@@ -1,0 +1,171 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "isy-angular-widgets": {
+      "projectType": "library",
+      "root": "projects/isy-angular-widgets",
+      "sourceRoot": "projects/isy-angular-widgets/src",
+      "prefix": "isy",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/isy-angular-widgets/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/isy-angular-widgets/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/isy-angular-widgets/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "codeCoverage": true,
+            "main": "projects/isy-angular-widgets/src/test.ts",
+            "tsConfig": "projects/isy-angular-widgets/tsconfig.spec.json",
+            "karmaConfig": "projects/isy-angular-widgets/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/isy-angular-widgets/**/*.ts",
+              "projects/isy-angular-widgets/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "isy-angular-widgets-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/isy-angular-widgets-demo",
+      "sourceRoot": "projects/isy-angular-widgets-demo/src",
+      "prefix": "demo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/isy-angular-widgets-demo",
+            "index": "projects/isy-angular-widgets-demo/src/index.html",
+            "main": "projects/isy-angular-widgets-demo/src/main.ts",
+            "polyfills": "projects/isy-angular-widgets-demo/src/polyfills.ts",
+            "tsConfig": "projects/isy-angular-widgets-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/isy-angular-widgets-demo/src/favicon.ico",
+              "projects/isy-angular-widgets-demo/src/assets"
+            ],
+            "styles": [
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeflex/primeflex.min.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss",
+              "projects/isy-angular-widgets/assets/theme/isyfact-liberation-fonts.css"
+            ],
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "moment"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/isy-angular-widgets-demo/src/environments/environment.ts",
+                  "with": "projects/isy-angular-widgets-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "isy-angular-widgets-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "isy-angular-widgets-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "isy-angular-widgets-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "codeCoverage": true,
+            "main": "projects/isy-angular-widgets-demo/src/test.ts",
+            "polyfills": "projects/isy-angular-widgets-demo/src/polyfills.ts",
+            "tsConfig": "projects/isy-angular-widgets-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/isy-angular-widgets-demo/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/isy-angular-widgets-demo/src/favicon.ico",
+              "projects/isy-angular-widgets-demo/src/assets"
+            ],
+            "styles": [
+              "projects/isy-angular-widgets-demo/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/isy-angular-widgets-demo/**/*.ts",
+              "projects/isy-angular-widgets-demo/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

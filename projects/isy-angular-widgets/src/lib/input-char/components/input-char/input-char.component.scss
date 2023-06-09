@@ -1,0 +1,37 @@
+// Für die Anpassung der Widgets innerhalb einer Komposition konnten die CSS Klassen von primeNG nicht mit eigenen Klassen
+// überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
+// können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
+
+.split {
+  height: 100%;
+  max-height: 394px;
+  position: absolute;
+  z-index: 1;
+  top: 14%;
+  overflow-x: hidden;
+}
+
+.left-panel-side {
+  left: 0;
+  width: 30%;
+  overflow-y: scroll;
+}
+
+.right-panel-side {
+  right: 0;
+  width: 70%;
+  padding: 5px;
+}
+
+:host::ng-deep.p-button {
+  font-weight: bold;
+}
+
+:host::ng-deep .p-accordion .p-accordion-header .p-accordion-header-link:focus {
+  box-shadow: none !important;
+}
+
+:host::ng-deep .p-accordion p-accordiontab .p-accordion-content {
+  border: 0;
+  padding: 0
+}

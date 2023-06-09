@@ -1,0 +1,47 @@
+.isy-hauptfenster {
+  border-top: #336794 solid 10px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.isy-hauptfenster-titelzeile {
+  min-height: 15px;
+}
+
+.isy-hauptfenster-logo-anbieter-awl {
+  max-height: 100px;
+}
+
+.isy-hauptfenster-logo-awl {
+  max-height: 60px;
+}
+
+.isy-hauptfenster-anbieterlogo-bereich {
+  margin-left: 0.5rem;
+}
+
+.isy-hauptfenster-nutzerbereich {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+::ng-deep .p-menubar {
+  background: none;
+  border: 0;
+}
+
+.isy-hauptfenster-linksnavigation {
+  border-right: 1px solid var(--gray-300);
+  background-color: #F3F3F3;
+
+  .collapseButton {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.isy-hauptfenster-informationsbereich {
+  border-left: 1px solid var(--gray-300);
+  background-color: #F3F3F3;
+}

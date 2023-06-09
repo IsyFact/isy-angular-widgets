@@ -1,0 +1,6316 @@
+[
+  {
+    "zeichen": "A",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A",
+    "codepoint": "U+0041"
+  },
+  {
+    "zeichen": "A̋",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH COMBINING DOUBLE ACUTE ACCENT",
+    "codepoint": "<U+0041,U+030B>"
+  },
+  {
+    "zeichen": "a",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A",
+    "codepoint": "U+0061"
+  },
+  {
+    "zeichen": "a̋",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH COMBINING DOUBLE ACUTE ACCENT",
+    "codepoint": "<U+0061,U+030B>"
+  },
+  {
+    "zeichen": "À",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH GRAVE",
+    "codepoint": "U+00C0"
+  },
+  {
+    "zeichen": "Á",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH ACUTE",
+    "codepoint": "U+00C1"
+  },
+  {
+    "zeichen": "Â",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX",
+    "codepoint": "U+00C2"
+  },
+  {
+    "zeichen": "Ã",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH TILDE",
+    "codepoint": "U+00C3"
+  },
+  {
+    "zeichen": "Ä",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH DIAERESIS",
+    "codepoint": "U+00C4"
+  },
+  {
+    "zeichen": "Å",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH RING ABOVE",
+    "codepoint": "U+00C5"
+  },
+  {
+    "zeichen": "Æ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER AE",
+    "codepoint": "U+00C6"
+  },
+  {
+    "zeichen": "à",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH GRAVE",
+    "codepoint": "U+00E0"
+  },
+  {
+    "zeichen": "á",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH ACUTE",
+    "codepoint": "U+005"
+  },
+  {
+    "zeichen": "â",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH CIRCUMFLEX",
+    "codepoint": "U+00E2"
+  },
+  {
+    "zeichen": "ã",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH TILDE",
+    "codepoint": "U+00E3"
+  },
+  {
+    "zeichen": "ä",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH DIAERESIS",
+    "codepoint": "U+00E4"
+  },
+  {
+    "zeichen": "å",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH RING ABOVE",
+    "codepoint": "U+00E5"
+  },
+  {
+    "zeichen": "æ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER AE",
+    "codepoint": "U+00E6"
+  },
+  {
+    "zeichen": "Ā",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH MACRON",
+    "codepoint": "U+0100"
+  },
+  {
+    "zeichen": "ā",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH MACRON",
+    "codepoint": "U+0101"
+  },
+  {
+    "zeichen": "Ă",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH BREVE",
+    "codepoint": "U+0102"
+  },
+  {
+    "zeichen": "ă",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH BREVE",
+    "codepoint": "U+0103"
+  },
+  {
+    "zeichen": "Ą",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH OGONEK",
+    "codepoint": "U+0104"
+  },
+  {
+    "zeichen": "ą",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH OGONEK",
+    "codepoint": "U+0105"
+  },
+  {
+    "zeichen": "Ǎ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH CARON",
+    "codepoint": "U+01CD"
+  },
+  {
+    "zeichen": "ǎ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH CARON",
+    "codepoint": "U+01CE"
+  },
+  {
+    "zeichen": "Ǟ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH DIAERESIS AND MACRON",
+    "codepoint": "U+01DE"
+  },
+  {
+    "zeichen": "ǟ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH DIAERESIS AND MACRON",
+    "codepoint": "U+01DF"
+  },
+  {
+    "zeichen": "Ǣ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER AE WITH MACRON",
+    "codepoint": "U+01E2"
+  },
+  {
+    "zeichen": "ǣ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER AE WITH MACRON",
+    "codepoint": "U+01E3"
+  },
+  {
+    "zeichen": "Ǻ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH RING ABOVE AND ACUTE",
+    "codepoint": "U+01FA"
+  },
+  {
+    "zeichen": "ǻ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH RING ABOVE AND ACUTE",
+    "codepoint": "U+01FB"
+  },
+  {
+    "zeichen": "Ǽ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER AE WITH ACUTE",
+    "codepoint": "U+01FC"
+  },
+  {
+    "zeichen": "ǽ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER AE WITH ACUTE",
+    "codepoint": "U+01FD"
+  },
+  {
+    "zeichen": "ȧ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH DOT ABOVE",
+    "codepoint": "U+0227"
+  },
+  {
+    "zeichen": "Ạ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH DOT BELOW",
+    "codepoint": "U+1EA0"
+  },
+  {
+    "zeichen": "Ạ̈",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH DOT BELOW WITH COMBINING DIAERESIS",
+    "codepoint": "<U+1EA0,U+0308>"
+  },
+  {
+    "zeichen": "ạ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH DOT BELOW",
+    "codepoint": "U+1EA1"
+  },
+  {
+    "zeichen": "ạ̈",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH DOT BELOW WITH COMBINING DIAERESIS",
+    "codepoint": "<U+1EA1,U+0308>"
+  },
+  {
+    "zeichen": "Ả",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH HOOK ABOVE",
+    "codepoint": "U+1EA2"
+  },
+  {
+    "zeichen": "ả",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH HOOK ABOVE",
+    "codepoint": "U+1EA3"
+  },
+  {
+    "zeichen": "Ấ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND ACUTE",
+    "codepoint": "U+1EA4"
+  },
+  {
+    "zeichen": "ấ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH CIRCUMFLEX AND ACUTE",
+    "codepoint": "U+1EA5"
+  },
+  {
+    "zeichen": "Ầ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND GRAVE",
+    "codepoint": "U+1EA6"
+  },
+  {
+    "zeichen": "ầ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH CIRCUMFLEX AND GRAVE",
+    "codepoint": "U+1EA7"
+  },
+  {
+    "zeichen": "Ẩ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND HOOK ABOVE",
+    "codepoint": "U+1EA8"
+  },
+  {
+    "zeichen": "ẩ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH CIRCUMFLEX AND HOOK ABOVE",
+    "codepoint": "U+1EA9"
+  },
+  {
+    "zeichen": "Ẫ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND TILDE",
+    "codepoint": "U+1EAA"
+  },
+  {
+    "zeichen": "ẫ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH CIRCUMFLEX AND TILDE",
+    "codepoint": "U+1EAB"
+  },
+  {
+    "zeichen": "Ậ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND DOT BELOW",
+    "codepoint": "U+1EAC"
+  },
+  {
+    "zeichen": "ậ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH CIRCUMFLEX AND DOT BELOW",
+    "codepoint": "U+1EAD"
+  },
+  {
+    "zeichen": "Ắ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH BREVE AND ACUTE",
+    "codepoint": "U+1EAE"
+  },
+  {
+    "zeichen": "ắ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH BREVE AND ACUTE",
+    "codepoint": "U+1EAF"
+  },
+  {
+    "zeichen": "Ằ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH BREVE AND GRAVE",
+    "codepoint": "U+1EB0"
+  },
+  {
+    "zeichen": "ằ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH BREVE AND GRAVE",
+    "codepoint": "U+1EB1"
+  },
+  {
+    "zeichen": "Ẳ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH BREVE AND HOOK ABOVE",
+    "codepoint": "U+1EB2"
+  },
+  {
+    "zeichen": "ẳ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH BREVE AND HOOK ABOVE",
+    "codepoint": "U+1EB3"
+  },
+  {
+    "zeichen": "Ẵ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH BREVE AND TILDE",
+    "codepoint": "U+1EB4"
+  },
+  {
+    "zeichen": "ẵ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH BREVE AND TILDE",
+    "codepoint": "U+1EB5"
+  },
+  {
+    "zeichen": "Ặ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER A WITH BREVE AND DOT BELOW",
+    "codepoint": "U+1EB6"
+  },
+  {
+    "zeichen": "ặ",
+    "grundzeichen": "A",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER A WITH BREVE AND DOT BELOW",
+    "codepoint": "U+1EB7"
+  },
+  {
+    "zeichen": "B",
+    "grundzeichen": "B",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER B",
+    "codepoint": "U+0042"
+  },
+  {
+    "zeichen": "b",
+    "grundzeichen": "B",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER B",
+    "codepoint": "U+0062"
+  },
+  {
+    "zeichen": "Ḃ",
+    "grundzeichen": "B",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER B WITH DOT ABOVE",
+    "codepoint": "U+1E02"
+  },
+  {
+    "zeichen": "ḃ",
+    "grundzeichen": "B",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER B WITH DOT ABOVE",
+    "codepoint": "U+1E03"
+  },
+  {
+    "zeichen": "Ḇ",
+    "grundzeichen": "B",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER B WITH LINE BELOW",
+    "codepoint": "U+1E06"
+  },
+  {
+    "zeichen": "ḇ",
+    "grundzeichen": "B",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER B WITH LINE BELOW",
+    "codepoint": "U+1E07"
+  },
+  {
+    "zeichen": "C",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C",
+    "codepoint": "U+0043"
+  },
+  {
+    "zeichen": "C̀",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0043,U+0300>"
+  },
+  {
+    "zeichen": "C̄",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH COMBINING MACRON",
+    "codepoint": "<U+0043,U+0304>"
+  },
+  {
+    "zeichen": "C̆",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH COMBINING BREVE",
+    "codepoint": "<U+0043,U+0306>"
+  },
+  {
+    "zeichen": "C̈",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH COMBINING DIAERESIS",
+    "codepoint": "<U+0043,U+0308>"
+  },
+  {
+    "zeichen": "C̕",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+0043,U+0315>"
+  },
+  {
+    "zeichen": "C̣",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH COMBINING DOT BELOW",
+    "codepoint": "<U+0043,U+0323>"
+  },
+  {
+    "zeichen": "C̦",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+0043,U+0326>"
+  },
+  {
+    "zeichen": "C̨̆",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH COMBINING OGONEK AND COMBINING BREVE",
+    "codepoint": "<U+0043,U+0328,U+0306>"
+  },
+  {
+    "zeichen": "c",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C",
+    "codepoint": "U+0063"
+  },
+  {
+    "zeichen": "c̀",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0063,U+0300>"
+  },
+  {
+    "zeichen": "c̄",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH COMBINING MACRON",
+    "codepoint": "<U+0063,U+0304>"
+  },
+  {
+    "zeichen": "c̆",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH COMBINING BREVE",
+    "codepoint": "<U+0063,U+0306>"
+  },
+  {
+    "zeichen": "c̈",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH COMBINING DIAERESIS",
+    "codepoint": "<U+0063,U+0308>"
+  },
+  {
+    "zeichen": "c̕",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+0063,U+0315>"
+  },
+  {
+    "zeichen": "c̣",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH COMBINING DOT BELOW",
+    "codepoint": "<U+0063,U+0323>"
+  },
+  {
+    "zeichen": "c̦",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+0063,U+0326>"
+  },
+  {
+    "zeichen": "c̨̆",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH COMBINING OGONEK AND COMBINING BREVE",
+    "codepoint": "<U+0063,U+0328,U+0306>"
+  },
+  {
+    "zeichen": "Ç",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH CEDILLA",
+    "codepoint": "U+00C7"
+  },
+  {
+    "zeichen": "Ç̆",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH CEDILLA WITH COMBINING BREVE",
+    "codepoint": "<U+00C7,U+0306>"
+  },
+  {
+    "zeichen": "ç",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH CEDILLA",
+    "codepoint": "U+00E7"
+  },
+  {
+    "zeichen": "ç̆",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH CEDILLA WITH COMBINING BREVE",
+    "codepoint": "<U+00E7,U+0306>"
+  },
+  {
+    "zeichen": "Ć",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH ACUTE",
+    "codepoint": "U+0106"
+  },
+  {
+    "zeichen": "ć",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH ACUTE",
+    "codepoint": "U+0107"
+  },
+  {
+    "zeichen": "Ĉ",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH CIRCUMFLEX",
+    "codepoint": "U+0108"
+  },
+  {
+    "zeichen": "ĉ",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH CIRCUMFLEX",
+    "codepoint": "U+0109"
+  },
+  {
+    "zeichen": "Ċ",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH DOT ABOVE",
+    "codepoint": "U+010A"
+  },
+  {
+    "zeichen": "ċ",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH DOT ABOVE",
+    "codepoint": "U+010B"
+  },
+  {
+    "zeichen": "Č",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH CARON",
+    "codepoint": "U+010C"
+  },
+  {
+    "zeichen": "Č̕",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH CARON WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+010C,U+0315>"
+  },
+  {
+    "zeichen": "Č̣",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH CARON WITH COMBINING DOT BELOW",
+    "codepoint": "<U+010C,U+0323>"
+  },
+  {
+    "zeichen": "č",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH CARON",
+    "codepoint": "U+010D"
+  },
+  {
+    "zeichen": "č̕",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH CARON WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+010D,U+0315>"
+  },
+  {
+    "zeichen": "č̣",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH CARON WITH COMBINING DOT BELOW",
+    "codepoint": "<U+010D,U+0323>"
+  },
+  {
+    "zeichen": "Ƈ",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER C WITH HOOK",
+    "codepoint": "U+0187"
+  },
+  {
+    "zeichen": "ƈ",
+    "grundzeichen": "C",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER C WITH HOOK",
+    "codepoint": "U+0188"
+  },
+  {
+    "zeichen": "D",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER D",
+    "codepoint": "U+0044"
+  },
+  {
+    "zeichen": "D̂",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER D WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+0044,U+0302>"
+  },
+  {
+    "zeichen": "d",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER D",
+    "codepoint": "U+0064"
+  },
+  {
+    "zeichen": "d̂",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER D WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+0064,U+0302>"
+  },
+  {
+    "zeichen": "Ð",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER ETH",
+    "codepoint": "U+00D0"
+  },
+  {
+    "zeichen": "ð",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER ETH",
+    "codepoint": "U+00F0"
+  },
+  {
+    "zeichen": "Ď",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER D WITH CARON",
+    "codepoint": "U+010E"
+  },
+  {
+    "zeichen": "ď",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER D WITH CARON",
+    "codepoint": "U+010F"
+  },
+  {
+    "zeichen": "Đ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER D WITH STROKE",
+    "codepoint": "U+0110"
+  },
+  {
+    "zeichen": "đ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER D WITH STROKE",
+    "codepoint": "U+0111"
+  },
+  {
+    "zeichen": "Ḋ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER D WITH DOT ABOVE",
+    "codepoint": "U+1E0A"
+  },
+  {
+    "zeichen": "ḋ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER D WITH DOT ABOVE",
+    "codepoint": "U+1E0B"
+  },
+  {
+    "zeichen": "Ḍ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER D WITH DOT BELOW",
+    "codepoint": "U+1E0C"
+  },
+  {
+    "zeichen": "ḍ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER D WITH DOT BELOW",
+    "codepoint": "U+1E0D"
+  },
+  {
+    "zeichen": "Ḏ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER D WITH LINE BELOW",
+    "codepoint": "U+1E0E"
+  },
+  {
+    "zeichen": "ḏ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER D WITH LINE BELOW",
+    "codepoint": "U+1E0F"
+  },
+  {
+    "zeichen": "Ḑ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER D WITH CEDILLA",
+    "codepoint": "U+150"
+  },
+  {
+    "zeichen": "ḑ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER D WITH CEDILLA",
+    "codepoint": "U+151"
+  },
+  {
+    "zeichen": "ᵈ",
+    "grundzeichen": "D",
+    "schriftzeichengruppe": "E1",
+    "name": "MODIFIER LETTER SMALL D",
+    "codepoint": "U+1D48"
+  },
+  {
+    "zeichen": "E",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E",
+    "codepoint": "U+0045"
+  },
+  {
+    "zeichen": "e",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E",
+    "codepoint": "U+0065"
+  },
+  {
+    "zeichen": "È",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH GRAVE",
+    "codepoint": "U+00C8"
+  },
+  {
+    "zeichen": "É",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH ACUTE",
+    "codepoint": "U+00C9"
+  },
+  {
+    "zeichen": "Ê",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX",
+    "codepoint": "U+00CA"
+  },
+  {
+    "zeichen": "Ë",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH DIAERESIS",
+    "codepoint": "U+00CB"
+  },
+  {
+    "zeichen": "è",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH GRAVE",
+    "codepoint": "U+00E8"
+  },
+  {
+    "zeichen": "é",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH ACUTE",
+    "codepoint": "U+00E9"
+  },
+  {
+    "zeichen": "ê",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CIRCUMFLEX",
+    "codepoint": "U+00EA"
+  },
+  {
+    "zeichen": "ë",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH DIAERESIS",
+    "codepoint": "U+00EB"
+  },
+  {
+    "zeichen": "Ē",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH MACRON",
+    "codepoint": "U+0112"
+  },
+  {
+    "zeichen": "ē",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH MACRON",
+    "codepoint": "U+0113"
+  },
+  {
+    "zeichen": "Ĕ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH BREVE",
+    "codepoint": "U+0114"
+  },
+  {
+    "zeichen": "ĕ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH BREVE",
+    "codepoint": "U+0115"
+  },
+  {
+    "zeichen": "Ė",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH DOT ABOVE",
+    "codepoint": "U+0116"
+  },
+  {
+    "zeichen": "ė",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH DOT ABOVE",
+    "codepoint": "U+0117"
+  },
+  {
+    "zeichen": "Ę",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH OGONEK",
+    "codepoint": "U+0118"
+  },
+  {
+    "zeichen": "ę",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH OGONEK",
+    "codepoint": "U+0119"
+  },
+  {
+    "zeichen": "Ě",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CARON",
+    "codepoint": "U+011A"
+  },
+  {
+    "zeichen": "ě",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CARON",
+    "codepoint": "U+011B"
+  },
+  {
+    "zeichen": "Ə",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER SCHWA",
+    "codepoint": "U+018F"
+  },
+  {
+    "zeichen": "Ȩ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CEDILLA",
+    "codepoint": "U+0228"
+  },
+  {
+    "zeichen": "ȩ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CEDILLA",
+    "codepoint": "U+0229"
+  },
+  {
+    "zeichen": "ə",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER SCHWA",
+    "codepoint": "U+0259"
+  },
+  {
+    "zeichen": "Ḝ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CEDILLA AND BREVE",
+    "codepoint": "U+15C"
+  },
+  {
+    "zeichen": "ḝ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CEDILLA AND BREVE",
+    "codepoint": "U+15D"
+  },
+  {
+    "zeichen": "Ẹ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH DOT BELOW",
+    "codepoint": "U+1EB8"
+  },
+  {
+    "zeichen": "ẹ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH DOT BELOW",
+    "codepoint": "U+1EB9"
+  },
+  {
+    "zeichen": "Ẻ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH HOOK ABOVE",
+    "codepoint": "U+1EBA"
+  },
+  {
+    "zeichen": "ẻ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH HOOK ABOVE",
+    "codepoint": "U+1EBB"
+  },
+  {
+    "zeichen": "Ẽ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH TILDE",
+    "codepoint": "U+1EBC"
+  },
+  {
+    "zeichen": "ẽ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH TILDE",
+    "codepoint": "U+1EBD"
+  },
+  {
+    "zeichen": "Ế",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND ACUTE",
+    "codepoint": "U+1EBE"
+  },
+  {
+    "zeichen": "ế",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CIRCUMFLEX AND ACUTE",
+    "codepoint": "U+1EBF"
+  },
+  {
+    "zeichen": "Ề",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND GRAVE",
+    "codepoint": "U+1EC0"
+  },
+  {
+    "zeichen": "ề",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CIRCUMFLEX AND GRAVE",
+    "codepoint": "U+1EC1"
+  },
+  {
+    "zeichen": "Ể",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND HOOK ABOVE",
+    "codepoint": "U+1EC2"
+  },
+  {
+    "zeichen": "ể",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CIRCUMFLEX AND HOOK ABOVE",
+    "codepoint": "U+1EC3"
+  },
+  {
+    "zeichen": "Ễ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND TILDE",
+    "codepoint": "U+1EC4"
+  },
+  {
+    "zeichen": "ễ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CIRCUMFLEX AND TILDE",
+    "codepoint": "U+1EC5"
+  },
+  {
+    "zeichen": "Ệ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND DOT BELOW",
+    "codepoint": "U+1EC6"
+  },
+  {
+    "zeichen": "ệ",
+    "grundzeichen": "E",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH CIRCUMFLEX AND DOT BELOW",
+    "codepoint": "U+1EC7"
+  },
+  {
+    "zeichen": "F",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER F",
+    "codepoint": "U+0046"
+  },
+  {
+    "zeichen": "F̀",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER F WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0046,U+0300>"
+  },
+  {
+    "zeichen": "F̄",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER F WITH COMBINING MACRON",
+    "codepoint": "<U+0046,U+0304>"
+  },
+  {
+    "zeichen": "f",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER F",
+    "codepoint": "U+0066"
+  },
+  {
+    "zeichen": "f̀",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER F WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0066,U+0300>"
+  },
+  {
+    "zeichen": "f̄",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER F WITH COMBINING MACRON",
+    "codepoint": "<U+0066,U+0304>"
+  },
+  {
+    "zeichen": "Ḟ",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER F WITH DOT ABOVE",
+    "codepoint": "U+15E"
+  },
+  {
+    "zeichen": "ḟ",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER F WITH DOT ABOVE",
+    "codepoint": "U+15F"
+  },
+  {
+    "zeichen": "ƒ",
+    "grundzeichen": "F",
+    "schriftzeichengruppe": "E1",
+    "name": "LATIN SMALL LETTER F WITH HOOK",
+    "codepoint": "U+0192"
+  },
+  {
+    "zeichen": "G",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G",
+    "codepoint": "U+0047"
+  },
+  {
+    "zeichen": "G̀",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0047,U+0300>"
+  },
+  {
+    "zeichen": "g",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G",
+    "codepoint": "U+0067"
+  },
+  {
+    "zeichen": "g̀",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0067,U+0300>"
+  },
+  {
+    "zeichen": "Ĝ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH CIRCUMFLEX",
+    "codepoint": "U+011C"
+  },
+  {
+    "zeichen": "ĝ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH CIRCUMFLEX",
+    "codepoint": "U+011D"
+  },
+  {
+    "zeichen": "Ğ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH BREVE",
+    "codepoint": "U+011E"
+  },
+  {
+    "zeichen": "ğ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH BREVE",
+    "codepoint": "U+011F"
+  },
+  {
+    "zeichen": "Ġ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH DOT ABOVE",
+    "codepoint": "U+0120"
+  },
+  {
+    "zeichen": "ġ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH DOT ABOVE",
+    "codepoint": "U+0121"
+  },
+  {
+    "zeichen": "Ģ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH CEDILLA",
+    "codepoint": "U+0122"
+  },
+  {
+    "zeichen": "ģ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH CEDILLA",
+    "codepoint": "U+0123"
+  },
+  {
+    "zeichen": "Ǥ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH STROKE",
+    "codepoint": "U+01E4"
+  },
+  {
+    "zeichen": "ǥ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH STROKE",
+    "codepoint": "U+01E5"
+  },
+  {
+    "zeichen": "Ǧ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH CARON",
+    "codepoint": "U+01E6"
+  },
+  {
+    "zeichen": "ǧ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH CARON",
+    "codepoint": "U+01E7"
+  },
+  {
+    "zeichen": "Ǵ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH ACUTE",
+    "codepoint": "U+01F4"
+  },
+  {
+    "zeichen": "ǵ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH ACUTE",
+    "codepoint": "U+01F5"
+  },
+  {
+    "zeichen": "Ḡ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER G WITH MACRON",
+    "codepoint": "U+1E20"
+  },
+  {
+    "zeichen": "ḡ",
+    "grundzeichen": "G",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER G WITH MACRON",
+    "codepoint": "U+1E21"
+  },
+  {
+    "zeichen": "H",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H",
+    "codepoint": "U+0048"
+  },
+  {
+    "zeichen": "H̄",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH COMBINING MACRON",
+    "codepoint": "<U+0048,U+0304>"
+  },
+  {
+    "zeichen": "H̦",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+0048,U+0326>"
+  },
+  {
+    "zeichen": "H̱",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH COMBINING MACRON BELOW",
+    "codepoint": "<U+0048,U+0331>"
+  },
+  {
+    "zeichen": "h",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H",
+    "codepoint": "U+0068"
+  },
+  {
+    "zeichen": "h̄",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH COMBINING MACRON",
+    "codepoint": "<U+0068,U+0304>"
+  },
+  {
+    "zeichen": "h̦",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+0068,U+0326>"
+  },
+  {
+    "zeichen": "Ĥ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH CIRCUMFLEX",
+    "codepoint": "U+0124"
+  },
+  {
+    "zeichen": "ĥ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH CIRCUMFLEX",
+    "codepoint": "U+0125"
+  },
+  {
+    "zeichen": "Ħ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH STROKE",
+    "codepoint": "U+0126"
+  },
+  {
+    "zeichen": "ħ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH STROKE",
+    "codepoint": "U+0127"
+  },
+  {
+    "zeichen": "Ȟ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH CARON",
+    "codepoint": "U+021E"
+  },
+  {
+    "zeichen": "ȟ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH CARON",
+    "codepoint": "U+021F"
+  },
+  {
+    "zeichen": "Ḣ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH DOT ABOVE",
+    "codepoint": "U+1E22"
+  },
+  {
+    "zeichen": "ḣ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH DOT ABOVE",
+    "codepoint": "U+1E23"
+  },
+  {
+    "zeichen": "Ḥ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH DOT BELOW",
+    "codepoint": "U+1E24"
+  },
+  {
+    "zeichen": "ḥ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH DOT BELOW",
+    "codepoint": "U+1E25"
+  },
+  {
+    "zeichen": "Ḧ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH DIAERESIS",
+    "codepoint": "U+1E26"
+  },
+  {
+    "zeichen": "ḧ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH DIAERESIS",
+    "codepoint": "U+1E27"
+  },
+  {
+    "zeichen": "Ḩ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH CEDILLA",
+    "codepoint": "U+1E28"
+  },
+  {
+    "zeichen": "ḩ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH CEDILLA",
+    "codepoint": "U+1E29"
+  },
+  {
+    "zeichen": "Ḫ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER H WITH BREVE BELOW",
+    "codepoint": "U+1E2A"
+  },
+  {
+    "zeichen": "ḫ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH BREVE BELOW",
+    "codepoint": "U+1E2B"
+  },
+  {
+    "zeichen": "ẖ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER H WITH LINE BELOW",
+    "codepoint": "U+1E96"
+  },
+  {
+    "zeichen": "ʰ",
+    "grundzeichen": "H",
+    "schriftzeichengruppe": "E1",
+    "name": "MODIFIER LETTER SMALL H",
+    "codepoint": "U+02B0"
+  },
+  {
+    "zeichen": "I",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I",
+    "codepoint": "U+0049"
+  },
+  {
+    "zeichen": "i",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I",
+    "codepoint": "U+0069"
+  },
+  {
+    "zeichen": "Ì",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH GRAVE",
+    "codepoint": "U+00CC"
+  },
+  {
+    "zeichen": "Í",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH ACUTE",
+    "codepoint": "U+00CD"
+  },
+  {
+    "zeichen": "Î",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH CIRCUMFLEX",
+    "codepoint": "U+00CE"
+  },
+  {
+    "zeichen": "Ï",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH DIAERESIS",
+    "codepoint": "U+00CF"
+  },
+  {
+    "zeichen": "ì",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH GRAVE",
+    "codepoint": "U+00EC"
+  },
+  {
+    "zeichen": "í",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH ACUTE",
+    "codepoint": "U+00ED"
+  },
+  {
+    "zeichen": "î",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH CIRCUMFLEX",
+    "codepoint": "U+00EE"
+  },
+  {
+    "zeichen": "ï",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH DIAERESIS",
+    "codepoint": "U+00EF"
+  },
+  {
+    "zeichen": "Ĩ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH TILDE",
+    "codepoint": "U+0128"
+  },
+  {
+    "zeichen": "ĩ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH TILDE",
+    "codepoint": "U+0129"
+  },
+  {
+    "zeichen": "Ī",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH MACRON",
+    "codepoint": "U+012A"
+  },
+  {
+    "zeichen": "Ī́",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH MACRON WITH COMBINING ACUTE ACCENT",
+    "codepoint": "<U+012A,U+0301>"
+  },
+  {
+    "zeichen": "ī",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH MACRON",
+    "codepoint": "U+012B"
+  },
+  {
+    "zeichen": "ī́",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH MACRON WITH COMBINING ACUTE ACCENT",
+    "codepoint": "<U+012B,U+0301>"
+  },
+  {
+    "zeichen": "Ĭ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH BREVE",
+    "codepoint": "U+012C"
+  },
+  {
+    "zeichen": "ĭ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH BREVE",
+    "codepoint": "U+012D"
+  },
+  {
+    "zeichen": "Į",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH OGONEK",
+    "codepoint": "U+012E"
+  },
+  {
+    "zeichen": "į",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH OGONEK",
+    "codepoint": "U+012F"
+  },
+  {
+    "zeichen": "İ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH DOT ABOVE",
+    "codepoint": "U+0130"
+  },
+  {
+    "zeichen": "ı",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER DOTLESS I",
+    "codepoint": "U+0131"
+  },
+  {
+    "zeichen": "Ĳ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LIGATURE IJ",
+    "codepoint": "U+0132"
+  },
+  {
+    "zeichen": "ĳ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LIGATURE IJ",
+    "codepoint": "U+0133"
+  },
+  {
+    "zeichen": "Ɨ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH STROKE",
+    "codepoint": "U+0197"
+  },
+  {
+    "zeichen": "Ǐ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH CARON",
+    "codepoint": "U+01CF"
+  },
+  {
+    "zeichen": "ǐ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH CARON",
+    "codepoint": "U+01D0"
+  },
+  {
+    "zeichen": "ɨ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH STROKE",
+    "codepoint": "U+0268"
+  },
+  {
+    "zeichen": "ḯ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH DIAERESIS AND ACUTE",
+    "codepoint": "U+1E2F"
+  },
+  {
+    "zeichen": "Ỉ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH HOOK ABOVE",
+    "codepoint": "U+1EC8"
+  },
+  {
+    "zeichen": "ỉ",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH HOOK ABOVE",
+    "codepoint": "U+1EC9"
+  },
+  {
+    "zeichen": "Ị",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER I WITH DOT BELOW",
+    "codepoint": "U+1ECA"
+  },
+  {
+    "zeichen": "ị",
+    "grundzeichen": "I",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER I WITH DOT BELOW",
+    "codepoint": "U+1ECB"
+  },
+  {
+    "zeichen": "j",
+    "grundzeichen": "J",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER J",
+    "codepoint": "U+006A"
+  },
+  {
+    "zeichen": "j́",
+    "grundzeichen": "J",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER J WITH COMBINING ACUTE ACCENT",
+    "codepoint": "<U+006A,U+0301>"
+  },
+  {
+    "zeichen": "J",
+    "grundzeichen": "J",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER J",
+    "codepoint": "U+004A"
+  },
+  {
+    "zeichen": "J́",
+    "grundzeichen": "J",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER J WITH COMBINING ACUTE ACCENT",
+    "codepoint": "<U+004A,U+0301>"
+  },
+  {
+    "zeichen": "J̌",
+    "grundzeichen": "J",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER J WITH COMBINING CARON",
+    "codepoint": "<U+004A,U+030C>"
+  },
+  {
+    "zeichen": "Ĵ",
+    "grundzeichen": "J",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER J WITH CIRCUMFLEX",
+    "codepoint": "U+0134"
+  },
+  {
+    "zeichen": "ĵ",
+    "grundzeichen": "J",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER J WITH CIRCUMFLEX",
+    "codepoint": "U+0135"
+  },
+  {
+    "zeichen": "ǰ",
+    "grundzeichen": "J",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER J WITH CARON",
+    "codepoint": "U+01F0"
+  },
+  {
+    "zeichen": "K",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K",
+    "codepoint": "U+004B"
+  },
+  {
+    "zeichen": "K̀",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+004B,U+0300>"
+  },
+  {
+    "zeichen": "K̂",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+004B,U+0302>"
+  },
+  {
+    "zeichen": "K̄",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING MACRON",
+    "codepoint": "<U+004B,U+0304>"
+  },
+  {
+    "zeichen": "K̇",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING DOT ABOVE",
+    "codepoint": "<U+004B,U+0307>"
+  },
+  {
+    "zeichen": "K̕",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+004B,U+0315>"
+  },
+  {
+    "zeichen": "K̛",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING HORN",
+    "codepoint": "<U+004B,U+031B>"
+  },
+  {
+    "zeichen": "K̦",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+004B,U+0326>"
+  },
+  {
+    "zeichen": "K͟H",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING DOUBLE MACRON BELOW AND LATIN CAPITAL LETTER H",
+    "codepoint": "<U+004B,U+035F,U+0048>"
+  },
+  {
+    "zeichen": "K͟h",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH COMBINING DOUBLE MACRON BELOW AND LATIN SMALL LETTER H",
+    "codepoint": "<U+004B,U+035F,U+0068>"
+  },
+  {
+    "zeichen": "k",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K",
+    "codepoint": "U+006B"
+  },
+  {
+    "zeichen": "k̀",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+006B,U+0300>"
+  },
+  {
+    "zeichen": "k̂",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+006B,U+0302>"
+  },
+  {
+    "zeichen": "k̄",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH COMBINING MACRON",
+    "codepoint": "<U+006B,U+0304>"
+  },
+  {
+    "zeichen": "k̇",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH COMBINING DOT ABOVE",
+    "codepoint": "<U+006B,U+0307>"
+  },
+  {
+    "zeichen": "k̕",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+006B,U+0315>"
+  },
+  {
+    "zeichen": "k̛",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH COMBINING HORN",
+    "codepoint": "<U+006B,U+031B>"
+  },
+  {
+    "zeichen": "k̦",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+006B,U+0326>"
+  },
+  {
+    "zeichen": "k͟h",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH COMBINING DOUBLE MACRON BELOW AND LATIN SMALL LETTER H",
+    "codepoint": "<U+006B,U+035F,U+0068>"
+  },
+  {
+    "zeichen": "Ķ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH CEDILLA",
+    "codepoint": "U+0136"
+  },
+  {
+    "zeichen": "ķ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH CEDILLA",
+    "codepoint": "U+0137"
+  },
+  {
+    "zeichen": "ĸ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER KRA",
+    "codepoint": "U+0138"
+  },
+  {
+    "zeichen": "Ǩ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH CARON",
+    "codepoint": "U+01E8"
+  },
+  {
+    "zeichen": "ǩ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH CARON",
+    "codepoint": "U+01E9"
+  },
+  {
+    "zeichen": "Ḱ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH ACUTE",
+    "codepoint": "U+1E30"
+  },
+  {
+    "zeichen": "ḱ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH ACUTE",
+    "codepoint": "U+1E31"
+  },
+  {
+    "zeichen": "Ḳ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH DOT BELOW",
+    "codepoint": "U+1E32"
+  },
+  {
+    "zeichen": "Ḳ̄",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH DOT BELOW WITH COMBINING MACRON",
+    "codepoint": "<U+1E32,U+0304>"
+  },
+  {
+    "zeichen": "ḳ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH DOT BELOW",
+    "codepoint": "U+1E33"
+  },
+  {
+    "zeichen": "ḳ̄",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH DOT BELOW WITH COMBINING MACRON",
+    "codepoint": "<U+1E33,U+0304>"
+  },
+  {
+    "zeichen": "Ḵ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER K WITH LINE BELOW",
+    "codepoint": "U+1E34"
+  },
+  {
+    "zeichen": "ḵ",
+    "grundzeichen": "K",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER K WITH LINE BELOW",
+    "codepoint": "U+1E35"
+  },
+  {
+    "zeichen": "L",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L",
+    "codepoint": "U+004C"
+  },
+  {
+    "zeichen": "L̂",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+004C,U+0302>"
+  },
+  {
+    "zeichen": "L̥",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH COMBINING RING BELOW",
+    "codepoint": "<U+004C,U+0325>"
+  },
+  {
+    "zeichen": "L̥̄",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH COMBINING RING BELOW AND COMBINING MACRON",
+    "codepoint": "<U+004C,U+0325,U+0304>"
+  },
+  {
+    "zeichen": "L̦",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+004C,U+0326>"
+  },
+  {
+    "zeichen": "l",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L",
+    "codepoint": "U+006C"
+  },
+  {
+    "zeichen": "l̂",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+006C,U+0302>"
+  },
+  {
+    "zeichen": "l̥",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH COMBINING RING BELOW",
+    "codepoint": "<U+006C,U+0325>"
+  },
+  {
+    "zeichen": "l̥̄",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH COMBINING RING BELOW AND COMBINING MACRON",
+    "codepoint": "<U+006C,U+0325,U+0304>"
+  },
+  {
+    "zeichen": "l̦",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+006C,U+0326>"
+  },
+  {
+    "zeichen": "Ĺ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH ACUTE",
+    "codepoint": "U+0139"
+  },
+  {
+    "zeichen": "ĺ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH ACUTE",
+    "codepoint": "U+013A"
+  },
+  {
+    "zeichen": "Ļ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH CEDILLA",
+    "codepoint": "U+013B"
+  },
+  {
+    "zeichen": "ļ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH CEDILLA",
+    "codepoint": "U+013C"
+  },
+  {
+    "zeichen": "Ľ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH CARON",
+    "codepoint": "U+013D"
+  },
+  {
+    "zeichen": "ľ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH CARON",
+    "codepoint": "U+013E"
+  },
+  {
+    "zeichen": "Ŀ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH MIDDLE DOT",
+    "codepoint": "U+013F"
+  },
+  {
+    "zeichen": "ŀ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH MIDDLE DOT",
+    "codepoint": "U+0140"
+  },
+  {
+    "zeichen": "Ł",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH STROKE",
+    "codepoint": "U+0141"
+  },
+  {
+    "zeichen": "ł",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH STROKE",
+    "codepoint": "U+0142"
+  },
+  {
+    "zeichen": "Ḷ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH DOT BELOW",
+    "codepoint": "U+1E36"
+  },
+  {
+    "zeichen": "ḷ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH DOT BELOW",
+    "codepoint": "U+1E37"
+  },
+  {
+    "zeichen": "Ḻ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER L WITH LINE BELOW",
+    "codepoint": "U+1E3A"
+  },
+  {
+    "zeichen": "ḻ",
+    "grundzeichen": "L",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER L WITH LINE BELOW",
+    "codepoint": "U+1E3B"
+  },
+  {
+    "zeichen": "ˆ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "MODIFIER LETTER CIRCUMFLEX ACCENT",
+    "codepoint": "U+02C6"
+  },
+  {
+    "zeichen": "ʹ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "MODIFIER LETTER PRIME",
+    "codepoint": "U+02B9"
+  },
+  {
+    "zeichen": "ʺ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "MODIFIER LETTER DOUBLE PRIME",
+    "codepoint": "U+02BA"
+  },
+  {
+    "zeichen": "ʾ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "MODIFIER LETTER RIGHT HALF RING",
+    "codepoint": "U+02BE"
+  },
+  {
+    "zeichen": "ʿ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "MODIFIER LETTER LEFT HALF RING",
+    "codepoint": "U+02BF"
+  },
+  {
+    "zeichen": "ˈ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "MODIFIER LETTER VERTICAL LINE",
+    "codepoint": "U+02C8"
+  },
+  {
+    "zeichen": "ˌ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "MODIFIER LETTER LOW VERTICAL LINE",
+    "codepoint": "U+02CC"
+  },
+  {
+    "zeichen": "ª",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "FEMININE ORDINAL INDICATOR",
+    "codepoint": "U+00AA"
+  },
+  {
+    "zeichen": "µ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "MICRO SIGN",
+    "codepoint": "U+00B5"
+  },
+  {
+    "zeichen": "º",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "MASCULINE ORDINAL INDICATOR",
+    "codepoint": "U+00BA"
+  },
+  {
+    "zeichen": "M",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER M",
+    "codepoint": "U+004D"
+  },
+  {
+    "zeichen": "M̀",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER M WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+004D,U+0300>"
+  },
+  {
+    "zeichen": "M̂",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER M WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+004D,U+0302>"
+  },
+  {
+    "zeichen": "M̆",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER M WITH COMBINING BREVE",
+    "codepoint": "<U+004D,U+0306>"
+  },
+  {
+    "zeichen": "M̐",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER M WITH COMBINING CANDRABINDU",
+    "codepoint": "<U+004D,U+0310>"
+  },
+  {
+    "zeichen": "m",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER M",
+    "codepoint": "U+006D"
+  },
+  {
+    "zeichen": "m̀",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER M WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+006D,U+0300>"
+  },
+  {
+    "zeichen": "m̂",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER M WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+006D,U+0302>"
+  },
+  {
+    "zeichen": "m̆",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER M WITH COMBINING BREVE",
+    "codepoint": "<U+006D,U+0306>"
+  },
+  {
+    "zeichen": "m̐",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER M WITH COMBINING CANDRABINDU",
+    "codepoint": "<U+006D,U+0310>"
+  },
+  {
+    "zeichen": "Ṁ",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER M WITH DOT ABOVE",
+    "codepoint": "U+1E40"
+  },
+  {
+    "zeichen": "ṁ",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER M WITH DOT ABOVE",
+    "codepoint": "U+1E41"
+  },
+  {
+    "zeichen": "Ṃ",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER M WITH DOT BELOW",
+    "codepoint": "U+1E42"
+  },
+  {
+    "zeichen": "ṃ",
+    "grundzeichen": "M",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER M WITH DOT BELOW",
+    "codepoint": "U+1E43"
+  },
+  {
+    "zeichen": "N",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N",
+    "codepoint": "U+004E"
+  },
+  {
+    "zeichen": "N̂",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+004E,U+0302>"
+  },
+  {
+    "zeichen": "N̄",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH COMBINING MACRON",
+    "codepoint": "<U+004E,U+0304>"
+  },
+  {
+    "zeichen": "N̆",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH COMBINING BREVE",
+    "codepoint": "<U+004E,U+0306>"
+  },
+  {
+    "zeichen": "N̦",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+004E,U+0326>"
+  },
+  {
+    "zeichen": "n",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N",
+    "codepoint": "U+006E"
+  },
+  {
+    "zeichen": "n̂",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH COMBINING CIRCUMFLEX ACCENT",
+    "codepoint": "<U+006E,U+0302>"
+  },
+  {
+    "zeichen": "n̄",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH COMBINING MACRON",
+    "codepoint": "<U+006E,U+0304>"
+  },
+  {
+    "zeichen": "n̆",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH COMBINING BREVE",
+    "codepoint": "<U+006E,U+0306>"
+  },
+  {
+    "zeichen": "n̦",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+006E,U+0326>"
+  },
+  {
+    "zeichen": "Ñ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH TILDE",
+    "codepoint": "U+00D1"
+  },
+  {
+    "zeichen": "ñ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH TILDE",
+    "codepoint": "U+00F1"
+  },
+  {
+    "zeichen": "Ń",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH ACUTE",
+    "codepoint": "U+0143"
+  },
+  {
+    "zeichen": "ń",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH ACUTE",
+    "codepoint": "U+0144"
+  },
+  {
+    "zeichen": "Ņ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH CEDILLA",
+    "codepoint": "U+0145"
+  },
+  {
+    "zeichen": "ņ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH CEDILLA",
+    "codepoint": "U+0146"
+  },
+  {
+    "zeichen": "Ň",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH CARON",
+    "codepoint": "U+0147"
+  },
+  {
+    "zeichen": "ň",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH CARON",
+    "codepoint": "U+0148"
+  },
+  {
+    "zeichen": "ŉ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N PRECEDED BY APOSTROPHE",
+    "codepoint": "U+0149"
+  },
+  {
+    "zeichen": "Ŋ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER ENG",
+    "codepoint": "U+014A"
+  },
+  {
+    "zeichen": "ŋ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER ENG",
+    "codepoint": "U+014B"
+  },
+  {
+    "zeichen": "Ǹ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH GRAVE",
+    "codepoint": "U+01F8"
+  },
+  {
+    "zeichen": "ǹ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH GRAVE",
+    "codepoint": "U+01F9"
+  },
+  {
+    "zeichen": "Ṅ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH DOT ABOVE",
+    "codepoint": "U+1E44"
+  },
+  {
+    "zeichen": "ṅ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH DOT ABOVE",
+    "codepoint": "U+1E45"
+  },
+  {
+    "zeichen": "Ṇ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH DOT BELOW",
+    "codepoint": "U+1E46"
+  },
+  {
+    "zeichen": "ṇ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH DOT BELOW",
+    "codepoint": "U+1E47"
+  },
+  {
+    "zeichen": "Ṉ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER N WITH LINE BELOW",
+    "codepoint": "U+1E48"
+  },
+  {
+    "zeichen": "ṉ",
+    "grundzeichen": "N",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER N WITH LINE BELOW",
+    "codepoint": "U+1E49"
+  },
+  {
+    "zeichen": "⁰",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUPERSCRIPT ZERO",
+    "codepoint": "U+2070"
+  },
+  {
+    "zeichen": "⁴",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUPERSCRIPT FOUR",
+    "codepoint": "U+2074"
+  },
+  {
+    "zeichen": "⁵",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUPERSCRIPT FIVE",
+    "codepoint": "U+2075"
+  },
+  {
+    "zeichen": "⁶",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUPERSCRIPT SIX",
+    "codepoint": "U+2076"
+  },
+  {
+    "zeichen": "⁷",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUPERSCRIPT SEVEN",
+    "codepoint": "U+2077"
+  },
+  {
+    "zeichen": "⁸",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUPERSCRIPT EIGHT",
+    "codepoint": "U+2078"
+  },
+  {
+    "zeichen": "⁹",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUPERSCRIPT NINE",
+    "codepoint": "U+2079"
+  },
+  {
+    "zeichen": "ⁿ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUPERSCRIPT LATIN SMALL LETTER N",
+    "codepoint": "U+207F"
+  },
+  {
+    "zeichen": "₀",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT ZERO",
+    "codepoint": "U+2080"
+  },
+  {
+    "zeichen": "₁",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT ONE",
+    "codepoint": "U+2081"
+  },
+  {
+    "zeichen": "₂",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT TWO",
+    "codepoint": "U+2082"
+  },
+  {
+    "zeichen": "₃",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT THREE",
+    "codepoint": "U+2083"
+  },
+  {
+    "zeichen": "₄",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT FOUR",
+    "codepoint": "U+2084"
+  },
+  {
+    "zeichen": "₅",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT FIVE",
+    "codepoint": "U+2085"
+  },
+  {
+    "zeichen": "₆",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT SIX",
+    "codepoint": "U+2086"
+  },
+  {
+    "zeichen": "₇",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT SEVEN",
+    "codepoint": "U+2087"
+  },
+  {
+    "zeichen": "₈",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT EIGHT",
+    "codepoint": "U+2088"
+  },
+  {
+    "zeichen": "₉",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SUBSCRIPT NINE",
+    "codepoint": "U+2089"
+  },
+  {
+    "zeichen": "0",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT ZERO",
+    "codepoint": "U+0030"
+  },
+  {
+    "zeichen": "1",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT ONE",
+    "codepoint": "U+0031"
+  },
+  {
+    "zeichen": "2",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT TWO",
+    "codepoint": "U+0032"
+  },
+  {
+    "zeichen": "3",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT THREE",
+    "codepoint": "U+0033"
+  },
+  {
+    "zeichen": "4",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT FOUR",
+    "codepoint": "U+0034"
+  },
+  {
+    "zeichen": "5",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT FIVE",
+    "codepoint": "U+0035"
+  },
+  {
+    "zeichen": "6",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT SIX",
+    "codepoint": "U+0036"
+  },
+  {
+    "zeichen": "7",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT SEVEN",
+    "codepoint": "U+0037"
+  },
+  {
+    "zeichen": "8",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT EIGHT",
+    "codepoint": "U+0038"
+  },
+  {
+    "zeichen": "9",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIGIT NINE",
+    "codepoint": "U+0039"
+  },
+  {
+    "zeichen": "²",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "SUPERSCRIPT TWO",
+    "codepoint": "U+00B2"
+  },
+  {
+    "zeichen": "³",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "SUPERSCRIPT THREE",
+    "codepoint": "U+00B3"
+  },
+  {
+    "zeichen": "¹",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "SUPERSCRIPT ONE",
+    "codepoint": "U+00B9"
+  },
+  {
+    "zeichen": "¼",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N3",
+    "name": "VULGAR FRACTION ONE QUARTER",
+    "codepoint": "U+00BC"
+  },
+  {
+    "zeichen": "½",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N3",
+    "name": "VULGAR FRACTION ONE HALF",
+    "codepoint": "U+00BD"
+  },
+  {
+    "zeichen": "¾",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N3",
+    "name": "VULGAR FRACTION THREE QUARTERS",
+    "codepoint": "U+00BE"
+  },
+  {
+    "zeichen": "O",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O",
+    "codepoint": "U+004F"
+  },
+  {
+    "zeichen": "o",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O",
+    "codepoint": "U+006F"
+  },
+  {
+    "zeichen": "Ò",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH GRAVE",
+    "codepoint": "U+00D2"
+  },
+  {
+    "zeichen": "Ó",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH ACUTE",
+    "codepoint": "U+00D3"
+  },
+  {
+    "zeichen": "Ô",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX",
+    "codepoint": "U+00D4"
+  },
+  {
+    "zeichen": "Õ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH TILDE",
+    "codepoint": "U+00D5"
+  },
+  {
+    "zeichen": "Ö",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH DIAERESIS",
+    "codepoint": "U+00D6"
+  },
+  {
+    "zeichen": "Ø",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH STROKE",
+    "codepoint": "U+00D8"
+  },
+  {
+    "zeichen": "ò",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH GRAVE",
+    "codepoint": "U+00F2"
+  },
+  {
+    "zeichen": "ó",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH ACUTE",
+    "codepoint": "U+00F3"
+  },
+  {
+    "zeichen": "ô",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH CIRCUMFLEX",
+    "codepoint": "U+00F4"
+  },
+  {
+    "zeichen": "õ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH TILDE",
+    "codepoint": "U+00F5"
+  },
+  {
+    "zeichen": "ö",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH DIAERESIS",
+    "codepoint": "U+00F6"
+  },
+  {
+    "zeichen": "ø",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH STROKE",
+    "codepoint": "U+00F8"
+  },
+  {
+    "zeichen": "Ō",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH MACRON",
+    "codepoint": "U+014C"
+  },
+  {
+    "zeichen": "ō",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH MACRON",
+    "codepoint": "U+014D"
+  },
+  {
+    "zeichen": "Ŏ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH BREVE",
+    "codepoint": "U+014E"
+  },
+  {
+    "zeichen": "ŏ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH BREVE",
+    "codepoint": "U+014F"
+  },
+  {
+    "zeichen": "Ő",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH DOUBLE ACUTE",
+    "codepoint": "U+0150"
+  },
+  {
+    "zeichen": "ő",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH DOUBLE ACUTE",
+    "codepoint": "U+0151"
+  },
+  {
+    "zeichen": "Œ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LIGATURE OE",
+    "codepoint": "U+0152"
+  },
+  {
+    "zeichen": "œ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LIGATURE OE",
+    "codepoint": "U+0153"
+  },
+  {
+    "zeichen": "Ơ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH HORN",
+    "codepoint": "U+01A0"
+  },
+  {
+    "zeichen": "ơ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH HORN",
+    "codepoint": "U+01A1"
+  },
+  {
+    "zeichen": "Ǒ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH CARON",
+    "codepoint": "U+01D1"
+  },
+  {
+    "zeichen": "ǒ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH CARON",
+    "codepoint": "U+01D2"
+  },
+  {
+    "zeichen": "Ǫ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH OGONEK",
+    "codepoint": "U+01EA"
+  },
+  {
+    "zeichen": "ǫ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH OGONEK",
+    "codepoint": "U+01EB"
+  },
+  {
+    "zeichen": "Ǭ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH OGONEK AND MACRON",
+    "codepoint": "U+01EC"
+  },
+  {
+    "zeichen": "ǭ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH OGONEK AND MACRON",
+    "codepoint": "U+01ED"
+  },
+  {
+    "zeichen": "Ǿ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH STROKE AND ACUTE",
+    "codepoint": "U+01FE"
+  },
+  {
+    "zeichen": "ǿ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH STROKE AND ACUTE",
+    "codepoint": "U+01FF"
+  },
+  {
+    "zeichen": "Ȫ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH DIAERESIS AND MACRON",
+    "codepoint": "U+022A"
+  },
+  {
+    "zeichen": "ȫ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH DIAERESIS AND MACRON",
+    "codepoint": "U+022B"
+  },
+  {
+    "zeichen": "Ȭ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH TILDE AND MACRON",
+    "codepoint": "U+022C"
+  },
+  {
+    "zeichen": "ȭ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH TILDE AND MACRON",
+    "codepoint": "U+022D"
+  },
+  {
+    "zeichen": "Ȯ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH DOT ABOVE",
+    "codepoint": "U+022E"
+  },
+  {
+    "zeichen": "ȯ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH DOT ABOVE",
+    "codepoint": "U+022F"
+  },
+  {
+    "zeichen": "Ȱ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH DOT ABOVE AND MACRON",
+    "codepoint": "U+0230"
+  },
+  {
+    "zeichen": "ȱ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH DOT ABOVE AND MACRON",
+    "codepoint": "U+0231"
+  },
+  {
+    "zeichen": "Ṓ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH MACRON AND ACUTE",
+    "codepoint": "U+1E52"
+  },
+  {
+    "zeichen": "ṓ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH MACRON AND ACUTE",
+    "codepoint": "U+1E53"
+  },
+  {
+    "zeichen": "Ọ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH DOT BELOW",
+    "codepoint": "U+1ECC"
+  },
+  {
+    "zeichen": "Ọ̈",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH DOT BELOW WITH COMBINING DIAERESIS",
+    "codepoint": "<U+1ECC,U+0308>"
+  },
+  {
+    "zeichen": "ọ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH DOT BELOW",
+    "codepoint": "U+1ECD"
+  },
+  {
+    "zeichen": "ọ̈",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH DOT BELOW WITH COMBINING DIAERESIS",
+    "codepoint": "<U+1ECD,U+0308>"
+  },
+  {
+    "zeichen": "Ỏ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH HOOK ABOVE",
+    "codepoint": "U+1ECE"
+  },
+  {
+    "zeichen": "ỏ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH HOOK ABOVE",
+    "codepoint": "U+1ECF"
+  },
+  {
+    "zeichen": "Ố",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND ACUTE",
+    "codepoint": "U+1ED0"
+  },
+  {
+    "zeichen": "ố",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH CIRCUMFLEX AND ACUTE",
+    "codepoint": "U+1ED1"
+  },
+  {
+    "zeichen": "Ồ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND GRAVE",
+    "codepoint": "U+1ED2"
+  },
+  {
+    "zeichen": "ồ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH CIRCUMFLEX AND GRAVE",
+    "codepoint": "U+1ED3"
+  },
+  {
+    "zeichen": "Ổ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE",
+    "codepoint": "U+1ED4"
+  },
+  {
+    "zeichen": "ổ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE",
+    "codepoint": "U+1ED5"
+  },
+  {
+    "zeichen": "Ỗ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND TILDE",
+    "codepoint": "U+1ED6"
+  },
+  {
+    "zeichen": "ỗ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH CIRCUMFLEX AND TILDE",
+    "codepoint": "U+1ED7"
+  },
+  {
+    "zeichen": "Ộ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND DOT BELOW",
+    "codepoint": "U+1ED8"
+  },
+  {
+    "zeichen": "ộ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH CIRCUMFLEX AND DOT BELOW",
+    "codepoint": "U+1ED9"
+  },
+  {
+    "zeichen": "Ớ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH HORN AND ACUTE",
+    "codepoint": "U+1EDA"
+  },
+  {
+    "zeichen": "ớ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH HORN AND ACUTE",
+    "codepoint": "U+1EDB"
+  },
+  {
+    "zeichen": "Ờ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH HORN AND GRAVE",
+    "codepoint": "U+1EDC"
+  },
+  {
+    "zeichen": "ờ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH HORN AND GRAVE",
+    "codepoint": "U+1EDD"
+  },
+  {
+    "zeichen": "Ở",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH HORN AND HOOK ABOVE",
+    "codepoint": "U+1EDE"
+  },
+  {
+    "zeichen": "ở",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH HORN AND HOOK ABOVE",
+    "codepoint": "U+1EDF"
+  },
+  {
+    "zeichen": "Ỡ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH HORN AND TILDE",
+    "codepoint": "U+1EE0"
+  },
+  {
+    "zeichen": "ỡ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH HORN AND TILDE",
+    "codepoint": "U+1E5"
+  },
+  {
+    "zeichen": "Ợ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER O WITH HORN AND DOT BELOW",
+    "codepoint": "U+1EE2"
+  },
+  {
+    "zeichen": "ợ",
+    "grundzeichen": "O",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER O WITH HORN AND DOT BELOW",
+    "codepoint": "U+1EE3"
+  },
+  {
+    "zeichen": "P",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER P",
+    "codepoint": "U+0050"
+  },
+  {
+    "zeichen": "P̀",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER P WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0050,U+0300>"
+  },
+  {
+    "zeichen": "P̄",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER P WITH COMBINING MACRON",
+    "codepoint": "<U+0050,U+0304>"
+  },
+  {
+    "zeichen": "P̕",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER P WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+0050,U+0315>"
+  },
+  {
+    "zeichen": "P̣",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER P WITH COMBINING DOT BELOW",
+    "codepoint": "<U+0050,U+0323>"
+  },
+  {
+    "zeichen": "p",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER P",
+    "codepoint": "U+0070"
+  },
+  {
+    "zeichen": "p̀",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER P WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0070,U+0300>"
+  },
+  {
+    "zeichen": "p̄",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER P WITH COMBINING MACRON",
+    "codepoint": "<U+0070,U+0304>"
+  },
+  {
+    "zeichen": "p̕",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER P WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+0070,U+0315>"
+  },
+  {
+    "zeichen": "p̣",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER P WITH COMBINING DOT BELOW",
+    "codepoint": "<U+0070,U+0323>"
+  },
+  {
+    "zeichen": "Ṕ",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER P WITH ACUTE",
+    "codepoint": "U+1E54"
+  },
+  {
+    "zeichen": "ṕ",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER P WITH ACUTE",
+    "codepoint": "U+1E55"
+  },
+  {
+    "zeichen": "Ṗ",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER P WITH DOT ABOVE",
+    "codepoint": "U+1E56"
+  },
+  {
+    "zeichen": "ṗ",
+    "grundzeichen": "P",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER P WITH DOT ABOVE",
+    "codepoint": "U+1E57"
+  },
+  {
+    "zeichen": "‘",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "LEFT SINGLE QUOTATION MARK",
+    "codepoint": "U+2018"
+  },
+  {
+    "zeichen": "‚",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SINGLE LOW-9 QUOTATION MARK",
+    "codepoint": "U+201A"
+  },
+  {
+    "zeichen": "“",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "LEFT DOUBLE QUOTATION MARK",
+    "codepoint": "U+201C"
+  },
+  {
+    "zeichen": "”",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "RIGHT DOUBLE QUOTATION MARK",
+    "codepoint": "U+201D"
+  },
+  {
+    "zeichen": "„",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "DOUBLE LOW-9 QUOTATION MARK",
+    "codepoint": "U+201E"
+  },
+  {
+    "zeichen": "†",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "DAGGER",
+    "codepoint": "U+2020"
+  },
+  {
+    "zeichen": "…",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "HORIZONTAL ELLIPSIS",
+    "codepoint": "U+2026"
+  },
+  {
+    "zeichen": "‰",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "PER MILLE SIGN",
+    "codepoint": "U+2030"
+  },
+  {
+    "zeichen": "‹",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SINGLE LEFT-POINTING ANGLE QUOTATION MARK",
+    "codepoint": "U+2039"
+  },
+  {
+    "zeichen": "›",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SINGLE RIGHT-POINTING ANGLE QUOTATION MARK",
+    "codepoint": "U+203A"
+  },
+  {
+    "zeichen": "'",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "APOSTROPHE",
+    "codepoint": "U+0027"
+  },
+  {
+    "zeichen": ",",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "COMMA",
+    "codepoint": "U+002C"
+  },
+  {
+    "zeichen": "-",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "HYPHEN-MINUS",
+    "codepoint": "U+002D"
+  },
+  {
+    "zeichen": ".",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "FULL STOP",
+    "codepoint": "U+002E"
+  },
+  {
+    "zeichen": "·",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "MIDDLE DOT",
+    "codepoint": "U+00B7"
+  },
+  {
+    "zeichen": "’",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "RIGHT SINGLE QUOTATION MARK",
+    "codepoint": "U+2019"
+  },
+  {
+    "zeichen": "‡",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "DOUBLE DAGGER",
+    "codepoint": "U+2021"
+  },
+  {
+    "zeichen": "!",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "EXCLAMATION MARK",
+    "codepoint": "U+0021"
+  },
+  {
+    "zeichen": "\"",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "QUOTATION MARK",
+    "codepoint": "U+0022"
+  },
+  {
+    "zeichen": "#",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "NUMBER SIGN",
+    "codepoint": "U+0023"
+  },
+  {
+    "zeichen": "%",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "PERCENT SIGN",
+    "codepoint": "U+0025"
+  },
+  {
+    "zeichen": "&",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "AMPERSAND",
+    "codepoint": "U+0026"
+  },
+  {
+    "zeichen": "(",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "LEFT PARENTHESIS",
+    "codepoint": "U+0028"
+  },
+  {
+    "zeichen": ")",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "RIGHT PARENTHESIS",
+    "codepoint": "U+0029"
+  },
+  {
+    "zeichen": "*",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "ASTERISK",
+    "codepoint": "U+002A"
+  },
+  {
+    "zeichen": "/",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "SOLIDUS",
+    "codepoint": "U+002F"
+  },
+  {
+    "zeichen": ":",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "COLON",
+    "codepoint": "U+003A"
+  },
+  {
+    "zeichen": ";",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "SEMICOLON",
+    "codepoint": "U+003B"
+  },
+  {
+    "zeichen": "?",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "QUESTION MARK",
+    "codepoint": "U+003F"
+  },
+  {
+    "zeichen": "@",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "COMMERCIAL AT",
+    "codepoint": "U+0040"
+  },
+  {
+    "zeichen": "[",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "LEFT SQUARE BRACKET",
+    "codepoint": "U+005B"
+  },
+  {
+    "zeichen": "\\",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "REVERSE SOLIDUS",
+    "codepoint": "U+005C"
+  },
+  {
+    "zeichen": "]",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "RIGHT SQUARE BRACKET",
+    "codepoint": "U+005D"
+  },
+  {
+    "zeichen": "_",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "LOW LINE",
+    "codepoint": "U+005F"
+  },
+  {
+    "zeichen": "{",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "LEFT CURLY BRACKET",
+    "codepoint": "U+007B"
+  },
+  {
+    "zeichen": "}",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "RIGHT CURLY BRACKET",
+    "codepoint": "U+007D"
+  },
+  {
+    "zeichen": "¡",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "INVERTED EXCLAMATION MARK",
+    "codepoint": "U+00A1"
+  },
+  {
+    "zeichen": "§",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "SECTION SIGN",
+    "codepoint": "U+00A7"
+  },
+  {
+    "zeichen": "«",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "LEFT-POINTING DOUBLE ANGLE QUOTATION MARK",
+    "codepoint": "U+00AB"
+  },
+  {
+    "zeichen": "¶",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "PILCROW SIGN",
+    "codepoint": "U+00B6"
+  },
+  {
+    "zeichen": "»",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK",
+    "codepoint": "U+00BB"
+  },
+  {
+    "zeichen": "¿",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "INVERTED QUESTION MARK",
+    "codepoint": "U+00BF"
+  },
+  {
+    "zeichen": "Q",
+    "grundzeichen": "Q",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Q",
+    "codepoint": "U+0051"
+  },
+  {
+    "zeichen": "q",
+    "grundzeichen": "Q",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Q",
+    "codepoint": "U+0071"
+  },
+  {
+    "zeichen": "R",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R",
+    "codepoint": "U+0052"
+  },
+  {
+    "zeichen": "R̆",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH COMBINING BREVE",
+    "codepoint": "<U+0052,U+0306>"
+  },
+  {
+    "zeichen": "R̥",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH COMBINING RING BELOW",
+    "codepoint": "<U+0052,U+0325>"
+  },
+  {
+    "zeichen": "R̥̄",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH COMBINING RING BELOW AND COMBINING MACRON",
+    "codepoint": "<U+0052,U+0325,U+0304>"
+  },
+  {
+    "zeichen": "r",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R",
+    "codepoint": "U+0072"
+  },
+  {
+    "zeichen": "r̆",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH COMBINING BREVE",
+    "codepoint": "<U+0072,U+0306>"
+  },
+  {
+    "zeichen": "r̥",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH COMBINING RING BELOW",
+    "codepoint": "<U+0072,U+0325>"
+  },
+  {
+    "zeichen": "r̥̄",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH COMBINING RING BELOW AND COMBINING MACRON",
+    "codepoint": "<U+0072,U+0325,U+0304>"
+  },
+  {
+    "zeichen": "Ŕ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH ACUTE",
+    "codepoint": "U+0154"
+  },
+  {
+    "zeichen": "ŕ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH ACUTE",
+    "codepoint": "U+0155"
+  },
+  {
+    "zeichen": "Ŗ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH CEDILLA",
+    "codepoint": "U+0156"
+  },
+  {
+    "zeichen": "ŗ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH CEDILLA",
+    "codepoint": "U+0157"
+  },
+  {
+    "zeichen": "Ř",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH CARON",
+    "codepoint": "U+0158"
+  },
+  {
+    "zeichen": "ř",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH CARON",
+    "codepoint": "U+0159"
+  },
+  {
+    "zeichen": "Ȓ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH INVERTED BREVE",
+    "codepoint": "U+0212"
+  },
+  {
+    "zeichen": "ȓ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH INVERTED BREVE",
+    "codepoint": "U+0213"
+  },
+  {
+    "zeichen": "Ṙ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH DOT ABOVE",
+    "codepoint": "U+1E58"
+  },
+  {
+    "zeichen": "ṙ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH DOT ABOVE",
+    "codepoint": "U+1E59"
+  },
+  {
+    "zeichen": "Ṛ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH DOT BELOW",
+    "codepoint": "U+1E5A"
+  },
+  {
+    "zeichen": "ṛ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH DOT BELOW",
+    "codepoint": "U+1E5B"
+  },
+  {
+    "zeichen": "Ṟ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER R WITH LINE BELOW",
+    "codepoint": "U+1E5E"
+  },
+  {
+    "zeichen": "ṟ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER R WITH LINE BELOW",
+    "codepoint": "U+1E5F"
+  },
+  {
+    "zeichen": "ʳ",
+    "grundzeichen": "R",
+    "schriftzeichengruppe": "E1",
+    "name": "MODIFIER LETTER SMALL R",
+    "codepoint": "U+02B3"
+  },
+  {
+    "zeichen": "S",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S",
+    "codepoint": "U+0053"
+  },
+  {
+    "zeichen": "S̀",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0053,U+0300>"
+  },
+  {
+    "zeichen": "S̄",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH COMBINING MACRON",
+    "codepoint": "<U+0053,U+0304>"
+  },
+  {
+    "zeichen": "S̛̄",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH COMBINING HORN AND COMBINING MACRON",
+    "codepoint": "<U+0053,U+031B,U+0304>"
+  },
+  {
+    "zeichen": "S̱",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH COMBINING MACRON BELOW",
+    "codepoint": "<U+0053,U+0331>"
+  },
+  {
+    "zeichen": "s",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S",
+    "codepoint": "U+0073"
+  },
+  {
+    "zeichen": "s̀",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0073,U+0300>"
+  },
+  {
+    "zeichen": "s̄",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH COMBINING MACRON",
+    "codepoint": "<U+0073,U+0304>"
+  },
+  {
+    "zeichen": "s̛̄",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH COMBINING HORN AND COMBINING MACRON",
+    "codepoint": "<U+0073,U+031B,U+0304>"
+  },
+  {
+    "zeichen": "s̱",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH COMBINING MACRON BELOW",
+    "codepoint": "<U+0073,U+0331>"
+  },
+  {
+    "zeichen": "ß",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER SHARP S",
+    "codepoint": "U+00DF"
+  },
+  {
+    "zeichen": "Ś",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH ACUTE",
+    "codepoint": "U+015A"
+  },
+  {
+    "zeichen": "ś",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH ACUTE",
+    "codepoint": "U+015B"
+  },
+  {
+    "zeichen": "Ŝ",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH CIRCUMFLEX",
+    "codepoint": "U+015C"
+  },
+  {
+    "zeichen": "ŝ",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH CIRCUMFLEX",
+    "codepoint": "U+015D"
+  },
+  {
+    "zeichen": "Ş",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH CEDILLA",
+    "codepoint": "U+015E"
+  },
+  {
+    "zeichen": "ş",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH CEDILLA",
+    "codepoint": "U+015F"
+  },
+  {
+    "zeichen": "Š",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH CARON",
+    "codepoint": "U+0160"
+  },
+  {
+    "zeichen": "š",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH CARON",
+    "codepoint": "U+0161"
+  },
+  {
+    "zeichen": "Ș",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH COMMA BELOW",
+    "codepoint": "U+0218"
+  },
+  {
+    "zeichen": "ș",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH COMMA BELOW",
+    "codepoint": "U+0219"
+  },
+  {
+    "zeichen": "Ṡ",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH DOT ABOVE",
+    "codepoint": "U+1E60"
+  },
+  {
+    "zeichen": "ṡ",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH DOT ABOVE",
+    "codepoint": "U+1E61"
+  },
+  {
+    "zeichen": "Ṣ",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH DOT BELOW",
+    "codepoint": "U+1E62"
+  },
+  {
+    "zeichen": "Ṣ̄",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER S WITH DOT BELOW WITH COMBINING MACRON",
+    "codepoint": "<U+1E62,U+0304>"
+  },
+  {
+    "zeichen": "ṣ",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH DOT BELOW",
+    "codepoint": "U+1E63"
+  },
+  {
+    "zeichen": "ṣ̄",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER S WITH DOT BELOW WITH COMBINING MACRON",
+    "codepoint": "<U+1E63,U+0304>"
+  },
+  {
+    "zeichen": "ẞ",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER SHARP S",
+    "codepoint": "U+1E9E"
+  },
+  {
+    "zeichen": "˜",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "SMALL TILDE",
+    "codepoint": "U+02DC"
+  },
+  {
+    "zeichen": "ˢ",
+    "grundzeichen": "S",
+    "schriftzeichengruppe": "E1",
+    "name": "MODIFIER LETTER SMALL S",
+    "codepoint": "U+02E2"
+  },
+  {
+    "zeichen": "™",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "TRADE MARK SIGN",
+    "codepoint": "U+2122"
+  },
+  {
+    "zeichen": "∞",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "INFINITY",
+    "codepoint": "U+221E"
+  },
+  {
+    "zeichen": "≤",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "LESS-THAN OR EQUAL TO",
+    "codepoint": "U+2264"
+  },
+  {
+    "zeichen": "≥",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "GREATER-THAN OR EQUAL TO",
+    "codepoint": "U+2265"
+  },
+  {
+    "zeichen": "`",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "GRAVE ACCENT",
+    "codepoint": "U+0060"
+  },
+  {
+    "zeichen": "~",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "TILDE",
+    "codepoint": "U+007E"
+  },
+  {
+    "zeichen": "¨",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "DIAERESIS",
+    "codepoint": "U+00A8"
+  },
+  {
+    "zeichen": "´",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "ACUTE ACCENT",
+    "codepoint": "U+00B4"
+  },
+  {
+    "zeichen": "$",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DOLLAR SIGN",
+    "codepoint": "U+0024"
+  },
+  {
+    "zeichen": "+",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "PLUS SIGN",
+    "codepoint": "U+002B"
+  },
+  {
+    "zeichen": "<",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "LESS-THAN SIGN",
+    "codepoint": "U+003C"
+  },
+  {
+    "zeichen": "=",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "EQUALS SIGN",
+    "codepoint": "U+003D"
+  },
+  {
+    "zeichen": ">",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "GREATER-THAN SIGN",
+    "codepoint": "U+003E"
+  },
+  {
+    "zeichen": "^",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "CIRCUMFLEX ACCENT",
+    "codepoint": "U+005E"
+  },
+  {
+    "zeichen": "|",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "VERTICAL LINE",
+    "codepoint": "U+007C"
+  },
+  {
+    "zeichen": "¢",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "CENT SIGN",
+    "codepoint": "U+00A2"
+  },
+  {
+    "zeichen": "£",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "POUND SIGN",
+    "codepoint": "U+00A3"
+  },
+  {
+    "zeichen": "¥",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "YEN SIGN",
+    "codepoint": "U+00A5"
+  },
+  {
+    "zeichen": "©",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "COPYRIGHT SIGN",
+    "codepoint": "U+00A9"
+  },
+  {
+    "zeichen": "¬",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "NOT SIGN",
+    "codepoint": "U+00AC"
+  },
+  {
+    "zeichen": "®",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "REGISTERED SIGN",
+    "codepoint": "U+00AE"
+  },
+  {
+    "zeichen": "¯",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "MACRON",
+    "codepoint": "U+00AF"
+  },
+  {
+    "zeichen": "°",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DEGREE SIGN",
+    "codepoint": "U+00B0"
+  },
+  {
+    "zeichen": "±",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "PLUS-MINUS SIGN",
+    "codepoint": "U+00B1"
+  },
+  {
+    "zeichen": "×",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "MULTIPLICATION SIGN",
+    "codepoint": "U+00D7"
+  },
+  {
+    "zeichen": "÷",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "DIVISION SIGN",
+    "codepoint": "U+00F7"
+  },
+  {
+    "zeichen": "€",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N2",
+    "name": "EURO SIGN",
+    "codepoint": "U+20AC"
+  },
+  {
+    "zeichen": "¤",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N3",
+    "name": "CURRENCY SIGN",
+    "codepoint": "U+00A4"
+  },
+  {
+    "zeichen": "¦",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N3",
+    "name": "BROKEN BAR",
+    "codepoint": "U+00A6"
+  },
+  {
+    "zeichen": "¸",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N3",
+    "name": "CEDILLA",
+    "codepoint": "U+00B8"
+  },
+  {
+    "zeichen": "T",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T",
+    "codepoint": "U+0054"
+  },
+  {
+    "zeichen": "T̀",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0054,U+0300>"
+  },
+  {
+    "zeichen": "T̄",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH COMBINING MACRON",
+    "codepoint": "<U+0054,U+0304>"
+  },
+  {
+    "zeichen": "T̈",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH COMBINING DIAERESIS",
+    "codepoint": "<U+0054,U+0308>"
+  },
+  {
+    "zeichen": "T̕",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+0054,U+0315>"
+  },
+  {
+    "zeichen": "T̛",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH COMBINING HORN",
+    "codepoint": "<U+0054,U+031B>"
+  },
+  {
+    "zeichen": "t",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T",
+    "codepoint": "U+0074"
+  },
+  {
+    "zeichen": "t̀",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+0074,U+0300>"
+  },
+  {
+    "zeichen": "t̄",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH COMBINING MACRON",
+    "codepoint": "<U+0074,U+0304>"
+  },
+  {
+    "zeichen": "t̕",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH COMBINING COMMA ABOVE RIGHT",
+    "codepoint": "<U+0074,U+0315>"
+  },
+  {
+    "zeichen": "t̛",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH COMBINING HORN",
+    "codepoint": "<U+0074,U+031B>"
+  },
+  {
+    "zeichen": "Þ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER THORN",
+    "codepoint": "U+00DE"
+  },
+  {
+    "zeichen": "þ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER THORN",
+    "codepoint": "U+00FE"
+  },
+  {
+    "zeichen": "Ţ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH CEDILLA",
+    "codepoint": "U+0162"
+  },
+  {
+    "zeichen": "ţ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH CEDILLA",
+    "codepoint": "U+0163"
+  },
+  {
+    "zeichen": "Ť",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH CARON",
+    "codepoint": "U+0164"
+  },
+  {
+    "zeichen": "ť",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH CARON",
+    "codepoint": "U+0165"
+  },
+  {
+    "zeichen": "Ŧ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH STROKE",
+    "codepoint": "U+0166"
+  },
+  {
+    "zeichen": "ŧ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH STROKE",
+    "codepoint": "U+0167"
+  },
+  {
+    "zeichen": "Ț",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH COMMA BELOW",
+    "codepoint": "U+021A"
+  },
+  {
+    "zeichen": "ț",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH COMMA BELOW",
+    "codepoint": "U+021B"
+  },
+  {
+    "zeichen": "Ṫ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH DOT ABOVE",
+    "codepoint": "U+1E6A"
+  },
+  {
+    "zeichen": "ṫ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH DOT ABOVE",
+    "codepoint": "U+1E6B"
+  },
+  {
+    "zeichen": "Ṭ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH DOT BELOW",
+    "codepoint": "U+1E6C"
+  },
+  {
+    "zeichen": "Ṭ̄",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH DOT BELOW WITH COMBINING MACRON",
+    "codepoint": "<U+1E6C,U+0304>"
+  },
+  {
+    "zeichen": "ṭ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH DOT BELOW",
+    "codepoint": "U+1E6D"
+  },
+  {
+    "zeichen": "ṭ̄",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH DOT BELOW WITH COMBINING MACRON",
+    "codepoint": "<U+1E6D,U+0304>"
+  },
+  {
+    "zeichen": "Ṯ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER T WITH LINE BELOW",
+    "codepoint": "U+1E6E"
+  },
+  {
+    "zeichen": "ṯ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH LINE BELOW",
+    "codepoint": "U+1E6F"
+  },
+  {
+    "zeichen": "ẗ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER T WITH DIAERESIS",
+    "codepoint": "U+1E97"
+  },
+  {
+    "zeichen": "ᵗ",
+    "grundzeichen": "T",
+    "schriftzeichengruppe": "E1",
+    "name": "MODIFIER LETTER SMALL T",
+    "codepoint": "U+1D57"
+  },
+  {
+    "zeichen": "U",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U",
+    "codepoint": "U+0055"
+  },
+  {
+    "zeichen": "U̇",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH COMBINING DOT ABOVE",
+    "codepoint": "<U+0055,U+0307>"
+  },
+  {
+    "zeichen": "u",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U",
+    "codepoint": "U+0075"
+  },
+  {
+    "zeichen": "u̇",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH COMBINING DOT ABOVE",
+    "codepoint": "<U+0075,U+0307>"
+  },
+  {
+    "zeichen": "Ù",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH GRAVE",
+    "codepoint": "U+00D9"
+  },
+  {
+    "zeichen": "Ú",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH ACUTE",
+    "codepoint": "U+00DA"
+  },
+  {
+    "zeichen": "Û",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH CIRCUMFLEX",
+    "codepoint": "U+00DB"
+  },
+  {
+    "zeichen": "Û̄",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH CIRCUMFLEX WITH COMBINING MACRON",
+    "codepoint": "<U+00DB,U+0304>"
+  },
+  {
+    "zeichen": "Ü",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS",
+    "codepoint": "U+00DC"
+  },
+  {
+    "zeichen": "ù",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH GRAVE",
+    "codepoint": "U+00F9"
+  },
+  {
+    "zeichen": "ú",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH ACUTE",
+    "codepoint": "U+00FA"
+  },
+  {
+    "zeichen": "û",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH CIRCUMFLEX",
+    "codepoint": "U+00FB"
+  },
+  {
+    "zeichen": "û̄",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH CIRCUMFLEX WITH COMBINING MACRON",
+    "codepoint": "<U+00FB,U+0304>"
+  },
+  {
+    "zeichen": "ü",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS",
+    "codepoint": "U+00FC"
+  },
+  {
+    "zeichen": "Ũ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH TILDE",
+    "codepoint": "U+0168"
+  },
+  {
+    "zeichen": "ũ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH TILDE",
+    "codepoint": "U+0169"
+  },
+  {
+    "zeichen": "Ū",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH MACRON",
+    "codepoint": "U+016A"
+  },
+  {
+    "zeichen": "ū",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH MACRON",
+    "codepoint": "U+016B"
+  },
+  {
+    "zeichen": "Ŭ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH BREVE",
+    "codepoint": "U+016C"
+  },
+  {
+    "zeichen": "ŭ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH BREVE",
+    "codepoint": "U+016D"
+  },
+  {
+    "zeichen": "Ů",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH RING ABOVE",
+    "codepoint": "U+016E"
+  },
+  {
+    "zeichen": "ů",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH RING ABOVE",
+    "codepoint": "U+016F"
+  },
+  {
+    "zeichen": "Ű",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DOUBLE ACUTE",
+    "codepoint": "U+0170"
+  },
+  {
+    "zeichen": "ű",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DOUBLE ACUTE",
+    "codepoint": "U+0171"
+  },
+  {
+    "zeichen": "Ų",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH OGONEK",
+    "codepoint": "U+0172"
+  },
+  {
+    "zeichen": "ų",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH OGONEK",
+    "codepoint": "U+0173"
+  },
+  {
+    "zeichen": "Ư",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH HORN",
+    "codepoint": "U+01AF"
+  },
+  {
+    "zeichen": "ư",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH HORN",
+    "codepoint": "U+01B0"
+  },
+  {
+    "zeichen": "Ǔ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH CARON",
+    "codepoint": "U+01D3"
+  },
+  {
+    "zeichen": "ǔ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH CARON",
+    "codepoint": "U+01D4"
+  },
+  {
+    "zeichen": "Ǖ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS AND MACRON",
+    "codepoint": "U+01D5"
+  },
+  {
+    "zeichen": "ǖ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS AND MACRON",
+    "codepoint": "U+01D6"
+  },
+  {
+    "zeichen": "Ǘ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS AND ACUTE",
+    "codepoint": "U+01D7"
+  },
+  {
+    "zeichen": "ǘ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS AND ACUTE",
+    "codepoint": "U+01D8"
+  },
+  {
+    "zeichen": "Ǚ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS AND CARON",
+    "codepoint": "U+01D9"
+  },
+  {
+    "zeichen": "ǚ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS AND CARON",
+    "codepoint": "U+01DA"
+  },
+  {
+    "zeichen": "Ǜ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS AND GRAVE",
+    "codepoint": "U+01DB"
+  },
+  {
+    "zeichen": "ǜ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS AND GRAVE",
+    "codepoint": "U+01DC"
+  },
+  {
+    "zeichen": "Ụ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DOT BELOW",
+    "codepoint": "U+1EE4"
+  },
+  {
+    "zeichen": "Ụ̄",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DOT BELOW WITH COMBINING MACRON",
+    "codepoint": "<U+1EE4,U+0304>"
+  },
+  {
+    "zeichen": "Ụ̈",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH DOT BELOW WITH COMBINING DIAERESIS",
+    "codepoint": "<U+1EE4,U+0308>"
+  },
+  {
+    "zeichen": "ụ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DOT BELOW",
+    "codepoint": "U+1EE5"
+  },
+  {
+    "zeichen": "ụ̄",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DOT BELOW WITH COMBINING MACRON",
+    "codepoint": "<U+1EE5,U+0304>"
+  },
+  {
+    "zeichen": "ụ̈",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH DOT BELOW WITH COMBINING DIAERESIS",
+    "codepoint": "<U+1EE5,U+0308>"
+  },
+  {
+    "zeichen": "Ủ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH HOOK ABOVE",
+    "codepoint": "U+1EE6"
+  },
+  {
+    "zeichen": "ủ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH HOOK ABOVE",
+    "codepoint": "U+1EE7"
+  },
+  {
+    "zeichen": "Ứ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH HORN AND ACUTE",
+    "codepoint": "U+1EE8"
+  },
+  {
+    "zeichen": "ứ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH HORN AND ACUTE",
+    "codepoint": "U+1EE9"
+  },
+  {
+    "zeichen": "Ừ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH HORN AND GRAVE",
+    "codepoint": "U+1EEA"
+  },
+  {
+    "zeichen": "ừ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH HORN AND GRAVE",
+    "codepoint": "U+1EEB"
+  },
+  {
+    "zeichen": "Ử",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH HORN AND HOOK ABOVE",
+    "codepoint": "U+1EEC"
+  },
+  {
+    "zeichen": "ử",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH HORN AND HOOK ABOVE",
+    "codepoint": "U+1EED"
+  },
+  {
+    "zeichen": "Ữ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH HORN AND TILDE",
+    "codepoint": "U+1EEE"
+  },
+  {
+    "zeichen": "ữ",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH HORN AND TILDE",
+    "codepoint": "U+1EEF"
+  },
+  {
+    "zeichen": "Ự",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER U WITH HORN AND DOT BELOW",
+    "codepoint": "U+1EF0"
+  },
+  {
+    "zeichen": "ự",
+    "grundzeichen": "U",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER U WITH HORN AND DOT BELOW",
+    "codepoint": "U+1EF1"
+  },
+  {
+    "zeichen": "V",
+    "grundzeichen": "V",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER V",
+    "codepoint": "U+0056"
+  },
+  {
+    "zeichen": "v",
+    "grundzeichen": "V",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER V",
+    "codepoint": "U+0076"
+  },
+  {
+    "zeichen": "W",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER W",
+    "codepoint": "U+0057"
+  },
+  {
+    "zeichen": "w",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER W",
+    "codepoint": "U+0077"
+  },
+  {
+    "zeichen": "Ŵ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER W WITH CIRCUMFLEX",
+    "codepoint": "U+0174"
+  },
+  {
+    "zeichen": "ŵ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER W WITH CIRCUMFLEX",
+    "codepoint": "U+0175"
+  },
+  {
+    "zeichen": "Ẁ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER W WITH GRAVE",
+    "codepoint": "U+1E80"
+  },
+  {
+    "zeichen": "ẁ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER W WITH GRAVE",
+    "codepoint": "U+1E81"
+  },
+  {
+    "zeichen": "Ẃ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER W WITH ACUTE",
+    "codepoint": "U+1E82"
+  },
+  {
+    "zeichen": "ẃ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER W WITH ACUTE",
+    "codepoint": "U+1E83"
+  },
+  {
+    "zeichen": "Ẅ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER W WITH DIAERESIS",
+    "codepoint": "U+1E84"
+  },
+  {
+    "zeichen": "ẅ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER W WITH DIAERESIS",
+    "codepoint": "U+1E85"
+  },
+  {
+    "zeichen": "Ẇ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER W WITH DOT ABOVE",
+    "codepoint": "U+1E86"
+  },
+  {
+    "zeichen": "ẇ",
+    "grundzeichen": "W",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER W WITH DOT ABOVE",
+    "codepoint": "U+1E87"
+  },
+  {
+    "zeichen": "X",
+    "grundzeichen": "X",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER X",
+    "codepoint": "U+0058"
+  },
+  {
+    "zeichen": "x",
+    "grundzeichen": "X",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER X",
+    "codepoint": "U+0078"
+  },
+  {
+    "zeichen": "Ẍ",
+    "grundzeichen": "X",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER X WITH DIAERESIS",
+    "codepoint": "U+1E8C"
+  },
+  {
+    "zeichen": "ẍ",
+    "grundzeichen": "X",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER X WITH DIAERESIS",
+    "codepoint": "U+1E8D"
+  },
+  {
+    "zeichen": "Y",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y",
+    "codepoint": "U+0059"
+  },
+  {
+    "zeichen": "y",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y",
+    "codepoint": "U+0079"
+  },
+  {
+    "zeichen": "Ý",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH ACUTE",
+    "codepoint": "U+00DD"
+  },
+  {
+    "zeichen": "ý",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH ACUTE",
+    "codepoint": "U+00FD"
+  },
+  {
+    "zeichen": "ÿ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH DIAERESIS",
+    "codepoint": "U+00FF"
+  },
+  {
+    "zeichen": "ÿ́",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH DIAERESIS WITH COMBINING ACUTE ACCENT",
+    "codepoint": "<U+00FF,U+0301>"
+  },
+  {
+    "zeichen": "Ŷ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH CIRCUMFLEX",
+    "codepoint": "U+0176"
+  },
+  {
+    "zeichen": "ŷ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH CIRCUMFLEX",
+    "codepoint": "U+0177"
+  },
+  {
+    "zeichen": "Ÿ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH DIAERESIS",
+    "codepoint": "U+0178"
+  },
+  {
+    "zeichen": "Ȳ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH MACRON",
+    "codepoint": "U+0232"
+  },
+  {
+    "zeichen": "ȳ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH MACRON",
+    "codepoint": "U+0233"
+  },
+  {
+    "zeichen": "Ẏ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH DOT ABOVE",
+    "codepoint": "U+1E8E"
+  },
+  {
+    "zeichen": "ẏ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH DOT ABOVE",
+    "codepoint": "U+1E8F"
+  },
+  {
+    "zeichen": "Ỳ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH GRAVE",
+    "codepoint": "U+1EF2"
+  },
+  {
+    "zeichen": "ỳ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH GRAVE",
+    "codepoint": "U+1EF3"
+  },
+  {
+    "zeichen": "Ỵ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH DOT BELOW",
+    "codepoint": "U+1EF4"
+  },
+  {
+    "zeichen": "ỵ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH DOT BELOW",
+    "codepoint": "U+1EF5"
+  },
+  {
+    "zeichen": "Ỷ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH HOOK ABOVE",
+    "codepoint": "U+1EF6"
+  },
+  {
+    "zeichen": "ỷ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH HOOK ABOVE",
+    "codepoint": "U+1EF7"
+  },
+  {
+    "zeichen": "Ỹ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Y WITH TILDE",
+    "codepoint": "U+1EF8"
+  },
+  {
+    "zeichen": "ỹ",
+    "grundzeichen": "Y",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Y WITH TILDE",
+    "codepoint": "U+1EF9"
+  },
+  {
+    "zeichen": "Z",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z",
+    "codepoint": "U+005A"
+  },
+  {
+    "zeichen": "Z̀",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+005A,U+0300>"
+  },
+  {
+    "zeichen": "Z̄",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH COMBINING MACRON",
+    "codepoint": "<U+005A,U+0304>"
+  },
+  {
+    "zeichen": "Z̆",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH COMBINING BREVE",
+    "codepoint": "<U+005A,U+0306>"
+  },
+  {
+    "zeichen": "Z̈",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH COMBINING DIAERESIS",
+    "codepoint": "<U+005A,U+0308>"
+  },
+  {
+    "zeichen": "Z̧",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH COMBINING CEDILLA",
+    "codepoint": "<U+005A,U+0327>"
+  },
+  {
+    "zeichen": "z",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z",
+    "codepoint": "U+007A"
+  },
+  {
+    "zeichen": "z̀",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH COMBINING GRAVE ACCENT",
+    "codepoint": "<U+007A,U+0300>"
+  },
+  {
+    "zeichen": "z̄",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH COMBINING MACRON",
+    "codepoint": "<U+007A,U+0304>"
+  },
+  {
+    "zeichen": "z̆",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH COMBINING BREVE",
+    "codepoint": "<U+007A,U+0306>"
+  },
+  {
+    "zeichen": "z̈",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH COMBINING DIAERESIS",
+    "codepoint": "<U+007A,U+0308>"
+  },
+  {
+    "zeichen": "z̧",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH COMBINING CEDILLA",
+    "codepoint": "<U+007A,U+0327>"
+  },
+  {
+    "zeichen": "Ź",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH ACUTE",
+    "codepoint": "U+0179"
+  },
+  {
+    "zeichen": "ź",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH ACUTE",
+    "codepoint": "U+017A"
+  },
+  {
+    "zeichen": "Ż",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH DOT ABOVE",
+    "codepoint": "U+017B"
+  },
+  {
+    "zeichen": "ż",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH DOT ABOVE",
+    "codepoint": "U+017C"
+  },
+  {
+    "zeichen": "Ž",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH CARON",
+    "codepoint": "U+017D"
+  },
+  {
+    "zeichen": "Ž̦",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH CARON WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+017D,U+0326>"
+  },
+  {
+    "zeichen": "Ž̧",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH CARON WITH COMBINING CEDILLA",
+    "codepoint": "<U+017D,U+0327>"
+  },
+  {
+    "zeichen": "ž",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH CARON",
+    "codepoint": "U+017E"
+  },
+  {
+    "zeichen": "ž̦",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH CARON WITH COMBINING COMMA BELOW",
+    "codepoint": "<U+017E,U+0326>"
+  },
+  {
+    "zeichen": "ž̧",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH CARON WITH COMBINING CEDILLA",
+    "codepoint": "<U+017E,U+0327>"
+  },
+  {
+    "zeichen": "Ʒ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER EZH",
+    "codepoint": "U+01B7"
+  },
+  {
+    "zeichen": "Ǯ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER EZH WITH CARON",
+    "codepoint": "U+01EE"
+  },
+  {
+    "zeichen": "ǯ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER EZH WITH CARON",
+    "codepoint": "U+01EF"
+  },
+  {
+    "zeichen": "ʒ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER EZH",
+    "codepoint": "U+0292"
+  },
+  {
+    "zeichen": "Ẑ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH CIRCUMFLEX",
+    "codepoint": "U+1E90"
+  },
+  {
+    "zeichen": "ẑ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH CIRCUMFLEX",
+    "codepoint": "U+1E91"
+  },
+  {
+    "zeichen": "Ẓ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH DOT BELOW",
+    "codepoint": "U+1E92"
+  },
+  {
+    "zeichen": "ẓ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH DOT BELOW",
+    "codepoint": "U+1E93"
+  },
+  {
+    "zeichen": "Ẕ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN CAPITAL LETTER Z WITH LINE BELOW",
+    "codepoint": "U+1E94"
+  },
+  {
+    "zeichen": "ẕ",
+    "grundzeichen": "Z",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER Z WITH LINE BELOW",
+    "codepoint": "U+1E95"
+  },
+  {
+    "zeichen": " ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N1",
+    "name": "SPACE",
+    "codepoint": "U+0020"
+  },
+  {
+    "zeichen": " ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "N4",
+    "name": "NO-BREAK SPACE",
+    "codepoint": "U+00A0"
+  },
+  {
+    "zeichen": "Ά",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER ALPHA WITH TONOS",
+    "codepoint": "U+0386"
+  },
+  {
+    "zeichen": "Έ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER EPSILON WITH TONOS",
+    "codepoint": "U+0388"
+  },
+  {
+    "zeichen": "Ή",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER ETA WITH TONOS",
+    "codepoint": "U+0389"
+  },
+  {
+    "zeichen": "Ί",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER IOTA WITH TONOS",
+    "codepoint": "U+038A"
+  },
+  {
+    "zeichen": "Ό",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER OMICRON WITH TONOS",
+    "codepoint": "U+038C"
+  },
+  {
+    "zeichen": "Ύ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER UPSILON WITH TONOS",
+    "codepoint": "U+038E"
+  },
+  {
+    "zeichen": "Ώ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER OMEGA WITH TONOS",
+    "codepoint": "U+038F"
+  },
+  {
+    "zeichen": "ΐ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS",
+    "codepoint": "U+0390"
+  },
+  {
+    "zeichen": "Α",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER ALPHA",
+    "codepoint": "U+0391"
+  },
+  {
+    "zeichen": "Β",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER BETA",
+    "codepoint": "U+0392"
+  },
+  {
+    "zeichen": "Γ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER GAMMA",
+    "codepoint": "U+0393"
+  },
+  {
+    "zeichen": "Δ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER DELTA",
+    "codepoint": "U+0394"
+  },
+  {
+    "zeichen": "Ε",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER EPSILON",
+    "codepoint": "U+0395"
+  },
+  {
+    "zeichen": "Ζ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER ZETA",
+    "codepoint": "U+0396"
+  },
+  {
+    "zeichen": "Η",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER ETA",
+    "codepoint": "U+0397"
+  },
+  {
+    "zeichen": "Θ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER THETA",
+    "codepoint": "U+0398"
+  },
+  {
+    "zeichen": "Ι",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER IOTA",
+    "codepoint": "U+0399"
+  },
+  {
+    "zeichen": "Κ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER KAPPA",
+    "codepoint": "U+039A"
+  },
+  {
+    "zeichen": "Λ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER LAMDA",
+    "codepoint": "U+039B"
+  },
+  {
+    "zeichen": "Μ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER MU",
+    "codepoint": "U+039C"
+  },
+  {
+    "zeichen": "Ν",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER NU",
+    "codepoint": "U+039D"
+  },
+  {
+    "zeichen": "Ξ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER XI",
+    "codepoint": "U+039E"
+  },
+  {
+    "zeichen": "Ο",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER OMICRON",
+    "codepoint": "U+039F"
+  },
+  {
+    "zeichen": "Π",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER PI",
+    "codepoint": "U+03A0"
+  },
+  {
+    "zeichen": "Ρ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER RHO",
+    "codepoint": "U+03A1"
+  },
+  {
+    "zeichen": "Σ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER SIGMA",
+    "codepoint": "U+03A3"
+  },
+  {
+    "zeichen": "Τ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER TAU",
+    "codepoint": "U+03A4"
+  },
+  {
+    "zeichen": "Υ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER UPSILON",
+    "codepoint": "U+03A5"
+  },
+  {
+    "zeichen": "Φ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER PHI",
+    "codepoint": "U+03A6"
+  },
+  {
+    "zeichen": "Χ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER CHI",
+    "codepoint": "U+03A7"
+  },
+  {
+    "zeichen": "Ψ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER PSI",
+    "codepoint": "U+03A8"
+  },
+  {
+    "zeichen": "Ω",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER OMEGA",
+    "codepoint": "U+03A9"
+  },
+  {
+    "zeichen": "Ϊ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER IOTA WITH DIALYTIKA",
+    "codepoint": "U+03AA"
+  },
+  {
+    "zeichen": "Ϋ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK CAPITAL LETTER UPSILON WITH DIALYTIKA",
+    "codepoint": "U+03AB"
+  },
+  {
+    "zeichen": "ά",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER ALPHA WITH TONOS",
+    "codepoint": "U+03AC"
+  },
+  {
+    "zeichen": "έ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER EPSILON WITH TONOS",
+    "codepoint": "U+03AD"
+  },
+  {
+    "zeichen": "ή",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER ETA WITH TONOS",
+    "codepoint": "U+03AE"
+  },
+  {
+    "zeichen": "ί",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER IOTA WITH TONOS",
+    "codepoint": "U+03AF"
+  },
+  {
+    "zeichen": "ΰ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS",
+    "codepoint": "U+03B0"
+  },
+  {
+    "zeichen": "α",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER ALPHA",
+    "codepoint": "U+03B1"
+  },
+  {
+    "zeichen": "β",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER BETA",
+    "codepoint": "U+03B2"
+  },
+  {
+    "zeichen": "γ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER GAMMA",
+    "codepoint": "U+03B3"
+  },
+  {
+    "zeichen": "δ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER DELTA",
+    "codepoint": "U+03B4"
+  },
+  {
+    "zeichen": "ε",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER EPSILON",
+    "codepoint": "U+03B5"
+  },
+  {
+    "zeichen": "ζ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER ZETA",
+    "codepoint": "U+03B6"
+  },
+  {
+    "zeichen": "η",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER ETA",
+    "codepoint": "U+03B7"
+  },
+  {
+    "zeichen": "θ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER THETA",
+    "codepoint": "U+03B8"
+  },
+  {
+    "zeichen": "ι",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER IOTA",
+    "codepoint": "U+03B9"
+  },
+  {
+    "zeichen": "κ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER KAPPA",
+    "codepoint": "U+03BA"
+  },
+  {
+    "zeichen": "λ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER LAMDA",
+    "codepoint": "U+03BB"
+  },
+  {
+    "zeichen": "μ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER MU",
+    "codepoint": "U+03BC"
+  },
+  {
+    "zeichen": "ν",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER NU",
+    "codepoint": "U+03BD"
+  },
+  {
+    "zeichen": "ξ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER XI",
+    "codepoint": "U+03BE"
+  },
+  {
+    "zeichen": "ο",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER OMICRON",
+    "codepoint": "U+03BF"
+  },
+  {
+    "zeichen": "π",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER PI",
+    "codepoint": "U+03C0"
+  },
+  {
+    "zeichen": "ρ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER RHO",
+    "codepoint": "U+03C1"
+  },
+  {
+    "zeichen": "ς",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER FINAL SIGMA",
+    "codepoint": "U+03C2"
+  },
+  {
+    "zeichen": "σ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER SIGMA",
+    "codepoint": "U+03C3"
+  },
+  {
+    "zeichen": "τ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER TAU",
+    "codepoint": "U+03C4"
+  },
+  {
+    "zeichen": "υ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER UPSILON",
+    "codepoint": "U+03C5"
+  },
+  {
+    "zeichen": "φ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER PHI",
+    "codepoint": "U+03C6"
+  },
+  {
+    "zeichen": "χ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER CHI",
+    "codepoint": "U+03C7"
+  },
+  {
+    "zeichen": "ψ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER PSI",
+    "codepoint": "U+03C8"
+  },
+  {
+    "zeichen": "ω",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER OMEGA",
+    "codepoint": "U+03C9"
+  },
+  {
+    "zeichen": "ϊ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER IOTA WITH DIALYTIKA",
+    "codepoint": "U+03CA"
+  },
+  {
+    "zeichen": "ϋ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER UPSILON WITH DIALYTIKA",
+    "codepoint": "U+03CB"
+  },
+  {
+    "zeichen": "ό",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER OMICRON WITH TONOS",
+    "codepoint": "U+03CC"
+  },
+  {
+    "zeichen": "ύ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER UPSILON WITH TONOS",
+    "codepoint": "U+03CD"
+  },
+  {
+    "zeichen": "ώ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "GRIECHISCH",
+    "name": "GREEK SMALL LETTER OMEGA WITH TONOS",
+    "codepoint": "U+03CE"
+  },
+  {
+    "zeichen": "Ѝ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER I WITH GRAVE",
+    "codepoint": "U+040D"
+  },
+  {
+    "zeichen": "А",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER A",
+    "codepoint": "U+0410"
+  },
+  {
+    "zeichen": "Б",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER BE",
+    "codepoint": "U+0411"
+  },
+  {
+    "zeichen": "В",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER VE",
+    "codepoint": "U+0412"
+  },
+  {
+    "zeichen": "Г",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER GHE",
+    "codepoint": "U+0413"
+  },
+  {
+    "zeichen": "Д",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER DE",
+    "codepoint": "U+0414"
+  },
+  {
+    "zeichen": "Е",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER IE",
+    "codepoint": "U+0415"
+  },
+  {
+    "zeichen": "Ж",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER ZHE",
+    "codepoint": "U+0416"
+  },
+  {
+    "zeichen": "З",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER ZE",
+    "codepoint": "U+0417"
+  },
+  {
+    "zeichen": "И",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER I",
+    "codepoint": "U+0418"
+  },
+  {
+    "zeichen": "Й",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER SHORT I",
+    "codepoint": "U+0419"
+  },
+  {
+    "zeichen": "К",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER KA",
+    "codepoint": "U+041A"
+  },
+  {
+    "zeichen": "Л",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER EL",
+    "codepoint": "U+041B"
+  },
+  {
+    "zeichen": "М",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER EM",
+    "codepoint": "U+041C"
+  },
+  {
+    "zeichen": "Н",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER EN",
+    "codepoint": "U+041D"
+  },
+  {
+    "zeichen": "О",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER O",
+    "codepoint": "U+041E"
+  },
+  {
+    "zeichen": "П",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER PE",
+    "codepoint": "U+041F"
+  },
+  {
+    "zeichen": "Р",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER ER",
+    "codepoint": "U+0420"
+  },
+  {
+    "zeichen": "С",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER ES",
+    "codepoint": "U+0421"
+  },
+  {
+    "zeichen": "Т",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER TE",
+    "codepoint": "U+0422"
+  },
+  {
+    "zeichen": "У",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER U",
+    "codepoint": "U+0423"
+  },
+  {
+    "zeichen": "Ф",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER EF",
+    "codepoint": "U+0424"
+  },
+  {
+    "zeichen": "Х",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER HA",
+    "codepoint": "U+0425"
+  },
+  {
+    "zeichen": "Ц",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER TSE",
+    "codepoint": "U+0426"
+  },
+  {
+    "zeichen": "Ч",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER CHE",
+    "codepoint": "U+0427"
+  },
+  {
+    "zeichen": "Ш",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER SHA",
+    "codepoint": "U+0428"
+  },
+  {
+    "zeichen": "Щ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER SHCHA",
+    "codepoint": "U+0429"
+  },
+  {
+    "zeichen": "Ъ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER HARD SIGN",
+    "codepoint": "U+042A"
+  },
+  {
+    "zeichen": "Ь",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER SOFT SIGN",
+    "codepoint": "U+042C"
+  },
+  {
+    "zeichen": "Ю",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER YU",
+    "codepoint": "U+042E"
+  },
+  {
+    "zeichen": "Я",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC CAPITAL LETTER YA",
+    "codepoint": "U+042F"
+  },
+  {
+    "zeichen": "а",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER A",
+    "codepoint": "U+0430"
+  },
+  {
+    "zeichen": "б",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER BE",
+    "codepoint": "U+0431"
+  },
+  {
+    "zeichen": "в",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER VE",
+    "codepoint": "U+0432"
+  },
+  {
+    "zeichen": "г",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER GHE",
+    "codepoint": "U+0433"
+  },
+  {
+    "zeichen": "д",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER DE",
+    "codepoint": "U+0434"
+  },
+  {
+    "zeichen": "е",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER IE",
+    "codepoint": "U+0435"
+  },
+  {
+    "zeichen": "ж",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER ZHE",
+    "codepoint": "U+0436"
+  },
+  {
+    "zeichen": "з",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER ZE",
+    "codepoint": "U+0437"
+  },
+  {
+    "zeichen": "и",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER I",
+    "codepoint": "U+0438"
+  },
+  {
+    "zeichen": "й",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER SHORT I",
+    "codepoint": "U+0439"
+  },
+  {
+    "zeichen": "к",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER KA",
+    "codepoint": "U+043A"
+  },
+  {
+    "zeichen": "л",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER EL",
+    "codepoint": "U+043B"
+  },
+  {
+    "zeichen": "м",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER EM",
+    "codepoint": "U+043C"
+  },
+  {
+    "zeichen": "н",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER EN",
+    "codepoint": "U+043D"
+  },
+  {
+    "zeichen": "о",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER O",
+    "codepoint": "U+043E"
+  },
+  {
+    "zeichen": "п",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER PE",
+    "codepoint": "U+043F"
+  },
+  {
+    "zeichen": "р",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER ER",
+    "codepoint": "U+0440"
+  },
+  {
+    "zeichen": "с",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER ES",
+    "codepoint": "U+0441"
+  },
+  {
+    "zeichen": "т",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER TE",
+    "codepoint": "U+0442"
+  },
+  {
+    "zeichen": "у",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER U",
+    "codepoint": "U+0443"
+  },
+  {
+    "zeichen": "ф",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER EF",
+    "codepoint": "U+0444"
+  },
+  {
+    "zeichen": "х",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER HA",
+    "codepoint": "U+0445"
+  },
+  {
+    "zeichen": "ц",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER TSE",
+    "codepoint": "U+0446"
+  },
+  {
+    "zeichen": "ч",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER CHE",
+    "codepoint": "U+0447"
+  },
+  {
+    "zeichen": "ш",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER SHA",
+    "codepoint": "U+0448"
+  },
+  {
+    "zeichen": "щ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER SHCHA",
+    "codepoint": "U+0449"
+  },
+  {
+    "zeichen": "ъ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER HARD SIGN",
+    "codepoint": "U+044A"
+  },
+  {
+    "zeichen": "ь",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER SOFT SIGN",
+    "codepoint": "U+044C"
+  },
+  {
+    "zeichen": "ю",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER YU",
+    "codepoint": "U+044E"
+  },
+  {
+    "zeichen": "я",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER YA",
+    "codepoint": "U+044F"
+  },
+  {
+    "zeichen": "ѝ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "KYRILLISCH",
+    "name": "CYRILLIC SMALL LETTER I WITH GRAVE",
+    "codepoint": "U+045D"
+  }
+]

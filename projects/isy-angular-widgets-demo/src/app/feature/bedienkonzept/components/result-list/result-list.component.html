@@ -1,0 +1,112 @@
+<p-panel styleClass="isy-demo-app-result-panel" [header]="'Ergebnisliste (' + personen.length + ')'" [toggleable]="true"
+         iconPos="start">
+  <p-table #dt1
+           [value]="personen"
+           [globalFilterFields]="['name','representative.name','status']"
+           selectionMode="single"
+           [(selection)]="selectedObject"
+  >
+    <ng-template pTemplate="caption">
+      <p-button label="Objekt anlegen"
+                class="mr-1"
+                icon="pi pi-plus"
+                (onClick)="emitCreateAction()">
+      </p-button>
+      <p-button label="Objekt bearbeiten"
+                icon="pi pi-pencil"
+                [disabled]="!selectedObject"
+                (onClick)="emitEditAction(selectedObject)">
+      </p-button>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th scope="col" pSortableColumn="personalien.nachname">Nachname
+          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.nachname"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="personalien.vorname">Vorname
+          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.vorname"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="personalien.geschlecht">Geschlecht
+          <p-columnFilter field="representative"
+                          matchMode="in"
+                          display="menu"
+                          [showMatchModes]="false"
+                          [showOperator]="false"
+                          [showAddButton]="false">
+            <ng-template pTemplate="header">
+              <div class="p-px-3 p-pt-3 p-pb-0">
+                <span class="p-text-bold">Agent Picker</span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-multiSelect optionLabel="option"
+                             placeholder="Alle"
+                             [ngModel]="value"
+                             [options]="geschlechter"
+                             (onChange)="filter($event.value)"
+              >
+                <ng-template let-option pTemplate="item">
+                  <div class="p-multiselect-representative-option">
+                    <span class="p-ml-1">{{option}}</span>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </ng-template>
+          </p-columnFilter>
+          <p-sortIcon field="personalien.geschlecht"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="personalien.geburtsname">Geburtsname
+          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.geburtsname"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="personalien.geburtsort">Geburtsort
+          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.geburtsort"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="personalien.staatsangehoerigkeit">Saatsangehörigkeit
+          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.staatsangehoerigkeit"></p-sortIcon>
+        </th>
+        <th scope="col" pSortableColumn="personalien.geburtsdatum">Geburtsdatum
+          <p-columnFilter type="date" field="personalien.geburtsdatum" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.geburtsdatum"></p-sortIcon>
+        </th>
+        <th scope="col">
+          Aktionen
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-person>
+      <tr [pSelectableRow]="rowData">
+        <td>{{person.personalien.nachname}}</td>
+        <td>{{person.personalien.vorname}}</td>
+        <td>{{person.personalien.geschlecht}}</td>
+        <td>{{person.personalien.geburtsname}}</td>
+        <td>{{person.personalien.geburtsort}}</td>
+        <td>{{person.personalien.staatsangehoerigkeit}}</td>
+        <td>{{person.personalien.geburtsdatum}}</td>
+        <td>
+          <p-button [icon]="'pi pi-pencil'"
+                    [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"
+                    (onClick)="emitEditAction(person)">
+          </p-button>
+          <p-button [icon]="'pi pi-download'"
+                    [styleClass]="'p-button-rounded p-button-text p-button-raised  mr-1'"
+                    [disabled]="true">
+          </p-button>
+          <p-button [icon]="'pi pi-trash'"
+                    [styleClass]="'p-button-rounded p-button-text p-button-raised'"
+                    [disabled]="true">
+          </p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">Keine Ergebnisse vorhanden.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>

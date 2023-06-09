@@ -1,0 +1,52 @@
+// Für die Anpassung der Widgets innerhalb einer Komposition konnten die CSS Klassen von primeNG nicht mit eigenen Klassen
+// überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
+// können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
+
+$on_selection_background_color: darkgrey;
+$on_hover_background_color: grey;
+$on_hover_text_color: white;
+
+.dataview-character-content {
+  height: 70%;
+  border: 1px #d3d3d3 solid;
+  overflow-y: scroll;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+
+button.char-select-button {
+  padding: 0.25rem;
+  width: 32px;
+  color: black;
+  background-color: transparent !important;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border-width: 0 1px 1px 0;
+}
+
+button.char-select-button:hover {
+  color: $on_hover_text_color !important;
+}
+
+:host::ng-deep .p-ripple {
+  padding: 0 !important;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button {
+  background-color: transparent !important;
+  border: none;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button:hover {
+  background-color: $on_hover_background_color !important;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button.p-highlight {
+  background-color: $on_selection_background_color !important;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button.p-highlight:hover {
+  background-color: $on_hover_background_color !important;
+  color: $on_hover_text_color !important;
+}

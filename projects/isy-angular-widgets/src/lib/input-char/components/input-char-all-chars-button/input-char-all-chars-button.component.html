@@ -1,0 +1,9 @@
+<p-selectButton
+  [options]=options
+  [multiple]="false"
+  [(ngModel)]="allCharsValue"
+>
+  <ng-template let-item>
+    <button class="all-select-button" (click)="onAllSelection()">{{item}}</button>
+  </ng-template>
+</p-selectButton>

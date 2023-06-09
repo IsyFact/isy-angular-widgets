@@ -1,0 +1,610 @@
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {WizardComponent} from './wizard.component';
+import {StepperComponent} from '../stepper/stepper.component';
+import {WizardDirective} from '../../directives/wizard.directive';
+import {RouterTestingModule} from '@angular/router/testing';
+import {DialogModule} from 'primeng/dialog';
+import {StepsModule} from 'primeng/steps';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ButtonModule} from 'primeng/button';
+import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
+import {Component, QueryList, ViewChild} from '@angular/core';
+
+const width = 50;
+const height = 30;
+const headerTitle = 'Wizard Title';
+const childrenLabels = ['Auswahl 1', 'Auswahl 2', 'Auswahl 3'];
+const startIndex = 0;
+
+const backButtonDeclaration = '#backButton';
+const nextButtonDeclaration = '#nextButton';
+const saveButtonDeclaration = '#saveButton';
+const closeButtonDeclaration = '#closeButton';
+
+const CLASS_FLEX = 'flex';
+const CLASS_ALIGN_CENTER = 'align-items-center';
+const CLASS_JUSTIFY_CENTER = 'justify-content-center';
+const CLASS_MR_2 = 'mr-2';
+const CLASS_MR_4 = 'mr-4';
+
+/* eslint-disable @typescript-eslint/unbound-method */
+// for testing emitting and custom reusable expect methods
+
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+
+// for accessing native template elements and their attributes
+@Component({
+  template:
+    `
+      <isy-wizard
+        #wizard
+        [width]="${width}"
+        [height]="${height}"
+        [headerTitle]="'${headerTitle}'"
+        [isVisible]="true"
+        [allowNext]="false"
+      >
+        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[0]}'"></isy-incomplete-date>
+        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[1]}'"></isy-incomplete-date>
+        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
+      </isy-wizard>`
+})
+export class TestComponent {
+  @ViewChild('wizard') wizard!: WizardComponent;
+}
+
+let wizard: WizardComponent;
+let stepper: StepperComponent;
+let contentChildren: QueryList<WizardDirective>;
+
+describe('Test WizardComponent with Mock Parent: ', () => {
+  let parentComponent: TestComponent;
+  let parentFixture: ComponentFixture<TestComponent>;
+
+  /**
+   * Initializes wizard component properties
+   */
+  function initGlobalVariables(): void {
+    wizard = parentComponent.wizard;
+    stepper = wizard.stepper;
+    contentChildren = wizard.content!;
+  }
+
+  /**
+   * Checks if the stepper is on the first step
+   */
+  function expectFirstStep(): void {
+    expect(stepper.index).toEqual(startIndex);
+  }
+
+  /**
+   * Checks if the stepper is on the last step
+   */
+  function expectLastStep(): void {
+    expect(stepper.index).toEqual(contentChildren.length - 1);
+  }
+
+  /**
+   * Checks if the wizard was closed
+   */
+  function expectWizardClosed(): void {
+    expect(stepper.index && wizard.index).toEqual(startIndex);
+    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(startIndex);
+
+    expect(wizard.isVisible && wizard.isSaved).toBeFalse();
+    expect(wizard.isVisibleChange.emit && wizard.savingChange.emit).toHaveBeenCalledWith(wizard.isVisible);
+  }
+
+  /**
+   * Moves the wizard to the last step (position)
+   */
+  function moveToLastStep(): void {
+    for (let i = 0; i < contentChildren.length - 1; i++) {
+      wizard.move(true);
+    }
+  }
+
+  /**
+   * Checks if the stepper was moved to the last step
+   */
+  function expectStepperMovedUntilEnd(): void {
+    expectFirstStep();
+    moveToLastStep();
+    expectLastStep();
+    expect(wizard.isSaved).toBeFalse();
+    parentFixture.detectChanges();
+  }
+
+  /**
+   * Checks if the save button is available
+   */
+  function expectSaveButtonIsAvailable(): void {
+    expectStepperMovedUntilEnd();
+    expect(wizard.isSaved).toBeFalse();
+  }
+
+  /**
+   * Sets up the next wizard (position) available
+   */
+  function setNextStepAvailable(): void {
+    wizard.allowNext = true;
+    expect(wizard.allowNext).toBeTrue();
+    parentFixture.detectChanges();
+  }
+
+  /**
+   * @returns an HTML element
+   * Gets and returns the HTML element of a native element
+   * @param declaration The ID of the native element
+   */
+  function getNativeElementAsHTMLElement(declaration: string): HTMLElement {
+    return parentFixture.nativeElement.querySelector(declaration) as HTMLElement;
+  }
+
+  /**
+   * Is pressing the (next) button inside the HTML template
+   */
+  function pressNextButton(): void {
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    nextButton.click();
+    parentFixture.detectChanges();
+  }
+
+  /**
+   * Checks if the stepper moved to the first step
+   */
+  function expectMovementToFirstStep(): void {
+    const emitIndexSpy = spyOn(wizard.stepperIndexChange, 'emit');
+    expect(stepper.items.length).toEqual(childrenLabels.length);
+    expect(wizard.isSaved && wizard.allowNext).toBeFalse();
+    expect(stepper.index).not.toEqual(stepper.items.length - 1);
+
+    setNextStepAvailable();
+    pressNextButton();
+
+    expect(stepper.index).toEqual(startIndex + 1);
+    expect(emitIndexSpy).toHaveBeenCalledWith(stepper.index);
+  }
+
+  /**
+   * Checks if the wizard moved to the next step
+   * @param currentStep The current wizard position (step)
+   */
+  function expectMovementToNextStep(currentStep: number): void {
+    expect(stepper.index).toEqual(currentStep + 1);
+    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(stepper.index);
+  }
+
+  /**
+   * @returns the information if the element is disabled
+   * Checks if a native element is disabled
+   * @param declaration the ID of a native element
+   */
+  function isElementDisabled(declaration: string): boolean {
+    return parentFixture.nativeElement.querySelector(declaration).disabled;
+  }
+
+  /**
+   * Is pressing the back button
+   */
+  function pressBackButton(): void {
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+    backButton.click();
+    parentFixture.detectChanges();
+  }
+
+  /**
+   * Is pressing the save button
+   */
+  function pressSaveButton(): void {
+    const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
+    saveButton.click();
+    parentFixture.detectChanges();
+  }
+
+  /**
+   * Is pressing the close button
+   */
+  function pressCloseButton(): void {
+    const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
+    closeButton.click();
+  }
+
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        WizardComponent,
+        StepperComponent,
+        WizardDirective,
+        TestComponent
+      ],
+      imports: [
+        BrowserAnimationsModule,
+        RouterTestingModule,
+        DialogModule,
+        StepsModule,
+        ButtonModule,
+        IncompleteDateModule
+      ]
+    })
+      .compileComponents();
+  });
+
+  beforeEach(() => {
+    parentFixture = TestBed.createComponent(TestComponent);
+    parentComponent = parentFixture.componentInstance;
+    parentFixture.detectChanges();
+    initGlobalVariables();
+  });
+
+  it('should create parent component (mocked test component)', () => {
+    expect(parentComponent).toBeTruthy();
+  });
+
+  it('should create Wizard', () => {
+    expect(wizard).toBeTruthy();
+  });
+
+  it('should check the Wizard width and height', () => {
+    expect(wizard).toBeTruthy();
+    expect(wizard.width).toEqual(width);
+    expect(wizard.height).toEqual(height);
+  });
+
+  it('should check the ContentChildren availability', () => {
+    expect(contentChildren).not.toBeUndefined();
+    expect(contentChildren).toBeTruthy();
+  });
+
+  it('should check the content child array length', () => {
+    expect(contentChildren.length).toEqual(childrenLabels.length);
+  });
+
+  it('should check the saved status on init', () => {
+    expect(wizard.isSaved).toBeFalse();
+  });
+
+  it('should check if the next step is on init available', () => {
+    expect(wizard.allowNext).toBeFalse();
+  });
+
+  it('should create internal Stepper', () => {
+    expect(stepper).toBeTruthy();
+  });
+
+  it('should check the number of available steps', () => {
+    expect(stepper.items.length).toEqual(childrenLabels.length);
+  });
+
+  it('should check that the allow close dialog input property on init is true)', () => {
+    expect(wizard.closable).toBeTrue();
+  });
+
+  it('should check the initialization of the stepper items', () => {
+    const afterContentInitSpy = spyOn(wizard, 'ngAfterContentInit');
+    wizard.ngAfterContentInit();
+    expect(afterContentInitSpy).toHaveBeenCalled();
+    expectFirstStep();
+  });
+
+  it('should check the index emitting on init', () => {
+    const emitIndexSpy = spyOn(wizard.stepperIndexChange, 'emit');
+    wizard.ngOnInit();
+    expectFirstStep();
+    expect(emitIndexSpy).toHaveBeenCalledWith(startIndex);
+  });
+
+  it('should check the title of the back button', () => {
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+    expect(backButton.innerHTML).toContain(wizard.labelBackButton);
+  });
+
+  it('should check the back button visibility while stepper index is 0', () => {
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+    expect(backButton).not.toBeNull();
+    expectFirstStep();
+  });
+
+  it('should check the back button visibility while stepper index is < stepper index', () => {
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+    expect(backButton).not.toBeNull();
+    expectFirstStep();
+    wizard.move(true);
+    expect(stepper.index).toEqual(startIndex + 1);
+  });
+
+  it('should check the back button disabled status while stepper index is 0', () => {
+    expectFirstStep();
+    expect(isElementDisabled(backButtonDeclaration)).toBeTrue();
+  });
+
+  it('should check the next button disabled status while stepper index is 0 and the form is invalid', () => {
+    expectFirstStep();
+    expect(wizard.allowNext).toBeFalse();
+    expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
+  });
+
+  it('should check the next button disabled status while stepper index is 0 and the form is valid', () => {
+    expectFirstStep();
+    expect(wizard.allowNext).toBeFalse();
+    setNextStepAvailable();
+    expect(isElementDisabled(nextButtonDeclaration)).toBeFalse();
+  });
+
+  it('should check the back button disabled status while stepper index is equals to max index', () => {
+    expect(wizard.allowNext).toBeFalse();
+
+    moveToLastStep();
+    expectLastStep();
+
+    setNextStepAvailable();
+    expect(isElementDisabled(backButtonDeclaration)).toBeFalse();
+  });
+
+  it('should check the next button disabled status while stepper index is equals to max index', () => {
+    expect(wizard.allowNext).toBeFalse();
+    moveToLastStep();
+    setNextStepAvailable();
+    expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
+  });
+
+  it('should check the next button visibility while stepper index is 0', () => {
+    expectFirstStep();
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    expect(nextButton).not.toBeNull();
+  });
+
+  it('should check the next button visibility while stepper index is < max stepper index', () => {
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    expect(nextButton).not.toBeNull();
+    expectFirstStep();
+
+    wizard.move(true);
+    expect(stepper.index).not.toEqual(startIndex);
+    expect(stepper.index).toEqual(startIndex + 1);
+    expect(stepper.index).not.toBeGreaterThan(contentChildren.length - 1);
+  });
+
+  it('should check the title of the back button', () => {
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+    expect(backButton.innerHTML).toContain(wizard.labelBackButton);
+  });
+
+  it('should check the class of the back button', () => {
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+    expect(backButton.className).toContain(CLASS_FLEX);
+    expect(backButton.className).toContain(CLASS_ALIGN_CENTER);
+    expect(backButton.className).toContain(CLASS_JUSTIFY_CENTER);
+    expect(backButton.className).toContain(CLASS_MR_2);
+  });
+
+  it('should check back button functionality while stepper index > 0', () => {
+    expectMovementToFirstStep();
+    expectMovementToNextStep(startIndex);
+
+    pressBackButton();
+
+    expectFirstStep();
+    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(startIndex);
+  });
+
+  it('should check the title of the next button', () => {
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    expect(nextButton.innerHTML).toContain(wizard.labelNextButton);
+  });
+
+  it('should check the class of the next button', () => {
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    expect(nextButton.className).toContain(CLASS_FLEX);
+    expect(nextButton.className).toContain(CLASS_ALIGN_CENTER);
+    expect(nextButton.className).toContain(CLASS_JUSTIFY_CENTER);
+    expect(nextButton.className).toContain(CLASS_MR_4);
+  });
+
+  it('should check next button functionality', () => {
+    expectMovementToFirstStep();
+    expectMovementToNextStep(startIndex);
+  });
+
+  it('should check the title of the save button', () => {
+    expectStepperMovedUntilEnd();
+    const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
+    expect(saveButton.innerHTML).toContain(wizard.labelSaveButton);
+  });
+
+  it('should check the class of the save button', () => {
+    expectStepperMovedUntilEnd();
+    const nextButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
+    expect(nextButton.className).toContain(CLASS_FLEX);
+    expect(nextButton.className).toContain(CLASS_ALIGN_CENTER);
+    expect(nextButton.className).toContain(CLASS_JUSTIFY_CENTER);
+  });
+
+  it('should check save button visibility on last step', () => {
+    expectStepperMovedUntilEnd();
+
+    const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
+    expect(saveButton).not.toBeNull();
+  });
+
+  it('should check save button disabled status on last step', () => {
+    expectSaveButtonIsAvailable();
+    expect(isElementDisabled(saveButtonDeclaration)).toBeTrue();
+  });
+
+  it('should check save button functionality', () => {
+    const param = true;
+    spyOn(wizard.savingChange, 'emit').withArgs(param);
+    expectSaveButtonIsAvailable();
+    expect(isElementDisabled(saveButtonDeclaration)).toBeTrue();
+
+    setNextStepAvailable();
+    expect(isElementDisabled(saveButtonDeclaration)).toBeFalse();
+
+    pressSaveButton();
+    expect(wizard.isSaved).not.toEqual(param);
+    expect(wizard.savingChange.emit).toHaveBeenCalledWith(param);
+    expect(wizard.closable).toBeTrue();
+
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+    expect(backButton).not.toBeNull();
+
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    expect(nextButton).not.toBeNull();
+  });
+
+  it('should check the title of the close button', () => {
+    const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
+    expect(closeButton.innerHTML).toContain(wizard.labelCloseButton);
+  });
+
+  it('should check the class of the close button', () => {
+    const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
+    expect(closeButton.className).toContain(CLASS_FLEX);
+    expect(closeButton.className).toContain(CLASS_ALIGN_CENTER);
+    expect(closeButton.className).toContain(CLASS_JUSTIFY_CENTER);
+  });
+
+  it('should check that the close button is on every step available and not disabled', () => {
+    for (let i = 0; i < contentChildren.length - 1; i++) {
+      expect(stepper.index).toEqual(i);
+      stepper.move(true);
+
+      expect(wizard.isSaved).toBeFalse();
+      expect(wizard.closable).toBeTrue();
+
+      const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
+      expect(closeButton).not.toBeNull();
+
+      const isCloseButtonDisabled = isElementDisabled(closeButtonDeclaration);
+      expect(isCloseButtonDisabled).toBeFalse();
+      parentFixture.detectChanges();
+    }
+  });
+
+  it('should check close button functionality', () => {
+    spyOn(stepper, 'reset');
+    spyOn(wizard.stepperIndexChange, 'emit');
+    spyOn(wizard.isVisibleChange, 'emit');
+    spyOn(wizard.savingChange, 'emit');
+
+    expect(wizard.closable).toBeTrue();
+    pressCloseButton();
+    expect(wizard.isSaved).toBeFalse();
+    expectWizardClosed();
+  });
+
+  it('should check the action after close button gonna be pressed', () => {
+    spyOn(wizard, 'closeDialog');
+    pressCloseButton();
+    expect(wizard.closeDialog).toHaveBeenCalled();
+  });
+
+  it('should check the stepper starting index', () => {
+    expect(wizard.index).toEqual(startIndex);
+  });
+
+  it('should check the stepper index event emitter call', () => {
+    spyOn(wizard.stepperIndexChange, 'emit');
+
+    wizard.ngOnInit();
+    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(wizard.index);
+  });
+
+  it('should check the stepper reset functionality', () => {
+    const resetSpy = spyOn(stepper, 'reset');
+    stepper.reset();
+    expect(resetSpy).toHaveBeenCalled();
+    expectFirstStep();
+  });
+
+  it('should check the stepper forward movement functionality', () => {
+    expectFirstStep();
+    stepper.move(true);
+    expect(stepper.index).toEqual(startIndex + 1);
+  });
+
+  it('should check the stepper forward movement functionality (via the parent)', () => {
+    expectFirstStep();
+    wizard.move(true);
+    expect(stepper.index).toEqual(startIndex + 1);
+  });
+
+  it('should check the stepper backward movement functionality', () => {
+    expectFirstStep();
+    stepper.move(true);
+    expect(stepper.index).toEqual(startIndex + 1);
+
+    stepper.move(false);
+    expectFirstStep();
+  });
+
+  it('should check the stepper backward movement functionality (via the parent)', () => {
+    expectFirstStep();
+    wizard.move(false);
+    expectFirstStep();
+  });
+
+  it('should check the stepper out of bound prevention on forward movement', () => {
+    moveToLastStep();
+    stepper.move(true);
+    expect(stepper.index).toEqual(stepper.items.length);
+  });
+
+  it('should check the stepper out of bound prevention on backward movement', () => {
+    expectFirstStep();
+    stepper.move(false);
+    expectFirstStep();
+  });
+
+  it('should check the wizards not save functionality', () => {
+    const param = false;
+    spyOn(stepper, 'move').withArgs(param);
+    spyOn(wizard.savingChange, 'emit');
+    wizard.save(param);
+    expect(wizard.savingChange.emit).toHaveBeenCalledWith(param);
+  });
+
+  it('should check the wizards save functionality', () => {
+    spyOn(wizard.savingChange, 'emit');
+    const param = true;
+    wizard.save(param);
+    expect(wizard.isSaved).not.toEqual(param);
+    expect(wizard.savingChange.emit).toHaveBeenCalledWith(param);
+  });
+
+  it('should check the dialog closing functionality', () => {
+    spyOn(stepper, 'reset');
+    spyOn(wizard.stepperIndexChange, 'emit');
+    spyOn(wizard.isVisibleChange, 'emit');
+    spyOn(wizard.savingChange, 'emit');
+
+    wizard.closeDialog();
+    expectWizardClosed();
+  });
+
+  it('should check the close button before and after save pressed (waiting for parent reponse...)', fakeAsync(() => {
+    expect(wizard.closable).toBeTrue();
+
+    moveToLastStep();
+    parentFixture.detectChanges();
+    expectLastStep();
+
+    expect(wizard.isSaved).toBeFalse();
+    expect(wizard.closable).toBeTrue();
+    const isCloseButtonDisabled = isElementDisabled(closeButtonDeclaration);
+    expect(isCloseButtonDisabled).toBeFalse();
+
+    pressSaveButton();
+    expect(wizard.closable).toBeTrue();
+
+    const milliseconds = 300;
+    tick(milliseconds);
+    wizard.closable = true;
+
+    expect(wizard.closable).toBeTrue();
+    expect(isCloseButtonDisabled).toBeFalse();
+  }));
+});

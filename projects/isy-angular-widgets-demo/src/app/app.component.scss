@@ -1,0 +1,14 @@
+::ng-deep .isy-hauptfenster-anbieterlogo-bereich {
+  /* Example to fit the Bundesregierung Logo to the Bundesstyleguide.
+  Assumption for those calculations are that the logo is 3 eagles high and requires to have 1 eagle on each side as free space,
+  so 5 eagles in total where 1 free eagle is already included in the source image.
+  Therefore, as standard max height is 100px, one eagle is about 20px.
+  Padding left is set to 20px minus the default margin coming from other components (which is 0.5rem).
+  Max height is changed to 80px (=4/5 of 100) to introduce 20px space to the bottom. */
+
+  padding-left: calc(20px - 0.5rem);
+
+  .isy-hauptfenster-logo-anbieter-awl {
+    max-height: 80px !important;
+  }
+}

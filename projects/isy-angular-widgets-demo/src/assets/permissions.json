@@ -1,0 +1,9 @@
+{
+  "elements": {
+    "personenSuche": ["admin"]
+  },
+  "routes": {
+    "personen": ["admin", "user"],
+    "personen-legacy": ["admin", "user"]
+  }
+}

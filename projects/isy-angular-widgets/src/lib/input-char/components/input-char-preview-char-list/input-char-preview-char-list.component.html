@@ -1,0 +1,13 @@
+<div class="dataview-character-content">
+  <p-selectButton
+    [options]="options"
+    [optionLabel]="'zeichen'"
+    [optionValue]="'zeichen'"
+    [multiple]="false"
+    [(ngModel)]="selectedValue"
+  >
+    <ng-template let-item>
+      <button class="char-select-button" (click)="onSelection(item)">{{item.zeichen}}</button>
+    </ng-template>
+  </p-selectButton>
+</div>

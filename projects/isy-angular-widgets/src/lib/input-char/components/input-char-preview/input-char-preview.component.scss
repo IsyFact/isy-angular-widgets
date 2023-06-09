@@ -1,0 +1,73 @@
+// Für die Anpassung der Widgets innerhalb einer Komposition konnten die CSS Klassen von primeNG nicht mit eigenen Klassen
+// überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
+// können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
+
+$dot-color: #888;
+$dot-thickness: 2px;
+$serif-font: 'Angular', serif;
+$sans-serif-font: 'Angular',  sans-serif;
+$letter-size: 6em;
+
+.character-information-content {
+  height: 30%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.left-panel-side {
+  width: 30%;
+  float: left;
+}
+
+.middle-panel-side {
+  width: 55%;
+  float: left;
+}
+
+.right-panel-side {
+  width: 15%;
+  float: left;
+}
+
+.insert-button {
+  position: absolute;
+  bottom: 0;
+}
+
+:host::ng-deep.p-button {
+  background-color: #efefef !important;
+  border: none;
+  color: black;
+}
+
+:host::ng-deep.p-button:hover {
+  background-color: darkgrey !important;
+  color: white;
+}
+
+.serif {
+  font-family: $serif-font;
+}
+
+.sans-serif {
+  font-family: $sans-serif-font;
+}
+
+.letters-preview {
+  border-bottom: $dot-thickness $dot-color dotted;
+  border-top: $dot-thickness $dot-color dotted;
+}
+
+.letter {
+  font-size: 5em;
+}
+
+.letter-information-preview {
+  position: relative;
+  padding-left: 8px;
+}
+
+.letters-spacing {
+  padding-bottom: 3rem;
+}

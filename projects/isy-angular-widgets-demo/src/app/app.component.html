@@ -1,0 +1,28 @@
+<isy-hauptfenster
+  logoAwl="../assets/default-application-logo.jpg"
+  logoAnbieterAwl="../assets/default-vendor-logo.png"
+  [showLinksnavigation]="true"
+  [showInformationsbereich]="true"
+  [collapsedInformationsbereich]="true"
+  [linksNavigationCols]="1"
+  [informationsbereichCols]="2"
+  [items]="items"
+  [userInfo]="userInfo"
+>
+  <div Titelzeile class="isy-demo-titelzeile">
+<!--    <b>{{title}}</b><span *ngIf="subTitle">: {{subTitle}}</span>-->
+  </div>
+  <div Linksnavigation>
+    <p-panelMenu [model]="sidebarItems"></p-panelMenu>
+  </div>
+  <router-outlet></router-outlet>
+  <div Informationsbereich>
+    <p class="p-3">
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+      sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+      ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+      et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+      gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </p>
+  </div>
+</isy-hauptfenster>

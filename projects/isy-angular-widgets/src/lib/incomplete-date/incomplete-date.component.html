@@ -1,0 +1,9 @@
+<input
+  pInputText
+  [placeholder]="placeholder"
+  [ngModel]="inputValue"
+  (ngModelChange)="onNgModelChange($event)"
+  [readonly]="readonly"
+  [disabled]="disabled"
+  (focusout)="onFocusOut()"
+  type="text">

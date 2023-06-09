@@ -1,0 +1,68 @@
+<a
+  #inputCharButton
+  id="inputCharButton"
+  pButton
+  icon="pi pi-language"
+  (click)="setupCharPickerAvailability()"
+>
+</a>
+
+<isy-input-char-dialog
+  [display]="displayCharPicker"
+  [header]="header"
+  [closable]="isDialogClosable"
+  [draggable]="isDialogDraggable"
+  [resizable]="isDialogResizable"
+  [closeOnClickOutside]="isDialogClosingOnOutsideClick"
+  [closeOnEscape]="isDialogClosingOnEscape"
+  [modal]="isDialogModalDisplayed"
+  (displayChange)="setupCharPickerAvailability($event)"
+>
+  <div *isyInputCharDialogDirective>
+    <div class="left-panel-side split">
+
+      <isy-input-char-all-chars-button
+        #allChars
+        (allSelected)="onAllSelection()"
+      >
+      </isy-input-char-all-chars-button>
+
+      <p-accordion [multiple]="true" (activeIndexChange)="toggle($event)">
+        <p-accordionTab [header]="'Basis'">
+          <isy-input-char-select-button
+            #base
+            [options]="grundZeichenListe"
+            (selection)="onBaseSelection($event)"
+          >
+          </isy-input-char-select-button>
+        </p-accordionTab>
+
+        <p-accordionTab [header]="'Gruppen'">
+          <isy-input-char-select-button
+            #group
+            [optionValue]="'id'"
+            [optionLabel]="'gruppe'"
+            [options]="schriftZeichenGruppen"
+            (selection)="onGroupSelection($event)"
+          >
+          </isy-input-char-select-button>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+
+    <div class="right-panel-side split">
+      <isy-input-char-preview-char-list
+        #charPreview
+        [options]="zeichenObjekteToDisplay"
+        (charSelection)="previewZeichenObjekt($event)"
+      >
+      </isy-input-char-preview-char-list>
+
+        <isy-input-char-preview *ngIf="selectedZeichenObjekt"
+          [(zeichenObjekt)]="selectedZeichenObjekt"
+          (zeichenObjektChange)="getSelectedZeichenObjekt($event)"
+        >
+        </isy-input-char-preview>
+    </div>
+  </div>
+</isy-input-char-dialog>

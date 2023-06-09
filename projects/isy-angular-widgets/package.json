@@ -1,0 +1,18 @@
+{
+  "name": "@isyfact/isy-angular-widgets",
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.2.4",
+    "@angular/core": "^14.2.4",
+    "primeicons": "^6.0.1",
+    "primeng": "^14.1.2",
+    "primeflex": "^3.2.1",
+    "moment": "^2.29.4"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
