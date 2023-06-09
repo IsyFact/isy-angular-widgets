@@ -78,7 +78,6 @@ Für das aktuelle Theme wurden folgende Einstellungen im PrimeNG Theme Designer 
 | Text                 | 73, 80, 87                    |
 | Border Radius        | 0px                           |
 | *Palette*            |                               |
-
 | Primary              | 69, 72, 77                    |
 | Primary Dark         | 137, 144, 154                 |
 | Primary Darker       | 137, 144, 154                 |
