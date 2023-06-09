@@ -1,5 +1,7 @@
 # isy-angular-widgets
 
+[![Node.js CI](https://github.com/IsyFact/isy-angular-widgets/actions/workflows/node.js.yml/badge.svg)](https://github.com/IsyFact/isy-angular-widgets/actions/workflows/node.js.yml)
+
 `isy-angular-widgets` ist eine Widget-Bibliothek, welche Behördenspezifische Komponenten auf Basis von [PrimeNG](https://www.primefaces.org/primeng/) bereitstellt.
 Die Bibliothek stellt zudem ein IsyFact Theme bereit, welches sich nach den Richtlinien für Design und Barrierefreiheit des Bundes orientiert.
 
