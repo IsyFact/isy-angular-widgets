@@ -1,6 +1,6 @@
 <div class="isy-hauptfenster">
   <div class="grid grid-nogutter">
-    <div class="col isy-hauptfenster-anbieterlogo-bereich">
+    <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
         <img
           alt="Logo des Anbieters der Anwendungslandschaft"
@@ -12,12 +12,12 @@
         <ng-content select="[LogoAnbieterAwl]"></ng-content>
       </ng-template>
     </div>
-    <div class="col isy-hauptfenster-nutzerbereich">
+    <div class="col isy-hauptfenster-nutzerbereich dont-print">
       <div class="flex flex-row-reverse">
         <img
           alt="Logo der Anwendungslandschaft"
           class="isy-hauptfenster-logo-awl"
-          ngSrc="logoAwl"
+          [src]="logoAwl"
           *ngIf="logoAwl; else customLogoAwl"
         >
         <ng-template #customLogoAwl>
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <p-megaMenu [model]="items"></p-megaMenu>
+  <p-megaMenu [model]="items" class="dont-print"></p-megaMenu>
   <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
     <div *ngIf="title; else customTitelzeile">{{title}}</div>
     <ng-template #customTitelzeile>
@@ -42,7 +42,7 @@
     </ng-template>
   </div>
 
-  <ng-content select="[Seitentoolbar]"></ng-content>
+  <ng-content select="[Seitentoolbar]" class="dont-print"></ng-content>
 
   <div class="grid grid-nogutter flex-grow-1">
     <div [class]="linksNavigationClass" [hidden]="!showLinksnavigation || collapsedLinksnavigation" >
@@ -69,7 +69,7 @@
       </div>
       <ng-content select="[Informationsbereich]"></ng-content>
     </div>
-    <div class="isy-hauptfenster-informationsbereich" [hidden]="!collapsedInformationsbereich">
+    <div class="isy-hauptfenster-informationsbereich dont-print" [hidden]="!collapsedInformationsbereich">
       <button pButton class="p-button-text" icon="pi pi-angle-double-left"
               (click)="collapsedInformationsbereich = false"></button>
     </div>

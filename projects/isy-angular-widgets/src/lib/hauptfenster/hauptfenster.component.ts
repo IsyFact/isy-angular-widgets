@@ -75,10 +75,10 @@ export class HauptfensterComponent   {
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
   get linksNavigationClass(): string {
-    return `col-${this.linksNavigationCols} isy-hauptfenster-linksnavigation`;
+    return `col-${this.linksNavigationCols} isy-hauptfenster-linksnavigation dont-print`;
   }
 
   get informationsbereichClass(): string {
-    return `col-${this.informationsbereichCols} isy-hauptfenster-informationsbereich`;
+    return `col-${this.informationsbereichCols} isy-hauptfenster-informationsbereich dont-print`;
   }
 }

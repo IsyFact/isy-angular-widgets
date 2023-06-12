@@ -45,3 +45,9 @@
   border-left: 1px solid var(--gray-300);
   background-color: #F3F3F3;
 }
+
+@media print {
+  .dont-print {
+    display: none;
+  }
+}
