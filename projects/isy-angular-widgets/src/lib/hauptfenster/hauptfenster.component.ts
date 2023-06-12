@@ -81,12 +81,4 @@ export class HauptfensterComponent   {
   @Input() informationsbereichWidth = "15em";
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
-
-  get linksNavigationClass(): string {
-    return `col-${this.linksNavigationCols} isy-hauptfenster-linksnavigation`;
-  }
-
-  get informationsbereichClass(): string {
-    return `col-${this.informationsbereichCols} isy-hauptfenster-informationsbereich`;
-  }
 }
