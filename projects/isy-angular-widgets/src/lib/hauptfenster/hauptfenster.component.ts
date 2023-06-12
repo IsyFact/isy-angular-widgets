@@ -68,17 +68,17 @@ export class HauptfensterComponent   {
    */
   @Input() applicationGroupColor: string = '#A13D6D';
 
-  @Input() linksNavigationCols = 1;
+  /**
+   * Determines the width of the Linksnavigation, e.g. "15em". Suggested unit is em.
+   * Default is 15em.
+   */
+  @Input() linksNavigationWidth = "15em";
 
-  @Input() informationsbereichCols = 1;
+  /**
+   * Determines the width of the Informationsbereich, e.g. "15em". Suggested unit is em.
+   * Default is 15em.
+   */
+  @Input() informationsbereichWidth = "15em";
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
-
-  get linksNavigationClass(): string {
-    return `col-${this.linksNavigationCols} isy-hauptfenster-linksnavigation`;
-  }
-
-  get informationsbereichClass(): string {
-    return `col-${this.informationsbereichCols} isy-hauptfenster-informationsbereich`;
-  }
 }
