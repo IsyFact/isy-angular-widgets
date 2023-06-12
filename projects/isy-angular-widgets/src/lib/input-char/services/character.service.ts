@@ -4,7 +4,7 @@ import sonderzeichenliste from '../sonderzeichenliste.json';
 import {Datentyp} from '../model/datentyp';
 
 /**
- * @ignore
+ * @internal
  */
 @Injectable({
   providedIn: 'root'
