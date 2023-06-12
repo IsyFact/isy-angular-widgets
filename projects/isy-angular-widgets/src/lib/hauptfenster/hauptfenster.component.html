@@ -1,31 +1,34 @@
 <div class="isy-hauptfenster">
   <div class="grid grid-nogutter">
-    <div class="col">
-      <div class="isy-hauptfenster-anbieterlogo-bereich">
-        <a href="" *ngIf="logoAnbieterAwl">
-          <img
-            alt="Logo des Anbieters der Anwendungslandschaft"
-            class="isy-hauptfenster-logo-anbieter-awl"
-            [src]="logoAnbieterAwl"
-          >
-        </a>
-      </div>
+    <div class="col isy-hauptfenster-anbieterlogo-bereich">
+      <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
+        <img
+          alt="Logo des Anbieters der Anwendungslandschaft"
+          class="isy-hauptfenster-logo-anbieter-awl"
+          [src]="logoAnbieterAwl"
+        >
+      </a>
+      <ng-template #customLogoAnbieterAwl>
+        <ng-content select="[LogoAnbieterAwl]"></ng-content>
+      </ng-template>
     </div>
-    <div class="col">
-      <div class="isy-hauptfenster-nutzerbereich">
-        <div class="flex flex-row-reverse">
-          <img
-            alt="Logo der Anwendungslandschaft"
-            class="isy-hauptfenster-logo-awl"
-            [src]="logoAwl"
-          >
-        </div>
-        <div class="flex flex-row-reverse">
-          <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)">Abmelden</p-button>
-          <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
-            <em class="pi pi-user mr-1"></em>
-            {{userInfo.displayName}}
-          </div>
+    <div class="col isy-hauptfenster-nutzerbereich">
+      <div class="flex flex-row-reverse">
+        <img
+          alt="Logo der Anwendungslandschaft"
+          class="isy-hauptfenster-logo-awl"
+          ngSrc="logoAwl"
+          *ngIf="logoAwl; else customLogoAwl"
+        >
+        <ng-template #customLogoAwl>
+          <ng-content select="[LogoAwl]"></ng-content>
+        </ng-template>
+      </div>
+      <div class="flex flex-row-reverse">
+        <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)">Abmelden</p-button>
+        <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
+          <em class="pi pi-user mr-1"></em>
+          {{userInfo.displayName}}
         </div>
       </div>
     </div>
@@ -33,8 +36,8 @@
 
   <p-megaMenu [model]="items"></p-megaMenu>
   <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
-    <div *ngIf="title; else elseBlock">{{title}}</div>
-    <ng-template  #elseBlock>
+    <div *ngIf="title; else customTitelzeile">{{title}}</div>
+    <ng-template #customTitelzeile>
       <ng-content select="[Titelzeile]"></ng-content>
     </ng-template>
   </div>
