@@ -38,9 +38,11 @@ export class WizardComponent implements OnInit, AfterContentInit {
   /**
    * Used for getting access over the stepper
    */
-  @ViewChild('stepper') stepper!: StepperComponent;
+  @ViewChild('stepper')
+  private stepper!: StepperComponent;
 
   /**
+   * @ignore
    * Stores the content who gona be projected inside the template
    */
   @ContentChildren(WizardDirective) content!: QueryList<WizardDirective>;
@@ -133,11 +135,13 @@ export class WizardComponent implements OnInit, AfterContentInit {
   index: number = 0;
 
   /**
+   * @ignore
    * Stores the items of the wizard
    */
   wizardItems: MenuItem[] = [];
 
   /**
+   * @ignore
    * Fired on initialization
    */
   ngOnInit(): void {
@@ -145,6 +149,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   /**
+   * @ignore
    * Fired after content initialization
    */
   ngAfterContentInit(): void {
@@ -174,6 +179,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   /**
+   * @ignore
    * Informs about the save action
    * @param save reports the saving status
    */
