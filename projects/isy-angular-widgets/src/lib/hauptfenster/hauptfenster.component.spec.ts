@@ -77,26 +77,42 @@ describe('HauptfensterComponent', () => {
     expect(titelzeileEl.textContent).toEqual(customTitle);
   });
 
-  it('expect caption of the logout button is equal "Abmelden"', () => {
+  it('should show "Abmelden" as the title of the logout button', () => {
     const logoutTitle = 'Abmelden';
     const logoutButton = fixture.nativeElement.querySelector('#isy-hauptfenster-logout-button') as HTMLButtonElement;
     expect(logoutButton.textContent).toEqual(logoutTitle);
   });
 
-  it('should check the logout function to have been called', () => {
+  it('should call the logout function when the button is clocked', () => {
     const spy = spyOn(component.logoutEvent, 'emit');
     const logoutButton = fixture.nativeElement.querySelector('#isy-hauptfenster-logout-button') as HTMLButtonElement;
     logoutButton.click();
     expect(spy).toHaveBeenCalledWith(component.userInfo);
   });
 
-  it('expect the linksnavigation to be hidden', () => {
+  it('should have a hidden linksnavigation by default', () => {
     const linksnavigation = fixture.nativeElement.querySelector('.isy-hauptfenster-linksnavigation') as HTMLElement;
     expect(linksnavigation.attributes.getNamedItem('hidden')).toBeTruthy();
   });
 
-  it('expect the informationsbereich to be hidden', () => {
+  it('should have a hidden informationsbereich by default', () => {
     const informationsbereich = fixture.nativeElement.querySelector('.isy-hauptfenster-informationsbereich') as HTMLElement;
     expect(informationsbereich.attributes.getNamedItem('hidden')).toBeTruthy();
+  });
+
+  it('should use the provided Linksnavigation width', () => {
+    const customLinksnavigationWidth = '5em';
+    component.linksNavigationWidth = customLinksnavigationWidth;
+    fixture.detectChanges();
+    const linksnavigation = fixture.nativeElement.querySelector('.isy-hauptfenster-linksnavigation') as HTMLElement;
+    expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
+  });
+
+  it('should use the provided Informationsbereich width', () => {
+    const customInformationsbereichWidth = '5em';
+    component.informationsbereichWidth = customInformationsbereichWidth;
+    fixture.detectChanges();
+    const informationsbereich = fixture.nativeElement.querySelector('.isy-hauptfenster-informationsbereich') as HTMLElement;
+    expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
 });
