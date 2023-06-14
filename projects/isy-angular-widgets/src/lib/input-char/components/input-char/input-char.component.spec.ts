@@ -109,10 +109,10 @@ describe('InputCharComponent', () => {
     it('should check the viewchilds availability while input char is displayed', () => {
       displayInputChar();
 
-      expect(component.allChars).not.toBeUndefined();
-      expect(component.base).not.toBeUndefined();
-      expect(component.group).not.toBeUndefined();
-      expect(component.charPreview).not.toBeUndefined();
+      expect((component as any).allChars).not.toBeUndefined();
+      expect((component as any).base).not.toBeUndefined();
+      expect((component as any).group).not.toBeUndefined();
+      expect((component as any).charPreview).not.toBeUndefined();
     });
 
     it('should check if the input char is displayed', () => {
@@ -152,10 +152,10 @@ describe('InputCharComponent', () => {
     it('should check the char preview event firing on dialog close', () => {
       displayInputChar();
 
-      const previewResetEmitterSpy = spyOn(component.charPreview.charSelection, 'emit');
+      const previewResetEmitterSpy = spyOn((component as any).charPreview.charSelection, 'emit');
       component.onDialogClose();
 
-      const firstPreviewChar = component.charPreview.options[0];
+      const firstPreviewChar = (component as any).charPreview.options[0];
       expect(previewResetEmitterSpy).toHaveBeenCalledWith(firstPreviewChar);
     });
 
@@ -165,15 +165,15 @@ describe('InputCharComponent', () => {
       const previewZeichenObjektSpy = spyOn(component, 'previewZeichenObjekt');
       component.onDialogClose();
 
-      const firstPreviewChar = component.charPreview.options[0];
-      expect(component.charPreview.selectedValue).toEqual(firstPreviewChar);
+      const firstPreviewChar = (component as any).charPreview.options[0];
+      expect((component as any).charPreview.selectedValue).toEqual(firstPreviewChar);
       expect(previewZeichenObjektSpy).toHaveBeenCalledWith(firstPreviewChar);
     });
 
     it('should check the char preview reset on dialog close', () => {
       displayInputChar();
 
-      const previewResetSpy = spyOn(component.charPreview, 'reset');
+      const previewResetSpy = spyOn((component as any).charPreview, 'reset');
       component.onDialogClose();
       expect(previewResetSpy).toHaveBeenCalled();
     });
@@ -181,17 +181,17 @@ describe('InputCharComponent', () => {
     it('should check the char on selection functionality on dialog close', () => {
       displayInputChar();
 
-      const previewOnSelectionSpy = spyOn(component.charPreview, 'onSelection');
+      const previewOnSelectionSpy = spyOn((component as any).charPreview, 'onSelection');
       component.onDialogClose();
 
-      const firstPreviewChar = component.charPreview.options[0];
+      const firstPreviewChar = (component as any).charPreview.options[0];
       expect(previewOnSelectionSpy).toHaveBeenCalledWith(firstPreviewChar);
     });
 
     it('should check the firing of all selection firing on dialog close', () => {
       displayInputChar();
 
-      const onAllSelectionSpy = spyOn(component.allChars.allSelected, 'emit');
+      const onAllSelectionSpy = spyOn((component as any).allChars.allSelected, 'emit');
       component.onDialogClose();
 
       expect(onAllSelectionSpy).toHaveBeenCalled();
@@ -210,14 +210,14 @@ describe('InputCharComponent', () => {
       displayInputChar();
 
       component.resetAllSelection();
-      expect(component.allChars.allCharsValue).toEqual('');
+      expect((component as any).allChars.allCharsValue).toEqual('');
     });
 
     it('should check the reset of base selection button', () => {
       displayInputChar();
 
       component.resetBaseSelection();
-      expect(component.base.selectedValue).toEqual('');
+      expect((component as any).base.selectedValue).toEqual('');
     });
 
     it('should check the setupCharPickerAvailability function to have been called', () => {
@@ -245,39 +245,39 @@ describe('InputCharComponent', () => {
 
     it('should check the resetAllSelection function to have been called', () => {
       const allChars = jasmine.createSpyObj('allChars', ['reset']);
-      component.allChars = allChars;
+      (component as any).allChars = allChars;
       component.resetAllSelection();
       expect(allChars.reset).toHaveBeenCalled();
     });
 
     it('should check the resetBase function to have been called', () => {
       const base = jasmine.createSpyObj('base', ['reset']);
-      component.base = base;
+      (component as any).base = base;
       component.resetBaseSelection();
       expect(base.reset).toHaveBeenCalled();
     });
 
     it('should check the resetGroupSelection function to have been called', () => {
       const group = jasmine.createSpyObj('group', ['reset']);
-      component.group = group;
+      (component as any).group = group;
       component.resetGroupSelection();
       expect(group.reset).toHaveBeenCalled();
     });
 
     it('should check the onDialogClose function to have been called', () => {
       const charPreview = jasmine.createSpyObj('charPreview', ['reset']);
-      component.charPreview = charPreview;
+      (component as any).charPreview = charPreview;
       const allChars = jasmine.createSpyObj('allChars', ['onAllSelection']);
-      component.allChars = allChars;
+      (component as any).allChars = allChars;
       component.onDialogClose();
       expect(charPreview.reset).toHaveBeenCalledBefore(allChars.onAllSelection);
     });
 
     it('should check the onDialogClose function to have been called', () => {
       const charPreview = jasmine.createSpyObj('charPreview', ['reset']);
-      component.charPreview = charPreview;
+      (component as any).charPreview = charPreview;
       const allChars = jasmine.createSpyObj('allChars', ['onAllSelection']);
-      component.allChars = allChars;
+      (component as any).allChars = allChars;
       component.onDialogClose();
       expect(charPreview.reset).toHaveBeenCalledBefore(allChars.onAllSelection);
     });
@@ -286,22 +286,22 @@ describe('InputCharComponent', () => {
       displayInputChar();
 
       component.resetGroupSelection();
-      expect(component.group.selectedValue).toEqual('');
+      expect((component as any).group.selectedValue).toEqual('');
     });
 
     it('should check the reset of group selection button', () => {
       displayInputChar();
 
       component.resetGroupSelection();
-      expect(component.group.selectedValue).toEqual('');
+      expect((component as any).group.selectedValue).toEqual('');
     });
 
     it('should check the on all selection functionality', () => {
       displayInputChar();
 
       component.onAllSelection();
-      expect(component.base.selectedValue).toEqual('');
-      expect(component.group.selectedValue).toEqual('');
+      expect((component as any).base.selectedValue).toEqual('');
+      expect((component as any).group.selectedValue).toEqual('');
 
       const allowedGroups = charService.getGroupsByDataType(component.datentyp);
       const zeichenListe = charService.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
@@ -314,8 +314,8 @@ describe('InputCharComponent', () => {
 
       const base = 'A';
       component.onBaseSelection(base);
-      expect(component.allChars.allCharsValue).toEqual('');
-      expect(component.group.selectedValue).toEqual('');
+      expect((component as any).allChars.allCharsValue).toEqual('');
+      expect((component as any).group.selectedValue).toEqual('');
 
       const filteredByBase = charService.filterZeichenobjekteByBase(sonderzeichenListe, base);
       expect(component.zeichenObjekteToDisplay).toEqual(filteredByBase);
@@ -327,8 +327,8 @@ describe('InputCharComponent', () => {
 
       const group = 'LATEIN';
       component.onGroupSelection(group);
-      expect(component.allChars.allCharsValue).toEqual('');
-      expect(component.base.selectedValue).toEqual('');
+      expect((component as any).allChars.allCharsValue).toEqual('');
+      expect((component as any).base.selectedValue).toEqual('');
 
       const filteredByBase = charService.filterZeichenobjekteByGroup(sonderzeichenListe, group);
       expect(component.zeichenObjekteToDisplay).toEqual(filteredByBase);
