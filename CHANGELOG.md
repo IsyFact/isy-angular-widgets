@@ -1,3 +1,11 @@
+# 0.9.0
+## Breaking Changes
+- Die Properties `linksNavigationCols` und `informationsbereichCols` wurden durch `linksNavigationWidth` und `informationsbereichWidth` ersetzt
+## Features
+- IFS-2010: Header und Seitenleisten werden in der Druckansicht jetzt ausgeblendet
+- IFS-XXXX: Anwendungslogos können jetzt mit eigenem HTML gesetzt werden
+- IFS-XXXX: Seitenleisten können jetzt in ihrer Breite frei konfiguriert werden
+
 # 0.8.0 - 15.05.2023
 ## Breaking Changes
 - Security-Paket von /core/security nach /security verschoben
