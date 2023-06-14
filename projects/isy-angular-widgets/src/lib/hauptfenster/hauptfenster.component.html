@@ -25,7 +25,7 @@
         </ng-template>
       </div>
       <div class="flex flex-row-reverse">
-        <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)" i18n>Abmelden</p-button>
+        <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)">Abmelden</p-button>
         <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
           <em class="pi pi-user mr-1"></em>
           {{userInfo.displayName}}
