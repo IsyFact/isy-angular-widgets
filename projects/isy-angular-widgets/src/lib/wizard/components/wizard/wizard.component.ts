@@ -36,10 +36,11 @@ const defaultHeight = 30;
 export class WizardComponent implements OnInit, AfterContentInit {
 
   /**
+   * @internal
    * Used for getting access over the stepper
    */
   @ViewChild('stepper')
-  private stepper!: StepperComponent;
+  stepper!: StepperComponent;
 
   /**
    * @internal
