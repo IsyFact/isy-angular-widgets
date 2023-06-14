@@ -1,48 +1,51 @@
 <div class="isy-hauptfenster">
   <div class="grid grid-nogutter">
-    <div class="col">
-      <div class="isy-hauptfenster-anbieterlogo-bereich">
-        <a href="" *ngIf="logoAnbieterAwl">
-          <img
-            alt="Logo des Anbieters der Anwendungslandschaft"
-            class="isy-hauptfenster-logo-anbieter-awl"
-            [src]="logoAnbieterAwl"
-          >
-        </a>
-      </div>
+    <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
+      <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
+        <img
+          alt="Logo des Anbieters der Anwendungslandschaft"
+          class="isy-hauptfenster-logo-anbieter-awl"
+          [src]="logoAnbieterAwl"
+        >
+      </a>
+      <ng-template #customLogoAnbieterAwl>
+        <ng-content select="[LogoAnbieterAwl]"></ng-content>
+      </ng-template>
     </div>
-    <div class="col">
-      <div class="isy-hauptfenster-nutzerbereich">
-        <div class="flex flex-row-reverse">
-          <img
-            alt="Logo der Anwendungslandschaft"
-            class="isy-hauptfenster-logo-awl"
-            [src]="logoAwl"
-          >
-        </div>
-        <div class="flex flex-row-reverse">
-          <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)" i18n>Abmelden</p-button>
-          <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
-            <em class="pi pi-user mr-1"></em>
-            {{userInfo.displayName}}
-          </div>
+    <div class="col isy-hauptfenster-nutzerbereich dont-print">
+      <div class="flex flex-row-reverse">
+        <img
+          alt="Logo der Anwendungslandschaft"
+          class="isy-hauptfenster-logo-awl"
+          [src]="logoAwl"
+          *ngIf="logoAwl; else customLogoAwl"
+        >
+        <ng-template #customLogoAwl>
+          <ng-content select="[LogoAwl]"></ng-content>
+        </ng-template>
+      </div>
+      <div class="flex flex-row-reverse">
+        <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)" i18n>Abmelden</p-button>
+        <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
+          <em class="pi pi-user mr-1"></em>
+          {{userInfo.displayName}}
         </div>
       </div>
     </div>
   </div>
 
-  <p-megaMenu [model]="items"></p-megaMenu>
+  <p-megaMenu [model]="items" class="dont-print"></p-megaMenu>
   <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
-    <div *ngIf="title; else elseBlock">{{title}}</div>
-    <ng-template  #elseBlock>
+    <div *ngIf="title; else customTitelzeile">{{title}}</div>
+    <ng-template #customTitelzeile>
       <ng-content select="[Titelzeile]"></ng-content>
     </ng-template>
   </div>
 
-  <ng-content select="[Seitentoolbar]"></ng-content>
+  <ng-content select="[Seitentoolbar]" class="dont-print"></ng-content>
 
   <div class="grid grid-nogutter flex-grow-1">
-    <div [class]="linksNavigationClass" [hidden]="!showLinksnavigation || collapsedLinksnavigation" >
+    <div [style.width]="linksNavigationWidth" class="isy-hauptfenster-linksnavigation dont-print" [hidden]="!showLinksnavigation || collapsedLinksnavigation" >
       <div *ngIf="allowSidebarCollapse" class="collapseButton">
         <button class="p-button-text" *ngIf="!collapsedLinksnavigation" pButton icon="pi pi-angle-double-left"
                 (click)="collapsedLinksnavigation = true"></button>
@@ -58,7 +61,7 @@
       <ng-content></ng-content>
     </div>
 
-    <div  [class]="informationsbereichClass" [hidden]="!showInformationsbereich || collapsedInformationsbereich">
+    <div  [style.width]="informationsbereichWidth" class="isy-hauptfenster-informationsbereich dont-print" [hidden]="!showInformationsbereich || collapsedInformationsbereich">
       <div *ngIf="allowSidebarCollapse" class="collapseButton">
         <button class="p-button-text" *ngIf="!collapsedInformationsbereich && allowSidebarCollapse" pButton
                 icon="pi pi-angle-double-right"
@@ -66,7 +69,7 @@
       </div>
       <ng-content select="[Informationsbereich]"></ng-content>
     </div>
-    <div class="isy-hauptfenster-informationsbereich" [hidden]="!collapsedInformationsbereich">
+    <div class="isy-hauptfenster-informationsbereich dont-print" [hidden]="!collapsedInformationsbereich">
       <button pButton class="p-button-text" icon="pi pi-angle-double-left"
               (click)="collapsedInformationsbereich = false"></button>
     </div>
