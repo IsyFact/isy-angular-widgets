@@ -100,22 +100,22 @@ export class WizardComponent implements OnInit, AfterContentInit {
   /**
    * The text of the back button
    */
-  @Input() labelBackButton = 'Zurück';
+  @Input() labelBackButton = $localize`Zurück`;
 
   /**
    * The text of the next button
    */
-  @Input() labelNextButton = 'Weiter';
+  @Input() labelNextButton = $localize`Weiter`;
 
   /**
    * The text of the save button
    */
-  @Input() labelSaveButton = 'Speichern';
+  @Input() labelSaveButton = $localize`Speichern`;
 
   /**
    * The text of the close button
    */
-  @Input() labelCloseButton = 'Schließen';
+  @Input() labelCloseButton = $localize`Schließen`;
 
   /**
    * Controls whether the next button is enabled which is to be controlled from the outside (e.g. for validation)

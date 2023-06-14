@@ -14,7 +14,8 @@
     "e2e": "npx testcafe chrome:headless ./projects/isy-angular-widgets-demo/src/test/e2e/*",
     "compodoc:build": "compodoc -p tsconfig.doc.json --disablePrivate",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s --disablePrivate",
-    "compodoc:serve": "compodoc -s"
+    "compodoc:serve": "compodoc -s",
+    "start:en": "ng serve --configuration en"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +45,7 @@
     "@angular-eslint/template-parser": "14.4.0",
     "@angular/cli": "^14.2.10",
     "@angular/compiler-cli": "^14.2.12",
+    "@angular/localize": "^14.3.0",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "5.43.0",

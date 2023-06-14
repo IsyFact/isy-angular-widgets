@@ -1,19 +1,19 @@
 <p-panel header="Basisdaten" [toggleable]="true" iconPos="start">
   <div class="p-fluid grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label for="basis-nachname">Nachname</label>
+      <label for="basis-nachname" i18n>Nachname</label>
     </div>
     <div class="col">
       <input id="basis-nachname" type="text" pInputText disabled [(ngModel)]="person.personalien.nachname">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label for="basis-vorname">Vorname </label>
+      <label for="basis-vorname" i18n>Vorname </label>
     </div>
     <div class="col">
       <input id="basis-vorname" type="text" pInputText disabled [(ngModel)]="person.personalien.vorname">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label for="basis-geburtsdatum">Geburtsdatum </label>
+      <label for="basis-geburtsdatum" i18n>Geburtsdatum </label>
     </div>
     <div class="col">
       <input id="basis-geburtsdatum" type="text" pInputText disabled [(ngModel)]="person.personalien.geburtsdatum">
@@ -27,7 +27,7 @@
     <div class="p-fluid formgrid grid">
       <div class="col">
         <div class="field">
-          <label for="nachname">Nachname</label>
+          <label for="nachname" i18n>Nachname</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
             <input id="nachname" required minlength="2" type="text" pInputText [disabled]="!editable"
@@ -35,12 +35,12 @@
           </div>
         </div>
         <div class="field">
-          <label for="vorname">Vorname </label>
+          <label for="vorname" i18n>Vorname </label>
           <input id="vorname" required minlength="2" type="text" pInputText [disabled]="!editable"
                  [(ngModel)]="newVorname" #vorname="ngModel">
         </div>
         <div class="field">
-          <label for="geschlecht">Geschlecht </label>
+          <label for="geschlecht" i18n>Geschlecht </label>
           <p-dropdown id="geschlecht" [(ngModel)]="newGeschlecht" [filter]="true" [filterBy]="'name'"
                       [optionLabel]="'name'" [optionValue]="'name'" [disabled]="!editable"
                       [options]="[{name: 'Männlich'}, {name: 'Weiblich'}, {name: 'Divers'}, {name: 'Keine Angabe'}]"
@@ -49,53 +49,53 @@
       </div>
       <div class="col">
         <div class="field">
-          <label for="geburtsname">Geburtsname </label>
+          <label for="geburtsname" i18n>Geburtsname </label>
           <input id="geburtsname" type="text" pInputText [disabled]="!editable" [(ngModel)]="newGeburtsname">
         </div>
         <div class="field">
-          <label for="geburtsort">Geburtsort </label>
+          <label for="geburtsort" i18n>Geburtsort </label>
           <input id="geburtsort" type="text" pInputText [disabled]="!editable" [(ngModel)]="newGeburtsort">
         </div>
         <div class="field">
-          <label for="telefonnummer">Telefonnummer </label>
+          <label for="telefonnummer" i18n>Telefonnummer </label>
           <p-inputMask id="telefonnummer" type="text" [disabled]="!editable" [(ngModel)]="newTelefonnummer"
                        mask="+99 9999 / 9999999"></p-inputMask>
         </div>
       </div>
       <div class="col">
         <div class="field">
-          <label for="staatsangehoerigkeit">Staatsangehörigkeit </label>
+          <label for="staatsangehoerigkeit" i18n>Staatsangehörigkeit </label>
           <input id="staatsangehoerigkeit" type="text" pInputText [disabled]="!editable"
                  [(ngModel)]="newStaatsangehoerigkeit">
         </div>
         <div class="field">
-          <label for="geburtsdatum">Geburtsdatum </label>
+          <label for="geburtsdatum" i18n>Geburtsdatum </label>
           <p-calendar id="geburtsdatum" [(ngModel)]="newGeburtsdatum"
                       dateFormat="dd.mm.yy" [disabled]="!editable" [showIcon]="true"></p-calendar>
         </div>
         <div class="field">
-          <label for="einreisedatum">Einreisedatum </label>
+          <label for="einreisedatum" i18n>Einreisedatum </label>
           <isy-incomplete-date id="einreisedatum" [(ngModel)]="newEinreisedatum" [disabled]="!editable"></isy-incomplete-date>
         </div>
       </div>
     </div>
     <div class="field field-checkbox">
       <p-inputSwitch id="showSecretFields" [(ngModel)]="showSecretFields"></p-inputSwitch>
-      <label for="showSecretFields">Zeige geheime Felder </label>
+      <label for="showSecretFields" i18n>Zeige geheime Felder </label>
     </div>
     <div id="divShowSecretFields" class="p-fluid grid" *ngIf="showSecretFields">
       <div class="field field-checkbox col-2">
         <p-checkbox id="ausweispflichtig" [(ngModel)]="newAusweispflichtig" [disabled]="!editable"
                     [binary]="true"></p-checkbox>
-        <label for="ausweispflichtig">Ausweispflichtig </label>
+        <label for="ausweispflichtig" i18n>Ausweispflichtig </label>
       </div>
       <div class="field col-1">
-        <label for="sicherheitsstufe">Sicherheitsstufe</label>
+        <label for="sicherheitsstufe" i18n>Sicherheitsstufe</label>
         <p-inputNumber id="sicherheitsstufe" [(ngModel)]="newSicherheitsstufe" [showButtons]="true" [min]="0" [max]="9"
                        [disabled]="!editable"></p-inputNumber>
       </div>
       <div class="field col-12">
-        <label for="geheimdienstnotizen">Geheimdienstnotizen </label>
+        <label for="geheimdienstnotizen" i18n>Geheimdienstnotizen </label>
         <div>
       <textarea id="geheimdienstnotizen" pInputTextarea [(ngModel)]="newGeheimdienstnotizen"
                 [disabled]="!editable"></textarea>
@@ -114,12 +114,12 @@
       </div>
     </div>
     <p-dialog header="Es gibt Fehler in der Eingabe" [(visible)]="showError">
-      <div *ngIf="(nachname.errors?.required)">Es ist kein Nachname eingetragen.</div>
-      <div *ngIf="nachname.errors?.minlength && !nachname.errors?.required">Der Nachname muss mindestens zwei Zeichen
+      <div *ngIf="(nachname.errors?.required)"  i18n>Es ist kein Nachname eingetragen.</div>
+      <div *ngIf="nachname.errors?.minlength && !nachname.errors?.required"  i18n>Der Nachname muss mindestens zwei Zeichen
         lang sein.
       </div>
-      <div *ngIf="(vorname.errors?.required)">Es ist kein Vorname eingetragen.</div>
-      <div *ngIf="vorname.errors?.minlength && !vorname.errors?.required">Der Vorname muss mindestens zwei Zeichen
+      <div *ngIf="(vorname.errors?.required)"  i18n>Es ist kein Vorname eingetragen.</div>
+      <div *ngIf="vorname.errors?.minlength && !vorname.errors?.required"  i18n>Der Vorname muss mindestens zwei Zeichen
         lang sein.
       </div>
     </p-dialog>
@@ -128,14 +128,14 @@
     <p-table [value]="person.sachverhalte.liste" responsiveLayout="scroll">
       <ng-template pTemplate="header">
         <tr>
-          <th>Sachverhalt</th>
-          <th>Status</th>
+          <th i18n>Sachverhalt</th>
+          <th i18n>Status</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-sachverhalt>
         <tr>
-          <td>{{sachverhalt}}</td>
-          <td>Gelöst</td>
+          <td i18n>{{sachverhalt}}</td>
+          <td i18n>Gelöst</td>
         </tr>
       </ng-template>
     </p-table>

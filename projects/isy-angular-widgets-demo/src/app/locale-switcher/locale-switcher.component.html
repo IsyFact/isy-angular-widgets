@@ -1,0 +1,11 @@
+<select
+  (change)="onChange()"
+  [(ngModel)]="activeLocale"
+>
+  <option
+    *ngFor="let locale of locales"
+    [value]="locale.code"
+  >
+    {{ locale.name }}
+  </option>
+</select>

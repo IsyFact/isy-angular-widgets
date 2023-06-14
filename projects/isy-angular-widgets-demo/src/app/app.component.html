@@ -1,6 +1,6 @@
 <isy-hauptfenster
-  logoAwl="../assets/default-application-logo.jpg"
-  logoAnbieterAwl="../assets/default-vendor-logo.png"
+  logoAwl="assets/default-application-logo.jpg"
+  logoAnbieterAwl="assets/default-vendor-logo.png"
   [showLinksnavigation]="true"
   [showInformationsbereich]="true"
   [collapsedInformationsbereich]="true"
@@ -9,8 +9,10 @@
   [items]="items"
   [userInfo]="userInfo"
 >
+
   <div Titelzeile class="isy-demo-titelzeile">
 <!--    <b>{{title}}</b><span *ngIf="subTitle">: {{subTitle}}</span>-->
+<demo-locale-switcher></demo-locale-switcher>
   </div>
   <div Linksnavigation>
     <p-panelMenu [model]="sidebarItems"></p-panelMenu>

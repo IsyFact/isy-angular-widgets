@@ -1,27 +1,27 @@
 export const navigationMenu = [
   {
-    label: 'Quicklinks',
+    label: $localize`Quicklinks`,
     expanded: true,
     items: [
       {
-        label: 'Beispiel Quicklink 1'
+        label: $localize`Beispiel Quicklink 1`
       },
       {
-        label: 'Beispiel Quicklink 2',
+        label: $localize`Beispiel Quicklink 2`,
         visible: true
       }
     ]
   },
   {
-    label: 'Häufige Aufgaben',
+    label: $localize`Häufige Aufgaben`,
     expanded: true,
     items: [
       {
-        label: 'Objekt suchen',
+        label: $localize`Objekt suchen`,
         routerLink: 'bedienkonzept/objekt-suchen'
       },
       {
-        label: 'Objekt anzeigen',
+        label: $localize`Objekt anzeigen`,
         routerLink: 'bedienkonzept/objekt-anzeigen/42'
       }
     ]

@@ -11,7 +11,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class InputCharAllCharsButtonComponent {
   @Output() allSelected = new EventEmitter<void>();
 
-  allCharsValue: string = 'Alle';
+  allCharsValue: string = $localize`Alle`;
 
   options: string [] = [this.allCharsValue];
 

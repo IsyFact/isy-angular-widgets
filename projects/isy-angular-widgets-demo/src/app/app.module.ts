@@ -14,25 +14,30 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SecurityModule} from '../../../isy-angular-widgets/src/lib/security/security.module';
 import {PanelMenuModule} from 'primeng/panelmenu';
+import { LocaleSwitcherComponent } from './locale-switcher/locale-switcher.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    HauptfensterModule,
-    BrowserAnimationsModule,
-    CoreModule,
-    SecurityModule,
-    SharedModule,
-    ButtonModule,
-    ToolbarModule,
-    PanelMenuModule
-  ],
-  providers: [AuthGuard, UserInfoPublicService, {provide: UserInfoService, useClass: UserInfoPublicService}, SecurityService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LocaleSwitcherComponent
+    ],
+    providers: [AuthGuard, UserInfoPublicService, { provide: UserInfoService, useClass: UserInfoPublicService }, SecurityService],
+    bootstrap: [AppComponent],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        HauptfensterModule,
+        BrowserAnimationsModule,
+        CoreModule,
+        SecurityModule,
+        SharedModule,
+        ButtonModule,
+        ToolbarModule,
+        PanelMenuModule,
+        FormsModule
+    ]
 })
 export class AppModule {
 }

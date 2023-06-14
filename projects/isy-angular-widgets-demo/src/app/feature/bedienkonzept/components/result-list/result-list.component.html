@@ -7,12 +7,12 @@
            [(selection)]="selectedObject"
   >
     <ng-template pTemplate="caption">
-      <p-button label="Objekt anlegen"
+      <p-button i18n-label label="Objekt anlegen"
                 class="mr-1"
                 icon="pi pi-plus"
                 (onClick)="emitCreateAction()">
       </p-button>
-      <p-button label="Objekt bearbeiten"
+      <p-button i18n-label label="Objekt bearbeiten"
                 icon="pi pi-pencil"
                 [disabled]="!selectedObject"
                 (onClick)="emitEditAction(selectedObject)">
@@ -20,15 +20,15 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th scope="col" pSortableColumn="personalien.nachname">Nachname
+        <th scope="col" pSortableColumn="personalien.nachname" i18n>Nachname
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.nachname"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.vorname">Vorname
+        <th scope="col" pSortableColumn="personalien.vorname" i18n>Vorname
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.vorname"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geschlecht">Geschlecht
+        <th scope="col" pSortableColumn="personalien.geschlecht" i18n>Geschlecht
           <p-columnFilter field="representative"
                           matchMode="in"
                           display="menu"
@@ -57,23 +57,23 @@
           </p-columnFilter>
           <p-sortIcon field="personalien.geschlecht"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geburtsname">Geburtsname
+        <th scope="col" pSortableColumn="personalien.geburtsname" i18n>Geburtsname
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.geburtsname"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geburtsort">Geburtsort
+        <th scope="col" pSortableColumn="personalien.geburtsort" i18n>Geburtsort
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.geburtsort"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.staatsangehoerigkeit">Saatsangehörigkeit
+        <th scope="col" pSortableColumn="personalien.staatsangehoerigkeit" i18n>Saatsangehörigkeit
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.staatsangehoerigkeit"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geburtsdatum">Geburtsdatum
+        <th scope="col" pSortableColumn="personalien.geburtsdatum" i18n>Geburtsdatum
           <p-columnFilter type="date" field="personalien.geburtsdatum" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.geburtsdatum"></p-sortIcon>
         </th>
-        <th scope="col">
+        <th scope="col" i18n>
           Aktionen
         </th>
       </tr>
@@ -105,7 +105,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="7">Keine Ergebnisse vorhanden.</td>
+        <td colspan="7" i18n>Keine Ergebnisse vorhanden.</td>
       </tr>
     </ng-template>
   </p-table>

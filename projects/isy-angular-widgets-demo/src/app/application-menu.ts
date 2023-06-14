@@ -1,17 +1,17 @@
 export const applicationMenu = [
   {
-    label: 'Bedienkonzept Vorgaben',
+    label: $localize`Bedienkonzept Vorgaben`,
     items: [
       [
         {
-          label: 'Häufige Aufgaben',
+          label: $localize`Häufige Aufgaben`,
           items: [
             {
-              label: 'Objekt suchen',
+              label: $localize`Objekt suchen`,
               routerLink: 'bedienkonzept/objekt-suchen'
             },
             {
-              label: 'Objekt anzeigen',
+              label: $localize`Objekt anzeigen`,
               routerLink: 'bedienkonzept/objekt-anzeigen/42'
             }
           ]
@@ -20,34 +20,34 @@ export const applicationMenu = [
     ]
   },
   {
-    label: 'Beispiel Menüpunkt',
+    label: $localize`Beispiel Menüpunkt`,
     items: [
       [
         {
-          label: 'Beispiel Gruppe 1',
+          label: $localize`Beispiel Gruppe 1`,
           items: [
             {
-              label: 'Beispiel Unterpunkt 1'
+              label: $localize`Beispiel Unterpunkt 1`
             },
             {
-              label: 'Beispiel Unterpunkt 2'
+              label: $localize`Beispiel Unterpunkt 2`
             },
             {
-              label: 'Beispiel Unterpunkt 3'
+              label: $localize`Beispiel Unterpunkt 3`
             }
           ]
         },
         {
-          label: 'Beispiel Gruppe 2',
+          label: $localize`Beispiel Gruppe 2`,
           items: [
             {
-              label: 'Beispiel Unterpunkt 1'
+              label: $localize`Beispiel Unterpunkt 1`
             },
             {
-              label: 'Beispiel Unterpunkt 2'
+              label: $localize`Beispiel Unterpunkt 2`
             },
             {
-              label: 'Beispiel Unterpunkt 3'
+              label: $localize`Beispiel Unterpunkt 3`
             }
           ]
         }
@@ -55,7 +55,7 @@ export const applicationMenu = [
     ]
   },
   {
-    label: 'Beispiel Menüpunkt (Disabled)',
+    label: $localize`Beispiel Menüpunkt (Disabled)`,
     disabled: true
   }
 ];

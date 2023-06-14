@@ -1,7 +1,7 @@
-<p-panel header="Objekt suchen" [toggleable]="true" iconPos="start">
+<p-panel i18n-header header="Objekt suchen" [toggleable]="true" iconPos="start">
   <div class="p-fluid grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label class="" for="ID">ID</label>
+      <label class="" for="ID" i18n>ID</label>
     </div>
     <div class="col">
       <input id="ID" type="text" pInputText [(ngModel)]="person.id" class="ng-invalid ng-dirt"/>
@@ -14,19 +14,19 @@
 
   <div class="p-fluid grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label for="Nachname">Nachname</label>
+      <label for="Nachname" i18n>Nachname</label>
     </div>
     <div class="col">
       <input id="Nachname" type="text" pInputText [(ngModel)]="person.personalien.nachname">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Geburtsname">Geburtsname</label>
+      <label class="align-content-end" for="Geburtsname" i18n>Geburtsname</label>
     </div>
     <div class="col">
       <input id="Geburtsname" type="text" pInputText [(ngModel)]="person.personalien.geburtsname">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Geburtsname">Geburtsort</label>
+      <label class="align-content-end" for="Geburtsname" i18n>Geburtsort</label>
     </div>
     <div class="col">
       <input id="Geburtsort" type="text" pInputText [(ngModel)]="person.personalien.geburtsort">
@@ -35,19 +35,19 @@
 
   <div class="p-fluid grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Vorname">Vorname </label>
+      <label class="align-content-end" for="Vorname" i18n>Vorname </label>
     </div>
     <div class="col">
       <input id="Vorname" type="text" pInputText [(ngModel)]="person.personalien.vorname">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Geschlecht">Geschlecht </label>
+      <label class="align-content-end" for="Geschlecht" i18n>Geschlecht </label>
     </div>
     <div class="col">
       <input id="Geschlecht" type="text" pInputText [(ngModel)]="person.personalien.geschlecht">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Geburtsdatum">Geburtsdatum </label>
+      <label class="align-content-end" for="Geburtsdatum" i18n>Geburtsdatum </label>
     </div>
     <div class="col">
       <p-calendar id="Geburtsdatum"
@@ -61,11 +61,11 @@
 
   <div class="p-fluid grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Staatsangehörigkeit">Staatsangehörigkeit</label>
+      <label class="align-content-end" for="Staatsangehörigkeit" i18n>Staatsangehörigkeit</label>
     </div>
     <div class="col-7">
       <p-dropdown id="Staatsangehörigkeit" [options]="laender" [(ngModel)]="person.personalien.staatsangehoerigkeit"
-                  [showClear]="true" placeholder="Land wählen">
+                  [showClear]="true" i18n-placeholder placeholder="Land wählen">
         <ng-template pTemplate="selectedItem">
           <div class="country-item country-item-value" *ngIf="person.personalien.staatsangehoerigkeit">
             <div>{{person.personalien.staatsangehoerigkeit}}</div>
@@ -119,7 +119,7 @@
   <div [formGroup]="editForm" *ngIf="selectedPerson && editForm">
     <div class="p-fluid grid m-0">
       <div class="col-1 text-right align-self-center">
-        <label for="editID">ID</label>
+        <label for="editID" i18n>ID</label>
       </div>
       <div class="col">
         <input id="editID" type="text" pInputText [formControlName]="'editID'"/>
@@ -131,19 +131,19 @@
     </div>
     <div class="p-fluid grid m-0">
       <div class="col-1 text-right align-self-center">
-        <label for="editNachname">Nachname</label>
+        <label for="editNachname" i18n>Nachname</label>
       </div>
       <div class="col">
         <input id="editNachname" type="text" pInputText [formControlName]="'editNachname'">
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editGeburtsname">Geburtsname</label>
+        <label class="align-content-end" for="editGeburtsname" i18n>Geburtsname</label>
       </div>
       <div class="col">
         <input id="editGeburtsname" type="text" pInputText [formControlName]="'editGeburtsname'">
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editGeburtsname">Geburtsort</label>
+        <label class="align-content-end" for="editGeburtsname" i18n>Geburtsort</label>
       </div>
       <div class="col">
         <input id="editGeburtsort" type="text" pInputText [formControlName]="'editGeburtsort'">
@@ -151,19 +151,19 @@
     </div>
     <div class="p-fluid grid m-0">
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editVorname">Vorname </label>
+        <label class="align-content-end" for="editVorname" i18n>Vorname </label>
       </div>
       <div class="col">
         <input id="editVorname" type="text" pInputText [formControlName]="'editVorname'">
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editGeschlecht">Geschlecht </label>
+        <label class="align-content-end" for="editGeschlecht" i18n>Geschlecht </label>
       </div>
       <div class="col">
         <input id="editGeschlecht" type="text" pInputText [formControlName]="'editGeschlecht'">
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editGeburtsdatum">Geburtsdatum </label>
+        <label class="align-content-end" for="editGeburtsdatum" i18n>Geburtsdatum </label>
       </div>
       <div class="col">
         <p-calendar
@@ -177,10 +177,11 @@
     </div>
     <div class="p-fluid grid m-0">
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editStaatsangehörigkeit">Staatsangehörigkeit</label>
+        <label class="align-content-end" for="editStaatsangehörigkeit" i18n>Staatsangehörigkeit</label>
       </div>
       <div class="col-7">
         <p-dropdown id="editStaatsangehörigkeit"
+                    i18n-placeholder
                     placeholder="Land wählen"
                     [options]="laender"
                     [showClear]="true"
@@ -235,7 +236,7 @@
         <div class="col align-content-end">
           <div class="col">
             <div class="field">
-              <label id="idLabel" for="personId">ID*</label>
+              <label id="idLabel" for="personId" i18n>ID*</label>
               <input id="personId" type="text" pInputText [formControlName]="'id'"/>
             </div>
           </div>
@@ -257,19 +258,20 @@
         <div [formGroup]="geburtsInformationenForm">
           <div class="col">
             <div class="field">
-              <label id="geburtsnameLabel" class="align-content-end" for="geburtname">Geburtsname*</label>
+              <label id="geburtsnameLabel" class="align-content-end" for="geburtname" i18n>Geburtsname*</label>
               <input id="geburtname" type="text" pInputText [formControlName]="'geburtsname'">
             </div>
             <div class="field">
-              <label id="geburtsortLabel" class="align-content-end" for="geburtort">Geburtsort*</label>
+              <label id="geburtsortLabel" class="align-content-end" for="geburtort" i18n>Geburtsort*</label>
               <input id="geburtort" type="text" pInputText [formControlName]="'geburtsort'">
             </div>
           </div>
 
           <div class="col">
             <div class="field">
-              <label id="staatsangehoerigkeitLabel" class="align-content-end" for="staatangehoerigkeit">Staatsangehörigkeit*</label>
+              <label id="staatsangehoerigkeitLabel" class="align-content-end" for="staatangehoerigkeit" i18n>Staatsangehörigkeit*</label>
               <p-dropdown id="staatangehoerigkeit"
+                          i18n-placeholder
                           placeholder="Land wählen"
                           optionValue="name"
                           optionLabel="name"
@@ -286,7 +288,7 @@
             </div>
 
             <div class="field">
-              <label id="geburtsdatumLabel" class="align-content-end" for="geburtdatum">Geburtsdatum*</label>
+              <label id="geburtsdatumLabel" class="align-content-end" for="geburtdatum" i18n>Geburtsdatum*</label>
               <p-calendar id="geburtdatum" dateFormat="dd.mm.yy" [formControlName]="'geburtsdatum'" [showIcon]="true">
               </p-calendar>
             </div>
