@@ -3,7 +3,7 @@ import {Zeichenobjekt} from '../../model/model';
 
 /**
  * Displays a character in sans and serif style.
- * @ignore
+ * @internal
  */
 @Component({
   selector: 'isy-input-char-preview',

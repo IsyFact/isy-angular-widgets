@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
 /**
- * @ignore
+ * @internal
  */
 @Component({
   selector: 'isy-input-char-all-chars-button',
