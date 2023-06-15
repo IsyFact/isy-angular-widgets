@@ -12,8 +12,8 @@
     "copy:collection": "node scripts/copy.js ./projects/isy-angular-widgets/schematics/collection.json ./dist/isy-angular-widgets/schematics/collection.json",
     "postbuild": "npm run copy:collection",
     "e2e": "npx testcafe chrome:headless ./projects/isy-angular-widgets-demo/src/test/e2e/*",
-    "compodoc:build": "compodoc -p tsconfig.doc.json --disablePrivate",
-    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s --disablePrivate",
+    "compodoc:build": "compodoc -p tsconfig.doc.json --disablePrivate --disableInternal",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s --disablePrivate --disableInternal",
     "compodoc:serve": "compodoc -s"
   },
   "private": true,
@@ -57,7 +57,7 @@
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "moment": "^2.29.4",
-    "ng-mocks": "^14.6.0",
+    "ng-mocks": "^14.11.0",
     "ng-packagr": "^14.2.2",
     "typescript": "~4.8.4"
   }
