@@ -15,13 +15,13 @@ import {WizardDirective} from '../../directives/wizard.directive';
 
 /**
  * The width of the wizard of not otherwise specified by the user.
- * @ignore
+ * @internal
  */
 const defaultWidth = 50;
 
 /**
  * The height of the wizard of not otherwise specified by the user.
- * @ignore
+ * @internal
  */
 const defaultHeight = 30;
 
@@ -36,11 +36,14 @@ const defaultHeight = 30;
 export class WizardComponent implements OnInit, AfterContentInit {
 
   /**
+   * @internal
    * Used for getting access over the stepper
    */
-  @ViewChild('stepper') stepper!: StepperComponent;
+  @ViewChild('stepper')
+  stepper!: StepperComponent;
 
   /**
+   * @internal
    * Stores the content who gona be projected inside the template
    */
   @ContentChildren(WizardDirective) content!: QueryList<WizardDirective>;
@@ -133,11 +136,13 @@ export class WizardComponent implements OnInit, AfterContentInit {
   index: number = 0;
 
   /**
+   * @internal
    * Stores the items of the wizard
    */
   wizardItems: MenuItem[] = [];
 
   /**
+   * @internal
    * Fired on initialization
    */
   ngOnInit(): void {
@@ -145,6 +150,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   /**
+   * @internal
    * Fired after content initialization
    */
   ngAfterContentInit(): void {
@@ -174,6 +180,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
   }
 
   /**
+   * @internal
    * Informs about the save action
    * @param save reports the saving status
    */

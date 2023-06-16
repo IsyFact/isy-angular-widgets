@@ -1,6 +1,6 @@
 
 /**
- * @ignore
+ * @internal
  */
 export enum Schriftzeichengruppe {
   /** Lateinische Buchstaben. */
@@ -29,7 +29,7 @@ export enum Schriftzeichengruppe {
 }
 
 /**
- * @ignore
+ * @internal
  */
 export interface SchriftZeichen {
   id: string;
@@ -37,7 +37,7 @@ export interface SchriftZeichen {
 }
 
 /**
- * @ignore
+ * @internal
  */
 export interface Zeichenobjekt {
   readonly zeichen: string,
