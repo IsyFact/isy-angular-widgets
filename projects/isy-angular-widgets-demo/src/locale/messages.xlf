@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="de" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="2593687682650545713" datatype="html">
+        <source> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/app.component.html</context>
+          <context context-type="linenumber">23,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1212886905101328952" datatype="html">
+        <source>Max Mustermann</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/app.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1162090750151417132" datatype="html">
+        <source>Bedienkonzept Vorgaben</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7299052769729572619" datatype="html">
+        <source>Häufige Aufgaben</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/navigation-menu.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7614040043114209045" datatype="html">
+        <source>Objekt suchen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/navigation-menu.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="153405739798665177" datatype="html">
+        <source>Objekt anzeigen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/navigation-menu.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7231471614534850454" datatype="html">
+        <source>Beispiel Menüpunkt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="590093748491389114" datatype="html">
+        <source>Beispiel Gruppe 1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7391882957838777298" datatype="html">
+        <source>Beispiel Unterpunkt 1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1322024096414021797" datatype="html">
+        <source>Beispiel Unterpunkt 2</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6472239977428173759" datatype="html">
+        <source>Beispiel Unterpunkt 3</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8143659226171609332" datatype="html">
+        <source>Beispiel Gruppe 2</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5962386056636653906" datatype="html">
+        <source>Beispiel Menüpunkt (Disabled)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/application-menu.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5568624650642701295" datatype="html">
+        <source>dashboard läuft!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/core/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6915505475892110922" datatype="html">
+        <source>Nachname*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/persoenliche-informationen/persoenliche-informationen.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6278737578310385428" datatype="html">
+        <source>Vorname</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/persoenliche-informationen/persoenliche-informationen.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">154,155</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6583225617769085815" datatype="html">
+        <source>Geschlecht*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/persoenliche-informationen/persoenliche-informationen.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4581370098685361526" datatype="html">
+        <source>Objekt anlegen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7581853519089230529" datatype="html">
+        <source>Objekt bearbeiten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5923517732927181344" datatype="html">
+        <source>Nachname <x id="START_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;p-columnFilter type=&quot;text&quot; field=&quot;personalien.nachname&quot; display=&quot;menu&quot;&gt;"/><x id="CLOSE_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;/p-columnFilter&gt;"/><x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;personalien.nachname&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">23,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6838816418336198885" datatype="html">
+        <source>Vorname <x id="START_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;p-columnFilter type=&quot;text&quot; field=&quot;personalien.nachname&quot; display=&quot;menu&quot;&gt;"/><x id="CLOSE_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;/p-columnFilter&gt;"/><x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;personalien.vorname&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">27,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2460741640340645221" datatype="html">
+        <source>Geschlecht</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">160,161</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6768171478336493850" datatype="html">
+        <source>Agent Picker</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3044976190675332923" datatype="html">
+        <source>Alle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7634053303798063409" datatype="html">
+        <source>Geburtsname <x id="START_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;p-columnFilter type=&quot;text&quot; field=&quot;personalien.nachname&quot; display=&quot;menu&quot;&gt;"/><x id="CLOSE_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;/p-columnFilter&gt;"/><x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;personalien.geburtsname&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">62,64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6737523313192352774" datatype="html">
+        <source>Geburtsort <x id="START_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;p-columnFilter type=&quot;text&quot; field=&quot;personalien.nachname&quot; display=&quot;menu&quot;&gt;"/><x id="CLOSE_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;/p-columnFilter&gt;"/><x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;personalien.geburtsort&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">66,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1588509309490825303" datatype="html">
+        <source>Saatsangehörigkeit <x id="START_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;p-columnFilter type=&quot;text&quot; field=&quot;personalien.nachname&quot; display=&quot;menu&quot;&gt;"/><x id="CLOSE_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;/p-columnFilter&gt;"/><x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;personalien.staatsangehoerigkeit&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">70,72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="959880441249037176" datatype="html">
+        <source>Geburtsdatum <x id="START_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;p-columnFilter type=&quot;date&quot; field=&quot;personalien.geburtsdatum&quot; display=&quot;menu&quot;&gt;"/><x id="CLOSE_TAG_P_COLUMNFILTER" ctype="x-p_columnfilter" equiv-text="&lt;/p-columnFilter&gt;"/><x id="START_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;p-sortIcon field=&quot;personalien.geburtsdatum&quot;&gt;"/><x id="CLOSE_TAG_P_SORTICON" ctype="x-p_sorticon" equiv-text="&lt;/p-sortIcon&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">74,76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2596709502341217625" datatype="html">
+        <source> Aktionen </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">78,80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="835200269886618198" datatype="html">
+        <source>Keine Ergebnisse vorhanden.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.html</context>
+          <context context-type="linenumber">110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5413696885197333983" datatype="html">
+        <source>Ergebnisliste(<x id="PH" equiv-text="this.personen.length"/>)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/components/result-list/result-list.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3411249407516768819" datatype="html">
+        <source>Basisdaten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3112560000750552205" datatype="html">
+        <source>Nachname</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">134,135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8158385069489789677" datatype="html">
+        <source>Geburtsdatum</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">166,167</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3032136904121424169" datatype="html">
+        <source>Personalien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5924643221930808116" datatype="html">
+        <source>Geburtsname</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">140,141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5594915815567933468" datatype="html">
+        <source>Geburtsort</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">146,147</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="681866609203884162" datatype="html">
+        <source>Telefonnummer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5904942854831924963" datatype="html">
+        <source>Staatsangehörigkeit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">180,181</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="373094167554318350" datatype="html">
+        <source>Einreisedatum</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3955030395258169806" datatype="html">
+        <source>Zeige geheime Felder</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4415526430837858850" datatype="html">
+        <source>Ausweispflichtig</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8733091909006755763" datatype="html">
+        <source>Sicherheitsstufe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5592860885540694205" datatype="html">
+        <source>Geheimdienstnotizen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6920196637619975735" datatype="html">
+        <source>Bearbeiten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">144</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2854123663314832793" datatype="html">
+        <source>Speichern</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">206,207</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets/src/lib/wizard/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7624133960269641605" datatype="html">
+        <source>Abbrechen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/shared/components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1239267173851913018" datatype="html">
+        <source>Es gibt Fehler in der Eingabe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3332812545808234315" datatype="html">
+        <source>Es ist kein Nachname eingetragen.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3277035171516533746" datatype="html">
+        <source>Der Nachname muss mindestens zwei Zeichen lang sein. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">118,120</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3722685911858147401" datatype="html">
+        <source>Es ist kein Vorname eingetragen.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7380023748914468795" datatype="html">
+        <source>Der Vorname muss mindestens zwei Zeichen lang sein. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">122,124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2410069319201633368" datatype="html">
+        <source>Sachverhalte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="886828909171043677" datatype="html">
+        <source>Sachverhalt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/shared/components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/shared/components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5519235933005019178" datatype="html">
+        <source>Gelöst</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.html</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/shared/components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7029045669792757368" datatype="html">
+        <source>Erika Musterfrau</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8027350198700097813" datatype="html">
+        <source>Köln</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7522974210957794701" datatype="html">
+        <source>Divers</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="897749604059929165" datatype="html">
+        <source>Mustermann</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3313528406596871463" datatype="html">
+        <source>Deutsch</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="793934040740364630" datatype="html">
+        <source>Hat einen Antrag auf BAFÖG gestellt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7251966716029635775" datatype="html">
+        <source>Wurde wegen Falschparkens ermahnt</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3148916413967330070" datatype="html">
+        <source>Steht auf der NO-FLY-Liste</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-anzeigen/objekt-anzeigen.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6068026124594030224" datatype="html">
+        <source>Belgien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7731013350359057223" datatype="html">
+        <source>Malta</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1766097903700928989" datatype="html">
+        <source>Bulgarien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="32522745793280327" datatype="html">
+        <source>Niederlande</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1598073513699003963" datatype="html">
+        <source>Dänemark</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4692073359600729075" datatype="html">
+        <source>Österreich</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2915277013095531577" datatype="html">
+        <source>Deutschland</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4859804121149272105" datatype="html">
+        <source>Polen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="338583078948566243" datatype="html">
+        <source>Estland</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1825932113518847029" datatype="html">
+        <source>Portugal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2467330552346259446" datatype="html">
+        <source>Finnland</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8154253024205668568" datatype="html">
+        <source>Rumänien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7424274321153164422" datatype="html">
+        <source>Frankreich</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4651871178018992718" datatype="html">
+        <source>Schweden</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6790946655402782838" datatype="html">
+        <source>Griechenland</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2920072526031883188" datatype="html">
+        <source>Slowakei</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4355182761235974826" datatype="html">
+        <source>Irland</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3338843776961100821" datatype="html">
+        <source>Slowenien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3350268034329295179" datatype="html">
+        <source>Italien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3151621968236253085" datatype="html">
+        <source>Spanien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="267640495169983490" datatype="html">
+        <source>Kroatien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8791236280338188810" datatype="html">
+        <source>Tschechien</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4571832356602143987" datatype="html">
+        <source>Lettland</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1739726084981880242" datatype="html">
+        <source>Ungarn</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6021705766355597663" datatype="html">
+        <source>Litauen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4221802120856321772" datatype="html">
+        <source>Zypern</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2693055807398849483" datatype="html">
+        <source>Luxemburg</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4901732320154802293" datatype="html">
+        <source>Schweiz</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4154148550409412117" datatype="html">
+        <source>Norwegen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4622289971066938286" datatype="html">
+        <source>Island</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2395801069572063630" datatype="html">
+        <source>Vereinigte Arabische Emirate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7139997792779421430" datatype="html">
+        <source>Kongo, Demokratische Republik</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/country-data.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8040881171107393560" datatype="html">
+        <source>ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">122,123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4946440185656622908" datatype="html">
+        <source>Land wählen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">185,186</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">280,281</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8496502695397194982" datatype="html">
+        <source>Suchen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7773598590001536104" datatype="html">
+        <source>Suche leeren</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">95,96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="394373098243716789" datatype="html">
+        <source>Ausgewähltes Objekt bearbeiten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">112,113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8183476381446897959" datatype="html">
+        <source>Schließen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">213,214</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets/src/lib/wizard/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6274564904336158981" datatype="html">
+        <source>Anlegen eines komplexen Objektes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">227,228</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4561755132812838683" datatype="html">
+        <source>ID*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">244,245</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7864915433098897493" datatype="html">
+        <source>Geburtsname*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">266,267</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7028453898935423485" datatype="html">
+        <source>Geburtsort*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">270,271</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="958385709300944314" datatype="html">
+        <source>Staatsangehörigkeit*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">277,278</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1312445133729406370" datatype="html">
+        <source>Geburtsdatum*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.html</context>
+          <context context-type="linenumber">296,297</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2901290528852496202" datatype="html">
+        <source>ID Eintrag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="725961153657562649" datatype="html">
+        <source>Persönliche Informationen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2653079447995370347" datatype="html">
+        <source>Geburtsinformationen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/feature/bedienkonzept/pages/objekt-suchen/objekt-suchen.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8761459569215107955" datatype="html">
+        <source>Quicklinks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/navigation-menu.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5950473533722058836" datatype="html">
+        <source>Beispiel Quicklink 1</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/navigation-menu.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3838953817962695987" datatype="html">
+        <source>Beispiel Quicklink 2</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/navigation-menu.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8510680704278002449" datatype="html">
+        <source>Sachverhalte Bearbeiten</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/shared/components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4580399730639224598" datatype="html">
+        <source>Löschen</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/shared/components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8633646590092963519" datatype="html">
+        <source>Neuer Eintrag</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/shared/components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8998179362936748717" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets-demo/src/app/shared/components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3577567805142771164" datatype="html">
+        <source>Logo des Anbieters der Anwendungslandschaft</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets/src/lib/hauptfenster/hauptfenster.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7270652170393912286" datatype="html">
+        <source>Logo der Anwendungslandschaft</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets/src/lib/hauptfenster/hauptfenster.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2361265238320887165" datatype="html">
+        <source>Abmelden</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets/src/lib/hauptfenster/hauptfenster.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8930526198656004715" datatype="html">
+        <source>Zurück</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets/src/lib/wizard/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="512114589853951663" datatype="html">
+        <source>Weiter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">projects/isy-angular-widgets/src/lib/wizard/components/wizard/wizard.component.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

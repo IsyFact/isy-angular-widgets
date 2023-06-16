@@ -61,7 +61,7 @@
         "sourceLocale": "de",
         "locales": {
           "en": {
-            "translation": "src/locale/isy-angular-widgets-demo/messages.en.xlf"
+            "translation": "projects/isy-angular-widgets-demo/src/locale/messages.en.xlf"
           }
         }
       },
