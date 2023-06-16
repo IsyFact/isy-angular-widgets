@@ -24,6 +24,13 @@ import {DateService} from '../../services/date.service';
 })
 export class ObjektSuchenComponent {
   /**
+   * Wizard form headline prepared for localization
+   */
+  idEintrag: string = $localize`ID Eintrag`;
+  persoenlicheInformationen: string = $localize`Persönliche Informationen`;
+  geburtsInformationen: string = $localize`Geburtsinformationen`;
+
+  /**
    * The boolean that decides whether to open the wizard
    */
   openWizard: boolean = false;

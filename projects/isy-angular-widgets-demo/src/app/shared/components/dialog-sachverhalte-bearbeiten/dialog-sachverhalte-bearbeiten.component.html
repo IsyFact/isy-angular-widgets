@@ -1,16 +1,16 @@
-<p-dialog *ngIf="person" header="Sachverhalte Bearbeiten" [(visible)]="visible">
+<p-dialog *ngIf="person" i18n-header header="Sachverhalte Bearbeiten" [(visible)]="visible">
   <p-table [value]="newSachverhalteListe" responsiveLayout="scroll">
     <ng-template pTemplate="header">
       <tr>
-        <th>Sachverhalt</th>
-        <th>Status</th>
-        <th>Löschen</th>
+        <th i18n>Sachverhalt</th>
+        <th i18n>Status</th>
+        <th i18n>Löschen</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-sachverhalt>
       <tr>
         <td>{{sachverhalt}}</td>
-        <td>Gelöst</td>
+        <td i18n>Gelöst</td>
         <td>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                   (click)="deleteSachverhalt(sachverhalt)"></button>
@@ -19,11 +19,11 @@
     </ng-template>
   </p-table>
   <div class="p-inputgroup">
-    <input type="text" pInputText placeholder="Neuer Eintrag" [(ngModel)]="newSachverhalt">
+    <input type="text" pInputText i18n-placeholder placeholder="Neuer Eintrag" [(ngModel)]="newSachverhalt">
     <button type="button" pButton pRipple icon="pi pi-plus" (click)="createSachverhalt(newSachverhalt)"></button>
   </div>
   <ng-template pTemplate="footer">
-    <button pButton (click)="saveSachverhalte()">OK</button>
-    <button pButton class="p-button-outlined" (click)="closeDialog()">Abbrechen</button>
+    <button pButton (click)="saveSachverhalte()" i18n>OK</button>
+    <button pButton class="p-button-outlined" (click)="closeDialog()" i18n>Abbrechen</button>
   </ng-template>
 </p-dialog>

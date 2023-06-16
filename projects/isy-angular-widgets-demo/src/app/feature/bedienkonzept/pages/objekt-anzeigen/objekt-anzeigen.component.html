@@ -1,4 +1,4 @@
-<p-panel header="Basisdaten" [toggleable]="true" iconPos="start">
+<p-panel i18n-header header="Basisdaten" [toggleable]="true" iconPos="start">
   <div class="p-fluid grid m-0">
     <div class="col-1 text-right align-self-center">
       <label for="basis-nachname" i18n>Nachname</label>
@@ -7,13 +7,13 @@
       <input id="basis-nachname" type="text" pInputText disabled [(ngModel)]="person.personalien.nachname">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label for="basis-vorname" i18n>Vorname </label>
+      <label for="basis-vorname" i18n>Vorname</label>
     </div>
     <div class="col">
       <input id="basis-vorname" type="text" pInputText disabled [(ngModel)]="person.personalien.vorname">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label for="basis-geburtsdatum" i18n>Geburtsdatum </label>
+      <label for="basis-geburtsdatum" i18n>Geburtsdatum</label>
     </div>
     <div class="col">
       <input id="basis-geburtsdatum" type="text" pInputText disabled [(ngModel)]="person.personalien.geburtsdatum">
@@ -23,7 +23,7 @@
 
 
 <p-tabView id="tabview" (onChange)="editable = false">
-  <p-tabPanel id="panelPersonalien" header="Personalien">
+  <p-tabPanel id="panelPersonalien" i18n-header header="Personalien">
     <div class="p-fluid formgrid grid">
       <div class="col">
         <div class="field">
@@ -35,12 +35,12 @@
           </div>
         </div>
         <div class="field">
-          <label for="vorname" i18n>Vorname </label>
+          <label for="vorname" i18n>Vorname</label>
           <input id="vorname" required minlength="2" type="text" pInputText [disabled]="!editable"
                  [(ngModel)]="newVorname" #vorname="ngModel">
         </div>
         <div class="field">
-          <label for="geschlecht" i18n>Geschlecht </label>
+          <label for="geschlecht" i18n>Geschlecht</label>
           <p-dropdown id="geschlecht" [(ngModel)]="newGeschlecht" [filter]="true" [filterBy]="'name'"
                       [optionLabel]="'name'" [optionValue]="'name'" [disabled]="!editable"
                       [options]="[{name: 'Männlich'}, {name: 'Weiblich'}, {name: 'Divers'}, {name: 'Keine Angabe'}]"
@@ -49,45 +49,45 @@
       </div>
       <div class="col">
         <div class="field">
-          <label for="geburtsname" i18n>Geburtsname </label>
+          <label for="geburtsname" i18n>Geburtsname</label>
           <input id="geburtsname" type="text" pInputText [disabled]="!editable" [(ngModel)]="newGeburtsname">
         </div>
         <div class="field">
-          <label for="geburtsort" i18n>Geburtsort </label>
+          <label for="geburtsort" i18n>Geburtsort</label>
           <input id="geburtsort" type="text" pInputText [disabled]="!editable" [(ngModel)]="newGeburtsort">
         </div>
         <div class="field">
-          <label for="telefonnummer" i18n>Telefonnummer </label>
+          <label for="telefonnummer" i18n>Telefonnummer</label>
           <p-inputMask id="telefonnummer" type="text" [disabled]="!editable" [(ngModel)]="newTelefonnummer"
                        mask="+99 9999 / 9999999"></p-inputMask>
         </div>
       </div>
       <div class="col">
         <div class="field">
-          <label for="staatsangehoerigkeit" i18n>Staatsangehörigkeit </label>
+          <label for="staatsangehoerigkeit" i18n>Staatsangehörigkeit</label>
           <input id="staatsangehoerigkeit" type="text" pInputText [disabled]="!editable"
                  [(ngModel)]="newStaatsangehoerigkeit">
         </div>
         <div class="field">
-          <label for="geburtsdatum" i18n>Geburtsdatum </label>
+          <label for="geburtsdatum" i18n>Geburtsdatum</label>
           <p-calendar id="geburtsdatum" [(ngModel)]="newGeburtsdatum"
                       dateFormat="dd.mm.yy" [disabled]="!editable" [showIcon]="true"></p-calendar>
         </div>
         <div class="field">
-          <label for="einreisedatum" i18n>Einreisedatum </label>
+          <label for="einreisedatum" i18n>Einreisedatum</label>
           <isy-incomplete-date id="einreisedatum" [(ngModel)]="newEinreisedatum" [disabled]="!editable"></isy-incomplete-date>
         </div>
       </div>
     </div>
     <div class="field field-checkbox">
       <p-inputSwitch id="showSecretFields" [(ngModel)]="showSecretFields"></p-inputSwitch>
-      <label for="showSecretFields" i18n>Zeige geheime Felder </label>
+      <label for="showSecretFields" i18n>Zeige geheime Felder</label>
     </div>
     <div id="divShowSecretFields" class="p-fluid grid" *ngIf="showSecretFields">
       <div class="field field-checkbox col-2">
         <p-checkbox id="ausweispflichtig" [(ngModel)]="newAusweispflichtig" [disabled]="!editable"
                     [binary]="true"></p-checkbox>
-        <label for="ausweispflichtig" i18n>Ausweispflichtig </label>
+        <label for="ausweispflichtig" i18n>Ausweispflichtig</label>
       </div>
       <div class="field col-1">
         <label for="sicherheitsstufe" i18n>Sicherheitsstufe</label>
@@ -95,7 +95,7 @@
                        [disabled]="!editable"></p-inputNumber>
       </div>
       <div class="field col-12">
-        <label for="geheimdienstnotizen" i18n>Geheimdienstnotizen </label>
+        <label for="geheimdienstnotizen" i18n>Geheimdienstnotizen</label>
         <div>
       <textarea id="geheimdienstnotizen" pInputTextarea [(ngModel)]="newGeheimdienstnotizen"
                 [disabled]="!editable"></textarea>
@@ -103,28 +103,28 @@
       </div>
     </div>
     <div class="justify-content-center flex">
-      <button pButton id="buttonEdit" *ngIf="!editable" label="Bearbeiten" icon="pi pi-user-edit" iconPos="left"
+      <button pButton id="buttonEdit" *ngIf="!editable" i18n-label label="Bearbeiten" icon="pi pi-user-edit" iconPos="left"
               (click)="editable = true"></button>
       <div id="divSaveCancel" *ngIf="editable" class="p-buttonset">
-        <button id="buttonSave" pButton label="Speichern" icon="pi pi-save" iconPos="left"
+        <button id="buttonSave" pButton i18n-label label="Speichern" icon="pi pi-save" iconPos="left"
                 (click)="(vorname.valid && nachname.valid) ? savePersonalien() : showError = true"
         ></button>
-        <button id="buttonCancel" pButton label="Abbrechen" icon="pi pi-times" class="p-button-outlined" iconPos="left"
+        <button id="buttonCancel" pButton i18n-label label="Abbrechen" icon="pi pi-times" class="p-button-outlined" iconPos="left"
                 (click)="cancelEdit()"></button>
       </div>
     </div>
-    <p-dialog header="Es gibt Fehler in der Eingabe" [(visible)]="showError">
-      <div *ngIf="(nachname.errors?.required)"  i18n>Es ist kein Nachname eingetragen.</div>
-      <div *ngIf="nachname.errors?.minlength && !nachname.errors?.required"  i18n>Der Nachname muss mindestens zwei Zeichen
+    <p-dialog i18n-header header="Es gibt Fehler in der Eingabe" [(visible)]="showError">
+      <div *ngIf="(nachname.errors?.required)" i18n>Es ist kein Nachname eingetragen.</div>
+      <div *ngIf="nachname.errors?.minlength && !nachname.errors?.required" i18n>Der Nachname muss mindestens zwei Zeichen
         lang sein.
       </div>
-      <div *ngIf="(vorname.errors?.required)"  i18n>Es ist kein Vorname eingetragen.</div>
-      <div *ngIf="vorname.errors?.minlength && !vorname.errors?.required"  i18n>Der Vorname muss mindestens zwei Zeichen
+      <div *ngIf="(vorname.errors?.required)" i18n>Es ist kein Vorname eingetragen.</div>
+      <div *ngIf="vorname.errors?.minlength && !vorname.errors?.required" i18n>Der Vorname muss mindestens zwei Zeichen
         lang sein.
       </div>
     </p-dialog>
   </p-tabPanel>
-  <p-tabPanel id="panelSachverhalte" header="Sachverhalte">
+  <p-tabPanel id="panelSachverhalte" i18n-header header="Sachverhalte">
     <p-table [value]="person.sachverhalte.liste" responsiveLayout="scroll">
       <ng-template pTemplate="header">
         <tr>
@@ -134,14 +134,14 @@
       </ng-template>
       <ng-template pTemplate="body" let-sachverhalt>
         <tr>
-          <td i18n>{{sachverhalt}}</td>
+          <td>{{sachverhalt}}</td>
           <td i18n>Gelöst</td>
         </tr>
       </ng-template>
     </p-table>
     <demo-dialog-sachverhalte-bearbeiten [(visible)]="editable" [person]="person"></demo-dialog-sachverhalte-bearbeiten>
 de    <div class="flex justify-content-end p-2">
-      <p-button label="Bearbeiten" icon="pi pi-user-edit" iconPos="left" (click)="editable = true"></p-button>
+      <p-button i18n-label label="Bearbeiten" icon="pi pi-user-edit" iconPos="left" (click)="editable = true"></p-button>
     </div>
   </p-tabPanel>
 </p-tabView>

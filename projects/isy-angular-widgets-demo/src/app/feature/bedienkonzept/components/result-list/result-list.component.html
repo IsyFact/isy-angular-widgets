@@ -1,4 +1,4 @@
-<p-panel styleClass="isy-demo-app-result-panel" [header]="'Ergebnisliste (' + personen.length + ')'" [toggleable]="true"
+<p-panel styleClass="isy-demo-app-result-panel" [header]="ergebnisliste" [toggleable]="true"
          iconPos="start">
   <p-table #dt1
            [value]="personen"
@@ -28,7 +28,8 @@
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.vorname"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geschlecht" i18n>Geschlecht
+        <th scope="col" pSortableColumn="personalien.geschlecht">
+          <p i18n>Geschlecht</p>
           <p-columnFilter field="representative"
                           matchMode="in"
                           display="menu"
@@ -37,11 +38,12 @@
                           [showAddButton]="false">
             <ng-template pTemplate="header">
               <div class="p-px-3 p-pt-3 p-pb-0">
-                <span class="p-text-bold">Agent Picker</span>
+                <span class="p-text-bold" i18n>Agent Picker</span>
               </div>
             </ng-template>
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
               <p-multiSelect optionLabel="option"
+                             i18n-placeholder
                              placeholder="Alle"
                              [ngModel]="value"
                              [options]="geschlechter"

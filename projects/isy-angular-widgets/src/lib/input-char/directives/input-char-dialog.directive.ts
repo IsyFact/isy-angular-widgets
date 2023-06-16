@@ -1,7 +1,7 @@
 import {Directive, TemplateRef} from '@angular/core';
 
 /**
- * @internal
+ * @ignore
  */
 @Directive({
   selector: '[isyInputCharDialogDirective]'

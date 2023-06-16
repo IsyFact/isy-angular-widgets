@@ -11,14 +11,16 @@
 
   <div Titelzeile class="isy-demo-titelzeile">
 <!--    <b>{{title}}</b><span *ngIf="subTitle">: {{subTitle}}</span>-->
-<demo-locale-switcher></demo-locale-switcher>
+    <div class="flex justify-content-end">
+      <demo-locale-switcher></demo-locale-switcher>
+    </div>
   </div>
   <div Linksnavigation>
     <p-panelMenu [model]="sidebarItems"></p-panelMenu>
   </div>
   <router-outlet></router-outlet>
   <div Informationsbereich>
-    <p class="p-3">
+    <p class="p-3" i18n>
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
       sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
       ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore

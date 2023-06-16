@@ -3,6 +3,7 @@
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
         <img
+          i18n-alt
           alt="Logo des Anbieters der Anwendungslandschaft"
           class="isy-hauptfenster-logo-anbieter-awl"
           [src]="logoAnbieterAwl"
@@ -15,6 +16,7 @@
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
       <div class="flex flex-row-reverse">
         <img
+          i18n-alt
           alt="Logo der Anwendungslandschaft"
           class="isy-hauptfenster-logo-awl"
           [src]="logoAwl"
@@ -25,7 +27,7 @@
         </ng-template>
       </div>
       <div class="flex flex-row-reverse">
-        <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)">Abmelden</p-button>
+        <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)" i18n>Abmelden</p-button>
         <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
           <em class="pi pi-user mr-1"></em>
           {{userInfo.displayName}}

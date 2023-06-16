@@ -14,14 +14,10 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SecurityModule} from '../../../isy-angular-widgets/src/lib/security/security.module';
 import {PanelMenuModule} from 'primeng/panelmenu';
-import { LocaleSwitcherComponent } from './locale-switcher/locale-switcher.component';
-import { FormsModule } from '@angular/forms';
-
 
 @NgModule({
     declarations: [
-        AppComponent,
-        LocaleSwitcherComponent
+        AppComponent
     ],
     providers: [AuthGuard, UserInfoPublicService, { provide: UserInfoService, useClass: UserInfoPublicService }, SecurityService],
     bootstrap: [AppComponent],
@@ -35,8 +31,7 @@ import { FormsModule } from '@angular/forms';
         SharedModule,
         ButtonModule,
         ToolbarModule,
-        PanelMenuModule,
-        FormsModule
+        PanelMenuModule
     ]
 })
 export class AppModule {

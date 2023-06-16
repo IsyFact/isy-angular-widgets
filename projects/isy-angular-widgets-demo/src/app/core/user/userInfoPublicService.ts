@@ -7,7 +7,7 @@ export class UserInfoPublicService implements UserInfoService {
     return {
       userId: '1',
       roles: ['admin', 'user'],
-      displayName: $localize`Nutzer`
+      displayName: 'Nutzer'
     };
   }
 }

@@ -11,13 +11,16 @@ import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {NotificationService} from './services/notification.service';
+import { LocaleSwitcherComponent } from './components/locale-switcher/locale-switcher.component';
 
 @NgModule({
   declarations: [
-    DialogSachverhalteBearbeitenComponent
+    DialogSachverhalteBearbeitenComponent,
+    LocaleSwitcherComponent
   ],
   exports: [
-    DialogSachverhalteBearbeitenComponent
+    DialogSachverhalteBearbeitenComponent,
+    LocaleSwitcherComponent
   ],
   imports: [
     CommonModule,

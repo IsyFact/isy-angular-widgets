@@ -7,10 +7,8 @@ import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {ActivationStart, Router} from '@angular/router';
 import {filter} from 'rxjs';
-import {MenuItem, PrimeNGConfig} from 'primeng/api';
-import '@angular/localize/init';
-import { Translate } from './shared/model/translate.model';
-import { TranslateService } from './shared/services/translate.service';
+import {MenuItem} from 'primeng/api';
+import { TranslateCalendarService } from './shared/services/translate-calendar.service';
 
 @Component({
   selector: 'demo-root',
@@ -22,14 +20,12 @@ export class AppComponent implements OnInit {
   readonly sidebarItems: MenuItem[] = navigationMenu;
   title!: string;
   subTitle!: string;
-  translate!: Translate;
 
   constructor(
     private router: Router,
     private securityService: SecurityService,
     private userInfoPublicService: UserInfoPublicService,
-    private primengConfig: PrimeNGConfig,
-    private translateService: TranslateService,
+    private translateCalendarService: TranslateCalendarService,
     @Inject(LOCALE_ID) private activeLocale: Locale
   ) {
     router.events.pipe(
@@ -43,13 +39,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.securityService.setRoles(this.userInfoPublicService.getUserInfo());
     this.securityService.setPermissions(data);
-    this.translate = this.translateService.translateL(
+    this.translateCalendarService.translateCalendar(
       this.activeLocale
     );
-    this.primengConfig.setTranslation(this.translate);
   }
 
   userInfo?: UserInfo = {
-    displayName: 'Max Mustermann'
+    displayName: $localize`Max Mustermann`
   };
 }

@@ -28,33 +28,27 @@ export class InputCharComponent implements OnInit {
   /**
    * Used for getting access to the all button
    */
-  @ViewChild('allChars')
-  private allChars!: InputCharAllCharsButtonComponent;
+  @ViewChild('allChars') allChars!: InputCharAllCharsButtonComponent;
 
   /**
    * Used for getting access to the base accordion tab
    */
-  @ViewChild('base')
-  private base!: InputCharSelectButtonComponent;
+  @ViewChild('base') base!: InputCharSelectButtonComponent;
 
   /**
    * Used for getting access to the group accordion tab
    */
-  @ViewChild('group')
-  private group!: InputCharSelectButtonComponent;
+  @ViewChild('group') group!: InputCharSelectButtonComponent;
 
   /**
    * Used for getting access to the character preview panel
    */
-  @ViewChild('charPreview')
-  private charPreview!: InputCharPreviewCharListComponent;
+  @ViewChild('charPreview') charPreview!: InputCharPreviewCharListComponent;
 
   /**
-   * @
    * Used for getting access to the HTML input field
    */
-  @ViewChild('inputCharButton')
-  private inputCharButton!: HTMLButtonElement;
+  @ViewChild('inputCharButton') inputCharButton!: HTMLButtonElement;
 
   /**
    * Determines which set of characters (datatype) according to DIN 91379 to show
@@ -97,37 +91,31 @@ export class InputCharComponent implements OnInit {
   @Input() isDialogModalDisplayed: boolean = false;
 
   /**
-   * @internal
    * Controls the char picker visibility
    */
   displayCharPicker: boolean = false;
 
   /**
-   * @internal
    * The array who stores the active states of all accordion tabs
    */
   activeState: boolean[] = [false, false];
 
   /**
-   * @internal
    * The array who stores all the grundzeichen
    */
   grundZeichenListe!: string[];
 
   /**
-   * @internal
    * The array who stores all the schriftzeichen
    */
   schriftZeichenGruppen!: SchriftZeichen[];
 
   /**
-   * @internal
    * The array who stores all the zeichenobjekte
    */
   zeichenObjekteToDisplay!: Zeichenobjekt[];
 
   /**
-   * @internal
    * Stores the current selected zeichenobjekt
    */
   selectedZeichenObjekt?: Zeichenobjekt;
@@ -135,7 +123,6 @@ export class InputCharComponent implements OnInit {
   constructor(private charService: CharacterService) { }
 
   /**
-   * @internal
    * Fire on initialization
    */
   ngOnInit(): void {
@@ -154,7 +141,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is setting up the char picker availability
    * @param close The opening status of the char picker
    */
@@ -171,7 +157,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Setting up the characters list who must be displayed
    * @param datentyp Used as filter
    */
@@ -182,7 +167,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Setting up the characters list who must be displayed
    */
   setupCharacterListToDisplay(): void {
@@ -191,7 +175,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is fired on dialog closing
    */
   onDialogClose(): void {
@@ -221,7 +204,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is fired when the all button get clicked
    */
   onAllSelection(): void {
@@ -232,7 +214,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is fired when a base get selected
    * @param base The selected base
    */
@@ -245,7 +226,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is fired when a base get selected
    * @param group The selected group
    */
@@ -258,7 +238,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is displaying the selected zeichenobjekt
    * @param zeichenobjekt the selected zeichenobjekt who must be displayed
    */
@@ -267,7 +246,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Emits the selected zeichenobjekt
    * @param zeichenObjekt The selected zeichenobjekt
    */
@@ -276,7 +254,6 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is selecting the first zeichenobjekt inside the current list
    */
   selectFirstEntry(): void {

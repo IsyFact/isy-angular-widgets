@@ -35,19 +35,19 @@
 
   <div class="p-fluid grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Vorname" i18n>Vorname </label>
+      <label class="align-content-end" for="Vorname" i18n>Vorname</label>
     </div>
     <div class="col">
       <input id="Vorname" type="text" pInputText [(ngModel)]="person.personalien.vorname">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Geschlecht" i18n>Geschlecht </label>
+      <label class="align-content-end" for="Geschlecht" i18n>Geschlecht</label>
     </div>
     <div class="col">
       <input id="Geschlecht" type="text" pInputText [(ngModel)]="person.personalien.geschlecht">
     </div>
     <div class="col-1 text-right align-self-center">
-      <label class="align-content-end" for="Geburtsdatum" i18n>Geburtsdatum </label>
+      <label class="align-content-end" for="Geburtsdatum" i18n>Geburtsdatum</label>
     </div>
     <div class="col">
       <p-calendar id="Geburtsdatum"
@@ -85,14 +85,14 @@
   </div>
 
   <div class="flex justify-content-end p-2">
-    <p-button [label]="'Suchen'"
+    <p-button i18n-label label="Suchen"
               class="mr-1"
               [iconPos]="'left'"
               [icon]="'pi pi-search'"
               (onClick)="findPerson()"
     >
     </p-button>
-    <p-button [label]="'Suche leeren'"
+    <p-button i18n-label label="Suche leeren"
               [iconPos]="'left'"
               [disabled]="!enableClearSearch()"
               (onClick)="clearSearch()"
@@ -109,7 +109,7 @@
 >
 </demo-result-list>
 
-<p-dialog [header]="'Ausgewähltes Objekt bearbeiten'"
+<p-dialog i18n-header header="Ausgewähltes Objekt bearbeiten"
           [(visible)]="openEditForm"
           [modal]="modal"
           [style]="{
@@ -151,19 +151,19 @@
     </div>
     <div class="p-fluid grid m-0">
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editVorname" i18n>Vorname </label>
+        <label class="align-content-end" for="editVorname" i18n>Vorname</label>
       </div>
       <div class="col">
         <input id="editVorname" type="text" pInputText [formControlName]="'editVorname'">
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editGeschlecht" i18n>Geschlecht </label>
+        <label class="align-content-end" for="editGeschlecht" i18n>Geschlecht</label>
       </div>
       <div class="col">
         <input id="editGeschlecht" type="text" pInputText [formControlName]="'editGeschlecht'">
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="editGeburtsdatum" i18n>Geburtsdatum </label>
+        <label class="align-content-end" for="editGeburtsdatum" i18n>Geburtsdatum</label>
       </div>
       <div class="col">
         <p-calendar
@@ -202,12 +202,14 @@
     </div>
     <div class="flex justify-content-end flex-wrap card-container pt-2">
       <p-button class="flex align-items-center justify-content-center mr-1"
+                i18n-label
                 label="Speichern"
                 (onClick)="saveChanges()"
                 [disabled]="!editForm.valid || !allowSave"
       >
       </p-button>
       <p-button class="flex align-items-center justify-content-center mr-1"
+                i18n-label
                 label="Schließen"
                 (onClick)="displayEditDialog()"
       >
@@ -216,10 +218,13 @@
   </div>
 </p-dialog>
 
+<!--[headerTitle]="'Anlegen eines komplexen Objektes'"-->
+
 <isy-wizard *ngIf="openWizard"
             [width]="50"
             [height]="30"
-            [headerTitle]="'Anlegen eines komplexen Objektes'"
+            i18n-headerTitle
+            headerTitle = "Anlegen eines komplexen Objektes"
             [allowNext]="isFormValid"
             [(isVisible)]="openWizard"
             (isVisibleChange)="onWizardClose($event)"
@@ -230,7 +235,7 @@
 >
   <!-- The wizard is generic, you can input any element. For example:-->
   <!-- 1. A simple form -->
-  <div *isyWizardDirective="'ID Eintrag'">
+  <div *isyWizardDirective="idEintrag">
     <div [formGroup]="idForm">
       <div class="p-fluid formgrid grid">
         <div class="col align-content-end">
@@ -246,13 +251,13 @@
   </div>
 
   <!-- 2. A custom component representing your form -->
-  <form *isyWizardDirective="'Persönliche Informationen'">
+  <form *isyWizardDirective="persoenlicheInformationen">
     <demo-persoenliche-informationen [form]="persoenlicheInformationenForm">
     </demo-persoenliche-informationen>
   </form>
 
   <!-- 3. A complex form -->
-  <div *isyWizardDirective="'Geburtsinformationen'">
+  <div *isyWizardDirective="geburtsInformationen">
     <div class="p-fluid formgrid grid">
       <div class="col align-content-end">
         <div [formGroup]="geburtsInformationenForm">

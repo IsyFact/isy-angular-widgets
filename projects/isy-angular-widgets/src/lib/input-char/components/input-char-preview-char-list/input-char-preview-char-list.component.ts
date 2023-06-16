@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Zeichenobjekt} from '../../model/model';
 
 /**
- * @internal
+ * @ignore
  */
 @Component({
   selector: 'isy-input-char-preview-char-list',

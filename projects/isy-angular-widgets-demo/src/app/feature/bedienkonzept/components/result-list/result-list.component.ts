@@ -24,6 +24,11 @@ export class ResultListComponent {
 
   readonly laender: string[];
 
+  /*
+  * Panel header prepared for localization.
+  */
+  ergebnisliste: string = $localize`Ergebnisliste(${this.personen.length})`;
+
   constructor() {
     this.laender = countries;
   }

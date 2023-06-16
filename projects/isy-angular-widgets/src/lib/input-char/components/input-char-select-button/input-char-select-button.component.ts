@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SchriftZeichen} from '../../model/model';
 
 /**
- * @internal
+ * @ignore
  */
 @Component({
   selector: 'isy-input-char-select-button',

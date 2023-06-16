@@ -21,11 +21,11 @@ export class ObjektAnzeigenComponent implements OnInit {
     id: '1',
     personalien: {
       geburtsdatum: '15.9.2021',
-      geburtsname: 'Erika Musterfrau',
-      geburtsort: 'Köln',
-      geschlecht: 'Divers',
-      nachname: 'Mustermann',
-      staatsangehoerigkeit: 'Deutsch',
+      geburtsname: $localize`Erika Musterfrau`,
+      geburtsort: $localize`Köln`,
+      geschlecht: $localize`Divers`,
+      nachname: $localize`Mustermann`,
+      staatsangehoerigkeit: $localize`Deutsch`,
       vorname: 'Max',
       ausweispflichtig: true,
       telefonnummer: '',
@@ -33,7 +33,7 @@ export class ObjektAnzeigenComponent implements OnInit {
       sicherheitsstufe: 0,
       einreisedatum: 'XX-XX-XXXX'
     }, sachverhalte: {
-      liste: ['Hat einen Antrag auf BAFÖG gestellt', 'Wurde wegen Falschparkens ermahnt', 'Steht auf der NO-FLY-Liste']
+      liste: [$localize`Hat einen Antrag auf BAFÖG gestellt`, $localize`Wurde wegen Falschparkens ermahnt`, $localize`Steht auf der NO-FLY-Liste`]
     }
   };
 

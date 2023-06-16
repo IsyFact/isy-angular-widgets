@@ -17,7 +17,7 @@ import {SecurityService} from './security-service';
 export class AuthGuard implements CanActivate, CanLoad {
 
   /**
-   * @internal
+   * @ignore
    */
   constructor(private securityService: SecurityService) {
   }

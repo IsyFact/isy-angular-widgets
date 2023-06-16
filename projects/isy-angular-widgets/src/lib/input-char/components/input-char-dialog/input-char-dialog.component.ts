@@ -2,7 +2,7 @@ import {Component, ContentChildren, EventEmitter, Input, Output, QueryList} from
 import {InputCharDialogDirective} from '../../directives/input-char-dialog.directive';
 
 /**
- * @internal
+ * @ignore
  */
 @Component({
   selector: 'isy-input-char-dialog',

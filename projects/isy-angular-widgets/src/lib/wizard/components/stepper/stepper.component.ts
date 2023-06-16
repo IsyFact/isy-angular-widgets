@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 
 /**
- * @internal
+ * @ignore
  */
 @Component({
   selector: 'isy-stepper',

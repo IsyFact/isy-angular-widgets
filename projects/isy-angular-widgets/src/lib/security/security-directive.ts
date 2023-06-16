@@ -13,7 +13,7 @@ import {SecurityService} from './security-service';
 export class SecurityDirective {
 
   /**
-   * @internal
+   * @ignore
    */
   constructor(private template: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
