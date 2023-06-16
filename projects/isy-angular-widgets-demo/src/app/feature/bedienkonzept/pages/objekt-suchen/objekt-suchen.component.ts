@@ -119,15 +119,13 @@ export class ObjektSuchenComponent {
   displayX: boolean = true;
 
   savedSuccessfully: boolean = false;
-
-  es: any;
   
   constructor(
     public personService: PersonenService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private notificationService: NotificationService,
-    private dateService: DateService,
+    private dateService: DateService
   ) {
     this.personen$ = of([]);
     this.laender = countries;
