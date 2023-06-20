@@ -260,6 +260,7 @@ export class ObjektSuchenComponent {
 
   /**
    * Adds a new person to the existing persons list
+   * @ignore
    */
   addNewPerson(): boolean {
     const person = this.getNewAddedPerson();
@@ -307,7 +308,6 @@ export class ObjektSuchenComponent {
    * @param isOpen Der momentane Anzeigestatus des Wizards
    */
   onWizardClose(isOpen: boolean): void {
-    console.log('gi');
     if (!isOpen) {
       resetPerson(this.person);
       this.resetAddPersonForms();

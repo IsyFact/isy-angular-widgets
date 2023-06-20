@@ -23,7 +23,6 @@ import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
 
 
-/* eslint-disable-next-line @typescript-eslint/no-magic-numbers */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -262,15 +261,6 @@ describe('InputCharComponent', () => {
       (component as any).group = group;
       component.resetGroupSelection();
       expect(group.reset).toHaveBeenCalled();
-    });
-
-    it('should check the onDialogClose function to have been called', () => {
-      const charPreview = jasmine.createSpyObj('charPreview', ['reset']);
-      (component as any).charPreview = charPreview;
-      const allChars = jasmine.createSpyObj('allChars', ['onAllSelection']);
-      (component as any).allChars = allChars;
-      component.onDialogClose();
-      expect(charPreview.reset).toHaveBeenCalledBefore(allChars.onAllSelection);
     });
 
     it('should check the onDialogClose function to have been called', () => {
