@@ -113,6 +113,8 @@ export class ObjektSuchenComponent {
 
   savedSuccessfully: boolean = false;
 
+  displayProgressSpinner = false;
+
   constructor(
     public personService: PersonenService,
     private router: Router,
@@ -255,7 +257,11 @@ export class ObjektSuchenComponent {
    * Is used for find persons based on their properties
    */
   findPerson(): void {
-    this.personen$ = (this.person.id !== '') ? this.personService.findPersonById(this.person.id) : this.personService.findPersonenByParameters(this.person);
+    this.displayProgressSpinner = true;
+    setTimeout(() => {
+      this.personen$ = (this.person.id !== '') ? this.personService.findPersonById(this.person.id) : this.personService.findPersonenByParameters(this.person);
+      this.displayProgressSpinner = false;
+    }, 3000);
   }
 
   /**
