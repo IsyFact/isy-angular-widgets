@@ -260,7 +260,6 @@ export class ObjektSuchenComponent {
 
   /**
    * Adds a new person to the existing persons list
-   * @ignore
    */
   addNewPerson(): boolean {
     const person = this.getNewAddedPerson();

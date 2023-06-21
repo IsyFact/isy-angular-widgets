@@ -15,13 +15,13 @@ import {WizardDirective} from '../../directives/wizard.directive';
 
 /**
  * The width of the wizard of not otherwise specified by the user.
- * @ignore
+ * @internal
  */
 const defaultWidth = 50;
 
 /**
  * The height of the wizard of not otherwise specified by the user.
- * @ignore
+ * @internal
  */
 const defaultHeight = 30;
 
