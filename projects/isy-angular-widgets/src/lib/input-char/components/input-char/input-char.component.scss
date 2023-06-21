@@ -35,3 +35,7 @@
   border: 0;
   padding: 0
 }
+
+::ng-deep.p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
+  overflow: hidden;
+}

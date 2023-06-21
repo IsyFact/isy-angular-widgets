@@ -31,13 +31,17 @@ import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wi
 import {PanelModule} from 'primeng/panel';
 import {NotificationService} from '../../shared/services/notification.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {CharPickerComponent} from './pages/char-picker/char-picker.component';
+import {InputCharModule} from "../../../../../isy-angular-widgets/src/lib/input-char/input-char.module";
+
 
 @NgModule({
   declarations: [
     ResultListComponent,
     ObjektSuchenComponent,
     ObjektAnzeigenComponent,
-    PersoenlicheInformationenComponent
+    PersoenlicheInformationenComponent,
+    CharPickerComponent
   ],
   exports: [
     ResultListComponent,
@@ -69,7 +73,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     ToastModule,
     WizardModule,
     PanelModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    InputCharModule
   ],
   providers: [
     NotificationService
