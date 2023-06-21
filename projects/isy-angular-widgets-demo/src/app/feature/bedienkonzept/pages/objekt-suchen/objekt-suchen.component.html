@@ -106,13 +106,9 @@
                   [selectedObject]="selectedPerson"
                   (edit)="editSelectedPerson($event)"
                   (create)="openAddNewObjectDialog()"
+                  [loading]="tbLoadingStatus"
 >
 </demo-result-list>
-
-<!-- The progress spinner appears when clicking on "Suchen" -->
-<div class="grid justify-content-center">
-  <p-progressSpinner *ngIf="displayProgressSpinner"></p-progressSpinner>
-</div>
 
 <p-dialog [header]="'Ausgewähltes Objekt bearbeiten'"
           [(visible)]="openEditForm"

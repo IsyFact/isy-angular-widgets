@@ -113,7 +113,7 @@ export class ObjektSuchenComponent {
 
   savedSuccessfully: boolean = false;
 
-  displayProgressSpinner = false;
+  tbLoadingStatus = false;
 
   constructor(
     public personService: PersonenService,
@@ -257,10 +257,10 @@ export class ObjektSuchenComponent {
    * Is used for find persons based on their properties
    */
   findPerson(): void {
-    this.displayProgressSpinner = true;
+    this.tbLoadingStatus = true;
     setTimeout(() => {
       this.personen$ = (this.person.id !== '') ? this.personService.findPersonById(this.person.id) : this.personService.findPersonenByParameters(this.person);
-      this.displayProgressSpinner = false;
+      this.tbLoadingStatus = false;
     }, 3000);
   }
 
