@@ -1,3 +1,8 @@
+<!-- The progress spinner appears when clicking on "Suchen" -->
+<div class="grid justify-content-center">
+  <p-progressSpinner *ngIf="displayProgressSpinner"></p-progressSpinner>
+</div>
+
 <p-panel styleClass="isy-demo-app-result-panel" [header]="'Ergebnisliste (' + personen.length + ')'" [toggleable]="true"
          iconPos="start">
   <p-table #dt1
@@ -5,6 +10,7 @@
            [globalFilterFields]="['name','representative.name','status']"
            selectionMode="single"
            [(selection)]="selectedObject"
+           [loading]="loading"
   >
     <ng-template pTemplate="caption">
       <p-button label="Objekt anlegen"

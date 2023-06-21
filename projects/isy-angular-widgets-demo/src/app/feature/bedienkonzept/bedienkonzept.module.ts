@@ -30,6 +30,7 @@ import {ToastModule} from 'primeng/toast';
 import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
 import {PanelModule} from 'primeng/panel';
 import {NotificationService} from '../../shared/services/notification.service';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {NotificationService} from '../../shared/services/notification.service';
     RippleModule,
     ToastModule,
     WizardModule,
-    PanelModule
+    PanelModule,
+    ProgressSpinnerModule
   ],
   providers: [
     NotificationService
