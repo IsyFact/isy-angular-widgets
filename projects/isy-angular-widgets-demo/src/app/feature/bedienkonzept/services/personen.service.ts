@@ -202,6 +202,8 @@ export class PersonenService {
   }
 
   rng(): number {
-    return Math.floor(Math.random() * Math.floor(this.maxEntries));
+    const crypto = window.crypto;
+    return (crypto.getRandomValues(new Uint32Array(1)))[0]%this.maxEntries
   }
 }
+
