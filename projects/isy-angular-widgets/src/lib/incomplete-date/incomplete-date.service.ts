@@ -88,7 +88,7 @@ export class IncompleteDateService {
       // determine the format used by the incomplete date, for example 00-MM-YYYY
       const usedDateFormat = moment(date, this.incompleteDateFormats).creationData().format as string;
       // remove [ and ] around X since they were only used for moment()
-      const usedDateFormatNoEscapes = usedDateFormat.replace(/[]/g, '');
+      const usedDateFormatNoEscapes = usedDateFormat.replace(/[\[\]]/g, '');
 
       // extract year, date and month from the date string
       if (date.match(this.separators)) { // contains seperators
