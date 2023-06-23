@@ -2,9 +2,9 @@
   <p-table [value]="newSachverhalteListe" responsiveLayout="scroll">
     <ng-template pTemplate="header">
       <tr>
-        <th>Sachverhalt</th>
-        <th>Status</th>
-        <th>Löschen</th>
+        <th scope="col">Sachverhalt</th>
+        <th scope="col">Status</th>
+        <th scope="col">Löschen</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-sachverhalt>

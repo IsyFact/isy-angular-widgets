@@ -32,7 +32,7 @@ export class IncompleteDateService {
     'D-[X]-YYYY', '[X]-M-YYYY',
     'YYYY-[XX]-[XX]', 'YYYY-[XX]-DD', 'YYYY-MM-[XX]'];
 
-  private readonly separators = new RegExp(/[.,\-\/]/, 'g');
+  private readonly separators = new RegExp(/[.,\-/]/, 'g');
 
   /**
    * If the new date is a valid or incomplete date it should be transformed
@@ -75,7 +75,7 @@ export class IncompleteDateService {
    * @returns The transformed date in the given format
    */
   private getIncompleteDate(date: string, format: string, dateInPastConstraint = false): string {
-    if (date && moment(date, this.incompleteDateFormats).isValid() && !(RegExp('[a-zA-WY-Z]').test(date))) {
+    if (date && moment(date, this.incompleteDateFormats).isValid() && !(/[a-zA-WY-Z]/.test(date))) {
       // if an 'X' is found in the input, 'X' will be used as a placeholder for unknown days and months instead of '0'
       const usesXForUnknown = date.includes('X');
 
@@ -125,7 +125,7 @@ export class IncompleteDateService {
       // date should be in the past, get century cut-off year and adjust
       if (dateInPastConstraint && year) {
         const currentYear4digits = +new Date().toISOString().split('T')[0].split('-')[0];
-        const currentCentury = currentYear4digits.toString().substr(0, 2);
+        const currentCentury = currentYear4digits.toString().substring(0, 2);
 
         if (year.length === 4 && +year > currentYear4digits) {
           // e.g. the year "99" in a dateInPast setting is 1999 instead of 2099
@@ -148,15 +148,15 @@ export class IncompleteDateService {
     let transformedDate = format;
 
     const yearForReplacement = this.getFormattedYear(year, format);
-    transformedDate = transformedDate.replace(RegExp('[Yy]+'), yearForReplacement);
+    transformedDate = transformedDate.replace(/[Yy]+/, yearForReplacement);
 
 
     const monthForReplacement = this.getFormattedMonth(month, format, useXForUnknown);
-    transformedDate = transformedDate.replace(RegExp('[Mm]+'), monthForReplacement);
+    transformedDate = transformedDate.replace(/[Mm]+/, monthForReplacement);
 
 
     const dayForReplacement = this.getFormattedDay(day, format, useXForUnknown);
-    transformedDate = transformedDate.replace(RegExp('[Dd]+'), dayForReplacement);
+    transformedDate = transformedDate.replace(/[Dd]+/, dayForReplacement);
 
 
     return transformedDate;
@@ -179,7 +179,7 @@ export class IncompleteDateService {
     if (!format) {
       format = this.defaultFormat;
     }
-    const match = RegExp('[Dd]+').exec(format);
+    const match = /[Dd]+/.exec(format);
     if (!match) {
       throw new Error(
         'Es konnte kein \'D\' oder \'d\' im Format gefunden werden.'
@@ -219,7 +219,7 @@ export class IncompleteDateService {
     if (!format) {
       format = this.defaultFormat;
     }
-    const match = RegExp('[Mm]+').exec(format);
+    const match = /[Mm]+/.exec(format);
     if (!match) {
       throw new Error(
         'Es konnte kein \'M\' oder \'m\' im Format gefunden werden.'
@@ -259,7 +259,7 @@ export class IncompleteDateService {
     if (!format) {
       format = this.defaultFormat;
     }
-    const match = RegExp('[Yy]+').exec(format);
+    const match = /[Yy]+/.exec(format);
     if (!match) {
       throw new Error(
         'Es konnte kein \'M\' oder \'m\' im Format gefunden werden.'

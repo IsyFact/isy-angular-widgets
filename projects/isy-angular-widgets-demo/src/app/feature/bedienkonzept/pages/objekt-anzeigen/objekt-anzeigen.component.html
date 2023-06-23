@@ -128,8 +128,8 @@
     <p-table [value]="person.sachverhalte.liste" responsiveLayout="scroll">
       <ng-template pTemplate="header">
         <tr>
-          <th>Sachverhalt</th>
-          <th>Status</th>
+          <th scope="col">Sachverhalt</th>
+          <th scope="col">Status</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-sachverhalt>

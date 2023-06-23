@@ -80,9 +80,12 @@ describe('InputCharPreviewCharListComponent', () => {
     const characterSelectButtons = fixture.nativeElement.querySelectorAll('.char-select-button') as HTMLElement [];
     expect(characterSelectButtons.length).toEqual(options.length);
 
-    const randomIndex = Math.floor(Math.random() * options.length);
+    const crypto = window.crypto;
+    const randomIndex =  (crypto.getRandomValues(new Uint32Array(1)))[0]%options.length
+
     characterSelectButtons[randomIndex].click();
 
+    console.log(`Selected Value: ${component.selectedValue}`)
     expect(component.selectedValue.toString()).toEqual(options[randomIndex].zeichen);
     expect(charSelection).toHaveBeenCalledWith(options[randomIndex]);
   });

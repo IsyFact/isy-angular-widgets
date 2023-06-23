@@ -93,14 +93,14 @@ describe(('IsyIncompleteDate'), () => {
     });
 
     it('transforms a valid date in format DD-MM-YY correctly to the output format with dateInPastConstraint if date is today', () => {
-      const todayFormat = `${todayIsoDay}-${todayIsoMonth}-${todayIsoYear.substr(2)}`;
+      const todayFormat = `${todayIsoDay}-${todayIsoMonth}-${todayIsoYear.substring(2)}`;
 
       expect(sut.transformValue(todayFormat, format, true)).toBe(todayIso);
     });
 
     it('transforms a valid date in format DD-MM-YY correctly to the output format with dateInPastConstraint if date is tomorrow', () => {
       const tomorrowInPreviousCentury = `${+tomorrowIsoYear - 100}-${tomorrowIsoMonth}-${tomorrowIsoDay}`;
-      const tomorrowFormat = `${tomorrowIsoDay}-${tomorrowIsoMonth}-${tomorrowIsoYear.substr(2)}`;
+      const tomorrowFormat = `${tomorrowIsoDay}-${tomorrowIsoMonth}-${tomorrowIsoYear.substring(2)}`;
 
       expect(sut.transformValue(tomorrowFormat, format, true)).toBe(tomorrowInPreviousCentury);
     });
