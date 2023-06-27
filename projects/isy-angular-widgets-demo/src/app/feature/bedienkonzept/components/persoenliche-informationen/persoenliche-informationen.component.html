@@ -1,11 +1,12 @@
 <div [formGroup]="form">
-  <div class="p-fluid formgrid grid">
+  <div class="formgrid grid">
     <div class="col align-content-end">
       <div class="field">
         <label id="nachnameLabel" for="Nachname">Nachname*</label>
         <input
           id="Nachname"
           type="text"
+          class="stretch"
           pInputText
           [formControlName]="'nachname'"
         >
@@ -15,6 +16,7 @@
         <input
           id="Vorname"
           type="text"
+          class="stretch"
           pInputText
           [formControlName]="'vorname'"
         >
@@ -24,6 +26,7 @@
         <input
           id="Geschlecht"
           type="text"
+          class="stretch"
           pInputText
           [formControlName]="'geschlecht'"
         >

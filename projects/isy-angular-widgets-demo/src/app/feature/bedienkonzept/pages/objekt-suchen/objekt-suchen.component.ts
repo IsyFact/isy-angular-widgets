@@ -109,11 +109,22 @@ export class ObjektSuchenComponent {
    */
   allowSave: boolean = false;
 
+  /**
+   * The boolean that decides if the X icon inside the popup dialog has to be displayed
+   */
   displayX: boolean = true;
 
+  /**
+   * The boolean that decides if the save action terminated successfully
+   */
   savedSuccessfully: boolean = false;
 
   tbLoadingStatus = false;
+
+  /**
+   * Used as CSS style for stretching HTML Elements
+   */
+  stretch = { width: '100%' };
 
   constructor(
     public personService: PersonenService,
