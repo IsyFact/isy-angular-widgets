@@ -36,6 +36,9 @@
   padding: 0
 }
 
+// Using InputChar inside a primeNG panel container with toggleapple option causes a display issue in the InputChar dialog
+// Base and group character are displayed at the same time and overlap each other
+// The issue is fixed by overwriting the CSS style below
 ::ng-deep.p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
   overflow: hidden;
 }

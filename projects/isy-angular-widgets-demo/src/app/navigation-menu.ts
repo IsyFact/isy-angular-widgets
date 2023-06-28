@@ -23,10 +23,6 @@ export const navigationMenu = [
       {
         label: 'Objekt anzeigen',
         routerLink: 'bedienkonzept/objekt-anzeigen/42'
-      },
-      {
-        label: 'Char Picker',
-        routerLink: 'bedienkonzept/char-picker/43'
       }
     ]
   }
