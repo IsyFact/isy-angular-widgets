@@ -1,6 +1,14 @@
 {
   "name": "@isyfact/isy-angular-widgets",
   "version": "0.8.0",
+  "description": "contains specific widgets for the development of apps in the public sector and applies the default Isyfact Theme.",
+  "author": {
+    "name": "IsyFact-Team",
+    "email": "isyfact@bva.bund.de",
+    "url": "https://www.bva.bund.de"
+  },
+  "license": "Apache-2.0",
+  "homepage": "http://isyfact.de",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

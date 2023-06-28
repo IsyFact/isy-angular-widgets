@@ -22,7 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
 
-
+const crypto = window.crypto
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -82,7 +82,7 @@ describe('InputCharComponent', () => {
       component = fixture.componentInstance;
       component.displayCharPicker = false;
       sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
-      randomIndex = Math.floor(Math.random() * sonderzeichenListe.length);
+      randomIndex =   (crypto.getRandomValues(new Uint32Array(1)))[0]%sonderzeichenListe.length;
       fixture.detectChanges();
     });
 

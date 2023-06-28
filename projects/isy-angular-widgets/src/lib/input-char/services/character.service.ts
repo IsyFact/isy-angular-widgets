@@ -30,7 +30,10 @@ export class CharacterService {
   }
 
   getGrundZeichenAsList(liste: Zeichenobjekt[]): string [] {
-    return [...new Set(liste.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen).sort())];
+    return [...new Set(
+      liste.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen)
+      .sort((a,b) => a.localeCompare(b)))
+    ];
   }
 
   convertSchriftZeichengruppeToSchriftzeichen(schriftzeichengruppe: Schriftzeichengruppe): SchriftZeichen {
