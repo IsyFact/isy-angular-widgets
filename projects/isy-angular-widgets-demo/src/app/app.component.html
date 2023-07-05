@@ -9,6 +9,18 @@
   [userInfo]="userInfo"
 >
   <div Titelzeile class="isy-demo-titelzeile">
+    <!-- Language switcher -->
+    <div class="grid justify-content-end">
+      <select class="lang-switch" #langSelect (change)="translate.use(langSelect.value)">
+        <option
+          *ngFor="let lang of translate.getLangs()"
+          [value]="lang"
+          [selected]="lang === translate.currentLang"
+        >
+          {{ lang }}
+        </option>
+      </select>
+    </div>
   </div>
   <div Linksnavigation>
     <p-panelMenu [model]="sidebarItems"></p-panelMenu>
