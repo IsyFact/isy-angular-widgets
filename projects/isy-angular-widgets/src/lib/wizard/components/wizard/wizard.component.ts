@@ -12,6 +12,7 @@ import {
 import {MenuItem} from 'primeng/api';
 import {StepperComponent} from '../stepper/stepper.component';
 import {WizardDirective} from '../../directives/wizard.directive';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * The width of the wizard of not otherwise specified by the user.
@@ -100,22 +101,22 @@ export class WizardComponent implements OnInit, AfterContentInit {
   /**
    * The text of the back button
    */
-  @Input() labelBackButton = 'Zurück';
+  @Input() labelBackButton = this.translate.instant('isyAngularWidgets.labelBackButton');
 
   /**
    * The text of the next button
    */
-  @Input() labelNextButton = 'Weiter';
+  @Input() labelNextButton = this.translate.instant('isyAngularWidgets.labelNextButton');
 
   /**
    * The text of the save button
    */
-  @Input() labelSaveButton = 'Speichern';
+  @Input() labelSaveButton = this.translate.instant('isyAngularWidgets.labelSaveButton');
 
   /**
    * The text of the close button
    */
-  @Input() labelCloseButton = 'Schließen';
+  @Input() labelCloseButton = this.translate.instant('isyAngularWidgets.labelCloseButton');
 
   /**
    * Controls whether the next button is enabled which is to be controlled from the outside (e.g. for validation)
@@ -136,6 +137,8 @@ export class WizardComponent implements OnInit, AfterContentInit {
    * Stores the items of the wizard
    */
   wizardItems: MenuItem[] = [];
+
+  constructor(public translate: TranslateService) {}
 
   /**
    * Fired on initialization

@@ -1,7 +1,17 @@
 {
     "isyAngularWidgets": {
         "de": "Deutsch",
-        "en": "Englisch"
+        "en": "Englisch",
+        "attr-isy-hauptfenster-anbieterlogo-bereichs": "Logo des Anbieters der Anwendungslandschaft",
+        "attr-isy-isy-hauptfenster-nutzerbereich": "Logo der Anwendungslandschaft",
+        "isy-hauptfenster-logout-button": "Abmelden",
+        "header-schriftZeichenGruppen": "Gruppen",
+        "header-grundZeichenListe": "Basis",
+        "insert-button": "Einfügen",
+        "labelBackButton": "Zurück",
+        "labelNextButton": "Weiter",
+        "labelSaveButton": "Speichern",
+        "labelCloseButton": "Schließen"
     },
     "primeng": {
         "startsWith": "Beginnt mit",

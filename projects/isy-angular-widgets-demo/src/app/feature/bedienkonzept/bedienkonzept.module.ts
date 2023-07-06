@@ -31,6 +31,15 @@ import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wi
 import {PanelModule} from 'primeng/panel';
 import {NotificationService} from '../../shared/services/notification.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {InputCharModule} from "../../../../../isy-angular-widgets/src/lib/input-char/input-char.module";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -69,7 +78,16 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     ToastModule,
     WizardModule,
     PanelModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    InputCharModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+        }
+    })
   ],
   providers: [
     NotificationService

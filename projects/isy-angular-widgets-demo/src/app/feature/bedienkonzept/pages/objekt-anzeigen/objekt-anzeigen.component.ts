@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Person} from '../../../../shared/model/person';
 import {ActivatedRoute} from '@angular/router';
 import {PersonenService} from '../../services/personen.service';
+import {TranslateService} from '@ngx-translate/core';
 
 /*
 * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -51,10 +52,14 @@ export class ObjektAnzeigenComponent implements OnInit {
   newSicherheitsstufe = 0;
   newEinreisedatum = '';
 
-  constructor(private route: ActivatedRoute, private personService: PersonenService) {
+  constructor(private route: ActivatedRoute, private personService: PersonenService, public translate: TranslateService) {
   }
 
   ngOnInit(): void {
+    // Get language from local Storage and use it for translation
+    const localLang = localStorage.getItem("lang") as string;
+    this.translate.use(localLang);
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.personService.findPersonById(id).subscribe(person => {

@@ -4,13 +4,13 @@ import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
 import {addPackageToPackageJson, getPackageVersionFromPackageJson} from './package-config';
 
 /**
- * Add translation file to the workspace.
+ * Add translation file and dependencies to new CLI project.
  */
 export function addTranslation(): Rule {
   return (tree: Tree, context: SchematicContext) => {
     if (getPackageVersionFromPackageJson(tree, '@angular/cdk') === null) {
 
-      // Add dependencies in new CLI projects.
+      // Add dependencies to new CLI project.
       addPackageToPackageJson(tree, '@ngx-translate/core', `^14.0.0`);
       addPackageToPackageJson(tree, '@ngx-translate/http-loader', `^7.0.0`);
 
@@ -19,6 +19,7 @@ export function addTranslation(): Rule {
       context.addTask(new NodePackageInstallTask());
     }
 
+    // Add translation to new CLI project
     addTranslationFile(context, tree, 'de.json');
     addTranslationFile(context, tree, 'en.json');
   };

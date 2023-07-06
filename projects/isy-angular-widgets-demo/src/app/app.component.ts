@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title!: string;
   subTitle!: string;
   subscription: Subscription;
+  localLang!: string;
   
   constructor(
     private router: Router,
@@ -45,12 +46,19 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription = this.translate.stream('primeng').subscribe(data => {
       this.primeNGConfig.setTranslation(data);
     });
-
   }  
+
+  // Change language and save it in local storage
+  changeLang(lang: string) {
+    localStorage.setItem('lang', lang);
+    window.location.reload();
+  }
 
   ngOnInit(): void {
     this.securityService.setRoles(this.userInfoPublicService.getUserInfo());
     this.securityService.setPermissions(data);
+    this.localLang = localStorage.getItem('lang') as string;
+    this.translate.use(this.localLang);
   }
 
   ngOnDestroy() {

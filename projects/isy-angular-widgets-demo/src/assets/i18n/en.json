@@ -1,8 +1,17 @@
 {
     "isyAngularWidgets": {
-        "title": "Title test",
         "de": "German",
-        "en": "English"
+        "en": "English",
+        "attr-isy-hauptfenster-anbieterlogo-bereich": "Logo of the application landscape provider",
+        "attr-isy-isy-hauptfenster-nutzerbereich": "Logo of the application landscape",
+        "isy-hauptfenster-logout-button": "Logout",
+        "header-schriftZeichenGruppen": "Groups",
+        "header-grundZeichenListe": "Base",
+        "insert-button": "Insert",
+        "labelBackButton": "Back",
+        "labelNextButton": "Next",
+        "labelSaveButton": "Save",
+        "labelCloseButton": "Close"
     },
     "primeng": {
         "startsWith": "Starts with",
