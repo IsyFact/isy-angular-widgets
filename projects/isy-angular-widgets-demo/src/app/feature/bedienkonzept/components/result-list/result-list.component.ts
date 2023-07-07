@@ -11,7 +11,7 @@ export class ResultListComponent {
   @Input() personen: Person[] = [];
   @Input() selectedObject?: Person;
   @Input() loading!: boolean;
-  
+
 
   /**
    * An event emitter that informs about the creation of a new data record
@@ -26,8 +26,6 @@ export class ResultListComponent {
 
   readonly laender: string[];
 
-  displayProgressSpinner = false;
-
   constructor() {
     this.laender = countries;
   }
@@ -37,10 +35,6 @@ export class ResultListComponent {
   }
 
   emitCreateAction(): void {
-    this.displayProgressSpinner = true;
-    setTimeout(() => {
       this.create.emit();
-      this.displayProgressSpinner = false;
-    }, 3000);
   }
 }

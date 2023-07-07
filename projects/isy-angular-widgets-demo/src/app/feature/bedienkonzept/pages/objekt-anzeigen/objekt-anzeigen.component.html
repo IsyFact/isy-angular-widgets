@@ -1,7 +1,13 @@
-<p-panel header="Basisdaten" [toggleable]="true" iconPos="start">
+<p-panel
+  iconPos="start"
+  [header]="('isyAngularWidgetsDemo.displayObject.masterDataHeader' | translate)"
+  [toggleable]="true"
+>
   <div class="grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label for="basis-nachname">Nachname</label>
+      <label for="basis-nachname">
+        {{('isyAngularWidgetsDemo.labels.lastName' | translate)}}
+      </label>
     </div>
     <div class="col">
       <input
@@ -10,11 +16,13 @@
         type="text"
         pInputText
         disabled
-        [(ngModel)]="person.personalien.nachname"
+        [(ngModel)]="person.personalData.lastName"
       >
     </div>
     <div class="col-1 text-right align-self-center">
-      <label for="basis-vorname">Vorname </label>
+      <label for="basis-vorname">
+        {{('isyAngularWidgetsDemo.labels.firstName' | translate)}}
+      </label>
     </div>
     <div class="col">
       <input
@@ -22,11 +30,13 @@
         class="w-full"
         type="text"
         pInputText
-        disabled [(ngModel)]="person.personalien.vorname"
+        disabled [(ngModel)]="person.personalData.firstName"
       >
     </div>
     <div class="col-1 text-right align-self-center">
-      <label for="basis-geburtsdatum">Geburtsdatum</label>
+      <label for="basis-geburtsdatum">
+        {{('isyAngularWidgetsDemo.labels.birthDate' | translate)}}
+      </label>
     </div>
     <div class="col">
       <input
@@ -35,270 +45,306 @@
         type="text"
         pInputText
         disabled
-        [(ngModel)]="person.personalien.geburtsdatum"
+        [(ngModel)]="person.personalData.birthDate"
       >
     </div>
   </div>
 </p-panel>
 
-<p-tabView id="tabview" (onChange)="editable = false">
-  <p-tabPanel id="panelPersonalien" header="Personalien">
-    <div class="grid m-0">
-      <div class="col-1 text-right align-self-center">
-        <label for="nachname">Nachname</label>
-      </div>
-      <div class="col">
-        <input
-          id="nachname"
-          class="w-full"
-          type="text"
-          pInputText
-          [(ngModel)]="newNachname"
-          #nachname="ngModel"
-          [disabled]="!editable"
-        >
-      </div>
-      <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="geburtsname">Geburtsname</label>
-      </div>
-      <div class="col">
-        <input id="geburtsname"
-               class="w-full"
-               type="text"
-               pInputText
-               [(ngModel)]="newGeburtsname"
-               [disabled]="!editable"
-        >
-      </div>
-      <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="Geburtsname">Geburtsort</label>
-      </div>
-      <div class="col">
-        <input
-          id="geburtsort"
-          class="w-full"
-          type="text"
-          pInputText
-          [(ngModel)]="newGeburtsort"
-          [disabled]="!editable"
-        >
-      </div>
-    </div>
-
-    <div class="grid m-0">
-      <div class="col-1 text-right align-self-center">
-        <label for="vorname">Vorname</label>
-      </div>
-      <div class="col">
-        <input id="vorname"
-               class="w-full"
-               required minlength="2"
-               type="text"
-               pInputText
-               [disabled]="!editable"
-               [(ngModel)]="newVorname"
-               #vorname="ngModel"
-        >
-      </div>
-      <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="geschlecht">Geschlecht</label>
-      </div>
-      <div class="col">
-        <p-dropdown
-          id="geschlecht"
-          [(ngModel)]="newGeschlecht"
-          [filter]="true"
-          [filterBy]="'name'"
-          [optionLabel]="'name'"
-          [optionValue]="'name'"
-          [disabled]="!editable"
-          [options]="[{name: 'Männlich'}, {name: 'Weiblich'}, {name: 'Divers'}, {name: 'keine Angaben'}]"
-        ></p-dropdown>
-      </div>
-      <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="Geburtsdatum">Geburtsdatum</label>
-      </div>
-      <div class="col">
-        <p-calendar
-          id="Geburtsdatum"
-          dateFormat="dd.mm.yy"
-          [(ngModel)]="newGeburtsdatum"
-          [disabled]="!editable"
-          [showIcon]="true"
-        >
-        </p-calendar>
-      </div>
-    </div>
-
-    <div class="grid m-0">
-      <div class="col-1 text-right align-self-center">
-        <label for="staatsangehoerigkeit">Staatsangehörigkeit</label>
-      </div>
-      <div class="col">
-        <input
-          id="staatsangehoerigkeit"
-          class="w-full"
-          type="text" pInputText
-          [disabled]="!editable"
-          [(ngModel)]="newStaatsangehoerigkeit"
-        >
-      </div>
-      <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="telefonnummer">Telefonnummer</label>
-      </div>
-      <div class="col">
-        <p-inputMask
-          id="telefonnummer"
-          type="text"
-          [disabled]="!editable"
-          [(ngModel)]="newTelefonnummer"
-          [style]="" mask="+99 9999 / 9999999"
-        >
-        </p-inputMask>
-      </div>
-      <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="einreisedatum">Einreisedatum</label>
-      </div>
-      <div class="col">
-        <isy-incomplete-date
-          id="einreisedatum"
-          [(ngModel)]="newEinreisedatum"
-          [disabled]="!editable"
-        >
-        </isy-incomplete-date>
-      </div>
-    </div>
-
-    <div class="grid m-0 mt-5">
-      <div class="col">
-        <div class="field field-checkbox">
-          <p-inputSwitch id="showSecretFields" [(ngModel)]="showSecretFields"></p-inputSwitch>
-          <label for="showSecretFields">Zeige geheime Felder </label>
-        </div>
-      </div>
-    </div>
-
-    <div id="divShowSecretFields" *ngIf="showSecretFields">
+<p-tabView id="tabview">
+  <p-tabPanel
+    id="panelPersonalien"
+    [header]="('isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate)"
+  >
+    <form [formGroup]="personalInfoForm">
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label for="ausweispflichtig">Ausweispflichtig</label>
+          <label for="lastName">
+            {{('isyAngularWidgetsDemo.labels.lastName' | translate)}}
+          </label>
         </div>
-        <div class="col-1">
-          <p-checkbox
-            id="ausweispflichtig"
-            [(ngModel)]="newAusweispflichtig"
-            [disabled]="!editable"
-            [binary]="true"
+        <div class="col">
+          <input
+            id="lastName"
+            formControlName="lastName"
+            class="w-full"
+            type="text"
+            pInputText
           >
-          </p-checkbox>
+          <small
+            class="p-error block"
+            *ngIf="personalInfoForm.controls['lastName'].invalid"
+          >
+            {{('isyAngularWidgetsDemo.messages.requiredMessage' | translate)}}
+          </small>
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="sicherheitsstufe">Sicherheitsstufe</label>
+          <label class="align-content-end" for="birthName">
+            {{('isyAngularWidgetsDemo.labels.birthName' | translate)}}
+          </label>
         </div>
-        <div class="col-5">
-          <p-inputNumber id="sicherheitsstufe"
-                         [(ngModel)]="newSicherheitsstufe"
-                         [showButtons]="true"
-                         [min]="0" [max]="9"
-                         [disabled]="!editable"
+        <div class="col">
+          <input id="birthName"
+                 formControlName="birthName"
+                 class="w-full"
+                 type="text"
+                 pInputText
           >
-          </p-inputNumber>
         </div>
-        <div class="col-6">
+        <div class="col-1 text-right align-self-center">
+          <label class="align-content-end" for="birthplace">
+            {{('isyAngularWidgetsDemo.labels.birthplace' | translate)}}
+          </label>
+        </div>
+        <div class="col">
+          <input
+            id="birthplace"
+            formControlName="birthplace"
+            class="w-full"
+            type="text"
+            pInputText
+          >
         </div>
       </div>
-
-
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label for="geheimdienstnotizen">Geheimdienstnotizen</label>
+          <label for="firstName">
+            {{('isyAngularWidgetsDemo.labels.firstName' | translate)}}
+          </label>
         </div>
-        <div class="col-5">
+        <div class="col">
+          <input id="firstName"
+                 formControlName="firstName"
+                 class="w-full"
+                 required minlength="2"
+                 type="text"
+                 pInputText
+          >
+          <small
+            class="p-error block"
+            *ngIf="personalInfoForm.controls['firstName'].invalid"
+          >
+            {{('isyAngularWidgetsDemo.messages.requiredMessage' | translate)}}
+          </small>
+        </div>
+        <div class="col-1 text-right align-self-center">
+          <label class="align-content-end" for="gender">
+            {{('isyAngularWidgetsDemo.labels.gender' | translate)}}
+          </label>
+        </div>
+        <div class="col">
+          <p-dropdown
+            id="gender"
+            formControlName="gender"
+            [filter]="true"
+            [filterBy]="'name'"
+            [optionLabel]="'name'"
+            [optionValue]="'name'"
+            [options]="[
+            {name: ('isyAngularWidgetsDemo.labels.optionMale' | translate)},
+            {name: ('isyAngularWidgetsDemo.labels.optionFemale' | translate)},
+            {name: ('isyAngularWidgetsDemo.labels.optionDivers' | translate)}
+          ]"
+          ></p-dropdown>
+        </div>
+        <div class="col-1 text-right align-self-center">
+          <label class="align-content-end" for="birthDate">
+            {{('isyAngularWidgetsDemo.labels.birthDate' | translate)}}
+          </label>
+        </div>
+        <div class="col">
+          <p-calendar
+            id="birthDate"
+            dateFormat="dd.mm.yy"
+            formControlName="birthDate"
+            [showIcon]="true"
+          >
+          </p-calendar>
+        </div>
+      </div>
+      <div class="grid m-0">
+        <div class="col-1 text-right align-self-center">
+          <label for="nationality">
+            {{('isyAngularWidgetsDemo.labels.nationality' | translate)}}
+          </label>
+        </div>
+        <div class="col">
+          <input
+            id="nationality"
+            formControlName="nationality"
+            class="w-full"
+            type="text" pInputText
+          >
+        </div>
+        <div class="col-1 text-right align-self-center">
+          <label class="align-content-end" for="phoneNumber">
+            {{('isyAngularWidgetsDemo.labels.phoneNumber' | translate)}}
+          </label>
+        </div>
+        <div class="col">
+          <p-inputMask
+            id="phoneNumber"
+            formControlName="phoneNumber"
+            type="text"
+            [style]="" mask="+99 9999 / 9999999"
+          >
+          </p-inputMask>
+        </div>
+        <div class="col-1 text-right align-self-center">
+          <label class="align-content-end" for="dateOfEntry">
+            {{('isyAngularWidgetsDemo.labels.dateOfEntry' | translate)}}
+          </label>
+        </div>
+        <div class="col">
+          <isy-incomplete-date
+            id="dateOfEntry"
+            formControlName="dateOfEntry"
+          >
+          </isy-incomplete-date>
+        </div>
+      </div>
+      <div class="grid m-0 mt-5">
+        <div class="col">
+          <div class="field field-checkbox">
+            <p-inputSwitch
+              id="showSecretFields"
+              (onChange)="showSecretFields = $event.checked"
+            ></p-inputSwitch>
+            <label for="showSecretFields">
+              {{('isyAngularWidgetsDemo.actions.showSecretFields' | translate)}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div id="divShowSecretFields" *ngIf="showSecretFields">
+        <div class="grid m-0">
+          <div class="col-1 text-right align-self-center">
+            <label for="idRequired">
+              {{('isyAngularWidgetsDemo.labels.idRequired' | translate)}}
+            </label>
+          </div>
+          <div class="col-1">
+            <p-checkbox
+              id="idRequired"
+              formControlName="idRequired"
+              [binary]="true"
+            >
+            </p-checkbox>
+          </div>
+          <div class="col-1 text-right align-self-center">
+            <label class="align-content-end" for="securityLevel">
+              {{('isyAngularWidgetsDemo.labels.securityLevel' | translate)}}
+            </label>
+          </div>
+          <div class="col-5">
+            <p-inputNumber
+              id="securityLevel"
+              formControlName="securityLevel"
+              [showButtons]="true"
+              [min]="0" [max]="9"
+            >
+            </p-inputNumber>
+          </div>
+          <div class="col-6">
+          </div>
+        </div>
+        <div class="grid m-0">
+          <div class="col-1 text-right align-self-center">
+            <label for="intelligenceNotes">
+              {{('isyAngularWidgetsDemo.labels.intelligenceNotes' | translate)}}
+            </label>
+          </div>
+          <div class="col-5">
           <textarea pInputTextarea
-                    id="geheimdienstnotizen"
+                    formControlName="intelligenceNotes"
+                    id="intelligenceNotes"
                     class="w-full"
                     [rows]="5"
-                    [(ngModel)]="newGeheimdienstnotizen"
-                    [disabled]="!editable"
           >
           </textarea>
-        </div>
-        <div class="col-6">
+          <small
+            class="p-error block"
+            *ngIf="personalInfoForm.controls['intelligenceNotes'].invalid"
+          >
+            {{('isyAngularWidgetsDemo.messages.maxLengthError' | translate: {numChars: intelligenceNotesMaxLength})}}
+          </small>
+          </div>
+          <div class="col-6">
+          </div>
         </div>
       </div>
-    </div>
+    </form>
 
     <div class="justify-content-center flex mt-3">
       <button pButton
-              *ngIf="!editable"
+              *ngIf="personalInfoForm.disabled"
               id="buttonEdit"
-              label="Bearbeiten"
               icon="pi pi-user-edit"
               iconPos="left"
-              (click)="editable = true"
+              [label]="('isyAngularWidgetsDemo.actions.edit' | translate)"
+              (click)="personalInfoForm.enable()"
       >
       </button>
-      <div id="divSaveCancel" *ngIf="editable" class="p-buttonset">
+      <div id="divSaveCancel" *ngIf="!personalInfoForm.disabled" class="p-buttonset">
         <button pButton
                 id="buttonSave"
-                label="Speichern"
                 icon="pi pi-save"
                 iconPos="left"
-                (click)="(vorname.valid && nachname.valid) ? savePersonalien() : showError = true"
+                [disabled]="!personalInfoForm.valid"
+                [label]="('isyAngularWidgetsDemo.actions.save' | translate)"
+                (click)="savePersonalien()"
         >
         </button>
         <button pButton
                 id="buttonCancel"
-                label="Abbrechen"
                 icon="pi pi-times"
                 class="p-button-outlined"
                 iconPos="left"
-                (click)="cancelEdit()"
+                [label]="('isyAngularWidgetsDemo.actions.cancel' | translate)"
+                (click)="this.personalInfoForm.disable();"
         >
         </button>
       </div>
     </div>
-    <p-dialog header="Es gibt Fehler in der Eingabe" [(visible)]="showError">
-      <div *ngIf="(nachname.errors?.required)">Es ist kein Nachname eingetragen.</div>
-      <div *ngIf="nachname.errors?.minlength && !nachname.errors?.required">Der Nachname muss
-        mindestens zwei Zeichen
-        lang sein.
-      </div>
-      <div *ngIf="(vorname.errors?.required)">Es ist kein Vorname eingetragen.</div>
-      <div *ngIf="vorname.errors?.minlength && !vorname.errors?.required">Der Vorname muss
-        mindestens zwei Zeichen
-        lang sein.
-      </div>
-    </p-dialog>
+
   </p-tabPanel>
 
-  <p-tabPanel id="panelSachverhalte" header="Sachverhalte">
-    <p-table [value]="person.sachverhalte.liste" responsiveLayout="scroll">
+  <p-tabPanel
+    id="panelSachverhalte"
+    [header]="('isyAngularWidgetsDemo.displayObject.tabFacts' | translate)"
+  >
+    <p-table [value]="person.facts" responsiveLayout="scroll">
       <ng-template pTemplate="caption">
-        <p-button label="Sachverhalt hinzufügen/bearbeiten"
-                  icon="pi pi-pencil"
-                  iconPos="left"
-                  (click)="editable = true"
+        <p-button
+          icon="pi pi-pencil"
+          iconPos="left"
+          [label]="('isyAngularWidgetsDemo.actions.addOrEditFact' | translate)"
         >
         </p-button>
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th scope="col">Sachverhalt</th>
-          <th scope="col">Status</th>
+          <th scope="col">
+            {{('isyAngularWidgetsDemo.labels.fact' | translate)}}
+          </th>
+          <th scope="col">
+            {{('isyAngularWidgetsDemo.labels.state' | translate)}}
+          </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-sachverhalt>
         <tr>
           <td>{{sachverhalt}}</td>
-          <td>Gelöst</td>
+          <td>
+            {{('isyAngularWidgetsDemo.labels.solved' | translate)}}
+          </td>
         </tr>
       </ng-template>
     </p-table>
     <demo-dialog-sachverhalte-bearbeiten
-      [(visible)]="editable"
       [person]="person"
     >
     </demo-dialog-sachverhalte-bearbeiten>
   </p-tabPanel>
 </p-tabView>
+<p-toast></p-toast>

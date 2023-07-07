@@ -146,7 +146,7 @@ describe('PersonBearbeitenComponent', () => {
     fixture.detectChanges();
     clickButton('#buttonCancel');
     expect(loadPersonSpy).toHaveBeenCalled();
-    expect(component.person.personalien.nachname).toEqual('Mustermann');
+    expect(component.person.personalData.lastName).toEqual('Mustermann');
   });
 
   it('expect editable to be false on tab view click', () => {

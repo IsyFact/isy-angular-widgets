@@ -14,17 +14,13 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SecurityModule} from '../../../isy-angular-widgets/src/lib/security/security.module';
 import {PanelMenuModule} from 'primeng/panelmenu';
-
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-// AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
+import {AccordionModule} from "primeng/accordion";
+import {DropdownModule} from "primeng/dropdown";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 @NgModule({
   declarations: [
@@ -44,13 +40,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     RadioButtonModule,
     FormsModule,
+    AccordionModule,
+    DropdownModule,
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        }
-    })
+      loader: {
+        provide: TranslateLoader,
+        useFactory: function HttpLoaderFactory(http: HttpClient) {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [AuthGuard, UserInfoPublicService, {provide: UserInfoService, useClass: UserInfoPublicService}, SecurityService],
   bootstrap: [AppComponent]

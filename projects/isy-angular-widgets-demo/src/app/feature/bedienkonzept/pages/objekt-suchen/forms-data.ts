@@ -38,9 +38,9 @@ export function initIdForm(person: Person): FormGroup {
 export function initPersoenlicheInformationenForm(person: Person): FormGroup {
   return new FormGroup(
     {
-      vorname: new FormControl(person.personalien.vorname, onlyChars),
-      nachname: new FormControl(person.personalien.nachname, requiredAndOnlyChars),
-      geschlecht: new FormControl(person.personalien.geschlecht, requiredAndOnlyChars)
+      vorname: new FormControl(person.personalData.firstName, onlyChars),
+      nachname: new FormControl(person.personalData.lastName, requiredAndOnlyChars),
+      geschlecht: new FormControl(person.personalData.gender, requiredAndOnlyChars)
     }
   );
 }
@@ -53,10 +53,10 @@ export function initPersoenlicheInformationenForm(person: Person): FormGroup {
 export function initGeburtsInformationenForm(person: Person): FormGroup {
   return new FormGroup(
     {
-      geburtsname: new FormControl(person.personalien.geburtsname, requiredAndOnlyChars),
-      geburtsort: new FormControl(person.personalien.geburtsort, requiredAndOnlyChars),
-      staatsangehoerigkeit: new FormControl(person.personalien.staatsangehoerigkeit, required),
-      geburtsdatum: new FormControl(person.personalien.geburtsdatum, required)
+      geburtsname: new FormControl(person.personalData.birthName, requiredAndOnlyChars),
+      geburtsort: new FormControl(person.personalData.birthplace, requiredAndOnlyChars),
+      staatsangehoerigkeit: new FormControl(person.personalData.nationality, required),
+      geburtsdatum: new FormControl(person.personalData.birthDate, required)
     }
   );
 }
@@ -70,13 +70,13 @@ export function initObjektBearbeitenForm(person: Person): FormGroup {
   return new FormGroup(
     {
       editID: new FormControl(person.id, requiredAndOnlyNumbers),
-      editNachname: new FormControl(person.personalien.nachname, requiredAndCharsAndNumbers),
-      editGeburtsname: new FormControl(person.personalien.geburtsname, requiredAndOnlyChars),
-      editGeburtsort: new FormControl(person.personalien.geburtsort, requiredAndOnlyChars),
-      editVorname: new FormControl(person.personalien.vorname, requiredAndOnlyChars),
-      editGeschlecht: new FormControl(person.personalien.geschlecht, required),
-      editGeburtsdatum: new FormControl(person.personalien.geburtsdatum, required),
-      editStaatsangehoerigkeit : new FormControl(person.personalien.staatsangehoerigkeit, required)
+      editNachname: new FormControl(person.personalData.lastName, requiredAndCharsAndNumbers),
+      editGeburtsname: new FormControl(person.personalData.birthName, requiredAndOnlyChars),
+      editGeburtsort: new FormControl(person.personalData.birthplace, requiredAndOnlyChars),
+      editVorname: new FormControl(person.personalData.firstName, requiredAndOnlyChars),
+      editGeschlecht: new FormControl(person.personalData.gender, required),
+      editGeburtsdatum: new FormControl(person.personalData.birthDate, required),
+      editStaatsangehoerigkeit : new FormControl(person.personalData.nationality, required)
     }
   );
 }

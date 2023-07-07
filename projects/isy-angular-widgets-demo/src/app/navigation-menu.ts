@@ -1,27 +1,27 @@
 export const navigationMenu = [
   {
-    label: 'Quicklinks',
+    label: 'isyAngularWidgetsDemo.menuItems.quickLinks',
     expanded: true,
     items: [
       {
-        label: 'Beispiel Quicklink 1'
+        label: 'isyAngularWidgetsDemo.menuItems.exampleQuickLink1'
       },
       {
-        label: 'Beispiel Quicklink 2',
+        label: 'isyAngularWidgetsDemo.menuItems.exampleQuickLink2',
         visible: true
       }
     ]
   },
   {
-    label: 'Häufige Aufgaben',
+    label: 'isyAngularWidgetsDemo.menuItems.frequentTasks',
     expanded: true,
     items: [
       {
-        label: 'Objekt suchen',
+        label: 'isyAngularWidgetsDemo.menuItems.searchObject',
         routerLink: 'bedienkonzept/objekt-suchen'
       },
       {
-        label: 'Objekt anzeigen',
+        label: 'isyAngularWidgetsDemo.menuItems.displayObject',
         routerLink: 'bedienkonzept/objekt-anzeigen/42'
       }
     ]

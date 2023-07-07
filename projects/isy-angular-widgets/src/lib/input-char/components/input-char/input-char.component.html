@@ -28,7 +28,7 @@
       </isy-input-char-all-chars-button>
 
       <p-accordion [multiple]="true" (activeIndexChange)="toggle($event)">
-        <p-accordionTab [header]="('isyAngularWidgets.header-grundZeichenListe' | translate) || 'Basis'">
+        <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerBaseChars' | translate)">
           <isy-input-char-select-button
             #base
             [options]="grundZeichenListe"
@@ -37,7 +37,7 @@
           </isy-input-char-select-button>
         </p-accordionTab>
 
-        <p-accordionTab [header]="('isyAngularWidgets.header-schriftZeichenGruppen' | translate) || 'Gruppen'">
+        <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerGroups' | translate)">
           <isy-input-char-select-button
             #group
             [optionValue]="'id'"

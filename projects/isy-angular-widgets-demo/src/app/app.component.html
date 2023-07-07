@@ -5,34 +5,39 @@
   [showInformationsbereich]="true"
   [collapsedInformationsbereich]="true"
   linksNavigationWidth="15em"
+  informationsbereichWidth="20em"
   [items]="items"
   [userInfo]="userInfo"
 >
-  <div Titelzeile class="isy-demo-titelzeile">
-    <!-- Language switcher -->
-    <div class="grid justify-content-end">
-      <select class="lang-switch" #langSelect (change)="changeLang(langSelect.value)">
-        <option
-          *ngFor="let lang of translate.getLangs()"
-          [value]="lang"
-          [selected]="lang === localLang"
-        >
-          {{ lang }}
-        </option>
-      </select>
-    </div>
-  </div>
   <div Linksnavigation>
     <p-panelMenu [model]="sidebarItems"></p-panelMenu>
   </div>
   <router-outlet></router-outlet>
   <div Informationsbereich>
-    <p class="p-3">
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-      sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-      ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-      et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-      gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-    </p>
+    <p-accordion [activeIndex]="0">
+      <p-accordionTab [header]="('isyAngularWidgetsDemo.settings.header' | translate)">
+        <label for="language-selector">{{('isyAngularWidgetsDemo.settings.languages.label' | translate)}}</label>
+        <p-dropdown
+          id="language-selector"
+          class="ml-2"
+          [options]="translate.getLangs()"
+          [(ngModel)]="selectedLanguage"
+          (onChange)="changeLanguage($event.value)"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div class="flex align-items-center gap-2" *ngIf="selectedLanguage">
+              <span [class]="'fi fi-' + getLanguageIcon(selectedLanguage)"></span>
+              <div>{{ ('isyAngularWidgetsDemo.settings.languages.' + selectedLanguage | translate) }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-language pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <span [class]="'fi fi-' + getLanguageIcon(language)"></span>
+              <div>{{ ('isyAngularWidgetsDemo.settings.languages.' + language | translate) }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </p-accordionTab>
+    </p-accordion>
   </div>
 </isy-hauptfenster>

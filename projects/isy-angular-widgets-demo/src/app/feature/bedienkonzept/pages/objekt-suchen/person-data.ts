@@ -7,22 +7,20 @@ import {Person} from '../../../../shared/model/person';
 export function getEmptyPerson(): Person {
   return {
     id: '',
-    personalien: {
-      nachname: '',
-      vorname: '',
-      geschlecht: '',
-      geburtsdatum: '',
-      geburtsort: '',
-      staatsangehoerigkeit: '',
-      geburtsname: '',
-      ausweispflichtig: true,
-      telefonnummer: '',
-      sicherheitsstufe: 0,
-      geheimdienstnotizen: '',
-      einreisedatum: 'XX-XX-XXXX'
-    }, sachverhalte: {
-      liste: []
-    }
+    personalData: {
+      lastName: '',
+      firstName: '',
+      gender: '',
+      birthDate: '',
+      birthplace: '',
+      nationality: '',
+      birthName: '',
+      idRequired: true,
+      phoneNumber: '',
+      securityLevel: 0,
+      intelligenceNotes: '',
+      dateOfEntry: 'XX-XX-XXXX'
+    }, facts: []
   };
 }
 
@@ -32,17 +30,17 @@ export function getEmptyPerson(): Person {
  */
 export function resetPerson(person: Person): void {
   person.id = '';
-  person.personalien.nachname = '';
-  person.personalien.vorname = '';
-  person.personalien.geschlecht = '';
-  person.personalien.geburtsdatum = '';
-  person.personalien.geburtsort = '';
-  person.personalien.staatsangehoerigkeit = '';
-  person.personalien.geburtsname = '';
-  person.personalien.ausweispflichtig = true;
-  person.personalien.telefonnummer = '';
-  person.personalien.sicherheitsstufe = 0;
-  person.personalien.geheimdienstnotizen = '';
-  person.personalien.einreisedatum = 'XX-XX-XXXX';
-  person.sachverhalte.liste = [];
+  person.personalData.lastName = '';
+  person.personalData.firstName = '';
+  person.personalData.gender = '';
+  person.personalData.birthDate = '';
+  person.personalData.birthplace = '';
+  person.personalData.nationality = '';
+  person.personalData.birthName = '';
+  person.personalData.idRequired = true;
+  person.personalData.phoneNumber = '';
+  person.personalData.securityLevel = 0;
+  person.personalData.intelligenceNotes = '';
+  person.personalData.dateOfEntry = 'XX-XX-XXXX';
+  person.facts = [];
 }

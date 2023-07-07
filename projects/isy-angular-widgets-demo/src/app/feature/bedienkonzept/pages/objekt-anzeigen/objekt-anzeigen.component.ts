@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Person} from '../../../../shared/model/person';
 import {ActivatedRoute} from '@angular/router';
 import {PersonenService} from '../../services/personen.service';
 import {TranslateService} from '@ngx-translate/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MessageService} from "primeng/api";
 
 /*
 * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -12,97 +14,70 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './objekt-anzeigen.component.html',
   styleUrls: ['./objekt-anzeigen.component.scss']
 })
-export class ObjektAnzeigenComponent implements OnInit {
+export class ObjektAnzeigenComponent {
 
-  editable = false;
+  readonly intelligenceNotesMaxLength = 255;
   showSecretFields = false;
-  showError = false;
+
+  personalInfoForm: FormGroup
 
   @Input() person: Person = {
     id: '1',
-    personalien: {
-      geburtsdatum: '15.9.2021',
-      geburtsname: 'Erika Musterfrau',
-      geburtsort: 'Köln',
-      geschlecht: 'Divers',
-      nachname: 'Mustermann',
-      staatsangehoerigkeit: 'Deutsch',
-      vorname: 'Max',
-      ausweispflichtig: true,
-      telefonnummer: '',
-      geheimdienstnotizen: '',
-      sicherheitsstufe: 0,
-      einreisedatum: 'XX-XX-XXXX'
-    }, sachverhalte: {
-      liste: ['Hat einen Antrag auf BAFÖG gestellt', 'Wurde wegen Falschparkens ermahnt', 'Steht auf der NO-FLY-Liste']
-    }
+    personalData: {
+      birthDate: '03.08.1980',
+      birthName: ' Mustermann',
+      birthplace: 'Köln',
+      gender: 'Männlich',
+      lastName: 'Mustermann',
+      nationality: 'Deutsch',
+      firstName: 'Max',
+      idRequired: true,
+      phoneNumber: '',
+      intelligenceNotes: '',
+      securityLevel: 0,
+      dateOfEntry: 'XX-XX-2000'
+    },
+    facts: [
+      'Hat einen Antrag auf BAFÖG gestellt',
+      'Wurde wegen Falschparkens ermahnt',
+      'Steht auf der NO-FLY-Liste'
+    ]
   };
 
-  newGeburtsdatum = '';
-  newGeburtsname = '';
-  newGeburtsort = '';
-  newGeschlecht = '';
-  newNachname = '';
-  newStaatsangehoerigkeit = '';
-  newVorname = '';
-  newAusweispflichtig = true;
-  newTelefonnummer = '';
-  newGeheimdienstnotizen = '';
-  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  newSicherheitsstufe = 0;
-  newEinreisedatum = '';
-
-  constructor(private route: ActivatedRoute, private personService: PersonenService, public translate: TranslateService) {
-  }
-
-  ngOnInit(): void {
-    // Get language from local Storage and use it for translation
-    const localLang = localStorage.getItem("lang") as string;
-    this.translate.use(localLang);
-
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.personService.findPersonById(id).subscribe(person => {
-        const firstPerson = 0;
-        this.person = person[firstPerson];
-        this.loadPerson();
-      });
-    } else {
-      this.loadPerson();
-    }
-  }
-
-  loadPerson(): void {
-    this.newGeburtsdatum = this.person.personalien.geburtsdatum;
-    this.newGeburtsname = this.person.personalien.geburtsname;
-    this.newGeburtsort = this.person.personalien.geburtsort;
-    this.newGeschlecht = this.person.personalien.geschlecht;
-    this.newNachname = this.person.personalien.nachname;
-    this.newStaatsangehoerigkeit = this.person.personalien.staatsangehoerigkeit;
-    this.newVorname = this.person.personalien.vorname;
-    this.newAusweispflichtig = this.person.personalien.ausweispflichtig;
-    this.newTelefonnummer = this.person.personalien.telefonnummer;
-    this.newGeheimdienstnotizen = this.person.personalien.geheimdienstnotizen;
+  constructor(
+    private route: ActivatedRoute,
+    private personService: PersonenService,
+    public translate: TranslateService,
+    private  fb: FormBuilder,
+    private messageService: MessageService
+  ) {
+    this.personalInfoForm = this.fb.group({
+      lastName: new FormControl(this.person.personalData.lastName, Validators.required),
+      birthName: new FormControl(this.person.personalData.birthName),
+      birthplace: new FormControl(this.person.personalData.birthplace),
+      firstName: new FormControl(this.person.personalData.firstName, Validators.required),
+      gender: new FormControl(this.person.personalData.gender),
+      birthDate: new FormControl(this.person.personalData.birthDate),
+      nationality: new FormControl(this.person.personalData.nationality),
+      phoneNumber: new FormControl(this.person.personalData.phoneNumber),
+      dateOfEntry: new FormControl(this.person.personalData.dateOfEntry),
+      idRequired: new FormControl(this.person.personalData.idRequired),
+      securityLevel: new FormControl(this.person.personalData.securityLevel),
+      intelligenceNotes: new FormControl(this.person.personalData.intelligenceNotes, Validators.maxLength(this.intelligenceNotesMaxLength))
+    });
+    this.personalInfoForm.disable()
   }
 
   savePersonalien(): void {
-    this.editable = false;
-    this.person.personalien.geburtsdatum = this.newGeburtsdatum;
-    this.person.personalien.geburtsname = this.newGeburtsname;
-    this.person.personalien.geburtsort = this.newGeburtsort;
-    this.person.personalien.geschlecht = this.newGeschlecht;
-    this.person.personalien.nachname = this.newNachname;
-    this.person.personalien.staatsangehoerigkeit = this.newStaatsangehoerigkeit;
-    this.person.personalien.vorname = this.newVorname;
-    this.person.personalien.ausweispflichtig = this.newAusweispflichtig;
-    this.person.personalien.telefonnummer = this.newTelefonnummer;
-    this.person.personalien.geheimdienstnotizen = this.newGeheimdienstnotizen;
-    this.person.personalien.sicherheitsstufe = this.newSicherheitsstufe;
+    this.personalInfoForm.disable();
+    this.personalInfoForm.clearValidators();
+    this.messageService.add({
+      severity: 'success',
+      summary: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonSummary'),
+      detail: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonDetail', {
+        firstName: this.personalInfoForm.value.firstName,
+        lastName: this.personalInfoForm.value.lastName
+      })
+    });
   }
-
-  cancelEdit(): void {
-    this.editable = false;
-    this.loadPerson();
-  }
-
 }

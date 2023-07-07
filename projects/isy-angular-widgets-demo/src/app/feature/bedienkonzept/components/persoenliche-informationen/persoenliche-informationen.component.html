@@ -2,7 +2,9 @@
   <div class="formgrid grid">
     <div class="col align-content-end">
       <div class="field">
-        <label id="nachnameLabel" for="Nachname">Nachname*</label>
+        <label id="nachnameLabel" for="Nachname">
+          {{('isyAngularWidgetsDemo.labels.lastName' | translate)}}
+        </label>
         <input
           id="Nachname"
           type="text"
@@ -12,7 +14,9 @@
         >
       </div>
       <div class="field">
-        <label id="vornameLabel" class="align-content-end" for="Vorname">Vorname</label>
+        <label id="vornameLabel" class="align-content-end" for="Vorname">
+          {{('isyAngularWidgetsDemo.labels.firstName' | translate)}}
+        </label>
         <input
           id="Vorname"
           type="text"
@@ -22,7 +26,9 @@
         >
       </div>
       <div class="field">
-        <label id="geschlechtLabel" class="align-content-end" for="Geschlecht">Geschlecht*</label>
+        <label id="geschlechtLabel" class="align-content-end" for="Geschlecht">
+          {{('isyAngularWidgetsDemo.labels.gender' | translate)}}
+        </label>
         <input
           id="Geschlecht"
           type="text"

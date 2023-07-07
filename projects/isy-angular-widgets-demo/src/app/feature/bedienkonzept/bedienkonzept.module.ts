@@ -20,7 +20,9 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputMaskModule} from 'primeng/inputmask';
 import {FieldsetModule} from 'primeng/fieldset';
 import {DialogModule} from 'primeng/dialog';
-import {IncompleteDateModule} from '../../../../../isy-angular-widgets/src/lib/incomplete-date/incomplete-date.module';
+import {
+  IncompleteDateModule
+} from '../../../../../isy-angular-widgets/src/lib/incomplete-date/incomplete-date.module';
 import {
   PersoenlicheInformationenComponent
 } from './components/persoenliche-informationen/persoenliche-informationen.component';
@@ -31,15 +33,13 @@ import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wi
 import {PanelModule} from 'primeng/panel';
 import {NotificationService} from '../../shared/services/notification.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import {InputCharModule} from "../../../../../isy-angular-widgets/src/lib/input-char/input-char.module";
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {
+  InputCharModule
+} from "../../../../../isy-angular-widgets/src/lib/input-char/input-char.module";
+import {HttpClientModule} from "@angular/common/http";
+import {TranslateModule} from "@ngx-translate/core";
+import {MessageModule} from "primeng/message";
 
-// AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
 
 @NgModule({
   declarations: [
@@ -81,13 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProgressSpinnerModule,
     InputCharModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        }
-    })
+    TranslateModule,
+    MessageModule
   ],
   providers: [
     NotificationService

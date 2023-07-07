@@ -89,13 +89,13 @@ describe('PersonenSuchenComponent', () => {
    */
   function expectPersonToBeEmpty(person: Person): void {
     expect(person.id).toEqual(emptyEntry);
-    expect(person.personalien.vorname).toEqual(emptyEntry);
-    expect(person.personalien.nachname).toEqual(emptyEntry);
-    expect(person.personalien.geschlecht).toEqual(emptyEntry);
-    expect(person.personalien.geburtsname).toEqual(emptyEntry);
-    expect(person.personalien.geburtsort).toEqual(emptyEntry);
-    expect(person.personalien.geburtsdatum).toEqual(emptyEntry);
-    expect(person.personalien.staatsangehoerigkeit).toEqual(emptyEntry);
+    expect(person.personalData.firstName).toEqual(emptyEntry);
+    expect(person.personalData.lastName).toEqual(emptyEntry);
+    expect(person.personalData.gender).toEqual(emptyEntry);
+    expect(person.personalData.birthName).toEqual(emptyEntry);
+    expect(person.personalData.birthplace).toEqual(emptyEntry);
+    expect(person.personalData.birthDate).toEqual(emptyEntry);
+    expect(person.personalData.nationality).toEqual(emptyEntry);
   }
 
   /**
@@ -124,13 +124,13 @@ describe('PersonenSuchenComponent', () => {
   function getInitPerson(): Person {
     const person = getEmptyPerson();
     person.id = '0';
-    person.personalien.vorname = 'vorname';
-    person.personalien.nachname = 'nachname';
-    person.personalien.geburtsname = 'geburtsname';
-    person.personalien.geschlecht = 'geschlecht';
-    person.personalien.geburtsort = 'geburtsort';
-    person.personalien.geburtsdatum = '01.01.2023';
-    person.personalien.staatsangehoerigkeit = 'Deutschland';
+    person.personalData.firstName = 'vorname';
+    person.personalData.lastName = 'nachname';
+    person.personalData.birthName = 'geburtsname';
+    person.personalData.gender = 'geschlecht';
+    person.personalData.birthplace = 'geburtsort';
+    person.personalData.birthDate = '01.01.2023';
+    person.personalData.nationality = 'Deutschland';
     return person;
   }
 
@@ -168,13 +168,13 @@ describe('PersonenSuchenComponent', () => {
     const editForm = component.editForm;
 
     editForm.controls.editID.setValue(person.id);
-    editForm.controls.editVorname.setValue(person.personalien.vorname);
-    editForm.controls.editNachname.setValue(person.personalien.nachname);
-    editForm.controls.editGeburtsname.setValue(person.personalien.geburtsname);
-    editForm.controls.editGeschlecht.setValue(person.personalien.geschlecht);
-    editForm.controls.editGeburtsort.setValue(person.personalien.geburtsort);
-    editForm.controls.editGeburtsdatum.setValue(person.personalien.geburtsdatum);
-    editForm.controls.editStaatsangehoerigkeit.setValue(person.personalien.staatsangehoerigkeit);
+    editForm.controls.editVorname.setValue(person.personalData.firstName);
+    editForm.controls.editNachname.setValue(person.personalData.lastName);
+    editForm.controls.editGeburtsname.setValue(person.personalData.birthName);
+    editForm.controls.editGeschlecht.setValue(person.personalData.gender);
+    editForm.controls.editGeburtsort.setValue(person.personalData.birthplace);
+    editForm.controls.editGeburtsdatum.setValue(person.personalData.birthDate);
+    editForm.controls.editStaatsangehoerigkeit.setValue(person.personalData.nationality);
   }
 
   /**
@@ -531,15 +531,15 @@ describe('PersonenSuchenComponent', () => {
     expect(idForm.controls.id.value).toEqual(newPerson.id);
 
     const persoenlicheInfoForm = component.persoenlicheInformationenForm;
-    expect(persoenlicheInfoForm.controls.vorname.value).toEqual(newPerson.personalien.vorname);
-    expect(persoenlicheInfoForm.controls.nachname.value).toEqual(newPerson.personalien.nachname);
-    expect(persoenlicheInfoForm.controls.geschlecht.value).toEqual(newPerson.personalien.geschlecht);
+    expect(persoenlicheInfoForm.controls.vorname.value).toEqual(newPerson.personalData.firstName);
+    expect(persoenlicheInfoForm.controls.nachname.value).toEqual(newPerson.personalData.lastName);
+    expect(persoenlicheInfoForm.controls.geschlecht.value).toEqual(newPerson.personalData.gender);
 
     const geburtsInfoForm = component.geburtsInformationenForm;
-    expect(geburtsInfoForm.controls.geburtsname.value).toEqual(newPerson.personalien.geburtsname);
-    expect(geburtsInfoForm.controls.geburtsort.value).toEqual(newPerson.personalien.geburtsort);
-    expect(geburtsInfoForm.controls.geburtsdatum.value).toEqual(newPerson.personalien.geburtsdatum);
-    expect(geburtsInfoForm.controls.staatsangehoerigkeit.value).toEqual(newPerson.personalien.staatsangehoerigkeit);
+    expect(geburtsInfoForm.controls.geburtsname.value).toEqual(newPerson.personalData.birthName);
+    expect(geburtsInfoForm.controls.geburtsort.value).toEqual(newPerson.personalData.birthplace);
+    expect(geburtsInfoForm.controls.geburtsdatum.value).toEqual(newPerson.personalData.birthDate);
+    expect(geburtsInfoForm.controls.staatsangehoerigkeit.value).toEqual(newPerson.personalData.nationality);
 
     const personenList = component.personen$;
     expectArrayIsEmpty(personenList, true);
@@ -570,15 +570,15 @@ describe('PersonenSuchenComponent', () => {
     setupEditForm(person);
     component.editSelectedPerson(person);
 
-    expect(component.selectedPerson!.personalien.vorname).toEqual(person.personalien.vorname);
+    expect(component.selectedPerson!.personalData.firstName).toEqual(person.personalData.firstName);
     expect(component.editForm).not.toBeUndefined();
     const newValue = 'edit';
     component.editForm.controls.editVorname.setValue(newValue);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    expect(component.selectedPerson!.personalien.vorname).not.toEqual(component.editForm.controls.editVorname.value);
+    expect(component.selectedPerson!.personalData.firstName).not.toEqual(component.editForm.controls.editVorname.value);
     component.saveChanges();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    expect(component.selectedPerson!.personalien.vorname).toEqual(component.editForm.controls.editVorname.value);
+    expect(component.selectedPerson!.personalData.firstName).toEqual(component.editForm.controls.editVorname.value);
 
     expect(component.openEditForm).toBeFalse();
     expect(component.allowSave).toBeFalse();

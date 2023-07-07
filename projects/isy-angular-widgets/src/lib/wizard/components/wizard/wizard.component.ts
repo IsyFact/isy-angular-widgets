@@ -101,22 +101,22 @@ export class WizardComponent implements OnInit, AfterContentInit {
   /**
    * The text of the back button
    */
-  @Input() labelBackButton = this.translate.instant('isyAngularWidgets.labelBackButton');
+  @Input() labelBackButton = this.translate.instant('isyAngularWidgets.wizard.back');
 
   /**
    * The text of the next button
    */
-  @Input() labelNextButton = this.translate.instant('isyAngularWidgets.labelNextButton');
+  @Input() labelNextButton = this.translate.instant('isyAngularWidgets.wizard.next');
 
   /**
    * The text of the save button
    */
-  @Input() labelSaveButton = this.translate.instant('isyAngularWidgets.labelSaveButton');
+  @Input() labelSaveButton = this.translate.instant('isyAngularWidgets.wizard.save');
 
   /**
    * The text of the close button
    */
-  @Input() labelCloseButton = this.translate.instant('isyAngularWidgets.labelCloseButton');
+  @Input() labelCloseButton = this.translate.instant('isyAngularWidgets.wizard.close');
 
   /**
    * Controls whether the next button is enabled which is to be controlled from the outside (e.g. for validation)
