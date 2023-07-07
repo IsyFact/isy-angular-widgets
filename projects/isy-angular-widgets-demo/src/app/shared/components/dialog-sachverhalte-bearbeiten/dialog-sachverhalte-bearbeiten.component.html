@@ -1,4 +1,4 @@
-<p-dialog *ngIf="person" header="Sachverhalte Bearbeiten" [(visible)]="visible">
+<p-dialog *ngIf="person" header="Sachverhalte Hinzufügen/Bearbeiten" [(visible)]="visible">
   <p-table [value]="newSachverhalteListe" responsiveLayout="scroll">
     <ng-template pTemplate="header">
       <tr>
@@ -12,8 +12,13 @@
         <td>{{sachverhalt}}</td>
         <td>Gelöst</td>
         <td>
-          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                  (click)="deleteSachverhalt(sachverhalt)"></button>
+          <button pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button-rounded"
+                  (click)="deleteSachverhalt(sachverhalt)"
+          >
+          </button>
         </td>
       </tr>
     </ng-template>
