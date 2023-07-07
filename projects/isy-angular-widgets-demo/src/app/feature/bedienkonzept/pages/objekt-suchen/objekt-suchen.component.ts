@@ -121,11 +121,6 @@ export class ObjektSuchenComponent {
 
   tbLoadingStatus = false;
 
-  /**
-   * Used as CSS style for stretching HTML Elements
-   */
-  stretch = { width: '100%' };
-
   constructor(
     public personService: PersonenService,
     private router: Router,

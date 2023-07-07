@@ -54,7 +54,6 @@
                   dateFormat="dd.mm.yy"
                   [(ngModel)]="person.personalien.geburtsdatum"
                   [showIcon]="true"
-                  [style]="stretch"
       >
       </p-calendar>
     </div>
@@ -65,8 +64,12 @@
       <label class="align-content-end" for="Staatsangehörigkeit">Staatsangehörigkeit</label>
     </div>
     <div class="col-3">
-      <p-dropdown id="Staatsangehörigkeit" [options]="laender" [(ngModel)]="person.personalien.staatsangehoerigkeit"
-                  [showClear]="true" placeholder="Land wählen" [style]="stretch">
+      <p-dropdown id="Staatsangehörigkeit"
+                  placeholder="Land wählen"
+                  [options]="laender"
+                  [(ngModel)]="person.personalien.staatsangehoerigkeit"
+                  [showClear]="true"
+      >
         <ng-template pTemplate="selectedItem">
           <div class="country-item country-item-value" *ngIf="person.personalien.staatsangehoerigkeit">
             <div>{{person.personalien.staatsangehoerigkeit}}</div>
@@ -173,7 +176,6 @@
           dateFormat="dd.mm.yy"
           [formControlName]="'editGeburtsdatum'"
           [showIcon]="true"
-          [style]="stretch"
         >
         </p-calendar>
       </div>
@@ -188,7 +190,6 @@
                     [options]="laender"
                     [showClear]="true"
                     [formControlName]="'editStaatsangehoerigkeit'"
-                    [style]="stretch"
         >
           <ng-template pTemplate="selectedItem">
             <div class="country-item country-item-value" *ngIf="selectedPerson!.personalien.staatsangehoerigkeit">
@@ -277,7 +278,6 @@
                           placeholder="Land wählen"
                           optionValue="name"
                           optionLabel="name"
-                          [style]="stretch"
                           [showClear]="true"
                           [options]="laenderMap"
                           [formControlName]="'staatsangehoerigkeit'"
@@ -295,7 +295,6 @@
               <p-calendar
                 id="geburtdatum"
                 dateFormat="dd.mm.yy"
-                [style]="stretch"
                 [formControlName]="'geburtsdatum'"
                 [showIcon]="true">
               </p-calendar>

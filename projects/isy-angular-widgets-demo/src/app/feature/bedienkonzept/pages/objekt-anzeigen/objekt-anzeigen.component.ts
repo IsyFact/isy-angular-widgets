@@ -17,8 +17,6 @@ export class ObjektAnzeigenComponent implements OnInit {
   showSecretFields = false;
   showError = false;
 
-  stretch = { width: '100%' };
-
   @Input() person: Person = {
     id: '1',
     personalien: {
