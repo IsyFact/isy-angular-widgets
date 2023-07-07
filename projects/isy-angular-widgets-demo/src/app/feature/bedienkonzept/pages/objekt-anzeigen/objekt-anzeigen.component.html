@@ -45,11 +45,11 @@
   <p-tabPanel id="panelPersonalien" header="Personalien">
     <div class="grid m-0">
       <div class="col-1 text-right align-self-center">
-        <label for="Nachname">Nachname</label>
+        <label for="nachname">Nachname</label>
       </div>
       <div class="col">
         <input
-          id="Nachname"
+          id="nachname"
           class="w-full"
           type="text"
           pInputText
@@ -59,10 +59,10 @@
         >
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="Geburtsname">Geburtsname</label>
+        <label class="align-content-end" for="geburtsname">Geburtsname</label>
       </div>
       <div class="col">
-        <input id="Geburtsname"
+        <input id="geburtsname"
                class="w-full"
                type="text"
                pInputText
@@ -87,10 +87,10 @@
 
     <div class="grid m-0">
       <div class="col-1 text-right align-self-center">
-        <label for="Vorname">Vorname</label>
+        <label for="vorname">Vorname</label>
       </div>
       <div class="col">
-        <input id="Vorname"
+        <input id="vorname"
                class="w-full"
                required minlength="2"
                type="text"
@@ -101,11 +101,11 @@
         >
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="Geschlecht">Geschlecht</label>
+        <label class="align-content-end" for="geschlecht">Geschlecht</label>
       </div>
       <div class="col">
         <p-dropdown
-          id="Geschlecht"
+          id="geschlecht"
           [(ngModel)]="newGeschlecht"
           [filter]="true"
           [filterBy]="'name'"
@@ -132,11 +132,11 @@
 
     <div class="grid m-0">
       <div class="col-1 text-right align-self-center">
-        <label for="Staatsangehoerigkeit">Staatsangehörigkeit</label>
+        <label for="staatsangehoerigkeit">Staatsangehörigkeit</label>
       </div>
       <div class="col">
         <input
-          id="Staatsangehoerigkeit"
+          id="staatsangehoerigkeit"
           class="w-full"
           type="text" pInputText
           [disabled]="!editable"
@@ -144,11 +144,11 @@
         >
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="Telefonnummer">Telefonnummer</label>
+        <label class="align-content-end" for="telefonnummer">Telefonnummer</label>
       </div>
       <div class="col">
         <p-inputMask
-          id="Telefonnummer"
+          id="telefonnummer"
           type="text"
           [disabled]="!editable"
           [(ngModel)]="newTelefonnummer"
@@ -157,7 +157,7 @@
         </p-inputMask>
       </div>
       <div class="col-1 text-right align-self-center">
-        <label class="align-content-end" for="Einreisedatum">Einreisedatum</label>
+        <label class="align-content-end" for="einreisedatum">Einreisedatum</label>
       </div>
       <div class="col">
         <isy-incomplete-date
@@ -181,7 +181,7 @@
     <div id="divShowSecretFields" *ngIf="showSecretFields">
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label for="Ausweispflichtig">Ausweispflichtig</label>
+          <label for="ausweispflichtig">Ausweispflichtig</label>
         </div>
         <div class="col-1">
           <p-checkbox
@@ -193,7 +193,7 @@
           </p-checkbox>
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="Sicherheitsstufe">Sicherheitsstufe</label>
+          <label class="align-content-end" for="sicherheitsstufe">Sicherheitsstufe</label>
         </div>
         <div class="col-5">
           <p-inputNumber id="sicherheitsstufe"
@@ -211,7 +211,7 @@
 
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label for="Geheimdienstnotizen">Geheimdienstnotizen</label>
+          <label for="geheimdienstnotizen">Geheimdienstnotizen</label>
         </div>
         <div class="col-5">
           <textarea pInputTextarea
