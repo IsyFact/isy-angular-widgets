@@ -1,6 +1,7 @@
 {
   "name": "@isyfact/isy-angular-widgets",
   "schematics": "./schematics/collection.json",
+  "version": "0.9.0",
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
     "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/isy-angular-widgets/"
@@ -22,6 +23,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "copyfiles": "file:../../node_modules/copyfiles",
     "typescript": "file:../../node_modules/typescript"
   }
 }
