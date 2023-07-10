@@ -1,12 +1,27 @@
 /* eslint-disable */
 import {Rule, SchematicContext, SchematicsException, Tree} from '@angular-devkit/schematics';
 import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
+import {addTranslationFile} from "../add-translation";
+import {addPackageToPackageJson} from "../add-translation/package-config";
 
 /**
  * Installs isy-angular-widgets as dependency and adds the necessary styles to the workspace.
  */
 export function ngAdd(): Rule {
   return (tree: Tree, context: SchematicContext) => {
+
+    addTranslationFile(context, tree, 'de.json');
+    addTranslationFile(context, tree, 'en.json');
+
+    // Add necessary dependencies to new CLI project.
+    addPackageToPackageJson(tree, '@ngx-translate/core', `^14.0.0`);
+    addPackageToPackageJson(tree, '@ngx-translate/http-loader', `^7.0.0`);
+    addPackageToPackageJson(tree, "@angular/common",  "^14.2.4");
+    addPackageToPackageJson(tree, "@angular/core", "^14.2.4");
+    addPackageToPackageJson(tree,  "primeicons", "^6.0.1");
+    addPackageToPackageJson(tree,  "primeng", "^14.1.2");
+    addPackageToPackageJson(tree,  "primeflex", "^3.2.1");
+    addPackageToPackageJson(tree,   "moment",  "^2.29.4");
 
     // Install isy-angular-widgets
     context.addTask(new NodePackageInstallTask());
@@ -60,7 +75,6 @@ function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree:
     return tree;
   }
 
-  context.logger.info(`Adding styles to project ${projectName}`);
   const project = projects[projectName];
 
   if (!project?.architect?.build?.options) {
@@ -80,7 +94,7 @@ function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree:
   const angularJson = JSON.stringify(workspace, null, 2);
   tree.overwrite('/angular.json', angularJson);
 
-  context.logger.info('✅ Add IsyFact styles.');
+  context.logger.info('√ Add isy-angular-widgets styles.');
 
   return tree;
 }
