@@ -5,6 +5,7 @@
 - IFS-2010: Header und Seitenleisten werden in der Druckansicht jetzt ausgeblendet
 - IFS-XXXX: Anwendungslogos können jetzt mit eigenem HTML gesetzt werden
 - IFS-XXXX: Seitenleisten können jetzt in ihrer Breite frei konfiguriert werden
+- IFS-XXXX: Widgets können jetzt in den Sprachen Deutsch und Englisch angezeigt werden
 
 # 0.8.0 - 15.05.2023
 ## Breaking Changes
