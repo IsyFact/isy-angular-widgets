@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs';
 import {SecurityService} from './security-service';
 
 /**
@@ -28,7 +27,7 @@ export class AuthGuard implements CanActivate, CanLoad {
    * @param state The current router state
    * @returns An observable that eventually outputs a boolean whether the given route can be accessed
    */
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
     return this.securityService?.checkRoutePermission(route);
   }
 
@@ -37,7 +36,7 @@ export class AuthGuard implements CanActivate, CanLoad {
    * @param route The route to check
    * @returns An observable that eventually outputs a boolean whether the given route can be loaded
    */
-  canLoad(route: Route): Observable<boolean> {
+  canLoad(route: Route): any {
     return this.securityService?.checkLoadRoutePermission(route);
   }
 }
