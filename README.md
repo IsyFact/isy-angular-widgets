@@ -9,20 +9,16 @@ Zusätzlich beinhaltet das Projekt die Beispielanwendung `isy-angular-widget-dem
 
 ## Getting Started
 
-Für die Verwendung von `isy-angular-widgets` müssen zunächst folgende PrimeNG Pakete installiert werden.
-
-```
-$npm i -S primeng primeflex primeicons
-```
-
-Anschließend kann die Bibliothek zum Projekt hinzugefügt werden.
+Mit folgendem Befehl wird die Bibliothek `isy-angular-widget` zu einem bestehenden Angular Projekt hinzugefügt.
 
 ```
 $ ng add @isyfact/isy-angular-widgets
 ```
 
-Dadurch werden die benötigten PrimeNG Styles, das Standard IsyFact Theme und eine Bibliothek von behördenspezifischen PrimeNG Widgets automatisch dem Projekt hinzugefügt.
-
+Die Schematics führt folgende Schritte aus:
+- Hinzufügen und Installation der Bibliothek und der notwendigen Abhängigkeiten
+- Hinzufügen der Stylesheets der IsyFact
+- Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
 
 ## Development Setup
 
