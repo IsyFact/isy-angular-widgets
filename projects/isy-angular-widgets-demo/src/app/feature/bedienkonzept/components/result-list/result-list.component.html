@@ -26,17 +26,17 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th scope="col" pSortableColumn="personalien.nachname">
+        <th scope="col" pSortableColumn="personalien.lastName">
           {{('isyAngularWidgetsDemo.labels.lastName' | translate)}}
-          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
+          <p-columnFilter type="text" field="personalien.lastName" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.nachname"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.vorname">
+        <th scope="col" pSortableColumn="personalien.firstName">
           {{('isyAngularWidgetsDemo.labels.firstName' | translate)}}
-          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
+          <p-columnFilter type="text" field="personalien.firstName" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.vorname"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geschlecht">
+        <th scope="col" pSortableColumn="personalien.gender">
           {{('isyAngularWidgetsDemo.labels.gender' | translate)}}
           <p-columnFilter
             field="representative"
@@ -61,27 +61,27 @@
               </p-multiSelect>
             </ng-template>
           </p-columnFilter>
-          <p-sortIcon field="personalien.geschlecht"></p-sortIcon>
+          <p-sortIcon field="personalien.gender"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geburtsname">
+        <th scope="col" pSortableColumn="personalien.birthName">
           {{('isyAngularWidgetsDemo.labels.birthName' | translate)}}
-          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.geburtsname"></p-sortIcon>
+          <p-columnFilter type="text" field="personalien.birthName" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.birthName"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geburtsort">
+        <th scope="col" pSortableColumn="personalien.birthplace">
           {{('isyAngularWidgetsDemo.labels.birthplace' | translate)}}
-          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.geburtsort"></p-sortIcon>
+          <p-columnFilter type="text" field="personalien.birthplace" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.birthplace"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.staatsangehoerigkeit">
+        <th scope="col" pSortableColumn="personalien.nationality">
           {{('isyAngularWidgetsDemo.labels.nationality' | translate)}}
-          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.staatsangehoerigkeit"></p-sortIcon>
+          <p-columnFilter type="text" field="personalien.nationality" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.nationality"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geburtsdatum">
+        <th scope="col" pSortableColumn="personalien.birthDate">
           {{('isyAngularWidgetsDemo.labels.birthDate' | translate)}}
-          <p-columnFilter type="date" field="personalien.geburtsdatum" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.geburtsdatum"></p-sortIcon>
+          <p-columnFilter type="date" field="personalien.birthDate" display="menu"></p-columnFilter>
+          <p-sortIcon field="personalien.birthDate"></p-sortIcon>
         </th>
         <th scope="col">
           {{('isyAngularWidgetsDemo.labels.actions' | translate)}}
@@ -90,13 +90,13 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-person>
       <tr [pSelectableRow]="rowData">
-        <td>{{person.personalien.nachname}}</td>
-        <td>{{person.personalien.vorname}}</td>
-        <td>{{person.personalien.geschlecht}}</td>
-        <td>{{person.personalien.geburtsname}}</td>
-        <td>{{person.personalien.geburtsort}}</td>
-        <td>{{person.personalien.staatsangehoerigkeit}}</td>
-        <td>{{person.personalien.geburtsdatum}}</td>
+        <td>{{person.personalData.lastName}}</td>
+        <td>{{person.personalData.firstName}}</td>
+        <td>{{person.personalData.gender}}</td>
+        <td>{{person.personalData.birthName}}</td>
+        <td>{{person.personalData.birthplae}}</td>
+        <td>{{person.personalData.nationality}}</td>
+        <td>{{person.personalData.birthDate}}</td>
         <td>
           <p-button [icon]="'pi pi-pencil'"
                     [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"

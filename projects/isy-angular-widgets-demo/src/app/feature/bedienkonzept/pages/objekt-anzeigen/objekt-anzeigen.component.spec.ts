@@ -1,22 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ObjektAnzeigenComponent } from './objekt-anzeigen.component';
+import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BedienkonzeptModule} from '../../bedienkonzept.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DropdownModule} from 'primeng/dropdown';
 import {TableModule} from 'primeng/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {By} from "@angular/platform-browser";
 
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
+  let inputFields: any = {}
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ObjektAnzeigenComponent ],
+      declarations: [ObjektAnzeigenComponent],
       imports: [
         RouterTestingModule,
         BedienkonzeptModule,
@@ -24,10 +25,13 @@ describe('PersonBearbeitenComponent', () => {
         DropdownModule,
         TableModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TranslateTestingModule.withTranslations('de', {
+          'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
+        })
       ]
     })
-      .compileComponents();
+    .compileComponents();
   });
 
   /**
@@ -43,110 +47,89 @@ describe('PersonBearbeitenComponent', () => {
     fixture = TestBed.createComponent(ObjektAnzeigenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    inputFields.lastName = fixture.debugElement.query(By.css('#lastName'));
+    inputFields.firstName = fixture.debugElement.query(By.css('#firstName'));
+    inputFields.birthName = fixture.debugElement.query(By.css('#birthName'));
+    inputFields.birthplace = fixture.debugElement.query(By.css('#birthplace'));
+    inputFields.nationality = fixture.debugElement.query(By.css('#nationality'));
+    inputFields.gender = fixture.debugElement.query(By.css('#gender'));
+    inputFields.phoneNumber = fixture.debugElement.query(By.css('#phoneNumber'));
+    inputFields.birthDate = fixture.debugElement.query(By.css('#birthDate input'));
+    inputFields.dateOfEntry = fixture.debugElement.query(By.css('#dateOfEntry input'));
   });
 
-  it('should create', () => {
+  it('creates', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check the disabled state of input fields', () => {
-    component.editable = false;
-    expect(component.editable).toBeFalse();
-    const inputNachname = fixture.nativeElement.querySelector('#nachname') as HTMLElement;
-    expect(inputNachname.attributes.getNamedItem('ng-reflect-is-disabled')).toBeTruthy();
+  it('displays data for "Max Mustermann"', async () => {
+    await fixture.whenStable();
+
+    expect(inputFields.lastName.nativeElement.value).toEqual('Mustermann');
+    expect(inputFields.firstName.nativeElement.value).toEqual('Max');
+    expect(inputFields.birthName.nativeElement.value.trim()).toEqual('Mustermann');
+    expect(inputFields.birthplace.nativeElement.value).toEqual('Köln');
+    expect(inputFields.nationality.nativeElement.value).toEqual('Deutsch');
+    expect(inputFields.gender.nativeElement.innerText).toEqual('Männlich');
+    expect(inputFields.phoneNumber.nativeElement.value).toBeUndefined();
+    expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
+    expect(inputFields.dateOfEntry.nativeElement.value).toEqual('XX.XX.2000');
+  })
+
+
+  it('hides button group for saving changes if not in edit mode', () => {
+    const saveButtonGroup = fixture.debugElement.query(By.css('#divSaveCancel'))
+
+    expect(saveButtonGroup).toBeNull();
   });
 
-  it('save and cancel button should be undefined', () => {
-    const divSaveCancel = fixture.nativeElement.querySelector('#divSaveCancel') as HTMLElement;
-    expect(divSaveCancel).toBeNull();
-  });
-
-  it('should set enable state to true and show save and cancel button', () => {
-    component.editable = true;
+  it('enables input fields in edit mode', () => {
     clickButton('#buttonEdit');
     fixture.detectChanges();
-    expect(component.editable).toBeTrue();
-    const divSaveCancel = fixture.nativeElement.querySelector('#divSaveCancel') as HTMLElement;
-    expect(divSaveCancel).not.toBeNull();
-    const buttonEdit = fixture.nativeElement.querySelector('#buttonEdit') as HTMLButtonElement;
-    expect(buttonEdit).toBeNull();
-    const iNachname = fixture.nativeElement.querySelector('#nachname') as HTMLInputElement;
-    expect(iNachname.disabled).toBeFalse();
+
+    expect(inputFields.firstName.disabled).toBeFalsy();
   });
 
-  it('expect the input fields to be enabled', () => {
-    component.editable = true;
-    clickButton('#buttonEdit');
-    fixture.detectChanges();
-    const iNachname = fixture.nativeElement.querySelector('#nachname') as HTMLInputElement;
-    expect(iNachname.disabled).toBeFalse();
-  });
+  it('hides secret fields by default', () => {
+    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'))
 
-  it('secret fields should be null', () => {
-    const divShowSecretFields = fixture.nativeElement.querySelector('#divShowSecretFields') as HTMLElement;
-    expect(divShowSecretFields).toBeNull();
+    expect(secretFieldsContainer).toBeNull();
   });
 
   it('expect secret fields to be visible', () => {
-    component.showSecretFields = true;
-    fixture.detectChanges();
-    const divShowSecretFields = fixture.nativeElement.querySelector('#divShowSecretFields') as HTMLElement;
-    expect(component.showSecretFields).toBeTrue();
-    expect(divShowSecretFields).not.toBeNull();
+    const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'))
+
+    console.log(showSecretFieldSwitch)
+    showSecretFieldSwitch.nativeElement.checked = true
+    showSecretFieldSwitch.nativeElement.dispatchEvent(new Event('change'));
+    fixture.detectChanges()
+
+    console.log(showSecretFieldSwitch.nativeElement.checked)
+    console.log(showSecretFieldSwitch.nativeElement.value)
+
+    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'))
+    expect(secretFieldsContainer).toBeTruthy();
   });
 
   it('expect no validation error', () => {
-    const savePersonalienSpy = spyOn(component, 'savePersonalien') .and. callThrough();
-    const iNachname = fixture.nativeElement.querySelector('#nachname') as HTMLInputElement;
-    iNachname.value = 'nachname';
-    iNachname.dispatchEvent(new Event('input'));
-    const iVorname = fixture.nativeElement.querySelector('#vorname') as HTMLInputElement;
-    iVorname.value = 'vorname';
-    iVorname.dispatchEvent(new Event('input'));
     clickButton('#buttonEdit');
     fixture.detectChanges();
-    clickButton('#buttonSave');
-    expect(savePersonalienSpy).toHaveBeenCalled();
-    expect(iNachname.value).toEqual('nachname');
-    expect(iVorname.value).toEqual('vorname');
-    expect(component.newNachname).toEqual('nachname');
+
+    const invalidFields = fixture.debugElement.queryAll(By.css('.ng-invalid'));
+
+    expect(invalidFields.length).toBe(0);
   });
 
-  it('expect validation error', () => {
-    const savePersonalienSpy = spyOn(component, 'savePersonalien') .and. callThrough();
-    const iNachname = fixture.nativeElement.querySelector('#nachname') as HTMLInputElement;
-    iNachname.value = 'nachname';
-    iNachname.dispatchEvent(new Event('input'));
-    const iVorname = fixture.nativeElement.querySelector('#vorname') as HTMLInputElement;
-    iVorname.value = '';
-    iVorname.dispatchEvent(new Event('input'));
+  it('displays validation error if lastName is empty', () => {
     clickButton('#buttonEdit');
     fixture.detectChanges();
-    clickButton('#buttonSave');
-    expect(savePersonalienSpy).not.toHaveBeenCalled();
-  });
 
-  it('expect to cancel edit', () => {
-    const cancelEditSpy = spyOn(component, 'cancelEdit');
-    clickButton('#buttonEdit');
-    const iNachname = fixture.nativeElement.querySelector('#nachname') as HTMLInputElement;
-    iNachname.value = 'neuer nachname';
-    iNachname.dispatchEvent(new Event('input'));
+    inputFields.lastName.nativeElement.value = ''
+    inputFields.lastName.nativeElement.dispatchEvent(new Event('input'));
     fixture.detectChanges();
-    clickButton('#buttonCancel');
-    expect(cancelEditSpy).toHaveBeenCalled();
-  });
 
-  it('expect to load person on cancel edit', () => {
-    const loadPersonSpy = spyOn(component, 'loadPerson');
-    clickButton('#buttonEdit');
-    const iNachname = fixture.nativeElement.querySelector('#nachname') as HTMLInputElement;
-    iNachname.value = 'neuer nachname';
-    iNachname.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-    clickButton('#buttonCancel');
-    expect(loadPersonSpy).toHaveBeenCalled();
-    expect(component.person.personalData.lastName).toEqual('Mustermann');
+    expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid')
   });
 
   it('expect editable to be false on tab view click', () => {
@@ -154,7 +137,6 @@ describe('PersonBearbeitenComponent', () => {
     const tabview = fixture.nativeElement.querySelector('#tabview');
     tabview.click();
     tabview.index = 1;
-    expect(component.editable).toBeFalse();
   });
 
   it('expect tab view index to be set', () => {

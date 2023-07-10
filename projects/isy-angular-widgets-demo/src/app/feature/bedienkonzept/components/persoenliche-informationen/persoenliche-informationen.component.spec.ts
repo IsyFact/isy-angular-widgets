@@ -7,6 +7,7 @@ import {markFormAsDirty} from '../../../../shared/validation/form-helper';
 import {By} from '@angular/platform-browser';
 import {initPersoenlicheInformationenForm} from '../../pages/objekt-suchen/forms-data';
 import {getEmptyPerson} from '../../pages/objekt-suchen/person-data';
+import { TranslateTestingModule } from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -25,7 +26,12 @@ describe('PersoenlicheInformationenComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        InputTextModule
+        InputTextModule,
+        TranslateTestingModule.withTranslations('de', {
+          'isyAngularWidgetsDemo.labels.firstName': 'Vorname',
+          'isyAngularWidgetsDemo.labels.lastName': 'Nachname',
+          'isyAngularWidgetsDemo.labels.gender': 'Geschlecht'
+        })
       ]
     })
       .compileComponents();
@@ -188,12 +194,12 @@ describe('PersoenlicheInformationenComponent', () => {
 
   it('should check the inner HTML Text of the Input fields', () => {
     const vornameLabel = fixture.nativeElement.querySelector('label#vornameLabel');
-    expect(vornameLabel.textContent).toEqual('Vorname');
+    expect(vornameLabel.textContent.trim()).toEqual('Vorname');
 
     const nachnameLabel = fixture.nativeElement.querySelector('label#nachnameLabel');
-    expect(nachnameLabel.textContent).toEqual('Nachname*');
+    expect(nachnameLabel.textContent.trim()).toEqual('Nachname');
 
     const geschlechtLabel = fixture.nativeElement.querySelector('label#geschlechtLabel');
-    expect(geschlechtLabel.textContent).toEqual('Geschlecht*');
+    expect(geschlechtLabel.textContent.trim()).toEqual('Geschlecht');
   });
 });

@@ -23,6 +23,7 @@ import {DialogModule} from 'primeng/dialog';
 import {DateService} from '../../services/date.service';
 import {Observable} from 'rxjs';
 import {NotificationService} from '../../../../shared/services/notification.service';
+import { TranslateTestingModule } from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
 // for HTML tests
@@ -207,7 +208,8 @@ describe('PersonenSuchenComponent', () => {
         RouterTestingModule,
         BrowserAnimationsModule,
         PanelModule,
-        DialogModule
+        DialogModule,
+        TranslateTestingModule.withTranslations({})
       ],
       providers: [
         SecurityService,

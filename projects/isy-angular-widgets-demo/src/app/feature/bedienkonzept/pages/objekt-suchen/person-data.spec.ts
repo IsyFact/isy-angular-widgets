@@ -18,7 +18,7 @@ describe('person-data', () => {
     expect(person.personalData.securityLevel).toEqual(0);
     expect(person.personalData.intelligenceNotes).toEqual('');
     expect(person.personalData.dateOfEntry).toEqual('XX-XX-XXXX');
-    expect(person.facts.liste).toEqual([]);
+    expect(person.facts).toEqual([]);
   });
 
   it('should check the reset of a person', () => {
@@ -26,7 +26,7 @@ describe('person-data', () => {
     person.personalData.idRequired = false;
     person.personalData.securityLevel = 1;
     person.personalData.dateOfEntry = '01-01-2022';
-    person.facts.liste = [
+    person.facts = [
       'a',
       'b'
     ];
@@ -45,6 +45,6 @@ describe('person-data', () => {
     expect(person.personalData.securityLevel).toEqual(0);
     expect(person.personalData.intelligenceNotes).toEqual('');
     expect(person.personalData.dateOfEntry).toEqual('XX-XX-XXXX');
-    expect(person.facts.liste).toEqual([]);
+    expect(person.facts).toEqual([]);
   });
 });

@@ -6,6 +6,7 @@ import {SecurityService} from '../../../isy-angular-widgets/src/lib/security/sec
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TranslateTestingModule } from 'ngx-translate-testing';
 
 describe('AppComponent', () => {
   let app: AppComponent;
@@ -16,7 +17,8 @@ describe('AppComponent', () => {
         RouterTestingModule,
         HauptfensterModule,
         PanelMenuModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        TranslateTestingModule.withTranslations({})
       ],
       declarations: [
         AppComponent

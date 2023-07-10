@@ -21,6 +21,7 @@ import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
+import { TranslateTestingModule } from 'ngx-translate-testing';
 
 const crypto = window.crypto
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -69,7 +70,8 @@ describe('InputCharComponent', () => {
           ButtonModule,
           SelectButtonModule,
           FormsModule,
-          BrowserAnimationsModule
+          BrowserAnimationsModule,
+          TranslateTestingModule.withTranslations({})
         ],
         providers: [
           CharacterService

@@ -111,7 +111,8 @@ export class PersonenService {
 
   findPersonById(id: string): Observable<Person[]> {
     return of<Person[]>([{
-      id: id, personalData: {
+      id: id,
+      personalData: {
         lastName: 'Wilhelm',
         firstName: 'Frederik',
         gender: 'x',
