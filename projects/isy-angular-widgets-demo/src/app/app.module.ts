@@ -21,6 +21,7 @@ import {AccordionModule} from "primeng/accordion";
 import {DropdownModule} from "primeng/dropdown";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {MegaMenuModule} from "primeng/megamenu";
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
         deps: [HttpClient]
       }
     }),
+    MegaMenuModule,
   ],
   providers: [AuthGuard, UserInfoPublicService, {provide: UserInfoService, useClass: UserInfoPublicService}, SecurityService],
   bootstrap: [AppComponent]
