@@ -36,8 +36,13 @@
     </div>
   </div>
 
-  <p-megaMenu [model]="items" class="dont-print"></p-megaMenu>
-  <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
+  <p-megaMenu [model]="items" class="dont-print" styleClass="flex">
+    <ng-template pTemplate="end">
+      <ng-content select="[Hauptnavigation-Tools]"></ng-content>
+    </ng-template>
+  </p-megaMenu>
+  <div class="isy-hauptfenster-titelzeile p-2"
+       [style]="'background-color:' + applicationGroupColor + ';'">
     <div *ngIf="title; else customTitelzeile">{{title}}</div>
     <ng-template #customTitelzeile>
       <ng-content select="[Titelzeile]"></ng-content>
