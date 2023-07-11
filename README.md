@@ -9,7 +9,7 @@ Zusätzlich beinhaltet das Projekt die Beispielanwendung `isy-angular-widget-dem
 
 ## Getting Started
 
-Mit folgendem Befehl wird die Bibliothek `isy-angular-widget` zu einem bestehenden Angular Projekt hinzugefügt.
+Mit folgendem Befehl wird die Bibliothek `isy-angular-widgets` zu einem bestehenden Angular Projekt hinzugefügt.
 
 ```
 $ ng add @isyfact/isy-angular-widgets
