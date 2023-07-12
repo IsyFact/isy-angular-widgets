@@ -5,6 +5,8 @@
 - IFS-2010: Header und Seitenleisten werden in der Druckansicht jetzt ausgeblendet
 - IFS-XXXX: Anwendungslogos können jetzt mit eigenem HTML gesetzt werden
 - IFS-XXXX: Seitenleisten können jetzt in ihrer Breite frei konfiguriert werden
+## Fixes
+- IFS-XXXX: Seitenleisten werden nun korrekt ausgeblendet, wenn ihr show-Property false, aber collapse-Property true ist
 
 # 0.8.0 - 15.05.2023
 ## Breaking Changes
