@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MegaMenuItem} from 'primeng/api';
 import {UserInfo} from '../api/userinfo';
+import {MenuTranslationService} from "../i18n/menu-translation.service";
+import {TranslateService} from "@ngx-translate/core";
 
 /**
  * The Anwendungsrahmen that contains general, application independent elements as logos or navigation bars.
@@ -81,4 +83,15 @@ export class HauptfensterComponent   {
   @Input() informationsbereichWidth = "15em";
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
+
+  translatedItems : MegaMenuItem[] = []
+
+  constructor(
+    private menuTranslationService: MenuTranslationService,
+    private translate: TranslateService
+  ) {
+    this.translate.onLangChange.subscribe(async () => {
+      this.translatedItems = await this.menuTranslationService.translateMegaMenuItems(this.items);
+    });
+  }
 }

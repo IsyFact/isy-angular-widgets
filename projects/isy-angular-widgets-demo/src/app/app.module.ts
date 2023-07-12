@@ -22,6 +22,9 @@ import {DropdownModule} from "primeng/dropdown";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {MegaMenuModule} from "primeng/megamenu";
+import {
+  MenuTranslationService
+} from "../../../isy-angular-widgets/src/lib/i18n/menu-translation.service";
 
 @NgModule({
   declarations: [
@@ -54,7 +57,13 @@ import {MegaMenuModule} from "primeng/megamenu";
     }),
     MegaMenuModule,
   ],
-  providers: [AuthGuard, UserInfoPublicService, {provide: UserInfoService, useClass: UserInfoPublicService}, SecurityService],
+  providers: [
+    AuthGuard,
+    UserInfoPublicService,
+    {provide: UserInfoService, useClass: UserInfoPublicService},
+    SecurityService,
+    MenuTranslationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
