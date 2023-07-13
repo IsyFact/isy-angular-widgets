@@ -24,6 +24,14 @@ module.exports = {
     },
     {
       "files": [
+        "*.spec.ts"
+      ],
+      "extends": [
+        "plugin:@isyfact/test"
+      ]
+    },
+    {
+      "files": [
         "*.html"
       ],
       "extends": [
