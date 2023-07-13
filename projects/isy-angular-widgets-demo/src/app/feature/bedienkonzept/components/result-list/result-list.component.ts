@@ -12,7 +12,6 @@ export class ResultListComponent {
   @Input() selectedObject?: Person;
   @Input() loading!: boolean;
 
-
   /**
    * An event emitter that informs about the creation of a new data record
    */

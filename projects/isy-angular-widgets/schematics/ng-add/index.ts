@@ -18,10 +18,10 @@ export function ngAdd(): Rule {
     addPackageToPackageJson(tree, '@ngx-translate/http-loader', `^7.0.0`);
     addPackageToPackageJson(tree, "@angular/common",  "^14.2.4");
     addPackageToPackageJson(tree, "@angular/core", "^14.2.4");
-    addPackageToPackageJson(tree,  "primeicons", "^6.0.1");
-    addPackageToPackageJson(tree,  "primeng", "^14.1.2");
-    addPackageToPackageJson(tree,  "primeflex", "^3.2.1");
-    addPackageToPackageJson(tree,   "moment",  "^2.29.4");
+    addPackageToPackageJson(tree, "primeicons", "^6.0.1");
+    addPackageToPackageJson(tree, "primeng", "^14.1.2");
+    addPackageToPackageJson(tree, "primeflex", "^3.2.1");
+    addPackageToPackageJson(tree, "moment",  "^2.29.4");
 
     // Install isy-angular-widgets
     context.addTask(new NodePackageInstallTask());

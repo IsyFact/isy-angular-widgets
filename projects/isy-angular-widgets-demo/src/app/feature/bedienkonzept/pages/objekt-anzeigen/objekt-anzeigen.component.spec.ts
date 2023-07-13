@@ -100,13 +100,9 @@ describe('PersonBearbeitenComponent', () => {
   it('expect secret fields to be visible', () => {
     const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'))
 
-    console.log(showSecretFieldSwitch)
     showSecretFieldSwitch.nativeElement.checked = true
     showSecretFieldSwitch.nativeElement.dispatchEvent(new Event('change'));
     fixture.detectChanges()
-
-    console.log(showSecretFieldSwitch.nativeElement.checked)
-    console.log(showSecretFieldSwitch.nativeElement.value)
 
     const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'))
     expect(secretFieldsContainer).toBeTruthy();
@@ -132,12 +128,6 @@ describe('PersonBearbeitenComponent', () => {
     expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid')
   });
 
-  it('expect editable to be false on tab view click', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const tabview = fixture.nativeElement.querySelector('#tabview');
-    tabview.click();
-    tabview.index = 1;
-  });
 
   it('expect tab view index to be set', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

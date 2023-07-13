@@ -9,7 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
 import {Component, QueryList, ViewChild} from '@angular/core';
-import { TranslateTestingModule } from 'ngx-translate-testing';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
 const width = 50;
 const height = 30;

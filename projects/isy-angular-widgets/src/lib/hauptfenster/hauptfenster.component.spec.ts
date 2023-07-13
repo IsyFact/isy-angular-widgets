@@ -4,7 +4,7 @@ import {HauptfensterComponent} from './hauptfenster.component';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {ButtonModule} from 'primeng/button';
 import {Component, Input, ViewChild} from '@angular/core';
-import { TranslateTestingModule } from 'ngx-translate-testing';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -43,7 +43,7 @@ describe('HauptfensterComponent', () => {
       .compileComponents();
   });
 
-  beforeEach(()=> {
+  beforeEach(() => {
     fixture = TestBed.createComponent(HauptfensterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
