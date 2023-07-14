@@ -113,12 +113,12 @@ export class PersonenService {
     return of<Person[]>([{
       id: id,
       personalData: {
-        lastName: 'Wilhelm',
-        firstName: 'Frederik',
-        gender: 'x',
-        birthDate: '01.01.1337',
-        birthplace: 'England',
-        nationality: 'Französisch',
+        nachname: 'Wilhelm',
+        vorname: 'Frederik',
+        geschlecht: 'x',
+        geburtsdatum: '01.01.1337',
+        geburtsort: 'England',
+        staatsangehoerigkeit: 'Französisch',
         birthName: 'Franziska',
         idRequired: true,
         phoneNumber: '',
@@ -126,7 +126,7 @@ export class PersonenService {
         intelligenceNotes: '',
         dateOfEntry: 'XX-XX-XXXX'
       },
-      facts: []
+      liste: []
     }]);
   }
 
@@ -146,24 +146,24 @@ export class PersonenService {
   }
 
   searchParametersAvailable(person: Person): boolean {
-    return person.personalData.lastName !== ''
-      || person.personalData.firstName !== ''
-      || person.personalData.gender !== ''
-      || person.personalData.birthDate !== ''
-      || person.personalData.birthplace !== ''
-      || !(person.personalData.nationality === '' || person.personalData.nationality === null)
+    return person.personalData.nachname !== ''
+      || person.personalData.vorname !== ''
+      || person.personalData.geschlecht !== ''
+      || person.personalData.geburtsdatum !== ''
+      || person.personalData.geburtsort !== ''
+      || !(person.personalData.staatsangehoerigkeit === '' || person.personalData.staatsangehoerigkeit === null)
       || person.personalData.birthName !== '';
   }
 
   generatePerson(): Person {
     return {
       id: this.rng().toString(), personalData: {
-        lastName: this.nachname[this.rng()],
-        firstName: this.vorname[this.rng()],
-        gender: 'x',
-        birthDate: '01.01.1337',
-        birthplace: this.staaten[this.rng()],
-        nationality: this.staaten[this.rng()],
+        nachname: this.nachname[this.rng()],
+        vorname: this.vorname[this.rng()],
+        geschlecht: 'x',
+        geburtsdatum: '01.01.1337',
+        geburtsort: this.staaten[this.rng()],
+        staatsangehoerigkeit: this.staaten[this.rng()],
         birthName: this.nachname[this.rng()],
         idRequired: true,
         phoneNumber: '',
@@ -171,28 +171,28 @@ export class PersonenService {
         intelligenceNotes: '',
         dateOfEntry: 'XX-XX-XXXX'
       },
-      facts: []
+      liste: []
     };
   }
 
   mergePersons(suche: Person, generiert: Person): Person {
-    if (suche.personalData.lastName !== '') {
-      generiert.personalData.lastName = suche.personalData.lastName;
+    if (suche.personalData.nachname !== '') {
+      generiert.personalData.nachname = suche.personalData.nachname;
     }
-    if (suche.personalData.firstName !== '') {
-      generiert.personalData.firstName = suche.personalData.firstName;
+    if (suche.personalData.vorname !== '') {
+      generiert.personalData.vorname = suche.personalData.vorname;
     }
-    if (suche.personalData.gender !== '') {
-      generiert.personalData.gender = suche.personalData.gender;
+    if (suche.personalData.geschlecht !== '') {
+      generiert.personalData.geschlecht = suche.personalData.geschlecht;
     }
-    if (suche.personalData.birthDate) {
-      generiert.personalData.birthDate = suche.personalData.birthDate;
+    if (suche.personalData.geburtsdatum) {
+      generiert.personalData.geburtsdatum = suche.personalData.geburtsdatum;
     }
-    if (suche.personalData.birthplace !== '') {
-      generiert.personalData.birthplace = suche.personalData.birthplace;
+    if (suche.personalData.geburtsort !== '') {
+      generiert.personalData.geburtsort = suche.personalData.geburtsort;
     }
-    if (suche.personalData.nationality !== '' && suche.personalData.nationality !== null) {
-      generiert.personalData.nationality = suche.personalData.nationality;
+    if (suche.personalData.staatsangehoerigkeit !== '' && suche.personalData.staatsangehoerigkeit !== null) {
+      generiert.personalData.staatsangehoerigkeit = suche.personalData.staatsangehoerigkeit;
     }
     if (suche.personalData.birthName !== '') {
       generiert.personalData.birthName = suche.personalData.birthName;

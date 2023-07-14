@@ -24,20 +24,20 @@ export class ObjektAnzeigenComponent {
   @Input() person: Person = {
     id: '1',
     personalData: {
-      birthDate: '03.08.1980',
+      geburtsdatum: '03.08.1980',
       birthName: ' Mustermann',
-      birthplace: 'Köln',
-      gender: 'Männlich',
-      lastName: 'Mustermann',
-      nationality: 'Deutsch',
-      firstName: 'Max',
+      geburtsort: 'Köln',
+      geschlecht: 'Männlich',
+      nachname: 'Mustermann',
+      staatsangehoerigkeit: 'Deutsch',
+      vorname: 'Max',
       idRequired: true,
       phoneNumber: '',
       intelligenceNotes: '',
       securityLevel: 0,
       dateOfEntry: 'XX-XX-2000'
     },
-    facts: [
+    liste: [
       'Hat einen Antrag auf BAFÖG gestellt',
       'Wurde wegen Falschparkens ermahnt',
       'Steht auf der NO-FLY-Liste'
@@ -52,13 +52,13 @@ export class ObjektAnzeigenComponent {
     private messageService: MessageService
   ) {
     this.personalInfoForm = this.fb.group({
-      lastName: new FormControl(this.person.personalData.lastName, Validators.required),
+      lastName: new FormControl(this.person.personalData.nachname, Validators.required),
       birthName: new FormControl(this.person.personalData.birthName),
-      birthplace: new FormControl(this.person.personalData.birthplace),
-      firstName: new FormControl(this.person.personalData.firstName, Validators.required),
-      gender: new FormControl(this.person.personalData.gender),
-      birthDate: new FormControl(this.person.personalData.birthDate),
-      nationality: new FormControl(this.person.personalData.nationality),
+      birthplace: new FormControl(this.person.personalData.geburtsort),
+      firstName: new FormControl(this.person.personalData.vorname, Validators.required),
+      gender: new FormControl(this.person.personalData.geschlecht),
+      birthDate: new FormControl(this.person.personalData.geburtsdatum),
+      nationality: new FormControl(this.person.personalData.staatsangehoerigkeit),
       phoneNumber: new FormControl(this.person.personalData.phoneNumber),
       dateOfEntry: new FormControl(this.person.personalData.dateOfEntry),
       idRequired: new FormControl(this.person.personalData.idRequired),

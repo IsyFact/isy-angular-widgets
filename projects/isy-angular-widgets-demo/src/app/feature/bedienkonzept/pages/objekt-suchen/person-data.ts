@@ -8,19 +8,19 @@ export function getEmptyPerson(): Person {
   return {
     id: '',
     personalData: {
-      lastName: '',
-      firstName: '',
-      gender: '',
-      birthDate: '',
-      birthplace: '',
-      nationality: '',
+      nachname: '',
+      vorname: '',
+      geschlecht: '',
+      geburtsdatum: '',
+      geburtsort: '',
+      staatsangehoerigkeit: '',
       birthName: '',
       idRequired: true,
       phoneNumber: '',
       securityLevel: 0,
       intelligenceNotes: '',
       dateOfEntry: 'XX-XX-XXXX'
-    }, facts: []
+    }, liste: []
   };
 }
 
@@ -30,17 +30,17 @@ export function getEmptyPerson(): Person {
  */
 export function resetPerson(person: Person): void {
   person.id = '';
-  person.personalData.lastName = '';
-  person.personalData.firstName = '';
-  person.personalData.gender = '';
-  person.personalData.birthDate = '';
-  person.personalData.birthplace = '';
-  person.personalData.nationality = '';
+  person.personalData.nachname = '';
+  person.personalData.vorname = '';
+  person.personalData.geschlecht = '';
+  person.personalData.geburtsdatum = '';
+  person.personalData.geburtsort = '';
+  person.personalData.staatsangehoerigkeit = '';
   person.personalData.birthName = '';
   person.personalData.idRequired = true;
   person.personalData.phoneNumber = '';
   person.personalData.securityLevel = 0;
   person.personalData.intelligenceNotes = '';
   person.personalData.dateOfEntry = 'XX-XX-XXXX';
-  person.facts = [];
+  person.liste = [];
 }

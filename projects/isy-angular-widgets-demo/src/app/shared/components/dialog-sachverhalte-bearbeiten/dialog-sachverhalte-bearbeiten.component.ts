@@ -19,14 +19,14 @@ export class DialogSachverhalteBearbeitenComponent implements OnChanges {
     if (this.person === undefined) {
       return;
     }
-    this.newSachverhalteListe = Object.assign([], this.person.facts);
+    this.newSachverhalteListe = Object.assign([], this.person.liste);
   }
 
   saveSachverhalte(): void {
     if (this.person === undefined) {
       return;
     }
-    this.person.facts = this.newSachverhalteListe;
+    this.person.liste = this.newSachverhalteListe;
     this.closeDialog();
   }
 

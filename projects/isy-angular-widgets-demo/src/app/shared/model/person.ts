@@ -4,19 +4,19 @@
 export interface Person {
   id: string;
   personalData: Personalien,
-  facts: string[]
+  liste: string[]
 }
 
 /**
  * An interface that defines a person's personal details.
  */
 export interface Personalien {
-  lastName: string;
-  firstName: string;
-  gender: string;
-  birthDate: string;
-  birthplace: string;
-  nationality: string;
+  nachname: string;
+  vorname: string;
+  geschlecht: string;
+  geburtsdatum: string;
+  geburtsort: string;
+  staatsangehoerigkeit: string;
   birthName: string;
   idRequired: boolean;
   phoneNumber: string;
