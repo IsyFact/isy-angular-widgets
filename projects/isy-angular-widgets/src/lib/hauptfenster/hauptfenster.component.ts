@@ -90,7 +90,7 @@ export class HauptfensterComponent   {
     private menuTranslationService: MenuTranslationService,
     private translate: TranslateService
   ) {
-    this.translate.onLangChange.subscribe(async () => {
+    this.translate.onLangChange.subscribe(async() => {
       this.translatedItems = await this.menuTranslationService.translateMegaMenuItems(this.items);
     });
   }

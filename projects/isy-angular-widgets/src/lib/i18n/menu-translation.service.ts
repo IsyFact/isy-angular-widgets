@@ -35,12 +35,12 @@ export class MenuTranslationService {
   public async translateMenuItems(items: MenuItem[]): Promise<MenuItem[]> {
     const translatedItems = [];
 
-    for(const untranslatedItem of items) {
+    for (const untranslatedItem of items) {
       const translatedItem = Object.assign({}, untranslatedItem);
 
       translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string));
 
-      if(translatedItem.items) {
+      if (translatedItem.items) {
         translatedItem.items = await this.translateMenuItems(translatedItem.items);
       }
 

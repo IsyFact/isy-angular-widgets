@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   // Change language and save it in local storage
-  changeLanguage(language: string) {
+  changeLanguage(language: string):void {
     this.translate.use(language);
   }
 
@@ -52,11 +52,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.changeLanguage(this.selectedLanguage);
 
-    this.translate.onLangChange.subscribe(async () => {
+    this.translate.onLangChange.subscribe(async() => {
       this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
     });
   }
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.primeNGI18nSubscription) {
       this.primeNGI18nSubscription.unsubscribe();
     }
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit, OnDestroy {
     displayName: 'Max Mustermann'
   };
 
-  getLanguageIcon(language: string) {
+  getLanguageIcon(language: string): string {
     switch (language) {
       case 'en':
         return 'gb';

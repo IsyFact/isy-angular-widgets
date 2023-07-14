@@ -55,7 +55,7 @@ import {
         deps: [HttpClient]
       }
     }),
-    MegaMenuModule,
+    MegaMenuModule
   ],
   providers: [
     AuthGuard,

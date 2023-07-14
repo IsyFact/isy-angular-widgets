@@ -34,6 +34,6 @@ export class ResultListComponent {
   }
 
   emitCreateAction(): void {
-      this.create.emit();
+    this.create.emit();
   }
 }

@@ -28,7 +28,7 @@ describe('InputCharViewComponent', () => {
       ],
       imports: [
         ButtonModule,
-        TranslateTestingModule.withTranslations('de',{
+        TranslateTestingModule.withTranslations('de', {
           'isyAngularWidgets.inputChar.insert': 'Einfügen'
         })
       ]

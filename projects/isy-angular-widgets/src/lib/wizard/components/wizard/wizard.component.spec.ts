@@ -64,18 +64,18 @@ describe('Test WizardComponent with Mock Parent: ', () => {
   let parentComponent: TestComponent;
   let parentFixture: ComponentFixture<TestComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         TestComponent
       ],
       imports: [
-        TranslateTestingModule.withTranslations('de',{
+        TranslateTestingModule.withTranslations('de', {
           'isyAngularWidgets.hauptfenster.logout': 'Abmelden'
         })
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   /**
@@ -227,7 +227,7 @@ describe('Test WizardComponent with Mock Parent: ', () => {
     closeButton.click();
   }
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         WizardComponent,
