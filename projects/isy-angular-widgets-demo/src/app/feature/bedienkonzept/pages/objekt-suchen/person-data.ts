@@ -14,12 +14,12 @@ export function getEmptyPerson(): Person {
       geburtsdatum: '',
       geburtsort: '',
       staatsangehoerigkeit: '',
-      birthName: '',
-      idRequired: true,
-      phoneNumber: '',
-      securityLevel: 0,
-      intelligenceNotes: '',
-      dateOfEntry: 'XX-XX-XXXX'
+      geburtsname: '',
+      ausweispflichtig: true,
+      telefonnummer: '',
+      sicherheitsstufe: 0,
+      geheimdienstnotizen: '',
+      einreisedatum: 'XX-XX-XXXX'
     }, liste: []
   };
 }
@@ -36,11 +36,11 @@ export function resetPerson(person: Person): void {
   person.personalData.geburtsdatum = '';
   person.personalData.geburtsort = '';
   person.personalData.staatsangehoerigkeit = '';
-  person.personalData.birthName = '';
-  person.personalData.idRequired = true;
-  person.personalData.phoneNumber = '';
-  person.personalData.securityLevel = 0;
-  person.personalData.intelligenceNotes = '';
-  person.personalData.dateOfEntry = 'XX-XX-XXXX';
+  person.personalData.geburtsname = '';
+  person.personalData.ausweispflichtig = true;
+  person.personalData.telefonnummer = '';
+  person.personalData.sicherheitsstufe = 0;
+  person.personalData.geheimdienstnotizen = '';
+  person.personalData.einreisedatum = 'XX-XX-XXXX';
   person.liste = [];
 }

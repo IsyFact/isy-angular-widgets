@@ -17,12 +17,12 @@ export interface Personalien {
   geburtsdatum: string;
   geburtsort: string;
   staatsangehoerigkeit: string;
-  birthName: string;
-  idRequired: boolean;
-  phoneNumber: string;
-  securityLevel: number;
-  intelligenceNotes: string;
-  dateOfEntry: string;
+  geburtsname: string;
+  ausweispflichtig: boolean;
+  telefonnummer: string;
+  sicherheitsstufe: number;
+  geheimdienstnotizen: string;
+  einreisedatum: string;
 }
 
 /**

@@ -93,7 +93,7 @@ describe('PersonenSuchenComponent', () => {
     expect(person.personalData.vorname).toEqual(emptyEntry);
     expect(person.personalData.nachname).toEqual(emptyEntry);
     expect(person.personalData.geschlecht).toEqual(emptyEntry);
-    expect(person.personalData.birthName).toEqual(emptyEntry);
+    expect(person.personalData.geburtsname).toEqual(emptyEntry);
     expect(person.personalData.geburtsort).toEqual(emptyEntry);
     expect(person.personalData.geburtsdatum).toEqual(emptyEntry);
     expect(person.personalData.staatsangehoerigkeit).toEqual(emptyEntry);
@@ -127,7 +127,7 @@ describe('PersonenSuchenComponent', () => {
     person.id = '0';
     person.personalData.vorname = 'vorname';
     person.personalData.nachname = 'nachname';
-    person.personalData.birthName = 'geburtsname';
+    person.personalData.geburtsname = 'geburtsname';
     person.personalData.geschlecht = 'geschlecht';
     person.personalData.geburtsort = 'geburtsort';
     person.personalData.geburtsdatum = '01.01.2023';
@@ -171,7 +171,7 @@ describe('PersonenSuchenComponent', () => {
     editForm.controls.editID.setValue(person.id);
     editForm.controls.editVorname.setValue(person.personalData.vorname);
     editForm.controls.editNachname.setValue(person.personalData.nachname);
-    editForm.controls.editGeburtsname.setValue(person.personalData.birthName);
+    editForm.controls.editGeburtsname.setValue(person.personalData.geburtsname);
     editForm.controls.editGeschlecht.setValue(person.personalData.geschlecht);
     editForm.controls.editGeburtsort.setValue(person.personalData.geburtsort);
     editForm.controls.editGeburtsdatum.setValue(person.personalData.geburtsdatum);
@@ -538,7 +538,7 @@ describe('PersonenSuchenComponent', () => {
     expect(persoenlicheInfoForm.controls.geschlecht.value).toEqual(newPerson.personalData.geschlecht);
 
     const geburtsInfoForm = component.geburtsInformationenForm;
-    expect(geburtsInfoForm.controls.geburtsname.value).toEqual(newPerson.personalData.birthName);
+    expect(geburtsInfoForm.controls.geburtsname.value).toEqual(newPerson.personalData.geburtsname);
     expect(geburtsInfoForm.controls.geburtsort.value).toEqual(newPerson.personalData.geburtsort);
     expect(geburtsInfoForm.controls.geburtsdatum.value).toEqual(newPerson.personalData.geburtsdatum);
     expect(geburtsInfoForm.controls.staatsangehoerigkeit.value).toEqual(newPerson.personalData.staatsangehoerigkeit);

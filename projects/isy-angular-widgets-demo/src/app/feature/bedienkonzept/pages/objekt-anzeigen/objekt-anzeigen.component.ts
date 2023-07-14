@@ -25,17 +25,17 @@ export class ObjektAnzeigenComponent {
     id: '1',
     personalData: {
       geburtsdatum: '03.08.1980',
-      birthName: ' Mustermann',
+      geburtsname: ' Mustermann',
       geburtsort: 'Köln',
       geschlecht: 'Männlich',
       nachname: 'Mustermann',
       staatsangehoerigkeit: 'Deutsch',
       vorname: 'Max',
-      idRequired: true,
-      phoneNumber: '',
-      intelligenceNotes: '',
-      securityLevel: 0,
-      dateOfEntry: 'XX-XX-2000'
+      ausweispflichtig: true,
+      telefonnummer: '',
+      geheimdienstnotizen: '',
+      sicherheitsstufe: 0,
+      einreisedatum: 'XX-XX-2000'
     },
     liste: [
       'Hat einen Antrag auf BAFÖG gestellt',
@@ -53,17 +53,17 @@ export class ObjektAnzeigenComponent {
   ) {
     this.personalInfoForm = this.fb.group({
       lastName: new FormControl(this.person.personalData.nachname, Validators.required),
-      birthName: new FormControl(this.person.personalData.birthName),
+      birthName: new FormControl(this.person.personalData.geburtsname),
       birthplace: new FormControl(this.person.personalData.geburtsort),
       firstName: new FormControl(this.person.personalData.vorname, Validators.required),
       gender: new FormControl(this.person.personalData.geschlecht),
       birthDate: new FormControl(this.person.personalData.geburtsdatum),
       nationality: new FormControl(this.person.personalData.staatsangehoerigkeit),
-      phoneNumber: new FormControl(this.person.personalData.phoneNumber),
-      dateOfEntry: new FormControl(this.person.personalData.dateOfEntry),
-      idRequired: new FormControl(this.person.personalData.idRequired),
-      securityLevel: new FormControl(this.person.personalData.securityLevel),
-      intelligenceNotes: new FormControl(this.person.personalData.intelligenceNotes, Validators.maxLength(this.intelligenceNotesMaxLength))
+      phoneNumber: new FormControl(this.person.personalData.telefonnummer),
+      dateOfEntry: new FormControl(this.person.personalData.einreisedatum),
+      idRequired: new FormControl(this.person.personalData.ausweispflichtig),
+      securityLevel: new FormControl(this.person.personalData.sicherheitsstufe),
+      intelligenceNotes: new FormControl(this.person.personalData.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength))
     });
     this.personalInfoForm.disable()
   }

@@ -119,12 +119,12 @@ export class PersonenService {
         geburtsdatum: '01.01.1337',
         geburtsort: 'England',
         staatsangehoerigkeit: 'Französisch',
-        birthName: 'Franziska',
-        idRequired: true,
-        phoneNumber: '',
-        securityLevel: 0,
-        intelligenceNotes: '',
-        dateOfEntry: 'XX-XX-XXXX'
+        geburtsname: 'Franziska',
+        ausweispflichtig: true,
+        telefonnummer: '',
+        sicherheitsstufe: 0,
+        geheimdienstnotizen: '',
+        einreisedatum: 'XX-XX-XXXX'
       },
       liste: []
     }]);
@@ -152,7 +152,7 @@ export class PersonenService {
       || person.personalData.geburtsdatum !== ''
       || person.personalData.geburtsort !== ''
       || !(person.personalData.staatsangehoerigkeit === '' || person.personalData.staatsangehoerigkeit === null)
-      || person.personalData.birthName !== '';
+      || person.personalData.geburtsname !== '';
   }
 
   generatePerson(): Person {
@@ -164,12 +164,12 @@ export class PersonenService {
         geburtsdatum: '01.01.1337',
         geburtsort: this.staaten[this.rng()],
         staatsangehoerigkeit: this.staaten[this.rng()],
-        birthName: this.nachname[this.rng()],
-        idRequired: true,
-        phoneNumber: '',
-        securityLevel: 0,
-        intelligenceNotes: '',
-        dateOfEntry: 'XX-XX-XXXX'
+        geburtsname: this.nachname[this.rng()],
+        ausweispflichtig: true,
+        telefonnummer: '',
+        sicherheitsstufe: 0,
+        geheimdienstnotizen: '',
+        einreisedatum: 'XX-XX-XXXX'
       },
       liste: []
     };
@@ -194,8 +194,8 @@ export class PersonenService {
     if (suche.personalData.staatsangehoerigkeit !== '' && suche.personalData.staatsangehoerigkeit !== null) {
       generiert.personalData.staatsangehoerigkeit = suche.personalData.staatsangehoerigkeit;
     }
-    if (suche.personalData.birthName !== '') {
-      generiert.personalData.birthName = suche.personalData.birthName;
+    if (suche.personalData.geburtsname !== '') {
+      generiert.personalData.geburtsname = suche.personalData.geburtsname;
     }
     return generiert;
   }
