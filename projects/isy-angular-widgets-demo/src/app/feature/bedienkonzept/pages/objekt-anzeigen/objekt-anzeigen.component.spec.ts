@@ -13,9 +13,9 @@ import {By} from '@angular/platform-browser';
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
-  let inputFields: any = {}
+  const inputFields: any = {};
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [ObjektAnzeigenComponent],
       imports: [
@@ -31,7 +31,7 @@ describe('PersonBearbeitenComponent', () => {
         })
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   /**
@@ -75,11 +75,11 @@ describe('PersonBearbeitenComponent', () => {
     expect(inputFields.phoneNumber.nativeElement.value).toBeUndefined();
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('XX.XX.2000');
-  })
+  });
 
 
   it('hides button group for saving changes if not in edit mode', () => {
-    const saveButtonGroup = fixture.debugElement.query(By.css('#divSaveCancel'))
+    const saveButtonGroup = fixture.debugElement.query(By.css('#divSaveCancel'));
 
     expect(saveButtonGroup).toBeNull();
   });
@@ -92,19 +92,19 @@ describe('PersonBearbeitenComponent', () => {
   });
 
   it('hides secret fields by default', () => {
-    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'))
+    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'));
 
     expect(secretFieldsContainer).toBeNull();
   });
 
   it('expect secret fields to be visible', () => {
-    const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'))
+    const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'));
 
-    showSecretFieldSwitch.nativeElement.checked = true
+    showSecretFieldSwitch.nativeElement.checked = true;
     showSecretFieldSwitch.nativeElement.dispatchEvent(new Event('change'));
-    fixture.detectChanges()
+    fixture.detectChanges();
 
-    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'))
+    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'));
     expect(secretFieldsContainer).toBeTruthy();
   });
 
@@ -121,11 +121,11 @@ describe('PersonBearbeitenComponent', () => {
     clickButton('#buttonEdit');
     fixture.detectChanges();
 
-    inputFields.lastName.nativeElement.value = ''
+    inputFields.lastName.nativeElement.value = '';
     inputFields.lastName.nativeElement.dispatchEvent(new Event('input'));
     fixture.detectChanges();
 
-    expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid')
+    expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid');
   });
 
 

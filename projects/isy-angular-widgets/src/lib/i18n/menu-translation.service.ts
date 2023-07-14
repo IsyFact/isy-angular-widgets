@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
-import {MegaMenuItem, MenuItem} from "primeng/api";
-import {firstValueFrom} from "rxjs";
+import {TranslateService} from '@ngx-translate/core';
+import {MegaMenuItem, MenuItem} from 'primeng/api';
+import {firstValueFrom} from 'rxjs';
 
 /**
  * A service to translate labels of {@link MenuItem} or {@link MegaMenuItem} using the ngx-translation service.
@@ -33,21 +33,21 @@ export class MenuTranslationService {
    * @returns translated {@link MegaMenuItem}
    */
   public async translateMenuItems(items: MenuItem[]): Promise<MenuItem[]> {
-    const translatedItems = []
+    const translatedItems = [];
 
     for(const untranslatedItem of items) {
-      const translatedItem = Object.assign({}, untranslatedItem)
+      const translatedItem = Object.assign({}, untranslatedItem);
 
-      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string))
+      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string));
 
       if(translatedItem.items) {
-        translatedItem.items = await this.translateMenuItems(translatedItem.items)
+        translatedItem.items = await this.translateMenuItems(translatedItem.items);
       }
 
-      translatedItems.push(translatedItem)
+      translatedItems.push(translatedItem);
     }
 
-    return translatedItems
+    return translatedItems;
   }
 
   /**
@@ -57,7 +57,7 @@ export class MenuTranslationService {
    * @returns translated {@link MegaMenuItem}
    */
   public async translateMegaMenuItems(items: MegaMenuItem[]): Promise<MegaMenuItem[]> {
-    const translatedItems = []
+    const translatedItems = [];
 
     for (const untranslatedItem of items) {
       const translatedItem = Object.assign({}, untranslatedItem);

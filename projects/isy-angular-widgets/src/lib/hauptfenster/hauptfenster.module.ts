@@ -5,7 +5,7 @@ import {ButtonModule} from 'primeng/button';
 import {CommonModule} from '@angular/common';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {TranslateModule} from '@ngx-translate/core';
-import {MenuTranslationService} from "../i18n/menu-translation.service";
+import {MenuTranslationService} from '../i18n/menu-translation.service';
 
 @NgModule({
   declarations: [

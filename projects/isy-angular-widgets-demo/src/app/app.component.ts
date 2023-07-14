@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {MegaMenuItem, MenuItem, PrimeNGConfig} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
-import {MenuTranslationService} from "../../../isy-angular-widgets/src/lib/i18n/menu-translation.service";
+import {MenuTranslationService} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
 
 @Component({
   selector: 'demo-root',
@@ -18,7 +18,7 @@ import {MenuTranslationService} from "../../../isy-angular-widgets/src/lib/i18n/
 })
 export class AppComponent implements OnInit, OnDestroy {
   items: MegaMenuItem[] = applicationMenu;
-  sidebarItems: MenuItem[] = []
+  sidebarItems: MenuItem[] = [];
   primeNGI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
 
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Change language and save it in local storage
   changeLanguage(language: string) {
-    this.translate.use(language)
+    this.translate.use(language);
   }
 
   ngOnInit(): void{

@@ -29,10 +29,10 @@ import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wi
 import {PanelModule} from 'primeng/panel';
 import {NotificationService} from '../../shared/services/notification.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import {InputCharModule} from "../../../../../isy-angular-widgets/src/lib/input-char/input-char.module";
-import {HttpClientModule} from "@angular/common/http";
-import {TranslateModule} from "@ngx-translate/core";
-import {MessageModule} from "primeng/message";
+import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
+import {HttpClientModule} from '@angular/common/http';
+import {TranslateModule} from '@ngx-translate/core';
+import {MessageModule} from 'primeng/message';
 
 
 @NgModule({
