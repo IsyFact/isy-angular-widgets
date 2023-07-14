@@ -23,7 +23,7 @@ export class ObjektAnzeigenComponent {
 
   @Input() person: Person = {
     id: '1',
-    personalData: {
+    personalien: {
       geburtsdatum: '03.08.1980',
       geburtsname: ' Mustermann',
       geburtsort: 'Köln',
@@ -52,18 +52,18 @@ export class ObjektAnzeigenComponent {
     private messageService: MessageService
   ) {
     this.personalInfoForm = this.fb.group({
-      lastName: new FormControl(this.person.personalData.nachname, Validators.required),
-      birthName: new FormControl(this.person.personalData.geburtsname),
-      birthplace: new FormControl(this.person.personalData.geburtsort),
-      firstName: new FormControl(this.person.personalData.vorname, Validators.required),
-      gender: new FormControl(this.person.personalData.geschlecht),
-      birthDate: new FormControl(this.person.personalData.geburtsdatum),
-      nationality: new FormControl(this.person.personalData.staatsangehoerigkeit),
-      phoneNumber: new FormControl(this.person.personalData.telefonnummer),
-      dateOfEntry: new FormControl(this.person.personalData.einreisedatum),
-      idRequired: new FormControl(this.person.personalData.ausweispflichtig),
-      securityLevel: new FormControl(this.person.personalData.sicherheitsstufe),
-      intelligenceNotes: new FormControl(this.person.personalData.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength))
+      lastName: new FormControl(this.person.personalien.nachname, Validators.required),
+      birthName: new FormControl(this.person.personalien.geburtsname),
+      birthplace: new FormControl(this.person.personalien.geburtsort),
+      firstName: new FormControl(this.person.personalien.vorname, Validators.required),
+      gender: new FormControl(this.person.personalien.geschlecht),
+      birthDate: new FormControl(this.person.personalien.geburtsdatum),
+      nationality: new FormControl(this.person.personalien.staatsangehoerigkeit),
+      phoneNumber: new FormControl(this.person.personalien.telefonnummer),
+      dateOfEntry: new FormControl(this.person.personalien.einreisedatum),
+      idRequired: new FormControl(this.person.personalien.ausweispflichtig),
+      securityLevel: new FormControl(this.person.personalien.sicherheitsstufe),
+      intelligenceNotes: new FormControl(this.person.personalien.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength))
     });
     this.personalInfoForm.disable()
   }

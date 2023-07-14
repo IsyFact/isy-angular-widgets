@@ -112,7 +112,7 @@ export class PersonenService {
   findPersonById(id: string): Observable<Person[]> {
     return of<Person[]>([{
       id: id,
-      personalData: {
+      personalien: {
         nachname: 'Wilhelm',
         vorname: 'Frederik',
         geschlecht: 'x',
@@ -146,18 +146,18 @@ export class PersonenService {
   }
 
   searchParametersAvailable(person: Person): boolean {
-    return person.personalData.nachname !== ''
-      || person.personalData.vorname !== ''
-      || person.personalData.geschlecht !== ''
-      || person.personalData.geburtsdatum !== ''
-      || person.personalData.geburtsort !== ''
-      || !(person.personalData.staatsangehoerigkeit === '' || person.personalData.staatsangehoerigkeit === null)
-      || person.personalData.geburtsname !== '';
+    return person.personalien.nachname !== ''
+      || person.personalien.vorname !== ''
+      || person.personalien.geschlecht !== ''
+      || person.personalien.geburtsdatum !== ''
+      || person.personalien.geburtsort !== ''
+      || !(person.personalien.staatsangehoerigkeit === '' || person.personalien.staatsangehoerigkeit === null)
+      || person.personalien.geburtsname !== '';
   }
 
   generatePerson(): Person {
     return {
-      id: this.rng().toString(), personalData: {
+      id: this.rng().toString(), personalien: {
         nachname: this.nachname[this.rng()],
         vorname: this.vorname[this.rng()],
         geschlecht: 'x',
@@ -176,26 +176,26 @@ export class PersonenService {
   }
 
   mergePersons(suche: Person, generiert: Person): Person {
-    if (suche.personalData.nachname !== '') {
-      generiert.personalData.nachname = suche.personalData.nachname;
+    if (suche.personalien.nachname !== '') {
+      generiert.personalien.nachname = suche.personalien.nachname;
     }
-    if (suche.personalData.vorname !== '') {
-      generiert.personalData.vorname = suche.personalData.vorname;
+    if (suche.personalien.vorname !== '') {
+      generiert.personalien.vorname = suche.personalien.vorname;
     }
-    if (suche.personalData.geschlecht !== '') {
-      generiert.personalData.geschlecht = suche.personalData.geschlecht;
+    if (suche.personalien.geschlecht !== '') {
+      generiert.personalien.geschlecht = suche.personalien.geschlecht;
     }
-    if (suche.personalData.geburtsdatum) {
-      generiert.personalData.geburtsdatum = suche.personalData.geburtsdatum;
+    if (suche.personalien.geburtsdatum) {
+      generiert.personalien.geburtsdatum = suche.personalien.geburtsdatum;
     }
-    if (suche.personalData.geburtsort !== '') {
-      generiert.personalData.geburtsort = suche.personalData.geburtsort;
+    if (suche.personalien.geburtsort !== '') {
+      generiert.personalien.geburtsort = suche.personalien.geburtsort;
     }
-    if (suche.personalData.staatsangehoerigkeit !== '' && suche.personalData.staatsangehoerigkeit !== null) {
-      generiert.personalData.staatsangehoerigkeit = suche.personalData.staatsangehoerigkeit;
+    if (suche.personalien.staatsangehoerigkeit !== '' && suche.personalien.staatsangehoerigkeit !== null) {
+      generiert.personalien.staatsangehoerigkeit = suche.personalien.staatsangehoerigkeit;
     }
-    if (suche.personalData.geburtsname !== '') {
-      generiert.personalData.geburtsname = suche.personalData.geburtsname;
+    if (suche.personalien.geburtsname !== '') {
+      generiert.personalien.geburtsname = suche.personalien.geburtsname;
     }
     return generiert;
   }

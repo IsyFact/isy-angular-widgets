@@ -7,7 +7,7 @@ import {Person} from '../../../../shared/model/person';
 export function getEmptyPerson(): Person {
   return {
     id: '',
-    personalData: {
+    personalien: {
       nachname: '',
       vorname: '',
       geschlecht: '',
@@ -30,17 +30,17 @@ export function getEmptyPerson(): Person {
  */
 export function resetPerson(person: Person): void {
   person.id = '';
-  person.personalData.nachname = '';
-  person.personalData.vorname = '';
-  person.personalData.geschlecht = '';
-  person.personalData.geburtsdatum = '';
-  person.personalData.geburtsort = '';
-  person.personalData.staatsangehoerigkeit = '';
-  person.personalData.geburtsname = '';
-  person.personalData.ausweispflichtig = true;
-  person.personalData.telefonnummer = '';
-  person.personalData.sicherheitsstufe = 0;
-  person.personalData.geheimdienstnotizen = '';
-  person.personalData.einreisedatum = 'XX-XX-XXXX';
+  person.personalien.nachname = '';
+  person.personalien.vorname = '';
+  person.personalien.geschlecht = '';
+  person.personalien.geburtsdatum = '';
+  person.personalien.geburtsort = '';
+  person.personalien.staatsangehoerigkeit = '';
+  person.personalien.geburtsname = '';
+  person.personalien.ausweispflichtig = true;
+  person.personalien.telefonnummer = '';
+  person.personalien.sicherheitsstufe = 0;
+  person.personalien.geheimdienstnotizen = '';
+  person.personalien.einreisedatum = 'XX-XX-XXXX';
   person.liste = [];
 }

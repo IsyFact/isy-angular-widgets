@@ -50,9 +50,9 @@ describe('PersoenlicheInformationenComponent', () => {
   it('should check the incoming form', () => {
     const form = component.form;
     expect(form.valid).toBeFalse();
-    expect(form.get('vorname')!.value).toEqual(person.personalData.vorname);
-    expect(form.get('nachname')!.value).toEqual(person.personalData.nachname);
-    expect(form.get('geschlecht')!.value).toEqual(person.personalData.geschlecht);
+    expect(form.get('vorname')!.value).toEqual(person.personalien.vorname);
+    expect(form.get('nachname')!.value).toEqual(person.personalien.nachname);
+    expect(form.get('geschlecht')!.value).toEqual(person.personalien.geschlecht);
   });
 
   it('should check the form fields validation rules', () => {
@@ -64,7 +64,7 @@ describe('PersoenlicheInformationenComponent', () => {
 
     formFields.forEach(formFieldName => {
       const field = component.form.get(formFieldName);
-      expect(field!.value).toEqual(person.personalData.nachname);
+      expect(field!.value).toEqual(person.personalien.nachname);
       expect(field!.valid).toBeFalse();
       expect(field?.dirty).toBeTrue();
 

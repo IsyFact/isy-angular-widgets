@@ -3,7 +3,7 @@
  */
 export interface Person {
   id: string;
-  personalData: Personalien,
+  personalien: Personalien,
   liste: string[]
 }
 
