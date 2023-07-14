@@ -76,7 +76,7 @@ describe('Test WizardComponent with Mock Parent: ', () => {
       ]
     })
     .compileComponents();
-  })
+  });
 
   /**
    * Initializes wizard component properties

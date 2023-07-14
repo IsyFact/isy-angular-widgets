@@ -3,8 +3,8 @@ import {Person} from '../../../../shared/model/person';
 import {ActivatedRoute} from '@angular/router';
 import {PersonenService} from '../../services/personen.service';
 import {TranslateService} from '@ngx-translate/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MessageService} from "primeng/api";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MessageService} from 'primeng/api';
 
 /*
 * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -19,7 +19,7 @@ export class ObjektAnzeigenComponent {
   readonly intelligenceNotesMaxLength = 255;
   showSecretFields = false;
 
-  personalInfoForm: FormGroup
+  personalInfoForm: FormGroup;
 
   @Input() person: Person = {
     id: '1',

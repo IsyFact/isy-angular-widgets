@@ -21,7 +21,7 @@ import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 
-const crypto = window.crypto
+const crypto = window.crypto;
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */

@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {MenuTranslationService} from './menu-translation.service';
-import {MegaMenuItem, MenuItem} from "primeng/api";
+import {MegaMenuItem, MenuItem} from 'primeng/api';
 
 describe('MenuTranslationService', () => {
   let service: MenuTranslationService;
@@ -12,7 +12,7 @@ describe('MenuTranslationService', () => {
         TranslateTestingModule.withTranslations('de', {
           'menu.label': 'Menu label',
           'submenu.label': 'Submenu label',
-          'menu.header': 'Submenu header',
+          'menu.header': 'Submenu header'
         })
       ]
     });
@@ -23,17 +23,17 @@ describe('MenuTranslationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('translates MenuItems labels', async () => {
+  it('translates MenuItems labels', async() => {
     const items: MenuItem[] = [
       {label: 'menu.label'}
-    ]
+    ];
 
-    const translatedItems = await service.translateMenuItems(items)
+    const translatedItems = await service.translateMenuItems(items);
 
-    expect(translatedItems[0].label).toEqual('Menu label')
-  })
+    expect(translatedItems[0].label).toEqual('Menu label');
+  });
 
-  it('translates submenu items labels', async () => {
+  it('translates submenu items labels', async() => {
     const items: MenuItem[] = [
       {
         label: 'menu.label',
@@ -41,25 +41,25 @@ describe('MenuTranslationService', () => {
           {label: 'submenu.label'}
         ]
       }
-    ]
+    ];
 
-    const translatedItems = await service.translateMenuItems(items)
-    const translatedSubMenuItem = translatedItems[0]?.items?.[0]
+    const translatedItems = await service.translateMenuItems(items);
+    const translatedSubMenuItem = translatedItems[0]?.items?.[0];
 
-    expect(translatedSubMenuItem?.label).toEqual('Submenu label')
-  })
+    expect(translatedSubMenuItem?.label).toEqual('Submenu label');
+  });
 
-  it('translates MegaMenuItems labels', async () => {
+  it('translates MegaMenuItems labels', async() => {
     const items: MegaMenuItem[] = [
       {label: 'menu.label'}
-    ]
+    ];
 
-    const translatedItems = await service.translateMegaMenuItems(items)
+    const translatedItems = await service.translateMegaMenuItems(items);
 
-    expect(translatedItems[0].label).toEqual('Menu label')
-  })
+    expect(translatedItems[0].label).toEqual('Menu label');
+  });
 
-  it('translates MegaMenu submenu items labels', async () => {
+  it('translates MegaMenu submenu items labels', async() => {
     const items: MegaMenuItem[] = [
       {
         label: 'menu.label',
@@ -71,12 +71,12 @@ describe('MenuTranslationService', () => {
             }
           ]
         ]
-      }]
+      }];
 
-    const translatedItems = await service.translateMegaMenuItems(items)
-    const  translatedSubMenuItem = translatedItems[0]?.items?.[0][0]
+    const translatedItems = await service.translateMegaMenuItems(items);
+    const  translatedSubMenuItem = translatedItems[0]?.items?.[0][0];
 
-    expect(translatedSubMenuItem?.label).toEqual('Submenu header')
-    expect(translatedSubMenuItem?.items?.[0].label).toEqual('Submenu label')
-  })
+    expect(translatedSubMenuItem?.label).toEqual('Submenu header');
+    expect(translatedSubMenuItem?.items?.[0].label).toEqual('Submenu label');
+  });
 });

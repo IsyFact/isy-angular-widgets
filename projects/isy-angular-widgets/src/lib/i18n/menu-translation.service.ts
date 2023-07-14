@@ -59,24 +59,24 @@ export class MenuTranslationService {
   public async translateMegaMenuItems(items: MegaMenuItem[]): Promise<MegaMenuItem[]> {
     const translatedItems = []
 
-    for(const untranslatedItem of items) {
-      const translatedItem = Object.assign({}, untranslatedItem)
+    for (const untranslatedItem of items) {
+      const translatedItem = Object.assign({}, untranslatedItem);
 
-      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string))
+      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string));
 
-      if(translatedItem.items) {
-        const translatedSubItems = []
+      if (translatedItem.items) {
+        const translatedSubItems = [];
 
-        for(const item of translatedItem.items) {
-          translatedSubItems.push(await this.translateMenuItems(item))
+        for (const item of translatedItem.items) {
+          translatedSubItems.push(await this.translateMenuItems(item));
         }
 
-        translatedItem.items = translatedSubItems
+        translatedItem.items = translatedSubItems;
       }
 
-      translatedItems.push(translatedItem)
+      translatedItems.push(translatedItem);
     }
 
-    return translatedItems
+    return translatedItems;
   }
 }
