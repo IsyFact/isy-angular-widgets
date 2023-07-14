@@ -8,7 +8,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {TableModule} from 'primeng/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateTestingModule} from 'ngx-translate-testing';
-import {By} from "@angular/platform-browser";
+import {By} from '@angular/platform-browser';
 
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
@@ -63,7 +63,7 @@ describe('PersonBearbeitenComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('displays data for "Max Mustermann"', async () => {
+  it('displays data for Max Mustermann', async() => {
     await fixture.whenStable();
 
     expect(inputFields.lastName.nativeElement.value).toEqual('Mustermann');

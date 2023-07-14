@@ -202,7 +202,7 @@ export class PersonenService {
 
   rng(): number {
     const crypto = window.crypto;
-    return (crypto.getRandomValues(new Uint32Array(1)))[0]%this.maxEntries
+    return (crypto.getRandomValues(new Uint32Array(1)))[0]%this.maxEntries;
   }
 }
 

@@ -69,9 +69,9 @@ export class AppComponent implements OnInit, OnDestroy {
   getLanguageIcon(language: string) {
     switch (language) {
       case 'en':
-        return 'gb'
+        return 'gb';
       default:
-        return language
+        return language;
     }
   }
 

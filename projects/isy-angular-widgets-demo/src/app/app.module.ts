@@ -17,14 +17,14 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {AccordionModule} from "primeng/accordion";
-import {DropdownModule} from "primeng/dropdown";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {MegaMenuModule} from "primeng/megamenu";
+import {AccordionModule} from 'primeng/accordion';
+import {DropdownModule} from 'primeng/dropdown';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MegaMenuModule} from 'primeng/megamenu';
 import {
   MenuTranslationService
-} from "../../../isy-angular-widgets/src/lib/i18n/menu-translation.service";
+} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
 
 @NgModule({
   declarations: [
