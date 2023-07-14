@@ -90,13 +90,13 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-person>
       <tr [pSelectableRow]="rowData">
-        <td>{{person.personalData.lastName}}</td>
-        <td>{{person.personalData.firstName}}</td>
-        <td>{{person.personalData.gender}}</td>
-        <td>{{person.personalData.birthName}}</td>
-        <td>{{person.personalData.birthplae}}</td>
-        <td>{{person.personalData.nationality}}</td>
-        <td>{{person.personalData.birthDate}}</td>
+        <td>{{person.personalien.nachname}}</td>
+        <td>{{person.personalien.vorname}}</td>
+        <td>{{person.personalien.geschlecht}}</td>
+        <td>{{person.personalien.geburtsname}}</td>
+        <td>{{person.personalien.geburtsort}}</td>
+        <td>{{person.personalien.staatsangehoerigkeit}}</td>
+        <td>{{person.personalien.geburtsdatum}}</td>
         <td>
           <p-button [icon]="'pi pi-pencil'"
                     [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"
