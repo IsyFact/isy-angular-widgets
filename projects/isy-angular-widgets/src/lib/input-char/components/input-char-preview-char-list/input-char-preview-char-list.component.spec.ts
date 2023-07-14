@@ -85,6 +85,7 @@ describe('InputCharPreviewCharListComponent', () => {
 
     characterSelectButtons[randomIndex].click();
 
+    console.log(`Selected Value: ${component.selectedValue}`)
     expect(component.selectedValue.toString()).toEqual(options[randomIndex].zeichen);
     expect(charSelection).toHaveBeenCalledWith(options[randomIndex]);
   });

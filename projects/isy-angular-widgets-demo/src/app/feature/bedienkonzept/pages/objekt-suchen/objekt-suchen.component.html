@@ -24,7 +24,7 @@
     </div>
     <div class="col">
       <input id="lastName" class="w-full" type="text" pInputText
-             [(ngModel)]="person.personalien.nachname">
+             [(ngModel)]="person.personalData.lastName">
     </div>
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
@@ -32,7 +32,7 @@
     </div>
     <div class="col">
       <input id="birthName" class="w-full" type="text" pInputText
-             [(ngModel)]="person.personalien.geburtsname">
+             [(ngModel)]="person.personalData.birthName">
     </div>
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
@@ -40,7 +40,7 @@
     </div>
     <div class="col">
       <input id="birthplace" class="w-full" type="text" pInputText
-             [(ngModel)]="person.personalien.geburtsort">
+             [(ngModel)]="person.personalData.birthplace">
     </div>
   </div>
 
@@ -51,7 +51,7 @@
     </div>
     <div class="col">
       <input id="firstName" class="w-full" type="text" pInputText
-             [(ngModel)]="person.personalien.vorname">
+             [(ngModel)]="person.personalData.firstName">
     </div>
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
@@ -59,7 +59,7 @@
     </div>
     <div class="col">
       <input id="gender" class="w-full" type="text" pInputText
-             [(ngModel)]="person.personalien.geschlecht">
+             [(ngModel)]="person.personalData.gender">
     </div>
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
@@ -68,7 +68,7 @@
     <div class="col">
       <p-calendar id="birthDate"
                   dateFormat="dd.mm.yy"
-                  [(ngModel)]="person.personalien.geburtsdatum"
+                  [(ngModel)]="person.personalData.birthDate"
                   [showIcon]="true"
       >
       </p-calendar>
@@ -84,13 +84,13 @@
       <p-dropdown id="nationality"
                   [placeholder]="('isyAngularWidgetsDemo.labels.chooseCountry' | translate)"
                   [options]="laender"
-                  [(ngModel)]="person.personalien.staatsangehoerigkeit"
+                  [(ngModel)]="person.personalData.nationality"
                   [showClear]="true"
       >
         <ng-template pTemplate="selectedItem">
           <div class="country-item country-item-value"
-               *ngIf="person.personalien.staatsangehoerigkeit">
-            <div>{{person.personalien.staatsangehoerigkeit}}</div>
+               *ngIf="person.personalData.nationality">
+            <div>{{person.personalData.nationality}}</div>
           </div>
         </ng-template>
         <ng-template let-land pTemplate="item">
@@ -234,8 +234,8 @@
         >
           <ng-template pTemplate="selectedItem">
             <div class="country-item country-item-value"
-                 *ngIf="selectedPerson!.personalien.staatsangehoerigkeit">
-              <div>{{selectedPerson!.personalien.staatsangehoerigkeit}}</div>
+                 *ngIf="selectedPerson!.personalData.nationality">
+              <div>{{selectedPerson!.personalData.nationality}}</div>
             </div>
           </ng-template>
           <ng-template let-land pTemplate="item">

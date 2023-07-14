@@ -7,8 +7,6 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TranslateTestingModule } from 'ngx-translate-testing';
-import {DropdownModule} from 'primeng/dropdown';
-import {FormsModule} from '@angular/forms';
 
 describe('AppComponent', () => {
   let app: AppComponent;
@@ -20,9 +18,7 @@ describe('AppComponent', () => {
         HauptfensterModule,
         PanelMenuModule,
         BrowserAnimationsModule,
-        TranslateTestingModule.withTranslations({}),
-        DropdownModule,
-        FormsModule
+        TranslateTestingModule.withTranslations({})
       ],
       declarations: [
         AppComponent

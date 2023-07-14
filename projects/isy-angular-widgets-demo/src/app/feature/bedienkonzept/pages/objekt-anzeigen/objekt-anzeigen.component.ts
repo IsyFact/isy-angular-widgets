@@ -23,21 +23,21 @@ export class ObjektAnzeigenComponent {
 
   @Input() person: Person = {
     id: '1',
-    personalien: {
-      geburtsdatum: '03.08.1980',
-      geburtsname: ' Mustermann',
-      geburtsort: 'Köln',
-      geschlecht: 'Männlich',
-      nachname: 'Mustermann',
-      staatsangehoerigkeit: 'Deutsch',
-      vorname: 'Max',
-      ausweispflichtig: true,
-      telefonnummer: '',
-      geheimdienstnotizen: '',
-      sicherheitsstufe: 0,
-      einreisedatum: 'XX-XX-2000'
+    personalData: {
+      birthDate: '03.08.1980',
+      birthName: ' Mustermann',
+      birthplace: 'Köln',
+      gender: 'Männlich',
+      lastName: 'Mustermann',
+      nationality: 'Deutsch',
+      firstName: 'Max',
+      idRequired: true,
+      phoneNumber: '',
+      intelligenceNotes: '',
+      securityLevel: 0,
+      dateOfEntry: 'XX-XX-2000'
     },
-    liste: [
+    facts: [
       'Hat einen Antrag auf BAFÖG gestellt',
       'Wurde wegen Falschparkens ermahnt',
       'Steht auf der NO-FLY-Liste'
@@ -52,18 +52,18 @@ export class ObjektAnzeigenComponent {
     private messageService: MessageService
   ) {
     this.personalInfoForm = this.fb.group({
-      lastName: new FormControl(this.person.personalien.nachname, Validators.required),
-      birthName: new FormControl(this.person.personalien.geburtsname),
-      birthplace: new FormControl(this.person.personalien.geburtsort),
-      firstName: new FormControl(this.person.personalien.vorname, Validators.required),
-      gender: new FormControl(this.person.personalien.geschlecht),
-      birthDate: new FormControl(this.person.personalien.geburtsdatum),
-      nationality: new FormControl(this.person.personalien.staatsangehoerigkeit),
-      phoneNumber: new FormControl(this.person.personalien.telefonnummer),
-      dateOfEntry: new FormControl(this.person.personalien.einreisedatum),
-      idRequired: new FormControl(this.person.personalien.ausweispflichtig),
-      securityLevel: new FormControl(this.person.personalien.sicherheitsstufe),
-      intelligenceNotes: new FormControl(this.person.personalien.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength))
+      lastName: new FormControl(this.person.personalData.lastName, Validators.required),
+      birthName: new FormControl(this.person.personalData.birthName),
+      birthplace: new FormControl(this.person.personalData.birthplace),
+      firstName: new FormControl(this.person.personalData.firstName, Validators.required),
+      gender: new FormControl(this.person.personalData.gender),
+      birthDate: new FormControl(this.person.personalData.birthDate),
+      nationality: new FormControl(this.person.personalData.nationality),
+      phoneNumber: new FormControl(this.person.personalData.phoneNumber),
+      dateOfEntry: new FormControl(this.person.personalData.dateOfEntry),
+      idRequired: new FormControl(this.person.personalData.idRequired),
+      securityLevel: new FormControl(this.person.personalData.securityLevel),
+      intelligenceNotes: new FormControl(this.person.personalData.intelligenceNotes, Validators.maxLength(this.intelligenceNotesMaxLength))
     });
     this.personalInfoForm.disable()
   }

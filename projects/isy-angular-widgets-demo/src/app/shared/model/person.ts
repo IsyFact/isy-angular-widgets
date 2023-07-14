@@ -3,26 +3,26 @@
  */
 export interface Person {
   id: string;
-  personalien: Personalien,
-  liste: string[];
+  personalData: Personalien,
+  facts: string[]
 }
 
 /**
  * An interface that defines a person's personal details.
  */
 export interface Personalien {
-  nachname: string;
-  vorname: string;
-  geschlecht: string;
-  geburtsdatum: string;
-  geburtsort: string;
-  staatsangehoerigkeit: string;
-  geburtsname: string;
-  ausweispflichtig: boolean;
-  telefonnummer: string;
-  sicherheitsstufe: number;
-  geheimdienstnotizen: string;
-  einreisedatum: string;
+  lastName: string;
+  firstName: string;
+  gender: string;
+  birthDate: string;
+  birthplace: string;
+  nationality: string;
+  birthName: string;
+  idRequired: boolean;
+  phoneNumber: string;
+  securityLevel: number;
+  intelligenceNotes: string;
+  dateOfEntry: string;
 }
 
 /**

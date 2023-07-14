@@ -16,7 +16,7 @@
         type="text"
         pInputText
         disabled
-        [(ngModel)]="person.personalien.nachname"
+        [(ngModel)]="person.personalData.lastName"
       >
     </div>
     <div class="col-1 text-right align-self-center">
@@ -30,7 +30,7 @@
         class="w-full"
         type="text"
         pInputText
-        disabled [(ngModel)]="person.personalien.vorname"
+        disabled [(ngModel)]="person.personalData.firstName"
       >
     </div>
     <div class="col-1 text-right align-self-center">
@@ -45,7 +45,7 @@
         type="text"
         pInputText
         disabled
-        [(ngModel)]="person.personalien.geburtsdatum"
+        [(ngModel)]="person.personalData.birthDate"
       >
     </div>
   </div>
@@ -313,7 +313,7 @@
     id="panelSachverhalte"
     [header]="('isyAngularWidgetsDemo.displayObject.tabFacts' | translate)"
   >
-    <p-table [value]="person.liste" responsiveLayout="scroll">
+    <p-table [value]="person.facts" responsiveLayout="scroll">
       <ng-template pTemplate="caption">
         <p-button
           icon="pi pi-pencil"

@@ -194,9 +194,9 @@ export class ObjektSuchenComponent {
     this.persoenlicheInformationenForm.valueChanges.subscribe((personalien: Personalien) => {
       this.isFormValid = this.persoenlicheInformationenForm.valid;
       if (this.persoenlicheInformationenForm.valid) {
-        this.neuePerson.personalien.vorname = personalien.vorname;
-        this.neuePerson.personalien.nachname = personalien.nachname;
-        this.neuePerson.personalien.geschlecht = personalien.geschlecht;
+        this.neuePerson.personalData.firstName = personalien.firstName;
+        this.neuePerson.personalData.lastName = personalien.lastName;
+        this.neuePerson.personalData.gender = personalien.gender;
       }
     });
   }
@@ -208,10 +208,10 @@ export class ObjektSuchenComponent {
     this.geburtsInformationenForm.valueChanges.subscribe((personalien: Personalien) => {
       this.isFormValid = this.geburtsInformationenForm.valid;
       if (this.geburtsInformationenForm.valid) {
-        this.neuePerson.personalien.geburtsname = personalien.geburtsname;
-        this.neuePerson.personalien.geburtsort = personalien.geburtsort;
-        this.neuePerson.personalien.staatsangehoerigkeit = personalien.staatsangehoerigkeit;
-        this.neuePerson.personalien.geburtsdatum = personalien.geburtsdatum;
+        this.neuePerson.personalData.birthName = personalien.birthName;
+        this.neuePerson.personalData.birthplace = personalien.birthplace;
+        this.neuePerson.personalData.nationality = personalien.nationality;
+        this.neuePerson.personalData.birthDate = personalien.birthDate;
       }
     });
   }
@@ -291,14 +291,14 @@ export class ObjektSuchenComponent {
   getNewAddedPerson(): Person {
     const person = getEmptyPerson();
     person.id = this.idForm.controls.id.value as string;
-    person.personalien.vorname = this.persoenlicheInformationenForm.controls.vorname.value as string;
-    person.personalien.nachname = this.persoenlicheInformationenForm.controls.nachname.value as string;
-    person.personalien.geschlecht = this.persoenlicheInformationenForm.controls.geschlecht.value as string;
-    person.personalien.geburtsname = this.geburtsInformationenForm.controls.geburtsname.value as string;
-    person.personalien.geburtsort = this.geburtsInformationenForm.controls.geburtsort.value as string;
+    person.personalData.firstName = this.persoenlicheInformationenForm.controls.vorname.value as string;
+    person.personalData.lastName = this.persoenlicheInformationenForm.controls.nachname.value as string;
+    person.personalData.gender = this.persoenlicheInformationenForm.controls.geschlecht.value as string;
+    person.personalData.birthName = this.geburtsInformationenForm.controls.geburtsname.value as string;
+    person.personalData.birthplace = this.geburtsInformationenForm.controls.geburtsort.value as string;
     const geburtsdatum = this.geburtsInformationenForm.controls.geburtsdatum.value as string;
-    person.personalien.geburtsdatum = this.dateService.convertToGermanDateFormat(geburtsdatum);
-    person.personalien.staatsangehoerigkeit = this.geburtsInformationenForm.controls.staatsangehoerigkeit.value as string;
+    person.personalData.birthDate = this.dateService.convertToGermanDateFormat(geburtsdatum);
+    person.personalData.nationality = this.geburtsInformationenForm.controls.staatsangehoerigkeit.value as string;
     return person;
   }
 
@@ -348,13 +348,13 @@ export class ObjektSuchenComponent {
    */
   hasPersonChanges(originalPerson: Person): boolean {
     return this.editForm.controls.editID.value !== originalPerson.id ||
-      this.editForm.controls.editVorname.value !== originalPerson.personalien.vorname ||
-      this.editForm.controls.editNachname.value !== originalPerson.personalien.nachname ||
-      this.editForm.controls.editGeschlecht.value !== originalPerson.personalien.geschlecht ||
-      this.editForm.controls.editGeburtsname.value !== originalPerson.personalien.geburtsname ||
-      this.editForm.controls.editGeburtsort.value !== originalPerson.personalien.geburtsort ||
-      this.editForm.controls.editGeburtsdatum.value !== originalPerson.personalien.geburtsdatum ||
-      this.editForm.controls.editStaatsangehoerigkeit.value !== originalPerson.personalien.staatsangehoerigkeit;
+      this.editForm.controls.editVorname.value !== originalPerson.personalData.firstName ||
+      this.editForm.controls.editNachname.value !== originalPerson.personalData.lastName ||
+      this.editForm.controls.editGeschlecht.value !== originalPerson.personalData.gender ||
+      this.editForm.controls.editGeburtsname.value !== originalPerson.personalData.birthName ||
+      this.editForm.controls.editGeburtsort.value !== originalPerson.personalData.birthplace ||
+      this.editForm.controls.editGeburtsdatum.value !== originalPerson.personalData.birthDate ||
+      this.editForm.controls.editStaatsangehoerigkeit.value !== originalPerson.personalData.nationality;
   }
 
   /**
@@ -362,14 +362,14 @@ export class ObjektSuchenComponent {
    */
   saveChanges(): void {
     this.selectedPerson!.id = this.editForm.controls.editID.value as string;
-    this.selectedPerson!.personalien.vorname = this.editForm.controls.editVorname.value as string;
-    this.selectedPerson!.personalien.nachname = this.editForm.controls.editNachname.value as string;
-    this.selectedPerson!.personalien.geburtsname = this.editForm.controls.editGeburtsname.value as string;
-    this.selectedPerson!.personalien.geschlecht = this.editForm.controls.editGeschlecht.value as string;
-    this.selectedPerson!.personalien.geburtsort = this.editForm.controls.editGeburtsort.value as string;
+    this.selectedPerson!.personalData.firstName = this.editForm.controls.editVorname.value as string;
+    this.selectedPerson!.personalData.lastName = this.editForm.controls.editNachname.value as string;
+    this.selectedPerson!.personalData.birthName = this.editForm.controls.editGeburtsname.value as string;
+    this.selectedPerson!.personalData.gender = this.editForm.controls.editGeschlecht.value as string;
+    this.selectedPerson!.personalData.birthplace = this.editForm.controls.editGeburtsort.value as string;
     const geburtsdatum = this.editForm.controls.editGeburtsdatum.value as string;
-    this.selectedPerson!.personalien.geburtsdatum = this.dateService.convertToGermanDateFormat(geburtsdatum);
-    this.selectedPerson!.personalien.staatsangehoerigkeit = this.editForm.controls.editStaatsangehoerigkeit.value as string;
+    this.selectedPerson!.personalData.birthDate = this.dateService.convertToGermanDateFormat(geburtsdatum);
+    this.selectedPerson!.personalData.nationality = this.editForm.controls.editStaatsangehoerigkeit.value as string;
 
     this.openEditForm = false;
     this.allowSave = false;
