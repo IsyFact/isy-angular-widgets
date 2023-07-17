@@ -6,7 +6,7 @@
   <div class="grid m-0">
     <div class="col-1 text-right align-self-center">
       <label for="basis-nachname">
-        {{('isyAngularWidgetsDemo.labels.lastName' | translate)}}
+        {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
       </label>
     </div>
     <div class="col">
@@ -21,7 +21,7 @@
     </div>
     <div class="col-1 text-right align-self-center">
       <label for="basis-vorname">
-        {{('isyAngularWidgetsDemo.labels.firstName' | translate)}}
+        {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
       </label>
     </div>
     <div class="col">
@@ -35,7 +35,7 @@
     </div>
     <div class="col-1 text-right align-self-center">
       <label for="basis-geburtsdatum">
-        {{('isyAngularWidgetsDemo.labels.birthDate' | translate)}}
+        {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
       </label>
     </div>
     <div class="col">
@@ -60,7 +60,7 @@
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
           <label for="lastName">
-            {{('isyAngularWidgetsDemo.labels.lastName' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -80,7 +80,7 @@
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="birthName">
-            {{('isyAngularWidgetsDemo.labels.birthName' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -93,7 +93,7 @@
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="birthplace">
-            {{('isyAngularWidgetsDemo.labels.birthplace' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -109,7 +109,7 @@
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
           <label for="firstName">
-            {{('isyAngularWidgetsDemo.labels.firstName' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -129,7 +129,7 @@
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="gender">
-            {{('isyAngularWidgetsDemo.labels.gender' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.geschlecht' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -149,7 +149,7 @@
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="birthDate">
-            {{('isyAngularWidgetsDemo.labels.birthDate' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -165,7 +165,7 @@
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
           <label for="nationality">
-            {{('isyAngularWidgetsDemo.labels.nationality' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -178,7 +178,7 @@
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="phoneNumber">
-            {{('isyAngularWidgetsDemo.labels.phoneNumber' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.telefonnummer' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -192,7 +192,7 @@
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="dateOfEntry">
-            {{('isyAngularWidgetsDemo.labels.dateOfEntry' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.einreisedatum' | translate)}}
           </label>
         </div>
         <div class="col">
@@ -220,7 +220,7 @@
         <div class="grid m-0">
           <div class="col-1 text-right align-self-center">
             <label for="idRequired">
-              {{('isyAngularWidgetsDemo.labels.idRequired' | translate)}}
+              {{('isyAngularWidgetsDemo.labels.ausweispflichtig' | translate)}}
             </label>
           </div>
           <div class="col-1">
@@ -233,7 +233,7 @@
           </div>
           <div class="col-1 text-right align-self-center">
             <label class="align-content-end" for="securityLevel">
-              {{('isyAngularWidgetsDemo.labels.securityLevel' | translate)}}
+              {{('isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate)}}
             </label>
           </div>
           <div class="col-5">
@@ -251,7 +251,7 @@
         <div class="grid m-0">
           <div class="col-1 text-right align-self-center">
             <label for="intelligenceNotes">
-              {{('isyAngularWidgetsDemo.labels.intelligenceNotes' | translate)}}
+              {{('isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate)}}
             </label>
           </div>
           <div class="col-5">
@@ -313,7 +313,7 @@
     id="panelSachverhalte"
     [header]="('isyAngularWidgetsDemo.displayObject.tabFacts' | translate)"
   >
-    <p-table [value]="person.liste" responsiveLayout="scroll">
+    <p-table [value]="person.sachverhalte" responsiveLayout="scroll">
       <ng-template pTemplate="caption">
         <p-button
           icon="pi pi-pencil"
@@ -325,7 +325,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th scope="col">
-            {{('isyAngularWidgetsDemo.labels.fact' | translate)}}
+            {{('isyAngularWidgetsDemo.labels.sachverhalte' | translate)}}
           </th>
           <th scope="col">
             {{('isyAngularWidgetsDemo.labels.state' | translate)}}

@@ -126,7 +126,7 @@ export class PersonenService {
         geheimdienstnotizen: '',
         einreisedatum: 'XX-XX-XXXX'
       },
-      liste: []
+      sachverhalte: []
     }]);
   }
 
@@ -171,7 +171,7 @@ export class PersonenService {
         geheimdienstnotizen: '',
         einreisedatum: 'XX-XX-XXXX'
       },
-      liste: []
+      sachverhalte: []
     };
   }
 

@@ -4,7 +4,7 @@
 export interface Person {
   id: string;
   personalien: Personalien,
-  liste: string[]
+  sachverhalte: string[]
 }
 
 /**

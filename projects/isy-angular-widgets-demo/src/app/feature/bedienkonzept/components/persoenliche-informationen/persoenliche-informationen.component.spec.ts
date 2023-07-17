@@ -28,9 +28,9 @@ describe('PersoenlicheInformationenComponent', () => {
         ReactiveFormsModule,
         InputTextModule,
         TranslateTestingModule.withTranslations('de', {
-          'isyAngularWidgetsDemo.labels.firstName': 'Vorname',
-          'isyAngularWidgetsDemo.labels.lastName': 'Nachname',
-          'isyAngularWidgetsDemo.labels.gender': 'Geschlecht'
+          'isyAngularWidgetsDemo.labels.vorname': 'Vorname',
+          'isyAngularWidgetsDemo.labels.nachname': 'Nachname',
+          'isyAngularWidgetsDemo.labels.geschlecht': 'Geschlecht'
         })
       ]
     })

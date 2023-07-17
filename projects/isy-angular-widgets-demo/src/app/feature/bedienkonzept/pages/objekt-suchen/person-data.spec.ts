@@ -18,7 +18,7 @@ describe('person-data', () => {
     expect(person.personalien.sicherheitsstufe).toEqual(0);
     expect(person.personalien.geheimdienstnotizen).toEqual('');
     expect(person.personalien.einreisedatum).toEqual('XX-XX-XXXX');
-    expect(person.liste).toEqual([]);
+    expect(person.sachverhalte).toEqual([]);
   });
 
   it('should check the reset of a person', () => {
@@ -26,7 +26,7 @@ describe('person-data', () => {
     person.personalien.ausweispflichtig = false;
     person.personalien.sicherheitsstufe = 1;
     person.personalien.einreisedatum = '01-01-2022';
-    person.liste = [
+    person.sachverhalte = [
       'a',
       'b'
     ];
@@ -45,6 +45,6 @@ describe('person-data', () => {
     expect(person.personalien.sicherheitsstufe).toEqual(0);
     expect(person.personalien.geheimdienstnotizen).toEqual('');
     expect(person.personalien.einreisedatum).toEqual('XX-XX-XXXX');
-    expect(person.liste).toEqual([]);
+    expect(person.sachverhalte).toEqual([]);
   });
 });

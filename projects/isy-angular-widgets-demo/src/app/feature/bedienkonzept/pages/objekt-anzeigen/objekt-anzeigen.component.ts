@@ -37,7 +37,7 @@ export class ObjektAnzeigenComponent {
       sicherheitsstufe: 0,
       einreisedatum: 'XX-XX-2000'
     },
-    liste: [
+    sachverhalte: [
       'Hat einen Antrag auf BAFÖG gestellt',
       'Wurde wegen Falschparkens ermahnt',
       'Steht auf der NO-FLY-Liste'

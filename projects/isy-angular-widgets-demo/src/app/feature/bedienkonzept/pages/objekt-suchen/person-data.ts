@@ -20,7 +20,7 @@ export function getEmptyPerson(): Person {
       sicherheitsstufe: 0,
       geheimdienstnotizen: '',
       einreisedatum: 'XX-XX-XXXX'
-    }, liste: []
+    }, sachverhalte: []
   };
 }
 
@@ -42,5 +42,5 @@ export function resetPerson(person: Person): void {
   person.personalien.sicherheitsstufe = 0;
   person.personalien.geheimdienstnotizen = '';
   person.personalien.einreisedatum = 'XX-XX-XXXX';
-  person.liste = [];
+  person.sachverhalte = [];
 }
