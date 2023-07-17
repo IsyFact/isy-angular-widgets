@@ -4,6 +4,7 @@ import {InputCharPreviewComponent} from './input-char-preview.component';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {ButtonModule} from 'primeng/button';
 import {By} from '@angular/platform-browser';
+import { TranslateTestingModule } from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 // used for accessing any data type (native DOM elements like a button)
@@ -26,7 +27,10 @@ describe('InputCharViewComponent', () => {
         InputCharPreviewComponent
       ],
       imports: [
-        ButtonModule
+        ButtonModule,
+        TranslateTestingModule.withTranslations('de', {
+          'isyAngularWidgets.inputChar.insert': 'Einfügen'
+        })
       ]
     })
       .compileComponents();

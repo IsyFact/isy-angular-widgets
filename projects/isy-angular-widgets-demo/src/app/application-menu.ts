@@ -1,17 +1,17 @@
 export const applicationMenu = [
   {
-    label: 'Bedienkonzept Vorgaben',
+    label: 'isyAngularWidgetsDemo.menuItems.bedienkonzeptSpecifications',
     items: [
       [
         {
-          label: 'Häufige Aufgaben',
+          label: 'isyAngularWidgetsDemo.menuItems.frequentTasks',
           items: [
             {
-              label: 'Objekt suchen',
+              label: 'isyAngularWidgetsDemo.menuItems.searchObject',
               routerLink: 'bedienkonzept/objekt-suchen'
             },
             {
-              label: 'Objekt anzeigen',
+              label: 'isyAngularWidgetsDemo.menuItems.displayObject',
               routerLink: 'bedienkonzept/objekt-anzeigen/42'
             }
           ]
@@ -20,34 +20,34 @@ export const applicationMenu = [
     ]
   },
   {
-    label: 'Beispiel Menüpunkt',
+    label: 'isyAngularWidgetsDemo.menuItems.exampleMenuItem',
     items: [
       [
         {
-          label: 'Beispiel Gruppe 1',
+          label: 'isyAngularWidgetsDemo.menuItems.exampleGroup1',
           items: [
             {
-              label: 'Beispiel Unterpunkt 1'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem1'
             },
             {
-              label: 'Beispiel Unterpunkt 2'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem2'
             },
             {
-              label: 'Beispiel Unterpunkt 3'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem3'
             }
           ]
         },
         {
-          label: 'Beispiel Gruppe 2',
+          label: 'isyAngularWidgetsDemo.menuItems.exampleGroup2',
           items: [
             {
-              label: 'Beispiel Unterpunkt 1'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem1'
             },
             {
-              label: 'Beispiel Unterpunkt 2'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem2'
             },
             {
-              label: 'Beispiel Unterpunkt 3'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem3'
             }
           ]
         }
@@ -55,7 +55,7 @@ export const applicationMenu = [
     ]
   },
   {
-    label: 'Beispiel Menüpunkt (Disabled)',
+    label: 'isyAngularWidgetsDemo.menuItems.exampleMenuItemDisabled',
     disabled: true
   }
 ];

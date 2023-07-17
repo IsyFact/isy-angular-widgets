@@ -18,6 +18,7 @@ import {
   InputCharPreviewCharListComponent
 } from './components/input-char-preview-char-list/input-char-preview-char-list.component';
 import {InputCharDirective} from './directives/input-char.directive';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {InputCharDirective} from './directives/input-char.directive';
     FormsModule,
     AccordionModule,
     DialogModule,
-    SelectButtonModule
+    SelectButtonModule,
+    TranslateModule
   ]
 })
 export class InputCharModule { }

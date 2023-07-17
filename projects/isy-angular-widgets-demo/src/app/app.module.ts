@@ -14,6 +14,17 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SecurityModule} from '../../../isy-angular-widgets/src/lib/security/security.module';
 import {PanelMenuModule} from 'primeng/panelmenu';
+import {FormsModule} from '@angular/forms';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AccordionModule} from 'primeng/accordion';
+import {DropdownModule} from 'primeng/dropdown';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MegaMenuModule} from 'primeng/megamenu';
+import {
+  MenuTranslationService
+} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
 
 @NgModule({
   declarations: [
@@ -29,9 +40,30 @@ import {PanelMenuModule} from 'primeng/panelmenu';
     SharedModule,
     ButtonModule,
     ToolbarModule,
-    PanelMenuModule
+    PanelMenuModule,
+    HttpClientModule,
+    RadioButtonModule,
+    FormsModule,
+    AccordionModule,
+    DropdownModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: function HttpLoaderFactory(http: HttpClient) {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [HttpClient]
+      }
+    }),
+    MegaMenuModule
   ],
-  providers: [AuthGuard, UserInfoPublicService, {provide: UserInfoService, useClass: UserInfoPublicService}, SecurityService],
+  providers: [
+    AuthGuard,
+    UserInfoPublicService,
+    {provide: UserInfoService, useClass: UserInfoPublicService},
+    SecurityService,
+    MenuTranslationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

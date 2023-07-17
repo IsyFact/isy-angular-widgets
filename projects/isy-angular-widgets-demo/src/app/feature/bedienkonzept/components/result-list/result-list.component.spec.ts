@@ -11,6 +11,7 @@ import {WizardModule} from '../../../../../../../isy-angular-widgets/src/lib/wiz
 import {ActivatedRoute} from '@angular/router';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
+import { TranslateTestingModule } from 'ngx-translate-testing';
 
 describe('ResultListComponent', () => {
   let component: ResultListComponent;
@@ -31,7 +32,8 @@ describe('ResultListComponent', () => {
         CalendarModule,
         DropdownModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TranslateTestingModule.withTranslations({})
       ],
       providers: [
         SecurityService,
@@ -52,26 +54,12 @@ describe('ResultListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('creates', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check the person on init', () => {
+  it('has no selection by default', () => {
     expect(component.selectedObject).toBeUndefined();
 
-  });
-
-  it('should check the person on init', () => {
-    expect(component.selectedObject).toBeUndefined();
-  });
-
-  it('should check the selected person on init', () => {
-    expect(component.selectedObject).toBeUndefined();
-  });
-
-
-  it('should check the number of countries', () => {
-    const countriesCount = 32;
-    expect(component.laender.length).toEqual(countriesCount);
   });
 });

@@ -1,16 +1,28 @@
-<p-dialog *ngIf="person" header="Sachverhalte Hinzufügen/Bearbeiten" [(visible)]="visible">
+<p-dialog
+  *ngIf="person"
+  [header]="('isyAngularWidgetsDemo.actions.addOrEditFact' | translate)"
+  [(visible)]="visible"
+>
   <p-table [value]="newSachverhalteListe" responsiveLayout="scroll">
     <ng-template pTemplate="header">
       <tr>
-        <th scope="col">Sachverhalt</th>
-        <th scope="col">Status</th>
-        <th scope="col">Löschen</th>
+        <th scope="col">
+          {{('isyAngularWidgetsDemo.labels.sachverhalte' | translate)}}
+        </th>
+        <th scope="col">
+          {{('isyAngularWidgetsDemo.labels.state' | translate)}}
+        </th>
+        <th scope="col">
+          {{('isyAngularWidgetsDemo.actions.delete' | translate)}}
+        </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-sachverhalt>
       <tr>
         <td>{{sachverhalt}}</td>
-        <td>Gelöst</td>
+        <td>
+          {{('isyAngularWidgetsDemo.labels.solved' | translate)}}
+        </td>
         <td>
           <button pButton
                   pRipple
@@ -24,11 +36,23 @@
     </ng-template>
   </p-table>
   <div class="p-inputgroup">
-    <input type="text" pInputText placeholder="Neuer Eintrag" [(ngModel)]="newSachverhalt">
-    <button type="button" pButton pRipple icon="pi pi-plus" (click)="createSachverhalt(newSachverhalt)"></button>
+    <input pInputText
+           type="text"
+           [placeholder]="('isyAngularWidgetsDemo.labels.newEntryPlaceholder' | translate)"
+           [(ngModel)]="newSachverhalt"
+    >
+    <button pButton
+            type="button"
+            pRipple
+            icon="pi pi-plus"
+            (click)="createSachverhalt(newSachverhalt)"
+    >
+    </button>
   </div>
   <ng-template pTemplate="footer">
     <button pButton (click)="saveSachverhalte()">OK</button>
-    <button pButton class="p-button-outlined" (click)="closeDialog()">Abbrechen</button>
+    <button pButton class="p-button-outlined" (click)="closeDialog()">
+      {{('isyAngularWidgetsDemo.actions.cancel' | translate)}}
+    </button>
   </ng-template>
 </p-dialog>

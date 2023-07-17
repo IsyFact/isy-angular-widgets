@@ -47,27 +47,27 @@ describe('StepperComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check the stepper length', () => {
+  it(`should have ${stepsNumber} steps`, () => {
     expect(component.items.length).toEqual(stepsNumber);
   });
 
-  it('should check the stepper items titles', () => {
+  it('should have the correct stepper items titles', () => {
     for (let i = 0; i < component.items.length; i++) {
       expect(component.items[i]).toEqual(stepperItems[i]);
     }
   });
 
-  it('should check the stepper index', () => {
+  it(`should have start index ${startIndex}`, () => {
     expect(component.index).toEqual(startIndex);
   });
 
-  it('should check the stepper index after forward movement', () => {
+  it(`should have index ${startIndex + 1} after forward movement`, () => {
     expect(component.index).toEqual(startIndex);
     component.move(true);
     expect(component.index).toEqual(startIndex + 1);
   });
 
-  it('should check the stepper index after backward movement', () => {
+  it(`should have index ${startIndex} after forward and backward movement`, () => {
     expect(component.index).toEqual(startIndex);
     component.move(true);
     expect(component.index).toEqual(startIndex + 1);
@@ -75,7 +75,7 @@ describe('StepperComponent', () => {
     expect(component.index).toEqual(startIndex);
   });
 
-  it('should check out of bound prevention while forwarding', () => {
+  it('should not go out of bound while forwarding', () => {
     expect(component.index).toEqual(startIndex);
     for (let i = 0; i < stepsNumber + 1; i++) {
       component.move(true);
@@ -83,13 +83,13 @@ describe('StepperComponent', () => {
     expect(component.index).toEqual(stepsNumber);
   });
 
-  it('should check out of bound prevention while backwarding', () => {
+  it('should not go out of bound while backwarding', () => {
     expect(component.index).toEqual(startIndex);
     component.move(false);
     expect(component.index).toEqual(startIndex);
   });
 
-  it('should check resetting the stepper index', () => {
+  it(`should correctly reset index to ${startIndex}`, () => {
     expect(component.index).toEqual(startIndex);
     component.move(true);
     expect(component.index).toEqual(startIndex + 1);

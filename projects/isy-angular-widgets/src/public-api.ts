@@ -10,3 +10,4 @@ export * from './lib/wizard/public-api';
 export * from './lib/input-char/public-api';
 export * from './lib/validation/public-api';
 export * from './lib/http/public-api';
+export * from './lib/i18n/public-api';

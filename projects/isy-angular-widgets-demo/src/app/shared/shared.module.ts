@@ -11,6 +11,7 @@ import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {NotificationService} from './services/notification.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {NotificationService} from './services/notification.service';
     ButtonModule,
     InputTextModule,
     RippleModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   providers: [
     NotificationService,
