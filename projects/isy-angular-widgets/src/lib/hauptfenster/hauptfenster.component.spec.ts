@@ -97,27 +97,29 @@ describe('HauptfensterComponent', () => {
 
   it('should have a hidden linksnavigation by default', () => {
     const linksnavigation = fixture.nativeElement.querySelector('.isy-hauptfenster-linksnavigation') as HTMLElement;
-    expect(linksnavigation.attributes.getNamedItem('hidden')).toBeTruthy();
+    expect(linksnavigation).toBeFalsy();
   });
 
   it('should have a hidden informationsbereich by default', () => {
     const informationsbereich = fixture.nativeElement.querySelector('.isy-hauptfenster-informationsbereich') as HTMLElement;
-    expect(informationsbereich.attributes.getNamedItem('hidden')).toBeTruthy();
+    expect(informationsbereich).toBeFalsy();
   });
 
   it('should use the provided Linksnavigation width', () => {
     const customLinksnavigationWidth = '5em';
     component.linksNavigationWidth = customLinksnavigationWidth;
+    component.showLinksnavigation = true;
     fixture.detectChanges();
-    const linksnavigation = fixture.nativeElement.querySelector('.isy-hauptfenster-linksnavigation') as HTMLElement;
+    const linksnavigation = fixture.nativeElement.querySelector('#openLinksNavigation') as HTMLElement;
     expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
   });
 
   it('should use the provided Informationsbereich width', () => {
     const customInformationsbereichWidth = '5em';
     component.informationsbereichWidth = customInformationsbereichWidth;
+    component.showInformationsbereich = true;
     fixture.detectChanges();
-    const informationsbereich = fixture.nativeElement.querySelector('.isy-hauptfenster-informationsbereich') as HTMLElement;
+    const informationsbereich = fixture.nativeElement.querySelector('#openInformationsbereich') as HTMLElement;
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
 });
