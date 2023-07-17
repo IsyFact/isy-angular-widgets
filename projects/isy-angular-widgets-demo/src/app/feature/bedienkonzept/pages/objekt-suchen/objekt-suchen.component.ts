@@ -16,6 +16,7 @@ import {getEmptyPerson, resetPerson} from './person-data';
 import {countries, countriesMap} from './country-data';
 import {TOAST_MESSAGE, TOAST_SEVERITY, TOAST_SUMMARY} from '../../../../shared/model/toast';
 import {DateService} from '../../services/date.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'demo-personen-suchen',
@@ -126,7 +127,8 @@ export class ObjektSuchenComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private notificationService: NotificationService,
-    private dateService: DateService
+    private dateService: DateService,
+    public translate: TranslateService
   ) {
     this.personen$ = of([]);
     this.laender = countries;

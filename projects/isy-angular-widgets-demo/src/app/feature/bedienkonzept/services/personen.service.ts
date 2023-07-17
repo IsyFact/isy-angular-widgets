@@ -111,7 +111,8 @@ export class PersonenService {
 
   findPersonById(id: string): Observable<Person[]> {
     return of<Person[]>([{
-      id: id, personalien: {
+      id: id,
+      personalien: {
         nachname: 'Wilhelm',
         vorname: 'Frederik',
         geschlecht: 'x',
@@ -124,9 +125,8 @@ export class PersonenService {
         sicherheitsstufe: 0,
         geheimdienstnotizen: '',
         einreisedatum: 'XX-XX-XXXX'
-      }, sachverhalte: {
-        liste: []
-      }
+      },
+      sachverhalte: []
     }]);
   }
 
@@ -170,9 +170,8 @@ export class PersonenService {
         sicherheitsstufe: 0,
         geheimdienstnotizen: '',
         einreisedatum: 'XX-XX-XXXX'
-      }, sachverhalte: {
-        liste: []
-      }
+      },
+      sachverhalte: []
     };
   }
 
@@ -203,7 +202,7 @@ export class PersonenService {
 
   rng(): number {
     const crypto = window.crypto;
-    return (crypto.getRandomValues(new Uint32Array(1)))[0]%this.maxEntries
+    return (crypto.getRandomValues(new Uint32Array(1)))[0]%this.maxEntries;
   }
 }
 

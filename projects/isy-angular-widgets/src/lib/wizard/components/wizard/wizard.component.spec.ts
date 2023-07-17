@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
 import {Component, QueryList, ViewChild} from '@angular/core';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
 const width = 50;
 const height = 30;
@@ -62,6 +63,20 @@ let contentChildren: QueryList<WizardDirective>;
 describe('Test WizardComponent with Mock Parent: ', () => {
   let parentComponent: TestComponent;
   let parentFixture: ComponentFixture<TestComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        TestComponent
+      ],
+      imports: [
+        TranslateTestingModule.withTranslations('de', {
+          'isyAngularWidgets.hauptfenster.logout': 'Abmelden'
+        })
+      ]
+    })
+      .compileComponents();
+  });
 
   /**
    * Initializes wizard component properties
@@ -212,7 +227,7 @@ describe('Test WizardComponent with Mock Parent: ', () => {
     closeButton.click();
   }
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         WizardComponent,

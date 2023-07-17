@@ -12,17 +12,16 @@ import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {CharacterService} from '../../services/character.service';
 import {DialogModule} from 'primeng/dialog';
 import {InputCharAllCharsButtonComponent} from '../input-char-all-chars-button/input-char-all-chars-button.component';
-import {
-  InputCharPreviewCharListComponent
-} from '../input-char-preview-char-list/input-char-preview-char-list.component';
+import {InputCharPreviewCharListComponent} from '../input-char-preview-char-list/input-char-preview-char-list.component';
 import {InputCharSelectButtonComponent} from '../input-char-select-button/input-char-select-button.component';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
-const crypto = window.crypto
+const crypto = window.crypto;
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -69,7 +68,8 @@ describe('InputCharComponent', () => {
           ButtonModule,
           SelectButtonModule,
           FormsModule,
-          BrowserAnimationsModule
+          BrowserAnimationsModule,
+          TranslateTestingModule.withTranslations({})
         ],
         providers: [
           CharacterService

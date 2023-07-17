@@ -81,11 +81,10 @@ describe('InputCharPreviewCharListComponent', () => {
     expect(characterSelectButtons.length).toEqual(options.length);
 
     const crypto = window.crypto;
-    const randomIndex =  (crypto.getRandomValues(new Uint32Array(1)))[0]%options.length
+    const randomIndex =  (crypto.getRandomValues(new Uint32Array(1)))[0]%options.length;
 
     characterSelectButtons[randomIndex].click();
 
-    console.log(`Selected Value: ${component.selectedValue}`)
     expect(component.selectedValue.toString()).toEqual(options[randomIndex].zeichen);
     expect(charSelection).toHaveBeenCalledWith(options[randomIndex]);
   });
