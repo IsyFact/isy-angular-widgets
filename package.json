@@ -13,6 +13,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build isy-angular-widgets && ng build isy-angular-widgets-demo && npm run build:schematics",
+    "postbuild": "cd ./projects/isy-angular-widgets && npm run postbuild",
     "build:schematics": "./node_modules/.bin/tsc -p ./projects/isy-angular-widgets/tsconfig.schematics.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false",
