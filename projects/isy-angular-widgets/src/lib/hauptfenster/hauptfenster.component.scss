@@ -44,6 +44,11 @@
 .isy-hauptfenster-informationsbereich {
   border-left: 1px solid var(--gray-300);
   background-color: #F3F3F3;
+
+  .collapseButton {
+    display: flex;
+    justify-content: flex-start;
+  }
 }
 
 @media print {

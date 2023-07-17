@@ -4,6 +4,7 @@ import {HauptfensterComponent} from './hauptfenster.component';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {ButtonModule} from 'primeng/button';
 import {Component, Input, ViewChild} from '@angular/core';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -33,7 +34,10 @@ describe('HauptfensterComponent', () => {
       ],
       imports: [
         MegaMenuModule,
-        ButtonModule
+        ButtonModule,
+        TranslateTestingModule.withTranslations('de', {
+          'isyAngularWidgets.hauptfenster.logout': 'Abmelden'
+        })
       ]
     })
       .compileComponents();
@@ -80,7 +84,8 @@ describe('HauptfensterComponent', () => {
   it('should show "Abmelden" as the title of the logout button', () => {
     const logoutTitle = 'Abmelden';
     const logoutButton = fixture.nativeElement.querySelector('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    expect(logoutButton.textContent).toEqual(logoutTitle);
+    const logoutButtonText = logoutButton.textContent || '';
+    expect(logoutButtonText.trim()).toEqual(logoutTitle);
   });
 
   it('should call the logout function when the button is clocked', () => {
@@ -92,27 +97,29 @@ describe('HauptfensterComponent', () => {
 
   it('should have a hidden linksnavigation by default', () => {
     const linksnavigation = fixture.nativeElement.querySelector('.isy-hauptfenster-linksnavigation') as HTMLElement;
-    expect(linksnavigation.attributes.getNamedItem('hidden')).toBeTruthy();
+    expect(linksnavigation).toBeFalsy();
   });
 
   it('should have a hidden informationsbereich by default', () => {
     const informationsbereich = fixture.nativeElement.querySelector('.isy-hauptfenster-informationsbereich') as HTMLElement;
-    expect(informationsbereich.attributes.getNamedItem('hidden')).toBeTruthy();
+    expect(informationsbereich).toBeFalsy();
   });
 
   it('should use the provided Linksnavigation width', () => {
     const customLinksnavigationWidth = '5em';
     component.linksNavigationWidth = customLinksnavigationWidth;
+    component.showLinksnavigation = true;
     fixture.detectChanges();
-    const linksnavigation = fixture.nativeElement.querySelector('.isy-hauptfenster-linksnavigation') as HTMLElement;
+    const linksnavigation = fixture.nativeElement.querySelector('#openLinksNavigation') as HTMLElement;
     expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
   });
 
   it('should use the provided Informationsbereich width', () => {
     const customInformationsbereichWidth = '5em';
     component.informationsbereichWidth = customInformationsbereichWidth;
+    component.showInformationsbereich = true;
     fixture.detectChanges();
-    const informationsbereich = fixture.nativeElement.querySelector('.isy-hauptfenster-informationsbereich') as HTMLElement;
+    const informationsbereich = fixture.nativeElement.querySelector('#openInformationsbereich') as HTMLElement;
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
 });

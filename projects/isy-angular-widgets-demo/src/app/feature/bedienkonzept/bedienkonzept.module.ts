@@ -21,9 +21,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {FieldsetModule} from 'primeng/fieldset';
 import {DialogModule} from 'primeng/dialog';
 import {IncompleteDateModule} from '../../../../../isy-angular-widgets/src/lib/incomplete-date/incomplete-date.module';
-import {
-  PersoenlicheInformationenComponent
-} from './components/persoenliche-informationen/persoenliche-informationen.component';
+import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
 import {MessagesModule} from 'primeng/messages';
 import {RippleModule} from 'primeng/ripple';
 import {ToastModule} from 'primeng/toast';
@@ -31,6 +29,11 @@ import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wi
 import {PanelModule} from 'primeng/panel';
 import {NotificationService} from '../../shared/services/notification.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
+import {HttpClientModule} from '@angular/common/http';
+import {TranslateModule} from '@ngx-translate/core';
+import {MessageModule} from 'primeng/message';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +72,11 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     ToastModule,
     WizardModule,
     PanelModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    InputCharModule,
+    HttpClientModule,
+    TranslateModule,
+    MessageModule
   ],
   providers: [
     NotificationService

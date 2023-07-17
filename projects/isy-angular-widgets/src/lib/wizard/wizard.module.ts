@@ -6,6 +6,7 @@ import {StepperComponent} from './components/stepper/stepper.component';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {WizardDirective} from './directives/wizard.directive';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {WizardDirective} from './directives/wizard.directive';
     CommonModule,
     StepsModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    TranslateModule
   ]
 })
 export class WizardModule { }

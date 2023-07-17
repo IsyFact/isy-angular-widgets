@@ -4,6 +4,10 @@
     "ng-add": {
       "description": "Add isy-angular-widgets to the project.",
       "factory": "./ng-add/index#ngAdd"
+    },
+    "add-translation": {
+      "description": "Add translation file to the project.",
+      "factory": "./add-translation/index#addTranslation"
     }
   }
 }

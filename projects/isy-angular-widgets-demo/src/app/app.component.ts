@@ -1,44 +1,78 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserInfo} from '../../../isy-angular-widgets/src/lib/api/userinfo';
 import {SecurityService} from '../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import data from '../assets/permissions.json';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
-import {ActivationStart, Router} from '@angular/router';
-import {filter} from 'rxjs';
-import {MenuItem} from 'primeng/api';
+import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {MegaMenuItem, MenuItem, PrimeNGConfig} from 'primeng/api';
+import {TranslateService} from '@ngx-translate/core';
+import {MenuTranslationService} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
 
 @Component({
   selector: 'demo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  readonly items = applicationMenu;
-  readonly sidebarItems: MenuItem[] = navigationMenu;
-  title!: string;
-  subTitle!: string;
+export class AppComponent implements OnInit, OnDestroy {
+  items: MegaMenuItem[] = applicationMenu;
+  sidebarItems: MenuItem[] = [];
+  primeNGI18nSubscription: Subscription;
+  selectedLanguage: string = 'de';
 
   constructor(
     private router: Router,
     private securityService: SecurityService,
-    private userInfoPublicService: UserInfoPublicService
+    private userInfoPublicService: UserInfoPublicService,
+    public translate: TranslateService,
+    private primeNGConfig: PrimeNGConfig,
+    private menuTranslationService: MenuTranslationService
   ) {
-    router.events.pipe(
-      filter((e): e is ActivationStart => e instanceof ActivationStart))
-      .subscribe((event: ActivationStart) => {
-        this.title = event.snapshot.data?.title as string;
-        this.subTitle = event.snapshot.data?.subTitle as string;
-      });
+
+    // Add translation
+    translate.addLangs(['de', 'en']);
+    translate.setDefaultLang('en');
+
+    // Set PrimeNG translation
+    this.primeNGI18nSubscription = this.translate.stream('primeng').subscribe(data => {
+      this.primeNGConfig.setTranslation(data);
+    });
   }
 
-  ngOnInit(): void {
+  // Change language and save it in local storage
+  changeLanguage(language: string):void {
+    this.translate.use(language);
+  }
+
+  ngOnInit(): void{
     this.securityService.setRoles(this.userInfoPublicService.getUserInfo());
     this.securityService.setPermissions(data);
+
+    this.changeLanguage(this.selectedLanguage);
+
+    this.translate.onLangChange.subscribe(async() => {
+      this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
+    });
+  }
+  ngOnDestroy(): void {
+    if (this.primeNGI18nSubscription) {
+      this.primeNGI18nSubscription.unsubscribe();
+    }
   }
 
   userInfo?: UserInfo = {
     displayName: 'Max Mustermann'
   };
+
+  getLanguageIcon(language: string): string {
+    switch (language) {
+      case 'en':
+        return 'gb';
+      default:
+        return language;
+    }
+  }
+
 }
