@@ -6,9 +6,6 @@ import {ButtonModule} from 'primeng/button';
 import {Component, Input, ViewChild} from '@angular/core';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-// Usage for accessing native HTML Elements
 @Component({
   template: `
     <isy-hauptfenster [title]="title">

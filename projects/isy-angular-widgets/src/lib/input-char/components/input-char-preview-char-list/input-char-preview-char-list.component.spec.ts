@@ -7,12 +7,6 @@ import {ButtonModule} from 'primeng/button';
 import {Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-// used for accessing any data type (native DOM elements like a button)
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-// used for accessing via querySelector native DOM elements by class name
-
 describe('InputCharPreviewCharListComponent', () => {
   let component: InputCharPreviewCharListComponent;
   let fixture: ComponentFixture<InputCharPreviewCharListComponent>;

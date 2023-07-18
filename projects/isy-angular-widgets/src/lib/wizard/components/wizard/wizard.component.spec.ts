@@ -28,14 +28,6 @@ const CLASS_JUSTIFY_CENTER = 'justify-content-center';
 const CLASS_MR_2 = 'mr-2';
 const CLASS_MR_4 = 'mr-4';
 
-/* eslint-disable @typescript-eslint/unbound-method */
-// for testing emitting and custom reusable expect methods
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-
-// for accessing native template elements and their attributes
 @Component({
   template:
     `

@@ -6,9 +6,6 @@ import {ButtonModule} from 'primeng/button';
 import {By} from '@angular/platform-browser';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-// used for accessing any data type (native DOM elements like a button)
-
 describe('InputCharViewComponent', () => {
   let component: InputCharPreviewComponent;
   let fixture: ComponentFixture<InputCharPreviewComponent>;

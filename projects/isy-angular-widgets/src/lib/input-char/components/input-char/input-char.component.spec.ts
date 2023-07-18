@@ -22,9 +22,7 @@ import {By} from '@angular/platform-browser';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 
 const crypto = window.crypto;
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+
 describe('InputCharComponent', () => {
   describe('InputCharComponent with default datentyp = DATENTYP_C', () => {
     let component: InputCharComponent;

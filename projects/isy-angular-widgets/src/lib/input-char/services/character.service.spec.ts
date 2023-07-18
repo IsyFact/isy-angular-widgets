@@ -5,9 +5,6 @@ import sonderzeichenliste from '../sonderzeichenliste.json';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../model/model';
 import {Datentyp} from '../model/datentyp';
 
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-// Used for hardcoded array index usage
-
 interface BaseInfo {
   name: string;
   count: number;

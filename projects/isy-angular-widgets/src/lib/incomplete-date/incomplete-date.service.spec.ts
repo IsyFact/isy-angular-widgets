@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
 import { IncompleteDateService } from './incomplete-date.service';
 
 describe(('IsyIncompleteDate'), () => {
