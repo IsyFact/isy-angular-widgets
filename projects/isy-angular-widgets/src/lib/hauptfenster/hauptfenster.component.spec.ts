@@ -84,7 +84,7 @@ describe('HauptfensterComponent', () => {
   it('should show "Abmelden" as the title of the logout button', () => {
     const logoutTitle = 'Abmelden';
     const logoutButton = fixture.nativeElement.querySelector('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const logoutButtonText = logoutButton.textContent || '';
+    const logoutButtonText = logoutButton.textContent ?? '';
     expect(logoutButtonText.trim()).toEqual(logoutTitle);
   });
 

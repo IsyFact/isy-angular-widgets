@@ -266,14 +266,16 @@ export class ObjektSuchenComponent {
    */
   findPerson(): void {
     this.tbLoadingStatus = true;
+    const delay = 3000;
     setTimeout(() => {
       this.personen$ = (this.person.id !== '') ? this.personService.findPersonById(this.person.id) : this.personService.findPersonenByParameters(this.person);
       this.tbLoadingStatus = false;
-    }, 3000);
+    }, delay);
   }
 
   /**
    * Adds a new person to the existing persons list
+   * @returns a boolean
    */
   addNewPerson(): boolean {
     const person = this.getNewAddedPerson();

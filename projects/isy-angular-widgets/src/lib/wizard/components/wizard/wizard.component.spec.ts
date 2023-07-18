@@ -64,7 +64,7 @@ describe('Test WizardComponent with Mock Parent', () => {
   let parentComponent: TestComponent;
   let parentFixture: ComponentFixture<TestComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [
         TestComponent
@@ -227,7 +227,7 @@ describe('Test WizardComponent with Mock Parent', () => {
     closeButton.click();
   }
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [
         WizardComponent,

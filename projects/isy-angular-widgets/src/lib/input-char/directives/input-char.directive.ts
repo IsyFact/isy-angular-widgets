@@ -39,7 +39,8 @@ export class InputCharDirective implements OnInit {
   inputMousePosition: number = 0;
 
   constructor(private viewContainerRef: ViewContainerRef, private element: ElementRef) {
-    this.element.nativeElement.style.width = 'calc(100% - 2.357rem)';
+    const htmlInputElement = this.element.nativeElement as HTMLInputElement;
+    htmlInputElement.style.width = 'calc(100% - 2.357rem)';
   }
 
   ngOnInit(): void {

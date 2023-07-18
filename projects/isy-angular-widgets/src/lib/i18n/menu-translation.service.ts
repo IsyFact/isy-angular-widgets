@@ -56,7 +56,7 @@ export class MenuTranslationService {
    * @param items MegaMenu items to translate
    * @returns translated {@link MegaMenuItem}
    */
-  public async translateMegaMenuItems(items: MegaMenuItem[]): Promise<MegaMenuItem[]> {
+  async translateMegaMenuItems(items: MegaMenuItem[]): Promise<MegaMenuItem[]> {
     const translatedItems = [];
 
     for (const untranslatedItem of items) {
