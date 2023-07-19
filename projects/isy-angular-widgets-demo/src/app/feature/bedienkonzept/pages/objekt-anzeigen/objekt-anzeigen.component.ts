@@ -74,11 +74,11 @@ export class ObjektAnzeigenComponent {
     this.personalInfoForm.clearValidators();
     this.messageService.add({
       severity: 'success',
-      summary: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonSummary'),
+      summary: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonSummary') as string,
       detail: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonDetail', {
-        firstName: this.personalInfoForm.value.firstName,
-        lastName: this.personalInfoForm.value.lastName
-      })
+        firstName: this.personalInfoForm.value.firstName as string,
+        lastName: this.personalInfoForm.value.lastName as string
+      }) as string
     });
   }
 }

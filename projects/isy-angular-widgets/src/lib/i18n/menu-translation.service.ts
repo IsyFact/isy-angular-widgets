@@ -6,7 +6,6 @@ import {firstValueFrom} from 'rxjs';
 /**
  * A service to translate labels of {@link MenuItem} or {@link MegaMenuItem} using the ngx-translation service.
  * Instead of label descriptions, the i18n key has to be provided in the label field of a menu item.
- *
  * @example
  * const items = [
  *   {
@@ -28,11 +27,10 @@ export class MenuTranslationService {
 
   /**
    * Translates all `label` fields of  {@link MenuItem} and all submenu items.
-   *
    * @param items Menu items to translate
    * @returns translated {@link MegaMenuItem}
    */
-  public async translateMenuItems(items: MenuItem[]): Promise<MenuItem[]> {
+  async translateMenuItems(items: MenuItem[]): Promise<MenuItem[]> {
     const translatedItems = [];
 
     for (const untranslatedItem of items) {
@@ -52,7 +50,6 @@ export class MenuTranslationService {
 
   /**
    * Translates all `label` fields of  {@link MegaMenuItem} and all submenu items.
-   *
    * @param items MegaMenu items to translate
    * @returns translated {@link MegaMenuItem}
    */

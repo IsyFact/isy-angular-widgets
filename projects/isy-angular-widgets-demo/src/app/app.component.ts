@@ -7,7 +7,7 @@ import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {MegaMenuItem, MenuItem, PrimeNGConfig} from 'primeng/api';
+import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
 
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set PrimeNG translation
     this.primeNGI18nSubscription = this.translate.stream('primeng').subscribe(data => {
-      this.primeNGConfig.setTranslation(data);
+      this.primeNGConfig.setTranslation(data as Translation);
     });
   }
 
