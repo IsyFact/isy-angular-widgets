@@ -36,14 +36,6 @@
     },
     {
       "files": [
-        "*.spec.ts"
-      ],
-      "extends": [
-        "plugin:@isyfact/test"
-      ]
-    },
-    {
-      "files": [
         "*.html"
       ],
       "rules": {}
