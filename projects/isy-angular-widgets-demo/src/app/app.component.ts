@@ -10,6 +10,8 @@ import {Subscription} from 'rxjs';
 import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
+import {NotificationService} from './shared/services/notification.service';
+import {TOAST_MESSAGE, TOAST_SEVERITY, TOAST_SUMMARY} from './shared/model/toast';
 
 @Component({
   selector: 'demo-root',
@@ -28,7 +30,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private userInfoPublicService: UserInfoPublicService,
     public translate: TranslateService,
     private primeNGConfig: PrimeNGConfig,
-    private menuTranslationService: MenuTranslationService
+    private menuTranslationService: MenuTranslationService,
+    private notificationService: NotificationService
   ) {
 
     // Add translation
@@ -52,8 +55,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.changeLanguage(this.selectedLanguage);
 
-    this.translate.onLangChange.subscribe(async() => {
-      this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
+    this.translate.onLangChange.subscribe(() => {
+      this.menuTranslationService.translateMenuItems(navigationMenu).then(items => {
+        this.sidebarItems = items;
+      }).catch(()=> {
+        this.notificationService.buildMessage(
+          TOAST_SEVERITY.ERROR,
+          TOAST_SUMMARY.ERROR,
+          TOAST_MESSAGE.ERROR_LOADING_ITEMS
+        );
+      });
     });
   }
   ngOnDestroy(): void {
