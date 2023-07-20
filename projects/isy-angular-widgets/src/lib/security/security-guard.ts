@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate, CanLoad {
 
   /**
    * @param securityService A service that can be configured with permission configuration and return permissions for certain elements.
+   * @internal
    */
   constructor(private securityService: SecurityService) {
   }

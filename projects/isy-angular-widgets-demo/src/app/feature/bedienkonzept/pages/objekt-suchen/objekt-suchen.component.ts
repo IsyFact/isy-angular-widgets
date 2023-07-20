@@ -275,7 +275,7 @@ export class ObjektSuchenComponent {
 
   /**
    * Adds a new person to the existing persons list
-   * @returns a boolean
+   * @returns The information about adding a new person
    */
   addNewPerson(): boolean {
     const person = this.getNewAddedPerson();
