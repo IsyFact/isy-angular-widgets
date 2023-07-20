@@ -57,10 +57,16 @@ describe('NotificationService', () => {
     TOAST_SUMMARY.WARN,
     TOAST_MESSAGE.WARN
   );
+  const fourthMessage = buildMessage(
+    TOAST_SEVERITY.ERROR,
+    TOAST_SUMMARY.ERROR,
+    TOAST_MESSAGE.ERROR
+  );
   const originalMessages = [
     firstMessage,
     secondMessage,
-    thirdMessage
+    thirdMessage,
+    fourthMessage
   ];
 
   beforeEach(() => {
@@ -96,7 +102,8 @@ describe('NotificationService', () => {
     service.addMessages(
       firstMessage,
       secondMessage,
-      thirdMessage
+      thirdMessage,
+      fourthMessage
     );
 
     expectSameLength(originalMessages, service.messages);
