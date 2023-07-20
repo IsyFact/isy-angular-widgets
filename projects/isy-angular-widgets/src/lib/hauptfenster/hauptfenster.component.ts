@@ -90,8 +90,12 @@ export class HauptfensterComponent   {
     private menuTranslationService: MenuTranslationService,
     private translate: TranslateService
   ) {
-    this.translate.onLangChange.subscribe(async() => {
-      this.translatedItems = await this.menuTranslationService.translateMegaMenuItems(this.items);
+    this.translate.onLangChange.subscribe(() => {
+      this.menuTranslationService.translateMegaMenuItems(this.items).then(items => {
+        this.translatedItems = items;
+      }).catch((error)=> {
+        throw error;
+      });
     });
   }
 }
