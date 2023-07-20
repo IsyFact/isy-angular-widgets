@@ -36,7 +36,7 @@ export class MenuTranslationService {
     for (const untranslatedItem of items) {
       const translatedItem = Object.assign({}, untranslatedItem);
 
-      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string));
+      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string)) as string;
 
       if (translatedItem.items) {
         translatedItem.items = await this.translateMenuItems(translatedItem.items);
@@ -59,7 +59,7 @@ export class MenuTranslationService {
     for (const untranslatedItem of items) {
       const translatedItem = Object.assign({}, untranslatedItem);
 
-      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string));
+      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string)) as string;
 
       if (translatedItem.items) {
         const translatedSubItems = [];
