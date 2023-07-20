@@ -6,6 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../../../shared/validation/validator';
+import {PersonalInformation} from '../../../../shared/model/forms';
 
 /*
 * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -72,12 +73,13 @@ export class ObjektAnzeigenComponent {
   savePersonalien(): void {
     this.personalInfoForm.disable();
     this.personalInfoForm.clearValidators();
+    const person = this.personalInfoForm.value as PersonalInformation;
     this.messageService.add({
       severity: 'success',
       summary: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonSummary') as string,
       detail: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonDetail', {
-        firstName: this.personalInfoForm.value.firstName as string,
-        lastName: this.personalInfoForm.value.lastName as string
+        firstName: person.firstName,
+        lastName: person.lastName
       }) as string
     });
   }
