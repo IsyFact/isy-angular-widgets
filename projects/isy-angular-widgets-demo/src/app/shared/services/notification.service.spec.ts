@@ -117,7 +117,7 @@ describe('NotificationService', () => {
     expectArrayBeSame(service.messages, []);
   });
 
-  it('should create a message for the notification dateService and the PrimeNG Toast (without lifetime)', () => {
+  it('should create a success message for the notification dateService and the PrimeNG Toast (without lifetime)', () => {
     const message = service.buildMessage(
       TOAST_SEVERITY.SUCCESS,
       TOAST_SUMMARY.SUCCESS,
@@ -130,7 +130,7 @@ describe('NotificationService', () => {
     expect(message.detail).toEqual(TOAST_MESSAGE.SUCCESS);
   });
 
-  it('should create a message for the notification dateService and the PrimeNG Toast (with lifetime)', () => {
+  it('should create a success message for the notification dateService and the PrimeNG Toast (with lifetime)', () => {
     const lifetime = 2000;
     const message = service.buildMessage(
       TOAST_SEVERITY.SUCCESS,
@@ -143,6 +143,93 @@ describe('NotificationService', () => {
     expect(message.severity).toEqual(TOAST_SEVERITY.SUCCESS);
     expect(message.summary).toEqual(TOAST_SUMMARY.SUCCESS);
     expect(message.detail).toEqual(TOAST_MESSAGE.SUCCESS);
+    expect(message.life).toEqual(lifetime);
+  });
+
+  it('should create an info message for the notification dateService and the PrimeNG Toast (without lifetime)', () => {
+    const message = service.buildMessage(
+      TOAST_SEVERITY.INFO,
+      TOAST_SUMMARY.INFO,
+      TOAST_MESSAGE.INFO
+    );
+
+    expect(message).toBeTruthy();
+    expect(message.severity).toEqual(TOAST_SEVERITY.INFO);
+    expect(message.summary).toEqual(TOAST_SUMMARY.INFO);
+    expect(message.detail).toEqual(TOAST_MESSAGE.INFO);
+  });
+
+  it('should create an info message for the notification dateService and the PrimeNG Toast (with lifetime)', () => {
+    const lifetime = 2000;
+    const message = service.buildMessage(
+      TOAST_SEVERITY.INFO,
+      TOAST_SUMMARY.INFO,
+      TOAST_MESSAGE.INFO,
+      lifetime
+    );
+
+    expect(message).toBeTruthy();
+    expect(message.severity).toEqual(TOAST_SEVERITY.INFO);
+    expect(message.summary).toEqual(TOAST_SUMMARY.INFO);
+    expect(message.detail).toEqual(TOAST_MESSAGE.INFO);
+    expect(message.life).toEqual(lifetime);
+  });
+
+  it('should create a warning message for the notification dateService and the PrimeNG Toast (without lifetime)', () => {
+    const message = service.buildMessage(
+      TOAST_SEVERITY.WARN,
+      TOAST_SUMMARY.WARN,
+      TOAST_MESSAGE.WARN
+    );
+
+    expect(message).toBeTruthy();
+    expect(message.severity).toEqual(TOAST_SEVERITY.WARN);
+    expect(message.summary).toEqual(TOAST_SUMMARY.WARN);
+    expect(message.detail).toEqual(TOAST_MESSAGE.WARN);
+  });
+
+  it('should create a warning message for the notification dateService and the PrimeNG Toast (with lifetime)', () => {
+    const lifetime = 2000;
+    const message = service.buildMessage(
+      TOAST_SEVERITY.WARN,
+      TOAST_SUMMARY.WARN,
+      TOAST_MESSAGE.WARN,
+      lifetime
+    );
+
+    expect(message).toBeTruthy();
+    expect(message.severity).toEqual(TOAST_SEVERITY.WARN);
+    expect(message.summary).toEqual(TOAST_SUMMARY.WARN);
+    expect(message.detail).toEqual(TOAST_MESSAGE.WARN);
+    expect(message.life).toEqual(lifetime);
+  });
+
+  it('should create a warning message for the notification dateService and the PrimeNG Toast (without lifetime)', () => {
+    const message = service.buildMessage(
+      TOAST_SEVERITY.ERROR,
+      TOAST_SUMMARY.ERROR,
+      TOAST_MESSAGE.ERROR
+    );
+
+    expect(message).toBeTruthy();
+    expect(message.severity).toEqual(TOAST_SEVERITY.ERROR);
+    expect(message.summary).toEqual(TOAST_SUMMARY.ERROR);
+    expect(message.detail).toEqual(TOAST_MESSAGE.ERROR);
+  });
+
+  it('should create a warning message for the notification dateService and the PrimeNG Toast (with lifetime)', () => {
+    const lifetime = 2000;
+    const message = service.buildMessage(
+      TOAST_SEVERITY.ERROR,
+      TOAST_SUMMARY.ERROR,
+      TOAST_MESSAGE.ERROR,
+      lifetime
+    );
+
+    expect(message).toBeTruthy();
+    expect(message.severity).toEqual(TOAST_SEVERITY.ERROR);
+    expect(message.summary).toEqual(TOAST_SUMMARY.ERROR);
+    expect(message.detail).toEqual(TOAST_MESSAGE.ERROR);
     expect(message.life).toEqual(lifetime);
   });
 });
