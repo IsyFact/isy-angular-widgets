@@ -8,7 +8,6 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import {DropdownModule} from 'primeng/dropdown';
-import {NotificationService} from './shared/services/notification.service';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {FormsModule} from '@angular/forms';
@@ -34,7 +33,6 @@ describe('AppComponent', () => {
       providers: [
         SecurityService,
         UserInfoPublicService,
-        NotificationService,
         MessageService
       ]
     }).compileComponents();
