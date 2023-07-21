@@ -60,7 +60,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }).catch(()=> {
         const message: Message = {
           severity: TOAST_SEVERITY.ERROR,
-          summary: TOAST_SEVERITY.ERROR,
           detail: this.translate.instant('toastMessages.errorLoadingItems') as string
         };
         this.messageService.add(message);

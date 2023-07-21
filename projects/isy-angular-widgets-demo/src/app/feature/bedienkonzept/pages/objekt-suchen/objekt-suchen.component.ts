@@ -311,7 +311,6 @@ export class ObjektSuchenComponent {
     const milliseconds = 3000;
     const message: Message = {
       severity: TOAST_SEVERITY.SUCCESS,
-      summary: TOAST_SEVERITY.SUCCESS,
       detail: this.translate.instant('toastMessages.successfullySavedFakeData') as string,
       life: milliseconds
     };
