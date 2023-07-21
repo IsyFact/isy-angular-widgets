@@ -10,7 +10,6 @@ import {InputTextModule} from 'primeng/inputtext';
 import {RippleModule} from 'primeng/ripple';
 import {FormsModule} from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import {NotificationService} from './services/notification.service';
 import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
@@ -31,7 +30,6 @@ import {TranslateModule} from '@ngx-translate/core';
     TranslateModule
   ],
   providers: [
-    NotificationService,
     MessageService
   ]
 })

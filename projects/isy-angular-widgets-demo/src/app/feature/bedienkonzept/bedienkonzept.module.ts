@@ -27,7 +27,6 @@ import {RippleModule} from 'primeng/ripple';
 import {ToastModule} from 'primeng/toast';
 import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
 import {PanelModule} from 'primeng/panel';
-import {NotificationService} from '../../shared/services/notification.service';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 import {HttpClientModule} from '@angular/common/http';
@@ -77,9 +76,6 @@ import {MessageModule} from 'primeng/message';
     HttpClientModule,
     TranslateModule,
     MessageModule
-  ],
-  providers: [
-    NotificationService
   ]
 })
 export class BedienkonzeptModule {
