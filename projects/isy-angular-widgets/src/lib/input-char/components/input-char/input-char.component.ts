@@ -97,46 +97,46 @@ export class InputCharComponent implements OnInit {
   @Input() isDialogModalDisplayed: boolean = false;
 
   /**
-   * @internal
    * Controls the char picker visibility
+   * @internal
    */
   displayCharPicker: boolean = false;
 
   /**
-   * @internal
    * The array who stores the active states of all accordion tabs
+   * @internal
    */
   activeState: boolean[] = [false, false];
 
   /**
-   * @internal
    * The array who stores all the grundzeichen
+   * @internal
    */
   grundZeichenListe!: string[];
 
   /**
-   * @internal
    * The array who stores all the schriftzeichen
+   * @internal
    */
   schriftZeichenGruppen!: SchriftZeichen[];
 
   /**
-   * @internal
    * The array who stores all the zeichenobjekte
+   * @internal
    */
   zeichenObjekteToDisplay!: Zeichenobjekt[];
 
   /**
-   * @internal
    * Stores the current selected zeichenobjekt
+   * @internal
    */
   selectedZeichenObjekt?: Zeichenobjekt;
 
   constructor(private charService: CharacterService) { }
 
   /**
-   * @internal
    * Fire on initialization
+   * @internal
    */
   ngOnInit(): void {
     this.getCharactersByDatentyp(this.datentyp);
@@ -154,9 +154,9 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is setting up the char picker availability
    * @param close The opening status of the char picker
+   * @internal
    */
   setupCharPickerAvailability(close?: boolean): void {
     if (this.displayCharPicker) {
@@ -171,9 +171,9 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Setting up the characters list who must be displayed
    * @param datentyp Used as filter
+   * @internal
    */
   getCharactersByDatentyp(datentyp: Datentyp): void {
     const allowedGroups = this.charService.getGroupsByDataType(datentyp);
@@ -182,8 +182,8 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Setting up the characters list who must be displayed
+   * @internal
    */
   setupCharacterListToDisplay(): void {
     this.zeichenObjekteToDisplay = this.zeichenListe;
@@ -191,8 +191,8 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is fired on dialog closing
+   * @internal
    */
   onDialogClose(): void {
     this.charPreview.reset();
@@ -221,8 +221,8 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is fired when the all button get clicked
+   * @internal
    */
   onAllSelection(): void {
     this.resetBaseSelection();
@@ -232,9 +232,9 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is fired when a base get selected
    * @param base The selected base
+   * @internal
    */
   onBaseSelection(base: string): void {
     this.resetAllSelection();
@@ -245,9 +245,9 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is fired when a base get selected
    * @param group The selected group
+   * @internal
    */
   onGroupSelection(group: string): void {
     this.resetAllSelection();
@@ -258,26 +258,26 @@ export class InputCharComponent implements OnInit {
   }
 
   /**
-   * @internal
    * Is displaying the selected zeichenobjekt
    * @param zeichenobjekt the selected zeichenobjekt who must be displayed
+   * @internal
    */
   previewZeichenObjekt(zeichenobjekt: Zeichenobjekt): void {
     this.selectedZeichenObjekt = zeichenobjekt;
   }
 
   /**
-   * @internal
    * Emits the selected zeichenobjekt
    * @param zeichenObjekt The selected zeichenobjekt
+   * @internal
    */
   getSelectedZeichenObjekt(zeichenObjekt: Zeichenobjekt): void {
     this.valueChange.emit(zeichenObjekt.zeichen);
   }
 
   /**
-   * @internal
    * Is selecting the first zeichenobjekt inside the current list
+   * @internal
    */
   selectFirstEntry(): void {
     this.selectedZeichenObjekt = this.zeichenObjekteToDisplay[0];

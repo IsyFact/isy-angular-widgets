@@ -88,10 +88,14 @@ export class HauptfensterComponent   {
 
   constructor(
     private menuTranslationService: MenuTranslationService,
-    private translate: TranslateService
+    private translateService: TranslateService
   ) {
-    this.translate.onLangChange.subscribe(async() => {
-      this.translatedItems = await this.menuTranslationService.translateMegaMenuItems(this.items);
+    this.translateService.onLangChange.subscribe(() => {
+      void this.translateItems();
     });
+  }
+
+  private async translateItems(): Promise<void> {
+    this.translatedItems = await this.menuTranslationService.translateMegaMenuItems(this.items);
   }
 }

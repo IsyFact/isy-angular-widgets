@@ -25,5 +25,6 @@ export enum TOAST_MESSAGE {
   SUCCESS = 'Daten erfolgreich Fake gespeichert!',
   INFO = 'Die ist ein Informationstext',
   WARN = 'Die ist ein Warnungstext',
-  ERROR = 'Dies ist ein Fehlertext'
+  ERROR = 'Dies ist ein Fehlertext',
+  ERROR_LOADING_ITEMS = 'Daten konnten geladen werden!'
 }

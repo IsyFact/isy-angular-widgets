@@ -25,6 +25,7 @@ import {MegaMenuModule} from 'primeng/megamenu';
 import {
   MenuTranslationService
 } from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {
         deps: [HttpClient]
       }
     }),
-    MegaMenuModule
+    MegaMenuModule,
+    ToastModule
   ],
   providers: [
     AuthGuard,

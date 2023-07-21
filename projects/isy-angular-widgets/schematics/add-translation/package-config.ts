@@ -1,5 +1,5 @@
 /**
- * @license
+ * @license MIT
  * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
@@ -14,19 +14,27 @@ interface PackageJson {
 
 /**
  * Sorts the keys of the given object.
+ * @param obj Record to be sorted
  * @returns A new object instance with sorted keys
  */
-function sortObjectByKeys(obj: Record<string, string>) {
+function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
   return Object.keys(obj)
     .sort()
-    .reduce((result, key) => {
+    .reduce((result: Record<string, string>, key) => {
       result[key] = obj[key];
       return result;
-    }, {} as Record<string, string>);
+    }, {});
 }
 
-/** Adds a package to the package.json in the given host tree. */
+/**
+ * Adds a package to the package.json in the given host tree.
+ * @param host Tree with packages and their versions
+ * @param pkg The package who gets added to package.json
+ * @param version The version of the package
+ * @returns The new package.json as Tree
+ */
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
+  const spacesNum = 2;
   if (host.exists('package.json')) {
     const sourceText = host.read('package.json')!.toString('utf-8');
     const json = JSON.parse(sourceText) as PackageJson;
@@ -40,13 +48,18 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
       json.dependencies = sortObjectByKeys(json.dependencies);
     }
 
-    host.overwrite('package.json', JSON.stringify(json, null, 2));
+    host.overwrite('package.json', JSON.stringify(json, null, spacesNum));
   }
 
   return host;
 }
 
-/** Gets the version of the specified package by looking at the package.json in the given tree. */
+/**
+ * Gets the version of the specified package by looking at the package.json in the given tree.
+ * @param tree Tree with packages and their versions
+ * @param name The name of the package
+ * @returns Null or the package version as a string
+ */
 export function getPackageVersionFromPackageJson(tree: Tree, name: string): string | null {
   if (!tree.exists('package.json')) {
     return null;
@@ -54,9 +67,5 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
 
   const packageJson = JSON.parse(tree.read('package.json')!.toString('utf8')) as PackageJson;
 
-  if (packageJson.dependencies && packageJson.dependencies[name]) {
-    return packageJson.dependencies[name];
-  }
-
-  return null;
+  return (packageJson.dependencies[name]) ? packageJson.dependencies[name] : null;
 }

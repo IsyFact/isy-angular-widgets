@@ -6,9 +6,6 @@ import {ButtonModule} from 'primeng/button';
 import {Component, Input, ViewChild} from '@angular/core';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-// Usage for accessing native HTML Elements
 @Component({
   template: `
     <isy-hauptfenster [title]="title">
@@ -84,7 +81,7 @@ describe('HauptfensterComponent', () => {
   it('should show "Abmelden" as the title of the logout button', () => {
     const logoutTitle = 'Abmelden';
     const logoutButton = fixture.nativeElement.querySelector('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const logoutButtonText = logoutButton.textContent || '';
+    const logoutButtonText = logoutButton.textContent ?? '';
     expect(logoutButtonText.trim()).toEqual(logoutTitle);
   });
 

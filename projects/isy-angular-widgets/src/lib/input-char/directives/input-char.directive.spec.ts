@@ -29,9 +29,6 @@ class TestComponent {
   }
 }
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
-// User for index access of any type (DOM element)
-
 describe('InputCharDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
