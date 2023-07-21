@@ -33,6 +33,10 @@ import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-
 import {HttpClientModule} from '@angular/common/http';
 import {TranslateModule} from '@ngx-translate/core';
 import {MessageModule} from 'primeng/message';
+import {
+  DialogSachverhalteBearbeitenComponent
+} from './components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component';
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -40,11 +44,9 @@ import {MessageModule} from 'primeng/message';
     ResultListComponent,
     ObjektSuchenComponent,
     ObjektAnzeigenComponent,
-    PersoenlicheInformationenComponent
-  ],
-  exports: [
-    ResultListComponent,
-    PersoenlicheInformationenComponent
+    PersoenlicheInformationenComponent,
+    DialogSachverhalteBearbeitenComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
