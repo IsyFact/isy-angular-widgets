@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {PersonenService} from '../../services/personen.service';
 import {Observable, of} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Person, Personalien, PersonId} from '../../../../shared/model/person';
+import {Person, Personalien, PersonId} from '../../model/person';
 import {FormGroup} from '@angular/forms';
 import {markFormArrayAsDirty, resetForm} from '../../../../shared/validation/form-helper';
 import {

@@ -15,7 +15,7 @@ import {
 } from '../../components/persoenliche-informationen/persoenliche-informationen.component';
 import {ToastModule} from 'primeng/toast';
 import {TOAST_SEVERITY} from '../../../../shared/model/toast';
-import {Person} from '../../../../shared/model/person';
+import {Person} from '../../model/person';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {getEmptyPerson} from './person-data';
 import {PanelModule} from 'primeng/panel';

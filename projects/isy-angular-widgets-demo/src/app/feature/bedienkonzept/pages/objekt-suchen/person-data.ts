@@ -1,4 +1,4 @@
-import {Person} from '../../../../shared/model/person';
+import {Person} from '../../model/person';
 
 /**
  * @returns a person

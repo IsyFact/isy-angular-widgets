@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {Person} from '../../../../shared/model/person';
+import {Person} from '../../model/person';
 import {ActivatedRoute} from '@angular/router';
 import {PersonenService} from '../../services/personen.service';
 import {TranslateService} from '@ngx-translate/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../../../shared/validation/validator';
-import {PersonalInformation} from '../../../../shared/model/forms';
+import {PersonalInformation} from '../../model/forms';
 
 /*
 * This page implements a suggestion for the Object Bearbeiten workflow.
