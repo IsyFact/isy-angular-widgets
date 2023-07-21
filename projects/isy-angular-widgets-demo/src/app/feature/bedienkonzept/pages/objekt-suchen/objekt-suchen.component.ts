@@ -11,12 +11,12 @@ import {
   initObjektBearbeitenForm,
   initPersoenlicheInformationenForm
 } from './forms-data';
-import {NotificationService} from '../../../../shared/services/notification.service';
 import {getEmptyPerson, resetPerson} from './person-data';
 import {countries, countriesMap} from './country-data';
-import {TOAST_MESSAGE, TOAST_SEVERITY, TOAST_SUMMARY} from '../../../../shared/model/toast';
+import {TOAST_SEVERITY} from '../../../../shared/model/toast';
 import {DateService} from '../../services/date.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Message, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'demo-personen-suchen',
@@ -126,7 +126,7 @@ export class ObjektSuchenComponent {
     public personService: PersonenService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private notificationService: NotificationService,
+    private messageService: MessageService,
     private dateService: DateService,
     public translate: TranslateService
   ) {
@@ -309,13 +309,13 @@ export class ObjektSuchenComponent {
    */
   addSuccessNotification(): void {
     const milliseconds = 3000;
-    const message = this.notificationService.buildMessage(
-      TOAST_SEVERITY.SUCCESS,
-      TOAST_SUMMARY.SUCCESS,
-      TOAST_MESSAGE.SUCCESS,
-      milliseconds
-    );
-    this.notificationService.addMessages(message);
+    const message: Message = {
+      severity: TOAST_SEVERITY.SUCCESS,
+      summary: TOAST_SEVERITY.SUCCESS,
+      detail: this.translate.instant('toastMessages.successfullySavedFakeData') as string,
+      life: milliseconds
+    };
+    this.messageService.add(message);
   }
 
   /**
@@ -326,7 +326,7 @@ export class ObjektSuchenComponent {
     if (!isOpen) {
       resetPerson(this.person);
       this.resetAddPersonForms();
-      this.notificationService.clearMessage();
+      this.messageService.clear();
     }
   }
 

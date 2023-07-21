@@ -7,11 +7,10 @@ import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
+import {MegaMenuItem, MenuItem, Message, MessageService, PrimeNGConfig, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
-import {NotificationService} from './shared/services/notification.service';
-import {TOAST_MESSAGE, TOAST_SEVERITY, TOAST_SUMMARY} from './shared/model/toast';
+import {TOAST_SEVERITY} from './shared/model/toast';
 
 @Component({
   selector: 'demo-root',
@@ -31,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private primeNGConfig: PrimeNGConfig,
     private menuTranslationService: MenuTranslationService,
-    private notificationService: NotificationService
+    private messageService: MessageService
   ) {
 
     // Add translation
@@ -49,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translate.use(language);
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.securityService.setRoles(this.userInfoPublicService.getUserInfo());
     this.securityService.setPermissions(data);
 
@@ -59,11 +58,12 @@ export class AppComponent implements OnInit, OnDestroy {
       this.menuTranslationService.translateMenuItems(navigationMenu).then(items => {
         this.sidebarItems = items;
       }).catch(()=> {
-        this.notificationService.buildMessage(
-          TOAST_SEVERITY.ERROR,
-          TOAST_SUMMARY.ERROR,
-          TOAST_MESSAGE.ERROR_LOADING_ITEMS
-        );
+        const message: Message = {
+          severity: TOAST_SEVERITY.ERROR,
+          summary: TOAST_SEVERITY.ERROR,
+          detail: this.translate.instant('toastMessages.errorLoadingItems') as string
+        };
+        this.messageService.add(message);
       });
     });
   }
