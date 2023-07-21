@@ -270,5 +270,9 @@
       "rotateRight": "Rotate Right",
       "rotateLeft": "Rotate Left"
     }
+  },
+  "toastMessages": {
+    "successfullySavedFakeData": "Data successfully (fake) saved!",
+    "errorLoadingItems": "Data could not load!"
   }
 }
