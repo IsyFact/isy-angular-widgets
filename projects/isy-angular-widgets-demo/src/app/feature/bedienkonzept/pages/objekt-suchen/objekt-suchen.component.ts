@@ -85,12 +85,12 @@ export class ObjektSuchenComponent {
   selectedPerson?: Person;
 
   /**
-   * The boolean that decides whether the dialog for editing a person gonna be displayed
+   * The boolean that decides whether the dialog for editing a person must be displayed
    */
   openEditForm: boolean = false;
 
   /**
-   * A form for the selected person who gonna be edited
+   * A form for the selected person who must be edited
    */
   editForm!: FormGroup;
 
@@ -128,6 +128,7 @@ export class ObjektSuchenComponent {
   /**
    * Full width in percentage
    */
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   fullWidth = 100;
 
   constructor(
