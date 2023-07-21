@@ -120,7 +120,15 @@ export class ObjektSuchenComponent {
    */
   savedSuccessfully: boolean = false;
 
+  /**
+   * The boolean that decides the spinner display
+   */
   tbLoadingStatus = false;
+
+  /**
+   * Full width in percentage
+   */
+  fullWidth = 100;
 
   constructor(
     public personService: PersonenService,
