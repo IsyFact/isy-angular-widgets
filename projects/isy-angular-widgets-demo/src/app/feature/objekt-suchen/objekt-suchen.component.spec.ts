@@ -14,7 +14,6 @@ import {
   PersoenlicheInformationenComponent
 } from './components/persoenliche-informationen/persoenliche-informationen.component';
 import {ToastModule} from 'primeng/toast';
-import {TOAST_SEVERITY} from '../../shared/model/toast';
 import {Person} from '../../shared/model/person';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {getEmptyPerson} from './person-data';
@@ -22,8 +21,7 @@ import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
 import {DateService} from './services/date.service';
 import {Observable} from 'rxjs';
-import {NotificationService} from '../../shared/services/notification.service';
-import { TranslateTestingModule } from 'ngx-translate-testing';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
 // for HTML tests
@@ -35,8 +33,6 @@ describe('PersonenSuchenComponent', () => {
   const DOT = '.';
   const format = 'dd.mm.yyyy';
   const unconvertedDate = 'Wed Jan 01 1337 12:00:00 GMT+0053 (Mitteleuropäische Normalzeit)';
-  const lifetime = 100;
-  const success = TOAST_SEVERITY.SUCCESS;
   const emptyEntry = '';
 
   let component: ObjektSuchenComponent;

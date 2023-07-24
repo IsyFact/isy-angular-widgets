@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
 import {
   DialogSachverhalteBearbeitenComponent
@@ -22,8 +22,7 @@ import {IncompleteDateModule} from '../../../../../isy-angular-widgets/src/lib/i
 import {InputMaskModule} from 'primeng/inputmask';
 import {CalendarModule} from 'primeng/calendar';
 import {ObjektAnzeigenRoutingModule} from './objekt-anzeigen-routing.module';
-import {InputTextareaModule} from "primeng/inputtextarea";
-
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 @NgModule({

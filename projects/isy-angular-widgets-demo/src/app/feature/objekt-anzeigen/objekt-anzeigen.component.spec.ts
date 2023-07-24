@@ -2,13 +2,14 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {BedienkonzeptModule} from '../bedienkonzept/bedienkonzept.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DropdownModule} from 'primeng/dropdown';
 import {TableModule} from 'primeng/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {By} from '@angular/platform-browser';
+import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
+import {MessageService} from 'primeng/api';
 
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
@@ -20,7 +21,7 @@ describe('PersonBearbeitenComponent', () => {
       declarations: [ObjektAnzeigenComponent],
       imports: [
         RouterTestingModule,
-        BedienkonzeptModule,
+        ObjektAnzeigenModule,
         BrowserAnimationsModule,
         DropdownModule,
         TableModule,
@@ -29,7 +30,11 @@ describe('PersonBearbeitenComponent', () => {
         TranslateTestingModule.withTranslations('de', {
           'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
         })
-      ]
+      ],
+      providers:
+        [
+          MessageService
+        ]
     })
       .compileComponents();
   });
