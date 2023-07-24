@@ -336,6 +336,7 @@
                           [showClear]="true"
                           [options]="laenderMap"
                           [formControlName]="'staatsangehoerigkeit'"
+                          [styleClass]="'w-full'"
               >
                 <ng-template let-land pTemplate="item">
                   <div class="country-item">
@@ -353,7 +354,9 @@
                 id="geburtdatum"
                 dateFormat="dd.mm.yy"
                 [formControlName]="'geburtsdatum'"
-                [showIcon]="true">
+                [showIcon]="true"
+                [styleClass]="'w-full'"
+              >
               </p-calendar>
             </div>
           </div>
