@@ -330,13 +330,13 @@
                 {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
               </label>
               <p-dropdown id="staatangehoerigkeit"
-                          [style]="{ 'width': fullWidth + '%' }"
                           placeholder="Land wählen"
                           optionValue="name"
                           optionLabel="name"
                           [showClear]="true"
                           [options]="laenderMap"
                           [formControlName]="'staatsangehoerigkeit'"
+                          [styleClass]="'w-full'"
               >
                 <ng-template let-land pTemplate="item">
                   <div class="country-item">
@@ -355,7 +355,7 @@
                 dateFormat="dd.mm.yy"
                 [formControlName]="'geburtsdatum'"
                 [showIcon]="true"
-                [style]="{ 'width': fullWidth + '%' }"
+                [styleClass]="'w-full'"
               >
               </p-calendar>
             </div>

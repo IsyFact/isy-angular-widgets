@@ -125,12 +125,6 @@ export class ObjektSuchenComponent {
    */
   tbLoadingStatus = false;
 
-  /**
-   * Full width in percentage
-   */
-  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  fullWidth = 100;
-
   constructor(
     public personService: PersonenService,
     private router: Router,
