@@ -13,10 +13,10 @@ import {
 } from './forms-data';
 import {getEmptyPerson, resetPerson} from './person-data';
 import {countries, countriesMap} from './country-data';
-import {TOAST_SEVERITY} from '../../../../shared/model/toast';
-import {DateService} from '../../services/date.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Message, MessageService} from 'primeng/api';
+import {DateService} from './services/date.service';
+import {TOAST_SEVERITY} from '../../shared/model/toast';
 
 @Component({
   selector: 'demo-personen-suchen',
