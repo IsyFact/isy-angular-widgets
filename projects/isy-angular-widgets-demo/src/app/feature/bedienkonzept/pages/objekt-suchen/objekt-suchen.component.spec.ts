@@ -22,7 +22,6 @@ import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
 import {DateService} from '../../services/date.service';
 import {Observable} from 'rxjs';
-import {NotificationService} from '../../../../shared/services/notification.service';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
@@ -42,7 +41,6 @@ describe('PersonenSuchenComponent', () => {
   let component: ObjektSuchenComponent;
   let fixture: ComponentFixture<ObjektSuchenComponent>;
   let dateService: DateService;
-  let notificationService: NotificationService;
 
   /**
    * Checks the reset of a person
@@ -214,8 +212,7 @@ describe('PersonenSuchenComponent', () => {
       providers: [
         SecurityService,
         MessageService,
-        DateService,
-        NotificationService
+        DateService
       ]
     })
       .compileComponents();
@@ -225,7 +222,6 @@ describe('PersonenSuchenComponent', () => {
     fixture = TestBed.createComponent(ObjektSuchenComponent);
     component = fixture.componentInstance;
     dateService = TestBed.inject(DateService);
-    notificationService = TestBed.inject(NotificationService);
     fixture.detectChanges();
   });
 
@@ -477,22 +473,6 @@ describe('PersonenSuchenComponent', () => {
     expect(secondDot).toEqual(DOT);
 
     expect(format.length).toEqual(expected.length);
-  });
-
-  it('should check the build of a message without lifetime', ()=> {
-    const message = notificationService.buildMessage(success, success, success);
-    expect(message.severity).toEqual(success);
-    expect(message.summary).toEqual(success);
-    expect(message.detail).toEqual(success);
-    expect(message.life).toBeUndefined();
-  });
-
-  it('should check the build of a message with lifetime', ()=> {
-    const message = notificationService.buildMessage(success, success, success, lifetime);
-    expect(message.severity).toEqual(success);
-    expect(message.summary).toEqual(success);
-    expect(message.detail).toEqual(success);
-    expect(message.life).toEqual(lifetime);
   });
 
   it('should check the opening of the wizard while adding a new person', ()=> {
