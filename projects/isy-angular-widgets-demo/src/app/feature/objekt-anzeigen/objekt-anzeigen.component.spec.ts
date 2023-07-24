@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {BedienkonzeptModule} from '../../bedienkonzept.module';
+import {BedienkonzeptModule} from '../bedienkonzept/bedienkonzept.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DropdownModule} from 'primeng/dropdown';
 import {TableModule} from 'primeng/table';

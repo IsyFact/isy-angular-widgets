@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {Person} from '../../model/person';
+import {Person} from '../../../../shared/model/person';
 
 @Component({
   selector: 'demo-dialog-sachverhalte-bearbeiten',

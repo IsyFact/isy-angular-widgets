@@ -5,8 +5,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {markFormAsDirty} from '../../../../shared/validation/form-helper';
 import {By} from '@angular/platform-browser';
-import {initPersoenlicheInformationenForm} from '../../pages/objekt-suchen/forms-data';
-import {getEmptyPerson} from '../../pages/objekt-suchen/person-data';
+import {initPersoenlicheInformationenForm} from '../../forms-data';
+import {getEmptyPerson} from '../../person-data';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */

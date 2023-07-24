@@ -1,4 +1,4 @@
-import {CountryMap} from '../../model/country';
+import {CountryMap} from './model/country';
 
 /**
  * A key-value Map of countries.

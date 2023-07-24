@@ -26,6 +26,8 @@ import {
   MenuTranslationService
 } from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
 import {ToastModule} from 'primeng/toast';
+import {ObjektSuchenModule} from './feature/objekt-suchen/objekt-suchen.module';
+import {ObjektAnzeigenModule} from './feature/objekt-anzeigen/objekt-anzeigen.module';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import {ToastModule} from 'primeng/toast';
       }
     }),
     MegaMenuModule,
-    ToastModule
+    ToastModule,
+    ObjektSuchenModule,
+    ObjektAnzeigenModule
   ],
   providers: [
     AuthGuard,
