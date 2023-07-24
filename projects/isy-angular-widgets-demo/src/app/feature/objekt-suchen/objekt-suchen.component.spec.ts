@@ -2,26 +2,27 @@ import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {CalendarModule} from 'primeng/calendar';
-import {ResultListComponent} from '../../components/result-list/result-list.component';
+import {ResultListComponent} from './components/result-list/result-list.component';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SecurityModule} from '../../../../../../../isy-angular-widgets/src/lib/security/security.module';
-import {SecurityService} from '../../../../../../../isy-angular-widgets/src/lib/security/security-service';
-import {WizardModule} from '../../../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
+import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/security/security.module';
+import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
+import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
 import {MessageService} from 'primeng/api';
 import {
   PersoenlicheInformationenComponent
-} from '../../components/persoenliche-informationen/persoenliche-informationen.component';
+} from './components/persoenliche-informationen/persoenliche-informationen.component';
 import {ToastModule} from 'primeng/toast';
-import {TOAST_SEVERITY} from '../../../../shared/model/toast';
-import {Person} from '../../../../shared/model/person';
+import {TOAST_SEVERITY} from '../../shared/model/toast';
+import {Person} from '../../shared/model/person';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {getEmptyPerson} from './person-data';
 import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
-import {DateService} from '../../services/date.service';
+import {DateService} from './services/date.service';
 import {Observable} from 'rxjs';
+import {NotificationService} from '../../shared/services/notification.service';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
