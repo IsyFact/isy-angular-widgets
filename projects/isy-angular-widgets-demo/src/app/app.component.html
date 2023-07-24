@@ -7,13 +7,19 @@
   [items]="items"
   [userInfo]="userInfo"
 >
+  <!--  The Isy-Hauptfenster is the main frame of isy-angular-widgets. It provides three regions to be filled,
+        like in the following example -->
   <div Linksnavigation>
+    <!--    The Linksnavigation is the left side bar. You could build some kind of menu here. -->
     <p-panelMenu [model]="sidebarItems"></p-panelMenu>
   </div>
+  <!--  The region without a tag is the content region, to be filled by the router. -->
   <router-outlet></router-outlet>
   <div Informationsbereich>
+    <!--    The Informationsbereich is the right side bar. -->
   </div>
   <div Hauptnavigation-Tools>
+    <!--    The Hauptnavigation-Tools are a region within the Menu and could for example be used for a language selector. -->
     <p-dropdown
       id="language-selector"
       class="ml-2"
@@ -40,4 +46,5 @@
   id="notificationToast"
   position="top-right"
 >
+  <!--  To define the (global) space where toast notifications will occur. -->
 </p-toast>
