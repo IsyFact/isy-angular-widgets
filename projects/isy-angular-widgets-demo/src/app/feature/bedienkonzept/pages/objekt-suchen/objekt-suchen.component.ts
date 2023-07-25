@@ -13,10 +13,10 @@ import {
 } from './forms-data';
 import {NotificationService} from '../../../../shared/services/notification.service';
 import {getEmptyPerson, resetPerson} from './person-data';
-import {countries, countriesMap} from './country-data';
 import {TOAST_MESSAGE, TOAST_SEVERITY, TOAST_SUMMARY} from '../../../../shared/model/toast';
 import {DateService} from '../../services/date.service';
 import {TranslateService} from '@ngx-translate/core';
+import {CountryMap} from "../../../../shared/model/country";
 
 @Component({
   selector: 'demo-personen-suchen',
@@ -60,11 +60,6 @@ export class ObjektSuchenComponent {
   neuePerson!: Person;
 
   /**
-   * A key-value map of countries for the nationality drop down list
-   */
-  laenderMap = countriesMap;
-
-  /**
    * An empty person for usage inside the forms
    */
   person: Person = getEmptyPerson();
@@ -72,7 +67,9 @@ export class ObjektSuchenComponent {
   /**
    * A list of possible nationalities
    */
-  laender: string[];
+  laender: string[] = [];
+
+  laender2: CountryMap[] = [];
 
   /**
    * A list of persons
@@ -131,12 +128,26 @@ export class ObjektSuchenComponent {
     public translate: TranslateService
   ) {
     this.personen$ = of([]);
-    this.laender = countries;
+    this.setupCountriesList();
+    this.setupCountriesList2();
+
     this.neuePerson = getEmptyPerson();
 
     this.initReactiveForms();
     markFormArrayAsDirty(this.allWizardForms);
     this.subscribeToAllForms();
+  }
+
+  setupCountriesList(): void {
+    this.translate.get('primeng.countries3').subscribe((data: CountryMap[]) => {
+      this.laender = data.map(item => item.name);
+    });
+  }
+
+  setupCountriesList2(): void {
+    this.translate.get('primeng.countries3').subscribe((countriesMap: CountryMap[]) => {
+      this.laender2 = [...countriesMap];
+    });
   }
 
   /**

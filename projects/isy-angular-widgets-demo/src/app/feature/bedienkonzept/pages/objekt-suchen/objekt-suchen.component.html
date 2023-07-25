@@ -227,7 +227,7 @@
       </div>
       <div class="col-3">
         <p-dropdown id="editStaatsangehörigkeit"
-                    placeholder="Land wählen"
+                    [placeholder]="('isyAngularWidgetsDemo.labels.chooseCountry' | translate)"
                     [options]="laender"
                     [showClear]="true"
                     [formControlName]="'editStaatsangehoerigkeit'"
@@ -330,11 +330,11 @@
                 {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
               </label>
               <p-dropdown id="staatangehoerigkeit"
-                          placeholder="Land wählen"
+                          [placeholder]="('isyAngularWidgetsDemo.labels.chooseCountry' | translate)"
+                          [showClear]="true"
                           optionValue="name"
                           optionLabel="name"
-                          [showClear]="true"
-                          [options]="laenderMap"
+                          [options]="laender2"
                           [formControlName]="'staatsangehoerigkeit'"
               >
                 <ng-template let-land pTemplate="item">
