@@ -1,18 +1,18 @@
 import {Component, Input} from '@angular/core';
-import {Person} from '../../../../shared/model/person';
+import {Person} from '../../shared/model/person';
 import {ActivatedRoute} from '@angular/router';
-import {PersonenService} from '../../services/personen.service';
+import {PersonenService} from '../../shared/services/personen.service';
 import {TranslateService} from '@ngx-translate/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import {required} from '../../../../shared/validation/validator';
-import {PersonalInformation} from '../../../../shared/model/forms';
+import {required} from '../../shared/validation/validator';
+import {PersonalInformation} from './model/forms';
 
 /*
 * This page implements a suggestion for the Object Bearbeiten workflow.
  */
 @Component({
-  selector: 'demo-objekt-bearbeiten-draft',
+  selector: 'demo-objekt-anzeigen',
   templateUrl: './objekt-anzeigen.component.html',
   styleUrls: ['./objekt-anzeigen.component.scss']
 })

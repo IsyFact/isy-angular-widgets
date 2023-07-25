@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Person, Personalien} from '../../../../shared/model/person';
-import {countries} from '../../pages/objekt-suchen/country-data';
+import {countries} from '../../country-data';
 
 @Component({
   selector: 'demo-result-list',

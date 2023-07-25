@@ -1,5 +1,5 @@
 import {getEmptyPerson, resetPerson} from './person-data';
-import {Person} from '../../../../shared/model/person';
+import {Person} from '../../shared/model/person';
 
 describe('person-data', () => {
   const person: Person = getEmptyPerson();

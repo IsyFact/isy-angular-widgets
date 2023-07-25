@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {PersonenService} from '../../services/personen.service';
+import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Person, Personalien, PersonId} from '../../../../shared/model/person';
+import {Person, Personalien, PersonId} from '../../shared/model/person';
 import {FormGroup} from '@angular/forms';
-import {markFormArrayAsDirty, resetForm} from '../../../../shared/validation/form-helper';
+import {markFormArrayAsDirty, resetForm} from '../../shared/validation/form-helper';
 import {
   initGeburtsInformationenForm,
   initIdForm,
@@ -13,10 +13,10 @@ import {
 } from './forms-data';
 import {getEmptyPerson, resetPerson} from './person-data';
 import {countries, countriesMap} from './country-data';
-import {TOAST_SEVERITY} from '../../../../shared/model/toast';
-import {DateService} from '../../services/date.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Message, MessageService} from 'primeng/api';
+import {DateService} from './services/date.service';
+import {TOAST_SEVERITY} from '../../shared/model/toast';
 
 @Component({
   selector: 'demo-personen-suchen',

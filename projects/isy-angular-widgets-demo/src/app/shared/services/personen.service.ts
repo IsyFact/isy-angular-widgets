@@ -1,4 +1,4 @@
-import {Person} from '../../../shared/model/person';
+import {Person} from '../model/person';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 
