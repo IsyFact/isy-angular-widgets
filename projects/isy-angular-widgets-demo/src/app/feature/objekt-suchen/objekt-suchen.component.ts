@@ -12,9 +12,9 @@ import {
   initPersoenlicheInformationenForm
 } from './forms-data';
 import {getEmptyPerson, resetPerson} from './person-data';
-import {countries, countriesMap} from './country-data';
-import {TranslateService} from '@ngx-translate/core';
+import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {Message, MessageService} from 'primeng/api';
+import {CountryMap} from './model/country';
 import {DateService} from './services/date.service';
 import {TOAST_SEVERITY} from '../../shared/model/toast';
 
@@ -60,11 +60,6 @@ export class ObjektSuchenComponent {
   neuePerson!: Person;
 
   /**
-   * A key-value map of countries for the nationality drop down list
-   */
-  laenderMap = countriesMap;
-
-  /**
    * An empty person for usage inside the forms
    */
   person: Person = getEmptyPerson();
@@ -72,7 +67,12 @@ export class ObjektSuchenComponent {
   /**
    * A list of possible nationalities
    */
-  laender: string[];
+  laender: string[] = [];
+
+  /**
+   * A key-value map of countries for the nationality drop down list
+   */
+  countryMap: CountryMap[] = [];
 
   /**
    * A list of persons
@@ -133,13 +133,34 @@ export class ObjektSuchenComponent {
     private dateService: DateService,
     public translate: TranslateService
   ) {
+    this.onLanguageChange();
+
     this.personen$ = of([]);
-    this.laender = countries;
+    this.setupCountries();
     this.neuePerson = getEmptyPerson();
 
     this.initReactiveForms();
     markFormArrayAsDirty(this.allWizardForms);
     this.subscribeToAllForms();
+  }
+
+  /**
+   * Is called on language change
+   */
+  onLanguageChange(): void {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.setupCountries();
+    });
+  }
+
+  /**
+   * Getting the country information
+   */
+  setupCountries(): void {
+    this.translate.get('primeng.countries').subscribe((countriesMap: CountryMap[]) => {
+      this.laender = countriesMap.map(item => item.name);
+      this.countryMap = [...countriesMap];
+    });
   }
 
   /**
