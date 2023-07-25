@@ -97,6 +97,11 @@ export class InputCharComponent implements OnInit {
   @Input() isDialogModalDisplayed: boolean = false;
 
   /**
+   * Determines whether the input is displayed
+   */
+  @Input() isInputDisabled: boolean = false;
+
+  /**
    * Controls the char picker visibility
    * @internal
    */
@@ -159,14 +164,16 @@ export class InputCharComponent implements OnInit {
    * @internal
    */
   setupCharPickerAvailability(close?: boolean): void {
-    if (this.displayCharPicker) {
-      this.onDialogClose();
-    }
+    if (!this.isInputDisabled) {
+      if (this.displayCharPicker) {
+        this.onDialogClose();
+      }
 
-    if (close) {
-      this.displayCharPicker = close;
-    } else {
-      this.displayCharPicker = !this.displayCharPicker;
+      if (close) {
+        this.displayCharPicker = close;
+      } else {
+        this.displayCharPicker = !this.displayCharPicker;
+      }
     }
   }
 
