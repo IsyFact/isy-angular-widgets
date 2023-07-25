@@ -17,6 +17,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {Message, MessageService} from 'primeng/api';
 import {DateService} from './services/date.service';
 import {TOAST_SEVERITY} from '../../shared/model/toast';
+import {Datentyp} from '../../../../../isy-angular-widgets/src/lib/input-char/model/datentyp';
 
 @Component({
   selector: 'demo-personen-suchen',
@@ -411,4 +412,6 @@ export class ObjektSuchenComponent {
     resetForm(this.persoenlicheInformationenForm);
     resetForm(this.geburtsInformationenForm);
   }
+
+  protected readonly Datentyp = Datentyp;
 }
