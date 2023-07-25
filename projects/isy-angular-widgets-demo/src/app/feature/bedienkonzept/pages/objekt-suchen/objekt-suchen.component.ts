@@ -11,11 +11,11 @@ import {
   initObjektBearbeitenForm,
   initPersoenlicheInformationenForm
 } from './forms-data';
-import {NotificationService} from '../../../../shared/services/notification.service';
 import {getEmptyPerson, resetPerson} from './person-data';
-import {TOAST_MESSAGE, TOAST_SEVERITY, TOAST_SUMMARY} from '../../../../shared/model/toast';
+import {TOAST_SEVERITY} from '../../../../shared/model/toast';
 import {DateService} from '../../services/date.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Message, MessageService} from 'primeng/api';
 import {CountryMap} from "../../../../shared/model/country";
 
 @Component({
@@ -82,12 +82,12 @@ export class ObjektSuchenComponent {
   selectedPerson?: Person;
 
   /**
-   * The boolean that decides whether the dialog for editing a person gonna be displayed
+   * The boolean that decides whether the dialog for editing a person must be displayed
    */
   openEditForm: boolean = false;
 
   /**
-   * A form for the selected person who gonna be edited
+   * A form for the selected person who must be edited
    */
   editForm!: FormGroup;
 
@@ -117,13 +117,16 @@ export class ObjektSuchenComponent {
    */
   savedSuccessfully: boolean = false;
 
+  /**
+   * The boolean that decides the spinner display
+   */
   tbLoadingStatus = false;
 
   constructor(
     public personService: PersonenService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private notificationService: NotificationService,
+    private messageService: MessageService,
     private dateService: DateService,
     public translate: TranslateService
   ) {
@@ -320,13 +323,12 @@ export class ObjektSuchenComponent {
    */
   addSuccessNotification(): void {
     const milliseconds = 3000;
-    const message = this.notificationService.buildMessage(
-      TOAST_SEVERITY.SUCCESS,
-      TOAST_SUMMARY.SUCCESS,
-      TOAST_MESSAGE.SUCCESS,
-      milliseconds
-    );
-    this.notificationService.addMessages(message);
+    const message: Message = {
+      severity: TOAST_SEVERITY.SUCCESS,
+      detail: this.translate.instant('toastMessages.successfullySavedFakeData') as string,
+      life: milliseconds
+    };
+    this.messageService.add(message);
   }
 
   /**
@@ -337,7 +339,7 @@ export class ObjektSuchenComponent {
     if (!isOpen) {
       resetPerson(this.person);
       this.resetAddPersonForms();
-      this.notificationService.clearMessage();
+      this.messageService.clear();
     }
   }
 

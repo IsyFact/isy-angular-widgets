@@ -190,6 +190,40 @@
       "Nov",
       "Dez"
     ],
+    "countries": [
+      "Belgien",
+      "Malta",
+      "Bulgarien",
+      "Niederlande",
+      "Dänemark",
+      "Österreich",
+      "Deutschland",
+      "Polen",
+      "Estland",
+      "Portugal",
+      "Finnland",
+      "Rumänien",
+      "Frankreich",
+      "Schweden",
+      "Griechenland",
+      "Slowakei",
+      "Irland",
+      "Slowenien",
+      "Italien",
+      "Spanien",
+      "Kroatien",
+      "Tschechien",
+      "Lettland",
+      "Ungarn",
+      "Litauen",
+      "Zypern",
+      "Luxemburg",
+      "Schweiz",
+      "Norwegen",
+      "Island",
+      "Vereinigte Arabische Emirate",
+      "Kongo, Demokratische Republik"
+    ],
     "countries3": [
       {
         "name": "Belgien",
@@ -319,40 +353,6 @@
         "name": "Kongo, Demokratische Republik",
         "code": "CD"
       }
-    ],
-    "countries": [
-      "Belgien",
-      "Malta",
-      "Bulgarien",
-      "Niederlande",
-      "Dänemark",
-      "Österreich",
-      "Deutschland",
-      "Polen",
-      "Estland",
-      "Portugal",
-      "Finnland",
-      "Rumänien",
-      "Frankreich",
-      "Schweden",
-      "Griechenland",
-      "Slowakei",
-      "Irland",
-      "Slowenien",
-      "Italien",
-      "Spanien",
-      "Kroatien",
-      "Tschechien",
-      "Lettland",
-      "Ungarn",
-      "Litauen",
-      "Zypern",
-      "Luxemburg",
-      "Schweiz",
-      "Norwegen",
-      "Island",
-      "Vereinigte Arabische Emirate",
-      "Kongo, Demokratische Republik"
     ],
     "countriesMap": [
       {
@@ -565,5 +565,9 @@
       "rotateRight": "Nach rechts drehen",
       "rotateLeft": "Nach links drehen"
     }
+  },
+  "toastMessages": {
+    "successfullySavedFakeData": "Daten erfolgreich (fake) gespeichert!",
+    "errorLoadingItems": "Daten konnten nicht geladen werden!"
   }
 }
