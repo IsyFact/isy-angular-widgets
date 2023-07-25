@@ -53,6 +53,7 @@
       "close": "Close",
       "clearSeebach": "Clear search",
       "showSecretFields": "Show secret fields",
+      "intelligenceNotes": "Intelligence notes",
       "addOrEditFact": "Add/Edit fact"
     },
     "labels": {
@@ -188,6 +189,300 @@
       "Oct",
       "Nov",
       "Dec"
+    ],
+    "countries": [
+      "Belgium",
+      "Malta",
+      "Bulgaria",
+      "Netherlands",
+      "Denmark",
+      "Austria",
+      "Germany",
+      "Poland",
+      "Estonia",
+      "Portugal",
+      "Finland",
+      "Romania",
+      "France",
+      "Sweden",
+      "Greece",
+      "Slovakia",
+      "Ireland",
+      "Slovenia",
+      "Italy",
+      "Spain",
+      "Croatia",
+      "Czech Republic",
+      "Latvia",
+      "Hungary",
+      "Lithuania",
+      "Cyprus",
+      "Luxembourg",
+      "Switzerland",
+      "Norway",
+      "Iceland",
+      "United Arab Emirates",
+      "Congo, Democratic Republic"
+    ],
+    "countries3": [
+      {
+        "name": "Belgium",
+        "code": "BE"
+      },
+      {
+        "name": "Malta",
+        "code": "MT"
+      },
+      {
+        "name": "Bulgaria",
+        "code": "BG"
+      },
+      {
+        "name": "Netherlands",
+        "code": "NL"
+      },
+      {
+        "name": "Denmark",
+        "code": "DK"
+      },
+      {
+        "name": "Austria",
+        "code": "AT"
+      },
+      {
+        "name": "Germany",
+        "code": "DE"
+      },
+      {
+        "name": "Poland",
+        "code": "PL"
+      },
+      {
+        "name": "Estonia",
+        "code": "EE"
+      },
+      {
+        "name": "Portugal",
+        "code": "PT"
+      },
+      {
+        "name": "Finland",
+        "code": "FI"
+      },
+      {
+        "name": "Romania",
+        "code": "RO"
+      },
+      {
+        "name": "France",
+        "code": "FR"
+      },
+      {
+        "name": "Sweden",
+        "code": "SE"
+      },
+      {
+        "name": "Greece",
+        "code": "GR"
+      },
+      {
+        "name": "Slovakia",
+        "code": "SK"
+      },
+      {
+        "name": "Ireland",
+        "code": "IE"
+      },
+      {
+        "name": "Slovenia",
+        "code": "SI"
+      },
+      {
+        "name": "Italy",
+        "code": "IT"
+      },
+      {
+        "name": "Spain",
+        "code": "ES"
+      },
+      {
+        "name": "Croatia",
+        "code": "HR"
+      },
+      {
+        "name": "Czech Republic",
+        "code": "CZ"
+      },
+      {
+        "name": "Latvia",
+        "code": "LV"
+      },
+      {
+        "name": "Hungary",
+        "code": "HU"
+      },
+      {
+        "name": "Lithuania",
+        "code": "LT"
+      },
+      {
+        "name": "Cyprus",
+        "code": "CY"
+      },
+      {
+        "name": "Luxembourg",
+        "code": "LU"
+      },
+      {
+        "name": "Switzerland",
+        "code": "CH"
+      },
+      {
+        "name": "Norway",
+        "code": "NO"
+      },
+      {
+        "name": "Iceland",
+        "code": "IS"
+      },
+      {
+        "name": "Vereinigte Arabische Emirate",
+        "code": "AE"
+      },
+      {
+        "name": "Kongo, Demokratische Republik",
+        "code": "CD"
+      }
+    ],
+    "countriesMap": [
+      {
+        "id": 1,
+        "name": "Belgium"
+      },
+      {
+        "id": 2,
+        "name": "Malta"
+      },
+      {
+        "id": 3,
+        "name": "Bulgaria"
+      },
+      {
+        "id": 4,
+        "name": "Netherlands"
+      },
+      {
+        "id": 5,
+        "name": "Denmark"
+      },
+      {
+        "id": 6,
+        "name": "Austria"
+      },
+      {
+        "id": 7,
+        "name": "Germany"
+      },
+      {
+        "id": 8,
+        "name": "Poland"
+      },
+      {
+        "id": 9,
+        "name": "Estonia"
+      },
+      {
+        "id": 10,
+        "name": "Portugal"
+      },
+      {
+        "id": 11,
+        "name": "Finland"
+      },
+      {
+        "id": 12,
+        "name": "Romania"
+      },
+      {
+        "id": 13,
+        "name": "France"
+      },
+      {
+        "id": 14,
+        "name": "Sweden"
+      },
+      {
+        "id": 15,
+        "name": "Greece"
+      },
+      {
+        "id": 16,
+        "name": "Slovakia"
+      },
+      {
+        "id": 17,
+        "name": "Ireland"
+      },
+      {
+        "id": 18,
+        "name": "Slovenia"
+      },
+      {
+        "id": 19,
+        "name": "Italy"
+      },
+      {
+        "id": 20,
+        "name": "Spain"
+      },
+      {
+        "id": 21,
+        "name": "Croatia"
+      },
+      {
+        "id": 22,
+        "name": "Czech Republic"
+      },
+      {
+        "id": 23,
+        "name": "Latvia"
+      },
+      {
+        "id": 24,
+        "name": "Hungary"
+      },
+      {
+        "id": 25,
+        "name": "Lithuania"
+      },
+      {
+        "id": 26,
+        "name": "Cyprus"
+      },
+      {
+        "id": 27,
+        "name": "Luxembourg"
+      },
+      {
+        "id": 28,
+        "name": "Switzerland"
+      },
+      {
+        "id": 29,
+        "name": "Norway"
+      },
+      {
+        "id": 30,
+        "name": "Iceland"
+      },
+      {
+        "id": 31,
+        "name": "United Arab Emirates"
+      },
+      {
+        "id": 32,
+        "name": "Congo, Democratic Republic"
+      }
     ],
     "chooseYear": "Choose Year",
     "chooseMonth": "Choose Month",
