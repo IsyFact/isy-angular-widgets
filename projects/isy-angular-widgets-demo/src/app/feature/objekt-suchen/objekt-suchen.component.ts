@@ -157,7 +157,7 @@ export class ObjektSuchenComponent {
    * Getting the country information
    */
   setupCountries(): void {
-    this.translate.get('primeng.countries3').subscribe((countriesMap: CountryMap[]) => {
+    this.translate.get('primeng.countries').subscribe((countriesMap: CountryMap[]) => {
       this.laender = countriesMap.map(item => item.name);
       this.countryMap = [...countriesMap];
     });
