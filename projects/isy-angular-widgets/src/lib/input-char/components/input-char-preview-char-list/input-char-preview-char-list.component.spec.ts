@@ -79,7 +79,8 @@ describe('InputCharPreviewCharListComponent', () => {
 
     characterSelectButtons[randomIndex].click();
 
-    expect(component.selectedValue.toString()).toEqual(options[randomIndex].zeichen);
+    const values = Object.values(component.selectedValue) as string [];
+    expect(values[0]).toEqual(options[randomIndex].zeichen);
     expect(charSelection).toHaveBeenCalledWith(options[randomIndex]);
   });
 });
