@@ -2,7 +2,7 @@
          [header]="('isyAngularWidgetsDemo.resultList.header' | translate)
             + ' (' + personen.length + ')'" [toggleable]="true"
          iconPos="start">
-  <p-table #dt1
+  <p-table
            [value]="personen"
            [globalFilterFields]="['name','representative.name','status']"
            selectionMode="single"
