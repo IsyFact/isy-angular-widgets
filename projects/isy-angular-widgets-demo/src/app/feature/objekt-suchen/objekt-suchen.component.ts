@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
+import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Person, Personalien, PersonId} from '../../shared/model/person';
 import {FormGroup} from '@angular/forms';
+import {markFormArrayAsDirty, resetForm} from '../../shared/validation/form-helper';
 import {
   initGeburtsInformationenForm,
   initIdForm,
@@ -11,11 +14,8 @@ import {
 import {getEmptyPerson, resetPerson} from './person-data';
 import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import {Message, MessageService} from 'primeng/api';
-import {Person, Personalien, PersonId} from '../../shared/model/person';
 import {CountryMap} from './model/country';
-import {PersonenService} from '../../shared/services/personen.service';
 import {DateService} from './services/date.service';
-import {markFormArrayAsDirty, resetForm} from '../../shared/validation/form-helper';
 import {TOAST_SEVERITY} from '../../shared/model/toast';
 
 @Component({
