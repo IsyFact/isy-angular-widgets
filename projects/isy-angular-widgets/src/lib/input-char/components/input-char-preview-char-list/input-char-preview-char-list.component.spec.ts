@@ -76,11 +76,12 @@ describe('InputCharPreviewCharListComponent', () => {
 
     const crypto = window.crypto;
     const randomIndex =  (crypto.getRandomValues(new Uint32Array(1)))[0]%options.length;
+    const randomZeichenobjekt = options[randomIndex];
 
     characterSelectButtons[randomIndex].click();
 
-    const values = Object.values(component.selectedValue) as string [];
-    expect(values[0]).toEqual(options[randomIndex].zeichen);
-    expect(charSelection).toHaveBeenCalledWith(options[randomIndex]);
+    const selectedZeichenobjekt = component.selectedValue;
+    expect(selectedZeichenobjekt).toEqual(randomZeichenobjekt);
+    expect(charSelection).toHaveBeenCalledWith(randomZeichenobjekt);
   });
 });
