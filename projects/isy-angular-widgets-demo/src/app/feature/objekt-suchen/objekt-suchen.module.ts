@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {
   PersoenlicheInformationenComponent
@@ -18,6 +18,7 @@ import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wi
 import {TableModule} from 'primeng/table';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
+import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
     ReactiveFormsModule,
     WizardModule,
     TableModule,
-    MultiSelectModule
+    MultiSelectModule,
+    InputCharModule
   ],
   providers: [
     DateService

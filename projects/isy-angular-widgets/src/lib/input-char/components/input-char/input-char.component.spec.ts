@@ -12,7 +12,9 @@ import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {CharacterService} from '../../services/character.service';
 import {DialogModule} from 'primeng/dialog';
 import {InputCharAllCharsButtonComponent} from '../input-char-all-chars-button/input-char-all-chars-button.component';
-import {InputCharPreviewCharListComponent} from '../input-char-preview-char-list/input-char-preview-char-list.component';
+import {
+  InputCharPreviewCharListComponent
+} from '../input-char-preview-char-list/input-char-preview-char-list.component';
 import {InputCharSelectButtonComponent} from '../input-char-select-button/input-char-select-button.component';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
@@ -346,7 +348,7 @@ describe('InputCharComponent', () => {
       const onDialogCloseSpy = spyOn(component, 'onDialogClose');
       component.setupCharPickerAvailability(true);
       expect(onDialogCloseSpy).toHaveBeenCalled();
-      expect(component.displayCharPicker).toBeTrue();
+      expect(component.displayCharPicker).toBeFalse();
     });
 
     it('should check the zeichenobjekt preview', () => {
@@ -422,7 +424,8 @@ describe('InputCharComponent', () => {
           ButtonModule,
           SelectButtonModule,
           FormsModule,
-          BrowserAnimationsModule
+          BrowserAnimationsModule,
+          TranslateTestingModule.withTranslations({})
         ],
         providers: [
           CharacterService
