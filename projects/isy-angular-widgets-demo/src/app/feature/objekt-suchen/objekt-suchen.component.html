@@ -276,8 +276,10 @@
             [isSaved]="savedSuccessfully"
             [closable]="displayX"
 >
+  <!--  Every side of the wizard needs to have the *isyWizardDirective. -->
 
   <!-- Step 1: ID Entry -->
+  <!--  Use with a simple form -->
   <div *isyWizardDirective="('isyAngularWidgetsDemo.createObjectDialog.stepIdEntry' | translate)">
     <div [formGroup]="idForm">
       <div class="formgrid grid">
@@ -294,6 +296,7 @@
   </div>
 
   <!-- Step 2: Personal information -->
+  <!--  Use with a custom component -->
   <form
     *isyWizardDirective="('isyAngularWidgetsDemo.createObjectDialog.stepPersonalInfo' | translate)">
     <demo-persoenliche-informationen
@@ -303,6 +306,7 @@
   </form>
 
   <!-- Step 3: Birth information -->
+  <!--  Use with a complex form -->
   <div *isyWizardDirective="('isyAngularWidgetsDemo.createObjectDialog.stepBirthInfo' | translate)">
     <div class="formgrid grid">
       <div class="col align-content-end">
