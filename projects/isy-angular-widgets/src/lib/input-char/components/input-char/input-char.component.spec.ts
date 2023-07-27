@@ -219,7 +219,6 @@ describe('InputCharComponent', () => {
 
       component.isInputDisabled = false;
       component.setupCharPickerAvailability(true);
-      fixture.detectChanges();
       expect(component.displayCharPicker).toBeFalse();
     });
 
