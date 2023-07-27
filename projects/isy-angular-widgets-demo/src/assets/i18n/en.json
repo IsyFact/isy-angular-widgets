@@ -53,6 +53,7 @@
       "close": "Close",
       "clearSeebach": "Clear search",
       "showSecretFields": "Show secret fields",
+      "intelligenceNotes": "Intelligence notes",
       "addOrEditFact": "Add/Edit fact"
     },
     "labels": {
@@ -61,7 +62,7 @@
       "geburtsname": "Birth name",
       "geburtsort": "Birthplace",
       "geschlecht": "Gender",
-      "geburtsdatum": "birth date",
+      "geburtsdatum": "Birth date",
       "staatsangehoerigkeit": "Nationality",
       "chooseCountry": "Choose country",
       "actions": "Actions",
@@ -188,6 +189,136 @@
       "Oct",
       "Nov",
       "Dec"
+    ],
+    "countries": [
+      {
+        "name": "Belgium",
+        "code": "BE"
+      },
+      {
+        "name": "Malta",
+        "code": "MT"
+      },
+      {
+        "name": "Bulgaria",
+        "code": "BG"
+      },
+      {
+        "name": "Netherlands",
+        "code": "NL"
+      },
+      {
+        "name": "Denmark",
+        "code": "DK"
+      },
+      {
+        "name": "Austria",
+        "code": "AT"
+      },
+      {
+        "name": "Germany",
+        "code": "DE"
+      },
+      {
+        "name": "Poland",
+        "code": "PL"
+      },
+      {
+        "name": "Estonia",
+        "code": "EE"
+      },
+      {
+        "name": "Portugal",
+        "code": "PT"
+      },
+      {
+        "name": "Finland",
+        "code": "FI"
+      },
+      {
+        "name": "Romania",
+        "code": "RO"
+      },
+      {
+        "name": "France",
+        "code": "FR"
+      },
+      {
+        "name": "Sweden",
+        "code": "SE"
+      },
+      {
+        "name": "Greece",
+        "code": "GR"
+      },
+      {
+        "name": "Slovakia",
+        "code": "SK"
+      },
+      {
+        "name": "Ireland",
+        "code": "IE"
+      },
+      {
+        "name": "Slovenia",
+        "code": "SI"
+      },
+      {
+        "name": "Italy",
+        "code": "IT"
+      },
+      {
+        "name": "Spain",
+        "code": "ES"
+      },
+      {
+        "name": "Croatia",
+        "code": "HR"
+      },
+      {
+        "name": "Czech Republic",
+        "code": "CZ"
+      },
+      {
+        "name": "Latvia",
+        "code": "LV"
+      },
+      {
+        "name": "Hungary",
+        "code": "HU"
+      },
+      {
+        "name": "Lithuania",
+        "code": "LT"
+      },
+      {
+        "name": "Cyprus",
+        "code": "CY"
+      },
+      {
+        "name": "Luxembourg",
+        "code": "LU"
+      },
+      {
+        "name": "Switzerland",
+        "code": "CH"
+      },
+      {
+        "name": "Norway",
+        "code": "NO"
+      },
+      {
+        "name": "Iceland",
+        "code": "IS"
+      },
+      {
+        "name": "Vereinigte Arabische Emirate",
+        "code": "AE"
+      },
+      {
+        "name": "Kongo, Demokratische Republik",
+        "code": "CD"
+      }
     ],
     "chooseYear": "Choose Year",
     "chooseMonth": "Choose Month",

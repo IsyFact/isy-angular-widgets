@@ -1,6 +1,6 @@
 import {FormControl, FormGroup} from '@angular/forms';
-import {charsAndNumbers, onlyChars, required, onlyNumbers} from '../../../../shared/validation/validator';
-import {Person} from '../../../../shared/model/person';
+import {charsAndNumbers, onlyChars, required, onlyNumbers} from '../../shared/validation/validator';
+import {Person} from '../../shared/model/person';
 
 /**
  * An Array with 2 validation rules: [required, allow only numbers]

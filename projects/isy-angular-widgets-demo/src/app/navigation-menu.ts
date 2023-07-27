@@ -18,11 +18,11 @@ export const navigationMenu = [
     items: [
       {
         label: 'isyAngularWidgetsDemo.menuItems.searchObject',
-        routerLink: 'bedienkonzept/objekt-suchen'
+        routerLink: 'objekt-suchen'
       },
       {
         label: 'isyAngularWidgetsDemo.menuItems.displayObject',
-        routerLink: 'bedienkonzept/objekt-anzeigen/42'
+        routerLink: 'objekt-anzeigen/42'
       }
     ]
   }

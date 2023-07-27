@@ -23,7 +23,8 @@
       <label for="lastName">{{('isyAngularWidgetsDemo.labels.nachname' | translate)}}</label>
     </div>
     <div class="col">
-      <input id="lastName" class="w-full" type="text" pInputText
+      <!--  IsyInputChar will add a special character picker to an input field -->
+      <input id="lastName" type="text" pInputText isyInputChar
              [(ngModel)]="person.personalien.nachname">
     </div>
     <div class="col-1 text-right align-self-center">
@@ -36,7 +37,7 @@
     </div>
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
-             for="birthplace">{{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}</label>
+             for="birthplace">{{('isyAngularWidgetsDemo.labels.geburtsort' | translate)}}</label>
     </div>
     <div class="col">
       <input id="birthplace" class="w-full" type="text" pInputText
@@ -50,7 +51,8 @@
              for="firstName">{{('isyAngularWidgetsDemo.labels.vorname' | translate)}}</label>
     </div>
     <div class="col">
-      <input id="firstName" class="w-full" type="text" pInputText
+      <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
+      <input id="firstName" type="text" pInputText isyInputChar [datentyp]="Datentyp.DATENTYP_A"
              [(ngModel)]="person.personalien.vorname">
     </div>
     <div class="col-1 text-right align-self-center">
@@ -227,7 +229,7 @@
       </div>
       <div class="col-3">
         <p-dropdown id="editStaatsangehörigkeit"
-                    placeholder="Land wählen"
+                    [placeholder]="('isyAngularWidgetsDemo.labels.chooseCountry' | translate)"
                     [options]="laender"
                     [showClear]="true"
                     [formControlName]="'editStaatsangehoerigkeit'"
@@ -274,8 +276,10 @@
             [isSaved]="savedSuccessfully"
             [closable]="displayX"
 >
+  <!--  Every side of the wizard needs to have the *isyWizardDirective. -->
 
   <!-- Step 1: ID Entry -->
+  <!--  Use with a simple form -->
   <div *isyWizardDirective="('isyAngularWidgetsDemo.createObjectDialog.stepIdEntry' | translate)">
     <div [formGroup]="idForm">
       <div class="formgrid grid">
@@ -292,6 +296,7 @@
   </div>
 
   <!-- Step 2: Personal information -->
+  <!--  Use with a custom component -->
   <form
     *isyWizardDirective="('isyAngularWidgetsDemo.createObjectDialog.stepPersonalInfo' | translate)">
     <demo-persoenliche-informationen
@@ -301,6 +306,7 @@
   </form>
 
   <!-- Step 3: Birth information -->
+  <!--  Use with a complex form -->
   <div *isyWizardDirective="('isyAngularWidgetsDemo.createObjectDialog.stepBirthInfo' | translate)">
     <div class="formgrid grid">
       <div class="col align-content-end">
@@ -330,11 +336,11 @@
                 {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
               </label>
               <p-dropdown id="staatangehoerigkeit"
-                          placeholder="Land wählen"
+                          [placeholder]="('isyAngularWidgetsDemo.labels.chooseCountry' | translate)"
+                          [showClear]="true"
                           optionValue="name"
                           optionLabel="name"
-                          [showClear]="true"
-                          [options]="laenderMap"
+                          [options]="countryMap"
                           [formControlName]="'staatsangehoerigkeit'"
                           [styleClass]="'w-full'"
               >

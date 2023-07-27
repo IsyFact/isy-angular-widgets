@@ -190,6 +190,136 @@
       "Nov",
       "Dez"
     ],
+    "countries": [
+      {
+        "name": "Belgien",
+        "code": "BE"
+      },
+      {
+        "name": "Malta",
+        "code": "MT"
+      },
+      {
+        "name": "Bulgarien",
+        "code": "BG"
+      },
+      {
+        "name": "Niederlande",
+        "code": "NL"
+      },
+      {
+        "name": "Dänemark",
+        "code": "DK"
+      },
+      {
+        "name": "Österreich",
+        "code": "AT"
+      },
+      {
+        "name": "Deutschland",
+        "code": "DE"
+      },
+      {
+        "name": "Polen",
+        "code": "PL"
+      },
+      {
+        "name": "Estland",
+        "code": "EE"
+      },
+      {
+        "name": "Portugal",
+        "code": "PT"
+      },
+      {
+        "name": "Finnland",
+        "code": "FI"
+      },
+      {
+        "name": "Rumänien",
+        "code": "RO"
+      },
+      {
+        "name": "Frankreich",
+        "code": "FR"
+      },
+      {
+        "name": "Schweden",
+        "code": "SE"
+      },
+      {
+        "name": "Griechenland",
+        "code": "GR"
+      },
+      {
+        "name": "Slowakei",
+        "code": "SK"
+      },
+      {
+        "name": "Irland",
+        "code": "IE"
+      },
+      {
+        "name": "Slowenien",
+        "code": "SI"
+      },
+      {
+        "name": "Italien",
+        "code": "IT"
+      },
+      {
+        "name": "Spanien",
+        "code": "ES"
+      },
+      {
+        "name": "Kroatien",
+        "code": "HR"
+      },
+      {
+        "name": "Tschechien",
+        "code": "CZ"
+      },
+      {
+        "name": "Lettland",
+        "code": "LV"
+      },
+      {
+        "name": "Ungarn",
+        "code": "HU"
+      },
+      {
+        "name": "Litauen",
+        "code": "LT"
+      },
+      {
+        "name": "Zypern",
+        "code": "CY"
+      },
+      {
+        "name": "Luxemburg",
+        "code": "LU"
+      },
+      {
+        "name": "Schweiz",
+        "code": "CH"
+      },
+      {
+        "name": "Norwegen",
+        "code": "NO"
+      },
+      {
+        "name": "Island",
+        "code": "IS"
+      },
+      {
+        "name": "Vereinigte Arabische Emirate",
+        "code": "AE"
+      },
+      {
+        "name": "Kongo, Demokratische Republik",
+        "code": "CD"
+      }
+    ],
     "chooseYear": "Jahr wählen",
     "chooseMonth": "Monat wählen",
     "chooseDate": "Datum wählen",
