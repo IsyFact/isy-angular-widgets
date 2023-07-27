@@ -11,6 +11,7 @@ import {By} from '@angular/platform-browser';
         id="charPicker"
         pInputText
         isyInputChar
+        disabled
         (change)="valueGet($event, charPicker.value)"
     >`
 })
@@ -50,6 +51,26 @@ describe('InputCharDirective', () => {
 
   it('should create', () => {
     expect(directive).toBeTruthy();
+  });
+
+  it('should check the input char button visibility', () => {
+    directive.ngOnInit();
+    directive.setInputCharButtonVisibility(directive.componentRef);
+    expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
+
+    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    input.disabled = false;
+    directive.ngOnInit();
+    directive.setInputCharButtonVisibility(directive.componentRef);
+    fixture.detectChanges();
+    expect(directive.componentRef.instance.isInputDisabled).toBeFalse();
+    
+    input.disabled = true;
+    directive.ngOnInit();
+    directive.setInputCharButtonVisibility(directive.componentRef);
+    fixture.detectChanges();
+    expect(directive.componentRef.instance.displayCharPicker).toBeFalse();
+    expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
   });
 
   it('should check the input mouse position of test component', () => {

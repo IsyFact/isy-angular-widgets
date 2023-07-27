@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {ComponentRef, Directive, ElementRef, HostListener, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {InputCharComponent} from '../components/input-char/input-char.component';
 import {Datentyp} from '../model/datentyp';
 
@@ -38,49 +38,54 @@ export class InputCharDirective implements OnInit {
    */
   inputMousePosition: number = 0;
 
+  componentRef!: ComponentRef<InputCharComponent>
+
   constructor(private viewContainerRef: ViewContainerRef, private element: ElementRef) {
     const htmlInputElement = this.element.nativeElement as HTMLInputElement;
     htmlInputElement.style.width = 'calc(100% - 2.357rem)';
   }
 
   ngOnInit(): void {
-    const componentRef = this.viewContainerRef.createComponent(InputCharComponent);
-    componentRef.instance.datentyp = this.datentyp!;
+    this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
+    this.componentRef.instance.datentyp = this.datentyp!;
 
-    if (this.element.nativeElement.disabled) {
-      componentRef.instance.isInputDisabled = true;
-    }
- 
-    const observer = new MutationObserver(mutationList => {
-        for (const mutation of mutationList) {
-          const input = mutation.target as HTMLFormElement;
-          
-          if (mutation && mutation.attributeName === 'disabled') {
-            if (input.disabled) {
-              componentRef.instance.displayCharPicker = false;
-              componentRef.instance.isInputDisabled = true;
-            } else {
-              componentRef.instance.isInputDisabled = false;
-            }
-          }
-        }
-      }
-    );
-
-    observer.observe(this.element.nativeElement, {
-      attributes: true
-    });
-
-    const subscription = componentRef.instance.valueChange.subscribe(zeichen => {
+    this.setInputCharButtonVisibility(this.componentRef);
+    
+    const subscription = this.componentRef.instance.valueChange.subscribe(zeichen => {
       const input = this.element.nativeElement as HTMLInputElement;
       input.value = this.buildInputValue(input.value, zeichen);
       this.setNextInputPosition();
       input.dispatchEvent(new Event('change', {}));
     });
 
-    componentRef.onDestroy(() => {
+    this.componentRef.onDestroy(() => {
       // needed for unsubscribe after multiple async (value change) listening
       subscription.unsubscribe();
+    });
+  }
+
+  setInputCharButtonVisibility(componentRef: ComponentRef<InputCharComponent>)  {
+    if (this.element.nativeElement.disabled) {
+      componentRef.instance.isInputDisabled = true;
+    }
+ 
+    const observer = new MutationObserver(mutationList => {
+      for (const mutation of mutationList) {
+        const input = mutation.target as HTMLInputElement;
+ 
+        if (mutation && mutation.attributeName === 'disabled') {
+          if (input.disabled) {
+            componentRef.instance.displayCharPicker = false;
+            componentRef.instance.isInputDisabled = true;
+          } else {
+            componentRef.instance.isInputDisabled = false;
+          }
+        }
+      }
+    });
+
+    observer.observe(this.element.nativeElement, {
+      attributes: true
     });
   }
 
