@@ -47,16 +47,11 @@ export class InputCharDirective implements OnInit {
     const componentRef = this.viewContainerRef.createComponent(InputCharComponent);
     componentRef.instance.datentyp = this.datentyp!;
 
-    const subscription = componentRef.instance.valueChange.subscribe(zeichen => {
+    componentRef.instance.valueChange.subscribe(zeichen => {
       const input = this.element.nativeElement as HTMLInputElement;
       input.value = this.buildInputValue(input.value, zeichen);
       this.setNextInputPosition();
       input.dispatchEvent(new Event('change', {}));
-    });
-
-    componentRef.onDestroy(() => {
-      // needed for unsubscribe after multiple async (value change) listening
-      subscription.unsubscribe();
     });
   }
 

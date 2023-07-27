@@ -1,15 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InputCharComponent} from './input-char.component';
-import {AccordionModule} from 'primeng/accordion';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {Datentyp} from '../../model/datentyp';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {CharacterService} from '../../services/character.service';
-import {DialogModule} from 'primeng/dialog';
-import {ButtonModule} from 'primeng/button';
-import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
@@ -49,12 +43,6 @@ describe('InputCharComponent', () => {
           InputCharComponent
         ],
         imports: [
-          AccordionModule,
-          ScrollPanelModule,
-          DialogModule,
-          ButtonModule,
-          SelectButtonModule,
-          FormsModule,
           BrowserAnimationsModule,
           TranslateTestingModule.withTranslations({}),
           InputCharModule
@@ -132,7 +120,7 @@ describe('InputCharComponent', () => {
       displayInputChar();
 
       component.displayCharPicker = false;
-      fixture.detectChanges();
+      // fixture.detectChanges();
       expect(component.displayCharPicker).toBeFalse();
     });
 
@@ -400,12 +388,6 @@ describe('InputCharComponent', () => {
           InputCharComponent
         ],
         imports: [
-          AccordionModule,
-          ScrollPanelModule,
-          DialogModule,
-          ButtonModule,
-          SelectButtonModule,
-          FormsModule,
           BrowserAnimationsModule,
           TranslateTestingModule.withTranslations({}),
           InputCharModule
