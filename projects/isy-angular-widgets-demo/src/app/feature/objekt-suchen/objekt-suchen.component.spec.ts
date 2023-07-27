@@ -440,7 +440,7 @@ describe('PersonenSuchenComponent', () => {
     fixture.detectChanges();
 
     const idLabel = fixture.nativeElement.querySelector('label#idLabel');
-    expect(idLabel.textContent).toEqual('ID*');
+    expect(idLabel.textContent).toEqual('ID');
   });
 
   it('should check the reactive forms init', () => {
