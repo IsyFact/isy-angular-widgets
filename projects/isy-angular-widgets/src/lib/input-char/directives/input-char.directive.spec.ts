@@ -3,6 +3,8 @@ import {Datentyp} from '../model/datentyp';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
+import {TranslateTestingModule} from 'ngx-translate-testing';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @Component({
   template:
@@ -40,6 +42,10 @@ describe('InputCharDirective', () => {
       declarations: [
         TestComponent,
         InputCharDirective
+      ],
+      imports: [
+        TranslateTestingModule.withTranslations({}),
+        BrowserAnimationsModule
       ]
     });
     fixture = TestBed.createComponent(TestComponent);

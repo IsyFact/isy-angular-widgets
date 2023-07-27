@@ -22,12 +22,8 @@ import {DialogModule} from 'primeng/dialog';
 import {DateService} from './services/date.service';
 import {Observable} from 'rxjs';
 import {TranslateTestingModule} from 'ngx-translate-testing';
+import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
-// for HTML tests
-
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-// disabled for date conversion checks
 describe('PersonenSuchenComponent', () => {
   const germanCharsStr ='öäüÖÄÜß';
   const DOT = '.';
@@ -204,7 +200,8 @@ describe('PersonenSuchenComponent', () => {
         BrowserAnimationsModule,
         PanelModule,
         DialogModule,
-        TranslateTestingModule.withTranslations({})
+        TranslateTestingModule.withTranslations({}),
+        InputCharModule
       ],
       providers: [
         SecurityService,
@@ -213,9 +210,7 @@ describe('PersonenSuchenComponent', () => {
       ]
     })
       .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ObjektSuchenComponent);
     component = fixture.componentInstance;
     dateService = TestBed.inject(DateService);
