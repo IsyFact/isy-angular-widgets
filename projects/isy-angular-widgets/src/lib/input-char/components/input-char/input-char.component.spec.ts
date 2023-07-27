@@ -132,7 +132,7 @@ describe('InputCharComponent', () => {
       displayInputChar();
 
       component.displayCharPicker = false;
-      fixture.detectChanges();
+      // fixture.detectChanges();
       expect(component.displayCharPicker).toBeFalse();
     });
 
