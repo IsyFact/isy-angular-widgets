@@ -1,27 +1,14 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InputCharComponent} from './input-char.component';
-import {AccordionModule} from 'primeng/accordion';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {ScrollPanelModule} from 'primeng/scrollpanel';
-import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
-import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
-import {InputCharDialogDirective} from '../../directives/input-char-dialog.directive';
 import {Datentyp} from '../../model/datentyp';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {CharacterService} from '../../services/character.service';
-import {DialogModule} from 'primeng/dialog';
-import {InputCharAllCharsButtonComponent} from '../input-char-all-chars-button/input-char-all-chars-button.component';
-import {
-  InputCharPreviewCharListComponent
-} from '../input-char-preview-char-list/input-char-preview-char-list.component';
-import {InputCharSelectButtonComponent} from '../input-char-select-button/input-char-select-button.component';
-import {ButtonModule} from 'primeng/button';
-import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
 import {TranslateTestingModule} from 'ngx-translate-testing';
+import {InputCharModule} from '../../input-char.module';
 
 const crypto = window.crypto;
 
@@ -53,23 +40,12 @@ describe('InputCharComponent', () => {
     beforeEach(async() => {
       await TestBed.configureTestingModule({
         declarations: [
-          InputCharComponent,
-          InputCharPreviewComponent,
-          InputCharAllCharsButtonComponent,
-          InputCharPreviewCharListComponent,
-          InputCharSelectButtonComponent,
-          InputCharDialogComponent,
-          InputCharDialogDirective
+          InputCharComponent
         ],
         imports: [
-          AccordionModule,
-          ScrollPanelModule,
-          DialogModule,
-          ButtonModule,
-          SelectButtonModule,
-          FormsModule,
           BrowserAnimationsModule,
-          TranslateTestingModule.withTranslations({})
+          TranslateTestingModule.withTranslations({}),
+          InputCharModule
         ],
         providers: [
           CharacterService
@@ -145,7 +121,7 @@ describe('InputCharComponent', () => {
       displayInputChar();
 
       component.displayCharPicker = false;
-      fixture.detectChanges();
+      // fixture.detectChanges();
       expect(component.displayCharPicker).toBeFalse();
     });
 
@@ -434,23 +410,12 @@ describe('InputCharComponent', () => {
     beforeEach(async() => {
       await TestBed.configureTestingModule({
         declarations: [
-          InputCharComponent,
-          InputCharPreviewComponent,
-          InputCharAllCharsButtonComponent,
-          InputCharPreviewCharListComponent,
-          InputCharSelectButtonComponent,
-          InputCharDialogComponent,
-          InputCharDialogDirective
+          InputCharComponent
         ],
         imports: [
-          AccordionModule,
-          ScrollPanelModule,
-          DialogModule,
-          ButtonModule,
-          SelectButtonModule,
-          FormsModule,
           BrowserAnimationsModule,
-          TranslateTestingModule.withTranslations({})
+          TranslateTestingModule.withTranslations({}),
+          InputCharModule
         ],
         providers: [
           CharacterService
