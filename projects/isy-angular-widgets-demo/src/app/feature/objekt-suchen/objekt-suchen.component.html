@@ -147,7 +147,7 @@
 >
   <div [formGroup]="editForm" *ngIf="selectedPerson && editForm">
     <div class="grid m-0">
-      <div class="col-1 text-right align-self-center">
+      <div class="col-2 text-right align-self-center">
         <label for="editID">ID</label>
       </div>
       <div class="col">
@@ -159,7 +159,7 @@
       <div class="col"></div>
     </div>
     <div class="grid m-0">
-      <div class="col-1 text-right align-self-center">
+      <div class="col-2 text-right align-self-center">
         <label for="editNachname">
           {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
         </label>
@@ -168,7 +168,7 @@
         <input id="editNachname" class="w-full" type="text" pInputText
                [formControlName]="'editNachname'">
       </div>
-      <div class="col-1 text-right align-self-center">
+      <div class="col-2 text-right align-self-center">
         <label class="align-content-end" for="editGeburtsname">
           {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
         </label>
@@ -177,7 +177,7 @@
         <input id="editGeburtsname" class="w-full" type="text" pInputText
                [formControlName]="'editGeburtsname'">
       </div>
-      <div class="col-1 text-right align-self-center">
+      <div class="col-2 text-right align-self-center">
         <label class="align-content-end" for="editGeburtsname">
           {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
         </label>
@@ -188,7 +188,7 @@
       </div>
     </div>
     <div class="grid m-0">
-      <div class="col-1 text-right align-self-center">
+      <div class="col-2 text-right align-self-center">
         <label class="align-content-end" for="editVorname">
           {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
         </label>
@@ -197,7 +197,7 @@
         <input id="editVorname" class="w-full" type="text" pInputText
                [formControlName]="'editVorname'">
       </div>
-      <div class="col-1 text-right align-self-center">
+      <div class="col-2 text-right align-self-center">
         <label class="align-content-end" for="editGeschlecht">
           {{('isyAngularWidgetsDemo.labels.geschlecht' | translate)}}
         </label>
@@ -206,7 +206,7 @@
         <input id="editGeschlecht" class="w-full" type="text" pInputText
                [formControlName]="'editGeschlecht'">
       </div>
-      <div class="col-1 text-right align-self-center">
+      <div class="col-2 text-right align-self-center">
         <label class="align-content-end" for="editGeburtsdatum">
           {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
         </label>
@@ -222,7 +222,7 @@
       </div>
     </div>
     <div class="grid m-0">
-      <div class="col-1 text-right align-self-center">
+      <div class="col-2 text-right align-self-center">
         <label class="align-content-end" for="editStaatsangehörigkeit">
           {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
         </label>
@@ -283,7 +283,7 @@
   <div *isyWizardDirective="('isyAngularWidgetsDemo.createObjectDialog.stepIdEntry' | translate)">
     <div [formGroup]="idForm">
       <div class="grid m-0">
-        <div class="col-1 text-left align-self-center">
+        <div class="col-1 text-right align-self-center">
           <label id="idLabel" for="personId">ID</label>
         </div>
         <div class="col">
@@ -314,7 +314,7 @@
   <div *isyWizardDirective="('isyAngularWidgetsDemo.createObjectDialog.stepBirthInfo' | translate)">
         <div [formGroup]="geburtsInformationenForm">
           <div class="grid m-0">
-            <div class="col-1 text-left align-self-center">
+            <div class="col-2 text-right align-self-center">
               <label id="geburtsnameLabel" class="align-content-end" for="geburtsname">
                 {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
               </label>
@@ -330,7 +330,7 @@
             </div>
           </div>
           <div class="grid m-0">
-            <div class="col-1 text-left align-self-center">
+            <div class="col-2 text-right align-self-center">
               <label id="geburtsortLabel" class="align-content-end"
                      for="geburtsort">
                 {{('isyAngularWidgetsDemo.labels.geburtsort' | translate)}}
@@ -347,7 +347,7 @@
             </div>
           </div>
           <div class="grid m-0">
-            <div class="col-1 text-left align-self-center">
+            <div class="col-2 text-right align-self-center">
               <label id="geburtsdatumLabel" class="align-content-end" for="geburtdatum">
                 {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
               </label>
@@ -364,7 +364,7 @@
             </div>
           </div>
           <div class="grid m-0">
-            <div class="col-1 text-left align-self-center">
+            <div class="col-2 text-right align-self-center">
               <label id="staatsangehoerigkeitLabel" class="align-content-end"
                      for="staatangehoerigkeit">
                 {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
