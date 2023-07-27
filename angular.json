@@ -28,9 +28,9 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "codeCoverage": true,
-            "main": "projects/isy-angular-widgets/src/test.ts",
             "tsConfig": "projects/isy-angular-widgets/tsconfig.spec.json",
-            "karmaConfig": "projects/isy-angular-widgets/karma.conf.js"
+            "karmaConfig": "projects/isy-angular-widgets/karma.conf.js",
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         },
         "lint": {
@@ -64,7 +64,9 @@
             "outputPath": "dist/isy-angular-widgets-demo",
             "index": "projects/isy-angular-widgets-demo/src/index.html",
             "main": "projects/isy-angular-widgets-demo/src/main.ts",
-            "polyfills": "projects/isy-angular-widgets-demo/src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/isy-angular-widgets-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -139,8 +141,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "codeCoverage": true,
-            "main": "projects/isy-angular-widgets-demo/src/test.ts",
-            "polyfills": "projects/isy-angular-widgets-demo/src/polyfills.ts",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/isy-angular-widgets-demo/tsconfig.spec.json",
             "karmaConfig": "projects/isy-angular-widgets-demo/karma.conf.js",
             "inlineStyleLanguage": "scss",
