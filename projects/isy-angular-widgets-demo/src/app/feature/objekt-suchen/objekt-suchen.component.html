@@ -228,11 +228,13 @@
         </label>
       </div>
       <div class="col-3">
-        <p-dropdown id="editStaatsangehörigkeit"
+        <p-dropdown #editStaatsangehoerigkeit
+                    id="editStaatsangehörigkeit"
                     [placeholder]="('isyAngularWidgetsDemo.labels.chooseCountry' | translate)"
                     [options]="laender"
                     [showClear]="true"
                     [formControlName]="'editStaatsangehoerigkeit'"
+                    (onChange)="onStaatsangehoerigkeitChange(editStaatsangehoerigkeit.value)"
         >
           <ng-template pTemplate="selectedItem">
             <div class="country-item country-item-value"

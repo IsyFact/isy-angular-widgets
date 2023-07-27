@@ -434,5 +434,9 @@ export class ObjektSuchenComponent {
     resetForm(this.geburtsInformationenForm);
   }
 
+  onStaatsangehoerigkeitChange(value: string): void {
+    this.selectedPerson!.personalien.staatsangehoerigkeit = value;
+  }
+
   protected readonly Datentyp = Datentyp;
 }
