@@ -232,14 +232,19 @@ describe('InputCharComponent', () => {
 
     it('should check the char picker visibility', () => { 
       component.isInputDisabled = true;
-      component.setupCharPickerAvailability(true);
+      component.setupCharPickerAvailability();
       fixture.detectChanges();
       expect(component.displayCharPicker).toBeFalse();
 
       component.isInputDisabled = false;
-      component.setupCharPickerAvailability(true);
+      component.setupCharPickerAvailability();
       fixture.detectChanges();
       expect(component.displayCharPicker).toBeTrue();
+
+      component.isInputDisabled = false;
+      component.setupCharPickerAvailability(true);
+      fixture.detectChanges();
+      expect(component.displayCharPicker).toBeFalse();
     });
 
     it('should check the input char button to have class disabled', () => { 
