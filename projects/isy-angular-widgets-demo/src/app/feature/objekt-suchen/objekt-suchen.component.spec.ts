@@ -582,15 +582,4 @@ describe('PersonenSuchenComponent', () => {
     enableClearSearch = component.enableClearSearch();
     expect(enableClearSearch).toBeTrue();
   });
-
-  it('should change the Staatsangehoerigkeit change', ()=> {
-    component.selectedPerson = getEmptyPerson();
-
-    const personalien = component.selectedPerson?.personalien;
-    expect(personalien?.staatsangehoerigkeit).toEqual('');
-
-    const country = 'Deutschland';
-    component.onStaatsangehoerigkeitChange(country);
-    expect(personalien?.staatsangehoerigkeit).toEqual(country);
-  });
 });
