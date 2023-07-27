@@ -225,6 +225,9 @@ describe('InputCharComponent', () => {
       component.setupCharPickerAvailability(true);
       fixture.detectChanges();
       expect(setupCharPickerAvailabilitySpy).toHaveBeenCalledWith(true);
+      component.displayCharPicker = false;
+      fixture.detectChanges();
+      expect(component.displayCharPicker).toBeFalse();
     });
 
     it('should check the char picker visibility', () => { 
