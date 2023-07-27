@@ -583,7 +583,7 @@ describe('PersonenSuchenComponent', () => {
     expect(enableClearSearch).toBeTrue();
   });
 
-  it('should check the Staatsangehoerigkeit change', ()=> {
+  it('should change the Staatsangehoerigkeit change', ()=> {
     component.selectedPerson = getEmptyPerson();
 
     const personalien = component.selectedPerson?.personalien;
