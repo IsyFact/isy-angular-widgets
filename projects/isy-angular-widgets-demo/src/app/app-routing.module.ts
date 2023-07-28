@@ -1,18 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DashboardViewComponent} from './feature/dashboard/dashboard-view.component';
+import {DashboardComponent} from './feature/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardViewComponent,
+    component: DashboardComponent,
     data: {
       title: 'Dashboard'
     }
   },
   {
     path: 'dashboard',
-    loadChildren: async() => (await import('./feature/dashboard/dashboard-view.module')).DashboardViewModule
+    loadChildren: async() => (await import('./feature/dashboard/dashboard.module')).DashboardModule
   },
   {
     path: 'objekt-anzeigen',
