@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardViewComponent } from './dashboard-view.component';
-import {DashboardModule} from '../../../../../isy-angular-widgets/src/lib/dashboard/dashboard.module';
 
 describe('DashboardViewComponent', () => {
   let component: DashboardViewComponent;
@@ -8,12 +7,7 @@ describe('DashboardViewComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [
-        DashboardViewComponent
-      ],
-      imports: [
-        DashboardModule
-      ]
+      declarations: [ DashboardViewComponent ]
     })
       .compileComponents();
   });
