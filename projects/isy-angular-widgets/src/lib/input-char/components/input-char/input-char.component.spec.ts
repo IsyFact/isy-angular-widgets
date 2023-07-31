@@ -206,7 +206,7 @@ describe('InputCharComponent', () => {
     });
 
     it('should check the input char button availability', () => { 
-      const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement
+      const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
       component.isInputDisabled = true;
       fixture.detectChanges();
       expect(button.disabled).toBeTruthy();
