@@ -13,7 +13,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         id="charPicker"
         pInputText
         isyInputChar
-        disabled
         (change)="valueGet($event, charPicker.value)"
     >`
 })
@@ -59,23 +58,17 @@ describe('InputCharDirective', () => {
     expect(directive).toBeTruthy();
   });
 
-  it('should check the input char button visibility', () => {
+  it('should check the componentRef instance isInputDisabled property', () => {
     directive.ngOnInit();
-    directive.setInputCharButtonVisibility(directive.componentRef);
-    expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
-
     const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
     input.disabled = false;
-    directive.ngOnInit();
-    directive.setInputCharButtonVisibility(directive.componentRef);
+    directive.setupInputChar(directive.componentRef);
     fixture.detectChanges();
     expect(directive.componentRef.instance.isInputDisabled).toBeFalse();
     
     input.disabled = true;
-    directive.ngOnInit();
-    directive.setInputCharButtonVisibility(directive.componentRef);
+    directive.setupInputChar(directive.componentRef);
     fixture.detectChanges();
-    expect(directive.componentRef.instance.displayCharPicker).toBeFalse();
     expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
   });
 

@@ -205,28 +205,15 @@ describe('InputCharComponent', () => {
       expect(component.displayCharPicker).toBeFalse();
     });
 
-    it('should check the char picker visibility', () => { 
+    it('should check the input char button availability', () => { 
+      const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement
       component.isInputDisabled = true;
-      component.setupCharPickerAvailability();
       fixture.detectChanges();
-      expect(component.displayCharPicker).toBeFalse();
+      expect(button.disabled).toBeTruthy();
 
       component.isInputDisabled = false;
-      component.setupCharPickerAvailability();
       fixture.detectChanges();
-      expect(component.displayCharPicker).toBeTrue();
-
-      component.isInputDisabled = false;
-      component.setupCharPickerAvailability(true);
-      expect(component.displayCharPicker).toBeFalse();
-    });
-
-    it('should check the input char button to have class disabled', () => { 
-      component.isInputDisabled = true;
-      component.displayCharPicker = true;
-      fixture.detectChanges();
-      const button = fixture.debugElement.query(By.css('#inputCharButton'));
-      expect(button.nativeElement.classList).toContain('disabled');
+      expect(button.disabled).toBeFalsy();
     });
 
     it('should check the previewZeichenObjekt function to have been called', () => {

@@ -19,11 +19,6 @@
   padding: 5px;
 }
 
-#inputCharButton.disabled {
-  background: #89909a;
-  border-color: #89909a;
-}
-
 // Für die Anpassung der Widgets innerhalb einer Komposition konnten die CSS Klassen von primeNG nicht mit eigenen Klassen
 // überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
 // können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.

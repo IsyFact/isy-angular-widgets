@@ -164,12 +164,10 @@ export class InputCharComponent implements OnInit {
    * @internal
    */
   setupCharPickerAvailability(close?: boolean): void {
-    if (!this.isInputDisabled) {
-      this.displayCharPicker = !(this.displayCharPicker || close);
+    this.displayCharPicker = !(this.displayCharPicker || close);
 
-      if (!this.displayCharPicker) {
-        this.onDialogClose();
-      }
+    if (!this.displayCharPicker) {
+      this.onDialogClose();
     }
   }
 

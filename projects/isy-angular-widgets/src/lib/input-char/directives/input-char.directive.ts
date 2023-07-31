@@ -49,7 +49,7 @@ export class InputCharDirective implements OnInit {
     this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
     this.componentRef.instance.datentyp = this.datentyp!;
 
-    this.setInputCharButtonVisibility(this.componentRef);
+    this.setupInputChar(this.componentRef);
     
     this.componentRef.instance.valueChange.subscribe(zeichen => {
       const input = this.element.nativeElement as HTMLInputElement;
@@ -59,10 +59,8 @@ export class InputCharDirective implements OnInit {
     });
   }
 
-  setInputCharButtonVisibility(componentRef: ComponentRef<InputCharComponent>)  {
-    if (this.element.nativeElement.disabled) {
-      componentRef.instance.isInputDisabled = true;
-    }
+  setupInputChar(componentRef: ComponentRef<InputCharComponent>)  {
+    componentRef.instance.isInputDisabled = this.element.nativeElement.disabled;
  
     const observer = new MutationObserver(mutationList => {
       for (const mutation of mutationList) {
