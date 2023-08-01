@@ -68,13 +68,6 @@ describe('InputCharDirective', () => {
     expect(directive.inputMousePosition).toEqual(1);
   });
 
-  /* it('should check the next input position', () => {
-    const newValue = 'ç̆eç̆';
-    expect(directive.inputMousePosition).toEqual(0);
-    directive.setNextInputPosition(1);
-    expect(directive.inputMousePosition).toEqual(1);
-  }); */
-
   it('should check the arrival of changed input value', () => {
     const newValue = 'abc';
     const valueOnChangeSpy = spyOn(component, 'valueGet');
@@ -101,7 +94,7 @@ describe('InputCharDirective', () => {
     fixture.detectChanges();
     let newInputValue = directive.buildInputValue(value, zeichen);
     expect(newInputValue).not.toEqual(`${value}${zeichen}`);
-    
+
     directive.inputMousePosition = value.length;
     newInputValue = directive.buildInputValue(value, zeichen);
     expect(newInputValue).toEqual(`${value}${zeichen}`);
