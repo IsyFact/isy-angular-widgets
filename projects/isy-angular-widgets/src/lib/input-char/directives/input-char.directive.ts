@@ -59,8 +59,12 @@ export class InputCharDirective implements OnInit {
     return (event.target as HTMLInputElement).selectionStart!;
   }
 
-  setNextInputPosition(number: number): void {
-    this.inputMousePosition += number;
+  /**
+   * Is setting the next input mouse position
+   * @param charLength used to determine the exact next input mouse position, since there are characters longer than one position
+   */
+  setNextInputPosition(charLength: number): void {
+    this.inputMousePosition += charLength;
   }
 
   buildInputValue(value: string, zeichen: string): string {

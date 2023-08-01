@@ -64,9 +64,16 @@ describe('InputCharDirective', () => {
 
   it('should set next input position', () => {
     expect(directive.inputMousePosition).toEqual(0);
-    directive.setNextInputPosition();
+    directive.setNextInputPosition(1);
     expect(directive.inputMousePosition).toEqual(1);
   });
+
+  /* it('should check the next input position', () => {
+    const newValue = 'ç̆eç̆';
+    expect(directive.inputMousePosition).toEqual(0);
+    directive.setNextInputPosition(1);
+    expect(directive.inputMousePosition).toEqual(1);
+  }); */
 
   it('should check the arrival of changed input value', () => {
     const newValue = 'abc';
@@ -83,8 +90,8 @@ describe('InputCharDirective', () => {
   });
 
   it('should check the build of the current input value', () => {
-    const value = 'a';
-    const zeichen = 'A̋';
+    const value = 'ç̆';
+    const zeichen = 'e';
 
     expect(directive.inputMousePosition).toEqual(0);
     const inputValue = directive.buildInputValue(value, zeichen);
@@ -92,7 +99,11 @@ describe('InputCharDirective', () => {
 
     directive.inputMousePosition = 1;
     fixture.detectChanges();
-    const newInputValue = directive.buildInputValue(value, zeichen);
+    let newInputValue = directive.buildInputValue(value, zeichen);
+    expect(newInputValue).not.toEqual(`${value}${zeichen}`);
+    
+    directive.inputMousePosition = value.length;
+    newInputValue = directive.buildInputValue(value, zeichen);
     expect(newInputValue).toEqual(`${value}${zeichen}`);
   });
 });
