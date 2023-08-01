@@ -2,7 +2,7 @@
   logoAwl="../assets/default-application-logo.jpg"
   logoAnbieterAwl="../assets/default-vendor-logo.png"
   [showLinksnavigation]="true"
-  [showInformationsbereich]="false"
+  [showInformationsbereich]="true"
   linksNavigationWidth="15em"
   [items]="items"
   [userInfo]="userInfo"
@@ -12,11 +12,13 @@
   <div Linksnavigation>
     <!--    The Linksnavigation is the left side bar. You could build some kind of menu here. -->
     <p-panelMenu [model]="sidebarItems"></p-panelMenu>
+
+    <router-outlet name="linksnavigation"></router-outlet>
   </div>
   <!--  The region without a tag is the content region, to be filled by the router. -->
-  <router-outlet></router-outlet>
   <div Informationsbereich>
     <!--    The Informationsbereich is the right side bar. -->
+    <router-outlet name="informationsbereich"></router-outlet>
   </div>
   <div Hauptnavigation-Tools>
     <!--    The Hauptnavigation-Tools are a region within the Menu and could for example be used for a language selector. -->
@@ -41,6 +43,7 @@
       </ng-template>
     </p-dropdown>
   </div>
+  <router-outlet></router-outlet>
 </isy-hauptfenster>
 <p-toast
   id="notificationToast"

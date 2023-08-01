@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
-import { QuicklinkComponent } from './components/quicklink/quicklink.component';
+import {DashboardComponent} from './dashboard.component';
 import {CardModule} from 'primeng/card';
+import {DashboardRoutingModule} from './dashboard.routing.module';
 
 @NgModule({
-  declarations: [DashboardComponent, QuicklinkComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
-    CardModule
+    CardModule,
+    DashboardRoutingModule
   ]
 })
 export class DashboardModule { }
