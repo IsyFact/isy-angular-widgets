@@ -38,29 +38,30 @@ export class InputCharDirective implements OnInit {
    */
   inputMousePosition: number = 0;
 
-  componentRef!: ComponentRef<InputCharComponent>
+  componentRef!: ComponentRef<InputCharComponent>;
+
+  htmlInputElement!: HTMLInputElement;
 
   constructor(private viewContainerRef: ViewContainerRef, private element: ElementRef) {
-    const htmlInputElement = this.element.nativeElement as HTMLInputElement;
-    htmlInputElement.style.width = 'calc(100% - 2.357rem)';
+    this.htmlInputElement = this.element.nativeElement as HTMLInputElement;
+    this.htmlInputElement.style.width = 'calc(100% - 2.357rem)';
   }
 
   ngOnInit(): void {
     this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
     this.componentRef.instance.datentyp = this.datentyp!;
 
-    this.setupInputChar(this.componentRef);
+    this.setupInputChar();
     
     this.componentRef.instance.valueChange.subscribe(zeichen => {
-      const input = this.element.nativeElement as HTMLInputElement;
-      input.value = this.buildInputValue(input.value, zeichen);
+      this.htmlInputElement.value = this.buildInputValue(this.htmlInputElement.value, zeichen);
       this.setNextInputPosition();
-      input.dispatchEvent(new Event('change', {}));
+      this.htmlInputElement.dispatchEvent(new Event('change', {}));
     });
   }
 
-  setupInputChar(componentRef: ComponentRef<InputCharComponent>)  {
-    componentRef.instance.isInputDisabled = this.element.nativeElement.disabled;
+  setupInputChar(): void  {
+    this.componentRef.setInput('isInputDisabled', this.htmlInputElement?.disabled);
  
     const observer = new MutationObserver(mutationList => {
       for (const mutation of mutationList) {
@@ -68,16 +69,16 @@ export class InputCharDirective implements OnInit {
  
         if (mutation && mutation.attributeName === 'disabled') {
           if (input.disabled) {
-            componentRef.instance.displayCharPicker = false;
-            componentRef.instance.isInputDisabled = true;
+            this.componentRef.instance.displayCharPicker = false;
+            this.componentRef.setInput('isInputDisabled', true);
           } else {
-            componentRef.instance.isInputDisabled = false;
+            this.componentRef.setInput('isInputDisabled', false);
           }
         }
       }
     });
 
-    observer.observe(this.element.nativeElement, {
+    observer.observe(this.htmlInputElement, {
       attributes: true
     });
   }

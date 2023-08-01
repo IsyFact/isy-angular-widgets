@@ -62,12 +62,12 @@ describe('InputCharDirective', () => {
     directive.ngOnInit();
     const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
     input.disabled = false;
-    directive.setupInputChar(directive.componentRef);
+    directive.setupInputChar();
     fixture.detectChanges();
     expect(directive.componentRef.instance.isInputDisabled).toBeFalse();
     
     input.disabled = true;
-    directive.setupInputChar(directive.componentRef);
+    directive.setupInputChar();
     fixture.detectChanges();
     expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
   });
