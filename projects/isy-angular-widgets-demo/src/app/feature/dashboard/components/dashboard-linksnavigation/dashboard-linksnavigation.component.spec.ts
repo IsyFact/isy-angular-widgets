@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DashboardLinksnavigationComponent } from './dashboard-linksnavigation.component';
+import {DashboardLinksnavigationComponent} from './dashboard-linksnavigation.component';
 
 describe('DashboardLinksnavigationComponent', () => {
   let component: DashboardLinksnavigationComponent;
   let fixture: ComponentFixture<DashboardLinksnavigationComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardLinksnavigationComponent ]
+      declarations: [DashboardLinksnavigationComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardLinksnavigationComponent);
     component = fixture.componentInstance;

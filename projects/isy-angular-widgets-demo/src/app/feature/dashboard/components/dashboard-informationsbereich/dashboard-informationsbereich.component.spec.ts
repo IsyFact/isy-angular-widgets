@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DashboardInformationsbereichComponent } from './dashboard-informationsbereich.component';
+import {DashboardInformationsbereichComponent} from './dashboard-informationsbereich.component';
 
 describe('DashboardInformationsbereichComponent', () => {
   let component: DashboardInformationsbereichComponent;
   let fixture: ComponentFixture<DashboardInformationsbereichComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardInformationsbereichComponent ]
+      declarations: [DashboardInformationsbereichComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardInformationsbereichComponent);
     component = fixture.componentInstance;
