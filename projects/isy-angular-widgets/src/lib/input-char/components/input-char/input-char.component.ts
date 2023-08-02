@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {SchriftZeichen, Zeichenobjekt} from '../../model/model';
 import {InputCharSelectButtonComponent} from '../input-char-select-button/input-char-select-button.component';
 import {InputCharAllCharsButtonComponent} from '../input-char-all-chars-button/input-char-all-chars-button.component';
@@ -13,7 +13,7 @@ import {
   templateUrl: './input-char.component.html',
   styleUrls: ['./input-char.component.scss']
 })
-export class InputCharComponent implements OnInit {
+export class InputCharComponent implements OnInit, OnChanges {
 
   /**
    * The array who stores all the characters
@@ -141,6 +141,10 @@ export class InputCharComponent implements OnInit {
     this.setupCharPicker();
   }
 
+  ngOnChanges(): void {
+    this.setupCharPicker();
+  }
+
   /**
    * Handles the opening and closing of the accordion tabs
    * @param index the index position of the selected accordion tab
@@ -156,8 +160,6 @@ export class InputCharComponent implements OnInit {
    */
   setupCharPickerAvailability(close?: boolean): void {
     this.displayCharPicker = !(this.displayCharPicker || close);
-
-    this.setupCharPicker();
 
     if (!this.displayCharPicker) {
       this.onDialogClose();
