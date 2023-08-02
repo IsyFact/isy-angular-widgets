@@ -23,7 +23,7 @@ describe('InputCharDialogComponent', () => {
 
     fixture = TestBed.createComponent(InputCharDialogComponent);
     component = fixture.componentInstance;
-    component.display = true;
+    component.visible = true;
     fixture.detectChanges();
   });
 
@@ -37,8 +37,8 @@ describe('InputCharDialogComponent', () => {
   });
 
   it('should check the closing functionality', () => {
-    const onCloseSpy = spyOn(component.displayChange, 'emit');
-    expect(component.display).toEqual(true);
+    const onCloseSpy = spyOn(component.visibleChange, 'emit');
+    expect(component.visible).toEqual(true);
 
     const closeDialog = true;
     component.onInnerDialogVisibilityChange(closeDialog);

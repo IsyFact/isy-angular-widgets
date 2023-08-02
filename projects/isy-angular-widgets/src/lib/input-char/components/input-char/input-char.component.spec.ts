@@ -205,7 +205,7 @@ describe('InputCharComponent', () => {
       expect(component.displayCharPicker).toBeFalse();
     });
 
-    it('should check the input char button availability', () => { 
+    it('should check the input char button availability', () => {
       const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
       component.isInputDisabled = true;
       fixture.detectChanges();
@@ -371,10 +371,7 @@ describe('InputCharComponent', () => {
       expect(component.selectedZeichenObjekt).toEqual(component.zeichenObjekteToDisplay[0]);
     });
 
-    it('should check the input char button click functionality', () => {
-      const onInputCharButtonClickSpy = spyOn(component, 'setupCharPickerAvailability');
-      displayInputChar();
-
+    it('should display after clicking the button', () => {
       const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
       expect(button).not.toBeUndefined();
       expect(button.className).toContain('p-button');
@@ -383,7 +380,6 @@ describe('InputCharComponent', () => {
       fixture.detectChanges();
 
       expect(component.displayCharPicker).toBeTrue();
-      expect(onInputCharButtonClickSpy).toHaveBeenCalledWith();
     });
   });
 

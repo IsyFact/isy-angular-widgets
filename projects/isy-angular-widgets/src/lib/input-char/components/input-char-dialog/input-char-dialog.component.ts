@@ -12,8 +12,8 @@ import {InputCharDialogDirective} from '../../directives/input-char-dialog.direc
 export class InputCharDialogComponent {
   @ContentChildren(InputCharDialogDirective) content!: QueryList<InputCharDialogDirective>;
 
-  @Input() display: boolean = false;
-  @Output() displayChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() visible: boolean = false;
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input() header!: string;
 
@@ -43,6 +43,6 @@ export class InputCharDialogComponent {
    * @internal
    */
   onInnerDialogVisibilityChange(visible: boolean): void {
-    this.displayChange.emit(visible);
+    this.visibleChange.emit(visible);
   }
 }

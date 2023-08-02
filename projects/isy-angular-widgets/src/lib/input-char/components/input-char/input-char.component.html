@@ -3,12 +3,12 @@
   pButton
   icon="pi pi-language"
   [disabled]="isInputDisabled"
-  (click)="setupCharPickerAvailability()"
+  (click)="toggleCharPicker()"
 >
 </button>
 
 <isy-input-char-dialog
-  [display]="displayCharPicker"
+  [visible]="displayCharPicker"
   [header]="header"
   [closable]="isDialogClosable"
   [draggable]="isDialogDraggable"
@@ -16,7 +16,7 @@
   [closeOnClickOutside]="isDialogClosingOnOutsideClick"
   [closeOnEscape]="isDialogClosingOnEscape"
   [modal]="isDialogModalDisplayed"
-  (displayChange)="setupCharPickerAvailability($event)"
+  (visibleChange)="setupCharPickerAvailability($event)"
 >
   <div *isyInputCharDialogDirective>
     <div class="left-panel-side split">
