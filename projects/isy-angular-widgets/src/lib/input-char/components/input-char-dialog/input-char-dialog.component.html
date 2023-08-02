@@ -11,7 +11,7 @@
         width: width + 'px',
         height: height + 'px'
      }"
-    (visibleChange)="onClose($event)"
+    (visibleChange)="onInnerDialogVisibilityChange($event)"
 >
     <div *ngFor="let child of this.content!; let i = index;">
       <ng-container [ngTemplateOutlet]="this.content!.get(i)!.templateRef">

@@ -12,9 +12,8 @@ import {InputCharDialogDirective} from '../../directives/input-char-dialog.direc
 export class InputCharDialogComponent {
   @ContentChildren(InputCharDialogDirective) content!: QueryList<InputCharDialogDirective>;
 
-  @Output() displayChange = new EventEmitter<boolean>();
-
   @Input() display: boolean = false;
+  @Output() displayChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input() header!: string;
 
@@ -36,7 +35,14 @@ export class InputCharDialogComponent {
 
   @Input() modal!: boolean;
 
-  onClose(close: boolean): void {
-    this.displayChange.emit(close);
+  /**
+   * The inner dialog can be closed by using the dialog X. In that case, the parent component needs to be notified explicitly
+   * as no event is thrown through two-way-binding.
+   * The method is not called when visibility changes from outside via display input.
+   * @param visible The new visibility state of the inner dialog; should always be false as the dialog can not open by itself.
+   * @internal
+   */
+  onInnerDialogVisibilityChange(visible: boolean): void {
+    this.displayChange.emit(visible);
   }
 }
