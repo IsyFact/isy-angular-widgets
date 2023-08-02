@@ -3,12 +3,12 @@
 - Die Properties `linksNavigationCols` und `informationsbereichCols` wurden durch `linksNavigationWidth` und `informationsbereichWidth` ersetzt
 ## Features
 - IFS-2010: Header und Seitenleisten werden in der Druckansicht jetzt ausgeblendet
-- IFS-XXXX: Anwendungslogos können jetzt mit eigenem HTML gesetzt werden
-- IFS-XXXX: Seitenleisten können jetzt in ihrer Breite frei konfiguriert werden
-- IFS-XXXX: Behördenspezifische Widgets und die Widgets aus PrimeNG können jetzt in den Sprachen Deutsch und Englisch angezeigt werden 
+- Anwendungslogos können jetzt mit eigenem HTML gesetzt werden
+- Seitenleisten können jetzt in ihrer Breite frei konfiguriert werden
+- Behördenspezifische Widgets und die Widgets aus PrimeNG können jetzt in den Sprachen Deutsch und Englisch angezeigt werden 
 ## Fixes
-- IFS-XXXX: Seitenleisten werden nun korrekt ausgeblendet, wenn ihr show-Property false, aber collapse-Property true ist
-- IFS-XXXX: Der InputCharPicker wird seinen Button nun korrekt neben seinem Inputfeld statt darunter rendern
+- Seitenleisten werden nun korrekt ausgeblendet, wenn ihr show-Property false, aber collapse-Property true ist
+- IFY-132: Der InputCharPicker wird seinen Button nun korrekt neben seinem Inputfeld statt darunter rendern
 
 # 0.8.0 - 15.05.2023
 ## Breaking Changes
