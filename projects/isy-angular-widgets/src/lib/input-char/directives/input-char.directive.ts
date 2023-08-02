@@ -40,7 +40,7 @@ export class InputCharDirective implements OnInit {
 
   componentRef!: ComponentRef<InputCharComponent>;
 
-  htmlInputElement!: HTMLInputElement;
+  htmlInputElement: HTMLInputElement;
 
   constructor(private viewContainerRef: ViewContainerRef, private element: ElementRef) {
     this.htmlInputElement = this.element.nativeElement as HTMLInputElement;
@@ -61,7 +61,7 @@ export class InputCharDirective implements OnInit {
   }
 
   setupInputChar(): void  {
-    this.componentRef.setInput('isInputDisabled', this.htmlInputElement?.disabled);
+    this.componentRef.setInput('isInputDisabled', this.htmlInputElement.disabled);
  
     const observer = new MutationObserver(mutationList => {
       for (const mutation of mutationList) {
@@ -74,6 +74,10 @@ export class InputCharDirective implements OnInit {
           } else {
             this.componentRef.setInput('isInputDisabled', false);
           }
+        }
+
+        if (mutation && mutation.attributeName === 'ng-reflect-datentyp') {
+          this.componentRef.setInput('datentyp', input.getAttribute('ng-reflect-datentyp'));
         }
       }
     });
