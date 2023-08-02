@@ -50,13 +50,6 @@ export class InputCharComponent implements OnInit {
   private charPreview!: InputCharPreviewCharListComponent;
 
   /**
-   * @
-   * Used for getting access to the HTML input field
-   */
-  @ViewChild('inputCharButton')
-  private inputCharButton!: HTMLButtonElement;
-
-  /**
    * Determines which set of characters (datatype) according to DIN 91379 to show
    */
   @Input() datentyp: Datentyp = Datentyp.DATENTYP_C;
@@ -137,7 +130,8 @@ export class InputCharComponent implements OnInit {
    */
   selectedZeichenObjekt?: Zeichenobjekt;
 
-  constructor(private charService: CharacterService) { }
+  constructor(private charService: CharacterService) {
+  }
 
   /**
    * Fire on initialization
@@ -164,9 +158,26 @@ export class InputCharComponent implements OnInit {
     this.displayCharPicker = !(this.displayCharPicker || close);
 
     this.setupCharPicker();
-    
+
     if (!this.displayCharPicker) {
       this.onDialogClose();
+    }
+  }
+
+  openCharPicker(): void {
+    this.displayCharPicker = true;
+  }
+
+  closeCharPicker(): void {
+    this.displayCharPicker = false;
+    this.onDialogClose();
+  }
+
+  toggleCharPicker(): void {
+    if (this.displayCharPicker) {
+      this.closeCharPicker();
+    } else {
+      this.openCharPicker();
     }
   }
 
