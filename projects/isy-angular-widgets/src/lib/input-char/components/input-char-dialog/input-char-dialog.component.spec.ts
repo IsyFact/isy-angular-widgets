@@ -41,7 +41,7 @@ describe('InputCharDialogComponent', () => {
     expect(component.display).toEqual(true);
 
     const closeDialog = true;
-    component.onClose(closeDialog);
+    component.onInnerDialogVisibilityChange(closeDialog);
     expect(onCloseSpy).toHaveBeenCalledWith(closeDialog);
   });
 });
