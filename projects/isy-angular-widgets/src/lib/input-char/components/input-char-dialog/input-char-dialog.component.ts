@@ -15,7 +15,7 @@ export class InputCharDialogComponent {
   @Input() visible = false;
   @Output() visibleChange = new EventEmitter<boolean>();
 
-  @Input() header?: string;
+  @Input() header!: string;
 
   /* eslint-disable-next-line @typescript-eslint/no-magic-numbers */
   @Input() width = 775;
