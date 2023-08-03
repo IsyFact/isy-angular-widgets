@@ -98,7 +98,7 @@ export class InputCharComponent implements OnInit, OnChanges {
    * Controls the char picker visibility
    * @internal
    */
-  displayCharPicker: boolean = false;
+  visible: boolean = false;
 
   /**
    * The array who stores the active states of all accordion tabs
@@ -161,14 +161,14 @@ export class InputCharComponent implements OnInit, OnChanges {
    * Opens the character picker
    */
   openCharPicker(): void {
-    this.displayCharPicker = true;
+    this.visible = true;
   }
 
   /**
    * Closes the character picker
    */
   closeCharPicker(): void {
-    this.displayCharPicker = false;
+    this.visible = false;
     this.onDialogClose();
   }
 
@@ -176,7 +176,7 @@ export class InputCharComponent implements OnInit, OnChanges {
    * Toggles the character picker
    */
   toggleCharPicker(): void {
-    if (this.displayCharPicker) {
+    if (this.visible) {
       this.closeCharPicker();
     } else {
       this.openCharPicker();

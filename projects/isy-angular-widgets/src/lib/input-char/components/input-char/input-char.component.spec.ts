@@ -22,12 +22,12 @@ describe('InputCharComponent', () => {
     let randomIndex: number;
 
     const displayInputChar = () : void => {
-      expect(component.displayCharPicker).toBeFalse();
+      expect(component.visible).toBeFalse();
 
-      component.displayCharPicker = true;
+      component.visible = true;
       fixture.detectChanges();
 
-      expect(component.displayCharPicker).toBeTrue();
+      expect(component.visible).toBeTrue();
     };
 
     const zeichenObjekt: Zeichenobjekt =   {
@@ -56,7 +56,7 @@ describe('InputCharComponent', () => {
       fixture = TestBed.createComponent(InputCharComponent);
       charService = TestBed.inject(CharacterService);
       component = fixture.componentInstance;
-      component.displayCharPicker = false;
+      component.visible = false;
       sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
       randomIndex =   (crypto.getRandomValues(new Uint32Array(1)))[0]%sonderzeichenListe.length;
       fixture.detectChanges();
@@ -74,7 +74,7 @@ describe('InputCharComponent', () => {
       expect(component.isDialogClosingOnOutsideClick).toBeFalse();
       expect(component.isDialogClosingOnEscape).toBeTrue();
       expect(component.isDialogModalDisplayed).toBeFalse();
-      expect(component.displayCharPicker).toBeFalse();
+      expect(component.visible).toBeFalse();
       expect(component.isInputDisabled).toBeFalse();
 
       component.activeState.forEach(state => {
@@ -92,7 +92,7 @@ describe('InputCharComponent', () => {
     });
 
     it('should check if the input char is displayed', () => {
-      expect(component.displayCharPicker).toBeFalse();
+      expect(component.visible).toBeFalse();
     });
 
     it('should check the number of available bases', () => {
@@ -120,8 +120,8 @@ describe('InputCharComponent', () => {
     it('should check the display attribute for the input char availability', () => {
       displayInputChar();
 
-      component.displayCharPicker = false;
-      expect(component.displayCharPicker).toBeFalse();
+      component.visible = false;
+      expect(component.visible).toBeFalse();
     });
 
     it('should check the char preview event firing on dialog close', () => {
@@ -343,7 +343,7 @@ describe('InputCharComponent', () => {
       button.click();
       fixture.detectChanges();
 
-      expect(component.displayCharPicker).toBeTrue();
+      expect(component.visible).toBeTrue();
     });
   });
 
