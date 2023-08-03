@@ -15,20 +15,44 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'
       - run: npm ci
       - run: npm test
       - run: npm run lint
+      - run: npm run build
+      - name: Upload Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: dist/isy-angular-widgets/
 
-  publish-npm:
-    needs: build
+  sbom:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'
+      - run: npx @cyclonedx/cyclonedx-npm --output-file isy-angular-widgets-sbom.json
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: isy-angular-widgets-sbom.json
+
+  publish-npm:
+    needs: [build, sbom]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - name: Download Build
+        uses: actions/download-artifact@v3
+        with:
+          name: Build
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
