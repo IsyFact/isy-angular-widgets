@@ -214,7 +214,7 @@ describe('InputCharComponent', () => {
     });
 
     it('should check the getSelectedZeichenObjekt function to have been called', () => {
-      const spy = spyOn(component.valueChange, 'emit');
+      const spy = spyOn(component.insertCharacter, 'emit');
       component.getSelectedZeichenObjekt(zeichenObjekt);
       expect(spy).toHaveBeenCalled();
     });
@@ -312,7 +312,7 @@ describe('InputCharComponent', () => {
     });
 
     it('should check the current value emitting on change', () => {
-      const onValueChangeSpy = spyOn(component.valueChange, 'emit');
+      const onValueChangeSpy = spyOn(component.insertCharacter, 'emit');
 
       const zeichenObjekt = component.zeichenObjekteToDisplay[0];
       component.getSelectedZeichenObjekt(zeichenObjekt);

@@ -53,7 +53,7 @@ export class InputCharDirective implements OnInit {
 
     this.setupInputChar();
 
-    this.componentRef.instance.valueChange.subscribe(zeichen => {
+    this.componentRef.instance.insertCharacter.subscribe(zeichen => {
       this.htmlInputElement.value = this.buildInputValue(this.htmlInputElement.value, zeichen);
       this.setNextInputPosition();
       this.htmlInputElement.dispatchEvent(new Event('change', {}));

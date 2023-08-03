@@ -23,7 +23,7 @@ export class InputCharComponent implements OnInit, OnChanges {
   /**
    * The current value
    */
-  @Output() valueChange = new EventEmitter<string>();
+  @Output() insertCharacter = new EventEmitter<string>();
 
   /**
    * Used for getting access to the all button
@@ -311,7 +311,7 @@ export class InputCharComponent implements OnInit, OnChanges {
    * @internal
    */
   getSelectedZeichenObjekt(zeichenObjekt: Zeichenobjekt): void {
-    this.valueChange.emit(zeichenObjekt.zeichen);
+    this.insertCharacter.emit(zeichenObjekt.zeichen);
   }
 
   /**
