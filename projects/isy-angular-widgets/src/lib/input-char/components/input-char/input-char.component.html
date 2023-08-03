@@ -58,11 +58,11 @@
       >
       </isy-input-char-preview-char-list>
 
-        <isy-input-char-preview *ngIf="selectedZeichenObjekt"
-          [zeichenObjekt]="selectedZeichenObjekt"
-          (insertCharacter)="getSelectedZeichenObjekt($event)"
-        >
-        </isy-input-char-preview>
+      <isy-input-char-preview *ngIf="selectedZeichenObjekt"
+                              [zeichenObjekt]="selectedZeichenObjekt"
+                              (insertCharacter)="getSelectedZeichenObjekt($event)"
+      >
+      </isy-input-char-preview>
     </div>
   </div>
 </isy-input-char-dialog>
