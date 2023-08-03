@@ -141,6 +141,10 @@ export class InputCharComponent implements OnInit, OnChanges {
     this.setupCharPicker();
   }
 
+  /**
+   * Fire on input changes
+   * @internal
+   */
   ngOnChanges(): void {
     this.setupCharPicker();
   }
@@ -153,15 +157,24 @@ export class InputCharComponent implements OnInit, OnChanges {
     this.activeState[index] = !this.activeState[index];
   }
 
+  /**
+   * Opens the character picker
+   */
   openCharPicker(): void {
     this.displayCharPicker = true;
   }
 
+  /**
+   * Closes the character picker
+   */
   closeCharPicker(): void {
     this.displayCharPicker = false;
     this.onDialogClose();
   }
 
+  /**
+   * Toggles the character picker
+   */
   toggleCharPicker(): void {
     if (this.displayCharPicker) {
       this.closeCharPicker();
@@ -170,6 +183,12 @@ export class InputCharComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Called when the inner dialog changes its visibility without interference from outside,
+   * e.g. via dialog close corner X.
+   * Calls open/close functions accordingly (although "visible" might already be set).
+   * @param visible The visibility state the inner dialog changed to
+   */
   onInnerDialogVisibilityChange(visible: boolean): void {
     if (visible) {
       this.openCharPicker();
@@ -179,7 +198,7 @@ export class InputCharComponent implements OnInit, OnChanges {
   }
 
   /**
-   * initialize the char picker
+   * Initialize the char picker
    * @internal
    */
   setupCharPicker(): void {
