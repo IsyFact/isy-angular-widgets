@@ -27,7 +27,7 @@
       >
       </isy-input-char-all-chars-button>
 
-      <p-accordion [multiple]="true" (activeIndexChange)="toggle($event)">
+      <p-accordion [multiple]="true" (activeIndexChange)="toggleTab($event)">
         <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerBaseChars' | translate)">
           <isy-input-char-select-button
             #base

@@ -111,7 +111,7 @@ describe('InputCharComponent', () => {
       const accordionTabsNum = component.activeState.length;
       for (let i = 0; i < accordionTabsNum; i++) {
         const currentState = component.activeState[i];
-        component.toggle(i);
+        component.toggleTab(i);
         expect(component.activeState[i]).toEqual(!currentState);
       }
       expect(component).toBeTruthy();

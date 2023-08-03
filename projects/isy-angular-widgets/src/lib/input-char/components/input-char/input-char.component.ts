@@ -149,7 +149,7 @@ export class InputCharComponent implements OnInit, OnChanges {
    * Handles the opening and closing of the accordion tabs
    * @param index the index position of the selected accordion tab
    */
-  toggle(index: number): void {
+  toggleTab(index: number): void {
     this.activeState[index] = !this.activeState[index];
   }
 
