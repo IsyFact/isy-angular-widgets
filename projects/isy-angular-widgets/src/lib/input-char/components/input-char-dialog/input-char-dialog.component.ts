@@ -17,11 +17,9 @@ export class InputCharDialogComponent {
 
   @Input() header!: string;
 
-  /* eslint-disable-next-line @typescript-eslint/no-magic-numbers */
-  @Input() width = 775;
+  @Input() width = '775px';
 
-  /* eslint-disable-next-line @typescript-eslint/no-magic-numbers */
-  @Input() height = 460;
+  @Input() height = '460px';
 
   @Input() closable = true;
 
