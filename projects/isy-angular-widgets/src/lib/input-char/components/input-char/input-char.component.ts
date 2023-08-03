@@ -188,6 +188,7 @@ export class InputCharComponent implements OnInit, OnChanges {
    * e.g. via dialog close corner X.
    * Calls open/close functions accordingly (although "visible" might already be set).
    * @param visible The visibility state the inner dialog changed to
+   * @internal
    */
   onInnerDialogVisibilityChange(visible: boolean): void {
     if (visible) {
