@@ -11,11 +11,11 @@ import {Zeichenobjekt} from '../../model/model';
   styleUrls: ['./input-char-preview.component.scss']
 })
 export class InputCharPreviewComponent {
-  @Input() zeichenObjekt!: Zeichenobjekt;
+  @Input() zeichenObjekt?: Zeichenobjekt;
 
-  @Output() zeichenObjektChange = new EventEmitter<Zeichenobjekt>();
+  @Output() insertCharacter = new EventEmitter<Zeichenobjekt>();
 
   selectZeichen(zeichenObjekt: Zeichenobjekt): void {
-    this.zeichenObjektChange.emit(zeichenObjekt);
+    this.insertCharacter.emit(zeichenObjekt);
   }
 }

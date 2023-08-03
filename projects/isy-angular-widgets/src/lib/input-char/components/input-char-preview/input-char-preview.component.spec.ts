@@ -4,7 +4,7 @@ import {InputCharPreviewComponent} from './input-char-preview.component';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {ButtonModule} from 'primeng/button';
 import {By} from '@angular/platform-browser';
-import { TranslateTestingModule } from 'ngx-translate-testing';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
 describe('InputCharViewComponent', () => {
   let component: InputCharPreviewComponent;
@@ -51,7 +51,7 @@ describe('InputCharViewComponent', () => {
   });
 
   it('should check emitted zeichenobjekt on selection', () => {
-    const zeichenObjektChangedSpy = spyOn(component.zeichenObjektChange, 'emit');
+    const zeichenObjektChangedSpy = spyOn(component.insertCharacter, 'emit');
     component.selectZeichen(zeichenObjekt);
     expect(zeichenObjektChangedSpy).toHaveBeenCalledWith(zeichenObjekt);
   });
@@ -62,7 +62,7 @@ describe('InputCharViewComponent', () => {
   });
 
   it('should check the select button click functionality', () => {
-    const zeichenObjektChangedSpy = spyOn(component.zeichenObjektChange, 'emit');
+    const zeichenObjektChangedSpy = spyOn(component.insertCharacter, 'emit');
     const insertButton = fixture.debugElement.query(By.css('.insert-button')).nativeElement as HTMLElement;
     insertButton.click();
     expect(zeichenObjektChangedSpy).toHaveBeenCalledWith(zeichenObjekt);
