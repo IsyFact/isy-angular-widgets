@@ -183,8 +183,12 @@ export class InputCharComponent implements OnInit, OnChanges {
     }
   }
 
-  onInnerDialogVisibilityChange(): void {
-
+  onInnerDialogVisibilityChange(visible: boolean): void {
+    if (visible) {
+      this.openCharPicker();
+    } else {
+      this.closeCharPicker();
+    }
   }
 
   /**

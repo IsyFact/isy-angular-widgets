@@ -16,7 +16,7 @@
   [closeOnClickOutside]="isDialogClosingOnOutsideClick"
   [closeOnEscape]="isDialogClosingOnEscape"
   [modal]="isDialogModalDisplayed"
-  (visibleChange)="setupCharPickerAvailability($event)"
+  (visibleChange)="onInnerDialogVisibilityChange($event)"
 >
   <div *isyInputCharDialogDirective>
     <div class="left-panel-side split">
