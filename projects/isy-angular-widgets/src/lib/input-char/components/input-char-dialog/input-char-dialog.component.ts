@@ -12,28 +12,28 @@ import {InputCharDialogDirective} from '../../directives/input-char-dialog.direc
 export class InputCharDialogComponent {
   @ContentChildren(InputCharDialogDirective) content!: QueryList<InputCharDialogDirective>;
 
-  @Input() visible: boolean = false;
-  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() visible = false;
+  @Output() visibleChange = new EventEmitter<boolean>();
 
-  @Input() header!: string;
-
-  /* eslint-disable-next-line @typescript-eslint/no-magic-numbers */
-  @Input() width: number = 775;
+  @Input() header?: string;
 
   /* eslint-disable-next-line @typescript-eslint/no-magic-numbers */
-  @Input() height: number = 460;
+  @Input() width = 775;
 
-  @Input() closable!: boolean;
+  /* eslint-disable-next-line @typescript-eslint/no-magic-numbers */
+  @Input() height = 460;
 
-  @Input() draggable!: boolean;
+  @Input() closable = true;
 
-  @Input() resizable!: boolean;
+  @Input() draggable = true;
 
-  @Input() closeOnClickOutside!: boolean;
+  @Input() resizable = false;
 
-  @Input() closeOnEscape!: boolean;
+  @Input() closeOnClickOutside = false;
 
-  @Input() modal!: boolean;
+  @Input() closeOnEscape = true;
+
+  @Input() modal = false;
 
   /**
    * The inner dialog can be closed by using the dialog X. In that case, the parent component needs to be notified explicitly
