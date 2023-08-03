@@ -195,16 +195,6 @@ describe('InputCharComponent', () => {
       expect((component as any).base.selectedValue).toEqual('');
     });
 
-    it('should check the setupCharPickerAvailability function to have been called', () => {
-      const setupCharPickerAvailabilitySpy = spyOn(component, 'setupCharPickerAvailability') .and. callThrough();
-      component.setupCharPickerAvailability(true);
-      fixture.detectChanges();
-      expect(setupCharPickerAvailabilitySpy).toHaveBeenCalledWith(true);
-      component.displayCharPicker = false;
-      fixture.detectChanges();
-      expect(component.displayCharPicker).toBeFalse();
-    });
-
     it('should check the input char button availability', () => {
       const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
       component.isInputDisabled = true;
@@ -310,32 +300,6 @@ describe('InputCharComponent', () => {
       const filteredByBase = charService.filterZeichenobjekteByGroup(sonderzeichenListe, group);
       expect(component.zeichenObjekteToDisplay).toEqual(filteredByBase);
       expect(component.selectedZeichenObjekt).toEqual(filteredByBase[0]);
-    });
-
-    it('should check the input char availability without closing param', () => {
-      const onDialogCloseSpy = spyOn(component, 'onDialogClose');
-
-      displayInputChar();
-
-      component.setupCharPickerAvailability();
-      expect(onDialogCloseSpy).toHaveBeenCalled();
-    });
-
-    it('should check the input char availability without closing param while is not displayed', () => {
-      const onDialogCloseSpy = spyOn(component, 'onDialogClose');
-
-      component.setupCharPickerAvailability();
-      expect(onDialogCloseSpy).not.toHaveBeenCalled();
-      expect(component.displayCharPicker).toBeTrue();
-    });
-
-    it('should check the input char availability with closing param', () => {
-      displayInputChar();
-
-      const onDialogCloseSpy = spyOn(component, 'onDialogClose');
-      component.setupCharPickerAvailability(true);
-      expect(onDialogCloseSpy).toHaveBeenCalled();
-      expect(component.displayCharPicker).toBeFalse();
     });
 
     it('should check the zeichenobjekt preview', () => {

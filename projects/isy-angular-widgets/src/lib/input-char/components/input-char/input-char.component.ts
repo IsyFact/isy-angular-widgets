@@ -153,19 +153,6 @@ export class InputCharComponent implements OnInit, OnChanges {
     this.activeState[index] = !this.activeState[index];
   }
 
-  /**
-   * Toggles the char pickers visibility and clears it up if necessary
-   * @param close If set to true, the picker will be closed regardless of current state
-   * @internal
-   */
-  setupCharPickerAvailability(close?: boolean): void {
-    this.displayCharPicker = !(this.displayCharPicker || close);
-
-    if (!this.displayCharPicker) {
-      this.onDialogClose();
-    }
-  }
-
   openCharPicker(): void {
     this.displayCharPicker = true;
   }
