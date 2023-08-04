@@ -1,6 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DashboardLinksnavigationComponent} from './dashboard-linksnavigation.component';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {MenuTranslationService} from '../../../../../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 describe('DashboardLinksnavigationComponent', () => {
   let component: DashboardLinksnavigationComponent;
@@ -8,7 +11,17 @@ describe('DashboardLinksnavigationComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardLinksnavigationComponent]
+      declarations: [
+        DashboardLinksnavigationComponent
+      ],
+      imports: [
+        PanelMenuModule,
+        TranslateModule.forRoot()
+      ],
+      providers: [
+        TranslateService,
+        MenuTranslationService
+      ]
     })
       .compileComponents();
 
