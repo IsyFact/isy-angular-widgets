@@ -93,7 +93,21 @@
       "exampleMenuItemDisabled": "Example menu item (Disabled)",
       "quickLinks": "Quick-Links",
       "exampleQuickLink1": "Example Quick-Link 1",
-      "exampleQuickLink2": "Example Quick-Link 2"
+      "exampleQuickLink2": "Example Quick-Link 2",
+      "dashboardExampleTitle": "Frequently used",
+      "dashboardExampleText": "Function name",
+      "dashboardExampleMessageTitle": "Messages",
+      "exampleMessageText": "M. Mustermann, 10:25 p.m. time, Report: ABCDE...",
+      "exampleVorgangTitle": "Occurrence",
+      "exampleVorgangText": "123456789",
+      "exampleUserAccountTitle": "User account",
+      "exampleUserAccountName": "Markus Wilke",
+      "exampleAuthorityName": "Authority: Musterbehörde",
+      "exampleContactTitle": "Contact",
+      "exampleAuthorityAddressName": "Musteramt für Musterungen",
+      "exampleAuthorityAddressFieldOffice": "Field Office: Musterstadt",
+      "exampleAuthorityAddressBuilding": "Musteramt für Musterungen",
+      "exampleAuthorityAddressPhone": "0-123-456-789"
     },
     "settings": {
       "header": "Settings Demo App",

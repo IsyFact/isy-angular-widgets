@@ -1,13 +1,13 @@
 export const linksnavigationMenu = [
   {
-    label: 'isyAngularWidgetsDemo.menuItems.quickLinks',
+    label: 'isyAngularWidgetsDemo.menuItems.dashboardExampleTitle',
     expanded: true,
     items: [
       {
-        label: 'isyAngularWidgetsDemo.menuItems.exampleQuickLink1'
+        label: 'isyAngularWidgetsDemo.menuItems.dashboardExampleText'
       },
       {
-        label: 'isyAngularWidgetsDemo.menuItems.exampleQuickLink2',
+        label: 'isyAngularWidgetsDemo.menuItems.dashboardExampleText',
         visible: true
       }
     ]

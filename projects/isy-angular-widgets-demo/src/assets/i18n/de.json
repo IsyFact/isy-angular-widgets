@@ -93,7 +93,21 @@
       "exampleMenuItemDisabled": "Beispiel Menüpunkt (Disabled)",
       "quickLinks": "Quick-Links",
       "exampleQuickLink1": "Beispiel Quick-Link 1",
-      "exampleQuickLink2": "Beispiel Quick-Link 2"
+      "exampleQuickLink2": "Beispiel Quick-Link 2",
+      "dashboardExampleTitle": "Häufig benutzt",
+      "dashboardExampleText": "Funktionsname",
+      "dashboardExampleMessageTitle": "Nachrichten",
+      "exampleMessageText": "M. Mustermann, 10:25 Uhr, Meldung: ABCDE...",
+      "exampleVorgangTitle": "Vorgang",
+      "exampleVorgangText": "123456789",
+      "exampleUserAccountTitle": "Benutzerkonto",
+      "exampleUserAccountName": "Name: Markus Wilke",
+      "exampleAuthorityName": "Behörde: Musterbehörde",
+      "exampleContactTitle": "Kontakt",
+      "exampleAuthorityAddressName": "Musteramt für Musterungen",
+      "exampleAuthorityAddressFieldOffice": "Dienstsitz: Musterstadt",
+      "exampleAuthorityAddressBuilding": "Referat ABC",
+      "exampleAuthorityAddressPhone": "0-123-456-789"
     },
     "settings": {
       "header": "Einstellungen Demo App",
