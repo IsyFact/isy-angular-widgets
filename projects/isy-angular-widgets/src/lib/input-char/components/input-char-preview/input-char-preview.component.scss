@@ -10,6 +10,7 @@ $letter-size: 6em;
 :host {
   display: flex;
   align-items: center;
+  height: $letter-size;
 }
 
 .left-panel-side {
