@@ -3,40 +3,14 @@
 
 $dot-color: #888;
 $dot-thickness: 2px;
-$serif-font: 'Angular', serif;
-$sans-serif-font: 'Angular',  sans-serif;
-$letter-size: 6em;
+$serif-font: BundesSerif, 'Liberation Serif', serif;
+$sans-serif-font: BundesSans, 'Liberation Sans', sans-serif;
+$letter-size: 5em;
 
 :host {
   display: flex;
   align-items: center;
   height: $letter-size;
-}
-
-.left-panel-side {
-  width: 30%;
-  float: left;
-}
-
-.right-panel-side {
-  width: 15%;
-  float: left;
-}
-
-.insert-button {
-  position: absolute;
-  bottom: 0;
-}
-
-:host::ng-deep.p-button {
-  background-color: #efefef !important;
-  border: none;
-  color: black;
-}
-
-:host::ng-deep.p-button:hover {
-  background-color: darkgrey !important;
-  color: white;
 }
 
 .serif {
@@ -50,18 +24,20 @@ $letter-size: 6em;
 .letters-preview {
   border-bottom: $dot-thickness $dot-color dotted;
   border-top: $dot-thickness $dot-color dotted;
-}
+  width: 30%;
+  float: left;
 
-.letter {
-  font-size: 5em;
+  .letter {
+    font-size: $letter-size;
+  }
 }
 
 .letter-information-preview {
   position: relative;
   padding-left: 8px;
   width: 70%;
-}
 
-.letters-spacing {
-  padding-bottom: 3rem;
+  .letters-spacing {
+    padding-bottom: 3rem;
+  }
 }
