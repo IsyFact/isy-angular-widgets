@@ -8,8 +8,8 @@ describe('InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
   let fixture: ComponentFixture<InputCharDialogComponent>;
 
-  const dialogDefaultWidth = 775;
-  const dialogDefaultHeight = 460;
+  const dialogDefaultWidth = '775px';
+  const dialogDefaultHeight = '460px';
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({

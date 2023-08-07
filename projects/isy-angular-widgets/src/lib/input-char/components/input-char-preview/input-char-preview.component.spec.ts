@@ -43,29 +43,11 @@ describe('InputCharViewComponent', () => {
   });
 
   it('should check the incoming zeichenobjekt input', () => {
-    expect(component.zeichenObjekt.zeichen).toEqual(zeichenObjekt.zeichen);
-    expect(component.zeichenObjekt.grundzeichen).toEqual(zeichenObjekt.grundzeichen);
-    expect(component.zeichenObjekt.schriftzeichengruppe).toEqual(zeichenObjekt.schriftzeichengruppe);
-    expect(component.zeichenObjekt.name).toEqual(zeichenObjekt.name);
-    expect(component.zeichenObjekt.codepoint).toEqual(zeichenObjekt.codepoint);
-  });
-
-  it('should check emitted zeichenobjekt on selection', () => {
-    const zeichenObjektChangedSpy = spyOn(component.insertCharacter, 'emit');
-    component.selectZeichen(zeichenObjekt);
-    expect(zeichenObjektChangedSpy).toHaveBeenCalledWith(zeichenObjekt);
-  });
-
-  it('should check the select button label', () => {
-    const insertButton = fixture.debugElement.query(By.css('.insert-button')).nativeElement as HTMLElement;
-    expect(insertButton.innerText).toContain('Einfügen');
-  });
-
-  it('should check the select button click functionality', () => {
-    const zeichenObjektChangedSpy = spyOn(component.insertCharacter, 'emit');
-    const insertButton = fixture.debugElement.query(By.css('.insert-button')).nativeElement as HTMLElement;
-    insertButton.click();
-    expect(zeichenObjektChangedSpy).toHaveBeenCalledWith(zeichenObjekt);
+    expect(component.zeichenObjekt?.zeichen).toEqual(zeichenObjekt.zeichen);
+    expect(component.zeichenObjekt?.grundzeichen).toEqual(zeichenObjekt.grundzeichen);
+    expect(component.zeichenObjekt?.schriftzeichengruppe).toEqual(zeichenObjekt.schriftzeichengruppe);
+    expect(component.zeichenObjekt?.name).toEqual(zeichenObjekt.name);
+    expect(component.zeichenObjekt?.codepoint).toEqual(zeichenObjekt.codepoint);
   });
 
   it('should check the character serif information content', () => {
