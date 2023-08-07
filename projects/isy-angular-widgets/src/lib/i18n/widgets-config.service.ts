@@ -31,6 +31,7 @@ export class WidgetsConfigService {
   translationObserver = this.translationSource.asObservable();
 
   getTranslation(path: string): any {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access
     return path.split('.').reduce((o, k) => o ? (o as any)[k] : undefined, this.translation);
   }
 
