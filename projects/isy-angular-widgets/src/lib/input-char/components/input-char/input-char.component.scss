@@ -32,17 +32,21 @@
 // überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
 // können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
 
-:host::ng-deep.p-button {
-  font-weight: bold;
-}
+:host::ng-deep {
+  .p-button {
+    font-weight: bold;
+  }
 
-:host::ng-deep .p-accordion .p-accordion-header .p-accordion-header-link:focus {
-  box-shadow: none !important;
-}
+  .p-accordion {
+    .p-accordion-header .p-accordion-header-link:focus {
+      box-shadow: none !important;
+    }
 
-:host::ng-deep .p-accordion p-accordiontab .p-accordion-content {
-  border: 0;
-  padding: 0
+    p-accordiontab .p-accordion-content {
+      border: 0;
+      padding: 0
+    }
+  }
 }
 
 // Using InputChar inside a primeNG panel container with toggleapple option causes a display issue in the InputChar dialog
