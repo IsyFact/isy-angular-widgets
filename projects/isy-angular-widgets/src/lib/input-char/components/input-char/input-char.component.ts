@@ -7,6 +7,7 @@ import {CharacterService} from '../../services/character.service';
 import {
   InputCharPreviewCharListComponent
 } from '../input-char-preview-char-list/input-char-preview-char-list.component';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 @Component({
   selector: 'isy-input-char',
@@ -132,7 +133,10 @@ export class InputCharComponent implements OnInit {
    */
   selectedZeichenObjekt?: Zeichenobjekt;
 
-  constructor(private charService: CharacterService) { }
+  constructor(
+    private charService: CharacterService,
+    private widgetsConfigService: WidgetsConfigService
+  ) {}
 
   /**
    * Fire on initialization
@@ -277,5 +281,9 @@ export class InputCharComponent implements OnInit {
    */
   selectFirstEntry(): void {
     this.selectedZeichenObjekt = this.zeichenObjekteToDisplay[0];
+  }
+
+  getTranslation(option: string): any {
+    return this.widgetsConfigService.getTranslation(option);
   }
 }

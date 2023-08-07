@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Zeichenobjekt} from '../../model/model';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 /**
  * Displays a character in sans and serif style.
@@ -15,7 +16,15 @@ export class InputCharPreviewComponent {
 
   @Output() zeichenObjektChange = new EventEmitter<Zeichenobjekt>();
 
+  constructor(
+    private widgetsConfigService: WidgetsConfigService
+  ) {}
+
   selectZeichen(zeichenObjekt: Zeichenobjekt): void {
     this.zeichenObjektChange.emit(zeichenObjekt);
+  }
+
+  getTranslation(option: string): any {
+    return this.widgetsConfigService.getTranslation(option);
   }
 }
