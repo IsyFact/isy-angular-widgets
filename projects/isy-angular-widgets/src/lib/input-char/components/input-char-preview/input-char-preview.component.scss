@@ -8,20 +8,13 @@ $serif-font: 'Angular', serif;
 $sans-serif-font: 'Angular',  sans-serif;
 $letter-size: 6em;
 
-.character-information-content {
-  height: 30%;
+:host {
   display: flex;
   align-items: center;
-  position: relative;
 }
 
 .left-panel-side {
   width: 30%;
-  float: left;
-}
-
-.middle-panel-side {
-  width: 55%;
   float: left;
 }
 
@@ -66,6 +59,7 @@ $letter-size: 6em;
 .letter-information-preview {
   position: relative;
   padding-left: 8px;
+  width: 70%;
 }
 
 .letters-spacing {

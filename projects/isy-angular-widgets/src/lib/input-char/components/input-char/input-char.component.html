@@ -57,12 +57,19 @@
         (charSelection)="previewZeichenObjekt($event)"
       >
       </isy-input-char-preview-char-list>
+      <div class="lower-right-panel">
 
-      <isy-input-char-preview *ngIf="selectedZeichenObjekt"
-                              [zeichenObjekt]="selectedZeichenObjekt"
-                              (insertCharacter)="getSelectedZeichenObjekt($event)"
-      >
-      </isy-input-char-preview>
+        <isy-input-char-preview *ngIf="selectedZeichenObjekt"
+                                [zeichenObjekt]="selectedZeichenObjekt"
+                                class="flex-grow-1"
+        >
+        </isy-input-char-preview>
+
+        <p-button [disabled]="!selectedZeichenObjekt"
+                  (click)="getSelectedZeichenObjekt(selectedZeichenObjekt!)">
+          {{('isyAngularWidgets.inputChar.insert' | translate)}}
+        </p-button>
+      </div>
     </div>
   </div>
 </isy-input-char-dialog>

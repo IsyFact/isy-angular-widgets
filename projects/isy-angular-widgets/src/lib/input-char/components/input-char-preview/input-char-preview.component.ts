@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Zeichenobjekt} from '../../model/model';
 
 /**
@@ -12,10 +12,4 @@ import {Zeichenobjekt} from '../../model/model';
 })
 export class InputCharPreviewComponent {
   @Input() zeichenObjekt?: Zeichenobjekt;
-
-  @Output() insertCharacter = new EventEmitter<Zeichenobjekt>();
-
-  selectZeichen(zeichenObjekt: Zeichenobjekt): void {
-    this.insertCharacter.emit(zeichenObjekt);
-  }
 }

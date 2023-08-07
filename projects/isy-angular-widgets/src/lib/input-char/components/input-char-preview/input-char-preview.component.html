@@ -1,18 +1,10 @@
-<div class="character-information-content">
-  <div class="left-panel-side flex letters-preview">
-    <p class="flex-1 text-center serif m-0 letter">{{zeichenObjekt?.zeichen}}</p>
-    <p class="flex-1 text-center sans-serif m-0 letter">{{zeichenObjekt?.zeichen}}</p>
-  </div>
+<div class="left-panel-side flex letters-preview">
+  <p class="flex-1 text-center serif m-0 letter">{{zeichenObjekt?.zeichen}}</p>
+  <p class="flex-1 text-center sans-serif m-0 letter">{{zeichenObjekt?.zeichen}}</p>
+</div>
 
 
-  <div class="middle-panel-side letter-information-preview ">
-    <p id="description" class="font-bold border-round m-0 letters-spacing">{{zeichenObjekt?.name}}</p>
-    <p id="codepoint" class="font-bold border-round m-0">{{zeichenObjekt?.codepoint}}</p>
-  </div>
-
-  <div class="right-panel-side">
-    <p-button class="insert-button" [disabled]="!zeichenObjekt" (click)="selectZeichen(zeichenObjekt!)">
-      {{('isyAngularWidgets.inputChar.insert' | translate)}}
-    </p-button>
-  </div>
+<div class="letter-information-preview ">
+  <p id="description" class="font-bold border-round m-0 letters-spacing">{{zeichenObjekt?.name}}</p>
+  <p id="codepoint" class="font-bold border-round m-0">{{zeichenObjekt?.codepoint}}</p>
 </div>
