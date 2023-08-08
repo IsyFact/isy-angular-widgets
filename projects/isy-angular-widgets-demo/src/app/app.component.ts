@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.primeNGConfig.setTranslation(data);
     });
 
-    // Set isyAngularWidgets translation
+    // Set Isy Angular Widgets translation
     this.isyAngularWidgetsI18nSubscription = this.translate.stream('isyAngularWidgets').subscribe((data: WidgetsTranslation) => {
       this.widgetsConfigService.setTranslation(data);
     });

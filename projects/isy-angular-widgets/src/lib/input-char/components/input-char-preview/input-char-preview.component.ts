@@ -24,7 +24,12 @@ export class InputCharPreviewComponent {
     this.zeichenObjektChange.emit(zeichenObjekt);
   }
 
-  getTranslation(option: string): any {
-    return this.widgetsConfigService.getTranslation(option);
+  /**
+   * Get translated text
+   * @param path to the translated text
+   * @returns translated text
+   */
+  getTranslation(path: string): any {
+    return this.widgetsConfigService.getTranslation(path);
   }
 }

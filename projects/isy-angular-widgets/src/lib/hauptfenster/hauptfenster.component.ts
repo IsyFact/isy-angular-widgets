@@ -115,7 +115,12 @@ export class HauptfensterComponent   {
     this.translatedItems = await this.menuTranslationService.translateMegaMenuItems(this.items);
   }
 
-  getTranslation(option: string): any {
-    return this.widgetsConfigService.getTranslation(option);
+  /**
+   * Get translated text
+   * @param path to the translated text
+   * @returns translated text
+   */
+  getTranslation(path: string): any {
+    return this.widgetsConfigService.getTranslation(path);
   }
 }

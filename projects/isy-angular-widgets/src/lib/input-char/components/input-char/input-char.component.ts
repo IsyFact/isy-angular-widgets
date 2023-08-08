@@ -283,7 +283,12 @@ export class InputCharComponent implements OnInit {
     this.selectedZeichenObjekt = this.zeichenObjekteToDisplay[0];
   }
 
-  getTranslation(option: string): any {
-    return this.widgetsConfigService.getTranslation(option);
+  /**
+   * Get translated text
+   * @param path to the translated text
+   * @returns translated text
+   */
+  getTranslation(path: string): any {
+    return this.widgetsConfigService.getTranslation(path);
   }
 }
