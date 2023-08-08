@@ -14,8 +14,6 @@ export function ngAdd(): Rule {
     addTranslationFile(context, tree, 'en.json');
 
     // Add necessary dependencies to new CLI project.
-    addPackageToPackageJson(tree, '@ngx-translate/core', `^14.0.0`);
-    addPackageToPackageJson(tree, '@ngx-translate/http-loader', `^7.0.0`);
     addPackageToPackageJson(tree, "@angular/common",  "^14.2.4");
     addPackageToPackageJson(tree, "@angular/core", "^14.2.4");
     addPackageToPackageJson(tree, "primeicons", "^6.0.1");
