@@ -2,52 +2,19 @@
   <div class="card-container purple-container overflow-hidden">
     <div class="flex" >
 
+
       <div class="grid w-full">
-        <div  class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card [header]="'A'">
 
-          </p-card>
-        </div>
-        <div  class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card [header]="'B'">
 
-          </p-card>
-        </div>
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card [header]="'C'">
 
-          </p-card>
-        </div>
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card [header]="'D'">
-
-          </p-card>
+        <div *ngFor="let item of widgetMenuItems; let i = index;" class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+          <demo-dashboard-widget [menuItems]="widgetMenuItems[i]"></demo-dashboard-widget>
         </div>
 
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card [header]="'E'">
 
-          </p-card>
-        </div>
 
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card [header]="'F'">
-
-          </p-card>
-        </div>
-
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card [header]="'G'">
-
-          </p-card>
-        </div>
-
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card [header]="'H'">
-
-          </p-card>
-        </div>
       </div>
+
 
     </div>
   </div>

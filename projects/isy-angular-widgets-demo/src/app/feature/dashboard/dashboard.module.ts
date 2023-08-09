@@ -13,12 +13,14 @@ import {MegaMenuModule} from 'primeng/megamenu';
 import {PanelModule} from 'primeng/panel';
 import {FormsModule} from '@angular/forms';
 import {PanelMenuModule} from 'primeng/panelmenu';
+import { DashboardWidgetComponent } from './components/dashboard-widget/dashboard-widget.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardLinksnavigationComponent,
-    DashboardInformationsbereichComponent
+    DashboardInformationsbereichComponent,
+    DashboardWidgetComponent
   ],
   imports: [
     CommonModule,
