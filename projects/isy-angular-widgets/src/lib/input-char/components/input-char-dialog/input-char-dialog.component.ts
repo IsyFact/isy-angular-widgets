@@ -15,7 +15,6 @@ import {
   InputCharPreviewCharListComponent
 } from '../input-char-preview-char-list/input-char-preview-char-list.component';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
-import {CharacterService} from '../../services/character.service';
 
 /**
  * @internal
@@ -56,10 +55,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   @Input() allCharacters: Zeichenobjekt[] = [];
 
   displayedCharacters: Zeichenobjekt[] = [];
-
-  constructor(private charService: CharacterService) {
-  }
-
 
   /**
    * The array who stores all the grundzeichen
