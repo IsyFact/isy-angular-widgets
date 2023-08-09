@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import {InputCharDialogDirective} from '../../directives/input-char-dialog.directive';
 import {InputCharAllCharsButtonComponent} from '../input-char-all-chars-button/input-char-all-chars-button.component';
-import {InputCharSelectButtonComponent} from '../input-char-select-button/input-char-select-button.component';
 import {
   InputCharPreviewCharListComponent
 } from '../input-char-preview-char-list/input-char-preview-char-list.component';
@@ -66,7 +65,9 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * The array who stores all the grundzeichen
    * @internal
    */
-  grundZeichenListe!: string[];
+  grundZeichenListe: string[] = [];
+
+  selectedGrundzeichen?: string;
 
   /**
    * The array who stores all the schriftzeichen
@@ -95,18 +96,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   private allChars!: InputCharAllCharsButtonComponent;
 
   /**
-   * Used for getting access to the base accordion tab
-   */
-  @ViewChild('base')
-  private base!: InputCharSelectButtonComponent;
-
-  /**
-   * Used for getting access to the group accordion tab
-   */
-  @ViewChild('group')
-  private group!: InputCharSelectButtonComponent;
-
-  /**
    * Used for getting access to the character preview panel
    */
   @ViewChild('charPreview')
@@ -133,7 +122,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * Resets all the user base selections
    */
   resetBaseSelection(): void {
-    this.base.reset();
+    this.selectedGrundzeichen = undefined;
   }
 
   /**
@@ -190,14 +179,13 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
 
   /**
    * Is fired when a base get selected
-   * @param base The selected base
    * @internal
    */
-  onBaseSelection(base: string): void {
+  onBaseSelection(): void {
     this.resetAllSelection();
     this.resetGroupSelection();
 
-    this.displayedCharacters = this.charService.filterZeichenobjekteByBase(this.allCharacters, base);
+    this.displayedCharacters = this.allCharacters.filter(z => z.grundzeichen === this.selectedGrundzeichen);
     this.selectFirstEntry();
   }
 
@@ -209,9 +197,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     this.resetAllSelection();
     this.resetBaseSelection();
 
-    if (this.selectedSchriftzeichenGruppe) {
-      this.displayedCharacters = this.charService.filterZeichenobjekteByGroup(this.allCharacters, this.selectedSchriftzeichenGruppe);
-    }
+    this.displayedCharacters = this.allCharacters.filter(z => z.schriftzeichengruppe === this.selectedSchriftzeichenGruppe);
     this.selectFirstEntry();
   }
 
@@ -230,7 +216,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * @internal
    */
   setupCharPicker(): void {
-    this.grundZeichenListe = this.charService.getGrundZeichenAsList(this.allCharacters);
+    this.grundZeichenListe = this.getAvailableGrundzeichen();
     this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
   }
 
@@ -239,6 +225,17 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     for (const char of this.allCharacters) {
       if (!res.includes(char.schriftzeichengruppe)) {
         res.push(char.schriftzeichengruppe);
+      }
+    }
+
+    return res;
+  }
+
+  private getAvailableGrundzeichen(): string[] {
+    const res: string[] = [];
+    for (const char of this.allCharacters) {
+      if (!res.includes(char.grundzeichen)) {
+        res.push(char.grundzeichen);
       }
     }
 

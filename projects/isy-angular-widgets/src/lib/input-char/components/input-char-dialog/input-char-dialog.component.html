@@ -24,12 +24,13 @@
 
       <p-accordion [multiple]="true" (activeIndexChange)="toggleTab($event)">
         <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerBaseChars' | translate)">
-          <isy-input-char-select-button
+          <p-selectButton
             #base
             [options]="grundZeichenListe"
-            (selection)="onBaseSelection($event)"
+            [(ngModel)]="selectedGrundzeichen"
+            (onChange)="onBaseSelection()"
           >
-          </isy-input-char-select-button>
+          </p-selectButton>
         </p-accordionTab>
 
         <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerGroups' | translate)">
