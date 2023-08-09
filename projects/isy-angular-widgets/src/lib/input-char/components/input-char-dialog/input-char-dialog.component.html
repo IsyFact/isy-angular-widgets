@@ -13,8 +13,58 @@
      }"
     (visibleChange)="onInnerDialogVisibilityChange($event)"
 >
-    <div *ngFor="let child of this.content!; let i = index;">
-      <ng-container [ngTemplateOutlet]="this.content!.get(i)!.templateRef">
-      </ng-container>
+  <div>
+    <div class="left-panel-side split">
+
+      <isy-input-char-all-chars-button
+        #allChars
+        (allSelected)="onAllSelection()"
+      >
+      </isy-input-char-all-chars-button>
+
+      <p-accordion [multiple]="true" (activeIndexChange)="toggleTab($event)">
+        <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerBaseChars' | translate)">
+          <isy-input-char-select-button
+            #base
+            [options]="grundZeichenListe"
+            (selection)="onBaseSelection($event)"
+          >
+          </isy-input-char-select-button>
+        </p-accordionTab>
+
+        <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerGroups' | translate)">
+          <isy-input-char-select-button
+            #group
+            [optionValue]="'id'"
+            [optionLabel]="'gruppe'"
+            [options]="schriftZeichenGruppen"
+            (selection)="onGroupSelection($event)"
+          >
+          </isy-input-char-select-button>
+        </p-accordionTab>
+      </p-accordion>
     </div>
+
+    <div class="right-panel-side split">
+      <isy-input-char-preview-char-list
+        #charPreview
+        [options]="zeichenObjekteToDisplay"
+        (charSelection)="previewZeichenObjekt($event)"
+      >
+      </isy-input-char-preview-char-list>
+      <div class="lower-right-panel">
+
+        <isy-input-char-preview *ngIf="selectedZeichenObjekt"
+                                [zeichenObjekt]="selectedZeichenObjekt"
+                                class="flex-grow-1"
+        >
+        </isy-input-char-preview>
+
+        <p-button [disabled]="!selectedZeichenObjekt"
+                  (click)="getSelectedZeichenObjekt(selectedZeichenObjekt!)">
+          {{('isyAngularWidgets.inputChar.insert' | translate)}}
+        </p-button>
+      </div>
+    </div>
+  </div>
 </p-dialog>
