@@ -58,18 +58,28 @@ describe('InputCharDirective', () => {
     expect(directive).toBeTruthy();
   });
 
-  it('should check the componentRef instance isInputDisabled property', () => {
+  it('should add an input char button to the input', () => {
     directive.ngOnInit();
+    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
+    expect(inputCharButton).toBeTruthy();
+  });
+
+  it('should set the input char button to disabled when the input is disabled', () => {
     const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
-    input.disabled = false;
-    directive.setupInputChar();
-    fixture.detectChanges();
-    expect(directive.componentRef.instance.isInputDisabled).toBeFalse();
-    
     input.disabled = true;
-    directive.setupInputChar();
     fixture.detectChanges();
-    expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
+    directive.setupInputChar();
+    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
+    expect(inputCharButton.disabled).toBeTrue();
+  });
+
+  it('should set the input char button to disabled when the input is readonly', () => {
+    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    input.readOnly = true;
+    fixture.detectChanges();
+    directive.setupInputChar();
+    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
+    expect(inputCharButton.disabled).toBeTrue();
   });
 
   it('should check the input mouse position of test component', () => {

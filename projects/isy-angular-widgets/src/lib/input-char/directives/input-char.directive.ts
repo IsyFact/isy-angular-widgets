@@ -61,14 +61,14 @@ export class InputCharDirective implements OnInit {
   }
 
   setupInputChar(): void  {
-    this.componentRef.setInput('isInputDisabled', this.htmlInputElement.disabled);
+    this.componentRef.setInput('isInputDisabled', this.htmlInputElement.disabled || this.htmlInputElement.readOnly);
  
     const observer = new MutationObserver(mutationList => {
       for (const mutation of mutationList) {
         const input = mutation.target as HTMLInputElement;
  
-        if (mutation && mutation.attributeName === 'disabled') {
-          if (input.disabled) {
+        if (mutation && (mutation.attributeName === 'disabled' || mutation.attributeName === 'readonly')) {
+          if (input.disabled || input.readOnly) {
             this.componentRef.instance.displayCharPicker = false;
             this.componentRef.setInput('isInputDisabled', true);
           } else {

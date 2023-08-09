@@ -205,12 +205,15 @@ describe('InputCharComponent', () => {
       expect(component.displayCharPicker).toBeFalse();
     });
 
-    it('should check the input char button availability', () => { 
+    it('should have the input char button to be disabled when isInputDisabled property is true', () => { 
       const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
       component.isInputDisabled = true;
       fixture.detectChanges();
       expect(button.disabled).toBeTruthy();
+    });
 
+    it('should have the input char button to be not disabled when isInputDisabled property is false', () => { 
+      const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
       component.isInputDisabled = false;
       fixture.detectChanges();
       expect(button.disabled).toBeFalsy();
