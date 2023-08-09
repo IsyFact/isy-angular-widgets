@@ -14,13 +14,17 @@ import {PanelModule} from 'primeng/panel';
 import {FormsModule} from '@angular/forms';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import { DashboardWidgetComponent } from './components/dashboard-widget/dashboard-widget.component';
+import {ChartModule} from 'primeng/chart';
+import {ButtonModule} from 'primeng/button';
+import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardLinksnavigationComponent,
     DashboardInformationsbereichComponent,
-    DashboardWidgetComponent
+    DashboardWidgetComponent,
+    ChartComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,9 @@ import { DashboardWidgetComponent } from './components/dashboard-widget/dashboar
     MegaMenuModule,
     PanelModule,
     FormsModule,
-    PanelMenuModule
+    PanelMenuModule,
+    ChartModule,
+    ButtonModule
   ]
 })
 export class DashboardModule { }

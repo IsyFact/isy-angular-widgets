@@ -13,6 +13,42 @@
             </p-card>
           </div>
         </ng-container>
+        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+          <p-card>
+            <demo-chart
+              [type]="'bar'"
+              [data]="barChartData"
+            >
+            </demo-chart>
+          </p-card>
+        </div>
+        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+          <p-card>
+            <demo-chart
+              [type]="'line'"
+              [data]="lineChartData"
+            >
+            </demo-chart>
+          </p-card>
+        </div>
+        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+          <p-card>
+            <demo-chart
+              [type]="'line'"
+              [data]="lineStyleChartData"
+            >
+            </demo-chart>
+          </p-card>
+        </div>
+        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+          <p-card>
+            <demo-chart
+              [type]="'doughnut'"
+              [data]="doughnutChartData"
+            >
+            </demo-chart>
+          </p-card>
+        </div>
       </div>
     </div>
   </div>
