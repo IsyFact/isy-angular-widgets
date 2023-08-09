@@ -1,13 +1,14 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
+import {Zeichenobjekt} from '../../model/model';
 
 @Component({
   selector: 'isy-input-char',
   templateUrl: './input-char.component.html',
   styleUrls: ['./input-char.component.scss']
 })
-export class InputCharComponent {
+export class InputCharComponent implements OnChanges {
 
   /**
    * The current value
@@ -65,10 +66,14 @@ export class InputCharComponent {
    */
   visible: boolean = false;
 
+  allCharacters: Zeichenobjekt[] = [];
+
   constructor(private charService: CharacterService) {
   }
 
-
+  ngOnChanges(): void {
+    this.getCharactersByDatentyp(this.datentyp);
+  }
 
 
   /**
@@ -97,5 +102,13 @@ export class InputCharComponent {
     }
   }
 
-
+  /**
+   * Setting up the characters list who must be displayed
+   * @param datentyp Used as filter
+   * @internal
+   */
+  getCharactersByDatentyp(datentyp: Datentyp): void {
+    const allowedGroups = this.charService.getGroupsByDataType(datentyp);
+    this.allCharacters = this.charService.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
+  }
 }

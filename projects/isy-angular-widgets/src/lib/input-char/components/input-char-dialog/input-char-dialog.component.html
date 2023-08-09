@@ -33,14 +33,13 @@
         </p-accordionTab>
 
         <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerGroups' | translate)">
-          <isy-input-char-select-button
+          <p-selectButton
             #group
-            [optionValue]="'id'"
-            [optionLabel]="'gruppe'"
             [options]="schriftZeichenGruppen"
-            (selection)="onGroupSelection($event)"
+            [(ngModel)]="selectedSchriftzeichenGruppe"
+            (onChange)="onGroupSelection()"
           >
-          </isy-input-char-select-button>
+          </p-selectButton>
         </p-accordionTab>
       </p-accordion>
     </div>
@@ -48,7 +47,7 @@
     <div class="right-panel-side split">
       <isy-input-char-preview-char-list
         #charPreview
-        [options]="zeichenObjekteToDisplay"
+        [options]="displayedCharacters"
         (charSelection)="previewZeichenObjekt($event)"
       >
       </isy-input-char-preview-char-list>

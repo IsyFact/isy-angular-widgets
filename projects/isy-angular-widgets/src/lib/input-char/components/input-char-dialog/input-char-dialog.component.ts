@@ -15,8 +15,7 @@ import {InputCharSelectButtonComponent} from '../input-char-select-button/input-
 import {
   InputCharPreviewCharListComponent
 } from '../input-char-preview-char-list/input-char-preview-char-list.component';
-import {Datentyp} from '../../model/datentyp';
-import {SchriftZeichen, Zeichenobjekt} from '../../model/model';
+import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {CharacterService} from '../../services/character.service';
 
 /**
@@ -55,15 +54,9 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
 
   @Input() modal = false;
 
-  /**
-   * Determines which set of characters (datatype) according to DIN 91379 to show
-   */
-  @Input() datentyp: Datentyp = Datentyp.DATENTYP_C;
+  @Input() allCharacters: Zeichenobjekt[] = [];
 
-  /**
-   * The array who stores all the characters
-   */
-  private zeichenListe = this.charService.getCharacters();
+  displayedCharacters: Zeichenobjekt[] = [];
 
   constructor(private charService: CharacterService) {
   }
@@ -79,21 +72,15 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * The array who stores all the schriftzeichen
    * @internal
    */
-  schriftZeichenGruppen!: SchriftZeichen[];
+  schriftZeichenGruppen: Schriftzeichengruppe[] = [];
 
-  /**
-   * The array who stores all the zeichenobjekte
-   * @internal
-   */
-  @Input() zeichenObjekteToDisplay!: Zeichenobjekt[];
+  selectedSchriftzeichenGruppe?: Schriftzeichengruppe;
 
   /**
    * Stores the current selected zeichenobjekt
    * @internal
    */
   selectedZeichenObjekt?: Zeichenobjekt;
-
-
 
   /**
    * The array who stores the active states of all accordion tabs
@@ -126,7 +113,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   private charPreview!: InputCharPreviewCharListComponent;
 
 
-
   /**
    * Is fired on dialog closing
    * @internal
@@ -154,15 +140,15 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * Resets all the user group selections
    */
   resetGroupSelection(): void {
-    this.group.reset();
+    this.selectedSchriftzeichenGruppe = undefined;
   }
 
   /**
    * Setting up the characters list who must be displayed
    * @internal
    */
-  setupCharacterListToDisplay(): void {
-    this.zeichenObjekteToDisplay = this.zeichenListe;
+  resetDisplayedCharacters(): void {
+    this.displayedCharacters = this.allCharacters;
     this.selectFirstEntry();
   }
 
@@ -199,7 +185,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     this.resetBaseSelection();
     this.resetGroupSelection();
 
-    this.setupCharacterListToDisplay();
+    this.resetDisplayedCharacters();
   }
 
   /**
@@ -211,23 +197,23 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     this.resetAllSelection();
     this.resetGroupSelection();
 
-    this.zeichenObjekteToDisplay = this.charService.filterZeichenobjekteByBase(this.zeichenListe, base);
+    this.displayedCharacters = this.charService.filterZeichenobjekteByBase(this.allCharacters, base);
     this.selectFirstEntry();
   }
 
   /**
    * Is fired when a base get selected
-   * @param group The selected group
    * @internal
    */
-  onGroupSelection(group: string): void {
+  onGroupSelection(): void {
     this.resetAllSelection();
     this.resetBaseSelection();
 
-    this.zeichenObjekteToDisplay = this.charService.filterZeichenobjekteByGroup(this.zeichenListe, group);
+    if (this.selectedSchriftzeichenGruppe) {
+      this.displayedCharacters = this.charService.filterZeichenobjekteByGroup(this.allCharacters, this.selectedSchriftzeichenGruppe);
+    }
     this.selectFirstEntry();
   }
-
 
 
   /**
@@ -235,32 +221,29 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * @internal
    */
   selectFirstEntry(): void {
-    this.selectedZeichenObjekt = this.zeichenObjekteToDisplay[0];
+    this.selectedZeichenObjekt = this.displayedCharacters[0];
   }
 
-  /**
-   * Setting up the characters list who must be displayed
-   * @param datentyp Used as filter
-   * @internal
-   */
-  getCharactersByDatentyp(datentyp: Datentyp): void {
-    const allowedGroups = this.charService.getGroupsByDataType(datentyp);
-    this.zeichenListe = this.charService.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
-    this.setupCharacterListToDisplay();
-  }
 
   /**
    * Initialize the char picker
    * @internal
    */
   setupCharPicker(): void {
-    this.getCharactersByDatentyp(this.datentyp);
-    this.grundZeichenListe = this.charService.getGrundZeichenAsList(this.zeichenListe);
-    this.schriftZeichenGruppen = this.charService.getSchriftZeichenAsObjectArray();
-    this.schriftZeichenGruppen = this.charService.filterSchriftzeichenGruppenBySchriftzeichen(this.schriftZeichenGruppen, this.datentyp);
+    this.grundZeichenListe = this.charService.getGrundZeichenAsList(this.allCharacters);
+    this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
   }
 
+  private getAvailableSchriftzeichenGruppen(): Schriftzeichengruppe[] {
+    const res: Schriftzeichengruppe[] = [];
+    for (const char of this.allCharacters) {
+      if (!res.includes(char.schriftzeichengruppe)) {
+        res.push(char.schriftzeichengruppe);
+      }
+    }
 
+    return res;
+  }
 
   /**
    * Called when the inner dialog changes its visibility without interference from outside,
