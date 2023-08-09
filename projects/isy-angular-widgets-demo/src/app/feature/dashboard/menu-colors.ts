@@ -1,6 +1,11 @@
+export const blue = '#9AD0F5';
+export const pink = '#FF9FB4';
+export const orange = '#FFC78F';
+export const yellow = '#FFE19A';
+
 export const widgetBackgroundColors = [
-  '#fe4a49',
-  '#2ab7ca',
-  '#fed766',
-  '#7bc043'
+  blue,
+  pink,
+  orange,
+  yellow
 ];
