@@ -8,8 +8,7 @@ export const informationsbereichMenu = [
         label: 'isyAngularWidgetsDemo.menuItems.exampleMessageText'
       },
       {
-        label: 'isyAngularWidgetsDemo.menuItems.exampleMessageText',
-        visible: true
+        label: 'isyAngularWidgetsDemo.menuItems.exampleMessageText'
       }
     ]
   },

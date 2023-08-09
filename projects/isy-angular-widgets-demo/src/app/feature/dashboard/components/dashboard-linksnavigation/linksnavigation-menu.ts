@@ -7,8 +7,7 @@ export const linksnavigationMenu = [
         label: 'isyAngularWidgetsDemo.menuItems.dashboardExampleText'
       },
       {
-        label: 'isyAngularWidgetsDemo.menuItems.dashboardExampleText',
-        visible: true
+        label: 'isyAngularWidgetsDemo.menuItems.dashboardExampleText'
       }
     ]
   }
