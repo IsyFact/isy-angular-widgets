@@ -107,7 +107,19 @@
       "exampleAuthorityAddressName": "Musteramt für Musterungen",
       "exampleAuthorityAddressFieldOffice": "Field Office: Musterstadt",
       "exampleAuthorityAddressBuilding": "Musteramt für Musterungen",
-      "exampleAuthorityAddressPhone": "0-123-456-789"
+      "exampleAuthorityAddressPhone": "0-123-456-789",
+      "exampleWidgetFirstAreaTitle": "Area A",
+      "exampleWidgetFirstAreaInformation": "Information",
+      "exampleWidgetFirstAreaEvaluation": "Evaluation",
+      "exampleWidgetSecondAreaTitle": "Area B",
+      "exampleWidgetSecondAreaDocuments": "Documents",
+      "exampleWidgetSecondAreaRequest": "Request",
+      "exampleWidgetThirdAreaTitle": "Area C",
+      "exampleWidgetThirdAreaMessages": "Messages",
+      "exampleWidgetThirdAreaCare": "Care",
+      "exampleWidgetFourthAreaTitle": "Area D",
+      "exampleWidgetFourthAreaInformation": "Information",
+      "exampleWidgetFourthAreaEvaluation": "Evaluation"
     },
     "settings": {
       "header": "Settings Demo App",
