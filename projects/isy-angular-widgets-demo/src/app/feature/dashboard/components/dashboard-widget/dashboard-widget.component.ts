@@ -10,6 +10,7 @@ import {MenuTranslationService} from '../../../../../../../isy-angular-widgets/s
 })
 export class DashboardWidgetComponent implements OnInit {
   @Input() menuItems!: MenuItem[];
+  @Input() backgroundColor!: string;
   items: MenuItem[] = [];
   selectedLanguage: string = 'de';
 
@@ -28,7 +29,7 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   loadMenuItems(items: MenuItem[]): void {
-    void this.menuTranslationService.translateMenuItems(this.menuItems).then(items => {
+    void this.menuTranslationService.translateMenuItems(items).then(items => {
       this.items = items;
     });
   }

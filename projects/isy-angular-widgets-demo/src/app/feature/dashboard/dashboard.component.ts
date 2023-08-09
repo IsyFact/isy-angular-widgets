@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {bereichA, bereichB, bereichC, bereichD} from './menus';
+import {widgetMenuItems} from './menus';
+import {widgetBackgroundColors} from './menu-colors';
 
 @Component({
   selector: 'demo-dashboard',
@@ -7,5 +8,6 @@ import {bereichA, bereichB, bereichC, bereichD} from './menus';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  protected readonly widgetMenuItems = [bereichA, bereichB, bereichC, bereichD];
+  protected readonly widgetMenuItems = widgetMenuItems;
+  protected readonly widgetBackgroundColors = widgetBackgroundColors;
 }

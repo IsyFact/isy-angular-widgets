@@ -1,4 +1,4 @@
-export const bereichA = [
+const bereichA = [
   {
     label: 'isyAngularWidgetsDemo.menuItems.exampleWidgetFirstAreaTitle',
     expanded: true,
@@ -14,7 +14,7 @@ export const bereichA = [
   }
 ];
 
-export const bereichB = [
+const bereichB = [
   {
     label: 'isyAngularWidgetsDemo.menuItems.exampleWidgetSecondAreaTitle',
     expanded: true,
@@ -30,7 +30,7 @@ export const bereichB = [
   }
 ];
 
-export const bereichC = [
+const bereichC = [
   {
     label: 'isyAngularWidgetsDemo.menuItems.exampleWidgetThirdAreaTitle',
     expanded: true,
@@ -46,7 +46,7 @@ export const bereichC = [
   }
 ];
 
-export const bereichD = [
+const bereichD = [
   {
     label: 'isyAngularWidgetsDemo.menuItems.exampleWidgetFourthAreaTitle',
     expanded: true,
@@ -60,4 +60,11 @@ export const bereichD = [
       }
     ]
   }
+];
+
+export const widgetMenuItems = [
+  bereichA,
+  bereichB,
+  bereichC,
+  bereichD
 ];
