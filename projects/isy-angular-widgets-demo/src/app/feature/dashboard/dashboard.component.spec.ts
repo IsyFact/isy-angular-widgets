@@ -10,6 +10,8 @@ import {DashboardWidgetComponent} from './components/dashboard-widget/dashboard-
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {CardModule} from 'primeng/card';
 import {PanelMenuModule} from 'primeng/panelmenu';
+import {ChartModule} from 'primeng/chart';
+import {ChartComponent} from './components/chart/chart.component';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -21,12 +23,14 @@ describe('DashboardComponent', () => {
         DashboardComponent,
         DashboardLinksnavigationComponent,
         DashboardInformationsbereichComponent,
-        DashboardWidgetComponent
+        DashboardWidgetComponent,
+        ChartComponent
       ],
       imports: [
         TranslateModule.forRoot(),
         CardModule,
-        PanelMenuModule
+        PanelMenuModule,
+        ChartModule
       ],
       providers: [
         TranslateService
