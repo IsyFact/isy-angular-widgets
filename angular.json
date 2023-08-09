@@ -79,7 +79,9 @@
               "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss",
               "projects/isy-angular-widgets/assets/theme/isyfact-liberation-fonts.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js"
+            ],
             "allowedCommonJsDependencies": [
               "moment"
             ]
