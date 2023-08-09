@@ -1,12 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
-import {CardModule} from 'primeng/card';
 import {
   DashboardLinksnavigationComponent
 } from './components/dashboard-linksnavigation/dashboard-linksnavigation.component';
 import {
   DashboardInformationsbereichComponent
 } from './components/dashboard-informationsbereich/dashboard-informationsbereich.component';
+import {DashboardWidgetComponent} from './components/dashboard-widget/dashboard-widget.component';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {CardModule} from 'primeng/card';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -17,10 +20,16 @@ describe('DashboardComponent', () => {
       declarations: [
         DashboardComponent,
         DashboardLinksnavigationComponent,
-        DashboardInformationsbereichComponent
+        DashboardInformationsbereichComponent,
+        DashboardWidgetComponent
       ],
       imports: [
-        CardModule
+        TranslateModule.forRoot(),
+        CardModule,
+        PanelMenuModule
+      ],
+      providers: [
+        TranslateService
       ]
     })
       .compileComponents();
