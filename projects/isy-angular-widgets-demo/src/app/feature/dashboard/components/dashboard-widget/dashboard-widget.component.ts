@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../../../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
@@ -8,7 +8,7 @@ import {MenuTranslationService} from '../../../../../../../isy-angular-widgets/s
   templateUrl: './dashboard-widget.component.html',
   styleUrls: ['./dashboard-widget.component.scss']
 })
-export class DashboardWidgetComponent {
+export class DashboardWidgetComponent implements OnInit {
   @Input() menuItems!: MenuItem[];
   items: MenuItem[] = [];
   selectedLanguage: string = 'de';

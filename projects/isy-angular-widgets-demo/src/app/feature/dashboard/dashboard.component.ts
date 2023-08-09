@@ -7,5 +7,5 @@ import {bereichA, bereichB, bereichC, bereichD} from './menus';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  protected readonly widgetMenuItems = [bereichA, bereichB, bereichC, bereichD]
+  protected readonly widgetMenuItems = [bereichA, bereichB, bereichC, bereichD];
 }
