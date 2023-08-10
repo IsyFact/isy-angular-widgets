@@ -9,7 +9,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
 import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
 import {Component, QueryList, ViewChild} from '@angular/core';
-import {TranslateTestingModule} from 'ngx-translate-testing';
 
 const width = 50;
 const height = 30;
@@ -60,11 +59,6 @@ describe('Test WizardComponent with Mock Parent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         TestComponent
-      ],
-      imports: [
-        TranslateTestingModule.withTranslations('de', {
-          'isyAngularWidgets.hauptfenster.logout': 'Abmelden'
-        })
       ]
     })
       .compileComponents();
