@@ -119,7 +119,12 @@
       "exampleWidgetThirdAreaCare": "Pflege",
       "exampleWidgetFourthAreaTitle": "Bereich D",
       "exampleWidgetFourthAreaInformation": "Informationen",
-      "exampleWidgetFourthAreaEvaluation": "Auswertung"
+      "exampleWidgetFourthAreaEvaluation": "Auswertung",
+      "exampleDashboardChartLabels": [
+        "Beamte",
+        "Externe",
+        "Behörden"
+      ]
     },
     "settings": {
       "header": "Einstellungen Demo App",

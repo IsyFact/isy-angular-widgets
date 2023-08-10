@@ -119,7 +119,12 @@
       "exampleWidgetThirdAreaCare": "Care",
       "exampleWidgetFourthAreaTitle": "Area D",
       "exampleWidgetFourthAreaInformation": "Information",
-      "exampleWidgetFourthAreaEvaluation": "Evaluation"
+      "exampleWidgetFourthAreaEvaluation": "Evaluation",
+      "exampleDashboardChartLabels": [
+        "Officials",
+        "Externals",
+        "Authorities"
+      ]
     },
     "settings": {
       "header": "Settings Demo App",
