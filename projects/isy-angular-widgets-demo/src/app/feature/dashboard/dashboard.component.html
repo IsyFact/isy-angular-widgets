@@ -1,16 +1,14 @@
 <div class="card">
   <div class="card-container purple-container overflow-hidden">
     <div class="flex">
-      <div class="grid w-full">
+      <div class="grid w-full pt-2 pl-3">
         <ng-container *ngFor="let item of widgetMenuItems; let i = index;">
           <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-            <p-card>
-              <demo-dashboard-widget
-                [menuItems]="widgetMenuItems[i]"
-                [backgroundColor]="widgetBackgroundColors[i]"
-              >
-              </demo-dashboard-widget>
-            </p-card>
+            <demo-dashboard-widget
+              [menuItems]="widgetMenuItems[i]"
+              [backgroundColor]="widgetBackgroundColors[i]"
+            >
+            </demo-dashboard-widget>
           </div>
         </ng-container>
         <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
@@ -41,13 +39,11 @@
           </p-card>
         </div>
         <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card>
-            <demo-chart
-              [type]="'doughnut'"
-              [data]="doughnutChartData"
-            >
-            </demo-chart>
-          </p-card>
+          <demo-chart
+            [type]="'doughnut'"
+            [data]="doughnutChartData"
+          >
+          </demo-chart>
         </div>
       </div>
     </div>
