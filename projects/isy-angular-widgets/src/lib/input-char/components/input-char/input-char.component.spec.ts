@@ -74,8 +74,8 @@ describe('InputCharComponent', () => {
       expect(component.isDialogClosingOnOutsideClick).toBeFalse();
       expect(component.isDialogClosingOnEscape).toBeTrue();
       expect(component.isDialogModalDisplayed).toBeFalse();
-      expect(component.visible).toBeFalse();
       expect(component.isInputDisabled).toBeFalse();
+      expect(component.visible).toBeFalse();
 
       component.activeState.forEach(state => {
         expect(state).toBeFalse();
@@ -201,6 +201,20 @@ describe('InputCharComponent', () => {
       fixture.detectChanges();
       expect(button.disabled).toBeTruthy();
 
+      component.isInputDisabled = false;
+      fixture.detectChanges();
+      expect(button.disabled).toBeFalsy();
+    });
+
+    it('should have the input char button to be disabled when isInputDisabled property is true', () => {
+      const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
+      component.isInputDisabled = true;
+      fixture.detectChanges();
+      expect(button.disabled).toBeTruthy();
+    });
+
+    it('should have the input char button to be not disabled when isInputDisabled property is false', () => {
+      const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
       component.isInputDisabled = false;
       fixture.detectChanges();
       expect(button.disabled).toBeFalsy();

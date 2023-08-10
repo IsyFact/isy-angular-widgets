@@ -58,6 +58,30 @@ describe('InputCharDirective', () => {
     expect(directive).toBeTruthy();
   });
 
+  it('should add an input char button to the input', () => {
+    directive.ngOnInit();
+    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
+    expect(inputCharButton).toBeTruthy();
+  });
+
+  it('should set the input char button to disabled when the input is disabled', () => {
+    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    input.disabled = true;
+    fixture.detectChanges();
+    directive.setupInputChar();
+    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
+    expect(inputCharButton.disabled).toBeTrue();
+  });
+
+  it('should set the input char button to disabled when the input is readonly', () => {
+    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    input.readOnly = true;
+    fixture.detectChanges();
+    directive.setupInputChar();
+    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
+    expect(inputCharButton.disabled).toBeTrue();
+  });
+
   it('should check the componentRef instance isInputDisabled property', () => {
     directive.ngOnInit();
     const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
@@ -65,7 +89,7 @@ describe('InputCharDirective', () => {
     directive.setupInputChar();
     fixture.detectChanges();
     expect(directive.componentRef.instance.isInputDisabled).toBeFalse();
-    
+
     input.disabled = true;
     directive.setupInputChar();
     fixture.detectChanges();
@@ -78,7 +102,7 @@ describe('InputCharDirective', () => {
 
   it('should set next input position', () => {
     expect(directive.inputMousePosition).toEqual(0);
-    directive.setNextInputPosition();
+    directive.setNextInputPosition(1);
     expect(directive.inputMousePosition).toEqual(1);
   });
 
@@ -97,16 +121,16 @@ describe('InputCharDirective', () => {
   });
 
   it('should check the build of the current input value', () => {
-    const value = 'a';
-    const zeichen = 'A̋';
+    const value = 'e';
+    const zeichen = 'ç̆';
 
     expect(directive.inputMousePosition).toEqual(0);
-    const inputValue = directive.buildInputValue(value, zeichen);
+    let inputValue = directive.buildInputValue(value, zeichen);
+    directive.setNextInputPosition(zeichen.length);
     expect(inputValue).toEqual(`${zeichen}${value}`);
 
-    directive.inputMousePosition = 1;
-    fixture.detectChanges();
-    const newInputValue = directive.buildInputValue(value, zeichen);
-    expect(newInputValue).toEqual(`${value}${zeichen}`);
+    inputValue = directive.buildInputValue(inputValue, value);
+    directive.setNextInputPosition(value.length);
+    expect(inputValue).toEqual(`${zeichen}${value}${value}`);
   });
 });

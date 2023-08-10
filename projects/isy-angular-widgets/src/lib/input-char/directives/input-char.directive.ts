@@ -53,23 +53,23 @@ export class InputCharDirective implements OnInit {
 
     this.setupInputChar();
 
-    this.componentRef.instance.insertCharacter.subscribe(zeichen => {
+    this.componentRef.instance.valueChange.subscribe(zeichen => {
       this.htmlInputElement.value = this.buildInputValue(this.htmlInputElement.value, zeichen);
-      this.setNextInputPosition();
+      this.setNextInputPosition(zeichen.length);
       this.htmlInputElement.dispatchEvent(new Event('change', {}));
     });
   }
 
   setupInputChar(): void  {
-    this.componentRef.setInput('isInputDisabled', this.htmlInputElement.disabled);
+    this.componentRef.setInput('isInputDisabled', this.htmlInputElement.disabled || this.htmlInputElement.readOnly);
 
     const observer = new MutationObserver(mutationList => {
       for (const mutation of mutationList) {
         const input = mutation.target as HTMLInputElement;
 
-        if (mutation && mutation.attributeName === 'disabled') {
-          if (input.disabled) {
-            this.componentRef.instance.visible = false;
+        if (mutation && (mutation.attributeName === 'disabled' || mutation.attributeName === 'readonly')) {
+          if (input.disabled || input.readOnly) {
+            this.componentRef.instance.displayCharPicker = false;
             this.componentRef.setInput('isInputDisabled', true);
           } else {
             this.componentRef.setInput('isInputDisabled', false);
@@ -91,8 +91,12 @@ export class InputCharDirective implements OnInit {
     return (event.target as HTMLInputElement).selectionStart!;
   }
 
-  setNextInputPosition(): void {
-    this.inputMousePosition += 1;
+  /**
+   * Is setting the next input mouse position
+   * @param charLength used to determine the exact next input mouse position, since there are characters longer than one position
+   */
+  setNextInputPosition(charLength: number): void {
+    this.inputMousePosition += charLength;
   }
 
   buildInputValue(value: string, zeichen: string): string {
