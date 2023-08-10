@@ -13,7 +13,7 @@ export class InputCharDirective implements OnInit {
   /**
    * Determines which set of characters (datatype) according to DIN 91379 to show
    */
-  @Input() datentyp?: Datentyp;
+  @Input() datentyp: Datentyp = Datentyp.DATENTYP_C;
 
   /**
    * Is getting fired on mouse up event
