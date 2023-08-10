@@ -93,7 +93,7 @@ const secondStackedDataset: ChartDatasetEntry = {
     50,
     30
   ],
-  backgroundColor: pink
+  backgroundColor: blue
 };
 
 export const barChartData = {
