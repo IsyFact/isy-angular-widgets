@@ -10,7 +10,35 @@ export interface ChartDatasetEntry {
   borderColor?: string;
   tension?: number;
   borderDash?: number[];
-  borderWidth?: number;
-  backgroundColor?: string[];
-  hoverBackgroundColor?: string[];
+  backgroundColor?: string | string[];
+}
+
+export interface StackedOptions {
+  tooltips: StackedTooltip;
+  responsive: boolean;
+  scales: Axes;
+}
+
+export interface StackedTooltip {
+  mode: string;
+  intersect: boolean;
+}
+
+export interface Axes {
+  x: Axe;
+  y: Axe;
+}
+
+export interface Axe {
+  stacked: boolean;
+  ticks: Tick;
+  grid: Grid;
+}
+
+export interface Tick {
+  color: string;
+}
+
+export interface Grid {
+  color: string;
 }
