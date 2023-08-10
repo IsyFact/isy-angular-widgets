@@ -1,12 +1,7 @@
-import {ChartDatasetEntry} from '../model/model';
+import {ChartData, ChartDatasetEntry} from '../model/model';
 import {blue, orange, pink} from './menu-colors';
 
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-const labels: string[] = [
-  'Beamte',
-  'Externe',
-  'Behörden'
-];
 
 const firstBarDataset: ChartDatasetEntry = {
   label: '2022',
@@ -96,32 +91,32 @@ const secondStackedDataset: ChartDatasetEntry = {
   backgroundColor: blue
 };
 
-export const barChartData = {
-  labels: labels,
+export const barChartData: ChartData = {
+  labels: [],
   datasets: [
     firstBarDataset,
     secondBarDataset
   ]
 };
 
-export const lineChartData = {
-  labels: labels,
+export const lineChartData: ChartData = {
+  labels: [],
   datasets: [
     firstLineDataset,
     secondLineDataset
   ]
 };
 
-export const lineStyleChartData = {
-  labels: labels,
+export const lineStyleChartData: ChartData = {
+  labels: [],
   datasets: [
     firstLineStyleDataset,
     secondLineStyleDataset
   ]
 };
 
-export const stackedChartData = {
-  labels: labels,
+export const stackedChartData: ChartData = {
+  labels: [],
   datasets: [
     firstStackedDataset,
     secondStackedDataset
