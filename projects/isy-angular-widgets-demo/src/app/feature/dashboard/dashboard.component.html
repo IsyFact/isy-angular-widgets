@@ -39,11 +39,14 @@
           </p-card>
         </div>
         <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <demo-chart
-            [type]="'doughnut'"
-            [data]="doughnutChartData"
-          >
-          </demo-chart>
+          <p-card>
+            <demo-chart
+              [type]="'bar'"
+              [data]="stackedChartData"
+              [options]="stackedOptions"
+            >
+            </demo-chart>
+          </p-card>
         </div>
       </div>
     </div>

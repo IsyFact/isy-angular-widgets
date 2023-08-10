@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {widgetMenuItems} from './menus';
-import {widgetBackgroundColors} from './menu-colors';
-import {barChartData, lineStyleChartData, lineChartData, doughnutChartData} from './chart-data';
+import {widgetMenuItems} from './data/menus';
+import {widgetBackgroundColors} from './data/menu-colors';
+import {barChartData, lineStyleChartData, lineChartData, stackedChartData} from './data/chart-data';
+import {stackedOptions} from './data/chart-configs';
 
 @Component({
   selector: 'demo-dashboard',
@@ -14,5 +15,6 @@ export class DashboardComponent {
   protected readonly barChartData = barChartData;
   protected readonly lineChartData = lineChartData;
   protected readonly lineStyleChartData = lineStyleChartData;
-  protected readonly doughnutChartData = doughnutChartData;
+  protected readonly stackedChartData = stackedChartData;
+  protected readonly stackedOptions = stackedOptions;
 }

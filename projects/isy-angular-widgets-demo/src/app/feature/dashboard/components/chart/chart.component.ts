@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ChartData} from '../../model/model';
+import {ChartData, StackedOptions} from '../../model/model';
 
 @Component({
   selector: 'demo-chart',
@@ -10,4 +10,6 @@ export class ChartComponent {
   @Input() type!: string;
 
   @Input() data!: ChartData;
+
+  @Input() options?: StackedOptions;
 }
