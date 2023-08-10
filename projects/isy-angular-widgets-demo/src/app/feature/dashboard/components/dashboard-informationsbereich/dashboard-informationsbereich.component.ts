@@ -10,8 +10,8 @@ import {informationsbereichMenu} from './informationsbereich-menu';
   styleUrls: ['./dashboard-informationsbereich.component.scss']
 })
 export class DashboardInformationsbereichComponent implements OnInit{
+  private selectedLanguage: string = 'de';
   items: MenuItem[] = [];
-  selectedLanguage: string = 'de';
 
   constructor(public translate: TranslateService,
     private menuTranslationService: MenuTranslationService) {

@@ -11,8 +11,8 @@ import {MenuTranslationService} from '../../../../../../../isy-angular-widgets/s
 export class DashboardWidgetComponent implements OnInit {
   @Input() menuItems!: MenuItem[];
   @Input() backgroundColor!: string;
+  private selectedLanguage: string = 'de';
   items: MenuItem[] = [];
-  selectedLanguage: string = 'de';
 
   constructor(public translate: TranslateService,
     private menuTranslationService: MenuTranslationService) {

@@ -10,8 +10,8 @@ import {linksnavigationMenu} from './linksnavigation-menu';
   styleUrls: ['./dashboard-linksnavigation.component.scss']
 })
 export class DashboardLinksnavigationComponent implements OnInit {
+  private selectedLanguage: string = 'de';
   items: MenuItem[] = [];
-  selectedLanguage: string = 'de';
 
   constructor(public translate: TranslateService,
     private menuTranslationService: MenuTranslationService) {
