@@ -52,7 +52,7 @@
     </div>
     <div class="col">
       <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
-      <input id="firstName" type="text" pInputText isyInputChar
+      <input id="firstName" type="text" pInputText isyInputChar [datentyp]="Datentyp.DATENTYP_A"
              [(ngModel)]="person.personalien.vorname">
     </div>
     <div class="col-1 text-right align-self-center">
