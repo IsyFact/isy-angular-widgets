@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {ChartData, StackedOptions} from '../../model/model';
+import {UIChart} from 'primeng/chart';
 
 @Component({
   selector: 'demo-chart',
@@ -7,6 +8,8 @@ import {ChartData, StackedOptions} from '../../model/model';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent {
+  @ViewChild('chart') chart!: UIChart;
+
   @Input() type!: string;
 
   @Input() data!: ChartData;
