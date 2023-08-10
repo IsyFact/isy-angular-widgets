@@ -13,36 +13,36 @@
         </ng-container>
         <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
           <p-card>
-            <demo-chart
+            <demo-chart #chart
               [type]="'bar'"
-              [data]="barChartData"
+              [data]="chartData[0]"
             >
             </demo-chart>
           </p-card>
         </div>
         <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
           <p-card>
-            <demo-chart
+            <demo-chart #chart
               [type]="'line'"
-              [data]="lineChartData"
+              [data]="chartData[1]"
             >
             </demo-chart>
           </p-card>
         </div>
         <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
           <p-card>
-            <demo-chart
+            <demo-chart #chart
               [type]="'line'"
-              [data]="lineStyleChartData"
+              [data]="chartData[2]"
             >
             </demo-chart>
           </p-card>
         </div>
         <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
           <p-card>
-            <demo-chart
+            <demo-chart #chart
               [type]="'bar'"
-              [data]="stackedChartData"
+              [data]="chartData[3]"
               [options]="stackedOptions"
             >
             </demo-chart>
