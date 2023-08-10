@@ -23,6 +23,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {CalendarModule} from 'primeng/calendar';
 import {ObjektAnzeigenRoutingModule} from './objekt-anzeigen-routing.module';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     InputMaskModule,
     CalendarModule,
     ReactiveFormsModule,
-    InputTextareaModule
+    InputTextareaModule,
+    InputCharModule
   ]
 })
 export class ObjektAnzeigenModule { }
