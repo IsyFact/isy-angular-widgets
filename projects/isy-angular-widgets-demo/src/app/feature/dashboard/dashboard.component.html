@@ -11,43 +11,18 @@
             </demo-dashboard-widget>
           </div>
         </ng-container>
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card>
-            <demo-chart #chart
-              [type]="'bar'"
-              [data]="chartData[0]"
-            >
-            </demo-chart>
-          </p-card>
-        </div>
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card>
-            <demo-chart #chart
-              [type]="'line'"
-              [data]="chartData[1]"
-            >
-            </demo-chart>
-          </p-card>
-        </div>
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card>
-            <demo-chart #chart
-              [type]="'line'"
-              [data]="chartData[2]"
-            >
-            </demo-chart>
-          </p-card>
-        </div>
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card>
-            <demo-chart #chart
-              [type]="'bar'"
-              [data]="chartData[3]"
-              [options]="stackedOptions"
-            >
-            </demo-chart>
-          </p-card>
-        </div>
+        <ng-container *ngFor="let item of chartInitData; let i = index;">
+          <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+            <p-card>
+              <demo-chart #chart
+                          [type]="chartInitData[i].type"
+                          [data]="chartInitData[i].data!"
+                          [options]="chartInitData[i].options"
+              >
+              </demo-chart>
+            </p-card>
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>

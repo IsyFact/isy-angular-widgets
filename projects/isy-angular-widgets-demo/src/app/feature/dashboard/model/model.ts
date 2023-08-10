@@ -4,7 +4,7 @@ export interface ChartData {
 }
 
 export interface ChartDatasetEntry {
-  label: string;
+  label?: string;
   data: (string | number) [];
   fill?: boolean;
   borderColor?: string;
@@ -41,4 +41,10 @@ export interface Tick {
 
 export interface Grid {
   color: string;
+}
+
+export interface ChartInitData {
+  type: string;
+  data?: ChartData;
+  options?: StackedOptions;
 }
