@@ -103,17 +103,6 @@ export class InputCharComponent implements OnChanges {
   }
 
   /**
-   * initialize the char picker
-   * @internal
-   */
-  setupCharPicker(): void {
-    this.getCharactersByDatentyp(this.datentyp);
-    this.grundZeichenListe = this.charService.getGrundZeichenAsList(this.zeichenListe);
-    this.schriftZeichenGruppen = this.charService.getSchriftZeichenAsObjectArray();
-    this.schriftZeichenGruppen = this.charService.filterSchriftzeichenGruppenBySchriftzeichen(this.schriftZeichenGruppen, this.datentyp);
-  }
-
-  /**
    * Setting up the characters list who must be displayed
    * @param datentyp Used as filter
    * @internal

@@ -53,7 +53,7 @@ export class InputCharDirective implements OnInit {
 
     this.setupInputChar();
 
-    this.componentRef.instance.valueChange.subscribe(zeichen => {
+    this.componentRef.instance.insertCharacter.subscribe(zeichen => {
       this.htmlInputElement.value = this.buildInputValue(this.htmlInputElement.value, zeichen);
       this.setNextInputPosition(zeichen.length);
       this.htmlInputElement.dispatchEvent(new Event('change', {}));
@@ -69,7 +69,7 @@ export class InputCharDirective implements OnInit {
 
         if (mutation && (mutation.attributeName === 'disabled' || mutation.attributeName === 'readonly')) {
           if (input.disabled || input.readOnly) {
-            this.componentRef.instance.displayCharPicker = false;
+            this.componentRef.instance.visible = false;
             this.componentRef.setInput('isInputDisabled', true);
           } else {
             this.componentRef.setInput('isInputDisabled', false);
