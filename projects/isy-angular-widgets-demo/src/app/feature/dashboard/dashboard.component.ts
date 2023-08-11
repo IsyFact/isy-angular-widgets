@@ -18,13 +18,17 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   @ViewChildren('chart') allCharts!: QueryList<ChartComponent>;
 
   private CHART_LABELS = 'isyAngularWidgetsDemo.menuItems.exampleDashboardChartLabels';
+
   private selectedLanguage: string = 'de';
 
   protected readonly widgetMenuItems = widgetMenuItems;
+
   protected readonly widgetBackgroundColors = widgetBackgroundColors;
+
   protected readonly stackedOptions = stackedOptions;
 
   chartInitData = initData;
+
   chartData = [
     barChartData,
     lineChartData,

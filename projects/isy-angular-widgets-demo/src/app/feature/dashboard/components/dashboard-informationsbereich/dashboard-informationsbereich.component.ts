@@ -11,6 +11,7 @@ import {informationsbereichMenu} from './informationsbereich-menu';
 })
 export class DashboardInformationsbereichComponent implements OnInit{
   private selectedLanguage: string = 'de';
+
   items: MenuItem[] = [];
 
   constructor(public translate: TranslateService,

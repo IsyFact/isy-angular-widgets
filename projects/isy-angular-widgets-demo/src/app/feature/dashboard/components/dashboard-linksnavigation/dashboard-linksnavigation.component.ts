@@ -11,6 +11,7 @@ import {linksnavigationMenu} from './linksnavigation-menu';
 })
 export class DashboardLinksnavigationComponent implements OnInit {
   private selectedLanguage: string = 'de';
+
   items: MenuItem[] = [];
 
   constructor(public translate: TranslateService,
