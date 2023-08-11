@@ -26,9 +26,9 @@ const secondBarDataset: ChartDatasetEntry = {
 const thirdBarDataset: ChartDatasetEntry = {
   label: '2022',
   data: [
-    10,
     40,
-    50
+    20,
+    40
   ],
   backgroundColor: pink
 };
@@ -36,9 +36,9 @@ const thirdBarDataset: ChartDatasetEntry = {
 const fourthBarDataset: ChartDatasetEntry = {
   label: '2023',
   data: [
-    10,
+    30,
     40,
-    50
+    30
   ],
   backgroundColor: orange
 };
