@@ -1,11 +1,12 @@
-<a
+<button
   #inputCharButton
   id="inputCharButton"
   pButton
   icon="pi pi-language"
+  [disabled]="isInputDisabled"
   (click)="setupCharPickerAvailability()"
 >
-</a>
+</button>
 
 <isy-input-char-dialog
   [display]="displayCharPicker"

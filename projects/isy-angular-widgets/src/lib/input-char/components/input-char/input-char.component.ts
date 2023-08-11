@@ -98,6 +98,11 @@ export class InputCharComponent implements OnInit {
   @Input() isDialogModalDisplayed: boolean = false;
 
   /**
+   * Determines whether the input is displayed
+   */
+  @Input() isInputDisabled: boolean = false;
+
+  /**
    * Controls the char picker visibility
    * @internal
    */
@@ -143,10 +148,7 @@ export class InputCharComponent implements OnInit {
    * @internal
    */
   ngOnInit(): void {
-    this.getCharactersByDatentyp(this.datentyp);
-    this.grundZeichenListe = this.charService.getGrundZeichenAsList(this.zeichenListe);
-    this.schriftZeichenGruppen = this.charService.getSchriftZeichenAsObjectArray();
-    this.schriftZeichenGruppen = this.charService.filterSchriftzeichenGruppenBySchriftzeichen(this.schriftZeichenGruppen, this.datentyp);
+    this.setupCharPicker();
   }
 
   /**
@@ -165,9 +167,22 @@ export class InputCharComponent implements OnInit {
   setupCharPickerAvailability(close?: boolean): void {
     this.displayCharPicker = !(this.displayCharPicker || close);
 
+    this.setupCharPicker();
+    
     if (!this.displayCharPicker) {
       this.onDialogClose();
     }
+  }
+
+  /**
+   * initialize the char picker
+   * @internal
+   */
+  setupCharPicker(): void {
+    this.getCharactersByDatentyp(this.datentyp);
+    this.grundZeichenListe = this.charService.getGrundZeichenAsList(this.zeichenListe);
+    this.schriftZeichenGruppen = this.charService.getSchriftZeichenAsObjectArray();
+    this.schriftZeichenGruppen = this.charService.filterSchriftzeichenGruppenBySchriftzeichen(this.schriftZeichenGruppen, this.datentyp);
   }
 
   /**

@@ -73,6 +73,7 @@ describe('InputCharComponent', () => {
       expect(component.isDialogClosingOnEscape).toBeTrue();
       expect(component.isDialogModalDisplayed).toBeFalse();
       expect(component.displayCharPicker).toBeFalse();
+      expect(component.isInputDisabled).toBeFalse();
 
       component.activeState.forEach(state => {
         expect(state).toBeFalse();
@@ -200,6 +201,20 @@ describe('InputCharComponent', () => {
       component.displayCharPicker = false;
       fixture.detectChanges();
       expect(component.displayCharPicker).toBeFalse();
+    });
+
+    it('should have the input char button to be disabled when isInputDisabled property is true', () => { 
+      const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
+      component.isInputDisabled = true;
+      fixture.detectChanges();
+      expect(button.disabled).toBeTruthy();
+    });
+
+    it('should have the input char button to be not disabled when isInputDisabled property is false', () => { 
+      const button = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLButtonElement;
+      component.isInputDisabled = false;
+      fixture.detectChanges();
+      expect(button.disabled).toBeFalsy();
     });
 
     it('should check the previewZeichenObjekt function to have been called', () => {
@@ -332,7 +347,6 @@ describe('InputCharComponent', () => {
 
       expect(component.selectedZeichenObjekt).toEqual(zeichenObjekt);
     });
-
 
     it('should check the current value emitting on change', () => {
       const onValueChangeSpy = spyOn(component.valueChange, 'emit');

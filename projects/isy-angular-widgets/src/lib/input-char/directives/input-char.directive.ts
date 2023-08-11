@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {ComponentRef, Directive, ElementRef, HostListener, Input, OnInit, ViewContainerRef} from '@angular/core';
 import {InputCharComponent} from '../components/input-char/input-char.component';
 import {Datentyp} from '../model/datentyp';
 
@@ -38,20 +38,52 @@ export class InputCharDirective implements OnInit {
    */
   inputMousePosition: number = 0;
 
+  componentRef!: ComponentRef<InputCharComponent>;
+
+  htmlInputElement: HTMLInputElement;
+
   constructor(private viewContainerRef: ViewContainerRef, private element: ElementRef) {
-    const htmlInputElement = this.element.nativeElement as HTMLInputElement;
-    htmlInputElement.style.width = 'calc(100% - 2.357rem)';
+    this.htmlInputElement = this.element.nativeElement as HTMLInputElement;
+    this.htmlInputElement.style.width = 'calc(100% - 2.357rem)';
   }
 
   ngOnInit(): void {
-    const componentRef = this.viewContainerRef.createComponent(InputCharComponent);
-    componentRef.instance.datentyp = this.datentyp!;
+    this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
+    this.componentRef.instance.datentyp = this.datentyp!;
 
-    componentRef.instance.valueChange.subscribe(zeichen => {
-      const input = this.element.nativeElement as HTMLInputElement;
-      input.value = this.buildInputValue(input.value, zeichen);
+    this.setupInputChar();
+    
+    this.componentRef.instance.valueChange.subscribe(zeichen => {
+      this.htmlInputElement.value = this.buildInputValue(this.htmlInputElement.value, zeichen);
       this.setNextInputPosition(zeichen.length);
-      input.dispatchEvent(new Event('change', {}));
+      this.htmlInputElement.dispatchEvent(new Event('change', {}));
+    });
+  }
+
+  setupInputChar(): void  {
+    this.componentRef.setInput('isInputDisabled', this.htmlInputElement.disabled || this.htmlInputElement.readOnly);
+ 
+    const observer = new MutationObserver(mutationList => {
+      for (const mutation of mutationList) {
+        const input = mutation.target as HTMLInputElement;
+ 
+        if (mutation && (mutation.attributeName === 'disabled' || mutation.attributeName === 'readonly')) {
+          if (input.disabled || input.readOnly) {
+            this.componentRef.instance.displayCharPicker = false;
+            this.componentRef.setInput('isInputDisabled', true);
+          } else {
+            this.componentRef.setInput('isInputDisabled', false);
+          }
+        }
+
+        if (mutation && mutation.attributeName === 'ng-reflect-datentyp') {
+          this.componentRef.setInput('datentyp', input.getAttribute('ng-reflect-datentyp'));
+        }
+      }
+    });
+
+    observer.observe(this.htmlInputElement, {
+      attributes: true
     });
   }
 
