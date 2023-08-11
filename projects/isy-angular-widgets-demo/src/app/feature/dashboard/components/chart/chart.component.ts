@@ -1,5 +1,5 @@
 import {Component, Input, ViewChild} from '@angular/core';
-import {ChartData, StackedOptions} from '../../model/model';
+import {ChartData, ChartOptions} from '../../model/model';
 import {UIChart} from 'primeng/chart';
 
 @Component({
@@ -14,5 +14,5 @@ export class ChartComponent {
 
   @Input() data!: ChartData;
 
-  @Input() options?: StackedOptions;
+  @Input() options?: ChartOptions;
 }

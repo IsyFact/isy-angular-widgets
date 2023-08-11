@@ -1,15 +1,18 @@
 import {ChartInitData} from '../model/model';
-import {stackedOptions} from './chart-configs';
+import {responsiveOptions, stackedOptions} from './chart-configs';
 
 export const initData: ChartInitData[] = [
   {
-    type: 'bar'
+    type: 'bar',
+    options: responsiveOptions
   },
   {
-    type: 'line'
+    type: 'line',
+    options: responsiveOptions
   },
   {
-    type: 'line'
+    type: 'line',
+    options: responsiveOptions
   },
   {
     type: 'bar',

@@ -1,4 +1,4 @@
-import {Axe, StackedOptions} from '../model/model';
+import {Axe, ChartOptions} from '../model/model';
 
 const ticksColor = '#666666';
 const gridColor = '#E5E5E5';
@@ -14,14 +14,20 @@ const axe: Axe = {
   }
 };
 
-export const stackedOptions: StackedOptions = {
+export const stackedOptions: ChartOptions = {
   tooltips: {
     mode: stackedMode,
     intersect: false
   },
-  responsive: true,
+  responsive: false,
+  maintainAspectRatio: false,
   scales: {
     x: axe,
     y: axe
   }
+};
+
+export const responsiveOptions: ChartOptions = {
+  responsive: false,
+  maintainAspectRatio: false
 };

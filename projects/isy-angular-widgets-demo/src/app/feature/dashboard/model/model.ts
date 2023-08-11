@@ -13,10 +13,11 @@ export interface ChartDatasetEntry {
   backgroundColor?: string | string[];
 }
 
-export interface StackedOptions {
-  tooltips: StackedTooltip;
+export interface ChartOptions {
+  tooltips?: StackedTooltip;
   responsive: boolean;
-  scales: Axes;
+  maintainAspectRatio: boolean;
+  scales?: Axes;
 }
 
 export interface StackedTooltip {
@@ -46,5 +47,5 @@ export interface Grid {
 export interface ChartInitData {
   type: string;
   data?: ChartData;
-  options?: StackedOptions;
+  options?: ChartOptions;
 }
