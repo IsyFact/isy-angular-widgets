@@ -19,7 +19,7 @@ export const stackedOptions: ChartOptions = {
     mode: stackedMode,
     intersect: false
   },
-  responsive: false,
+  responsive: true,
   maintainAspectRatio: false,
   scales: {
     x: axe,
@@ -28,6 +28,6 @@ export const stackedOptions: ChartOptions = {
 };
 
 export const responsiveOptions: ChartOptions = {
-  responsive: false,
+  responsive: true,
   maintainAspectRatio: false
 };
