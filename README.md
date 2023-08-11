@@ -20,6 +20,19 @@ Die Schematics führt folgende Schritte aus:
 - Hinzufügen der Stylesheets der IsyFact
 - Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
 
+## I18N
+
+Eine Übersetzung der PrimeNG- und Widget-Bibliothek-Komponenten wird mit Hilfe der PrimeNGConfig- und WidgetsConfigService-Instanz durgeführt.
+
+PrimeNGConfig:
+Für die Übersetzung der PrimeNG-Komponenten muss PrimeNGConfig von primeng/api importiert und über Dependency Injection injiziert werden.
+Ein üblicher Ort ist das Stammverzeichnis der Anwendung, um die von den Komponenten verwendete Standardsprache zu initialisieren.
+Englisch ist die Standardsprache und die Funktion setTranslation wird verwendet, um die Werte zu ändern, indem ein Übersetzungsobjekt übergeben wird. Die Verwendung von PrimeNGConfig kann in der offiziellen PrimeNG-Dokumentation (https://www.primefaces.org/primeng-v14-lts/i18n) zu i18n nachgelesen werden.
+
+WidgetsConfigService:
+Für die Übersetzung der Widget-Bibliothek-Komponenten muss WidgetsConfigService von isy-angular-widgets/src/lib/i18n/widgets-config.service importiert und über Dependency Injection injiziert werden.
+Deutsch ist die Standardsprache. Die Funktion setTranslation des WidgetsConfigService wird verwendet, um die Werte zu ändern, indem ein Übersetzungsobjekt übergeben wird.
+
 ## Development Setup
 
 ### Prerequisites

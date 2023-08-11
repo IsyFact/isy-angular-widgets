@@ -4,7 +4,6 @@ import {InputCharPreviewComponent} from './input-char-preview.component';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {ButtonModule} from 'primeng/button';
 import {By} from '@angular/platform-browser';
-import { TranslateTestingModule } from 'ngx-translate-testing';
 
 describe('InputCharViewComponent', () => {
   let component: InputCharPreviewComponent;
@@ -24,10 +23,7 @@ describe('InputCharViewComponent', () => {
         InputCharPreviewComponent
       ],
       imports: [
-        ButtonModule,
-        TranslateTestingModule.withTranslations('de', {
-          'isyAngularWidgets.inputChar.insert': 'Einfügen'
-        })
+        ButtonModule
       ]
     })
       .compileComponents();

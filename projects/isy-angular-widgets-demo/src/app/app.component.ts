@@ -11,6 +11,8 @@ import {MegaMenuItem, MenuItem, Message, MessageService, PrimeNGConfig, Translat
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
 import {TOAST_SEVERITY} from './shared/model/toast';
+import {WidgetsTranslation} from '../../../isy-angular-widgets/src/lib/i18n/widgets-translation';
+import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/widgets-config.service';
 
 @Component({
   selector: 'demo-root',
@@ -21,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
   items: MegaMenuItem[] = applicationMenu;
   sidebarItems: MenuItem[] = [];
   primeNGI18nSubscription: Subscription;
+  isyAngularWidgetsI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
 
   constructor(
@@ -29,6 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private userInfoPublicService: UserInfoPublicService,
     public translate: TranslateService,
     private primeNGConfig: PrimeNGConfig,
+    private widgetsConfigService: WidgetsConfigService,
     private menuTranslationService: MenuTranslationService,
     private messageService: MessageService
   ) {
@@ -40,6 +44,11 @@ export class AppComponent implements OnInit, OnDestroy {
     // Set PrimeNG translation
     this.primeNGI18nSubscription = this.translate.stream('primeng').subscribe((data: Translation) => {
       this.primeNGConfig.setTranslation(data);
+    });
+
+    // Set Isy Angular Widgets translation
+    this.isyAngularWidgetsI18nSubscription = this.translate.stream('isyAngularWidgets').subscribe((data: WidgetsTranslation) => {
+      this.widgetsConfigService.setTranslation(data);
     });
   }
 

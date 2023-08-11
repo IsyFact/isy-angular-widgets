@@ -7,7 +7,6 @@ import {CharacterService} from '../../services/character.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
-import {TranslateTestingModule} from 'ngx-translate-testing';
 import {InputCharModule} from '../../input-char.module';
 
 const crypto = window.crypto;
@@ -44,7 +43,6 @@ describe('InputCharComponent', () => {
         ],
         imports: [
           BrowserAnimationsModule,
-          TranslateTestingModule.withTranslations({}),
           InputCharModule
         ],
         providers: [
@@ -402,7 +400,6 @@ describe('InputCharComponent', () => {
         ],
         imports: [
           BrowserAnimationsModule,
-          TranslateTestingModule.withTranslations({}),
           InputCharModule
         ],
         providers: [
