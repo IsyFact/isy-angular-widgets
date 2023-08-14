@@ -3,7 +3,6 @@ import {AfterContentInit, Component, OnInit, QueryList, ViewChildren} from '@ang
 import {barChartData, lineStyleChartData, lineChartData, stackedChartData} from './data/chart-data';
 import {widgetBackgroundColors} from './data/menu-colors';
 import {widgetMenuItems} from './data/menus';
-import {stackedOptions} from './data/chart-configs';
 import {initData} from './data/chart-init';
 
 import {TranslateService} from '@ngx-translate/core';
@@ -17,15 +16,13 @@ import {ChartComponent} from './components/chart/chart.component';
 export class DashboardComponent implements OnInit, AfterContentInit {
   @ViewChildren('chart') allCharts!: QueryList<ChartComponent>;
 
-  private CHART_LABELS = 'isyAngularWidgetsDemo.menuItems.exampleDashboardChartLabels';
+  private readonly CHART_LABELS = 'isyAngularWidgetsDemo.menuItems.exampleDashboardChartLabels';
 
-  private selectedLanguage: string = 'de';
+  private readonly selectedLanguage: string = 'de';
 
   protected readonly widgetMenuItems = widgetMenuItems;
 
   protected readonly widgetBackgroundColors = widgetBackgroundColors;
-
-  protected readonly stackedOptions = stackedOptions;
 
   chartInitData = initData;
 

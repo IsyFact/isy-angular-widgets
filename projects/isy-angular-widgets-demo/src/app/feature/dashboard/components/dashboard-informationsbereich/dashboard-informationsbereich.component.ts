@@ -10,7 +10,7 @@ import {informationsbereichMenu} from './informationsbereich-menu';
   styleUrls: ['./dashboard-informationsbereich.component.scss']
 })
 export class DashboardInformationsbereichComponent implements OnInit{
-  private selectedLanguage: string = 'de';
+  private readonly selectedLanguage: string = 'de';
 
   items: MenuItem[] = [];
 
@@ -37,6 +37,4 @@ export class DashboardInformationsbereichComponent implements OnInit{
   changeLanguage(language: string):void {
     this.translate.use(language);
   }
-
-  protected readonly informationsbereichMenu = informationsbereichMenu;
 }
