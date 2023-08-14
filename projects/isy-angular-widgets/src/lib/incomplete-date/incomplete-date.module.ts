@@ -10,8 +10,7 @@ import {IncompleteDateService} from './incomplete-date.service';
   ],
   imports: [
     FormsModule,
-    InputTextModule,
-    FormsModule
+    InputTextModule
   ],
   exports: [
     IncompleteDateComponent
