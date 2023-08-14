@@ -1,29 +1,25 @@
-<div class="card">
-  <div class="card-container purple-container overflow-hidden">
-    <div class="flex">
-      <div class="grid w-full pt-2 pl-3">
-        <ng-container *ngFor="let item of widgetMenuItems; let i = index;">
-          <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-            <demo-dashboard-widget
-              [menuItems]="widgetMenuItems[i]"
-              [backgroundColor]="widgetBackgroundColors[i]"
-            >
-            </demo-dashboard-widget>
-          </div>
-        </ng-container>
-        <ng-container *ngFor="let item of chartInitData; let i = index;">
-          <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-            <p-card>
-              <demo-chart #chart
-                          [type]="chartInitData[i].type"
-                          [data]="chartInitData[i].data!"
-                          [options]="chartInitData[i].options"
-              >
-              </demo-chart>
-            </p-card>
-          </div>
-        </ng-container>
+<div class="card overflow-auto">
+  <div class="grid w-full pt-2 pl-3">
+    <ng-container *ngFor="let item of widgetMenuItems; let i = index;">
+      <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+        <demo-dashboard-widget
+          [menuItems]="widgetMenuItems[i]"
+          [backgroundColor]="widgetBackgroundColors[i]"
+        >
+        </demo-dashboard-widget>
       </div>
-    </div>
+    </ng-container>
+    <ng-container *ngFor="let item of chartInitData; let i = index;">
+      <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+        <p-card>
+          <demo-chart #chart
+                      [type]="chartInitData[i].type"
+                      [data]="chartInitData[i].data!"
+                      [options]="chartInitData[i].options"
+          >
+          </demo-chart>
+        </p-card>
+      </div>
+    </ng-container>
   </div>
 </div>
