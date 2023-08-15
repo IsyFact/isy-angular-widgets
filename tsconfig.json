@@ -24,9 +24,9 @@
     "importHelpers": true,
     "useDefineForClassFields": false,
     "target": "es2022",
-    "module": "es2020",
+    "module": "es2022",
     "lib": [
-      "es2020",
+      "es2022",
       "dom"
     ]
   },
