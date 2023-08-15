@@ -4,6 +4,7 @@
 name: Node.js Package
 
 on:
+  workflow_dispatch:
   release:
     types: [created]
 
@@ -53,6 +54,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Build
-      - run: npm publish --access public
+      - run: npm publish --dry-run --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
