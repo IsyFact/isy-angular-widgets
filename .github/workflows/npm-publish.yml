@@ -4,7 +4,6 @@
 name: Node.js Package
 
 on:
-  push:
   release:
     types: [created]
 
@@ -13,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        # @setup-node@v3 does not provide node_modules in cache
       - uses: actions/cache@v3
         with:
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
@@ -38,6 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        # @setup-node@v3 does not provide node_modules in cache
       - uses: actions/cache@v3
         with:
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
@@ -67,6 +68,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Build
-      - run: npm publish --dry-run --access public
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
