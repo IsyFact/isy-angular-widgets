@@ -1,1 +1,9 @@
-{"include":["projects/isy-angular-widgets/src/**/*.ts"],"exclude":["projects/**/*.spec.ts", "**/test.ts"]}
+{
+  "include": [
+    "projects/isy-angular-widgets/src/**/*.ts"
+  ],
+  "exclude": [
+    "projects/**/*.spec.ts",
+    "**/test.ts"
+  ]
+}
