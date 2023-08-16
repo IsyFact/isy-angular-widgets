@@ -3,6 +3,7 @@
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
         <img
+          loading="lazy"
           alt="{{getTranslation('hauptfenster.altLogoAnbieterAwl')}}"
           class="isy-hauptfenster-logo-anbieter-awl"
           [src]="logoAnbieterAwl"
