@@ -76,7 +76,7 @@ export class IncompleteDateService {
   }
 
   /**
-   * Check if the german date format is valid or not
+   * Check if the date in date format DD.MM.YYYY is valid or not
    * @param dateStr Date as a string
    * @returns True or false as a boolean
    */
@@ -92,7 +92,7 @@ export class IncompleteDateService {
   }
 
   /**
-   * Check if the german date format is unspecified or not
+   * Check if the date in date format DD.MM.YYYY is unspecified or not
    * @param dateStr Date as a string
    * @returns True or false as a boolean
    */
