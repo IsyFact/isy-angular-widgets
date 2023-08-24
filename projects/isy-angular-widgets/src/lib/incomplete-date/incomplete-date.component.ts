@@ -48,7 +48,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
   /**
    * Decides whether only past dates are allowed
    */
-  @Input() dateInPastConstraint = true;
+  @Input() dateInPastConstraint = false;
 
   /**
    * FormControl / ngModel Value of the host component, actual output
