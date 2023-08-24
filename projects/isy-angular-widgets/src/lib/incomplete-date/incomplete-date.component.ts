@@ -7,49 +7,14 @@ import {IncompleteDateService} from './incomplete-date.service';
 
 /**
  * This component is used to input complete and incomplete dates.
- * To enter an unknown day or month,  `0` or `X` can be used.
+ * To enter an unknown day or month,  `0` or `x` can be used.
  *
- * The following formats are supported by the widget (for the example of displayDateFormat:
- * DD.MM.YYYY). Allowed seperators are `-`, `/`, `.` :
+ * The format DD.MM.YYYY is supported by the widget
  *
- * [cols="1,1", options="header"]
- * |===
- * | Initial Value / Input    | Display
- * | null                     |
- * | undefined                |
- * | test                     | test
- * | test2017                 | test2017
- * | 9999-99-99               | 00.00.9999
- * | 2017                     | 00.00.2017
- * | 072017                   | 00.07.2017
- * | 01072017                 | 01.07.2017
- * | 201707                   | 00.07.2017
- * | 00072017                 | 00.07.2017
- * | XX072017                 | XX.07.2017
- * | 010717                   | 01.07.2017
- * | 00000000                 | 00.00.0000
- * | XXXX0000                 | XX.XX.0000
- * | 01-07-17                 | 01.07.2017
- * | 17-07-01                 | 17.07.2001
- * | 2017-07-01               | 01.07.2017
- * | 2017-07-00               | 00.07.2017
- * | 01/07/2017               | 01.07.2017
- * | 2017/07/01               | 01.07.2017
- * | 2017/00/00               | 00.00.2017
- * | 2017/XX/XX               | XX.XX.2017
- * | 2017/7/1                 | 01.07.2017
- * | 4.9.17                   | 04.09.2017
- * | 04.9.17                  | 04.09.2017
- * | 4.09.17                  | 04.09.2017
- * | 4.9.2017                 | 04.09.2017
- * |===
- *
- * == Century switch / Birthdays in the past
  *
  * If only past dates are allowed (e.g. for already born persons),
  * the property `dateInPastConstraint` can be set to `true`via binding.
  *
- * When autocompleting e.g. 101050, 10.10.1950 will be the output instead of 10.10.2050.
  */
 @Component({
   selector: 'isy-incomplete-date',
@@ -81,19 +46,9 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
   @Input() placeholder = '';
 
   /**
-   * User-side date format.
+   * Decides whether only past dates are allowed
    */
-  @Input() displayDateFormat = 'DD.MM.YYYY';
-
-  /**
-   * Data-side date format.
-   */
-  @Input() outputValueFormat = 'YYYY-MM-DD';
-
-  /**
-   * Decides whether only past dates are allowed (century switch - instead of 2050 e.g. 1950)
-   */
-  @Input() dateInPastConstraint = false;
+  @Input() dateInPastConstraint = true;
 
   /**
    * FormControl / ngModel Value of the host component, actual output
@@ -126,7 +81,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
    * @param val The new value
    */
   writeValue(val: string): void {
-    this.inputValue = this.incompleteDateService.transformValue(val, this.displayDateFormat);
+    this.inputValue = this.incompleteDateService.transformValue(val);
   }
 
   /**
@@ -137,7 +92,6 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
     this.inputValue = value;
     this.outputValue = this.incompleteDateService.transformValue(
       value,
-      this.outputValueFormat,
       this.dateInPastConstraint
     );
     this._onChange(this.outputValue);
@@ -173,7 +127,6 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
   onFocusOut(): void {
     this.inputValue = this.incompleteDateService.transformValue(
       this.inputValue,
-      this.displayDateFormat,
       this.dateInPastConstraint
     );
     this._onTouched();

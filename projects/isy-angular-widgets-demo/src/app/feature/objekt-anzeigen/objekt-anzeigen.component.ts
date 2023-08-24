@@ -37,7 +37,7 @@ export class ObjektAnzeigenComponent {
       telefonnummer: '',
       geheimdienstnotizen: '',
       sicherheitsstufe: 0,
-      einreisedatum: 'XX-XX-2000'
+      einreisedatum: 'xx.xx.2000'
     },
     sachverhalte: [
       'Hat einen Antrag auf BAFÖG gestellt',
