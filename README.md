@@ -148,7 +148,6 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'test';
   primeNgSub?: Subscription
   widgetSub?: Subscription
 
