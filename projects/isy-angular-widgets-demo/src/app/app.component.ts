@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {
 
     // Add translation
-    translate.addLangs(['de', 'en']);
+    translate.addLangs(['de', 'en', 'ru']);
     translate.setDefaultLang('en');
 
     // Set PrimeNG translation
@@ -61,15 +61,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.changeLanguage(this.selectedLanguage);
 
-    this.translate.onLangChange.subscribe(() => {
-      this.menuTranslationService.translateMenuItems(navigationMenu).then(items => {
-        this.sidebarItems = items;
-      }).catch(console.error);
-      this.menuTranslationService.translateMegaMenuItems(applicationMenu).then(items => {
-        this.items = items;
-      }).catch(console.error);
-    });
+    this.translate.onLangChange.subscribe(void (async(): Promise<void> => {
+      this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
+      this.items = await this.menuTranslationService.translateMegaMenuItems(applicationMenu);
+    }));
   }
+
   ngOnDestroy(): void {
     if (this.primeNGI18nSubscription) {
       this.primeNGI18nSubscription.unsubscribe();
