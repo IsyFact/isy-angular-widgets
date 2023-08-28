@@ -20,18 +20,168 @@ Die Schematics führt folgende Schritte aus:
 - Hinzufügen der Stylesheets der IsyFact
 - Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
 
+### Hauptfenster einbinden
+
+Nach der Installation von `isy-angular-widget` kann das Hauptfenster Widget eingebunden werden.
+Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Datei `app.component.html` mit folgendem Inhalt überschrieben werden:
+
+```html
+<isy-hauptfenster
+  [collapsedLinksnavigation]="false"
+  [collapsedInformationsbereich]="true"
+  [showInformationsbereich]="true"
+  [showLinksnavigation]="true"
+  [userInfo]="{
+    displayName: 'Max Mustermann'
+  }"
+  [items]="[
+    {label: 'Menüeintrag 1'},
+    {label: 'Menüeintrag 2'},
+    {label: 'Menüeintrag 3'}
+  ]"
+  [applicationGroupColor]="'#458648'"
+  [linksNavigationWidth]="'200px'"
+  [logoAwl]="'{image-src}'"
+  [logoAnbieterAwl]="'{image-src}'"
+>
+  <p-menu Linksnavigation
+    [model]="[
+      {label: 'Menüeintrag 1', icon: 'pi pi-check'},
+      {label: 'Menüeintrag 2', icon: 'pi pi-check'},
+      {label: 'Menüeintrag 3', icon: 'pi pi-check'}
+    ]"
+  ></p-menu>
+  <p-panel header="Inhaltsbereich">
+    Darstellung von Formularen, Tabellen, etc.
+  </p-panel>
+  <p Informationsbereich  class="p-2">
+    Inhalt des Informationsbereich.
+  </p>
+</isy-hauptfenster>
+```
+
+Je nach IDE müssen die Importe für das Hauptfenster Modul noch manuell in der `app.module.ts` ergänzt werden.
+
+```typescript
+// Other imports ...
+import {HauptfensterModule} from '@isyfact/isy-angular-widgets';
+
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    // Other imports ...
+    BrowserModule,
+    BrowserAnimationsModule,
+    HauptfensterModule,
+    MenuModule,
+    PanelModule
+  ]
+})
+export class AppModule {
+}
+```
+
 ## I18N
 
-Eine Übersetzung der PrimeNG- und Widget-Bibliothek-Komponenten wird mit Hilfe der PrimeNGConfig- und WidgetsConfigService-Instanz durgeführt.
+`isy-angular-widgets` unterstützt die Übersetzungsfähigkeit in beliebige Sprachen.
+Standardmäßig werden die Widgets auf Deutsch dargestellt.
 
-PrimeNGConfig:
-Für die Übersetzung der PrimeNG-Komponenten muss PrimeNGConfig von primeng/api importiert und über Dependency Injection injiziert werden.
-Ein üblicher Ort ist das Stammverzeichnis der Anwendung, um die von den Komponenten verwendete Standardsprache zu initialisieren.
-Englisch ist die Standardsprache und die Funktion setTranslation wird verwendet, um die Werte zu ändern, indem ein Übersetzungsobjekt übergeben wird. Die Verwendung von PrimeNGConfig kann in der offiziellen PrimeNG-Dokumentation (https://www.primefaces.org/primeng-v14-lts/i18n) zu i18n nachgelesen werden.
+Beim Installer über `ng add @isyfact/isy-angular-widgets` werden automatisch deutsche und englische Übersetzungsdateien sowohl für PrimeNG als auch für `isy-angular-widgets` im `asset` Verzeichnis angelegt.
 
-WidgetsConfigService:
-Für die Übersetzung der Widget-Bibliothek-Komponenten muss WidgetsConfigService von isy-angular-widgets/src/lib/i18n/widgets-config.service importiert und über Dependency Injection injiziert werden.
-Deutsch ist die Standardsprache. Die Funktion setTranslation des WidgetsConfigService wird verwendet, um die Werte zu ändern, indem ein Übersetzungsobjekt übergeben wird.
+### Beispielkonfiguration mit ngx-translate
+
+Folgendes Beispiel zeigt, wie die Übersetzungsfähigkeit mit der Bibliothek `@ngx-translate` hergestellt werden kann.
+Prinzipiell kann aber jede beliebige I18N-Bibliothek eingesetzt werden.
+
+Zunächst wird `@ngx-translate` installiert.
+
+```bash
+npm install @ngx-translate/core@14 @ngx-translate/http-loader@7 --save
+```
+
+Anschließend können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
+Dazu wird zunächst das `TranslateModule` in der Datei `app.module.ts` installiert.
+
+```typescript
+// Other imports ...
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    // Other imports ...
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: function HttpLoaderFactory(http: HttpClient) {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [HttpClient]
+      }
+    })
+  ]
+})
+export class AppModule {
+}
+```
+
+Anschließend können in der Datei `app.component.ts` die Übersetzungen für PrimeNG und `isy-angular-widgets` bereitgestellt werden.
+
+```typescript
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PrimeNGConfig} from "primeng/api";
+import {WidgetsConfigService} from "@isyfact/isy-angular-widgets";
+import {TranslateService} from "@ngx-translate/core";
+import {Subscription} from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit, OnDestroy {
+  primeNgSub?: Subscription
+  widgetSub?: Subscription
+
+  constructor(
+    private primeNgConfig: PrimeNGConfig,
+    private widgetConfig: WidgetsConfigService,
+    private translateService: TranslateService
+  ) {}
+
+  ngOnInit(): void {
+    this.translateService.setDefaultLang('en');
+
+    this.translate('de');
+  }
+
+  translate(lang: string) {
+    this.translateService.use(lang);
+    this.primeNgSub =this.translateService.get('primeng')
+      .subscribe(res => this.primeNgConfig.setTranslation(res));
+    this.widgetSub = this.translateService.get('isyAngularWidgets')
+      .subscribe(res => this.widgetConfig.setTranslation(res));
+  }
+
+  ngOnDestroy(): void {
+    if(this.primeNgSub) {
+      this.primeNgSub.unsubscribe();
+    }
+    if(this.widgetSub) {
+      this.widgetSub.unsubscribe();
+    }
+  }
+}
+```
+Die `translate`-Methode kann z.B. auch fr einen Language-Picker verwenden werden, damit def Benutzer einer Seite die Sprache selber wählen kann.
 
 ## Development Setup
 

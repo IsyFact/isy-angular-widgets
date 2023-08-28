@@ -7,10 +7,9 @@ import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {MegaMenuItem, MenuItem, Message, MessageService, PrimeNGConfig, Translation} from 'primeng/api';
+import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
-import {MenuTranslationService} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
-import {TOAST_SEVERITY} from './shared/model/toast';
+import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {WidgetsTranslation} from '../../../isy-angular-widgets/src/lib/i18n/widgets-translation';
 import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/widgets-config.service';
 
@@ -20,7 +19,7 @@ import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/wi
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  items: MegaMenuItem[] = applicationMenu;
+  items: MegaMenuItem[] = [];
   sidebarItems: MenuItem[] = [];
   primeNGI18nSubscription: Subscription;
   isyAngularWidgetsI18nSubscription: Subscription;
@@ -33,12 +32,11 @@ export class AppComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private primeNGConfig: PrimeNGConfig,
     private widgetsConfigService: WidgetsConfigService,
-    private menuTranslationService: MenuTranslationService,
-    private messageService: MessageService
+    private menuTranslationService: MenuTranslationService
   ) {
 
     // Add translation
-    translate.addLangs(['de', 'en']);
+    translate.addLangs(['de', 'en', 'ru']);
     translate.setDefaultLang('en');
 
     // Set PrimeNG translation
@@ -63,18 +61,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.changeLanguage(this.selectedLanguage);
 
-    this.translate.onLangChange.subscribe(() => {
-      this.menuTranslationService.translateMenuItems(navigationMenu).then(items => {
-        this.sidebarItems = items;
-      }).catch(()=> {
-        const message: Message = {
-          severity: TOAST_SEVERITY.ERROR,
-          detail: this.translate.instant('toastMessages.errorLoadingItems') as string
-        };
-        this.messageService.add(message);
-      });
-    });
+    this.translate.onLangChange.subscribe(void (async(): Promise<void> => {
+      this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
+      this.items = await this.menuTranslationService.translateMegaMenuItems(applicationMenu);
+    }));
   }
+
   ngOnDestroy(): void {
     if (this.primeNGI18nSubscription) {
       this.primeNGI18nSubscription.unsubscribe();
