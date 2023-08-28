@@ -86,7 +86,7 @@ export class IncompleteDateService {
     const date = new Date(isoFormattedStr);
     const timestamp = date.getTime();
 
-    if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) return false;
+    if (isNaN(timestamp)) return false;
 
     return date.toISOString().startsWith(isoFormattedStr);
   }
@@ -99,6 +99,6 @@ export class IncompleteDateService {
   private dateIsUnspecified(dateStr: string): boolean {
     const regex = /^(0{2}\.\d{2}\.\d{4})|(\d{2}\.0{2}\.\d{4})$/;
 
-    return (dateStr.match(regex) === null && dateStr.match('x') === null) ? false : true;
+    return (!(dateStr.match(regex) === null && dateStr.match('x') === null));
   }
 }
