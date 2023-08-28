@@ -4,8 +4,6 @@ import {MenubarModule} from 'primeng/menubar';
 import {ButtonModule} from 'primeng/button';
 import {CommonModule} from '@angular/common';
 import {MegaMenuModule} from 'primeng/megamenu';
-import {TranslateModule} from '@ngx-translate/core';
-import {MenuTranslationService} from '../i18n/menu-translation.service';
 
 @NgModule({
   declarations: [
@@ -15,14 +13,10 @@ import {MenuTranslationService} from '../i18n/menu-translation.service';
     MenubarModule,
     ButtonModule,
     CommonModule,
-    MegaMenuModule,
-    TranslateModule
+    MegaMenuModule
   ],
   exports: [
     HauptfensterComponent
-  ],
-  providers: [
-    MenuTranslationService
   ]
 })
 export class HauptfensterModule { }

@@ -16,7 +16,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {DropdownModule} from 'primeng/dropdown';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MenuTranslationService} from '../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
+import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 

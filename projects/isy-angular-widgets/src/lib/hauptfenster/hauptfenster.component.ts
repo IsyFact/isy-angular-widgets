@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MegaMenuItem} from 'primeng/api';
 import {UserInfo} from '../api/userinfo';
-import {MenuTranslationService} from '../i18n/menu-translation.service';
-import {TranslateService} from '@ngx-translate/core';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
 /**
@@ -99,28 +97,6 @@ export class HauptfensterComponent   {
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
-  translatedItems : MegaMenuItem[] = [];
-
-  constructor(
-    private menuTranslationService: MenuTranslationService,
-    private translateService: TranslateService,
-    private widgetsConfigService: WidgetsConfigService
-  ) {
-    this.translateService.onLangChange.subscribe(() => {
-      void this.translateItems();
-    });
-  }
-
-  private async translateItems(): Promise<void> {
-    this.translatedItems = await this.menuTranslationService.translateMegaMenuItems(this.items);
-  }
-
-  /**
-   * Get translated text
-   * @param path to the translated text
-   * @returns translated text
-   */
-  getTranslation(path: string): any {
-    return this.widgetsConfigService.getTranslation(path);
+  constructor(public configService: WidgetsConfigService) {
   }
 }

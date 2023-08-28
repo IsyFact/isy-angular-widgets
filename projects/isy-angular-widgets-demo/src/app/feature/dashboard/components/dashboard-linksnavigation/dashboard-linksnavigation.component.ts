@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
-import {MenuTranslationService} from '../../../../../../../isy-angular-widgets/src/lib/i18n/menu-translation.service';
+import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
 import {linksnavigationMenu} from './linksnavigation-menu';
 
 @Component({
@@ -37,6 +37,4 @@ export class DashboardLinksnavigationComponent implements OnInit {
   changeLanguage(language: string): void {
     this.translate.use(language);
   }
-
-  protected readonly linksnavigationMenu = linksnavigationMenu;
 }
