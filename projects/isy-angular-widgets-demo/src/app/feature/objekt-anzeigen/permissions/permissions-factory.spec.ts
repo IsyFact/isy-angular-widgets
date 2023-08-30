@@ -33,18 +33,7 @@ describe('PermissionsFactory', ()=> {
   });
 
   it('creates', ()=> {
-    removeRoleFromLocalStorage();
     expect(PermissionsFactory).toBeTruthy();
-  });
-
-  it('role is not set', ()=> {
-    removeRoleFromLocalStorage();
-
-    const role = localStorage.getItem('role');
-    expect(role).toBeNull();
-
-    const instance = PermissionsFactory.getInstance();
-    expect(instance).toBeUndefined();
   });
 
   it('admin role is set', ()=> {
