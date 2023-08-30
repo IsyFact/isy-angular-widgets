@@ -1,9 +1,9 @@
 import {PermissionsBase} from './permissions-base';
+import {UNKNOWN_PERMISSIONS} from '../data/permissions-data';
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
 export class UnknownPermissions extends PermissionsBase {
   constructor() {
     super();
-    this.permissions = [];
+    this.permissions = UNKNOWN_PERMISSIONS;
   }
 }

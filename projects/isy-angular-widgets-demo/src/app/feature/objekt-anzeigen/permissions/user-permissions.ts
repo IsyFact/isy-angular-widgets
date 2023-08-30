@@ -1,12 +1,9 @@
 import {PermissionsBase} from './permissions-base';
-import {PermissionType} from '../model/auth';
+import {USER_PERMISSIONS} from '../data/permissions-data';
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
 export class UserPermissions extends PermissionsBase {
   constructor() {
     super();
-    this.permissions = [
-      PermissionType.READ
-    ];
+    this.permissions = USER_PERMISSIONS;
   }
 }
