@@ -14,14 +14,9 @@ export class PermissionsManagerService {
 
   private currentPermissions = this.currentPermissionsSubject.asObservable();
 
-  isGranted(permission: PermissionType): boolean {
-    const permissions = PermissionsFactory.getInstance()!.permissions;
-    for (const perm of permissions) {
-      if (perm === permission) {
-        return true;
-      }
-    }
-    return false;
+  isGranted(neededPermission: PermissionType[]): boolean {
+    const permissionsOfEntity = PermissionsFactory.getInstance()!.permissions;
+    return neededPermission.some(entry => permissionsOfEntity.includes(entry));
   }
 
   authAs(role: Role): void {

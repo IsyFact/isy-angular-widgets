@@ -6,10 +6,9 @@ import {PermissionType} from '../model/auth';
   selector: '[demoIsGranted]'
 })
 export class IsGrantedDirective implements OnInit {
-  templateRefPermissions!: PermissionType;
+  templateRefPermissions!: PermissionType[];
 
-  @Input() set demoIsGranted(permission: PermissionType) {
-    // ToDo: Array, not single permission type
+  @Input() set demoIsGranted(permission: PermissionType[]) {
     this.isGranted(permission);
     this.templateRefPermissions = permission;
   }
@@ -22,22 +21,19 @@ export class IsGrantedDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    this.permissionsManagerService.getPermissions().subscribe(val => {
-      const availablePermissions = val.permissions.includes(this.templateRefPermissions, 0);
-      this.updateView(availablePermissions);
+    this.permissionsManagerService.getPermissions().subscribe(permissionsOfEntity => {
+      const arePermissionsAvailable = permissionsOfEntity.permissions.some(permission => this.templateRefPermissions.includes(permission));
+      this.updateView(arePermissionsAvailable);
     });
   }
 
-  private isGranted(permission: PermissionType): void {
-    const isGranted = this.permissionsManagerService.isGranted(permission);
-    this.updateView(isGranted);
+  private isGranted(permission: PermissionType[]): void {
+    const arePermissionsAvailable = this.permissionsManagerService.isGranted(permission);
+    this.updateView(arePermissionsAvailable);
   }
 
   private updateView(condition: boolean): void {
-    if (condition) {
-      this.viewContainerRef.createEmbeddedView(this.templateRef);
-    } else {
-      this.viewContainerRef.clear();
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    condition ? this.viewContainerRef.createEmbeddedView(this.templateRef) : this.viewContainerRef.clear();
   }
 }

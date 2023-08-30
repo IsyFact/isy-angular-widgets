@@ -7,7 +7,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
-import {personsWithPermissions} from './dropdown-permission-data';
+import {personsWithPermissions} from './data/dropdown-permission-data';
 import {Permission} from './model/permission';
 import {PermissionsManagerService} from './services/permissions-manager.service';
 import {PermissionType, Role} from './model/auth';
@@ -97,7 +97,6 @@ export class ObjektAnzeigenComponent {
   permissionSelection(permitted: boolean): void {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     permitted ? this.permissionsManagerService.authAs(Role.ADMIN) : this.permissionsManagerService.authAs(Role.USER);
-
     if (!permitted) {
       this.showSecretFields = false;
     }
