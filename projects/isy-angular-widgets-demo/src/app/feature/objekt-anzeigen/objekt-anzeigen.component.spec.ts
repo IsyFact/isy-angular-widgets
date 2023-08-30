@@ -13,8 +13,8 @@ import {MessageService} from 'primeng/api';
 import {PermissionsManagerService} from './services/permissions-manager.service';
 import {IsGrantedDirective} from './directives/is-granted.directive';
 import {Role} from './model/auth';
-import {PermissionsFactory} from "./permissions/permissions-factory";
-import {ADMIN_PERMISSIONS, USER_PERMISSIONS} from "./data/permissions-data";
+import {PermissionsFactory} from './permissions/permissions-factory';
+import {ADMIN_PERMISSIONS, USER_PERMISSIONS} from './data/permissions-data';
 
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
@@ -192,4 +192,9 @@ describe('PersonBearbeitenComponent', () => {
     const currentPermissionsBase = PermissionsFactory.getInstance();
     expect(currentPermissionsBase.permissions).toEqual(USER_PERMISSIONS);
   });
+
+
+  // ToDo: get permissions by role???
+
+
 });
