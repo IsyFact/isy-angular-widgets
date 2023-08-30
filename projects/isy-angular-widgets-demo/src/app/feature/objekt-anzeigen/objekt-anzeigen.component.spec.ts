@@ -12,6 +12,9 @@ import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
 import {PermissionsManagerService} from './services/permissions-manager.service';
 import {IsGrantedDirective} from './directives/is-granted.directive';
+import {Role} from './model/auth';
+import {PermissionsFactory} from "./permissions/permissions-factory";
+import {ADMIN_PERMISSIONS, USER_PERMISSIONS} from "./data/permissions-data";
 
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
@@ -80,6 +83,15 @@ describe('PersonBearbeitenComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('permissions are unset', () => {
+    expect(component.selectedPermission).toBeUndefined();
+  });
+
+  it('default role is user', () => {
+    const role = localStorage.getItem('role');
+    expect(role).toEqual(Role.USER);
+  });
+
   it('displays data for Max Mustermann', async() => {
     await fixture.whenStable();
 
@@ -115,7 +127,7 @@ describe('PersonBearbeitenComponent', () => {
   });
 
   it('expect secret fields to be visible', () => {
-    component.permissionSelection(true);
+    component.selectPermission(Role.ADMIN);
 
     const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'));
     showSecretFieldSwitch.nativeElement.checked = true;
@@ -154,5 +166,30 @@ describe('PersonBearbeitenComponent', () => {
     expect(tabview.index).toBe(0);
     tabview.index = 1;
     expect(tabview.index).toBe(1);
+  });
+
+
+  it('on admin permission selection', () => {
+    const defaultRole = localStorage.getItem('role');
+    expect(defaultRole).toEqual(Role.USER);
+
+    component.selectPermission(Role.ADMIN);
+    const updatedRole = localStorage.getItem('role');
+    expect(updatedRole).toEqual(Role.ADMIN);
+
+    const currentPermissionsBase = PermissionsFactory.getInstance();
+    expect(currentPermissionsBase.permissions).toEqual(ADMIN_PERMISSIONS);
+  });
+
+  it('on user permission selection', () => {
+    const defaultRole = localStorage.getItem('role');
+    expect(defaultRole).toEqual(Role.USER);
+
+    component.selectPermission(Role.USER);
+    const updatedRole = localStorage.getItem('role');
+    expect(updatedRole).toEqual(defaultRole);
+
+    const currentPermissionsBase = PermissionsFactory.getInstance();
+    expect(currentPermissionsBase.permissions).toEqual(USER_PERMISSIONS);
   });
 });
