@@ -204,7 +204,7 @@
         </div>
       </div>
       <div class="grid m-0 mt-5">
-        <div class="col">
+        <div class="col" *demoIsGranted="PermissionType.EDIT">
           <div class="field field-checkbox">
             <p-inputSwitch
               id="showSecretFields"
@@ -215,6 +215,17 @@
             </label>
           </div>
         </div>
+        <p-dropdown
+          id="permitted"
+          optionLabel="title"
+          dataKey="title"
+          optionValue="permitted"
+          [options]="personsWithPermissions"
+          [(ngModel)]="selectedPermission"
+          [ngModelOptions]="{standalone: true}"
+          (onChange)="permissionSelection($event.value)"
+        >
+        </p-dropdown>
       </div>
       <div id="divShowSecretFields" *ngIf="showSecretFields">
         <div class="grid m-0">

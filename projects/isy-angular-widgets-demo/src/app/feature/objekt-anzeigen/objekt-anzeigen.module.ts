@@ -24,12 +24,15 @@ import {CalendarModule} from 'primeng/calendar';
 import {ObjektAnzeigenRoutingModule} from './objekt-anzeigen-routing.module';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
+import {SharedModule} from '../../shared/shared.module';
+import {IsGrantedDirective} from './directives/is-granted.directive';
 
 
 @NgModule({
   declarations: [
     ObjektAnzeigenComponent,
-    DialogSachverhalteBearbeitenComponent
+    DialogSachverhalteBearbeitenComponent,
+    IsGrantedDirective
   ],
   imports: [
     CommonModule,
@@ -53,7 +56,8 @@ import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-
     CalendarModule,
     ReactiveFormsModule,
     InputTextareaModule,
-    InputCharModule
+    InputCharModule,
+    SharedModule
   ]
 })
 export class ObjektAnzeigenModule { }

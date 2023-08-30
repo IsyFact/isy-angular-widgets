@@ -7,6 +7,10 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
+import {personsWithPermissions} from './dropdown-permission-data';
+import {Permission} from './model/permission';
+import {PermissionsManagerService} from './services/permissions-manager.service';
+import {PermissionType, Role} from './model/auth';
 
 /*
 * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -17,8 +21,10 @@ import {PersonalInformation} from './model/forms';
   styleUrls: ['./objekt-anzeigen.component.scss']
 })
 export class ObjektAnzeigenComponent {
-
+  protected readonly personsWithPermissions = personsWithPermissions;
+  protected readonly PermissionType = PermissionType;
   readonly intelligenceNotesMaxLength = 255;
+
   showSecretFields = false;
 
   personalInfoForm: FormGroup;
@@ -46,12 +52,15 @@ export class ObjektAnzeigenComponent {
     ]
   };
 
+  selectedPermission!: Permission;
+
   constructor(
     private route: ActivatedRoute,
     private personService: PersonenService,
     public translate: TranslateService,
-    private  fb: FormBuilder,
-    private messageService: MessageService
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private permissionsManagerService: PermissionsManagerService
   ) {
     this.personalInfoForm = this.fb.group({
       lastName: new FormControl(this.person.personalien.nachname, required),
@@ -68,6 +77,7 @@ export class ObjektAnzeigenComponent {
       intelligenceNotes: new FormControl(this.person.personalien.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength))
     });
     this.personalInfoForm.disable();
+    this.permissionsManagerService.authAs(Role.USER);
   }
 
   savePersonalien(): void {
@@ -82,5 +92,10 @@ export class ObjektAnzeigenComponent {
         lastName: person.lastName
       }) as string
     });
+  }
+
+  permissionSelection(permitted: boolean): void {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    permitted ? this.permissionsManagerService.authAs(Role.ADMIN) : this.permissionsManagerService.authAs(Role.USER);
   }
 }
