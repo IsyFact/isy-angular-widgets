@@ -97,5 +97,9 @@ export class ObjektAnzeigenComponent {
   permissionSelection(permitted: boolean): void {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     permitted ? this.permissionsManagerService.authAs(Role.ADMIN) : this.permissionsManagerService.authAs(Role.USER);
+
+    if (!permitted) {
+      this.showSecretFields = false;
+    }
   }
 }

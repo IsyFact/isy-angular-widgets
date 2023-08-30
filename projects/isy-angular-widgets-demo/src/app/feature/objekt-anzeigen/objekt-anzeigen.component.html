@@ -204,17 +204,6 @@
         </div>
       </div>
       <div class="grid m-0 mt-5">
-        <div class="col" *demoIsGranted="PermissionType.EDIT">
-          <div class="field field-checkbox">
-            <p-inputSwitch
-              id="showSecretFields"
-              (onChange)="showSecretFields = $event.checked"
-            ></p-inputSwitch>
-            <label for="showSecretFields">
-              {{('isyAngularWidgetsDemo.actions.showSecretFields' | translate)}}
-            </label>
-          </div>
-        </div>
         <p-dropdown
           id="permitted"
           optionLabel="title"
@@ -226,6 +215,19 @@
           (onChange)="permissionSelection($event.value)"
         >
         </p-dropdown>
+      </div>
+      <div class="grid m-0 mt-5">
+        <div class="col" *demoIsGranted="PermissionType.EDIT">
+          <div class="field field-checkbox">
+            <p-inputSwitch
+              id="showSecretFields"
+              (onChange)="showSecretFields = $event.checked"
+            ></p-inputSwitch>
+            <label for="showSecretFields">
+              {{('isyAngularWidgetsDemo.actions.showSecretFields' | translate)}}
+            </label>
+          </div>
+        </div>
       </div>
       <div id="divShowSecretFields" *ngIf="showSecretFields">
         <div class="grid m-0">
