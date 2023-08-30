@@ -26,7 +26,7 @@ export class PermissionsManagerService {
     this.currentPermissionsSubject.next(this.permissions);
   }
 
-  getPermissions(): Observable<PermissionsBase> {
+  getPermissionsBase(): Observable<PermissionsBase> {
     return this.currentPermissions;
   }
 }

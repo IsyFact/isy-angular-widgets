@@ -21,7 +21,7 @@ export class IsGrantedDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    this.permissionsManagerService.getPermissions().subscribe(permissionsOfEntity => {
+    this.permissionsManagerService.getPermissionsBase().subscribe(permissionsOfEntity => {
       const arePermissionsAvailable = permissionsOfEntity.permissions.some(permission => this.templateRefPermissions.includes(permission));
       this.updateView(arePermissionsAvailable);
     });
