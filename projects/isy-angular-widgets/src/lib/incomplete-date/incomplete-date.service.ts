@@ -9,14 +9,14 @@ export interface DateObject {
 }
 
 /**
- * Performs transformations from incomplete dates into different formats
+ * Performs transformations from incomplete dates into german date format DD.MM.YYYY
  */
 @Injectable()
 export class IncompleteDateService {
 
   /**
    * If the new date is a valid or incomplete date it should be transformed
-   * into the given format. Otherwise, return it empty.
+   * into the german date format. Otherwise, return it empty.
    * @param newValue Value to be transformed
    * @param dateInPastConstraint If true, the date should be in the past
    * @returns The transformed date in the german date format
@@ -36,8 +36,8 @@ export class IncompleteDateService {
   }
 
   /**
-   * Takes an incomplete date and transforms it into a specified one.
-   * Example: 00.00.1999
+   * Takes an incomplete date and transforms it into the german date format.
+   * Example: x1.x1.1999 -> xx.xx.1999
    * @param date Date as a string
    * @param dateInPastConstraint If true, future date is not allowed
    * @returns The transformed date in the german date format
