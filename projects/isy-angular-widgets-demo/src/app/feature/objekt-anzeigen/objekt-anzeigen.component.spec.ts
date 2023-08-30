@@ -79,7 +79,7 @@ describe('PersonBearbeitenComponent', () => {
     expect(inputFields.gender.nativeElement.innerText).toEqual('Männlich');
     expect(inputFields.phoneNumber.nativeElement.value).toBeUndefined();
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
-    expect(inputFields.dateOfEntry.nativeElement.value).toEqual('XX.XX.2000');
+    expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
   });
 
 
