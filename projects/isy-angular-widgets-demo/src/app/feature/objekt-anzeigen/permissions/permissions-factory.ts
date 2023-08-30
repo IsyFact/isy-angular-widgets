@@ -9,7 +9,7 @@ export class PermissionsFactory {
   private static instance: PermissionsBase;
 
   private constructor() {
-    // private and unused because singleton pattern
+    // private and unused constructor because singleton pattern
   }
 
   static getInstance(): PermissionsBase {
