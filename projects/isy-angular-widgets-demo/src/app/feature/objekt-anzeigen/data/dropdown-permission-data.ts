@@ -1,12 +1,13 @@
 import {Permission} from '../model/permission';
+import {Role} from '../model/auth';
 
 export const personsWithPermissions: Permission[] = [
   {
     title: 'Unberechtigt',
-    permitted: false
+    role: Role.USER
   },
   {
     title: 'Berechtigt',
-    permitted: true
+    role: Role.ADMIN
   }
 ];

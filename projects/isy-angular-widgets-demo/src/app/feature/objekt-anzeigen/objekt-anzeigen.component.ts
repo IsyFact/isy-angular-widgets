@@ -54,6 +54,8 @@ export class ObjektAnzeigenComponent {
 
   selectedPermission!: Permission;
 
+  secretFieldsNeededPermissions = [PermissionType.EDIT];
+
   constructor(
     private route: ActivatedRoute,
     private personService: PersonenService,
@@ -94,10 +96,9 @@ export class ObjektAnzeigenComponent {
     });
   }
 
-  permissionSelection(permitted: boolean): void {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    permitted ? this.permissionsManagerService.authAs(Role.ADMIN) : this.permissionsManagerService.authAs(Role.USER);
-    if (!permitted) {
+  selectPermission(role: Role): void {
+    this.permissionsManagerService.authAs(role);
+    if (role !== Role.ADMIN) {
       this.showSecretFields = false;
     }
   }

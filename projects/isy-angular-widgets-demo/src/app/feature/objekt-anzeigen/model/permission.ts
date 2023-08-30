@@ -1,4 +1,6 @@
+import {Role} from './auth';
+
 export interface Permission {
   title: string;
-  permitted: boolean;
+  role: Role;
 }
