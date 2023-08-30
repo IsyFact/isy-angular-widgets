@@ -1,4 +1,4 @@
-import {Permission} from './model/permission';
+import {Permission} from '../model/permission';
 
 export const personsWithPermissions: Permission[] = [
   {
