@@ -10,15 +10,21 @@ import {TranslateTestingModule} from 'ngx-translate-testing';
 import {By} from '@angular/platform-browser';
 import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
+import {PermissionsManagerService} from './services/permissions-manager.service';
+import {IsGrantedDirective} from './directives/is-granted.directive';
 
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
+  let permissionsManagerService: PermissionsManagerService;
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
   const inputFields: any = {};
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [ObjektAnzeigenComponent],
+      declarations: [
+        ObjektAnzeigenComponent,
+        IsGrantedDirective
+      ],
       imports: [
         RouterTestingModule,
         ObjektAnzeigenModule,
@@ -33,10 +39,16 @@ describe('PersonBearbeitenComponent', () => {
       ],
       providers:
         [
-          MessageService
+          MessageService,
+          PermissionsManagerService
         ]
     })
       .compileComponents();
+
+    fixture = TestBed.createComponent(ObjektAnzeigenComponent);
+    component = fixture.componentInstance;
+    permissionsManagerService = TestBed.inject(PermissionsManagerService);
+    fixture.detectChanges();
   });
 
   /**
@@ -103,8 +115,9 @@ describe('PersonBearbeitenComponent', () => {
   });
 
   it('expect secret fields to be visible', () => {
-    const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'));
+    component.permissionSelection(true);
 
+    const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'));
     showSecretFieldSwitch.nativeElement.checked = true;
     showSecretFieldSwitch.nativeElement.dispatchEvent(new Event('change'));
     fixture.detectChanges();
