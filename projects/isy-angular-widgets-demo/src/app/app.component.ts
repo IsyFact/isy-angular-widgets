@@ -61,10 +61,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.changeLanguage(this.selectedLanguage);
 
-    this.translate.onLangChange.subscribe(void (async(): Promise<void> => {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    this.translate.onLangChange.subscribe(async() => {
       this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
       this.items = await this.menuTranslationService.translateMegaMenuItems(applicationMenu);
-    }));
+    });
   }
 
   ngOnDestroy(): void {
