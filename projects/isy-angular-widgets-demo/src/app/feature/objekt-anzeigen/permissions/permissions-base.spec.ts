@@ -1,21 +1,24 @@
 import {PermissionsBase} from './permissions-base';
-import {ADMIN_PERMISSIONS} from '../data/permissions-data';
+import {PermissionType} from '../model/auth';
 
-export class TestPermissionsBase extends PermissionsBase {
+const permissions = [
+  PermissionType.CREATE
+];
+
+class TestClass extends PermissionsBase {
   constructor() {
     super();
-    this.permissions = ADMIN_PERMISSIONS;
+    this.permissions = permissions;
   }
 }
+describe('PermissionsBase', () => {
+  let testClass: TestClass;
 
-describe('PermissionsBase', ()=> {
-  const testPermissionsBase = new TestPermissionsBase();
-
-  it('creates', ()=> {
-    expect(testPermissionsBase).toBeTruthy();
+  beforeEach(() => {
+    testClass = new TestClass();
   });
 
-  it('expects correctly permissions', ()=> {
-    expect(testPermissionsBase.permissions).toEqual(ADMIN_PERMISSIONS);
+  it('permissions set correctly', () => {
+    expect(testClass.permissions).toEqual(permissions);
   });
 });

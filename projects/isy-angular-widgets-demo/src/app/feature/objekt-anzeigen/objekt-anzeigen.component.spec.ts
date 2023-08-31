@@ -20,6 +20,7 @@ describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
   let permissionsManagerService: PermissionsManagerService;
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
+  let messageService: MessageService;
   const inputFields: any = {};
 
   beforeEach(async() => {
@@ -51,6 +52,7 @@ describe('PersonBearbeitenComponent', () => {
     fixture = TestBed.createComponent(ObjektAnzeigenComponent);
     component = fixture.componentInstance;
     permissionsManagerService = TestBed.inject(PermissionsManagerService);
+    messageService = TestBed.inject(MessageService);
     fixture.detectChanges();
   });
 
@@ -193,8 +195,32 @@ describe('PersonBearbeitenComponent', () => {
     expect(currentPermissionsBase.permissions).toEqual(USER_PERMISSIONS);
   });
 
+  it('saves personalien', () => {
+    spyOn(messageService, 'add');
 
-  // ToDo: get permissions by role???
+    const form = component.personalInfoForm;
+    const lastNameControl = form.controls.lastName;
+    const firstNameControl = form.controls.firstName;
+    const intelligenceNotesControl = form.controls.intelligenceNotes;
 
+    component.personalInfoForm.enable();
 
+    expect(form.valid).toBeTrue();
+    lastNameControl.markAsTouched();
+    firstNameControl.markAsTouched();
+    intelligenceNotesControl.markAsTouched();
+    fixture.detectChanges();
+
+    expect(lastNameControl.valid).toBeTrue();
+    expect(firstNameControl.valid).toBeTrue();
+    expect(intelligenceNotesControl.valid).toBeTrue();
+
+    component.savePersonalien();
+    expect(form.valid).toBeFalse();
+    expect(lastNameControl.valid).toBeFalse();
+    expect(firstNameControl.valid).toBeFalse();
+    expect(intelligenceNotesControl.valid).toBeFalse();
+
+    expect(messageService.add).toHaveBeenCalled();
+  });
 });

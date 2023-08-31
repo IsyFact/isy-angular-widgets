@@ -36,19 +36,19 @@ describe('PermissionsFactory', ()=> {
     expect(PermissionsFactory).toBeTruthy();
   });
 
-  it('admin role is set', ()=> {
+  it('role/permissions mapping - admin role is set', ()=> {
     addRoleToLocalStorage('admin');
     const instance = PermissionsFactory.getInstance();
     expect(instance.permissions).toEqual(ADMIN_PERMISSIONS);
   });
 
-  it('user role is set', ()=> {
+  it('role/permissions mapping - user role is set', ()=> {
     addRoleToLocalStorage('user');
     const instance = PermissionsFactory.getInstance();
     expect(instance.permissions).toEqual(USER_PERMISSIONS);
   });
 
-  it('unknown role is set', ()=> {
+  it('role/permissions mapping - unknown role is set', ()=> {
     addRoleToLocalStorage('unknown');
     const instance = PermissionsFactory.getInstance();
     expect(instance.permissions).toEqual(UNKNOWN_PERMISSIONS);
