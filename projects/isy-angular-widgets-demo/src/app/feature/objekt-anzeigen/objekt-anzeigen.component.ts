@@ -7,6 +7,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
+import {dropdownPermissionsData} from './dropdown-permissions-data';
+import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 
 /*
 * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -17,6 +19,7 @@ import {PersonalInformation} from './model/forms';
   styleUrls: ['./objekt-anzeigen.component.scss']
 })
 export class ObjektAnzeigenComponent {
+  protected readonly dropdownPermissionsData = dropdownPermissionsData;
 
   readonly intelligenceNotesMaxLength = 255;
   showSecretFields = false;
@@ -46,12 +49,15 @@ export class ObjektAnzeigenComponent {
     ]
   };
 
+  secretFieldsPermission: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private personService: PersonenService,
     public translate: TranslateService,
     private  fb: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private securityService: SecurityService
   ) {
     this.personalInfoForm = this.fb.group({
       lastName: new FormControl(this.person.personalien.nachname, required),
@@ -82,5 +88,15 @@ export class ObjektAnzeigenComponent {
         lastName: person.lastName
       }) as string
     });
+  }
+
+  selectPermission(permission: string): void {
+    this.secretFieldsPermission = permission;
+
+    const permitted = this.securityService.checkElementPermission(permission);
+    if (!permitted) {
+      //ToDo: Reset changes?
+      this.showSecretFields = false;
+    }
   }
 }

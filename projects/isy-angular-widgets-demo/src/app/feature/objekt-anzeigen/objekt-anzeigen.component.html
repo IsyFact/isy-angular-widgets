@@ -204,6 +204,21 @@
         </div>
       </div>
       <div class="grid m-0 mt-5">
+        <label class="align-content-end" for="selectPermissionForSecrentFields">
+          {{('isyAngularWidgetsDemo.labels.selectPermissionForSecretFields' | translate)}}
+        </label>
+        <p-dropdown
+          id="selectPermissionForSecrentFields"
+          optionLabel="display"
+          dataKey="display"
+          optionValue="permission"
+          [options]="dropdownPermissionsData"
+          (onChange)="selectPermission($event.value)"
+        >
+        </p-dropdown>
+      </div>
+
+      <div class="grid m-0 mt-5" *isyPermitted="secretFieldsPermission">
         <div class="col">
           <div class="field field-checkbox">
             <p-inputSwitch
