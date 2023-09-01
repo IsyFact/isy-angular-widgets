@@ -77,7 +77,8 @@
       "sachverhalte": "Sachverhalt",
       "state": "Status",
       "solved": "Gelöst",
-      "newEntryPlaceholder": "Neuer Eintrag"
+      "newEntryPlaceholder": "Neuer Eintrag",
+      "selectPermissionForSecretFields": "Anzeige geheime Felder"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",
