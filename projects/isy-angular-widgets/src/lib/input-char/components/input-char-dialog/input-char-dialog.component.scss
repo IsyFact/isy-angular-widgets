@@ -100,8 +100,9 @@ button.group-select-button:hover {
   border: none;
   color: $text_color;
   cursor: $pointer_cursor;
-  padding: $button_padding;
-  width: 24px;
+  //padding: $button_padding;
+  width: 50px;
+  font-weight: normal;
 
   &:hover {
     background-color: $on_hover_background_color !important;
