@@ -29,6 +29,7 @@
   align-items: flex-end;
 }
 
+
 // Für die Anpassung der Widgets innerhalb einer Komposition konnten die CSS Klassen von primeNG nicht mit eigenen Klassen
 // überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
 // können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
@@ -55,4 +56,63 @@
 // The issue is fixed by overwriting the CSS style below
 ::ng-deep.p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
   overflow: hidden;
+}
+
+// Für die Anpassung der Widgets innerhalb einer Komposition konnten die CSS Klassen von primeNG nicht mit eigenen Klassen
+// überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
+// können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
+
+$button_padding: 0.25rem;
+$text_color: black;
+$pointer_cursor: pointer;
+$on_selection_background_color: darkgrey;
+$on_hover_background_color: grey;
+$on_hover_text_color: white;
+
+button.base-select-button {
+  border: none;
+  color: $text_color;
+  padding: $button_padding;
+  width: 24px;
+  cursor: $pointer_cursor;
+  background-color: transparent !important;
+}
+
+button.base-select-button:hover {
+  color: $on_hover_text_color !important;
+}
+
+button.group-select-button {
+  border: none;
+  color: $text_color;
+  padding: $button_padding;
+  cursor: $pointer_cursor;
+  background-color: transparent !important;
+}
+
+button.group-select-button:hover {
+  color: $on_hover_text_color !important;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button {
+  background-color: transparent !important;
+  border: none;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button:hover {
+  background-color: $on_hover_background_color !important;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button.p-highlight {
+  background-color: $on_selection_background_color !important;
+}
+
+:host::ng-deep .p-ripple.p-element.p-button.p-highlight:hover {
+  background-color: $on_hover_background_color !important;
+  color: $on_hover_text_color !important;
+}
+
+:host::ng-deep .p-accordion-content {
+  padding-top: 0;
+  padding-bottom: 0;
 }
