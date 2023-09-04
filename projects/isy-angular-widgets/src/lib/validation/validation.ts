@@ -43,6 +43,38 @@ export class Validation {
   }
 
   /**
+   * Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY.
+   * If the date in german format is not valid and not unspecified according to definition,
+   * a "DATE" error is thrown. E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx
+   * For valid or valid unspecifid dates, no error is thrown.
+   * @param c The control element the validator is appended to
+   * @returns The object {DATE: true} if the validation fails; null otherwise
+   */
+  static validUnspecifiedDate(c: AbstractControl): ValidationErrors | null {
+    const regexInputMask = /^([x0-9]{2}\.[x0-9]{2}\.[x0-9]{4})$/;
+    let isDateValid = false;
+
+    if (c.value.match(regexInputMask)) {
+      const [day, month, year] = c.value.split('.');
+
+      if (c.value.match('x') === null && !(`${day}` === '00' && `${month}` === '00')) {
+        const isoFormattedStr = `${year}-${month}-${day}`;
+        const date = new Date(isoFormattedStr);
+        const timestamp = date.getTime();
+  
+        if (isNaN(timestamp)) isDateValid = false;
+        else isDateValid = date.toISOString().startsWith(isoFormattedStr);
+      }
+    }
+  
+    const regexInputUnspecified = /^(0{2}\.([0-1][1-2]|[1][0-2])\.\d{4})|(0{2}\.0{2}\.\d{4})|(0{2}\.0{2}\.0{4})|(x{2}\.([0-1][1-2]|[1][0-2])\.\d{4})|(x{2}\.x{2}\.\d{4})|(x{2}\.x{2}\.x{4})$/;
+
+    if (c.value.match(regexInputUnspecified) === null && !isDateValid) return {DATE: true};
+
+    return null;
+  }
+
+  /**
    * Checks that the date is a valid date. To be used as a factory that returns a validator function.
    * @param dateFormat The format to be checked.
    * @param strict Strict parsing means that an exact match is required - including delimiters, whitespaces, etc.
