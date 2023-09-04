@@ -10,10 +10,15 @@ import {TranslateTestingModule} from 'ngx-translate-testing';
 import {By} from '@angular/platform-browser';
 import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
+import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
+import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
+import data from '../../../assets/permissions.json';
 
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
+  let userInfoService: UserInfoPublicService;
+  let securityService: SecurityService;
   const inputFields: any = {};
 
   beforeEach(async() => {
@@ -31,12 +36,16 @@ describe('PersonBearbeitenComponent', () => {
           'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
         })
       ],
-      providers:
-        [
-          MessageService
-        ]
+      providers: [
+        MessageService,
+        SecurityService,
+        UserInfoPublicService
+      ]
     })
       .compileComponents();
+
+    userInfoService = TestBed.inject(UserInfoPublicService);
+    securityService = TestBed.inject(SecurityService);
   });
 
   /**
@@ -103,8 +112,13 @@ describe('PersonBearbeitenComponent', () => {
   });
 
   it('expect secret fields to be visible', () => {
-    const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'));
+    const userInfoData = userInfoService.getUserInfo();
+    securityService.setRoles(userInfoData);
+    securityService.setPermissions(data);
+    component.selectPermission('secretFieldsInputSwitch');
+    fixture.detectChanges();
 
+    const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'));
     showSecretFieldSwitch.nativeElement.checked = true;
     showSecretFieldSwitch.nativeElement.dispatchEvent(new Event('change'));
     fixture.detectChanges();
