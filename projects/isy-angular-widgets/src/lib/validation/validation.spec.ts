@@ -15,6 +15,12 @@ describe('Validation', () => {
   });
 
   describe('unspecifiedDate', () => {
+    it('should return no validation error, if input is empty', () => {
+      const validDateControl: AbstractControl = new FormControl('');
+      const errors = Validation.validUnspecifiedDate(validDateControl);
+      expect(errors).toBeNull();
+    });
+
     it('should return null if date is valid', () => {
       const validDateControl: AbstractControl = new FormControl('11.11.2023');
       const errors = Validation.validUnspecifiedDate(validDateControl);
