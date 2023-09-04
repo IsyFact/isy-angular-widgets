@@ -92,11 +92,6 @@ export class ObjektAnzeigenComponent {
 
   selectPermission(permission: string): void {
     this.secretFieldsPermission = permission;
-
-    const permitted = this.securityService.checkElementPermission(permission);
-    if (!permitted) {
-      //ToDo: Reset changes?
-      this.showSecretFields = false;
-    }
+    this.showSecretFields = this.securityService.checkElementPermission(permission);
   }
 }

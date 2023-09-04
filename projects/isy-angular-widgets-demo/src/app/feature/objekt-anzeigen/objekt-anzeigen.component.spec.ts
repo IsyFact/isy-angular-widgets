@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DropdownModule} from 'primeng/dropdown';
+import {Dropdown, DropdownModule} from 'primeng/dropdown';
 import {TableModule} from 'primeng/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateTestingModule} from 'ngx-translate-testing';
@@ -17,6 +17,7 @@ import data from '../../../assets/permissions.json';
 describe('PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
+  let messageService: MessageService;
   let userInfoService: UserInfoPublicService;
   let securityService: SecurityService;
   const inputFields: any = {};
@@ -44,6 +45,7 @@ describe('PersonBearbeitenComponent', () => {
     })
       .compileComponents();
 
+    messageService = TestBed.inject(MessageService);
     userInfoService = TestBed.inject(UserInfoPublicService);
     securityService = TestBed.inject(SecurityService);
   });
@@ -55,6 +57,16 @@ describe('PersonBearbeitenComponent', () => {
   function clickButton(sbutton: string): void {
     const button = fixture.nativeElement.querySelector(sbutton) as HTMLButtonElement;
     button.click();
+  }
+
+  /**
+   * Is setting up roles and permissions
+   */
+  function setupRolesAndPermissions(): void {
+    const userInfoData = userInfoService.getUserInfo();
+    securityService.setRoles(userInfoData);
+    securityService.setPermissions(data);
+    fixture.detectChanges();
   }
 
   beforeEach(() => {
@@ -155,5 +167,41 @@ describe('PersonBearbeitenComponent', () => {
     expect(tabview.index).toBe(0);
     tabview.index = 1;
     expect(tabview.index).toBe(1);
+  });
+
+  it('display permitted secret fields elements', () => {
+    setupRolesAndPermissions();
+    expect(component.showSecretFields).toBeFalse();
+    const elementId = 'secretFieldsInputSwitch';
+    component.selectPermission(elementId);
+    expect(component.showSecretFields).toBeTrue();
+  });
+
+  it('do not Display non permitted element', () => {
+    setupRolesAndPermissions();
+    expect(component.showSecretFields).toBeFalse();
+    const elementId = 'not_permitted';
+    component.selectPermission(elementId);
+    expect(component.showSecretFields).toBeFalse();
+  });
+
+  it('checking the buttons availability', () => {
+    expect(component.personalInfoForm.disabled).toBeTrue();
+
+    const editButton = fixture.nativeElement.querySelector('#buttonEdit') as HTMLButtonElement;
+    expect(editButton).not.toBeNull();
+
+    const saveButton = fixture.nativeElement.querySelector('#buttonSave') as HTMLButtonElement;
+    expect(saveButton).toBeNull();
+
+    const cancelButton = fixture.nativeElement.querySelector('#buttonCancel') as HTMLButtonElement;
+    expect(cancelButton).toBeNull();
+  });
+
+  it('Message added on saving personalien', () => {
+    const messageSpy = spyOn(messageService, 'add');
+    component.savePersonalien();
+    fixture.detectChanges();
+    expect(messageSpy).toHaveBeenCalled();
   });
 });
