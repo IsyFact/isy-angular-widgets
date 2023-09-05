@@ -34,84 +34,49 @@
 // überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
 // können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
 
-:host::ng-deep {
-
-  .p-accordion {
-    .p-accordion-header .p-accordion-header-link:focus {
-      box-shadow: none !important;
-    }
-
-    p-accordiontab .p-accordion-content {
-      border: 0;
-      padding: 0
-    }
-  }
-}
-
-// Using InputChar inside a primeNG panel container with toggleapple option causes a display issue in the InputChar dialog
-// Base and group character are displayed at the same time and overlap each other
-// The issue is fixed by overwriting the CSS style below
-::ng-deep.p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
-  overflow: hidden;
-}
-
-// Für die Anpassung der Widgets innerhalb einer Komposition konnten die CSS Klassen von primeNG nicht mit eigenen Klassen
-// überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
-// können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
-
-$button_padding: 0.25rem;
 $text_color: black;
 $pointer_cursor: pointer;
 $on_selection_background_color: darkgrey;
 $on_hover_background_color: grey;
 $on_hover_text_color: white;
 
-button.base-select-button {
-  border: none;
-  color: $text_color;
-  padding: $button_padding;
-  width: 24px;
-  cursor: $pointer_cursor;
-  background-color: transparent !important;
-}
-
-button.base-select-button:hover {
-  color: $on_hover_text_color !important;
-}
-
-button.group-select-button {
-  border: none;
-  color: $text_color;
-  padding: $button_padding;
-  cursor: $pointer_cursor;
-  background-color: transparent !important;
-}
-
-button.group-select-button:hover {
-  color: $on_hover_text_color !important;
-}
-
-
-:host::ng-deep p-accordion p-selectButton .p-ripple.p-element.p-button {
-  background-color: transparent !important;
-  border: none;
-  color: $text_color;
-  cursor: $pointer_cursor;
-  //padding: $button_padding;
-  width: 50px;
-  font-weight: normal;
-
-  &:hover {
-    background-color: $on_hover_background_color !important;
-    color: $on_hover_text_color !important;
+::ng-deep .p-accordion {
+  .p-accordion-header .p-accordion-header-link:focus {
+    box-shadow: none!important;
   }
 
-  &.p-highlight {
-    background-color: $on_selection_background_color !important;
+  p-accordiontab .p-accordion-content {
+    border: 0;
+    padding: 0
   }
 
-  &.p-highlight:hover {
-    background-color: $on_hover_background_color !important;
-    color: $on_hover_text_color !important;
+  p-selectButton .p-ripple.p-element.p-button {
+    background-color: transparent;
+    border: none;
+    color: $text_color;
+    cursor: $pointer_cursor;
+    width: 50px;
+    font-weight: normal;
+
+    &:hover {
+      background-color: $on_hover_background_color;
+      color: $on_hover_text_color;
+    }
+
+    &.p-highlight {
+      background-color: $on_selection_background_color;
+    }
+
+    &.p-highlight:hover {
+      background-color: $on_hover_background_color;
+      color: $on_hover_text_color;
+    }
   }
+}
+
+// Using InputChar inside a primeNG panel container with toggleable option causes a display issue in the InputChar dialog
+// Base and group character are displayed at the same time and overlap each other
+// The issue is fixed by overwriting the CSS style below
+::ng-deep.p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
+  overflow: hidden;
 }
