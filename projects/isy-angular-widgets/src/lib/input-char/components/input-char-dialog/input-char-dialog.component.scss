@@ -28,10 +28,8 @@
   align-items: flex-end;
 }
 
-
-// Für die Anpassung der Widgets innerhalb einer Komposition konnten die CSS Klassen von primeNG nicht mit eigenen Klassen
-// überschrieben werden (hatte keinen Effekt). Da wir die PrimeNG Widgets aktuell nicht über SASS einzeln überschreiben
-// können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
+// To style PrimeNG widgets within a composition, we were unable to use own classes. A SASS interface is currently
+// not available. For a quick fix, the depracated ng-deep is used; SASS variables should be used later.
 
 $text_color: black;
 $pointer_cursor: pointer;
@@ -40,7 +38,30 @@ $on_hover_background_color: grey;
 $on_hover_text_color: white;
 
 ::ng-deep {
-  .p-accordion {
+
+  // Common styles of all select buttons
+  p-selectButton .p-ripple.p-element.p-button {
+    background-color: transparent;
+    color: $text_color;
+    cursor: $pointer_cursor;
+
+    &:hover {
+      background-color: $on_hover_background_color;
+      color: $on_hover_text_color;
+    }
+
+    &.p-highlight {
+      background-color: $on_selection_background_color;
+    }
+
+    &.p-highlight:hover {
+      background-color: $on_hover_background_color;
+      color: $on_hover_text_color;
+    }
+  }
+
+  // Styles specific for left side (incl. select buttons)
+  .left-panel-side {
     .p-accordion-header .p-accordion-header-link:focus {
       box-shadow: none !important;
     }
@@ -51,27 +72,18 @@ $on_hover_text_color: white;
     }
 
     p-selectButton .p-ripple.p-element.p-button {
-      background-color: transparent;
       border: none;
-      color: $text_color;
-      cursor: $pointer_cursor;
       width: 50px;
-      font-weight: normal;
-
-      &:hover {
-        background-color: $on_hover_background_color;
-        color: $on_hover_text_color;
-      }
-
-      &.p-highlight {
-        background-color: $on_selection_background_color;
-      }
-
-      &.p-highlight:hover {
-        background-color: $on_hover_background_color;
-        color: $on_hover_text_color;
-      }
     }
+  }
+
+  // Styles specific for right side select buttons
+  .right-panel-side p-selectButton .p-ripple.p-element.p-button {
+    padding: 0.25rem;
+    width: 32px;
+    font-size: 1.25rem;
+    border-width: 0 1px 1px 0;
+    border-style: solid;
   }
 
   // Using InputChar inside a primeNG panel container with toggleable option causes a display issue in the InputChar dialog
