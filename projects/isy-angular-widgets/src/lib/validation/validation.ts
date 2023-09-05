@@ -57,10 +57,8 @@ export class Validation {
 
     const regexInputMask = /^([x0-9]{2}\.[x0-9]{2}\.[x0-9]{4})$/;
     let isDateValid = false;
-    console.log(input.match(regexInputMask));
 
     if (input.match(regexInputMask)) {
-      console.log('test');
       const [day, month, year] = input.split('.');
 
       if (!(input.match('x') && `${day}` === '00' && `${month}` === '00')) {
