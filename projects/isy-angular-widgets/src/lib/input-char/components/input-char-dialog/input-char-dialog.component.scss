@@ -35,9 +35,6 @@
 // können wurde als Quick-Fix erstmal ng-deep verwendet. Mittelfrist soll das am besten mit SAAS gelöst werden.
 
 :host::ng-deep {
-  .p-button {
-    font-weight: bold;
-  }
 
   .p-accordion {
     .p-accordion-header .p-accordion-header-link:focus {
