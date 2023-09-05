@@ -61,7 +61,7 @@
         </isy-input-char-preview>
 
         <button pButton [disabled]="!selectedZeichenObjekt"
-                (click)="getSelectedZeichenObjekt(selectedZeichenObjekt!)" style="font-weight: bold">
+                (click)="emitSelectedZeichenObjekt()" style="font-weight: bold">
           {{('isyAngularWidgets.inputChar.insert' | translate)}}
         </button>
       </div>

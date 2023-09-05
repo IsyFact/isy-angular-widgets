@@ -273,11 +273,12 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
 
   /**
    * Emits the selected zeichenobjekt
-   * @param zeichenObjekt The selected zeichenobjekt
    * @internal
    */
-  getSelectedZeichenObjekt(zeichenObjekt: Zeichenobjekt): void {
-    this.insertCharacter.emit(zeichenObjekt.zeichen);
+  emitSelectedZeichenObjekt(): void {
+    if (this.selectedZeichenObjekt) {
+      this.insertCharacter.emit(this.selectedZeichenObjekt.zeichen);
+    }
   }
 
 }
