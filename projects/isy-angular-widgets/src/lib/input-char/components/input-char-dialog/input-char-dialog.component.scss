@@ -1,4 +1,3 @@
-
 .split {
   height: 100%;
   max-height: 394px;
@@ -40,43 +39,45 @@ $on_selection_background_color: darkgrey;
 $on_hover_background_color: grey;
 $on_hover_text_color: white;
 
-::ng-deep .p-accordion {
-  .p-accordion-header .p-accordion-header-link:focus {
-    box-shadow: none!important;
-  }
-
-  p-accordiontab .p-accordion-content {
-    border: 0;
-    padding: 0
-  }
-
-  p-selectButton .p-ripple.p-element.p-button {
-    background-color: transparent;
-    border: none;
-    color: $text_color;
-    cursor: $pointer_cursor;
-    width: 50px;
-    font-weight: normal;
-
-    &:hover {
-      background-color: $on_hover_background_color;
-      color: $on_hover_text_color;
+::ng-deep {
+  .p-accordion {
+    .p-accordion-header .p-accordion-header-link:focus {
+      box-shadow: none !important;
     }
 
-    &.p-highlight {
-      background-color: $on_selection_background_color;
+    p-accordiontab .p-accordion-content {
+      border: 0;
+      padding: 0
     }
 
-    &.p-highlight:hover {
-      background-color: $on_hover_background_color;
-      color: $on_hover_text_color;
+    p-selectButton .p-ripple.p-element.p-button {
+      background-color: transparent;
+      border: none;
+      color: $text_color;
+      cursor: $pointer_cursor;
+      width: 50px;
+      font-weight: normal;
+
+      &:hover {
+        background-color: $on_hover_background_color;
+        color: $on_hover_text_color;
+      }
+
+      &.p-highlight {
+        background-color: $on_selection_background_color;
+      }
+
+      &.p-highlight:hover {
+        background-color: $on_hover_background_color;
+        color: $on_hover_text_color;
+      }
     }
   }
-}
 
-// Using InputChar inside a primeNG panel container with toggleable option causes a display issue in the InputChar dialog
-// Base and group character are displayed at the same time and overlap each other
-// The issue is fixed by overwriting the CSS style below
-::ng-deep.p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
-  overflow: hidden;
+  // Using InputChar inside a primeNG panel container with toggleable option causes a display issue in the InputChar dialog
+  // Base and group character are displayed at the same time and overlap each other
+  // The issue is fixed by overwriting the CSS style below
+  .p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
+    overflow: hidden;
+  }
 }
