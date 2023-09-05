@@ -71,9 +71,26 @@ $on_hover_text_color: white;
       padding: 0
     }
 
-    p-selectButton .p-ripple.p-element.p-button {
+    p-accordion p-selectButton .p-ripple.p-element.p-button {
       border: none;
       width: 50px;
+    }
+
+    .all-select-button .p-ripple.p-element.p-button {
+      width: 100%;
+      border: none;
+      font-weight: 600;
+      text-align: start;
+      height: 50px;
+      box-shadow: none !important;
+
+      &:not(.p-highlight) {
+        background-color: var(--surface-b);
+      }
+
+      span {
+        padding: 1rem;
+      }
     }
   }
 
