@@ -1,16 +1,5 @@
-import {
-  Component,
-  ContentChildren,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  QueryList,
-  ViewChild
-} from '@angular/core';
+import {Component, ContentChildren, EventEmitter, Input, OnChanges, OnInit, Output, QueryList} from '@angular/core';
 import {InputCharDialogDirective} from '../../directives/input-char-dialog.directive';
-import {InputCharAllCharsButtonComponent} from '../input-char-all-chars-button/input-char-all-chars-button.component';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 
 /**
@@ -26,6 +15,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
 
   @Input() visible = false;
   @Output() visibleChange = new EventEmitter<boolean>();
+
   /**
    * The current value
    */
@@ -82,10 +72,10 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   activeState: boolean[] = [false, false];
 
   /**
-   * Used for getting access to the all button
+   * Filled when all chars are selected; solely technical reasons.
+   * @internal
    */
-  @ViewChild('allChars')
-  private allChars!: InputCharAllCharsButtonComponent;
+  allCharsModel: string = '';
 
   /**
    * Is fired on dialog closing
@@ -93,14 +83,13 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    */
   onDialogClose(): void {
     this.selectedZeichenObjekt = this.allCharacters[0];
-    this.allChars.onAllSelection();
   }
 
   /**
    * Resets all the user selections
    */
   resetAllSelection(): void {
-    this.allChars.reset();
+    this.allCharsModel = '';
   }
 
   /**

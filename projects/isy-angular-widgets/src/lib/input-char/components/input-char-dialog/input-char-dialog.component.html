@@ -15,12 +15,12 @@
 >
   <div>
     <div class="left-panel-side split">
-
-      <isy-input-char-all-chars-button
-        #allChars
-        (allSelected)="onAllSelection()"
+      <p-selectButton
+        [options]="['Alle']"
+        (onOptionClick)="onAllSelection()"
+        [(ngModel)]="allCharsModel"
       >
-      </isy-input-char-all-chars-button>
+      </p-selectButton>
 
       <p-accordion [multiple]="true" (activeIndexChange)="toggleTab($event)">
         <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerBaseChars' | translate)">
