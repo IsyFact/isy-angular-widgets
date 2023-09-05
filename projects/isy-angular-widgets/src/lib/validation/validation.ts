@@ -66,8 +66,7 @@ export class Validation {
         const date = new Date(isoFormattedStr);
         const timestamp = date.getTime();
   
-        if (isNaN(timestamp)) isDateValid = false;
-        else isDateValid = date.toISOString().startsWith(isoFormattedStr);
+        if (!isNaN(timestamp)) isDateValid = date.toISOString().startsWith(isoFormattedStr);
       }
     }
   
