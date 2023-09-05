@@ -36,17 +36,17 @@ button.char-select-button:hover {
 :host::ng-deep .p-ripple.p-element.p-button {
   background-color: transparent !important;
   border: none;
-}
 
-:host::ng-deep .p-ripple.p-element.p-button:hover {
-  background-color: $on_hover_background_color !important;
-}
+  &:hover {
+    background-color: $on_hover_background_color !important;
+  }
 
-:host::ng-deep .p-ripple.p-element.p-button.p-highlight {
-  background-color: $on_selection_background_color !important;
-}
+  .p-highlight {
+    background-color: $on_selection_background_color !important;
+  }
 
-:host::ng-deep .p-ripple.p-element.p-button.p-highlight:hover {
-  background-color: $on_hover_background_color !important;
-  color: $on_hover_text_color !important;
+  .p-highlight:hover {
+    background-color: $on_hover_background_color !important;
+    color: $on_hover_text_color !important;
+  }
 }

@@ -95,7 +95,7 @@ button.group-select-button:hover {
 }
 
 
-:host::ng-deep p-selectButton .p-ripple.p-element.p-button {
+:host::ng-deep p-accordion p-selectButton .p-ripple.p-element.p-button {
   background-color: transparent !important;
   border: none;
   color: $text_color;
@@ -117,9 +117,4 @@ button.group-select-button:hover {
     background-color: $on_hover_background_color !important;
     color: $on_hover_text_color !important;
   }
-}
-
-:host::ng-deep .p-accordion-content {
-  padding-top: 0;
-  padding-bottom: 0;
 }
