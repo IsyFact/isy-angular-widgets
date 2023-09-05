@@ -11,9 +11,6 @@ import {
 } from '@angular/core';
 import {InputCharDialogDirective} from '../../directives/input-char-dialog.directive';
 import {InputCharAllCharsButtonComponent} from '../input-char-all-chars-button/input-char-all-chars-button.component';
-import {
-  InputCharPreviewCharListComponent
-} from '../input-char-preview-char-list/input-char-preview-char-list.component';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 
 /**
@@ -91,18 +88,11 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   private allChars!: InputCharAllCharsButtonComponent;
 
   /**
-   * Used for getting access to the character preview panel
-   */
-  @ViewChild('charPreview')
-  private charPreview!: InputCharPreviewCharListComponent;
-
-
-  /**
    * Is fired on dialog closing
    * @internal
    */
   onDialogClose(): void {
-    this.charPreview.reset();
+    this.selectedZeichenObjekt = this.allCharacters[0];
     this.allChars.onAllSelection();
   }
 
