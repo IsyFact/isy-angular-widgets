@@ -88,7 +88,6 @@ export class InputCharComponent implements OnChanges {
    */
   closeCharPicker(): void {
     this.visible = false;
-    // this.onDialogClose();
   }
 
   /**
@@ -107,7 +106,7 @@ export class InputCharComponent implements OnChanges {
    * @param datentyp Used as filter
    * @internal
    */
-  getCharactersByDatentyp(datentyp: Datentyp): void {
+  private getCharactersByDatentyp(datentyp: Datentyp): void {
     const allowedGroups = this.charService.getGroupsByDataType(datentyp);
     this.allCharacters = this.charService.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
   }
