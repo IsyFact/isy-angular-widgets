@@ -10,9 +10,6 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {InputCharPreviewComponent} from './components/input-char-preview/input-char-preview.component';
 import {InputCharDialogComponent} from './components/input-char-dialog/input-char-dialog.component';
 import {InputCharDialogDirective} from './directives/input-char-dialog.directive';
-import {
-  InputCharAllCharsButtonComponent
-} from './components/input-char-all-chars-button/input-char-all-chars-button.component';
 import {InputCharDirective} from './directives/input-char.directive';
 import {TranslateModule} from '@ngx-translate/core';
 
@@ -22,7 +19,6 @@ import {TranslateModule} from '@ngx-translate/core';
     InputCharPreviewComponent,
     InputCharDialogComponent,
     InputCharDialogDirective,
-    InputCharAllCharsButtonComponent,
     InputCharDirective
   ],
   exports: [
