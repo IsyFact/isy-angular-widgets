@@ -24,7 +24,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {ObjektAnzeigenRoutingModule} from './objekt-anzeigen-routing.module';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
-import {SecurityService} from 'isy-angular-widgets';
+import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {SecurityDirective} from '../../../../../isy-angular-widgets/src/lib/security/security-directive';
 
 
