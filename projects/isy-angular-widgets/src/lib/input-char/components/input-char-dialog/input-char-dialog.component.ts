@@ -31,7 +31,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
 
   @Input() resizable = false;
 
-  @Input() closeOnClickOutside = false;
+  @Input() dismissableMask = false;
 
   @Input() closeOnEscape = true;
 
