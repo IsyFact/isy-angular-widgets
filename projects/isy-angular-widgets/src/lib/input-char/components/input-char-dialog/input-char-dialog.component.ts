@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 
 /**
@@ -112,37 +112,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * Filled when all chars are selected; solely technical reasons.
    * @internal
    */
-  allCharsModel: string = '';
-
-  /**
-   * Resets all the user selections.
-   */
-  resetAllSelection(): void {
-    this.allCharsModel = '';
-  }
-
-  /**
-   * Resets all the user base selections.
-   */
-  resetBaseSelection(): void {
-    this.selectedGrundzeichen = undefined;
-  }
-
-  /**
-   * Resets all the user group selections.
-   */
-  resetGroupSelection(): void {
-    this.selectedSchriftzeichenGruppe = undefined;
-  }
-
-  /**
-   * Setting up the characters list who must be displayed.
-   * @internal
-   */
-  resetDisplayedCharacters(): void {
-    this.displayedCharacters = this.allCharacters;
-    this.selectFirstEntry();
-  }
+  allCharsModel: string = 'Alle';
 
   /**
    * Fire on initialization
@@ -154,10 +124,43 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
 
   /**
    * Fire on input changes
+   * @param changes List of changes
    * @internal
    */
-  ngOnChanges(): void {
-    this.setupCharPicker();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.allCharacters) {
+      this.setupCharPicker();
+    }
+  }
+
+  /**
+   * Resets all the user selections.
+   */
+  private resetAllSelection(): void {
+    this.allCharsModel = '';
+  }
+
+  /**
+   * Resets all the user base selections.
+   */
+  private resetBaseSelection(): void {
+    this.selectedGrundzeichen = undefined;
+  }
+
+  /**
+   * Resets all the user group selections.
+   */
+  private resetGroupSelection(): void {
+    this.selectedSchriftzeichenGruppe = undefined;
+  }
+
+  /**
+   * Setting up the characters list who must be displayed.
+   * @internal
+   */
+  private resetDisplayedCharacters(): void {
+    this.displayedCharacters = this.allCharacters;
+    this.selectFirstEntry();
   }
 
   /**
@@ -200,18 +203,20 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * Is selecting the first zeichenobjekt inside the current list
    * @internal
    */
-  selectFirstEntry(): void {
+  private selectFirstEntry(): void {
     this.selectedZeichenObjekt = this.displayedCharacters[0];
   }
 
 
   /**
-   * Initialize the char picker
+   * Initialize the char picker with it's Grundzeichen, Schriftzeichengruppen and initial state.
    * @internal
    */
-  setupCharPicker(): void {
+  private setupCharPicker(): void {
     this.grundZeichenListe = this.getAvailableGrundzeichen();
     this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
+    this.resetDisplayedCharacters();
+    this.allCharsModel = 'Alle';
   }
 
   private getAvailableSchriftzeichenGruppen(): Schriftzeichengruppe[] {
@@ -227,9 +232,10 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
 
   /**
    * Calculates an array of all different Grundzeichen within @{link allCharacters}.
+   * Empty Grundzeichen is transformed to "*".
    * @returns An array containing all different Grundzeichen.
    */
-  getAvailableGrundzeichen(): string[] {
+  private getAvailableGrundzeichen(): string[] {
     const res: string[] = [];
     for (const char of this.allCharacters) {
       const grundzeichen = char.grundzeichen === '' ? '*' : char.grundzeichen;
@@ -273,24 +279,15 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    */
   closeCharPicker(): void {
     this.visible = false;
-    this.selectedZeichenObjekt = this.allCharacters[0];
+    // this.selectedZeichenObjekt = this.allCharacters[0];
     this.visibleChange.emit(this.visible);
-  }
-
-  /**
-   * Is displaying the selected zeichenobjekt
-   * @param zeichenobjekt the selected zeichenobjekt who must be displayed
-   * @internal
-   */
-  previewZeichenObjekt(zeichenobjekt: Zeichenobjekt): void {
-    this.selectedZeichenObjekt = zeichenobjekt;
   }
 
   /**
    * Emits the selected zeichenobjekt
    * @internal
    */
-  emitSelectedZeichenObjekt(): void {
+  insertSelectedZeichen(): void {
     if (this.selectedZeichenObjekt) {
       this.insertCharacter.emit(this.selectedZeichenObjekt.zeichen);
     }
