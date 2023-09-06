@@ -75,30 +75,11 @@ export class InputCharComponent implements OnChanges {
     this.getCharactersByDatentyp(this.datentyp);
   }
 
-
-  /**
-   * Opens the character picker
-   */
-  openCharPicker(): void {
-    this.visible = true;
-  }
-
-  /**
-   * Closes the character picker
-   */
-  closeCharPicker(): void {
-    this.visible = false;
-  }
-
   /**
    * Toggles the character picker
    */
   toggleCharPicker(): void {
-    if (this.visible) {
-      this.closeCharPicker();
-    } else {
-      this.openCharPicker();
-    }
+    this.visible = !this.visible;
   }
 
   /**
