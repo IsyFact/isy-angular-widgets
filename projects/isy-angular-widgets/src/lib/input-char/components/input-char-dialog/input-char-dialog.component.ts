@@ -78,14 +78,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   allCharsModel: string = '';
 
   /**
-   * Is fired on dialog closing
-   * @internal
-   */
-  onDialogClose(): void {
-    this.selectedZeichenObjekt = this.allCharacters[0];
-  }
-
-  /**
    * Resets all the user selections
    */
   resetAllSelection(): void {
@@ -241,6 +233,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    */
   openCharPicker(): void {
     this.visible = true;
+    this.visibleChange.emit(this.visible);
   }
 
   /**
@@ -248,7 +241,8 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    */
   closeCharPicker(): void {
     this.visible = false;
-    this.onDialogClose();
+    this.selectedZeichenObjekt = this.allCharacters[0];
+    this.visibleChange.emit(this.visible);
   }
 
   /**
