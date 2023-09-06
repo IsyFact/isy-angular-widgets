@@ -109,12 +109,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   selectedZeichenObjekt?: Zeichenobjekt;
 
   /**
-   * The array who stores the active states of all accordion tabs
-   * @internal
-   */
-  activeState: boolean[] = [false, false];
-
-  /**
    * Filled when all chars are selected; solely technical reasons.
    * @internal
    */
@@ -165,15 +159,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.setupCharPicker();
   }
-
-  /**
-   * Handles the opening and closing of the accordion tabs
-   * @param index the index position of the selected accordion tab
-   */
-  toggleTab(index: number): void {
-    this.activeState[index] = !this.activeState[index];
-  }
-
 
   /**
    * Is fired when the all button get clicked
