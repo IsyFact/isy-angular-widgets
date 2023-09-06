@@ -17,7 +17,7 @@
     <div class="left-panel-side split">
       <p-selectButton
         [options]="['Alle']"
-        (onOptionClick)="onAllSelection()"
+        (onChange)="onAllSelection()"
         [(ngModel)]="allCharsModel"
         class="all-select-button"
       >
