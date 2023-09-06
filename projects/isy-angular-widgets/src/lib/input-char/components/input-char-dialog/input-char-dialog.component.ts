@@ -11,54 +11,99 @@ import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 })
 export class InputCharDialogComponent implements OnInit, OnChanges {
 
+  /**
+   * Specifies the visibility of the dialog.
+   */
   @Input() visible = false;
   @Output() visibleChange = new EventEmitter<boolean>();
 
   /**
-   * The current value
+   * Emits a character chosen to insert by the user.
    */
   @Output() insertCharacter = new EventEmitter<string>();
 
-  @Input() header!: string;
+  /**
+   * Title text of the dialog.
+   */
+  @Input() header: string = 'Special Character Picker';
 
+  /**
+   * The width of the dialog.
+   */
   @Input() width = '775px';
 
+  /**
+   * The height of the dialog.
+   */
   @Input() height = '460px';
 
+  /**
+   * Adds a close icon to the header to hide the dialog.
+   */
   @Input() closable = true;
 
+  /**
+   * Enables dragging to change the position using header.
+   */
   @Input() draggable = true;
 
+  /**
+   * Enables resizing of the content.
+   */
   @Input() resizable = false;
 
+  /**
+   * Specifies if clicking the modal background should hide the dialog.
+   */
   @Input() dismissableMask = false;
 
+  /**
+   * Specifies if pressing escape key should hide the dialog.
+   */
   @Input() closeOnEscape = true;
 
+  /**
+   * Defines if background should be blocked when dialog is displayed.
+   */
   @Input() modal = false;
 
+  /**
+   * All characters the dialog should display.
+   */
   @Input() allCharacters: Zeichenobjekt[] = [];
 
+  /**
+   * The currently displayed characters.
+   * @internal
+   */
   displayedCharacters: Zeichenobjekt[] = [];
 
   /**
-   * The array who stores all the grundzeichen
+   * The array who stores all the grundzeichen.
    * @internal
    */
   grundZeichenListe: string[] = [];
 
+  /**
+   * The currently selected Grundzeichen.
+   * @internal
+   */
   selectedGrundzeichen?: string;
 
   /**
-   * The array who stores all the schriftzeichen
+   * The array who stores all the Schriftzeichen.
    * @internal
    */
   schriftZeichenGruppen: Schriftzeichengruppe[] = [];
 
+  /**
+   * The currently selected Schriftzeichengruppe.
+   * @internal
+   */
   selectedSchriftzeichenGruppe?: Schriftzeichengruppe;
 
   /**
-   * Stores the current selected zeichenobjekt
+   * Stores the current selected Zeichenobjekt.
    * @internal
    */
   selectedZeichenObjekt?: Zeichenobjekt;
@@ -76,28 +121,28 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   allCharsModel: string = '';
 
   /**
-   * Resets all the user selections
+   * Resets all the user selections.
    */
   resetAllSelection(): void {
     this.allCharsModel = '';
   }
 
   /**
-   * Resets all the user base selections
+   * Resets all the user base selections.
    */
   resetBaseSelection(): void {
     this.selectedGrundzeichen = undefined;
   }
 
   /**
-   * Resets all the user group selections
+   * Resets all the user group selections.
    */
   resetGroupSelection(): void {
     this.selectedSchriftzeichenGruppe = undefined;
   }
 
   /**
-   * Setting up the characters list who must be displayed
+   * Setting up the characters list who must be displayed.
    * @internal
    */
   resetDisplayedCharacters(): void {
@@ -195,6 +240,10 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     return res;
   }
 
+  /**
+   * Calculates an array of all different Grundzeichen within @{link allCharacters}.
+   * @returns An array containing all different Grundzeichen.
+   */
   getAvailableGrundzeichen(): string[] {
     const res: string[] = [];
     for (const char of this.allCharacters) {
