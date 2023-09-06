@@ -219,6 +219,10 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     this.allCharsModel = 'Alle';
   }
 
+  /**
+   * Calculates an array of all different Schriftzeichengruppen within @{link allCharacters}.
+   * @returns An array containing all different Schriftzeichengruppen.
+   */
   private getAvailableSchriftzeichenGruppen(): Schriftzeichengruppe[] {
     const res: Schriftzeichengruppe[] = [];
     for (const char of this.allCharacters) {
