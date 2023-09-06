@@ -17,11 +17,17 @@
   right: 0;
   width: 70%;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+
+  p-selectbutton {
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
 }
 
 .lower-right-panel {
   display: flex;
-  position: absolute;
   bottom: 0;
   width: 100%;
   padding: 1em;
@@ -96,12 +102,15 @@ $on_hover_text_color: white;
   }
 
   // Styles specific for right side select buttons
-  .right-panel-side p-selectButton .p-ripple.p-element.p-button {
-    padding: 0.25rem;
-    width: 32px;
-    font-size: 1.25rem;
-    border-width: 0 1px 1px 0;
-    border-style: solid;
+  .right-panel-side p-selectButton {
+
+    .p-ripple.p-element.p-button {
+      padding: 0.25rem;
+      width: 32px;
+      font-size: 1.25rem;
+      border-width: 0 1px 1px 0;
+      border-style: solid;
+    }
   }
 
   // Using InputChar inside a primeNG panel container with toggleable option causes a display issue in the InputChar dialog
