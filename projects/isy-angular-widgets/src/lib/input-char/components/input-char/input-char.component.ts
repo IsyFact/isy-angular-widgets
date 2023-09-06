@@ -66,6 +66,10 @@ export class InputCharComponent implements OnChanges {
    */
   visible: boolean = false;
 
+  /**
+   * All characters available in the selected data type.
+   * @internal
+   */
   allCharacters: Zeichenobjekt[] = [];
 
   constructor(private charService: CharacterService) {
