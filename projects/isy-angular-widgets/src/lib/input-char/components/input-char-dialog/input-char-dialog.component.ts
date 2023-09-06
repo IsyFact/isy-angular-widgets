@@ -1,5 +1,4 @@
-import {Component, ContentChildren, EventEmitter, Input, OnChanges, OnInit, Output, QueryList} from '@angular/core';
-import {InputCharDialogDirective} from '../../directives/input-char-dialog.directive';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 
 /**
@@ -11,7 +10,6 @@ import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
   styleUrls: ['./input-char-dialog.component.scss']
 })
 export class InputCharDialogComponent implements OnInit, OnChanges {
-  @ContentChildren(InputCharDialogDirective) content!: QueryList<InputCharDialogDirective>;
 
   @Input() visible = false;
   @Output() visibleChange = new EventEmitter<boolean>();
