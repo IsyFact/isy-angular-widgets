@@ -182,7 +182,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     this.resetAllSelection();
     this.resetGroupSelection();
 
-    this.displayedCharacters = this.allCharacters.filter(z => z.grundzeichen === this.selectedGrundzeichen);
+    this.displayedCharacters = this.allCharacters.filter(z => (z.grundzeichen === '' ? '*' : z.grundzeichen) === this.selectedGrundzeichen);
     this.selectFirstEntry();
   }
 
