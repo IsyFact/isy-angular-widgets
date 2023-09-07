@@ -143,14 +143,14 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   /**
    * Resets all the user base selections.
    */
-  private resetBaseSelection(): void {
+  private resetGrundzeichenSelection(): void {
     this.selectedGrundzeichen = undefined;
   }
 
   /**
    * Resets all the user group selections.
    */
-  private resetGroupSelection(): void {
+  private resetSchriftzeichenGruppeSelection(): void {
     this.selectedSchriftzeichenGruppe = undefined;
   }
 
@@ -168,8 +168,8 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * @internal
    */
   onAllSelection(): void {
-    this.resetBaseSelection();
-    this.resetGroupSelection();
+    this.resetGrundzeichenSelection();
+    this.resetSchriftzeichenGruppeSelection();
 
     this.resetDisplayedCharacters();
   }
@@ -178,9 +178,9 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * Is fired when a base get selected
    * @internal
    */
-  onBaseSelection(): void {
+  onGrundzeichenSelection(): void {
     this.resetAllSelection();
-    this.resetGroupSelection();
+    this.resetSchriftzeichenGruppeSelection();
 
     this.displayedCharacters = this.allCharacters.filter(z => (z.grundzeichen === '' ? '*' : z.grundzeichen) === this.selectedGrundzeichen);
     this.selectFirstEntry();
@@ -190,9 +190,9 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * Is fired when a base get selected
    * @internal
    */
-  onGroupSelection(): void {
+  onSchriftzeichenGruppeSelection(): void {
     this.resetAllSelection();
-    this.resetBaseSelection();
+    this.resetGrundzeichenSelection();
 
     this.displayedCharacters = this.allCharacters.filter(z => z.schriftzeichengruppe === this.selectedSchriftzeichenGruppe);
     this.selectFirstEntry();

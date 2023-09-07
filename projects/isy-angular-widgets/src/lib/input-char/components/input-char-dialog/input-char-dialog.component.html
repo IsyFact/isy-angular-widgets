@@ -28,7 +28,8 @@
           <p-selectButton
             [options]="grundZeichenListe"
             [(ngModel)]="selectedGrundzeichen"
-            (onChange)="onBaseSelection()"
+            (onChange)="onGrundzeichenSelection()"
+            id="grundzeichenSelectButton"
           >
           </p-selectButton>
         </p-accordionTab>
@@ -37,7 +38,8 @@
           <p-selectButton
             [options]="schriftZeichenGruppen"
             [(ngModel)]="selectedSchriftzeichenGruppe"
-            (onChange)="onGroupSelection()"
+            (onChange)="onSchriftzeichenGruppeSelection()"
+            id="schriftzeichenGruppeSelectButton"
           >
           </p-selectButton>
         </p-accordionTab>
