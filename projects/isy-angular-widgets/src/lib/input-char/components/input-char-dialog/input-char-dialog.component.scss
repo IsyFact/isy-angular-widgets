@@ -32,6 +32,10 @@
   width: 100%;
   padding: 1em;
   align-items: flex-end;
+
+  button {
+    flex-shrink: 0;
+  }
 }
 
 // To style PrimeNG widgets within a composition, we were unable to use own classes. A SASS interface is currently
