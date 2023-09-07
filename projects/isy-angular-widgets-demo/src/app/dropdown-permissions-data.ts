@@ -5,11 +5,11 @@ interface DropdownPermissionData {
 
 export const dropdownPermissionsData: DropdownPermissionData[] = [
   {
-    display: 'Nein',
-    permission: ''
+    display: 'Admin',
+    permission: 'admin'
   },
   {
-    display: 'Ja',
-    permission: 'secretFieldsInputSwitch'
+    display: 'User',
+    permission: 'user'
   }
 ];

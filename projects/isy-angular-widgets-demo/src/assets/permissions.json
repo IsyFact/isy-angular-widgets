@@ -1,7 +1,7 @@
 {
   "elements": {
     "personenSuche": ["admin"],
-    "secretFieldsInputSwitch": ["admin","user"]
+    "secretFieldsInputSwitch": ["admin"]
   },
   "routes": {
     "personen": ["admin", "user"],
