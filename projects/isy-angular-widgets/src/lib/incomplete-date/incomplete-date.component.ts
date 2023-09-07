@@ -2,7 +2,6 @@
 
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-
 import {IncompleteDateService} from './incomplete-date.service';
 
 /**
@@ -46,16 +45,6 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
   @Input() placeholder = '';
 
   /**
-   * Decides whether only past dates are allowed
-   */
-  @Input() dateInPastConstraint = false;
-
-  /**
-   * FormControl / ngModel Value of the host component, actual output
-   */
-  private outputValue: string = '';
-
-  /**
    * Currently displayed date string
    */
   inputValue: string = '';
@@ -77,43 +66,41 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Transforms and saves a value according to the display format
-   * @param val The new value
-   */
-  writeValue(val: string): void {
-    this.inputValue = this.incompleteDateService.transformValue(val);
-  }
-
-  /**
-   * Updates input and output value according the format configuration
+   * Called by the Forms module to write a value into a form control
    * @param value The new value
    */
-  onNgModelChange(value: string): void {
+  writeValue(value: string): void {
     this.inputValue = value;
-    this.outputValue = this.incompleteDateService.transformValue(
-      value,
-      this.dateInPastConstraint
-    );
-    this._onChange(this.outputValue);
   }
 
   /**
+   * Transforms the input value if necessary and updates it when user completes the mask pattern
+   */
+  onComplete(): void {
+    this.inputValue = this.incompleteDateService.transformValue(this.inputValue);
+    this.onChange(this.inputValue);
+  }
+
+  /**
+   * Reports the value back to the parent form
    * Calls the given function on component change
    * @param fn The function to be called on component change
    */
-  registerOnChange(fn: Function): void {
-    this._onChange = fn;
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
 
   /**
+   * Reports to the parent form that the control was touched
    * Calls the given function on component touch
    * @param fn The function to be called on component touch
    */
-  registerOnTouched(fn: Function): void {
-    this._onTouched = fn;
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   /**
+   * Transmits the state (enabled/disabled) to the form control
    * Enables or disables the component
    * @param isDisabled True to disable the component; false to enable the component
    */
@@ -121,21 +108,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
     this.disabled = isDisabled;
   }
 
-  /**
-   * Transforms the current input according to configuration on losing the focus
-   */
-  onFocusOut(): void {
-    this.inputValue = this.incompleteDateService.transformValue(
-      this.inputValue,
-      this.dateInPastConstraint
-    );
-    this._onTouched();
-  }
+  onChange: Function = (_: any) => {};
 
-  private _onChange: Function = (_: unknown) => {
-    /*Empty*/
-  };
-  private _onTouched: Function = () => {
-    /*Empty*/
-  };
+  onTouched: Function = () => {}; 
+
 }

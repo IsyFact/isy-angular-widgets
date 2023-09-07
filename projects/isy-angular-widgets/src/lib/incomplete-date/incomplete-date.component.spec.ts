@@ -31,9 +31,9 @@ describe('IsyIncompleteDateComponent', () => {
   });
 
   it('valid writeValue sets inputValue', () => {
-    sut.writeValue('01.01.2020');
+    sut.writeValue('01.01.2023');
 
-    expect(sut.inputValue).toBe('01.01.2020');
+    expect(sut.inputValue).toBe('01.01.2023');
     expect(onChange).not.toHaveBeenCalled();
     expect(onTouched).not.toHaveBeenCalled();
   });
@@ -43,14 +43,9 @@ describe('IsyIncompleteDateComponent', () => {
     expect(sut.disabled).toBeTrue();
   });
 
-  it('expect value set by onFocusOut', () => {
-    sut.writeValue('01.01.2020');
-    sut.onFocusOut();
-    expect(sut.inputValue).toBe('01.01.2020');
-  });
-
-  it('expect value set by onNgModelChange', () => {
-    sut.onNgModelChange('01.01.2020');
-    expect(sut.inputValue).toBe('01.01.2020');
+  it('expect value set by onComplete', () => {
+    sut.writeValue('01.01.2023');
+    sut.onComplete();
+    expect(sut.inputValue).toBe('01.01.2023');
   });
 });
