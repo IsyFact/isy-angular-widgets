@@ -285,7 +285,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    */
   closeCharPicker(): void {
     this.visible = false;
-    // this.selectedZeichenObjekt = this.allCharacters[0];
     this.visibleChange.emit(this.visible);
   }
 
