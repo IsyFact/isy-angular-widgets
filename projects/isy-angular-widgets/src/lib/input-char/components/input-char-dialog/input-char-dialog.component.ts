@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
+import {WidgetsConfigService} from "../../../i18n/widgets-config.service";
 
 /**
  * @internal
@@ -113,6 +114,9 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * @internal
    */
   allCharsModel: string = 'Alle';
+
+  constructor(private widgetsConfigService: WidgetsConfigService) {
+  }
 
   /**
    * Fire on initialization
@@ -295,4 +299,12 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Get translated text
+   * @param path to the translated text
+   * @returns translated text
+   */
+  getTranslation(path: string): any {
+    return this.widgetsConfigService.getTranslation(path);
+  }
 }
