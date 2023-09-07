@@ -1,5 +1,5 @@
 import {IncompleteDateService} from './incomplete-date.service';
-import { IncompleteDateComponent } from './incomplete-date.component';
+import {IncompleteDateComponent} from './incomplete-date.component';
 import {TestBed} from '@angular/core/testing';
 import {AbstractControl, FormControl, FormsModule} from '@angular/forms';
 
@@ -58,6 +58,18 @@ describe('IsyIncompleteDateComponent', () => {
   it('should return UNSPECIFIEDDATE if the day is invalid', () => {
     const errorKey = 'UNSPECIFIEDDATE';
     const control: AbstractControl = new FormControl('50.11.2023');
+
+    const errors = sut.validate(control);
+    if (!errors) {
+      throw new Error('errors is not defined');
+    }
+
+    expect(errors[errorKey]).toBeDefined();
+  });
+
+  it('should return UNSPECIFIEDDATE if the month is invalid', () => {
+    const errorKey = 'UNSPECIFIEDDATE';
+    const control: AbstractControl = new FormControl('11.50.2023');
 
     const errors = sut.validate(control);
     if (!errors) {
