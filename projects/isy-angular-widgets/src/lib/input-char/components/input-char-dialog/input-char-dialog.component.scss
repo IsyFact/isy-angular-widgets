@@ -79,15 +79,19 @@ $on_hover_text_color: white;
       }
     }
 
-    p-accordion p-selectButton .p-ripple.p-element.p-button {
+    // Styles specific for left side select buttons
+    p-selectButton .p-ripple.p-element.p-button {
       border: none;
+    }
+
+    // Styles specific for the Grundzeichen select button
+    #grundzeichenSelectButton .p-ripple.p-element.p-button {
       width: 50px;
     }
 
     // Styles specific for the "Select All" button
-    .all-select-button .p-ripple.p-element.p-button {
+    #all-select-button .p-ripple.p-element.p-button {
       width: 100%;
-      border: none;
       font-weight: 600;
       text-align: start;
       height: 50px;
