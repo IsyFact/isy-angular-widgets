@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 import {firstValueFrom} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * A service to translate labels of {@link MenuItem} or {@link MegaMenuItem} using the ngx-translation service.
@@ -35,6 +35,7 @@ export class MenuTranslationService {
 
     for (const untranslatedItem of items) {
       const translatedItem = Object.assign({}, untranslatedItem);
+
 
       translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string)) as string;
 

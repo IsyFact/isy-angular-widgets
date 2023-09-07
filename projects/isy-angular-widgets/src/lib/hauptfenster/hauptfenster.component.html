@@ -3,7 +3,7 @@
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
         <img
-          alt="{{('isyAngularWidgets.hauptfenster.altLogoAnbieterAwl' | translate)}}"
+          alt="{{configService.getTranslation('hauptfenster.altLogoAnbieterAwl')}}"
           class="isy-hauptfenster-logo-anbieter-awl"
           [src]="logoAnbieterAwl"
         >
@@ -15,7 +15,7 @@
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
       <div class="flex flex-row-reverse">
         <img
-          alt="{{('isyAngularWidgets.hauptfenster.altLogoAwl' | translate)}}"
+          alt="{{configService.getTranslation('hauptfenster.altLogoAwl')}}"
           class="isy-hauptfenster-logo-awl"
           [src]="logoAwl"
           *ngIf="logoAwl; else customLogoAwl"
@@ -26,7 +26,7 @@
       </div>
       <div class="flex flex-row-reverse">
         <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)">
-          {{('isyAngularWidgets.hauptfenster.logout' | translate)}}
+          {{configService.getTranslation('hauptfenster.logout')}}
         </p-button>
         <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
           <em class="pi pi-user mr-1"></em>
@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <p-megaMenu [model]="translatedItems" class="dont-print" styleClass="flex">
+  <p-megaMenu [model]="items" class="dont-print" styleClass="flex">
     <ng-template pTemplate="end">
       <ng-content select="[Hauptnavigation-Tools]"></ng-content>
     </ng-template>

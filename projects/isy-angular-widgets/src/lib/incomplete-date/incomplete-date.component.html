@@ -1,10 +1,11 @@
-<input
-  pInputText
-  [placeholder]="placeholder"
-  [ngModel]="inputValue"
-  (ngModelChange)="onNgModelChange($event)"
+<p-inputMask
   [readonly]="readonly"
   [disabled]="disabled"
-  (focusout)="onFocusOut()"
-  class="w-full"
-  type="text">
+  (ngModelChange)="onNgModelChange($event)" 
+  (focusout)="onFocusOut()" 
+  mask="**.**.****" 
+  [(ngModel)]="inputValue" 
+  characterPattern="^[x]" 
+  [placeholder]="placeholder"
+>
+</p-inputMask>

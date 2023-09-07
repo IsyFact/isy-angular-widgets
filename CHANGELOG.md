@@ -1,14 +1,18 @@
-# 0.9.0
+# 14.0.0 - 30.08.2023
 ## Breaking Changes
 - Die Properties `linksNavigationCols` und `informationsbereichCols` wurden durch `linksNavigationWidth` und `informationsbereichWidth` ersetzt
 ## Features
 - IFS-2010: Header und Seitenleisten werden in der Druckansicht jetzt ausgeblendet
-- IFS-XXXX: Anwendungslogos können jetzt mit eigenem HTML gesetzt werden
-- IFS-XXXX: Seitenleisten können jetzt in ihrer Breite frei konfiguriert werden
-- IFS-XXXX: Behördenspezifische Widgets und die Widgets aus PrimeNG können jetzt in den Sprachen Deutsch und Englisch angezeigt werden 
+- Anwendungslogos können jetzt mit eigenem HTML gesetzt werden
+- Seitenleisten können jetzt in ihrer Breite frei konfiguriert werden
+- Behördenspezifische Widgets und die Widgets aus PrimeNG können jetzt in den Sprachen Deutsch und Englisch angezeigt werden 
+- ISY-86: Eingabefeld für ungewisses Datum verwendet jetzt eine Eingabemaske für das deutsche Datumsformat
 ## Fixes
-- IFS-XXXX: Seitenleisten werden nun korrekt ausgeblendet, wenn ihr show-Property false, aber collapse-Property true ist
-- IFS-XXXX: Der InputCharPicker wird seinen Button nun korrekt neben seinem Inputfeld statt darunter rendern
+- Seitenleisten werden nun korrekt ausgeblendet, wenn ihr show-Property false, aber collapse-Property true ist
+- ISY-132: Der Sonderzeichen-Picker stellt seinen Button nun korrekt neben seinem Eingabefeld (anstatt darunter) dar
+## Demo-Anwendung
+- ISY-97: Die Demo-Anwendung zeigt ein Dashboard auf der Startseite, welches sich bereits responsive verhält
+- ISY-96: Der Sonderzeichen-Picker wird exemplarisch auf der Seite _Objekt suchen_ eingebunden
 
 # 0.8.0 - 15.05.2023
 ## Breaking Changes

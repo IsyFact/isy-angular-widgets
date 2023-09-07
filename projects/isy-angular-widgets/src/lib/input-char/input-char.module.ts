@@ -10,7 +10,6 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {InputCharPreviewComponent} from './components/input-char-preview/input-char-preview.component';
 import {InputCharDialogComponent} from './components/input-char-dialog/input-char-dialog.component';
 import {InputCharDirective} from './directives/input-char.directive';
-import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import {TranslateModule} from '@ngx-translate/core';
     FormsModule,
     AccordionModule,
     DialogModule,
-    SelectButtonModule,
-    TranslateModule
+    SelectButtonModule
   ]
 })
 export class InputCharModule { }

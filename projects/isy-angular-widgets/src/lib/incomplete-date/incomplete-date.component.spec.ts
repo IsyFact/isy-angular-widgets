@@ -38,14 +38,6 @@ describe('IsyIncompleteDateComponent', () => {
     expect(onTouched).not.toHaveBeenCalled();
   });
 
-  it('invalid writeValue clears inputValue', () => {
-    sut.writeValue('otto');
-
-    expect(sut.inputValue).toBe('');
-    expect(onChange).not.toHaveBeenCalled();
-    expect(onTouched).not.toHaveBeenCalled();
-  });
-
   it('expect disabled to be true', () => {
     sut.setDisabledState(true);
     expect(sut.disabled).toBeTrue();

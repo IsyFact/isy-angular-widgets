@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {Zeichenobjekt} from '../../model/model';
 
 @Component({
@@ -72,7 +73,7 @@ export class InputCharComponent implements OnChanges {
    */
   allCharacters: Zeichenobjekt[] = [];
 
-  constructor(private charService: CharacterService) {
+  constructor(private charService: CharacterService, private widgetsConfigService: WidgetsConfigService) {
   }
 
   ngOnChanges(): void {
@@ -94,5 +95,14 @@ export class InputCharComponent implements OnChanges {
   private getCharactersByDatentyp(datentyp: Datentyp): void {
     const allowedGroups = this.charService.getGroupsByDataType(datentyp);
     this.allCharacters = this.charService.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
+  }
+
+  /**
+   * Get translated text
+   * @param path to the translated text
+   * @returns translated text
+   */
+  getTranslation(path: string): any {
+    return this.widgetsConfigService.getTranslation(path);
   }
 }
