@@ -34,10 +34,12 @@ $letter-size: 5em;
 
 .letter-information-preview {
   position: relative;
-  padding-left: 8px;
+  padding-left: 10px;
   width: 70%;
+  height: calc($letter-size + 1em);
 
-  .letters-spacing {
-    padding-bottom: 3rem;
+  #codepoint {
+    position: absolute;
+    bottom: 0;
   }
 }
