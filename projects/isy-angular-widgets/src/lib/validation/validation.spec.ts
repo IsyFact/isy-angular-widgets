@@ -27,8 +27,8 @@ describe('Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return DATE if the day is invalid', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if the day is invalid', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('50.11.2023');
 
       const errors = Validation.validUnspecifiedDate(control);
@@ -39,8 +39,8 @@ describe('Validation', () => {
       expect(errors[errorKey]).toBeDefined();
     });
 
-    it('should return DATE if the month is invalid', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if the month is invalid', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.30.2023');
 
       const errors = Validation.validUnspecifiedDate(control);
@@ -69,8 +69,8 @@ describe('Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return DATE if date is unspecified and the month is invalid in german date format 00.MM.YYYY', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if date is unspecified and the month is invalid in german date format 00.MM.YYYY', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('00.13.2023');
       const errors = Validation.validUnspecifiedDate(control);
 
@@ -81,8 +81,8 @@ describe('Validation', () => {
       expect(errors[errorKey]).toBeDefined();
     });
 
-    it('should return DATE if date is in german date format DD.00.YYYY', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if date is in german date format DD.00.YYYY', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.00.2023');
       const errors = Validation.validUnspecifiedDate(control);
       
@@ -111,8 +111,8 @@ describe('Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return DATE if date is unspecified and the month is invalid in german date format xx.MM.YYYY', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if date is unspecified and the month is invalid in german date format xx.MM.YYYY', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('xx.13.2023');
       const errors = Validation.validUnspecifiedDate(control);
       
@@ -123,8 +123,8 @@ describe('Validation', () => {
       expect(errors[errorKey]).toBeDefined();
     });
 
-    it('should return DATE if date is in german date format DD.xx.2022', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if date is in german date format DD.xx.2022', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.xx.2023');
       const errors = Validation.validUnspecifiedDate(control);
       
@@ -135,8 +135,8 @@ describe('Validation', () => {
       expect(errors[errorKey]).toBeDefined();
     });
 
-    it('should return DATE if date is in german date format xx.MM.xxxx', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if date is in german date format xx.MM.xxxx', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('xx.01.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
       
@@ -147,8 +147,8 @@ describe('Validation', () => {
       expect(errors[errorKey]).toBeDefined();
     });
 
-    it('should return DATE if date is in german date format DD.xx.xxxx', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if date is in german date format DD.xx.xxxx', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.xx.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
       
@@ -159,8 +159,8 @@ describe('Validation', () => {
       expect(errors[errorKey]).toBeDefined();
     });
 
-    it('should return DATE if date is in german date format DD.MM.xxxx', () => {
-      const errorKey = 'DATE';
+    it('should return UNSPECIFIEDDATE if date is in german date format DD.MM.xxxx', () => {
+      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.01.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
       
