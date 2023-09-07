@@ -72,9 +72,16 @@ $on_hover_text_color: white;
       box-shadow: none !important;
     }
 
-    p-accordiontab .p-accordion-content {
-      border: 0;
-      padding: 0
+    p-accordiontab {
+      // Fix specific for a buggy PrimeNG 14 behaviour where sometimes, content is shown although accordion is collapsed.
+      :not(.p-accordion-tab-active) .p-toggleable-content:not(.ng-animating) {
+        height: 0;
+      }
+
+      .p-accordion-content {
+        border: 0;
+        padding: 0
+      }
     }
 
     p-accordion p-selectButton .p-ripple.p-element.p-button {
@@ -110,6 +117,11 @@ $on_hover_text_color: white;
       font-size: 1.25rem;
       border-width: 0 1px 1px 0;
       border-style: solid;
+
+      // Specific fix for the " " (space, U+0020) selectButton to have full height. To be revised in later versions.
+      span {
+        height: 24px;
+      }
     }
   }
 
@@ -119,4 +131,5 @@ $on_hover_text_color: white;
   .p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
     overflow: hidden;
   }
+
 }

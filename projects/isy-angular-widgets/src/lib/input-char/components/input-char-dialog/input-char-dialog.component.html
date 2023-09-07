@@ -26,7 +26,6 @@
       <p-accordion [multiple]="true">
         <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerBaseChars' | translate)">
           <p-selectButton
-            #base
             [options]="grundZeichenListe"
             [(ngModel)]="selectedGrundzeichen"
             (onChange)="onBaseSelection()"
@@ -36,7 +35,6 @@
 
         <p-accordionTab [header]="('isyAngularWidgets.inputChar.headerGroups' | translate)">
           <p-selectButton
-            #group
             [options]="schriftZeichenGruppen"
             [(ngModel)]="selectedSchriftzeichenGruppe"
             (onChange)="onGroupSelection()"

@@ -198,7 +198,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     this.selectFirstEntry();
   }
 
-
   /**
    * Is selecting the first zeichenobjekt inside the current list
    * @internal
@@ -206,7 +205,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   private selectFirstEntry(): void {
     this.selectedZeichenObjekt = this.displayedCharacters[0];
   }
-
 
   /**
    * Initialize the char picker with it's Grundzeichen, Schriftzeichengruppen and initial state.
