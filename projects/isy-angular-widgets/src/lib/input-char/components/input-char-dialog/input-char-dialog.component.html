@@ -16,7 +16,8 @@
   <div>
     <div class="split" id="left-panel-side">
       <p-selectButton
-        [options]="['Alle']"
+        [options]="allCharsOptions"
+        optionLabel="label"
         (onChange)="onAllSelection()"
         [(ngModel)]="allCharsModel"
         id="all-select-button"
@@ -24,7 +25,7 @@
       </p-selectButton>
 
       <p-accordion [multiple]="true">
-        <p-accordionTab [header]="getTranslation('isyAngularWidgets.inputChar.headerBaseChars')">
+        <p-accordionTab [header]="widgetsConfigService.getTranslation('inputChar.headerBaseChars')">
           <p-selectButton
             [options]="grundZeichenListe"
             [(ngModel)]="selectedGrundzeichen"
@@ -34,7 +35,7 @@
           </p-selectButton>
         </p-accordionTab>
 
-        <p-accordionTab [header]="getTranslation('isyAngularWidgets.inputChar.headerGroups')">
+        <p-accordionTab [header]="getTranslation('inputChar.headerGroups')">
           <p-selectButton
             [options]="schriftZeichenGruppen"
             [(ngModel)]="selectedSchriftzeichenGruppe"
@@ -64,7 +65,7 @@
 
         <button pButton [disabled]="!selectedZeichenObjekt" class="flex-shrink-0 font-bold"
                 (click)="insertSelectedZeichen()">
-          {{getTranslation('isyAngularWidgets.inputChar.insert')}}
+          {{getTranslation('inputChar.insert')}}
         </button>
       </div>
     </div>

@@ -110,12 +110,18 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   selectedZeichenObjekt?: Zeichenobjekt;
 
   /**
+   * Filled with one option for "All Characters"; solely technical reasons.
+   * @internal
+   */
+  allCharsOptions = [{label: this.getTranslation('inputChar.all') as string || 'Alle'}];
+
+  /**
    * Filled when all chars are selected; solely technical reasons.
    * @internal
    */
-  allCharsModel: string = 'Alle';
+  allCharsModel: {label: string} | undefined = this.allCharsOptions[0];
 
-  constructor(private widgetsConfigService: WidgetsConfigService) {
+  constructor(public widgetsConfigService: WidgetsConfigService) {
   }
 
   /**
@@ -141,7 +147,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * Resets all the user selections.
    */
   private resetAllSelection(): void {
-    this.allCharsModel = '';
+    this.allCharsModel = undefined;
   }
 
   /**
@@ -218,7 +224,7 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     this.grundZeichenListe = this.getAvailableGrundzeichen();
     this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
     this.resetDisplayedCharacters();
-    this.allCharsModel = 'Alle';
+    this.allCharsModel = this.allCharsOptions[0];
   }
 
   /**
