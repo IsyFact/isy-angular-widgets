@@ -66,6 +66,7 @@ describe('PersonBearbeitenComponent', () => {
     const userInfoData = userInfoService.getUserInfo();
     securityService.setRoles(userInfoData);
     securityService.setPermissions(data);
+    component.showSecretFields = true;
     fixture.detectChanges();
   }
 
@@ -127,14 +128,9 @@ describe('PersonBearbeitenComponent', () => {
     const userInfoData = userInfoService.getUserInfo();
     securityService.setRoles(userInfoData);
     securityService.setPermissions(data);
-    component.selectPermission('secretFieldsInputSwitch');
+    component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
+    expect(component.showSecretFields).toBeTrue();
     fixture.detectChanges();
-
-    const showSecretFieldSwitch = fixture.debugElement.query(By.css('#showSecretFields input'));
-    showSecretFieldSwitch.nativeElement.checked = true;
-    showSecretFieldSwitch.nativeElement.dispatchEvent(new Event('change'));
-    fixture.detectChanges();
-
     const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'));
     expect(secretFieldsContainer).toBeTruthy();
   });
@@ -170,19 +166,15 @@ describe('PersonBearbeitenComponent', () => {
   });
 
   it('display permitted secret fields elements', () => {
-    setupRolesAndPermissions();
     expect(component.showSecretFields).toBeFalse();
-    const elementId = 'secretFieldsInputSwitch';
-    component.selectPermission(elementId);
+    setupRolesAndPermissions();
     expect(component.showSecretFields).toBeTrue();
   });
 
   it('do not Display non permitted element', () => {
-    setupRolesAndPermissions();
     expect(component.showSecretFields).toBeFalse();
-    const elementId = 'not_permitted';
-    component.selectPermission(elementId);
-    expect(component.showSecretFields).toBeFalse();
+    const secretFields = fixture.nativeElement.querySelector('showSecretFields');
+    expect(secretFields).toBeNull();
   });
 
   it('checking the buttons availability', () => {

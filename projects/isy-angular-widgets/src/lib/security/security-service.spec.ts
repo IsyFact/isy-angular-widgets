@@ -1,5 +1,5 @@
 import {TestBed} from '@angular/core/testing';
-import {SecurityService} from 'isy-angular-widgets';
+import {SecurityService} from './security-service';
 import {UserInfoPublicService} from '../../../../isy-angular-widgets-demo/src/app/core/user/userInfoPublicService';
 import {PermissionMaps} from './permission-maps';
 import {UserInfo} from '../api/userinfo';

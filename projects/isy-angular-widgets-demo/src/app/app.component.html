@@ -42,6 +42,18 @@
         </div>
       </ng-template>
     </p-dropdown>
+
+    <p-dropdown
+      id="selectPermissionForSecrentFields"
+      class="ml-2"
+      optionLabel="display"
+      dataKey="display"
+      optionValue="permission"
+      [options]="dropdownPermissionsData"
+      (onChange)="selectPermission($event.value)"
+    >
+    </p-dropdown>
+
   </div>
   <router-outlet></router-outlet>
 </isy-hauptfenster>

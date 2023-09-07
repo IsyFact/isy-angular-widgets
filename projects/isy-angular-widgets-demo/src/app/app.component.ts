@@ -12,6 +12,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {WidgetsTranslation} from '../../../isy-angular-widgets/src/lib/i18n/widgets-translation';
 import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/widgets-config.service';
+import {dropdownPermissionsData} from './dropdown-permissions-data';
 
 @Component({
   selector: 'demo-root',
@@ -19,6 +20,7 @@ import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/wi
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
+  protected readonly dropdownPermissionsData = dropdownPermissionsData;
   items: MegaMenuItem[] = [];
   sidebarItems: MenuItem[] = [];
   primeNGI18nSubscription: Subscription;
@@ -74,7 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  userInfo?: UserInfo = {
+  userInfo: UserInfo = {
     displayName: 'Max Mustermann'
   };
 
@@ -87,4 +89,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  selectPermission(role: string): void {
+    this.userInfo.roles = [role];
+    this.securityService.setRoles(this.userInfo);
+  }
 }
