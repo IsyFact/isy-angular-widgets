@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
-import {WidgetsConfigService} from "../../../i18n/widgets-config.service";
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 /**
  * @internal
