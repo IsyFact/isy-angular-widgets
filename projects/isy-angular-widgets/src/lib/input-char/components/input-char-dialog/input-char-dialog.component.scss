@@ -7,13 +7,13 @@
   overflow-x: hidden;
 }
 
-.left-panel-side {
+#left-panel-side {
   left: 0;
   width: 30%;
   overflow-y: scroll;
 }
 
-.right-panel-side {
+#right-panel-side {
   right: 0;
   width: 70%;
   padding: 5px;
@@ -26,16 +26,12 @@
   }
 }
 
-.lower-right-panel {
+#lower-right-panel {
   display: flex;
   bottom: 0;
   width: 100%;
   padding: 1em;
   align-items: flex-end;
-
-  button {
-    flex-shrink: 0;
-  }
 }
 
 // To style PrimeNG widgets within a composition, we were unable to use own classes. A SASS interface is currently
@@ -71,7 +67,7 @@ $on_hover_text_color: white;
   }
 
   // Styles specific for left side (incl. select buttons)
-  .left-panel-side {
+  #left-panel-side {
     .p-accordion-header .p-accordion-header-link:focus {
       box-shadow: none !important;
     }
@@ -113,7 +109,7 @@ $on_hover_text_color: white;
   }
 
   // Styles specific for right side select buttons
-  .right-panel-side p-selectButton {
+  #right-panel-side p-selectButton {
 
     .p-ripple.p-element.p-button {
       padding: 0.25rem;

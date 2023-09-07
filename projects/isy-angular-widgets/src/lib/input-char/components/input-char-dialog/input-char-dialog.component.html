@@ -14,7 +14,7 @@
   (visibleChange)="onInnerDialogVisibilityChange($event)"
 >
   <div>
-    <div class="left-panel-side split">
+    <div class="split" id="left-panel-side">
       <p-selectButton
         [options]="['Alle']"
         (onChange)="onAllSelection()"
@@ -44,14 +44,14 @@
       </p-accordion>
     </div>
 
-    <div class="right-panel-side split">
+    <div class="split" id="right-panel-side">
       <p-selectButton
         [options]="displayedCharacters"
         [optionLabel]="'zeichen'"
         [(ngModel)]="selectedZeichenObjekt"
       >
       </p-selectButton>
-      <div class="lower-right-panel">
+      <div id="lower-right-panel">
 
         <isy-input-char-preview *ngIf="selectedZeichenObjekt"
                                 [zeichenObjekt]="selectedZeichenObjekt"
@@ -59,8 +59,8 @@
         >
         </isy-input-char-preview>
 
-        <button pButton [disabled]="!selectedZeichenObjekt"
-                (click)="insertSelectedZeichen()" style="font-weight: bold">
+        <button pButton [disabled]="!selectedZeichenObjekt" class="flex-shrink-0 font-bold"
+                (click)="insertSelectedZeichen()">
           {{('isyAngularWidgets.inputChar.insert' | translate)}}
         </button>
       </div>
