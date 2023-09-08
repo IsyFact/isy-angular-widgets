@@ -125,9 +125,7 @@ describe('PersonBearbeitenComponent', () => {
   });
 
   it('expect secret fields to be visible', () => {
-    const userInfoData = userInfoService.getUserInfo();
-    securityService.setRoles(userInfoData);
-    securityService.setPermissions(data);
+    setupRolesAndPermissions();
     component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
     expect(component.showSecretFields).toBeTrue();
     fixture.detectChanges();

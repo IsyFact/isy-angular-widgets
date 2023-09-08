@@ -44,10 +44,10 @@
     </p-dropdown>
 
     <p-dropdown
-      id="selectPermissionForSecrentFields"
+      id="permissionsDropdown"
       class="ml-2"
-      optionLabel="display"
-      dataKey="display"
+      optionLabel="role"
+      dataKey="role"
       optionValue="permission"
       [options]="dropdownPermissionsData"
       (onChange)="selectPermission($event.value)"

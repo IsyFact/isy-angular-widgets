@@ -1,15 +1,15 @@
 interface DropdownPermissionData {
-  display: string;
+  role: string;
   permission: string;
 }
 
 export const dropdownPermissionsData: DropdownPermissionData[] = [
   {
-    display: 'Admin',
+    role: 'Admin',
     permission: 'admin'
   },
   {
-    display: 'User',
+    role: 'User',
     permission: 'user'
   }
 ];

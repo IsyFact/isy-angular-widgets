@@ -5,7 +5,6 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import data from '../assets/permissions.json';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
-import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
@@ -23,12 +22,14 @@ export class AppComponent implements OnInit, OnDestroy {
   protected readonly dropdownPermissionsData = dropdownPermissionsData;
   items: MegaMenuItem[] = [];
   sidebarItems: MenuItem[] = [];
+  userInfo: UserInfo = {
+    displayName: 'Max Mustermann'
+  };
   primeNGI18nSubscription: Subscription;
   isyAngularWidgetsI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
 
   constructor(
-    private router: Router,
     private securityService: SecurityService,
     private userInfoPublicService: UserInfoPublicService,
     public translate: TranslateService,
@@ -36,7 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private widgetsConfigService: WidgetsConfigService,
     private menuTranslationService: MenuTranslationService
   ) {
-
     // Add translation
     translate.addLangs(['de', 'en', 'ru']);
     translate.setDefaultLang('en');
@@ -75,10 +75,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.primeNGI18nSubscription.unsubscribe();
     }
   }
-
-  userInfo: UserInfo = {
-    displayName: 'Max Mustermann'
-  };
 
   getLanguageIcon(language: string): string {
     switch (language) {

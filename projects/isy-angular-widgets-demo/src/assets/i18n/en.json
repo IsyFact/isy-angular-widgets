@@ -77,8 +77,7 @@
       "sachverhalte": "Fact",
       "state": "State",
       "solved": "Solved",
-      "newEntryPlaceholder": "New Entry",
-      "selectPermissionForSecretFields": "Display secret fields"
+      "newEntryPlaceholder": "New Entry"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",
