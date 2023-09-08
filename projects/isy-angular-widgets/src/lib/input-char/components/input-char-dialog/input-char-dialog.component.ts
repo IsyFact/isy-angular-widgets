@@ -248,16 +248,14 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
    * @returns An array containing all different Grundzeichen.
    */
   private getAvailableGrundzeichen(): string[] {
-    const res: string[] = [];
-    for (const char of this.allCharacters) {
-      const grundzeichen = char.grundzeichen === '' ? '*' : char.grundzeichen;
-      if (!res.includes(grundzeichen)) {
-        if (grundzeichen === '*') {
-          res.unshift(grundzeichen);
-        } else {
-          res.push(grundzeichen);
-        }
-      }
+
+    const res = [...new Set(this.allCharacters.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))];
+
+    // Put * to the first position if present
+    const specialPos = res.indexOf('*');
+    if (specialPos > 0) {
+      res.splice(specialPos, 1);
+      res.unshift('*');
     }
 
     return res;
