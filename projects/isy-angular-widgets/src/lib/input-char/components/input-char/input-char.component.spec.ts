@@ -40,7 +40,7 @@ describe('InputCharComponent', () => {
     });
 
     it('should have the specified default input configuration', () => {
-      expect(component.header).toEqual('');
+      expect(component.header).toEqual(undefined);
       expect(component.isDialogClosable).toBeTrue();
       expect(component.isDialogDraggable).toBeTrue();
       expect(component.isDialogResizable).toBeFalse();
