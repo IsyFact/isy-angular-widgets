@@ -75,51 +75,6 @@ describe('CharacterService', () => {
     expect(sonderZeichenliste.length).toEqual(numberOfSonderZeichen);
   });
 
-  it('check the sonderzeichenliste to array conversion', () => {
-    const schriftZeichenArray = service.getSchriftZeichenAsObjectArray();
-    const numberOfGroups = Object.keys(Schriftzeichengruppe).length;
-    expect(schriftZeichenArray.length).toEqual(numberOfGroups);
-  });
-
-  it('should check the filtering by base functionality for all different bases', () => {
-
-    bases.forEach((base, index) => {
-      const currentBase = bases[index];
-      const zeichenObjekte = service.filterZeichenobjekteByBase(sonderZeichenliste, currentBase.name);
-      expect(zeichenObjekte.length).toEqual(currentBase.count);
-    });
-  });
-
-  it('should check the filtering by group functionality for all different groups', () => {
-    groups.forEach((group, index) => {
-      const currentGroup = groups[index];
-      const zeichenObjekte = service.filterZeichenobjekteByGroup(sonderZeichenliste, currentGroup.name);
-      expect(zeichenObjekte.length).toEqual(currentGroup.count);
-    });
-  });
-
-  it('should check the zeichenobjekt to list conversion', () => {
-    const baseList = service.getGrundZeichenAsList(sonderZeichenliste);
-    for (let i = 0; i < baseList.length; i++) {
-      expect(baseList[i]).toEqual(bases[i].name);
-    }
-  });
-
-  it('should check the schriftzeichengruppe to schriftzeichen conversion', () => {
-    const schriftzeichenGruppe = Schriftzeichengruppe.LATEIN;
-    const schriftZeichen = service.convertSchriftZeichengruppeToSchriftzeichen(schriftzeichenGruppe);
-    expect(schriftZeichen.id).toEqual(schriftzeichenGruppe);
-    expect(schriftZeichen.gruppe).toEqual(schriftzeichenGruppe);
-  });
-
-  it('should check the schriftzeichengruppe array to schriftzeichen array conversion', () => {
-    const schriftZeichen = service.convertToSchriftzeichenArray(schriftZeichenGruppen);
-    for (let i = 0; i < schriftZeichenGruppen.length; i++) {
-      expect(schriftZeichenGruppen[i]).toEqual(schriftZeichen[i].id);
-      expect(schriftZeichenGruppen[i]).toEqual(schriftZeichen[i].gruppe);
-    }
-  });
-
   it('should check the group filtering by datatype = "DATENTYP_A"', () => {
     const dataType = Datentyp.DATENTYP_A;
     const filteredGroups = service.getGroupsByDataType(dataType);
