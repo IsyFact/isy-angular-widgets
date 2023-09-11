@@ -7,8 +7,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {By} from '@angular/platform-browser';
 import {InputCharModule} from '../../input-char.module';
 
-const crypto = window.crypto;
-
 describe('InputCharComponent', () => {
   describe('InputCharComponent with default datentyp = DATENTYP_C', () => {
     let component: InputCharComponent;
