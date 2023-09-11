@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
-import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {Zeichenobjekt} from '../../model/model';
 
 @Component({
@@ -73,7 +72,7 @@ export class InputCharComponent implements OnChanges {
    */
   allCharacters: Zeichenobjekt[] = [];
 
-  constructor(private charService: CharacterService, private widgetsConfigService: WidgetsConfigService) {
+  constructor(private charService: CharacterService) {
   }
 
   ngOnChanges(): void {
