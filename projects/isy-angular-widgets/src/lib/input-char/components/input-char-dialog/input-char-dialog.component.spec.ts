@@ -4,7 +4,7 @@ import {InputCharDialogComponent} from './input-char-dialog.component';
 import {DialogModule} from 'primeng/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {By} from '@angular/platform-browser';
-import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
+import {Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 
 describe('InputCharDialogComponent', () => {
@@ -18,7 +18,7 @@ describe('InputCharDialogComponent', () => {
   const numberOfBases = [...new Set(sonderzeichenListe.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))].length;
   const numberOfGroups = [...new Set(sonderzeichenListe.map(item => item.schriftzeichengruppe))].length;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [InputCharDialogComponent],
       imports: [
@@ -42,15 +42,6 @@ describe('InputCharDialogComponent', () => {
     fixture.detectChanges();
 
     expect(component.visible).toBeTrue();
-  };
-
-
-  const zeichenObjekt: Zeichenobjekt = {
-    zeichen: 'A',
-    grundzeichen: 'A',
-    schriftzeichengruppe: Schriftzeichengruppe.LATEIN,
-    name: 'LATIN CAPITAL LETTER A',
-    codepoint: 'U+0041'
   };
 
   it('should create', () => {
