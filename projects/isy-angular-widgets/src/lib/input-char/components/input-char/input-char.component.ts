@@ -96,13 +96,4 @@ export class InputCharComponent implements OnChanges {
     const allowedGroups = this.charService.getGroupsByDataType(datentyp);
     this.allCharacters = this.charService.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
   }
-
-  /**
-   * Get translated text
-   * @param path to the translated text
-   * @returns translated text
-   */
-  getTranslation(path: string): any {
-    return this.widgetsConfigService.getTranslation(path);
-  }
 }
