@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Route, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {SecurityService} from './security-service';
 
@@ -14,7 +14,7 @@ import {SecurityService} from './security-service';
  *   }
  */
 @Injectable({providedIn: 'root'})
-export class AuthGuard implements CanActivate, CanLoad {
+export class AuthGuard {
 
   /**
    * @param securityService A service that can be configured with permission configuration and return permissions for certain elements.
