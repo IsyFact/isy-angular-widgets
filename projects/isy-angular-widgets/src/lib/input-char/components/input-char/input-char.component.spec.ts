@@ -2,10 +2,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InputCharComponent} from './input-char.component';
 import {Datentyp} from '../../model/datentyp';
-import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {CharacterService} from '../../services/character.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {By} from '@angular/platform-browser';
 import {InputCharModule} from '../../input-char.module';
 
@@ -17,27 +15,6 @@ describe('InputCharComponent', () => {
     let fixture: ComponentFixture<InputCharComponent>;
     let charService: CharacterService;
 
-    let randomIndex: number;
-
-
-    const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
-
-    const displayInputChar = (): void => {
-      expect(component.visible).toBeFalse();
-
-      component.visible = true;
-      fixture.detectChanges();
-
-      expect(component.visible).toBeTrue();
-    };
-
-    const zeichenObjekt: Zeichenobjekt = {
-      zeichen: 'A',
-      grundzeichen: 'A',
-      schriftzeichengruppe: Schriftzeichengruppe.LATEIN,
-      name: 'LATIN CAPITAL LETTER A',
-      codepoint: 'U+0041'
-    };
     beforeEach(async() => {
       await TestBed.configureTestingModule({
         declarations: [
@@ -57,7 +34,6 @@ describe('InputCharComponent', () => {
       charService = TestBed.inject(CharacterService);
       component = fixture.componentInstance;
       component.visible = false;
-      randomIndex = (crypto.getRandomValues(new Uint32Array(1)))[0] % sonderzeichenListe.length;
       fixture.detectChanges();
     });
 
