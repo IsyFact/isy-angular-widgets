@@ -39,7 +39,7 @@ describe('InputCharViewComponent', () => {
   });
 
   it('should have a button with label "Einfügen"', () => {
-    const insertButton = fixture.debugElement.query(By.css('.insert-button')).nativeElement as HTMLElement;
+    const insertButton = fixture.debugElement.query(By.css('#insert-button')).nativeElement as HTMLElement;
     expect(insertButton.innerText).toContain('Einfügen');
   });
 
