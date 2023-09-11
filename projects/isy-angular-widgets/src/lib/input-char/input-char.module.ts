@@ -18,6 +18,7 @@ import {
   InputCharPreviewCharListComponent
 } from './components/input-char-preview-char-list/input-char-preview-char-list.component';
 import {InputCharDirective} from './directives/input-char.directive';
+import {CharacterService} from './services/character.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,9 @@ import {InputCharDirective} from './directives/input-char.directive';
     AccordionModule,
     DialogModule,
     SelectButtonModule
+  ],
+  providers: [
+    CharacterService
   ]
 })
 export class InputCharModule { }
