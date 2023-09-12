@@ -20,12 +20,12 @@ export interface ChartOptions {
   scales?: Axes;
 }
 
-export interface StackedTooltip {
+interface StackedTooltip {
   mode: string;
   intersect: boolean;
 }
 
-export interface Axes {
+interface Axes {
   x: Axe;
   y: Axe;
 }
@@ -36,11 +36,11 @@ export interface Axe {
   grid: Grid;
 }
 
-export interface Tick {
+interface Tick {
   color: string;
 }
 
-export interface Grid {
+interface Grid {
   color: string;
 }
 
