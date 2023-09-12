@@ -12,19 +12,11 @@ describe('SecurityGuard - without setting up roles and permissions', function() 
   let activatedRoute: ActivatedRoute;
   let fakeCounterService: SpyObj<AuthGuard>;
 
-  const route: Route = {
-    title: 'Dashboard',
-    path: 'dashboard'
-  };
-
-  const routeStateMock: any = { snapshot: {}, url: '/dashboard'};
-
   beforeEach(() => {
     fakeCounterService = jasmine.createSpyObj<AuthGuard>(
       'AuthGuard',
       {
-        canActivate: of(false),
-        canLoad: of(false)
+        canActivate: of(false)
       }
     );
 
@@ -68,16 +60,9 @@ describe('SecurityGuard - without setting up roles and permissions', function() 
   });
 
   it('cannot activate - no roles setup', () => {
-    const canActivateObservable = guard.canActivate(activatedRoute.snapshot, routeStateMock);
+    const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
     void canActivateObservable.forEach(canActivate => {
       expect(canActivate).toBeFalse();
-    });
-  });
-
-  it('cannot load - no roles setup', () => {
-    const canLoadObservable = guard.canLoad(route);
-    void canLoadObservable.forEach(canBeLoaded => {
-      expect(canBeLoaded).toBeFalse();
     });
   });
 });
@@ -105,14 +90,13 @@ describe('SecurityGuard - with setting up roles and permissions', function() {
     path: 'dashboard'
   };
 
-  const routeStateMock: any = { snapshot: {}, url: '/dashboard'};
+  const routeStateMock: any = {snapshot: {}, url: '/dashboard'};
 
   beforeEach(() => {
     fakeCounterService = jasmine.createSpyObj<AuthGuard>(
       'AuthGuard',
       {
-        canActivate: of(true),
-        canLoad: of(true)
+        canActivate: of(true)
       }
     );
 
@@ -162,16 +146,9 @@ describe('SecurityGuard - with setting up roles and permissions', function() {
   });
 
   it('can activate - roles set up', () => {
-    const canActivateObservable = guard.canActivate(activatedRoute.snapshot, routeStateMock);
+    const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
     void canActivateObservable.forEach(canActivate => {
       expect(canActivate).toBeTrue();
-    });
-  });
-
-  it('can load - roles setup', () => {
-    const canLoadObservable = guard.canLoad(route);
-    void canLoadObservable.forEach(canBeLoaded => {
-      expect(canBeLoaded).toBeTrue();
     });
   });
 });
