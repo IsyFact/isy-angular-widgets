@@ -1,3 +1,20 @@
+# 15.0.0 - 12.09.2023
+## Breaking Changes
+- ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
+  * Der Service für die Funktionalität der AuthGuards musste angepasst werden, da die Interfaces CanActivate, CanLoad deprecated sind
+  * Die Integration der AuthGuards innerhalb der Routen musste auf die neuste V
+  * Die Implementierung der Methode canLoad wurde entfernt, da deprecated
+  * Die Datei polyfills.ts wird nicht mehr verwendet und wurde durch zone.js ersetzt
+  * Die Konstanten innerhalb der Testkonfigurationsdateien test.ts werden nicht mehr verwendet
+  * Lib- und Targetversion wurden auf ES2022 angehoben
+  * Benötigte Versionsnummern von verwendeten Abhängigkeit für die Übersetzungsfähigkeit wurden aktualisiert
+## Features
+- ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
+  * Demo-Anwendung und Bibliothek wurden auf Angular und PrimeNg 15 migriert
+## Demo Anwendung
+  * Die Skripte des schematics- und postbuilds wurden in die Demo-Anwendung verschoben
+  * Nicht (mehr) verwendeter Code wurde entfernt
+
 # 14.0.0 - 30.08.2023
 ## Breaking Changes
 - Die Properties `linksNavigationCols` und `informationsbereichCols` wurden durch `linksNavigationWidth` und `informationsbereichWidth` ersetzt
