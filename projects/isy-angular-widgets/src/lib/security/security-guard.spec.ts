@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {SecurityService} from './security-service';
-import {ActivatedRoute, Route} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {AuthGuard} from './security-guard';
 import {UserInfoPublicService} from '../../../../isy-angular-widgets-demo/src/app/core/user/userInfoPublicService';
 import {of} from 'rxjs';
