@@ -85,13 +85,6 @@ describe('SecurityGuard - with setting up roles and permissions', function() {
     }
   };
 
-  const route: Route = {
-    title: 'Dashboard',
-    path: 'dashboard'
-  };
-
-  const routeStateMock: any = {snapshot: {}, url: '/dashboard'};
-
   beforeEach(() => {
     fakeCounterService = jasmine.createSpyObj<AuthGuard>(
       'AuthGuard',
