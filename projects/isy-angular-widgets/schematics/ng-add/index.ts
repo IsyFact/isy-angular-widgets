@@ -14,11 +14,11 @@ export function ngAdd(): Rule {
     addTranslationFile(context, tree, 'en.json');
 
     // Add necessary dependencies to new CLI project.
-    addPackageToPackageJson(tree, "@angular/common",  "^14.2.4");
-    addPackageToPackageJson(tree, "@angular/core", "^14.2.4");
+    addPackageToPackageJson(tree, "@angular/common",  "^15.2.9");
+    addPackageToPackageJson(tree, "@angular/core", "^15.2.9");
     addPackageToPackageJson(tree, "primeicons", "^6.0.1");
-    addPackageToPackageJson(tree, "primeng", "^14.1.2");
-    addPackageToPackageJson(tree, "primeflex", "^3.2.1");
+    addPackageToPackageJson(tree, "primeng", "^15.2.1");
+    addPackageToPackageJson(tree, "primeflex", "^3.3.0");
     addPackageToPackageJson(tree, "moment",  "^2.29.4");
 
     // Install isy-angular-widgets
