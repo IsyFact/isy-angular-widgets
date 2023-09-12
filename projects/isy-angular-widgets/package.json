@@ -1,7 +1,7 @@
 {
   "name": "@isyfact/isy-angular-widgets",
   "schematics": "./schematics/collection.json",
-  "version": "14.0.0",
+  "version": "14.1.0",
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
     "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/isy-angular-widgets/"
