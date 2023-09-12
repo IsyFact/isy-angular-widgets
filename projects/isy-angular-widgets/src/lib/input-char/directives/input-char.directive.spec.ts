@@ -4,6 +4,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CharacterService} from '../services/character.service';
 
 @Component({
   template:
@@ -44,6 +45,9 @@ describe('InputCharDirective', () => {
       ],
       imports: [
         BrowserAnimationsModule
+      ],
+      providers: [
+        CharacterService
       ]
     });
     fixture = TestBed.createComponent(TestComponent);
@@ -112,7 +116,7 @@ describe('InputCharDirective', () => {
     let inputValue = directive.buildInputValue(value, zeichen);
     directive.setNextInputPosition(zeichen.length);
     expect(inputValue).toEqual(`${zeichen}${value}`);
-    
+
     inputValue = directive.buildInputValue(inputValue, value);
     directive.setNextInputPosition(value.length);
     expect(inputValue).toEqual(`${zeichen}${value}${value}`);

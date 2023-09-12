@@ -61,7 +61,11 @@ describe('CharacterService', () => {
   const schriftZeichenGruppen = Object.values(Schriftzeichengruppe);
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        CharacterService
+      ]
+    });
     service = TestBed.inject(CharacterService);
   });
 
