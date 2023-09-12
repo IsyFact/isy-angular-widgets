@@ -48,8 +48,8 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   const dialogDefaultHeight = '460px';
 
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
-  const numberOfBases = [...new Set(sonderzeichenListe.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))].length;
-  const numberOfGroups = [...new Set(sonderzeichenListe.map(item => item.schriftzeichengruppe))].length;
+  const bases = [...new Set(sonderzeichenListe.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))];
+  const groups = [...new Set(sonderzeichenListe.map(item => item.schriftzeichengruppe))];
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
@@ -89,17 +89,17 @@ describe('Unit Tests: InputCharDialogComponent', () => {
       expect(onCloseSpy).toHaveBeenCalledWith(false);
     });
 
-    it(`should show ${numberOfBases} available bases`, () => {
+    it(`should show ${bases.length} available bases`, () => {
       const baseSelectButton = fixture.debugElement.query(By.css('#grundzeichen-select-button')).componentInstance;
-      expect(baseSelectButton.options.length).toEqual(numberOfBases);
+      expect(baseSelectButton.options.length).toEqual(bases.length);
     });
 
-    it(`should show ${numberOfGroups} available groups`, () => {
+    it(`should show ${groups.length} available groups`, () => {
       const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button')).componentInstance;
-      expect(schriftzeichengruppeSelectButton.options.length).toEqual(numberOfGroups);
+      expect(schriftzeichengruppeSelectButton.options.length).toEqual(groups.length);
     });
 
-    it('should only have all schriftzeichen active after clicking it', () => {
+    it('should only have all schriftzeichen active after corresponding selection', () => {
       const allButton = fixture.debugElement.query(By.css('#all-select-button')).componentInstance;
       allButton.onChange.emit();
 
@@ -108,39 +108,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
       expect(component.selectedSchriftzeichenGruppe).toBeUndefined();
     });
 
-    it('should only have a "A" base enabled active after clicking it"', () => {
-      const baseSelectButton = fixture.debugElement.query(By.css('#grundzeichen-select-button')).componentInstance;
-      expect(baseSelectButton).toBeTruthy();
-
-      // I couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-      component.selectedGrundzeichen = 'A';
-
-      baseSelectButton.onChange.emit('A');
-
-      expect(component.allCharsModel).toBeUndefined();
-      expect(component.selectedGrundzeichen).toBeTruthy();
-      expect(component.selectedSchriftzeichenGruppe).toBeUndefined();
-    });
-
-    it('should only have a schriftzeichengruppe enabled active after clicking it', () => {
-      const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button')).componentInstance;
-      expect(schriftzeichengruppeSelectButton).toBeTruthy();
-
-      // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-      component.selectedSchriftzeichenGruppe = Schriftzeichengruppe.LATEIN;
-
-      schriftzeichengruppeSelectButton.onChange.emit(Schriftzeichengruppe.LATEIN);
-
-      expect(component.allCharsModel).toBeUndefined();
-      expect(component.selectedGrundzeichen).toBeUndefined();
-      expect(component.selectedSchriftzeichenGruppe).toBeTruthy();
-    });
-
-    /**
-     * Helper function to emulate a grundzeichen selection.
-     * @param grundzeichen The grundzeichen to select.
-     */
-    function selectGrundzeichen(grundzeichen: string): void {
+    const selectGrundzeichen = (grundzeichen: string): void => {
       const baseSelectButton = fixture.debugElement.query(By.css('#grundzeichen-select-button')).componentInstance;
       expect(baseSelectButton).toBeTruthy();
 
@@ -149,35 +117,42 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
       baseSelectButton.onChange.emit(grundzeichen);
       fixture.detectChanges();
-    }
+    };
 
-    it('should show only characters with a selected base', () => {
-      const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
+    bases.forEach((grundzeichen: string) => {
+      it(`should only have a ${grundzeichen} base enabled active after corresponding selection"`, () => {
+        selectGrundzeichen(grundzeichen);
 
-      selectGrundzeichen('A');
+        // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+        expect(component.allCharsModel).toBeUndefined();
+        expect(component.selectedGrundzeichen).toEqual(grundzeichen);
+        expect(component.selectedSchriftzeichenGruppe).toBeUndefined();
+      });
 
-      const options = charactersSelectButton.options;
-      expect(options).toBeTruthy();
-      for (const character of options) {
-        expect(character.grundzeichen).toEqual('A');
-      }
+      it(`should show only characters with a selected base ${grundzeichen}`, () => {
+        const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
+        expect(charactersSelectButton).toBeTruthy();
+
+        selectGrundzeichen(grundzeichen);
+
+        const options = charactersSelectButton.options;
+        expect(options).toBeTruthy();
+        for (const char of options) {
+          expect((char.grundzeichen === '' ? '*' : char.grundzeichen)).toEqual(grundzeichen);
+        }
+      });
+
+      it(`should show all characters with a selected base ${grundzeichen}`, () => {
+        const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
+        expect(charactersSelectButton).toBeTruthy();
+
+        selectGrundzeichen(grundzeichen);
+
+        expect(charactersSelectButton.options.length).toEqual(sonderzeichenListe.filter(char => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen).length);
+      });
     });
 
-    it('should show all characters with a selected base', () => {
-      const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
-
-      selectGrundzeichen('A');
-
-      expect(charactersSelectButton.options.length).toEqual(sonderzeichenListe.filter(char => char.grundzeichen === 'A').length);
-    });
-
-    /**
-     * Helper function to emulate a schriftzeichengruppe selection.
-     * @param schriftzeichengruppe The schriftzeichengruppe to select.
-     */
-    function selectSchriftzeichengruppe(schriftzeichengruppe: Schriftzeichengruppe): void {
+    const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
       const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button')).componentInstance;
       expect(schriftzeichengruppeSelectButton).toBeTruthy();
 
@@ -186,34 +161,45 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
       schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
       fixture.detectChanges();
-    }
+    };
 
-    it('should show only characters with a selected schriftzeichengruppe', () => {
-      const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
+    groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+      it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
+        selectSchriftzeichengruppe(schriftzeichengruppe);
 
-      selectSchriftzeichengruppe(Schriftzeichengruppe.LATEIN);
+        // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+        expect(component.allCharsModel).toBeUndefined();
+        expect(component.selectedGrundzeichen).toBeUndefined();
+        expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
+      });
 
-      const options = charactersSelectButton.options;
-      expect(options).toBeTruthy();
-      for (const character of options) {
-        expect(character.schriftzeichengruppe).toEqual(Schriftzeichengruppe.LATEIN);
-      }
-    });
+      it('should show only characters with a selected schriftzeichengruppe', () => {
+        const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
+        expect(charactersSelectButton).toBeTruthy();
 
-    it('should show all characters with a selected schriftzeichengruppe', () => {
-      const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button')).componentInstance;
-      expect(schriftzeichengruppeSelectButton).toBeTruthy();
-      const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
+        selectSchriftzeichengruppe(schriftzeichengruppe);
 
-      // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-      component.selectedSchriftzeichenGruppe = Schriftzeichengruppe.LATEIN;
+        const options = charactersSelectButton.options;
+        expect(options).toBeTruthy();
+        for (const character of options) {
+          expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
+        }
+      });
 
-      schriftzeichengruppeSelectButton.onChange.emit(Schriftzeichengruppe.LATEIN);
-      fixture.detectChanges();
+      it('should show all characters with a selected schriftzeichengruppe', () => {
+        const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button')).componentInstance;
+        expect(schriftzeichengruppeSelectButton).toBeTruthy();
+        const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
+        expect(charactersSelectButton).toBeTruthy();
 
-      expect(charactersSelectButton.options.length).toEqual(sonderzeichenListe.filter(char => char.schriftzeichengruppe === Schriftzeichengruppe.LATEIN).length);
+        // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+        component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
+
+        schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
+        fixture.detectChanges();
+
+        expect(charactersSelectButton.options.length).toEqual(sonderzeichenListe.filter(char => char.schriftzeichengruppe === schriftzeichengruppe).length);
+      });
     });
 
     it('should have a button with the label "Einfügen"', () => {
