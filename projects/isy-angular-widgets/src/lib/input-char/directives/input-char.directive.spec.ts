@@ -96,7 +96,7 @@ describe('InputCharDirective', () => {
 
   it('should check the arrival of changed input value', () => {
     const newValue = 'abc';
-    const valueOnChangeSpy = spyOn(component, 'valueGet');
+    const valueOnChangeSpy = spyOn(component, 'valueGet' as any);
 
     const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
     input.value = newValue;
@@ -105,7 +105,7 @@ describe('InputCharDirective', () => {
     input.dispatchEvent(changeEvent);
     fixture.detectChanges();
 
-    expect(valueOnChangeSpy).toHaveBeenCalledWith(changeEvent, newValue);
+    expect(valueOnChangeSpy).toHaveBeenCalledWith(changeEvent as any, newValue as any);
   });
 
   it('should check the build of the current input value', () => {

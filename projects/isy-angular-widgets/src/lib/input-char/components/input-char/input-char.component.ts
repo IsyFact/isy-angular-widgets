@@ -51,7 +51,6 @@ export class InputCharComponent implements OnInit {
   private charPreview!: InputCharPreviewCharListComponent;
 
   /**
-   * @
    * Used for getting access to the HTML input field
    */
   @ViewChild('inputCharButton')

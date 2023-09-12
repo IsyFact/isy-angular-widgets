@@ -166,7 +166,7 @@ describe('Test WizardComponent with Mock Parent', () => {
     pressNextButton();
 
     expect(stepper.index).toEqual(startIndex + 1);
-    expect(emitIndexSpy).toHaveBeenCalledWith(stepper.index);
+    expect(emitIndexSpy).toHaveBeenCalledWith(stepper.index as any);
   }
 
   /**
@@ -284,7 +284,7 @@ describe('Test WizardComponent with Mock Parent', () => {
   });
 
   it('should have correctly initialized stepper items', () => {
-    const afterContentInitSpy = spyOn(wizard, 'ngAfterContentInit');
+    const afterContentInitSpy = spyOn(wizard, 'ngAfterContentInit' as any);
     wizard.ngAfterContentInit();
     expect(afterContentInitSpy).toHaveBeenCalled();
     expectFirstStep();
@@ -294,7 +294,7 @@ describe('Test WizardComponent with Mock Parent', () => {
     const emitIndexSpy = spyOn(wizard.stepperIndexChange, 'emit');
     wizard.ngOnInit();
     expectFirstStep();
-    expect(emitIndexSpy).toHaveBeenCalledWith(startIndex);
+    expect(emitIndexSpy).toHaveBeenCalledWith(startIndex as any);
   });
 
   it('should have the right back button label', () => {
@@ -437,7 +437,7 @@ describe('Test WizardComponent with Mock Parent', () => {
 
   it('should have functional save button', () => {
     const param = true;
-    spyOn(wizard.savingChange, 'emit').withArgs(param);
+    spyOn(wizard.savingChange, 'emit').withArgs(param as any);
     expectSaveButtonIsAvailable();
     expect(isElementDisabled(saveButtonDeclaration)).toBeTrue();
 
@@ -486,7 +486,7 @@ describe('Test WizardComponent with Mock Parent', () => {
   });
 
   it('should have a functional close button', () => {
-    spyOn(stepper, 'reset');
+    spyOn(stepper, 'reset' as any);
     spyOn(wizard.stepperIndexChange, 'emit');
     spyOn(wizard.isVisibleChange, 'emit');
     spyOn(wizard.savingChange, 'emit');
@@ -498,7 +498,7 @@ describe('Test WizardComponent with Mock Parent', () => {
   });
 
   it('should call the close handler after close button was pressed', () => {
-    spyOn(wizard, 'closeDialog');
+    spyOn(wizard, 'closeDialog' as any);
     pressCloseButton();
     expect(wizard.closeDialog).toHaveBeenCalled();
   });
@@ -515,7 +515,7 @@ describe('Test WizardComponent with Mock Parent', () => {
   });
 
   it('should correctly reset', () => {
-    const resetSpy = spyOn(stepper, 'reset');
+    const resetSpy = spyOn(stepper, 'reset' as any);
     stepper.reset();
     expect(resetSpy).toHaveBeenCalled();
     expectFirstStep();
@@ -562,7 +562,7 @@ describe('Test WizardComponent with Mock Parent', () => {
 
   it('should have a not save functionality', () => {
     const param = false;
-    spyOn(stepper, 'move').withArgs(param);
+    spyOn(stepper, 'move' as any).withArgs(param as any);
     spyOn(wizard.savingChange, 'emit');
     wizard.save(param);
     expect(wizard.savingChange.emit).toHaveBeenCalledWith(param);
@@ -577,7 +577,7 @@ describe('Test WizardComponent with Mock Parent', () => {
   });
 
   it('should be able to close', () => {
-    spyOn(stepper, 'reset');
+    spyOn(stepper, 'reset' as any);
     spyOn(wizard.stepperIndexChange, 'emit');
     spyOn(wizard.isVisibleChange, 'emit');
     spyOn(wizard.savingChange, 'emit');
