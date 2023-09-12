@@ -8,8 +8,8 @@ import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {Component, EventEmitter, Input, NO_ERRORS_SCHEMA, Output} from '@angular/core';
 import {SelectButton} from 'primeng/selectbutton';
 import {Accordion} from 'primeng/accordion';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {InputCharModule} from "../../input-char.module";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {InputCharModule} from '../../input-char.module';
 
 // Disabled for mocking
 /* eslint-disable @angular-eslint/component-selector */
