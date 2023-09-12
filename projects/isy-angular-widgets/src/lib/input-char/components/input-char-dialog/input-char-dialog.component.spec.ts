@@ -10,7 +10,7 @@ import {Accordion} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputCharModule} from '../../input-char.module';
 
-// Disabled for mocking
+// Disabled for mocking as we need to match the PrimeNG selectors
 /* eslint-disable @angular-eslint/component-selector */
 
 @Component({
