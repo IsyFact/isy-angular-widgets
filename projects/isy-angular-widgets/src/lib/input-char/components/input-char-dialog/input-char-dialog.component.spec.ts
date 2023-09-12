@@ -1,5 +1,4 @@
 import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
-
 import {InputCharDialogComponent} from './input-char-dialog.component';
 import {Dialog} from 'primeng/dialog';
 import {By} from '@angular/platform-browser';
