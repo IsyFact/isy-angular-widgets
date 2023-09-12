@@ -58,7 +58,7 @@ describe('CharacterService', () => {
     {name: Schriftzeichengruppe.GRIECHISCH, count: 69},
     {name: Schriftzeichengruppe.KYRILLISCH, count: 62}
   ];
-  const schriftZeichenGruppen = Object.values(Schriftzeichengruppe);
+  const schriftZeichenGruppen = Object.values(Schriftzeichengruppe) as Schriftzeichengruppe[];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
