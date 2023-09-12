@@ -19,7 +19,7 @@ export class InputCharComponent implements OnInit {
   /**
    * The array who stores all the characters
    */
-  private zeichenListe = this.charService.getCharacters();
+  private zeichenListe!: Zeichenobjekt[];
 
   /**
    * The current value
@@ -141,7 +141,9 @@ export class InputCharComponent implements OnInit {
   constructor(
     private charService: CharacterService,
     private widgetsConfigService: WidgetsConfigService
-  ) {}
+  ) {
+    this.zeichenListe = this.charService.getCharacters();
+  }
 
   /**
    * Fire on initialization
@@ -168,7 +170,7 @@ export class InputCharComponent implements OnInit {
     this.displayCharPicker = !(this.displayCharPicker || close);
 
     this.setupCharPicker();
-    
+
     if (!this.displayCharPicker) {
       this.onDialogClose();
     }
