@@ -1,9 +1,13 @@
 {
   "elements": {
-    "personenSuche": ["admin"]
+    "personenSuche": ["admin"],
+    "secretFieldsInputSwitch": ["admin"]
   },
   "routes": {
     "personen": ["admin", "user"],
-    "personen-legacy": ["admin", "user"]
+    "personen-legacy": ["admin", "user"],
+    "dashboard": ["admin", "user"],
+    "objekt-anzeigen": ["admin", "user"],
+    "objekt-suchen": ["admin", "user"]
   }
 }
