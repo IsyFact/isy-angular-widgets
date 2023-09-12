@@ -1,7 +1,7 @@
 {
   "name": "@isyfact/isy-angular-widgets",
   "schematics": "./schematics/collection.json",
-  "version": "14.0.0",
+  "version": "15.0.0",
   "ng-add": {
     "save": "dependencies"
   },
