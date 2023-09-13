@@ -1,10 +1,11 @@
 import {IncompleteDateService} from './incomplete-date.service';
 import {IncompleteDateComponent} from './incomplete-date.component';
-import {TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AbstractControl, FormControl, FormsModule} from '@angular/forms';
 
 describe('IsyIncompleteDateComponent', () => {
-  let sut: IncompleteDateComponent;
+  let component: IncompleteDateComponent;
+  let fixture: ComponentFixture<IncompleteDateComponent>;
   let onChange: Function = () => {};
   let onTouched: Function = () => {};
 
@@ -13,45 +14,49 @@ describe('IsyIncompleteDateComponent', () => {
       declarations: [IncompleteDateComponent],
       imports: [
         FormsModule
+      ],
+      providers: [
+        IncompleteDateService
       ]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    sut = new IncompleteDateComponent(/*new UniqueIdService(), */new IncompleteDateService());
+    fixture = TestBed.createComponent(IncompleteDateComponent);
+    component = fixture.componentInstance;
     onChange = jasmine.createSpy('onChange spy');
     onTouched = jasmine.createSpy('onTouched spy');
-    sut.registerOnChange(onChange);
-    sut.registerOnTouched(onTouched);
+    component.registerOnChange(onChange);
+    component.registerOnTouched(onTouched);
   });
 
-  it('should be created', () => {
-    expect(sut).toBeDefined();
+  it('it should be created', () => {
+    expect(component).toBeDefined();
   });
 
   it('valid writeValue sets inputValue', () => {
-    sut.writeValue('01.01.2023');
+    component.writeValue('01.01.2023');
 
-    expect(sut.inputValue).toBe('01.01.2023');
+    expect(component.inputValue).toBe('01.01.2023');
     expect(onChange).not.toHaveBeenCalled();
     expect(onTouched).not.toHaveBeenCalled();
   });
 
   it('expect disabled to be true', () => {
-    sut.setDisabledState(true);
-    expect(sut.disabled).toBeTrue();
+    component.setDisabledState(true);
+    expect(component.disabled).toBeTrue();
   });
 
   it('expect value set by onComplete', () => {
-    sut.writeValue('01.01.2023');
-    sut.onComplete();
-    expect(sut.inputValue).toBe('01.01.2023');
+    component.writeValue('01.01.2023');
+    component.onComplete();
+    expect(component.inputValue).toBe('01.01.2023');
   });
 
   it('should return null if date is valid', () => {
     const validDateControl: AbstractControl = new FormControl('11.11.2023');
-    const errors = sut.validate(validDateControl);
+    const errors = component.validate(validDateControl);
     expect(errors).toBeNull();
   });
 
@@ -59,7 +64,7 @@ describe('IsyIncompleteDateComponent', () => {
     const errorKey = 'UNSPECIFIEDDATE';
     const control: AbstractControl = new FormControl('50.11.2023');
 
-    const errors = sut.validate(control);
+    const errors = component.validate(control);
     if (!errors) {
       throw new Error('errors is not defined');
     }
@@ -71,7 +76,7 @@ describe('IsyIncompleteDateComponent', () => {
     const errorKey = 'UNSPECIFIEDDATE';
     const control: AbstractControl = new FormControl('11.50.2023');
 
-    const errors = sut.validate(control);
+    const errors = component.validate(control);
     if (!errors) {
       throw new Error('errors is not defined');
     }

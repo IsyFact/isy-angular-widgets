@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
 import {IncompleteDateService} from './incomplete-date.service';
 import {Validation} from '../validation/validation';
+import {InputMask} from 'primeng/inputmask';
 
 /**
  * This component is used to input complete and incomplete dates.
@@ -11,10 +12,12 @@ import {Validation} from '../validation/validation';
  *
  * The format DD.MM.YYYY is supported by the widget
  *
+ * == Century switch / Birthdays in the past
  *
  * If only past dates are allowed (e.g. for already born persons),
  * the property `dateInPastConstraint` can be set to `true`via binding.
  *
+ * When autocompleting e.g. 10.10.50, 10.10.1950 will be the output instead of 10.10.2050.
  */
 @Component({
   selector: 'isy-incomplete-date',
@@ -33,7 +36,7 @@ import {Validation} from '../validation/validation';
     }
   ]
 })
-export class IncompleteDateComponent implements ControlValueAccessor, Validator,  OnInit {
+export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit {
 
   /**
    * A disabled date picker can't be opened.
@@ -51,10 +54,17 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   @Input() placeholder = '';
 
   /**
+   * Decides whether only past dates are allowed (century switch - instead of 2050 e.g. 1950)
+   */
+  @Input() dateInPastConstraint = false;
+
+  /**
    * Currently displayed date string
    */
   inputValue: string = '';
 
+  @ViewChild(InputMask) field?: InputMask;
+  
   /**
    * Default constructor
    * @param incompleteDateService The service that contains date transformation logic
@@ -96,6 +106,23 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   onComplete(): void {
     this.inputValue = this.incompleteDateService.transformValue(this.inputValue);
+    this.onChange(this.inputValue);
+  }
+
+  /**
+   * Transforms the current input on losing the focus
+   */
+  onBlur(): void {
+    this.inputValue = this.incompleteDateService.transformValue(
+      this.inputValue,
+      this.dateInPastConstraint
+    );
+    const input = this.field?.inputViewChild.nativeElement as HTMLInputElement;
+    input.value = this.inputValue;
+
+    if (this.inputValue.includes('_')) input.value = '';
+
+    this.onTouched();
     this.onChange(this.inputValue);
   }
 

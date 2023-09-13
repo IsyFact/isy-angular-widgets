@@ -1,29 +1,40 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
 import {Injectable} from '@angular/core';
-
-export interface DateObject {
-  day: string;
-  month: string;
-  year: string;
-}
+import {DateObject} from './model/model';
+import {INCOMPLETE_DATE_REGEX, UNSPECIFIED_DATE_REGEX} from './data/regex';
 
 /**
  * Performs transformations from incomplete dates into german date format DD.MM.YYYY
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class IncompleteDateService {
+  private readonly DATE_CHAR = 'x';
 
   /**
    * If the new date is a valid or incomplete date it should be transformed
    * into the german date format. Otherwise, return it empty.
    * @param newValue Value to be transformed
+   * @param dateInPastConstraint If true, the date should be in the past
    * @returns The transformed date in the german date format
    */
-  transformValue(newValue: string): string {
+  transformValue(newValue: string, dateInPastConstraint = false): string {
+    const maxPartYearLength = 4;
+    const coEfficient = 10;
     let dateStr = newValue;
-    
-    if (this.dateIsUnspecified(newValue)) dateStr = this.getIncompleteDate(newValue);
+    const [day, month, year] = dateStr.split('.');
+    let partYear = `${year}`.replace(/_/g, '');
+
+    // e.g. the year "99" in a dateInPast setting is 1999 instead of 2099
+    if (partYear.length < maxPartYearLength && !partYear.includes(this.DATE_CHAR)) {
+      const currentYear: number = new Date().getFullYear();
+      const numX = coEfficient ** partYear.length;
+      partYear = currentYear.toString().slice(0, -partYear.length).concat(partYear);
+      partYear = (Number(partYear) > currentYear) && dateInPastConstraint ? (Number(partYear)-numX).toString() : Number(partYear).toString();
+      dateStr = [`${day}`, `${month}`, partYear].join('.');
+    }
+
+    if (this.dateIsUnspecified(dateStr)) dateStr = this.getIncompleteDate(dateStr);
 
     return dateStr;
   }
@@ -41,21 +52,19 @@ export class IncompleteDateService {
     const dateObject = dateKeys.reduce((object: Object, element: string, index: number) => {
       let partOfFormat = formats[index];
 
-      if (partOfFormat.includes('x')) {
-        partOfFormat = 'x'.repeat(partOfFormat.length);
-      } 
+      if (partOfFormat.includes(this.DATE_CHAR)) {
+        partOfFormat = this.DATE_CHAR.repeat(partOfFormat.length);
+      }
 
       return { ...object, [element]: partOfFormat };
     }, {}) as DateObject;
 
     const dateStr = Object.values(dateObject).join('.');
 
-    const regex = /^(0{2}\.x{2}\.\d{4})|(x{2}\.0{2}\.\d{4})$/;
-    
-    if (dateStr.match(regex) !== null || dateObject.month.includes('x') || dateObject.year.includes('x')) return 'xx.xx.' + dateObject.year;
-    
+    if (dateStr.match(INCOMPLETE_DATE_REGEX) !== null || dateObject.month.includes(this.DATE_CHAR) || dateObject.year.includes(this.DATE_CHAR)) return 'xx.xx.' + dateObject.year;
+
     if (dateObject.month === '00' || dateObject.year === '0000') return '00.00.' + dateObject.year;
-    
+
     return dateStr;
   }
 
@@ -65,8 +74,6 @@ export class IncompleteDateService {
    * @returns True or false as a boolean
    */
   private dateIsUnspecified(dateStr: string): boolean {
-    const regex = /^(0{2}\.\d{2}\.\d{4})|(\d{2}\.0{2}\.\d{4})$/;
-
-    return (!(dateStr.match(regex) === null && dateStr.match('x') === null));
+    return (!(dateStr.match(UNSPECIFIED_DATE_REGEX) === null && dateStr.match(this.DATE_CHAR) === null));
   }
 }
