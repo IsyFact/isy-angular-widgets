@@ -1,6 +1,14 @@
-# 14.1.0 - 12.09.2023
+# 14.1.0 - .09.2023
 ## Features
 - ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
+## Demo-Anwendung
+- ISY-137: Demonstration der Security Widgets:
+  * Demonstration des Security Widgets innerhalb der Demo-Anwendung
+  * Dropdown Liste innerhalb des Hauptfenster zur Auswahl einer beliebigen Rolle (Admin oder User) hinzugefügt
+  * Änderung der Rolle zur Laufzeit nicht möglich
+  * Auswahl der Rolle Admin und anschließende Navigation auf die Seite _Objekt anzeigen_, ermöglicht die Anzeige des Input Switches _Zeige geheime Felder_
+  * Auswahl der Rolle User und anschließende Navigation auf die Seite _Objekt anzeigen_, zeigt den Input Switche _Zeige geheime Felder_ nicht an, da fehlende Berechtigung
+
 # 14.0.0 - 30.08.2023
 ## Breaking Changes
 - Die Properties `linksNavigationCols` und `informationsbereichCols` wurden durch `linksNavigationWidth` und `informationsbereichWidth` ersetzt
