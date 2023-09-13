@@ -64,9 +64,7 @@
             "outputPath": "dist/isy-angular-widgets-demo",
             "index": "projects/isy-angular-widgets-demo/src/index.html",
             "main": "projects/isy-angular-widgets-demo/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": "zone.js",
             "tsConfig": "projects/isy-angular-widgets-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
