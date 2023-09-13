@@ -27,6 +27,7 @@ $letters-preview-width: 30%;
 
   .letter {
     font-size: $letter-size;
+    white-space: pre;
   }
 }
 
