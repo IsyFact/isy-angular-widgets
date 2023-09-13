@@ -1,5 +1,6 @@
 # 14.1.0 - .09.2023
 ## Features
+- ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt
 - ISY-216: Erstellen von Validatoren für ungewisses Datum
   * Zusätzliche Validatoren für ungewisse Datumswerte integriert
   * Tag und Monat wurden in das Datumformat integriert
