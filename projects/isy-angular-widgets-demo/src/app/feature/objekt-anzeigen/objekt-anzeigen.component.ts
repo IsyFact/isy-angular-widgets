@@ -1,7 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Person} from '../../shared/model/person';
-import {ActivatedRoute} from '@angular/router';
-import {PersonenService} from '../../shared/services/personen.service';
 import {TranslateService} from '@ngx-translate/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
@@ -17,7 +15,6 @@ import {PersonalInformation} from './model/forms';
   styleUrls: ['./objekt-anzeigen.component.scss']
 })
 export class ObjektAnzeigenComponent {
-
   readonly intelligenceNotesMaxLength = 255;
   showSecretFields = false;
 
@@ -47,8 +44,6 @@ export class ObjektAnzeigenComponent {
   };
 
   constructor(
-    private route: ActivatedRoute,
-    private personService: PersonenService,
     public translate: TranslateService,
     private  fb: FormBuilder,
     private messageService: MessageService

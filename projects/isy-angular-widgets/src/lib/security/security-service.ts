@@ -7,7 +7,9 @@ import {PermissionMaps} from './permission-maps';
 /**
  * A service that can be configured with permission configuration and return permissions for certain elements.
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SecurityService {
   private roles?: string[];
   private routeMap: Map<string, string[]> = new Map();

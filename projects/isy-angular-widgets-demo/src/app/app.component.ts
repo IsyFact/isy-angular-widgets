@@ -5,13 +5,13 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import data from '../assets/permissions.json';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
-import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {WidgetsTranslation} from '../../../isy-angular-widgets/src/lib/i18n/widgets-translation';
 import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/widgets-config.service';
+import {dropdownPermissionsData} from './dropdown-permissions-data';
 
 @Component({
   selector: 'demo-root',
@@ -19,14 +19,17 @@ import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/wi
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
+  protected readonly dropdownPermissionsData = dropdownPermissionsData;
   items: MegaMenuItem[] = [];
   sidebarItems: MenuItem[] = [];
+  userInfo: UserInfo = {
+    displayName: 'Max Mustermann'
+  };
   primeNGI18nSubscription: Subscription;
   isyAngularWidgetsI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
 
   constructor(
-    private router: Router,
     private securityService: SecurityService,
     private userInfoPublicService: UserInfoPublicService,
     public translate: TranslateService,
@@ -34,7 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private widgetsConfigService: WidgetsConfigService,
     private menuTranslationService: MenuTranslationService
   ) {
-
     // Add translation
     translate.addLangs(['de', 'en', 'ru']);
     translate.setDefaultLang('en');
@@ -74,10 +76,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  userInfo?: UserInfo = {
-    displayName: 'Max Mustermann'
-  };
-
   getLanguageIcon(language: string): string {
     switch (language) {
       case 'en':
@@ -87,4 +85,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  selectPermission(role: string): void {
+    this.userInfo.roles = [role];
+    this.securityService.setRoles(this.userInfo);
+  }
 }
