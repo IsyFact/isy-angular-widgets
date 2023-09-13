@@ -1,8 +1,9 @@
 <p-inputMask
   [readonly]="readonly"
   [disabled]="disabled"
-  (ngModelChange)="onNgModelChange($event)" 
-  (focusout)="onFocusOut()" 
+  (onInput) = "onChange($event.target.value)"
+  (onBlur) = "onTouched()"
+  (onComplete) = "onComplete()"
   mask="**.**.****" 
   [(ngModel)]="inputValue" 
   characterPattern="^[x]" 
