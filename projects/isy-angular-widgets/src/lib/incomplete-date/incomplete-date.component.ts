@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-
+import {Component, forwardRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
 import {IncompleteDateService} from './incomplete-date.service';
+import {Validation} from '../validation/validation';
+import {InputMask} from 'primeng/inputmask';
 
 /**
  * This component is used to input complete and incomplete dates.
@@ -11,10 +12,12 @@ import {IncompleteDateService} from './incomplete-date.service';
  *
  * The format DD.MM.YYYY is supported by the widget
  *
+ * == Century switch / Birthdays in the past
  *
  * If only past dates are allowed (e.g. for already born persons),
  * the property `dateInPastConstraint` can be set to `true`via binding.
  *
+ * When autocompleting e.g. 10.10.50, 10.10.1950 will be the output instead of 10.10.2050.
  */
 @Component({
   selector: 'isy-incomplete-date',
@@ -25,10 +28,15 @@ import {IncompleteDateService} from './incomplete-date.service';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => IncompleteDateComponent),
       multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => IncompleteDateComponent),
+      multi: true
     }
   ]
 })
-export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
+export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit {
 
   /**
    * A disabled date picker can't be opened.
@@ -46,20 +54,17 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
   @Input() placeholder = '';
 
   /**
-   * Decides whether only past dates are allowed
+   * Decides whether only past dates are allowed (century switch - instead of 2050 e.g. 1950)
    */
   @Input() dateInPastConstraint = false;
-
-  /**
-   * FormControl / ngModel Value of the host component, actual output
-   */
-  private outputValue: string = '';
 
   /**
    * Currently displayed date string
    */
   inputValue: string = '';
 
+  @ViewChild(InputMask) field?: InputMask;
+  
   /**
    * Default constructor
    * @param incompleteDateService The service that contains date transformation logic
@@ -77,43 +82,70 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Transforms and saves a value according to the display format
-   * @param val The new value
+   * Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY.
+   * If the date in german format is not valid and not unspecified, a "UNSPECIFIEDDATE" error is thrown. 
+   * E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx
+   * For valid or valid unspecified dates, no error is thrown.
+   * @param c The control element the validator is appended to
+   * @returns The object {UNSPECIFIEDDATE: true} if the validation fails; null otherwise
    */
-  writeValue(val: string): void {
-    this.inputValue = this.incompleteDateService.transformValue(val);
+  validate(c: AbstractControl): ValidationErrors | null {
+    return Validation.validUnspecifiedDate(c);
   }
 
   /**
-   * Updates input and output value according the format configuration
+   * Called by the Forms module to write a value into a form control
    * @param value The new value
    */
-  onNgModelChange(value: string): void {
+  writeValue(value: string): void {
     this.inputValue = value;
-    this.outputValue = this.incompleteDateService.transformValue(
-      value,
-      this.dateInPastConstraint
-    );
-    this._onChange(this.outputValue);
   }
 
   /**
+   * Transforms the input value if necessary and updates it when user completes the mask pattern
+   */
+  onComplete(): void {
+    this.inputValue = this.incompleteDateService.transformValue(this.inputValue);
+    this.onChange(this.inputValue);
+  }
+
+  /**
+   * Transforms the current input on losing the focus
+   */
+  onBlur(): void {
+    this.inputValue = this.incompleteDateService.transformValue(
+      this.inputValue,
+      this.dateInPastConstraint
+    );
+    const input = this.field?.inputViewChild.nativeElement as HTMLInputElement;
+    input.value = this.inputValue;
+
+    if (this.inputValue.includes('_')) input.value = '';
+
+    this.onTouched();
+    this.onChange(this.inputValue);
+  }
+
+  /**
+   * Reports the value back to the parent form
    * Calls the given function on component change
    * @param fn The function to be called on component change
    */
-  registerOnChange(fn: Function): void {
-    this._onChange = fn;
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
 
   /**
+   * Reports to the parent form that the control was touched
    * Calls the given function on component touch
    * @param fn The function to be called on component touch
    */
-  registerOnTouched(fn: Function): void {
-    this._onTouched = fn;
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
   }
 
   /**
+   * Transmits the state (enabled/disabled) to the form control
    * Enables or disables the component
    * @param isDisabled True to disable the component; false to enable the component
    */
@@ -121,21 +153,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, OnInit {
     this.disabled = isDisabled;
   }
 
-  /**
-   * Transforms the current input according to configuration on losing the focus
-   */
-  onFocusOut(): void {
-    this.inputValue = this.incompleteDateService.transformValue(
-      this.inputValue,
-      this.dateInPastConstraint
-    );
-    this._onTouched();
-  }
+  onChange: Function = (_: any) => {};
 
-  private _onChange: Function = (_: unknown) => {
-    /*Empty*/
-  };
-  private _onTouched: Function = () => {
-    /*Empty*/
-  };
+  onTouched: Function = () => {}; 
+
 }
