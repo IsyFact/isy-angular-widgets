@@ -202,6 +202,18 @@ describe('Unit Tests: InputCharDialogComponent', () => {
       });
     });
 
+    sonderzeichenListe.forEach((zeichen: Zeichenobjekt) => {
+      it('should emit the chosen character after button press', () => {
+        const button = fixture.debugElement.query(By.css('#lower-right-panel button')).nativeElement;
+        const insertCharacterSpy = spyOn(component.insertCharacter, 'emit');
+        component.selectedZeichenObjekt = zeichen;
+        button.click();
+
+        expect(insertCharacterSpy).toHaveBeenCalledWith(zeichen.zeichen);
+      });
+
+    });
+
     it('should have a button with the label "Einfügen"', () => {
       const button = fixture.debugElement.query(By.css('#lower-right-panel button')).nativeElement;
       expect(button.innerHTML).toContain('Einfügen');
