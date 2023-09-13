@@ -2,7 +2,7 @@
   [readonly]="readonly"
   [disabled]="disabled"
   (onInput) = "onChange($event.target.value)"
-  (onBlur) = "onTouched()"
+  (onBlur) = "onBlur()"
   (onComplete) = "onComplete()"
   mask="**.**.****" 
   [(ngModel)]="inputValue" 

@@ -11,19 +11,33 @@ export interface DateObject {
 /**
  * Performs transformations from incomplete dates into german date format DD.MM.YYYY
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class IncompleteDateService {
 
   /**
    * If the new date is a valid or incomplete date it should be transformed
    * into the german date format. Otherwise, return it empty.
    * @param newValue Value to be transformed
+   * @param dateInPastConstraint If true, the date should be in the past
    * @returns The transformed date in the german date format
    */
-  transformValue(newValue: string): string {
+  transformValue(newValue: string, dateInPastConstraint = false): string {
     let dateStr = newValue;
-    
-    if (this.dateIsUnspecified(newValue)) dateStr = this.getIncompleteDate(newValue);
+    const [day, month, year] = dateStr.split('.');
+    let partYear = `${year}`.replace(/_/g, '');
+
+    // e.g. the year "99" in a dateInPast setting is 1999 instead of 2099
+    if (partYear.length < 4 && !partYear.includes('x')) {
+      const currentYear: number = new Date().getFullYear();
+      const numX = 10 ** partYear.length;
+      partYear = currentYear.toString().slice(0, -partYear.length).concat(partYear);
+      partYear = (Number(partYear) > currentYear) && dateInPastConstraint ? (Number(partYear)-numX).toString() : Number(partYear).toString();
+      dateStr = [`${day}`, `${month}`, partYear].join('.');
+    } 
+
+    if (this.dateIsUnspecified(dateStr)) dateStr = this.getIncompleteDate(dateStr);
 
     return dateStr;
   }

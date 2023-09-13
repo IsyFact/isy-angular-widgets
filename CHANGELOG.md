@@ -1,3 +1,6 @@
+# 14.1.0 - 12.09.2023
+## Features
+- ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
 # 14.0.0 - 30.08.2023
 ## Breaking Changes
 - Die Properties `linksNavigationCols` und `informationsbereichCols` wurden durch `linksNavigationWidth` und `informationsbereichWidth` ersetzt
