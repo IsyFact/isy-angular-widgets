@@ -103,7 +103,7 @@ describe('InputCharComponent', () => {
     it('should show 5 available groups', () => {
       expect(component).toBeTruthy();
       const numberOfGroups = charService.getGroupsByDataType(Datentyp.DATENTYP_C).length;
-      const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichenGruppeSelectButton .p-buttonset div'));
+      const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button'));
       expect(groupButtons.length).toEqual(numberOfGroups);
     });
 

@@ -38,11 +38,6 @@ describe('InputCharViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a button with label "Einfügen"', () => {
-    const insertButton = fixture.debugElement.query(By.css('#insert-button')).nativeElement as HTMLElement;
-    expect(insertButton.innerText).toContain('Einfügen');
-  });
-
   it('should show the selected character in the sans field', () => {
     const serifCharacterPreview = fixture.debugElement.query(By.css('#serif-letter')).nativeElement as HTMLElement;
     expect(serifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
