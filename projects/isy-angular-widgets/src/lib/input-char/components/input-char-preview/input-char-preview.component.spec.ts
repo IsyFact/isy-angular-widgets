@@ -31,7 +31,6 @@ describe('InputCharViewComponent', () => {
     it(`should show the selected character ${zeichenObjekt.zeichen} in the sans field`, () => {
       component.zeichenObjekt = zeichenObjekt;
       fixture.detectChanges();
-      console.log(zeichenObjekt);
 
       const serifCharacterPreview = fixture.debugElement.query(By.css('#serif-letter')).nativeElement as HTMLElement;
       expect(serifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
