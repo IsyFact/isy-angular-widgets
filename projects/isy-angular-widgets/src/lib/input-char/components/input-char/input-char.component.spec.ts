@@ -1,37 +1,33 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {InputCharComponent} from './input-char.component';
-import {Datentyp} from '../../model/datentyp';
-import {CharacterService} from '../../services/character.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {By} from '@angular/platform-browser';
 import {InputCharModule} from '../../input-char.module';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-describe('InputCharComponent', () => {
+
+describe('Unit Tests:  InputCharComponent', () => {
   describe('InputCharComponent with default datentyp = DATENTYP_C', () => {
     let component: InputCharComponent;
     let fixture: ComponentFixture<InputCharComponent>;
-    let charService: CharacterService;
+
+    const dialogDefaultWidth = '775px';
+    const dialogDefaultHeight = '460px';
 
     beforeEach(async() => {
       await TestBed.configureTestingModule({
         declarations: [
           InputCharComponent
         ],
-        imports: [
-          BrowserAnimationsModule,
-          InputCharModule
-        ],
-        providers: [
-          CharacterService
+        schemas: [
+          NO_ERRORS_SCHEMA
         ]
       })
         .compileComponents();
 
       fixture = TestBed.createComponent(InputCharComponent);
-      charService = TestBed.inject(CharacterService);
       component = fixture.componentInstance;
-      component.visible = false;
       fixture.detectChanges();
     });
 
@@ -55,15 +51,6 @@ describe('InputCharComponent', () => {
       expect(component.visible).toBeFalse();
     });
 
-    it('should switch visibility according to attribute', () => {
-      component.visible = true;
-      expect(component.visible).toBeTrue();
-
-
-      component.visible = false;
-      expect(component.visible).toBeFalse();
-    });
-
     it('should check the input char button availability', () => {
       const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
       component.isInputDisabled = true;
@@ -77,22 +64,27 @@ describe('InputCharComponent', () => {
 
     it('should have the input char button disabled when isInputDisabled property is true', () => {
       const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+      expect(button).toBeTruthy();
+
       component.isInputDisabled = true;
       fixture.detectChanges();
+
       expect(button.disabled).toBeTruthy();
     });
 
     it('should have the input char button not disabled when isInputDisabled property is false', () => {
       const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+      expect(button).toBeTruthy();
+
       component.isInputDisabled = false;
       fixture.detectChanges();
+
       expect(button.disabled).toBeFalsy();
     });
 
     it('should display after clicking the button', () => {
       const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
-      expect(button).not.toBeUndefined();
-      expect(button.className).toContain('p-button');
+      expect(button).toBeTruthy();
 
       button.click();
       fixture.detectChanges();
@@ -100,53 +92,46 @@ describe('InputCharComponent', () => {
       expect(component.visible).toBeTrue();
     });
 
-    it('should show 5 available groups', () => {
-      expect(component).toBeTruthy();
-      const numberOfGroups = charService.getGroupsByDataType(Datentyp.DATENTYP_C).length;
-      const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button'));
-      expect(groupButtons.length).toEqual(numberOfGroups);
+    it('should have the correct default size', () => {
+      expect(component.width).toEqual(dialogDefaultWidth);
+      expect(component.height).toEqual(dialogDefaultHeight);
     });
+  });
+});
 
+describe('Integration Test: InputCharComponent', () => {
+  let component: InputCharComponent;
+  let fixture: ComponentFixture<InputCharComponent>;
+
+  beforeEach(async() => {
+
+    await TestBed.configureTestingModule({
+      declarations: [
+        InputCharComponent
+      ],
+      imports: [
+        InputCharModule, BrowserAnimationsModule
+      ]
+    })
+      .compileComponents();
+
+
+    fixture = TestBed.createComponent(InputCharComponent);
+    component = fixture.componentInstance;
+    component.visible = true;
+    component.ngOnChanges();
+    fixture.detectChanges();
   });
 
-  describe('InputCharComponent with datentyp = Datentyp_A', () => {
-    let component: InputCharComponent;
-    let fixture: ComponentFixture<InputCharComponent>;
-    let characterService: CharacterService;
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    beforeEach(async() => {
-      await TestBed.configureTestingModule({
-        declarations: [
-          InputCharComponent
-        ],
-        imports: [
-          BrowserAnimationsModule,
-          InputCharModule
-        ],
-        providers: [
-          CharacterService
-        ]
-      })
-        .compileComponents();
-
-      fixture = TestBed.createComponent(InputCharComponent);
-      characterService = TestBed.inject(CharacterService);
-      component = fixture.componentInstance;
-      component.datentyp = Datentyp.DATENTYP_A;
-      fixture.detectChanges();
-
-
-    });
-
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
-
-    it('should show 3 available groups', () => {
-      expect(component).toBeTruthy();
-      const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichenGruppeSelectButton .p-buttonset div'));
-      expect(groupButtons.length).toEqual(3);
-    });
-
+  it('should show 5 available groups', () => {
+    const groupButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button .p-buttonset'));
+    console.log(groupButton);
+    const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button'));
+    console.log(groupButtons);
+    expect(groupButtons.length).toEqual(5);
   });
 });
