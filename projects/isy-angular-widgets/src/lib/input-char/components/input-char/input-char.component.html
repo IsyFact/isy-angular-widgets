@@ -7,17 +7,24 @@
 >
 </button>
 
-<isy-input-char-dialog
-  [(visible)]="visible"
+<p-dialog
   [header]="header!"
+  [(visible)]="visible"
   [closable]="isDialogClosable"
   [draggable]="isDialogDraggable"
   [resizable]="isDialogResizable"
   [dismissableMask]="isDialogClosingOnOutsideClick"
   [closeOnEscape]="isDialogClosingOnEscape"
   [modal]="isDialogModalDisplayed"
-  [allCharacters]="allCharacters"
-  (insertCharacter)="insertCharacter.emit($event)"
+  [style]="{
+        width: width,
+        height: height
+     }"
 >
+  <isy-input-char-dialog
+    [allCharacters]="allCharacters"
+    (insertCharacter)="insertCharacter.emit($event)"
+  >
+  </isy-input-char-dialog>
 
-</isy-input-char-dialog>
+</p-dialog>

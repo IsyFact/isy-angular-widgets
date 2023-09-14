@@ -11,6 +11,16 @@ import {Zeichenobjekt} from '../../model/model';
 export class InputCharComponent implements OnChanges {
 
   /**
+   * The width of the dialog.
+   */
+  @Input() width = '775px';
+
+  /**
+   * The height of the dialog.
+   */
+  @Input() height = '460px';
+
+  /**
    * The current value
    */
   @Output() insertCharacter = new EventEmitter<string>();

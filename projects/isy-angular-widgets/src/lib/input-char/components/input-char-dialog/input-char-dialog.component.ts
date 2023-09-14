@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
@@ -10,63 +10,12 @@ import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
   templateUrl: './input-char-dialog.component.html',
   styleUrls: ['./input-char-dialog.component.scss']
 })
-export class InputCharDialogComponent implements OnInit, OnChanges {
-
-  /**
-   * Specifies the visibility of the dialog.
-   */
-  @Input() visible = false;
-  @Output() visibleChange = new EventEmitter<boolean>();
+export class InputCharDialogComponent implements OnChanges {
 
   /**
    * Emits a character chosen to insert by the user.
    */
   @Output() insertCharacter = new EventEmitter<string>();
-
-  /**
-   * Title text of the dialog.
-   */
-  @Input() header: string = 'Special Character Picker';
-
-  /**
-   * The width of the dialog.
-   */
-  @Input() width = '775px';
-
-  /**
-   * The height of the dialog.
-   */
-  @Input() height = '460px';
-
-  /**
-   * Adds a close icon to the header to hide the dialog.
-   */
-  @Input() closable = true;
-
-  /**
-   * Enables dragging to change the position using header.
-   */
-  @Input() draggable = true;
-
-  /**
-   * Enables resizing of the content.
-   */
-  @Input() resizable = false;
-
-  /**
-   * Specifies if clicking the modal background should hide the dialog.
-   */
-  @Input() dismissableMask = false;
-
-  /**
-   * Specifies if pressing escape key should hide the dialog.
-   */
-  @Input() closeOnEscape = true;
-
-  /**
-   * Defines if background should be blocked when dialog is displayed.
-   */
-  @Input() modal = false;
 
   /**
    * All characters the dialog should display.
@@ -125,22 +74,11 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
   }
 
   /**
-   * Fire on initialization
-   * @internal
-   */
-  ngOnInit(): void {
-    this.setupCharPicker();
-  }
-
-  /**
    * Fire on input changes
-   * @param changes List of changes
    * @internal
    */
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.allCharacters) {
-      this.setupCharPicker();
-    }
+  ngOnChanges(): void {
+    this.setupCharPicker();
   }
 
   /**
@@ -259,37 +197,6 @@ export class InputCharDialogComponent implements OnInit, OnChanges {
     }
 
     return res;
-  }
-
-  /**
-   * Called when the inner dialog changes its visibility without interference from outside,
-   * e.g. via dialog close corner X.
-   * Calls open/close functions accordingly (although "visible" might already be set).
-   * @param visible The visibility state the inner dialog changed to
-   * @internal
-   */
-  onInnerDialogVisibilityChange(visible: boolean): void {
-    if (visible) {
-      this.openCharPicker();
-    } else {
-      this.closeCharPicker();
-    }
-  }
-
-  /**
-   * Opens the character picker
-   */
-  openCharPicker(): void {
-    this.visible = true;
-    this.visibleChange.emit(this.visible);
-  }
-
-  /**
-   * Closes the character picker
-   */
-  closeCharPicker(): void {
-    this.visible = false;
-    this.visibleChange.emit(this.visible);
   }
 
   /**

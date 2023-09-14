@@ -1,73 +1,57 @@
-<p-dialog
-  [header]="header"
-  [(visible)]="visible"
-  [closable]="closable"
-  [draggable]="draggable"
-  [resizable]="resizable"
-  [dismissableMask]="dismissableMask"
-  [closeOnEscape]="closeOnEscape"
-  [modal]="modal"
-  [style]="{
-        width: width,
-        height: height
-     }"
-  (visibleChange)="onInnerDialogVisibilityChange($event)"
->
-  <div>
-    <div class="split" id="left-panel-side">
-      <p-selectButton
-        [options]="allCharsOptions"
-        optionLabel="label"
-        (onChange)="onAllSelection()"
-        [(ngModel)]="allCharsModel"
-        id="all-select-button"
-      >
-      </p-selectButton>
+<div>
+  <div class="split" id="left-panel-side">
+    <p-selectButton
+      [options]="allCharsOptions"
+      optionLabel="label"
+      (onChange)="onAllSelection()"
+      [(ngModel)]="allCharsModel"
+      id="all-select-button"
+    >
+    </p-selectButton>
 
-      <p-accordion [multiple]="true">
-        <p-accordionTab [header]="widgetsConfigService.getTranslation('inputChar.headerBaseChars')">
-          <p-selectButton
-            [options]="grundZeichenListe"
-            [(ngModel)]="selectedGrundzeichen"
-            (onChange)="onGrundzeichenSelection()"
-            id="grundzeichen-select-button"
-          >
-          </p-selectButton>
-        </p-accordionTab>
-
-        <p-accordionTab [header]="getTranslation('inputChar.headerGroups')">
-          <p-selectButton
-            [options]="schriftZeichenGruppen"
-            [(ngModel)]="selectedSchriftzeichenGruppe"
-            (onChange)="onSchriftzeichenGruppeSelection()"
-            id="schriftzeichengruppe-select-button"
-          >
-          </p-selectButton>
-        </p-accordionTab>
-      </p-accordion>
-    </div>
-
-    <div class="split" id="right-panel-side">
-      <p-selectButton
-        [options]="displayedCharacters"
-        [optionLabel]="'zeichen'"
-        [(ngModel)]="selectedZeichenObjekt"
-        class="flex-grow-1 overflow-y-scroll"
-      >
-      </p-selectButton>
-      <div id="lower-right-panel">
-
-        <isy-input-char-preview *ngIf="selectedZeichenObjekt"
-                                [zeichenObjekt]="selectedZeichenObjekt"
-                                class="flex-grow-1"
+    <p-accordion [multiple]="true">
+      <p-accordionTab [header]="widgetsConfigService.getTranslation('inputChar.headerBaseChars')">
+        <p-selectButton
+          [options]="grundZeichenListe"
+          [(ngModel)]="selectedGrundzeichen"
+          (onChange)="onGrundzeichenSelection()"
+          id="grundzeichen-select-button"
         >
-        </isy-input-char-preview>
+        </p-selectButton>
+      </p-accordionTab>
 
-        <button pButton [disabled]="!selectedZeichenObjekt" class="flex-shrink-0 font-bold"
-                (click)="insertSelectedZeichen()">
-          {{getTranslation('inputChar.insert')}}
-        </button>
-      </div>
+      <p-accordionTab [header]="getTranslation('inputChar.headerGroups')">
+        <p-selectButton
+          [options]="schriftZeichenGruppen"
+          [(ngModel)]="selectedSchriftzeichenGruppe"
+          (onChange)="onSchriftzeichenGruppeSelection()"
+          id="schriftzeichengruppe-select-button"
+        >
+        </p-selectButton>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+
+  <div class="split" id="right-panel-side">
+    <p-selectButton
+      [options]="displayedCharacters"
+      [optionLabel]="'zeichen'"
+      [(ngModel)]="selectedZeichenObjekt"
+      class="flex-grow-1 overflow-y-scroll"
+    >
+    </p-selectButton>
+    <div id="lower-right-panel">
+
+      <isy-input-char-preview *ngIf="selectedZeichenObjekt"
+                              [zeichenObjekt]="selectedZeichenObjekt"
+                              class="flex-grow-1"
+      >
+      </isy-input-char-preview>
+
+      <button pButton [disabled]="!selectedZeichenObjekt" class="flex-shrink-0 font-bold"
+              (click)="insertSelectedZeichen()">
+        {{getTranslation('inputChar.insert')}}
+      </button>
     </div>
   </div>
-</p-dialog>
+</div>
