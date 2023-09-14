@@ -199,8 +199,15 @@
           <isy-incomplete-date
             id="dateOfEntry"
             formControlName="dateOfEntry"
+            [dateInPastConstraint]="true"
           >
           </isy-incomplete-date>
+          <small
+            class="p-error block"
+            *ngIf="personalInfoForm.controls['dateOfEntry'].invalid"
+          >
+            {{('isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate)}}
+          </small>
         </div>
       </div>
       <div class="grid m-0 mt-5" *isyPermitted="'secretFieldsInputSwitch'">
