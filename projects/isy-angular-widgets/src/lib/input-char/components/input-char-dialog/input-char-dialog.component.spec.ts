@@ -220,7 +220,6 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
   const numberOfBases = [...new Set(sonderzeichenListe.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))].length;
   it(`should show ${numberOfBases} available bases`, () => {
-    console.log(component.grundZeichenListe);
     const baseButtons = fixture.debugElement.queryAll(By.css('#grundzeichen-select-button .p-buttonset div'));
     expect(baseButtons.length).toEqual(numberOfBases);
   });
