@@ -6312,5 +6312,47 @@
     "schriftzeichengruppe": "KYRILLISCH",
     "name": "CYRILLIC SMALL LETTER I WITH GRAVE",
     "codepoint": "U+045D"
+  },
+  {
+    "zeichen": "ḗ",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "LATIN SMALL LETTER E WITH MACRON AND ACUTE",
+    "codepoint": "U+1E17"
+  },
+  {
+    "zeichen": "ē̍",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "SMALL LETTER E WITH MACRON WITH COMBINING VERTICAL LINE ABOVE",
+    "codepoint": "<U+0113,U+030D>"
+  },
+  {
+    "zeichen": "ō̍",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "LATEIN",
+    "name": "SMALL LETTER O WITH MACRON WITH COMBINING VERTICAL LINE ABOVE",
+    "codepoint": "<U+014D,U+030D>"
+  },
+  {
+    "zeichen": "̍",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "COMBINING VERTICAL LINE ABOVE",
+    "codepoint": "U+030D"
+  },
+  {
+    "zeichen": "′",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "PRIME",
+    "codepoint": "U+2032"
+  },
+  {
+    "zeichen": "″",
+    "grundzeichen": "",
+    "schriftzeichengruppe": "E1",
+    "name": "DOUBLE PRIME",
+    "codepoint": "U+2032"
   }
 ]
