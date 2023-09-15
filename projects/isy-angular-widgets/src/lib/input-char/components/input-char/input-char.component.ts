@@ -86,7 +86,7 @@ export class InputCharComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    this.getCharactersByDatentyp(this.datentyp);
+    this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);
   }
 
   /**
@@ -94,14 +94,5 @@ export class InputCharComponent implements OnChanges {
    */
   toggleCharPicker(): void {
     this.visible = !this.visible;
-  }
-
-  /**
-   * Setting up the characters list who must be displayed
-   * @param datentyp Used as filter
-   * @internal
-   */
-  private getCharactersByDatentyp(datentyp: Datentyp): void {
-    this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);
   }
 }
