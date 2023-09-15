@@ -63,7 +63,7 @@ describe('Unit Tests: InputCharComponent', () => {
         fixture = TestBed.createComponent(InputCharComponent);
         component = fixture.componentInstance;
         component.datentyp = datentyp as Datentyp;
-        component.ngOnChanges();
+        fixture.componentRef.setInput('datentyp', datentyp);
         fixture.detectChanges();
       });
 
@@ -80,10 +80,6 @@ describe('Unit Tests: InputCharComponent', () => {
         expect(component.isDialogClosingOnEscape).toBeTrue();
         expect(component.isDialogModalDisplayed).toBeFalse();
         expect(component.isInputDisabled).toBeFalse();
-        expect(component.visible).toBeFalse();
-      });
-
-      it('should not be visible by default', () => {
         expect(component.visible).toBeFalse();
       });
 
@@ -158,12 +154,10 @@ describe('Integration Test: InputCharComponent', () => {
         })
           .compileComponents();
 
-
         fixture = TestBed.createComponent(InputCharComponent);
         component = fixture.componentInstance;
-        component.datentyp = datentyp as Datentyp;
-        component.visible = true;
-        component.ngOnChanges();
+        fixture.componentRef.setInput('datentyp', datentyp);
+        fixture.debugElement.query(By.css('#input-char-button')).nativeElement.click();
         fixture.detectChanges();
       });
 
@@ -172,13 +166,13 @@ describe('Integration Test: InputCharComponent', () => {
       });
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
-      it(`should show ${expectedGroups} available groups`, () => {
+      it(`should show ${expectedGroups} available groups after opening`, () => {
         const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button'));
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
-      it(`should show ${expectedCharacters} characters`, () => {
+      it(`should show ${expectedCharacters} characters after opening`, () => {
         const groupButtons = fixture.debugElement.queryAll(By.css('#right-panel-side p-selectbutton .p-buttonset .p-button'));
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
