@@ -204,8 +204,6 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   let fixture: ComponentFixture<InputCharDialogComponent>;
 
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
-  const numberOfBases = [...new Set(sonderzeichenListe.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))].length;
-  const numberOfGroups = [...new Set(sonderzeichenListe.map(item => item.schriftzeichengruppe))].length;
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
@@ -220,11 +218,13 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     fixture.detectChanges();
   });
 
+  const numberOfBases = [...new Set(sonderzeichenListe.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))].length;
   it(`should show ${numberOfBases} available bases`, () => {
     const baseButtons = fixture.debugElement.queryAll(By.css('#grundzeichen-select-button .p-buttonset div'));
     expect(baseButtons.length).toEqual(numberOfBases);
   });
 
+  const numberOfGroups = [...new Set(sonderzeichenListe.map(item => item.schriftzeichengruppe))].length;
   it(`should show ${numberOfGroups} available groups`, () => {
     const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset div'));
     expect(groupButtons.length).toEqual(numberOfGroups);
