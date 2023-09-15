@@ -14,7 +14,10 @@ export class CharacterService {
   getCharacters(): Zeichenobjekt[] {
     return sonderzeichenliste as Zeichenobjekt[];
   }
-
+  getCharactersByDataType(datentyp: Datentyp): Zeichenobjekt[] {
+    const allowedGroups = this.getGroupsByDataType(datentyp);
+    return this.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
+  }
   getGroupsByDataType(dataTyp: Datentyp): Schriftzeichengruppe[] {
     switch (dataTyp) {
       case Datentyp.DATENTYP_A:

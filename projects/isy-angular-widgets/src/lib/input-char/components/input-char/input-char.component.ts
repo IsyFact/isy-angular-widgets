@@ -102,7 +102,6 @@ export class InputCharComponent implements OnChanges {
    * @internal
    */
   private getCharactersByDatentyp(datentyp: Datentyp): void {
-    const allowedGroups = this.charService.getGroupsByDataType(datentyp);
-    this.allCharacters = this.charService.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
+    this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);
   }
 }
