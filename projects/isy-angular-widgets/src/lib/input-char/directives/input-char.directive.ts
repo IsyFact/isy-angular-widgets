@@ -21,7 +21,7 @@ export class InputCharDirective implements OnInit {
    */
   @HostListener('mouseup', ['$event'])
   onMouseUp(event: MouseEvent): void {
-    this.inputMousePosition = this.getInputMousePosition(event);
+    this.selectionPosition = this.getSelectionPosition(event);
   }
 
   /**
@@ -30,13 +30,13 @@ export class InputCharDirective implements OnInit {
    */
   @HostListener('keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    this.inputMousePosition = this.getInputMousePosition(event);
+    this.selectionPosition = this.getSelectionPosition(event);
   }
 
   /**
-   * The current mouse position (index) inside the input
+   * The current selection position (index) inside the input
    */
-  inputMousePosition: number = 0;
+  selectionPosition: number = 0;
 
   componentRef!: ComponentRef<InputCharComponent>;
 
@@ -87,7 +87,7 @@ export class InputCharDirective implements OnInit {
     });
   }
 
-  getInputMousePosition(event: MouseEvent | KeyboardEvent): number {
+  getSelectionPosition(event: MouseEvent | KeyboardEvent): number {
     return (event.target as HTMLInputElement).selectionStart!;
   }
 
@@ -96,12 +96,12 @@ export class InputCharDirective implements OnInit {
    * @param charLength used to determine the exact next input mouse position, since there are characters longer than one position
    */
   setNextInputPosition(charLength: number): void {
-    this.inputMousePosition += charLength;
+    this.selectionPosition += charLength;
   }
 
   buildInputValue(value: string, zeichen: string): string {
-    const beforeZeichen = value.substring(0, this.inputMousePosition);
-    const afterZeichen = value.substring(this.inputMousePosition);
+    const beforeZeichen = value.substring(0, this.selectionPosition);
+    const afterZeichen = value.substring(this.selectionPosition);
     return `${beforeZeichen}${zeichen}${afterZeichen}`;
   }
 }
