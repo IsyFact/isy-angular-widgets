@@ -18,9 +18,9 @@ interface GroupInfo {
 describe('CharacterService', () => {
   let service: CharacterService;
   const sonderZeichenliste = sonderzeichenliste as Zeichenobjekt[];
-  const numberOfSonderZeichen = 902;
+  const numberOfSonderZeichen = 908;
   const bases: BaseInfo [] = [
-    {name: '*', count: 250},
+    {name: '*', count: 256},
     {name: 'A', count: 61},
     {name: 'B', count: 6},
     {name: 'C', count: 36},
@@ -49,16 +49,18 @@ describe('CharacterService', () => {
     {name: 'Z', count: 32}
   ];
   const groups: GroupInfo[] = [
-    {name: Schriftzeichengruppe.LATEIN, count: 646},
+    {name: Schriftzeichengruppe.LATEIN, count: 649},
     {name: Schriftzeichengruppe.N1, count: 18},
     {name: Schriftzeichengruppe.N2, count: 60},
     {name: Schriftzeichengruppe.N3, count: 6},
     {name: Schriftzeichengruppe.N4, count: 1},
-    {name: Schriftzeichengruppe.E1, count: 40},
+    {name: Schriftzeichengruppe.E1, count: 43},
     {name: Schriftzeichengruppe.GRIECHISCH, count: 69},
     {name: Schriftzeichengruppe.KYRILLISCH, count: 62}
   ];
   const schriftZeichenGruppen = Object.values(Schriftzeichengruppe);
+
+  const DIN_91379_CHARS = ['ḗ', 'ē̍', 'ō̍', '̍', '′', '″'];
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -113,7 +115,7 @@ describe('CharacterService', () => {
   });
 
   it('should check the schriftzeichengruppe array to schriftzeichen array conversion', () => {
-    const schriftZeichen = service.convertToSchriftzeichenArray(schriftZeichenGruppen);
+    const schriftZeichen = service.convertToSchriftzeichenArray(schriftZeichenGruppen as Schriftzeichengruppe[]);
     for (let i = 0; i < schriftZeichenGruppen.length; i++) {
       expect(schriftZeichenGruppen[i]).toEqual(schriftZeichen[i].id);
       expect(schriftZeichenGruppen[i]).toEqual(schriftZeichen[i].gruppe);
@@ -161,4 +163,10 @@ describe('CharacterService', () => {
     expect(filteredGroups).toEqual(schriftZeichenGruppen);
   });
 
+  it('new added DIN 91379 special characters are available', ()=> {
+    DIN_91379_CHARS.forEach(character => {
+      const filteredResult = sonderZeichenliste.filter(item => item.zeichen === character);
+      expect(filteredResult[0].zeichen).toEqual(character);
+    });
+  });
 });
