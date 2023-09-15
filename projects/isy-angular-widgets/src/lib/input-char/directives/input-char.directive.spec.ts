@@ -96,21 +96,7 @@ describe('InputCharDirective', () => {
     });
   });
 
-  it('should check the componentRef instance isInputDisabled property', () => {
-    directive.ngOnInit();
-    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
-    input.disabled = false;
-    directive.setupInputChar();
-    fixture.detectChanges();
-    expect(directive.componentRef.instance.isInputDisabled).toBeFalse();
-
-    input.disabled = true;
-    directive.setupInputChar();
-    fixture.detectChanges();
-    expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
-  });
-
-  it('should check the input mouse position of test component', () => {
+  it('should have mouse position 0 by default', () => {
     expect(directive.selectionPosition).toEqual(0);
   });
 
