@@ -7,5 +7,8 @@ body {
 }
 
 .p-galleria .p-galleria-thumbnail-container {
+  // Added because the default background color of the galleria thumbnail container is to dark
+  // We choose a default color from the PrimeNg CSS variable palette (comes from 'isyfact-primeng-bootstrap-light.css')
+  // Now the galleria thumbnail container background color is the same as the default grey background color from PrimeNg
   background: var(--surface-b);
 }
