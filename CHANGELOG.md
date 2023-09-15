@@ -1,5 +1,7 @@
 # 14.1.0 - 13.09.2023
 ## Features
+- ISY-377: Umsetzung der DIN 91379
+  * Sonderzeichenliste nach DIN 91379 erweitert
 - ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt
 - ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
 - ISY-216: Erstellen von Validatoren für ungewisses Datum
