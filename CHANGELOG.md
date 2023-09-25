@@ -1,4 +1,4 @@
-# 15.0.0 - 13.09.2023
+# 15.0.0 - 02.10.2023
 ## Breaking Changes
 - ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
   * Die Auth Guard Methode canLoad wurde entfernt, da deprecated
