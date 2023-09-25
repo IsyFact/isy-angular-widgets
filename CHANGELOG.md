@@ -1,4 +1,4 @@
-# 14.1.0 - 15.09.2023
+# 14.1.0 - 25.09.2023
 ## Features
 - ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt
 - ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
