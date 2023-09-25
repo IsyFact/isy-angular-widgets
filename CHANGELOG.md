@@ -1,5 +1,7 @@
-# 14.1.0 - 13.09.2023
+# 14.1.0 - 25.09.2023
 ## Features
+- ISY-373: Deaktiviere @angular-eslint/component-selector für Tests
+  * ESLint Selektor Regel für Direktiven und Komponenten Tests wurde deaktiviert 
 - ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt
 - ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
 - ISY-216: Erstellen von Validatoren für ungewisses Datum
