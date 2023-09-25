@@ -1,10 +1,12 @@
-# 14.1.0 - 13.09.2023
+# 14.1.0 - 25.09.2023
 ## Features
 - ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt
 - ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
 - ISY-216: Erstellen von Validatoren für ungewisses Datum
   * Zusätzliche Validatoren für ungewisse Datumswerte integriert
   * Tag und Monat wurden in das Datumformat integriert
+## Fixes
+- ISY-134 - Performance Violation im CharPicker
 ## Demo-Anwendung
 - ISY-137: Demonstration der Security Widgets:
   * Demonstration des Security Widgets innerhalb der Demo-Anwendung
