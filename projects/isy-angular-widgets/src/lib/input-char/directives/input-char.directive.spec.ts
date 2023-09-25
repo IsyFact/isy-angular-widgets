@@ -50,6 +50,7 @@ describe('InputCharDirective', () => {
     component = fixture.componentInstance;
     directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
     directive = directiveElement[0].injector.get(InputCharDirective) as InputCharDirective;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -57,42 +58,57 @@ describe('InputCharDirective', () => {
   });
 
   it('should add an input char button to the input', () => {
-    directive.ngOnInit();
-    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
+    const inputCharButton = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
   });
 
-  it('should set the input char button to disabled when the input is disabled', () => {
+  it('should set the input char button to disabled when the input is disabled', (done) => {
     const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    expect(input).toBeTruthy();
+    const inputCharButton = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+    expect(inputCharButton).toBeTruthy();
+
     input.disabled = true;
     fixture.detectChanges();
-    directive.setupInputChar();
-    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
-    expect(inputCharButton.disabled).toBeTrue();
+
+    setTimeout(() => {
+      fixture.detectChanges();
+      expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
+      expect(inputCharButton.disabled).toBeTrue();
+      done();
+    });
   });
 
-  it('should set the input char button to disabled when the input is readonly', () => {
+  it('should set the input char button to disabled when the input is readonly', (done) => {
     const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    expect(input).toBeTruthy();
+    const inputCharButton = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+    expect(inputCharButton).toBeTruthy();
+
     input.readOnly = true;
     fixture.detectChanges();
-    directive.setupInputChar();
-    const inputCharButton = fixture.debugElement.query(By.css('#inputCharButton')).nativeElement as HTMLInputElement;
-    expect(inputCharButton.disabled).toBeTrue();
+
+    setTimeout(() => {
+      fixture.detectChanges();
+      expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
+      expect(inputCharButton.disabled).toBeTrue();
+      done();
+    });
   });
 
-  it('should check the input mouse position of test component', () => {
-    expect(directive.inputMousePosition).toEqual(0);
+  it('should have mouse position 0 by default', () => {
+    expect(directive.selectionPosition).toEqual(0);
   });
 
   it('should set next input position', () => {
-    expect(directive.inputMousePosition).toEqual(0);
+    expect(directive.selectionPosition).toEqual(0);
     directive.setNextInputPosition(1);
-    expect(directive.inputMousePosition).toEqual(1);
+    expect(directive.selectionPosition).toEqual(1);
   });
 
   it('should check the arrival of changed input value', () => {
     const newValue = 'abc';
-    const valueOnChangeSpy = spyOn(component, 'valueGet');
+    const valueOnChangeSpy = spyOn(component, 'valueGet' as any);
 
     const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
     input.value = newValue;
@@ -101,18 +117,18 @@ describe('InputCharDirective', () => {
     input.dispatchEvent(changeEvent);
     fixture.detectChanges();
 
-    expect(valueOnChangeSpy).toHaveBeenCalledWith(changeEvent, newValue);
+    expect(valueOnChangeSpy).toHaveBeenCalledWith(changeEvent as any, newValue as any);
   });
 
   it('should check the build of the current input value', () => {
     const value = 'e';
     const zeichen = 'ç̆';
 
-    expect(directive.inputMousePosition).toEqual(0);
+    expect(directive.selectionPosition).toEqual(0);
     let inputValue = directive.buildInputValue(value, zeichen);
     directive.setNextInputPosition(zeichen.length);
     expect(inputValue).toEqual(`${zeichen}${value}`);
-    
+
     inputValue = directive.buildInputValue(inputValue, value);
     directive.setNextInputPosition(value.length);
     expect(inputValue).toEqual(`${zeichen}${value}${value}`);
