@@ -7,6 +7,8 @@
 - ISY-216: Erstellen von Validatoren für ungewisses Datum
   * Zusätzliche Validatoren für ungewisse Datumswerte integriert
   * Tag und Monat wurden in das Datumformat integriert
+## Fixes
+- ISY-134 - Performance Violation im CharPicker
 ## Demo-Anwendung
 - ISY-137: Demonstration der Security Widgets:
   * Demonstration des Security Widgets innerhalb der Demo-Anwendung
