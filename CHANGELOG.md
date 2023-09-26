@@ -1,5 +1,7 @@
 # 14.1.1 - 26.09.2023
 ## Features
+- ISY-373: Deaktiviere @angular-eslint/component-selector für Tests
+  * ESLint Selektor Regel für Direktiven und Komponenten Tests wurde deaktiviert 
 - ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt
 - ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
 - ISY-216: Erstellen von Validatoren für ungewisses Datum
@@ -8,6 +10,7 @@
 ## Fixes
 - ISY-241: Anpassung des Styles für das Galerie Widget von PrimeNG
   * SCSS Code wurde angepasst
+- ISY-134 - Performance Violation im CharPicker
 ## Demo-Anwendung
 - ISY-137: Demonstration der Security Widgets:
   * Demonstration des Security Widgets innerhalb der Demo-Anwendung
