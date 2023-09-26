@@ -1,3 +1,7 @@
+# 14.1.1 - 26.09.2023
+## Fixes
+- ISY-316: Readme aus dem Root-Verzeichnis wird für Releases verwendet
+
 # 14.1.0 - 13.09.2023
 ## Features
 - ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt

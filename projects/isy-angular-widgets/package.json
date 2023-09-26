@@ -1,6 +1,6 @@
 {
   "name": "@isyfact/isy-angular-widgets",
-  "version": "14.1.0",
+  "version": "14.1.1",
   "description": "contains specific widgets for the development of apps in the public sector and applies the default Isyfact Theme.",
   "schematics": "./schematics/collection.json",
   "author": {
@@ -9,14 +9,14 @@
     "url": "https://www.bva.bund.de"
   },
   "keywords": [
+    "Bundesverwaltungsamt",
+    "BVA",
+    "Öffentlicher Sektor",
+    "Behördenspezifische Widgets",
+    "isyfact",
+    "Isyfact Theme",
     "isy-angular-widgets",
-    "hauptfenster",
-    "i18n",
-    "incomplete-date",
-    "input-char",
-    "security",
-    "validation",
-    "wizard"
+    "i18n"
   ],
   "homepage": "http://isyfact.de",
   "repository": {
@@ -28,10 +28,6 @@
     "url": "https://github.com/IsyFact/isy-angular-widgets/issues"
   },
   "license": "Apache-2.0",
-  "scripts": {
-    "build": "tsc -p tsconfig.schematics.json",
-    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/isy-angular-widgets/"
-  },
   "ng-add": {
     "save": "dependencies"
   },
