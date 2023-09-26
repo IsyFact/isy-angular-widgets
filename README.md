@@ -13,7 +13,7 @@ cd isy-angular-widget
 
 ### Dependencies Installieren
 
-Vor der ersten Ausführung, bzw. beim Ergänzen neuer Pakete muss das Projekt mit folgendem Befehl installiert werden.
+Vor der ersten Ausführung bzw. beim Ergänzen neuer Pakete muss das Projekt mit folgendem Befehl installiert werden.
 
 ```shell
 npm install
