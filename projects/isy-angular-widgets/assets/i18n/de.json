@@ -9,7 +9,8 @@
     "inputChar": {
       "headerBaseChars": "Basis",
       "headerGroups": "Gruppen",
-      "insert": "Einfügen"
+      "insert": "Einfügen",
+      "all": "Alle"
     },
     "hauptfenster": {
       "altLogoAwl": "Logo der Anwendungslandschaft",
