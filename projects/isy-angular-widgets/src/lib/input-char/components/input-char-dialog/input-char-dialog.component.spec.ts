@@ -188,7 +188,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
       button.click();
       component.insertSelectedZeichen();
 
-      expect(insertCharacterSpy).toHaveBeenCalledWith(zeichen.zeichen as any);
+      expect(insertCharacterSpy).toHaveBeenCalledWith(zeichen.zeichen);
     });
 
   });
