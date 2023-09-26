@@ -22,30 +22,28 @@ npm install
 ### Widgets-Bibliothek lokal an ein neues Projekt anbinden
 
 1. Öffnen isy-angular-widgets
-2. Im Root directory "npm run build:widgets_lib" ausführen
+2. Im root directory "npm run build:widgets_lib" ausführen
 3. Umgehen auf Pfad "/isy-angular-widgets/dist/isy-angular-widgets" und Pfad kopieren
-4. Neues Angular Projekt Version 14 neu anlegen (npm install wird ausgeführt)
-5. Umgehen auf Root directory und Ausführung von "npm add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets" (kopierter Pfad von Schritt 3)
-6. Im Modul wo die eine ausgewählte Komponente z.B. Input Char verwendet werden soll, müssen folgende Module unter "modules" hinzugefügt werden:
-   a.  BrowserAnimationsModule
-   b.	Je nach Fall vlt. auch BrowserModule oder/auch CommonModule
-7. Innerhalb der Datei angular.json, unter: architect->build->options muss folgendes property hinzugefügt werden: "preserveSymlinks": true Hintergrund: Bei Windows entsteht oft wegen den Pfaden ein Fehler und es tritt eine Fehlermeldung bezüglich inject() auf. Unter Linux gibt es keine Probleme (wurde überprüft)
+4. Neues Angular-Projekt Version 14 neu anlegen (npm install wird ausgeführt)
+5. Umgehen auf root directory und Ausführung von "npm add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets" (kopierter Pfad von Schritt 3)
+6. Im Modul, wo die eine ausgewählte Komponente z.B. Input-Char verwendet werden soll, müssen folgende Module unter "modules" hinzugefügt werden: BrowserAnimationsModule und je nach Fall vlt. auch BrowserModule oder/auch CommonModule
+7. Innerhalb der Datei angular.json, unter: architect->build->options muss folgendes property hinzugefügt werden: "preserveSymlinks": true - Hintergrund: Bei Windows entsteht oft wegen den Pfaden ein Fehler und es tritt eine Fehlermeldung bezüglich inject() auf. Unter Linux gibt es keine Probleme
 8. Applikation starten
 9. Aus isy-angular-widgets ein beliebiges Widget integrieren
 
-### Demo Anwendung starten
+### Demo-Anwendung starten
 
-Neben den Widgets können in der Demo Anwendung praktische Beispiele für die Umsetzung von Styleguide Patterns oder querschnittlichen Aspekten betrachtet werden.
-Die Demo Anwendung kann mit folgendem Befehl gestartet werden. 
+Neben den Widgets können in der Demo-Anwendung praktische Beispiele für die Umsetzung von Styleguide-Patterns oder querschnittlichen Aspekten betrachtet werden.
+Die Demo-Anwendung kann mit folgendem Befehl gestartet werden. 
 
 ```
 $ npm run start
 ```
 
-#### E2E Tests für Demoanwendung ausführen
+#### E2E-Tests für Demo-Anwendung ausführen
 
-Für die Demoanwendung wurden exemplarisch einige E2E-Tests mit dem Framework [TestCafe](https://testcafe.io/) umgesetzt.
-Um die Tests auszuführen, muss zunächst die Demoanwendung gestartet werden (siehe oben).
+Für die Demo-Anwendung wurden exemplarisch einige E2E-Tests mit dem Framework [TestCafe](https://testcafe.io/) umgesetzt.
+Um die Tests auszuführen, muss zunächst die Demo-Anwendung gestartet werden (siehe oben).
 Für die Ausführung der Tests wird der Webbrowser Chrome benötigt, alternativ kann das `e2e` Skript angepasst und dort ein anderer Browser eingetragen werden.
 Die Tests werden mit folgendem Befehlt gestartet.
 
@@ -53,12 +51,12 @@ Die Tests werden mit folgendem Befehlt gestartet.
 $ npm run e2e
 ```
 
-### PrimeNG Designer
-Die globalen Styles (isyfact-primeng-bootstrap-light.css) werden vom [PrimeNG Theme Designer](https://designer.primeng.org/#/) generiert.
+### PrimeNG-Designer
+Die globalen Styles (isyfact-primeng-bootstrap-light.css) werden vom [PrimeNG-Theme-Designer](https://designer.primeng.org/#/) generiert.
 
 
-Als Basis Theme wird _Bootstrap Light_ verwendet.
-Für das aktuelle Theme wurden folgende Einstellungen im PrimeNG Theme Designer verwenden:
+Als Basis-Theme wird _Bootstrap Light_ verwendet.
+Für das aktuelle Theme wurden folgende Einstellungen im PrimeNG-Theme-Designer verwenden:
 
 | Einstellungen        | Wert                          | 
 |----------------------|-------------------------------|

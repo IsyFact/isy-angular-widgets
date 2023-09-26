@@ -2,7 +2,7 @@
 
 [![Node.js CI](https://github.com/IsyFact/isy-angular-widgets/actions/workflows/node.js.yml/badge.svg)](https://github.com/IsyFact/isy-angular-widgets/actions/workflows/node.js.yml)
 
-`isy-angular-widgets` ist eine Widget-Bibliothek, welche Behördenspezifische Komponenten auf Basis von [PrimeNG](https://www.primefaces.org/primeng/) bereitstellt.
+`isy-angular-widgets` ist eine Widget-Bibliothek, welche behördenspezifische Komponenten auf Basis von [PrimeNG](https://www.primefaces.org/primeng/) bereitstellt.
 Die Bibliothek stellt zudem ein IsyFact-Theme bereit, welches sich nach den Richtlinien für Design und Barrierefreiheit des Bundes orientiert.
 
 Praktische sowie querschnittliche Beispiele für die Umsetzung von Patterns des Styleguide sind in der Beispielanwendung [`isy-angular-widget-demo`](https://github.com/IsyFact/isy-angular-widgets/tree/main/projects/isy-angular-widgets-demo) zu finden.
@@ -19,7 +19,7 @@ Praktische sowie querschnittliche Beispiele für die Umsetzung von Patterns des 
 - Wizard-Widget
 - Special-Char-Picker Widgets
 - Spezifische Validator-Methoden für Input-Felder
-- Behördenspezifische Widgets und Widgets aus PrimeNG in den Sprachen Deutsch und Englisch
+- Behördenspezifische Widgets und Widgets aus PrimeNG in deutscher und englischer Sprache
 
 ## Getting Started
 
@@ -100,10 +100,10 @@ export class AppModule {
 
 ## I18N
 
-`isy-angular-widgets` unterstützt die Übersetzungsfähigkeit in beliebige Sprachen.
+`isy-angular-widgets` unterstützt die Übersetzungsfähigkeit in beliebigen Sprachen.
 Standardmäßig werden die Widgets auf Deutsch dargestellt.
 
-Beim Installer über `ng add @isyfact/isy-angular-widgets` werden automatisch deutsche und englische Übersetzungsdateien sowohl für PrimeNG als auch für `isy-angular-widgets` im `asset` Verzeichnis angelegt.
+Beim Installer über `ng add @isyfact/isy-angular-widgets` werden automatisch deutsche und englische Übersetzungsdateien, sowohl für PrimeNG als auch für `isy-angular-widgets`, im `asset` Verzeichnis angelegt.
 
 ### Beispielkonfiguration mit ngx-translate
 
