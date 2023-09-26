@@ -32,4 +32,11 @@ describe('DashboardWidgetsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('gets background color class name', () => {
+    const color = 'blue';
+    const expected = `${color}-background`;
+    const actual = component.getBackgroundColorClass('blue');
+    expect(actual).toEqual(expected);
+  });
 });

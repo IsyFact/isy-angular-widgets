@@ -1,4 +1,4 @@
-# 14.1.0 - 25.09.2023
+# 14.1.1 - 26.09.2023
 ## Features
 - ISY-373: Deaktiviere @angular-eslint/component-selector für Tests
   * ESLint Selektor Regel für Direktiven und Komponenten Tests wurde deaktiviert 
@@ -8,6 +8,8 @@
   * Zusätzliche Validatoren für ungewisse Datumswerte integriert
   * Tag und Monat wurden in das Datumformat integriert
 ## Fixes
+- ISY-241: Anpassung des Styles für das Galerie Widget von PrimeNG
+  * SCSS Code wurde angepasst
 - ISY-134 - Performance Violation im CharPicker
 ## Demo-Anwendung
 - ISY-137: Demonstration der Security Widgets:
