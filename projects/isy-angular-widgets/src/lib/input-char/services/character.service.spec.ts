@@ -1,7 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 
 import {CharacterService} from './character.service';
-import sonderzeichenliste from '../sonderzeichenliste.json';
 import {Schriftzeichengruppe} from '../model/model';
 import {Datentyp} from '../model/datentyp';
 
@@ -158,9 +157,9 @@ describe('CharacterService', () => {
     });
   });
 
-  it('new added DIN 91379 special characters are available', ()=> {
-    DIN_91379_CHARS.forEach(character => {
-      const filteredResult = sonderzeichenliste.filter(item => item.zeichen === character);
+  DIN_91379_CHARS.forEach(character => {
+    it(`should contain new added DIN 91379 special character ${character}`, ()=> {
+      const filteredResult = service.getCharacters().filter(item => item.zeichen === character);
       expect(filteredResult[0].zeichen).toEqual(character);
     });
   });
