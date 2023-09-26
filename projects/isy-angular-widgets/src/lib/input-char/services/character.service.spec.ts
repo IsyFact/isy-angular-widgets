@@ -7,7 +7,6 @@ import {Datentyp} from '../model/datentyp';
 describe('CharacterService', () => {
   let service: CharacterService;
 
-  const DIN_91379_CHARS = ['ḗ', 'ē̍', 'ō̍', '̍', '′', '″'];
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -157,6 +156,7 @@ describe('CharacterService', () => {
     });
   });
 
+  const DIN_91379_CHARS = ['ḗ', 'ē̍', 'ō̍', '̍', '′', '″'];
   DIN_91379_CHARS.forEach(character => {
     it(`should contain new added DIN 91379 special character ${character}`, ()=> {
       const filteredResult = service.getCharacters().filter(item => item.zeichen === character);
