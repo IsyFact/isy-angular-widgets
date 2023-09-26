@@ -1,7 +1,22 @@
 import {ChartData, ChartDatasetEntry} from '../model/model';
-import {blue, orange, pink, yellow} from './menu-colors';
+
+/**
+ * Gets CSS variable value by key
+ * @param color the needed color
+ * @param weight the needed weight of the color
+ * @returns the value of the given CSS variable
+ */
+function getCSSVariable(color: string, weight?: number): string {
+  const defaultWeight = 200;
+  const cssVarialbe = weight ? `--${color}-${weight}` : `--${color}-${defaultWeight}`;
+  return getComputedStyle(document.documentElement).getPropertyValue(cssVarialbe);
+}
 
 /* eslint-disable @typescript-eslint/no-magic-numbers */
+const blue_300 = getCSSVariable('blue');
+const pink_300 = getCSSVariable('pink');
+const orange_300 = getCSSVariable('orange');
+const yellow_300 = getCSSVariable('yellow');
 
 const firstBarDataset: ChartDatasetEntry = {
   label: '2020',
@@ -10,7 +25,7 @@ const firstBarDataset: ChartDatasetEntry = {
     30,
     30
   ],
-  backgroundColor: blue
+  backgroundColor: blue_300
 };
 
 const secondBarDataset: ChartDatasetEntry = {
@@ -20,7 +35,7 @@ const secondBarDataset: ChartDatasetEntry = {
     40,
     50
   ],
-  backgroundColor: yellow
+  backgroundColor: yellow_300
 };
 
 const thirdBarDataset: ChartDatasetEntry = {
@@ -30,7 +45,7 @@ const thirdBarDataset: ChartDatasetEntry = {
     20,
     40
   ],
-  backgroundColor: pink
+  backgroundColor: pink_300
 };
 
 const fourthBarDataset: ChartDatasetEntry = {
@@ -40,7 +55,7 @@ const fourthBarDataset: ChartDatasetEntry = {
     40,
     30
   ],
-  backgroundColor: orange
+  backgroundColor: orange_300
 };
 
 const firstLineDataset: ChartDatasetEntry = {
@@ -51,7 +66,7 @@ const firstLineDataset: ChartDatasetEntry = {
     25
   ],
   fill: false,
-  borderColor: blue,
+  borderColor: blue_300,
   tension: .4
 };
 
@@ -63,7 +78,7 @@ const secondLineDataset: ChartDatasetEntry = {
     10
   ],
   fill: false,
-  borderColor: yellow,
+  borderColor: yellow_300,
   tension: .4
 };
 
@@ -75,7 +90,7 @@ const thirdLineDataset: ChartDatasetEntry = {
     80
   ],
   fill: false,
-  borderColor: pink,
+  borderColor: pink_300,
   tension: .4
 };
 
@@ -87,7 +102,7 @@ const fourthLineDataset: ChartDatasetEntry = {
     50
   ],
   fill: false,
-  borderColor: orange,
+  borderColor: orange_300,
   tension: .4
 };
 
@@ -99,7 +114,7 @@ const firstLineStyleDataset: ChartDatasetEntry = {
     20
   ],
   fill: false,
-  borderColor: blue,
+  borderColor: blue_300,
   tension: .4,
   borderDash: [5, 5]
 };
@@ -112,7 +127,7 @@ const secondLineStyleDataset: ChartDatasetEntry = {
     70
   ],
   fill: false,
-  borderColor: yellow,
+  borderColor: yellow_300,
   tension: .4,
   borderDash: [1, 5]
 };
@@ -125,7 +140,7 @@ const thirdLineStyleDataset: ChartDatasetEntry = {
     25
   ],
   fill: false,
-  borderColor: pink,
+  borderColor: pink_300,
   tension: .4,
   borderDash: [1, 5]
 };
@@ -138,7 +153,7 @@ const fourthLineStyleDataset: ChartDatasetEntry = {
     30
   ],
   fill: false,
-  borderColor: orange,
+  borderColor: orange_300,
   tension: .4,
   borderDash: [1, 5]
 };
@@ -150,7 +165,7 @@ const firstStackedDataset: ChartDatasetEntry = {
     20,
     40
   ],
-  backgroundColor: blue
+  backgroundColor: blue_300
 };
 
 const secondStackedDataset: ChartDatasetEntry = {
@@ -160,7 +175,7 @@ const secondStackedDataset: ChartDatasetEntry = {
     20,
     40
   ],
-  backgroundColor: yellow
+  backgroundColor: yellow_300
 };
 
 const thirdStackedDataset: ChartDatasetEntry = {
@@ -170,7 +185,7 @@ const thirdStackedDataset: ChartDatasetEntry = {
     50,
     30
   ],
-  backgroundColor: pink
+  backgroundColor: pink_300
 };
 
 const fourthStackedDataset: ChartDatasetEntry = {
@@ -180,7 +195,7 @@ const fourthStackedDataset: ChartDatasetEntry = {
     10,
     25
   ],
-  backgroundColor: orange
+  backgroundColor: orange_300
 };
 
 export const barChartData: ChartData = {

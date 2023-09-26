@@ -1,20 +1,23 @@
-# 15.0.0 - 02.10.2023
-## Breaking Changes
-- ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
-  * Die Auth Guard Methode canLoad wurde entfernt, da deprecated
-  * Aus der Auth Guard Methode canActivate wurde der Parameter _state_ aus der Signatur entfernt
-## Demo Anwendung
-- ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
-  * Demo-Anwendung und Bibliothek wurden auf Angular und PrimeNg 15 migriert
-
-# 14.1.0 - 13.09.2023
+# 15.0.0 - 
 ## Features
+- ISY-373: Deaktiviere @angular-eslint/component-selector für Tests
+  * ESLint Selektor Regel für Direktiven und Komponenten Tests wurde deaktiviert 
 - ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt
 - ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
 - ISY-216: Erstellen von Validatoren für ungewisses Datum
   * Zusätzliche Validatoren für ungewisse Datumswerte integriert
   * Tag und Monat wurden in das Datumformat integriert
+## Fixes
+- ISY-241: Anpassung des Styles für das Galerie Widget von PrimeNG
+  * SCSS Code wurde angepasst
+- ISY-134 - Performance Violation im CharPicker
+## Breaking Changes
+- ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
+  * Die Auth Guard Methode canLoad wurde entfernt, da deprecated
+  * Aus der Auth Guard Methode canActivate wurde der Parameter _state_ aus der Signatur entfernt
 ## Demo-Anwendung
+- ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
+  * Demo-Anwendung und Bibliothek wurden auf Angular und PrimeNg 15 migriert
 - ISY-137: Demonstration der Security Widgets:
   * Demonstration des Security Widgets innerhalb der Demo-Anwendung
   * Dropdown Liste innerhalb des Hauptfenster zur Auswahl einer beliebigen Rolle (Admin oder User) hinzugefügt
