@@ -15,6 +15,8 @@
 - ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
   * Die Auth Guard Methode canLoad wurde entfernt, da deprecated
   * Aus der Auth Guard Methode canActivate wurde der Parameter _state_ aus der Signatur entfernt
+- ISY-371: Breaking Change vor v15: API des CharPickers der API von p-dialog angleichen
+  * Properties der Komponente input-char der API von p-dialog angeglichen
 ## Demo-Anwendung
 - ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
   * Demo-Anwendung und Bibliothek wurden auf Angular und PrimeNg 15 migriert
