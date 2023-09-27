@@ -7,6 +7,7 @@ import {Datentyp} from '../model/datentyp';
 describe('CharacterService', () => {
   let service: CharacterService;
 
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -20,18 +21,18 @@ describe('CharacterService', () => {
     expect(service).toBeTruthy();
   });
 
-  const numberOfSonderZeichen = 902;
+  const numberOfSonderZeichen = 908;
   it(`should return ${numberOfSonderZeichen} characters`, () => {
     expect(service.getCharacters().length).toEqual(numberOfSonderZeichen);
   });
 
   const groupCounts = new Map<Schriftzeichengruppe, number>([
-    [Schriftzeichengruppe.LATEIN, 646],
+    [Schriftzeichengruppe.LATEIN, 649],
     [Schriftzeichengruppe.N1, 18],
     [Schriftzeichengruppe.N2, 60],
     [Schriftzeichengruppe.N3, 6],
     [Schriftzeichengruppe.N4, 1],
-    [Schriftzeichengruppe.E1, 40],
+    [Schriftzeichengruppe.E1, 43],
     [Schriftzeichengruppe.GRIECHISCH, 69],
     [Schriftzeichengruppe.KYRILLISCH, 62]
   ]);
@@ -42,7 +43,7 @@ describe('CharacterService', () => {
   });
 
   const baseCounts = new Map<string, number>([
-    ['', 250],
+    ['', 256],
     ['A', 61],
     ['B', 6],
     ['C', 36],
@@ -79,14 +80,14 @@ describe('CharacterService', () => {
   const datenTypTestDataSet = [
     {
       datentyp: Datentyp.DATENTYP_A,
-      characters: 664,
+      characters: 667,
       expectedSchriftzeichengruppen: [
         Schriftzeichengruppe.LATEIN,
         Schriftzeichengruppe.N1
       ]
     },    {
       datentyp: Datentyp.DATENTYP_B,
-      characters: 724,
+      characters: 727,
       expectedSchriftzeichengruppen: [
         Schriftzeichengruppe.LATEIN,
         Schriftzeichengruppe.N1,
@@ -94,7 +95,7 @@ describe('CharacterService', () => {
       ]
     },    {
       datentyp: Datentyp.DATENTYP_C,
-      characters: 731,
+      characters: 734,
       expectedSchriftzeichengruppen: [
         Schriftzeichengruppe.LATEIN,
         Schriftzeichengruppe.N1,
@@ -104,7 +105,7 @@ describe('CharacterService', () => {
       ]
     },    {
       datentyp: Datentyp.DATENTYP_D,
-      characters: 839,
+      characters: 845,
       expectedSchriftzeichengruppen: [
         Schriftzeichengruppe.LATEIN,
         Schriftzeichengruppe.N1,
@@ -115,7 +116,7 @@ describe('CharacterService', () => {
       ]
     },    {
       datentyp: Datentyp.DATENTYP_E,
-      characters: 902,
+      characters: 908,
       expectedSchriftzeichengruppen: [
         Schriftzeichengruppe.LATEIN,
         Schriftzeichengruppe.N1,
@@ -156,6 +157,14 @@ describe('CharacterService', () => {
           expect(testData.expectedSchriftzeichengruppen).toContain(schriftzeichengruppe);
         }
       });
+    });
+  });
+
+  const DIN_91379_CHARS = ['ḗ', 'ē̍', 'ō̍', '̍', '′', '″'];
+  DIN_91379_CHARS.forEach(character => {
+    it(`should contain DIN 91379 special character ${character}`, ()=> {
+      const filteredResult = service.getCharacters().find(item => item.zeichen === character);
+      expect(filteredResult).toBeTruthy();
     });
   });
 });
