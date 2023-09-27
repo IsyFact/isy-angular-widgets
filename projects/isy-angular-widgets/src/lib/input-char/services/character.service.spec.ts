@@ -158,9 +158,9 @@ describe('CharacterService', () => {
 
   const DIN_91379_CHARS = ['ḗ', 'ē̍', 'ō̍', '̍', '′', '″'];
   DIN_91379_CHARS.forEach(character => {
-    it(`should contain new added DIN 91379 special character ${character}`, ()=> {
-      const filteredResult = service.getCharacters().filter(item => item.zeichen === character);
-      expect(filteredResult[0].zeichen).toEqual(character);
+    it(`should contain DIN 91379 special character ${character}`, ()=> {
+      const filteredResult = service.getCharacters().find(item => item.zeichen === character);
+      expect(filteredResult).toBeTruthy();
     });
   });
 });
