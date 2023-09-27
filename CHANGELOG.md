@@ -10,6 +10,7 @@
   * Zusätzliche Validatoren für ungewisse Datumswerte integriert
   * Tag und Monat wurden in das Datumformat integriert
 ## Fixes
+- ISY-316: Readme aus dem Root-Verzeichnis wird für Releases verwendet
 - ISY-241: Anpassung des Styles für das Galerie Widget von PrimeNG
   * SCSS Code wurde angepasst
 - ISY-134 - Performance Violation im CharPicker

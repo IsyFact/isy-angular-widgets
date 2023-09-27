@@ -1,11 +1,33 @@
 {
   "name": "@isyfact/isy-angular-widgets",
+  "version": "14.1.1",
+  "description": "contains specific widgets for the development of apps in the public sector and applies the default Isyfact Theme.",
   "schematics": "./schematics/collection.json",
-  "version": "14.1.0",
-  "scripts": {
-    "build": "tsc -p tsconfig.schematics.json",
-    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/isy-angular-widgets/"
+  "author": {
+    "name": "IsyFact-Team",
+    "email": "isyfact@bva.bund.de",
+    "url": "https://www.bva.bund.de"
   },
+  "keywords": [
+    "Bundesverwaltungsamt",
+    "BVA",
+    "Öffentlicher Sektor",
+    "Behördenspezifische Widgets",
+    "isyfact",
+    "Isyfact Theme",
+    "isy-angular-widgets",
+    "i18n"
+  ],
+  "homepage": "http://isyfact.de",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IsyFact/isy-angular-widgets"
+  },
+  "bugs": {
+    "email": "isyfact@bva.bund.de",
+    "url": "https://github.com/IsyFact/isy-angular-widgets/issues"
+  },
+  "license": "Apache-2.0",
   "ng-add": {
     "save": "dependencies"
   },
@@ -13,7 +35,7 @@
     "@angular/common": "^14.2.4",
     "@angular/core": "^14.2.4",
     "primeicons": "^6.0.1",
-    "primeng": "^14.1.2",
+    "primeng": "^14.2.2",
     "primeflex": "^3.2.1",
     "moment": "^2.29.4"
   },

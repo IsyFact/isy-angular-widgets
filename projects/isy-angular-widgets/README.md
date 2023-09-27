@@ -1,24 +1,198 @@
-# IsyAngularWidgets
+# isy-angular-widgets
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+[![Node.js CI](https://github.com/IsyFact/isy-angular-widgets/actions/workflows/node.js.yml/badge.svg)](https://github.com/IsyFact/isy-angular-widgets/actions/workflows/node.js.yml)
 
-## Code scaffolding
+`isy-angular-widgets` ist eine Widget-Bibliothek, welche behördenspezifische Komponenten auf Basis von [PrimeNG](https://www.primefaces.org/primeng/) bereitstellt.
+Die Bibliothek stellt zudem ein IsyFact-Theme bereit, welches sich nach den Richtlinien für Design und Barrierefreiheit des Bundes orientiert.
 
-Run `ng generate component component-name --project isy-angular-widgets` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project isy-angular-widgets`.
-> Note: Don't forget to add `--project isy-angular-widgets` or else it will be added to the default project in your `angular.json` file. 
+Praktische sowie querschnittliche Beispiele für die Umsetzung von Patterns des Styleguide sind in der Beispielanwendung [`isy-angular-widget-demo`](https://github.com/IsyFact/isy-angular-widgets/tree/main/projects/isy-angular-widgets-demo) zu finden.
 
-## Build
+## Features
 
-Run `ng build isy-angular-widgets` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Hauptfenster-Widget mit Seitenleisten, UserInfo und Navigation
+- Standard Isyfact-Theme mit konfigurierbaren Farben für Hauptnavigationspunkte
+- MegaMenu im Header
+- Unterstützung für Rollen und Rechte
+- Widget für die Anzeige eines ungewissen Datums mit Eingabemaske für das deutsche Datumsformat
+- Security-Modul für die Beschränkung von Rechten auf Navigationspunkte
+- Direktive zur Einschränkung der Sichtbarkeit von einzelnen Widgets
+- Wizard-Widget
+- Special-Char-Picker Widgets
+- Spezifische Validator-Methoden für Input-Felder
+- Behördenspezifische Widgets und Widgets aus PrimeNG in deutscher und englischer Sprache
 
-## Publishing
+## Getting Started
 
-After building your library with `ng build isy-angular-widgets`, go to the dist folder `cd dist/isy-angular-widgets` and run `npm publish`.
+Mit folgendem Befehl wird die Bibliothek `isy-angular-widgets` zu einem bestehenden Angular-Projekt hinzugefügt.
 
-## Running unit tests
+```
+$ ng add @isyfact/isy-angular-widgets
+```
 
-Run `ng test isy-angular-widgets` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Die Schematics führt folgende Schritte aus:
+- Hinzufügen und Installation der Bibliothek und der notwendigen Abhängigkeiten
+- Hinzufügen der Stylesheets der IsyFact
+- Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
 
-## Further help
+### Hauptfenster einbinden
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Nach der Installation von `isy-angular-widgets` kann das Hauptfenster-Widget eingebunden werden.
+Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Datei `app.component.html` mit folgendem Inhalt überschrieben werden:
+
+```html
+<isy-hauptfenster
+  [collapsedLinksnavigation]="false"
+  [collapsedInformationsbereich]="true"
+  [showInformationsbereich]="true"
+  [showLinksnavigation]="true"
+  [userInfo]="{
+    displayName: 'Max Mustermann'
+  }"
+  [items]="[
+    {label: 'Menüeintrag 1'},
+    {label: 'Menüeintrag 2'},
+    {label: 'Menüeintrag 3'}
+  ]"
+  [applicationGroupColor]="'#458648'"
+  [linksNavigationWidth]="'200px'"
+  [logoAwl]="'{image-src}'"
+  [logoAnbieterAwl]="'{image-src}'"
+>
+  <p-menu Linksnavigation
+    [model]="[
+      {label: 'Menüeintrag 1', icon: 'pi pi-check'},
+      {label: 'Menüeintrag 2', icon: 'pi pi-check'},
+      {label: 'Menüeintrag 3', icon: 'pi pi-check'}
+    ]"
+  ></p-menu>
+  <p-panel header="Inhaltsbereich">
+    Darstellung von Formularen, Tabellen, etc.
+  </p-panel>
+  <p Informationsbereich  class="p-2">
+    Inhalt des Informationsbereich.
+  </p>
+</isy-hauptfenster>
+```
+
+Je nach IDE müssen die Importe für das Hauptfenster-Modul noch manuell in der `app.module.ts` ergänzt werden.
+
+```typescript
+// Other imports ...
+import {HauptfensterModule} from '@isyfact/isy-angular-widgets';
+
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    // Other imports ...
+    BrowserModule,
+    BrowserAnimationsModule,
+    HauptfensterModule,
+    MenuModule,
+    PanelModule
+  ]
+})
+export class AppModule {
+}
+```
+
+## I18N
+
+`isy-angular-widgets` unterstützt die Übersetzungsfähigkeit in beliebigen Sprachen.
+Standardmäßig werden die Widgets auf Deutsch dargestellt.
+
+Beim Installer über `ng add @isyfact/isy-angular-widgets` werden automatisch deutsche und englische Übersetzungsdateien, sowohl für PrimeNG als auch für `isy-angular-widgets`, im `asset` Verzeichnis angelegt.
+
+### Beispielkonfiguration mit ngx-translate
+
+Folgendes Beispiel zeigt, wie die Übersetzungsfähigkeit mit der Bibliothek `@ngx-translate` hergestellt werden kann.
+Prinzipiell kann aber jede beliebige I18N-Bibliothek eingesetzt werden.
+
+Zunächst wird `@ngx-translate` installiert.
+
+```bash
+npm install @ngx-translate/core@14 @ngx-translate/http-loader@7 --save
+```
+
+Anschließend können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
+Dazu wird zunächst das `TranslateModule` in der Datei `app.module.ts` installiert.
+
+```typescript
+// Other imports ...
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    // Other imports ...
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: function HttpLoaderFactory(http: HttpClient) {
+          return new TranslateHttpLoader(http);
+        },
+        deps: [HttpClient]
+      }
+    })
+  ]
+})
+export class AppModule {
+}
+```
+
+Anschließend können in der Datei `app.component.ts` die Übersetzungen für PrimeNG und `isy-angular-widgets` bereitgestellt werden.
+
+```typescript
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PrimeNGConfig} from "primeng/api";
+import {WidgetsConfigService} from "@isyfact/isy-angular-widgets";
+import {TranslateService} from "@ngx-translate/core";
+import {Subscription} from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit, OnDestroy {
+  primeNgSub?: Subscription
+  widgetSub?: Subscription
+
+  constructor(
+    private primeNgConfig: PrimeNGConfig,
+    private widgetConfig: WidgetsConfigService,
+    private translateService: TranslateService
+  ) {}
+
+  ngOnInit(): void {
+    this.translateService.setDefaultLang('en');
+
+    this.translate('de');
+  }
+
+  translate(lang: string) {
+    this.translateService.use(lang);
+    this.primeNgSub =this.translateService.get('primeng')
+      .subscribe(res => this.primeNgConfig.setTranslation(res));
+    this.widgetSub = this.translateService.get('isyAngularWidgets')
+      .subscribe(res => this.widgetConfig.setTranslation(res));
+  }
+
+  ngOnDestroy(): void {
+    if(this.primeNgSub) {
+      this.primeNgSub.unsubscribe();
+    }
+    if(this.widgetSub) {
+      this.widgetSub.unsubscribe();
+    }
+  }
+}
+```
+Die `translate`-Methode kann z.B. auch fr einen Language-Picker verwenden werden, damit def Benutzer einer Seite die Sprache selber wählen kann.
