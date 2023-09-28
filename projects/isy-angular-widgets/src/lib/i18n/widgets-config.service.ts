@@ -9,7 +9,7 @@ import {Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class WidgetsConfigService {
-
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   private translation: WidgetsTranslation = {
     wizard: {
       back: 'Zurück',

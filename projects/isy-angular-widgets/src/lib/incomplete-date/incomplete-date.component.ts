@@ -64,7 +64,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   inputValue: string = '';
 
   @ViewChild(InputMask) field?: InputMask;
-  
+
   /**
    * Default constructor
    * @param incompleteDateService The service that contains date transformation logic
@@ -77,13 +77,13 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   ngOnInit(): void {
     // Enable syntax <isy-incomplete-date readonly /> (isReadOnly has value "" which is true as boolean)
-    this.readonly = this.readonly || '' === (this.readonly as any);
-    this.disabled = this.disabled || '' === (this.disabled as any);
+    this.readonly = this.readonly || '' === (this.readonly as unknown);
+    this.disabled = this.disabled || '' === (this.disabled as unknown);
   }
 
   /**
    * Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY.
-   * If the date in german format is not valid and not unspecified, a "UNSPECIFIEDDATE" error is thrown. 
+   * If the date in german format is not valid and not unspecified, a "UNSPECIFIEDDATE" error is thrown.
    * E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx
    * For valid or valid unspecified dates, no error is thrown.
    * @param c The control element the validator is appended to
@@ -155,6 +155,6 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   onChange: Function = (_: any) => {};
 
-  onTouched: Function = () => {}; 
+  onTouched: Function = () => {};
 
 }

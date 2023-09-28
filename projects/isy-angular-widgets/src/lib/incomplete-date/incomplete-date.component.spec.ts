@@ -6,8 +6,8 @@ import {AbstractControl, FormControl, FormsModule} from '@angular/forms';
 describe('IsyIncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let fixture: ComponentFixture<IncompleteDateComponent>;
-  let onChange: Function = () => {};
-  let onTouched: Function = () => {};
+  let onChange: unknown;
+  let onTouched: unknown;
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({

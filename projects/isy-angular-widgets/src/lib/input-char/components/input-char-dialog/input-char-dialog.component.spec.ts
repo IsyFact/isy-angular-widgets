@@ -14,7 +14,7 @@ import {InputCharModule} from '../../input-char.module';
   template: ''
 })
 class FakeSelectButtonComponent implements Partial<SelectButton> {
-  @Input() options?: any[];
+  @Input() options?: string[];
 
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onChange = new EventEmitter<void>();
