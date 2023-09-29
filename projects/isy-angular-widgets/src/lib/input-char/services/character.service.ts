@@ -6,7 +6,7 @@ import {Datentyp} from '../model/datentyp';
 /**
  * @internal
  */
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CharacterService {
 
   getCharacters(): Zeichenobjekt[] {
