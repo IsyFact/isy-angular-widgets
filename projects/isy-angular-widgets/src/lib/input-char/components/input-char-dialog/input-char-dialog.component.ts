@@ -62,18 +62,17 @@ export class InputCharDialogComponent implements OnChanges {
    * Filled with one option for "All Characters"; solely technical reasons.
    * @internal
    */
-  allCharsOptions!: any[];
+  allCharsOptions= [{label: 'Alle'}];
 
   /**
    * Filled when all chars are selected; solely technical reasons.
    * @internal
    */
-  allCharsModel?: string;
+  allCharsModel?: {label: string};
 
   constructor(public widgetsConfigService: WidgetsConfigService) {
     this.allCharsOptions = [{label: this.getTranslation('inputChar.all') as string || 'Alle'}];
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
-    this.allCharsModel = this.allCharsOptions[0] as string;
+    this.allCharsModel = this.allCharsOptions[0];
   }
 
   /**
@@ -165,7 +164,6 @@ export class InputCharDialogComponent implements OnChanges {
     this.grundZeichenListe = this.getAvailableGrundzeichen();
     this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
     this.resetDisplayedCharacters();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
     this.allCharsModel = this.allCharsOptions[0];
   }
 
