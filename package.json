@@ -1,6 +1,6 @@
 {
   "name": "@isyfact/isy-angular-widgets",
-  "version": "14.1.0",
+  "version": "14.2.0",
   "description": "contains specific widgets for the development of apps in the public sector and applies the default Isyfact Theme.",
   "author": {
     "name": "IsyFact-Team",
