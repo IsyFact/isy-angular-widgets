@@ -4,13 +4,16 @@
   * Sonderzeichenliste nach DIN 91379 erweitert
 - ISY-373: Deaktiviere @angular-eslint/component-selector für Tests
   * ESLint Selektor Regel für Direktiven und Komponenten Tests wurde deaktiviert
+## Fixes
+- ISY-316: Readme aus dem Root-Verzeichnis wird für Releases verwendet
+
+# 14.1.0 - 26.09.2023
 - ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf "invalid" gesetzt und der Fehler grafisch dargestellt
 - ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich
 - ISY-216: Erstellen von Validatoren für ungewisses Datum
   * Zusätzliche Validatoren für ungewisse Datumswerte integriert
   * Tag und Monat wurden in das Datumformat integriert
 ## Fixes
-- ISY-316: Readme aus dem Root-Verzeichnis wird für Releases verwendet
 - ISY-241: Anpassung des Styles für das Galerie Widget von PrimeNG
   * SCSS Code wurde angepasst
 - ISY-134 - Performance Violation im CharPicker
