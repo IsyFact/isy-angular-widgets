@@ -1,4 +1,4 @@
-# 15.0.0 -
+# 15.0.0 - 29.09.2023
 ## Features
 - ISY-377: Umsetzung der DIN 91379
   * Sonderzeichenliste nach DIN 91379 erweitert
