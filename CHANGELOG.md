@@ -1,4 +1,16 @@
-# 14.2.0 - 29.9.2023
+# 15.0.0 - 29.09.2023
+## Breaking Changes
+- ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
+  * Die Implementierung der Interfaces CanActivate, CanLoad wurde entfernt, da deprecated
+  * Der Parameter _state_ wurde aus der Signatur der Auth Guard Methode canActivate entfernt
+  * Die Auth Guard Methode canLoad wurde entfernt, da CanLoad Interface deprecated
+- ISY-371: Breaking Change vor v15: API des CharPickers der API von p-dialog angleichen
+  * Properties der Komponente input-char der API von p-dialog angeglichen
+## Demo-Anwendung
+- ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
+  * Demo-Anwendung und Bibliothek wurden auf Angular und PrimeNg 15 migriert
+
+# 14.2.0 - 29.09.2023
 ## Features
 - ISY-377: Umsetzung der DIN 91379
   * Sonderzeichenliste nach DIN 91379 erweitert

@@ -38,32 +38,32 @@ export class InputCharComponent implements OnChanges {
   /**
    * Determines whether the char picker can be closed
    */
-  @Input() isDialogClosable: boolean = true;
+  @Input() closable: boolean = true;
 
   /**
    * Determines whether the char picker can be repositioned manually
    */
-  @Input() isDialogDraggable: boolean = true;
+  @Input() draggable: boolean = true;
 
   /**
    * Determines whether the char picker can be resized manually
    */
-  @Input() isDialogResizable: boolean = false;
+  @Input() resizable: boolean = false;
 
   /**
    * Determines whether the picker closes when clicking outside of it
    */
-  @Input() isDialogClosingOnOutsideClick: boolean = false;
+  @Input() dismissableMask: boolean = false;
 
   /**
    * Determines whether the picker closes when pressing the ESC key
    */
-  @Input() isDialogClosingOnEscape: boolean = true;
+  @Input() closeOnEscape: boolean = true;
 
   /**
    * Determines whether the picker is displayed as a modal
    */
-  @Input() isDialogModalDisplayed: boolean = false;
+  @Input() modal: boolean = false;
 
   /**
    * Determines whether the input is displayed

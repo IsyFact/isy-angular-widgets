@@ -43,7 +43,7 @@ const CLASS_MR_4 = 'mr-4';
         <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
       </isy-wizard>`
 })
-export class TestComponent {
+class TestComponent {
   @ViewChild('wizard') wizard!: WizardComponent;
 }
 

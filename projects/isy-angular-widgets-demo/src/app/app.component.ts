@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private menuTranslationService: MenuTranslationService
   ) {
     // Add translation
-    translate.addLangs(['de', 'en', 'ru']);
+    translate.addLangs(['de', 'en']);
     translate.setDefaultLang('en');
 
     // Set PrimeNG translation

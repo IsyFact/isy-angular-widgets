@@ -4,6 +4,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CharacterService} from '../services/character.service';
 
 @Component({
   template:

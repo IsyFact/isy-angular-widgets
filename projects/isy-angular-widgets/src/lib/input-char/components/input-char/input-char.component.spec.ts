@@ -73,12 +73,12 @@ describe('Unit Tests: InputCharComponent', () => {
 
       it('should have the specified default input configuration', () => {
         expect(component.header).toEqual(undefined);
-        expect(component.isDialogClosable).toBeTrue();
-        expect(component.isDialogDraggable).toBeTrue();
-        expect(component.isDialogResizable).toBeFalse();
-        expect(component.isDialogClosingOnOutsideClick).toBeFalse();
-        expect(component.isDialogClosingOnEscape).toBeTrue();
-        expect(component.isDialogModalDisplayed).toBeFalse();
+        expect(component.closable).toBeTrue();
+        expect(component.draggable).toBeTrue();
+        expect(component.resizable).toBeFalse();
+        expect(component.dismissableMask).toBeFalse();
+        expect(component.closeOnEscape).toBeTrue();
+        expect(component.modal).toBeFalse();
         expect(component.isInputDisabled).toBeFalse();
         expect(component.visible).toBeFalse();
       });

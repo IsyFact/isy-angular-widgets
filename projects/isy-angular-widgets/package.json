@@ -1,6 +1,6 @@
 {
   "name": "@isyfact/isy-angular-widgets",
-  "version": "14.2.0",
+  "version": "15.0.0",
   "description": "contains specific widgets for the development of apps in the public sector and applies the default Isyfact Theme.",
   "schematics": "./schematics/collection.json",
   "author": {
@@ -32,18 +32,14 @@
     "save": "dependencies"
   },
   "peerDependencies": {
-    "@angular/common": "^14.2.4",
-    "@angular/core": "^14.2.4",
+    "@angular/common": "^15.2.9",
+    "@angular/core": "^15.2.9",
     "primeicons": "^6.0.1",
-    "primeng": "^14.2.2",
+    "primeng": "^15.2.1",
     "primeflex": "^3.3.1",
     "moment": "^2.29.4"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
-  },
-  "devDependencies": {
-    "copyfiles": "^2.4.1",
-    "typescript": "~4.8.4"
+    "tslib": "^2.6.2"
   }
 }

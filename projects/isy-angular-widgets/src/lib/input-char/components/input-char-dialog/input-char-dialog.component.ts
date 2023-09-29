@@ -62,15 +62,17 @@ export class InputCharDialogComponent implements OnChanges {
    * Filled with one option for "All Characters"; solely technical reasons.
    * @internal
    */
-  allCharsOptions = [{label: this.getTranslation('inputChar.all') as string || 'Alle'}];
+  allCharsOptions= [{label: 'Alle'}];
 
   /**
    * Filled when all chars are selected; solely technical reasons.
    * @internal
    */
-  allCharsModel: {label: string} | undefined = this.allCharsOptions[0];
+  allCharsModel?: {label: string};
 
   constructor(public widgetsConfigService: WidgetsConfigService) {
+    this.allCharsOptions = [{label: this.getTranslation('inputChar.all') as string || 'Alle'}];
+    this.allCharsModel = this.allCharsOptions[0];
   }
 
   /**

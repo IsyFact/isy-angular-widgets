@@ -9,7 +9,8 @@ describe('CharacterService', () => {
 
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+    });
     service = TestBed.inject(CharacterService);
   });
 

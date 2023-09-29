@@ -186,7 +186,6 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
       expect(insertCharacterSpy).toHaveBeenCalledWith(zeichen.zeichen);
     });
-
   });
 
   it('should have a button with the label "Einfügen"', () => {
