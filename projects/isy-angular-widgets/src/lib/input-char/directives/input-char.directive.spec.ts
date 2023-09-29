@@ -45,9 +45,6 @@ describe('InputCharDirective', () => {
       ],
       imports: [
         BrowserAnimationsModule
-      ],
-      providers: [
-        CharacterService
       ]
     });
     fixture = TestBed.createComponent(TestComponent);

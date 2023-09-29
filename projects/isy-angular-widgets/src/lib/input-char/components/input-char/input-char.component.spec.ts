@@ -56,9 +56,6 @@ describe('Unit Tests: InputCharComponent', () => {
           ],
           schemas: [
             NO_ERRORS_SCHEMA
-          ],
-          providers: [
-            CharacterService
           ]
         })
           .compileComponents();

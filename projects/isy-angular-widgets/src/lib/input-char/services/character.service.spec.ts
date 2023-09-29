@@ -10,9 +10,6 @@ describe('CharacterService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        CharacterService
-      ]
     });
     service = TestBed.inject(CharacterService);
   });

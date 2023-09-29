@@ -562,7 +562,7 @@ describe('Test WizardComponent with Mock Parent', () => {
 
   it('should have a not save functionality', () => {
     const param = false;
-    spyOn(stepper, 'move' as any).withArgs(param);
+    spyOn(stepper, 'move').withArgs(param);
     spyOn(wizard.savingChange, 'emit');
     wizard.save(param);
     expect(wizard.savingChange.emit).toHaveBeenCalledWith(param);
