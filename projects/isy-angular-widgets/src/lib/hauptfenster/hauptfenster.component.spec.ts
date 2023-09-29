@@ -107,7 +107,7 @@ describe('HauptfensterComponent', () => {
     component.linksNavigationWidth = customLinksnavigationWidth;
     component.showLinksnavigation = true;
     fixture.detectChanges();
-    const linksnavigation = fixture.nativeElement.querySelector('#openLinksNavigation') as HTMLElement;
+    const linksnavigation = fixture.nativeElement.querySelector('#open-links-navigation') as HTMLElement;
     expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
   });
 

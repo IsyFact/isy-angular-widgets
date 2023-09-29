@@ -51,21 +51,21 @@
   </div>
 </p-panel>
 
-<p-tabView id="tabview">
+<p-tabView id="tab-view">
   <p-tabPanel
-    id="panelPersonalien"
+    id="panel-personalien"
     [header]="('isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate)"
   >
     <form [formGroup]="personalInfoForm">
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label for="lastName">
+          <label for="last-name">
             {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
           </label>
         </div>
         <div class="col">
           <input
-            id="lastName"
+            id="last-name"
             formControlName="lastName"
             type="text"
             pInputText
@@ -79,12 +79,12 @@
           </small>
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="birthName">
+          <label class="align-content-end" for="birth-name">
             {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
           </label>
         </div>
         <div class="col">
-          <input id="birthName"
+          <input id="birth-name"
                  formControlName="birthName"
                  type="text"
                  pInputText
@@ -92,13 +92,13 @@
           >
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="birthplace">
+          <label class="align-content-end" for="birth-place">
             {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
           </label>
         </div>
         <div class="col">
           <input
-            id="birthplace"
+            id="birth-place"
             formControlName="birthplace"
             class="w-full"
             type="text"
@@ -108,12 +108,12 @@
       </div>
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label for="firstName">
+          <label for="first-name">
             {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
           </label>
         </div>
         <div class="col">
-          <input id="firstName"
+          <input id="first-name"
                  formControlName="firstName"
                  class="w-full"
                  required minlength="2"
@@ -148,13 +148,13 @@
           ></p-dropdown>
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="birthDate">
+          <label class="align-content-end" for="birth-date">
             {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
           </label>
         </div>
         <div class="col">
           <p-calendar
-            id="birthDate"
+            id="birth-date"
             dateFormat="dd.mm.yy"
             formControlName="birthDate"
             [showIcon]="true"
@@ -177,13 +177,13 @@
           >
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="phoneNumber">
+          <label class="align-content-end" for="phone-number">
             {{('isyAngularWidgetsDemo.labels.telefonnummer' | translate)}}
           </label>
         </div>
         <div class="col">
           <p-inputMask
-            id="phoneNumber"
+            id="phone-number"
             formControlName="phoneNumber"
             type="text"
             [style]="" mask="+99 9999 / 9999999"
@@ -191,13 +191,13 @@
           </p-inputMask>
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="dateOfEntry">
+          <label class="align-content-end" for="date-of-entry">
             {{('isyAngularWidgetsDemo.labels.einreisedatum' | translate)}}
           </label>
         </div>
         <div class="col">
           <isy-incomplete-date
-            id="dateOfEntry"
+            id="date-of-entry"
             formControlName="dateOfEntry"
             [dateInPastConstraint]="true"
           >
@@ -214,38 +214,38 @@
         <div class="col">
           <div class="field field-checkbox">
             <p-inputSwitch
-              id="showSecretFields"
+              id="show-secret-fields"
               (onChange)="showSecretFields = $event.checked"
             ></p-inputSwitch>
-            <label for="showSecretFields">
+            <label for="show-secret-fields">
               {{('isyAngularWidgetsDemo.actions.showSecretFields' | translate)}}
             </label>
           </div>
         </div>
       </div>
-      <div id="divShowSecretFields" *ngIf="showSecretFields">
+      <div id="div-show-secret-fields" *ngIf="showSecretFields">
         <div class="grid m-0">
           <div class="col-1 text-right align-self-center">
-            <label for="idRequired">
+            <label for="id-required">
               {{('isyAngularWidgetsDemo.labels.ausweispflichtig' | translate)}}
             </label>
           </div>
           <div class="col-1">
             <p-checkbox
-              id="idRequired"
+              id="id-required"
               formControlName="idRequired"
               [binary]="true"
             >
             </p-checkbox>
           </div>
           <div class="col-1 text-right align-self-center">
-            <label class="align-content-end" for="securityLevel">
+            <label class="align-content-end" for="security-level">
               {{('isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate)}}
             </label>
           </div>
           <div class="col-5">
             <p-inputNumber
-              id="securityLevel"
+              id="security-level"
               formControlName="securityLevel"
               [showButtons]="true"
               [min]="0" [max]="9"
@@ -257,14 +257,14 @@
         </div>
         <div class="grid m-0">
           <div class="col-1 text-right align-self-center">
-            <label for="intelligenceNotes">
+            <label for="intelligence-notes">
               {{('isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate)}}
             </label>
           </div>
           <div class="col-5">
           <textarea pInputTextarea
                     formControlName="intelligenceNotes"
-                    id="intelligenceNotes"
+                    id="intelligence-notes"
                     class="w-full"
                     [rows]="5"
           >
@@ -285,16 +285,16 @@
     <div class="justify-content-center flex mt-3">
       <button pButton
               *ngIf="personalInfoForm.disabled"
-              id="buttonEdit"
+              id="button-edit"
               icon="pi pi-user-edit"
               iconPos="left"
               [label]="('isyAngularWidgetsDemo.actions.edit' | translate)"
               (click)="personalInfoForm.enable()"
       >
       </button>
-      <div id="divSaveCancel" *ngIf="!personalInfoForm.disabled" class="p-buttonset">
+      <div id="div-save-cancel" *ngIf="!personalInfoForm.disabled" class="p-buttonset">
         <button pButton
-                id="buttonSave"
+                id="button-save"
                 icon="pi pi-save"
                 iconPos="left"
                 [disabled]="!personalInfoForm.valid"
@@ -303,7 +303,7 @@
         >
         </button>
         <button pButton
-                id="buttonCancel"
+                id="button-cancel"
                 icon="pi pi-times"
                 class="p-button-outlined"
                 iconPos="left"
@@ -317,7 +317,7 @@
   </p-tabPanel>
 
   <p-tabPanel
-    id="panelSachverhalte"
+    id="panel-sachverhalte"
     [header]="('isyAngularWidgetsDemo.displayObject.tabFacts' | translate)"
   >
     <p-table [value]="person.sachverhalte" responsiveLayout="scroll">

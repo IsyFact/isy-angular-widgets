@@ -10,7 +10,7 @@ import {CharacterService} from '../services/character.service';
   template:
     `<input
         #charPicker
-        id="charPicker"
+        id="char-picker"
         pInputText
         isyInputChar
         (change)="valueGet($event, charPicker.value)"
@@ -64,7 +64,7 @@ describe('InputCharDirective', () => {
   });
 
   it('should set the input char button to disabled when the input is disabled', (done) => {
-    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
     const inputCharButton = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
@@ -81,7 +81,7 @@ describe('InputCharDirective', () => {
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
-    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
     const inputCharButton = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
@@ -111,7 +111,7 @@ describe('InputCharDirective', () => {
     const newValue = 'abc';
     const valueOnChangeSpy = spyOn(component, 'valueGet');
 
-    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     input.value = newValue;
 
     const changeEvent = new Event('change', {});
