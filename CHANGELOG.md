@@ -19,8 +19,9 @@
 - ISY-134 - Performance Violation im CharPicker
 ## Breaking Changes
 - ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
-  * Die Auth Guard Methode canLoad wurde entfernt, da deprecated
-  * Aus der Auth Guard Methode canActivate wurde der Parameter _state_ aus der Signatur entfernt
+  * Die Implementierung der Interfaces CanActivate, CanLoad wurde entfernt, da deprecated
+  * Der Parameter _state_ wurde aus der Signatur der Auth Guard Methode canActivate entfernt
+  * Die Auth Guard Methode canLoad wurde entfernt, da CanLoad Interface deprecated
 - ISY-371: Breaking Change vor v15: API des CharPickers der API von p-dialog angleichen
   * Properties der Komponente input-char der API von p-dialog angeglichen
 ## Demo-Anwendung
