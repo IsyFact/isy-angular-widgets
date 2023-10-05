@@ -68,10 +68,11 @@
              for="birthDate">{{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}</label>
     </div>
     <div class="col">
-      <p-calendar id="birthDate"
+      <p-calendar inputId="birthDate"
                   dateFormat="dd.mm.yy"
                   [(ngModel)]="person.personalien.geburtsdatum"
                   [showIcon]="true"
+                  [iconAriaLabel]="translate.instant('isyAngularWidgets.p-calendar.iconAriaLabel')"
       >
       </p-calendar>
     </div>
