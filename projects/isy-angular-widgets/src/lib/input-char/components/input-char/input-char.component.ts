@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {Zeichenobjekt} from '../../model/model';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 @Component({
   selector: 'isy-input-char',
@@ -82,7 +83,7 @@ export class InputCharComponent implements OnChanges {
    */
   allCharacters: Zeichenobjekt[] = [];
 
-  constructor(private charService: CharacterService) {
+  constructor(private charService: CharacterService, public configService: WidgetsConfigService) {
   }
 
   ngOnChanges(): void {
