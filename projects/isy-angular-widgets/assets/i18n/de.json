@@ -25,9 +25,6 @@
         "collapseInformationsbereich": "Informationsbereich ausblenden",
         "expandInformationsbereich": "Informationsbereich einblenden"
       }
-    },
-    "p-calendar": {
-      "iconAriaLabel": "Datepicker öffnen/schließen"
     }
   },
   "primeng": {
