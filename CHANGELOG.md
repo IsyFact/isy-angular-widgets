@@ -1,3 +1,15 @@
+# 15.0.1 - 5.10.2023
+## Fixes
+- ISY-377: Neue DIN 91379 werden jetzt beim korrekten Grundzeichen angezeigt
+- ISY-292: Sekundärfarbe von Buttons für besseren Kontrast angepasst
+- Aria-Labels zu Buttons von Hauptfenster und CharPicker hinzugefügt
+
+# 14.2.1 - 5.10.2023
+## Fixes
+- ISY-377: Neue DIN 91379 werden jetzt beim korrekten Grundzeichen angezeigt
+- ISY-292: Sekundärfarbe von Buttons für besseren Kontrast angepasst
+- Aria-Labels zu Buttons von Hauptfenster und CharPicker hinzugefügt
+
 # 15.0.0 - 29.09.2023
 ## Breaking Changes
 - ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15
