@@ -6315,21 +6315,21 @@
   },
   {
     "zeichen": "ḗ",
-    "grundzeichen": "",
+    "grundzeichen": "E",
     "schriftzeichengruppe": "LATEIN",
     "name": "LATIN SMALL LETTER E WITH MACRON AND ACUTE",
     "codepoint": "U+1E17"
   },
   {
     "zeichen": "ē̍",
-    "grundzeichen": "",
+    "grundzeichen": "E",
     "schriftzeichengruppe": "LATEIN",
     "name": "SMALL LETTER E WITH MACRON WITH COMBINING VERTICAL LINE ABOVE",
     "codepoint": "<U+0113,U+030D>"
   },
   {
     "zeichen": "ō̍",
-    "grundzeichen": "",
+    "grundzeichen": "O",
     "schriftzeichengruppe": "LATEIN",
     "name": "SMALL LETTER O WITH MACRON WITH COMBINING VERTICAL LINE ABOVE",
     "codepoint": "<U+014D,U+030D>"
