@@ -10,12 +10,21 @@
       "headerBaseChars": "Basis",
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
-      "all": "Alle"
+      "all": "Alle",
+      "aria": {
+        "togglePicker": "Sonderzeichenpicker öffnen/schließen"
+      }
     },
     "hauptfenster": {
       "altLogoAwl": "Logo der Anwendungslandschaft",
       "altLogoAnbieterAwl": "Logo des Anbieters der Anwendungslandschaft",
-      "logout": "Abmelden"
+      "logout": "Abmelden",
+      "aria": {
+        "collapseLinksnavigation": "Linksnavigation ausblenden",
+        "expandLinksnavigation": "Linksnavigation einblenden",
+        "collapseInformationsbereich": "Informationsbereich ausblenden",
+        "expandInformationsbereich": "Informationsbereich einblenden"
+      }
     }
   },
   "primeng": {
