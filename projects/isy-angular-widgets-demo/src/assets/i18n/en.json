@@ -9,12 +9,21 @@
     "inputChar": {
       "headerBaseChars": "Base",
       "headerGroups": "Groups",
-      "insert": "Insert"
+      "insert": "Insert",
+      "aria": {
+        "togglePicker": "Open/Close Special Character Picker"
+      }
     },
     "hauptfenster": {
       "altLogoAwl": "Logo of the application landscape",
       "altLogoAnbieterAwl": "Logo of the application landscape provide",
-      "logout": "Logout"
+      "logout": "Logout",
+      "aria": {
+        "collapseLinksnavigation": "Collapse left side bar",
+        "expandLinksnavigation": "Expand left side bar",
+        "collapseInformationsbereich": "Collapse right side bar",
+        "expandInformationsbereich": "Expand right side bar"
+      }
     }
   },
   "isyAngularWidgetsDemo": {

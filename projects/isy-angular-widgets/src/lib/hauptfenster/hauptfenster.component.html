@@ -56,12 +56,14 @@
       <div [style.width]="linksNavigationWidth" [hidden]="collapsedLinksnavigation" id="openLinksNavigation">
         <div *ngIf="allowSidebarCollapse" class="collapseButton">
           <button class="p-button-text" pButton icon="pi pi-angle-double-left"
+                  [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
                   (click)="collapsedLinksnavigation = true"></button>
         </div>
         <ng-content select="[Linksnavigation]"></ng-content>
       </div>
       <div [hidden]="!collapsedLinksnavigation">
         <button class="p-button-text" pButton icon="pi pi-angle-double-right"
+                [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
                 (click)="collapsedLinksnavigation = false"></button>
       </div>
     </div>
@@ -71,9 +73,11 @@
     </div>
 
     <div class="isy-hauptfenster-informationsbereich dont-print" *ngIf="showInformationsbereich">
-      <div [style.width]="informationsbereichWidth" [hidden]="collapsedInformationsbereich" id="openInformationsbereich">
+      <div [style.width]="informationsbereichWidth" [hidden]="collapsedInformationsbereich"
+           id="openInformationsbereich">
         <div *ngIf="allowSidebarCollapse" class="collapseButton">
           <button class="p-button-text" pButton icon="pi pi-angle-double-right"
+                  [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')"
                   (click)="collapsedInformationsbereich = true"></button>
         </div>
         <ng-content select="[Informationsbereich]"></ng-content>
@@ -81,6 +85,7 @@
       <div
         [hidden]="!collapsedInformationsbereich">
         <button pButton class="p-button-text" icon="pi pi-angle-double-left"
+                [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandInformationsbereich')"
                 (click)="collapsedInformationsbereich = false"></button>
       </div>
     </div>
