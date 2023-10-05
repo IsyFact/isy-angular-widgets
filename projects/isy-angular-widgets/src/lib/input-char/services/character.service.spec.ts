@@ -39,12 +39,12 @@ describe('CharacterService', () => {
   });
 
   const baseCounts = new Map<string, number>([
-    ['', 256],
+    ['', 253],
     ['A', 61],
     ['B', 6],
     ['C', 36],
     ['D', 19],
-    ['E', 42],
+    ['E', 44],
     ['F', 9],
     ['G', 20],
     ['H', 25],
@@ -54,7 +54,7 @@ describe('CharacterService', () => {
     ['L', 24],
     ['M', 14],
     ['N', 29],
-    ['O', 68],
+    ['O', 69],
     ['P', 14],
     ['Q', 2],
     ['R', 23],
