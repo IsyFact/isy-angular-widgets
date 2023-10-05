@@ -21,9 +21,9 @@
       "logout": "Abmelden",
       "aria": {
         "collapseLinksnavigation": "Linksnavigation ausblenden",
-        "expandLinksnavigation": "Linksnavigation ausblenden",
+        "expandLinksnavigation": "Linksnavigation einblenden",
         "collapseInformationsbereich": "Informationsbereich ausblenden",
-        "expandInformationsbereich": "Informationsbereich ausblenden"
+        "expandInformationsbereich": "Informationsbereich einblenden"
       }
     }
   },
