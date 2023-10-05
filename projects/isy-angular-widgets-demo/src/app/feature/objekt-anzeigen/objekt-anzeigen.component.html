@@ -134,7 +134,7 @@
         </div>
         <div class="col">
           <p-dropdown
-            id="gender"
+            inputId="gender"
             formControlName="gender"
             [filter]="true"
             [filterBy]="'name'"
@@ -154,10 +154,11 @@
         </div>
         <div class="col">
           <p-calendar
-            id="birthDate"
+            inputId="birthDate"
             dateFormat="dd.mm.yy"
             formControlName="birthDate"
             [showIcon]="true"
+            [iconAriaLabel]="translate.instant('isyAngularWidgets.p-calendar.iconAriaLabel')"
           >
           </p-calendar>
         </div>
@@ -183,7 +184,7 @@
         </div>
         <div class="col">
           <p-inputMask
-            id="phoneNumber"
+            inputId="phoneNumber"
             formControlName="phoneNumber"
             type="text"
             [style]="" mask="+99 9999 / 9999999"
@@ -197,7 +198,7 @@
         </div>
         <div class="col">
           <isy-incomplete-date
-            id="dateOfEntry"
+            inputId="dateOfEntry"
             formControlName="dateOfEntry"
             [dateInPastConstraint]="true"
           >
@@ -214,7 +215,7 @@
         <div class="col">
           <div class="field field-checkbox">
             <p-inputSwitch
-              id="showSecretFields"
+              inputId="showSecretFields"
               (onChange)="showSecretFields = $event.checked"
             ></p-inputSwitch>
             <label for="showSecretFields">

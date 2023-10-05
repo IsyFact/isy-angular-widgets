@@ -28,6 +28,7 @@
       [options]="translate.getLangs()"
       [(ngModel)]="selectedLanguage"
       (onChange)="changeLanguage($event.value)"
+      [ariaLabel]="('isyAngularWidgetsDemo.settings.languages.label' | translate)"
     >
       <ng-template pTemplate="selectedItem">
         <div class="flex align-items-center gap-2" *ngIf="selectedLanguage">
@@ -49,13 +50,17 @@
       optionLabel="role"
       dataKey="role"
       optionValue="permission"
+      [ariaLabel]="('isyAngularWidgetsDemo.settings.languages.label' | translate)"
       [options]="dropdownPermissionsData"
       (onChange)="selectPermission($event.value)"
     >
     </p-dropdown>
 
   </div>
-  <router-outlet></router-outlet>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
 </isy-hauptfenster>
 <p-toast
   id="notificationToast"

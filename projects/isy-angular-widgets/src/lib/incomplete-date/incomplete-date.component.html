@@ -4,9 +4,10 @@
   (onInput) = "onChange($event.target.value)"
   (onBlur) = "onBlur()"
   (onComplete) = "onComplete()"
-  mask="**.**.****" 
-  [(ngModel)]="inputValue" 
-  characterPattern="^[x]" 
+  mask="**.**.****"
+  [(ngModel)]="inputValue"
+  characterPattern="^[x]"
   [placeholder]="placeholder"
+  [inputId]="inputId!"
 >
 </p-inputMask>
