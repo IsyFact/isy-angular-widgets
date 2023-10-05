@@ -63,12 +63,17 @@ Für das aktuelle Theme wurden folgende Einstellungen im PrimeNG-Theme-Designer 
 | *General*            |                               |
 | Font Family          | BundesSans,Calibri,sans-serif |
 | Text                 | 73, 80, 87                    |
+| Secondary Text       | 73, 80, 87                    |
 | Border Radius        | 0px                           |
+| Disabled Opacity     | 0.75                          |
 | *Palette*            |                               |
 | Primary              | 69, 72, 77                    |
 | Primary Dark         | 137, 144, 154                 |
 | Primary Darker       | 137, 144, 154                 |
 | Highlight Background | 204, 227, 236                 |
 | Text on Highlight    | 73, 80, 87                    |
+| Hover Background     | 204, 227, 236                 |
 | *Forms*              |                               |
 | Focus Border         | 204, 227, 236                 |
+| *Buttons*            |                               |
+| Secondary Background | 69, 72, 77                    |
