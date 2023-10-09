@@ -75,15 +75,15 @@ describe('PersonBearbeitenComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    inputFields.lastName = fixture.debugElement.query(By.css('#lastName'));
-    inputFields.firstName = fixture.debugElement.query(By.css('#firstName'));
-    inputFields.birthName = fixture.debugElement.query(By.css('#birthName'));
-    inputFields.birthplace = fixture.debugElement.query(By.css('#birthplace'));
+    inputFields.lastName = fixture.debugElement.query(By.css('#last-name'));
+    inputFields.firstName = fixture.debugElement.query(By.css('#first-name'));
+    inputFields.birthName = fixture.debugElement.query(By.css('#birth-name'));
+    inputFields.birthplace = fixture.debugElement.query(By.css('#birth-place'));
     inputFields.nationality = fixture.debugElement.query(By.css('#nationality'));
     inputFields.gender = fixture.debugElement.query(By.css('#gender'));
-    inputFields.phoneNumber = fixture.debugElement.query(By.css('#phoneNumber'));
-    inputFields.birthDate = fixture.debugElement.query(By.css('#birthDate input'));
-    inputFields.dateOfEntry = fixture.debugElement.query(By.css('#dateOfEntry input'));
+    inputFields.phoneNumber = fixture.debugElement.query(By.css('#phone-number'));
+    inputFields.birthDate = fixture.debugElement.query(By.css('#birth-date input'));
+    inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry input'));
   });
 
   it('creates', () => {
@@ -112,7 +112,7 @@ describe('PersonBearbeitenComponent', () => {
   });
 
   it('enables input fields in edit mode', () => {
-    clickButton('#buttonEdit');
+    clickButton('#button-edit');
     fixture.detectChanges();
 
     expect(inputFields.firstName.disabled).toBeFalsy();
@@ -129,12 +129,12 @@ describe('PersonBearbeitenComponent', () => {
     component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
     expect(component.showSecretFields).toBeTrue();
     fixture.detectChanges();
-    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'));
+    const secretFieldsContainer = fixture.debugElement.query(By.css('#div-show-secret-fields'));
     expect(secretFieldsContainer).toBeTruthy();
   });
 
   it('expect no validation error', () => {
-    clickButton('#buttonEdit');
+    clickButton('#button-edit');
     fixture.detectChanges();
 
     const invalidFields = fixture.debugElement.queryAll(By.css('.ng-invalid'));
@@ -143,7 +143,7 @@ describe('PersonBearbeitenComponent', () => {
   });
 
   it('displays validation error if lastName is empty', () => {
-    clickButton('#buttonEdit');
+    clickButton('#button-edit');
     fixture.detectChanges();
 
     inputFields.lastName.nativeElement.value = '';
@@ -156,7 +156,7 @@ describe('PersonBearbeitenComponent', () => {
 
   it('expect tab view index to be set', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const tabview = fixture.nativeElement.querySelector('#tabview');
+    const tabview = fixture.nativeElement.querySelector('#tab-view');
     tabview.index = 0;
     expect(tabview.index).toBe(0);
     tabview.index = 1;
@@ -171,20 +171,20 @@ describe('PersonBearbeitenComponent', () => {
 
   it('do not Display non permitted element', () => {
     expect(component.showSecretFields).toBeFalse();
-    const secretFields = fixture.nativeElement.querySelector('showSecretFields');
+    const secretFields = fixture.nativeElement.querySelector('show-secret-fields');
     expect(secretFields).toBeNull();
   });
 
   it('checking the buttons availability', () => {
     expect(component.personalInfoForm.disabled).toBeTrue();
 
-    const editButton = fixture.nativeElement.querySelector('#buttonEdit') as HTMLButtonElement;
+    const editButton = fixture.nativeElement.querySelector('#button-edit') as HTMLButtonElement;
     expect(editButton).not.toBeNull();
 
-    const saveButton = fixture.nativeElement.querySelector('#buttonSave') as HTMLButtonElement;
+    const saveButton = fixture.nativeElement.querySelector('#button-save') as HTMLButtonElement;
     expect(saveButton).toBeNull();
 
-    const cancelButton = fixture.nativeElement.querySelector('#buttonCancel') as HTMLButtonElement;
+    const cancelButton = fixture.nativeElement.querySelector('#button-cancel') as HTMLButtonElement;
     expect(cancelButton).toBeNull();
   });
 

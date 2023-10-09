@@ -193,13 +193,13 @@ describe('PersoenlicheInformationenComponent', () => {
   });
 
   it('should check the inner HTML Text of the Input fields', () => {
-    const vornameLabel = fixture.nativeElement.querySelector('label#vornameLabel');
+    const vornameLabel = fixture.nativeElement.querySelector('label#vorname-label');
     expect(vornameLabel.textContent.trim()).toEqual('Vorname');
 
-    const nachnameLabel = fixture.nativeElement.querySelector('label#nachnameLabel');
+    const nachnameLabel = fixture.nativeElement.querySelector('label#nachname-label');
     expect(nachnameLabel.textContent.trim()).toEqual('Nachname');
 
-    const geschlechtLabel = fixture.nativeElement.querySelector('label#geschlechtLabel');
+    const geschlechtLabel = fixture.nativeElement.querySelector('label#geschlecht-label');
     expect(geschlechtLabel.textContent.trim()).toEqual('Geschlecht');
   });
 });

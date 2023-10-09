@@ -257,7 +257,7 @@ describe('PersonenSuchenComponent', () => {
 
     component.getSavedStatus(true);
 
-    const toast = fixture.nativeElement.querySelector('#notificationToast') as HTMLElement;
+    const toast = fixture.nativeElement.querySelector('#notification-toast') as HTMLElement;
     const toastPosition = 'top-right';
     expect(toast.getAttribute('position')).toEqual(toastPosition);
   }));
@@ -439,7 +439,7 @@ describe('PersonenSuchenComponent', () => {
     component.openWizard = true;
     fixture.detectChanges();
 
-    const idLabel = fixture.nativeElement.querySelector('label#idLabel');
+    const idLabel = fixture.nativeElement.querySelector('label#id-label');
     expect(idLabel.textContent).toEqual('ID');
   });
 

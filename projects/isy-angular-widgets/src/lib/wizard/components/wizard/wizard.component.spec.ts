@@ -16,10 +16,10 @@ const headerTitle = 'Wizard Title';
 const childrenLabels = ['Auswahl 1', 'Auswahl 2', 'Auswahl 3'];
 const startIndex = 0;
 
-const backButtonDeclaration = '#backButton';
-const nextButtonDeclaration = '#nextButton';
-const saveButtonDeclaration = '#saveButton';
-const closeButtonDeclaration = '#closeButton';
+const backButtonDeclaration = '#back-button';
+const nextButtonDeclaration = '#next-button';
+const saveButtonDeclaration = '#save-button';
+const closeButtonDeclaration = '#close-button';
 
 const CLASS_FLEX = 'flex';
 const CLASS_ALIGN_CENTER = 'align-items-center';
