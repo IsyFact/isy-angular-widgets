@@ -4,9 +4,8 @@ import {CharacterService} from './character.service';
 import {Schriftzeichengruppe} from '../model/model';
 import {Datentyp} from '../model/datentyp';
 
-describe('CharacterService', () => {
+describe('Unit Tests: CharacterService', () => {
   let service: CharacterService;
-
 
   beforeEach(() => {
     TestBed.configureTestingModule({

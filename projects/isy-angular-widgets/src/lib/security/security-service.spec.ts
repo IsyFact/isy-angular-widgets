@@ -36,34 +36,36 @@ describe('SecurityService', () => {
     }
   };
 
+  const activatedRouteProvider = {
+    provide: ActivatedRoute,
+    useValue: {
+      snapshot: {
+        data: {
+          title: 'Dashboard'
+        },
+        outlet: 'primary',
+        routerConfig: {
+          data: {
+            title: 'Dashboard'
+          },
+          path: 'dashboard'
+        },
+        url: [
+          {
+            path: 'dashboard',
+            parameters: {}
+          }
+        ]
+      }
+    }
+  };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         SecurityService,
         UserInfoPublicService,
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              data: {
-                title: 'Dashboard'
-              },
-              outlet: 'primary',
-              routerConfig: {
-                data: {
-                  title: 'Dashboard'
-                },
-                path: 'dashboard'
-              },
-              url: [
-                {
-                  path: 'dashboard',
-                  parameters: {}
-                }
-              ]
-            }
-          }
-        }
+        activatedRouteProvider
       ]
     });
     service = TestBed.inject(SecurityService);
@@ -75,36 +77,40 @@ describe('SecurityService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('roles and permissions not set', () => {
-    const isElementPermitted = service.checkElementPermission('personenSuche');
-    expect(isElementPermitted).toBeFalse();
+  describe('Integration Test: SecurityGuard - Unavailable roles and permissions', function() {
+    it('should not access element without roles and permissions', () => {
+      const isElementPermitted = service.checkElementPermission('personenSuche');
+      expect(isElementPermitted).toBeFalse();
 
-    const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
-    isRoutePermittedObservable.subscribe(isRoutePermitted => {
-      expect(isRoutePermitted).toBeFalse();
-    });
+      const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
+      isRoutePermittedObservable.subscribe(isRoutePermitted => {
+        expect(isRoutePermitted).toBeFalse();
+      });
 
-    const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
-    isLoadRoutePermittedObservable.subscribe(isLoadRoutePermitted => {
-      expect(isLoadRoutePermitted).toBeFalse();
+      const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
+      isLoadRoutePermittedObservable.subscribe(isLoadRoutePermitted => {
+        expect(isLoadRoutePermitted).toBeFalse();
+      });
     });
   });
 
-  it('permission for accessing element', () => {
-    const userInfoData = userInfoService.getUserInfo();
-    setupRolesAndPermissions(service, userInfoData, permissionsData);
+  describe('Integration Test: SecurityGuard - Available roles and permissions', function() {
+    it('should access element with correctly permissions', () => {
+      const userInfoData = userInfoService.getUserInfo();
+      setupRolesAndPermissions(service, userInfoData, permissionsData);
 
-    const isElementPermitted = service.checkElementPermission('personenSuche');
-    expect(isElementPermitted).toBeTrue();
+      const isElementPermitted = service.checkElementPermission('personenSuche');
+      expect(isElementPermitted).toBeTrue();
 
-    const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
-    isRoutePermittedObservable.subscribe(isRoutePermitted => {
-      expect(isRoutePermitted).toBeTrue();
-    });
+      const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
+      isRoutePermittedObservable.subscribe(isRoutePermitted => {
+        expect(isRoutePermitted).toBeTrue();
+      });
 
-    const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
-    isLoadRoutePermittedObservable.subscribe(isLoadRoutePermitted => {
-      expect(isLoadRoutePermitted).toBeTrue();
+      const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
+      isLoadRoutePermittedObservable.subscribe(isLoadRoutePermitted => {
+        expect(isLoadRoutePermitted).toBeTrue();
+      });
     });
   });
 });

@@ -3,8 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {HauptfensterComponent} from './hauptfenster.component';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {ButtonModule} from 'primeng/button';
-import {Component, Input, ViewChild} from '@angular/core';
-import {TranslateTestingModule} from 'ngx-translate-testing';
+import {Component, Input, NO_ERRORS_SCHEMA} from '@angular/core';
 
 @Component({
   template: `
@@ -15,32 +14,24 @@ import {TranslateTestingModule} from 'ngx-translate-testing';
     </isy-hauptfenster>
 `})
 class HauptFensterWrapperComponent {
-  @ViewChild('hauptfenster') hauptfenster!: HauptfensterComponent;
   @Input() title!: string;
 }
 
-describe('HauptfensterComponent', () => {
+describe('Unit Tests: HauptfensterComponent', ()=> {
   let component: HauptfensterComponent;
   let fixture: ComponentFixture<HauptfensterComponent>;
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [
-        HauptfensterComponent,
-        HauptFensterWrapperComponent
+        HauptfensterComponent
       ],
-      imports: [
-        MegaMenuModule,
-        ButtonModule,
-        TranslateTestingModule.withTranslations('de', {
-          'isyAngularWidgets.hauptfenster.logout': 'Abmelden'
-        })
+      schemas:[
+        NO_ERRORS_SCHEMA
       ]
     })
       .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(HauptfensterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -59,22 +50,12 @@ describe('HauptfensterComponent', () => {
     expect(titelzeileEl.textContent).toEqual(customTitle);
   });
 
-  it('display custom html in template of Titelzeile', () => {
-    const wrapperFixture = TestBed.createComponent(HauptFensterWrapperComponent);
-    wrapperFixture.detectChanges();
-    const titelzeileEl = wrapperFixture.nativeElement.querySelector('.isy-hauptfenster-titelzeile') as HTMLElement;
-    const h1El = titelzeileEl.querySelector('.custom-title');
-
-    expect(h1El!.textContent).toEqual('Titel inside H1!');
-  });
-
-  it('does not display custom html in Titelzeile if titel input is used', () => {
-    const wrapperFixture = TestBed.createComponent(HauptFensterWrapperComponent);
-    const wrapperComponent = wrapperFixture.componentInstance;
+  it('display title input in Titelzeile', () => {
     const customTitle = 'Custom Title';
-    wrapperComponent.title = customTitle;
-    wrapperFixture.detectChanges();
-    const titelzeileEl = wrapperFixture.nativeElement.querySelector('.isy-hauptfenster-titelzeile') as HTMLElement;
+    component.title = customTitle;
+    fixture.detectChanges();
+    const titelzeileEl = fixture.nativeElement.querySelector('.isy-hauptfenster-titelzeile') as HTMLElement;
+
     expect(titelzeileEl.textContent).toEqual(customTitle);
   });
 
@@ -118,5 +99,49 @@ describe('HauptfensterComponent', () => {
     fixture.detectChanges();
     const informationsbereich = fixture.nativeElement.querySelector('#open-informationsbereich') as HTMLElement;
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
+  });
+});
+
+describe('Integration Test: HauptfensterComponent', () => {
+  let component: HauptfensterComponent;
+  let fixture: ComponentFixture<HauptfensterComponent>;
+
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        HauptfensterComponent,
+        HauptFensterWrapperComponent
+      ],
+      imports: [
+        MegaMenuModule,
+        ButtonModule
+      ]
+    })
+      .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HauptfensterComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should display custom html in template of Titelzeile', () => {
+    const wrapperFixture = TestBed.createComponent(HauptFensterWrapperComponent);
+    wrapperFixture.detectChanges();
+    const titelzeileEl = wrapperFixture.nativeElement.querySelector('.isy-hauptfenster-titelzeile') as HTMLElement;
+    const h1El = titelzeileEl.querySelector('.custom-title');
+
+    expect(h1El!.textContent).toEqual('Titel inside H1!');
+  });
+
+  it('should not display custom html in Titelzeile if titel input is used', () => {
+    const wrapperFixture = TestBed.createComponent(HauptFensterWrapperComponent);
+    const wrapperComponent = wrapperFixture.componentInstance;
+    const customTitle = 'Custom Title';
+    wrapperComponent.title = customTitle;
+    wrapperFixture.detectChanges();
+    const titelzeileEl = wrapperFixture.nativeElement.querySelector('.isy-hauptfenster-titelzeile') as HTMLElement;
+    expect(titelzeileEl.textContent).toEqual(customTitle);
   });
 });

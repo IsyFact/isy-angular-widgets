@@ -8,7 +8,6 @@ import {NgModule} from '@angular/core';
 import {ZipkinOpenTracingHttpInterceptor} from './zipkin-open-tracing-http-interceptor';
 import {OpenTraceHeaders} from './open-tracing-headers';
 
-
 @NgModule({
   imports: [HttpClientModule],
   providers: [
@@ -33,7 +32,6 @@ describe('ZipkinOpenTracingHttpInterceptor', () => {
       .replace(HttpClientModule, HttpClientTestingModule);
   });
 
-
   it('should add Zipkin traceId header', () => {
     MockRender();
 
@@ -45,9 +43,6 @@ describe('ZipkinOpenTracingHttpInterceptor', () => {
     const req = httpMock.expectOne('/any-url');
     req.flush('');
     httpMock.verify();
-
-
-
 
     expect(req.request.headers.has(OpenTraceHeaders.ZIPKIN_TRACE_ID)).toBeTruthy();
     expect(req.request.headers.get(OpenTraceHeaders.ZIPKIN_TRACE_ID)).toMatch(uuidRegex);

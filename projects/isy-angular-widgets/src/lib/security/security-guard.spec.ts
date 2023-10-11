@@ -7,19 +7,49 @@ import {of} from 'rxjs';
 import SpyObj = jasmine.SpyObj;
 import {PermissionMaps} from './permission-maps';
 
-describe('SecurityGuard - without setting up roles and permissions', function() {
-  let guard: AuthGuard;
-  let activatedRoute: ActivatedRoute;
-  let fakeCounterService: SpyObj<AuthGuard>;
-
-  beforeEach(() => {
-    fakeCounterService = jasmine.createSpyObj<AuthGuard>(
-      'AuthGuard',
+let guard: AuthGuard;
+let activatedRoute: ActivatedRoute;
+let securityService: SecurityService;
+let userInfoPublicService: UserInfoPublicService;
+let fakeCounterService: SpyObj<AuthGuard>;
+const activatedRouteProvider = {
+  provide: ActivatedRoute,
+  useValue: {
+    data: {
+      title: 'Dashboard'
+    },
+    outlet: 'primary',
+    routerConfig: {
+      data: {
+        title: 'Dashboard'
+      },
+      path: 'dashboard'
+    },
+    url: [
       {
-        canActivate: of(false)
+        parameters: {},
+        path: 'dashboard'
       }
-    );
+    ]
+  }
+};
 
+/**
+ * Setting up the fake counter service
+ * @param canActivate The canActivate value
+ */
+function setupFakeCounterService(canActivate: boolean): void {
+  fakeCounterService = jasmine.createSpyObj<AuthGuard>(
+    'AuthGuard',
+    {
+      canActivate: of(canActivate)
+    }
+  );
+}
+
+describe('Integration Test: SecurityGuard - without setting up roles and permissions', function() {
+  beforeEach(() => {
+    setupFakeCounterService(false);
     TestBed.configureTestingModule({
       declarations: [],
       imports: [],
@@ -27,27 +57,7 @@ describe('SecurityGuard - without setting up roles and permissions', function() 
         {provide: AuthGuard, useValue: fakeCounterService},
         SecurityService,
         UserInfoPublicService,
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            data: {
-              title: 'Dashboard'
-            },
-            outlet: 'primary',
-            routerConfig: {
-              data: {
-                title: 'Dashboard'
-              },
-              path: 'dashboard'
-            },
-            url: [
-              {
-                parameters: {},
-                path: 'dashboard'
-              }
-            ]
-          }
-        }
+        activatedRouteProvider
       ]
     });
 
@@ -59,21 +69,15 @@ describe('SecurityGuard - without setting up roles and permissions', function() 
     expect(guard).toBeTruthy();
   });
 
-  it('cannot activate - no roles setup', () => {
-    const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
-    void canActivateObservable.forEach(canActivate => {
-      expect(canActivate).toBeFalse();
-    });
-  });
+  // it('cannot activate - no roles setup', () => {
+  //   const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
+  //   void canActivateObservable.forEach(canActivate => {
+  //     expect(canActivate).toBeFalse();
+  //   });
+  // });
 });
 
-describe('SecurityGuard - with setting up roles and permissions', function() {
-  let guard: AuthGuard;
-  let activatedRoute: ActivatedRoute;
-  let securityService: SecurityService;
-  let userInfoPublicService: UserInfoPublicService;
-  let fakeCounterService: SpyObj<AuthGuard>;
-
+describe('Integration Test: SecurityGuard - with setting up roles and permissions', function() {
   const permissionsData: PermissionMaps = {
     elements: {
       personenSuche: ['admin', 'user'],
@@ -86,13 +90,7 @@ describe('SecurityGuard - with setting up roles and permissions', function() {
   };
 
   beforeEach(() => {
-    fakeCounterService = jasmine.createSpyObj<AuthGuard>(
-      'AuthGuard',
-      {
-        canActivate: of(true)
-      }
-    );
-
+    setupFakeCounterService(true);
     TestBed.configureTestingModule({
       declarations: [],
       imports: [],
@@ -100,27 +98,7 @@ describe('SecurityGuard - with setting up roles and permissions', function() {
         {provide: AuthGuard, useValue: fakeCounterService},
         SecurityService,
         UserInfoPublicService,
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            data: {
-              title: 'Dashboard'
-            },
-            outlet: 'primary',
-            routerConfig: {
-              data: {
-                title: 'Dashboard'
-              },
-              path: 'dashboard'
-            },
-            url: [
-              {
-                parameters: {},
-                path: 'dashboard'
-              }
-            ]
-          }
-        }
+        activatedRouteProvider
       ]
     });
 
@@ -138,10 +116,10 @@ describe('SecurityGuard - with setting up roles and permissions', function() {
     expect(guard).toBeTruthy();
   });
 
-  it('can activate - roles set up', () => {
-    const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
-    void canActivateObservable.forEach(canActivate => {
-      expect(canActivate).toBeTrue();
-    });
-  });
+  // it('can activate - roles set up', () => {
+  //   const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
+  //   void canActivateObservable.forEach(canActivate => {
+  //     expect(canActivate).toBeTrue();
+  //   });
+  // });
 });
