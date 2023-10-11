@@ -16,7 +16,7 @@ function setupRolesAndPermissions(service: SecurityService, userInfoData: UserIn
   service.setPermissions(permissionsData);
 }
 
-describe('SecurityService', () => {
+describe('Integration Test: SecurityService', () => {
   let service: SecurityService;
   let userInfoService: UserInfoPublicService;
   let activatedRoute: ActivatedRoute;

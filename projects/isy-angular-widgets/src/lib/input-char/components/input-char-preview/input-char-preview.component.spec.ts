@@ -4,8 +4,9 @@ import {InputCharPreviewComponent} from './input-char-preview.component';
 import {Zeichenobjekt} from '../../model/model';
 import {By} from '@angular/platform-browser';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-describe('InputCharViewComponent', () => {
+describe('Unit Tests: InputCharViewComponent', () => {
   let component: InputCharPreviewComponent;
   let fixture: ComponentFixture<InputCharPreviewComponent>;
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
@@ -14,6 +15,9 @@ describe('InputCharViewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         InputCharPreviewComponent
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
       ]
     })
       .compileComponents();

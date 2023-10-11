@@ -51,7 +51,7 @@ let wizard: WizardComponent;
 let stepper: StepperComponent;
 let contentChildren: QueryList<WizardDirective>;
 
-describe('Test WizardComponent with Mock Parent', () => {
+describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let parentComponent: TestComponent;
   let parentFixture: ComponentFixture<TestComponent>;
 
@@ -527,7 +527,7 @@ describe('Test WizardComponent with Mock Parent', () => {
     expect(stepper.index).toEqual(startIndex + 1);
   });
 
-  it('should have a stepper that  correctly moves forward (via the parent)', () => {
+  it('should have a stepper that correctly moves forward (via the parent)', () => {
     expectFirstStep();
     wizard.move(true);
     expect(stepper.index).toEqual(startIndex + 1);

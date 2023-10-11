@@ -69,12 +69,12 @@ describe('Integration Test: SecurityGuard - without setting up roles and permiss
     expect(guard).toBeTruthy();
   });
 
-  // it('cannot activate - no roles setup', () => {
-  //   const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
-  //   void canActivateObservable.forEach(canActivate => {
-  //     expect(canActivate).toBeFalse();
-  //   });
-  // });
+  it('should not activate because no roles setup', () => {
+    const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
+    void canActivateObservable.forEach(canActivate => {
+      expect(canActivate).toBeFalse();
+    });
+  });
 });
 
 describe('Integration Test: SecurityGuard - with setting up roles and permissions', function() {
@@ -116,10 +116,10 @@ describe('Integration Test: SecurityGuard - with setting up roles and permission
     expect(guard).toBeTruthy();
   });
 
-  // it('can activate - roles set up', () => {
-  //   const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
-  //   void canActivateObservable.forEach(canActivate => {
-  //     expect(canActivate).toBeTrue();
-  //   });
-  // });
+  it('should activate - with roles set up', () => {
+    const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
+    void canActivateObservable.forEach(canActivate => {
+      expect(canActivate).toBeTrue();
+    });
+  });
 });

@@ -41,16 +41,7 @@ describe('Unit Tests: HauptfensterComponent', ()=> {
     expect(component).toBeTruthy();
   });
 
-  it('display title input in Titelzeile', () => {
-    const customTitle = 'Custom Title';
-    component.title = customTitle;
-    fixture.detectChanges();
-    const titelzeileEl = fixture.nativeElement.querySelector('.isy-hauptfenster-titelzeile') as HTMLElement;
-
-    expect(titelzeileEl.textContent).toEqual(customTitle);
-  });
-
-  it('display title input in Titelzeile', () => {
+  it('should display the title input in Titelzeile', () => {
     const customTitle = 'Custom Title';
     component.title = customTitle;
     fixture.detectChanges();

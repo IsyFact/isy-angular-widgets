@@ -114,6 +114,10 @@ describe('Integration Test: StepperComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
   it('should have the correct stepper items titles', () => {
     for (let i = 0; i < component.items.length; i++) {
       expect(component.items[i]).toEqual(stepperItems[i]);

@@ -8,7 +8,6 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 
-
 describe('Unit Tests: InputCharComponent', () => {
   describe('with default datentyp', () => {
     let component: InputCharComponent;
@@ -83,12 +82,15 @@ describe('Unit Tests: InputCharComponent', () => {
         expect(component.visible).toBeFalse();
       });
 
-      it('should check the input char button availability', () => {
+      it('should display the input char button', () => {
         const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
         component.isInputDisabled = true;
         fixture.detectChanges();
         expect(button.disabled).toBeTruthy();
+      });
 
+      it('should not display the input char button', () => {
+        const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
         component.isInputDisabled = false;
         fixture.detectChanges();
         expect(button.disabled).toBeFalsy();

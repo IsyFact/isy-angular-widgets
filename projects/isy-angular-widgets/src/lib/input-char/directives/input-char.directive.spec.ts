@@ -4,7 +4,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CharacterService} from '../services/character.service';
 
 @Component({
   template:
@@ -31,7 +30,7 @@ class TestComponent {
   }
 }
 
-describe('InputCharDirective', () => {
+describe('Integration Tests: InputCharDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let directiveElement: any;
@@ -107,7 +106,7 @@ describe('InputCharDirective', () => {
     expect(directive.selectionPosition).toEqual(1);
   });
 
-  it('should check the arrival of changed input value', () => {
+  it('should change the input value', () => {
     const newValue = 'abc';
     const valueOnChangeSpy = spyOn(component, 'valueGet');
 
@@ -121,7 +120,7 @@ describe('InputCharDirective', () => {
     expect(valueOnChangeSpy).toHaveBeenCalledWith(changeEvent, newValue);
   });
 
-  it('should check the build of the current input value', () => {
+  it('should build the current input value', () => {
     const value = 'e';
     const zeichen = 'ç̆';
 
