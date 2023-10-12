@@ -77,3 +77,9 @@ Für das aktuelle Theme wurden folgende Einstellungen im PrimeNG-Theme-Designer 
 | Focus Border         | 204, 227, 236                 |
 | *Buttons*            |                               |
 | Secondary Background | 69, 72, 77                    |
+
+## Erstellen von Releases
+
+Releases werden mithilfe einer GitHub Action erzeugt, welche immer dann ausgeführt wird, wenn ein Tag mit einer gültigen Versionsnummer nach Semver erstellt wird.
+Diese Versionsnummer wird dann automatisch in die package.json der gebauten Bibliothek ausgetauscht.
+Das bedeutet, die Versionsnummer muss nicht manuell in der package.json des Projekts gepflegt werden (Dort steht einfach 0.0.0).
