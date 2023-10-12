@@ -16,7 +16,6 @@ export const initData: ChartInitData[] = [
   },
   {
     type: 'bar',
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     options: stackedOptions
   }
 ];
