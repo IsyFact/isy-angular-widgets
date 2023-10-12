@@ -1,3 +1,6 @@
+# 47.11.0 - 12.10.2023
+- Nothing else matters
+
 # 15.0.1 - 5.10.2023
 ## Fixes
 - ISY-377: Neue DIN 91379 werden jetzt beim korrekten Grundzeichen angezeigt
