@@ -54,7 +54,6 @@ describe('Integration Tests: AppComponent', () => {
   });
 
   it('the hauptfenster component should not be null', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const hauptfenster = fixture.nativeElement.querySelector('isy-hauptfenster') as HTMLElement;
     expect(hauptfenster).not.toBeNull();
   });

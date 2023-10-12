@@ -9,10 +9,6 @@ import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-// for HTML tests
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const germanCharsStr ='öäüÖÄÜß';
   const person = getEmptyPerson();

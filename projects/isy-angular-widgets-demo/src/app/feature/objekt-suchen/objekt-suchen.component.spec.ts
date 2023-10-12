@@ -280,7 +280,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(geschlecht?.errors).not.toBeNull();
     expectFormValuesAreEmpty(personalInfoForm, true);
 
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     const birthForm = component.allWizardForms[2];
     const geburtsname = personalInfoForm.get('geburtsname');
     expect(geburtsname?.errors).not.toBeNull();
@@ -548,10 +547,8 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(component.editForm).not.toBeUndefined();
     const newValue = 'edit';
     component.editForm.controls.editVorname.setValue(newValue);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     expect(component.selectedPerson!.personalien.vorname).not.toEqual(component.editForm.controls.editVorname.value);
     component.saveChanges();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     expect(component.selectedPerson!.personalien.vorname).toEqual(component.editForm.controls.editVorname.value);
 
     expect(component.openEditForm).toBeFalse();

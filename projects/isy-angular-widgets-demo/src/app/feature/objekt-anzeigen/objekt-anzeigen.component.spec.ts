@@ -154,7 +154,6 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
 
 
   it('tab view index should be set', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const tabview = fixture.nativeElement.querySelector('#tab-view');
     tabview.index = 0;
     expect(tabview.index).toBe(0);
