@@ -89,6 +89,6 @@ jobs:
           cp package.json "$tmp_file" \
             && jq --arg version "$RELEASE_VERSION" '.version=$version' "$tmp_file" >package.json \
             && rm -f "$tmp_file"
-      - run: npm publish --dry-run --access public
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
