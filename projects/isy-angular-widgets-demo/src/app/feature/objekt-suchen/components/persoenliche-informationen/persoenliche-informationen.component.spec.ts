@@ -13,9 +13,18 @@ import { TranslateTestingModule } from 'ngx-translate-testing';
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 // for HTML tests
-describe('PersoenlicheInformationenComponent', () => {
+describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const germanCharsStr ='öäüÖÄÜß';
   const person = getEmptyPerson();
+  const inputIDs = [
+    'Nachname',
+    'Geschlecht'
+  ];
+  const stateClasses = [
+    'ng-untouched',
+    'ng-dirty',
+    'ng-invalid'
+  ];
 
   let component: PersoenlicheInformationenComponent;
   let fixture: ComponentFixture<PersoenlicheInformationenComponent>;
@@ -47,7 +56,7 @@ describe('PersoenlicheInformationenComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check the incoming form', () => {
+  it('should validate the incoming form', () => {
     const form = component.form;
     expect(form.valid).toBeFalse();
     expect(form.get('vorname')!.value).toEqual(person.personalien.vorname);
@@ -55,7 +64,7 @@ describe('PersoenlicheInformationenComponent', () => {
     expect(form.get('geschlecht')!.value).toEqual(person.personalien.geschlecht);
   });
 
-  it('should check the form fields validation rules', () => {
+  it('form fields should be valid', () => {
     const invalidValue = 1;
     const formFields = [
       'nachname',
@@ -80,26 +89,7 @@ describe('PersoenlicheInformationenComponent', () => {
     });
   });
 
-  it('should check the HTML Inputs on init', () => {
-    const inputIDs = [
-      'Nachname',
-      'Geschlecht'
-    ];
-    const stateClasses = [
-      'ng-untouched',
-      'ng-dirty',
-      'ng-invalid'
-    ];
-
-    inputIDs.forEach(id => {
-      const element = fixture.debugElement.query(By.css(`#${id}`));
-      stateClasses.forEach(inputClass => {
-        expect(element.classes[inputClass]).toBeTrue();
-      });
-    });
-  });
-
-  it('check validation of nachname', () => {
+  it('should validate nachname form field', () => {
     const nachnameStr = 'nachname';
     const nachnameInput = component.form.get(nachnameStr);
     expect(nachnameInput!.errors).not.toBeNull();
@@ -123,7 +113,7 @@ describe('PersoenlicheInformationenComponent', () => {
     expect(nachnameInput!.errors).toBeNull();
   });
 
-  it('check validation of vorname', () => {
+  it('should validate vorname form field', () => {
     const vornameStr = 'vorname';
     const vornameInput = component.form.get(vornameStr);
     expect(vornameInput!.errors).toBeNull();
@@ -147,7 +137,7 @@ describe('PersoenlicheInformationenComponent', () => {
     expect(vornameInput!.errors).toBeNull();
   });
 
-  it('check validation of geschlecht', () => {
+  it('should validate geschlecht form field', () => {
     const geschlechtStr = 'geschlecht';
     const geschlechtInput = component.form.get(geschlechtStr);
     expect(geschlechtInput!.errors).not.toBeNull();
@@ -171,7 +161,7 @@ describe('PersoenlicheInformationenComponent', () => {
     expect(geschlechtInput!.errors).toBeNull();
   });
 
-  it('check form validity', () => {
+  it('should validate the form', () => {
     const form = component.form;
     expect(form.valid).toBeFalse();
 
@@ -192,7 +182,7 @@ describe('PersoenlicheInformationenComponent', () => {
     expect(form.valid).toBeTrue();
   });
 
-  it('should check the inner HTML Text of the Input fields', () => {
+  it('should evaluate the inner HTML text of the input fields', () => {
     const vornameLabel = fixture.nativeElement.querySelector('label#vorname-label');
     expect(vornameLabel.textContent.trim()).toEqual('Vorname');
 
@@ -201,5 +191,16 @@ describe('PersoenlicheInformationenComponent', () => {
 
     const geschlechtLabel = fixture.nativeElement.querySelector('label#geschlecht-label');
     expect(geschlechtLabel.textContent.trim()).toEqual('Geschlecht');
+  });
+
+  inputIDs.forEach(id => {
+    stateClasses.forEach(inputClass => {
+      describe(`with input HTML id: ${id}`, () => {
+        it(`should include CSS class: ${inputClass}`, () => {
+          const element = fixture.debugElement.query(By.css(`#${id}`));
+          expect(element.classes[inputClass]).toBeTrue();
+        });
+      });
+    });
   });
 });

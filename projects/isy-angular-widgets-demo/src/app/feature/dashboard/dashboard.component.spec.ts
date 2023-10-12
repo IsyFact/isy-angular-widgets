@@ -13,12 +13,13 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 import {ChartModule} from 'primeng/chart';
 import {ChartComponent} from './components/chart/chart.component';
 
-describe('DashboardComponent', () => {
+describe('Integration Tests: DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
   const GERMAN_LANGUAGE = 'de';
   const ENGLISH_LANGUAGE = 'en';
+  const chartRows = 4;
 
   /**
    * Expects that the chart was initialized
@@ -61,33 +62,33 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have been initialized correctly', () => {
-    expect(component).toBeTruthy();
+  describe('with available charts', ()=> {
+    it('should init char data correctly', () => {
+      component.initCharts();
+      expectChartDataBeInit();
+    });
+
+    it('should have correctly initialized chart data', () => {
+      expectChartDataBeInit();
+    });
+
+    it(`should have ${chartRows} chart data rows`, () => {
+      expect(component.chartData.length).toEqual(chartRows);
+    });
   });
 
-  it('should have 4 chart data rows', () => {
-    expect(component.chartData.length).toEqual(4);
-  });
+  describe('with translations functionality', ()=> {
+    it('should have the german language as default language', () => {
+      expect(component.translate.langs.length).toEqual(1);
+      expect(component.translate.langs[0]).toEqual(GERMAN_LANGUAGE);
+      expect(component.translate.currentLang).toEqual(GERMAN_LANGUAGE);
+    });
 
-  it('should have the german language as default language', () => {
-    expect(component.translate.langs.length).toEqual(1);
-    expect(component.translate.langs[0]).toEqual(GERMAN_LANGUAGE);
-    expect(component.translate.currentLang).toEqual(GERMAN_LANGUAGE);
-  });
-
-  it('should change the current language', () => {
-    expect(component.translate.langs.length).toEqual(1);
-    component.changeLanguage(ENGLISH_LANGUAGE);
-    expect(component.translate.langs.length).toEqual(2);
-    expect(component.translate.currentLang).toEqual(ENGLISH_LANGUAGE);
-  });
-
-  it('should init char data correctly', () => {
-    component.initCharts();
-    expectChartDataBeInit();
-  });
-
-  it('should have correctly initialized chart data', () => {
-    expectChartDataBeInit();
+    it('should change the current language', () => {
+      expect(component.translate.langs.length).toEqual(1);
+      component.changeLanguage(ENGLISH_LANGUAGE);
+      expect(component.translate.langs.length).toEqual(2);
+      expect(component.translate.currentLang).toEqual(ENGLISH_LANGUAGE);
+    });
   });
 });

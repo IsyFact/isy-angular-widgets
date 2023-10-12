@@ -1,10 +1,10 @@
 import {getEmptyPerson, resetPerson} from './person-data';
 import {Person} from '../../shared/model/person';
 
-describe('person-data', () => {
+describe('Unit Tests: person-data', () => {
   const person: Person = getEmptyPerson();
 
-  it('should check the generation of an empty person', () => {
+  it('should generate an empty person', () => {
     expect(person.id).toEqual('');
     expect(person.personalien.nachname).toEqual('');
     expect(person.personalien.vorname).toEqual('');
@@ -21,7 +21,7 @@ describe('person-data', () => {
     expect(person.sachverhalte).toEqual([]);
   });
 
-  it('should check the reset of a person', () => {
+  it('should reset a person', () => {
     person.id = 'id';
     person.personalien.ausweispflichtig = false;
     person.personalien.sicherheitsstufe = 1;

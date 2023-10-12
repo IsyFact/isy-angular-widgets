@@ -24,7 +24,7 @@ import {Observable} from 'rxjs';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 
-describe('PersonenSuchenComponent', () => {
+describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr ='öäüÖÄÜß';
   const DOT = '.';
   const format = 'dd.mm.yyyy';

@@ -3,7 +3,7 @@ import {TranslateTestingModule} from 'ngx-translate-testing';
 import {MenuTranslationService} from './menu-translation.service';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 
-describe('MenuTranslationService', () => {
+describe('Unit Tests: MenuTranslationService', () => {
   let service: MenuTranslationService;
 
   beforeEach(() => {
@@ -19,11 +19,11 @@ describe('MenuTranslationService', () => {
     service = TestBed.inject(MenuTranslationService);
   });
 
-  it('should be created', () => {
+  it('should create', () => {
     expect(service).toBeTruthy();
   });
 
-  it('translates MenuItems labels', async() => {
+  it('should translate MenuItems labels', async() => {
     const items: MenuItem[] = [
       {label: 'menu.label'}
     ];
@@ -33,7 +33,7 @@ describe('MenuTranslationService', () => {
     expect(translatedItems[0].label).toEqual('Menu label');
   });
 
-  it('translates submenu items labels', async() => {
+  it('should translate submenu items labels', async() => {
     const items: MenuItem[] = [
       {
         label: 'menu.label',
@@ -49,7 +49,7 @@ describe('MenuTranslationService', () => {
     expect(translatedSubMenuItem?.label).toEqual('Submenu label');
   });
 
-  it('translates MegaMenuItems labels', async() => {
+  it('should translate MegaMenuItems labels', async() => {
     const items: MegaMenuItem[] = [
       {label: 'menu.label'}
     ];
@@ -59,7 +59,7 @@ describe('MenuTranslationService', () => {
     expect(translatedItems[0].label).toEqual('Menu label');
   });
 
-  it('translates MegaMenu submenu items labels', async() => {
+  it('should translate MegaMenu submenu items labels', async() => {
     const items: MegaMenuItem[] = [
       {
         label: 'menu.label',
