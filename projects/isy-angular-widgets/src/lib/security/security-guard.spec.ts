@@ -2,15 +2,14 @@ import {TestBed} from '@angular/core/testing';
 import {SecurityService} from './security-service';
 import {ActivatedRoute} from '@angular/router';
 import {AuthGuard} from './security-guard';
-import {UserInfoPublicService} from '../../../../isy-angular-widgets-demo/src/app/core/user/userInfoPublicService';
 import {of} from 'rxjs';
 import SpyObj = jasmine.SpyObj;
 import {PermissionMaps} from './permission-maps';
+import {UserInfo} from '../api/userinfo';
 
 let guard: AuthGuard;
 let activatedRoute: ActivatedRoute;
 let securityService: SecurityService;
-let userInfoPublicService: UserInfoPublicService;
 let fakeCounterService: SpyObj<AuthGuard>;
 const activatedRouteProvider = {
   provide: ActivatedRoute,
@@ -47,6 +46,18 @@ function setupFakeCounterService(canActivate: boolean): void {
   );
 }
 
+/**
+ *  Returns needed logged-in user info data
+ *  @returns an object with logged-in user info
+ */
+function getUserInfo(): UserInfo {
+  return {
+    userId: '1',
+    roles: ['admin', 'user'],
+    displayName: 'Nutzer'
+  };
+}
+
 describe('Integration Test: SecurityGuard - without setting up roles and permissions', function() {
   beforeEach(() => {
     setupFakeCounterService(false);
@@ -56,7 +67,6 @@ describe('Integration Test: SecurityGuard - without setting up roles and permiss
       providers: [
         {provide: AuthGuard, useValue: fakeCounterService},
         SecurityService,
-        UserInfoPublicService,
         activatedRouteProvider
       ]
     });
@@ -97,17 +107,15 @@ describe('Integration Test: SecurityGuard - with setting up roles and permission
       providers: [
         {provide: AuthGuard, useValue: fakeCounterService},
         SecurityService,
-        UserInfoPublicService,
         activatedRouteProvider
       ]
     });
 
     guard = TestBed.inject(AuthGuard);
     securityService = TestBed.inject(SecurityService);
-    userInfoPublicService = TestBed.inject(UserInfoPublicService);
     activatedRoute = TestBed.inject(ActivatedRoute);
 
-    const userInfoData = userInfoPublicService.getUserInfo();
+    const userInfoData = getUserInfo();
     securityService.setRoles(userInfoData);
     securityService.setPermissions(permissionsData);
   });

@@ -68,10 +68,6 @@ describe('Integration Tests: DashboardComponent', () => {
       expectChartDataBeInit();
     });
 
-    it('should have correctly initialized chart data', () => {
-      expectChartDataBeInit();
-    });
-
     it(`should have ${chartRows} chart data rows`, () => {
       expect(component.chartData.length).toEqual(chartRows);
     });

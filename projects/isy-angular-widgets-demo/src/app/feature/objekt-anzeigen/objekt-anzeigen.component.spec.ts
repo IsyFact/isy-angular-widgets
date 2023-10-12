@@ -153,7 +153,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   });
 
 
-  it('tab view index should be set', () => {
+  it('should set tab view index', () => {
     const tabview = fixture.nativeElement.querySelector('#tab-view');
     tabview.index = 0;
     expect(tabview.index).toBe(0);
@@ -186,7 +186,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(cancelButton).toBeNull();
   });
 
-  it('message should be added on saving personalien', () => {
+  it('should show message if personalien have been saved', () => {
     const messageSpy = spyOn(messageService, 'add');
     component.savePersonalien();
     fixture.detectChanges();

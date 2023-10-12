@@ -60,7 +60,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(form.get('geschlecht')!.value).toEqual(person.personalien.geschlecht);
   });
 
-  it('form fields should be valid', () => {
+  it('should validate the form fields', () => {
     const invalidValue = 1;
     const formFields = [
       'nachname',
@@ -178,7 +178,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(form.valid).toBeTrue();
   });
 
-  it('should evaluate the inner HTML text of the input fields', () => {
+  it('should evaluate the HTML label text of the input fields', () => {
     const vornameLabel = fixture.nativeElement.querySelector('label#vorname-label');
     expect(vornameLabel.textContent.trim()).toEqual('Vorname');
 
@@ -191,8 +191,8 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   inputIDs.forEach(id => {
     stateClasses.forEach(inputClass => {
-      describe(`with input HTML id: ${id}`, () => {
-        it(`should include CSS class: ${inputClass}`, () => {
+      describe(`required form input element with id: ${id}`, () => {
+        it('should display dirty state error class', () => {
           const element = fixture.debugElement.query(By.css(`#${id}`));
           expect(element.classes[inputClass]).toBeTrue();
         });

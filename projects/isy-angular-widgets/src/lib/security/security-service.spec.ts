@@ -1,6 +1,5 @@
 import {TestBed} from '@angular/core/testing';
 import {SecurityService} from './security-service';
-import {UserInfoPublicService} from '../../../../isy-angular-widgets-demo/src/app/core/user/userInfoPublicService';
 import {PermissionMaps} from './permission-maps';
 import {UserInfo} from '../api/userinfo';
 import {ActivatedRoute, Route} from '@angular/router';
@@ -16,10 +15,22 @@ function setupRolesAndPermissions(service: SecurityService, userInfoData: UserIn
   service.setPermissions(permissionsData);
 }
 
+/**
+ *  Returns needed logged-in user info data
+ *  @returns an object with logged-in user info
+ */
+function getUserInfo(): UserInfo {
+  return {
+    userId: '1',
+    roles: ['admin', 'user'],
+    displayName: 'Nutzer'
+  };
+}
+
 describe('Integration Test: SecurityService', () => {
   let service: SecurityService;
-  let userInfoService: UserInfoPublicService;
   let activatedRoute: ActivatedRoute;
+  const userInfoData = getUserInfo();
   const route: Route = {
     title: 'Dashboard',
     path: 'dashboard'
@@ -64,12 +75,10 @@ describe('Integration Test: SecurityService', () => {
     TestBed.configureTestingModule({
       providers: [
         SecurityService,
-        UserInfoPublicService,
         activatedRouteProvider
       ]
     });
     service = TestBed.inject(SecurityService);
-    userInfoService = TestBed.inject(UserInfoPublicService);
     activatedRoute = TestBed.inject(ActivatedRoute);
   });
 
@@ -78,15 +87,19 @@ describe('Integration Test: SecurityService', () => {
   });
 
   describe('Integration Test: SecurityGuard - Unavailable roles and permissions', function() {
-    it('should not access element without roles and permissions', () => {
+    it('should not access HTML element without roles and permissions', () => {
       const isElementPermitted = service.checkElementPermission('personenSuche');
       expect(isElementPermitted).toBeFalse();
+    });
 
+    it('should not access route without roles and permissions', ()=> {
       const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
       isRoutePermittedObservable.subscribe(isRoutePermitted => {
         expect(isRoutePermitted).toBeFalse();
       });
+    });
 
+    it('should not access async route without roles and permissions', ()=> {
       const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
       isLoadRoutePermittedObservable.subscribe(isLoadRoutePermitted => {
         expect(isLoadRoutePermitted).toBeFalse();
@@ -95,18 +108,22 @@ describe('Integration Test: SecurityService', () => {
   });
 
   describe('Integration Test: SecurityGuard - Available roles and permissions', function() {
-    it('should access element with correctly permissions', () => {
-      const userInfoData = userInfoService.getUserInfo();
+    it('should access HTML element with correctly permissions', () => {
       setupRolesAndPermissions(service, userInfoData, permissionsData);
-
       const isElementPermitted = service.checkElementPermission('personenSuche');
       expect(isElementPermitted).toBeTrue();
+    });
 
+    it('should route with correctly permissions', ()=> {
+      setupRolesAndPermissions(service, userInfoData, permissionsData);
       const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
       isRoutePermittedObservable.subscribe(isRoutePermitted => {
         expect(isRoutePermitted).toBeTrue();
       });
+    });
 
+    it('should route async with correctly permissions', ()=> {
+      setupRolesAndPermissions(service, userInfoData, permissionsData);
       const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
       isLoadRoutePermittedObservable.subscribe(isLoadRoutePermitted => {
         expect(isLoadRoutePermitted).toBeTrue();
