@@ -32,12 +32,13 @@
 // To style PrimeNG widgets within a composition, we were unable to use own classes. A SASS interface is currently
 // not available. For a quick fix, the deprecated ng-deep is used; SASS variables should be used later.
 
-$select_button_text_color: var(--surface-900);;
+$select_button_text_color: black;
 $cursor_pointer: pointer;
-$select_button_on_selection_background_color: var(--gray-600);
-$select_button_on_hover_background_color: var(--surface-200);
+$select_button_on_selection_background_color: darkgrey;
+$select_button_on_hover_background_color: grey;
+$select_button_on_hover_text_color: white;
 
-:host::ng-deep {
+::ng-deep {
 
   // Common styles of all select buttons
   p-selectButton .p-ripple.p-element.p-button {
@@ -56,7 +57,7 @@ $select_button_on_hover_background_color: var(--surface-200);
 
     &.p-highlight:hover {
       background-color: $select_button_on_hover_background_color;
-      color: $select_button_text_color;
+      color: $select_button_on_hover_text_color;
     }
   }
 
@@ -129,5 +130,4 @@ $select_button_on_hover_background_color: var(--surface-200);
   .p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
     overflow: hidden;
   }
-
 }
