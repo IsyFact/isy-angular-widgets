@@ -13,10 +13,10 @@ export function ngAdd(): Rule {
     addTranslationFile(context, tree, 'en.json');
 
     // Add necessary dependencies to new CLI project.
-    addPackageToPackageJson(tree, "@angular/common",  "^15.2.9");
-    addPackageToPackageJson(tree, "@angular/core", "^15.2.9");
+    addPackageToPackageJson(tree, "@angular/common",  "^16.2.9");
+    addPackageToPackageJson(tree, "@angular/core", "^16.2.9");
     addPackageToPackageJson(tree, "primeicons", "^6.0.1");
-    addPackageToPackageJson(tree, "primeng", "^15.2.1");
+    addPackageToPackageJson(tree, "primeng", "^16.5.0");
     addPackageToPackageJson(tree, "primeflex", "^3.3.1");
     addPackageToPackageJson(tree, "moment",  "^2.29.4");
 
@@ -113,7 +113,7 @@ export function addTranslationFile(context: SchematicContext, tree: Tree, langua
   }
 
   if (!tree.exists(translationFilePath)) {
-    tree.create(translationFilePath, isyTranslation.toString("utf-8"));
+    tree.create(translationFilePath, isyTranslation.toString('utf-8'));
     context.logger.info('√ Add language files (de, en) for isy-angular-widgets.');
   } else {
     const translation = tree.read(translationFilePath);
