@@ -216,6 +216,7 @@ export class InputCharDialogComponent implements OnChanges {
    * @param path to the translated text
    * @returns translated text
    */
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   getTranslation(path: string): any {
     return this.widgetsConfigService.getTranslation(path);
   }

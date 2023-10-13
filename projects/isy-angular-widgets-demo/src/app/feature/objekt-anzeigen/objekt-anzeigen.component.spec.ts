@@ -20,6 +20,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   let messageService: MessageService;
   let userInfoService: UserInfoPublicService;
   let securityService: SecurityService;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const inputFields: any = {};
 
   beforeEach(async() => {
