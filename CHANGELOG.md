@@ -1,3 +1,7 @@
+# 16.0.0 - ..2023
+## Features
+- ISY-144 Upgrade Angular und PrimeNG Bibliothek auf Version 16
+
 # 15.0.1 - 5.10.2023
 ## Fixes
 - ISY-377: Neue DIN 91379 werden jetzt beim korrekten Grundzeichen angezeigt
