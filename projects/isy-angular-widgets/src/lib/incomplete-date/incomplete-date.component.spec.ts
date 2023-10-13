@@ -6,8 +6,8 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 describe('Unit Tests: IsyIncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let fixture: ComponentFixture<IncompleteDateComponent>;
-  let onChange: Function = () => {};
-  let onTouched: Function = () => {};
+  let onChange: unknown = () => {};
+  let onTouched: unknown = () => {};
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
