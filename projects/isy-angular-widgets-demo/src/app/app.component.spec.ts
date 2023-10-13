@@ -12,9 +12,10 @@ import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {FormsModule} from '@angular/forms';
 
-describe('AppComponent', () => {
+describe('Integration Tests: AppComponent', () => {
   let app: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       imports: [
@@ -44,7 +45,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the app', () => {
+  it('should create the application', () => {
     expect(app).toBeTruthy();
   });
 
@@ -53,7 +54,6 @@ describe('AppComponent', () => {
   });
 
   it('the hauptfenster component should not be null', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const hauptfenster = fixture.nativeElement.querySelector('isy-hauptfenster') as HTMLElement;
     expect(hauptfenster).not.toBeNull();
   });

@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {WidgetsConfigService} from './widgets-config.service';
 
-describe('WidgetsConfigService', () => {
+describe('Unit tests: WidgetsConfigService', () => {
   let service: WidgetsConfigService;
 
   beforeEach(() => {

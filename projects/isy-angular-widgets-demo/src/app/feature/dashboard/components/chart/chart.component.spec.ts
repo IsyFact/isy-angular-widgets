@@ -5,7 +5,7 @@ import {ChartModule} from 'primeng/chart';
 import {responsiveOptions} from '../../data/chart-configs';
 import {barChartData} from '../../data/chart-data';
 
-describe('ChartComponent', () => {
+describe('Integration Tests: ChartComponent', () => {
   let component: ChartComponent;
   let fixture: ComponentFixture<ChartComponent>;
 

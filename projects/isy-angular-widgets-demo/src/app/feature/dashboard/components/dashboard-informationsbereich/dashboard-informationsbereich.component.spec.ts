@@ -5,7 +5,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
 import {PanelMenuModule} from 'primeng/panelmenu';
 
-describe('DashboardInformationsbereichComponent', () => {
+describe('Integration Tests: DashboardInformationsbereichComponent', () => {
   let component: DashboardInformationsbereichComponent;
   let fixture: ComponentFixture<DashboardInformationsbereichComponent>;
 

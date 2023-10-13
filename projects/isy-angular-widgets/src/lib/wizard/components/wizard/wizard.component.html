@@ -26,7 +26,7 @@
   <ng-template pTemplate="footer">
     <div class="flex justify-content-end flex-wrap card-container">
       <button *ngIf="!isSaved"
-              id="backButton"
+              id="back-button"
               pButton
               [class]="'flex align-items-center justify-content-center mr-2'"
               [disabled]="stepper.index === 0"
@@ -36,7 +36,7 @@
       </button>
 
       <button *ngIf="!isSaved"
-              id="nextButton"
+              id="next-button"
               pButton
               [class]="'flex align-items-center justify-content-center mr-4'"
               [disabled]="stepper.index === wizardItems.length - 1 || !allowNext"
@@ -46,7 +46,7 @@
       </button>
 
       <button *ngIf="stepper.index === wizardItems.length - 1 && !isSaved"
-              id="saveButton"
+              id="save-button"
               pButton
               [class]="'flex align-items-center justify-content-center'"
               [disabled]="(stepper.index !== wizardItems.length - 1 || !allowNext) && !isSaved"
@@ -56,7 +56,7 @@
       </button>
 
       <button
-        id="closeButton"
+        id="close-button"
         pButton
         [class]="'flex align-items-center justify-content-center'"
         [disabled]="isSaved && !closable"

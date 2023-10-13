@@ -20,27 +20,27 @@
 
   <div class="grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label for="lastName">{{('isyAngularWidgetsDemo.labels.nachname' | translate)}}</label>
+      <label for="last-name">{{('isyAngularWidgetsDemo.labels.nachname' | translate)}}</label>
     </div>
     <div class="col">
       <!--  IsyInputChar will add a special character picker to an input field -->
-      <input id="lastName" type="text" pInputText isyInputChar
+      <input id="last-name" type="text" pInputText isyInputChar
              [(ngModel)]="person.personalien.nachname">
     </div>
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
-             for="birthName">{{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}</label>
+             for="birth-name">{{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}</label>
     </div>
     <div class="col">
-      <input id="birthName" class="w-full" type="text" pInputText
+      <input id="birth-name" class="w-full" type="text" pInputText
              [(ngModel)]="person.personalien.geburtsname">
     </div>
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
-             for="birthplace">{{('isyAngularWidgetsDemo.labels.geburtsort' | translate)}}</label>
+             for="birth-place">{{('isyAngularWidgetsDemo.labels.geburtsort' | translate)}}</label>
     </div>
     <div class="col">
-      <input id="birthplace" class="w-full" type="text" pInputText
+      <input id="birth-place" class="w-full" type="text" pInputText
              [(ngModel)]="person.personalien.geburtsort">
     </div>
   </div>
@@ -48,11 +48,11 @@
   <div class="grid m-0">
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
-             for="firstName">{{('isyAngularWidgetsDemo.labels.vorname' | translate)}}</label>
+             for="first-name">{{('isyAngularWidgetsDemo.labels.vorname' | translate)}}</label>
     </div>
     <div class="col">
       <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
-      <input id="firstName" type="text" pInputText isyInputChar
+      <input id="first-name" type="text" pInputText isyInputChar
              [(ngModel)]="person.personalien.vorname">
     </div>
     <div class="col-1 text-right align-self-center">
@@ -65,10 +65,10 @@
     </div>
     <div class="col-1 text-right align-self-center">
       <label class="align-content-end"
-             for="birthDate">{{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}</label>
+             for="birth-date">{{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}</label>
     </div>
     <div class="col">
-      <p-calendar id="birthDate"
+      <p-calendar id="birth-date"
                   dateFormat="dd.mm.yy"
                   [(ngModel)]="person.personalien.geburtsdatum"
                   [showIcon]="true"
@@ -148,10 +148,10 @@
   <div [formGroup]="editForm" *ngIf="selectedPerson && editForm">
     <div class="grid m-0">
       <div class="col-2 text-right align-self-center">
-        <label for="editID">ID</label>
+        <label for="edit-id">ID</label>
       </div>
       <div class="col">
-        <input id="editID" class="w-full" type="text" pInputText [formControlName]="'editID'"/>
+        <input id="edit-id" class="w-full" type="text" pInputText [formControlName]="'editID'"/>
       </div>
       <div class="col-1"></div>
       <div class="col"></div>
@@ -160,60 +160,60 @@
     </div>
     <div class="grid m-0">
       <div class="col-2 text-right align-self-center">
-        <label for="editNachname">
+        <label for="edit-nachname">
           {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
         </label>
       </div>
       <div class="col">
-        <input id="editNachname" class="w-full" type="text" pInputText
+        <input id="edit-nachname" class="w-full" type="text" pInputText
                [formControlName]="'editNachname'">
       </div>
       <div class="col-2 text-right align-self-center">
-        <label class="align-content-end" for="editGeburtsname">
+        <label class="align-content-end" for="edit-geburtsname">
           {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
         </label>
       </div>
       <div class="col">
-        <input id="editGeburtsname" class="w-full" type="text" pInputText
+        <input id="edit-geburtsname" class="w-full" type="text" pInputText
                [formControlName]="'editGeburtsname'">
       </div>
       <div class="col-2 text-right align-self-center">
-        <label class="align-content-end" for="editGeburtsname">
+        <label class="align-content-end" for="edit-geburtsname">
           {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
         </label>
       </div>
       <div class="col">
-        <input id="editGeburtsort" class="w-full" type="text" pInputText
+        <input id="edit-geburtsort" class="w-full" type="text" pInputText
                [formControlName]="'editGeburtsort'">
       </div>
     </div>
     <div class="grid m-0">
       <div class="col-2 text-right align-self-center">
-        <label class="align-content-end" for="editVorname">
+        <label class="align-content-end" for="edit-vorname">
           {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
         </label>
       </div>
       <div class="col">
-        <input id="editVorname" class="w-full" type="text" pInputText
+        <input id="edit-vorname" class="w-full" type="text" pInputText
                [formControlName]="'editVorname'">
       </div>
       <div class="col-2 text-right align-self-center">
-        <label class="align-content-end" for="editGeschlecht">
+        <label class="align-content-end" for="edit-geschlecht">
           {{('isyAngularWidgetsDemo.labels.geschlecht' | translate)}}
         </label>
       </div>
       <div class="col">
-        <input id="editGeschlecht" class="w-full" type="text" pInputText
+        <input id="edit-geschlecht" class="w-full" type="text" pInputText
                [formControlName]="'editGeschlecht'">
       </div>
       <div class="col-2 text-right align-self-center">
-        <label class="align-content-end" for="editGeburtsdatum">
+        <label class="align-content-end" for="edit-geburtsdatum">
           {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
         </label>
       </div>
       <div class="col">
         <p-calendar
-          id="editGeburtsdatum"
+          id="edit-geburtsdatum"
           dateFormat="dd.mm.yy"
           [formControlName]="'editGeburtsdatum'"
           [showIcon]="true"
@@ -223,12 +223,12 @@
     </div>
     <div class="grid m-0">
       <div class="col-2 text-right align-self-center">
-        <label class="align-content-end" for="editStaatsangehörigkeit">
+        <label class="align-content-end" for="edit-staatsangehörigkeit">
           {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
         </label>
       </div>
       <div class="col-3">
-        <p-dropdown id="editStaatsangehörigkeit"
+        <p-dropdown id="edit-staatsangehörigkeit"
                     [placeholder]="('isyAngularWidgetsDemo.labels.chooseCountry' | translate)"
                     [options]="laender"
                     [showClear]="true"
@@ -285,11 +285,11 @@
     <div [formGroup]="idForm">
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label id="idLabel" for="personId">ID</label>
+          <label id="id-label" for="person-id">ID</label>
         </div>
         <div class="col">
           <input
-            id="personId"
+            id="person-id"
             type="text"
             class="w-full"
             pInputText
@@ -316,7 +316,7 @@
         <div [formGroup]="geburtsInformationenForm">
           <div class="grid m-0">
             <div class="col-2 text-right align-self-center">
-              <label id="geburtsnameLabel" class="align-content-end" for="geburtsname">
+              <label id="geburtsname-label" class="align-content-end" for="geburtsname">
                 {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
               </label>
             </div>
@@ -332,7 +332,7 @@
           </div>
           <div class="grid m-0">
             <div class="col-2 text-right align-self-center">
-              <label id="geburtsortLabel" class="align-content-end"
+              <label id="geburtsort-label" class="align-content-end"
                      for="geburtsort">
                 {{('isyAngularWidgetsDemo.labels.geburtsort' | translate)}}
               </label>
@@ -349,7 +349,7 @@
           </div>
           <div class="grid m-0">
             <div class="col-2 text-right align-self-center">
-              <label id="geburtsdatumLabel" class="align-content-end" for="geburtdatum">
+              <label id="geburtsdatum-label" class="align-content-end" for="geburtdatum">
                 {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
               </label>
             </div>
@@ -365,7 +365,7 @@
           </div>
           <div class="grid m-0">
             <div class="col-2 text-right align-self-center">
-              <label id="staatsangehoerigkeitLabel" class="align-content-end"
+              <label id="staatsangehoerigkeit-label" class="align-content-end"
                      for="staatangehoerigkeit">
                 {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
               </label>
@@ -392,7 +392,7 @@
 </isy-wizard>
 
 <p-toast
-  id="notificationToast"
+  id="notification-toast"
   position="top-right"
 >
 </p-toast>

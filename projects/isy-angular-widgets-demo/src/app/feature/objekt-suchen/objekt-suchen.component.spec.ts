@@ -24,7 +24,7 @@ import {Observable} from 'rxjs';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 
-describe('PersonenSuchenComponent', () => {
+describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr ='öäüÖÄÜß';
   const DOT = '.';
   const format = 'dd.mm.yyyy';
@@ -257,7 +257,7 @@ describe('PersonenSuchenComponent', () => {
 
     component.getSavedStatus(true);
 
-    const toast = fixture.nativeElement.querySelector('#notificationToast') as HTMLElement;
+    const toast = fixture.nativeElement.querySelector('#notification-toast') as HTMLElement;
     const toastPosition = 'top-right';
     expect(toast.getAttribute('position')).toEqual(toastPosition);
   }));
@@ -280,7 +280,6 @@ describe('PersonenSuchenComponent', () => {
     expect(geschlecht?.errors).not.toBeNull();
     expectFormValuesAreEmpty(personalInfoForm, true);
 
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     const birthForm = component.allWizardForms[2];
     const geburtsname = personalInfoForm.get('geburtsname');
     expect(geburtsname?.errors).not.toBeNull();
@@ -439,7 +438,7 @@ describe('PersonenSuchenComponent', () => {
     component.openWizard = true;
     fixture.detectChanges();
 
-    const idLabel = fixture.nativeElement.querySelector('label#idLabel');
+    const idLabel = fixture.nativeElement.querySelector('label#id-label');
     expect(idLabel.textContent).toEqual('ID');
   });
 
@@ -548,10 +547,8 @@ describe('PersonenSuchenComponent', () => {
     expect(component.editForm).not.toBeUndefined();
     const newValue = 'edit';
     component.editForm.controls.editVorname.setValue(newValue);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     expect(component.selectedPerson!.personalien.vorname).not.toEqual(component.editForm.controls.editVorname.value);
     component.saveChanges();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     expect(component.selectedPerson!.personalien.vorname).toEqual(component.editForm.controls.editVorname.value);
 
     expect(component.openEditForm).toBeFalse();

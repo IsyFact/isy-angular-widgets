@@ -6,7 +6,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {FormsModule} from '@angular/forms';
 
-describe('DashboardWidgetsComponent', () => {
+describe('Integration Tests: DashboardWidgetsComponent', () => {
   let component: DashboardWidgetComponent;
   let fixture: ComponentFixture<DashboardWidgetComponent>;
 
@@ -33,7 +33,7 @@ describe('DashboardWidgetsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('gets background color class name', () => {
+  it('should get background color class name', () => {
     const color = 'blue';
     const expected = `${color}-background`;
     const actual = component.getBackgroundColorClass('blue');

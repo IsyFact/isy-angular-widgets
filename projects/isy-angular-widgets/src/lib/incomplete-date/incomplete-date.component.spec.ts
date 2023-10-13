@@ -1,9 +1,9 @@
-import {IncompleteDateService} from './incomplete-date.service';
 import {IncompleteDateComponent} from './incomplete-date.component';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {AbstractControl, FormControl, FormsModule} from '@angular/forms';
+import {AbstractControl, FormControl} from '@angular/forms';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-describe('IsyIncompleteDateComponent', () => {
+describe('Unit Tests: IsyIncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let fixture: ComponentFixture<IncompleteDateComponent>;
   let onChange: Function = () => {};
@@ -11,18 +11,15 @@ describe('IsyIncompleteDateComponent', () => {
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
-      declarations: [IncompleteDateComponent],
-      imports: [
-        FormsModule
+      declarations: [
+        IncompleteDateComponent
       ],
-      providers: [
-        IncompleteDateService
+      schemas: [
+        NO_ERRORS_SCHEMA
       ]
     })
       .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(IncompleteDateComponent);
     component = fixture.componentInstance;
     onChange = jasmine.createSpy('onChange spy');
@@ -31,11 +28,11 @@ describe('IsyIncompleteDateComponent', () => {
     component.registerOnTouched(onTouched);
   });
 
-  it('it should be created', () => {
+  it('should create', () => {
     expect(component).toBeDefined();
   });
 
-  it('valid writeValue sets inputValue', () => {
+  it('should set valid writeValue to inputValue', () => {
     component.writeValue('01.01.2023');
 
     expect(component.inputValue).toBe('01.01.2023');
@@ -43,12 +40,12 @@ describe('IsyIncompleteDateComponent', () => {
     expect(onTouched).not.toHaveBeenCalled();
   });
 
-  it('expect disabled to be true', () => {
+  it('should disable the state', () => {
     component.setDisabledState(true);
     expect(component.disabled).toBeTrue();
   });
 
-  it('expect value set by onComplete', () => {
+  it('should set value by onComplete', () => {
     component.writeValue('01.01.2023');
     component.onComplete();
     expect(component.inputValue).toBe('01.01.2023');

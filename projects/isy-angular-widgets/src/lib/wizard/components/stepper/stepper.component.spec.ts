@@ -3,39 +3,37 @@ import {StepperComponent} from './stepper.component';
 import {StepsModule} from 'primeng/steps';
 import {MenuItem} from 'primeng/api';
 import {RouterTestingModule} from '@angular/router/testing';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-describe('StepperComponent', () => {
+const stepperItems: MenuItem [] = [
+  {
+    label: 'Auswahl 1'
+  },
+  {
+    label: 'Auswahl 1'
+  },
+  {
+    label: 'Auswahl 1'
+  }
+];
+const stepsNumber: number = stepperItems.length;
+const startIndex: number = 0;
+
+describe('Unit Tests: StepperComponent', ()=> {
   let component: StepperComponent;
   let fixture: ComponentFixture<StepperComponent>;
-
-  const stepperItems: MenuItem [] = [
-    {
-      label: 'Auswahl 1'
-    },
-    {
-      label: 'Auswahl 1'
-    },
-    {
-      label: 'Auswahl 1'
-    }
-  ];
-  const stepsNumber: number = stepperItems.length;
-  const startIndex: number = 0;
 
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [
         StepperComponent
       ],
-      imports: [
-        StepsModule,
-        RouterTestingModule
+      schemas: [
+        NO_ERRORS_SCHEMA
       ]
     })
       .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(StepperComponent);
     component = fixture.componentInstance;
     component.items = stepperItems;
@@ -47,18 +45,12 @@ describe('StepperComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it(`should starts with index: ${startIndex}`, () => {
+    expect(component.index).toEqual(startIndex);
+  });
+
   it(`should have ${stepsNumber} steps`, () => {
     expect(component.items.length).toEqual(stepsNumber);
-  });
-
-  it('should have the correct stepper items titles', () => {
-    for (let i = 0; i < component.items.length; i++) {
-      expect(component.items[i]).toEqual(stepperItems[i]);
-    }
-  });
-
-  it(`should have start index ${startIndex}`, () => {
-    expect(component.index).toEqual(startIndex);
   });
 
   it(`should have index ${startIndex + 1} after forward movement`, () => {
@@ -95,5 +87,40 @@ describe('StepperComponent', () => {
     expect(component.index).toEqual(startIndex + 1);
     component.reset();
     expect(component.index).toEqual(startIndex);
+  });
+});
+
+describe('Integration Test: StepperComponent', () => {
+  let component: StepperComponent;
+  let fixture: ComponentFixture<StepperComponent>;
+
+  beforeEach(async() => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        StepperComponent
+      ],
+      imports: [
+        StepsModule,
+        RouterTestingModule
+      ]
+    })
+      .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(StepperComponent);
+    component = fixture.componentInstance;
+    component.items = stepperItems;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should have the correct stepper items titles', () => {
+    for (let i = 0; i < component.items.length; i++) {
+      expect(component.items[i]).toEqual(stepperItems[i]);
+    }
   });
 });
