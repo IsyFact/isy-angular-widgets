@@ -1,3 +1,7 @@
+# 15.0.2
+## Fixes
+- ISY-500: Liberation Font wird jetzt korrekt als Fallback Schriftart verwendet
+
 # 15.0.1 - 5.10.2023
 ## Fixes
 - ISY-377: Neue DIN 91379 werden jetzt beim korrekten Grundzeichen angezeigt
