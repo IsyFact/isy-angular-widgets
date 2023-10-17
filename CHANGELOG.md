@@ -1,6 +1,8 @@
 # 15.0.2
 ## Fixes
 - ISY-500: Liberation Font wird jetzt korrekt als Fallback Schriftart verwendet
+## Demo-Anwendung
+- ISY-516: Entfernen von automatischen Ausblenden von Toast-Notifications
 
 # 15.0.1 - 5.10.2023
 ## Fixes
