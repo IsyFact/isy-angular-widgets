@@ -104,47 +104,50 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   }
 
   /**
-   * Automatically fills the input of day and month when user enter dot
+   * Autocompletes the input of day and month when entering dot
    * E.g. unspecified dates: x. -> xx, 1. -> 01
    * @param event KeyboardEvent
    */
   onKeydown(event: KeyboardEvent): void {
-    const pos = 3;
+    const dayPartEndPos = 3;
+    const monthPartEndPos = 6;
+    const inputMousePositionStep = 2;
     const input = event.target as HTMLInputElement;
     let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
 
-    if (event.key === "." && inputMousePosition <= pos * 2 && inputMousePosition !== 0) {
+    if (event.key === '.' && inputMousePosition <= monthPartEndPos && inputMousePosition !== 0) {
       const [day, month, year] = input.value.split('.');
       const dateUnspecifiedChar = 'x';
       let partDay = `${day}`;
       let partMonth = `${month}`;
 
-      if (partDay.replace(/_/g, '').length <= 1) partDay = this.dateAutofill(partDay, dateUnspecifiedChar);
+      if (partDay.replace(/_/g, '').length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
 
-      if (inputMousePosition > pos && inputMousePosition <= pos * 2 && partMonth.replace(/_/g, '').length <= 1) {
-        partDay = `${day}`.replace(/_/g, '').length === 0 ? dateUnspecifiedChar.repeat(2) : partDay;
-        partMonth = this.dateAutofill(partMonth, dateUnspecifiedChar);
+      if (inputMousePosition > dayPartEndPos && inputMousePosition <= monthPartEndPos && partMonth.replace(/_/g, '').length <= 1) {
+        partDay = `${day}`.replace(/_/g, '').length === 0 ? dateUnspecifiedChar.repeat(`${day}`.length) : partDay;
+        partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
       }
       
       const dateStr = [partDay, partMonth, `${year}`].join('.');
-
       input.value = this.inputValue = dateStr;
 
-      if (inputMousePosition !== pos && inputMousePosition !== pos * 2) inputMousePosition = inputMousePosition + 2;
+      if (inputMousePosition !== dayPartEndPos && inputMousePosition !== monthPartEndPos) inputMousePosition = inputMousePosition + inputMousePositionStep;
 
       input.setSelectionRange(inputMousePosition, inputMousePosition);
-      
       this.onChange(this.inputValue);
     }
   }
 
-  /** Takes a part of a date and automatically fills it with x or 0
+  /** 
+   * Transforms a part of a date string
    * @param partOfDate part of a date as a string
    * @param char unspecified character as a string
-   * @returns The automatically filled part of a date
+   * @returns transformed part of a date
    */
-  private dateAutofill(partOfDate: string, char: string): string {
-    return partOfDate.replace(/_/g, '') == char || partOfDate.replace(/_/g, '').length === 0  ? char.repeat(2) : '0' + partOfDate.replace(/_/g, '');
+  transformDatePart(partOfDate: string, char: string): string {
+    const partOfDateReplaced = partOfDate.replace(/_/g, '');
+
+    return partOfDateReplaced == char || partOfDateReplaced.length === 0  ? char.repeat(partOfDate.length) : '0' + partOfDateReplaced;
   }
 
   /**

@@ -3,8 +3,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AbstractControl, FormControl} from '@angular/forms';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {By} from '@angular/platform-browser';
+import {InputMask} from 'primeng/inputmask';
 
-describe('Unit Tests: IsyIncompleteDateComponent', () => {
+fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let fixture: ComponentFixture<IncompleteDateComponent>;
   let onChange: Function = () => {};
@@ -13,7 +14,9 @@ describe('Unit Tests: IsyIncompleteDateComponent', () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [
-        IncompleteDateComponent
+        IncompleteDateComponent,
+        InputMask
+        
       ],
       schemas: [
         NO_ERRORS_SCHEMA
@@ -82,21 +85,564 @@ describe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(errors[errorKey]).toBeDefined();
   });
 
-  it('should fill input when dot is entered', () => {
-    const val = 'x_.__.____';
-    console.log(fixture.debugElement.query(By.css('p-inputmask')));
-    console.log(fixture.debugElement.query(By.css('p-inputmask')).nativeElement);
-    const input = fixture.debugElement.query(By.css('p-inputmask')).nativeElement as HTMLInputElement;
+  it('should transform the input value on losing the focus to "" when input value contains "_"', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    component.inputValue = 'xx.__.____';
+    fixture.detectChanges();
+    component.onBlur();
+    expect(input.value).toBe('');
+  });
 
-    input.value = val;
-
-    const keyEvent = new KeyboardEvent("keydown", {
-      key: ".",
-      code: "190"
+  it('should autocomplete the input value from x_.__.____ to xx.__.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = 'x_.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
     });
-
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(1, 1);
     component.onKeydown(keyEvent);
-    
     expect(input.value).toBe('xx.__.____');
+  });
+
+  it('should autocomplete the input value from _x.__.____ to xx.__.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_x.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(2, 2);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.__.____');
+  });
+
+  it('should autocomplete the input value from xx.__.____ to xx.__.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = 'xx.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(3, 3);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.__.____');
+  });
+
+  it('should autocomplete the input value from __.x_.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from __._x.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from __.xx.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.xx.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from x_.x_.____ to xx.x_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = 'x_.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(1, 1);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.x_.____');
+  });
+
+  it('should autocomplete the input value from _x.x_.____ to xx.x_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_x.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(2, 2);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.x_.____');
+  });
+
+  it('should autocomplete the input value from _x.x_.____ to xx.x_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_x.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(3, 3);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.x_.____');
+  });
+
+  it('should autocomplete the input value from x_.x_.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = 'x_.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from _x.x_.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_x.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from x_._x.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = 'x_._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from x_._x.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = 'x_._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from _x._x.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_x._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from _x._x.____ to xx.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_x._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from 1_.__.____ to 01.__.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(1, 1);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.__.____');
+  });
+
+  it('should autocomplete the input value from _1.__.____ to 01.__.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(2, 2);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.__.____');
+  });
+
+  it('should autocomplete the input value from 01.__.____ to 01.__.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '01.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(3, 3);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.__.____');
+  });
+
+  it('should autocomplete the input value from __.1_.____ to xx.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.1_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.01.____');
+  });
+
+  it('should autocomplete the input value from __._1.____ to xx.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__._1.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.01.____');
+  });
+
+  it('should autocomplete the input value from __._1.____ to xx.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__._1.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.01.____');
+  });
+
+  it('should autocomplete the input value from 1_.1_.____ to 01.1_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_.1_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(1, 1);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.1_.____');
+  });
+
+  it('should autocomplete the input value from _1.1_.____ to 01.1_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1.1_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(2, 2);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.1_.____');
+  });
+
+  it('should autocomplete the input value from _1.1_.____ to 01.1_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1.1_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(3, 3);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.1_.____');
+  });
+
+  it('should autocomplete the input value from 1_.1_.____ to 01.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_.1_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.01.____');
+  });
+
+  it('should autocomplete the input value from _1.1_.____ to 01.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1.1_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.01.____');
+  });
+
+  it('should autocomplete the input value from 1_._1.____ to 01.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_._1.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.01.____');
+  });
+
+  it('should autocomplete the input value from 1_._1.____ to 01.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_._1.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.01.____');
+  });
+
+  it('should autocomplete the input value from _1._1.____ to 01.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1._1.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.01.____');
+  });
+
+  it('should autocomplete the input value from _1._1.____ to 01.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1._1.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.01.____');
+  });
+
+  it('should autocomplete the input value from _1._1.____ to 01.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1._1.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.01.____');
+  });
+
+  it('should autocomplete the input value from _1._1.____ to 01.01.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1._1.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.01.____');
+  });
+
+  it('should autocomplete the input value from 1_.x_.____ to 01.x_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(1, 1);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.x_.____');
+  });
+
+  it('should autocomplete the input value from _1.x_.____ to 01.x_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(2, 2);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.x_.____');
+  });
+
+  it('should autocomplete the input value from _1.x_.____ to 01.x_.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(3, 3);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.x_.____');
+  });
+
+  it('should autocomplete the input value from 1_.x_.____ to 01.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.xx.____');
+  });
+
+  it('should autocomplete the input value from _1.x_.____ to 01.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1.x_.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.xx.____');
+  });
+
+  it('should autocomplete the input value from 1_._x.____ to 01.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.xx.____');
+  });
+
+  it('should autocomplete the input value from 1_._x.____ to 01.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '1_._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.xx.____');
+  });
+
+  it('should autocomplete the input value from _1._x.____ to 01.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.xx.____');
+  });
+
+  it('should autocomplete the input value from _1._x.____ to 01.xx.__ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '_1._x.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(6, 6);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('01.xx.____');
+  });
+
+  it('should return the string "__" correctly', () => {
+    expect(component.transformDatePart('__', 'x')).toBe('xx');
+  });
+
+  it('should return the string "x_" correctly', () => {
+    expect(component.transformDatePart('x_', 'x')).toBe('xx');
+  });
+
+  it('should return the string "_x" correctly', () => {
+    expect(component.transformDatePart('_x', 'x')).toBe('xx');
+  });
+
+  it('should return the string "1_" correctly', () => {
+    expect(component.transformDatePart('1_', 'x')).toBe('01');
+  });
+
+  it('should return the string "_1" correctly', () => {
+    expect(component.transformDatePart('_1', 'x')).toBe('01');
   });
 });
