@@ -2,6 +2,7 @@ import {IncompleteDateComponent} from './incomplete-date.component';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AbstractControl, FormControl} from '@angular/forms';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {By} from '@angular/platform-browser';
 
 describe('Unit Tests: IsyIncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
@@ -79,5 +80,23 @@ describe('Unit Tests: IsyIncompleteDateComponent', () => {
     }
 
     expect(errors[errorKey]).toBeDefined();
+  });
+
+  it('should fill input when dot is entered', () => {
+    const val = 'x_.__.____';
+    console.log(fixture.debugElement.query(By.css('p-inputmask')));
+    console.log(fixture.debugElement.query(By.css('p-inputmask')).nativeElement);
+    const input = fixture.debugElement.query(By.css('p-inputmask')).nativeElement as HTMLInputElement;
+
+    input.value = val;
+
+    const keyEvent = new KeyboardEvent("keydown", {
+      key: ".",
+      code: "190"
+    });
+
+    component.onKeydown(keyEvent);
+    
+    expect(input.value).toBe('xx.__.____');
   });
 });

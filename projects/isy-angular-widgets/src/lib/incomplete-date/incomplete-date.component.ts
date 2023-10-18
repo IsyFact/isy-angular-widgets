@@ -63,6 +63,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   inputValue: string = '';
 
+  autoclear: boolean = false;
+
   @ViewChild(InputMask) field?: InputMask;
   
   /**
@@ -99,6 +101,50 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   writeValue(value: string): void {
     this.inputValue = value;
+  }
+
+  /**
+   * Automatically fills the input of day and month when user enter dot
+   * E.g. unspecified dates: x. -> xx, 1. -> 01
+   * @param event KeyboardEvent
+   */
+  onKeydown(event: KeyboardEvent): void {
+    const pos = 3;
+    const input = event.target as HTMLInputElement;
+    let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
+
+    if (event.key === "." && inputMousePosition <= pos * 2 && inputMousePosition !== 0) {
+      const [day, month, year] = input.value.split('.');
+      const dateUnspecifiedChar = 'x';
+      let partDay = `${day}`;
+      let partMonth = `${month}`;
+
+      if (partDay.replace(/_/g, '').length <= 1) partDay = this.dateAutofill(partDay, dateUnspecifiedChar);
+
+      if (inputMousePosition > pos && inputMousePosition <= pos * 2 && partMonth.replace(/_/g, '').length <= 1) {
+        partDay = `${day}`.replace(/_/g, '').length === 0 ? dateUnspecifiedChar.repeat(2) : partDay;
+        partMonth = this.dateAutofill(partMonth, dateUnspecifiedChar);
+      }
+      
+      const dateStr = [partDay, partMonth, `${year}`].join('.');
+
+      input.value = this.inputValue = dateStr;
+
+      if (inputMousePosition !== pos && inputMousePosition !== pos * 2) inputMousePosition = inputMousePosition + 2;
+
+      input.setSelectionRange(inputMousePosition, inputMousePosition);
+      
+      this.onChange(this.inputValue);
+    }
+  }
+
+  /** Takes a part of a date and automatically fills it with x or 0
+   * @param partOfDate part of a date as a string
+   * @param char unspecified character as a string
+   * @returns The automatically filled part of a date
+   */
+  private dateAutofill(partOfDate: string, char: string): string {
+    return partOfDate.replace(/_/g, '') == char || partOfDate.replace(/_/g, '').length === 0  ? char.repeat(2) : '0' + partOfDate.replace(/_/g, '');
   }
 
   /**
@@ -156,5 +202,4 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   onChange: Function = (_: any) => {};
 
   onTouched: Function = () => {}; 
-
 }
