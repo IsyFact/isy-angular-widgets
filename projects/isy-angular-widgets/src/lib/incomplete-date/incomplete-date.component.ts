@@ -133,9 +133,20 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
       // Mouse position (specific fixed numbers required)
       /* eslint-disable @typescript-eslint/no-magic-numbers */
-      if (inputMousePosition === 0 || inputMousePosition === 3) inputMousePosition = inputMousePosition + 3;
-      if (inputMousePosition === 1 || inputMousePosition === 4) inputMousePosition = inputMousePosition + 2;
-      if (inputMousePosition === 2 || inputMousePosition === 5) inputMousePosition = inputMousePosition + 1;
+      switch (inputMousePosition) {
+        case 0:
+        case 3:
+          inputMousePosition += 3;
+          break;
+        case 1:
+        case 4:
+          inputMousePosition += 2;
+          break;
+        case 2:
+        case 5:
+          inputMousePosition += 1;
+          break;
+      }
       /* eslint-enable @typescript-eslint/no-magic-numbers */
 
       input.setSelectionRange(inputMousePosition, inputMousePosition);
