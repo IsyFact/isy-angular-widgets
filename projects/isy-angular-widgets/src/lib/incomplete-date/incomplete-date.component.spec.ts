@@ -5,7 +5,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {InputMask} from 'primeng/inputmask';
 
-fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
+describe('Unit Tests: IsyIncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let fixture: ComponentFixture<IncompleteDateComponent>;
   let onChange: Function = () => {};
@@ -93,7 +93,85 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('');
   });
 
-  it('should autocomplete the input value from x_.__.____ to xx.__.__ when entering dot', () => {
+  it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(0, 0);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.__.____');
+  });
+
+  it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(1, 1);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.__.____');
+  });
+
+  it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(2, 2);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.__.____');
+  });
+
+  it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(3, 3);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(4, 4);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
+    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+    input.value = '__.__.____';
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '.',
+      code: '190'
+    });
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(5, 5);
+    component.onKeydown(keyEvent);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from x_.__.____ to xx.__.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = 'x_.__.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -106,7 +184,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.__.____');
   });
 
-  it('should autocomplete the input value from _x.__.____ to xx.__.__ when entering dot', () => {
+  it('should autocomplete the input value from _x.__.____ to xx.__.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_x.__.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -119,20 +197,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.__.____');
   });
 
-  it('should autocomplete the input value from xx.__.____ to xx.__.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = 'xx.__.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(3, 3);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('xx.__.____');
-  });
-
-  it('should autocomplete the input value from __.x_.____ to xx.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from __.x_.____ to xx.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '__.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -145,7 +210,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.xx.____');
   });
 
-  it('should autocomplete the input value from __._x.____ to xx.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from __._x.____ to xx.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '__._x.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -158,20 +223,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.xx.____');
   });
 
-  it('should autocomplete the input value from __.xx.____ to xx.xx.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '__.xx.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(6, 6);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from x_.x_.____ to xx.x_.__ when entering dot', () => {
+  it('should autocomplete the input value from x_.x_.____ to xx.x_.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = 'x_.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -184,7 +236,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.x_.____');
   });
 
-  it('should autocomplete the input value from _x.x_.____ to xx.x_.__ when entering dot', () => {
+  it('should autocomplete the input value from _x.x_.____ to xx.x_.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_x.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -197,20 +249,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.x_.____');
   });
 
-  it('should autocomplete the input value from _x.x_.____ to xx.x_.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '_x.x_.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(3, 3);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('xx.x_.____');
-  });
-
-  it('should autocomplete the input value from x_.x_.____ to xx.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from x_.x_.____ to xx.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = 'x_.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -223,7 +262,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.xx.____');
   });
 
-  it('should autocomplete the input value from _x.x_.____ to xx.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from _x.x_.____ to xx.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_x.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -236,7 +275,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.xx.____');
   });
 
-  it('should autocomplete the input value from x_._x.____ to xx.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from x_._x.____ to xx.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = 'x_._x.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -249,20 +288,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.xx.____');
   });
 
-  it('should autocomplete the input value from x_._x.____ to xx.xx.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = 'x_._x.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(6, 6);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from _x._x.____ to xx.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from _x._x.____ to xx.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_x._x.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -275,20 +301,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.xx.____');
   });
 
-  it('should autocomplete the input value from _x._x.____ to xx.xx.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '_x._x.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(6, 6);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from 1_.__.____ to 01.__.__ when entering dot', () => {
+  it('should autocomplete the input value from 1_.__.____ to 01.__.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '1_.__.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -301,7 +314,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.__.____');
   });
 
-  it('should autocomplete the input value from _1.__.____ to 01.__.__ when entering dot', () => {
+  it('should autocomplete the input value from _1.__.____ to 01.__.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_1.__.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -314,20 +327,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.__.____');
   });
 
-  it('should autocomplete the input value from 01.__.____ to 01.__.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '01.__.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(3, 3);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('01.__.____');
-  });
-
-  it('should autocomplete the input value from __.1_.____ to xx.01.__ when entering dot', () => {
+  it('should autocomplete the input value from __.1_.____ to xx.01.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '__.1_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -340,7 +340,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.01.____');
   });
 
-  it('should autocomplete the input value from __._1.____ to xx.01.__ when entering dot', () => {
+  it('should autocomplete the input value from __._1.____ to xx.01.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '__._1.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -353,20 +353,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('xx.01.____');
   });
 
-  it('should autocomplete the input value from __._1.____ to xx.01.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '__._1.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(6, 6);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('xx.01.____');
-  });
-
-  it('should autocomplete the input value from 1_.1_.____ to 01.1_.__ when entering dot', () => {
+  it('should autocomplete the input value from 1_.1_.____ to 01.1_.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '1_.1_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -379,7 +366,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.1_.____');
   });
 
-  it('should autocomplete the input value from _1.1_.____ to 01.1_.__ when entering dot', () => {
+  it('should autocomplete the input value from _1.1_.____ to 01.1_.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_1.1_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -392,20 +379,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.1_.____');
   });
 
-  it('should autocomplete the input value from _1.1_.____ to 01.1_.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '_1.1_.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(3, 3);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('01.1_.____');
-  });
-
-  it('should autocomplete the input value from 1_.1_.____ to 01.01.__ when entering dot', () => {
+  it('should autocomplete the input value from 1_.1_.____ to 01.01.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '1_.1_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -418,7 +392,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.01.____');
   });
 
-  it('should autocomplete the input value from _1.1_.____ to 01.01.__ when entering dot', () => {
+  it('should autocomplete the input value from _1.1_.____ to 01.01.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_1.1_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -431,7 +405,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.01.____');
   });
 
-  it('should autocomplete the input value from 1_._1.____ to 01.01.__ when entering dot', () => {
+  it('should autocomplete the input value from 1_._1.____ to 01.01.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '1_._1.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -444,20 +418,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.01.____');
   });
 
-  it('should autocomplete the input value from 1_._1.____ to 01.01.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '1_._1.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(6, 6);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('01.01.____');
-  });
-
-  it('should autocomplete the input value from _1._1.____ to 01.01.__ when entering dot', () => {
+  it('should autocomplete the input value from _1._1.____ to 01.01.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_1._1.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -470,20 +431,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.01.____');
   });
 
-  it('should autocomplete the input value from _1._1.____ to 01.01.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '_1._1.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(6, 6);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('01.01.____');
-  });
-
-  it('should autocomplete the input value from _1._1.____ to 01.01.__ when entering dot', () => {
+  it('should autocomplete the input value from _1._1.____ to 01.01.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_1._1.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -496,20 +444,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.01.____');
   });
 
-  it('should autocomplete the input value from _1._1.____ to 01.01.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '_1._1.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(6, 6);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('01.01.____');
-  });
-
-  it('should autocomplete the input value from 1_.x_.____ to 01.x_.__ when entering dot', () => {
+  it('should autocomplete the input value from 1_.x_.____ to 01.x_.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '1_.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -522,7 +457,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.x_.____');
   });
 
-  it('should autocomplete the input value from _1.x_.____ to 01.x_.__ when entering dot', () => {
+  it('should autocomplete the input value from _1.x_.____ to 01.x_.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_1.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -535,20 +470,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.x_.____');
   });
 
-  it('should autocomplete the input value from _1.x_.____ to 01.x_.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '_1.x_.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(3, 3);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('01.x_.____');
-  });
-
-  it('should autocomplete the input value from 1_.x_.____ to 01.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from 1_.x_.____ to 01.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '1_.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -561,7 +483,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.xx.____');
   });
 
-  it('should autocomplete the input value from _1.x_.____ to 01.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from _1.x_.____ to 01.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_1.x_.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -574,7 +496,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.xx.____');
   });
 
-  it('should autocomplete the input value from 1_._x.____ to 01.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from 1_._x.____ to 01.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '1_._x.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -587,20 +509,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.xx.____');
   });
 
-  it('should autocomplete the input value from 1_._x.____ to 01.xx.__ when entering dot', () => {
-    const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '1_._x.____';
-    const keyEvent = new KeyboardEvent('keydown', {
-      key: '.',
-      code: '190'
-    });
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(6, 6);
-    component.onKeydown(keyEvent);
-    expect(input.value).toBe('01.xx.____');
-  });
-
-  it('should autocomplete the input value from _1._x.____ to 01.xx.__ when entering dot', () => {
+  it('should autocomplete the input value from _1._x.____ to 01.xx.____ when entering dot', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     input.value = '_1._x.____';
     const keyEvent = new KeyboardEvent('keydown', {
@@ -613,9 +522,9 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     expect(input.value).toBe('01.xx.____');
   });
 
-  it('should autocomplete the input value from _1._x.____ to 01.xx.__ when entering dot', () => {
+  it('should not autocomplete the input value from xx.xx.____ to xx.xx.____ when entering dot in the year part', () => {
     const input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
-    input.value = '_1._x.____';
+    input.value = 'xx.xx.____';
     const keyEvent = new KeyboardEvent('keydown', {
       key: '.',
       code: '190'
@@ -623,7 +532,7 @@ fdescribe('Unit Tests: IsyIncompleteDateComponent', () => {
     input.dispatchEvent(keyEvent);
     input.setSelectionRange(6, 6);
     component.onKeydown(keyEvent);
-    expect(input.value).toBe('01.xx.____');
+    expect(input.value).toBe('xx.xx.____');
   });
 
   it('should return the string "__" correctly', () => {

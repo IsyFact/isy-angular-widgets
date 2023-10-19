@@ -63,8 +63,6 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   inputValue: string = '';
 
-  autoclear: boolean = false;
-
   @ViewChild(InputMask) field?: InputMask;
   
   /**
@@ -109,29 +107,36 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * @param event KeyboardEvent
    */
   onKeydown(event: KeyboardEvent): void {
+    let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
     const dayPartEndPos = 3;
     const monthPartEndPos = 6;
-    const inputMousePositionStep = 2;
-    const input = event.target as HTMLInputElement;
-    let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
 
-    if (event.key === '.' && inputMousePosition <= monthPartEndPos && inputMousePosition !== 0) {
+    if (event.key === '.' && inputMousePosition < monthPartEndPos) {
+      const input = event.target as HTMLInputElement;
       const [day, month, year] = input.value.split('.');
-      const dateUnspecifiedChar = 'x';
       let partDay = `${day}`;
       let partMonth = `${month}`;
+      const partYear = `${year}`;
+      const partDayReplaced = partDay.replace(/_/g, '');
+      const partMonthReplaced = partMonth.replace(/_/g, '');
+      const dateUnspecifiedChar = 'x';
 
-      if (partDay.replace(/_/g, '').length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
+      if (partDayReplaced.length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
 
-      if (inputMousePosition > dayPartEndPos && inputMousePosition <= monthPartEndPos && partMonth.replace(/_/g, '').length <= 1) {
-        partDay = `${day}`.replace(/_/g, '').length === 0 ? dateUnspecifiedChar.repeat(`${day}`.length) : partDay;
+      if (inputMousePosition >= dayPartEndPos && inputMousePosition < monthPartEndPos && partMonthReplaced.length <= 1) {
+        partDay = partDayReplaced.length === 0 ? dateUnspecifiedChar.repeat(partDay.length) : partDay;
         partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
       }
       
-      const dateStr = [partDay, partMonth, `${year}`].join('.');
+      const dateStr = [partDay, partMonth, partYear].join('.');
       input.value = this.inputValue = dateStr;
 
-      if (inputMousePosition !== dayPartEndPos && inputMousePosition !== monthPartEndPos) inputMousePosition = inputMousePosition + inputMousePositionStep;
+      // Mouse position (specific fixed numbers required)
+      /* eslint-disable @typescript-eslint/no-magic-numbers */
+      if (inputMousePosition === 0 || inputMousePosition === 3) inputMousePosition = inputMousePosition + 3;
+      if (inputMousePosition === 1 || inputMousePosition === 4) inputMousePosition = inputMousePosition + 2;
+      if (inputMousePosition === 2 || inputMousePosition === 5) inputMousePosition = inputMousePosition + 1;
+      /* eslint-enable @typescript-eslint/no-magic-numbers */
 
       input.setSelectionRange(inputMousePosition, inputMousePosition);
       this.onChange(this.inputValue);

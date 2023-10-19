@@ -1,4 +1,6 @@
 # 15.0.2
+## Features
+- ISY-345: Wechsel in nächsten Datum-Abschnitt mit Punk-Taste für ungewisses Datum-Eingabefeld
 ## Fixes
 - ISY-500: Liberation Font wird jetzt korrekt als Fallback Schriftart verwendet
 
