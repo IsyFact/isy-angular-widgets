@@ -36,10 +36,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/isy-angular-widgets/**/*.ts",
-              "projects/isy-angular-widgets/**/*.html"
-            ]
+            "lintFilePatterns": ["projects/isy-angular-widgets/**/*.ts", "projects/isy-angular-widgets/**/*.html"]
           }
         }
       }
@@ -80,9 +77,7 @@
               "projects/isy-angular-widgets/assets/theme/isyfact-liberation-fonts.css"
             ],
             "scripts": [],
-            "allowedCommonJsDependencies": [
-              "moment"
-            ]
+            "allowedCommonJsDependencies": ["moment"]
           },
           "configurations": {
             "production": {
@@ -140,10 +135,7 @@
           "options": {
             "codeCoverage": true,
             "main": "projects/isy-angular-widgets-demo/src/test.ts",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/isy-angular-widgets-demo/tsconfig.spec.json",
             "karmaConfig": "projects/isy-angular-widgets-demo/karma.conf.js",
             "inlineStyleLanguage": "scss",
@@ -151,9 +143,7 @@
               "projects/isy-angular-widgets-demo/src/favicon.ico",
               "projects/isy-angular-widgets-demo/src/assets"
             ],
-            "styles": [
-              "projects/isy-angular-widgets-demo/src/styles.scss"
-            ],
+            "styles": ["projects/isy-angular-widgets-demo/src/styles.scss"],
             "scripts": []
           }
         },

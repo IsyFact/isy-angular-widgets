@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 
 import {Component, forwardRef, Input, OnInit, ViewChild} from '@angular/core';
-import {AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator
+} from '@angular/forms';
 import {IncompleteDateService} from './incomplete-date.service';
 import {Validation} from '../validation/validation';
 import {InputMask} from 'primeng/inputmask';
@@ -37,7 +44,6 @@ import {InputMask} from 'primeng/inputmask';
   ]
 })
 export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit {
-
   /**
    * A disabled date picker can't be opened.
    */
@@ -64,13 +70,12 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   inputValue: string = '';
 
   @ViewChild(InputMask) field?: InputMask;
-  
+
   /**
    * Default constructor
    * @param incompleteDateService The service that contains date transformation logic
    */
-  constructor(private incompleteDateService: IncompleteDateService) {
-  }
+  constructor(private incompleteDateService: IncompleteDateService) {}
 
   /**
    * Initializes readonly and disabled properties
@@ -83,7 +88,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   /**
    * Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY.
-   * If the date in german format is not valid and not unspecified, a "UNSPECIFIEDDATE" error is thrown. 
+   * If the date in german format is not valid and not unspecified, a "UNSPECIFIEDDATE" error is thrown.
    * E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx
    * For valid or valid unspecified dates, no error is thrown.
    * @param c The control element the validator is appended to
@@ -102,6 +107,77 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   }
 
   /**
+   * Autocompletes the input of day and month when entering dot
+   * E.g. unspecified dates: x. -> xx, 1. -> 01
+   * @param event KeyboardEvent
+   */
+  onKeydown(event: KeyboardEvent): void {
+    let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
+    const dayPartEndPos = 3;
+    const monthPartEndPos = 6;
+
+    if (event.key === '.' && inputMousePosition < monthPartEndPos) {
+      const input = event.target as HTMLInputElement;
+      const [day, month, year] = input.value.split('.');
+      let partDay = `${day}`;
+      let partMonth = `${month}`;
+      const partYear = `${year}`;
+      const partDayReplaced = partDay.replace(/_/g, '');
+      const partMonthReplaced = partMonth.replace(/_/g, '');
+      const dateUnspecifiedChar = 'x';
+
+      if (partDayReplaced.length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
+
+      if (
+        inputMousePosition >= dayPartEndPos &&
+        inputMousePosition < monthPartEndPos &&
+        partMonthReplaced.length <= 1
+      ) {
+        partDay = partDayReplaced.length === 0 ? dateUnspecifiedChar.repeat(partDay.length) : partDay;
+        partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
+      }
+
+      const dateStr = [partDay, partMonth, partYear].join('.');
+      input.value = this.inputValue = dateStr;
+
+      // Mouse position (specific fixed numbers required)
+      /* eslint-disable @typescript-eslint/no-magic-numbers */
+      switch (inputMousePosition) {
+        case 0:
+        case 3:
+          inputMousePosition += 3;
+          break;
+        case 1:
+        case 4:
+          inputMousePosition += 2;
+          break;
+        case 2:
+        case 5:
+          inputMousePosition += 1;
+          break;
+      }
+      /* eslint-enable @typescript-eslint/no-magic-numbers */
+
+      input.setSelectionRange(inputMousePosition, inputMousePosition);
+      this.onChange(this.inputValue);
+    }
+  }
+
+  /**
+   * Transforms a part of a date string
+   * @param partOfDate part of a date as a string
+   * @param char unspecified character as a string
+   * @returns transformed part of a date
+   */
+  transformDatePart(partOfDate: string, char: string): string {
+    const partOfDateReplaced = partOfDate.replace(/_/g, '');
+
+    return partOfDateReplaced == char || partOfDateReplaced.length === 0
+      ? char.repeat(partOfDate.length)
+      : '0' + partOfDateReplaced;
+  }
+
+  /**
    * Transforms the input value if necessary and updates it when user completes the mask pattern
    */
   onComplete(): void {
@@ -113,10 +189,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Transforms the current input on losing the focus
    */
   onBlur(): void {
-    this.inputValue = this.incompleteDateService.transformValue(
-      this.inputValue,
-      this.dateInPastConstraint
-    );
+    this.inputValue = this.incompleteDateService.transformValue(this.inputValue, this.dateInPastConstraint);
     const input = this.field?.inputViewChild.nativeElement as HTMLInputElement;
     input.value = this.inputValue;
 
@@ -155,6 +228,5 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   onChange: Function = (_: any) => {};
 
-  onTouched: Function = () => {}; 
-
+  onTouched: Function = () => {};
 }

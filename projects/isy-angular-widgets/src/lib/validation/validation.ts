@@ -5,7 +5,6 @@ import moment from 'moment';
  * List of user-defined validators. Can be extended with additional static validators
  */
 export class Validation {
-
   /**
    * If the specified value is a valid date, it will be checked if the date is in the future.
    * If the date corresponds to today's date or is in the past, a "FUTURE" error is thrown.
@@ -70,7 +69,8 @@ export class Validation {
       }
     }
 
-    const regexInputUnspecified = /^(0{2}\.([0-1][1-2]|[1][0-2])\.\d{4})|(0{2}\.0{2}\.\d{4})|(0{2}\.0{2}\.0{4})|(x{2}\.([0-1][1-2]|[1][0-2])\.\d{4})|(x{2}\.x{2}\.\d{4})|(x{2}\.x{2}\.x{4})$/;
+    const regexInputUnspecified =
+      /^(0{2}\.([0-1][1-2]|[1][0-2])\.\d{4})|(0{2}\.0{2}\.\d{4})|(0{2}\.0{2}\.0{4})|(x{2}\.([0-1][1-2]|[1][0-2])\.\d{4})|(x{2}\.x{2}\.\d{4})|(x{2}\.x{2}\.x{4})$/;
 
     if (!(input.match(regexInputUnspecified) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
 
@@ -140,7 +140,8 @@ export class Validation {
    * @returns The object {CREDITCARD: true} if the validation fails; null otherwise
    */
   static validCreditCardNumber(c: AbstractControl): ValidationErrors | null {
-    const minLength = 12, maxLength = 19;
+    const minLength = 12,
+      maxLength = 19;
 
     let value = c.value as string;
     if (!value) {

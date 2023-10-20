@@ -1,8 +1,13 @@
-# 15.0.2
+# 15.0.2 - 
+## Features
+- ISY-303 - Automatisierte Code-Formatierung mit Prettier
+- ISY-345: Wechsel in nächsten Datum-Abschnitt mit Punk-Taste für ungewisses Datum-Eingabefeld
 ## Fixes
 - ISY-500: Liberation Font wird jetzt korrekt als Fallback Schriftart verwendet
 ## Enhancements
 - ISY-451: Die Dokumentation der Bibliothek ist auf GitHub Pages verfügbar
+## Demo-Anwendung
+- ISY-516: Entfernen von automatischen Ausblenden von Toast-Notifications
 
 # 15.0.1 - 5.10.2023
 ## Fixes

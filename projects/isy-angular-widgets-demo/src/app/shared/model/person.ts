@@ -3,8 +3,8 @@
  */
 export interface Person {
   id: string;
-  personalien: Personalien,
-  sachverhalte: string[]
+  personalien: Personalien;
+  sachverhalte: string[];
 }
 
 /**

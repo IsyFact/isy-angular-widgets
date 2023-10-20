@@ -13,16 +13,11 @@ describe('Integration Tests: ChartComponent', () => {
   const data = barChartData;
   const options = responsiveOptions;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ChartComponent
-      ],
-      imports: [
-        ChartModule
-      ]
-    })
-      .compileComponents();
+      declarations: [ChartComponent],
+      imports: [ChartModule]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ChartComponent);
     component = fixture.componentInstance;

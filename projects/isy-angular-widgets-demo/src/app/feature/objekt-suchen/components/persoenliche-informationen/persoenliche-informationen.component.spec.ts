@@ -7,25 +7,18 @@ import {markFormAsDirty} from '../../../../shared/validation/form-helper';
 import {By} from '@angular/platform-browser';
 import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
-import { TranslateTestingModule } from 'ngx-translate-testing';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
-  const germanCharsStr ='öäüÖÄÜß';
+  const germanCharsStr = 'öäüÖÄÜß';
   const person = getEmptyPerson();
-  const inputIDs = [
-    'Nachname',
-    'Geschlecht'
-  ];
-  const stateClasses = [
-    'ng-untouched',
-    'ng-dirty',
-    'ng-invalid'
-  ];
+  const inputIDs = ['Nachname', 'Geschlecht'];
+  const stateClasses = ['ng-untouched', 'ng-dirty', 'ng-invalid'];
 
   let component: PersoenlicheInformationenComponent;
   let fixture: ComponentFixture<PersoenlicheInformationenComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PersoenlicheInformationenComponent],
       imports: [
@@ -38,8 +31,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
           'isyAngularWidgetsDemo.labels.geschlecht': 'Geschlecht'
         })
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PersoenlicheInformationenComponent);
     component = fixture.componentInstance;
@@ -62,12 +54,9 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   it('should validate the form fields', () => {
     const invalidValue = 1;
-    const formFields = [
-      'nachname',
-      'geschlecht'
-    ];
+    const formFields = ['nachname', 'geschlecht'];
 
-    formFields.forEach(formFieldName => {
+    formFields.forEach((formFieldName) => {
       const field = component.form.get(formFieldName);
       expect(field!.value).toEqual(person.personalien.nachname);
       expect(field!.valid).toBeFalse();
@@ -189,8 +178,8 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(geschlechtLabel.textContent.trim()).toEqual('Geschlecht');
   });
 
-  inputIDs.forEach(id => {
-    stateClasses.forEach(inputClass => {
+  inputIDs.forEach((id) => {
+    stateClasses.forEach((inputClass) => {
       describe(`required form input element with id: ${id}`, () => {
         it('should display dirty state error class', () => {
           const element = fixture.debugElement.query(By.css(`#${id}`));

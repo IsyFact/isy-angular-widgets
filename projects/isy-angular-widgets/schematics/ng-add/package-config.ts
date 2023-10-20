@@ -67,5 +67,5 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
 
   const packageJson = JSON.parse(tree.read('package.json')!.toString('utf8')) as PackageJson;
 
-  return (packageJson.dependencies[name]) ? packageJson.dependencies[name] : null;
+  return packageJson.dependencies[name] ? packageJson.dependencies[name] : null;
 }

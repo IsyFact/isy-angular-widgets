@@ -23,23 +23,19 @@ describe('Unit Tests: MenuTranslationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should translate MenuItems labels', async() => {
-    const items: MenuItem[] = [
-      {label: 'menu.label'}
-    ];
+  it('should translate MenuItems labels', async () => {
+    const items: MenuItem[] = [{label: 'menu.label'}];
 
     const translatedItems = await service.translateMenuItems(items);
 
     expect(translatedItems[0].label).toEqual('Menu label');
   });
 
-  it('should translate submenu items labels', async() => {
+  it('should translate submenu items labels', async () => {
     const items: MenuItem[] = [
       {
         label: 'menu.label',
-        items: [
-          {label: 'submenu.label'}
-        ]
+        items: [{label: 'submenu.label'}]
       }
     ];
 
@@ -49,17 +45,15 @@ describe('Unit Tests: MenuTranslationService', () => {
     expect(translatedSubMenuItem?.label).toEqual('Submenu label');
   });
 
-  it('should translate MegaMenuItems labels', async() => {
-    const items: MegaMenuItem[] = [
-      {label: 'menu.label'}
-    ];
+  it('should translate MegaMenuItems labels', async () => {
+    const items: MegaMenuItem[] = [{label: 'menu.label'}];
 
     const translatedItems = await service.translateMegaMenuItems(items);
 
     expect(translatedItems[0].label).toEqual('Menu label');
   });
 
-  it('should translate MegaMenu submenu items labels', async() => {
+  it('should translate MegaMenu submenu items labels', async () => {
     const items: MegaMenuItem[] = [
       {
         label: 'menu.label',
@@ -71,10 +65,11 @@ describe('Unit Tests: MenuTranslationService', () => {
             }
           ]
         ]
-      }];
+      }
+    ];
 
     const translatedItems = await service.translateMegaMenuItems(items);
-    const  translatedSubMenuItem = translatedItems[0]?.items?.[0][0];
+    const translatedSubMenuItem = translatedItems[0]?.items?.[0][0];
 
     expect(translatedSubMenuItem?.label).toEqual('Submenu header');
     expect(translatedSubMenuItem?.items?.[0].label).toEqual('Submenu label');

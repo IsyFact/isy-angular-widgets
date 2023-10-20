@@ -35,7 +35,6 @@ const defaultHeight = 30;
   styleUrls: ['./wizard.component.scss']
 })
 export class WizardComponent implements OnInit, AfterContentInit {
-
   /**
    * Used for getting access over the stepper
    */
@@ -149,7 +148,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
    * Fired after content initialization
    */
   ngAfterContentInit(): void {
-    this.wizardItems = this.content.map(item => {
+    this.wizardItems = this.content.map((item) => {
       return {
         label: item.isyWizardDirective
       };

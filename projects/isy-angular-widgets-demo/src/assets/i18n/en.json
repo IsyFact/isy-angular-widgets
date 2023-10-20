@@ -130,11 +130,7 @@
       "exampleWidgetFourthAreaTitle": "Area D",
       "exampleWidgetFourthAreaInformation": "Information",
       "exampleWidgetFourthAreaEvaluation": "Evaluation",
-      "exampleDashboardChartLabels": [
-        "Officials",
-        "Externals",
-        "Authorities"
-      ]
+      "exampleDashboardChartLabels": ["Officials", "Externals", "Authorities"]
     },
     "settings": {
       "header": "Settings Demo App",
@@ -176,33 +172,9 @@
     "cancel": "Cancel",
     "completed": "Completed",
     "pending": "Pending",
-    "dayNames": [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ],
-    "dayNamesShort": [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat"
-    ],
-    "dayNamesMin": [
-      "Su",
-      "Mo",
-      "Tu",
-      "We",
-      "Th",
-      "Fr",
-      "Sa"
-    ],
+    "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
     "monthNames": [
       "January",
       "February",
@@ -217,20 +189,7 @@
       "November",
       "December"
     ],
-    "monthNamesShort": [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ],
+    "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     "countries": [
       {
         "name": "Belgium",

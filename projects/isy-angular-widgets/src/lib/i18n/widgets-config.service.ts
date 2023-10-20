@@ -9,7 +9,6 @@ import {Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class WidgetsConfigService {
-
   private translation: WidgetsTranslation = {
     wizard: {
       back: 'Zurück',
@@ -33,11 +32,11 @@ export class WidgetsConfigService {
 
   getTranslation(path: string): any {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
-    return path.split('.').reduce((o, k) => o ? (o as any)[k] : undefined, this.translation);
+    return path.split('.').reduce((o, k) => (o ? (o as any)[k] : undefined), this.translation);
   }
 
   setTranslation(value: WidgetsTranslation): void {
-    this.translation = { ...this.translation, ...value };
+    this.translation = {...this.translation, ...value};
     this.translationSource.next(this.translation);
   }
 }

@@ -10,9 +10,7 @@ import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/securit
 import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
 import {MessageService} from 'primeng/api';
-import {
-  PersoenlicheInformationenComponent
-} from './components/persoenliche-informationen/persoenliche-informationen.component';
+import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
 import {ToastModule} from 'primeng/toast';
 import {Person} from '../../shared/model/person';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,7 +23,7 @@ import {TranslateTestingModule} from 'ngx-translate-testing';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
-  const germanCharsStr ='öäüÖÄÜß';
+  const germanCharsStr = 'öäüÖÄÜß';
   const DOT = '.';
   const format = 'dd.mm.yyyy';
   const unconvertedDate = 'Wed Jan 01 1337 12:00:00 GMT+0053 (Mitteleuropäische Normalzeit)';
@@ -49,7 +47,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    * @param form the form who must be checked
    */
   function expectFormControlsToBeReseted(form: FormGroup): void {
-    Object.keys(form.controls).forEach(key => {
+    Object.keys(form.controls).forEach((key) => {
       expect(form.controls[key].value).toBeNull();
       expect(form.controls[key].dirty).toBeTrue();
     });
@@ -69,9 +67,9 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    * @param checkEmpty is checking if equals or not
    */
   function expectFormValuesAreEmpty(form: FormGroup, checkEmpty: boolean): void {
-    Object.keys(form.controls).forEach(key => {
+    Object.keys(form.controls).forEach((key) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      (checkEmpty) ? expect(form.get(key)?.value).toEqual('') : expect(form.get(key)?.value).not.toEqual('');
+      checkEmpty ? expect(form.get(key)?.value).toEqual('') : expect(form.get(key)?.value).not.toEqual('');
     });
   }
 
@@ -95,8 +93,8 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    * @param array an array of persons
    * @param checkEmpty is checking if equals or not
    */
-  function expectArrayIsEmpty(array:  Observable<Person[]>, checkEmpty: boolean): void {
-    array.subscribe(personen => {
+  function expectArrayIsEmpty(array: Observable<Person[]>, checkEmpty: boolean): void {
+    array.subscribe((personen) => {
       if (checkEmpty) {
         expect(personen).toEqual([]);
         expect(personen.length).toEqual(0);
@@ -174,18 +172,14 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    */
   function addNewEntryToPersonenList(): void {
     const person = getInitPerson();
-    component.personen$.subscribe(list => {
+    component.personen$.subscribe((list) => {
       list.unshift(person);
     });
   }
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ObjektSuchenComponent,
-        ResultListComponent,
-        PersoenlicheInformationenComponent
-      ],
+      declarations: [ObjektSuchenComponent, ResultListComponent, PersoenlicheInformationenComponent],
       imports: [
         RouterTestingModule,
         CalendarModule,
@@ -203,13 +197,8 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
         TranslateTestingModule.withTranslations({}),
         InputCharModule
       ],
-      providers: [
-        SecurityService,
-        MessageService,
-        DateService
-      ]
-    })
-      .compileComponents();
+      providers: [SecurityService, MessageService, DateService]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ObjektSuchenComponent);
     component = fixture.componentInstance;
@@ -466,25 +455,25 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(format.length).toEqual(expected.length);
   });
 
-  it('should check the opening of the wizard while adding a new person', ()=> {
+  it('should check the opening of the wizard while adding a new person', () => {
     expect(component.openWizard).toBeFalse();
     component.displayWizard();
     expect(component.openWizard).toBeTrue();
   });
 
-  it('should check the opening of the wizard while adding a new person - embedded call', ()=> {
+  it('should check the opening of the wizard while adding a new person - embedded call', () => {
     expect(component.openWizard).toBeFalse();
     component.openAddNewObjectDialog();
     expect(component.openWizard).toBeTrue();
   });
 
-  it('should check the opening of the dialog for editing a person', ()=> {
+  it('should check the opening of the dialog for editing a person', () => {
     expect(component.openWizard).toBeFalse();
     component.openAddNewObjectDialog();
     expect(component.openWizard).toBeTrue();
   });
 
-  it('should check the cleared search functionality', ()=> {
+  it('should check the cleared search functionality', () => {
     const person = getInitPerson();
     setupEditForm(person);
     component.clearSearch();
@@ -492,7 +481,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expectArrayIsEmpty(component.personen$, true);
   });
 
-  it('should check the addition of a new person', ()=> {
+  it('should check the addition of a new person', () => {
     setupFormValues();
     expect(component.openWizard).toBeTrue();
 
@@ -520,7 +509,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expectArrayIsEmpty(personenList, false);
   });
 
-  it('should check the edit of a person', ()=> {
+  it('should check the edit of a person', () => {
     expect(component.openWizard).toBeFalse();
     component.openAddNewObjectDialog();
     expect(component.openWizard).toBeTrue();
@@ -534,9 +523,9 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(component.editForm).not.toBeUndefined();
   });
 
-  it('should check saving of an existing edited person', ()=> {
+  it('should check saving of an existing edited person', () => {
     const person = getInitPerson();
-    component.personen$.subscribe(list => {
+    component.personen$.subscribe((list) => {
       list.unshift(person);
     });
 
@@ -555,9 +544,9 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(component.allowSave).toBeFalse();
   });
 
-  it('should check if save button is active', ()=> {
+  it('should check if save button is active', () => {
     const person = getInitPerson();
-    component.personen$.subscribe(list => {
+    component.personen$.subscribe((list) => {
       list.unshift(person);
     });
 
@@ -572,7 +561,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(component.allowSave).toBeFalse();
   });
 
-  it('should check if save button is active', ()=> {
+  it('should check if save button is active', () => {
     let enableClearSearch = component.enableClearSearch();
     expect(enableClearSearch).toBeFalse();
     addNewEntryToPersonenList();

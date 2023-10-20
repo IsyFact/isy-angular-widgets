@@ -32,13 +32,13 @@
       <ng-template pTemplate="selectedItem">
         <div class="flex align-items-center gap-2" *ngIf="selectedLanguage">
           <span [class]="'fi fi-' + getLanguageIcon(selectedLanguage)"></span>
-          <div>{{ ('isyAngularWidgetsDemo.settings.languages.' + selectedLanguage | translate) }}</div>
+          <div>{{ 'isyAngularWidgetsDemo.settings.languages.' + selectedLanguage | translate }}</div>
         </div>
       </ng-template>
       <ng-template let-language pTemplate="item">
         <div class="flex align-items-center gap-2">
           <span [class]="'fi fi-' + getLanguageIcon(language)"></span>
-          <div>{{ ('isyAngularWidgetsDemo.settings.languages.' + language | translate) }}</div>
+          <div>{{ 'isyAngularWidgetsDemo.settings.languages.' + language | translate }}</div>
         </div>
       </ng-template>
     </p-dropdown>
@@ -53,13 +53,9 @@
       (onChange)="selectPermission($event.value)"
     >
     </p-dropdown>
-
   </div>
   <router-outlet></router-outlet>
 </isy-hauptfenster>
-<p-toast
-  id="notification-toast"
-  position="top-right"
->
+<p-toast id="notification-toast" position="top-right">
   <!--  To define the (global) space where toast notifications will occur. -->
 </p-toast>

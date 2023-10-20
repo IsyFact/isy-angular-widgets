@@ -1,13 +1,9 @@
 {
   "extends": "../../.eslintrc.js",
-  "ignorePatterns": [
-    "!**/*"
-  ],
+  "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
         "project": [
           "projects/isy-angular-widgets/tsconfig.lib.json",
@@ -35,22 +31,14 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {}
     },
     {
-      "files": [
-        "*.spec.ts"
-      ],
+      "files": ["*.spec.ts"],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "off"
-        ],
-        "@angular-eslint/component-selector": [
-          "off"
-        ]
+        "@angular-eslint/directive-selector": ["off"],
+        "@angular-eslint/component-selector": ["off"]
       }
     }
   ]

@@ -9,14 +9,15 @@ import {informationsbereichMenu} from './informationsbereich-menu';
   templateUrl: './dashboard-informationsbereich.component.html',
   styleUrls: ['./dashboard-informationsbereich.component.scss']
 })
-export class DashboardInformationsbereichComponent implements OnInit{
+export class DashboardInformationsbereichComponent implements OnInit {
   private readonly selectedLanguage: string = 'de';
 
   items: MenuItem[] = [];
 
-  constructor(public translate: TranslateService,
-    private menuTranslationService: MenuTranslationService) {
-  }
+  constructor(
+    public translate: TranslateService,
+    private menuTranslationService: MenuTranslationService
+  ) {}
 
   ngOnInit(): void {
     this.loadMenuItems(informationsbereichMenu);
@@ -29,12 +30,12 @@ export class DashboardInformationsbereichComponent implements OnInit{
   }
 
   loadMenuItems(items: MenuItem[]): void {
-    void this.menuTranslationService.translateMenuItems(items).then(items => {
+    void this.menuTranslationService.translateMenuItems(items).then((items) => {
       this.items = items;
     });
   }
 
-  changeLanguage(language: string):void {
+  changeLanguage(language: string): void {
     this.translate.use(language);
   }
 }

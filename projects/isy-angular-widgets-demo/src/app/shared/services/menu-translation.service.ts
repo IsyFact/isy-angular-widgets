@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 import {firstValueFrom} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
@@ -22,8 +22,7 @@ import {TranslateService} from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class MenuTranslationService {
-
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService) {}
 
   /**
    * Translates all `label` fields of  {@link MenuItem} and all submenu items.
@@ -36,8 +35,7 @@ export class MenuTranslationService {
     for (const untranslatedItem of items) {
       const translatedItem = Object.assign({}, untranslatedItem);
 
-
-      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string)) as string;
+      translatedItem.label = (await firstValueFrom(this.translate.get(untranslatedItem.label as string))) as string;
 
       if (translatedItem.items) {
         translatedItem.items = await this.translateMenuItems(translatedItem.items);
@@ -60,7 +58,7 @@ export class MenuTranslationService {
     for (const untranslatedItem of items) {
       const translatedItem = Object.assign({}, untranslatedItem);
 
-      translatedItem.label = await firstValueFrom(this.translate.get(untranslatedItem.label as string)) as string;
+      translatedItem.label = (await firstValueFrom(this.translate.get(untranslatedItem.label as string))) as string;
 
       if (translatedItem.items) {
         const translatedSubItems = [];

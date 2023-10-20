@@ -11,16 +11,11 @@ describe('Unit Tests: InputCharViewComponent', () => {
   let fixture: ComponentFixture<InputCharPreviewComponent>;
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        InputCharPreviewComponent
-      ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      declarations: [InputCharPreviewComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InputCharPreviewComponent);
     component = fixture.componentInstance;

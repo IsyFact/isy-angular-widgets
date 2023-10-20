@@ -8,12 +8,10 @@ import {OpenTraceHeaders} from './open-tracing-headers';
  */
 @Injectable()
 export class ZipkinOpenTracingHttpInterceptor extends OpenTracingHttpInterceptor {
-
   /**
    * Constructor that configures an {@link OpenTracingHttpInterceptor} to use ZIPKIN standard
    */
   constructor() {
     super(OpenTraceHeaders.ZIPKIN_TRACE_ID, OpenTraceHeaders.ZIPKIN_SPAN_ID);
   }
-
 }

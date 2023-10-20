@@ -3,19 +3,19 @@
  */
 export interface WidgetsTranslation {
   wizard?: {
-    back?: string, 
-    next?: string,
-    save?: string,
-    close?: string
+    back?: string;
+    next?: string;
+    save?: string;
+    close?: string;
   };
   inputChar?: {
-    headerBaseChars?: string, 
-    headerGroups?: string,
-    insert?: string
+    headerBaseChars?: string;
+    headerGroups?: string;
+    insert?: string;
   };
   hauptfenster?: {
-    altLogoAwl?: string, 
-    altLogoAnbieterAwl?: string,
-    logout?: string
+    altLogoAwl?: string;
+    altLogoAnbieterAwl?: string;
+    logout?: string;
   };
 }

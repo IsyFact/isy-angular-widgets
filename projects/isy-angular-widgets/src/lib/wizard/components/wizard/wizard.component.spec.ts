@@ -28,20 +28,18 @@ const CLASS_MR_2 = 'mr-2';
 const CLASS_MR_4 = 'mr-4';
 
 @Component({
-  template:
-    `
-      <isy-wizard
-        #wizard
-        [width]="${width}"
-        [height]="${height}"
-        [headerTitle]="'${headerTitle}'"
-        [isVisible]="true"
-        [allowNext]="false"
-      >
-        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[0]}'"></isy-incomplete-date>
-        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[1]}'"></isy-incomplete-date>
-        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
-      </isy-wizard>`
+  template: ` <isy-wizard
+    #wizard
+    [width]="${width}"
+    [height]="${height}"
+    [headerTitle]="'${headerTitle}'"
+    [isVisible]="true"
+    [allowNext]="false"
+  >
+    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[0]}'"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[1]}'"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
+  </isy-wizard>`
 })
 class TestComponent {
   @ViewChild('wizard') wizard!: WizardComponent;
@@ -55,13 +53,10 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let parentComponent: TestComponent;
   let parentFixture: ComponentFixture<TestComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        TestComponent
-      ]
-    })
-      .compileComponents();
+      declarations: [TestComponent]
+    }).compileComponents();
   });
 
   /**
@@ -213,14 +208,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     closeButton.click();
   }
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        WizardComponent,
-        StepperComponent,
-        WizardDirective,
-        TestComponent
-      ],
+      declarations: [WizardComponent, StepperComponent, WizardDirective, TestComponent],
       imports: [
         BrowserAnimationsModule,
         RouterTestingModule,
@@ -229,8 +219,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
         ButtonModule,
         IncompleteDateModule
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -5,7 +5,7 @@ import {CHARS_AND_NUMBERS, ONLY_CHARS_REGEX, ONLY_NUMBERS_REGEX} from './regex';
 /**
  * A validation rule that marks a field as required.
  */
-export const required:  ValidatorFn = Validators.required;
+export const required: ValidatorFn = Validators.required;
 
 /**
  * A validation rule that only allows the use of characters.
