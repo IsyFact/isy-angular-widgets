@@ -40,7 +40,6 @@ jobs:
       - run: npm test
       - run: npm run lint
       - run: npm run build
-      - run: npm run compodoc:build
       - name: Upload Build
         uses: actions/upload-artifact@v3
         with:
