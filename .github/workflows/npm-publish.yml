@@ -38,6 +38,7 @@ jobs:
           fi
       - run: npm ci
       - run: npm test
+      - run: npm run prettier:check
       - run: npm run lint
       - run: npm run build
       - name: Upload Build
