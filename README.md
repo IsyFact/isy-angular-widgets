@@ -43,13 +43,12 @@ $ npm run start
 #### Prettier für Demo-Anwendung und Widgets-Bibliothek ausführen
 Zur Überprüfung der Demo-Anwendung und der Widgets-Bibliothek auf Code-Formatierungsfehler mithilfe von Prettier, kann folgender Befehl ausgeführt werden.
 ```
-$ npm run prettier . --check
+$ npm run prettier:check
 ```
 Um Code-Formatierungsfehler innerhalb der Demo-Anwendung und der Widgets-Bibliothek mithilfe von Prettier zu beheben, kann folgender Befehl ausgeführt werden.
 ```
-$ npm run prettier --write .
+$ npm run prettier:fix
 ```
-
 
 #### E2E-Tests für Demo-Anwendung ausführen
 
