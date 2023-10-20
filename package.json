@@ -23,7 +23,9 @@
     "e2e": "npx testcafe chrome:headless ./projects/isy-angular-widgets-demo/src/test/e2e/*",
     "compodoc:build": "compodoc -p tsconfig.doc.json --disablePrivate --disableInternal",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s --disablePrivate --disableInternal",
-    "compodoc:serve": "compodoc -s"
+    "compodoc:serve": "compodoc -s",
+    "prettier:check": "prettier . --check",
+    "prettier:write": "prettier --write ."
   },
   "private": true,
   "dependencies": {
@@ -75,6 +77,7 @@
     "ng-mocks": "^14.11.0",
     "ng-packagr": "^15.2.2",
     "ngx-translate-testing": "^6.1.0",
+    "prettier": "^3.0.3",
     "typescript": "~4.8.4"
   }
 }
