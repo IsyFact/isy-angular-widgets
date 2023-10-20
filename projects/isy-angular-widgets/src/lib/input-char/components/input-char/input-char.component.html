@@ -5,8 +5,7 @@
   icon="pi pi-language"
   [disabled]="isInputDisabled"
   (click)="toggleCharPicker()"
->
-</button>
+></button>
 
 <p-dialog
   [header]="header!"
@@ -18,14 +17,10 @@
   [closeOnEscape]="closeOnEscape"
   [modal]="modal"
   [style]="{
-        width: width,
-        height: height
-     }"
+    width: width,
+    height: height
+  }"
 >
-  <isy-input-char-dialog
-    [allCharacters]="allCharacters"
-    (insertCharacter)="insertCharacter.emit($event)"
-  >
+  <isy-input-char-dialog [allCharacters]="allCharacters" (insertCharacter)="insertCharacter.emit($event)">
   </isy-input-char-dialog>
-
 </p-dialog>

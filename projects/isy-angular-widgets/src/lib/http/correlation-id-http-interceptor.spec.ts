@@ -1,8 +1,5 @@
-import {
-  HttpClientTestingModule,
-  HttpTestingController
-} from '@angular/common/http/testing';
-import { CorrelationIdHttpInterceptor } from './correlation-id-http-interceptor';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {CorrelationIdHttpInterceptor} from './correlation-id-http-interceptor';
 import {MockBuilder, MockRender, NG_MOCKS_INTERCEPTORS, ngMocks} from 'ng-mocks';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
@@ -25,7 +22,7 @@ describe('Unit tests: CorrelationIdHttpInterceptor', () => {
   const X_CORRELATION_ID = 'x-correlation-id';
   const url = '/any-url';
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     return MockBuilder(CorrelationIdHttpInterceptor, TargetModule)
       .exclude(NG_MOCKS_INTERCEPTORS)
       .keep(HTTP_INTERCEPTORS)

@@ -8,20 +8,8 @@ import {ButtonModule} from 'primeng/button';
 import {WizardDirective} from './directives/wizard.directive';
 
 @NgModule({
-  declarations: [
-    WizardComponent,
-    StepperComponent,
-    WizardDirective
-  ],
-  exports: [
-    WizardComponent,
-    WizardDirective
-  ],
-  imports: [
-    CommonModule,
-    StepsModule,
-    DialogModule,
-    ButtonModule
-  ]
+  declarations: [WizardComponent, StepperComponent, WizardDirective],
+  exports: [WizardComponent, WizardDirective],
+  imports: [CommonModule, StepsModule, DialogModule, ButtonModule]
 })
-export class WizardModule { }
+export class WizardModule {}

@@ -12,25 +12,21 @@ import {Component, Input, NO_ERRORS_SCHEMA} from '@angular/core';
         <h1 class="custom-title">Titel inside H1!</h1>
       </div>
     </isy-hauptfenster>
-`})
+  `
+})
 class HauptFensterWrapperComponent {
   @Input() title!: string;
 }
 
-describe('Unit Tests: HauptfensterComponent', ()=> {
+describe('Unit Tests: HauptfensterComponent', () => {
   let component: HauptfensterComponent;
   let fixture: ComponentFixture<HauptfensterComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        HauptfensterComponent
-      ],
-      schemas:[
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      declarations: [HauptfensterComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HauptfensterComponent);
     component = fixture.componentInstance;
@@ -70,7 +66,9 @@ describe('Unit Tests: HauptfensterComponent', ()=> {
   });
 
   it('should have a hidden informationsbereich by default', () => {
-    const informationsbereich = fixture.nativeElement.querySelector('.isy-hauptfenster-informationsbereich') as HTMLElement;
+    const informationsbereich = fixture.nativeElement.querySelector(
+      '.isy-hauptfenster-informationsbereich'
+    ) as HTMLElement;
     expect(informationsbereich).toBeFalsy();
   });
 
@@ -97,18 +95,11 @@ describe('Integration Test: HauptfensterComponent', () => {
   let component: HauptfensterComponent;
   let fixture: ComponentFixture<HauptfensterComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        HauptfensterComponent,
-        HauptFensterWrapperComponent
-      ],
-      imports: [
-        MegaMenuModule,
-        ButtonModule
-      ]
-    })
-      .compileComponents();
+      declarations: [HauptfensterComponent, HauptFensterWrapperComponent],
+      imports: [MegaMenuModule, ButtonModule]
+    }).compileComponents();
   });
 
   beforeEach(() => {

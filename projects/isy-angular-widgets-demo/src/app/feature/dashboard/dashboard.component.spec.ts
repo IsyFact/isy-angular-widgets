@@ -1,11 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import { DashboardComponent } from './dashboard.component';
-import {
-  DashboardLinksnavigationComponent
-} from './components/dashboard-linksnavigation/dashboard-linksnavigation.component';
-import {
-  DashboardInformationsbereichComponent
-} from './components/dashboard-informationsbereich/dashboard-informationsbereich.component';
+import {DashboardComponent} from './dashboard.component';
+import {DashboardLinksnavigationComponent} from './components/dashboard-linksnavigation/dashboard-linksnavigation.component';
+import {DashboardInformationsbereichComponent} from './components/dashboard-informationsbereich/dashboard-informationsbereich.component';
 import {DashboardWidgetComponent} from './components/dashboard-widget/dashboard-widget.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {CardModule} from 'primeng/card';
@@ -30,7 +26,7 @@ describe('Integration Tests: DashboardComponent', () => {
     }
   }
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
@@ -39,17 +35,9 @@ describe('Integration Tests: DashboardComponent', () => {
         DashboardWidgetComponent,
         ChartComponent
       ],
-      imports: [
-        TranslateModule.forRoot(),
-        CardModule,
-        PanelMenuModule,
-        ChartModule
-      ],
-      providers: [
-        TranslateService
-      ]
-    })
-      .compileComponents();
+      imports: [TranslateModule.forRoot(), CardModule, PanelMenuModule, ChartModule],
+      providers: [TranslateService]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -62,7 +50,7 @@ describe('Integration Tests: DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('with available charts', ()=> {
+  describe('with available charts', () => {
     it('should init char data correctly', () => {
       component.initCharts();
       expectChartDataBeInit();
@@ -73,7 +61,7 @@ describe('Integration Tests: DashboardComponent', () => {
     });
   });
 
-  describe('with translations functionality', ()=> {
+  describe('with translations functionality', () => {
     it('should have the german language as default language', () => {
       expect(component.translate.langs.length).toEqual(1);
       expect(component.translate.langs[0]).toEqual(GERMAN_LANGUAGE);

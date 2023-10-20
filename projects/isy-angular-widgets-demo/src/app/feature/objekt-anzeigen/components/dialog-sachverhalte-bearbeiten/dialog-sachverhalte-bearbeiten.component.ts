@@ -7,7 +7,6 @@ import {Person} from '../../../../shared/model/person';
   styleUrls: ['./dialog-sachverhalte-bearbeiten.component.scss']
 })
 export class DialogSachverhalteBearbeitenComponent implements OnChanges {
-
   @Input() person: Person | undefined;
   @Input() visible = false;
   @Output() visibleChange = new EventEmitter();
@@ -31,7 +30,7 @@ export class DialogSachverhalteBearbeitenComponent implements OnChanges {
   }
 
   deleteSachverhalt(sachverhalt: string): void {
-    this.newSachverhalteListe = this.newSachverhalteListe.filter(entry => entry != sachverhalt);
+    this.newSachverhalteListe = this.newSachverhalteListe.filter((entry) => entry != sachverhalt);
   }
 
   createSachverhalt(sachverhalt: string): void {
@@ -43,5 +42,4 @@ export class DialogSachverhalteBearbeitenComponent implements OnChanges {
     this.visible = false;
     this.visibleChange.emit(this.visible);
   }
-
 }

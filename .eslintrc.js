@@ -1,46 +1,30 @@
 module.exports = {
-  "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
-  "overrides": [
+  root: true,
+  ignorePatterns: ['projects/**/*'],
+  overrides: [
     {
-      "files": [
-        "*.ts"
-      ],
-      "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
+      files: ['*.ts'],
+      parserOptions: {
+        project: ['tsconfig.json'],
         tsconfigRootDir: __dirname,
-        "createDefaultProgram": true
+        createDefaultProgram: true
       },
-      "extends": [
-        "plugin:jsdoc/recommended-typescript",
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:@isyfact/recommended"
+      extends: [
+        'plugin:jsdoc/recommended-typescript',
+        'plugin:@angular-eslint/recommended',
+        'plugin:@angular-eslint/template/process-inline-templates',
+        'plugin:@isyfact/recommended'
       ]
     },
     {
-      "files": [
-        "*.spec.ts"
-      ],
-      "extends": [
-        "plugin:@isyfact/test"
-      ]
+      files: ['*.spec.ts'],
+      extends: ['plugin:@isyfact/test']
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {}
+      files: ['*.html'],
+      extends: ['plugin:@angular-eslint/template/recommended'],
+      rules: {}
     }
   ],
-  "plugins": [
-    "jsdoc"
-  ]
-}
+  plugins: ['jsdoc']
+};

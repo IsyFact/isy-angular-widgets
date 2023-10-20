@@ -3,10 +3,10 @@
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
         <img
-          alt="{{configService.getTranslation('hauptfenster.altLogoAnbieterAwl')}}"
+          alt="{{ configService.getTranslation('hauptfenster.altLogoAnbieterAwl') }}"
           class="isy-hauptfenster-logo-anbieter-awl"
           [src]="logoAnbieterAwl"
-        >
+        />
       </a>
       <ng-template #customLogoAnbieterAwl>
         <ng-content select="[LogoAnbieterAwl]"></ng-content>
@@ -15,22 +15,22 @@
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
       <div class="flex flex-row-reverse">
         <img
-          alt="{{configService.getTranslation('hauptfenster.altLogoAwl')}}"
+          alt="{{ configService.getTranslation('hauptfenster.altLogoAwl') }}"
           class="isy-hauptfenster-logo-awl"
           [src]="logoAwl"
           *ngIf="logoAwl; else customLogoAwl"
-        >
+        />
         <ng-template #customLogoAwl>
           <ng-content select="[LogoAwl]"></ng-content>
         </ng-template>
       </div>
       <div class="flex flex-row-reverse">
         <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)">
-          {{configService.getTranslation('hauptfenster.logout')}}
+          {{ configService.getTranslation('hauptfenster.logout') }}
         </p-button>
         <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
           <em class="pi pi-user mr-1"></em>
-          {{userInfo.displayName}}
+          {{ userInfo.displayName }}
         </div>
       </div>
     </div>
@@ -41,9 +41,8 @@
       <ng-content select="[Hauptnavigation-Tools]"></ng-content>
     </ng-template>
   </p-megaMenu>
-  <div class="isy-hauptfenster-titelzeile p-2"
-       [style]="'background-color:' + applicationGroupColor + ';'">
-    <div *ngIf="title; else customTitelzeile">{{title}}</div>
+  <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
+    <div *ngIf="title; else customTitelzeile">{{ title }}</div>
     <ng-template #customTitelzeile>
       <ng-content select="[Titelzeile]"></ng-content>
     </ng-template>
@@ -55,16 +54,24 @@
     <div class="isy-hauptfenster-linksnavigation dont-print" *ngIf="showLinksnavigation">
       <div [style.width]="linksNavigationWidth" [hidden]="collapsedLinksnavigation" id="open-links-navigation">
         <div *ngIf="allowSidebarCollapse" class="collapseButton">
-          <button class="p-button-text" pButton icon="pi pi-angle-double-left"
-                  [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
-                  (click)="collapsedLinksnavigation = true"></button>
+          <button
+            class="p-button-text"
+            pButton
+            icon="pi pi-angle-double-left"
+            [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
+            (click)="collapsedLinksnavigation = true"
+          ></button>
         </div>
         <ng-content select="[Linksnavigation]"></ng-content>
       </div>
       <div [hidden]="!collapsedLinksnavigation">
-        <button class="p-button-text" pButton icon="pi pi-angle-double-right"
-                [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
-                (click)="collapsedLinksnavigation = false"></button>
+        <button
+          class="p-button-text"
+          pButton
+          icon="pi pi-angle-double-right"
+          [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
+          (click)="collapsedLinksnavigation = false"
+        ></button>
       </div>
     </div>
 
@@ -73,20 +80,30 @@
     </div>
 
     <div class="isy-hauptfenster-informationsbereich dont-print" *ngIf="showInformationsbereich">
-      <div [style.width]="informationsbereichWidth" [hidden]="collapsedInformationsbereich"
-           id="open-informationsbereich">
+      <div
+        [style.width]="informationsbereichWidth"
+        [hidden]="collapsedInformationsbereich"
+        id="open-informationsbereich"
+      >
         <div *ngIf="allowSidebarCollapse" class="collapseButton">
-          <button class="p-button-text" pButton icon="pi pi-angle-double-right"
-                  [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')"
-                  (click)="collapsedInformationsbereich = true"></button>
+          <button
+            class="p-button-text"
+            pButton
+            icon="pi pi-angle-double-right"
+            [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')"
+            (click)="collapsedInformationsbereich = true"
+          ></button>
         </div>
         <ng-content select="[Informationsbereich]"></ng-content>
       </div>
-      <div
-        [hidden]="!collapsedInformationsbereich">
-        <button pButton class="p-button-text" icon="pi pi-angle-double-left"
-                [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandInformationsbereich')"
-                (click)="collapsedInformationsbereich = false"></button>
+      <div [hidden]="!collapsedInformationsbereich">
+        <button
+          pButton
+          class="p-button-text"
+          icon="pi pi-angle-double-left"
+          [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandInformationsbereich')"
+          (click)="collapsedInformationsbereich = false"
+        ></button>
       </div>
     </div>
   </div>

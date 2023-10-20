@@ -21,8 +21,7 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
   templateUrl: './hauptfenster.component.html',
   styleUrls: ['./hauptfenster.component.scss']
 })
-export class HauptfensterComponent   {
-
+export class HauptfensterComponent {
   /**
    * Items to be shown in the main menu bar.
    */
@@ -97,6 +96,5 @@ export class HauptfensterComponent   {
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
-  constructor(public configService: WidgetsConfigService) {
-  }
+  constructor(public configService: WidgetsConfigService) {}
 }

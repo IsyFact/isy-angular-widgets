@@ -32,7 +32,10 @@ export class IncompleteDateService {
         const currentYear: number = new Date().getFullYear();
         const numX = coEfficient ** partYearNoUnderscore.length;
         partYear = currentYear.toString().slice(0, -partYearNoUnderscore.length).concat(partYearNoUnderscore);
-        partYear = (Number(partYear) > currentYear) && dateInPastConstraint ? (Number(partYear)-numX).toString() : Number(partYear).toString();
+        partYear =
+          Number(partYear) > currentYear && dateInPastConstraint
+            ? (Number(partYear) - numX).toString()
+            : Number(partYear).toString();
       }
 
       dateStr = [`${day}`, `${month}`, partYear].join('.');
@@ -60,12 +63,17 @@ export class IncompleteDateService {
         partOfFormat = this.DATE_CHAR.repeat(partOfFormat.length);
       }
 
-      return { ...object, [element]: partOfFormat };
+      return {...object, [element]: partOfFormat};
     }, {}) as DateObject;
 
     const dateStr = Object.values(dateObject).join('.');
 
-    if (dateStr.match(INCOMPLETE_DATE_REGEX) !== null || dateObject.month.includes(this.DATE_CHAR) || dateObject.year.includes(this.DATE_CHAR)) return 'xx.xx.' + dateObject.year;
+    if (
+      dateStr.match(INCOMPLETE_DATE_REGEX) !== null ||
+      dateObject.month.includes(this.DATE_CHAR) ||
+      dateObject.year.includes(this.DATE_CHAR)
+    )
+      return 'xx.xx.' + dateObject.year;
 
     if (dateObject.month === '00' || dateObject.year === '0000') return '00.00.' + dateObject.year;
 
@@ -78,6 +86,6 @@ export class IncompleteDateService {
    * @returns True or false as a boolean
    */
   private dateIsUnspecified(dateStr: string): boolean {
-    return (!(dateStr.match(UNSPECIFIED_DATE_REGEX) === null && dateStr.match(this.DATE_CHAR) === null));
+    return !(dateStr.match(UNSPECIFIED_DATE_REGEX) === null && dateStr.match(this.DATE_CHAR) === null);
   }
 }

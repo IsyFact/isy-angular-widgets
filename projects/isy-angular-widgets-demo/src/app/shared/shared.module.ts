@@ -3,8 +3,6 @@ import {PersonenService} from './services/personen.service';
 
 @NgModule({
   imports: [],
-  providers: [
-    PersonenService
-  ]
+  providers: [PersonenService]
 })
-export class SharedModule { }
+export class SharedModule {}

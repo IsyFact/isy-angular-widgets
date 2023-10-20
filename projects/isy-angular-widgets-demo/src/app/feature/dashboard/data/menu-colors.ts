@@ -1,6 +1,1 @@
-export const widgetBackgroundColors = [
-  'blue',
-  'pink',
-  'orange',
-  'yellow'
-];
+export const widgetBackgroundColors = ['blue', 'pink', 'orange', 'yellow'];

@@ -1,7 +1,4 @@
-import {
-  HttpClientTestingModule,
-  HttpTestingController
-} from '@angular/common/http/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {MockBuilder, MockRender, NG_MOCKS_INTERCEPTORS, ngMocks} from 'ng-mocks';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
@@ -22,10 +19,9 @@ import {OpenTraceHeaders} from './open-tracing-headers';
 class TargetModule {}
 
 describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
-
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     return MockBuilder(ZipkinOpenTracingHttpInterceptor, TargetModule)
       .exclude(NG_MOCKS_INTERCEPTORS)
       .keep(HTTP_INTERCEPTORS)
@@ -46,7 +42,6 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
 
     expect(req.request.headers.has(OpenTraceHeaders.ZIPKIN_TRACE_ID)).toBeTruthy();
     expect(req.request.headers.get(OpenTraceHeaders.ZIPKIN_TRACE_ID)).toMatch(uuidRegex);
-
   });
 
   it('should add span id header', () => {
@@ -82,5 +77,4 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
 
     expect(traceId).not.toEqual(spanId);
   });
-
 });
