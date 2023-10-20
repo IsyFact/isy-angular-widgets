@@ -180,11 +180,7 @@ describe('Unit Test: Validation', () => {
     });
 
     it('should return null if date is in the future', () => {
-      const control: AbstractControl = new FormControl(
-        moment()
-          .startOf('day')
-          .add(1, 'day')
-      );
+      const control: AbstractControl = new FormControl(moment().startOf('day').add(1, 'day'));
 
       const errors = Validation.isInFuture(control);
 
@@ -193,11 +189,7 @@ describe('Unit Test: Validation', () => {
 
     it('should return FUTURE if date is in the past', () => {
       const errorKey = 'FUTURE';
-      const control: AbstractControl = new FormControl(
-        moment()
-          .startOf('day')
-          .subtract(1, 'day')
-      );
+      const control: AbstractControl = new FormControl(moment().startOf('day').subtract(1, 'day'));
 
       const errors = Validation.isInFuture(control);
       if (!errors) {
@@ -218,11 +210,7 @@ describe('Unit Test: Validation', () => {
     });
 
     it('should return null if date is in the past', () => {
-      const control: AbstractControl = new FormControl(
-        moment()
-          .startOf('day')
-          .subtract(1, 'day')
-      );
+      const control: AbstractControl = new FormControl(moment().startOf('day').subtract(1, 'day'));
 
       const errors = Validation.isInPast(control);
 
@@ -231,11 +219,7 @@ describe('Unit Test: Validation', () => {
 
     it('should return PAST if date is in the future', () => {
       const errorKey = 'PAST';
-      const control: AbstractControl = new FormControl(
-        moment()
-          .startOf('day')
-          .add(1, 'day')
-      );
+      const control: AbstractControl = new FormControl(moment().startOf('day').add(1, 'day'));
 
       const errors = Validation.isInPast(control);
       if (!errors) {
@@ -286,18 +270,17 @@ describe('Unit Test: Validation', () => {
       expect(errors.DATE).toBeDefined();
     });
 
-    it('should return validation error, if input is not a valid date after not strict parsing',
-      () => {
-        const invalidDateControl: AbstractControl = new FormControl('abc');
-        const dateValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DD', false, 'YEAR');
+    it('should return validation error, if input is not a valid date after not strict parsing', () => {
+      const invalidDateControl: AbstractControl = new FormControl('abc');
+      const dateValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DD', false, 'YEAR');
 
-        const errors = dateValidatorFn(invalidDateControl);
+      const errors = dateValidatorFn(invalidDateControl);
 
-        if (!errors) {
-          throw new Error('errors is not defined');
-        }
-        expect(errors.YEAR).toBeDefined();
-      });
+      if (!errors) {
+        throw new Error('errors is not defined');
+      }
+      expect(errors.YEAR).toBeDefined();
+    });
   });
 
   describe('isoDate', () => {

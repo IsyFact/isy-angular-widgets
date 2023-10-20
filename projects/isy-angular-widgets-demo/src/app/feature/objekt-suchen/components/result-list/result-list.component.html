@@ -1,43 +1,46 @@
-<p-panel styleClass="isy-demo-app-result-panel"
-         [header]="('isyAngularWidgetsDemo.resultList.header' | translate)
-            + ' (' + personen.length + ')'" [toggleable]="true"
-         iconPos="start">
+<p-panel
+  styleClass="isy-demo-app-result-panel"
+  [header]="('isyAngularWidgetsDemo.resultList.header' | translate) + ' (' + personen.length + ')'"
+  [toggleable]="true"
+  iconPos="start"
+>
   <p-table
-           [value]="personen"
-           [globalFilterFields]="['name','representative.name','status']"
-           selectionMode="single"
-           [(selection)]="selectedObject"
-           [loading]="loading"
+    [value]="personen"
+    [globalFilterFields]="['name', 'representative.name', 'status']"
+    selectionMode="single"
+    [(selection)]="selectedObject"
+    [loading]="loading"
   >
     <ng-template pTemplate="caption">
       <p-button
         class="mr-1"
         icon="pi pi-plus"
-        [label]="('isyAngularWidgetsDemo.actions.createObject' | translate)"
+        [label]="'isyAngularWidgetsDemo.actions.createObject' | translate"
         (onClick)="emitCreateAction()"
       >
       </p-button>
       <p-button
         icon="pi pi-pencil"
-        [label]="('isyAngularWidgetsDemo.actions.editObject' | translate)"
+        [label]="'isyAngularWidgetsDemo.actions.editObject' | translate"
         [disabled]="!selectedObject"
-        (onClick)="emitEditAction(selectedObject)">
+        (onClick)="emitEditAction(selectedObject)"
+      >
       </p-button>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th scope="col" pSortableColumn="personalien.lastName">
-          {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
+          {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
           <p-columnFilter type="text" field="personalien.lastName" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.nachname"></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.firstName">
-          {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
+          {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
           <p-columnFilter type="text" field="personalien.firstName" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.vorname"></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.gender">
-          {{('isyAngularWidgetsDemo.labels.geschlecht' | translate)}}
+          {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
           <p-columnFilter
             field="representative"
             matchMode="in"
@@ -47,15 +50,16 @@
             [showAddButton]="false"
           >
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-              <p-multiSelect optionLabel="option"
-                             placeholder="Alle"
-                             [ngModel]="value"
-                             [options]="geschlechter"
-                             (onChange)="filter($event.value)"
+              <p-multiSelect
+                optionLabel="option"
+                placeholder="Alle"
+                [ngModel]="value"
+                [options]="geschlechter"
+                (onChange)="filter($event.value)"
               >
                 <ng-template let-option pTemplate="item">
                   <div class="p-multiselect-representative-option">
-                    <span class="p-ml-1">{{option}}</span>
+                    <span class="p-ml-1">{{ option }}</span>
                   </div>
                 </ng-template>
               </p-multiSelect>
@@ -64,51 +68,57 @@
           <p-sortIcon field="personalien.gender"></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.birthName">
-          {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
+          {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
           <p-columnFilter type="text" field="personalien.birthName" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.birthName"></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.birthplace">
-          {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
+          {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
           <p-columnFilter type="text" field="personalien.birthplace" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.birthplace"></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.nationality">
-          {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
+          {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
           <p-columnFilter type="text" field="personalien.nationality" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.nationality"></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.birthDate">
-          {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
+          {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
           <p-columnFilter type="date" field="personalien.birthDate" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.birthDate"></p-sortIcon>
         </th>
         <th scope="col">
-          {{('isyAngularWidgetsDemo.labels.actions' | translate)}}
+          {{ 'isyAngularWidgetsDemo.labels.actions' | translate }}
         </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-person>
       <tr [pSelectableRow]="rowData">
-        <td>{{person.personalien.nachname}}</td>
-        <td>{{person.personalien.vorname}}</td>
-        <td>{{person.personalien.geschlecht}}</td>
-        <td>{{person.personalien.geburtsname}}</td>
-        <td>{{person.personalien.geburtsort}}</td>
-        <td>{{person.personalien.staatsangehoerigkeit}}</td>
-        <td>{{person.personalien.geburtsdatum}}</td>
+        <td>{{ person.personalien.nachname }}</td>
+        <td>{{ person.personalien.vorname }}</td>
+        <td>{{ person.personalien.geschlecht }}</td>
+        <td>{{ person.personalien.geburtsname }}</td>
+        <td>{{ person.personalien.geburtsort }}</td>
+        <td>{{ person.personalien.staatsangehoerigkeit }}</td>
+        <td>{{ person.personalien.geburtsdatum }}</td>
         <td>
-          <p-button [icon]="'pi pi-pencil'"
-                    [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"
-                    (onClick)="emitEditAction(person)">
+          <p-button
+            [icon]="'pi pi-pencil'"
+            [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"
+            (onClick)="emitEditAction(person)"
+          >
           </p-button>
-          <p-button [icon]="'pi pi-download'"
-                    [styleClass]="'p-button-rounded p-button-text p-button-raised  mr-1'"
-                    [disabled]="true">
+          <p-button
+            [icon]="'pi pi-download'"
+            [styleClass]="'p-button-rounded p-button-text p-button-raised  mr-1'"
+            [disabled]="true"
+          >
           </p-button>
-          <p-button [icon]="'pi pi-trash'"
-                    [styleClass]="'p-button-rounded p-button-text p-button-raised'"
-                    [disabled]="true">
+          <p-button
+            [icon]="'pi pi-trash'"
+            [styleClass]="'p-button-rounded p-button-text p-button-raised'"
+            [disabled]="true"
+          >
           </p-button>
         </td>
       </tr>
@@ -116,7 +126,7 @@
     <ng-template pTemplate="emptymessage">
       <tr>
         <td colspan="7">
-          {{('isyAngularWidgetsDemo.resultList.emptyText' | translate)}}
+          {{ 'isyAngularWidgetsDemo.resultList.emptyText' | translate }}
         </td>
       </tr>
     </ng-template>

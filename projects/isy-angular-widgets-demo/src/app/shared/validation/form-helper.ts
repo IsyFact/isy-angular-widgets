@@ -5,7 +5,7 @@ import {FormGroup} from '@angular/forms';
  * @param form The form whose fields are affected
  */
 export function markFormAsDirty(form: FormGroup): void {
-  Object.keys(form.controls).forEach(key => {
+  Object.keys(form.controls).forEach((key) => {
     form.get(key)!.markAsDirty();
   });
 }
@@ -14,8 +14,8 @@ export function markFormAsDirty(form: FormGroup): void {
  * Marks an array of multiple forms as dirty.
  * @param formArray The form array containing all forms
  */
-export function markFormArrayAsDirty(formArray: FormGroup []): void {
-  formArray.forEach(form => {
+export function markFormArrayAsDirty(formArray: FormGroup[]): void {
+  formArray.forEach((form) => {
     markFormAsDirty(form);
   });
 }
@@ -25,7 +25,7 @@ export function markFormArrayAsDirty(formArray: FormGroup []): void {
  * @param form The shape to reset
  */
 export function resetForm(form: FormGroup): void {
-  Object.keys(form.controls).forEach(key => {
+  Object.keys(form.controls).forEach((key) => {
     form.controls[key].reset();
     form.controls[key].markAsDirty();
   });

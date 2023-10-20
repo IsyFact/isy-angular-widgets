@@ -23,11 +23,9 @@ const requiredAndCharsAndNumbers = [required, charsAndNumbers];
  * @param person A person with the existing values as input
  */
 export function initIdForm(person: Person): FormGroup {
-  return new FormGroup(
-    {
-      id: new FormControl(person.id, requiredAndCharsAndNumbers)
-    }
-  );
+  return new FormGroup({
+    id: new FormControl(person.id, requiredAndCharsAndNumbers)
+  });
 }
 
 /**
@@ -36,13 +34,11 @@ export function initIdForm(person: Person): FormGroup {
  * @param person A person with the existing values as input
  */
 export function initPersoenlicheInformationenForm(person: Person): FormGroup {
-  return new FormGroup(
-    {
-      vorname: new FormControl(person.personalien.vorname, onlyChars),
-      nachname: new FormControl(person.personalien.nachname, requiredAndOnlyChars),
-      geschlecht: new FormControl(person.personalien.geschlecht, requiredAndOnlyChars)
-    }
-  );
+  return new FormGroup({
+    vorname: new FormControl(person.personalien.vorname, onlyChars),
+    nachname: new FormControl(person.personalien.nachname, requiredAndOnlyChars),
+    geschlecht: new FormControl(person.personalien.geschlecht, requiredAndOnlyChars)
+  });
 }
 
 /**
@@ -51,14 +47,12 @@ export function initPersoenlicheInformationenForm(person: Person): FormGroup {
  * @param person A person with the existing values as input
  */
 export function initGeburtsInformationenForm(person: Person): FormGroup {
-  return new FormGroup(
-    {
-      geburtsname: new FormControl(person.personalien.geburtsname, requiredAndOnlyChars),
-      geburtsort: new FormControl(person.personalien.geburtsort, requiredAndOnlyChars),
-      staatsangehoerigkeit: new FormControl(person.personalien.staatsangehoerigkeit, required),
-      geburtsdatum: new FormControl(person.personalien.geburtsdatum, required)
-    }
-  );
+  return new FormGroup({
+    geburtsname: new FormControl(person.personalien.geburtsname, requiredAndOnlyChars),
+    geburtsort: new FormControl(person.personalien.geburtsort, requiredAndOnlyChars),
+    staatsangehoerigkeit: new FormControl(person.personalien.staatsangehoerigkeit, required),
+    geburtsdatum: new FormControl(person.personalien.geburtsdatum, required)
+  });
 }
 
 /**
@@ -67,16 +61,14 @@ export function initGeburtsInformationenForm(person: Person): FormGroup {
  * @param person A person with the existing values as input
  */
 export function initObjektBearbeitenForm(person: Person): FormGroup {
-  return new FormGroup(
-    {
-      editID: new FormControl(person.id, requiredAndOnlyNumbers),
-      editNachname: new FormControl(person.personalien.nachname, requiredAndCharsAndNumbers),
-      editGeburtsname: new FormControl(person.personalien.geburtsname, requiredAndOnlyChars),
-      editGeburtsort: new FormControl(person.personalien.geburtsort, requiredAndOnlyChars),
-      editVorname: new FormControl(person.personalien.vorname, requiredAndOnlyChars),
-      editGeschlecht: new FormControl(person.personalien.geschlecht, required),
-      editGeburtsdatum: new FormControl(person.personalien.geburtsdatum, required),
-      editStaatsangehoerigkeit : new FormControl(person.personalien.staatsangehoerigkeit, required)
-    }
-  );
+  return new FormGroup({
+    editID: new FormControl(person.id, requiredAndOnlyNumbers),
+    editNachname: new FormControl(person.personalien.nachname, requiredAndCharsAndNumbers),
+    editGeburtsname: new FormControl(person.personalien.geburtsname, requiredAndOnlyChars),
+    editGeburtsort: new FormControl(person.personalien.geburtsort, requiredAndOnlyChars),
+    editVorname: new FormControl(person.personalien.vorname, requiredAndOnlyChars),
+    editGeschlecht: new FormControl(person.personalien.geschlecht, required),
+    editGeburtsdatum: new FormControl(person.personalien.geburtsdatum, required),
+    editStaatsangehoerigkeit: new FormControl(person.personalien.staatsangehoerigkeit, required)
+  });
 }

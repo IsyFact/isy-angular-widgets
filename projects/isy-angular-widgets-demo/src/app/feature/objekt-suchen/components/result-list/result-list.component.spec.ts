@@ -11,17 +11,15 @@ import {WizardModule} from '../../../../../../../isy-angular-widgets/src/lib/wiz
 import {ActivatedRoute} from '@angular/router';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
-import { TranslateTestingModule } from 'ngx-translate-testing';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
 describe('Integration Tests: ResultListComponent', () => {
   let component: ResultListComponent;
   let fixture: ComponentFixture<ResultListComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ResultListComponent
-      ],
+      declarations: [ResultListComponent],
       imports: [
         TableModule,
         SecurityModule,
@@ -44,8 +42,7 @@ describe('Integration Tests: ResultListComponent', () => {
           }
         }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

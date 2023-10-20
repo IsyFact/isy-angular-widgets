@@ -26,10 +26,7 @@ describe('Unit Tests: person-data', () => {
     person.personalien.ausweispflichtig = false;
     person.personalien.sicherheitsstufe = 1;
     person.personalien.einreisedatum = '01-01-2022';
-    person.sachverhalte = [
-      'a',
-      'b'
-    ];
+    person.sachverhalte = ['a', 'b'];
     resetPerson(person);
 
     expect(person.id).toEqual('');

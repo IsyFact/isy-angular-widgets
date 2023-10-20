@@ -11,7 +11,6 @@ import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
   styleUrls: ['./input-char-dialog.component.scss']
 })
 export class InputCharDialogComponent implements OnChanges {
-
   /**
    * Emits a character chosen to insert by the user.
    */
@@ -62,7 +61,7 @@ export class InputCharDialogComponent implements OnChanges {
    * Filled with one option for "All Characters"; solely technical reasons.
    * @internal
    */
-  allCharsOptions= [{label: 'Alle'}];
+  allCharsOptions = [{label: 'Alle'}];
 
   /**
    * Filled when all chars are selected; solely technical reasons.
@@ -71,7 +70,7 @@ export class InputCharDialogComponent implements OnChanges {
   allCharsModel?: {label: string};
 
   constructor(public widgetsConfigService: WidgetsConfigService) {
-    this.allCharsOptions = [{label: this.getTranslation('inputChar.all') as string || 'Alle'}];
+    this.allCharsOptions = [{label: (this.getTranslation('inputChar.all') as string) || 'Alle'}];
     this.allCharsModel = this.allCharsOptions[0];
   }
 
@@ -132,7 +131,9 @@ export class InputCharDialogComponent implements OnChanges {
     this.resetAllSelection();
     this.resetSchriftzeichenGruppeSelection();
 
-    this.displayedCharacters = this.allCharacters.filter(z => (z.grundzeichen === '' ? '*' : z.grundzeichen) === this.selectedGrundzeichen);
+    this.displayedCharacters = this.allCharacters.filter(
+      (z) => (z.grundzeichen === '' ? '*' : z.grundzeichen) === this.selectedGrundzeichen
+    );
     this.selectFirstEntry();
   }
 
@@ -144,7 +145,9 @@ export class InputCharDialogComponent implements OnChanges {
     this.resetAllSelection();
     this.resetGrundzeichenSelection();
 
-    this.displayedCharacters = this.allCharacters.filter(z => z.schriftzeichengruppe === this.selectedSchriftzeichenGruppe);
+    this.displayedCharacters = this.allCharacters.filter(
+      (z) => z.schriftzeichengruppe === this.selectedSchriftzeichenGruppe
+    );
     this.selectFirstEntry();
   }
 
@@ -188,8 +191,7 @@ export class InputCharDialogComponent implements OnChanges {
    * @returns An array containing all different Grundzeichen.
    */
   private getAvailableGrundzeichen(): string[] {
-
-    const res = [...new Set(this.allCharacters.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))];
+    const res = [...new Set(this.allCharacters.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
 
     // Put * to the first position if present
     const specialPos = res.indexOf('*');

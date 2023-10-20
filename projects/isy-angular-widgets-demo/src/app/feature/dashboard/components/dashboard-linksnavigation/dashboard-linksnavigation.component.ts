@@ -14,9 +14,10 @@ export class DashboardLinksnavigationComponent implements OnInit {
 
   items: MenuItem[] = [];
 
-  constructor(public translate: TranslateService,
-    private menuTranslationService: MenuTranslationService) {
-  }
+  constructor(
+    public translate: TranslateService,
+    private menuTranslationService: MenuTranslationService
+  ) {}
 
   ngOnInit(): void {
     this.loadMenuItems(linksnavigationMenu);
@@ -29,7 +30,7 @@ export class DashboardLinksnavigationComponent implements OnInit {
   }
 
   loadMenuItems(items: MenuItem[]): void {
-    void this.menuTranslationService.translateMenuItems(items).then(items => {
+    void this.menuTranslationService.translateMenuItems(items).then((items) => {
       this.items = items;
     });
   }

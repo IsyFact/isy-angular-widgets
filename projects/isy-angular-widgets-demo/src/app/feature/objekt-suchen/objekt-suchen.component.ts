@@ -51,7 +51,7 @@ export class ObjektSuchenComponent {
   /**
    * The form array who includes all the forms of all wizard demo screens
    */
-  allWizardForms!: FormGroup [];
+  allWizardForms!: FormGroup[];
 
   /**
    * A new person who gona be user for the storage of the form values of the wizard demo screens
@@ -155,7 +155,7 @@ export class ObjektSuchenComponent {
    */
   setupCountries(): void {
     this.translate.get('primeng.countries').subscribe((countriesMap: CountryMap[]) => {
-      this.laender = countriesMap.map(item => item.name);
+      this.laender = countriesMap.map((item) => item.name);
       this.countryMap = [...countriesMap];
     });
   }
@@ -189,11 +189,7 @@ export class ObjektSuchenComponent {
     this.persoenlicheInformationenForm = initPersoenlicheInformationenForm(this.neuePerson);
     this.geburtsInformationenForm = initGeburtsInformationenForm(this.neuePerson);
 
-    this.allWizardForms = [
-      this.idForm,
-      this.persoenlicheInformationenForm,
-      this.geburtsInformationenForm
-    ];
+    this.allWizardForms = [this.idForm, this.persoenlicheInformationenForm, this.geburtsInformationenForm];
   }
 
   /**
@@ -289,7 +285,10 @@ export class ObjektSuchenComponent {
     this.tbLoadingStatus = true;
     const delay = 3000;
     setTimeout(() => {
-      this.personen$ = (this.person.id !== '') ? this.personService.findPersonById(this.person.id) : this.personService.findPersonenByParameters(this.person);
+      this.personen$ =
+        this.person.id !== ''
+          ? this.personService.findPersonById(this.person.id)
+          : this.personService.findPersonenByParameters(this.person);
       this.tbLoadingStatus = false;
     }, delay);
   }
@@ -300,7 +299,7 @@ export class ObjektSuchenComponent {
    */
   addNewPerson(): boolean {
     const person = this.getNewAddedPerson();
-    this.personen$.subscribe(personenList => {
+    this.personen$.subscribe((personenList) => {
       personenList.unshift(person);
       this.selectedPerson = personenList[0];
     });
@@ -321,7 +320,8 @@ export class ObjektSuchenComponent {
     person.personalien.geburtsort = this.geburtsInformationenForm.controls.geburtsort.value as string;
     const geburtsdatum = this.geburtsInformationenForm.controls.geburtsdatum.value as string;
     person.personalien.geburtsdatum = this.dateService.convertToGermanDateFormat(geburtsdatum);
-    person.personalien.staatsangehoerigkeit = this.geburtsInformationenForm.controls.staatsangehoerigkeit.value as string;
+    person.personalien.staatsangehoerigkeit = this.geburtsInformationenForm.controls.staatsangehoerigkeit
+      .value as string;
     return person;
   }
 
@@ -368,14 +368,16 @@ export class ObjektSuchenComponent {
    * @param originalPerson The original person before change (edit)
    */
   hasPersonChanges(originalPerson: Person): boolean {
-    return this.editForm.controls.editID.value !== originalPerson.id ||
+    return (
+      this.editForm.controls.editID.value !== originalPerson.id ||
       this.editForm.controls.editVorname.value !== originalPerson.personalien.vorname ||
       this.editForm.controls.editNachname.value !== originalPerson.personalien.nachname ||
       this.editForm.controls.editGeschlecht.value !== originalPerson.personalien.geschlecht ||
       this.editForm.controls.editGeburtsname.value !== originalPerson.personalien.geburtsname ||
       this.editForm.controls.editGeburtsort.value !== originalPerson.personalien.geburtsort ||
       this.editForm.controls.editGeburtsdatum.value !== originalPerson.personalien.geburtsdatum ||
-      this.editForm.controls.editStaatsangehoerigkeit.value !== originalPerson.personalien.staatsangehoerigkeit;
+      this.editForm.controls.editStaatsangehoerigkeit.value !== originalPerson.personalien.staatsangehoerigkeit
+    );
   }
 
   /**
@@ -390,7 +392,8 @@ export class ObjektSuchenComponent {
     this.selectedPerson!.personalien.geburtsort = this.editForm.controls.editGeburtsort.value as string;
     const geburtsdatum = this.editForm.controls.editGeburtsdatum.value as string;
     this.selectedPerson!.personalien.geburtsdatum = this.dateService.convertToGermanDateFormat(geburtsdatum);
-    this.selectedPerson!.personalien.staatsangehoerigkeit = this.editForm.controls.editStaatsangehoerigkeit.value as string;
+    this.selectedPerson!.personalien.staatsangehoerigkeit = this.editForm.controls.editStaatsangehoerigkeit
+      .value as string;
 
     this.openEditForm = false;
     this.allowSave = false;
@@ -402,8 +405,8 @@ export class ObjektSuchenComponent {
    */
   enableClearSearch(): boolean {
     let enable = false;
-    this.personen$.subscribe(list => {
-      enable = (list.length > 0);
+    this.personen$.subscribe((list) => {
+      enable = list.length > 0;
     });
     return enable;
   }

@@ -62,9 +62,4 @@ const bereichD = [
   }
 ];
 
-export const widgetMenuItems = [
-  bereichA,
-  bereichB,
-  bereichC,
-  bereichD
-];
+export const widgetMenuItems = [bereichA, bereichB, bereichC, bereichD];

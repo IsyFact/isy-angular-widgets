@@ -5,7 +5,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {InputMask} from 'primeng/inputmask';
 
-describe('IsyIncompleteDateComponent', ()=> {
+describe('IsyIncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let fixture: ComponentFixture<IncompleteDateComponent>;
   let input: HTMLInputElement;
@@ -29,17 +29,11 @@ describe('IsyIncompleteDateComponent', ()=> {
   }
 
   describe('Integration Tests: IsyIncompleteDateComponent', () => {
-    beforeEach(async() => {
+    beforeEach(async () => {
       await TestBed.configureTestingModule({
-        declarations: [
-          IncompleteDateComponent,
-          InputMask
-        ],
-        schemas: [
-          NO_ERRORS_SCHEMA
-        ]
-      })
-        .compileComponents();
+        declarations: [IncompleteDateComponent, InputMask],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
       init();
       input = fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
     });
@@ -325,16 +319,11 @@ describe('IsyIncompleteDateComponent', ()=> {
   });
 
   describe('Unit Tests: IsyIncompleteDateComponent', () => {
-    beforeEach(async() => {
+    beforeEach(async () => {
       await TestBed.configureTestingModule({
-        declarations: [
-          IncompleteDateComponent
-        ],
-        schemas: [
-          NO_ERRORS_SCHEMA
-        ]
-      })
-        .compileComponents();
+        declarations: [IncompleteDateComponent],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
       init();
     });
 

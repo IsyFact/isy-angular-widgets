@@ -28,8 +28,8 @@ export class SecurityService {
    * @param permissionJson The permission map to use
    */
   setPermissions(permissionJson: PermissionMaps): void {
-    this.routeMap = new Map(Object.entries(permissionJson.routes)) ;
-    this.elementMap = new Map(Object.entries(permissionJson.elements)) ;
+    this.routeMap = new Map(Object.entries(permissionJson.routes));
+    this.elementMap = new Map(Object.entries(permissionJson.elements));
   }
 
   /**
@@ -81,7 +81,6 @@ export class SecurityService {
     }
     if (!route.path) {
       return of(false);
-
     }
     const routeValue = this.routeMap.get(route.path);
     for (const role of this.roles) {

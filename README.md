@@ -40,6 +40,16 @@ Die Demo-Anwendung kann mit folgendem Befehl gestartet werden.
 $ npm run start
 ```
 
+#### Prettier für Demo-Anwendung und Widgets-Bibliothek ausführen
+Zur Überprüfung der Demo-Anwendung und der Widgets-Bibliothek auf Code-Formatierungsfehler mithilfe von Prettier, kann folgender Befehl ausgeführt werden.
+```
+$ npm run prettier:check
+```
+Um Code-Formatierungsfehler innerhalb der Demo-Anwendung und der Widgets-Bibliothek mithilfe von Prettier zu beheben, kann folgender Befehl ausgeführt werden.
+```
+$ npm run prettier:fix
+```
+
 #### E2E-Tests für Demo-Anwendung ausführen
 
 Für die Demo-Anwendung wurden exemplarisch einige E2E-Tests mit dem Framework [TestCafe](https://testcafe.io/) umgesetzt.

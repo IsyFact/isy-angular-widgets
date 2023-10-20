@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {IncompleteDateService} from './incomplete-date.service';
 
-describe(('Unit Tests: IsyIncompleteDate'), () => {
+describe('Unit Tests: IsyIncompleteDate', () => {
   let service: IncompleteDateService;
 
   beforeEach(() => {
@@ -79,7 +79,7 @@ describe(('Unit Tests: IsyIncompleteDate'), () => {
     });
   });
 
-  describe('transformValue (X for incomplete)', () =>  {
+  describe('transformValue (X for incomplete)', () => {
     it('should return an incomplete date in xx.MM.YYYY format correctly', () => {
       expect(service.transformValue('xx.01.2023')).toBe('xx.01.2023');
     });

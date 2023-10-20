@@ -22,7 +22,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   let securityService: SecurityService;
   const inputFields: any = {};
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ObjektAnzeigenComponent],
       imports: [
@@ -37,13 +37,8 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
           'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
         })
       ],
-      providers: [
-        MessageService,
-        SecurityService,
-        UserInfoPublicService
-      ]
-    })
-      .compileComponents();
+      providers: [MessageService, SecurityService, UserInfoPublicService]
+    }).compileComponents();
 
     messageService = TestBed.inject(MessageService);
     userInfoService = TestBed.inject(UserInfoPublicService);
@@ -90,7 +85,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display data for Max Mustermann', async() => {
+  it('should display data for Max Mustermann', async () => {
     await fixture.whenStable();
 
     expect(inputFields.lastName.nativeElement.value).toEqual('Mustermann');
@@ -103,7 +98,6 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
   });
-
 
   it('should hide button group for saving changes if not in edit mode', () => {
     const saveButtonGroup = fixture.debugElement.query(By.css('#divSaveCancel'));
@@ -151,7 +145,6 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
 
     expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid');
   });
-
 
   it('should set tab view index', () => {
     const tabview = fixture.nativeElement.querySelector('#tab-view');

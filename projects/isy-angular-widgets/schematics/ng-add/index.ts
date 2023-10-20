@@ -8,17 +8,16 @@ import {addPackageToPackageJson} from './package-config';
  */
 export function ngAdd(): Rule {
   return (tree: Tree, context: SchematicContext) => {
-
     addTranslationFile(context, tree, 'de.json');
     addTranslationFile(context, tree, 'en.json');
 
     // Add necessary dependencies to new CLI project.
-    addPackageToPackageJson(tree, "@angular/common",  "^15.2.9");
-    addPackageToPackageJson(tree, "@angular/core", "^15.2.9");
-    addPackageToPackageJson(tree, "primeicons", "^6.0.1");
-    addPackageToPackageJson(tree, "primeng", "^15.2.1");
-    addPackageToPackageJson(tree, "primeflex", "^3.3.1");
-    addPackageToPackageJson(tree, "moment",  "^2.29.4");
+    addPackageToPackageJson(tree, '@angular/common', '^15.2.9');
+    addPackageToPackageJson(tree, '@angular/core', '^15.2.9');
+    addPackageToPackageJson(tree, 'primeicons', '^6.0.1');
+    addPackageToPackageJson(tree, 'primeng', '^15.2.1');
+    addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
+    addPackageToPackageJson(tree, 'moment', '^2.29.4');
 
     // Install isy-angular-widgets
     context.addTask(new NodePackageInstallTask());
@@ -51,7 +50,7 @@ function loadWorkspace(tree: Tree) {
  * @param context
  * @param tree
  */
-function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree: Tree): Tree  {
+function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree: Tree): Tree {
   const styles = [
     'node_modules/primeicons/primeicons.css',
     'node_modules/primeflex/primeflex.min.css',
@@ -113,7 +112,7 @@ export function addTranslationFile(context: SchematicContext, tree: Tree, langua
   }
 
   if (!tree.exists(translationFilePath)) {
-    tree.create(translationFilePath, isyTranslation.toString("utf-8"));
+    tree.create(translationFilePath, isyTranslation.toString('utf-8'));
     context.logger.info('√ Add language files (de, en) for isy-angular-widgets.');
   } else {
     const translation = tree.read(translationFilePath);
@@ -131,4 +130,3 @@ export function addTranslationFile(context: SchematicContext, tree: Tree, langua
     tree.overwrite(translationFilePath, JSON.stringify(translationJson, null, 2));
   }
 }
-
