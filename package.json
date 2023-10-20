@@ -25,7 +25,7 @@
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s --disablePrivate --disableInternal",
     "compodoc:serve": "compodoc -s",
     "prettier:check": "prettier . --check",
-    "prettier:write": "prettier --write ."
+    "prettier:fix": "prettier --fix ."
   },
   "private": true,
   "dependencies": {
