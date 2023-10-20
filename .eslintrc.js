@@ -13,7 +13,8 @@ module.exports = {
         'plugin:jsdoc/recommended-typescript',
         'plugin:@angular-eslint/recommended',
         'plugin:@angular-eslint/template/process-inline-templates',
-        'plugin:@isyfact/recommended'
+        'plugin:@isyfact/recommended',
+        'plugin:editorconfig/all'
       ]
     },
     {
@@ -26,5 +27,5 @@ module.exports = {
       rules: {}
     }
   ],
-  plugins: ['jsdoc']
+  plugins: ['jsdoc', 'editorconfig']
 };
