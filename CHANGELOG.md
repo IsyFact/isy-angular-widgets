@@ -1,4 +1,4 @@
-# 15.0.2
+# 15.0.2 - 
 ## Features
 - ISY-303 - Automatisierte Code-Formatierung mit Prettier
 - ISY-345: Wechsel in nächsten Datum-Abschnitt mit Punk-Taste für ungewisses Datum-Eingabefeld
