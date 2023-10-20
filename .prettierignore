@@ -33,3 +33,5 @@ testem.log
 Thumbs.db
 documentation
 *.md
+*.yml
+*.yaml
