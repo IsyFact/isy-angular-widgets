@@ -9,7 +9,7 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 import {ChartModule} from 'primeng/chart';
 import {ChartComponent} from './components/chart/chart.component';
 
-describe('Integration Tests: DashboardComponent', () => {
+describe('Integration Tests: DashboardComponent', () =>         {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
