@@ -23,14 +23,18 @@ export class IncompleteDateService {
     const coEfficient = 10;
     let dateStr = newValue;
     const [day, month, year] = dateStr.split('.');
-    let partYear = `${year}`.replace(/_/g, '');
+    let partYear = `${year}`;
+    const partYearNoUnderscore = `${year}`.replace(/_/g, '');
 
     // e.g. the year "99" in a dateInPast setting is 1999 instead of 2099
-    if (partYear.length < maxPartYearLength && !partYear.includes(this.DATE_CHAR)) {
-      const currentYear: number = new Date().getFullYear();
-      const numX = coEfficient ** partYear.length;
-      partYear = currentYear.toString().slice(0, -partYear.length).concat(partYear);
-      partYear = (Number(partYear) > currentYear) && dateInPastConstraint ? (Number(partYear)-numX).toString() : Number(partYear).toString();
+    if (partYearNoUnderscore.length < maxPartYearLength && !partYearNoUnderscore.includes(this.DATE_CHAR)) {
+      if (partYearNoUnderscore.length !== 0) {
+        const currentYear: number = new Date().getFullYear();
+        const numX = coEfficient ** partYearNoUnderscore.length;
+        partYear = currentYear.toString().slice(0, -partYearNoUnderscore.length).concat(partYearNoUnderscore);
+        partYear = (Number(partYear) > currentYear) && dateInPastConstraint ? (Number(partYear)-numX).toString() : Number(partYear).toString();
+      }
+
       dateStr = [`${day}`, `${month}`, partYear].join('.');
     }
 

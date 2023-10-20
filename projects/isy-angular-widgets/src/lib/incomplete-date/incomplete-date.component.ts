@@ -102,6 +102,71 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   }
 
   /**
+   * Autocompletes the input of day and month when entering dot
+   * E.g. unspecified dates: x. -> xx, 1. -> 01
+   * @param event KeyboardEvent
+   */
+  onKeydown(event: KeyboardEvent): void {
+    let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
+    const dayPartEndPos = 3;
+    const monthPartEndPos = 6;
+
+    if (event.key === '.' && inputMousePosition < monthPartEndPos) {
+      const input = event.target as HTMLInputElement;
+      const [day, month, year] = input.value.split('.');
+      let partDay = `${day}`;
+      let partMonth = `${month}`;
+      const partYear = `${year}`;
+      const partDayReplaced = partDay.replace(/_/g, '');
+      const partMonthReplaced = partMonth.replace(/_/g, '');
+      const dateUnspecifiedChar = 'x';
+
+      if (partDayReplaced.length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
+
+      if (inputMousePosition >= dayPartEndPos && inputMousePosition < monthPartEndPos && partMonthReplaced.length <= 1) {
+        partDay = partDayReplaced.length === 0 ? dateUnspecifiedChar.repeat(partDay.length) : partDay;
+        partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
+      }
+      
+      const dateStr = [partDay, partMonth, partYear].join('.');
+      input.value = this.inputValue = dateStr;
+
+      // Mouse position (specific fixed numbers required)
+      /* eslint-disable @typescript-eslint/no-magic-numbers */
+      switch (inputMousePosition) {
+        case 0:
+        case 3:
+          inputMousePosition += 3;
+          break;
+        case 1:
+        case 4:
+          inputMousePosition += 2;
+          break;
+        case 2:
+        case 5:
+          inputMousePosition += 1;
+          break;
+      }
+      /* eslint-enable @typescript-eslint/no-magic-numbers */
+
+      input.setSelectionRange(inputMousePosition, inputMousePosition);
+      this.onChange(this.inputValue);
+    }
+  }
+
+  /** 
+   * Transforms a part of a date string
+   * @param partOfDate part of a date as a string
+   * @param char unspecified character as a string
+   * @returns transformed part of a date
+   */
+  transformDatePart(partOfDate: string, char: string): string {
+    const partOfDateReplaced = partOfDate.replace(/_/g, '');
+
+    return partOfDateReplaced == char || partOfDateReplaced.length === 0  ? char.repeat(partOfDate.length) : '0' + partOfDateReplaced;
+  }
+
+  /**
    * Transforms the input value if necessary and updates it when user completes the mask pattern
    */
   onComplete(): void {
@@ -156,5 +221,4 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   onChange: Function = (_: any) => {};
 
   onTouched: Function = () => {}; 
-
 }
