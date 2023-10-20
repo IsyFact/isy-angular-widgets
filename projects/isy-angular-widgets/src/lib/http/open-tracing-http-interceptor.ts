@@ -2,7 +2,6 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Observable} from 'rxjs';
 import {OpenTraceHeaders} from './open-tracing-headers';
 
-
 /**
  * An abstract {@link HttpInterceptor} that adds http headers depending on the concrete OpenTracing implementation.
  *

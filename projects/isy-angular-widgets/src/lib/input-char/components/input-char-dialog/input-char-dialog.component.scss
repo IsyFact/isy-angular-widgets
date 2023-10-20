@@ -39,7 +39,6 @@ $select_button_on_hover_background_color: grey;
 $select_button_on_hover_text_color: white;
 
 ::ng-deep {
-
   // Common styles of all select buttons
   p-selectButton .p-ripple.p-element.p-button {
     background-color: transparent;
@@ -75,7 +74,7 @@ $select_button_on_hover_text_color: white;
 
       .p-accordion-content {
         border: 0;
-        padding: 0
+        padding: 0;
       }
     }
 
@@ -109,7 +108,6 @@ $select_button_on_hover_text_color: white;
 
   // Styles specific for right side select buttons
   #right-panel-side p-selectButton {
-
     .p-ripple.p-element.p-button {
       padding: 0.25rem;
       width: 32px;

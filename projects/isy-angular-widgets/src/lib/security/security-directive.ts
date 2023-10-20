@@ -11,7 +11,6 @@ import {SecurityService} from './security-service';
   selector: '[isyPermitted]'
 })
 export class SecurityDirective {
-
   /**
    * @param template Represents an embedded template that can be used to instantiate embedded views.
    * @param viewContainer Represents a container where one or more views can be attached to a component.
@@ -20,8 +19,8 @@ export class SecurityDirective {
    */
   constructor(private template: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
-    private securityService: SecurityService) {
-  }
+    private securityService: SecurityService
+  ) {}
 
   /**
    * Shows the element if the corresponding permission is present

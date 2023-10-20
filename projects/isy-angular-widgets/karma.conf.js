@@ -24,10 +24,7 @@ module.exports = function (config) {
     customLaunchers: {
       Headless: {
         base: 'ChromeHeadless',
-        flags: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox'
-        ]
+        flags: ['--no-sandbox', '--disable-setuid-sandbox']
       }
     },
     jasmineHtmlReporter: {
@@ -36,11 +33,7 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, '../../coverage/isy-angular-widgets'),
       subdir: '.',
-      reporters: [
-        { type: 'html' },
-        { type: 'text-summary' },
-        { type: 'lcov' }
-      ]
+      reporters: [{type: 'html'}, {type: 'text-summary'}, {type: 'lcov'}]
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,

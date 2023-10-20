@@ -47,13 +47,15 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     // Set Isy Angular Widgets translation
-    this.isyAngularWidgetsI18nSubscription = this.translate.stream('isyAngularWidgets').subscribe((data: WidgetsTranslation) => {
-      this.widgetsConfigService.setTranslation(data);
-    });
+    this.isyAngularWidgetsI18nSubscription = this.translate
+      .stream('isyAngularWidgets')
+      .subscribe((data: WidgetsTranslation) => {
+        this.widgetsConfigService.setTranslation(data);
+      });
   }
 
   // Change language and save it in local storage
-  changeLanguage(language: string):void {
+  changeLanguage(language: string): void {
     this.translate.use(language);
   }
 
@@ -64,7 +66,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.changeLanguage(this.selectedLanguage);
 
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    this.translate.onLangChange.subscribe(async() => {
+    this.translate.onLangChange.subscribe(async () => {
       this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
       this.items = await this.menuTranslationService.translateMegaMenuItems(applicationMenu);
     });

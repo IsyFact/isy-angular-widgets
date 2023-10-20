@@ -9,7 +9,6 @@ import {Datentyp} from '../model/datentyp';
   selector: '[isyInputChar]'
 })
 export class InputCharDirective implements OnInit {
-
   /**
    * Determines which set of characters (datatype) according to DIN 91379 to show
    */
@@ -42,7 +41,10 @@ export class InputCharDirective implements OnInit {
 
   htmlInputElement: HTMLInputElement;
 
-  constructor(private viewContainerRef: ViewContainerRef, private element: ElementRef) {
+  constructor(
+    private viewContainerRef: ViewContainerRef,
+    private element: ElementRef
+  ) {
     this.htmlInputElement = this.element.nativeElement as HTMLInputElement;
     this.htmlInputElement.style.width = 'calc(100% - 2.357rem)';
   }
@@ -53,17 +55,17 @@ export class InputCharDirective implements OnInit {
 
     this.setupInputChar();
 
-    this.componentRef.instance.insertCharacter.subscribe(zeichen => {
+    this.componentRef.instance.insertCharacter.subscribe((zeichen) => {
       this.htmlInputElement.value = this.buildInputValue(this.htmlInputElement.value, zeichen);
       this.setNextInputPosition(zeichen.length);
       this.htmlInputElement.dispatchEvent(new Event('change', {}));
     });
   }
 
-  setupInputChar(): void  {
+  setupInputChar(): void {
     this.componentRef.setInput('isInputDisabled', this.htmlInputElement.disabled || this.htmlInputElement.readOnly);
 
-    const observer = new MutationObserver(mutationList => {
+    const observer = new MutationObserver((mutationList) => {
       for (const mutation of mutationList) {
         const input = mutation.target as HTMLInputElement;
 

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DashboardWidgetComponent } from './dashboard-widget.component';
+import {DashboardWidgetComponent} from './dashboard-widget.component';
 import {CardModule} from 'primeng/card';
 import {TranslateModule} from '@ngx-translate/core';
 import {PanelMenuModule} from 'primeng/panelmenu';
@@ -10,19 +10,11 @@ describe('Integration Tests: DashboardWidgetsComponent', () => {
   let component: DashboardWidgetComponent;
   let fixture: ComponentFixture<DashboardWidgetComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        DashboardWidgetComponent
-      ],
-      imports: [
-        TranslateModule.forRoot(),
-        PanelMenuModule,
-        CardModule,
-        FormsModule
-      ]
-    })
-      .compileComponents();
+      declarations: [DashboardWidgetComponent],
+      imports: [TranslateModule.forRoot(), PanelMenuModule, CardModule, FormsModule]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardWidgetComponent);
     component = fixture.componentInstance;

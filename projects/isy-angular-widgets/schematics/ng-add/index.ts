@@ -8,7 +8,6 @@ import {addPackageToPackageJson} from './package-config';
  */
 export function ngAdd(): Rule {
   return (tree: Tree, context: SchematicContext) => {
-
     addTranslationFile(context, tree, 'de.json');
     addTranslationFile(context, tree, 'en.json');
 
@@ -51,7 +50,7 @@ function loadWorkspace(tree: Tree) {
  * @param context
  * @param tree
  */
-function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree: Tree): Tree  {
+function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree: Tree): Tree {
   const styles = [
     'node_modules/primeicons/primeicons.css',
     'node_modules/primeflex/primeflex.min.css',
@@ -131,4 +130,3 @@ export function addTranslationFile(context: SchematicContext, tree: Tree, langua
     tree.overwrite(translationFilePath, JSON.stringify(translationJson, null, 2));
   }
 }
-

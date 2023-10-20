@@ -6,14 +6,13 @@ import {By} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @Component({
-  template:
-    `<input
-        #charPicker
-        id="char-picker"
-        pInputText
-        isyInputChar
-        (change)="valueGet($event, charPicker.value)"
-    >`
+  template: `<input
+    #charPicker
+    id="char-picker"
+    pInputText
+    isyInputChar
+    (change)="valueGet($event, charPicker.value)"
+  />`
 })
 class TestComponent {
   datentyp: Datentyp = Datentyp.DATENTYP_A;
@@ -39,13 +38,8 @@ describe('Integration Tests: InputCharDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        TestComponent,
-        InputCharDirective
-      ],
-      imports: [
-        BrowserAnimationsModule
-      ]
+      declarations: [TestComponent, InputCharDirective],
+      imports: [BrowserAnimationsModule]
     });
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;

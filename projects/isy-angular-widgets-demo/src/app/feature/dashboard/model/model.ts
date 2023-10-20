@@ -5,7 +5,7 @@ export interface ChartData {
 
 export interface ChartDatasetEntry {
   label?: string;
-  data: (string | number) [];
+  data: (string | number)[];
   fill?: boolean;
   borderColor?: string;
   tension?: number;

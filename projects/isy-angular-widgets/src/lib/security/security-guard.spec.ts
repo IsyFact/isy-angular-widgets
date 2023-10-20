@@ -38,12 +38,9 @@ const activatedRouteProvider = {
  * @param canActivate The canActivate value
  */
 function setupFakeCounterService(canActivate: boolean): void {
-  fakeCounterService = jasmine.createSpyObj<AuthGuard>(
-    'AuthGuard',
-    {
-      canActivate: of(canActivate)
-    }
-  );
+  fakeCounterService = jasmine.createSpyObj<AuthGuard>('AuthGuard', {
+    canActivate: of(canActivate)
+  });
 }
 
 /**
@@ -58,17 +55,13 @@ function getUserInfo(): UserInfo {
   };
 }
 
-describe('Integration Test: SecurityGuard - without setting up roles and permissions', function() {
+describe('Integration Test: SecurityGuard - without setting up roles and permissions', function () {
   beforeEach(() => {
     setupFakeCounterService(false);
     TestBed.configureTestingModule({
       declarations: [],
       imports: [],
-      providers: [
-        {provide: AuthGuard, useValue: fakeCounterService},
-        SecurityService,
-        activatedRouteProvider
-      ]
+      providers: [{provide: AuthGuard, useValue: fakeCounterService}, SecurityService, activatedRouteProvider]
     });
 
     guard = TestBed.inject(AuthGuard);
@@ -81,13 +74,13 @@ describe('Integration Test: SecurityGuard - without setting up roles and permiss
 
   it('should not activate because no roles setup', () => {
     const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
-    void canActivateObservable.forEach(canActivate => {
+    void canActivateObservable.forEach((canActivate) => {
       expect(canActivate).toBeFalse();
     });
   });
 });
 
-describe('Integration Test: SecurityGuard - with setting up roles and permissions', function() {
+describe('Integration Test: SecurityGuard - with setting up roles and permissions', function () {
   const permissionsData: PermissionMaps = {
     elements: {
       personenSuche: ['admin', 'user'],
@@ -104,11 +97,7 @@ describe('Integration Test: SecurityGuard - with setting up roles and permission
     TestBed.configureTestingModule({
       declarations: [],
       imports: [],
-      providers: [
-        {provide: AuthGuard, useValue: fakeCounterService},
-        SecurityService,
-        activatedRouteProvider
-      ]
+      providers: [{provide: AuthGuard, useValue: fakeCounterService}, SecurityService, activatedRouteProvider]
     });
 
     guard = TestBed.inject(AuthGuard);
@@ -126,7 +115,7 @@ describe('Integration Test: SecurityGuard - with setting up roles and permission
 
   it('should activate - with roles set up', () => {
     const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
-    void canActivateObservable.forEach(canActivate => {
+    void canActivateObservable.forEach((canActivate) => {
       expect(canActivate).toBeTrue();
     });
   });

@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
-import {
-  DialogSachverhalteBearbeitenComponent
-} from './components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component';
+import {DialogSachverhalteBearbeitenComponent} from './components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component';
 import {PanelModule} from 'primeng/panel';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
@@ -26,12 +24,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/security/security.module';
 
-
 @NgModule({
-  declarations: [
-    ObjektAnzeigenComponent,
-    DialogSachverhalteBearbeitenComponent
-  ],
+  declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
   imports: [
     CommonModule,
     ObjektAnzeigenRoutingModule,
@@ -59,4 +53,4 @@ import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/securit
   ],
   providers: []
 })
-export class ObjektAnzeigenModule { }
+export class ObjektAnzeigenModule {}

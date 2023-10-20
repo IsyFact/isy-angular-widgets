@@ -20,7 +20,8 @@ export function getEmptyPerson(): Person {
       sicherheitsstufe: 0,
       geheimdienstnotizen: '',
       einreisedatum: 'XX-XX-XXXX'
-    }, sachverhalte: []
+    },
+    sachverhalte: []
   };
 }
 

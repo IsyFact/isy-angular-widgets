@@ -10,9 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
-      "isy-angular-widgets": [
-        "dist/isy-angular-widgets"
-      ]
+      "isy-angular-widgets": ["dist/isy-angular-widgets"]
     },
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -24,10 +22,7 @@
     "importHelpers": true,
     "target": "es2022",
     "module": "es2022",
-    "lib": [
-      "es2022",
-      "dom"
-    ]
+    "lib": ["es2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

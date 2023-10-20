@@ -9,7 +9,6 @@ import {Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class WidgetsConfigService {
-
   private translation: WidgetsTranslation = {
     wizard: {
       back: 'Zurück',

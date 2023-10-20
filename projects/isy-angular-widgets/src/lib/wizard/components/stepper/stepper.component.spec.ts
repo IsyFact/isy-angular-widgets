@@ -5,7 +5,7 @@ import {MenuItem} from 'primeng/api';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-const stepperItems: MenuItem [] = [
+const stepperItems: MenuItem[] = [
   {
     label: 'Auswahl 1'
   },
@@ -19,20 +19,15 @@ const stepperItems: MenuItem [] = [
 const stepsNumber: number = stepperItems.length;
 const startIndex: number = 0;
 
-describe('Unit Tests: StepperComponent', ()=> {
+describe('Unit Tests: StepperComponent', () => {
   let component: StepperComponent;
   let fixture: ComponentFixture<StepperComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        StepperComponent
-      ],
-      schemas: [
-        NO_ERRORS_SCHEMA
-      ]
-    })
-      .compileComponents();
+      declarations: [StepperComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(StepperComponent);
     component = fixture.componentInstance;
@@ -94,17 +89,11 @@ describe('Integration Test: StepperComponent', () => {
   let component: StepperComponent;
   let fixture: ComponentFixture<StepperComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        StepperComponent
-      ],
-      imports: [
-        StepsModule,
-        RouterTestingModule
-      ]
-    })
-      .compileComponents();
+      declarations: [StepperComponent],
+      imports: [StepsModule, RouterTestingModule]
+    }).compileComponents();
   });
 
   beforeEach(() => {

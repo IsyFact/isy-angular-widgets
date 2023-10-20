@@ -71,5 +71,5 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument
   const packageJson = JSON.parse(tree.read('package.json')!.toString('utf8')) as PackageJson;
 
-  return (packageJson.dependencies[name]) ? packageJson.dependencies[name] : null;
+  return packageJson.dependencies[name] ? packageJson.dependencies[name] : null;
 }

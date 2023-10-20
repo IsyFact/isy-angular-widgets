@@ -41,16 +41,16 @@
     >
     </p-selectButton>
     <div id="lower-right-panel">
-
-      <isy-input-char-preview *ngIf="selectedZeichenObjekt"
-                              [zeichenObjekt]="selectedZeichenObjekt"
-                              class="flex-grow-1"
-      >
+      <isy-input-char-preview *ngIf="selectedZeichenObjekt" [zeichenObjekt]="selectedZeichenObjekt" class="flex-grow-1">
       </isy-input-char-preview>
 
-      <button pButton [disabled]="!selectedZeichenObjekt" class="flex-shrink-0 font-bold"
-              (click)="insertSelectedZeichen()">
-        {{getTranslation('inputChar.insert')}}
+      <button
+        pButton
+        [disabled]="!selectedZeichenObjekt"
+        class="flex-shrink-0 font-bold"
+        (click)="insertSelectedZeichen()"
+      >
+        {{ getTranslation('inputChar.insert') }}
       </button>
     </div>
   </div>

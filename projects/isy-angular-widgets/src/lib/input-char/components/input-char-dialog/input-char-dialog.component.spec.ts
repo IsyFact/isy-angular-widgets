@@ -26,24 +26,21 @@ class FakeSelectButtonComponent implements Partial<SelectButton> {
   selector: 'p-accordion',
   template: '<ng-content></ng-content>'
 })
-class FakeAccordionComponent implements Partial<Accordion> {
-
-}
+class FakeAccordionComponent implements Partial<Accordion> {}
 
 describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
   let fixture: ComponentFixture<InputCharDialogComponent>;
 
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
-  const bases = [...new Set(sonderzeichenListe.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))];
-  const groups = [...new Set(sonderzeichenListe.map(item => item.schriftzeichengruppe))];
+  const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
+  const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [InputCharDialogComponent, FakeSelectButtonComponent, FakeAccordionComponent],
       schemas: [NO_ERRORS_SCHEMA]
-    })
-      .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InputCharDialogComponent);
     component = fixture.componentInstance;
@@ -65,7 +62,9 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   it(`should show ${groups.length} available groups`, () => {
-    const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button')).componentInstance;
+    const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+      By.css('#schriftzeichengruppe-select-button')
+    ).componentInstance;
     expect(schriftzeichengruppeSelectButton).toBeTruthy();
     expect(schriftzeichengruppeSelectButton.options.length).toEqual(groups.length);
   });
@@ -102,7 +101,9 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     });
 
     it(`should show only characters with a selected base ${grundzeichen}`, () => {
-      const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('#right-panel-side p-selectButton')
+      ).componentInstance;
       expect(charactersSelectButton).toBeTruthy();
 
       selectGrundzeichen(grundzeichen);
@@ -110,22 +111,29 @@ describe('Unit Tests: InputCharDialogComponent', () => {
       const options = charactersSelectButton.options;
       expect(options).toBeTruthy();
       for (const char of options) {
-        expect((char.grundzeichen === '' ? '*' : char.grundzeichen)).toEqual(grundzeichen);
+        expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
       }
     });
 
     it(`should show all characters with a selected base ${grundzeichen}`, () => {
-      const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('#right-panel-side p-selectButton')
+      ).componentInstance;
       expect(charactersSelectButton).toBeTruthy();
 
       selectGrundzeichen(grundzeichen);
 
-      expect(charactersSelectButton.options.length).toEqual(sonderzeichenListe.filter(char => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen).length);
+      expect(charactersSelectButton.options.length).toEqual(
+        sonderzeichenListe.filter((char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen)
+          .length
+      );
     });
   });
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button')).componentInstance;
+    const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+      By.css('#schriftzeichengruppe-select-button')
+    ).componentInstance;
     expect(schriftzeichengruppeSelectButton).toBeTruthy();
 
     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
@@ -146,7 +154,9 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     });
 
     it('should show only characters with a selected schriftzeichengruppe', () => {
-      const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('#right-panel-side p-selectButton')
+      ).componentInstance;
       expect(charactersSelectButton).toBeTruthy();
 
       selectSchriftzeichengruppe(schriftzeichengruppe);
@@ -159,9 +169,13 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     });
 
     it('should show all characters with a selected schriftzeichengruppe', () => {
-      const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('#schriftzeichengruppe-select-button')).componentInstance;
+      const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+        By.css('#schriftzeichengruppe-select-button')
+      ).componentInstance;
       expect(schriftzeichengruppeSelectButton).toBeTruthy();
-      const charactersSelectButton = fixture.debugElement.query(By.css('#right-panel-side p-selectButton')).componentInstance;
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('#right-panel-side p-selectButton')
+      ).componentInstance;
       expect(charactersSelectButton).toBeTruthy();
 
       // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
@@ -170,7 +184,9 @@ describe('Unit Tests: InputCharDialogComponent', () => {
       schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
       fixture.detectChanges();
 
-      expect(charactersSelectButton.options.length).toEqual(sonderzeichenListe.filter(char => char.schriftzeichengruppe === schriftzeichengruppe).length);
+      expect(charactersSelectButton.options.length).toEqual(
+        sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
+      );
     });
   });
 
@@ -202,12 +218,11 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [InputCharDialogComponent],
       imports: [BrowserAnimationsModule, InputCharModule]
-    })
-      .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InputCharDialogComponent);
     component = fixture.componentInstance;
@@ -215,13 +230,15 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  const numberOfBases = [...new Set(sonderzeichenListe.map(item => item.grundzeichen === '' ? '*' : item.grundzeichen))].length;
+  const numberOfBases = [
+    ...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))
+  ].length;
   it(`should show ${numberOfBases} available bases`, () => {
     const baseButtons = fixture.debugElement.queryAll(By.css('#grundzeichen-select-button .p-buttonset div'));
     expect(baseButtons.length).toEqual(numberOfBases);
   });
 
-  const numberOfGroups = [...new Set(sonderzeichenListe.map(item => item.schriftzeichengruppe))].length;
+  const numberOfGroups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))].length;
   it(`should show ${numberOfGroups} available groups`, () => {
     const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset div'));
     expect(groupButtons.length).toEqual(numberOfGroups);

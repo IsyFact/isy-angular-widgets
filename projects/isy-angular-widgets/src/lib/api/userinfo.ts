@@ -4,7 +4,6 @@ import {Injectable} from '@angular/core';
  * Contains information about a user, mostly used for the currently logged-in user.
  */
 export interface UserInfo {
-
   /**
    * The technical user ID.
    */
@@ -26,10 +25,9 @@ export interface UserInfo {
  */
 @Injectable()
 export abstract class UserInfoService {
-
   /**
    * Returns the user info object.
    * Necessary server calls should be implemented here.
    */
-  abstract getUserInfo() : UserInfo;
+  abstract getUserInfo(): UserInfo;
 }

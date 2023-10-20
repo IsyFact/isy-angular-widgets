@@ -10,7 +10,11 @@ import {ActivatedRoute, Route} from '@angular/router';
  * @param userInfoData Data who is including the roles and coming from the userinfo endpoint
  * @param permissionsData Data who is including the permissions
  */
-function setupRolesAndPermissions(service: SecurityService, userInfoData: UserInfo, permissionsData: PermissionMaps): void {
+function setupRolesAndPermissions(
+  service: SecurityService,
+  userInfoData: UserInfo,
+  permissionsData: PermissionMaps
+): void {
   service.setRoles(userInfoData);
   service.setPermissions(permissionsData);
 }
@@ -73,10 +77,7 @@ describe('Integration Test: SecurityService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        SecurityService,
-        activatedRouteProvider
-      ]
+      providers: [SecurityService, activatedRouteProvider]
     });
     service = TestBed.inject(SecurityService);
     activatedRoute = TestBed.inject(ActivatedRoute);
@@ -86,46 +87,46 @@ describe('Integration Test: SecurityService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('Integration Test: SecurityGuard - Unavailable roles and permissions', function() {
+  describe('Integration Test: SecurityGuard - Unavailable roles and permissions', function () {
     it('should not access HTML element without roles and permissions', () => {
       const isElementPermitted = service.checkElementPermission('personenSuche');
       expect(isElementPermitted).toBeFalse();
     });
 
-    it('should not access route without roles and permissions', ()=> {
+    it('should not access route without roles and permissions', () => {
       const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
-      isRoutePermittedObservable.subscribe(isRoutePermitted => {
+      isRoutePermittedObservable.subscribe((isRoutePermitted) => {
         expect(isRoutePermitted).toBeFalse();
       });
     });
 
-    it('should not access async route without roles and permissions', ()=> {
+    it('should not access async route without roles and permissions', () => {
       const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
-      isLoadRoutePermittedObservable.subscribe(isLoadRoutePermitted => {
+      isLoadRoutePermittedObservable.subscribe((isLoadRoutePermitted) => {
         expect(isLoadRoutePermitted).toBeFalse();
       });
     });
   });
 
-  describe('Integration Test: SecurityGuard - Available roles and permissions', function() {
+  describe('Integration Test: SecurityGuard - Available roles and permissions', function () {
     it('should access HTML element with correctly permissions', () => {
       setupRolesAndPermissions(service, userInfoData, permissionsData);
       const isElementPermitted = service.checkElementPermission('personenSuche');
       expect(isElementPermitted).toBeTrue();
     });
 
-    it('should route with correctly permissions', ()=> {
+    it('should route with correctly permissions', () => {
       setupRolesAndPermissions(service, userInfoData, permissionsData);
       const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
-      isRoutePermittedObservable.subscribe(isRoutePermitted => {
+      isRoutePermittedObservable.subscribe((isRoutePermitted) => {
         expect(isRoutePermitted).toBeTrue();
       });
     });
 
-    it('should route async with correctly permissions', ()=> {
+    it('should route async with correctly permissions', () => {
       setupRolesAndPermissions(service, userInfoData, permissionsData);
       const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
-      isLoadRoutePermittedObservable.subscribe(isLoadRoutePermitted => {
+      isLoadRoutePermittedObservable.subscribe((isLoadRoutePermitted) => {
         expect(isLoadRoutePermitted).toBeTrue();
       });
     });
