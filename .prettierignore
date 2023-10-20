@@ -32,4 +32,4 @@ testem.log
 .DS_Store
 Thumbs.db
 documentation
-README.md
+*.md
