@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
 import {Person, Personalien, PersonId} from '../../shared/model/person';
 import {FormGroup} from '@angular/forms';
 import {markFormArrayAsDirty, resetForm} from '../../shared/validation/form-helper';
@@ -12,12 +11,11 @@ import {
   initPersoenlicheInformationenForm
 } from './forms-data';
 import {getEmptyPerson, resetPerson} from './person-data';
-import {LangChangeEvent, TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {Message, MessageService} from 'primeng/api';
 import {CountryMap} from './model/country';
 import {DateService} from './services/date.service';
 import {TOAST_SEVERITY} from '../../shared/model/toast';
-import {Datentyp} from '../../../../../isy-angular-widgets/src/lib/input-char/model/datentyp';
 
 @Component({
   selector: 'demo-personen-suchen',
@@ -128,8 +126,6 @@ export class ObjektSuchenComponent {
 
   constructor(
     public personService: PersonenService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private dateService: DateService,
     public translate: TranslateService
@@ -149,7 +145,7 @@ export class ObjektSuchenComponent {
    * Is called on language change
    */
   onLanguageChange(): void {
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    this.translate.onLangChange.subscribe(() => {
       this.setupCountries();
     });
   }
@@ -333,11 +329,10 @@ export class ObjektSuchenComponent {
    * Is adding a notification to the notification service to display a toast popup
    */
   addSuccessNotification(): void {
-    const milliseconds = 3000;
     const message: Message = {
       severity: TOAST_SEVERITY.SUCCESS,
       detail: this.translate.instant('toastMessages.successfullySavedFakeData') as string,
-      life: milliseconds
+      sticky: true
     };
     this.messageService.add(message);
   }
@@ -433,6 +428,4 @@ export class ObjektSuchenComponent {
     resetForm(this.persoenlicheInformationenForm);
     resetForm(this.geburtsInformationenForm);
   }
-
-  protected readonly Datentyp = Datentyp;
 }
