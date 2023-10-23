@@ -7,6 +7,7 @@
 ## Enhancements
 - ISY-451: Die Dokumentation der Bibliothek ist auf GitHub Pages verfügbar
 ## Demo-Anwendung
+- ISY-360: Verhalten nach Navigation auf eine nicht existierende Seite
 - ISY-516: Entfernen von automatischen Ausblenden von Toast-Notifications
 
 # 15.0.1 - 5.10.2023
