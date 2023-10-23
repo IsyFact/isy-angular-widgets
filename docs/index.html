@@ -1,0 +1,229 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@isyfact/isy-angular-widgets documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="./" class="navbar-brand">@isyfact/isy-angular-widgets documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h2>Development Setup</h2>
+<h3>Prerequisites</h3>
+<p>Auf dem PC müssen die neueste <a href="https://nodejs.org/en/download/">Node und Npm LTS Version</a> installiert sein.</p>
+<p>Anschließend muss das Projekt aus GitHub bezogen werden</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-shell">git clone https://github.com/IsyFact/isy-angular-widgets.git
+cd isy-angular-widget</code></pre></div><h3>Dependencies Installieren</h3>
+<p>Vor der ersten Ausführung bzw. beim Ergänzen neuer Pakete muss das Projekt mit folgendem Befehl installiert werden.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-shell">npm install</code></pre></div><h3>Widgets-Bibliothek lokal an ein neues Projekt anbinden</h3>
+<ol>
+<li>Öffnen isy-angular-widgets</li>
+<li>Im root directory &quot;npm run build:widgets_lib&quot; ausführen</li>
+<li>Umgehen auf Pfad &quot;/isy-angular-widgets/dist/isy-angular-widgets&quot; und Pfad kopieren</li>
+<li>Neues Angular-Projekt Version 15 neu anlegen (npm install wird ausgeführt)</li>
+<li>Umgehen auf root directory und Ausführung von &quot;npm add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets&quot; (kopierter Pfad von Schritt 3)</li>
+<li>Im Modul, wo die eine ausgewählte Komponente z.B. Input-Char verwendet werden soll, müssen folgende Module unter &quot;modules&quot; hinzugefügt werden: BrowserAnimationsModule und je nach Fall vlt. auch BrowserModule oder/auch CommonModule</li>
+<li>Innerhalb der Datei angular.json, unter: architect-&gt;build-&gt;options muss folgendes property hinzugefügt werden: &quot;preserveSymlinks&quot;: true - Hintergrund: Bei Windows entsteht oft wegen den Pfaden ein Fehler und es tritt eine Fehlermeldung bezüglich inject() auf. Unter Linux gibt es keine Probleme</li>
+<li>Applikation starten</li>
+<li>Aus isy-angular-widgets ein beliebiges Widget integrieren</li>
+</ol>
+<h3>Demo-Anwendung starten</h3>
+<p>Neben den Widgets können in der Demo-Anwendung praktische Beispiele für die Umsetzung von Styleguide-Patterns oder querschnittlichen Aspekten betrachtet werden.
+Die Demo-Anwendung kann mit folgendem Befehl gestartet werden. </p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">$ npm run start</code></pre></div><h4>Prettier für Demo-Anwendung und Widgets-Bibliothek ausführen</h4>
+<p>Zur Überprüfung der Demo-Anwendung und der Widgets-Bibliothek auf Code-Formatierungsfehler mithilfe von Prettier, kann folgender Befehl ausgeführt werden.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">$ npm run prettier:check</code></pre></div><p>Um Code-Formatierungsfehler innerhalb der Demo-Anwendung und der Widgets-Bibliothek mithilfe von Prettier zu beheben, kann folgender Befehl ausgeführt werden.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">$ npm run prettier:fix</code></pre></div><h4>E2E-Tests für Demo-Anwendung ausführen</h4>
+<p>Für die Demo-Anwendung wurden exemplarisch einige E2E-Tests mit dem Framework <a href="https://testcafe.io/">TestCafe</a> umgesetzt.
+Um die Tests auszuführen, muss zunächst die Demo-Anwendung gestartet werden (siehe oben).
+Für die Ausführung der Tests wird der Webbrowser Chrome benötigt, alternativ kann das <code>e2e</code> Skript angepasst und dort ein anderer Browser eingetragen werden.
+Die Tests werden mit folgendem Befehlt gestartet.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">$ npm run e2e</code></pre></div><h3>PrimeNG-Designer</h3>
+<p>Die globalen Styles (isyfact-primeng-bootstrap-light.css) werden vom <a href="https://designer.primeng.org/#/">PrimeNG-Theme-Designer</a> generiert.</p>
+<p>Als Basis-Theme wird <em>Bootstrap Light</em> verwendet.
+Für das aktuelle Theme wurden folgende Einstellungen im PrimeNG-Theme-Designer verwenden:</p>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Einstellungen</th>
+<th>Wert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>General</em></td>
+<td></td>
+</tr>
+<tr>
+<td>Font Family</td>
+<td>BundesSans,&#39;Liberation Sans&#39;,sans-serif</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>73, 80, 87</td>
+</tr>
+<tr>
+<td>Secondary Text</td>
+<td>73, 80, 87</td>
+</tr>
+<tr>
+<td>Border Radius</td>
+<td>0px</td>
+</tr>
+<tr>
+<td>Disabled Opacity</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td><em>Palette</em></td>
+<td></td>
+</tr>
+<tr>
+<td>Primary</td>
+<td>69, 72, 77</td>
+</tr>
+<tr>
+<td>Primary Dark</td>
+<td>137, 144, 154</td>
+</tr>
+<tr>
+<td>Primary Darker</td>
+<td>137, 144, 154</td>
+</tr>
+<tr>
+<td>Highlight Background</td>
+<td>204, 227, 236</td>
+</tr>
+<tr>
+<td>Text on Highlight</td>
+<td>73, 80, 87</td>
+</tr>
+<tr>
+<td>Hover Background</td>
+<td>204, 227, 236</td>
+</tr>
+<tr>
+<td><em>Forms</em></td>
+<td></td>
+</tr>
+<tr>
+<td>Focus Border</td>
+<td>204, 227, 236</td>
+</tr>
+<tr>
+<td><em>Buttons</em></td>
+<td></td>
+</tr>
+<tr>
+<td>Secondary Background</td>
+<td>69, 72, 77</td>
+</tr>
+</tbody>
+</table>
+<h2>Erstellen von Releases</h2>
+<p>Releases werden mithilfe einer GitHub Action erzeugt, welche immer dann ausgeführt wird, wenn ein Tag mit einer gültigen Versionsnummer nach Semver erstellt wird.
+Diese Versionsnummer wird dann automatisch in die package.json der gebauten Bibliothek ausgetauscht.
+Das bedeutet, die Versionsnummer muss nicht manuell in der package.json des Projekts gepflegt werden (Dort steht einfach 0.0.0).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

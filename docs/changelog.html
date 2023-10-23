@@ -1,0 +1,331 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@isyfact/isy-angular-widgets documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="./" class="navbar-brand">@isyfact/isy-angular-widgets documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1>15.0.2 -</h1>
+<h2>Features</h2>
+<ul>
+<li>ISY-303 - Automatisierte Code-Formatierung mit Prettier</li>
+<li>ISY-345: Wechsel in nächsten Datum-Abschnitt mit Punk-Taste für ungewisses Datum-Eingabefeld</li>
+</ul>
+<h2>Fixes</h2>
+<ul>
+<li>ISY-500: Liberation Font wird jetzt korrekt als Fallback Schriftart verwendet</li>
+</ul>
+<h2>Enhancements</h2>
+<ul>
+<li>ISY-451: Die Dokumentation der Bibliothek ist auf GitHub Pages verfügbar</li>
+</ul>
+<h2>Demo-Anwendung</h2>
+<ul>
+<li>ISY-516: Entfernen von automatischen Ausblenden von Toast-Notifications</li>
+</ul>
+<h1>15.0.1 - 5.10.2023</h1>
+<h2>Fixes</h2>
+<ul>
+<li>ISY-377: Neue DIN 91379 werden jetzt beim korrekten Grundzeichen angezeigt</li>
+<li>ISY-292: Sekundärfarbe von Buttons für besseren Kontrast angepasst</li>
+<li>Aria-Labels zu Buttons von Hauptfenster und CharPicker hinzugefügt</li>
+</ul>
+<h1>14.2.1 - 5.10.2023</h1>
+<h2>Fixes</h2>
+<ul>
+<li>ISY-377: Neue DIN 91379 werden jetzt beim korrekten Grundzeichen angezeigt</li>
+<li>ISY-292: Sekundärfarbe von Buttons für besseren Kontrast angepasst</li>
+<li>Aria-Labels zu Buttons von Hauptfenster und CharPicker hinzugefügt</li>
+</ul>
+<h1>15.0.0 - 29.09.2023</h1>
+<h2>Breaking Changes</h2>
+<ul>
+<li>ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15<ul>
+<li>Die Implementierung der Interfaces CanActivate, CanLoad wurde entfernt, da deprecated</li>
+<li>Der Parameter <em>state</em> wurde aus der Signatur der Auth Guard Methode canActivate entfernt</li>
+<li>Die Auth Guard Methode canLoad wurde entfernt, da CanLoad Interface deprecated</li>
+</ul>
+</li>
+<li>ISY-371: Breaking Change vor v15: API des CharPickers der API von p-dialog angleichen<ul>
+<li>Properties der Komponente input-char der API von p-dialog angeglichen</li>
+</ul>
+</li>
+</ul>
+<h2>Demo-Anwendung</h2>
+<ul>
+<li>ISY-138: Upgrade Angular und PrimeNG Bibliothek auf Version 15<ul>
+<li>Demo-Anwendung und Bibliothek wurden auf Angular und PrimeNg 15 migriert</li>
+</ul>
+</li>
+</ul>
+<h1>14.2.0 - 29.09.2023</h1>
+<h2>Features</h2>
+<ul>
+<li>ISY-377: Umsetzung der DIN 91379<ul>
+<li>Sonderzeichenliste nach DIN 91379 erweitert</li>
+</ul>
+</li>
+<li>ISY-373: Deaktiviere @angular-eslint/component-selector für Tests<ul>
+<li>ESLint Selektor Regel für Direktiven und Komponenten Tests wurde deaktiviert</li>
+</ul>
+</li>
+</ul>
+<h2>Fixes</h2>
+<ul>
+<li>ISY-316: Readme aus dem Root-Verzeichnis wird für Releases verwendet</li>
+</ul>
+<h1>14.1.0 - 26.09.2023</h1>
+<ul>
+<li>ISY-348: Bei ungültigen Datumeingaben wird das Eingabefeld auf &quot;invalid&quot; gesetzt und der Fehler grafisch dargestellt</li>
+<li>ISY-346: Eingabe von verkürzten Jahreszahlen im ungewissen Datum Eingabefeld ist jetzt möglich</li>
+<li>ISY-216: Erstellen von Validatoren für ungewisses Datum<ul>
+<li>Zusätzliche Validatoren für ungewisse Datumswerte integriert</li>
+<li>Tag und Monat wurden in das Datumformat integriert</li>
+</ul>
+</li>
+</ul>
+<h2>Fixes</h2>
+<ul>
+<li>ISY-241: Anpassung des Styles für das Galerie Widget von PrimeNG<ul>
+<li>SCSS Code wurde angepasst</li>
+</ul>
+</li>
+<li>ISY-134 - Performance Violation im CharPicker</li>
+</ul>
+<h2>Demo-Anwendung</h2>
+<ul>
+<li>ISY-137: Demonstration der Security Widgets:<ul>
+<li>Demonstration des Security Widgets innerhalb der Demo-Anwendung</li>
+<li>Dropdown Liste innerhalb des Hauptfenster zur Auswahl einer beliebigen Rolle (Admin oder User) hinzugefügt</li>
+<li>Änderung der Rolle zur Laufzeit nicht möglich</li>
+<li>Auswahl der Rolle Admin und anschließende Navigation auf die Seite <em>Objekt anzeigen</em>, ermöglicht die Anzeige des Input Switches <em>Zeige geheime Felder</em></li>
+<li>Auswahl der Rolle User und anschließende Navigation auf die Seite <em>Objekt anzeigen</em>, zeigt den Input Switche <em>Zeige geheime Felder</em> nicht an, da fehlende Berechtigung</li>
+</ul>
+</li>
+</ul>
+<h1>14.0.0 - 30.08.2023</h1>
+<h2>Breaking Changes</h2>
+<ul>
+<li>Die Properties <code>linksNavigationCols</code> und <code>informationsbereichCols</code> wurden durch <code>linksNavigationWidth</code> und <code>informationsbereichWidth</code> ersetzt</li>
+</ul>
+<h2>Features</h2>
+<ul>
+<li>IFS-2010: Header und Seitenleisten werden in der Druckansicht jetzt ausgeblendet</li>
+<li>Anwendungslogos können jetzt mit eigenem HTML gesetzt werden</li>
+<li>Seitenleisten können jetzt in ihrer Breite frei konfiguriert werden</li>
+<li>Behördenspezifische Widgets und die Widgets aus PrimeNG können jetzt in den Sprachen Deutsch und Englisch angezeigt werden </li>
+<li>ISY-86: Eingabefeld für ungewisses Datum verwendet jetzt eine Eingabemaske für das deutsche Datumsformat</li>
+</ul>
+<h2>Fixes</h2>
+<ul>
+<li>Seitenleisten werden nun korrekt ausgeblendet, wenn ihr show-Property false, aber collapse-Property true ist</li>
+<li>ISY-132: Der Sonderzeichen-Picker stellt seinen Button nun korrekt neben seinem Eingabefeld (anstatt darunter) dar</li>
+</ul>
+<h2>Demo-Anwendung</h2>
+<ul>
+<li>ISY-97: Die Demo-Anwendung zeigt ein Dashboard auf der Startseite, welches sich bereits responsive verhält</li>
+<li>ISY-96: Der Sonderzeichen-Picker wird exemplarisch auf der Seite <em>Objekt suchen</em> eingebunden</li>
+</ul>
+<h1>0.8.0 - 15.05.2023</h1>
+<h2>Breaking Changes</h2>
+<ul>
+<li>Security-Paket von /core/security nach /security verschoben</li>
+</ul>
+<h2>Features</h2>
+<ul>
+<li>IFS-1751: Es wurden spezifische Validator-Methoden für Input Felder hinzugefügt:<ul>
+<li><code>isInFuture</code> - Prüft, ob ein Datum in der Zukunft liegt</li>
+<li><code>isInPast</code> - Prüft, ob ein Datum in der Vergangenheit liegt</li>
+<li><code>dateFormat</code> - Prüft, ob ein Datum ein bestimmtes Format einhält</li>
+<li><code>isoDate</code>, <code>isoTime</code> und <code>isoDateTime</code> prüfen, ob ein Datum ein gültiges ISO 8601 Datum ist</li>
+<li><code>validCreditCardNumber</code> - Prüft, ob die Eingabe eine gültige Kreditkartennummer ist</li>
+</ul>
+</li>
+<li>IFS-1871: Es wurden zwei HttpInterceptors für das automatische Setzen einer CorrelationId im Request Header hinzugefügt<ul>
+<li><code>CorrelationIdHttpInterceptor</code> - Für Anwendungen, die eine CorrelationId nach IsyFact Standard verarbeiten</li>
+<li><code>ZipkinOpenTracingHttpInterceptor</code> - Für Anwendungen, die Tracing mit Zipkins und OpenTracing implementieren</li>
+</ul>
+</li>
+<li>IFS-2388: Das Theme wurde überarbeitet, sodass es dem Erscheinungsbild des alten Angular Bausteins möglichst ähnlich ist<ul>
+<li>In der <code>HauptfensterComponent</code> kann die Farbe der Anwendung über das Attribut <code>applicationGroupColor</code>angepasst werden</li>
+<li>Die <code>WizardComponent</code> erhält die Properties <code>closable</code> and <code>modal</code>, die standardmäßig auf <code>true</code> gesetzt sind</li>
+</ul>
+</li>
+<li>IFS-1791: Es wurde Dokumentation für die Komponenten hinzugefügt. Sie ist über gitlab pages erreichbar.</li>
+</ul>
+<h1>0.7.0 - 03.02.2023</h1>
+<h2>Features</h2>
+<ul>
+<li>IFS-1750: Bereitstellung des Special Char Picker Widgets<ul>
+<li>Bekannter Fehler: Der Picker wird falsch dargestellt, wenn er innerhalb eines Elements mit p-fluid verwendet wird. Die Verwendung dieser Stylingklasse ist zu überdenken.</li>
+</ul>
+</li>
+</ul>
+<h1>0.6.0 - 18.01.2023</h1>
+<h2>Fixes</h2>
+<ul>
+<li>IFS-1750: Bereitstellung des Special Char Picker Widgets (Pre-Release Version)</li>
+<li>IFS-2211: Behebung von mehreren kleinen Anzeigefehlern im Hauptfenster:<ul>
+<li>Im Hauptfenster wird keine vertikale Scrollbar mehr angezeigt, wenn der Inhalt kleiner als die Höhe des Bildschirms ist</li>
+<li>Im Content-Bereich wird eine horizontale Scrollbar angezeigt, wenn der Inhalt zu breit für den Bildschirm ist</li>
+<li>Das Logo des Anbieters der Anwendungslandschaft nimmt jetzt weniger Breite ein als zuvor</li>
+</ul>
+</li>
+</ul>
+<h1>0.5.1 - 21.12.2022</h1>
+<h2>Fixes</h2>
+<ul>
+<li>IFS-1755: Die .woff2-Schriftarten für Liberation Font werden korrekt exportiert und zur Verwendung bereitgestellt. Dies behebt einen Fehler, der den Build in der vorherigen Version verhinderte.</li>
+<li>Das IsyFact-Theme ist jetzt unter node_modules/@isyfact/isy-angular-widgets/assets/theme/isyfact-theme.scss abgelegt. Es müssen entsprechende Änderungen z.B. in der angular.json Datei vorgenommen werden.</li>
+</ul>
+<h1>0.5.0 - 24.11.2022</h1>
+<h2>Features</h2>
+<ul>
+<li>IFS-1680: Es wird nun ein Wizard-Widget bereitgestellt</li>
+<li>IFS-2070: Die Titelzeile im Hauptfenster kann mit beliebigem HTML befüllt werden</li>
+</ul>
+<h2>Enhancements</h2>
+<ul>
+<li>IFS-2071: Balken im Hauptfenster mit der Standardfarbe hat eine größe von 10px erhalten</li>
+</ul>
+<h1>0.4.0 - 10.10.2022</h1>
+<h2>Features</h2>
+<ul>
+<li>IFS-1789: isy-angular-widgets verwendet jetzt Angular 14 und PrimeNG 14</li>
+<li>IFE-475: Security Modul für die Beschränkung von Rechten auf Navigationspunkte sowie einer Direktive zur Einschränkung der Sichtbarkeit von einzelnen Widgets zu Verfügung gestellt. Außerdem kann ein Rollen/Rechte Mapping in der GUI eingestellt werden</li>
+<li>IFE-538: Die Seitenleisten des Hauptfensters können jetzt so konfiguriert werden, dass der Benutzer sie einklappen kann</li>
+<li>IFE-418: Widget für die Anzeige eines ungewissen Datums wurde bereitgestellt</li>
+</ul>
+<h2>Fixes</h2>
+<ul>
+<li>IFE-554: Die Seitenleisten nehmen jetzt die komplette Höhe des Browserfensters ein</li>
+<li>IFS-1764: Das Anwendungslogo kann jetzt entsprechend der Vorgaben des Bundesstyleguides angepasst werden</li>
+<li>IFE-500: Es werden keine Platzhaltertexte mehr angezeigt, wenn kein Anwendungslogo im Hauptfenster gesetzt ist</li>
+</ul>
+<h1>0.3.0 - 15.02.2022</h1>
+<h2>Features</h2>
+<ul>
+<li>IFE-461: Im Header wird jetzt ein MegaMenu statt einer Menubar verwendet</li>
+<li>IFE-475: Unterstützung für Rollen und Rechte</li>
+</ul>
+<h1>0.2.0 - 08.02.2022</h1>
+<h2>Features</h2>
+<ul>
+<li>IFE-463: Seitenleisten im Hauptfenster unterstützen Angular router outlets und die Breite der Leisten kann angepasst werden</li>
+<li>IFE-462: Output für Logout-Button in Hauptfenster hinzugefügt</li>
+</ul>
+<h1>0.1.0 - 09.12.2021</h1>
+<h2>Features</h2>
+<ul>
+<li>IFE-408: Hauptfenster Widget mit Seitenleisten, UserInfo und Navigation hinzugefügt</li>
+<li>IFE-413: Standard Isyfact-Theme mit konfigurierbaren Farben für Hauptnavigationspunkte hinzugefügt</li>
+<li>IFE-453: Verwendung des UserInfo-Objekts für den Anwendungsrahmen</li>
+<li>IFE-409: Objekt-Suchen Pattern us dem Styleguide als Beispielseite in Demo-Anwendung hinzugefügt</li>
+<li>IFE-409: Objekt-Bearbeiten Pattern aus dem Styleguide als Beispielseite in Demo-Anwendung hinzugefügt</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'changelog.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
