@@ -9,7 +9,7 @@ describe('Unit Tests: PageNotFoundComponent', () => {
   let fixture: ComponentFixture<PageNotFoundComponent>;
   const startPage = 'Startseite';
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PageNotFoundComponent],
       schemas: [NO_ERRORS_SCHEMA]
@@ -24,7 +24,7 @@ describe('Unit Tests: PageNotFoundComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it( `should have ${startPage} as inner text value`, () => {
+  it(`should have ${startPage} as inner text value`, () => {
     const anchorTag = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
     expect(anchorTag.innerText).toEqual(startPage);
   });
