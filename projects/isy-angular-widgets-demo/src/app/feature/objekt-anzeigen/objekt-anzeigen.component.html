@@ -131,7 +131,7 @@
         </div>
         <div class="col">
           <p-calendar
-            inputId="birthDate"
+            inputId="birth-date"
             dateFormat="dd.mm.yy"
             formControlName="birthDate"
             [showIcon]="true"
@@ -155,7 +155,7 @@
         </div>
         <div class="col">
           <p-inputMask
-            inputId="phoneNumber"
+            inputId="phone-number"
             formControlName="phoneNumber"
             type="text"
             [style]="" mask="+99 9999 / 9999999"
@@ -169,7 +169,7 @@
         </div>
         <div class="col">
           <isy-incomplete-date
-            inputId="dateOfEntry"
+            inputId="date-of-entry"
             formControlName="dateOfEntry"
             [dateInPastConstraint]="true"
           >
@@ -183,7 +183,7 @@
         <div class="col">
           <div class="field field-checkbox">
             <p-inputSwitch
-              inputId="showSecretFields"
+              inputId="show-secret-fields"
               (onChange)="showSecretFields = $event.checked"
             ></p-inputSwitch>
             <label for="show-secret-fields">
