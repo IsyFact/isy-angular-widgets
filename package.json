@@ -13,7 +13,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build isy-angular-widgets && ng build isy-angular-widgets-demo && npm run build:schematics",
-    "build:with_base_href": "ng build isy-angular-widgets && ng build isy-angular-widgets-demo --base-href='https://isyfact.github.io/isy-angular-widgets/demo/' && npm run build:schematics",
     "build:widgets_lib": "ng build isy-angular-widgets && npm run build:schematics && npm run postbuild",
     "build:widgets_demo": "ng build isy-angular-widgets-demo",
     "build:schematics": "tsc -p ./projects/isy-angular-widgets/tsconfig.schematics.json",

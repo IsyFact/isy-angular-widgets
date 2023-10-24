@@ -39,9 +39,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      #    - run: npm run prettier:check
-      #    - run: npm run lint
-      #    - run: npm test
+          - run: npm run prettier:check
+          - run: npm run lint
+          - run: npm test
       - run: npm run build --if-present
       - run: npm run compodoc:build
 
@@ -67,10 +67,9 @@ jobs:
       - name: Create docs
         run: |
                npm run compodoc:build
-               npm run build:with_base_href
-      #        npm run build
-      #        cd ./docs && mkdir demo && cd ..
-      #        cp -r ./dist/isy-angular-widgets-demo ./docs/demo
+              npm run build
+              cd ./docs && mkdir demo && cd ..
+              cp -r ./dist/isy-angular-widgets-demo ./docs/demo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
