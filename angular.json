@@ -155,6 +155,9 @@
               "projects/isy-angular-widgets-demo/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
