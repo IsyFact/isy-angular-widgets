@@ -71,12 +71,11 @@ jobs:
       #        npm run build
       #        cd ./docs && mkdir demo && cd ..
       #        cp -r ./dist/isy-angular-widgets-demo ./docs/demo
-      - run:  angular-cli-ghpages --dir=dist/isy-angular-widgets-demo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload documentation repository
-          path: 'dist/isy-angular-widgets-demo'
+          path: 'dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
