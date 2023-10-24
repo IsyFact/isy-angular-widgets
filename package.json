@@ -80,6 +80,7 @@
     "ng-mocks": "^14.11.0",
     "ng-packagr": "^16.2.3",
     "ngx-translate-testing": "^7.0.0",
+    "prettier": "^3.0.3",
     "typescript": "~4.9.3"
   }
 }
