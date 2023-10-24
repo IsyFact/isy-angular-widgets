@@ -67,7 +67,8 @@ jobs:
       - name: Create docs
         run: |
           npm run compodoc:build
-          npm run build
+          npm run build -- --base-href https://isyfact.github.io/isy-angular-widgets/demo/
+          cd ./docs && mkdir demo && cd ..
           cp -r ./dist/isy-angular-widgets-demo ./docs/demo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
