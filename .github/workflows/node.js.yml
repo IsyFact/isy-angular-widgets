@@ -66,7 +66,7 @@ jobs:
       - run: npm ci
       - name: Create docs
         run: |
-               npm run compodoc:build
+              npm run compodoc:build
               npm run build
               cd ./docs && mkdir demo && cd ..
               cp -r ./dist/isy-angular-widgets-demo ./docs/demo
