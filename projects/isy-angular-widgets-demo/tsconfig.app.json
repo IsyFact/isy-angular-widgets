@@ -6,11 +6,6 @@
     "resolveJsonModule": true,
     "types": []
   },
-  "files": [
-    "src/main.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts",
-    "src/environments/**/*.ts"
-  ]
+  "files": ["src/main.ts"],
+  "include": ["src/**/*.d.ts", "src/environments/**/*.ts"]
 }

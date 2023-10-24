@@ -33,11 +33,11 @@ export class WidgetsConfigService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getTranslation(path: string): any {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-    return path.split('.').reduce((o, k) => o ? (o as any)[k] : undefined, this.translation);
+    return path.split('.').reduce((o, k) => (o ? (o as any)[k] : undefined), this.translation);
   }
 
   setTranslation(value: WidgetsTranslation): void {
-    this.translation = { ...this.translation, ...value };
+    this.translation = {...this.translation, ...value};
     this.translationSource.next(this.translation);
   }
 }

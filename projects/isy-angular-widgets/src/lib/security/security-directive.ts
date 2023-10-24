@@ -17,7 +17,8 @@ export class SecurityDirective {
    * @param securityService A service that can be configured with permission configuration and return permissions for certain elements.
    * @internal
    */
-  constructor(private template: TemplateRef<unknown>,
+  constructor(
+    private template: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
     private securityService: SecurityService
   ) {}
