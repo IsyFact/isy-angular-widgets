@@ -4,7 +4,7 @@ import {By} from '@angular/platform-browser';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {Component, EventEmitter, Input, NO_ERRORS_SCHEMA, Output} from '@angular/core';
-import {SelectButton} from 'primeng/selectbutton';
+import {SelectButton, SelectButtonChangeEvent} from 'primeng/selectbutton';
 import {Accordion} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputCharModule} from '../../input-char.module';
@@ -14,11 +14,12 @@ import {InputCharModule} from '../../input-char.module';
   template: ''
 })
 class FakeSelectButtonComponent implements Partial<SelectButton> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() options?: any[];
 
   // Implementing onChange from SelectButton because usage of Partial
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  @Output() onChange = new EventEmitter<void>();
+  @Output() onChange = new EventEmitter<SelectButtonChangeEvent>();
 }
 
 @Component({

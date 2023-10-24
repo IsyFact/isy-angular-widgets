@@ -1,9 +1,9 @@
 <p-inputMask
   [readonly]="readonly"
   [disabled]="disabled"
-  (onInput)="onChange($event.target.value)"
-  (onBlur)="onBlur()"
-  (onComplete)="onComplete()"
+  (onInput) = "onChange($any($event.target).value)"
+  (onBlur) = "onBlur()"
+  (onComplete) = "onComplete()"
   (onKeydown)="onKeydown($event)"
   mask="**.**.****"
   [(ngModel)]="inputValue"

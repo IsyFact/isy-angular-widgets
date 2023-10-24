@@ -32,6 +32,7 @@ class TestComponent {
 describe('Integration Tests: InputCharDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   let directiveElement: any;
   let directive: InputCharDirective;
 

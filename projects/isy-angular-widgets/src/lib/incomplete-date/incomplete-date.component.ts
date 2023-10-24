@@ -82,8 +82,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   ngOnInit(): void {
     // Enable syntax <isy-incomplete-date readonly /> (isReadOnly has value "" which is true as boolean)
-    this.readonly = this.readonly || '' === (this.readonly as any);
-    this.disabled = this.disabled || '' === (this.disabled as any);
+    this.readonly = this.readonly || '' === (this.readonly as unknown);
+    this.disabled = this.disabled || '' === (this.disabled as unknown);
   }
 
   /**
@@ -204,6 +204,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Calls the given function on component change
    * @param fn The function to be called on component change
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
@@ -213,6 +214,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Calls the given function on component touch
    * @param fn The function to be called on component touch
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
@@ -226,7 +228,9 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     this.disabled = isDisabled;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
   onChange: Function = (_: any) => {};
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   onTouched: Function = () => {};
 }

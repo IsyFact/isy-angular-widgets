@@ -8,9 +8,9 @@ import {InputMask} from 'primeng/inputmask';
 describe('IsyIncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let fixture: ComponentFixture<IncompleteDateComponent>;
+  let onChange: unknown = () => {};
+  let onTouched: unknown = () => {};
   let input: HTMLInputElement;
-  let onChange: Function = () => {};
-  let onTouched: Function = () => {};
   const keyEvent = new KeyboardEvent('keydown', {
     key: '.',
     code: '190'

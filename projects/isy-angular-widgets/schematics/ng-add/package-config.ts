@@ -8,6 +8,7 @@
 
 import {Tree} from '@angular-devkit/schematics';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface PackageJson {
   dependencies: Record<string, string>;
 }
@@ -36,7 +37,9 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
   const spacesNum = 2;
   if (host.exists('package.json')) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     const sourceText = host.read('package.json')!.toString('utf-8');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const json = JSON.parse(sourceText) as PackageJson;
 
     if (!json.dependencies) {
@@ -65,6 +68,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
     return null;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument
   const packageJson = JSON.parse(tree.read('package.json')!.toString('utf8')) as PackageJson;
 
   return packageJson.dependencies[name] ? packageJson.dependencies[name] : null;

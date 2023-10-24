@@ -1,3 +1,7 @@
+# 16.0.0 - ..2023
+## Features
+- ISY-144 Upgrade Angular und PrimeNG Bibliothek auf Version 16
+
 # 15.0.2 - 
 ## Features
 - ISY-303 - Automatisierte Code-Formatierung mit Prettier

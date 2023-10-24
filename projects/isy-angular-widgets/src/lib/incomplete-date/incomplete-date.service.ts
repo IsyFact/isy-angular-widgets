@@ -56,6 +56,7 @@ export class IncompleteDateService {
     const formats = date.split('.');
     const dateKeys = ['day', 'month', 'year'];
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     const dateObject = dateKeys.reduce((object: Object, element: string, index: number) => {
       let partOfFormat = formats[index];
 
