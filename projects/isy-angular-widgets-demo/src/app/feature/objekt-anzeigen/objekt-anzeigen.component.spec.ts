@@ -14,7 +14,7 @@ import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/securi
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
 import data from '../../../assets/permissions.json';
 
-describe('PersonBearbeitenComponent', () => {
+describe('Integration Tests: PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
   let messageService: MessageService;
@@ -22,7 +22,7 @@ describe('PersonBearbeitenComponent', () => {
   let securityService: SecurityService;
   const inputFields: any = {};
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ObjektAnzeigenComponent],
       imports: [
@@ -37,13 +37,8 @@ describe('PersonBearbeitenComponent', () => {
           'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
         })
       ],
-      providers: [
-        MessageService,
-        SecurityService,
-        UserInfoPublicService
-      ]
-    })
-      .compileComponents();
+      providers: [MessageService, SecurityService, UserInfoPublicService]
+    }).compileComponents();
 
     messageService = TestBed.inject(MessageService);
     userInfoService = TestBed.inject(UserInfoPublicService);
@@ -75,22 +70,22 @@ describe('PersonBearbeitenComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    inputFields.lastName = fixture.debugElement.query(By.css('#lastName'));
-    inputFields.firstName = fixture.debugElement.query(By.css('#firstName'));
-    inputFields.birthName = fixture.debugElement.query(By.css('#birthName'));
-    inputFields.birthplace = fixture.debugElement.query(By.css('#birthplace'));
+    inputFields.lastName = fixture.debugElement.query(By.css('#last-name'));
+    inputFields.firstName = fixture.debugElement.query(By.css('#first-name'));
+    inputFields.birthName = fixture.debugElement.query(By.css('#birth-name'));
+    inputFields.birthplace = fixture.debugElement.query(By.css('#birth-place'));
     inputFields.nationality = fixture.debugElement.query(By.css('#nationality'));
     inputFields.gender = fixture.debugElement.query(By.css('#gender'));
-    inputFields.phoneNumber = fixture.debugElement.query(By.css('#phoneNumber'));
-    inputFields.birthDate = fixture.debugElement.query(By.css('#birthDate input'));
-    inputFields.dateOfEntry = fixture.debugElement.query(By.css('#dateOfEntry input'));
+    inputFields.phoneNumber = fixture.debugElement.query(By.css('#phone-number'));
+    inputFields.birthDate = fixture.debugElement.query(By.css('#birth-date input'));
+    inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry input'));
   });
 
   it('creates', () => {
     expect(component).toBeTruthy();
   });
 
-  it('displays data for Max Mustermann', async() => {
+  it('should display data for Max Mustermann', async () => {
     await fixture.whenStable();
 
     expect(inputFields.lastName.nativeElement.value).toEqual('Mustermann');
@@ -104,46 +99,44 @@ describe('PersonBearbeitenComponent', () => {
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
   });
 
-
-  it('hides button group for saving changes if not in edit mode', () => {
+  it('should hide button group for saving changes if not in edit mode', () => {
     const saveButtonGroup = fixture.debugElement.query(By.css('#divSaveCancel'));
 
     expect(saveButtonGroup).toBeNull();
   });
 
-  it('enables input fields in edit mode', () => {
-    clickButton('#buttonEdit');
+  it('shoud enable input fields in edit mode', () => {
+    clickButton('#button-edit');
     fixture.detectChanges();
 
     expect(inputFields.firstName.disabled).toBeFalsy();
   });
 
-  it('hides secret fields by default', () => {
+  it('should hide secret fields by default', () => {
     const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'));
 
     expect(secretFieldsContainer).toBeNull();
   });
 
-  it('expect secret fields to be visible', () => {
+  it('should set secret fields visible', () => {
     setupRolesAndPermissions();
     component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
     expect(component.showSecretFields).toBeTrue();
     fixture.detectChanges();
-    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'));
+    const secretFieldsContainer = fixture.debugElement.query(By.css('#div-show-secret-fields'));
     expect(secretFieldsContainer).toBeTruthy();
   });
 
-  it('expect no validation error', () => {
-    clickButton('#buttonEdit');
+  it('should not throwing a validation error', () => {
+    clickButton('#button-edit');
     fixture.detectChanges();
 
     const invalidFields = fixture.debugElement.queryAll(By.css('.ng-invalid'));
-
     expect(invalidFields.length).toBe(0);
   });
 
-  it('displays validation error if lastName is empty', () => {
-    clickButton('#buttonEdit');
+  it('should display validation error if lastName is empty', () => {
+    clickButton('#button-edit');
     fixture.detectChanges();
 
     inputFields.lastName.nativeElement.value = '';
@@ -153,42 +146,40 @@ describe('PersonBearbeitenComponent', () => {
     expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid');
   });
 
-
-  it('expect tab view index to be set', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const tabview = fixture.nativeElement.querySelector('#tabview');
+  it('should set tab view index', () => {
+    const tabview = fixture.nativeElement.querySelector('#tab-view');
     tabview.index = 0;
     expect(tabview.index).toBe(0);
     tabview.index = 1;
     expect(tabview.index).toBe(1);
   });
 
-  it('display permitted secret fields elements', () => {
+  it('should display permitted secret fields element', () => {
     expect(component.showSecretFields).toBeFalse();
     setupRolesAndPermissions();
     expect(component.showSecretFields).toBeTrue();
   });
 
-  it('do not Display non permitted element', () => {
+  it('should not display non permitted element', () => {
     expect(component.showSecretFields).toBeFalse();
-    const secretFields = fixture.nativeElement.querySelector('showSecretFields');
+    const secretFields = fixture.nativeElement.querySelector('show-secret-fields');
     expect(secretFields).toBeNull();
   });
 
-  it('checking the buttons availability', () => {
+  it('should display the (edit, save, cancel) buttons', () => {
     expect(component.personalInfoForm.disabled).toBeTrue();
 
-    const editButton = fixture.nativeElement.querySelector('#buttonEdit') as HTMLButtonElement;
+    const editButton = fixture.nativeElement.querySelector('#button-edit') as HTMLButtonElement;
     expect(editButton).not.toBeNull();
 
-    const saveButton = fixture.nativeElement.querySelector('#buttonSave') as HTMLButtonElement;
+    const saveButton = fixture.nativeElement.querySelector('#button-save') as HTMLButtonElement;
     expect(saveButton).toBeNull();
 
-    const cancelButton = fixture.nativeElement.querySelector('#buttonCancel') as HTMLButtonElement;
+    const cancelButton = fixture.nativeElement.querySelector('#button-cancel') as HTMLButtonElement;
     expect(cancelButton).toBeNull();
   });
 
-  it('Message added on saving personalien', () => {
+  it('should show message if personalien have been saved', () => {
     const messageSpy = spyOn(messageService, 'add');
     component.savePersonalien();
     fixture.detectChanges();

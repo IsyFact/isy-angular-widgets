@@ -40,6 +40,16 @@ Die Demo-Anwendung kann mit folgendem Befehl gestartet werden.
 $ npm run start
 ```
 
+#### Prettier für Demo-Anwendung und Widgets-Bibliothek ausführen
+Zur Überprüfung der Demo-Anwendung und der Widgets-Bibliothek auf Code-Formatierungsfehler mithilfe von Prettier, kann folgender Befehl ausgeführt werden.
+```
+$ npm run prettier:check
+```
+Um Code-Formatierungsfehler innerhalb der Demo-Anwendung und der Widgets-Bibliothek mithilfe von Prettier zu beheben, kann folgender Befehl ausgeführt werden.
+```
+$ npm run prettier:fix
+```
+
 #### E2E-Tests für Demo-Anwendung ausführen
 
 Für die Demo-Anwendung wurden exemplarisch einige E2E-Tests mit dem Framework [TestCafe](https://testcafe.io/) umgesetzt.
@@ -58,22 +68,28 @@ Die globalen Styles (isyfact-primeng-bootstrap-light.css) werden vom [PrimeNG-Th
 Als Basis-Theme wird _Bootstrap Light_ verwendet.
 Für das aktuelle Theme wurden folgende Einstellungen im PrimeNG-Theme-Designer verwenden:
 
-| Einstellungen        | Wert                          | 
-|----------------------|-------------------------------|
-| *General*            |                               |
-| Font Family          | BundesSans,Calibri,sans-serif |
-| Text                 | 73, 80, 87                    |
-| Secondary Text       | 73, 80, 87                    |
-| Border Radius        | 0px                           |
-| Disabled Opacity     | 0.75                          |
-| *Palette*            |                               |
-| Primary              | 69, 72, 77                    |
-| Primary Dark         | 137, 144, 154                 |
-| Primary Darker       | 137, 144, 154                 |
-| Highlight Background | 204, 227, 236                 |
-| Text on Highlight    | 73, 80, 87                    |
-| Hover Background     | 204, 227, 236                 |
-| *Forms*              |                               |
-| Focus Border         | 204, 227, 236                 |
-| *Buttons*            |                               |
-| Secondary Background | 69, 72, 77                    |
+| Einstellungen        | Wert                                    | 
+|----------------------|-----------------------------------------|
+| *General*            |                                         |
+| Font Family          | BundesSans,'Liberation Sans',sans-serif |
+| Text                 | 73, 80, 87                              |
+| Secondary Text       | 73, 80, 87                              |
+| Border Radius        | 0px                                     |
+| Disabled Opacity     | 0.75                                    |
+| *Palette*            |                                         |
+| Primary              | 69, 72, 77                              |
+| Primary Dark         | 137, 144, 154                           |
+| Primary Darker       | 137, 144, 154                           |
+| Highlight Background | 204, 227, 236                           |
+| Text on Highlight    | 73, 80, 87                              |
+| Hover Background     | 204, 227, 236                           |
+| *Forms*              |                                         |
+| Focus Border         | 204, 227, 236                           |
+| *Buttons*            |                                         |
+| Secondary Background | 69, 72, 77                              |
+
+## Erstellen von Releases
+
+Releases werden mithilfe einer GitHub Action erzeugt, welche immer dann ausgeführt wird, wenn ein Tag mit einer gültigen Versionsnummer nach Semver erstellt wird.
+Diese Versionsnummer wird dann automatisch in die package.json der gebauten Bibliothek ausgetauscht.
+Das bedeutet, die Versionsnummer muss nicht manuell in der package.json des Projekts gepflegt werden (Dort steht einfach 0.0.0).

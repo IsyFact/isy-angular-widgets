@@ -10,7 +10,6 @@ import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
   styleUrls: ['./input-char.component.scss']
 })
 export class InputCharComponent implements OnChanges {
-
   /**
    * The width of the dialog.
    */
@@ -83,8 +82,10 @@ export class InputCharComponent implements OnChanges {
    */
   allCharacters: Zeichenobjekt[] = [];
 
-  constructor(private charService: CharacterService, public configService: WidgetsConfigService) {
-  }
+  constructor(
+    private charService: CharacterService,
+    public configService: WidgetsConfigService
+  ) {}
 
   ngOnChanges(): void {
     this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);

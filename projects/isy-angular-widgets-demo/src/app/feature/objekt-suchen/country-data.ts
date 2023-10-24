@@ -3,7 +3,7 @@ import {CountryMap} from './model/country';
 /**
  * A key-value Map of countries.
  */
-export const countriesMap: CountryMap [] = [
+export const countriesMap: CountryMap[] = [
   {id: 1, name: 'Belgien'},
   {id: 2, name: 'Malta'},
   {id: 3, name: 'Bulgarien'},

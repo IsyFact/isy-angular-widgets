@@ -17,9 +17,10 @@ export class DashboardWidgetComponent implements OnInit {
 
   items: MenuItem[] = [];
 
-  constructor(public translate: TranslateService,
-    private menuTranslationService: MenuTranslationService) {
-  }
+  constructor(
+    public translate: TranslateService,
+    private menuTranslationService: MenuTranslationService
+  ) {}
 
   ngOnInit(): void {
     this.loadMenuItems(this.menuItems);
@@ -32,12 +33,12 @@ export class DashboardWidgetComponent implements OnInit {
   }
 
   loadMenuItems(items: MenuItem[]): void {
-    void this.menuTranslationService.translateMenuItems(items).then(items => {
+    void this.menuTranslationService.translateMenuItems(items).then((items) => {
       this.items = items;
     });
   }
 
-  changeLanguage(language: string):void {
+  changeLanguage(language: string): void {
     this.translate.use(language);
   }
 

@@ -26,15 +26,9 @@ export class DashboardComponent implements OnInit, AfterContentInit {
 
   chartInitData = initData;
 
-  chartData = [
-    barChartData,
-    lineChartData,
-    lineStyleChartData,
-    stackedChartData
-  ];
+  chartData = [barChartData, lineChartData, lineStyleChartData, stackedChartData];
 
-  constructor(public translate: TranslateService) {
-  }
+  constructor(public translate: TranslateService) {}
 
   ngAfterContentInit(): void {
     this.getChartLabels();
@@ -62,11 +56,11 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   }
 
   setupTranslatedLabels(labels: string[]): void {
-    this.chartData.map(chart => chart.labels = labels);
+    this.chartData.map((chart) => (chart.labels = labels));
   }
 
   refreshCharLabels(): void {
-    this.allCharts.map(currentChart => currentChart.chart.refresh());
+    this.allCharts.map((currentChart) => currentChart.chart.refresh());
   }
 
   changeLanguage(language: string): void {

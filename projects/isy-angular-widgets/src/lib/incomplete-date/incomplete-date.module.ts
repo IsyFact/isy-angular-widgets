@@ -5,17 +5,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {InputMaskModule} from 'primeng/inputmask';
 
 @NgModule({
-  declarations: [
-    IncompleteDateComponent
-  ],
-  imports: [
-    FormsModule,
-    InputTextModule,
-    InputMaskModule
-  ],
-  exports: [
-    IncompleteDateComponent
-  ]
+  declarations: [IncompleteDateComponent],
+  imports: [FormsModule, InputTextModule, InputMaskModule],
+  exports: [IncompleteDateComponent]
 })
-export class IncompleteDateModule {
-}
+export class IncompleteDateModule {}

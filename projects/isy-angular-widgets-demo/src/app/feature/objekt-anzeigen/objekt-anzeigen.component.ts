@@ -7,7 +7,7 @@ import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
 
 /*
-* This page implements a suggestion for the Object Bearbeiten workflow.
+ * This page implements a suggestion for the Object Bearbeiten workflow.
  */
 @Component({
   selector: 'demo-objekt-anzeigen',
@@ -45,7 +45,7 @@ export class ObjektAnzeigenComponent {
 
   constructor(
     public translate: TranslateService,
-    private  fb: FormBuilder,
+    private fb: FormBuilder,
     private messageService: MessageService
   ) {
     this.personalInfoForm = this.fb.group({
@@ -60,7 +60,10 @@ export class ObjektAnzeigenComponent {
       dateOfEntry: new FormControl(this.person.personalien.einreisedatum),
       idRequired: new FormControl(this.person.personalien.ausweispflichtig),
       securityLevel: new FormControl(this.person.personalien.sicherheitsstufe),
-      intelligenceNotes: new FormControl(this.person.personalien.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength))
+      intelligenceNotes: new FormControl(
+        this.person.personalien.geheimdienstnotizen,
+        Validators.maxLength(this.intelligenceNotesMaxLength)
+      )
     });
     this.personalInfoForm.disable();
   }

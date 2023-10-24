@@ -10,9 +10,7 @@ import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/securit
 import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
 import {MessageService} from 'primeng/api';
-import {
-  PersoenlicheInformationenComponent
-} from './components/persoenliche-informationen/persoenliche-informationen.component';
+import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
 import {ToastModule} from 'primeng/toast';
 import {Person} from '../../shared/model/person';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -24,8 +22,8 @@ import {Observable} from 'rxjs';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 
-describe('PersonenSuchenComponent', () => {
-  const germanCharsStr ='öäüÖÄÜß';
+describe('Integration Tests: PersonenSuchenComponent', () => {
+  const germanCharsStr = 'öäüÖÄÜß';
   const DOT = '.';
   const format = 'dd.mm.yyyy';
   const unconvertedDate = 'Wed Jan 01 1337 12:00:00 GMT+0053 (Mitteleuropäische Normalzeit)';
@@ -49,7 +47,7 @@ describe('PersonenSuchenComponent', () => {
    * @param form the form who must be checked
    */
   function expectFormControlsToBeReseted(form: FormGroup): void {
-    Object.keys(form.controls).forEach(key => {
+    Object.keys(form.controls).forEach((key) => {
       expect(form.controls[key].value).toBeNull();
       expect(form.controls[key].dirty).toBeTrue();
     });
@@ -69,9 +67,9 @@ describe('PersonenSuchenComponent', () => {
    * @param checkEmpty is checking if equals or not
    */
   function expectFormValuesAreEmpty(form: FormGroup, checkEmpty: boolean): void {
-    Object.keys(form.controls).forEach(key => {
+    Object.keys(form.controls).forEach((key) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      (checkEmpty) ? expect(form.get(key)?.value).toEqual('') : expect(form.get(key)?.value).not.toEqual('');
+      checkEmpty ? expect(form.get(key)?.value).toEqual('') : expect(form.get(key)?.value).not.toEqual('');
     });
   }
 
@@ -95,8 +93,8 @@ describe('PersonenSuchenComponent', () => {
    * @param array an array of persons
    * @param checkEmpty is checking if equals or not
    */
-  function expectArrayIsEmpty(array:  Observable<Person[]>, checkEmpty: boolean): void {
-    array.subscribe(personen => {
+  function expectArrayIsEmpty(array: Observable<Person[]>, checkEmpty: boolean): void {
+    array.subscribe((personen) => {
       if (checkEmpty) {
         expect(personen).toEqual([]);
         expect(personen.length).toEqual(0);
@@ -174,18 +172,14 @@ describe('PersonenSuchenComponent', () => {
    */
   function addNewEntryToPersonenList(): void {
     const person = getInitPerson();
-    component.personen$.subscribe(list => {
+    component.personen$.subscribe((list) => {
       list.unshift(person);
     });
   }
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ObjektSuchenComponent,
-        ResultListComponent,
-        PersoenlicheInformationenComponent
-      ],
+      declarations: [ObjektSuchenComponent, ResultListComponent, PersoenlicheInformationenComponent],
       imports: [
         RouterTestingModule,
         CalendarModule,
@@ -203,13 +197,8 @@ describe('PersonenSuchenComponent', () => {
         TranslateTestingModule.withTranslations({}),
         InputCharModule
       ],
-      providers: [
-        SecurityService,
-        MessageService,
-        DateService
-      ]
-    })
-      .compileComponents();
+      providers: [SecurityService, MessageService, DateService]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ObjektSuchenComponent);
     component = fixture.componentInstance;
@@ -257,7 +246,7 @@ describe('PersonenSuchenComponent', () => {
 
     component.getSavedStatus(true);
 
-    const toast = fixture.nativeElement.querySelector('#notificationToast') as HTMLElement;
+    const toast = fixture.nativeElement.querySelector('#notification-toast') as HTMLElement;
     const toastPosition = 'top-right';
     expect(toast.getAttribute('position')).toEqual(toastPosition);
   }));
@@ -280,7 +269,6 @@ describe('PersonenSuchenComponent', () => {
     expect(geschlecht?.errors).not.toBeNull();
     expectFormValuesAreEmpty(personalInfoForm, true);
 
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     const birthForm = component.allWizardForms[2];
     const geburtsname = personalInfoForm.get('geburtsname');
     expect(geburtsname?.errors).not.toBeNull();
@@ -439,7 +427,7 @@ describe('PersonenSuchenComponent', () => {
     component.openWizard = true;
     fixture.detectChanges();
 
-    const idLabel = fixture.nativeElement.querySelector('label#idLabel');
+    const idLabel = fixture.nativeElement.querySelector('label#id-label');
     expect(idLabel.textContent).toEqual('ID');
   });
 
@@ -467,25 +455,25 @@ describe('PersonenSuchenComponent', () => {
     expect(format.length).toEqual(expected.length);
   });
 
-  it('should check the opening of the wizard while adding a new person', ()=> {
+  it('should check the opening of the wizard while adding a new person', () => {
     expect(component.openWizard).toBeFalse();
     component.displayWizard();
     expect(component.openWizard).toBeTrue();
   });
 
-  it('should check the opening of the wizard while adding a new person - embedded call', ()=> {
+  it('should check the opening of the wizard while adding a new person - embedded call', () => {
     expect(component.openWizard).toBeFalse();
     component.openAddNewObjectDialog();
     expect(component.openWizard).toBeTrue();
   });
 
-  it('should check the opening of the dialog for editing a person', ()=> {
+  it('should check the opening of the dialog for editing a person', () => {
     expect(component.openWizard).toBeFalse();
     component.openAddNewObjectDialog();
     expect(component.openWizard).toBeTrue();
   });
 
-  it('should check the cleared search functionality', ()=> {
+  it('should check the cleared search functionality', () => {
     const person = getInitPerson();
     setupEditForm(person);
     component.clearSearch();
@@ -493,7 +481,7 @@ describe('PersonenSuchenComponent', () => {
     expectArrayIsEmpty(component.personen$, true);
   });
 
-  it('should check the addition of a new person', ()=> {
+  it('should check the addition of a new person', () => {
     setupFormValues();
     expect(component.openWizard).toBeTrue();
 
@@ -521,7 +509,7 @@ describe('PersonenSuchenComponent', () => {
     expectArrayIsEmpty(personenList, false);
   });
 
-  it('should check the edit of a person', ()=> {
+  it('should check the edit of a person', () => {
     expect(component.openWizard).toBeFalse();
     component.openAddNewObjectDialog();
     expect(component.openWizard).toBeTrue();
@@ -535,9 +523,9 @@ describe('PersonenSuchenComponent', () => {
     expect(component.editForm).not.toBeUndefined();
   });
 
-  it('should check saving of an existing edited person', ()=> {
+  it('should check saving of an existing edited person', () => {
     const person = getInitPerson();
-    component.personen$.subscribe(list => {
+    component.personen$.subscribe((list) => {
       list.unshift(person);
     });
 
@@ -548,19 +536,17 @@ describe('PersonenSuchenComponent', () => {
     expect(component.editForm).not.toBeUndefined();
     const newValue = 'edit';
     component.editForm.controls.editVorname.setValue(newValue);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     expect(component.selectedPerson!.personalien.vorname).not.toEqual(component.editForm.controls.editVorname.value);
     component.saveChanges();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     expect(component.selectedPerson!.personalien.vorname).toEqual(component.editForm.controls.editVorname.value);
 
     expect(component.openEditForm).toBeFalse();
     expect(component.allowSave).toBeFalse();
   });
 
-  it('should check if save button is active', ()=> {
+  it('should check if save button is active', () => {
     const person = getInitPerson();
-    component.personen$.subscribe(list => {
+    component.personen$.subscribe((list) => {
       list.unshift(person);
     });
 
@@ -575,7 +561,7 @@ describe('PersonenSuchenComponent', () => {
     expect(component.allowSave).toBeFalse();
   });
 
-  it('should check if save button is active', ()=> {
+  it('should check if save button is active', () => {
     let enableClearSearch = component.enableClearSearch();
     expect(enableClearSearch).toBeFalse();
     addNewEntryToPersonenList();

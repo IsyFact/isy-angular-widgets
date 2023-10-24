@@ -14,7 +14,6 @@ import {Injectable} from '@angular/core';
  */
 @Injectable()
 export class CorrelationIdHttpInterceptor implements HttpInterceptor {
-
   /**
    * Appends a random x-correlation-id as header to the given request
    * @param req The request to append to

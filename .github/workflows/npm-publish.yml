@@ -4,8 +4,12 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - '\d+.\d+.\d+'
+
+env:
+  RELEASE_VERSION: ${{ github.ref_name }}
 
 jobs:
   build:
@@ -23,10 +27,21 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+      - name: validate latest changelog entry
+        run: |
+          FIRST_CHANGELOG_LINE=$(head -n 1 CHANGELOG.md)
+          if [[ "$FIRST_CHANGELOG_LINE" =~ ^\#[[:space:]]${RELEASE_VERSION//./\\.}.* ]]; then
+            echo "First changelog entry describes current version $RELEASE_VERSION"
+          else
+            echo "First changelog entry does not describe current version $RELEASE_VERSION."
+            exit 1
+          fi
       - run: npm ci
-      - run: npm test
+      - run: npm run prettier:check
       - run: npm run lint
+      - run: npm test
       - run: npm run build
+      - run: npm run compodoc:build
       - name: Upload Build
         uses: actions/upload-artifact@v3
         with:
@@ -68,6 +83,14 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Build
+      - name: bump version in package.json
+        run: |
+          # jq can't replace file contents directly therefore a tmp file is needed
+          tmp_file=$(mktemp)
+
+          cp package.json "$tmp_file" \
+            && jq --arg version "$RELEASE_VERSION" '.version=$version' "$tmp_file" >package.json \
+            && rm -f "$tmp_file"
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}

@@ -11,17 +11,15 @@ import {WizardModule} from '../../../../../../../isy-angular-widgets/src/lib/wiz
 import {ActivatedRoute} from '@angular/router';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
-import { TranslateTestingModule } from 'ngx-translate-testing';
+import {TranslateTestingModule} from 'ngx-translate-testing';
 
-describe('ResultListComponent', () => {
+describe('Integration Tests: ResultListComponent', () => {
   let component: ResultListComponent;
   let fixture: ComponentFixture<ResultListComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ResultListComponent
-      ],
+      declarations: [ResultListComponent],
       imports: [
         TableModule,
         SecurityModule,
@@ -44,8 +42,7 @@ describe('ResultListComponent', () => {
           }
         }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -54,12 +51,11 @@ describe('ResultListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('creates', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('has no selection by default', () => {
+  it('should not be selected by default', () => {
     expect(component.selectedObject).toBeUndefined();
-
   });
 });

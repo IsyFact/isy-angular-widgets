@@ -1,52 +1,34 @@
 <div [formGroup]="form">
   <div class="grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label id="nachnameLabel" for="Nachname">
-        {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
+      <label id="nachname-label" for="Nachname">
+        {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
       </label>
     </div>
     <div class="col">
-      <input
-        id="Nachname"
-        type="text"
-        class="w-full"
-        pInputText
-        [formControlName]="'nachname'"
-      >
+      <input id="Nachname" type="text" class="w-full" pInputText [formControlName]="'nachname'" />
     </div>
   </div>
 
   <div class="grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label id="vornameLabel" class="align-content-end" for="Vorname">
-        {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
+      <label id="vorname-label" class="align-content-end" for="Vorname">
+        {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
       </label>
     </div>
     <div class="col">
-      <input
-        id="Vorname"
-        type="text"
-        class="w-full"
-        pInputText
-        [formControlName]="'vorname'"
-      >
+      <input id="Vorname" type="text" class="w-full" pInputText [formControlName]="'vorname'" />
     </div>
   </div>
 
   <div class="grid m-0">
     <div class="col-1 text-right align-self-center">
-      <label id="geschlechtLabel" class="align-content-end" for="Geschlecht">
-        {{('isyAngularWidgetsDemo.labels.geschlecht' | translate)}}
+      <label id="geschlecht-label" class="align-content-end" for="Geschlecht">
+        {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
       </label>
     </div>
     <div class="col">
-      <input
-        id="Geschlecht"
-        type="text"
-        class="w-full"
-        pInputText
-        [formControlName]="'geschlecht'"
-      >
+      <input id="Geschlecht" type="text" class="w-full" pInputText [formControlName]="'geschlecht'" />
     </div>
   </div>
 </div>

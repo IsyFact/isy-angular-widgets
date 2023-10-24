@@ -16,10 +16,10 @@ const headerTitle = 'Wizard Title';
 const childrenLabels = ['Auswahl 1', 'Auswahl 2', 'Auswahl 3'];
 const startIndex = 0;
 
-const backButtonDeclaration = '#backButton';
-const nextButtonDeclaration = '#nextButton';
-const saveButtonDeclaration = '#saveButton';
-const closeButtonDeclaration = '#closeButton';
+const backButtonDeclaration = '#back-button';
+const nextButtonDeclaration = '#next-button';
+const saveButtonDeclaration = '#save-button';
+const closeButtonDeclaration = '#close-button';
 
 const CLASS_FLEX = 'flex';
 const CLASS_ALIGN_CENTER = 'align-items-center';
@@ -28,20 +28,18 @@ const CLASS_MR_2 = 'mr-2';
 const CLASS_MR_4 = 'mr-4';
 
 @Component({
-  template:
-    `
-      <isy-wizard
-        #wizard
-        [width]="${width}"
-        [height]="${height}"
-        [headerTitle]="'${headerTitle}'"
-        [isVisible]="true"
-        [allowNext]="false"
-      >
-        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[0]}'"></isy-incomplete-date>
-        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[1]}'"></isy-incomplete-date>
-        <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
-      </isy-wizard>`
+  template: ` <isy-wizard
+    #wizard
+    [width]="${width}"
+    [height]="${height}"
+    [headerTitle]="'${headerTitle}'"
+    [isVisible]="true"
+    [allowNext]="false"
+  >
+    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[0]}'"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[1]}'"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
+  </isy-wizard>`
 })
 class TestComponent {
   @ViewChild('wizard') wizard!: WizardComponent;
@@ -51,17 +49,14 @@ let wizard: WizardComponent;
 let stepper: StepperComponent;
 let contentChildren: QueryList<WizardDirective>;
 
-describe('Test WizardComponent with Mock Parent', () => {
+describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let parentComponent: TestComponent;
   let parentFixture: ComponentFixture<TestComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        TestComponent
-      ]
-    })
-      .compileComponents();
+      declarations: [TestComponent]
+    }).compileComponents();
   });
 
   /**
@@ -213,14 +208,9 @@ describe('Test WizardComponent with Mock Parent', () => {
     closeButton.click();
   }
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        WizardComponent,
-        StepperComponent,
-        WizardDirective,
-        TestComponent
-      ],
+      declarations: [WizardComponent, StepperComponent, WizardDirective, TestComponent],
       imports: [
         BrowserAnimationsModule,
         RouterTestingModule,
@@ -229,8 +219,7 @@ describe('Test WizardComponent with Mock Parent', () => {
         ButtonModule,
         IncompleteDateModule
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -527,7 +516,7 @@ describe('Test WizardComponent with Mock Parent', () => {
     expect(stepper.index).toEqual(startIndex + 1);
   });
 
-  it('should have a stepper that  correctly moves forward (via the parent)', () => {
+  it('should have a stepper that correctly moves forward (via the parent)', () => {
     expectFirstStep();
     wizard.move(true);
     expect(stepper.index).toEqual(startIndex + 1);

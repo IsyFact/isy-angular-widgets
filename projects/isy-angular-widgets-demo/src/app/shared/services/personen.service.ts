@@ -2,12 +2,10 @@ import {Person} from '../model/person';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class PersonenService {
-
   private readonly maxEntries = 30;
 
   vorname: string[] = [
@@ -110,24 +108,26 @@ export class PersonenService {
   ];
 
   findPersonById(id: string): Observable<Person[]> {
-    return of<Person[]>([{
-      id: id,
-      personalien: {
-        nachname: 'Wilhelm',
-        vorname: 'Frederik',
-        geschlecht: 'x',
-        geburtsdatum: '01.01.1337',
-        geburtsort: 'England',
-        staatsangehoerigkeit: 'Französisch',
-        geburtsname: 'Franziska',
-        ausweispflichtig: true,
-        telefonnummer: '',
-        sicherheitsstufe: 0,
-        geheimdienstnotizen: '',
-        einreisedatum: 'XX-XX-XXXX'
-      },
-      sachverhalte: []
-    }]);
+    return of<Person[]>([
+      {
+        id: id,
+        personalien: {
+          nachname: 'Wilhelm',
+          vorname: 'Frederik',
+          geschlecht: 'x',
+          geburtsdatum: '01.01.1337',
+          geburtsort: 'England',
+          staatsangehoerigkeit: 'Französisch',
+          geburtsname: 'Franziska',
+          ausweispflichtig: true,
+          telefonnummer: '',
+          sicherheitsstufe: 0,
+          geheimdienstnotizen: '',
+          einreisedatum: 'XX-XX-XXXX'
+        },
+        sachverhalte: []
+      }
+    ]);
   }
 
   findPersonenByParameters(person: Person): Observable<Person[]> {
@@ -139,25 +139,27 @@ export class PersonenService {
       }
       return of<Person[]>(persons);
     }
-    for (let i = 0; i < this.maxEntries; i++)
-      persons.push(this.generatePerson());
+    for (let i = 0; i < this.maxEntries; i++) persons.push(this.generatePerson());
 
     return of<Person[]>(persons);
   }
 
   searchParametersAvailable(person: Person): boolean {
-    return person.personalien.nachname !== ''
-      || person.personalien.vorname !== ''
-      || person.personalien.geschlecht !== ''
-      || person.personalien.geburtsdatum !== ''
-      || person.personalien.geburtsort !== ''
-      || !(person.personalien.staatsangehoerigkeit === '' || person.personalien.staatsangehoerigkeit === null)
-      || person.personalien.geburtsname !== '';
+    return (
+      person.personalien.nachname !== '' ||
+      person.personalien.vorname !== '' ||
+      person.personalien.geschlecht !== '' ||
+      person.personalien.geburtsdatum !== '' ||
+      person.personalien.geburtsort !== '' ||
+      !(person.personalien.staatsangehoerigkeit === '' || person.personalien.staatsangehoerigkeit === null) ||
+      person.personalien.geburtsname !== ''
+    );
   }
 
   generatePerson(): Person {
     return {
-      id: this.rng().toString(), personalien: {
+      id: this.rng().toString(),
+      personalien: {
         nachname: this.nachname[this.rng()],
         vorname: this.vorname[this.rng()],
         geschlecht: 'x',
@@ -202,7 +204,6 @@ export class PersonenService {
 
   rng(): number {
     const crypto = window.crypto;
-    return (crypto.getRandomValues(new Uint32Array(1)))[0]%this.maxEntries;
+    return crypto.getRandomValues(new Uint32Array(1))[0] % this.maxEntries;
   }
 }
-

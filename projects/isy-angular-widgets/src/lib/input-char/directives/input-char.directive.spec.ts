@@ -4,17 +4,15 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CharacterService} from '../services/character.service';
 
 @Component({
-  template:
-    `<input
-        #charPicker
-        id="charPicker"
-        pInputText
-        isyInputChar
-        (change)="valueGet($event, charPicker.value)"
-    >`
+  template: `<input
+    #charPicker
+    id="char-picker"
+    pInputText
+    isyInputChar
+    (change)="valueGet($event, charPicker.value)"
+  />`
 })
 class TestComponent {
   datentyp: Datentyp = Datentyp.DATENTYP_A;
@@ -31,7 +29,7 @@ class TestComponent {
   }
 }
 
-describe('InputCharDirective', () => {
+describe('Integration Tests: InputCharDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let directiveElement: any;
@@ -39,13 +37,8 @@ describe('InputCharDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        TestComponent,
-        InputCharDirective
-      ],
-      imports: [
-        BrowserAnimationsModule
-      ]
+      declarations: [TestComponent, InputCharDirective],
+      imports: [BrowserAnimationsModule]
     });
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
@@ -64,7 +57,7 @@ describe('InputCharDirective', () => {
   });
 
   it('should set the input char button to disabled when the input is disabled', (done) => {
-    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
     const inputCharButton = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
@@ -81,7 +74,7 @@ describe('InputCharDirective', () => {
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
-    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
     const inputCharButton = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
@@ -107,11 +100,11 @@ describe('InputCharDirective', () => {
     expect(directive.selectionPosition).toEqual(1);
   });
 
-  it('should check the arrival of changed input value', () => {
+  it('should change the input value', () => {
     const newValue = 'abc';
     const valueOnChangeSpy = spyOn(component, 'valueGet');
 
-    const input = fixture.debugElement.query(By.css('#charPicker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     input.value = newValue;
 
     const changeEvent = new Event('change', {});
@@ -121,7 +114,7 @@ describe('InputCharDirective', () => {
     expect(valueOnChangeSpy).toHaveBeenCalledWith(changeEvent, newValue);
   });
 
-  it('should check the build of the current input value', () => {
+  it('should build the current input value', () => {
     const value = 'e';
     const zeichen = 'ç̆';
 

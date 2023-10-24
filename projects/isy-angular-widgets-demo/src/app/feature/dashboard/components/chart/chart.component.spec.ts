@@ -5,7 +5,7 @@ import {ChartModule} from 'primeng/chart';
 import {responsiveOptions} from '../../data/chart-configs';
 import {barChartData} from '../../data/chart-data';
 
-describe('ChartComponent', () => {
+describe('Integration Tests: ChartComponent', () => {
   let component: ChartComponent;
   let fixture: ComponentFixture<ChartComponent>;
 
@@ -13,16 +13,11 @@ describe('ChartComponent', () => {
   const data = barChartData;
   const options = responsiveOptions;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ChartComponent
-      ],
-      imports: [
-        ChartModule
-      ]
-    })
-      .compileComponents();
+      declarations: [ChartComponent],
+      imports: [ChartModule]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ChartComponent);
     component = fixture.componentInstance;

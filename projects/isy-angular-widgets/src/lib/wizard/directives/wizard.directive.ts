@@ -9,6 +9,5 @@ import {Directive, Input, TemplateRef} from '@angular/core';
 export class WizardDirective {
   @Input() isyWizardDirective: string = '';
 
-  constructor(public templateRef: TemplateRef<unknown>) {
-  }
+  constructor(public templateRef: TemplateRef<unknown>) {}
 }

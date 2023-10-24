@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { DateService } from './date.service';
+import {DateService} from './date.service';
 
-describe('DateService', () => {
+describe('Unit Tests: DateService', () => {
   const DOT = '.';
   const format = 'dd.mm.yyyy';
   const convertedDate = '01.01.1337';
@@ -15,19 +15,17 @@ describe('DateService', () => {
     service = TestBed.inject(DateService);
   });
 
-  it('should be created', () => {
+  it('should create', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should check the german date format', () => {
+  it('should be in german date format', () => {
     const expected = service.convertToGermanDateFormat(unconvertedDate);
     expect(convertedDate).toEqual(expected);
 
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     const firstDot = expected.substring(2, 3);
     expect(firstDot).toEqual(DOT);
 
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     const secondDot = expected.substring(5, 6);
     expect(secondDot).toEqual(DOT);
 

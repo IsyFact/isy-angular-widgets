@@ -12,24 +12,8 @@ import {InputCharDialogComponent} from './components/input-char-dialog/input-cha
 import {InputCharDirective} from './directives/input-char.directive';
 
 @NgModule({
-  declarations: [
-    InputCharComponent,
-    InputCharPreviewComponent,
-    InputCharDialogComponent,
-    InputCharDirective
-  ],
-  exports: [
-    InputCharComponent,
-    InputCharDirective
-  ],
-  imports: [
-    CommonModule,
-    InputTextModule,
-    ButtonModule,
-    FormsModule,
-    AccordionModule,
-    DialogModule,
-    SelectButtonModule
-  ]
+  declarations: [InputCharComponent, InputCharPreviewComponent, InputCharDialogComponent, InputCharDirective],
+  exports: [InputCharComponent, InputCharDirective],
+  imports: [CommonModule, InputTextModule, ButtonModule, FormsModule, AccordionModule, DialogModule, SelectButtonModule]
 })
-export class InputCharModule { }
+export class InputCharModule {}

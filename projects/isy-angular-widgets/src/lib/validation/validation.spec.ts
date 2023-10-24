@@ -7,11 +7,9 @@ import moment from 'moment';
 /**
  * Unit-Test der IsyValidators Klasse.
  */
-describe('Validation', () => {
+describe('Unit Test: Validation', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: []
-    });
+    TestBed.configureTestingModule({});
   });
 
   describe('unspecifiedDate', () => {
@@ -85,7 +83,7 @@ describe('Validation', () => {
       const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.00.2023');
       const errors = Validation.validUnspecifiedDate(control);
-      
+
       if (!errors) {
         throw new Error('errors is not defined');
       }
@@ -115,7 +113,7 @@ describe('Validation', () => {
       const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('xx.13.2023');
       const errors = Validation.validUnspecifiedDate(control);
-      
+
       if (!errors) {
         throw new Error('errors is not defined');
       }
@@ -127,7 +125,7 @@ describe('Validation', () => {
       const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.xx.2023');
       const errors = Validation.validUnspecifiedDate(control);
-      
+
       if (!errors) {
         throw new Error('errors is not defined');
       }
@@ -139,7 +137,7 @@ describe('Validation', () => {
       const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('xx.01.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
-      
+
       if (!errors) {
         throw new Error('errors is not defined');
       }
@@ -151,7 +149,7 @@ describe('Validation', () => {
       const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.xx.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
-      
+
       if (!errors) {
         throw new Error('errors is not defined');
       }
@@ -163,7 +161,7 @@ describe('Validation', () => {
       const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.01.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
-      
+
       if (!errors) {
         throw new Error('errors is not defined');
       }
@@ -182,11 +180,7 @@ describe('Validation', () => {
     });
 
     it('should return null if date is in the future', () => {
-      const control: AbstractControl = new FormControl(
-        moment()
-          .startOf('day')
-          .add(1, 'day')
-      );
+      const control: AbstractControl = new FormControl(moment().startOf('day').add(1, 'day'));
 
       const errors = Validation.isInFuture(control);
 
@@ -195,11 +189,7 @@ describe('Validation', () => {
 
     it('should return FUTURE if date is in the past', () => {
       const errorKey = 'FUTURE';
-      const control: AbstractControl = new FormControl(
-        moment()
-          .startOf('day')
-          .subtract(1, 'day')
-      );
+      const control: AbstractControl = new FormControl(moment().startOf('day').subtract(1, 'day'));
 
       const errors = Validation.isInFuture(control);
       if (!errors) {
@@ -220,11 +210,7 @@ describe('Validation', () => {
     });
 
     it('should return null if date is in the past', () => {
-      const control: AbstractControl = new FormControl(
-        moment()
-          .startOf('day')
-          .subtract(1, 'day')
-      );
+      const control: AbstractControl = new FormControl(moment().startOf('day').subtract(1, 'day'));
 
       const errors = Validation.isInPast(control);
 
@@ -233,11 +219,7 @@ describe('Validation', () => {
 
     it('should return PAST if date is in the future', () => {
       const errorKey = 'PAST';
-      const control: AbstractControl = new FormControl(
-        moment()
-          .startOf('day')
-          .add(1, 'day')
-      );
+      const control: AbstractControl = new FormControl(moment().startOf('day').add(1, 'day'));
 
       const errors = Validation.isInPast(control);
       if (!errors) {
@@ -288,18 +270,17 @@ describe('Validation', () => {
       expect(errors.DATE).toBeDefined();
     });
 
-    it('should return validation error, if input is not a valid date after not strict parsing',
-      () => {
-        const invalidDateControl: AbstractControl = new FormControl('abc');
-        const dateValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DD', false, 'YEAR');
+    it('should return validation error, if input is not a valid date after not strict parsing', () => {
+      const invalidDateControl: AbstractControl = new FormControl('abc');
+      const dateValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DD', false, 'YEAR');
 
-        const errors = dateValidatorFn(invalidDateControl);
+      const errors = dateValidatorFn(invalidDateControl);
 
-        if (!errors) {
-          throw new Error('errors is not defined');
-        }
-        expect(errors.YEAR).toBeDefined();
-      });
+      if (!errors) {
+        throw new Error('errors is not defined');
+      }
+      expect(errors.YEAR).toBeDefined();
+    });
   });
 
   describe('isoDate', () => {

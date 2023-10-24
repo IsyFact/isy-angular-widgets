@@ -1,4 +1,3 @@
-
 /**
  * @internal
  */
@@ -40,9 +39,9 @@ export interface SchriftZeichen {
  * @internal
  */
 export interface Zeichenobjekt {
-  readonly zeichen: string,
-  readonly grundzeichen: string,
-  readonly schriftzeichengruppe: Schriftzeichengruppe,
-  readonly name: string,
-  readonly codepoint: string
+  readonly zeichen: string;
+  readonly grundzeichen: string;
+  readonly schriftzeichengruppe: Schriftzeichengruppe;
+  readonly name: string;
+  readonly codepoint: string;
 }

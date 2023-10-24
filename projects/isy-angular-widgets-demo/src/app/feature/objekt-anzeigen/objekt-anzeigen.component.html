@@ -1,12 +1,12 @@
 <p-panel
   iconPos="start"
-  [header]="('isyAngularWidgetsDemo.displayObject.masterDataHeader' | translate)"
+  [header]="'isyAngularWidgetsDemo.displayObject.masterDataHeader' | translate"
   [toggleable]="true"
 >
   <div class="grid m-0">
     <div class="col-1 text-right align-self-center">
       <label for="basis-nachname">
-        {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
+        {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
       </label>
     </div>
     <div class="col">
@@ -17,11 +17,11 @@
         pInputText
         disabled
         [(ngModel)]="person.personalien.nachname"
-      >
+      />
     </div>
     <div class="col-1 text-right align-self-center">
       <label for="basis-vorname">
-        {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
+        {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
       </label>
     </div>
     <div class="col">
@@ -30,12 +30,13 @@
         class="w-full"
         type="text"
         pInputText
-        disabled [(ngModel)]="person.personalien.vorname"
-      >
+        disabled
+        [(ngModel)]="person.personalien.vorname"
+      />
     </div>
     <div class="col-1 text-right align-self-center">
       <label for="basis-geburtsdatum">
-        {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
+        {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
       </label>
     </div>
     <div class="col">
@@ -46,90 +47,66 @@
         pInputText
         disabled
         [(ngModel)]="person.personalien.geburtsdatum"
-      >
+      />
     </div>
   </div>
 </p-panel>
 
-<p-tabView id="tabview">
-  <p-tabPanel
-    id="panelPersonalien"
-    [header]="('isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate)"
-  >
+<p-tabView id="tab-view">
+  <p-tabPanel id="panel-personalien" [header]="'isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate">
     <form [formGroup]="personalInfoForm">
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label for="lastName">
-            {{('isyAngularWidgetsDemo.labels.nachname' | translate)}}
+          <label for="last-name">
+            {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
           </label>
         </div>
         <div class="col">
-          <input
-            id="lastName"
-            formControlName="lastName"
-            type="text"
-            pInputText
-            isyInputChar
-          >
-          <small
-            class="p-error block"
-            *ngIf="personalInfoForm.controls['lastName'].invalid"
-          >
-            {{('isyAngularWidgetsDemo.messages.requiredMessage' | translate)}}
+          <input id="last-name" formControlName="lastName" type="text" pInputText isyInputChar />
+          <small class="p-error block" *ngIf="personalInfoForm.controls['lastName'].invalid">
+            {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
           </small>
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="birthName">
-            {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
+          <label class="align-content-end" for="birth-name">
+            {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
           </label>
         </div>
         <div class="col">
-          <input id="birthName"
-                 formControlName="birthName"
-                 type="text"
-                 pInputText
-                 isyInputChar
-          >
+          <input id="birth-name" formControlName="birthName" type="text" pInputText isyInputChar />
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="birthplace">
-            {{('isyAngularWidgetsDemo.labels.geburtsname' | translate)}}
+          <label class="align-content-end" for="birth-place">
+            {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
           </label>
         </div>
         <div class="col">
-          <input
-            id="birthplace"
-            formControlName="birthplace"
-            class="w-full"
-            type="text"
-            pInputText
-          >
+          <input id="birth-place" formControlName="birthplace" class="w-full" type="text" pInputText />
         </div>
       </div>
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label for="firstName">
-            {{('isyAngularWidgetsDemo.labels.vorname' | translate)}}
+          <label for="first-name">
+            {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
           </label>
         </div>
         <div class="col">
-          <input id="firstName"
-                 formControlName="firstName"
-                 class="w-full"
-                 required minlength="2"
-                 type="text"
-                 pInputText
-          >
-          <small
-            class="p-error block"
-            *ngIf="personalInfoForm.controls['firstName'].invalid"
-          >
-            {{('isyAngularWidgetsDemo.messages.requiredMessage' | translate)}}
+          <input
+            id="first-name"
+            formControlName="firstName"
+            class="w-full"
+            required
+            minlength="2"
+            type="text"
+            pInputText
+          />
+          <small class="p-error block" *ngIf="personalInfoForm.controls['firstName'].invalid">
+            {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
           </small>
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="gender">
-            {{('isyAngularWidgetsDemo.labels.geschlecht' | translate)}}
+            {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
           </label>
         </div>
         <div class="col">
@@ -141,15 +118,15 @@
             [optionLabel]="'name'"
             [optionValue]="'name'"
             [options]="[
-            {name: ('isyAngularWidgetsDemo.labels.optionMale' | translate)},
-            {name: ('isyAngularWidgetsDemo.labels.optionFemale' | translate)},
-            {name: ('isyAngularWidgetsDemo.labels.optionDivers' | translate)}
-          ]"
+              {name: ('isyAngularWidgetsDemo.labels.optionMale' | translate)},
+              {name: ('isyAngularWidgetsDemo.labels.optionFemale' | translate)},
+              {name: ('isyAngularWidgetsDemo.labels.optionDivers' | translate)}
+            ]"
           ></p-dropdown>
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="birthDate">
-            {{('isyAngularWidgetsDemo.labels.geburtsdatum' | translate)}}
+          <label class="align-content-end" for="birth-date">
+            {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
           </label>
         </div>
         <div class="col">
@@ -165,20 +142,15 @@
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
           <label for="nationality">
-            {{('isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate)}}
+            {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
           </label>
         </div>
         <div class="col">
-          <input
-            id="nationality"
-            formControlName="nationality"
-            class="w-full"
-            type="text" pInputText
-          >
+          <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="phoneNumber">
-            {{('isyAngularWidgetsDemo.labels.telefonnummer' | translate)}}
+          <label class="align-content-end" for="phone-number">
+            {{ 'isyAngularWidgetsDemo.labels.telefonnummer' | translate }}
           </label>
         </div>
         <div class="col">
@@ -191,8 +163,8 @@
           </p-inputMask>
         </div>
         <div class="col-1 text-right align-self-center">
-          <label class="align-content-end" for="dateOfEntry">
-            {{('isyAngularWidgetsDemo.labels.einreisedatum' | translate)}}
+          <label class="align-content-end" for="date-of-entry">
+            {{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}
           </label>
         </div>
         <div class="col">
@@ -202,11 +174,8 @@
             [dateInPastConstraint]="true"
           >
           </isy-incomplete-date>
-          <small
-            class="p-error block"
-            *ngIf="personalInfoForm.controls['dateOfEntry'].invalid"
-          >
-            {{('isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate)}}
+          <small class="p-error block" *ngIf="personalInfoForm.controls['dateOfEntry'].invalid">
+            {{ 'isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate }}
           </small>
         </div>
       </div>
@@ -217,141 +186,120 @@
               inputId="showSecretFields"
               (onChange)="showSecretFields = $event.checked"
             ></p-inputSwitch>
-            <label for="showSecretFields">
-              {{('isyAngularWidgetsDemo.actions.showSecretFields' | translate)}}
+            <label for="show-secret-fields">
+              {{ 'isyAngularWidgetsDemo.actions.showSecretFields' | translate }}
             </label>
           </div>
         </div>
       </div>
-      <div id="divShowSecretFields" *ngIf="showSecretFields">
+      <div id="div-show-secret-fields" *ngIf="showSecretFields">
         <div class="grid m-0">
           <div class="col-1 text-right align-self-center">
-            <label for="idRequired">
-              {{('isyAngularWidgetsDemo.labels.ausweispflichtig' | translate)}}
+            <label for="id-required">
+              {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
             </label>
           </div>
           <div class="col-1">
-            <p-checkbox
-              id="idRequired"
-              formControlName="idRequired"
-              [binary]="true"
-            >
-            </p-checkbox>
+            <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
           </div>
           <div class="col-1 text-right align-self-center">
-            <label class="align-content-end" for="securityLevel">
-              {{('isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate)}}
+            <label class="align-content-end" for="security-level">
+              {{ 'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate }}
             </label>
           </div>
           <div class="col-5">
-            <p-inputNumber
-              id="securityLevel"
-              formControlName="securityLevel"
-              [showButtons]="true"
-              [min]="0" [max]="9"
-            >
+            <p-inputNumber id="security-level" formControlName="securityLevel" [showButtons]="true" [min]="0" [max]="9">
             </p-inputNumber>
           </div>
-          <div class="col-6">
-          </div>
+          <div class="col-6"></div>
         </div>
         <div class="grid m-0">
           <div class="col-1 text-right align-self-center">
-            <label for="intelligenceNotes">
-              {{('isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate)}}
+            <label for="intelligence-notes">
+              {{ 'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate }}
             </label>
           </div>
           <div class="col-5">
-          <textarea pInputTextarea
-                    formControlName="intelligenceNotes"
-                    id="intelligenceNotes"
-                    class="w-full"
-                    [rows]="5"
-          >
-          </textarea>
-          <small
-            class="p-error block"
-            *ngIf="personalInfoForm.controls['intelligenceNotes'].invalid"
-          >
-            {{('isyAngularWidgetsDemo.messages.maxLengthError' | translate: {numChars: intelligenceNotesMaxLength})}}
-          </small>
+            <textarea
+              pInputTextarea
+              id="intelligence-notes"
+              formControlName="intelligenceNotes"
+              class="w-full"
+              [rows]="5"
+            >
+            </textarea>
+            <small class="p-error block" *ngIf="personalInfoForm.controls['intelligenceNotes'].invalid">
+              {{ 'isyAngularWidgetsDemo.messages.maxLengthError' | translate: {numChars: intelligenceNotesMaxLength} }}
+            </small>
           </div>
-          <div class="col-6">
-          </div>
+          <div class="col-6"></div>
         </div>
       </div>
     </form>
 
     <div class="justify-content-center flex mt-3">
-      <button pButton
-              *ngIf="personalInfoForm.disabled"
-              id="buttonEdit"
-              icon="pi pi-user-edit"
-              iconPos="left"
-              [label]="('isyAngularWidgetsDemo.actions.edit' | translate)"
-              (click)="personalInfoForm.enable()"
-      >
-      </button>
-      <div id="divSaveCancel" *ngIf="!personalInfoForm.disabled" class="p-buttonset">
-        <button pButton
-                id="buttonSave"
-                icon="pi pi-save"
-                iconPos="left"
-                [disabled]="!personalInfoForm.valid"
-                [label]="('isyAngularWidgetsDemo.actions.save' | translate)"
-                (click)="savePersonalien()"
-        >
-        </button>
-        <button pButton
-                id="buttonCancel"
-                icon="pi pi-times"
-                class="p-button-outlined"
-                iconPos="left"
-                [label]="('isyAngularWidgetsDemo.actions.cancel' | translate)"
-                (click)="this.personalInfoForm.disable();"
-        >
-        </button>
+      <button
+        pButton
+        *ngIf="personalInfoForm.disabled"
+        id="button-edit"
+        icon="pi pi-user-edit"
+        iconPos="left"
+        [label]="'isyAngularWidgetsDemo.actions.edit' | translate"
+        (click)="personalInfoForm.enable()"
+      ></button>
+      <div id="div-save-cancel" *ngIf="!personalInfoForm.disabled" class="p-buttonset">
+        <button
+          pButton
+          id="button-save"
+          icon="pi pi-save"
+          iconPos="left"
+          [disabled]="!personalInfoForm.valid"
+          [label]="'isyAngularWidgetsDemo.actions.save' | translate"
+          (click)="savePersonalien()"
+        ></button>
+        <button
+          pButton
+          id="button-cancel"
+          icon="pi pi-times"
+          class="p-button-outlined"
+          iconPos="left"
+          [label]="'isyAngularWidgetsDemo.actions.cancel' | translate"
+          (click)="this.personalInfoForm.disable()"
+        ></button>
       </div>
     </div>
-
   </p-tabPanel>
 
-  <p-tabPanel
-    id="panelSachverhalte"
-    [header]="('isyAngularWidgetsDemo.displayObject.tabFacts' | translate)"
-  >
+  <p-tabPanel id="panel-sachverhalte" [header]="'isyAngularWidgetsDemo.displayObject.tabFacts' | translate">
     <p-table [value]="person.sachverhalte" responsiveLayout="scroll">
       <ng-template pTemplate="caption">
         <p-button
           icon="pi pi-pencil"
           iconPos="left"
-          [label]="('isyAngularWidgetsDemo.actions.addOrEditFact' | translate)"
+          [label]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
         >
         </p-button>
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
           <th scope="col">
-            {{('isyAngularWidgetsDemo.labels.sachverhalte' | translate)}}
+            {{ 'isyAngularWidgetsDemo.labels.sachverhalte' | translate }}
           </th>
           <th scope="col">
-            {{('isyAngularWidgetsDemo.labels.state' | translate)}}
+            {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
           </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-sachverhalt>
         <tr>
-          <td>{{sachverhalt}}</td>
+          <td>{{ sachverhalt }}</td>
           <td>
-            {{('isyAngularWidgetsDemo.labels.solved' | translate)}}
+            {{ 'isyAngularWidgetsDemo.labels.solved' | translate }}
           </td>
         </tr>
       </ng-template>
     </p-table>
-    <demo-dialog-sachverhalte-bearbeiten
-      [person]="person"
-    >
-    </demo-dialog-sachverhalte-bearbeiten>
+    <demo-dialog-sachverhalte-bearbeiten [person]="person"> </demo-dialog-sachverhalte-bearbeiten>
   </p-tabPanel>
 </p-tabView>
 <p-toast></p-toast>

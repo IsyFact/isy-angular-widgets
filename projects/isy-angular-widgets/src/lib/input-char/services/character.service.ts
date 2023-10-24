@@ -8,27 +8,19 @@ import {Datentyp} from '../model/datentyp';
  */
 @Injectable({providedIn: 'root'})
 export class CharacterService {
-
   getCharacters(): Zeichenobjekt[] {
     return sonderzeichenliste as Zeichenobjekt[];
   }
   getCharactersByDataType(datentyp: Datentyp): Zeichenobjekt[] {
     const allowedGroups = this.getGroupsByDataType(datentyp);
-    return this.getCharacters().filter(z => allowedGroups.includes(z.schriftzeichengruppe));
+    return this.getCharacters().filter((z) => allowedGroups.includes(z.schriftzeichengruppe));
   }
   getGroupsByDataType(dataTyp: Datentyp): Schriftzeichengruppe[] {
     switch (dataTyp) {
       case Datentyp.DATENTYP_A:
-        return [
-          Schriftzeichengruppe.LATEIN,
-          Schriftzeichengruppe.N1
-        ];
+        return [Schriftzeichengruppe.LATEIN, Schriftzeichengruppe.N1];
       case Datentyp.DATENTYP_B:
-        return [
-          Schriftzeichengruppe.LATEIN,
-          Schriftzeichengruppe.N1,
-          Schriftzeichengruppe.N2
-        ];
+        return [Schriftzeichengruppe.LATEIN, Schriftzeichengruppe.N1, Schriftzeichengruppe.N2];
       case Datentyp.DATENTYP_C:
         return [
           Schriftzeichengruppe.LATEIN,

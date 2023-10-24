@@ -4,13 +4,11 @@ import {CharacterService} from './character.service';
 import {Schriftzeichengruppe} from '../model/model';
 import {Datentyp} from '../model/datentyp';
 
-describe('CharacterService', () => {
+describe('Unit Tests: CharacterService', () => {
   let service: CharacterService;
 
-
   beforeEach(() => {
-    TestBed.configureTestingModule({
-    });
+    TestBed.configureTestingModule({});
     service = TestBed.inject(CharacterService);
   });
 
@@ -35,7 +33,9 @@ describe('CharacterService', () => {
   ]);
   groupCounts.forEach((expectedCount, schriftzeichengruppe) => {
     it(`should return ${expectedCount} characters with Schriftzeichengruppe ${schriftzeichengruppe}`, () => {
-      expect(service.getCharacters().filter(character => character.schriftzeichengruppe === schriftzeichengruppe).length).toEqual(expectedCount);
+      expect(
+        service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
+      ).toEqual(expectedCount);
     });
   });
 
@@ -70,7 +70,9 @@ describe('CharacterService', () => {
   ]);
   baseCounts.forEach((expectedCount, base) => {
     it(`should return ${expectedCount} characters with Grundzeichen ${base}`, () => {
-      expect(service.getCharacters().filter(character => character.grundzeichen === base).length).toEqual(expectedCount);
+      expect(service.getCharacters().filter((character) => character.grundzeichen === base).length).toEqual(
+        expectedCount
+      );
     });
   });
 
@@ -78,19 +80,14 @@ describe('CharacterService', () => {
     {
       datentyp: Datentyp.DATENTYP_A,
       characters: 667,
-      expectedSchriftzeichengruppen: [
-        Schriftzeichengruppe.LATEIN,
-        Schriftzeichengruppe.N1
-      ]
-    },    {
+      expectedSchriftzeichengruppen: [Schriftzeichengruppe.LATEIN, Schriftzeichengruppe.N1]
+    },
+    {
       datentyp: Datentyp.DATENTYP_B,
       characters: 727,
-      expectedSchriftzeichengruppen: [
-        Schriftzeichengruppe.LATEIN,
-        Schriftzeichengruppe.N1,
-        Schriftzeichengruppe.N2
-      ]
-    },    {
+      expectedSchriftzeichengruppen: [Schriftzeichengruppe.LATEIN, Schriftzeichengruppe.N1, Schriftzeichengruppe.N2]
+    },
+    {
       datentyp: Datentyp.DATENTYP_C,
       characters: 734,
       expectedSchriftzeichengruppen: [
@@ -100,7 +97,8 @@ describe('CharacterService', () => {
         Schriftzeichengruppe.N3,
         Schriftzeichengruppe.N4
       ]
-    },    {
+    },
+    {
       datentyp: Datentyp.DATENTYP_D,
       characters: 845,
       expectedSchriftzeichengruppen: [
@@ -111,7 +109,8 @@ describe('CharacterService', () => {
         Schriftzeichengruppe.E1,
         Schriftzeichengruppe.GRIECHISCH
       ]
-    },    {
+    },
+    {
       datentyp: Datentyp.DATENTYP_E,
       characters: 908,
       expectedSchriftzeichengruppen: [
@@ -126,7 +125,7 @@ describe('CharacterService', () => {
       ]
     }
   ];
-  datenTypTestDataSet.forEach(testData =>  {
+  datenTypTestDataSet.forEach((testData) => {
     describe(`with ${testData.datentyp}`, () => {
       const datentyp = testData.datentyp;
       const numberOfSchriftzeichenGruppen = testData.expectedSchriftzeichengruppen.length;
@@ -140,7 +139,7 @@ describe('CharacterService', () => {
         expect(service.getCharactersByDataType(datentyp).length).toEqual(numberOfCharacters);
       });
 
-      testData.expectedSchriftzeichengruppen.forEach(expectedSchriftzeichengruppe => {
+      testData.expectedSchriftzeichengruppen.forEach((expectedSchriftzeichengruppe) => {
         it(`should contain ${expectedSchriftzeichengruppe}`, () => {
           for (const expectedSchriftzeichengruppe of testData.expectedSchriftzeichengruppen) {
             expect(service.getGroupsByDataType(datentyp)).toContain(expectedSchriftzeichengruppe);
@@ -158,9 +157,9 @@ describe('CharacterService', () => {
   });
 
   const DIN_91379_CHARS = ['ḗ', 'ē̍', 'ō̍', '̍', '′', '″'];
-  DIN_91379_CHARS.forEach(character => {
-    it(`should contain DIN 91379 special character ${character}`, ()=> {
-      const filteredResult = service.getCharacters().find(item => item.zeichen === character);
+  DIN_91379_CHARS.forEach((character) => {
+    it(`should contain DIN 91379 special character ${character}`, () => {
+      const filteredResult = service.getCharacters().find((item) => item.zeichen === character);
       expect(filteredResult).toBeTruthy();
     });
   });

@@ -8,22 +8,16 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 
-
 describe('Unit Tests: InputCharComponent', () => {
   describe('with default datentyp', () => {
     let component: InputCharComponent;
     let fixture: ComponentFixture<InputCharComponent>;
 
-    beforeEach(async() => {
+    beforeEach(async () => {
       await TestBed.configureTestingModule({
-        declarations: [
-          InputCharComponent
-        ],
-        schemas: [
-          NO_ERRORS_SCHEMA
-        ]
-      })
-        .compileComponents();
+        declarations: [InputCharComponent],
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
 
       fixture = TestBed.createComponent(InputCharComponent);
       component = fixture.componentInstance;
@@ -40,8 +34,7 @@ describe('Unit Tests: InputCharComponent', () => {
     });
   });
 
-  Object.keys(Datentyp).forEach(datentyp => {
-
+  Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       let component: InputCharComponent;
       let fixture: ComponentFixture<InputCharComponent>;
@@ -49,16 +42,11 @@ describe('Unit Tests: InputCharComponent', () => {
       const dialogDefaultWidth = '775px';
       const dialogDefaultHeight = '460px';
 
-      beforeEach(async() => {
+      beforeEach(async () => {
         await TestBed.configureTestingModule({
-          declarations: [
-            InputCharComponent
-          ],
-          schemas: [
-            NO_ERRORS_SCHEMA
-          ]
-        })
-          .compileComponents();
+          declarations: [InputCharComponent],
+          schemas: [NO_ERRORS_SCHEMA]
+        }).compileComponents();
 
         fixture = TestBed.createComponent(InputCharComponent);
         component = fixture.componentInstance;
@@ -83,12 +71,15 @@ describe('Unit Tests: InputCharComponent', () => {
         expect(component.visible).toBeFalse();
       });
 
-      it('should check the input char button availability', () => {
+      it('should display the input char button', () => {
         const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
         component.isInputDisabled = true;
         fixture.detectChanges();
         expect(button.disabled).toBeTruthy();
+      });
 
+      it('should not display the input char button', () => {
+        const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
         component.isInputDisabled = false;
         fixture.detectChanges();
         expect(button.disabled).toBeFalsy();
@@ -129,30 +120,21 @@ describe('Unit Tests: InputCharComponent', () => {
         expect(component.height).toEqual(dialogDefaultHeight);
       });
     });
-
   });
 });
 
 describe('Integration Test: InputCharComponent', () => {
-
-  Object.keys(Datentyp).forEach(datentyp => {
-
+  Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       let component: InputCharComponent;
       let fixture: ComponentFixture<InputCharComponent>;
       const service = new CharacterService();
 
-      beforeEach(async() => {
-
+      beforeEach(async () => {
         await TestBed.configureTestingModule({
-          declarations: [
-            InputCharComponent
-          ],
-          imports: [
-            InputCharModule, BrowserAnimationsModule
-          ]
-        })
-          .compileComponents();
+          declarations: [InputCharComponent],
+          imports: [InputCharModule, BrowserAnimationsModule]
+        }).compileComponents();
 
         fixture = TestBed.createComponent(InputCharComponent);
         component = fixture.componentInstance;
@@ -167,13 +149,17 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button'));
+        const groupButtons = fixture.debugElement.queryAll(
+          By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button')
+        );
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = fixture.debugElement.queryAll(By.css('#right-panel-side p-selectbutton .p-buttonset .p-button'));
+        const groupButtons = fixture.debugElement.queryAll(
+          By.css('#right-panel-side p-selectbutton .p-buttonset .p-button')
+        );
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
     });
