@@ -190,7 +190,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   onBlur(): void {
     this.inputValue = this.incompleteDateService.transformValue(this.inputValue, this.dateInPastConstraint);
-    const input = this.field?.inputViewChild.nativeElement as HTMLInputElement;
+    const input = this.field?.inputViewChild!.nativeElement as HTMLInputElement;
     input.value = this.inputValue;
 
     if (this.inputValue.includes('_')) input.value = '';
