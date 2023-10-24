@@ -53,7 +53,7 @@ jobs:
       - run: npm run compodoc:build
       - run: |
           # Stage the file, commit and push
-          git ls-files --modified
+          git checkout gh-pages
           git add ./docs
           git commit -m "docs: Added documentation"
-          git push origin gh-pages
+          git push
