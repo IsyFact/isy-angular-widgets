@@ -68,7 +68,7 @@ jobs:
         run: |
           npm run compodoc:build
           npm run build
-          cp ./dist/isy-angular-widgets-demo ./docs/demo
+          cp -r ./dist/isy-angular-widgets-demo ./docs/demo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
