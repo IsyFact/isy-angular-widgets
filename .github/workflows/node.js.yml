@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main", "feature/ISY-451_Compodoc" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
