@@ -1,6 +1,6 @@
 import {AfterContentInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 
-import {barChartData, lineStyleChartData, lineChartData, stackedChartData} from './data/chart-data';
+import {barChartData, lineChartData, lineStyleChartData, stackedChartData} from './data/chart-data';
 import {widgetBackgroundColors} from './data/menu-colors';
 import {widgetMenuItems} from './data/menus';
 import {initData} from './data/chart-init';

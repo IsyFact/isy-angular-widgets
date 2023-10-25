@@ -58,7 +58,12 @@
       }}</label>
     </div>
     <div class="col">
-      <p-calendar id="birth-date" dateFormat="dd.mm.yy" [(ngModel)]="person.personalien.geburtsdatum" [showIcon]="true">
+      <p-calendar
+        inputId="birth-date"
+        dateFormat="dd.mm.yy"
+        [(ngModel)]="person.personalien.geburtsdatum"
+        [showIcon]="true"
+      >
       </p-calendar>
     </div>
   </div>

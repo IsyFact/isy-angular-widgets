@@ -24,6 +24,9 @@
         "collapseInformationsbereich": "Informationsbereich ausblenden",
         "expandInformationsbereich": "Informationsbereich einblenden"
       }
+    },
+    "p-calendar": {
+      "iconAriaLabel": "Datepicker öffnen/schließen"
     }
   },
   "isyAngularWidgetsDemo": {
@@ -134,6 +137,7 @@
     },
     "settings": {
       "header": "Einstellungen Demo App",
+      "role": "Rolle",
       "languages": {
         "label": "Sprache",
         "de": "Deutsch",
