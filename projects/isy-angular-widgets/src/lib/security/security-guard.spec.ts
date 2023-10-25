@@ -3,9 +3,9 @@ import {SecurityService} from './security-service';
 import {ActivatedRoute} from '@angular/router';
 import {AuthGuard} from './security-guard';
 import {of} from 'rxjs';
-import SpyObj = jasmine.SpyObj;
 import {PermissionMaps} from './permission-maps';
 import {UserInfo} from '../api/userinfo';
+import SpyObj = jasmine.SpyObj;
 
 let guard: AuthGuard;
 let activatedRoute: ActivatedRoute;
