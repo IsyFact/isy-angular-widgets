@@ -10,7 +10,9 @@ import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/securit
 import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
 import {MessageService} from 'primeng/api';
-import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
+import {
+  PersoenlicheInformationenComponent
+} from './components/persoenliche-informationen/persoenliche-informationen.component';
 import {ToastModule} from 'primeng/toast';
 import {Person} from '../../shared/model/person';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';

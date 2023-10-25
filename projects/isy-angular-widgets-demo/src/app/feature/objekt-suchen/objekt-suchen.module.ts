@@ -1,7 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
-import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
+import {
+  PersoenlicheInformationenComponent
+} from './components/persoenliche-informationen/persoenliche-informationen.component';
 import {ResultListComponent} from './components/result-list/result-list.component';
 import {DateService} from './services/date.service';
 import {CalendarModule} from 'primeng/calendar';

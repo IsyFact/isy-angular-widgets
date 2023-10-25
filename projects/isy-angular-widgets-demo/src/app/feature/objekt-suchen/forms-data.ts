@@ -1,5 +1,5 @@
 import {FormControl, FormGroup} from '@angular/forms';
-import {charsAndNumbers, onlyChars, required, onlyNumbers} from '../../shared/validation/validator';
+import {charsAndNumbers, onlyChars, onlyNumbers, required} from '../../shared/validation/validator';
 import {Person} from '../../shared/model/person';
 
 /**

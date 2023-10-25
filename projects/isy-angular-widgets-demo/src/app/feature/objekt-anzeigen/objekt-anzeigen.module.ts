@@ -1,7 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
-import {DialogSachverhalteBearbeitenComponent} from './components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component';
+import {
+  DialogSachverhalteBearbeitenComponent
+} from './components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component';
 import {PanelModule} from 'primeng/panel';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';

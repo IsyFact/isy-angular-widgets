@@ -130,12 +130,7 @@
           </label>
         </div>
         <div class="col">
-          <p-calendar
-            inputId="birth-date"
-            dateFormat="dd.mm.yy"
-            formControlName="birthDate"
-            [showIcon]="true"
-          >
+          <p-calendar inputId="birth-date" dateFormat="dd.mm.yy" formControlName="birthDate" [showIcon]="true">
           </p-calendar>
         </div>
       </div>
@@ -158,7 +153,8 @@
             inputId="phone-number"
             formControlName="phoneNumber"
             type="text"
-            [style]="" mask="+99 9999 / 9999999"
+            [style]=""
+            mask="+99 9999 / 9999999"
           >
           </p-inputMask>
         </div>
@@ -168,11 +164,7 @@
           </label>
         </div>
         <div class="col">
-          <isy-incomplete-date
-            inputId="date-of-entry"
-            formControlName="dateOfEntry"
-            [dateInPastConstraint]="true"
-          >
+          <isy-incomplete-date inputId="date-of-entry" formControlName="dateOfEntry" [dateInPastConstraint]="true">
           </isy-incomplete-date>
           <small class="p-error block" *ngIf="personalInfoForm.controls['dateOfEntry'].invalid">
             {{ 'isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate }}
@@ -182,10 +174,7 @@
       <div class="grid m-0 mt-5" *isyPermitted="'secretFieldsInputSwitch'">
         <div class="col">
           <div class="field field-checkbox">
-            <p-inputSwitch
-              inputId="show-secret-fields"
-              (onChange)="showSecretFields = $event.checked"
-            ></p-inputSwitch>
+            <p-inputSwitch inputId="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-inputSwitch>
             <label for="show-secret-fields">
               {{ 'isyAngularWidgetsDemo.actions.showSecretFields' | translate }}
             </label>
