@@ -72,21 +72,21 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should display the input char button', () => {
-        const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
         component.isInputDisabled = true;
         fixture.detectChanges();
         expect(button.disabled).toBeTruthy();
       });
 
       it('should not display the input char button', () => {
-        const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
         component.isInputDisabled = false;
         fixture.detectChanges();
         expect(button.disabled).toBeFalsy();
       });
 
       it('should have the input char button disabled when isInputDisabled property is true', () => {
-        const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         component.isInputDisabled = true;
@@ -96,7 +96,7 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should have the input char button not disabled when isInputDisabled property is false', () => {
-        const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         component.isInputDisabled = false;
@@ -106,7 +106,7 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should display after clicking the button', () => {
-        const button = fixture.debugElement.query(By.css('#input-char-button')).nativeElement as HTMLButtonElement;
+        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         button.click();
@@ -139,7 +139,7 @@ describe('Integration Test: InputCharComponent', () => {
         fixture = TestBed.createComponent(InputCharComponent);
         component = fixture.componentInstance;
         fixture.componentRef.setInput('datentyp', datentyp);
-        fixture.debugElement.query(By.css('#input-char-button')).nativeElement.click();
+        fixture.debugElement.query(By.css('.input-char-button')).nativeElement.click();
         fixture.detectChanges();
       });
 
