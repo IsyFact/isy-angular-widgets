@@ -111,7 +111,7 @@
         </div>
         <div class="col">
           <p-dropdown
-            id="gender"
+            inputId="gender"
             formControlName="gender"
             [filter]="true"
             [filterBy]="'name'"
@@ -130,7 +130,8 @@
           </label>
         </div>
         <div class="col">
-          <p-calendar id="birth-date" dateFormat="dd.mm.yy" formControlName="birthDate" [showIcon]="true"> </p-calendar>
+          <p-calendar inputId="birth-date" dateFormat="dd.mm.yy" formControlName="birthDate" [showIcon]="true">
+          </p-calendar>
         </div>
       </div>
       <div class="grid m-0">
@@ -148,7 +149,13 @@
           </label>
         </div>
         <div class="col">
-          <p-inputMask id="phone-number" formControlName="phoneNumber" type="text" [style]="" mask="+99 9999 / 9999999">
+          <p-inputMask
+            inputId="phone-number"
+            formControlName="phoneNumber"
+            type="text"
+            [style]=""
+            mask="+99 9999 / 9999999"
+          >
           </p-inputMask>
         </div>
         <div class="col-1 text-right align-self-center">
@@ -157,7 +164,7 @@
           </label>
         </div>
         <div class="col">
-          <isy-incomplete-date id="date-of-entry" formControlName="dateOfEntry" [dateInPastConstraint]="true">
+          <isy-incomplete-date inputId="date-of-entry" formControlName="dateOfEntry" [dateInPastConstraint]="true">
           </isy-incomplete-date>
           <small class="p-error block" *ngIf="personalInfoForm.controls['dateOfEntry'].invalid">
             {{ 'isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate }}
@@ -167,7 +174,7 @@
       <div class="grid m-0 mt-5" *isyPermitted="'secretFieldsInputSwitch'">
         <div class="col">
           <div class="field field-checkbox">
-            <p-inputSwitch id="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-inputSwitch>
+            <p-inputSwitch inputId="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-inputSwitch>
             <label for="show-secret-fields">
               {{ 'isyAngularWidgetsDemo.actions.showSecretFields' | translate }}
             </label>

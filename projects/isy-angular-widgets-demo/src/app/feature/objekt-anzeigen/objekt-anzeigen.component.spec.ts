@@ -76,10 +76,10 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     inputFields.birthName = fixture.debugElement.query(By.css('#birth-name'));
     inputFields.birthplace = fixture.debugElement.query(By.css('#birth-place'));
     inputFields.nationality = fixture.debugElement.query(By.css('#nationality'));
-    inputFields.gender = fixture.debugElement.query(By.css('#gender'));
+    inputFields.gender = fixture.debugElement.query(By.css('p-dropdown:has(#gender) .p-inputtext'));
     inputFields.phoneNumber = fixture.debugElement.query(By.css('#phone-number'));
-    inputFields.birthDate = fixture.debugElement.query(By.css('#birth-date input'));
-    inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry input'));
+    inputFields.birthDate = fixture.debugElement.query(By.css('#birth-date'));
+    inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry'));
   });
 
   it('creates', () => {
@@ -95,7 +95,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(inputFields.birthplace.nativeElement.value).toEqual('Köln');
     expect(inputFields.nationality.nativeElement.value).toEqual('Deutsch');
     expect(inputFields.gender.nativeElement.innerText).toEqual('Männlich');
-    expect(inputFields.phoneNumber.nativeElement.value).toBeUndefined();
+    expect(inputFields.phoneNumber.nativeElement.value).toEqual('');
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
   });

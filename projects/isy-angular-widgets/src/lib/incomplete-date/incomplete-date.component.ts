@@ -64,6 +64,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   @Input() dateInPastConstraint = false;
 
+  @Input() inputId?: string;
+
   /**
    * Currently displayed date string
    */
