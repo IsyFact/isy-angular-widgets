@@ -4,7 +4,7 @@
   (onInput)="onChange($any($event.target).value)"
   (onBlur)="onBlur()"
   (onComplete)="onComplete()"
-  (onKeydown)="onKeydown($event)"
+  (onKeydown)="onKeydown($any($event))"
   mask="**.**.****"
   [(ngModel)]="inputValue"
   characterPattern="^[x]"
