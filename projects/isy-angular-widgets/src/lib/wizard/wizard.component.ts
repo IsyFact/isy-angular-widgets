@@ -4,9 +4,11 @@ import {
   ContentChildren,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
-  QueryList
+  QueryList,
+  SimpleChanges
 } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {WizardDirective} from './wizard.directive';
@@ -32,7 +34,7 @@ const defaultHeight = 30;
   templateUrl: './wizard.component.html',
   styleUrls: ['./wizard.component.scss']
 })
-export class WizardComponent implements OnInit, AfterContentInit {
+export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
 
   /**
    * Stores the content that will be projected inside the template
@@ -129,7 +131,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
   /**
    * Stores the items of the wizard
    */
-  wizardItems: MenuItem[] = [];
+  items: MenuItem[] = [];
 
   /**
    * Fired on initialization
@@ -142,11 +144,17 @@ export class WizardComponent implements OnInit, AfterContentInit {
    * Fired after content initialization
    */
   ngAfterContentInit(): void {
-    this.wizardItems = this.content.map((item) => {
+    this.items = this.content.map((item) => {
       return {
         label: item.isyWizardDirective
       };
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.isVisible.currentValue === false) {
+      this.resetStepper();
+    }
   }
 
   /**
