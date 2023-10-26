@@ -25,7 +25,7 @@ npm install
 2. Im root directory "npm run build:widgets_lib" ausführen
 3. Umgehen auf Pfad "/isy-angular-widgets/dist/isy-angular-widgets" und Pfad kopieren
 4. Neues Angular-Projekt Version 15 neu anlegen (npm install wird ausgeführt)
-5. Umgehen auf root directory und Ausführung von "npm add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets" (kopierter Pfad von Schritt 3)
+5. Umgehen auf root directory und Ausführung von "ng add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets" (kopierter Pfad von Schritt 3)
 6. Im Modul, wo die eine ausgewählte Komponente z.B. Input-Char verwendet werden soll, müssen folgende Module unter "modules" hinzugefügt werden: BrowserAnimationsModule und je nach Fall vlt. auch BrowserModule oder/auch CommonModule
 7. Innerhalb der Datei angular.json, unter: architect->build->options muss folgendes property hinzugefügt werden: "preserveSymlinks": true - Hintergrund: Bei Windows entsteht oft wegen den Pfaden ein Fehler und es tritt eine Fehlermeldung bezüglich inject() auf. Unter Linux gibt es keine Probleme
 8. Applikation starten
