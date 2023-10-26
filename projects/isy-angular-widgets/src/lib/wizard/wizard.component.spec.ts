@@ -1,13 +1,13 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {WizardComponent} from './wizard.component';
 import {StepperComponent} from '../stepper/stepper.component';
-import {WizardDirective} from '../../directives/wizard.directive';
+import {WizardDirective} from './wizard.directive';
 import {RouterTestingModule} from '@angular/router/testing';
 import {DialogModule} from 'primeng/dialog';
 import {StepsModule} from 'primeng/steps';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/button';
-import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
+import {IncompleteDateModule} from '../incomplete-date/incomplete-date.module';
 import {Component, QueryList, ViewChild} from '@angular/core';
 
 const width = 50;

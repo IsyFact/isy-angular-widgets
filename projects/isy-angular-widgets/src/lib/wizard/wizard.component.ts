@@ -6,12 +6,10 @@ import {
   Input,
   OnInit,
   Output,
-  QueryList,
-  ViewChild
+  QueryList
 } from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import {StepperComponent} from '../stepper/stepper.component';
-import {WizardDirective} from '../../directives/wizard.directive';
+import {WizardDirective} from './wizard.directive';
 
 /**
  * The width of the wizard of not otherwise specified by the user.
@@ -35,10 +33,6 @@ const defaultHeight = 30;
   styleUrls: ['./wizard.component.scss']
 })
 export class WizardComponent implements OnInit, AfterContentInit {
-  /**
-   * Used for getting access over the stepper
-   */
-  @ViewChild('stepper') stepper!: StepperComponent;
 
   /**
    * Stores the content that will be projected inside the template
@@ -160,8 +154,10 @@ export class WizardComponent implements OnInit, AfterContentInit {
    * @param next used for forward/backward navigation
    */
   move(next: boolean): void {
-    this.stepper.move(next);
-    this.stepperIndexChange.emit(this.stepper.index);
+    if (next)
+      this.index++;
+    else
+      this.index--;
   }
 
   /**
@@ -185,8 +181,7 @@ export class WizardComponent implements OnInit, AfterContentInit {
    * Is resetting the stepper position
    */
   private resetStepper(): void {
-    this.stepper.reset();
-    this.stepperIndexChange.emit(0);
+    this.index = 0;
   }
 
   /**
