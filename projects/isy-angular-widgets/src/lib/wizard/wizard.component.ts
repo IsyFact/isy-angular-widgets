@@ -35,7 +35,6 @@ const defaultHeight = 30;
   styleUrls: ['./wizard.component.scss']
 })
 export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
-
   /**
    * Stores the content that will be projected inside the template
    */
@@ -162,10 +161,8 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * @param next used for forward/backward navigation
    */
   move(next: boolean): void {
-    if (next)
-      this.index++;
-    else
-      this.index--;
+    if (next) this.index++;
+    else this.index--;
   }
 
   /**
