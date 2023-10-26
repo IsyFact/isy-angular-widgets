@@ -203,6 +203,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   function pressCloseButton(): void {
     const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
     closeButton.click();
+    parentFixture.detectChanges();
   }
 
   beforeEach(async () => {
