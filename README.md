@@ -62,31 +62,43 @@ $ npm run e2e
 ```
 
 ### PrimeNG-Designer
-Die globalen Styles (isyfact-primeng-bootstrap-light.css) werden vom [PrimeNG-Theme-Designer](https://designer.primeng.org/#/) generiert.
+Da der PrimeNG Theme-Designer als Open-Source zur Verfügung steht, wird die aktuelle PrimeNG Designer-Webseite kein Update mehr erhalten. 
+Der Theme-Designer ist nur noch bis zur Version 15.4.1 verfügbar.
+Momentan wird an einer erweiterten Version des Theme-Designers, dem Advanced-Theme-Editor, gearbeitet. 
+Nach der Roadmap von PrimeNG (https://primeng.org/roadmap) ist die Veröffentlichung für Q4 2023 geplant.
+Bis dahin wird auf der Designer-Website auf das PrimeNG Sass-Theme verwiesen, um auf die aktuelle Theming-API für weitere Anpassungsoptionen zuzugreifen.
 
+Damit das Isyfact-Theme mit den neuen Bausteinen kompatibel bleibt, sind die untenstehenden Schritte erforderlich um die globalen Styles (isyfact-primeng-bootstrap-light.css) zu generieren.
 
-Als Basis-Theme wird _Bootstrap Light_ verwendet.
-Für das aktuelle Theme wurden folgende Einstellungen im PrimeNG-Theme-Designer verwenden:
+Als Basis-Theme wird _Bootstrap4 Light Blue_ verwendet.
 
-| Einstellungen        | Wert                                    | 
-|----------------------|-----------------------------------------|
-| *General*            |                                         |
-| Font Family          | BundesSans,'Liberation Sans',sans-serif |
-| Text                 | 73, 80, 87                              |
-| Secondary Text       | 73, 80, 87                              |
-| Border Radius        | 0px                                     |
-| Disabled Opacity     | 0.75                                    |
-| *Palette*            |                                         |
-| Primary              | 69, 72, 77                              |
-| Primary Dark         | 137, 144, 154                           |
-| Primary Darker       | 137, 144, 154                           |
-| Highlight Background | 204, 227, 236                           |
-| Text on Highlight    | 73, 80, 87                              |
-| Hover Background     | 204, 227, 236                           |
-| *Forms*              |                                         |
-| Focus Border         | 204, 227, 236                           |
-| *Buttons*            |                                         |
-| Secondary Background | 69, 72, 77                              |
+1. Das Repo primeng-sass-theme von https://github.com/primefaces/primeng-sass-theme klonen
+2. In den Dateien primeng-sass-theme/themes/bootstrap4/bootstrap4-light/_variables_light.scss und primeng-sass-theme/themes/bootstrap4/bootstrap4-light/blue/_variables.scss folgende Properties-Variablen anpassen:
+
+| Properties-Variablen      | Wert               | 
+|---------------------------|--------------------|
+| *reused color variables*  |                    |                   
+| $shade200:                | #cce3ec            |
+| *global*                  |                    |
+| $textColor                | $shade700          |
+| $textSecondaryColor       | $shade700          |
+| $borderRadius             | 0px                |
+| $disabledOpacity          | .75                |
+| *Palette*                 |                    |
+| $primaryColor             | #45484d            |
+| $primaryDarkColor         | #89909a            |
+| $primaryDarkerColor       | #89909a            |
+| $highlightBg              | #cce3ec            |
+| $highlightTextColor       | #495057            |
+| *input field*             |                    |
+| $inputFocusBorderColor    | $highlightBg       |
+| *button*                  |                    |
+| $secondaryButtonBg        | $primaryColor      |
+
+3. Sass installieren: npm install -g sass
+4. CSS-Theme generieren: Umgehen auf primeng-sass-theme/themes/bootstrap4/bootstrap4-light/blue und sass --update theme.scss:isyfact-primeng-bootstrap-light.css ausführen
+5. In der Datei primeng-sass-theme/themes/bootstrap4/bootstrap4-light/blue/isyfact-primeng-bootstrap-light.css in Zeile 2 und 3 die Font-Family in "BundesSans,'Liberation Sans',sans-serif" ändern
+6. In der Widgets-Library die Datei isy-angular-widgets/projects/isy-angular-widgets/assets/theme/isyfact-primeng-bootstrap-light.css mit der neu generierten Datei ersetzen und anschließend minifizieren.
 
 ## Erstellen von Releases
 
