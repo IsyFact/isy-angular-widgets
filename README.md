@@ -73,7 +73,7 @@ Damit das Isyfact-Theme mit den neuen Bausteinen kompatibel bleibt, sind die unt
 Als Basis-Theme wird _Bootstrap4 Light Blue_ verwendet.
 
 1. Das Repo primeng-sass-theme von https://github.com/primefaces/primeng-sass-theme klonen
-2. In den Dateien primeng-sass-theme/themes/bootstrap4/bootstrap4-light/_variables_light.scss und primeng-sass-theme/themes/bootstrap4/bootstrap4-light/blue/_variables.scss folgende Properties-Variablen angepassen:
+2. In den Dateien primeng-sass-theme/themes/bootstrap4/bootstrap4-light/_variables_light.scss und primeng-sass-theme/themes/bootstrap4/bootstrap4-light/blue/_variables.scss folgende Properties-Variablen anpassen:
 
 | Properties-Variablen      | Wert               | 
 |---------------------------|--------------------|
