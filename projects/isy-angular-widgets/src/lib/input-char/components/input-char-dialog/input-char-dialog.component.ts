@@ -70,7 +70,7 @@ export class InputCharDialogComponent implements OnChanges {
   allCharsModel?: {label: string};
 
   constructor(public widgetsConfigService: WidgetsConfigService) {
-    this.allCharsOptions = [{label: (this.getTranslation('inputChar.all') as string) || 'Alle'}];
+    this.allCharsOptions = [{label: this.getTranslation('inputChar.all') || 'Alle'}];
     this.allCharsModel = this.allCharsOptions[0];
   }
 
@@ -218,8 +218,7 @@ export class InputCharDialogComponent implements OnChanges {
    * @param path to the translated text
    * @returns translated text
    */
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  getTranslation(path: string): any {
-    return this.widgetsConfigService.getTranslation(path);
+  getTranslation(path: string): string {
+    return this.widgetsConfigService.getTranslation(path) as string;
   }
 }

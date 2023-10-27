@@ -13,6 +13,7 @@ import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
 import data from '../../../assets/permissions.json';
+import {DebugElement} from '@angular/core';
 
 describe('Integration Tests: PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
@@ -20,8 +21,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   let messageService: MessageService;
   let userInfoService: UserInfoPublicService;
   let securityService: SecurityService;
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  const inputFields: any = {};
+  const inputFields: {[key: string]: DebugElement & {disabled?: boolean}} = {};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

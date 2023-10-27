@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, DebugElement} from '@angular/core';
 import {Datentyp} from '../model/datentyp';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDirective} from './input-char.directive';
@@ -32,8 +32,7 @@ class TestComponent {
 describe('Integration Tests: InputCharDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  let directiveElement: any;
+  let directiveElement: DebugElement[];
   let directive: InputCharDirective;
 
   beforeEach(() => {
@@ -44,7 +43,7 @@ describe('Integration Tests: InputCharDirective', () => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
-    directive = directiveElement[0].injector.get(InputCharDirective) as InputCharDirective;
+    directive = directiveElement[0].injector.get(InputCharDirective);
     fixture.detectChanges();
   });
 
