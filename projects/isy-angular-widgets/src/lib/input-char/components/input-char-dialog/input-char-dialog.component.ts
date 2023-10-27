@@ -70,7 +70,7 @@ export class InputCharDialogComponent implements OnChanges {
   allCharsModel?: {label: string};
 
   constructor(public widgetsConfigService: WidgetsConfigService) {
-    this.allCharsOptions = [{label: (this.getTranslation('inputChar.all')) || 'Alle'}];
+    this.allCharsOptions = [{label: this.getTranslation('inputChar.all') || 'Alle'}];
     this.allCharsModel = this.allCharsOptions[0];
   }
 
