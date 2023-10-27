@@ -21,7 +21,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   let messageService: MessageService;
   let userInfoService: UserInfoPublicService;
   let securityService: SecurityService;
-  const inputFields: {[key: string]: DebugElement & { disabled?: boolean }} = {};
+  const inputFields: {[key: string]: DebugElement & {disabled?: boolean}} = {};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
