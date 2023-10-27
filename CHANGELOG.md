@@ -1,5 +1,5 @@
-# 16.0.0 - ..2023
-## Features
+# 16.0.0 - 
+## Breaking Changes
 - ISY-144 Upgrade Angular und PrimeNG Bibliothek auf Version 16
 
 # 15.0.2 - 
