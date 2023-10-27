@@ -206,8 +206,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Calls the given function on component change
    * @param fn The function to be called on component change
    */
-  registerOnChange(fn: () => unknown): void {
-    this.onChange = fn;
+  registerOnChange(fn: unknown): void {
+    this.onChange = fn as () => unknown;
   }
 
   /**
@@ -215,8 +215,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Calls the given function on component touch
    * @param fn The function to be called on component touch
    */
-  registerOnTouched(fn: () => unknown): void {
-    this.onTouched = fn;
+  registerOnTouched(fn: unknown): void {
+    this.onTouched = fn as () => unknown;
   }
 
   /**
