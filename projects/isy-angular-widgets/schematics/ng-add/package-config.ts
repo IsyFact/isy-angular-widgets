@@ -8,7 +8,6 @@
 
 import {Tree} from '@angular-devkit/schematics';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 interface PackageJson {
   dependencies: Record<string, string>;
 }

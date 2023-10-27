@@ -206,8 +206,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Calls the given function on component change
    * @param fn The function to be called on component change
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: ()=> unknown): void {
     this.onChange = fn;
   }
 
@@ -216,8 +215,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Calls the given function on component touch
    * @param fn The function to be called on component touch
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: ()=> unknown): void {
     this.onTouched = fn;
   }
 
@@ -230,9 +228,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     this.disabled = isDisabled;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
-  onChange: Function = (_: any) => {};
+  onChange: (_: unknown) => unknown = () => {};
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onTouched: Function = () => {};
+  onTouched: () => void = () => {};
 }
