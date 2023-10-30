@@ -9,7 +9,7 @@ export interface ChartDatasetEntry {
   fill?: boolean;
   borderColor?: string;
   tension?: number;
-  borderDash?: number[] | string [];
+  borderDash?: number[] | string[];
   backgroundColor?: string | string[];
 }
 
