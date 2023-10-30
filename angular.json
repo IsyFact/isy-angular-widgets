@@ -93,12 +93,6 @@
                   "maximumError": "4kb"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/isy-angular-widgets-demo/src/environments/environment.ts",
-                  "with": "projects/isy-angular-widgets-demo/src/environments/environment.prod.ts"
-                }
-              ],
               "outputHashing": "all"
             },
             "development": {
