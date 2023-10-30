@@ -15,7 +15,6 @@ export class Validation {
   static isInFuture(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-
     const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
     if (dateValue.isValid() && dateValue.isSameOrBefore(today)) {
       return {FUTURE: true};
@@ -30,10 +29,9 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {PAST: true} if the validation fails; null otherwise
    */
-  static isInPast(c: AbstractControl): ValidationErrors | null {
+  static isInPast(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
     if (dateValue.isValid() && dateValue.isSameOrAfter(today)) {
       return {PAST: true};
@@ -85,13 +83,11 @@ export class Validation {
    * @returns A validator function with the given configuration
    */
   static dateFormat(dateFormat: string, strict: boolean, messageKey: string): ValidatorFn {
-    return (c: AbstractControl): ValidationErrors | null => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    return (c: AbstractControl<MomentInput>): ValidationErrors | null => {
       const input = c.value;
       if (!input) {
         return null;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const parsedDate = moment(input, dateFormat, strict);
       if (!dateFormat || !parsedDate || !parsedDate.isValid()) {
         return {[messageKey]: {format: dateFormat}};
