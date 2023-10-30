@@ -239,7 +239,6 @@ describe('Unit Test: Validation', () => {
       const errors = Validation.isoDate(invalidIsoDateControl);
       errorHaveToBeDefined(errors, undefined, 'DATE');
     });
-
   });
 
   describe('isoTime', () => {
