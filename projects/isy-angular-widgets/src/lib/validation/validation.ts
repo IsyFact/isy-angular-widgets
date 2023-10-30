@@ -166,8 +166,8 @@ export class Validation {
       let nDigit = parseInt(cDigit, radix);
 
       if (bEven) {
-        if ((nDigit *= digitsMultiplier) > (radix - 1)) {
-          nDigit -= (radix - 1);
+        if ((nDigit *= digitsMultiplier) > radix - 1) {
+          nDigit -= radix - 1;
         }
       }
 
