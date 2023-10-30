@@ -154,18 +154,20 @@ export class Validation {
     }
 
     // Execution of the Luhn algorithm (specific fixed numbers required)
-    /* eslint-disable @typescript-eslint/no-magic-numbers */
+    const radix = 10;
+    const digitsMultiplier = 2;
     let nCheck = 0;
     let bEven = false;
+
     value = value.replace(/\D/g, '');
 
     for (let n = value.length - 1; n >= 0; n--) {
       const cDigit = value.charAt(n);
-      let nDigit = parseInt(cDigit, 10);
+      let nDigit = parseInt(cDigit, radix);
 
       if (bEven) {
-        if ((nDigit *= 2) > 9) {
-          nDigit -= 9;
+        if ((nDigit *= digitsMultiplier) > (radix - 1)) {
+          nDigit -= (radix - 1);
         }
       }
 
@@ -173,11 +175,9 @@ export class Validation {
       bEven = !bEven;
     }
 
-    if (nCheck % 10 !== 0) {
+    if (nCheck % radix !== 0) {
       return {CREDITCARD: true};
     }
-
-    /* eslint-enable @typescript-eslint/no-magic-numbers */
 
     return null;
   }
