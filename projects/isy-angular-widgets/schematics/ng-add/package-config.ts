@@ -37,8 +37,8 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
   const spacesNum = 2;
   if (host.exists('package.json')) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    const sourceText = host.read('package.json')!.toString('utf-8');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    const sourceText = host.read('package.json')!.toString('utf-8') as string;
+
     const json = JSON.parse(sourceText) as PackageJson;
 
     if (!json.dependencies) {

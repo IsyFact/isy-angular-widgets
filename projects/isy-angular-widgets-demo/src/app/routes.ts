@@ -4,8 +4,6 @@ import {inject} from '@angular/core';
 import {Observable} from 'rxjs';
 import {PageNotFoundComponent} from './shared/errors/page-not-found/page-not-found.component';
 
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-
 /**
  * Determines if a given route can be accessed
  * @param route Contains the information about a route associated with a component loaded in an outlet at a particular moment in time.
@@ -22,17 +20,17 @@ export const routes: Routes = [
       title: 'Dashboard'
     },
     loadChildren: async () => (await import('./feature/dashboard/dashboard.module')).DashboardModule,
-    canActivate: [(route: ActivatedRouteSnapshot) => canActivate(route)]
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },
   {
     path: 'objekt-anzeigen',
     loadChildren: async () => (await import('./feature/objekt-anzeigen/objekt-anzeigen.module')).ObjektAnzeigenModule,
-    canActivate: [(route: ActivatedRouteSnapshot) => canActivate(route)]
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },
   {
     path: 'objekt-suchen',
     loadChildren: async () => (await import('./feature/objekt-suchen/objekt-suchen.module')).ObjektSuchenModule,
-    canActivate: [(route: ActivatedRouteSnapshot) => canActivate(route)]
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },
   {
     path: '',

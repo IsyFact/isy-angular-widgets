@@ -1,5 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import moment from 'moment';
+import moment, {MomentInput} from 'moment';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
@@ -12,10 +12,10 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {FUTURE: true} if the validation fails; null otherwise
    */
-  static isInFuture(c: AbstractControl): ValidationErrors | null {
+  static isInFuture(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+
     const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
     if (dateValue.isValid() && dateValue.isSameOrBefore(today)) {
       return {FUTURE: true};
