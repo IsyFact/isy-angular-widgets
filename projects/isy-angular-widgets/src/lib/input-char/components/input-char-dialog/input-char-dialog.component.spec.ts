@@ -14,6 +14,7 @@ import {InputCharModule} from '../../input-char.module';
   template: ''
 })
 class FakeSelectButtonComponent implements Partial<SelectButton> {
+  // Implementing options from SelectButton because usage of Partial
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() options?: any[];
 
