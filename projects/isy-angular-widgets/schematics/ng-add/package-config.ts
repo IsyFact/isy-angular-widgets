@@ -38,6 +38,7 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
   const spacesNum = 2;
   if (host.exists(FILE_NAME)) {
+    // Node Buffer is not supported in Browser context but schematics is executed with node and not with browser
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     const sourceText = host.read(FILE_NAME)!.toString('utf-8') as string;
 
@@ -69,6 +70,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
     return null;
   }
 
+  // Node Buffer is not supported in Browser context but schematics is executed with node and not with browser
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument
   const packageJson = JSON.parse(tree.read(FILE_NAME)!.toString('utf8')) as PackageJson;
 

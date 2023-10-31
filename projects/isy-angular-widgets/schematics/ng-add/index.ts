@@ -1,57 +1,37 @@
-/* eslint-disable */
 import {Rule, SchematicContext, SchematicsException, Tree} from '@angular-devkit/schematics';
 import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
 import {addPackageToPackageJson} from './package-config';
 
-/**
- * Installs isy-angular-widgets as dependency and adds the necessary styles to the workspace.
- */
-export function ngAdd(): Rule {
-  return (tree: Tree, context: SchematicContext) => {
-    addTranslationFile(context, tree, 'de.json');
-    addTranslationFile(context, tree, 'en.json');
+// Node Buffer (isyTranslation) is not supported in Browser context but schematics is executed with node and not with browser
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-call */
 
-    // Add necessary dependencies to new CLI project.
+interface MyBuild {
+  options: {
+    styles: string[];
+  };
+}
 
-    addPackageToPackageJson(tree, '@angular/common', '^16.2.11');
-    addPackageToPackageJson(tree, '@angular/core', '^16.2.11');
-    addPackageToPackageJson(tree, 'primeicons', '^6.0.1');
-    addPackageToPackageJson(tree, 'primeng', '^16.6.0');
-    addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
-    addPackageToPackageJson(tree, 'moment', '^2.29.4');
+interface Architect {
+  build: MyBuild;
+}
 
-    // Install isy-angular-widgets
-    context.addTask(new NodePackageInstallTask());
-
-    const workspace = loadWorkspace(tree);
-    return applyStylesToWorkspace(workspace, context, tree);
+interface Workspace {
+  projects: {
+    [key: string]: {
+      projectType: string;
+      architect: Architect;
+    };
   };
 }
 
 /**
- * Loads the angular workspace store in angular.json.
- *
- * @param tree
- * @throw SchematicsException if workspace is not available
- */
-function loadWorkspace(tree: Tree) {
-  const workspaceConfig = tree.read('/angular.json');
-
-  if (!workspaceConfig) {
-    throw new SchematicsException('❌ Could not find Angular workspace configuration.');
-  }
-
-  return JSON.parse(workspaceConfig.toString());
-}
-
-/**
  * Add necessary styles for isy-angular-widgets to the angular workspace.
- *
  * @param workspace Current angular workspace object
- * @param context
- * @param tree
+ * @param context A rule factory, which is normally the way schematics are implemented. Returned by the tooling after loading a schematic description
+ * @param tree List of styles
+ * @returns Tree Tree with styles
  */
-function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree: Tree): Tree {
+function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext, tree: Tree): Tree {
   const styles = [
     'node_modules/primeicons/primeicons.css',
     'node_modules/primeflex/primeflex.min.css',
@@ -88,7 +68,8 @@ function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree:
     project.architect.build.options.styles = styles;
   }
 
-  const angularJson = JSON.stringify(workspace, null, 2);
+  const space = 2;
+  const angularJson = JSON.stringify(workspace, null, space);
   tree.overwrite('/angular.json', angularJson);
 
   context.logger.info('√ Add isy-angular-widgets styles.');
@@ -97,14 +78,29 @@ function applyStylesToWorkspace(workspace: any, context: SchematicContext, tree:
 }
 
 /**
- * Create new translation file or merge if one already exists.
- *
- * @param context
- * @param tree
- * @param language
- * @throw SchematicsException if translation file does not exist or is empty
+ * Loads the angular workspace store in angular.json.
+ * @param tree List with angular.json properties
+ * @returns Workspace Part structure of angular.json file
+ * @throws SchematicsException if workspace is not available
  */
-export function addTranslationFile(context: SchematicContext, tree: Tree, language: string) {
+function loadWorkspace(tree: Tree): Workspace {
+  const workspaceConfig = tree.read('/angular.json');
+
+  if (!workspaceConfig) {
+    throw new SchematicsException('❌ Could not find Angular workspace configuration.');
+  }
+
+  return JSON.parse(workspaceConfig.toString()) as Workspace;
+}
+
+/**
+ * Create new translation file or merge if one already exists.
+ * @param context A rule factory, which is normally the way schematics are implemented. Returned by the tooling after loading a schematic description.
+ * @param tree Tree with translation files
+ * @param language the current language
+ * @throws SchematicsException if translation file does not exist or is empty
+ */
+export function addTranslationFile(context: SchematicContext, tree: Tree, language: string): void {
   const isyTranslation = tree.read('./node_modules/@isyfact/isy-angular-widgets/assets/i18n/' + language);
   const translationFilePath = '/src/assets/i18n/' + language;
 
@@ -125,9 +121,36 @@ export function addTranslationFile(context: SchematicContext, tree: Tree, langua
 
     if (translationJson) {
       translationJson = {...translationJson, ...isyTranslationJson};
-      context.logger.info(`√ Add language keys (de, en) for isy-angular-widgets to existing language files.`);
+      context.logger.info('√ Add language keys (de, en) for isy-angular-widgets to existing language files.');
     }
 
-    tree.overwrite(translationFilePath, JSON.stringify(translationJson, null, 2));
+    const space = 2;
+    tree.overwrite(translationFilePath, JSON.stringify(translationJson, null, space));
   }
+}
+
+/**
+ * Installs isy-angular-widgets as dependency and adds the necessary styles to the workspace.
+ * @returns Rule
+ */
+export function ngAdd(): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    addTranslationFile(context, tree, 'de.json');
+    addTranslationFile(context, tree, 'en.json');
+
+    // Add necessary dependencies to new CLI project.
+
+    addPackageToPackageJson(tree, '@angular/common', '^16.2.11');
+    addPackageToPackageJson(tree, '@angular/core', '^16.2.11');
+    addPackageToPackageJson(tree, 'primeicons', '^6.0.1');
+    addPackageToPackageJson(tree, 'primeng', '^16.6.0');
+    addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
+    addPackageToPackageJson(tree, 'moment', '^2.29.4');
+
+    // Install isy-angular-widgets
+    context.addTask(new NodePackageInstallTask());
+
+    const workspace = loadWorkspace(tree);
+    return applyStylesToWorkspace(workspace, context, tree);
+  };
 }
