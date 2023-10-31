@@ -30,10 +30,9 @@ export class WidgetsConfigService {
 
   private translationSource = new Subject<unknown>();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getTranslation(path: string): any {
+  getTranslation(path: string): string | undefined {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-    return path.split('.').reduce((o, k) => (o ? (o as any)[k] : undefined), this.translation);
+    return path.split('.').reduce((o, k) => (o ? (o as any)[k] : undefined), this.translation) as string;
   }
 
   setTranslation(value: WidgetsTranslation): void {
