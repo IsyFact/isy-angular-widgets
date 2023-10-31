@@ -38,7 +38,7 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
   const spacesNum = 2;
   if (host.exists(FILE_NAME)) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     const sourceText = host.read(FILE_NAME)!.toString('utf-8') as string;
 
     const json = JSON.parse(sourceText) as PackageJson;
@@ -69,7 +69,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
     return null;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument
   const packageJson = JSON.parse(tree.read(FILE_NAME)!.toString('utf8')) as PackageJson;
 
   return packageJson.dependencies[name] ? packageJson.dependencies[name] : null;
