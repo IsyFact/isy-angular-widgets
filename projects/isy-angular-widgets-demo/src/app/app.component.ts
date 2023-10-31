@@ -65,6 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.changeLanguage(this.selectedLanguage);
 
+    // Solution with promise usage needs to many lines of code and promise is not needed for this use case
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     this.translate.onLangChange.subscribe(async () => {
       this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);

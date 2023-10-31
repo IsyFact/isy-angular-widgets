@@ -125,6 +125,15 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
       const partDayReplaced = partDay.replace(/_/g, '');
       const partMonthReplaced = partMonth.replace(/_/g, '');
       const dateUnspecifiedChar = 'x';
+      const cursorPositionAtFirstDayLetter = 0;
+      const cursorPositionAtSecondDayLetter = 1;
+      const cursorPositionAtDotAfterDayLetter = 2;
+      const cursorPositionAtFirstMonthLetter = 3;
+      const cursorPositionAtSecondMonthLetter = 4;
+      const cursorPositionAtDotAfterMonthLetter = 5;
+      const onePosition = 1;
+      const twoPositions = 2;
+      const threePositions = 3;
 
       if (partDayReplaced.length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
 
@@ -140,23 +149,20 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
       const dateStr = [partDay, partMonth, partYear].join('.');
       input.value = this.inputValue = dateStr;
 
-      // Mouse position (specific fixed numbers required)
-      /* eslint-disable @typescript-eslint/no-magic-numbers */
       switch (inputMousePosition) {
-        case 0:
-        case 3:
-          inputMousePosition += 3;
+        case cursorPositionAtFirstDayLetter:
+        case cursorPositionAtFirstMonthLetter:
+          inputMousePosition += threePositions;
           break;
-        case 1:
-        case 4:
-          inputMousePosition += 2;
+        case cursorPositionAtSecondDayLetter:
+        case cursorPositionAtSecondMonthLetter:
+          inputMousePosition += twoPositions;
           break;
-        case 2:
-        case 5:
-          inputMousePosition += 1;
+        case cursorPositionAtDotAfterDayLetter:
+        case cursorPositionAtDotAfterMonthLetter:
+          inputMousePosition += onePosition;
           break;
       }
-      /* eslint-enable @typescript-eslint/no-magic-numbers */
 
       input.setSelectionRange(inputMousePosition, inputMousePosition);
       this.onChange(this.inputValue);

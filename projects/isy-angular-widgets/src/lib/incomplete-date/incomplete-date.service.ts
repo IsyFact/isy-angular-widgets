@@ -56,8 +56,7 @@ export class IncompleteDateService {
     const formats = date.split('.');
     const dateKeys = ['day', 'month', 'year'];
 
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const dateObject = dateKeys.reduce((object: Object, element: string, index: number) => {
+    const dateObject = dateKeys.reduce((object: DateObject, element: string, index: number) => {
       let partOfFormat = formats[index];
 
       if (partOfFormat.includes(this.DATE_CHAR)) {
@@ -71,8 +70,8 @@ export class IncompleteDateService {
 
     if (
       dateStr.match(INCOMPLETE_DATE_REGEX) !== null ||
-      dateObject.month.includes(this.DATE_CHAR) ||
-      dateObject.year.includes(this.DATE_CHAR)
+      dateObject.month!.includes(this.DATE_CHAR) ||
+      dateObject.year!.includes(this.DATE_CHAR)
     )
       return 'xx.xx.' + dateObject.year;
 

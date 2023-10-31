@@ -9,16 +9,11 @@ import {Accordion} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputCharModule} from '../../input-char.module';
 
-type Renamed = Omit<SelectButton, 'options'> & {
-// Override SelectButton options property for fixing ESLint error
-  options: string[];
-};
-
 @Component({
   selector: 'p-selectButton',
   template: ''
 })
-class FakeSelectButtonComponent implements Partial<Renamed> {
+class FakeSelectButtonComponent implements Partial<SelectButton> {
   @Input() options?: string[];
 
   // Implementing onChange from SelectButton because usage of Partial
