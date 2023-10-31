@@ -9,14 +9,17 @@ import {Accordion} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputCharModule} from '../../input-char.module';
 
+type Renamed = Omit<SelectButton, 'options'> & {
+// Override SelectButton options property for fixing ESLint error
+  options: string[];
+};
+
 @Component({
   selector: 'p-selectButton',
   template: ''
 })
-class FakeSelectButtonComponent implements Partial<SelectButton> {
-  // Implementing options from SelectButton because usage of Partial
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input() options?: any[];
+class FakeSelectButtonComponent implements Partial<Renamed> {
+  @Input() options?: string[];
 
   // Implementing onChange from SelectButton because usage of Partial
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
