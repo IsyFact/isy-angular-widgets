@@ -1,9 +1,8 @@
 import {Component, DebugElement} from '@angular/core';
 import {Datentyp} from '../model/datentyp';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 @Component({
   template: `<input
@@ -30,21 +29,18 @@ class TestComponent {
 }
 
 describe('Integration Tests: InputCharDirective', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+  let spectator: Spectator<TestComponent>;
   let directiveElement: DebugElement[];
   let directive: InputCharDirective;
+  const createdComponent = createComponentFactory({
+    component: TestComponent,
+    declarations: [InputCharDirective]
+  });
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [TestComponent, InputCharDirective],
-      imports: [BrowserAnimationsModule]
-    });
-    fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
-    directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
+  beforeEach(()=> {
+    spectator = createdComponent();
+    directiveElement = spectator.fixture.debugElement.queryAll(By.directive(InputCharDirective));
     directive = directiveElement[0].injector.get(InputCharDirective);
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -52,21 +48,21 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should add an input char button to the input', () => {
-    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
   });
 
   it('should set the input char button to disabled when the input is disabled', (done) => {
-    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = spectator.fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
-    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
 
     setTimeout(() => {
-      fixture.detectChanges();
+      spectator.fixture.detectChanges();
       expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
       expect(inputCharButton.disabled).toBeTrue();
       done();
@@ -74,16 +70,16 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
-    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = spectator.fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
-    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
 
     setTimeout(() => {
-      fixture.detectChanges();
+      spectator.fixture.detectChanges();
       expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
       expect(inputCharButton.disabled).toBeTrue();
       done();
@@ -102,14 +98,14 @@ describe('Integration Tests: InputCharDirective', () => {
 
   it('should change the input value', () => {
     const newValue = 'abc';
-    const valueOnChangeSpy = spyOn(component, 'valueGet');
+    const valueOnChangeSpy = spyOn(spectator.component, 'valueGet');
 
-    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = spectator.fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     input.value = newValue;
 
     const changeEvent = new Event('change', {});
     input.dispatchEvent(changeEvent);
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
 
     expect(valueOnChangeSpy).toHaveBeenCalledWith(changeEvent, newValue);
   });

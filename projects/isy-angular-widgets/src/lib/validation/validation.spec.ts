@@ -8,10 +8,6 @@ import moment from 'moment';
  * Unit-Test der IsyValidators Klasse.
  */
 describe('Unit Test: Validation', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-  });
-
   /**
    * Expects that error have to be defined
    * @param errors Current errors list
