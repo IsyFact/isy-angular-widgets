@@ -1,7 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {InputCharComponent} from './input-char.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {By} from '@angular/platform-browser';
 import {InputCharModule} from '../../input-char.module';
 import {Datentyp} from '../../model/datentyp';
@@ -12,8 +9,9 @@ import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 
 describe('Unit Tests: InputCharComponent', () => {
+  let spectator: Spectator<InputCharComponent>;
+
   describe('with default datentyp', () => {
-    let spectator: Spectator<InputCharComponent>;
     const createdComponent = createComponentFactory({
       component: InputCharComponent,
       declarations: [MockComponent(Dialog), MockComponent(InputCharDialogComponent)]
@@ -38,8 +36,6 @@ describe('Unit Tests: InputCharComponent', () => {
     describe(`with ${datentyp}`, () => {
       const dialogDefaultWidth = '775px';
       const dialogDefaultHeight = '460px';
-
-      let spectator: Spectator<InputCharComponent>;
       const createdComponent = createComponentFactory({
         component: InputCharComponent,
         declarations: [MockComponent(Dialog), MockComponent(InputCharDialogComponent)]
@@ -126,32 +122,28 @@ describe('Unit Tests: InputCharComponent', () => {
 });
 
 describe('Integration Test: InputCharComponent', () => {
+  const service = new CharacterService();
+
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
-      let component: InputCharComponent;
-      let fixture: ComponentFixture<InputCharComponent>;
-      const service = new CharacterService();
-
-      beforeEach(async () => {
-        await TestBed.configureTestingModule({
-          declarations: [InputCharComponent],
-          imports: [InputCharModule, BrowserAnimationsModule]
-        }).compileComponents();
-
-        fixture = TestBed.createComponent(InputCharComponent);
-        component = fixture.componentInstance;
-        fixture.componentRef.setInput('datentyp', datentyp);
-        fixture.debugElement.query(By.css('.input-char-button')).nativeElement.click();
-        fixture.detectChanges();
+      let spectator: Spectator<InputCharComponent>;
+      const createdComponent = createComponentFactory({
+        component: InputCharComponent,
+        imports: [InputCharModule]
+      });
+      beforeEach(() => {
+        spectator = createdComponent();
+        spectator.fixture.componentRef.setInput('datentyp', datentyp);
+        spectator.click('.input-char-button');
       });
 
       it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
       });
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = fixture.debugElement.queryAll(
+        const groupButtons = spectator.fixture.debugElement.queryAll(
           By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button')
         );
         expect(groupButtons.length).toEqual(expectedGroups);
@@ -159,7 +151,7 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = fixture.debugElement.queryAll(
+        const groupButtons = spectator.fixture.debugElement.queryAll(
           By.css('#right-panel-side p-selectbutton .p-buttonset .p-button')
         );
         expect(groupButtons.length).toEqual(expectedCharacters);
