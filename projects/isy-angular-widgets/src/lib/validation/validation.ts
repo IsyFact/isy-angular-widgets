@@ -67,8 +67,7 @@ export class Validation {
       }
     }
 
-    const regexInputUnspecified =
-      /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})|(0{2}\.0{2}\.\d{4})|(0{2}\.0{2}\.0{4})|(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})|(x{2}\.x{2}\.\d{4})|(x{2}\.x{2}\.x{4})$/;
+    const regexInputUnspecified = /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})|(0{2}\.0{2}\.\d{4})|(0{2}\.0{2}\.0{4})|(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})|(x{2}\.x{2}\.\d{4})|(x{2}\.x{2}\.x{4})$/;
 
     if (!(input.match(regexInputUnspecified) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
 
