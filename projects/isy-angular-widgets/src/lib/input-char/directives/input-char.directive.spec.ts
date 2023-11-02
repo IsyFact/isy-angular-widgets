@@ -37,7 +37,7 @@ describe('Integration Tests: InputCharDirective', () => {
     declarations: [InputCharDirective]
   });
 
-  beforeEach(()=> {
+  beforeEach(() => {
     spectator = createdComponent();
     directiveElement = spectator.fixture.debugElement.queryAll(By.directive(InputCharDirective));
     directive = directiveElement[0].injector.get(InputCharDirective);
@@ -48,14 +48,16 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should add an input char button to the input', () => {
-    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button'))
+      .nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
   });
 
   it('should set the input char button to disabled when the input is disabled', (done) => {
     const input = spectator.fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
-    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button'))
+      .nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
@@ -72,7 +74,8 @@ describe('Integration Tests: InputCharDirective', () => {
   it('should set the input char button to disabled when the input is readonly', (done) => {
     const input = spectator.fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
-    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button'))
+      .nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
