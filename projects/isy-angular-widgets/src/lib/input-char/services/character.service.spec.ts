@@ -7,7 +7,7 @@ describe('Unit Tests: CharacterService', () => {
   let spectator: SpectatorService<CharacterService>;
   const createdService = createServiceFactory(CharacterService);
 
-  beforeEach(() => spectator = createdService());
+  beforeEach(() => (spectator = createdService()));
 
   it('should be created', () => {
     expect(spectator.service).toBeTruthy();
