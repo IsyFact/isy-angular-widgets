@@ -1,61 +1,54 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {InputCharPreviewComponent} from './input-char-preview.component';
 import {Zeichenobjekt} from '../../model/model';
 import {By} from '@angular/platform-browser';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
-describe('Unit Tests: InputCharViewComponent', () => {
-  let component: InputCharPreviewComponent;
-  let fixture: ComponentFixture<InputCharPreviewComponent>;
+describe('Unit Tests: InputCharPreviewComponent', () => {
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
+  const createComponent = createComponentFactory(InputCharPreviewComponent);
+  let spectator: Spectator<InputCharPreviewComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [InputCharPreviewComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(InputCharPreviewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   sonderzeichenListe.forEach((zeichenObjekt: Zeichenobjekt) => {
     it(`should show the selected character ${zeichenObjekt.zeichen} in the sans field`, () => {
-      component.zeichenObjekt = zeichenObjekt;
-      fixture.detectChanges();
+      spectator.component.zeichenObjekt = zeichenObjekt;
+      spectator.fixture.detectChanges();
 
-      const serifCharacterPreview = fixture.debugElement.query(By.css('#serif-letter')).nativeElement as HTMLElement;
+      const serifCharacterPreview = spectator.fixture.debugElement.query(By.css('#serif-letter'))
+        .nativeElement as HTMLElement;
       expect(serifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
     });
 
     it(`should show the selected character ${zeichenObjekt.zeichen} sans-serif field`, () => {
-      component.zeichenObjekt = zeichenObjekt;
-      fixture.detectChanges();
+      spectator.component.zeichenObjekt = zeichenObjekt;
+      spectator.fixture.detectChanges();
 
-      const sansSerifCharacterPreview = fixture.debugElement.query(By.css('#sans-letter')).nativeElement as HTMLElement;
+      const sansSerifCharacterPreview = spectator.fixture.debugElement.query(By.css('#sans-letter'))
+        .nativeElement as HTMLElement;
       expect(sansSerifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
     });
 
     it(`should show selected the character ${zeichenObjekt.zeichen} description`, () => {
-      component.zeichenObjekt = zeichenObjekt;
-      fixture.detectChanges();
+      spectator.component.zeichenObjekt = zeichenObjekt;
+      spectator.fixture.detectChanges();
 
-      const characterDescriptionName = fixture.debugElement.query(By.css('#description')).nativeElement as HTMLElement;
+      const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#description'))
+        .nativeElement as HTMLElement;
       expect(characterDescriptionName.innerText).toContain(zeichenObjekt.name);
     });
 
     it(`should show selected the character ${zeichenObjekt.zeichen} codepoint`, () => {
-      component.zeichenObjekt = zeichenObjekt;
-      fixture.detectChanges();
+      spectator.component.zeichenObjekt = zeichenObjekt;
+      spectator.fixture.detectChanges();
 
-      const characterDescriptionName = fixture.debugElement.query(By.css('#codepoint')).nativeElement as HTMLElement;
+      const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#codepoint'))
+        .nativeElement as HTMLElement;
       expect(characterDescriptionName.innerText).toContain(zeichenObjekt.codepoint);
     });
   });
