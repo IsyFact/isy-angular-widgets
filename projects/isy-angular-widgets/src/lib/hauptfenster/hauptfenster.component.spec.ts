@@ -18,9 +18,9 @@ class HauptFensterWrapperComponent {
   @Input() title!: string;
 }
 
-let spectator: Spectator<HauptfensterComponent>;
 
 describe('Unit Tests: HauptfensterComponent', () => {
+  let spectator: Spectator<HauptfensterComponent>;
   const createdComponent = createComponentFactory({
     component: HauptfensterComponent,
     declarations: [MockComponent(Button), MockComponent(MegaMenu), MockComponent(MegaMenuSub)]

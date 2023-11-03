@@ -1,6 +1,5 @@
-import {TestBed} from '@angular/core/testing';
-
 import {DateService} from './date.service';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
 describe('Unit Tests: DateService', () => {
   const DOT = '.';
@@ -8,19 +7,17 @@ describe('Unit Tests: DateService', () => {
   const convertedDate = '01.01.1337';
   const unconvertedDate = 'Wed Jan 01 1337 12:00:00 GMT+0053 (Mitteleuropäische Normalzeit)';
 
-  let service: DateService;
+  let spectator: SpectatorService<DateService>;
+  const createdService = createServiceFactory(DateService);
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DateService);
-  });
+  beforeEach(() => spectator = createdService());
 
   it('should create', () => {
-    expect(service).toBeTruthy();
+    expect(spectator.service).toBeTruthy();
   });
 
   it('should be in german date format', () => {
-    const expected = service.convertToGermanDateFormat(unconvertedDate);
+    const expected = spectator.service.convertToGermanDateFormat(unconvertedDate);
     expect(convertedDate).toEqual(expected);
 
     const firstDot = expected.substring(2, 3);
