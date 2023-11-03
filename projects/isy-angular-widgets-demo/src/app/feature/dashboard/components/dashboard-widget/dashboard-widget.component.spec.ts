@@ -13,7 +13,7 @@ describe('Integration Tests: DashboardWidgetsComponent', () => {
     providers: [TranslateService]
   });
 
-  beforeEach(() => spectator = createdComponent());
+  beforeEach(() => (spectator = createdComponent()));
 
   afterEach(() => {
     spectator.fixture.destroy();

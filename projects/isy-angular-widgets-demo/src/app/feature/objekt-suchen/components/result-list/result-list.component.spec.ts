@@ -13,7 +13,7 @@ describe('Integration Tests: ResultListComponent', () => {
     imports: [TranslateTestingModule.withTranslations({})]
   });
 
-  beforeEach(()=> spectator = createdComponent());
+  beforeEach(() => (spectator = createdComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

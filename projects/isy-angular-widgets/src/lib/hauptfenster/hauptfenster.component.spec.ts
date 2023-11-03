@@ -18,7 +18,6 @@ class HauptFensterWrapperComponent {
   @Input() title!: string;
 }
 
-
 describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
   const createdComponent = createComponentFactory({

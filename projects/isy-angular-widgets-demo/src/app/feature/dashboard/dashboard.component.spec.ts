@@ -15,7 +15,7 @@ describe('Integration Tests: DashboardComponent', () => {
     providers: [TranslateService]
   });
 
-  beforeEach(()=> spectator = createdComponent());
+  beforeEach(() => (spectator = createdComponent()));
 
   /**
    * Expects that the chart was initialized

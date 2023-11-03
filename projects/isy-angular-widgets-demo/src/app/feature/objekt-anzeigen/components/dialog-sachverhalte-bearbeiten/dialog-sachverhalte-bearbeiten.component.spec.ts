@@ -9,7 +9,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
     imports: [TableModule]
   });
 
-  beforeEach(()=> spectator = createdComponent());
+  beforeEach(() => (spectator = createdComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

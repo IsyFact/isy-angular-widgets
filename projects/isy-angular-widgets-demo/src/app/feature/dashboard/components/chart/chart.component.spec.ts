@@ -15,7 +15,7 @@ describe('Integration Tests: ChartComponent', () => {
   const data = barChartData;
   const options = responsiveOptions;
 
-  beforeEach(()=> {
+  beforeEach(() => {
     spectator = createdComponent();
     spectator.component.type = type;
     spectator.component.data = data;

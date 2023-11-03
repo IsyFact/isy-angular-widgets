@@ -19,14 +19,16 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   const createdComponent = createComponentFactory({
     component: ObjektAnzeigenComponent,
     declarations: [],
-    imports: [ObjektAnzeigenModule,
+    imports: [
+      ObjektAnzeigenModule,
       TranslateTestingModule.withTranslations('de', {
         'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
-      })],
+      })
+    ],
     providers: [MessageService]
   });
 
-  beforeEach(()=> {
+  beforeEach(() => {
     spectator = createdComponent();
     messageService = new MessageService();
     userInfoService = new UserInfoPublicService();

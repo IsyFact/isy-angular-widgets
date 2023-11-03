@@ -13,7 +13,7 @@ describe('Integration Tests: DashboardInformationsbereichComponent', () => {
     providers: [TranslateService]
   });
 
-  beforeEach(()=> spectator = createdComponent());
+  beforeEach(() => (spectator = createdComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
