@@ -5,7 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
-import {Validation} from 'projects/isy-angular-widgets/src/public-api';
+import {Validation} from '../../../../../isy-angular-widgets/src/lib/validation/validation';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
