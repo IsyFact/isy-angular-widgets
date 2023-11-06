@@ -24,7 +24,6 @@ describe('IsyIncompleteDateComponent', () => {
     component = fixture.componentInstance;
     onChange = jasmine.createSpy('onChange spy');
     onTouched = jasmine.createSpy('onTouched spy');
-    const x = onChange;
     component.registerOnChange(onChange);
     component.registerOnTouched(onTouched);
   }
