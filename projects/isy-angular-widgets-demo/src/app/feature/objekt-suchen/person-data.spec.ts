@@ -17,7 +17,11 @@ describe('Unit Tests: person-data', () => {
     expect(person.personalien.telefonnummer).toEqual('');
     expect(person.personalien.sicherheitsstufe).toEqual(0);
     expect(person.personalien.geheimdienstnotizen).toEqual('');
-    expect(person.personalien.einreisedatum).toEqual('XX-XX-XXXX');
+    expect(person.personalien.einreisedatum).toEqual('xx.xx.xxxx');
+    expect(person.personalien.abreisedatum).toEqual('xx.xx.xxxx');
+    expect(person.personalien.ablaufdatumReisepass).toEqual('');
+    expect(person.personalien.kreditkartennummer).toEqual('');
+    expect(person.personalien.ablaufdatumKreditkarte).toEqual('');
     expect(person.sachverhalte).toEqual([]);
   });
 
@@ -25,7 +29,7 @@ describe('Unit Tests: person-data', () => {
     person.id = 'id';
     person.personalien.ausweispflichtig = false;
     person.personalien.sicherheitsstufe = 1;
-    person.personalien.einreisedatum = '01-01-2022';
+    person.personalien.einreisedatum = '01.01.2022';
     person.sachverhalte = ['a', 'b'];
     resetPerson(person);
 
@@ -41,7 +45,11 @@ describe('Unit Tests: person-data', () => {
     expect(person.personalien.telefonnummer).toEqual('');
     expect(person.personalien.sicherheitsstufe).toEqual(0);
     expect(person.personalien.geheimdienstnotizen).toEqual('');
-    expect(person.personalien.einreisedatum).toEqual('XX-XX-XXXX');
+    expect(person.personalien.einreisedatum).toEqual('xx.xx.xxxx');
+    expect(person.personalien.abreisedatum).toEqual('xx.xx.xxxx');
+    expect(person.personalien.ablaufdatumReisepass).toEqual('');
+    expect(person.personalien.kreditkartennummer).toEqual('');
+    expect(person.personalien.ablaufdatumKreditkarte).toEqual('');
     expect(person.sachverhalte).toEqual([]);
   });
 });

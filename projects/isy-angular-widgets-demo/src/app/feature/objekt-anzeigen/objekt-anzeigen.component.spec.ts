@@ -81,7 +81,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry'));
     inputFields.dateOfDeparture = fixture.debugElement.query(By.css('#date-of-departure'));
     inputFields.passportExpirationDate = fixture.debugElement.query(By.css('#passport-expiration-date'));
-    inputFields.creditCardNumber = fixture.debugElement.query(By.css('#dcredit-card-number'));
+    inputFields.creditCardNumber = fixture.debugElement.query(By.css('#credit-card-number'));
     inputFields.creditCardExpirationDate = fixture.debugElement.query(By.css('#credit-card-expiration-date'));
   });
 
@@ -102,7 +102,6 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
     expect(inputFields.dateOfDeparture.nativeElement.value).toEqual('xx.xx.2024');
-    expect(inputFields.passportExpirationDate.nativeElement.value).toEqual('');
     expect(inputFields.passportExpirationDate.nativeElement.value).toEqual('');
     expect(inputFields.creditCardNumber.nativeElement.value).toEqual('');
     expect(inputFields.creditCardExpirationDate.nativeElement.value).toEqual('');
