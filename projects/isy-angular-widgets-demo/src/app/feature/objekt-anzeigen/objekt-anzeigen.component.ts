@@ -71,13 +71,16 @@ export class ObjektAnzeigenComponent {
         Validators.maxLength(this.intelligenceNotesMaxLength)
       ),
       // Demo: Validator validUnspecifiedDate - Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY
-      dateOfDeparture : new FormControl(this.person.personalien.abreisedatum, Validation.validUnspecifiedDate),
+      dateOfDeparture: new FormControl(this.person.personalien.abreisedatum, Validation.validUnspecifiedDate),
       // Demo: Validator isInFuture - If the specified value is a valid date, it will be checked if the date is in the future
       passportExpirationDate: new FormControl(this.person.personalien.ablaufdatumReisepass, Validation.isInFuture),
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
       creditCardNumber: new FormControl(this.person.personalien.kreditkartennummer, Validation.validCreditCardNumber),
       // Demo: Validator dateFormat - Checks that the date is a valid date
-      creditCardExpirationDate: new FormControl(this.person.personalien.ablaufdatumKreditkarte, Validation.dateFormat('DD.MM.YYYY', true, 'Ungültig'))
+      creditCardExpirationDate: new FormControl(
+        this.person.personalien.ablaufdatumKreditkarte,
+        Validation.dateFormat('DD.MM.YYYY', true, 'Ungültig')
+      )
     });
     this.personalInfoForm.disable();
   }

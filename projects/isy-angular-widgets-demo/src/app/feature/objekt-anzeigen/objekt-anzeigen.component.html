@@ -186,7 +186,12 @@
           </label>
         </div>
         <div class="col">
-          <p-calendar inputId="passport-expiration-date" dateFormat="dd.mm.yy" formControlName="passportExpirationDate" [showIcon]="true">
+          <p-calendar
+            inputId="passport-expiration-date"
+            dateFormat="dd.mm.yy"
+            formControlName="passportExpirationDate"
+            [showIcon]="true"
+          >
           </p-calendar>
         </div>
         <div class="col-1 text-right align-self-center">
@@ -205,7 +210,13 @@
           </label>
         </div>
         <div class="col-3">
-          <input id="credit-card-expiration-date" formControlName="creditCardExpirationDate" class="w-full" type="text" pInputText />
+          <input
+            id="credit-card-expiration-date"
+            formControlName="creditCardExpirationDate"
+            class="w-full"
+            type="text"
+            pInputText
+          />
         </div>
       </div>
       <div class="grid m-0 mt-5" *isyPermitted="'secretFieldsInputSwitch'">
