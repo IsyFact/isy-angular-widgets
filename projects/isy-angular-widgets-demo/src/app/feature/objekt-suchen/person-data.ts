@@ -19,7 +19,11 @@ export function getEmptyPerson(): Person {
       telefonnummer: '',
       sicherheitsstufe: 0,
       geheimdienstnotizen: '',
-      einreisedatum: 'XX-XX-XXXX'
+      einreisedatum: 'xx.xx.xxxx',
+      abreisedatum: 'xx.xx.xxxx',
+      ablaufdatumReisepass: '',
+      kreditkartennummer: '',
+      ablaufdatumKreditkarte: ''
     },
     sachverhalte: []
   };
@@ -42,6 +46,10 @@ export function resetPerson(person: Person): void {
   person.personalien.telefonnummer = '';
   person.personalien.sicherheitsstufe = 0;
   person.personalien.geheimdienstnotizen = '';
-  person.personalien.einreisedatum = 'XX-XX-XXXX';
+  person.personalien.einreisedatum = 'xx.xx.xxxx';
+  person.personalien.abreisedatum = 'xx.xx.xxxx';
+  person.personalien.ablaufdatumReisepass = '';
+  person.personalien.kreditkartennummer = '';
+  person.personalien.ablaufdatumKreditkarte = '';
   person.sachverhalte = [];
 }

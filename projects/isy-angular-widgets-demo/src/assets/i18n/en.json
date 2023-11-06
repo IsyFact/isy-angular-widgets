@@ -84,13 +84,17 @@
       "optionDivers": "Divers",
       "telefonnummer": "Phone number",
       "einreisedatum": "Date of entry",
+      "abreisedatum": "Date of departure",
+      "ablaufdatumReisepass": "Passport expiration date",
       "ausweispflichtig": "ID required",
       "sicherheitsstufe": "Security level",
       "geheimdienstnotizen": "Intelligence Notes",
       "sachverhalte": "Fact",
       "state": "State",
       "solved": "Solved",
-      "newEntryPlaceholder": "New Entry"
+      "newEntryPlaceholder": "New Entry",
+      "kreditkartennummer": "Credit card number",
+      "ablaufdatumKreditkarte": "Credit card expiration date"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",

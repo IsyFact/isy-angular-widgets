@@ -171,6 +171,43 @@
           </small>
         </div>
       </div>
+      <div class="grid m-0">
+        <div class="col-1 text-right align-self-center">
+          <label for="date-of-departure">
+            {{ 'isyAngularWidgetsDemo.labels.abreisedatum' | translate }}
+          </label>
+        </div>
+        <div class="col">
+          <input id="date-of-departure" formControlName="dateOfDeparture" class="w-full" type="text" pInputText />
+        </div>
+        <div class="col-1 text-right align-self-center">
+          <label class="align-content-end" for="passport-expiration-date">
+            {{ 'isyAngularWidgetsDemo.labels.ablaufdatumReisepass' | translate }}
+          </label>
+        </div>
+        <div class="col">
+          <p-calendar inputId="passport-expiration-date" dateFormat="dd.mm.yy" formControlName="passportExpirationDate" [showIcon]="true">
+          </p-calendar>
+        </div>
+        <div class="col-1 text-right align-self-center">
+          <label for="credit-card-number">
+            {{ 'isyAngularWidgetsDemo.labels.kreditkartennummer' | translate }}
+          </label>
+        </div>
+        <div class="col">
+          <input id="credit-card-number" formControlName="creditCardNumber" class="w-full" type="text" pInputText />
+        </div>
+      </div>
+      <div class="grid m-0">
+        <div class="col-1 text-right align-self-center">
+          <label for="credit-card-expiration-date">
+            {{ 'isyAngularWidgetsDemo.labels.ablaufdatumKreditkarte' | translate }}
+          </label>
+        </div>
+        <div class="col-3">
+          <input id="credit-card-expiration-date" formControlName="creditCardExpirationDate" class="w-full" type="text" pInputText />
+        </div>
+      </div>
       <div class="grid m-0 mt-5" *isyPermitted="'secretFieldsInputSwitch'">
         <div class="col">
           <div class="field field-checkbox">
