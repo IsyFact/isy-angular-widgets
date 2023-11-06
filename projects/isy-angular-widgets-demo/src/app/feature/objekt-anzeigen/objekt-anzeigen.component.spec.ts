@@ -79,6 +79,10 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     inputFields.phoneNumber = fixture.debugElement.query(By.css('#phone-number'));
     inputFields.birthDate = fixture.debugElement.query(By.css('#birth-date'));
     inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry'));
+    inputFields.dateOfDeparture = fixture.debugElement.query(By.css('#date-of-departure'));
+    inputFields.passportExpirationDate = fixture.debugElement.query(By.css('#passport-expiration-date'));
+    inputFields.creditCardNumber = fixture.debugElement.query(By.css('#credit-card-number'));
+    inputFields.creditCardExpirationDate = fixture.debugElement.query(By.css('#credit-card-expiration-date'));
   });
 
   it('creates', () => {
@@ -97,6 +101,10 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(inputFields.phoneNumber.nativeElement.value).toEqual('');
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
+    expect(inputFields.dateOfDeparture.nativeElement.value).toEqual('xx.xx.2024');
+    expect(inputFields.passportExpirationDate.nativeElement.value).toEqual('');
+    expect(inputFields.creditCardNumber.nativeElement.value).toEqual('');
+    expect(inputFields.creditCardExpirationDate.nativeElement.value).toEqual('');
   });
 
   it('should hide button group for saving changes if not in edit mode', () => {

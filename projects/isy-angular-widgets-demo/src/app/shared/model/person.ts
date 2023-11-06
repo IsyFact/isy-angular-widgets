@@ -23,6 +23,10 @@ export interface Personalien {
   sicherheitsstufe: number;
   geheimdienstnotizen: string;
   einreisedatum: string;
+  abreisedatum: string;
+  ablaufdatumReisepass: string;
+  kreditkartennummer: string;
+  ablaufdatumKreditkarte: string;
 }
 
 /**
