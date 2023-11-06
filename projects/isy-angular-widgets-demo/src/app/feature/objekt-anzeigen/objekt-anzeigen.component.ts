@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
+import {Validation} from '../../../../../isy-angular-widgets/src/lib/validation/validation';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -34,7 +35,11 @@ export class ObjektAnzeigenComponent {
       telefonnummer: '',
       geheimdienstnotizen: '',
       sicherheitsstufe: 0,
-      einreisedatum: 'xx.xx.2000'
+      einreisedatum: 'xx.xx.2000',
+      abreisedatum: 'xx.xx.2024',
+      ablaufdatumReisepass: '',
+      kreditkartennummer: '',
+      ablaufdatumKreditkarte: ''
     },
     sachverhalte: [
       'Hat einen Antrag auf BAFÖG gestellt',
@@ -54,7 +59,8 @@ export class ObjektAnzeigenComponent {
       birthplace: new FormControl(this.person.personalien.geburtsort),
       firstName: new FormControl(this.person.personalien.vorname, required),
       gender: new FormControl(this.person.personalien.geschlecht),
-      birthDate: new FormControl(this.person.personalien.geburtsdatum),
+      // Demo: Validator isInPast - If the given value is a valid date, it will be checked if the date is in the past
+      birthDate: new FormControl(this.person.personalien.geburtsdatum, Validation.isInPast),
       nationality: new FormControl(this.person.personalien.staatsangehoerigkeit),
       phoneNumber: new FormControl(this.person.personalien.telefonnummer),
       dateOfEntry: new FormControl(this.person.personalien.einreisedatum),
@@ -63,6 +69,17 @@ export class ObjektAnzeigenComponent {
       intelligenceNotes: new FormControl(
         this.person.personalien.geheimdienstnotizen,
         Validators.maxLength(this.intelligenceNotesMaxLength)
+      ),
+      // Demo: Validator validUnspecifiedDate - Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY
+      dateOfDeparture: new FormControl(this.person.personalien.abreisedatum, Validation.validUnspecifiedDate),
+      // Demo: Validator isInFuture - If the specified value is a valid date, it will be checked if the date is in the future
+      passportExpirationDate: new FormControl(this.person.personalien.ablaufdatumReisepass, Validation.isInFuture),
+      // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
+      creditCardNumber: new FormControl(this.person.personalien.kreditkartennummer, Validation.validCreditCardNumber),
+      // Demo: Validator dateFormat - Checks that the date is a valid date
+      creditCardExpirationDate: new FormControl(
+        this.person.personalien.ablaufdatumKreditkarte,
+        Validation.dateFormat('DD.MM.YYYY', true, 'Ungültig')
       )
     });
     this.personalInfoForm.disable();
