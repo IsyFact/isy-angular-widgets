@@ -1,7 +1,7 @@
 import {SecurityService} from './security-service';
 import {PermissionMaps} from './permission-maps';
 import {UserInfo} from '../api/userinfo';
-import {ActivatedRoute, Route} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, Route, UrlSegment} from '@angular/router';
 import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
 /**
@@ -30,9 +30,19 @@ function getUserInfo(): UserInfo {
   };
 }
 
+/**
+ * builds an activated route snapshot
+ * @returns an activated route snapshot object
+ */
+function buildSnapshot(): ActivatedRouteSnapshot {
+  const snapshot = new ActivatedRouteSnapshot();
+  snapshot.url = [new UrlSegment('dashboard', {})];
+  return snapshot;
+}
+
 describe('SecurityService', () => {
   let spectator: SpectatorService<SecurityService>;
-  let activatedRoute: ActivatedRoute;
+  const snapshot = buildSnapshot();
   const userInfoData = getUserInfo();
   const route: Route = {
     title: 'Dashboard',
@@ -48,39 +58,13 @@ describe('SecurityService', () => {
       dashboard: ['admin', 'user']
     }
   };
-
-  const activatedRouteProvider = {
-    provide: ActivatedRoute,
-    useValue: {
-      snapshot: {
-        data: {
-          title: 'Dashboard'
-        },
-        outlet: 'primary',
-        routerConfig: {
-          data: {
-            title: 'Dashboard'
-          },
-          path: 'dashboard'
-        },
-        url: [
-          {
-            path: 'dashboard',
-            parameters: {}
-          }
-        ]
-      }
-    }
-  };
-
   const createdService = createServiceFactory({
     service: SecurityService,
-    providers: [{provide: ActivatedRoute, useValue: activatedRouteProvider}]
+    providers: [{provide: ActivatedRoute, useValue: {}}]
   });
 
   beforeEach(() => {
     spectator = createdService();
-    activatedRoute = new ActivatedRoute();
   });
 
   it('should be created', () => {
@@ -94,8 +78,7 @@ describe('SecurityService', () => {
     });
 
     it('should not access route without roles and permissions', () => {
-      console.log(activatedRoute.snapshot);
-      const isRoutePermittedObservable = spectator.service.checkRoutePermission(activatedRoute.snapshot);
+      const isRoutePermittedObservable = spectator.service.checkRoutePermission(snapshot);
       isRoutePermittedObservable.subscribe((isRoutePermitted) => {
         expect(isRoutePermitted).toBeFalse();
       });
@@ -118,7 +101,7 @@ describe('SecurityService', () => {
 
     it('should route with correctly permissions', () => {
       setupRolesAndPermissions(spectator.service, userInfoData, permissionsData);
-      const isRoutePermittedObservable = spectator.service.checkRoutePermission(activatedRoute.snapshot);
+      const isRoutePermittedObservable = spectator.service.checkRoutePermission(snapshot);
       isRoutePermittedObservable.subscribe((isRoutePermitted) => {
         expect(isRoutePermitted).toBeTrue();
       });
