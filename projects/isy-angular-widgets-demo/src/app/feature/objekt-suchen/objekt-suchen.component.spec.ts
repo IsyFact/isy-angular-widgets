@@ -70,9 +70,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     Object.keys(form.controls).forEach((key) => {
       if (checkEmpty) {
         expect(form.get(key)?.value).toEqual('');
-      }
-
-      if (!checkEmpty) {
+      } else {
         expect(form.get(key)?.value).not.toEqual('');
       }
     });
