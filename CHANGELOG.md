@@ -1,8 +1,10 @@
+# 15.1.1 -
+## Fixes
+- ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
 # 15.1.0 - 07.11.2023 
 ## Features
 - ISY-345: Wechsel in nächsten Datum-Abschnitt mit Punkt-Taste für ungewisses Datum-Eingabefeld möglich
 ## Fixes
-- ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
 - ISY-500: Liberation Font wird jetzt korrekt als Fallback Schriftart verwendet
 ## Enhancements
 - ISY-451: Die Dokumentation der Bibliothek ist auf [GitHub Pages](https://isyfact.github.io/isy-angular-widgets/) verfügbar
