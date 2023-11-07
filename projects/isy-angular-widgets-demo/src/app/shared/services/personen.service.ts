@@ -123,7 +123,11 @@ export class PersonenService {
           telefonnummer: '',
           sicherheitsstufe: 0,
           geheimdienstnotizen: '',
-          einreisedatum: 'XX-XX-XXXX'
+          einreisedatum: 'xx.xx.xxxx',
+          abreisedatum: 'xx.xx.xxxx',
+          ablaufdatumReisepass: '',
+          kreditkartennummer: '',
+          ablaufdatumKreditkarte: ''
         },
         sachverhalte: []
       }
@@ -171,7 +175,11 @@ export class PersonenService {
         telefonnummer: '',
         sicherheitsstufe: 0,
         geheimdienstnotizen: '',
-        einreisedatum: 'XX-XX-XXXX'
+        einreisedatum: 'xx.xx.xxxx',
+        abreisedatum: 'xx.xx.xxxx',
+        ablaufdatumReisepass: '',
+        kreditkartennummer: '',
+        ablaufdatumKreditkarte: ''
       },
       sachverhalte: []
     };

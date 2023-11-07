@@ -84,13 +84,17 @@
       "optionDivers": "Divers",
       "telefonnummer": "Telefonnummer",
       "einreisedatum": "Einreisedatum",
+      "abreisedatum": "Abreisedatum",
+      "ablaufdatumReisepass": "Ablaufdatum des Reisepasses",
       "ausweispflichtig": "Ausweispflichtig",
       "sicherheitsstufe": "Sicherheitsstufe",
       "geheimdienstnotizen": "Geheimdienst Notizen",
       "sachverhalte": "Sachverhalt",
       "state": "Status",
       "solved": "Gelöst",
-      "newEntryPlaceholder": "Neuer Eintrag"
+      "newEntryPlaceholder": "Neuer Eintrag",
+      "kreditkartennummer": "Kreditkartennummer",
+      "ablaufdatumKreditkarte": "Ablaufdatum der Kreditkarte"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",
