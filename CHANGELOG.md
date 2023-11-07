@@ -10,14 +10,9 @@
 - ISY-451: Die Dokumentation der Bibliothek ist auf [GitHub Pages](https://isyfact.github.io/isy-angular-widgets/) verfügbar
 - ISY-469: Es wurden fehlende Aria-Labels, Input-IDs hinzugefügt und falsch gesetzten IDs entfernt, um die Barrierefreiheit zu erhöhen
 ## Demo-Anwendung
-<<<<<<< HEAD
-- ISY-378: Hinzufügen von Validatoren auf der Objekt-Anzeigen-Seite
-- ISY-360: Verhalten nach Navigation auf eine nicht existierende Seite
-=======
 - ISY-378: Hinzufügen Beispielen für Validatoren auf der Objekt-Anzeigen-Seite
 - ISY-303: Automatisierte Code-Formatierung mit Prettier
 - ISY-360: Beim Versuch auf nicht vorhandene Seiten zu navigieren wird jetzt eine Fehlerseite angezeigt
->>>>>>> main
 - ISY-516: Entfernen von automatischen Ausblenden von Toast-Notifications
 
 # 15.0.1 - 5.10.2023
