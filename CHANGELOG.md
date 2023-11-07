@@ -1,4 +1,4 @@
-# 15.1.0 - 06.11.2023 
+# 15.1.0 - 07.11.2023 
 ## Features
 - ISY-345: Wechsel in nächsten Datum-Abschnitt mit Punkt-Taste für ungewisses Datum-Eingabefeld möglich
 ## Fixes
