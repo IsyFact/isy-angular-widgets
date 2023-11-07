@@ -235,4 +235,12 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   onChange: (_: unknown) => unknown = () => {};
 
   onTouched: () => void = () => {};
+
+  castToString(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
+
+  castToKeyboardEvent(event: Event): KeyboardEvent {
+    return event as KeyboardEvent;
+  }
 }

@@ -1,10 +1,10 @@
 <p-inputMask
   [readonly]="readonly"
   [disabled]="disabled"
-  (onInput)="onChange($any($event.target).value)"
+  (onInput)="onChange(castToString($event))"
   (onBlur)="onBlur()"
   (onComplete)="onComplete()"
-  (onKeydown)="onKeydown($any($event))"
+  (onKeydown)="onKeydown(castToKeyboardEvent($event))"
   mask="**.**.****"
   [(ngModel)]="inputValue"
   characterPattern="^[x]"
