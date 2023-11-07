@@ -3,6 +3,7 @@
 - ISY-303: Automatisierte Code-Formatierung mit Prettier
 - ISY-345: Wechsel in nächsten Datum-Abschnitt mit Punk-Taste für ungewisses Datum-Eingabefeld
 ## Fixes
+- ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
 - ISY-500: Liberation Font wird jetzt korrekt als Fallback Schriftart verwendet
 ## Enhancements
 - ISY-451: Die Dokumentation der Bibliothek ist auf GitHub Pages verfügbar
