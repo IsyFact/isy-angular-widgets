@@ -1,13 +1,13 @@
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {By} from '@angular/platform-browser';
-import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
 import data from '../../../assets/permissions.json';
 import {DebugElement} from '@angular/core';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
+import {MessageService} from 'primeng/api';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Integration Tests: PersonBearbeitenComponent', () => {
   let messageService: MessageService;
@@ -81,6 +81,10 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(inputFields.phoneNumber.nativeElement.value).toEqual('');
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
+    expect(inputFields.dateOfDeparture.nativeElement.value).toEqual('xx.xx.2024');
+    expect(inputFields.passportExpirationDate.nativeElement.value).toEqual('');
+    expect(inputFields.creditCardNumber.nativeElement.value).toEqual('');
+    expect(inputFields.creditCardExpirationDate.nativeElement.value).toEqual('');
   });
 
   it('should hide button group for saving changes if not in edit mode', () => {
