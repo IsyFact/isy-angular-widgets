@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -68,6 +68,10 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Currently displayed date string
    */
   inputValue: string = '';
+
+  // To align with PrimeNG API
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() onInput: EventEmitter<Event> = new EventEmitter<Event>();
 
   @ViewChild(InputMask) field?: InputMask;
 
@@ -203,6 +207,10 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
     this.onTouched();
     this.onChange(this.inputValue);
+  }
+
+  onInputChange(event: Event): void {
+    this.onInput.emit(event);
   }
 
   /**
