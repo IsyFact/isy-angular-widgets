@@ -111,12 +111,12 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * E.g. unspecified dates: x. -> xx, 1. -> 01
    * @param event KeyboardEvent
    */
-  onKeydown(event: KeyboardEvent): void {
+  onKeydown(event: Event): void {
     let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
     const dayPartEndPos = 3;
     const monthPartEndPos = 6;
 
-    if (event.key === '.' && inputMousePosition < monthPartEndPos) {
+    if (event instanceof KeyboardEvent && event.key === '.' && inputMousePosition < monthPartEndPos) {
       const input = event.target as HTMLInputElement;
       const [day, month, year] = input.value.split('.');
       let partDay = `${day}`;
@@ -235,12 +235,4 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   onChange: (_: unknown) => unknown = () => {};
 
   onTouched: () => void = () => {};
-
-  castToString(event: Event): string {
-    return (event.target as HTMLInputElement).value;
-  }
-
-  castToKeyboardEvent(event: Event): KeyboardEvent {
-    return event as KeyboardEvent;
-  }
 }
