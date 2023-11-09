@@ -56,15 +56,18 @@ export class IncompleteDateService {
     const formats = date.split('.');
     const dateKeys = ['day', 'month', 'year'];
 
-    const dateObject = dateKeys.reduce<DateObject>((object: DateObject, element: string, index: number) => {
-      let partOfFormat = formats[index];
+    const dateObject = dateKeys.reduce<DateObject>(
+      (object: DateObject, element: string, index: number) => {
+        let partOfFormat = formats[index];
 
-      if (partOfFormat.includes(this.DATE_CHAR)) {
-        partOfFormat = this.DATE_CHAR.repeat(partOfFormat.length);
-      }
+        if (partOfFormat.includes(this.DATE_CHAR)) {
+          partOfFormat = this.DATE_CHAR.repeat(partOfFormat.length);
+        }
 
-      return {...object, [element]: partOfFormat};
-    }, {day: '', month: '', year: ''});
+        return {...object, [element]: partOfFormat};
+      },
+      {day: '', month: '', year: ''}
+    );
 
     const dateStr = Object.values(dateObject).join('.');
 
