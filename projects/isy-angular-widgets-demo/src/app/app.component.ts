@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserInfo} from '../../../isy-angular-widgets/src/lib/api/userinfo';
 import {SecurityService} from '../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
-import data from '../assets/permissions.json';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {Subscription} from 'rxjs';
@@ -11,6 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {WidgetsTranslation} from '../../../isy-angular-widgets/src/lib/i18n/widgets-translation';
 import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/widgets-config.service';
+import {permissions} from './app.permission';
 
 @Component({
   selector: 'demo-root',
@@ -26,8 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
   primeNGI18nSubscription: Subscription;
   isyAngularWidgetsI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
-
-  languages: string[] = [];
 
   constructor(
     private securityService: SecurityService,
@@ -64,8 +62,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.securityService.setRoles(this.userInfoPublicService.getUserInfo());
-    this.securityService.setPermissions(data);
-    //this.changeLanguage(this.selectedLanguage);
+
+    // Permission to role mapping could also be loaded from server or a file
+    this.securityService.setPermissions(permissions);
 
     // Solution with promise usage needs to many lines of code and promise is not needed for this use case
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -73,8 +72,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
       this.items = await this.menuTranslationService.translateMegaMenuItems(applicationMenu);
     });
-
-    this.languages = this.translate.getLangs();
   }
 
   ngOnDestroy(): void {

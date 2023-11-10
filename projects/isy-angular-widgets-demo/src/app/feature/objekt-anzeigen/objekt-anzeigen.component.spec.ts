@@ -12,7 +12,7 @@ import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
-import data from '../../../assets/permissions.json';
+import {permissions} from '../../app.permission';
 import {DebugElement} from '@angular/core';
 
 describe('Integration Tests: PersonBearbeitenComponent', () => {
@@ -61,7 +61,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   function setupRolesAndPermissions(): void {
     const userInfoData = userInfoService.getUserInfo();
     securityService.setRoles(userInfoData);
-    securityService.setPermissions(data);
+    securityService.setPermissions(permissions);
     component.showSecretFields = true;
     fixture.detectChanges();
   }
@@ -76,7 +76,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     inputFields.birthName = fixture.debugElement.query(By.css('#birth-name'));
     inputFields.birthplace = fixture.debugElement.query(By.css('#birth-place'));
     inputFields.nationality = fixture.debugElement.query(By.css('#nationality'));
-    inputFields.gender = fixture.debugElement.query(By.css('p-dropdown:has(#gender) .p-inputtext'));
+    inputFields.gender = fixture.debugElement.query(By.css('p-dropdown:has(#gender)'));
     inputFields.phoneNumber = fixture.debugElement.query(By.css('#phone-number'));
     inputFields.birthDate = fixture.debugElement.query(By.css('#birth-date'));
     inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry'));
@@ -98,7 +98,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(inputFields.birthName.nativeElement.value.trim()).toEqual('Mustermann');
     expect(inputFields.birthplace.nativeElement.value).toEqual('Köln');
     expect(inputFields.nationality.nativeElement.value).toEqual('Deutsch');
-    expect(inputFields.gender.nativeElement.textContent).toEqual('Männlich');
+    expect(inputFields.gender.nativeElement.innerText).toEqual('Männlich');
     expect(inputFields.phoneNumber.nativeElement.value).toEqual('');
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
