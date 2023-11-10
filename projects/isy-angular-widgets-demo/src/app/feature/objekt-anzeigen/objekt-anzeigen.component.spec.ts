@@ -98,7 +98,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(inputFields.birthName.nativeElement.value.trim()).toEqual('Mustermann');
     expect(inputFields.birthplace.nativeElement.value).toEqual('Köln');
     expect(inputFields.nationality.nativeElement.value).toEqual('Deutsch');
-    expect(inputFields.gender.nativeElement.innerText).toEqual('Männlich');
+    expect(inputFields.gender.nativeElement.textContent).toEqual('Männlich');
     expect(inputFields.phoneNumber.nativeElement.value).toEqual('');
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');

@@ -25,7 +25,7 @@
     <p-dropdown
       id="language-selector"
       class="ml-2"
-      [options]="translate.getLangs()"
+      [options]="languages"
       [(ngModel)]="selectedLanguage"
       (onChange)="changeLanguage($event.value)"
       [ariaLabel]="'isyAngularWidgetsDemo.settings.languages.label' | translate"
@@ -51,9 +51,16 @@
       dataKey="role"
       optionValue="permission"
       [ariaLabel]="'isyAngularWidgetsDemo.settings.languages.label' | translate"
-      [options]="dropdownPermissionsData"
+      [options]="[
+        {role: 'Admin', permission: 'admin'},
+        {role: 'User', permission: 'user'}
+      ]"
       (onChange)="selectPermission($event.value)"
     >
+      <!--  Workaround since PrimeNG 16.7.x ist not able to display optionValue -->
+      <ng-template pTemplate="selectedItem" *ngIf="userInfo.roles">
+        <span>{{ userInfo.roles[0] }}</span>
+      </ng-template>
     </p-dropdown>
   </div>
   <main>
