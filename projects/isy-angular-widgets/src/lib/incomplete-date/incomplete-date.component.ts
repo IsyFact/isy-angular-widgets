@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
-
-import {Component, forwardRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -71,6 +69,10 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   inputValue: string = '';
 
+  // To align with PrimeNG API
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() onInput: EventEmitter<Event> = new EventEmitter<Event>();
+
   @ViewChild(InputMask) field?: InputMask;
 
   /**
@@ -84,8 +86,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   ngOnInit(): void {
     // Enable syntax <isy-incomplete-date readonly /> (isReadOnly has value "" which is true as boolean)
-    this.readonly = this.readonly || '' === (this.readonly as any);
-    this.disabled = this.disabled || '' === (this.disabled as any);
+    this.readonly = this.readonly || '' === (this.readonly as unknown);
+    this.disabled = this.disabled || '' === (this.disabled as unknown);
   }
 
   /**
@@ -113,12 +115,12 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * E.g. unspecified dates: x. -> xx, 1. -> 01
    * @param event KeyboardEvent
    */
-  onKeydown(event: KeyboardEvent): void {
+  onKeydown(event: Event): void {
     let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
     const dayPartEndPos = 3;
     const monthPartEndPos = 6;
 
-    if (event.key === '.' && inputMousePosition < monthPartEndPos) {
+    if (event instanceof KeyboardEvent && event.key === '.' && inputMousePosition < monthPartEndPos) {
       const input = event.target as HTMLInputElement;
       const [day, month, year] = input.value.split('.');
       let partDay = `${day}`;
@@ -127,6 +129,15 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
       const partDayReplaced = partDay.replace(/_/g, '');
       const partMonthReplaced = partMonth.replace(/_/g, '');
       const dateUnspecifiedChar = 'x';
+      const cursorPositionAtFirstDayLetter = 0;
+      const cursorPositionAtSecondDayLetter = 1;
+      const cursorPositionAtDotAfterDayLetter = 2;
+      const cursorPositionAtFirstMonthLetter = 3;
+      const cursorPositionAtSecondMonthLetter = 4;
+      const cursorPositionAtDotAfterMonthLetter = 5;
+      const onePosition = 1;
+      const twoPositions = 2;
+      const threePositions = 3;
 
       if (partDayReplaced.length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
 
@@ -142,23 +153,20 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
       const dateStr = [partDay, partMonth, partYear].join('.');
       input.value = this.inputValue = dateStr;
 
-      // Mouse position (specific fixed numbers required)
-      /* eslint-disable @typescript-eslint/no-magic-numbers */
       switch (inputMousePosition) {
-        case 0:
-        case 3:
-          inputMousePosition += 3;
+        case cursorPositionAtFirstDayLetter:
+        case cursorPositionAtFirstMonthLetter:
+          inputMousePosition += threePositions;
           break;
-        case 1:
-        case 4:
-          inputMousePosition += 2;
+        case cursorPositionAtSecondDayLetter:
+        case cursorPositionAtSecondMonthLetter:
+          inputMousePosition += twoPositions;
           break;
-        case 2:
-        case 5:
-          inputMousePosition += 1;
+        case cursorPositionAtDotAfterDayLetter:
+        case cursorPositionAtDotAfterMonthLetter:
+          inputMousePosition += onePosition;
           break;
       }
-      /* eslint-enable @typescript-eslint/no-magic-numbers */
 
       input.setSelectionRange(inputMousePosition, inputMousePosition);
       this.onChange(this.inputValue);
@@ -192,7 +200,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   onBlur(): void {
     this.inputValue = this.incompleteDateService.transformValue(this.inputValue, this.dateInPastConstraint);
-    const input = this.field?.inputViewChild.nativeElement as HTMLInputElement;
+    const input = this.field?.inputViewChild!.nativeElement as HTMLInputElement;
     input.value = this.inputValue;
 
     if (this.inputValue.includes('_')) input.value = '';
@@ -201,13 +209,17 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     this.onChange(this.inputValue);
   }
 
+  onInputChange(event: Event): void {
+    this.onInput.emit(event);
+  }
+
   /**
    * Reports the value back to the parent form
    * Calls the given function on component change
    * @param fn The function to be called on component change
    */
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
+  registerOnChange(fn: unknown): void {
+    this.onChange = fn as () => unknown;
   }
 
   /**
@@ -215,8 +227,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Calls the given function on component touch
    * @param fn The function to be called on component touch
    */
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+  registerOnTouched(fn: unknown): void {
+    this.onTouched = fn as () => unknown;
   }
 
   /**
@@ -228,7 +240,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     this.disabled = isDisabled;
   }
 
-  onChange: Function = (_: any) => {};
+  onChange: (_: unknown) => unknown = () => {};
 
-  onTouched: Function = () => {};
+  onTouched: () => void = () => {};
 }

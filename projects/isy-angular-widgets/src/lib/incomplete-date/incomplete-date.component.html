@@ -1,7 +1,7 @@
 <p-inputMask
   [readonly]="readonly"
   [disabled]="disabled"
-  (onInput)="onChange($event.target.value)"
+  (onInput)="onInputChange($event)"
   (onBlur)="onBlur()"
   (onComplete)="onComplete()"
   (onKeydown)="onKeydown($event)"

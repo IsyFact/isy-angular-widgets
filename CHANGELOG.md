@@ -1,3 +1,11 @@
+# 16.0.0 - 10.11.2023
+## Breaking Changes
+- ISY-144 Upgrade Angular und PrimeNG Bibliothek auf Version 16
+  * `WidgetsConfigService#getTranslation` erlaubt jetzt auch Werte vom Typ `undefined`
+
+## Features
+- `IncompleteDate`: Registrierung auf `onInput`-Output ist jetzt möglich
+
 # 15.1.0 - 07.11.2023 
 ## Features
 - ISY-345: Wechsel in nächsten Datum-Abschnitt mit Punkt-Taste für ungewisses Datum-Eingabefeld möglich

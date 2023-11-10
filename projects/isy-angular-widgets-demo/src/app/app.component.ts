@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserInfo} from '../../../isy-angular-widgets/src/lib/api/userinfo';
 import {SecurityService} from '../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
-import data from '../assets/permissions.json';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {Subscription} from 'rxjs';
@@ -11,7 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {WidgetsTranslation} from '../../../isy-angular-widgets/src/lib/i18n/widgets-translation';
 import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/widgets-config.service';
-import {dropdownPermissionsData} from './dropdown-permissions-data';
+import {permissions} from './app.permission';
 
 @Component({
   selector: 'demo-root',
@@ -19,7 +18,6 @@ import {dropdownPermissionsData} from './dropdown-permissions-data';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  protected readonly dropdownPermissionsData = dropdownPermissionsData;
   items: MegaMenuItem[] = [];
   sidebarItems: MenuItem[] = [];
   userInfo: UserInfo = {
@@ -54,17 +52,21 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  // Change language and save it in local storage
   changeLanguage(language: string): void {
-    this.translate.use(language);
+    // Since Angular and PrimeNG 16 dropdown emits change events if angular form module writes initial null values.
+    // Currently, it's not clear, if firing the onChange Event from PrimeNG on initial null values or triggering value accessors for initial null values from Angular Forms is inappropriate
+    if (language) {
+      this.translate.use(language);
+    }
   }
 
   ngOnInit(): void {
     this.securityService.setRoles(this.userInfoPublicService.getUserInfo());
-    this.securityService.setPermissions(data);
 
-    this.changeLanguage(this.selectedLanguage);
+    // Permission to role mapping could also be loaded from server or a file
+    this.securityService.setPermissions(permissions);
 
+    // Solution with promise usage needs to many lines of code and promise is not needed for this use case
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     this.translate.onLangChange.subscribe(async () => {
       this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);

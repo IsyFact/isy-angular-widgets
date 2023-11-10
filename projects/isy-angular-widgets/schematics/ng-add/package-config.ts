@@ -12,6 +12,8 @@ interface PackageJson {
   dependencies: Record<string, string>;
 }
 
+const FILE_NAME = 'package.json';
+
 /**
  * Sorts the keys of the given object.
  * @param obj Record to be sorted
@@ -35,8 +37,11 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
  */
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
   const spacesNum = 2;
-  if (host.exists('package.json')) {
-    const sourceText = host.read('package.json')!.toString('utf-8');
+  if (host.exists(FILE_NAME)) {
+    // Node Buffer is not supported in Browser context but schematics is executed with node and not with browser
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+    const sourceText = host.read(FILE_NAME)!.toString('utf-8') as string;
+
     const json = JSON.parse(sourceText) as PackageJson;
 
     if (!json.dependencies) {
@@ -48,7 +53,7 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
       json.dependencies = sortObjectByKeys(json.dependencies);
     }
 
-    host.overwrite('package.json', JSON.stringify(json, null, spacesNum));
+    host.overwrite(FILE_NAME, JSON.stringify(json, null, spacesNum));
   }
 
   return host;
@@ -61,11 +66,13 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
  * @returns Null or the package version as a string
  */
 export function getPackageVersionFromPackageJson(tree: Tree, name: string): string | null {
-  if (!tree.exists('package.json')) {
+  if (!tree.exists(FILE_NAME)) {
     return null;
   }
 
-  const packageJson = JSON.parse(tree.read('package.json')!.toString('utf8')) as PackageJson;
+  // Node Buffer is not supported in Browser context but schematics is executed with node and not with browser
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument
+  const packageJson = JSON.parse(tree.read(FILE_NAME)!.toString('utf8')) as PackageJson;
 
   return packageJson.dependencies[name] ? packageJson.dependencies[name] : null;
 }

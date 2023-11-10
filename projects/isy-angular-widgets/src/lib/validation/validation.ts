@@ -1,5 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import moment from 'moment';
+import moment, {MomentInput} from 'moment';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
@@ -12,10 +12,9 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {FUTURE: true} if the validation fails; null otherwise
    */
-  static isInFuture(c: AbstractControl): ValidationErrors | null {
+  static isInFuture(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
     if (dateValue.isValid() && dateValue.isSameOrBefore(today)) {
       return {FUTURE: true};
@@ -30,10 +29,9 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {PAST: true} if the validation fails; null otherwise
    */
-  static isInPast(c: AbstractControl): ValidationErrors | null {
+  static isInPast(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
     if (dateValue.isValid() && dateValue.isSameOrAfter(today)) {
       return {PAST: true};
@@ -70,7 +68,7 @@ export class Validation {
     }
 
     const regexInputUnspecified =
-      /^(0{2}\.([0-1][1-2]|[1][0-2])\.\d{4})|(0{2}\.0{2}\.\d{4})|(0{2}\.0{2}\.0{4})|(x{2}\.([0-1][1-2]|[1][0-2])\.\d{4})|(x{2}\.x{2}\.\d{4})|(x{2}\.x{2}\.x{4})$/;
+      /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(0{2}\.0{2}\.\d{4})$|^(0{2}\.0{2}\.0{4})$|^(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(x{2}\.x{2}\.\d{4})$|^(x{2}\.x{2}\.x{4})$/;
 
     if (!(input.match(regexInputUnspecified) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
 
@@ -85,13 +83,11 @@ export class Validation {
    * @returns A validator function with the given configuration
    */
   static dateFormat(dateFormat: string, strict: boolean, messageKey: string): ValidatorFn {
-    return (c: AbstractControl): ValidationErrors | null => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    return (c: AbstractControl<MomentInput>): ValidationErrors | null => {
       const input = c.value;
       if (!input) {
         return null;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const parsedDate = moment(input, dateFormat, strict);
       if (!dateFormat || !parsedDate || !parsedDate.isValid()) {
         return {[messageKey]: {format: dateFormat}};
@@ -158,18 +154,20 @@ export class Validation {
     }
 
     // Execution of the Luhn algorithm (specific fixed numbers required)
-    /* eslint-disable @typescript-eslint/no-magic-numbers */
+    const radix = 10;
+    const digitsMultiplier = 2;
     let nCheck = 0;
     let bEven = false;
+
     value = value.replace(/\D/g, '');
 
     for (let n = value.length - 1; n >= 0; n--) {
       const cDigit = value.charAt(n);
-      let nDigit = parseInt(cDigit, 10);
+      let nDigit = parseInt(cDigit, radix);
 
       if (bEven) {
-        if ((nDigit *= 2) > 9) {
-          nDigit -= 9;
+        if ((nDigit *= digitsMultiplier) > radix - 1) {
+          nDigit -= radix - 1;
         }
       }
 
@@ -177,11 +175,9 @@ export class Validation {
       bEven = !bEven;
     }
 
-    if (nCheck % 10 !== 0) {
+    if (nCheck % radix !== 0) {
       return {CREDITCARD: true};
     }
-
-    /* eslint-enable @typescript-eslint/no-magic-numbers */
 
     return null;
   }
