@@ -1,4 +1,4 @@
-import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed} from '@angular/core/testing';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {CalendarModule} from 'primeng/calendar';
@@ -21,6 +21,9 @@ import {DateService} from './services/date.service';
 import {Observable} from 'rxjs';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {ObjektSuchenModule} from './objekt-suchen.module';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -29,9 +32,20 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   const unconvertedDate = 'Wed Jan 01 1337 12:00:00 GMT+0053 (Mitteleuropäische Normalzeit)';
   const emptyEntry = '';
 
-  let component: ObjektSuchenComponent;
-  let fixture: ComponentFixture<ObjektSuchenComponent>;
   let dateService: DateService;
+  let spectator: Spectator<ObjektSuchenComponent>;
+  const createdComponent = createComponentFactory({
+    component: ObjektSuchenComponent,
+    imports: [ObjektSuchenModule, TranslateModule.forRoot(), RouterTestingModule],
+    providers: [TranslateService, MessageService]
+  });
+
+  beforeEach(() => {
+    spectator = createdComponent();
+    dateService = new DateService();
+  });
+
+  afterEach(() => spectator.fixture.destroy());
 
   /**
    * Checks the reset of a person
@@ -131,19 +145,19 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    * Set values to the form
    */
   function setupFormValues(): void {
-    component.displayWizard();
-    expect(component.openWizard).toBeTrue();
+    spectator.component.displayWizard();
+    expect(spectator.component.openWizard).toBeTrue();
 
-    component.initReactiveForms();
+    spectator.component.initReactiveForms();
 
-    component.idForm.controls.id.setValue('0');
+    spectator.component.idForm.controls.id.setValue('0');
 
-    const persoenlicheInfoForm = component.persoenlicheInformationenForm;
+    const persoenlicheInfoForm = spectator.component.persoenlicheInformationenForm;
     persoenlicheInfoForm.controls.vorname.setValue('vorname');
     persoenlicheInfoForm.controls.nachname.setValue('nachname');
     persoenlicheInfoForm.controls.geschlecht.setValue('geschlecht');
 
-    const geburtsInfoForm = component.geburtsInformationenForm;
+    const geburtsInfoForm = spectator.component.geburtsInformationenForm;
     geburtsInfoForm.controls.geburtsname.setValue('geburtsname');
     geburtsInfoForm.controls.geburtsort.setValue('geburtsort');
     geburtsInfoForm.controls.geburtsdatum.setValue('01.01.2023');
@@ -155,10 +169,10 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    * @param person the person where used for initializing the form
    */
   function setupEditForm(person: Person): void {
-    component.editSelectedPerson(person);
-    fixture.detectChanges();
+    spectator.component.editSelectedPerson(person);
+    spectator.fixture.detectChanges();
 
-    const editForm = component.editForm;
+    const editForm = spectator.component.editForm;
 
     editForm.controls.editID.setValue(person.id);
     editForm.controls.editVorname.setValue(person.personalien.vorname);
@@ -175,95 +189,66 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    */
   function addNewEntryToPersonenList(): void {
     const person = getInitPerson();
-    component.personen$.subscribe((list) => {
+    spectator.component.personen$.subscribe((list) => {
       list.unshift(person);
     });
   }
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ObjektSuchenComponent, ResultListComponent, PersoenlicheInformationenComponent],
-      imports: [
-        RouterTestingModule,
-        CalendarModule,
-        TableModule,
-        DropdownModule,
-        SecurityModule,
-        FormsModule,
-        ReactiveFormsModule,
-        WizardModule,
-        ToastModule,
-        RouterTestingModule,
-        BrowserAnimationsModule,
-        PanelModule,
-        DialogModule,
-        TranslateTestingModule.withTranslations({}),
-        InputCharModule
-      ],
-      providers: [SecurityService, MessageService, DateService]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(ObjektSuchenComponent);
-    component = fixture.componentInstance;
-    dateService = TestBed.inject(DateService);
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   it('should check the forms array length', () => {
     const numberOfForms = 3;
-    expect(component.allWizardForms.length).toEqual(numberOfForms);
+    expect(spectator.component.allWizardForms.length).toEqual(numberOfForms);
   });
 
   it('should check the forms array content', () => {
-    expect(component.allWizardForms[0]).toEqual(component.idForm);
-    expect(component.allWizardForms[1]).toEqual(component.persoenlicheInformationenForm);
-    expect(component.allWizardForms[2]).toEqual(component.geburtsInformationenForm);
+    expect(spectator.component.allWizardForms[0]).toEqual(spectator.component.idForm);
+    expect(spectator.component.allWizardForms[1]).toEqual(spectator.component.persoenlicheInformationenForm);
+    expect(spectator.component.allWizardForms[2]).toEqual(spectator.component.geburtsInformationenForm);
   });
 
   it('should check the status booleans on init', () => {
-    expect(component.openWizard).toBeFalse();
-    expect(component.isFormValid).toBeFalse();
+    expect(spectator.component.openWizard).toBeFalse();
+    expect(spectator.component.isFormValid).toBeFalse();
   });
 
   it('should check the actions after closing the wizard', () => {
-    component.onWizardClose(false);
-    fixture.detectChanges();
-    expectPersonToBeReseted(component.neuePerson);
-    expectFormControlsToBeReseted(component.idForm);
-    expectFormControlsToBeReseted(component.persoenlicheInformationenForm);
-    expectFormControlsToBeReseted(component.geburtsInformationenForm);
+    spectator.component.onWizardClose(false);
+    spectator.fixture.detectChanges();
+    expectPersonToBeReseted(spectator.component.neuePerson);
+    expectFormControlsToBeReseted(spectator.component.idForm);
+    expectFormControlsToBeReseted(spectator.component.persoenlicheInformationenForm);
+    expectFormControlsToBeReseted(spectator.component.geburtsInformationenForm);
   });
 
   it('should check the incoming save status - false (never arrives)', () => {
-    component.getSavedStatus(false);
-    expect(component.openWizard).toBeFalse();
+    spectator.component.getSavedStatus(false);
+    expect(spectator.component.openWizard).toBeFalse();
   });
 
   it('should check the incoming save status - true (client clicks on wizard save button)', fakeAsync(() => {
     const person = getInitPerson();
     setupEditForm(person);
 
-    component.getSavedStatus(true);
+    spectator.component.getSavedStatus(true);
 
-    const toast = fixture.nativeElement.querySelector('#notification-toast') as HTMLElement;
+    const toast = spectator.fixture.nativeElement.querySelector('#notification-toast') as HTMLElement;
     const toastPosition = 'top-right';
     expect(toast.getAttribute('position')).toEqual(toastPosition);
   }));
 
   it('should check the functionality on arriving wizard index (on init => index = 0)', () => {
     const wizardIndex = 0;
-    component.getWizardIndex(wizardIndex);
+    spectator.component.getWizardIndex(wizardIndex);
 
-    const idForm = component.allWizardForms[0];
+    const idForm = spectator.component.allWizardForms[0];
     const id = idForm.get('id');
     expect(id?.errors).not.toBeNull();
     expectFormValuesAreEmpty(idForm, true);
 
-    const personalInfoForm = component.allWizardForms[1];
+    const personalInfoForm = spectator.component.allWizardForms[1];
     const vorname = personalInfoForm.get('vorname');
     expect(vorname?.errors).toBeNull();
     const nachname = personalInfoForm.get('nachname');
@@ -272,7 +257,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(geschlecht?.errors).not.toBeNull();
     expectFormValuesAreEmpty(personalInfoForm, true);
 
-    const birthForm = component.allWizardForms[2];
+    const birthForm = spectator.component.allWizardForms[2];
     const geburtsname = personalInfoForm.get('geburtsname');
     expect(geburtsname?.errors).not.toBeNull();
     const geburtsort = personalInfoForm.get('geburtsort');
@@ -283,52 +268,52 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(geburtsdatum?.errors).not.toBeNull();
     expectFormValuesAreEmpty(birthForm, true);
 
-    expect(component.isFormValid).toBeFalse();
+    expect(spectator.component.isFormValid).toBeFalse();
   });
 
   it('should check the functionality on arriving wizard index (index = 1)', () => {
     const wizardIndex = 1;
-    const currentForm = component.allWizardForms[wizardIndex - 1];
+    const currentForm = spectator.component.allWizardForms[wizardIndex - 1];
     currentForm.get('id')?.setValue('id');
-    component.getWizardIndex(wizardIndex);
+    spectator.component.getWizardIndex(wizardIndex);
 
     expectFormIsValid(currentForm);
     expectFormValuesAreEmpty(currentForm, false);
 
-    fixture.detectChanges();
-    expect(component.isFormValid).toBeFalse();
+    spectator.fixture.detectChanges();
+    expect(spectator.component.isFormValid).toBeFalse();
   });
 
   it('should check the functionality on arriving wizard index (index = 2)', () => {
     const wizardIndex = 2;
-    const currentForm = component.allWizardForms[wizardIndex - 1];
+    const currentForm = spectator.component.allWizardForms[wizardIndex - 1];
     currentForm.get('vorname')?.setValue('vorname');
     currentForm.get('nachname')?.setValue('nachname');
     currentForm.get('geschlecht')?.setValue('geschlecht');
-    component.getWizardIndex(wizardIndex);
+    spectator.component.getWizardIndex(wizardIndex);
 
     expectFormIsValid(currentForm);
     expectFormValuesAreEmpty(currentForm, false);
-    expect(component.isFormValid).toBeFalse();
+    expect(spectator.component.isFormValid).toBeFalse();
   });
 
   it('should check the functionality on arriving wizard index (index = 3)', () => {
     const wizardIndex = 2;
-    const currentForm = component.allWizardForms[wizardIndex];
+    const currentForm = spectator.component.allWizardForms[wizardIndex];
     currentForm.get('geburtsname')?.setValue('geburtsname');
     currentForm.get('geburtsort')?.setValue('geburtsort');
     currentForm.get('staatsangehoerigkeit')?.setValue('Malta');
     currentForm.get('geburtsdatum')?.setValue('01-01-2000');
-    component.getWizardIndex(wizardIndex);
+    spectator.component.getWizardIndex(wizardIndex);
 
     expectFormIsValid(currentForm);
     expectFormValuesAreEmpty(currentForm, false);
-    expect(component.isFormValid).toBeTrue();
+    expect(spectator.component.isFormValid).toBeTrue();
   });
 
   it('should check the id form validation on init', () => {
-    const form = component.idForm;
-    const id = component.idForm.get('id');
+    const form = spectator.component.idForm;
+    const id = spectator.component.idForm.get('id');
 
     id!.setValue('id');
     expect(id!.errors).toBeNull();
@@ -360,21 +345,21 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should check for the id form the values change event', () => {
-    const id = component.idForm.get('id');
+    const id = spectator.component.idForm.get('id');
     const validValue = 'id';
 
     id!.setValue(validValue);
-    expect(component.neuePerson.id).toEqual(validValue);
-    expect(component.idForm.valid).toBeTrue();
+    expect(spectator.component.neuePerson.id).toEqual(validValue);
+    expect(spectator.component.idForm.valid).toBeTrue();
     expect(id?.errors).toBeNull();
   });
 
   it('should check the birth form on init', () => {
-    const form = component.geburtsInformationenForm;
-    const geburtsname = component.geburtsInformationenForm.get('geburtsname');
-    const geburtsort = component.geburtsInformationenForm.get('geburtsort');
-    const staatsangehoerigkeit = component.geburtsInformationenForm.get('staatsangehoerigkeit');
-    const geburtsdatum = component.geburtsInformationenForm.get('geburtsdatum');
+    const form = spectator.component.geburtsInformationenForm;
+    const geburtsname = spectator.component.geburtsInformationenForm.get('geburtsname');
+    const geburtsort = spectator.component.geburtsInformationenForm.get('geburtsort');
+    const staatsangehoerigkeit = spectator.component.geburtsInformationenForm.get('staatsangehoerigkeit');
+    const geburtsdatum = spectator.component.geburtsInformationenForm.get('geburtsdatum');
     expect(form.valid).toBeFalse();
 
     expect(geburtsname!.errors).not.toBeNull();
@@ -415,33 +400,33 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should check the incoming open wizard event', () => {
-    expect(component.openWizard).toBeFalse();
+    expect(spectator.component.openWizard).toBeFalse();
 
-    component.displayWizard();
-    expect(component.openWizard).toBeTrue();
+    spectator.component.displayWizard();
+    expect(spectator.component.openWizard).toBeTrue();
 
-    expect(component.openWizard).toBeTrue();
+    expect(spectator.component.openWizard).toBeTrue();
 
-    component.displayWizard();
-    expect(component.openWizard).toBeFalse();
+    spectator.component.displayWizard();
+    expect(spectator.component.openWizard).toBeFalse();
   });
 
   it('should check the inner HTML Text of the ID Input field', () => {
-    component.openWizard = true;
-    fixture.detectChanges();
+    spectator.component.openWizard = true;
+    spectator.fixture.detectChanges();
 
-    const idLabel = fixture.nativeElement.querySelector('label#id-label');
+    const idLabel = spectator.fixture.nativeElement.querySelector('label#id-label');
     expect(idLabel.textContent).toEqual('ID');
   });
 
   it('should check the reactive forms init', () => {
-    component.initReactiveForms();
+    spectator.component.initReactiveForms();
 
     const expectedLength = 3;
-    expect(component.allWizardForms.length).toEqual(expectedLength);
-    expect(component.allWizardForms[0]).toEqual(component.idForm);
-    expect(component.allWizardForms[1]).toEqual(component.persoenlicheInformationenForm);
-    expect(component.allWizardForms[2]).toEqual(component.geburtsInformationenForm);
+    expect(spectator.component.allWizardForms.length).toEqual(expectedLength);
+    expect(spectator.component.allWizardForms[0]).toEqual(spectator.component.idForm);
+    expect(spectator.component.allWizardForms[1]).toEqual(spectator.component.persoenlicheInformationenForm);
+    expect(spectator.component.allWizardForms[2]).toEqual(spectator.component.geburtsInformationenForm);
   });
 
   it('should check the german date format', () => {
@@ -459,116 +444,116 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should check the opening of the wizard while adding a new person', () => {
-    expect(component.openWizard).toBeFalse();
-    component.displayWizard();
-    expect(component.openWizard).toBeTrue();
+    expect(spectator.component.openWizard).toBeFalse();
+    spectator.component.displayWizard();
+    expect(spectator.component.openWizard).toBeTrue();
   });
 
   it('should check the opening of the wizard while adding a new person - embedded call', () => {
-    expect(component.openWizard).toBeFalse();
-    component.openAddNewObjectDialog();
-    expect(component.openWizard).toBeTrue();
+    expect(spectator.component.openWizard).toBeFalse();
+    spectator.component.openAddNewObjectDialog();
+    expect(spectator.component.openWizard).toBeTrue();
   });
 
   it('should check the opening of the dialog for editing a person', () => {
-    expect(component.openWizard).toBeFalse();
-    component.openAddNewObjectDialog();
-    expect(component.openWizard).toBeTrue();
+    expect(spectator.component.openWizard).toBeFalse();
+    spectator.component.openAddNewObjectDialog();
+    expect(spectator.component.openWizard).toBeTrue();
   });
 
   it('should check the cleared search functionality', () => {
     const person = getInitPerson();
     setupEditForm(person);
-    component.clearSearch();
-    expectPersonToBeEmpty(component.person);
-    expectArrayIsEmpty(component.personen$, true);
+    spectator.component.clearSearch();
+    expectPersonToBeEmpty(spectator.component.person);
+    expectArrayIsEmpty(spectator.component.personen$, true);
   });
 
   it('should check the addition of a new person', () => {
     setupFormValues();
-    expect(component.openWizard).toBeTrue();
+    expect(spectator.component.openWizard).toBeTrue();
 
     const person = getInitPerson();
     setupEditForm(person);
-    const newPerson = component.getNewAddedPerson();
+    const newPerson = spectator.component.getNewAddedPerson();
 
-    const idForm = component.idForm;
+    const idForm = spectator.component.idForm;
     expect(idForm.controls.id.value).toEqual(newPerson.id);
 
-    const persoenlicheInfoForm = component.persoenlicheInformationenForm;
+    const persoenlicheInfoForm = spectator.component.persoenlicheInformationenForm;
     expect(persoenlicheInfoForm.controls.vorname.value).toEqual(newPerson.personalien.vorname);
     expect(persoenlicheInfoForm.controls.nachname.value).toEqual(newPerson.personalien.nachname);
     expect(persoenlicheInfoForm.controls.geschlecht.value).toEqual(newPerson.personalien.geschlecht);
 
-    const geburtsInfoForm = component.geburtsInformationenForm;
+    const geburtsInfoForm = spectator.component.geburtsInformationenForm;
     expect(geburtsInfoForm.controls.geburtsname.value).toEqual(newPerson.personalien.geburtsname);
     expect(geburtsInfoForm.controls.geburtsort.value).toEqual(newPerson.personalien.geburtsort);
     expect(geburtsInfoForm.controls.geburtsdatum.value).toEqual(newPerson.personalien.geburtsdatum);
     expect(geburtsInfoForm.controls.staatsangehoerigkeit.value).toEqual(newPerson.personalien.staatsangehoerigkeit);
 
-    const personenList = component.personen$;
+    const personenList = spectator.component.personen$;
     expectArrayIsEmpty(personenList, true);
-    component.addNewPerson();
+    spectator.component.addNewPerson();
     expectArrayIsEmpty(personenList, false);
   });
 
   it('should check the edit of a person', () => {
-    expect(component.openWizard).toBeFalse();
-    component.openAddNewObjectDialog();
-    expect(component.openWizard).toBeTrue();
+    expect(spectator.component.openWizard).toBeFalse();
+    spectator.component.openAddNewObjectDialog();
+    expect(spectator.component.openWizard).toBeTrue();
 
     const person = getInitPerson();
-    expect(component.editForm).toBeUndefined();
+    expect(spectator.component.editForm).toBeUndefined();
 
-    component.editSelectedPerson(person);
+    spectator.component.editSelectedPerson(person);
 
-    expect(component.selectedPerson).toEqual(person);
-    expect(component.editForm).not.toBeUndefined();
+    expect(spectator.component.selectedPerson).toEqual(person);
+    expect(spectator.component.editForm).not.toBeUndefined();
   });
 
   it('should check saving of an existing edited person', () => {
     const person = getInitPerson();
-    component.personen$.subscribe((list) => {
+    spectator.component.personen$.subscribe((list) => {
       list.unshift(person);
     });
 
     setupEditForm(person);
-    component.editSelectedPerson(person);
+    spectator.component.editSelectedPerson(person);
 
-    expect(component.selectedPerson!.personalien.vorname).toEqual(person.personalien.vorname);
-    expect(component.editForm).not.toBeUndefined();
+    expect(spectator.component.selectedPerson!.personalien.vorname).toEqual(person.personalien.vorname);
+    expect(spectator.component.editForm).not.toBeUndefined();
     const newValue = 'edit';
-    component.editForm.controls.editVorname.setValue(newValue);
-    expect(component.selectedPerson!.personalien.vorname).not.toEqual(component.editForm.controls.editVorname.value);
-    component.saveChanges();
-    expect(component.selectedPerson!.personalien.vorname).toEqual(component.editForm.controls.editVorname.value);
+    spectator.component.editForm.controls.editVorname.setValue(newValue);
+    expect(spectator.component.selectedPerson!.personalien.vorname).not.toEqual(spectator.component.editForm.controls.editVorname.value);
+    spectator.component.saveChanges();
+    expect(spectator.component.selectedPerson!.personalien.vorname).toEqual(spectator.component.editForm.controls.editVorname.value);
 
-    expect(component.openEditForm).toBeFalse();
-    expect(component.allowSave).toBeFalse();
+    expect(spectator.component.openEditForm).toBeFalse();
+    expect(spectator.component.allowSave).toBeFalse();
   });
 
   it('should check if save button is active', () => {
     const person = getInitPerson();
-    component.personen$.subscribe((list) => {
+    spectator.component.personen$.subscribe((list) => {
       list.unshift(person);
     });
 
     setupEditForm(person);
-    component.editSelectedPerson(person);
+    spectator.component.editSelectedPerson(person);
 
-    expect(component.allowSave).toBeFalse();
-    const storedValue = component.editForm.controls.editVorname.value;
-    component.editForm.controls.editVorname.setValue('edit');
-    expect(component.allowSave).toBeTrue();
-    component.editForm.controls.editVorname.setValue(storedValue);
-    expect(component.allowSave).toBeFalse();
+    expect(spectator.component.allowSave).toBeFalse();
+    const storedValue = spectator.component.editForm.controls.editVorname.value;
+    spectator.component.editForm.controls.editVorname.setValue('edit');
+    expect(spectator.component.allowSave).toBeTrue();
+    spectator.component.editForm.controls.editVorname.setValue(storedValue);
+    expect(spectator.component.allowSave).toBeFalse();
   });
 
   it('should check if save button is active', () => {
-    let enableClearSearch = component.enableClearSearch();
+    let enableClearSearch = spectator.component.enableClearSearch();
     expect(enableClearSearch).toBeFalse();
     addNewEntryToPersonenList();
-    enableClearSearch = component.enableClearSearch();
+    enableClearSearch = spectator.component.enableClearSearch();
     expect(enableClearSearch).toBeTrue();
   });
 });

@@ -1,4 +1,3 @@
-import {ComponentFixture} from '@angular/core/testing';
 import {ResultListComponent} from './result-list.component';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
@@ -7,9 +6,6 @@ import {Panel} from 'primeng/panel';
 import {Table} from 'primeng/table';
 
 describe('Integration Tests: ResultListComponent', () => {
-  let component: ResultListComponent;
-  let fixture: ComponentFixture<ResultListComponent>;
-
   let spectator: Spectator<ResultListComponent>;
   const createdComponent = createComponentFactory({
     component: ResultListComponent,
@@ -20,10 +16,10 @@ describe('Integration Tests: ResultListComponent', () => {
   beforeEach(() => (spectator = createdComponent()));
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   it('should not be selected by default', () => {
-    expect(component.selectedObject).toBeUndefined();
+    expect(spectator.component.selectedObject).toBeUndefined();
   });
 });
