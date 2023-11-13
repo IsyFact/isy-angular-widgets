@@ -1,8 +1,8 @@
-import {TestBed} from '@angular/core/testing';
 import {SecurityService} from './security-service';
 import {PermissionMaps} from './permission-maps';
 import {UserInfo} from '../api/userinfo';
-import {ActivatedRoute, Route} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, Route, UrlSegment} from '@angular/router';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
 /**
  *
@@ -31,9 +31,19 @@ function getUserInfo(): UserInfo {
   };
 }
 
+/**
+ * builds an activated route snapshot
+ * @returns an activated route snapshot object
+ */
+function buildSnapshot(): ActivatedRouteSnapshot {
+  const snapshot = new ActivatedRouteSnapshot();
+  snapshot.url = [new UrlSegment('dashboard', {})];
+  return snapshot;
+}
+
 describe('Integration Test: SecurityService', () => {
-  let service: SecurityService;
-  let activatedRoute: ActivatedRoute;
+  let spectator: SpectatorService<SecurityService>;
+  const snapshot = buildSnapshot();
   const userInfoData = getUserInfo();
   const route: Route = {
     title: 'Dashboard',
@@ -51,57 +61,32 @@ describe('Integration Test: SecurityService', () => {
     }
   };
 
-  const activatedRouteProvider = {
-    provide: ActivatedRoute,
-    useValue: {
-      snapshot: {
-        data: {
-          title: 'Dashboard'
-        },
-        outlet: 'primary',
-        routerConfig: {
-          data: {
-            title: 'Dashboard'
-          },
-          path: 'dashboard'
-        },
-        url: [
-          {
-            path: 'dashboard',
-            parameters: {}
-          }
-        ]
-      }
-    }
-  };
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [SecurityService, activatedRouteProvider]
-    });
-    service = TestBed.inject(SecurityService);
-    activatedRoute = TestBed.inject(ActivatedRoute);
+  const createdService = createServiceFactory({
+    service: SecurityService,
+    providers: [{provide: ActivatedRoute, useValue: {}}]
   });
 
+  beforeEach(() => spectator = createdService());
+
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(spectator.service).toBeTruthy();
   });
 
   describe('Integration Test: SecurityGuard - Unavailable roles and permissions', function () {
     it('should not access HTML element without roles and permissions', () => {
-      const isElementPermitted = service.checkElementPermission('personenSuche');
+      const isElementPermitted = spectator.service.checkElementPermission('personenSuche');
       expect(isElementPermitted).toBeFalse();
     });
 
     it('should not access route without roles and permissions', () => {
-      const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
+      const isRoutePermittedObservable = spectator.service.checkRoutePermission(snapshot);
       isRoutePermittedObservable.subscribe((isRoutePermitted) => {
         expect(isRoutePermitted).toBeFalse();
       });
     });
 
     it('should not access async route without roles and permissions', () => {
-      const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
+      const isLoadRoutePermittedObservable = spectator.service.checkLoadRoutePermission(route);
       isLoadRoutePermittedObservable.subscribe((isLoadRoutePermitted) => {
         expect(isLoadRoutePermitted).toBeFalse();
       });
@@ -110,22 +95,22 @@ describe('Integration Test: SecurityService', () => {
 
   describe('Integration Test: SecurityGuard - Available roles and permissions', function () {
     it('should access HTML element with correctly permissions', () => {
-      setupRolesAndPermissions(service, userInfoData, permissionsData);
-      const isElementPermitted = service.checkElementPermission('personenSuche');
+      setupRolesAndPermissions(spectator.service, userInfoData, permissionsData);
+      const isElementPermitted = spectator.service.checkElementPermission('personenSuche');
       expect(isElementPermitted).toBeTrue();
     });
 
     it('should route with correctly permissions', () => {
-      setupRolesAndPermissions(service, userInfoData, permissionsData);
-      const isRoutePermittedObservable = service.checkRoutePermission(activatedRoute.snapshot);
+      setupRolesAndPermissions(spectator.service, userInfoData, permissionsData);
+      const isRoutePermittedObservable = spectator.service.checkRoutePermission(snapshot);
       isRoutePermittedObservable.subscribe((isRoutePermitted) => {
         expect(isRoutePermitted).toBeTrue();
       });
     });
 
     it('should route async with correctly permissions', () => {
-      setupRolesAndPermissions(service, userInfoData, permissionsData);
-      const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
+      setupRolesAndPermissions(spectator.service, userInfoData, permissionsData);
+      const isLoadRoutePermittedObservable = spectator.service.checkLoadRoutePermission(route);
       isLoadRoutePermittedObservable.subscribe((isLoadRoutePermitted) => {
         expect(isLoadRoutePermitted).toBeTrue();
       });

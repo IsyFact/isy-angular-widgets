@@ -1,6 +1,4 @@
 import {Validation} from './validation';
-
-import {TestBed} from '@angular/core/testing';
 import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 import moment from 'moment';
 
@@ -8,10 +6,6 @@ import moment from 'moment';
  * Unit-Test der IsyValidators Klasse.
  */
 describe('Unit Test: Validation', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-  });
-
   /**
    * Expects that error have to be defined
    * @param errors Current errors list
@@ -48,9 +42,7 @@ describe('Unit Test: Validation', () => {
     it('should return UNSPECIFIEDDATE if the day is invalid', () => {
       const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('50.11.2023');
-
       const errors = Validation.validUnspecifiedDate(control);
-
       errorHaveToBeDefined(errors, errorKey);
     });
 

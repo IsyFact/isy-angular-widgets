@@ -1,43 +1,39 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ChartComponent} from './chart.component';
 import {ChartModule} from 'primeng/chart';
 import {responsiveOptions} from '../../data/chart-configs';
 import {barChartData} from '../../data/chart-data';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Integration Tests: ChartComponent', () => {
-  let component: ChartComponent;
-  let fixture: ComponentFixture<ChartComponent>;
+  let spectator: Spectator<ChartComponent>;
+  const createdComponent = createComponentFactory({
+    component: ChartComponent,
+    imports: [ChartModule]
+  });
 
   const type = 'bar';
   const data = barChartData;
   const options = responsiveOptions;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ChartComponent],
-      imports: [ChartModule]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(ChartComponent);
-    component = fixture.componentInstance;
-    component.type = type;
-    component.data = data;
-    component.options = options;
-    fixture.detectChanges();
+  beforeEach(() => {
+    spectator = createdComponent();
+    spectator.component.type = type;
+    spectator.component.data = data;
+    spectator.component.options = options;
+    spectator.fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   it('should have be correctly initialized', () => {
-    expect(component.chart.type).toEqual(type);
-    expect(component.chart.data).toEqual(data);
-    expect(component.chart.options).toEqual(options);
+    expect(spectator.component.chart.type).toEqual(type);
+    expect(spectator.component.chart.data).toEqual(data);
+    expect(spectator.component.chart.options).toEqual(options);
   });
 
   it('should be responsive', () => {
-    expect(component.chart.responsive).toBeTrue();
+    expect(spectator.component.chart.responsive).toBeTrue();
   });
 });

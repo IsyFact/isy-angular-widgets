@@ -1,27 +1,21 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {DashboardInformationsbereichComponent} from './dashboard-informationsbereich.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
-import {PanelMenuModule} from 'primeng/panelmenu';
+import {PanelMenu} from 'primeng/panelmenu';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {MockComponent} from 'ng-mocks';
 
 describe('Integration Tests: DashboardInformationsbereichComponent', () => {
-  let component: DashboardInformationsbereichComponent;
-  let fixture: ComponentFixture<DashboardInformationsbereichComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [DashboardInformationsbereichComponent],
-      imports: [PanelMenuModule, TranslateModule.forRoot()],
-      providers: [TranslateService, MenuTranslationService]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(DashboardInformationsbereichComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  let spectator: Spectator<DashboardInformationsbereichComponent>;
+  const createdComponent = createComponentFactory({
+    component: DashboardInformationsbereichComponent,
+    declarations: [MockComponent(PanelMenu)],
+    imports: [TranslateModule.forRoot()],
+    providers: [TranslateService]
   });
 
+  beforeEach(() => (spectator = createdComponent()));
+
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

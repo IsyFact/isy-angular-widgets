@@ -3,22 +3,21 @@ import {TestBed} from '@angular/core/testing';
 import {CharacterService} from './character.service';
 import {Schriftzeichengruppe} from '../model/model';
 import {Datentyp} from '../model/datentyp';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
 describe('Unit Tests: CharacterService', () => {
-  let service: CharacterService;
+  let spectator: SpectatorService<CharacterService>;
+  const createdService = createServiceFactory(CharacterService);
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(CharacterService);
-  });
+  beforeEach(() => (spectator = createdService()));
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(spectator.service).toBeTruthy();
   });
 
   const numberOfSonderZeichen = 908;
   it(`should return ${numberOfSonderZeichen} characters`, () => {
-    expect(service.getCharacters().length).toEqual(numberOfSonderZeichen);
+    expect(spectator.service.getCharacters().length).toEqual(numberOfSonderZeichen);
   });
 
   const groupCounts = new Map<Schriftzeichengruppe, number>([
@@ -34,7 +33,7 @@ describe('Unit Tests: CharacterService', () => {
   groupCounts.forEach((expectedCount, schriftzeichengruppe) => {
     it(`should return ${expectedCount} characters with Schriftzeichengruppe ${schriftzeichengruppe}`, () => {
       expect(
-        service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
+          spectator.service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
       ).toEqual(expectedCount);
     });
   });
@@ -70,7 +69,7 @@ describe('Unit Tests: CharacterService', () => {
   ]);
   baseCounts.forEach((expectedCount, base) => {
     it(`should return ${expectedCount} characters with Grundzeichen ${base}`, () => {
-      expect(service.getCharacters().filter((character) => character.grundzeichen === base).length).toEqual(
+      expect(spectator.service.getCharacters().filter((character) => character.grundzeichen === base).length).toEqual(
         expectedCount
       );
     });
@@ -132,23 +131,23 @@ describe('Unit Tests: CharacterService', () => {
       const numberOfCharacters = testData.characters;
 
       it(`should return ${numberOfSchriftzeichenGruppen} Schriftzeichengruppen`, () => {
-        expect(service.getGroupsByDataType(datentyp).length).toEqual(numberOfSchriftzeichenGruppen);
+        expect(spectator.service.getGroupsByDataType(datentyp).length).toEqual(numberOfSchriftzeichenGruppen);
       });
 
       it(`should return ${numberOfCharacters} characters`, () => {
-        expect(service.getCharactersByDataType(datentyp).length).toEqual(numberOfCharacters);
+        expect(spectator.service.getCharactersByDataType(datentyp).length).toEqual(numberOfCharacters);
       });
 
       testData.expectedSchriftzeichengruppen.forEach((expectedSchriftzeichengruppe) => {
         it(`should contain ${expectedSchriftzeichengruppe}`, () => {
           for (const expectedSchriftzeichengruppe of testData.expectedSchriftzeichengruppen) {
-            expect(service.getGroupsByDataType(datentyp)).toContain(expectedSchriftzeichengruppe);
+            expect(spectator.service.getGroupsByDataType(datentyp)).toContain(expectedSchriftzeichengruppe);
           }
         });
       });
 
       it('should not contain unexpected Schriftzeichengruppen', () => {
-        const schriftzeichengruppen = service.getGroupsByDataType(datentyp);
+        const schriftzeichengruppen = spectator.service.getGroupsByDataType(datentyp);
         for (const schriftzeichengruppe of schriftzeichengruppen) {
           expect(testData.expectedSchriftzeichengruppen).toContain(schriftzeichengruppe);
         }
@@ -159,7 +158,7 @@ describe('Unit Tests: CharacterService', () => {
   const DIN_91379_CHARS = ['ḗ', 'ē̍', 'ō̍', '̍', '′', '″'];
   DIN_91379_CHARS.forEach((character) => {
     it(`should contain DIN 91379 special character ${character}`, () => {
-      const filteredResult = service.getCharacters().find((item) => item.zeichen === character);
+      const filteredResult = spectator.service.getCharacters().find((item) => item.zeichen === character);
       expect(filteredResult).toBeTruthy();
     });
   });
