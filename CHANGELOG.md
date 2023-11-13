@@ -1,3 +1,7 @@
+# 16.0.1 - 
+## Fixes
+- ISY-375 - Analyse: Einsatz von ng-mocks
+
 # 16.0.0 - 10.11.2023
 ## Breaking Changes
 - ISY-144 Upgrade Angular und PrimeNG Bibliothek auf Version 16
