@@ -1,11 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDialogComponent} from './input-char-dialog.component';
 import {By} from '@angular/platform-browser';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {SelectButton} from 'primeng/selectbutton';
-import {Accordion} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputCharModule} from '../../input-char.module';
 import {MockComponent} from 'ng-mocks';
@@ -15,9 +11,11 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 
-let spectator: Spectator<InputCharDialogComponent>;
-describe('Unit Tests: InputCharDialogComponent', () => {
 const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
+let spectator: Spectator<InputCharDialogComponent>;
+
+describe('Unit Tests: InputCharDialogComponent', () => {
+  const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
   const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
   const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
 
@@ -196,8 +194,6 @@ const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 });
 
 describe('Integration Tests: InputCharDialogComponent', () => {
-  const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
-
   const createdComponent = createComponentFactory({
     component: InputCharDialogComponent,
     imports: [InputCharModule, BrowserAnimationsModule]

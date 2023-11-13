@@ -47,10 +47,8 @@ let wizard: WizardComponent;
 let stepper: StepperComponent;
 let contentChildren: QueryList<WizardDirective>;
 
-
 describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let spectator: Spectator<TestComponent>;
-
   const createdComponent = createComponentFactory({
     component: TestComponent,
     imports: [WizardModule, RouterTestingModule, IncompleteDateModule]

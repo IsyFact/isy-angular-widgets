@@ -1,5 +1,3 @@
-import {TestBed} from '@angular/core/testing';
-
 import {CharacterService} from './character.service';
 import {Schriftzeichengruppe} from '../model/model';
 import {Datentyp} from '../model/datentyp';
@@ -33,7 +31,7 @@ describe('Unit Tests: CharacterService', () => {
   groupCounts.forEach((expectedCount, schriftzeichengruppe) => {
     it(`should return ${expectedCount} characters with Schriftzeichengruppe ${schriftzeichengruppe}`, () => {
       expect(
-          spectator.service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
+        spectator.service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
       ).toEqual(expectedCount);
     });
   });
