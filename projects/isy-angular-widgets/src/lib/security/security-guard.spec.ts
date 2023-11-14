@@ -1,37 +1,14 @@
-import {TestBed} from '@angular/core/testing';
 import {SecurityService} from './security-service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, UrlSegment} from '@angular/router';
 import {AuthGuard} from './security-guard';
 import {of} from 'rxjs';
 import {PermissionMaps} from './permission-maps';
 import {UserInfo} from '../api/userinfo';
 import SpyObj = jasmine.SpyObj;
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
+import {TestBed} from '@angular/core/testing';
 
-let guard: AuthGuard;
-let activatedRoute: ActivatedRoute;
-let securityService: SecurityService;
 let fakeCounterService: SpyObj<AuthGuard>;
-const activatedRouteProvider = {
-  provide: ActivatedRoute,
-  useValue: {
-    data: {
-      title: 'Dashboard'
-    },
-    outlet: 'primary',
-    routerConfig: {
-      data: {
-        title: 'Dashboard'
-      },
-      path: 'dashboard'
-    },
-    url: [
-      {
-        parameters: {},
-        path: 'dashboard'
-      }
-    ]
-  }
-};
 
 /**
  * Setting up the fake counter service
@@ -55,25 +32,55 @@ function getUserInfo(): UserInfo {
   };
 }
 
-describe('Integration Test: SecurityGuard - without setting up roles and permissions', function () {
-  beforeEach(() => {
-    setupFakeCounterService(false);
-    TestBed.configureTestingModule({
-      declarations: [],
-      imports: [],
-      providers: [{provide: AuthGuard, useValue: fakeCounterService}, SecurityService, activatedRouteProvider]
-    });
+/**
+ * builds an activated route snapshot
+ * @returns an activated route snapshot object
+ */
+function buildSnapshot(): ActivatedRouteSnapshot {
+  const snapshot = new ActivatedRouteSnapshot();
+  snapshot.url = [new UrlSegment('dashboard', {})];
+  return snapshot;
+}
 
-    guard = TestBed.inject(AuthGuard);
-    activatedRoute = TestBed.inject(ActivatedRoute);
+let securityService: SecurityService;
+const snapshot = buildSnapshot();
+const activatedRouteProvider = {
+  provide: ActivatedRoute,
+  useValue: {
+    data: {
+      title: 'Dashboard'
+    },
+    outlet: 'primary',
+    routerConfig: {
+      data: {
+        title: 'Dashboard'
+      },
+      path: 'dashboard'
+    },
+    url: [
+      {
+        parameters: {},
+        path: 'dashboard'
+      }
+    ]
+  }
+};
+
+describe('Integration Test: SecurityGuard - without setting up roles and permissions', function () {
+  let spectator: SpectatorService<AuthGuard>;
+  const createdService = createServiceFactory({
+    service: AuthGuard,
+    providers: [{provide: AuthGuard, useValue: {}}]
   });
 
+  beforeEach(() => spectator = createdService());
+
   it('should create', () => {
-    expect(guard).toBeTruthy();
+    expect(spectator.service).toBeTruthy();
   });
 
   it('should not activate because no roles setup', () => {
-    const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
+    const canActivateObservable = spectator.service.canActivate(snapshot);
     void canActivateObservable.forEach((canActivate) => {
       expect(canActivate).toBeFalse();
     });
@@ -81,6 +88,7 @@ describe('Integration Test: SecurityGuard - without setting up roles and permiss
 });
 
 describe('Integration Test: SecurityGuard - with setting up roles and permissions', function () {
+  let guard: AuthGuard;
   const permissionsData: PermissionMaps = {
     elements: {
       personenSuche: ['admin', 'user'],
@@ -102,7 +110,6 @@ describe('Integration Test: SecurityGuard - with setting up roles and permission
 
     guard = TestBed.inject(AuthGuard);
     securityService = TestBed.inject(SecurityService);
-    activatedRoute = TestBed.inject(ActivatedRoute);
 
     const userInfoData = getUserInfo();
     securityService.setRoles(userInfoData);
@@ -114,7 +121,7 @@ describe('Integration Test: SecurityGuard - with setting up roles and permission
   });
 
   it('should activate - with roles set up', () => {
-    const canActivateObservable = guard.canActivate(activatedRoute.snapshot);
+    const canActivateObservable = guard.canActivate(snapshot);
     void canActivateObservable.forEach((canActivate) => {
       expect(canActivate).toBeTrue();
     });

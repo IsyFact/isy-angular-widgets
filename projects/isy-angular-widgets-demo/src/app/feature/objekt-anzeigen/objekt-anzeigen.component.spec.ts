@@ -13,7 +13,6 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 describe('Integration Tests: PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
-  let messageService: MessageService;
   let userInfoService: UserInfoPublicService;
   let securityService: SecurityService;
   const inputFields: {[key: string]: DebugElement & {disabled?: boolean}} = {};
@@ -33,7 +32,6 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
 
   beforeEach(() => {
     spectator = createdComponent();
-    messageService = new MessageService();
     userInfoService = new UserInfoPublicService();
     securityService = new SecurityService();
 
@@ -189,11 +187,4 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     const cancelButton = fixture.nativeElement.querySelector('#button-cancel') as HTMLButtonElement;
     expect(cancelButton).toBeNull();
   });
-
-  // it('should show message if personalien have been saved', () => {
-  //   const messageSpy = spyOn(messageService, 'add');
-  //   component.savePersonalien();
-  //   fixture.detectChanges();
-  //   expect(messageSpy).toHaveBeenCalled();
-  // });
 });
