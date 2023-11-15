@@ -35,7 +35,8 @@ describe('IsyIncompleteDateComponent', () => {
     beforeEach(() => {
       spectator = createdComponent();
       init(spectator);
-      input = spectator.fixture.debugElement.query(By.css('p-inputmask .p-inputmask')).nativeElement as HTMLInputElement;
+      input = spectator.fixture.debugElement.query(By.css('p-inputmask .p-inputmask'))
+        .nativeElement as HTMLInputElement;
     });
 
     it('should transform the input value on losing the focus to "" when input value contains "_"', () => {

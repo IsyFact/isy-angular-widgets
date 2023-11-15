@@ -42,20 +42,26 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
   it('should show "Abmelden" as the title of the logout button', () => {
     const logoutTitle = 'Abmelden';
-    const logoutButton = spectator.fixture.nativeElement.querySelector('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+    const logoutButton = spectator.fixture.nativeElement.querySelector(
+      '#isy-hauptfenster-logout-button'
+    ) as HTMLButtonElement;
     const logoutButtonText = logoutButton.textContent ?? '';
     expect(logoutButtonText.trim()).toEqual(logoutTitle);
   });
 
   it('should call the logout function when the button is clocked', () => {
     const spy = spyOn(spectator.component.logoutEvent, 'emit');
-    const logoutButton = spectator.fixture.nativeElement.querySelector('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+    const logoutButton = spectator.fixture.nativeElement.querySelector(
+      '#isy-hauptfenster-logout-button'
+    ) as HTMLButtonElement;
     logoutButton.click();
     expect(spy).toHaveBeenCalledWith(spectator.component.userInfo);
   });
 
   it('should have a hidden linksnavigation by default', () => {
-    const linksnavigation = spectator.fixture.nativeElement.querySelector('.isy-hauptfenster-linksnavigation') as HTMLElement;
+    const linksnavigation = spectator.fixture.nativeElement.querySelector(
+      '.isy-hauptfenster-linksnavigation'
+    ) as HTMLElement;
     expect(linksnavigation).toBeFalsy();
   });
 
@@ -80,7 +86,9 @@ describe('Unit Tests: HauptfensterComponent', () => {
     spectator.component.informationsbereichWidth = customInformationsbereichWidth;
     spectator.component.showInformationsbereich = true;
     spectator.fixture.detectChanges();
-    const informationsbereich = spectator.fixture.nativeElement.querySelector('#open-informationsbereich') as HTMLElement;
+    const informationsbereich = spectator.fixture.nativeElement.querySelector(
+      '#open-informationsbereich'
+    ) as HTMLElement;
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
 });

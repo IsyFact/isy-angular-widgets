@@ -66,21 +66,24 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should display the input char button', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
+          .nativeElement as HTMLButtonElement;
         spectator.component.isInputDisabled = true;
         spectator.fixture.detectChanges();
         expect(button.disabled).toBeTruthy();
       });
 
       it('should not display the input char button', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
+          .nativeElement as HTMLButtonElement;
         spectator.component.isInputDisabled = false;
         spectator.fixture.detectChanges();
         expect(button.disabled).toBeFalsy();
       });
 
       it('should have the input char button disabled when isInputDisabled property is true', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
+          .nativeElement as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         spectator.component.isInputDisabled = true;
@@ -90,7 +93,8 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should have the input char button not disabled when isInputDisabled property is false', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
+          .nativeElement as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         spectator.component.isInputDisabled = false;
@@ -100,7 +104,8 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should display after clicking the button', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
+          .nativeElement as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         button.click();

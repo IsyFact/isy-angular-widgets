@@ -13,7 +13,6 @@ describe('Integration Tests: DashboardLinksnavigationComponent', () => {
     providers: [TranslateService]
   });
 
-
   beforeEach(() => (spectator = createdComponent()));
 
   it('should create', () => {

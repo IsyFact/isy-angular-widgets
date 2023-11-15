@@ -37,7 +37,9 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   it(`should show ${bases.length} available bases`, () => {
-    const baseSelectButton = spectator.fixture.debugElement.query(By.css('#grundzeichen-select-button')).componentInstance;
+    const baseSelectButton = spectator.fixture.debugElement.query(
+      By.css('#grundzeichen-select-button')
+    ).componentInstance;
     expect(baseSelectButton).toBeTruthy();
     expect(baseSelectButton.options.length).toEqual(bases.length);
   });
@@ -61,7 +63,9 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   const selectGrundzeichen = (grundzeichen: string): void => {
-    const baseSelectButton = spectator.fixture.debugElement.query(By.css('#grundzeichen-select-button')).componentInstance;
+    const baseSelectButton = spectator.fixture.debugElement.query(
+      By.css('#grundzeichen-select-button')
+    ).componentInstance;
     expect(baseSelectButton).toBeTruthy();
 
     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
@@ -215,7 +219,9 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
   const numberOfGroups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))].length;
   it(`should show ${numberOfGroups} available groups`, () => {
-    const groupButtons = spectator.fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset div'));
+    const groupButtons = spectator.fixture.debugElement.queryAll(
+      By.css('#schriftzeichengruppe-select-button .p-buttonset div')
+    );
     expect(groupButtons.length).toEqual(numberOfGroups);
   });
 });

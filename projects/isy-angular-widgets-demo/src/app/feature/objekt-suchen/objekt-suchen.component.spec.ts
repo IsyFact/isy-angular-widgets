@@ -510,9 +510,13 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(spectator.component.editForm).not.toBeUndefined();
     const newValue = 'edit';
     spectator.component.editForm.controls.editVorname.setValue(newValue);
-    expect(spectator.component.selectedPerson!.personalien.vorname).not.toEqual(spectator.component.editForm.controls.editVorname.value);
+    expect(spectator.component.selectedPerson!.personalien.vorname).not.toEqual(
+      spectator.component.editForm.controls.editVorname.value
+    );
     spectator.component.saveChanges();
-    expect(spectator.component.selectedPerson!.personalien.vorname).toEqual(spectator.component.editForm.controls.editVorname.value);
+    expect(spectator.component.selectedPerson!.personalien.vorname).toEqual(
+      spectator.component.editForm.controls.editVorname.value
+    );
 
     expect(spectator.component.openEditForm).toBeFalse();
     expect(spectator.component.allowSave).toBeFalse();

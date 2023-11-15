@@ -21,7 +21,8 @@ describe('Unit Tests: InputCharViewComponent', () => {
       spectator.component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
-      const serifCharacterPreview = spectator.fixture.debugElement.query(By.css('#serif-letter')).nativeElement as HTMLElement;
+      const serifCharacterPreview = spectator.fixture.debugElement.query(By.css('#serif-letter'))
+        .nativeElement as HTMLElement;
       expect(serifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
     });
 
@@ -29,7 +30,8 @@ describe('Unit Tests: InputCharViewComponent', () => {
       spectator.component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
-      const sansSerifCharacterPreview = spectator.fixture.debugElement.query(By.css('#sans-letter')).nativeElement as HTMLElement;
+      const sansSerifCharacterPreview = spectator.fixture.debugElement.query(By.css('#sans-letter'))
+        .nativeElement as HTMLElement;
       expect(sansSerifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
     });
 
@@ -37,7 +39,8 @@ describe('Unit Tests: InputCharViewComponent', () => {
       spectator.component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
-      const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#description')).nativeElement as HTMLElement;
+      const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#description'))
+        .nativeElement as HTMLElement;
       expect(characterDescriptionName.innerText).toContain(zeichenObjekt.name);
     });
 
@@ -45,7 +48,8 @@ describe('Unit Tests: InputCharViewComponent', () => {
       spectator.component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
-      const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#codepoint')).nativeElement as HTMLElement;
+      const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#codepoint'))
+        .nativeElement as HTMLElement;
       expect(characterDescriptionName.innerText).toContain(zeichenObjekt.codepoint);
     });
   });

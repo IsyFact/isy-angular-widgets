@@ -15,7 +15,9 @@ describe('Integration Tests: DashboardWidgetsComponent', () => {
 
   beforeEach(() => (spectator = createdComponent()));
 
-  afterEach(() => { spectator.fixture.destroy();});
+  afterEach(() => {
+    spectator.fixture.destroy();
+  });
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

@@ -66,7 +66,7 @@ describe('Integration Test: SecurityService', () => {
     providers: [{provide: ActivatedRoute, useValue: {}}]
   });
 
-  beforeEach(() => spectator = createdService());
+  beforeEach(() => (spectator = createdService()));
 
   it('should be created', () => {
     expect(spectator.service).toBeTruthy();

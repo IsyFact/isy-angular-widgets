@@ -15,11 +15,11 @@ function buildSnapshot(): ActivatedRouteSnapshot {
 
 const snapshot = buildSnapshot();
 
-describe('Integration Test: SecurityGuard - without setting up roles and permissions', ()=> {
+describe('Integration Test: SecurityGuard - without setting up roles and permissions', () => {
   let spectator: SpectatorService<AuthGuard>;
   const createdService = createServiceFactory(AuthGuard);
 
-  beforeEach(() => spectator = createdService());
+  beforeEach(() => (spectator = createdService()));
 
   it('should create', () => {
     expect(spectator.service).toBeTruthy();
@@ -33,7 +33,7 @@ describe('Integration Test: SecurityGuard - without setting up roles and permiss
   });
 });
 
-describe('Integration Test: SecurityGuard - with setting up roles and permissions', ()=> {
+describe('Integration Test: SecurityGuard - with setting up roles and permissions', () => {
   const securityServiceSpy = createSpyObject(SecurityService);
   securityServiceSpy.checkRoutePermission.andReturn(true);
 
@@ -43,7 +43,7 @@ describe('Integration Test: SecurityGuard - with setting up roles and permission
     providers: [{provide: SecurityService, useValue: securityServiceSpy}]
   });
 
-  beforeEach(() => spectator = createdService());
+  beforeEach(() => (spectator = createdService()));
 
   it('should create', () => {
     expect(spectator.service).toBeTruthy();
