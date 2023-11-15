@@ -15,15 +15,18 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   let spectator: Spectator<PersoenlicheInformationenComponent>;
   const createdComponent = createComponentFactory({
     component: PersoenlicheInformationenComponent,
-    imports: [  TranslateTestingModule.withTranslations('de', {
-      'isyAngularWidgetsDemo.labels.vorname': 'Vorname',
-      'isyAngularWidgetsDemo.labels.nachname': 'Nachname',
-      'isyAngularWidgetsDemo.labels.geschlecht': 'Geschlecht'
-    }), MockModule(ReactiveFormsModule)],
+    imports: [
+      TranslateTestingModule.withTranslations('de', {
+        'isyAngularWidgetsDemo.labels.vorname': 'Vorname',
+        'isyAngularWidgetsDemo.labels.nachname': 'Nachname',
+        'isyAngularWidgetsDemo.labels.geschlecht': 'Geschlecht'
+      }),
+      MockModule(ReactiveFormsModule)
+    ],
     providers: [{provide: FormBuilder, useValue: formBuilder}]
   });
 
-  beforeEach(()=> {
+  beforeEach(() => {
     spectator = createdComponent();
     spectator.component.form = initPersoenlicheInformationenForm(person);
     markFormAsDirty(spectator.component.form);
