@@ -1,7 +1,6 @@
 import {PersoenlicheInformationenComponent} from './persoenliche-informationen.component';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {markFormAsDirty} from '../../../../shared/validation/form-helper';
-import {By} from '@angular/platform-browser';
 import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
 import {TranslateTestingModule} from 'ngx-translate-testing';
@@ -11,8 +10,6 @@ import {MockModule} from 'ng-mocks';
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
   const person = getEmptyPerson();
-  const inputIDs = ['Nachname', 'Geschlecht'];
-  const stateClasses = ['ng-untouched', 'ng-dirty', 'ng-invalid'];
   const formBuilder: FormBuilder = new FormBuilder();
 
   let spectator: Spectator<PersoenlicheInformationenComponent>;
@@ -170,17 +167,4 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     const geschlechtLabel = spectator.fixture.nativeElement.querySelector('label#geschlecht-label');
     expect(geschlechtLabel.textContent.trim()).toEqual('Geschlecht');
   });
-
-  // inputIDs.forEach((id) => {
-  //   stateClasses.forEach((inputClass) => {
-  //     console.log(inputClass);
-  //     describe(`required form input element with id: ${id}`, () => {
-  //       it('should display dirty state error class', () => {
-  //         console.log(spectator.fixture.debugElement.query(By.css(`#${id}`)));
-  //         const element = spectator.fixture.debugElement.query(By.css(`#${id}`));
-  //         expect(element.classes[inputClass]).toBeTrue();
-  //       });
-  //     });
-  //   });
-  // });
 });
