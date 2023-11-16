@@ -30,10 +30,12 @@ class TestComponent {
 }
 
 describe('Integration Tests: InputCharDirective', () => {
-  let fixture: ComponentFixture<TestComponent>;
   let spectator: Spectator<TestComponent>;
+  let fixture: ComponentFixture<TestComponent>;
   let directiveElement: DebugElement[];
   let directive: InputCharDirective;
+  let inputCharButton: HTMLButtonElement;
+  let input: HTMLInputElement;
   const createdComponent = createComponentFactory({
     component: TestComponent,
     declarations: [InputCharDirective]
@@ -44,6 +46,8 @@ describe('Integration Tests: InputCharDirective', () => {
     fixture = spectator.fixture;
     directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
     directive = directiveElement[0].injector.get(InputCharDirective);
+    input = spectator.query('#char-picker') as HTMLInputElement;
+    inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
   });
 
   /**
@@ -65,15 +69,11 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should add an input char button to the input', () => {
-    const inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
   });
 
   it('should set the input char button to disabled when the input is disabled', (done) => {
-    const input = spectator.query('#char-picker') as HTMLInputElement;
     expect(input).toBeTruthy();
-
-    const inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
@@ -81,10 +81,7 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
-    const input = spectator.query('#char-picker') as HTMLInputElement;
     expect(input).toBeTruthy();
-
-    const inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
@@ -105,7 +102,6 @@ describe('Integration Tests: InputCharDirective', () => {
     const newValue = 'abc';
     const valueOnChangeSpy = spyOn(spectator.component, 'valueGet');
 
-    const input = spectator.query('#char-picker') as HTMLInputElement;
     input.value = newValue;
 
     const changeEvent = new Event('change', {});
@@ -130,11 +126,8 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should get the current input position', () => {
-    const newValue = 'test';
-    const input = spectator.query('#char-picker') as HTMLInputElement;
-    input.value = newValue;
+    input.value = 'test';
     input.dispatchEvent(new KeyboardEvent('keyup'));
-    fixture.detectChanges();
-    expect(directive.selectionPosition).toEqual(newValue.length);
+    expect(directive.selectionPosition).toEqual(input.value.length);
   });
 });
