@@ -82,8 +82,8 @@ export class InputCharDirective implements OnInit, OnDestroy {
     this.updateInputDisabledState();
 
     // Observe changes in the DOM using MutationObserver
-    this.attributeMutationObserver = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
+    this.attributeMutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
         const input = mutation.target as HTMLInputElement;
 
         if (mutation) {
@@ -100,7 +100,7 @@ export class InputCharDirective implements OnInit, OnDestroy {
   }
 
   private updateInputDisabledState(): void {
-    const { disabled, readOnly } = this.htmlInputElement;
+    const {disabled, readOnly} = this.htmlInputElement;
     this.componentRef.setInput('isInputDisabled', disabled || readOnly);
   }
 
