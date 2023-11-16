@@ -1,6 +1,5 @@
 import {InputCharPreviewComponent} from './input-char-preview.component';
 import {Zeichenobjekt} from '../../model/model';
-import {By} from '@angular/platform-browser';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 

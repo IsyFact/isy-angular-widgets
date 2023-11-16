@@ -1,5 +1,4 @@
 import {InputCharComponent} from './input-char.component';
-import {By} from '@angular/platform-browser';
 import {InputCharModule} from '../../input-char.module';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';

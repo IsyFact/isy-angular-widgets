@@ -11,7 +11,6 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 import {ComponentFixture} from '@angular/core/testing';
-import {DebugElement} from '@angular/core';
 
 const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 let spectator: Spectator<InputCharDialogComponent>;
