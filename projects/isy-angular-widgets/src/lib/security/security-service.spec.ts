@@ -32,19 +32,20 @@ function getUserInfo(): UserInfo {
 }
 
 /**
+ * @param expectToBe Decides the usage of an existing or not existing route
  * builds an activated route snapshot
  * @returns an activated route snapshot object
  */
-function buildSnapshot(): ActivatedRouteSnapshot {
+function buildSnapshot(expectToBe: boolean): ActivatedRouteSnapshot {
   const snapshot = new ActivatedRouteSnapshot();
-  snapshot.url = [new UrlSegment('dashboard', {})];
+  snapshot.url = expectToBe ? [new UrlSegment('dashboard', {})] : [new UrlSegment('', {})];
   return snapshot;
 }
 
 describe('Integration Test: SecurityService', () => {
   let service: SecurityService;
   let spectator: SpectatorService<SecurityService>;
-  const snapshot = buildSnapshot();
+  const snapshot = buildSnapshot(true);
   const userInfoData = getUserInfo();
   const route: Route = {
     title: 'Dashboard',
@@ -104,6 +105,12 @@ describe('Integration Test: SecurityService', () => {
       expect(isElementPermitted).toBeTrue();
     });
 
+    it('should not access the HTML element because the element was not found inside the permitted elements', () => {
+      setupRolesAndPermissions(service, userInfoData, permissionsData);
+      const isElementPermitted = service.checkElementPermission('');
+      expect(isElementPermitted).toBeFalse();
+    });
+
     it('should route with correctly permissions', () => {
       setupRolesAndPermissions(service, userInfoData, permissionsData);
       const isRoutePermittedObservable = service.checkRoutePermission(snapshot);
@@ -112,11 +119,37 @@ describe('Integration Test: SecurityService', () => {
       });
     });
 
+    it('should not route because the route was not found inside the permitted routes', () => {
+      setupRolesAndPermissions(service, userInfoData, permissionsData);
+      const snapshotWithWrongRoute = buildSnapshot(false);
+      const isRoutePermittedObservable = service.checkRoutePermission(snapshotWithWrongRoute);
+      isRoutePermittedObservable.subscribe((isRoutePermitted) => {
+        expect(isRoutePermitted).toBeFalse();
+      });
+    });
+
     it('should route async with correctly permissions', () => {
       setupRolesAndPermissions(service, userInfoData, permissionsData);
       const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
       isLoadRoutePermittedObservable.subscribe((isLoadRoutePermitted) => {
         expect(isLoadRoutePermitted).toBeTrue();
+      });
+    });
+
+    it('should not route async because no route is available', () => {
+      const dummyRoute: Route = {title: 'dummy'};
+      setupRolesAndPermissions(service, userInfoData, permissionsData);
+      const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(dummyRoute);
+      isLoadRoutePermittedObservable.subscribe((isLoadRoutePermitted) => {
+        expect(isLoadRoutePermitted).toBeFalse();
+      });
+    });
+
+    it('should not route async because the current role was not found', () => {
+      setupRolesAndPermissions(service, {roles: ['wrong_role']}, permissionsData);
+      const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
+      isLoadRoutePermittedObservable.subscribe((isLoadRoutePermitted) => {
+        expect(isLoadRoutePermitted).toBeFalse();
       });
     });
   });

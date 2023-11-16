@@ -15,16 +15,28 @@ describe('IncompleteDateComponent', () => {
 
   /**
    * Initialize test
-   * @param spectator Specator object with all the information
    */
-  function init(spectator: Spectator<IncompleteDateComponent>): void {
+  function init(): void {
     onChange = jasmine.createSpy('onChange spy');
     onTouched = jasmine.createSpy('onTouched spy');
     component.registerOnChange(onChange);
     component.registerOnTouched(onTouched);
   }
 
+  /**
+   * Setting up the keyboard event
+   * @param keyEvent the current keyboard event
+   * @param selectionStartRange the starting range of the current selection
+   * @param selectionEndRange the ending range of the current selection
+   */
+  function setupEvent(keyEvent: KeyboardEvent, selectionStartRange: number, selectionEndRange: number): void {
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(selectionStartRange, selectionEndRange);
+    component.onKeydown(keyEvent);
+  }
+
   describe('Integration Tests: IsyIncompleteDateComponent', () => {
+    const errorKey = 'UNSPECIFIEDDATE';
     let spectator: Spectator<IncompleteDateComponent>;
     const createdComponent = createComponentFactory({
       component: IncompleteDateComponent,
@@ -35,7 +47,7 @@ describe('IncompleteDateComponent', () => {
     beforeEach(() => {
       spectator = createdComponent();
       component = spectator.component;
-      init(spectator);
+      init();
       input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
     });
 
@@ -46,275 +58,220 @@ describe('IncompleteDateComponent', () => {
       expect(input.value).toBe('');
     });
 
+    it('should emit an event on input change', ()=> {
+      const onInputSpy = spyOn(component.onInput, 'emit');
+
+      component.inputValue = 'xx.__.____';
+      spectator.fixture.detectChanges();
+
+      input.dispatchEvent(keyEvent);
+      component.onInputChange(keyEvent);
+      spectator.fixture.detectChanges();
+
+      expect(onInputSpy).toHaveBeenCalledWith(keyEvent);
+    });
+
     it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
       input.value = '__.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(0, 0);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 0, 0);
       expect(input.value).toBe('xx.__.____');
     });
 
     it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
       input.value = '__.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(1, 1);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('xx.__.____');
     });
 
     it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
       input.value = '__.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(2, 2);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('xx.__.____');
     });
 
     it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
       input.value = '__.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(3, 3);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 3, 3);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
       input.value = '__.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
       input.value = '__.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from x_.__.____ to xx.__.____ when entering dot', () => {
       input.value = 'x_.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(1, 1);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('xx.__.____');
     });
 
     it('should autocomplete the input value from _x.__.____ to xx.__.____ when entering dot', () => {
       input.value = '_x.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(2, 2);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('xx.__.____');
     });
 
     it('should autocomplete the input value from __.x_.____ to xx.xx.____ when entering dot', () => {
       input.value = '__.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from __._x.____ to xx.xx.____ when entering dot', () => {
       input.value = '__._x.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from x_.x_.____ to xx.x_.____ when entering dot', () => {
       input.value = 'x_.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(1, 1);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('xx.x_.____');
     });
 
     it('should autocomplete the input value from _x.x_.____ to xx.x_.____ when entering dot', () => {
       input.value = '_x.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(2, 2);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('xx.x_.____');
     });
 
     it('should autocomplete the input value from x_.x_.____ to xx.xx.____ when entering dot', () => {
       input.value = 'x_.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from _x.x_.____ to xx.xx.____ when entering dot', () => {
       input.value = '_x.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from x_._x.____ to xx.xx.____ when entering dot', () => {
       input.value = 'x_._x.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from _x._x.____ to xx.xx.____ when entering dot', () => {
       input.value = '_x._x.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.xx.____');
     });
 
     it('should autocomplete the input value from 1_.__.____ to 01.__.____ when entering dot', () => {
       input.value = '1_.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(1, 1);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('01.__.____');
     });
 
     it('should autocomplete the input value from _1.__.____ to 01.__.____ when entering dot', () => {
       input.value = '_1.__.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(2, 2);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('01.__.____');
     });
 
     it('should autocomplete the input value from __.1_.____ to xx.01.____ when entering dot', () => {
       input.value = '__.1_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.01.____');
     });
 
     it('should autocomplete the input value from __._1.____ to xx.01.____ when entering dot', () => {
       input.value = '__._1.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.01.____');
     });
 
     it('should autocomplete the input value from 1_.1_.____ to 01.1_.____ when entering dot', () => {
       input.value = '1_.1_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(1, 1);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('01.1_.____');
     });
 
     it('should autocomplete the input value from _1.1_.____ to 01.1_.____ when entering dot', () => {
       input.value = '_1.1_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(2, 2);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('01.1_.____');
     });
 
     it('should autocomplete the input value from 1_.1_.____ to 01.01.____ when entering dot', () => {
       input.value = '1_.1_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('01.01.____');
     });
 
     it('should autocomplete the input value from _1.1_.____ to 01.01.____ when entering dot', () => {
       input.value = '_1.1_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('01.01.____');
     });
 
     it('should autocomplete the input value from 1_._1.____ to 01.01.____ when entering dot', () => {
       input.value = '1_._1.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.01.____');
     });
 
     it('should autocomplete the input value from _1._1.____ to 01.01.____ when entering dot', () => {
       input.value = '_1._1.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.01.____');
     });
 
     it('should autocomplete the input value from _1._1.____ to 01.01.____ when entering dot', () => {
       input.value = '_1._1.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.01.____');
     });
 
     it('should autocomplete the input value from 1_.x_.____ to 01.x_.____ when entering dot', () => {
       input.value = '1_.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(1, 1);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('01.x_.____');
     });
 
     it('should autocomplete the input value from _1.x_.____ to 01.x_.____ when entering dot', () => {
       input.value = '_1.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(2, 2);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('01.x_.____');
     });
 
     it('should autocomplete the input value from 1_.x_.____ to 01.xx.____ when entering dot', () => {
       input.value = '1_.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('01.xx.____');
     });
 
     it('should autocomplete the input value from _1.x_.____ to 01.xx.____ when entering dot', () => {
       input.value = '_1.x_.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(4, 4);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('01.xx.____');
     });
 
     it('should autocomplete the input value from 1_._x.____ to 01.xx.____ when entering dot', () => {
       input.value = '1_._x.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.xx.____');
     });
 
     it('should autocomplete the input value from _1._x.____ to 01.xx.____ when entering dot', () => {
       input.value = '_1._x.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(5, 5);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.xx.____');
     });
 
     it('should not autocomplete the input value from xx.xx.____ to xx.xx.____ when entering dot in the year part', () => {
       input.value = 'xx.xx.____';
-      input.dispatchEvent(keyEvent);
-      input.setSelectionRange(6, 6);
-      component.onKeydown(keyEvent);
+      setupEvent(keyEvent, 6, 6);
       expect(input.value).toBe('xx.xx.____');
     });
 
@@ -348,7 +305,6 @@ describe('IncompleteDateComponent', () => {
     });
 
     it('should return UNSPECIFIEDDATE if the day is invalid', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('50.11.2023');
 
       const errors = component.validate(control);
@@ -360,7 +316,6 @@ describe('IncompleteDateComponent', () => {
     });
 
     it('should return UNSPECIFIEDDATE if the month is invalid', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('11.50.2023');
 
       const errors = component.validate(control);
