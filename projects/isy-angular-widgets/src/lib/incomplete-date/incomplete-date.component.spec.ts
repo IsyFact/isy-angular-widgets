@@ -58,7 +58,7 @@ describe('IncompleteDateComponent', () => {
       expect(input.value).toBe('');
     });
 
-    it('should emit an event on input change', ()=> {
+    it('should emit an event on input change', () => {
       const onInputSpy = spyOn(component.onInput, 'emit');
 
       component.inputValue = 'xx.__.____';
