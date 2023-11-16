@@ -13,44 +13,45 @@ function buildSnapshot(): ActivatedRouteSnapshot {
   return snapshot;
 }
 
-const snapshot = buildSnapshot();
-
-describe('Integration Test: SecurityGuard - without setting up roles and permissions', () => {
+describe('SecurityGuard: Integration Tests', () => {
   let spectator: SpectatorService<AuthGuard>;
-  const createdService = createServiceFactory(AuthGuard);
+  const snapshot = buildSnapshot();
 
-  beforeEach(() => (spectator = createdService()));
+  describe('SecurityGuard - without setting up roles and permissions', () => {
+    const createdService = createServiceFactory(AuthGuard);
 
-  it('should create', () => {
-    expect(spectator.service).toBeTruthy();
-  });
+    beforeEach(() => (spectator = createdService()));
 
-  it('should not activate because no roles setup', () => {
-    const canActivateObservable = spectator.service.canActivate(snapshot);
-    void canActivateObservable.forEach((canActivate) => {
-      expect(canActivate).toBeFalse();
+    it('should create', () => {
+      expect(spectator.service).toBeTruthy();
+    });
+
+    it('should not activate because no roles setup', () => {
+      const canActivateObservable = spectator.service.canActivate(snapshot);
+      void canActivateObservable.forEach((canActivate) => {
+        expect(canActivate).toBeFalse();
+      });
     });
   });
-});
 
-describe('Integration Test: SecurityGuard - with setting up roles and permissions', () => {
-  const securityServiceSpy = createSpyObject(SecurityService);
-  securityServiceSpy.checkRoutePermission.andReturn(true);
+  describe('SecurityGuard - with setting up roles and permissions', () => {
+    const securityServiceSpy = createSpyObject(SecurityService);
+    securityServiceSpy.checkRoutePermission.andReturn(true);
 
-  let spectator: SpectatorService<AuthGuard>;
-  const createdService = createServiceFactory({
-    service: AuthGuard,
-    providers: [{provide: SecurityService, useValue: securityServiceSpy}]
-  });
+    const createdService = createServiceFactory({
+      service: AuthGuard,
+      providers: [{provide: SecurityService, useValue: securityServiceSpy}]
+    });
 
-  beforeEach(() => (spectator = createdService()));
+    beforeEach(() => (spectator = createdService()));
 
-  it('should create', () => {
-    expect(spectator.service).toBeTruthy();
-  });
+    it('should create', () => {
+      expect(spectator.service).toBeTruthy();
+    });
 
-  it('should activate - with roles set up', () => {
-    const canActivateObservable = spectator.service.canActivate(snapshot);
-    expect(canActivateObservable).toBeTrue();
+    it('should activate - with roles set up', () => {
+      const canActivateObservable = spectator.service.canActivate(snapshot);
+      expect(canActivateObservable).toBeTrue();
+    });
   });
 });
