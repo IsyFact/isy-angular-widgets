@@ -14,7 +14,7 @@ describe('Unit Tests: PageNotFoundComponent', () => {
   });
 
   it(`should have ${startPage} as inner text value`, () => {
-    const anchorTag = spectator.fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+    const anchorTag = spectator.query('a') as HTMLAnchorElement;
     expect(anchorTag.innerText).toEqual(startPage);
   });
 });

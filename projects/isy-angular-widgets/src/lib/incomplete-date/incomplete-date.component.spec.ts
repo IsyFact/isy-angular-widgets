@@ -1,6 +1,5 @@
 import {IncompleteDateComponent} from './incomplete-date.component';
 import {AbstractControl, FormControl, FormsModule} from '@angular/forms';
-import {By} from '@angular/platform-browser';
 import {InputMask} from 'primeng/inputmask';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
@@ -37,8 +36,7 @@ describe('IncompleteDateComponent', () => {
       spectator = createdComponent();
       component = spectator.component;
       init(spectator);
-      input = spectator.fixture.debugElement.query(By.css('p-inputmask .p-inputmask'))
-        .nativeElement as HTMLInputElement;
+      input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
     });
 
     it('should transform the input value on losing the focus to "" when input value contains "_"', () => {
