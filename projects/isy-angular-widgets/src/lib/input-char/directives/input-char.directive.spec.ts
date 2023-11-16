@@ -126,4 +126,13 @@ describe('Integration Tests: InputCharDirective', () => {
     directive.setNextInputPosition(value.length);
     expect(inputValue).toEqual(`${zeichen}${value}${value}`);
   });
+
+  it('should get the current input position', () => {
+    const newValue = 'test';
+    const input = spectator.query('#char-picker') as HTMLInputElement;
+    input.value = newValue;
+    input.dispatchEvent(new KeyboardEvent('keyup'));
+    fixture.detectChanges();
+    expect(directive.selectionPosition).toEqual(newValue.length);
+  });
 });
