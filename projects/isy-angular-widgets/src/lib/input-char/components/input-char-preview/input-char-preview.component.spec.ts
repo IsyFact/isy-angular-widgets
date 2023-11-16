@@ -7,8 +7,8 @@ const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 
 describe('Unit Tests: InputCharPreviewComponent', () => {
   let component: InputCharPreviewComponent;
-  const createComponent = createComponentFactory(InputCharPreviewComponent);
   let spectator: Spectator<InputCharPreviewComponent>;
+  const createComponent = createComponentFactory(InputCharPreviewComponent);
 
   beforeEach(() => {
     spectator = createComponent();

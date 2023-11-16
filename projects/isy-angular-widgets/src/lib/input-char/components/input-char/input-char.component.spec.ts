@@ -8,10 +8,9 @@ import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 
 let component: InputCharComponent;
+let spectator: Spectator<InputCharComponent>;
 
 describe('Unit Tests: InputCharComponent', () => {
-  let spectator: Spectator<InputCharComponent>;
-
   describe('with default datentyp', () => {
     const createdComponent = createComponentFactory({
       component: InputCharComponent,

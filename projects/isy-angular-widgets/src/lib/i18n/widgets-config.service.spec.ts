@@ -12,7 +12,7 @@ describe('Unit tests: WidgetsConfigService', () => {
   });
 
   it('should get the translated text', () => {
-    const text: string = 'hauptfenster.logout';
+    const text = 'hauptfenster.logout';
     let translatedText = spectator.service.getTranslation(text);
     expect(translatedText).toEqual('Abmelden');
 

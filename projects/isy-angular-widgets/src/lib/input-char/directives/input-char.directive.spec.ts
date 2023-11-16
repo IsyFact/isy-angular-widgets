@@ -46,6 +46,20 @@ describe('Integration Tests: InputCharDirective', () => {
     directive = directiveElement[0].injector.get(InputCharDirective);
   });
 
+  /**
+   * Setting up timeout
+   * @param inputCharButton The current HTML button
+   * @param done Action method that should be called when the async work is complete.
+   */
+  function setTimeOut(inputCharButton: HTMLButtonElement, done: DoneFn): void {
+    setTimeout(() => {
+      fixture.detectChanges();
+      expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
+      expect(inputCharButton.disabled).toBeTrue();
+      done();
+    });
+  }
+
   it('should create', () => {
     expect(directive).toBeTruthy();
   });
@@ -58,35 +72,23 @@ describe('Integration Tests: InputCharDirective', () => {
   it('should set the input char button to disabled when the input is disabled', (done) => {
     const input = spectator.query('#char-picker') as HTMLInputElement;
     expect(input).toBeTruthy();
+
     const inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
-    fixture.detectChanges();
-
-    setTimeout(() => {
-      fixture.detectChanges();
-      expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
-      expect(inputCharButton.disabled).toBeTrue();
-      done();
-    });
+    setTimeOut(inputCharButton, done);
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
     const input = spectator.query('#char-picker') as HTMLInputElement;
     expect(input).toBeTruthy();
+
     const inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
-    fixture.detectChanges();
-
-    setTimeout(() => {
-      fixture.detectChanges();
-      expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
-      expect(inputCharButton.disabled).toBeTrue();
-      done();
-    });
+    setTimeOut(inputCharButton, done);
   });
 
   it('should have mouse position 0 by default', () => {

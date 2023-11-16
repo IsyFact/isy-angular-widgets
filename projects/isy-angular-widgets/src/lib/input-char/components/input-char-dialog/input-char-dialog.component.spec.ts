@@ -12,9 +12,9 @@ import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 import {ComponentFixture} from '@angular/core/testing';
 
-const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 let spectator: Spectator<InputCharDialogComponent>;
 let fixture: ComponentFixture<InputCharDialogComponent>;
+const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 
 describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
@@ -30,10 +30,8 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
   beforeEach(() => {
     spectator = createdComponent();
-
     component = spectator.component;
     fixture = spectator.fixture;
-
     component.allCharacters = sonderzeichenListe;
     component.ngOnChanges();
     fixture.detectChanges();

@@ -20,6 +20,7 @@ class TargetModule {}
 
 describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const URL = '/any-url';
 
   beforeEach(async () => {
     return MockBuilder(ZipkinOpenTracingHttpInterceptor, TargetModule)
@@ -34,9 +35,9 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
     const client = ngMocks.findInstance(HttpClient);
     const httpMock = ngMocks.findInstance(HttpTestingController);
 
-    client.get('/any-url').subscribe();
+    client.get(URL).subscribe();
 
-    const req = httpMock.expectOne('/any-url');
+    const req = httpMock.expectOne(URL);
     req.flush('');
     httpMock.verify();
 
@@ -50,9 +51,9 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
     const client = ngMocks.findInstance(HttpClient);
     const httpMock = ngMocks.findInstance(HttpTestingController);
 
-    client.get('/any-url').subscribe();
+    client.get(URL).subscribe();
 
-    const req = httpMock.expectOne('/any-url');
+    const req = httpMock.expectOne(URL);
     req.flush('');
     httpMock.verify();
 
@@ -66,9 +67,9 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
     const client = ngMocks.findInstance(HttpClient);
     const httpMock = ngMocks.findInstance(HttpTestingController);
 
-    client.get('/any-url').subscribe();
+    client.get(URL).subscribe();
 
-    const req = httpMock.expectOne('/any-url');
+    const req = httpMock.expectOne(URL);
     req.flush('');
     httpMock.verify();
 
