@@ -1,4 +1,13 @@
-import {ComponentRef, Directive, ElementRef, HostListener, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {
+  ComponentRef,
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewContainerRef
+} from '@angular/core';
 import {InputCharComponent} from '../components/input-char/input-char.component';
 import {Datentyp} from '../model/datentyp';
 
@@ -8,7 +17,7 @@ import {Datentyp} from '../model/datentyp';
 @Directive({
   selector: '[isyInputChar]'
 })
-export class InputCharDirective implements OnInit {
+export class InputCharDirective implements OnInit, OnDestroy {
   /**
    * Determines which set of characters (datatype) according to DIN 91379 to show
    */
@@ -41,6 +50,8 @@ export class InputCharDirective implements OnInit {
 
   htmlInputElement: HTMLInputElement;
 
+  private attributeMutationObserver?: MutationObserver;
+
   constructor(
     private viewContainerRef: ViewContainerRef,
     private element: ElementRef
@@ -62,31 +73,50 @@ export class InputCharDirective implements OnInit {
     });
   }
 
-  setupInputChar(): void {
-    this.componentRef.setInput('isInputDisabled', this.htmlInputElement.disabled || this.htmlInputElement.readOnly);
+  ngOnDestroy(): void {
+    // Disconnect the MutationObserver to avoid memory leaks
+    this.attributeMutationObserver?.disconnect();
+  }
 
-    const observer = new MutationObserver((mutationList) => {
-      for (const mutation of mutationList) {
+  setupInputChar(): void {
+    this.updateInputDisabledState();
+
+    // Observe changes in the DOM using MutationObserver
+    this.attributeMutationObserver = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
         const input = mutation.target as HTMLInputElement;
 
-        if (mutation && (mutation.attributeName === 'disabled' || mutation.attributeName === 'readonly')) {
-          if (input.disabled || input.readOnly) {
-            this.componentRef.instance.visible = false;
-            this.componentRef.setInput('isInputDisabled', true);
-          } else {
-            this.componentRef.setInput('isInputDisabled', false);
-          }
+        if (mutation) {
+          this.handleDisabledReadonlyChange(input, mutation.attributeName);
+          this.handleDatentypChange(input, mutation.attributeName);
         }
-
-        if (mutation && mutation.attributeName === 'ng-reflect-datentyp') {
-          this.componentRef.setInput('datentyp', input.getAttribute('ng-reflect-datentyp'));
-        }
-      }
+      });
     });
 
-    observer.observe(this.htmlInputElement, {
+    // Start observing the target element for attribute changes
+    this.attributeMutationObserver.observe(this.htmlInputElement, {
       attributes: true
     });
+  }
+
+  private updateInputDisabledState(): void {
+    const { disabled, readOnly } = this.htmlInputElement;
+    this.componentRef.setInput('isInputDisabled', disabled || readOnly);
+  }
+
+  private handleDisabledReadonlyChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
+    if ((attributeName === 'disabled' || attributeName === 'readonly') && (input.disabled || input.readOnly)) {
+      this.componentRef.instance.visible = false;
+      this.componentRef.setInput('isInputDisabled', true);
+    } else {
+      this.componentRef.setInput('isInputDisabled', false);
+    }
+  }
+
+  private handleDatentypChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
+    if (attributeName === 'ng-reflect-datentyp') {
+      this.componentRef.setInput('datentyp', input.getAttribute('ng-reflect-datentyp'));
+    }
   }
 
   getSelectionPosition(event: MouseEvent | KeyboardEvent): number {
