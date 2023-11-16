@@ -72,24 +72,21 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should display the input char button', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
-          .nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         component.isInputDisabled = true;
         spectator.fixture.detectChanges();
         expect(button.disabled).toBeTruthy();
       });
 
       it('should not display the input char button', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
-          .nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         component.isInputDisabled = false;
         spectator.fixture.detectChanges();
         expect(button.disabled).toBeFalsy();
       });
 
       it('should have the input char button disabled when isInputDisabled property is true', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
-          .nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         component.isInputDisabled = true;
@@ -99,8 +96,7 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should have the input char button not disabled when isInputDisabled property is false', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
-          .nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         component.isInputDisabled = false;
@@ -110,8 +106,7 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should display after clicking the button', () => {
-        const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
-          .nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         button.click();
@@ -150,17 +145,13 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.fixture.debugElement.queryAll(
-          By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button')
-        );
+        const groupButtons = spectator.queryAll('#schriftzeichengruppe-select-button .p-buttonset .p-button');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = spectator.fixture.debugElement.queryAll(
-          By.css('#right-panel-side p-selectbutton .p-buttonset .p-button')
-        );
+        const groupButtons = spectator.queryAll('#right-panel-side p-selectbutton .p-buttonset .p-button');
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
     });

@@ -163,13 +163,13 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   });
 
   it('should evaluate the HTML label text of the input fields', () => {
-    const vornameLabel = spectator.fixture.nativeElement.querySelector('label#vorname-label');
-    expect(vornameLabel.textContent.trim()).toEqual('Vorname');
+    const vornameLabel = spectator.query('label#vorname-label') as HTMLElement;
+    expect(vornameLabel.textContent!.trim()).toEqual('Vorname');
 
-    const nachnameLabel = spectator.fixture.nativeElement.querySelector('label#nachname-label');
-    expect(nachnameLabel.textContent.trim()).toEqual('Nachname');
+    const nachnameLabel = spectator.query('label#nachname-label') as HTMLElement;
+    expect(nachnameLabel.textContent!.trim()).toEqual('Nachname');
 
-    const geschlechtLabel = spectator.fixture.nativeElement.querySelector('label#geschlecht-label');
-    expect(geschlechtLabel.textContent.trim()).toEqual('Geschlecht');
+    const geschlechtLabel = spectator.query('label#geschlecht-label') as HTMLElement;
+    expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht');
   });
 });

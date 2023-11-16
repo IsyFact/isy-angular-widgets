@@ -51,14 +51,14 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should add an input char button to the input', () => {
-    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
   });
 
   it('should set the input char button to disabled when the input is disabled', (done) => {
-    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = spectator.query('#char-picker') as HTMLInputElement;
     expect(input).toBeTruthy();
-    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
@@ -73,9 +73,9 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
-    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = spectator.query('#char-picker') as HTMLInputElement;
     expect(input).toBeTruthy();
-    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+    const inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
@@ -103,7 +103,7 @@ describe('Integration Tests: InputCharDirective', () => {
     const newValue = 'abc';
     const valueOnChangeSpy = spyOn(spectator.component, 'valueGet');
 
-    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = spectator.query('#char-picker') as HTMLInputElement;
     input.value = newValue;
 
     const changeEvent = new Event('change', {});

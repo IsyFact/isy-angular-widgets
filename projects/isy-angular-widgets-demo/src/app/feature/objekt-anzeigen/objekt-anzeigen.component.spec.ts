@@ -125,7 +125,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     clickButton('#button-edit');
     fixture.detectChanges();
 
-    const invalidFields = debugElement.queryAll(By.css('.ng-invalid'));
+    const invalidFields = spectator.queryAll('.ng-invalid');
     expect(invalidFields.length).toBe(0);
   });
 

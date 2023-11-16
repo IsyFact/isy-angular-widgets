@@ -11,6 +11,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 import {ComponentFixture} from '@angular/core/testing';
+import {DebugElement} from '@angular/core';
 
 const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 let spectator: Spectator<InputCharDialogComponent>;
@@ -180,7 +181,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
   sonderzeichenListe.forEach((zeichen: Zeichenobjekt) => {
     it(`should emit the chosen character ${zeichen.zeichen} after button press`, () => {
-      const button = fixture.debugElement.query(By.css('#lower-right-panel button')).nativeElement;
+      const button = spectator.query('#lower-right-panel button') as HTMLButtonElement;
       expect(button).toBeTruthy();
       const insertCharacterSpy = spyOn(component.insertCharacter, 'emit');
 
@@ -195,7 +196,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   it('should have a button with the label "Einfügen"', () => {
-    const button = fixture.debugElement.query(By.css('#lower-right-panel button')).nativeElement;
+    const button = spectator.query('#lower-right-panel button') as HTMLButtonElement;
     expect(button.innerHTML).toContain('Einfügen');
   });
 });
@@ -218,13 +219,13 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     ...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))
   ].length;
   it(`should show ${numberOfBases} available bases`, () => {
-    const baseButtons = fixture.debugElement.queryAll(By.css('#grundzeichen-select-button .p-buttonset div'));
+    const baseButtons = spectator.queryAll('#grundzeichen-select-button .p-buttonset div');
     expect(baseButtons.length).toEqual(numberOfBases);
   });
 
   const numberOfGroups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))].length;
   it(`should show ${numberOfGroups} available groups`, () => {
-    const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset div'));
+    const groupButtons = spectator.queryAll('#schriftzeichengruppe-select-button .p-buttonset div');
     expect(groupButtons.length).toEqual(numberOfGroups);
   });
 });

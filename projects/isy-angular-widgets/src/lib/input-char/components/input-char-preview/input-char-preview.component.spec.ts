@@ -25,8 +25,7 @@ describe('Unit Tests: InputCharPreviewComponent', () => {
       component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
-      const serifCharacterPreview = spectator.fixture.debugElement.query(By.css('#serif-letter'))
-        .nativeElement as HTMLElement;
+      const serifCharacterPreview = spectator.query('#serif-letter') as HTMLElement;
       expect(serifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
     });
 
@@ -34,8 +33,7 @@ describe('Unit Tests: InputCharPreviewComponent', () => {
       component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
-      const sansSerifCharacterPreview = spectator.fixture.debugElement.query(By.css('#sans-letter'))
-        .nativeElement as HTMLElement;
+      const sansSerifCharacterPreview = spectator.query('#sans-letter') as HTMLElement;
       expect(sansSerifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
     });
 
@@ -43,8 +41,7 @@ describe('Unit Tests: InputCharPreviewComponent', () => {
       component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
-      const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#description'))
-        .nativeElement as HTMLElement;
+      const characterDescriptionName = spectator.query('#description') as HTMLElement;
       expect(characterDescriptionName.innerText).toContain(zeichenObjekt.name);
     });
 
@@ -52,8 +49,7 @@ describe('Unit Tests: InputCharPreviewComponent', () => {
       component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
-      const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#codepoint'))
-        .nativeElement as HTMLElement;
+      const characterDescriptionName = spectator.query('#codepoint') as HTMLElement;
       expect(characterDescriptionName.innerText).toContain(zeichenObjekt.codepoint);
     });
   });

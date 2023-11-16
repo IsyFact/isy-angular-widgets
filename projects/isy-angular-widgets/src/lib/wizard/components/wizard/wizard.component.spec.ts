@@ -175,7 +175,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    * @param declaration the ID of a native element
    */
   function isElementDisabled(declaration: string): boolean {
-    return fixture.nativeElement.querySelector(declaration).disabled;
+    return (spectator.query(declaration) as HTMLButtonElement).disabled;
   }
 
   /**
