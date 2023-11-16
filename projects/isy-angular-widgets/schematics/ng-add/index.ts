@@ -143,7 +143,7 @@ export function ngAdd(): Rule {
     addPackageToPackageJson(tree, '@angular/common', '^16.2.12');
     addPackageToPackageJson(tree, '@angular/core', '^16.2.12');
     addPackageToPackageJson(tree, 'primeicons', '^6.0.1');
-    addPackageToPackageJson(tree, 'primeng', '^16.7.1');
+    addPackageToPackageJson(tree, 'primeng', '^16.7.2');
     addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
     addPackageToPackageJson(tree, 'moment', '^2.29.4');
 
