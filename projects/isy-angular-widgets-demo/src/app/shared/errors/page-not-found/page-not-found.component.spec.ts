@@ -1,5 +1,4 @@
 import {PageNotFoundComponent} from './page-not-found.component';
-import {By} from '@angular/platform-browser';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Unit Tests: PageNotFoundComponent', () => {
