@@ -5,6 +5,7 @@ import {barChartData} from '../../data/chart-data';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Integration Tests: ChartComponent', () => {
+  let component: ChartComponent;
   let spectator: Spectator<ChartComponent>;
   const createdComponent = createComponentFactory({
     component: ChartComponent,
@@ -17,23 +18,25 @@ describe('Integration Tests: ChartComponent', () => {
 
   beforeEach(() => {
     spectator = createdComponent();
-    spectator.component.type = type;
-    spectator.component.data = data;
-    spectator.component.options = options;
+    component = spectator.component;
+
+    component.type = type;
+    component.data = data;
+    component.options = options;
     spectator.fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should have be correctly initialized', () => {
-    expect(spectator.component.chart.type).toEqual(type);
-    expect(spectator.component.chart.data).toEqual(data);
-    expect(spectator.component.chart.options).toEqual(options);
+    expect(component.chart.type).toEqual(type);
+    expect(component.chart.data).toEqual(data);
+    expect(component.chart.options).toEqual(options);
   });
 
   it('should be responsive', () => {
-    expect(spectator.component.chart.responsive).toBeTrue();
+    expect(component.chart.responsive).toBeTrue();
   });
 });

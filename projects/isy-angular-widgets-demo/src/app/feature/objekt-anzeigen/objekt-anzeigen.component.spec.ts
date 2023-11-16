@@ -8,12 +8,16 @@ import {DebugElement} from '@angular/core';
 import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {ComponentFixture} from '@angular/core/testing';
 
-describe('Integration Tests: PersonBearbeitenComponent', () => {
+describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
   let securityService: SecurityService;
   const inputFields: {[key: string]: DebugElement & {disabled?: boolean}} = {};
 
+  let component: ObjektAnzeigenComponent;
+  let fixture: ComponentFixture<ObjektAnzeigenComponent>;
+  let debugElement: DebugElement;
   let spectator: Spectator<ObjektAnzeigenComponent>;
   const createdComponent = createComponentFactory({
     component: ObjektAnzeigenComponent,
@@ -28,22 +32,27 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
 
   beforeEach(() => {
     spectator = createdComponent();
+
+    component = spectator.component;
+    fixture = spectator.fixture;
+    debugElement = fixture.debugElement;
+
     userInfoService = new UserInfoPublicService();
     securityService = new SecurityService();
 
-    inputFields.lastName = spectator.fixture.debugElement.query(By.css('#last-name'));
-    inputFields.firstName = spectator.fixture.debugElement.query(By.css('#first-name'));
-    inputFields.birthName = spectator.fixture.debugElement.query(By.css('#birth-name'));
-    inputFields.birthplace = spectator.fixture.debugElement.query(By.css('#birth-place'));
-    inputFields.nationality = spectator.fixture.debugElement.query(By.css('#nationality'));
-    inputFields.gender = spectator.fixture.debugElement.query(By.css('p-dropdown:has(#gender) .p-inputtext'));
-    inputFields.phoneNumber = spectator.fixture.debugElement.query(By.css('#phone-number'));
-    inputFields.birthDate = spectator.fixture.debugElement.query(By.css('#birth-date'));
-    inputFields.dateOfEntry = spectator.fixture.debugElement.query(By.css('#date-of-entry'));
-    inputFields.dateOfDeparture = spectator.fixture.debugElement.query(By.css('#date-of-departure'));
-    inputFields.passportExpirationDate = spectator.fixture.debugElement.query(By.css('#passport-expiration-date'));
-    inputFields.creditCardNumber = spectator.fixture.debugElement.query(By.css('#credit-card-number'));
-    inputFields.creditCardExpirationDate = spectator.fixture.debugElement.query(By.css('#credit-card-expiration-date'));
+    inputFields.lastName = debugElement.query(By.css('#last-name'));
+    inputFields.firstName = debugElement.query(By.css('#first-name'));
+    inputFields.birthName = debugElement.query(By.css('#birth-name'));
+    inputFields.birthplace = debugElement.query(By.css('#birth-place'));
+    inputFields.nationality = debugElement.query(By.css('#nationality'));
+    inputFields.gender = debugElement.query(By.css('p-dropdown:has(#gender) .p-inputtext'));
+    inputFields.phoneNumber = debugElement.query(By.css('#phone-number'));
+    inputFields.birthDate = debugElement.query(By.css('#birth-date'));
+    inputFields.dateOfEntry = debugElement.query(By.css('#date-of-entry'));
+    inputFields.dateOfDeparture = debugElement.query(By.css('#date-of-departure'));
+    inputFields.passportExpirationDate = debugElement.query(By.css('#passport-expiration-date'));
+    inputFields.creditCardNumber = debugElement.query(By.css('#credit-card-number'));
+    inputFields.creditCardExpirationDate = debugElement.query(By.css('#credit-card-expiration-date'));
   });
 
   /**
@@ -51,7 +60,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
    * @param sbutton the ID of the button who must be clicked
    */
   function clickButton(sbutton: string): void {
-    const button = spectator.fixture.nativeElement.querySelector(sbutton) as HTMLButtonElement;
+    const button = fixture.nativeElement.querySelector(sbutton) as HTMLButtonElement;
     button.click();
   }
 
@@ -62,15 +71,15 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     const userInfoData = userInfoService.getUserInfo();
     securityService.setRoles(userInfoData);
     securityService.setPermissions(permissions);
-    spectator.component.showSecretFields = true;
+    component.showSecretFields = true;
   }
 
   it('creates', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should display data for Max Mustermann', async () => {
-    await spectator.fixture.whenStable();
+    await fixture.whenStable();
 
     expect(inputFields.lastName.nativeElement.value).toEqual('Mustermann');
     expect(inputFields.firstName.nativeElement.value).toEqual('Max');
@@ -88,51 +97,51 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   });
 
   it('should hide button group for saving changes if not in edit mode', () => {
-    const saveButtonGroup = spectator.fixture.debugElement.query(By.css('#divSaveCancel'));
+    const saveButtonGroup = debugElement.query(By.css('#divSaveCancel'));
     expect(saveButtonGroup).toBeNull();
   });
 
   it('shoud enable input fields in edit mode', () => {
     clickButton('#button-edit');
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
     expect(inputFields.firstName.disabled).toBeFalsy();
   });
 
   it('should hide secret fields by default', () => {
-    const secretFieldsContainer = spectator.fixture.debugElement.query(By.css('#divShowSecretFields'));
+    const secretFieldsContainer = debugElement.query(By.css('#divShowSecretFields'));
     expect(secretFieldsContainer).toBeNull();
   });
 
   it('should set secret fields visible', () => {
     setupRolesAndPermissions();
-    spectator.component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
-    expect(spectator.component.showSecretFields).toBeTrue();
-    spectator.fixture.detectChanges();
-    const secretFieldsContainer = spectator.fixture.debugElement.query(By.css('#div-show-secret-fields'));
+    component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
+    expect(component.showSecretFields).toBeTrue();
+    fixture.detectChanges();
+    const secretFieldsContainer = debugElement.query(By.css('#div-show-secret-fields'));
     expect(secretFieldsContainer).toBeTruthy();
   });
 
   it('should not throwing a validation error', () => {
     clickButton('#button-edit');
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
 
-    const invalidFields = spectator.fixture.debugElement.queryAll(By.css('.ng-invalid'));
+    const invalidFields = debugElement.queryAll(By.css('.ng-invalid'));
     expect(invalidFields.length).toBe(0);
   });
 
   it('should display validation error if lastName is empty', () => {
     clickButton('#button-edit');
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
 
     inputFields.lastName.nativeElement.value = '';
     inputFields.lastName.nativeElement.dispatchEvent(new Event('input'));
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
 
     expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid');
   });
 
   it('should set tab view index', () => {
-    const tabview = spectator.fixture.nativeElement.querySelector('#tab-view');
+    const tabview = fixture.nativeElement.querySelector('#tab-view');
     tabview.index = 0;
     expect(tabview.index).toBe(0);
     tabview.index = 1;
@@ -140,27 +149,27 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   });
 
   it('should display permitted secret fields element', () => {
-    expect(spectator.component.showSecretFields).toBeFalse();
+    expect(component.showSecretFields).toBeFalse();
     setupRolesAndPermissions();
-    expect(spectator.component.showSecretFields).toBeTrue();
+    expect(component.showSecretFields).toBeTrue();
   });
 
   it('should not display non permitted element', () => {
-    expect(spectator.component.showSecretFields).toBeFalse();
-    const secretFields = spectator.fixture.nativeElement.querySelector('show-secret-fields');
+    expect(component.showSecretFields).toBeFalse();
+    const secretFields = fixture.nativeElement.querySelector('show-secret-fields');
     expect(secretFields).toBeNull();
   });
 
   it('should display the (edit, save, cancel) buttons', () => {
-    expect(spectator.component.personalInfoForm.disabled).toBeTrue();
+    expect(component.personalInfoForm.disabled).toBeTrue();
 
-    const editButton = spectator.fixture.nativeElement.querySelector('#button-edit') as HTMLButtonElement;
+    const editButton = fixture.nativeElement.querySelector('#button-edit') as HTMLButtonElement;
     expect(editButton).not.toBeNull();
 
-    const saveButton = spectator.fixture.nativeElement.querySelector('#button-save') as HTMLButtonElement;
+    const saveButton = fixture.nativeElement.querySelector('#button-save') as HTMLButtonElement;
     expect(saveButton).toBeNull();
 
-    const cancelButton = spectator.fixture.nativeElement.querySelector('#button-cancel') as HTMLButtonElement;
+    const cancelButton = fixture.nativeElement.querySelector('#button-cancel') as HTMLButtonElement;
     expect(cancelButton).toBeNull();
   });
 });

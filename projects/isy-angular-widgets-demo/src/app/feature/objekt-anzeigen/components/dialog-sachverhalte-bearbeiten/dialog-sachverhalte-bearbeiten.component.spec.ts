@@ -3,45 +3,49 @@ import {TableModule} from 'primeng/table';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
+  let component: DialogSachverhalteBearbeitenComponent;
   let spectator: Spectator<DialogSachverhalteBearbeitenComponent>;
   const createdComponent = createComponentFactory({
     component: DialogSachverhalteBearbeitenComponent,
     imports: [TableModule]
   });
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => {
+    spectator = createdComponent();
+    component = spectator.component;
+  });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('ngOnChanges method should have been called', () => {
-    const ngOnChangeSpy = spyOn(spectator.component, 'ngOnChanges').and.callThrough();
-    spectator.component.ngOnChanges();
+    const ngOnChangeSpy = spyOn(component, 'ngOnChanges').and.callThrough();
+    component.ngOnChanges();
     expect(ngOnChangeSpy).toHaveBeenCalled();
   });
 
   it('saveSachverhalte method should have been called', () => {
-    const saveSachverhalteSpy = spyOn(spectator.component, 'saveSachverhalte').and.callThrough();
-    spectator.component.saveSachverhalte();
+    const saveSachverhalteSpy = spyOn(component, 'saveSachverhalte').and.callThrough();
+    component.saveSachverhalte();
     expect(saveSachverhalteSpy).toHaveBeenCalled();
   });
 
   it('createSachverhalt method should have been called', () => {
-    const spy = spyOn(spectator.component, 'createSachverhalt').and.callThrough();
-    spectator.component.createSachverhalt('createSachverhalt');
+    const spy = spyOn(component, 'createSachverhalt').and.callThrough();
+    component.createSachverhalt('createSachverhalt');
     expect(spy).toHaveBeenCalled();
   });
 
   it('deleteSachverhalt method should have been called', () => {
-    const spy = spyOn(spectator.component, 'deleteSachverhalt').and.callThrough();
-    spectator.component.deleteSachverhalt('deleteSachverhalt');
+    const spy = spyOn(component, 'deleteSachverhalt').and.callThrough();
+    component.deleteSachverhalt('deleteSachverhalt');
     expect(spy).toHaveBeenCalled();
   });
 
   it('closeDialog method should have been called', () => {
-    const spy = spyOn(spectator.component, 'closeDialog').and.callThrough();
-    spectator.component.closeDialog();
+    const spy = spyOn(component, 'closeDialog').and.callThrough();
+    component.closeDialog();
     expect(spy).toHaveBeenCalled();
   });
 });

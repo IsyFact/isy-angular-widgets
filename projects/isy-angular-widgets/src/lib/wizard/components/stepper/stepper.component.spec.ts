@@ -19,6 +19,7 @@ const stepsNumber: number = stepperItems.length;
 const startIndex: number = 0;
 
 describe('Unit Tests: StepperComponent', () => {
+  let component: StepperComponent;
   let spectator: Spectator<StepperComponent>;
   const createdComponent = createComponentFactory({
     component: StepperComponent,
@@ -27,65 +28,66 @@ describe('Unit Tests: StepperComponent', () => {
 
   beforeEach(() => {
     spectator = createdComponent();
-    spectator.component.items = stepperItems;
-    spectator.component.index = startIndex;
+    component = spectator.component;
+    component.items = stepperItems;
+    component.index = startIndex;
   });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it(`should starts with index: ${startIndex}`, () => {
-    expect(spectator.component.index).toEqual(startIndex);
+    expect(component.index).toEqual(startIndex);
   });
 
   it(`should have ${stepsNumber} steps`, () => {
-    expect(spectator.component.items.length).toEqual(stepsNumber);
+    expect(component.items.length).toEqual(stepsNumber);
   });
 
   it(`should have index ${startIndex + 1} after forward movement`, () => {
-    expect(spectator.component.index).toEqual(startIndex);
-    spectator.component.move(true);
-    expect(spectator.component.index).toEqual(startIndex + 1);
+    expect(component.index).toEqual(startIndex);
+    component.move(true);
+    expect(component.index).toEqual(startIndex + 1);
   });
 
   it(`should have index ${startIndex} after forward and backward movement`, () => {
-    expect(spectator.component.index).toEqual(startIndex);
-    spectator.component.move(true);
-    expect(spectator.component.index).toEqual(startIndex + 1);
-    spectator.component.move(false);
-    expect(spectator.component.index).toEqual(startIndex);
+    expect(component.index).toEqual(startIndex);
+    component.move(true);
+    expect(component.index).toEqual(startIndex + 1);
+    component.move(false);
+    expect(component.index).toEqual(startIndex);
   });
 
   it('should not go out of bound while forwarding', () => {
-    expect(spectator.component.index).toEqual(startIndex);
+    expect(component.index).toEqual(startIndex);
     for (let i = 0; i < stepsNumber + 1; i++) {
-      spectator.component.move(true);
+      component.move(true);
     }
-    expect(spectator.component.index).toEqual(stepsNumber);
+    expect(component.index).toEqual(stepsNumber);
   });
 
   it('should not go out of bound while backwarding', () => {
-    expect(spectator.component.index).toEqual(startIndex);
-    spectator.component.move(false);
-    expect(spectator.component.index).toEqual(startIndex);
+    expect(component.index).toEqual(startIndex);
+    component.move(false);
+    expect(component.index).toEqual(startIndex);
   });
 
   it(`should correctly reset index to ${startIndex}`, () => {
-    expect(spectator.component.index).toEqual(startIndex);
-    spectator.component.move(true);
-    expect(spectator.component.index).toEqual(startIndex + 1);
-    spectator.component.reset();
-    expect(spectator.component.index).toEqual(startIndex);
+    expect(component.index).toEqual(startIndex);
+    component.move(true);
+    expect(component.index).toEqual(startIndex + 1);
+    component.reset();
+    expect(component.index).toEqual(startIndex);
   });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should have the correct stepper items titles', () => {
-    for (let i = 0; i < spectator.component.items.length; i++) {
-      expect(spectator.component.items[i]).toEqual(stepperItems[i]);
+    for (let i = 0; i < component.items.length; i++) {
+      expect(component.items[i]).toEqual(stepperItems[i]);
     }
   });
 });

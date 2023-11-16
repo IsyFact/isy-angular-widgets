@@ -6,19 +6,23 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 
-describe('Unit Tests: InputCharViewComponent', () => {
+describe('Unit Tests: InputCharPreviewComponent', () => {
+  let component: InputCharPreviewComponent;
   const createComponent = createComponentFactory(InputCharPreviewComponent);
   let spectator: Spectator<InputCharPreviewComponent>;
 
-  beforeEach(() => (spectator = createComponent()));
+  beforeEach(() => {
+    spectator = createComponent();
+    component = spectator.component;
+  });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   sonderzeichenListe.forEach((zeichenObjekt: Zeichenobjekt) => {
     it(`should show the selected character ${zeichenObjekt.zeichen} in the sans field`, () => {
-      spectator.component.zeichenObjekt = zeichenObjekt;
+      component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
       const serifCharacterPreview = spectator.fixture.debugElement.query(By.css('#serif-letter'))
@@ -27,7 +31,7 @@ describe('Unit Tests: InputCharViewComponent', () => {
     });
 
     it(`should show the selected character ${zeichenObjekt.zeichen} sans-serif field`, () => {
-      spectator.component.zeichenObjekt = zeichenObjekt;
+      component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
       const sansSerifCharacterPreview = spectator.fixture.debugElement.query(By.css('#sans-letter'))
@@ -36,7 +40,7 @@ describe('Unit Tests: InputCharViewComponent', () => {
     });
 
     it(`should show selected the character ${zeichenObjekt.zeichen} description`, () => {
-      spectator.component.zeichenObjekt = zeichenObjekt;
+      component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
       const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#description'))
@@ -45,7 +49,7 @@ describe('Unit Tests: InputCharViewComponent', () => {
     });
 
     it(`should show selected the character ${zeichenObjekt.zeichen} codepoint`, () => {
-      spectator.component.zeichenObjekt = zeichenObjekt;
+      component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
 
       const characterDescriptionName = spectator.fixture.debugElement.query(By.css('#codepoint'))

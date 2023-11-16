@@ -8,6 +8,8 @@ import {MockComponent} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 
+let component: InputCharComponent;
+
 describe('Unit Tests: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
 
@@ -19,16 +21,18 @@ describe('Unit Tests: InputCharComponent', () => {
 
     beforeEach(() => {
       spectator = createdComponent();
-      spectator.component.ngOnChanges();
+      component = spectator.component;
+
+      component.ngOnChanges();
       spectator.fixture.detectChanges();
     });
 
     it('should create', () => {
-      expect(spectator.component).toBeTruthy();
+      expect(component).toBeTruthy();
     });
 
     it('should have default datatype DATENTYP_C', () => {
-      expect(spectator.component.datentyp).toEqual(Datentyp.DATENTYP_C);
+      expect(component.datentyp).toEqual(Datentyp.DATENTYP_C);
     });
   });
 
@@ -44,31 +48,33 @@ describe('Unit Tests: InputCharComponent', () => {
 
       beforeEach(() => {
         spectator = createdComponent();
-        spectator.component.datentyp = datentyp as Datentyp;
+        component = spectator.component;
+
+        component.datentyp = datentyp as Datentyp;
         spectator.fixture.componentRef.setInput('datentyp', datentyp);
         spectator.fixture.detectChanges();
       });
 
       it('should create', () => {
-        expect(spectator.component).toBeTruthy();
+        expect(component).toBeTruthy();
       });
 
       it('should have the specified default input configuration', () => {
-        expect(spectator.component.header).toEqual(undefined);
-        expect(spectator.component.closable).toBeTrue();
-        expect(spectator.component.draggable).toBeTrue();
-        expect(spectator.component.resizable).toBeFalse();
-        expect(spectator.component.dismissableMask).toBeFalse();
-        expect(spectator.component.closeOnEscape).toBeTrue();
-        expect(spectator.component.modal).toBeFalse();
-        expect(spectator.component.isInputDisabled).toBeFalse();
-        expect(spectator.component.visible).toBeFalse();
+        expect(component.header).toEqual(undefined);
+        expect(component.closable).toBeTrue();
+        expect(component.draggable).toBeTrue();
+        expect(component.resizable).toBeFalse();
+        expect(component.dismissableMask).toBeFalse();
+        expect(component.closeOnEscape).toBeTrue();
+        expect(component.modal).toBeFalse();
+        expect(component.isInputDisabled).toBeFalse();
+        expect(component.visible).toBeFalse();
       });
 
       it('should display the input char button', () => {
         const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
           .nativeElement as HTMLButtonElement;
-        spectator.component.isInputDisabled = true;
+        component.isInputDisabled = true;
         spectator.fixture.detectChanges();
         expect(button.disabled).toBeTruthy();
       });
@@ -76,7 +82,7 @@ describe('Unit Tests: InputCharComponent', () => {
       it('should not display the input char button', () => {
         const button = spectator.fixture.debugElement.query(By.css('.input-char-button'))
           .nativeElement as HTMLButtonElement;
-        spectator.component.isInputDisabled = false;
+        component.isInputDisabled = false;
         spectator.fixture.detectChanges();
         expect(button.disabled).toBeFalsy();
       });
@@ -86,7 +92,7 @@ describe('Unit Tests: InputCharComponent', () => {
           .nativeElement as HTMLButtonElement;
         expect(button).toBeTruthy();
 
-        spectator.component.isInputDisabled = true;
+        component.isInputDisabled = true;
         spectator.fixture.detectChanges();
 
         expect(button.disabled).toBeTruthy();
@@ -97,7 +103,7 @@ describe('Unit Tests: InputCharComponent', () => {
           .nativeElement as HTMLButtonElement;
         expect(button).toBeTruthy();
 
-        spectator.component.isInputDisabled = false;
+        component.isInputDisabled = false;
         spectator.fixture.detectChanges();
 
         expect(button.disabled).toBeFalsy();
@@ -111,12 +117,12 @@ describe('Unit Tests: InputCharComponent', () => {
         button.click();
         spectator.fixture.detectChanges();
 
-        expect(spectator.component.visible).toBeTrue();
+        expect(component.visible).toBeTrue();
       });
 
       it('should have the correct default size', () => {
-        expect(spectator.component.width).toEqual(dialogDefaultWidth);
-        expect(spectator.component.height).toEqual(dialogDefaultHeight);
+        expect(component.width).toEqual(dialogDefaultWidth);
+        expect(component.height).toEqual(dialogDefaultHeight);
       });
     });
   });

@@ -12,6 +12,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const person = getEmptyPerson();
   const formBuilder: FormBuilder = new FormBuilder();
 
+  let component: PersoenlicheInformationenComponent;
   let spectator: Spectator<PersoenlicheInformationenComponent>;
   const createdComponent = createComponentFactory({
     component: PersoenlicheInformationenComponent,
@@ -28,17 +29,18 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   beforeEach(() => {
     spectator = createdComponent();
-    spectator.component.form = initPersoenlicheInformationenForm(person);
-    markFormAsDirty(spectator.component.form);
+    component = spectator.component;
+    component.form = initPersoenlicheInformationenForm(person);
+    markFormAsDirty(component.form);
     spectator.fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should validate the incoming form', () => {
-    const form = spectator.component.form;
+    const form = component.form;
     expect(form.valid).toBeFalse();
     expect(form.get('vorname')!.value).toEqual(person.personalien.vorname);
     expect(form.get('nachname')!.value).toEqual(person.personalien.nachname);
@@ -50,7 +52,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     const formFields = ['nachname', 'geschlecht'];
 
     formFields.forEach((formFieldName) => {
-      const field = spectator.component.form.get(formFieldName);
+      const field = component.form.get(formFieldName);
       expect(field!.value).toEqual(person.personalien.nachname);
       expect(field!.valid).toBeFalse();
       expect(field?.dirty).toBeTrue();
@@ -69,7 +71,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   it('should validate nachname form field', () => {
     const nachnameStr = 'nachname';
-    const nachnameInput = spectator.component.form.get(nachnameStr);
+    const nachnameInput = component.form.get(nachnameStr);
     expect(nachnameInput!.errors).not.toBeNull();
 
     nachnameInput!.setValue(1);
@@ -93,7 +95,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   it('should validate vorname form field', () => {
     const vornameStr = 'vorname';
-    const vornameInput = spectator.component.form.get(vornameStr);
+    const vornameInput = component.form.get(vornameStr);
     expect(vornameInput!.errors).toBeNull();
 
     vornameInput!.setValue(1);
@@ -117,7 +119,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   it('should validate geschlecht form field', () => {
     const geschlechtStr = 'geschlecht';
-    const geschlechtInput = spectator.component.form.get(geschlechtStr);
+    const geschlechtInput = component.form.get(geschlechtStr);
     expect(geschlechtInput!.errors).not.toBeNull();
 
     geschlechtInput!.setValue(1);
@@ -140,12 +142,12 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   });
 
   it('should validate the form', () => {
-    const form = spectator.component.form;
+    const form = component.form;
     expect(form.valid).toBeFalse();
 
-    const nachnameInput = spectator.component.form.get('nachname');
-    const vornameInput = spectator.component.form.get('vorname');
-    const geschlechtInput = spectator.component.form.get('geschlecht');
+    const nachnameInput = component.form.get('nachname');
+    const vornameInput = component.form.get('vorname');
+    const geschlechtInput = component.form.get('geschlecht');
 
     nachnameInput!.setValue('nachname');
     expect(nachnameInput?.errors).toBeNull();

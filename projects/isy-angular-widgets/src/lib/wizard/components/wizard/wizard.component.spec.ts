@@ -1,4 +1,4 @@
-import {fakeAsync, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, tick} from '@angular/core/testing';
 import {WizardComponent} from './wizard.component';
 import {StepperComponent} from '../stepper/stepper.component';
 import {WizardDirective} from '../../directives/wizard.directive';
@@ -46,6 +46,7 @@ class TestComponent {
 let wizard: WizardComponent;
 let stepper: StepperComponent;
 let contentChildren: QueryList<WizardDirective>;
+let fixture: ComponentFixture<TestComponent>;
 
 describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let spectator: Spectator<TestComponent>;
@@ -105,7 +106,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     moveToLastStep();
     expectLastStep();
     expect(wizard.isSaved).toBeFalse();
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
   }
 
   /**
@@ -122,7 +123,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   function setNextStepAvailable(): void {
     wizard.allowNext = true;
     expect(wizard.allowNext).toBeTrue();
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
   }
 
   /**
@@ -131,7 +132,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    * @param declaration The ID of the native element
    */
   function getNativeElementAsHTMLElement(declaration: string): HTMLElement {
-    return spectator.fixture.nativeElement.querySelector(declaration) as HTMLElement;
+    return fixture.nativeElement.querySelector(declaration) as HTMLElement;
   }
 
   /**
@@ -140,7 +141,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   function pressNextButton(): void {
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
     nextButton.click();
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
   }
 
   /**
@@ -174,7 +175,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    * @param declaration the ID of a native element
    */
   function isElementDisabled(declaration: string): boolean {
-    return spectator.fixture.nativeElement.querySelector(declaration).disabled;
+    return fixture.nativeElement.querySelector(declaration).disabled;
   }
 
   /**
@@ -183,7 +184,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   function pressBackButton(): void {
     const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
     backButton.click();
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
   }
 
   /**
@@ -192,7 +193,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   function pressSaveButton(): void {
     const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
     saveButton.click();
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
   }
 
   /**
@@ -205,8 +206,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   beforeEach(() => {
     spectator = createdComponent();
+    fixture = spectator.fixture;
     initGlobalVariables();
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
   });
 
   it('should create parent component (mocked test component)', () => {
@@ -450,7 +452,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
       const isCloseButtonDisabled = isElementDisabled(closeButtonDeclaration);
       expect(isCloseButtonDisabled).toBeFalse();
-      spectator.fixture.detectChanges();
+      fixture.detectChanges();
     }
   });
 
@@ -559,7 +561,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(wizard.closable).toBeTrue();
 
     moveToLastStep();
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
     expectLastStep();
 
     expect(wizard.isSaved).toBeFalse();

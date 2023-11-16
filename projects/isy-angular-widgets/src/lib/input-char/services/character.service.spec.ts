@@ -4,18 +4,22 @@ import {Datentyp} from '../model/datentyp';
 import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
 describe('Unit Tests: CharacterService', () => {
+  let service: CharacterService;
   let spectator: SpectatorService<CharacterService>;
   const createdService = createServiceFactory(CharacterService);
 
-  beforeEach(() => (spectator = createdService()));
+  beforeEach(() => {
+    spectator = createdService();
+    service = spectator.service;
+  });
 
   it('should be created', () => {
-    expect(spectator.service).toBeTruthy();
+    expect(service).toBeTruthy();
   });
 
   const numberOfSonderZeichen = 908;
   it(`should return ${numberOfSonderZeichen} characters`, () => {
-    expect(spectator.service.getCharacters().length).toEqual(numberOfSonderZeichen);
+    expect(service.getCharacters().length).toEqual(numberOfSonderZeichen);
   });
 
   const groupCounts = new Map<Schriftzeichengruppe, number>([
@@ -31,8 +35,7 @@ describe('Unit Tests: CharacterService', () => {
   groupCounts.forEach((expectedCount, schriftzeichengruppe) => {
     it(`should return ${expectedCount} characters with Schriftzeichengruppe ${schriftzeichengruppe}`, () => {
       expect(
-        spectator.service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe)
-          .length
+        service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
       ).toEqual(expectedCount);
     });
   });
@@ -68,7 +71,7 @@ describe('Unit Tests: CharacterService', () => {
   ]);
   baseCounts.forEach((expectedCount, base) => {
     it(`should return ${expectedCount} characters with Grundzeichen ${base}`, () => {
-      expect(spectator.service.getCharacters().filter((character) => character.grundzeichen === base).length).toEqual(
+      expect(service.getCharacters().filter((character) => character.grundzeichen === base).length).toEqual(
         expectedCount
       );
     });
@@ -130,23 +133,23 @@ describe('Unit Tests: CharacterService', () => {
       const numberOfCharacters = testData.characters;
 
       it(`should return ${numberOfSchriftzeichenGruppen} Schriftzeichengruppen`, () => {
-        expect(spectator.service.getGroupsByDataType(datentyp).length).toEqual(numberOfSchriftzeichenGruppen);
+        expect(service.getGroupsByDataType(datentyp).length).toEqual(numberOfSchriftzeichenGruppen);
       });
 
       it(`should return ${numberOfCharacters} characters`, () => {
-        expect(spectator.service.getCharactersByDataType(datentyp).length).toEqual(numberOfCharacters);
+        expect(service.getCharactersByDataType(datentyp).length).toEqual(numberOfCharacters);
       });
 
       testData.expectedSchriftzeichengruppen.forEach((expectedSchriftzeichengruppe) => {
         it(`should contain ${expectedSchriftzeichengruppe}`, () => {
           for (const expectedSchriftzeichengruppe of testData.expectedSchriftzeichengruppen) {
-            expect(spectator.service.getGroupsByDataType(datentyp)).toContain(expectedSchriftzeichengruppe);
+            expect(service.getGroupsByDataType(datentyp)).toContain(expectedSchriftzeichengruppe);
           }
         });
       });
 
       it('should not contain unexpected Schriftzeichengruppen', () => {
-        const schriftzeichengruppen = spectator.service.getGroupsByDataType(datentyp);
+        const schriftzeichengruppen = service.getGroupsByDataType(datentyp);
         for (const schriftzeichengruppe of schriftzeichengruppen) {
           expect(testData.expectedSchriftzeichengruppen).toContain(schriftzeichengruppe);
         }
@@ -157,7 +160,7 @@ describe('Unit Tests: CharacterService', () => {
   const DIN_91379_CHARS = ['ḗ', 'ē̍', 'ō̍', '̍', '′', '″'];
   DIN_91379_CHARS.forEach((character) => {
     it(`should contain DIN 91379 special character ${character}`, () => {
-      const filteredResult = spectator.service.getCharacters().find((item) => item.zeichen === character);
+      const filteredResult = service.getCharacters().find((item) => item.zeichen === character);
       expect(filteredResult).toBeTruthy();
     });
   });

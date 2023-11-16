@@ -3,6 +3,7 @@ import {Datentyp} from '../model/datentyp';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {ComponentFixture} from '@angular/core/testing';
 
 @Component({
   template: `<input
@@ -29,6 +30,7 @@ class TestComponent {
 }
 
 describe('Integration Tests: InputCharDirective', () => {
+  let fixture: ComponentFixture<TestComponent>;
   let spectator: Spectator<TestComponent>;
   let directiveElement: DebugElement[];
   let directive: InputCharDirective;
@@ -39,7 +41,8 @@ describe('Integration Tests: InputCharDirective', () => {
 
   beforeEach(() => {
     spectator = createdComponent();
-    directiveElement = spectator.fixture.debugElement.queryAll(By.directive(InputCharDirective));
+    fixture = spectator.fixture;
+    directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
     directive = directiveElement[0].injector.get(InputCharDirective);
   });
 
@@ -48,23 +51,21 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should add an input char button to the input', () => {
-    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button'))
-      .nativeElement as HTMLButtonElement;
+    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
   });
 
   it('should set the input char button to disabled when the input is disabled', (done) => {
-    const input = spectator.fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
-    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button'))
-      .nativeElement as HTMLButtonElement;
+    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
 
     setTimeout(() => {
-      spectator.fixture.detectChanges();
+      fixture.detectChanges();
       expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
       expect(inputCharButton.disabled).toBeTrue();
       done();
@@ -72,17 +73,16 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
-    const input = spectator.fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     expect(input).toBeTruthy();
-    const inputCharButton = spectator.fixture.debugElement.query(By.css('.input-char-button'))
-      .nativeElement as HTMLButtonElement;
+    const inputCharButton = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
 
     setTimeout(() => {
-      spectator.fixture.detectChanges();
+      fixture.detectChanges();
       expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
       expect(inputCharButton.disabled).toBeTrue();
       done();
@@ -103,12 +103,12 @@ describe('Integration Tests: InputCharDirective', () => {
     const newValue = 'abc';
     const valueOnChangeSpy = spyOn(spectator.component, 'valueGet');
 
-    const input = spectator.fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
+    const input = fixture.debugElement.query(By.css('#char-picker')).nativeElement as HTMLInputElement;
     input.value = newValue;
 
     const changeEvent = new Event('change', {});
     input.dispatchEvent(changeEvent);
-    spectator.fixture.detectChanges();
+    fixture.detectChanges();
 
     expect(valueOnChangeSpy).toHaveBeenCalledWith(changeEvent, newValue);
   });
