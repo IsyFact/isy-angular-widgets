@@ -81,12 +81,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   getLanguageIcon(language: string): string {
-    switch (language) {
-      case 'en':
-        return 'gb';
-      default:
-        return language;
+    if (language === 'en') {
+      return 'gb';
     }
+    return language;
   }
 
   selectPermission(role: string): void {
