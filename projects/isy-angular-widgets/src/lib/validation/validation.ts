@@ -58,7 +58,7 @@ export class Validation {
     if (RegExp(regexInputMask).exec(input)) {
       const [day, month, year] = input.split('.');
 
-      if (!(RegExp('x').exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
+      if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
         const isoFormattedStr = `${year}-${month}-${day}`;
         const date = new Date(isoFormattedStr);
         const timestamp = date.getTime();
