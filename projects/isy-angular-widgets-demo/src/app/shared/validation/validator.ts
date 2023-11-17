@@ -1,7 +1,6 @@
 import {ValidatorFn, Validators} from '@angular/forms';
 import {CHARS_AND_NUMBERS, ONLY_CHARS_REGEX, ONLY_NUMBERS_REGEX} from './regex';
 
-/* eslint-disable @typescript-eslint/unbound-method */
 /**
  * A validation rule that marks a field as required.
  */

@@ -68,8 +68,11 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    */
   function expectFormValuesAreEmpty(form: FormGroup, checkEmpty: boolean): void {
     Object.keys(form.controls).forEach((key) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      checkEmpty ? expect(form.get(key)?.value).toEqual('') : expect(form.get(key)?.value).not.toEqual('');
+      if (checkEmpty) {
+        expect(form.get(key)?.value).toEqual('');
+      } else {
+        expect(form.get(key)?.value).not.toEqual('');
+      }
     });
   }
 

@@ -3,29 +3,12 @@ import {InputCharDialogComponent} from './input-char-dialog.component';
 import {By} from '@angular/platform-browser';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {Component, EventEmitter, Input, NO_ERRORS_SCHEMA, Output} from '@angular/core';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {SelectButton} from 'primeng/selectbutton';
 import {Accordion} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputCharModule} from '../../input-char.module';
-
-@Component({
-  selector: 'p-selectButton',
-  template: ''
-})
-class FakeSelectButtonComponent implements Partial<SelectButton> {
-  @Input() options?: any[];
-
-  // Implementing onChange from SelectButton because usage of Partial
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  @Output() onChange = new EventEmitter<void>();
-}
-
-@Component({
-  selector: 'p-accordion',
-  template: '<ng-content></ng-content>'
-})
-class FakeAccordionComponent implements Partial<Accordion> {}
+import {MockComponent} from 'ng-mocks';
 
 describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
@@ -37,7 +20,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InputCharDialogComponent, FakeSelectButtonComponent, FakeAccordionComponent],
+      declarations: [InputCharDialogComponent, MockComponent(SelectButton), MockComponent(Accordion)],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 

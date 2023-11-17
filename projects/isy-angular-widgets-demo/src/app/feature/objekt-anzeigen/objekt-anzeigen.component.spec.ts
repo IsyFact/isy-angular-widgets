@@ -12,7 +12,8 @@ import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
-import data from '../../../assets/permissions.json';
+import {permissions} from '../../app.permission';
+import {DebugElement} from '@angular/core';
 
 describe('Integration Tests: PersonBearbeitenComponent', () => {
   let component: ObjektAnzeigenComponent;
@@ -20,7 +21,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   let messageService: MessageService;
   let userInfoService: UserInfoPublicService;
   let securityService: SecurityService;
-  const inputFields: any = {};
+  const inputFields: {[key: string]: DebugElement & {disabled?: boolean}} = {};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -60,7 +61,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   function setupRolesAndPermissions(): void {
     const userInfoData = userInfoService.getUserInfo();
     securityService.setRoles(userInfoData);
-    securityService.setPermissions(data);
+    securityService.setPermissions(permissions);
     component.showSecretFields = true;
     fixture.detectChanges();
   }
@@ -75,7 +76,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     inputFields.birthName = fixture.debugElement.query(By.css('#birth-name'));
     inputFields.birthplace = fixture.debugElement.query(By.css('#birth-place'));
     inputFields.nationality = fixture.debugElement.query(By.css('#nationality'));
-    inputFields.gender = fixture.debugElement.query(By.css('p-dropdown:has(#gender) .p-inputtext'));
+    inputFields.gender = fixture.debugElement.query(By.css('p-dropdown:has(#gender)'));
     inputFields.phoneNumber = fixture.debugElement.query(By.css('#phone-number'));
     inputFields.birthDate = fixture.debugElement.query(By.css('#birth-date'));
     inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry'));

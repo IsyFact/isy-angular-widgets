@@ -15,15 +15,7 @@ module.exports = {
         'plugin:@angular-eslint/template/process-inline-templates',
         'plugin:@isyfact/recommended',
         'plugin:editorconfig/all'
-      ],
-      rules: {
-        '@typescript-eslint/unbound-method': [
-          'error',
-          {
-            ignoreStatic: true
-          }
-        ]
-      }
+      ]
     },
     {
       files: ['*.spec.ts'],

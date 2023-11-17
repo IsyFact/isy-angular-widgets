@@ -117,13 +117,11 @@
             inputId="gender"
             formControlName="gender"
             [filter]="true"
-            [filterBy]="'name'"
-            [optionLabel]="'name'"
-            [optionValue]="'name'"
+            filterBy="name"
             [options]="[
-              {name: ('isyAngularWidgetsDemo.labels.optionMale' | translate)},
-              {name: ('isyAngularWidgetsDemo.labels.optionFemale' | translate)},
-              {name: ('isyAngularWidgetsDemo.labels.optionDivers' | translate)}
+              'isyAngularWidgetsDemo.labels.optionMale' | translate,
+              'isyAngularWidgetsDemo.labels.optionFemale' | translate,
+              'isyAngularWidgetsDemo.labels.optionDivers' | translate
             ]"
           ></p-dropdown>
         </div>

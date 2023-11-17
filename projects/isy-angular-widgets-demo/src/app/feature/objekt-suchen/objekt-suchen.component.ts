@@ -17,6 +17,8 @@ import {CountryMap} from './model/country';
 import {DateService} from './services/date.service';
 import {TOAST_SEVERITY} from '../../shared/model/toast';
 
+const defaultWidth = 60;
+
 @Component({
   selector: 'demo-personen-suchen',
   templateUrl: './objekt-suchen.component.html',
@@ -96,8 +98,7 @@ export class ObjektSuchenComponent {
   /**
    * The width of the wizard who adds a new person
    */
-  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  width: number = 60;
+  width: number = defaultWidth;
 
   /**
    * The boolean that decides whether the modal feature may be enabled

@@ -84,19 +84,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "1.5mb",
                   "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/isy-angular-widgets-demo/src/environments/environment.ts",
-                  "with": "projects/isy-angular-widgets-demo/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"

@@ -18,7 +18,7 @@ export class SecurityDirective {
    * @internal
    */
   constructor(
-    private template: TemplateRef<any>,
+    private template: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
     private securityService: SecurityService
   ) {}
