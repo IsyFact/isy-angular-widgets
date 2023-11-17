@@ -33,7 +33,7 @@ export class MenuTranslationService {
     const translatedItems = [];
 
     for (const untranslatedItem of items) {
-      const translatedItem = Object.assign({}, untranslatedItem);
+      const translatedItem = {...untranslatedItem};
 
       translatedItem.label = (await firstValueFrom(this.translate.get(untranslatedItem.label as string))) as string;
 
@@ -56,7 +56,7 @@ export class MenuTranslationService {
     const translatedItems = [];
 
     for (const untranslatedItem of items) {
-      const translatedItem = Object.assign({}, untranslatedItem);
+      const translatedItem = {...untranslatedItem};
 
       translatedItem.label = (await firstValueFrom(this.translate.get(untranslatedItem.label as string))) as string;
 
