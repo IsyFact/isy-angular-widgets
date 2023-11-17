@@ -1,6 +1,7 @@
 # 16.0.1 - 
 ## Fixes
 - ISY-375 - Analyse: Einsatz von ng-mocks
+- ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
 
 # 16.0.0 - 10.11.2023
 ## Breaking Changes
