@@ -1,4 +1,15 @@
-import {Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -41,7 +52,7 @@ import {InputMask} from 'primeng/inputmask';
     }
   ]
 })
-export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit {
+export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit, OnDestroy {
   /**
    * A disabled date picker can't be opened.
    */
@@ -64,6 +75,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @Input() inputId?: string;
 
+  @Input() inputClass?: string;
+
   /**
    * Currently displayed date string
    */
@@ -75,11 +88,37 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @ViewChild(InputMask) field?: InputMask;
 
+  private classMutationObserver?: MutationObserver;
+
   /**
    * Default constructor
    * @param incompleteDateService The service that contains date transformation logic
+   * @param element The ElementRef representing the host element
    */
-  constructor(private incompleteDateService: IncompleteDateService) {}
+  constructor(
+    private incompleteDateService: IncompleteDateService,
+    private element: ElementRef
+  ) {}
+
+  ngAfterViewInit(): void {
+    const element = this.element.nativeElement as HTMLElement;
+
+    // Observe changes in the DOM using MutationObserver
+    this.classMutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        // Check if the 'class' attribute has changed
+        if (mutation.attributeName === 'class') this.inputClass = element.className;
+      });
+    });
+
+    // Start observing the target element for attribute changes
+    this.classMutationObserver.observe(element, {attributes: true});
+  }
+
+  ngOnDestroy(): void {
+    // Disconnect the MutationObserver to avoid memory leaks
+    this.classMutationObserver?.disconnect();
+  }
 
   /**
    * Initializes readonly and disabled properties
