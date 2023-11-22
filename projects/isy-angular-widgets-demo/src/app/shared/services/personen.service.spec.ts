@@ -2,7 +2,7 @@ import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 import {PersonenService} from './personen.service';
 import {Person} from '../model/person';
 
-describe('Unit Tests: PersonenService', ()=> {
+describe('Unit Tests: PersonenService', () => {
   const maxEntries = 30;
   const empty = '';
   let spectator: SpectatorService<PersonenService>;
@@ -32,16 +32,16 @@ describe('Unit Tests: PersonenService', ()=> {
     sachverhalte: []
   };
 
-  beforeEach(()=> {
+  beforeEach(() => {
     spectator = createdService();
     service = spectator.service;
   });
 
-  it('should create', ()=> {
+  it('should create', () => {
     expect(spectator.service).toBeTruthy();
   });
 
-  it('should generate a new person', ()=> {
+  it('should generate a new person', () => {
     const person = spectator.service.generatePerson();
     const personalien = person.personalien;
 
@@ -74,28 +74,28 @@ describe('Unit Tests: PersonenService', ()=> {
     expect(person.sachverhalte).toEqual([]);
   });
 
-  it('should find person by id', ()=> {
+  it('should find person by id', () => {
     const foundPersonObservable = service.findPersonById('0');
-    foundPersonObservable.subscribe(person => {
+    foundPersonObservable.subscribe((person) => {
       expect(person[0]).toEqual(mockedPerson);
     });
   });
 
-  it('should find personen by parameters', ()=> {
+  it('should find personen by parameters', () => {
     const generatePerson = service.generatePerson();
     const foundPersonsObservable = service.findPersonenByParameters(generatePerson);
-    foundPersonsObservable.subscribe(persons => {
+    foundPersonsObservable.subscribe((persons) => {
       expect(persons.length).toBeGreaterThan(0);
     });
   });
 
-  it('parameters should be available ', ()=> {
+  it('parameters should be available ', () => {
     const person = service.generatePerson();
     const paramsAvailable = service.searchParametersAvailable(person);
     expect(paramsAvailable).toBeTrue();
   });
 
-  it('should merge the mocked person values into the new generated person', ()=> {
+  it('should merge the mocked person values into the new generated person', () => {
     const newPerson = service.generatePerson();
     const mergedPerson = service.mergePersons(mockedPerson, newPerson);
 
@@ -108,7 +108,7 @@ describe('Unit Tests: PersonenService', ()=> {
     expect(mergedPerson.personalien.geburtsname).toEqual(mockedPerson.personalien.geburtsname);
   });
 
-  it('should be smaller or equal than max entries', ()=> {
+  it('should be smaller or equal than max entries', () => {
     const rng = spectator.service.rng();
     expect(rng).toBeLessThanOrEqual(maxEntries);
   });
