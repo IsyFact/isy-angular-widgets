@@ -74,6 +74,21 @@ describe('Unit Tests: PersonenService', () => {
     expect(person.sachverhalte).toEqual([]);
   });
 
+  it('search parameters should not be available', () => {
+    const person = service.generatePerson();
+    const personalien = person.personalien;
+    personalien.vorname = '';
+    personalien.nachname = '';
+    personalien.geschlecht = '';
+    personalien.geburtsdatum = '';
+    personalien.geburtsort = '';
+    personalien.staatsangehoerigkeit = '';
+    personalien.geburtsname = '';
+
+    const available = service.searchParametersAvailable(person);
+    expect(available).toBeFalse();
+  });
+
   it('should find person by id', () => {
     const foundPersonObservable = service.findPersonById('0');
     foundPersonObservable.subscribe((person) => {
