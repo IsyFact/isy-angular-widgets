@@ -7,7 +7,7 @@ import {permissions} from '../../app.permission';
 import {DebugElement} from '@angular/core';
 import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
@@ -173,11 +173,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(cancelButton).toBeNull();
   });
 
-  //ToDo: Fix
-  // it('should show message if personalien have been saved', () => {
-  //   const messageSpy = spyOn(messageService, 'add');
-  //   component.savePersonalien();
-  //   fixture.detectChanges();
-  //   expect(messageSpy).toHaveBeenCalled();
-  // });
+  it('should show message if personalien have been saved', () => {
+    const msg = createSpyObject(MessageService);
+    msg.add({});
+    component.savePersonalien();
+    fixture.detectChanges();
+    expect(msg.add).toHaveBeenCalled();
+  });
 });
