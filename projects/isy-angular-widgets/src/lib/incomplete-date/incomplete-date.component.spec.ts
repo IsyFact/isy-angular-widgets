@@ -15,9 +15,8 @@ describe('IncompleteDateComponent', () => {
 
   /**
    * Initialize test
-   * @param spectator Specator object with all the information
    */
-  function init(spectator: Spectator<IncompleteDateComponent>): void {
+  function init(): void {
     onChange = jasmine.createSpy('onChange spy');
     onTouched = jasmine.createSpy('onTouched spy');
     component.registerOnChange(onChange);
@@ -35,7 +34,7 @@ describe('IncompleteDateComponent', () => {
     beforeEach(() => {
       spectator = createdComponent();
       component = spectator.component;
-      init(spectator);
+      init();
       input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
     });
 
