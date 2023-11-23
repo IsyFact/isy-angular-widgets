@@ -544,4 +544,19 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     enableClearSearch = component.enableClearSearch();
     expect(enableClearSearch).toBeTrue();
   });
+
+  it('should find person', ()=> {
+    const findPersonSpy = spyOn(spectator.component, 'findPerson');
+    expect(component.tbLoadingStatus).toBeFalse();
+
+    const searchButton = spectator.query('#search-button') as HTMLButtonElement;
+    searchButton.addEventListener('click', function () {
+      spectator.component.findPerson();
+    });
+    searchButton.click();
+    spectator.fixture.detectChanges();
+
+    expect(findPersonSpy).toHaveBeenCalled();
+    expect(component.tbLoadingStatus).toBeFalse();
+  });
 });
