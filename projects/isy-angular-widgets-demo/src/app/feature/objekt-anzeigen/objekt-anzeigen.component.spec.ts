@@ -172,4 +172,12 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     const cancelButton = fixture.nativeElement.querySelector('#button-cancel') as HTMLButtonElement;
     expect(cancelButton).toBeNull();
   });
+
+  //ToDo: Fix
+  // it('should show message if personalien have been saved', () => {
+  //   const messageSpy = spyOn(messageService, 'add');
+  //   component.savePersonalien();
+  //   fixture.detectChanges();
+  //   expect(messageSpy).toHaveBeenCalled();
+  // });
 });
