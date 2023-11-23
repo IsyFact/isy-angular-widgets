@@ -23,4 +23,28 @@ describe('Integration Tests: AppComponent', () => {
     const hauptfenster = spectator.fixture.nativeElement.querySelector('isy-hauptfenster') as HTMLElement;
     expect(hauptfenster).not.toBeNull();
   });
+
+  it('should select the correct permission', () => {
+    const role = 'admin';
+    spectator.component.selectPermission(role);
+    expect(spectator.component.userInfo.roles).toEqual([role]);
+  });
+
+  it('should setting up language', () => {
+    const language = 'en';
+    expect(spectator.component.translate.currentLang).not.toEqual(language);
+    spectator.component.changeLanguage('en');
+    spectator.fixture.detectChanges();
+    expect(spectator.component.translate.currentLang).toEqual(language);
+  });
+
+  it('should return the english language', () => {
+    const language = spectator.component.getLanguageIcon('en');
+    expect(language).toEqual('gb');
+  });
+
+  it('should return the correct language', () => {
+    const language = spectator.component.getLanguageIcon('de');
+    expect(language).toEqual('de');
+  });
 });
