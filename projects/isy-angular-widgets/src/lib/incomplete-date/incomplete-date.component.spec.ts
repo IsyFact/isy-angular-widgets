@@ -52,12 +52,12 @@ describe('IncompleteDateComponent', () => {
     });
 
     it('should change inputClass on attribute change', (done) => {
-      spectator.component.ngAfterViewInit();
+      component.ngAfterViewInit();
       const element = spectator.element;
       element.classList.add('ng-dirty');
 
       setTimeout(() => {
-        expect(spectator.component.inputClass).toBe('ng-dirty');
+        expect(component.inputClass).toBe('ng-dirty');
         done();
       }, 0);
     });
