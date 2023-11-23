@@ -173,7 +173,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(cancelButton).toBeNull();
   });
 
-  it('should show message if personalien have been saved', () => {
+  it('should display notificatioon message if personalien have been saved', () => {
     const msg = createSpyObject(MessageService);
     msg.add({});
     component.savePersonalien();

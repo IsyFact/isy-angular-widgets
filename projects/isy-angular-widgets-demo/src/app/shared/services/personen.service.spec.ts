@@ -96,11 +96,28 @@ describe('Unit Tests: PersonenService', () => {
     });
   });
 
-  it('should find personen by parameters', () => {
+  it('should find personen by parameters, with available search parameters', () => {
     const generatePerson = service.generatePerson();
     const foundPersonsObservable = service.findPersonenByParameters(generatePerson);
     foundPersonsObservable.subscribe((persons) => {
       expect(persons.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('should found personen by parameters, without available search parameters', () => {
+    const person = service.generatePerson();
+    const personalien = person.personalien;
+    personalien.vorname = '';
+    personalien.nachname = '';
+    personalien.geschlecht = '';
+    personalien.geburtsdatum = '';
+    personalien.geburtsort = '';
+    personalien.staatsangehoerigkeit = '';
+    personalien.geburtsname = '';
+
+    const foundPersonsObservable = service.findPersonenByParameters(person);
+    foundPersonsObservable.subscribe((person) => {
+      expect(person.length).toBeGreaterThan(0);
     });
   });
 
