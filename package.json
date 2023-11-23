@@ -58,7 +58,7 @@
     "@angular-eslint/template-parser": "16.2.0",
     "@angular/cli": "~16.2.10",
     "@angular/compiler-cli": "^16.2.12",
-    "@compodoc/compodoc": "^1.1.22",
+    "@compodoc/compodoc": "^1.1.23",
     "@isyfact/eslint-plugin": "^1.4.1",
     "@ngneat/spectator": "^15.0.1",
     "@types/jasmine": "~5.1.4",
