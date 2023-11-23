@@ -51,18 +51,19 @@ describe('IncompleteDateComponent', () => {
       input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
     });
 
-    it('should update inputClass when "class" attribute changes', () => {
-      component.ngAfterViewInit();
-      console.log(input);
-      spectator.fixture.detectChanges();
-      component.onInputChange(keyEvent);
-      spectator.fixture.detectChanges();
-      console.log(input);
-      expect(spectator.component.inputClass).toBe('ng-dirty');
+    it('should change inputClass on attribute change', (done) => {
+      spectator.component.ngAfterViewInit();
+      const element = spectator.element;
+      element.classList.add('ng-dirty');
+
+      setTimeout(() => {
+        expect(spectator.component.inputClass).toBe('ng-dirty');
+        done();
+      }, 0);
     });
 
     it('should disconnect MutationObserver on ngOnDestroy', () => {
-      spyOn(component.classMutationObserver as any, 'disconnect');
+      spyOn(component.classMutationObserver!, 'disconnect');
       component.ngOnDestroy();
       expect(component.classMutationObserver?.disconnect).toHaveBeenCalled();
     });
