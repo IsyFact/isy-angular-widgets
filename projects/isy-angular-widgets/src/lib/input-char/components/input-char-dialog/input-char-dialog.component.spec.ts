@@ -1,35 +1,39 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {InputCharDialogComponent} from './input-char-dialog.component';
 import {By} from '@angular/platform-browser';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {SelectButton} from 'primeng/selectbutton';
-import {Accordion} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputCharModule} from '../../input-char.module';
 import {MockComponent} from 'ng-mocks';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {AccordionModule} from 'primeng/accordion';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {FormsModule} from '@angular/forms';
+import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
+import {ComponentFixture} from '@angular/core/testing';
+
+let spectator: Spectator<InputCharDialogComponent>;
+let fixture: ComponentFixture<InputCharDialogComponent>;
+const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 
 describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
-  let fixture: ComponentFixture<InputCharDialogComponent>;
-
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
   const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
   const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [InputCharDialogComponent, MockComponent(SelectButton), MockComponent(Accordion)],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+  const createdComponent = createComponentFactory({
+    component: InputCharDialogComponent,
+    imports: [AccordionModule, SelectButtonModule, FormsModule],
+    declarations: [MockComponent(InputCharPreviewComponent)]
+  });
 
-    fixture = TestBed.createComponent(InputCharDialogComponent);
-    component = fixture.componentInstance;
+  beforeEach(() => {
+    spectator = createdComponent();
+    component = spectator.component;
+    fixture = spectator.fixture;
     component.allCharacters = sonderzeichenListe;
-    // Manually triggered as input doesn't come from outside in tests
     component.ngOnChanges();
-
     fixture.detectChanges();
   });
 
@@ -174,7 +178,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
   sonderzeichenListe.forEach((zeichen: Zeichenobjekt) => {
     it(`should emit the chosen character ${zeichen.zeichen} after button press`, () => {
-      const button = fixture.debugElement.query(By.css('#lower-right-panel button')).nativeElement;
+      const button = spectator.query('#lower-right-panel button') as HTMLButtonElement;
       expect(button).toBeTruthy();
       const insertCharacterSpy = spyOn(component.insertCharacter, 'emit');
 
@@ -189,25 +193,21 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   it('should have a button with the label "Einfügen"', () => {
-    const button = fixture.debugElement.query(By.css('#lower-right-panel button')).nativeElement;
+    const button = spectator.query('#lower-right-panel button') as HTMLButtonElement;
     expect(button.innerHTML).toContain('Einfügen');
   });
 });
 
 describe('Integration Tests: InputCharDialogComponent', () => {
-  let component: InputCharDialogComponent;
-  let fixture: ComponentFixture<InputCharDialogComponent>;
+  const createdComponent = createComponentFactory({
+    component: InputCharDialogComponent,
+    imports: [InputCharModule, BrowserAnimationsModule]
+  });
 
-  const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
+  beforeEach(() => {
+    spectator = createdComponent();
+    fixture = spectator.fixture;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [InputCharDialogComponent],
-      imports: [BrowserAnimationsModule, InputCharModule]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(InputCharDialogComponent);
-    component = fixture.componentInstance;
     fixture.componentRef.setInput('allCharacters', sonderzeichenListe);
     fixture.detectChanges();
   });
@@ -216,13 +216,13 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     ...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))
   ].length;
   it(`should show ${numberOfBases} available bases`, () => {
-    const baseButtons = fixture.debugElement.queryAll(By.css('#grundzeichen-select-button .p-buttonset div'));
+    const baseButtons = spectator.queryAll('#grundzeichen-select-button .p-buttonset div');
     expect(baseButtons.length).toEqual(numberOfBases);
   });
 
   const numberOfGroups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))].length;
   it(`should show ${numberOfGroups} available groups`, () => {
-    const groupButtons = fixture.debugElement.queryAll(By.css('#schriftzeichengruppe-select-button .p-buttonset div'));
+    const groupButtons = spectator.queryAll('#schriftzeichengruppe-select-button .p-buttonset div');
     expect(groupButtons.length).toEqual(numberOfGroups);
   });
 });

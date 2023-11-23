@@ -1,12 +1,14 @@
-import {TestBed} from '@angular/core/testing';
 import {IncompleteDateService} from './incomplete-date.service';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
-describe('Unit Tests: IsyIncompleteDate', () => {
+describe('Unit Tests: IncompleteDateService', () => {
   let service: IncompleteDateService;
+  let spectator: SpectatorService<IncompleteDateService>;
+  const createService = createServiceFactory(IncompleteDateService);
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(IncompleteDateService);
+    spectator = createService();
+    service = spectator.service;
   });
 
   describe('transformValue', () => {

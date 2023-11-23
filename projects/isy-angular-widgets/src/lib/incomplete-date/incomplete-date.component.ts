@@ -88,7 +88,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @ViewChild(InputMask) field?: InputMask;
 
-  private classMutationObserver?: MutationObserver;
+  classMutationObserver?: MutationObserver;
 
   /**
    * Default constructor

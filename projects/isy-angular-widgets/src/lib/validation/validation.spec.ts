@@ -1,6 +1,4 @@
 import {Validation} from './validation';
-
-import {TestBed} from '@angular/core/testing';
 import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 import moment from 'moment';
 
@@ -8,10 +6,6 @@ import moment from 'moment';
  * Unit-Test der IsyValidators Klasse.
  */
 describe('Unit Test: Validation', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-  });
-
   /**
    * Expects that error have to be defined
    * @param errors Current errors list
@@ -33,6 +27,8 @@ describe('Unit Test: Validation', () => {
   }
 
   describe('unspecifiedDate', () => {
+    const errorKey = 'UNSPECIFIEDDATE';
+
     it('should return no validation error, if input is empty', () => {
       const validDateControl: AbstractControl = new FormControl('');
       const errors = Validation.validUnspecifiedDate(validDateControl);
@@ -46,16 +42,12 @@ describe('Unit Test: Validation', () => {
     });
 
     it('should return UNSPECIFIEDDATE if the day is invalid', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('50.11.2023');
-
       const errors = Validation.validUnspecifiedDate(control);
-
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return UNSPECIFIEDDATE if the month is invalid', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.30.2023');
       const errors = Validation.validUnspecifiedDate(control);
       errorHaveToBeDefined(errors, errorKey);
@@ -80,14 +72,12 @@ describe('Unit Test: Validation', () => {
     });
 
     it('should return UNSPECIFIEDDATE if date is unspecified and the month is invalid in german date format 00.MM.YYYY', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('00.13.2023');
       const errors = Validation.validUnspecifiedDate(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return UNSPECIFIEDDATE if date is in german date format DD.00.YYYY', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.00.2023');
       const errors = Validation.validUnspecifiedDate(control);
 
@@ -113,35 +103,30 @@ describe('Unit Test: Validation', () => {
     });
 
     it('should return UNSPECIFIEDDATE if date is unspecified and the month is invalid in german date format xx.MM.YYYY', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('xx.13.2023');
       const errors = Validation.validUnspecifiedDate(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return UNSPECIFIEDDATE if date is in german date format DD.xx.2022', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.xx.2023');
       const errors = Validation.validUnspecifiedDate(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return UNSPECIFIEDDATE if date is in german date format xx.MM.xxxx', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('xx.01.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return UNSPECIFIEDDATE if date is in german date format DD.xx.xxxx', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.xx.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return UNSPECIFIEDDATE if date is in german date format DD.MM.xxxx', () => {
-      const errorKey = 'UNSPECIFIEDDATE';
       const control: AbstractControl = new FormControl('01.01.xxxx');
       const errors = Validation.validUnspecifiedDate(control);
       errorHaveToBeDefined(errors, errorKey);
@@ -270,6 +255,8 @@ describe('Unit Test: Validation', () => {
   });
 
   describe('creditCardNumber', () => {
+    const errorKey = 'CREDITCARD';
+
     it('should return null if the number is valid', () => {
       const control: AbstractControl = new FormControl('4485-8456-9196-5929');
       const errors = Validation.validCreditCardNumber(control);
@@ -283,28 +270,24 @@ describe('Unit Test: Validation', () => {
     });
 
     it('should return CREDITCARD if the value is invalid', () => {
-      const errorKey = 'CREDITCARD';
       const control: AbstractControl = new FormControl('4485-8456-9196-5928');
       const errors = Validation.validCreditCardNumber(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return CREDITCARD if the value is not only numbers', () => {
-      const errorKey = 'CREDITCARD';
       const control: AbstractControl = new FormControl('448s-8456-91g6-5929');
       const errors = Validation.validCreditCardNumber(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return CREDITCARD if the value is too short', () => {
-      const errorKey = 'CREDITCARD';
       const control: AbstractControl = new FormControl('4485-8456-9');
       const errors = Validation.validCreditCardNumber(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return CREDITCARD if the value is too long', () => {
-      const errorKey = 'CREDITCARD';
       const control: AbstractControl = new FormControl('4485-8456-9196-59291');
       const errors = Validation.validCreditCardNumber(control);
       errorHaveToBeDefined(errors, errorKey);

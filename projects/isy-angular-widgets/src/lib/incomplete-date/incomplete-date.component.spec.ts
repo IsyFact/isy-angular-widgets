@@ -51,27 +51,20 @@ describe('IncompleteDateComponent', () => {
       input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
     });
 
-    it('should observe changes in the class attribute', () => {
-      const nativeElement = spectator.fixture.nativeElement;
-  
-      // Simulate a change in the class attribute
-      nativeElement.classList.add('ng-dirty');
-  
-      // Trigger Angular change detection
-      spectator.detectChanges();
-  
-      // Assert that the component's inputClass property is updated
+    it('should update inputClass when "class" attribute changes', () => {
+      component.ngAfterViewInit();
+      console.log(input);
+      spectator.fixture.detectChanges();
+      component.onInputChange(keyEvent);
+      spectator.fixture.detectChanges();
+      console.log(input);
       expect(spectator.component.inputClass).toBe('ng-dirty');
     });
-  
+
     it('should disconnect MutationObserver on ngOnDestroy', () => {
-      spyOn(spectator.component.classMutationObserver, 'disconnect');
-  
-      // Trigger ngOnDestroy
-      spectator.component.ngOnDestroy();
-  
-      // Assert that disconnect method was called
-      expect(spectator.component.classMutationObserver.disconnect).toHaveBeenCalled();
+      spyOn(component.classMutationObserver as any, 'disconnect');
+      component.ngOnDestroy();
+      expect(component.classMutationObserver?.disconnect).toHaveBeenCalled();
     });
 
     it('should transform the input value on losing the focus to "" when input value contains "_"', () => {

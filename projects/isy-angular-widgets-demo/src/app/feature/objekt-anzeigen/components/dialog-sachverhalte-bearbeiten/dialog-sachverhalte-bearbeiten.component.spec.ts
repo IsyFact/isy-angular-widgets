@@ -1,22 +1,18 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DialogSachverhalteBearbeitenComponent} from './dialog-sachverhalte-bearbeiten.component';
 import {TableModule} from 'primeng/table';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   let component: DialogSachverhalteBearbeitenComponent;
-  let fixture: ComponentFixture<DialogSachverhalteBearbeitenComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [DialogSachverhalteBearbeitenComponent],
-      imports: [TableModule]
-    }).compileComponents();
+  let spectator: Spectator<DialogSachverhalteBearbeitenComponent>;
+  const createdComponent = createComponentFactory({
+    component: DialogSachverhalteBearbeitenComponent,
+    imports: [TableModule]
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogSachverhalteBearbeitenComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createdComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {

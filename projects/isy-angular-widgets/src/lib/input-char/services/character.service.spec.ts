@@ -1,15 +1,16 @@
-import {TestBed} from '@angular/core/testing';
-
 import {CharacterService} from './character.service';
 import {Schriftzeichengruppe} from '../model/model';
 import {Datentyp} from '../model/datentyp';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
 describe('Unit Tests: CharacterService', () => {
   let service: CharacterService;
+  let spectator: SpectatorService<CharacterService>;
+  const createdService = createServiceFactory(CharacterService);
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(CharacterService);
+    spectator = createdService();
+    service = spectator.service;
   });
 
   it('should be created', () => {

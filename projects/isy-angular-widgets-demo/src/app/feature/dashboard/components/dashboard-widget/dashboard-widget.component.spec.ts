@@ -1,34 +1,32 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {DashboardWidgetComponent} from './dashboard-widget.component';
-import {CardModule} from 'primeng/card';
-import {TranslateModule} from '@ngx-translate/core';
-import {PanelMenuModule} from 'primeng/panelmenu';
-import {FormsModule} from '@angular/forms';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {MockComponent} from 'ng-mocks';
+import {PanelMenu} from 'primeng/panelmenu';
 
 describe('Integration Tests: DashboardWidgetsComponent', () => {
-  let component: DashboardWidgetComponent;
-  let fixture: ComponentFixture<DashboardWidgetComponent>;
+  let spectator: Spectator<DashboardWidgetComponent>;
+  const createdComponent = createComponentFactory({
+    component: DashboardWidgetComponent,
+    declarations: [MockComponent(PanelMenu)],
+    imports: [TranslateModule.forRoot()],
+    providers: [TranslateService]
+  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [DashboardWidgetComponent],
-      imports: [TranslateModule.forRoot(), PanelMenuModule, CardModule, FormsModule]
-    }).compileComponents();
+  beforeEach(() => (spectator = createdComponent()));
 
-    fixture = TestBed.createComponent(DashboardWidgetComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  afterEach(() => {
+    spectator.fixture.destroy();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 
   it('should get background color class name', () => {
     const color = 'blue';
     const expected = `${color}-background`;
-    const actual = component.getBackgroundColorClass('blue');
+    const actual = spectator.component.getBackgroundColorClass('blue');
     expect(actual).toEqual(expected);
   });
 });
