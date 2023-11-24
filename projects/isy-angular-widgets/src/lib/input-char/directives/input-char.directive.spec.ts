@@ -54,11 +54,11 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   /**
-   * Setting up timeout
+   * Expect that button is disabled
    * @param inputCharButton The current HTML button
    * @param done Action method that should be called when the async work is complete.
    */
-  function setTimeOut(inputCharButton: HTMLButtonElement, done: DoneFn): void {
+  function expectInputCharButtonIsDisabled(inputCharButton: HTMLButtonElement, done: DoneFn): void {
     setTimeout(() => {
       fixture.detectChanges();
       expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
@@ -80,7 +80,7 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
-    setTimeOut(inputCharButton, done);
+    expectInputCharButtonIsDisabled(inputCharButton, done);
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
@@ -88,7 +88,7 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
-    setTimeOut(inputCharButton, done);
+    expectInputCharButtonIsDisabled(inputCharButton, done);
   });
 
   it('should have mouse position 0 by default', () => {
