@@ -124,13 +124,14 @@ describe('Unit Tests: InputCharComponent', () => {
 describe('Integration Test: InputCharComponent', () => {
   const service = new CharacterService();
 
+  let spectator: Spectator<InputCharComponent>;
+  const createdComponent = createComponentFactory({
+    component: InputCharComponent,
+    imports: [InputCharModule]
+  });
+
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
-      let spectator: Spectator<InputCharComponent>;
-      const createdComponent = createComponentFactory({
-        component: InputCharComponent,
-        imports: [InputCharModule]
-      });
       beforeEach(() => {
         spectator = createdComponent();
         spectator.fixture.componentRef.setInput('datentyp', datentyp);

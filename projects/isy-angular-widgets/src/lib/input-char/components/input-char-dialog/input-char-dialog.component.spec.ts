@@ -2,7 +2,6 @@ import {InputCharDialogComponent} from './input-char-dialog.component';
 import {By} from '@angular/platform-browser';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputCharModule} from '../../input-char.module';
 import {MockComponent} from 'ng-mocks';
 import {SelectButtonModule} from 'primeng/selectbutton';
@@ -201,7 +200,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 describe('Integration Tests: InputCharDialogComponent', () => {
   const createdComponent = createComponentFactory({
     component: InputCharDialogComponent,
-    imports: [InputCharModule, BrowserAnimationsModule]
+    imports: [InputCharModule]
   });
 
   beforeEach(() => {
