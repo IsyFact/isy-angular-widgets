@@ -11,12 +11,14 @@ let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
 
 describe('Unit Tests: InputCharComponent', () => {
-  describe('with default datentyp', () => {
-    const createdComponent = createComponentFactory({
-      component: InputCharComponent,
-      declarations: [MockComponent(Dialog), MockComponent(InputCharDialogComponent)]
-    });
+  const dialogDefaultWidth = '775px';
+  const dialogDefaultHeight = '460px';
+  const createdComponent = createComponentFactory({
+    component: InputCharComponent,
+    declarations: [MockComponent(Dialog), MockComponent(InputCharDialogComponent)]
+  });
 
+  describe('with default datentyp', () => {
     beforeEach(() => {
       spectator = createdComponent();
       component = spectator.component;
@@ -36,14 +38,6 @@ describe('Unit Tests: InputCharComponent', () => {
 
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
-      const dialogDefaultWidth = '775px';
-      const dialogDefaultHeight = '460px';
-
-      const createdComponent = createComponentFactory({
-        component: InputCharComponent,
-        declarations: [MockComponent(Dialog), MockComponent(InputCharDialogComponent)]
-      });
-
       beforeEach(() => {
         spectator = createdComponent();
         component = spectator.component;
