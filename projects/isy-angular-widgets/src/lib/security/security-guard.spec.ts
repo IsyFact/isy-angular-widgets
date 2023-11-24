@@ -20,7 +20,7 @@ describe('SecurityGuard: Integration Tests', () => {
   describe('SecurityGuard - without setting up roles and permissions', () => {
     const createdService = createServiceFactory(AuthGuard);
 
-    beforeEach(() => spectator = createdService());
+    beforeEach(() => (spectator = createdService()));
 
     it('should create', () => {
       expect(spectator.service).toBeTruthy();
@@ -43,7 +43,7 @@ describe('SecurityGuard: Integration Tests', () => {
       providers: [{provide: SecurityService, useValue: securityServiceSpy}]
     });
 
-    beforeEach(() => spectator = createdService());
+    beforeEach(() => (spectator = createdService()));
 
     it('should create', () => {
       expect(spectator.service).toBeTruthy();
