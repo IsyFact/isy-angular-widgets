@@ -545,7 +545,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(enableClearSearch).toBeTrue();
   });
 
-  it('should find person', ()=> {
+  it('should find person', () => {
     const findPersonSpy = spyOn(spectator.component, 'findPerson');
     expect(component.tbLoadingStatus).toBeFalse();
 

@@ -15,6 +15,9 @@ import {ComponentFixture} from '@angular/core/testing';
   />`
 })
 class TestComponent {
+  // Needed to access private method
+  /* eslint-disable @typescript-eslint/dot-notation */
+
   datentyp: Datentyp = Datentyp.DATENTYP_A;
 
   valueGet(event?: Event, referenceVariableValue?: string): void {
@@ -129,5 +132,16 @@ describe('Integration Tests: InputCharDirective', () => {
     input.value = 'test';
     input.dispatchEvent(new KeyboardEvent('keyup'));
     expect(directive.selectionPosition).toEqual(input.value.length);
+  });
+
+  it('input should be disabled', () => {
+    directive['handleDisabledReadonlyChange'](input, 'other');
+    expect(directive.componentRef.instance.isInputDisabled).toBeFalse();
+  });
+
+  it('input should be enabled', () => {
+    input.disabled = true;
+    directive['handleDisabledReadonlyChange'](input, 'disabled');
+    expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
   });
 });
