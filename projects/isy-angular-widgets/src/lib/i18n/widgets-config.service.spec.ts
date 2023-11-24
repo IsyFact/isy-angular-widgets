@@ -5,7 +5,7 @@ describe('Unit tests: WidgetsConfigService', () => {
   let spectator: SpectatorService<WidgetsConfigService>;
   const createdService = createServiceFactory(WidgetsConfigService);
 
-  beforeEach(() => (spectator = createdService()));
+  beforeEach(() => spectator = createdService());
 
   it('should be created', () => {
     expect(spectator.service).toBeTruthy();

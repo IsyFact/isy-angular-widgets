@@ -38,6 +38,11 @@ describe('Unit Tests: InputCharComponent', () => {
     it('should have default datatype DATENTYP_C', () => {
       expect(component.datentyp).toEqual(Datentyp.DATENTYP_C);
     });
+
+    it('should have the correct default size', () => {
+      expect(component.width).toEqual(dialogDefaultWidth);
+      expect(component.height).toEqual(dialogDefaultHeight);
+    });
   });
 
   Object.keys(Datentyp).forEach((datentyp) => {
@@ -110,11 +115,6 @@ describe('Unit Tests: InputCharComponent', () => {
 
         expect(component.visible).toBeTrue();
       });
-
-      it('should have the correct default size', () => {
-        expect(component.width).toEqual(dialogDefaultWidth);
-        expect(component.height).toEqual(dialogDefaultHeight);
-      });
     });
   });
 });
@@ -126,7 +126,7 @@ describe('Integration Test: InputCharComponent', () => {
   const createdComponent = createComponentFactory({
     component: InputCharComponent,
     declarations: [MockComponents(Dialog, InputCharPreviewComponent), InputCharDialogComponent],
-    imports: [MockModule(FormsModule), MockModule(ButtonModule), SelectButtonModule, MockModule(AccordionModule)]
+    imports: [MockModule(FormsModule), MockModule(ButtonModule), MockModule(AccordionModule), SelectButtonModule]
   });
 
   Object.keys(Datentyp).forEach((datentyp) => {

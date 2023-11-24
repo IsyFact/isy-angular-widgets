@@ -4,6 +4,7 @@ import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
+import {MockDirective} from "ng-mocks";
 
 @Component({
   template: `<input

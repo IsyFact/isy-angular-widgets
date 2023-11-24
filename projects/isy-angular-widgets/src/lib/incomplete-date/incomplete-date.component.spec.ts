@@ -2,6 +2,7 @@ import {IncompleteDateComponent} from './incomplete-date.component';
 import {AbstractControl, FormControl, FormsModule} from '@angular/forms';
 import {InputMask} from 'primeng/inputmask';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {MockModule} from 'ng-mocks';
 
 describe('IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
@@ -41,7 +42,7 @@ describe('IncompleteDateComponent', () => {
     const createdComponent = createComponentFactory({
       component: IncompleteDateComponent,
       declarations: [InputMask],
-      imports: [FormsModule]
+      imports: [MockModule(FormsModule)]
     });
 
     beforeEach(() => {
