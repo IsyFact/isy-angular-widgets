@@ -1,11 +1,15 @@
 import {InputCharComponent} from './input-char.component';
-import {InputCharModule} from '../../input-char.module';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockComponent} from 'ng-mocks';
+import {MockComponents, MockModule} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
+import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {AccordionModule} from 'primeng/accordion';
+import {ButtonModule} from 'primeng/button';
+import {FormsModule} from '@angular/forms';
 
 let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
@@ -15,7 +19,7 @@ describe('Unit Tests: InputCharComponent', () => {
   const dialogDefaultHeight = '460px';
   const createdComponent = createComponentFactory({
     component: InputCharComponent,
-    declarations: [MockComponent(Dialog), MockComponent(InputCharDialogComponent)]
+    declarations: [MockComponents(Dialog, InputCharDialogComponent)]
   });
 
   describe('with default datentyp', () => {
@@ -121,7 +125,8 @@ describe('Integration Test: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
   const createdComponent = createComponentFactory({
     component: InputCharComponent,
-    imports: [InputCharModule]
+    declarations: [MockComponents(Dialog, InputCharPreviewComponent), InputCharDialogComponent],
+    imports: [MockModule(FormsModule), MockModule(ButtonModule), SelectButtonModule, MockModule(AccordionModule)]
   });
 
   Object.keys(Datentyp).forEach((datentyp) => {
