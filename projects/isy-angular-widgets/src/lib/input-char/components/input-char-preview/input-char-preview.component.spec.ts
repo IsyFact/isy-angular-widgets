@@ -3,29 +3,24 @@ import {Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
-const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
-
 describe('Unit Tests: InputCharPreviewComponent', () => {
+  const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
   let spectator: Spectator<InputCharPreviewComponent>;
   const createComponent = createComponentFactory(InputCharPreviewComponent);
 
-  beforeEach(() => (spectator = createComponent()));
+  beforeEach(() => spectator = createComponent());
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
   });
 
   sonderzeichenListe.forEach((zeichenObjekt: Zeichenobjekt) => {
-    it(`should show the selected character ${zeichenObjekt.zeichen} in the sans field`, () => {
+    it(`should show the selected character ${zeichenObjekt.zeichen} in the serif and sans serif font`, () => {
       spectator.component.zeichenObjekt = zeichenObjekt;
       spectator.fixture.detectChanges();
+
       const serifCharacterPreview = spectator.query('#serif-letter') as HTMLElement;
       expect(serifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);
-    });
-
-    it(`should show the selected character ${zeichenObjekt.zeichen} sans-serif field`, () => {
-      spectator.component.zeichenObjekt = zeichenObjekt;
-      spectator.fixture.detectChanges();
 
       const sansSerifCharacterPreview = spectator.query('#sans-letter') as HTMLElement;
       expect(sansSerifCharacterPreview.innerText).toContain(zeichenObjekt.zeichen);

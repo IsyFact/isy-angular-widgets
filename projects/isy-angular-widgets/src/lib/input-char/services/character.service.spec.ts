@@ -7,21 +7,6 @@ describe('Unit Tests: CharacterService', () => {
   let service: CharacterService;
   let spectator: SpectatorService<CharacterService>;
   const createdService = createServiceFactory(CharacterService);
-
-  beforeEach(() => {
-    spectator = createdService();
-    service = spectator.service;
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  const numberOfSonderZeichen = 908;
-  it(`should return ${numberOfSonderZeichen} characters`, () => {
-    expect(service.getCharacters().length).toEqual(numberOfSonderZeichen);
-  });
-
   const groupCounts = new Map<Schriftzeichengruppe, number>([
     [Schriftzeichengruppe.LATEIN, 649],
     [Schriftzeichengruppe.N1, 18],
@@ -32,14 +17,6 @@ describe('Unit Tests: CharacterService', () => {
     [Schriftzeichengruppe.GRIECHISCH, 69],
     [Schriftzeichengruppe.KYRILLISCH, 62]
   ]);
-  groupCounts.forEach((expectedCount, schriftzeichengruppe) => {
-    it(`should return ${expectedCount} characters with Schriftzeichengruppe ${schriftzeichengruppe}`, () => {
-      expect(
-        service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
-      ).toEqual(expectedCount);
-    });
-  });
-
   const baseCounts = new Map<string, number>([
     ['', 253],
     ['A', 61],
@@ -69,14 +46,6 @@ describe('Unit Tests: CharacterService', () => {
     ['Y', 21],
     ['Z', 32]
   ]);
-  baseCounts.forEach((expectedCount, base) => {
-    it(`should return ${expectedCount} characters with Grundzeichen ${base}`, () => {
-      expect(service.getCharacters().filter((character) => character.grundzeichen === base).length).toEqual(
-        expectedCount
-      );
-    });
-  });
-
   const datenTypTestDataSet = [
     {
       datentyp: Datentyp.DATENTYP_A,
@@ -126,6 +95,37 @@ describe('Unit Tests: CharacterService', () => {
       ]
     }
   ];
+
+  beforeEach(() => {
+    spectator = createdService();
+    service = spectator.service;
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  const numberOfSonderZeichen = 908;
+  it(`should return ${numberOfSonderZeichen} characters`, () => {
+    expect(service.getCharacters().length).toEqual(numberOfSonderZeichen);
+  });
+
+  groupCounts.forEach((expectedCount, schriftzeichengruppe) => {
+    it(`should return ${expectedCount} characters with Schriftzeichengruppe ${schriftzeichengruppe}`, () => {
+      expect(
+        service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
+      ).toEqual(expectedCount);
+    });
+  });
+
+  baseCounts.forEach((expectedCount, base) => {
+    it(`should return ${expectedCount} characters with Grundzeichen ${base}`, () => {
+      expect(service.getCharacters().filter((character) => character.grundzeichen === base).length).toEqual(
+        expectedCount
+      );
+    });
+  });
+
   datenTypTestDataSet.forEach((testData) => {
     describe(`with ${testData.datentyp}`, () => {
       const datentyp = testData.datentyp;
