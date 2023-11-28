@@ -17,9 +17,10 @@ import {TableModule} from 'primeng/table';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
+import { RequiredLabelComponent } from './components/required-label/required-label.component';
 
 @NgModule({
-  declarations: [ObjektSuchenComponent, PersoenlicheInformationenComponent, ResultListComponent],
+  declarations: [ObjektSuchenComponent, PersoenlicheInformationenComponent, ResultListComponent, RequiredLabelComponent],
   imports: [
     CommonModule,
     ObjektSuchenRoutingModule,
