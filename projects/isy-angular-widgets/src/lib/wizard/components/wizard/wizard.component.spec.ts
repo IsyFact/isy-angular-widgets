@@ -6,7 +6,6 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Component, QueryList, ViewChild} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {WizardModule} from '../../wizard.module';
-import {MockComponent} from 'ng-mocks';
 import {IncompleteDateComponent} from '../../../incomplete-date/incomplete-date.component';
 
 const width = 50;
@@ -54,7 +53,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   const createdComponent = createComponentFactory({
     component: TestComponent,
     imports: [WizardModule, RouterTestingModule],
-    declarations: [MockComponent(IncompleteDateComponent)]
+    declarations: [IncompleteDateComponent]
   });
 
   /**
