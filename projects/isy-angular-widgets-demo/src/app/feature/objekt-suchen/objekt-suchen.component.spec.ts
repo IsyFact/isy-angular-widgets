@@ -51,7 +51,17 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   function expectFormControlsToBeReseted(form: FormGroup): void {
     Object.keys(form.controls).forEach((key) => {
       expect(form.controls[key].value).toBeNull();
-      expect(form.controls[key].dirty).toBeTrue();
+    });
+  }
+
+  /**
+   * Checks if a form is dirty
+   * @param form the form who must be checked
+   * @param isDirty the current dirty state
+   */
+  function expectFormControlsToBeDirty(form: FormGroup, isDirty: boolean): void {
+    Object.keys(form.controls).forEach((key) => {
+      expect(form.controls[key].dirty).toEqual(isDirty);
     });
   }
 
@@ -206,9 +216,15 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     component.onWizardClose(false);
     spectator.fixture.detectChanges();
     expectPersonToBeReseted(component.neuePerson);
+
     expectFormControlsToBeReseted(component.idForm);
+    expectFormControlsToBeDirty(component.idForm, false);
+
     expectFormControlsToBeReseted(component.persoenlicheInformationenForm);
+    expectFormControlsToBeDirty(component.persoenlicheInformationenForm, false);
+
     expectFormControlsToBeReseted(component.geburtsInformationenForm);
+    expectFormControlsToBeDirty(component.geburtsInformationenForm, false);
   });
 
   it('should check the incoming save status - false (never arrives)', () => {
