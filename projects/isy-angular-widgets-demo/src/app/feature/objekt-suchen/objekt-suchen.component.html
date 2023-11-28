@@ -279,7 +279,14 @@
           <label id="id-label" for="person-id">ID</label>
         </div>
         <div class="col">
-          <input id="person-id" type="text" class="w-full" pInputText [formControlName]="'id'" />
+          <input
+            id="person-id"
+            type="text"
+            class="w-full"
+            pInputText
+            [formControlName]="'id'"
+            (focus)="onFormControlFocus(idForm.controls.id)"
+          />
         </div>
       </div>
     </div>
@@ -302,7 +309,14 @@
           </label>
         </div>
         <div class="col">
-          <input id="geburtsname" class="w-full" type="text" pInputText [formControlName]="'geburtsname'" />
+          <input
+            id="geburtsname"
+            class="w-full"
+            type="text"
+            pInputText
+            [formControlName]="'geburtsname'"
+            (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsname)"
+          />
         </div>
       </div>
       <div class="grid m-0">
@@ -312,7 +326,14 @@
           </label>
         </div>
         <div class="col">
-          <input id="geburtsort" class="w-full" type="text" pInputText [formControlName]="'geburtsort'" />
+          <input
+            id="geburtsort"
+            class="w-full"
+            type="text"
+            pInputText
+            [formControlName]="'geburtsort'"
+            (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsort)"
+          />
         </div>
       </div>
       <div class="grid m-0">
@@ -322,7 +343,13 @@
           </label>
         </div>
         <div class="col-3">
-          <p-calendar id="geburtdatum" dateFormat="dd.mm.yy" [formControlName]="'geburtsdatum'" [showIcon]="true">
+          <p-calendar
+            id="geburtdatum"
+            dateFormat="dd.mm.yy"
+            [formControlName]="'geburtsdatum'"
+            [showIcon]="true"
+            (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
+          >
           </p-calendar>
         </div>
       </div>
@@ -341,6 +368,9 @@
             optionLabel="name"
             [options]="countryMap"
             [formControlName]="'staatsangehoerigkeit'"
+            (focus)="onFormControlFocus(geburtsInformationenForm.controls.staatangehoerigkeit)"
+            (click)="onFormControlFocus(geburtsInformationenForm.controls.staatangehoerigkeit)"
+            [required]="true"
           >
             <ng-template let-land pTemplate="item">
               <div class="country-item">

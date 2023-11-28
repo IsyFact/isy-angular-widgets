@@ -6,7 +6,14 @@
       </label>
     </div>
     <div class="col">
-      <input id="Nachname" type="text" class="w-full" pInputText [formControlName]="'nachname'" />
+      <input
+        id="Nachname"
+        type="text"
+        class="w-full"
+        pInputText
+        [formControlName]="'nachname'"
+        (focus)="onFormControlFocus(form.controls.nachname)"
+      />
     </div>
   </div>
 
@@ -28,7 +35,14 @@
       </label>
     </div>
     <div class="col">
-      <input id="Geschlecht" type="text" class="w-full" pInputText [formControlName]="'geschlecht'" />
+      <input
+        id="Geschlecht"
+        type="text"
+        class="w-full"
+        pInputText
+        [formControlName]="'geschlecht'"
+        (focus)="onFormControlFocus(form.controls.geschlecht)"
+      />
     </div>
   </div>
 </div>
