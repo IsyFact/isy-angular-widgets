@@ -2,8 +2,8 @@ import {InputCharComponent} from './input-char.component';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockComponents, MockModule} from 'ng-mocks';
-import {Dialog} from 'primeng/dialog';
+import {MockComponents} from 'ng-mocks';
+import {Dialog, DialogModule} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 import {SelectButtonModule} from 'primeng/selectbutton';
@@ -125,8 +125,8 @@ describe('Integration Test: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
   const createdComponent = createComponentFactory({
     component: InputCharComponent,
-    declarations: [MockComponents(Dialog, InputCharPreviewComponent), InputCharDialogComponent],
-    imports: [MockModule(FormsModule), MockModule(ButtonModule), MockModule(AccordionModule), SelectButtonModule]
+    declarations: [InputCharPreviewComponent, InputCharDialogComponent],
+    imports: [FormsModule, ButtonModule, AccordionModule, SelectButtonModule, DialogModule]
   });
 
   Object.keys(Datentyp).forEach((datentyp) => {
