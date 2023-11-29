@@ -174,4 +174,18 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     const geschlechtLabel = spectator.query('label#geschlecht-label') as HTMLElement;
     expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht');
   });
+
+  it('form control should be dirty after focus', ()=> {
+    const nachnameSpy = spyOn(spectator.component, 'onFormControlFocus');
+    component.form.get('nachname')!.setValue('nachname');
+    spectator.fixture.detectChanges();
+
+    const input = spectator.query('#Nachname') as HTMLInputElement;
+    input.focus();
+
+    spectator.detectChanges();
+    expect(spectator.component.form.controls.nachname.dirty).toBeTrue();
+
+    expect(nachnameSpy).toHaveBeenCalledWith(component.form.controls.nachname);
+  });
 });
