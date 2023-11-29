@@ -72,205 +72,205 @@ describe('IncompleteDateComponent', () => {
       expect(onInputSpy).toHaveBeenCalledWith(keyEvent);
     });
 
-    it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
+    it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 0 when entering dot', () => {
       input.value = '__.__.____';
       setupEvent(keyEvent, 0, 0);
       expect(input.value).toBe('xx.__.____');
     });
 
-    it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
+    it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 1 when entering dot', () => {
       input.value = '__.__.____';
       setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('xx.__.____');
     });
 
-    it('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot', () => {
+    it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 2 when entering dot', () => {
       input.value = '__.__.____';
       setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('xx.__.____');
     });
 
-    it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 3 when entering dot', () => {
       input.value = '__.__.____';
       setupEvent(keyEvent, 3, 3);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
       input.value = '__.__.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from __.__.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
       input.value = '__.__.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from x_.__.____ to xx.__.____ when entering dot', () => {
+    it('should autocomplete the input value from x_.__.____ to xx.__.____ with current cursor position 1 when entering dot', () => {
       input.value = 'x_.__.____';
       setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('xx.__.____');
     });
 
-    it('should autocomplete the input value from _x.__.____ to xx.__.____ when entering dot', () => {
+    it('should autocomplete the input value from _x.__.____ to xx.__.____ with current cursor position 2 when entering dot', () => {
       input.value = '_x.__.____';
       setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('xx.__.____');
     });
 
-    it('should autocomplete the input value from __.x_.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from __.x_.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
       input.value = '__.x_.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from __._x.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from __._x.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
       input.value = '__._x.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from x_.x_.____ to xx.x_.____ when entering dot', () => {
+    it('should autocomplete the input value from x_.x_.____ to xx.x_.____ with current cursor position 1 when entering dot', () => {
       input.value = 'x_.x_.____';
       setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('xx.x_.____');
     });
 
-    it('should autocomplete the input value from _x.x_.____ to xx.x_.____ when entering dot', () => {
+    it('should autocomplete the input value from _x.x_.____ to xx.x_.____ with current cursor position 2 when entering dot', () => {
       input.value = '_x.x_.____';
       setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('xx.x_.____');
     });
 
-    it('should autocomplete the input value from x_.x_.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from x_.x_.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
       input.value = 'x_.x_.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from _x.x_.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from _x.x_.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
       input.value = '_x.x_.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from x_._x.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from x_._x.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
       input.value = 'x_._x.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from _x._x.____ to xx.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from _x._x.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
       input.value = '_x._x.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.xx.____');
     });
 
-    it('should autocomplete the input value from 1_.__.____ to 01.__.____ when entering dot', () => {
+    it('should autocomplete the input value from 1_.__.____ to 01.__.____ with current cursor position 1 when entering dot', () => {
       input.value = '1_.__.____';
       setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('01.__.____');
     });
 
-    it('should autocomplete the input value from _1.__.____ to 01.__.____ when entering dot', () => {
+    it('should autocomplete the input value from _1.__.____ to 01.__.____ with current cursor position 2 when entering dot', () => {
       input.value = '_1.__.____';
       setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('01.__.____');
     });
 
-    it('should autocomplete the input value from __.1_.____ to xx.01.____ when entering dot', () => {
+    it('should autocomplete the input value from __.1_.____ to xx.01.____ with current cursor position 4 when entering dot', () => {
       input.value = '__.1_.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('xx.01.____');
     });
 
-    it('should autocomplete the input value from __._1.____ to xx.01.____ when entering dot', () => {
+    it('should autocomplete the input value from __._1.____ to xx.01.____ with current cursor position 5 when entering dot', () => {
       input.value = '__._1.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('xx.01.____');
     });
 
-    it('should autocomplete the input value from 1_.1_.____ to 01.1_.____ when entering dot', () => {
+    it('should autocomplete the input value from 1_.1_.____ to 01.1_.____ with current cursor position 1 when entering dot', () => {
       input.value = '1_.1_.____';
       setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('01.1_.____');
     });
 
-    it('should autocomplete the input value from _1.1_.____ to 01.1_.____ when entering dot', () => {
+    it('should autocomplete the input value from _1.1_.____ to 01.1_.____ with current cursor position 2 when entering dot', () => {
       input.value = '_1.1_.____';
       setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('01.1_.____');
     });
 
-    it('should autocomplete the input value from 1_.1_.____ to 01.01.____ when entering dot', () => {
+    it('should autocomplete the input value from 1_.1_.____ to 01.01.____ with current cursor position 4 when entering dot', () => {
       input.value = '1_.1_.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('01.01.____');
     });
 
-    it('should autocomplete the input value from _1.1_.____ to 01.01.____ when entering dot', () => {
+    it('should autocomplete the input value from _1.1_.____ to 01.01.____ with current cursor position 4 when entering dot', () => {
       input.value = '_1.1_.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('01.01.____');
     });
 
-    it('should autocomplete the input value from 1_._1.____ to 01.01.____ when entering dot', () => {
+    it('should autocomplete the input value from 1_._1.____ to 01.01.____ with current cursor position 5 when entering dot', () => {
       input.value = '1_._1.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.01.____');
     });
 
-    it('should autocomplete the input value from _1._1.____ to 01.01.____ when entering dot', () => {
+    it('should autocomplete the input value from _1._1.____ to 01.01.____ with current cursor position 5 when entering dot', () => {
       input.value = '_1._1.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.01.____');
     });
 
-    it('should autocomplete the input value from _1._1.____ to 01.01.____ when entering dot', () => {
+    it('should autocomplete the input value from _1._1.____ to 01.01.____ with current cursor position 5 when entering dot', () => {
       input.value = '_1._1.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.01.____');
     });
 
-    it('should autocomplete the input value from 1_.x_.____ to 01.x_.____ when entering dot', () => {
+    it('should autocomplete the input value from 1_.x_.____ to 01.x_.____ with current cursor position 1 when entering dot', () => {
       input.value = '1_.x_.____';
       setupEvent(keyEvent, 1, 1);
       expect(input.value).toBe('01.x_.____');
     });
 
-    it('should autocomplete the input value from _1.x_.____ to 01.x_.____ when entering dot', () => {
+    it('should autocomplete the input value from _1.x_.____ to 01.x_.____ with current cursor position 2 when entering dot', () => {
       input.value = '_1.x_.____';
       setupEvent(keyEvent, 2, 2);
       expect(input.value).toBe('01.x_.____');
     });
 
-    it('should autocomplete the input value from 1_.x_.____ to 01.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from 1_.x_.____ to 01.xx.____ with current cursor position 4 when entering dot', () => {
       input.value = '1_.x_.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('01.xx.____');
     });
 
-    it('should autocomplete the input value from _1.x_.____ to 01.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from _1.x_.____ to 01.xx.____ with current cursor position 4 when entering dot', () => {
       input.value = '_1.x_.____';
       setupEvent(keyEvent, 4, 4);
       expect(input.value).toBe('01.xx.____');
     });
 
-    it('should autocomplete the input value from 1_._x.____ to 01.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from 1_._x.____ to 01.xx.____ with current cursor position 5 when entering dot', () => {
       input.value = '1_._x.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.xx.____');
     });
 
-    it('should autocomplete the input value from _1._x.____ to 01.xx.____ when entering dot', () => {
+    it('should autocomplete the input value from _1._x.____ to 01.xx.____ with current cursor position 5 when entering dot', () => {
       input.value = '_1._x.____';
       setupEvent(keyEvent, 5, 5);
       expect(input.value).toBe('01.xx.____');
     });
 
-    it('should not autocomplete the input value from xx.xx.____ to xx.xx.____ when entering dot in the year part', () => {
+    it('should not autocomplete the input value from xx.xx.____ to xx.xx.____ with current cursor position 6 when entering dot in the year part', () => {
       input.value = 'xx.xx.____';
       setupEvent(keyEvent, 6, 6);
       expect(input.value).toBe('xx.xx.____');
