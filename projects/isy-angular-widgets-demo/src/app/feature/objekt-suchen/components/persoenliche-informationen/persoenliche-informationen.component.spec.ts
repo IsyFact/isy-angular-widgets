@@ -175,7 +175,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht');
   });
 
-  it('form control should be dirty after focus', ()=> {
+  it('form control should be dirty after focus', () => {
     const nachnameSpy = spyOn(spectator.component, 'onFormControlFocus');
     component.form.get('nachname')!.setValue('nachname');
     spectator.fixture.detectChanges();
