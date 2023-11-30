@@ -69,7 +69,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(onInputSpy).toHaveBeenCalledWith(keyEvent);
   });
 
-  describe('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot and ', ()=> {
+  describe('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot and ', () => {
     it(' current cursor position is 0', () => {
       input.value = '__.__.____';
       setupEvent(keyEvent, 0, 0);
