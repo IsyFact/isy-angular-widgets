@@ -1,4 +1,6 @@
 # 16.0.1 - 
+## Features
+- ISY-576: moment.js wurde durch date-fns ersetzt
 ## Fixes
 - ISY-375 - Analyse: Einsatz von ng-mocks
 
