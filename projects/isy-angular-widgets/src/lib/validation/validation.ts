@@ -83,14 +83,13 @@ export class Validation {
    * @returns The object {UNSPECIFIEDDATE: true} if the validation fails; null otherwise
    */
   static validUnspecifiedDate(c: AbstractControl): ValidationErrors | null {
-    const input = c.value as string;
+    const input = (c.value as string) ?? null;
 
     if (!input) return null;
 
-    const regexInputMask = INPUT_MASK_REGEX;
     let isDateValid = false;
 
-    if (input.match(regexInputMask)) {
+    if (INPUT_MASK_REGEX.test(input)) {
       const [day, month, year] = input.split('.');
 
       if (!(input.match('x') !== null || `${day}` === '00' || `${month}` === '00')) {
@@ -102,9 +101,7 @@ export class Validation {
       }
     }
 
-    const regexInputUnspecified = INPUT_UNSPECIFIED_REGEX;
-
-    if (!(input.match(regexInputUnspecified) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
+    if (!(INPUT_UNSPECIFIED_REGEX.test(input) || isDateValid)) return {UNSPECIFIEDDATE: true};
 
     return null;
   }
@@ -124,16 +121,18 @@ export class Validation {
 
       let parsedDate: Date;
       let isValidDate = false;
-      const isoTimeLength = 8;
+      const isoDateTimeLength = 20;
 
       switch (dateFormat) {
         case 'ISO8601':
           parsedDate = parseISO(input);
-          isValidDate = isValid(parsedDate);
+          isValidDate = strict
+            ? isValid(parsedDate) && input.endsWith('Z') && input.length === isoDateTimeLength
+            : isValid(parsedDate);
           break;
-        case 'ISOTime':
-          const completeDateString = `2023-01-01 ${input}`;
-          parsedDate = parse(completeDateString, 'yyyy-MM-dd HH:mm:ss', new Date());
+        case 'HH:mm:ss':
+          const isoTimeLength = dateFormat.length;
+          parsedDate = parse(input, 'HH:mm:ss', new Date());
           isValidDate = strict ? isValid(parsedDate) && input.length === isoTimeLength : isValid(parsedDate);
           break;
         default:
@@ -142,9 +141,7 @@ export class Validation {
           break;
       }
 
-      if (!isValidDate) return {[messageKey]: {format: dateFormat}};
-
-      return null;
+      return isValidDate ? null : {[messageKey]: {format: dateFormat}};
     };
   }
 
@@ -164,7 +161,7 @@ export class Validation {
    * @returns The object {TIME: true} if the validation fails; null otherwise
    */
   static isoTime(c: AbstractControl): ValidationErrors | null {
-    const isoTimeValidatorFn: ValidatorFn = Validation.dateFormat('ISOTime', 'TIME', true);
+    const isoTimeValidatorFn: ValidatorFn = Validation.dateFormat('HH:mm:ss', 'TIME', true);
     return isoTimeValidatorFn(c);
   }
 
