@@ -6,8 +6,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Component, QueryList, ViewChild} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {WizardModule} from '../../wizard.module';
-import {MockComponent} from 'ng-mocks';
-import {IncompleteDateComponent} from '../../../incomplete-date/incomplete-date.component';
+import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
 
 const width = 50;
 const height = 30;
@@ -53,8 +52,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let spectator: Spectator<TestComponent>;
   const createdComponent = createComponentFactory({
     component: TestComponent,
-    imports: [WizardModule, RouterTestingModule],
-    declarations: [MockComponent(IncompleteDateComponent)]
+    imports: [WizardModule, RouterTestingModule, IncompleteDateModule]
   });
 
   /**
@@ -421,7 +419,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   it('should have a next button with some classes', () => {
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
-    expect(nextButton.className).toContain(CLASS_FLEX && CLASS_ALIGN_CENTER && CLASS_JUSTIFY_CENTER && CLASS_MR_4);
+    expect(nextButton.className).toContain(CLASS_ALIGN_CENTER);
+    expect(nextButton.className).toContain(CLASS_JUSTIFY_CENTER);
+    expect(nextButton.className).toContain(CLASS_MR_4);
   });
 
   it('should have a functional next button', () => {
@@ -438,7 +438,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have some classes on the save button', () => {
     expectStepperMovedUntilEnd();
     const nextButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
-    expect(nextButton.className).toContain(CLASS_FLEX && CLASS_ALIGN_CENTER && CLASS_JUSTIFY_CENTER);
+    expect(nextButton.className).toContain(CLASS_FLEX);
+    expect(nextButton.className).toContain(CLASS_ALIGN_CENTER);
+    expect(nextButton.className).toContain(CLASS_JUSTIFY_CENTER);
   });
 
   it('should have a visible save button on last step', () => {

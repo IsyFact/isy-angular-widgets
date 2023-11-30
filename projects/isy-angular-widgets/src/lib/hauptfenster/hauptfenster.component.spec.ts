@@ -3,7 +3,8 @@ import {Component, Input} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MegaMenu, MegaMenuSub} from 'primeng/megamenu';
 import {Button} from 'primeng/button';
-import {MockComponent} from 'ng-mocks';
+import {MockComponents} from 'ng-mocks';
+import {HauptfensterModule} from './hauptfenster.module';
 
 @Component({
   template: `
@@ -22,7 +23,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
   const createdComponent = createComponentFactory({
     component: HauptfensterComponent,
-    declarations: [MockComponent(Button), MockComponent(MegaMenu), MockComponent(MegaMenuSub)]
+    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
   });
 
   beforeEach(() => (spectator = createdComponent()));
@@ -87,7 +88,7 @@ describe('Integration Test: HauptfensterComponent', () => {
   let spectator: Spectator<HauptFensterWrapperComponent>;
   const createdComponent = createComponentFactory({
     component: HauptFensterWrapperComponent,
-    declarations: [HauptfensterComponent, MockComponent(Button), MockComponent(MegaMenu), MockComponent(MegaMenuSub)]
+    imports: [HauptfensterModule]
   });
 
   beforeEach(() => (spectator = createdComponent()));

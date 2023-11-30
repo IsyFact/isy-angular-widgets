@@ -15,9 +15,6 @@ import {ComponentFixture} from '@angular/core/testing';
   />`
 })
 class TestComponent {
-  // Needed to access private method
-  /* eslint-disable @typescript-eslint/dot-notation */
-
   datentyp: Datentyp = Datentyp.DATENTYP_A;
 
   valueGet(event?: Event, referenceVariableValue?: string): void {
@@ -54,11 +51,11 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   /**
-   * Setting up timeout
+   * Expect that button is disabled
    * @param inputCharButton The current HTML button
    * @param done Action method that should be called when the async work is complete.
    */
-  function setTimeOut(inputCharButton: HTMLButtonElement, done: DoneFn): void {
+  function expectInputCharButtonIsDisabled(inputCharButton: HTMLButtonElement, done: DoneFn): void {
     setTimeout(() => {
       fixture.detectChanges();
       expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
@@ -80,7 +77,7 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
-    setTimeOut(inputCharButton, done);
+    expectInputCharButtonIsDisabled(inputCharButton, done);
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
@@ -88,7 +85,7 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
-    setTimeOut(inputCharButton, done);
+    expectInputCharButtonIsDisabled(inputCharButton, done);
   });
 
   it('should have mouse position 0 by default', () => {
@@ -132,16 +129,5 @@ describe('Integration Tests: InputCharDirective', () => {
     input.value = 'test';
     input.dispatchEvent(new KeyboardEvent('keyup'));
     expect(directive.selectionPosition).toEqual(input.value.length);
-  });
-
-  it('input should be disabled', () => {
-    directive['handleDisabledReadonlyChange'](input, 'other');
-    expect(directive.componentRef.instance.isInputDisabled).toBeFalse();
-  });
-
-  it('input should be enabled', () => {
-    input.disabled = true;
-    directive['handleDisabledReadonlyChange'](input, 'disabled');
-    expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
   });
 });
