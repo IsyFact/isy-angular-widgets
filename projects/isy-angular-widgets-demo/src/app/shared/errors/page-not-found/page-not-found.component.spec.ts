@@ -6,7 +6,7 @@ describe('Unit Tests: PageNotFoundComponent', () => {
   let spectator: Spectator<PageNotFoundComponent>;
   const createdComponent = createComponentFactory(PageNotFoundComponent);
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => spectator = createdComponent());
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
