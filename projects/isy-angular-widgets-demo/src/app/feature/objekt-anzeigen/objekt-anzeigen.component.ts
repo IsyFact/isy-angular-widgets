@@ -77,7 +77,10 @@ export class ObjektAnzeigenComponent {
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
       creditCardNumber: new FormControl(this.person.personalien.kreditkartennummer, Validation.validCreditCardNumber),
       // Demo: Validator dateFormat - Checks that the date is a valid date
-      creditCardExpirationDate: new FormControl(this.person.personalien.ablaufdatumKreditkarte, Validation.isoDateTime)
+      creditCardExpirationDate: new FormControl(
+        this.person.personalien.ablaufdatumKreditkarte,
+        Validation.dateFormat('DD.MM.YYYY', 'DATE', true)
+      )
     });
     this.personalInfoForm.disable();
   }
