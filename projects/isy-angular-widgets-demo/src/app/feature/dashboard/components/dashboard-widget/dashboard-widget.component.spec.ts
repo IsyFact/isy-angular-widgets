@@ -1,15 +1,14 @@
 import {DashboardWidgetComponent} from './dashboard-widget.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {MockComponent} from 'ng-mocks';
 import {PanelMenu} from 'primeng/panelmenu';
 
 describe('Integration Tests: DashboardWidgetsComponent', () => {
   let spectator: Spectator<DashboardWidgetComponent>;
   const createdComponent = createComponentFactory({
     component: DashboardWidgetComponent,
-    declarations: [MockComponent(PanelMenu)],
     imports: [TranslateModule.forRoot()],
+    declarations: [PanelMenu],
     providers: [TranslateService]
   });
 
