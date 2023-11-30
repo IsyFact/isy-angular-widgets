@@ -26,7 +26,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
   });
 
-  beforeEach(() => spectator = createdComponent());
+  beforeEach(() => (spectator = createdComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
@@ -91,7 +91,7 @@ describe('Integration Test: HauptfensterComponent', () => {
     imports: [HauptfensterModule]
   });
 
-  beforeEach(() => spectator = createdComponent());
+  beforeEach(() => (spectator = createdComponent()));
 
   it('should display custom html in template of Titelzeile', () => {
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;

@@ -9,7 +9,7 @@ describe('Integration Tests: AppComponent', () => {
     imports: [AppModule]
   });
 
-  beforeEach(() => spectator = createdComponent());
+  beforeEach(() => (spectator = createdComponent()));
 
   it('should create the application', () => {
     expect(spectator.component).toBeTruthy();

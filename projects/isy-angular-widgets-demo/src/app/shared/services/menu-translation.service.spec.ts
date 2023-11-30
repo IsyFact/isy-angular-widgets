@@ -16,7 +16,7 @@ describe('Unit Tests: MenuTranslationService', () => {
     ]
   });
 
-  beforeEach(() => spectator = createdService());
+  beforeEach(() => (spectator = createdService()));
 
   it('should create', () => {
     expect(spectator.service).toBeTruthy();

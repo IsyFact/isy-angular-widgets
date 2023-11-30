@@ -8,7 +8,7 @@ describe('Unit Tests: InputCharPreviewComponent', () => {
   let spectator: Spectator<InputCharPreviewComponent>;
   const createComponent = createComponentFactory(InputCharPreviewComponent);
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

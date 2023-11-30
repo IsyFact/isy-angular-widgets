@@ -5,7 +5,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MockComponents} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
-import {InputCharModule} from "../../input-char.module";
+import {InputCharModule} from '../../input-char.module';
 
 let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
