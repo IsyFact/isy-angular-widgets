@@ -348,6 +348,7 @@
             dateFormat="dd.mm.yy"
             [formControlName]="'geburtsdatum'"
             [showIcon]="true"
+            [appendTo]="'body'"
             (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
           >
           </p-calendar>
@@ -368,6 +369,7 @@
             optionLabel="name"
             [options]="countryMap"
             [formControlName]="'staatsangehoerigkeit'"
+            [appendTo]="'body'"
             (focusout)="onFormControlFocus(geburtsInformationenForm.controls.staatsangehoerigkeit)"
           >
             <ng-template let-land pTemplate="item">
