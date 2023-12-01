@@ -5,7 +5,7 @@ import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockComponent, MockModule} from 'ng-mocks';
+import {MockModule} from 'ng-mocks';
 import {RequiredLabelComponent} from '../required-label/required-label.component';
 
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
@@ -25,7 +25,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       }),
       MockModule(ReactiveFormsModule)
     ],
-    declarations: [MockComponent(RequiredLabelComponent)],
+    declarations: [RequiredLabelComponent],
     providers: [{provide: FormBuilder, useValue: formBuilder}]
   });
 
@@ -176,7 +176,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   });
 
   it('form control should be dirty after focus', () => {
-    const nachnameSpy = spyOn(spectator.component, 'onFormControlFocus');
+    const nachnameSpy = spyOn(component, 'onFormControlFocus');
     component.form.get('nachname')!.setValue('nachname');
     spectator.fixture.detectChanges();
 
@@ -184,7 +184,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     input.focus();
 
     spectator.detectChanges();
-    expect(spectator.component.form.controls.nachname.dirty).toBeTrue();
+    expect(component.form.controls.nachname.dirty).toBeTrue();
 
     expect(nachnameSpy).toHaveBeenCalledWith(component.form.controls.nachname);
   });
