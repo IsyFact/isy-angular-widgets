@@ -1,8 +1,2 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Used for PrimeNg Dropdown because no class for touched/invalid/dirty state implemented */
-::ng-deep p-dropdown.ng-touched.ng-invalid.ng-dirty {
-  .p-dropdown {
-    border-color: var(--red-500);
-  }
-}
