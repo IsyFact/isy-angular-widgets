@@ -1,7 +1,7 @@
 import {IncompleteDateComponent} from './incomplete-date.component';
-import {AbstractControl, FormControl, FormsModule} from '@angular/forms';
-import {InputMask} from 'primeng/inputmask';
+import {AbstractControl, FormControl} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {IncompleteDateModule} from './incomplete-date.module';
 
 describe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
@@ -16,8 +16,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   let spectator: Spectator<IncompleteDateComponent>;
   const createdComponent = createComponentFactory({
     component: IncompleteDateComponent,
-    declarations: [InputMask],
-    imports: [FormsModule]
+    imports: [IncompleteDateModule]
   });
 
   /**
