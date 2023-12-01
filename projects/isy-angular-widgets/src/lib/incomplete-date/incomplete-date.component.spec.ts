@@ -68,42 +68,40 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(onInputSpy).toHaveBeenCalledWith(keyEvent);
   });
 
-  describe('should autocomplete the input value from __.__.____ to xx.__.____ when entering dot and ', () => {
-    it(' current cursor position is 0', () => {
-      input.value = '__.__.____';
-      setupEvent(keyEvent, 0, 0);
-      expect(input.value).toBe('xx.__.____');
-    });
+  it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 0 when entering dot', () => {
+    input.value = '__.__.____';
+    setupEvent(keyEvent, 0, 0);
+    expect(input.value).toBe('xx.__.____');
+  });
 
-    it('current cursor position is 1', () => {
-      input.value = '__.__.____';
-      setupEvent(keyEvent, 1, 1);
-      expect(input.value).toBe('xx.__.____');
-    });
+  it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 1 when entering dot', () => {
+    input.value = '__.__.____';
+    setupEvent(keyEvent, 1, 1);
+    expect(input.value).toBe('xx.__.____');
+  });
 
-    it('current cursor position is 2', () => {
-      input.value = '__.__.____';
-      setupEvent(keyEvent, 2, 2);
-      expect(input.value).toBe('xx.__.____');
-    });
+  it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 2 when entering dot', () => {
+    input.value = '__.__.____';
+    setupEvent(keyEvent, 2, 2);
+    expect(input.value).toBe('xx.__.____');
+  });
 
-    it('current cursor position is 3', () => {
-      input.value = '__.__.____';
-      setupEvent(keyEvent, 3, 3);
-      expect(input.value).toBe('xx.xx.____');
-    });
+  it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 3 when entering dot', () => {
+    input.value = '__.__.____';
+    setupEvent(keyEvent, 3, 3);
+    expect(input.value).toBe('xx.xx.____');
+  });
 
-    it('current cursor position is 4', () => {
-      input.value = '__.__.____';
-      setupEvent(keyEvent, 4, 4);
-      expect(input.value).toBe('xx.xx.____');
-    });
+  it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
+    input.value = '__.__.____';
+    setupEvent(keyEvent, 4, 4);
+    expect(input.value).toBe('xx.xx.____');
+  });
 
-    it('current cursor position is 5', () => {
-      input.value = '__.__.____';
-      setupEvent(keyEvent, 5, 5);
-      expect(input.value).toBe('xx.xx.____');
-    });
+  it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
+    input.value = '__.__.____';
+    setupEvent(keyEvent, 5, 5);
+    expect(input.value).toBe('xx.xx.____');
   });
 
   it('should autocomplete the input value from x_.__.____ to xx.__.____ with current cursor position 1 when entering dot', () => {
