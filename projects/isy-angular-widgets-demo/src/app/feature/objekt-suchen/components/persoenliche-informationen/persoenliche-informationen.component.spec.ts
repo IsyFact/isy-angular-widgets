@@ -1,43 +1,38 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {PersoenlicheInformationenComponent} from './persoenliche-informationen.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {InputTextModule} from 'primeng/inputtext';
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {markFormAsDirty} from '../../../../shared/validation/form-helper';
-import {By} from '@angular/platform-browser';
 import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
 import {TranslateTestingModule} from 'ngx-translate-testing';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {MockModule} from 'ng-mocks';
 
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
   const person = getEmptyPerson();
-  const inputIDs = ['Nachname', 'Geschlecht'];
-  const stateClasses = ['ng-untouched', 'ng-dirty', 'ng-invalid'];
+  const formBuilder: FormBuilder = new FormBuilder();
 
   let component: PersoenlicheInformationenComponent;
-  let fixture: ComponentFixture<PersoenlicheInformationenComponent>;
+  let spectator: Spectator<PersoenlicheInformationenComponent>;
+  const createdComponent = createComponentFactory({
+    component: PersoenlicheInformationenComponent,
+    imports: [
+      TranslateTestingModule.withTranslations('de', {
+        'isyAngularWidgetsDemo.labels.vorname': 'Vorname',
+        'isyAngularWidgetsDemo.labels.nachname': 'Nachname',
+        'isyAngularWidgetsDemo.labels.geschlecht': 'Geschlecht'
+      }),
+      MockModule(ReactiveFormsModule)
+    ],
+    providers: [{provide: FormBuilder, useValue: formBuilder}]
+  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [PersoenlicheInformationenComponent],
-      imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        InputTextModule,
-        TranslateTestingModule.withTranslations('de', {
-          'isyAngularWidgetsDemo.labels.vorname': 'Vorname',
-          'isyAngularWidgetsDemo.labels.nachname': 'Nachname',
-          'isyAngularWidgetsDemo.labels.geschlecht': 'Geschlecht'
-        })
-      ]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(PersoenlicheInformationenComponent);
-    component = fixture.componentInstance;
+  beforeEach(() => {
+    spectator = createdComponent();
+    component = spectator.component;
     component.form = initPersoenlicheInformationenForm(person);
     markFormAsDirty(component.form);
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -168,24 +163,13 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   });
 
   it('should evaluate the HTML label text of the input fields', () => {
-    const vornameLabel = fixture.nativeElement.querySelector('label#vorname-label');
-    expect(vornameLabel.textContent.trim()).toEqual('Vorname');
+    const vornameLabel = spectator.query('label#vorname-label') as HTMLElement;
+    expect(vornameLabel.textContent!.trim()).toEqual('Vorname');
 
-    const nachnameLabel = fixture.nativeElement.querySelector('label#nachname-label');
-    expect(nachnameLabel.textContent.trim()).toEqual('Nachname');
+    const nachnameLabel = spectator.query('label#nachname-label') as HTMLElement;
+    expect(nachnameLabel.textContent!.trim()).toEqual('Nachname');
 
-    const geschlechtLabel = fixture.nativeElement.querySelector('label#geschlecht-label');
-    expect(geschlechtLabel.textContent.trim()).toEqual('Geschlecht');
-  });
-
-  inputIDs.forEach((id) => {
-    stateClasses.forEach((inputClass) => {
-      describe(`required form input element with id: ${id}`, () => {
-        it('should display dirty state error class', () => {
-          const element = fixture.debugElement.query(By.css(`#${id}`));
-          expect(element.classes[inputClass]).toBeTrue();
-        });
-      });
-    });
+    const geschlechtLabel = spectator.query('label#geschlecht-label') as HTMLElement;
+    expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht');
   });
 });

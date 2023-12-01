@@ -72,7 +72,7 @@ export class IncompleteDateService {
     const dateStr = Object.values(dateObject).join('.');
 
     if (
-      dateStr.match(INCOMPLETE_DATE_REGEX) !== null ||
+      RegExp(INCOMPLETE_DATE_REGEX).exec(dateStr) !== null ||
       dateObject.month.includes(this.DATE_CHAR) ||
       dateObject.year.includes(this.DATE_CHAR)
     )
@@ -89,6 +89,6 @@ export class IncompleteDateService {
    * @returns True or false as a boolean
    */
   private dateIsUnspecified(dateStr: string): boolean {
-    return !(dateStr.match(UNSPECIFIED_DATE_REGEX) === null && dateStr.match(this.DATE_CHAR) === null);
+    return !(RegExp(UNSPECIFIED_DATE_REGEX).exec(dateStr) === null && RegExp(this.DATE_CHAR).exec(dateStr) === null);
   }
 }

@@ -1,26 +1,15 @@
-import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
+import {fakeAsync} from '@angular/core/testing';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {CalendarModule} from 'primeng/calendar';
-import {ResultListComponent} from './components/result-list/result-list.component';
-import {TableModule} from 'primeng/table';
-import {DropdownModule} from 'primeng/dropdown';
-import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/security/security.module';
-import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
-import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
+import {FormGroup} from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
-import {ToastModule} from 'primeng/toast';
 import {Person} from '../../shared/model/person';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {getEmptyPerson} from './person-data';
-import {PanelModule} from 'primeng/panel';
-import {DialogModule} from 'primeng/dialog';
 import {DateService} from './services/date.service';
 import {Observable} from 'rxjs';
-import {TranslateTestingModule} from 'ngx-translate-testing';
-import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {ObjektSuchenModule} from './objekt-suchen.module';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -29,9 +18,22 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   const unconvertedDate = 'Wed Jan 01 1337 12:00:00 GMT+0053 (Mitteleuropäische Normalzeit)';
   const emptyEntry = '';
 
-  let component: ObjektSuchenComponent;
-  let fixture: ComponentFixture<ObjektSuchenComponent>;
   let dateService: DateService;
+  let component: ObjektSuchenComponent;
+  let spectator: Spectator<ObjektSuchenComponent>;
+  const createdComponent = createComponentFactory({
+    component: ObjektSuchenComponent,
+    imports: [ObjektSuchenModule, TranslateModule.forRoot(), RouterTestingModule],
+    providers: [TranslateService, MessageService]
+  });
+
+  beforeEach(() => {
+    spectator = createdComponent();
+    component = spectator.component;
+    dateService = new DateService();
+  });
+
+  afterEach(() => spectator.fixture.destroy());
 
   /**
    * Checks the reset of a person
@@ -156,7 +158,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    */
   function setupEditForm(person: Person): void {
     component.editSelectedPerson(person);
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
 
     const editForm = component.editForm;
 
@@ -180,35 +182,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     });
   }
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ObjektSuchenComponent, ResultListComponent, PersoenlicheInformationenComponent],
-      imports: [
-        RouterTestingModule,
-        CalendarModule,
-        TableModule,
-        DropdownModule,
-        SecurityModule,
-        FormsModule,
-        ReactiveFormsModule,
-        WizardModule,
-        ToastModule,
-        RouterTestingModule,
-        BrowserAnimationsModule,
-        PanelModule,
-        DialogModule,
-        TranslateTestingModule.withTranslations({}),
-        InputCharModule
-      ],
-      providers: [SecurityService, MessageService, DateService]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(ObjektSuchenComponent);
-    component = fixture.componentInstance;
-    dateService = TestBed.inject(DateService);
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -231,7 +204,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
   it('should check the actions after closing the wizard', () => {
     component.onWizardClose(false);
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
     expectPersonToBeReseted(component.neuePerson);
     expectFormControlsToBeReseted(component.idForm);
     expectFormControlsToBeReseted(component.persoenlicheInformationenForm);
@@ -249,7 +222,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     component.getSavedStatus(true);
 
-    const toast = fixture.nativeElement.querySelector('#notification-toast') as HTMLElement;
+    const toast = spectator.fixture.nativeElement.querySelector('#notification-toast') as HTMLElement;
     const toastPosition = 'top-right';
     expect(toast.getAttribute('position')).toEqual(toastPosition);
   }));
@@ -295,7 +268,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expectFormIsValid(currentForm);
     expectFormValuesAreEmpty(currentForm, false);
 
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
     expect(component.isFormValid).toBeFalse();
   });
 
@@ -428,9 +401,9 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
   it('should check the inner HTML Text of the ID Input field', () => {
     component.openWizard = true;
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
 
-    const idLabel = fixture.nativeElement.querySelector('label#id-label');
+    const idLabel = spectator.fixture.nativeElement.querySelector('label#id-label');
     expect(idLabel.textContent).toEqual('ID');
   });
 
@@ -570,5 +543,20 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     addNewEntryToPersonenList();
     enableClearSearch = component.enableClearSearch();
     expect(enableClearSearch).toBeTrue();
+  });
+
+  it('should find person', () => {
+    const findPersonSpy = spyOn(spectator.component, 'findPerson');
+    expect(component.tbLoadingStatus).toBeFalse();
+
+    const searchButton = spectator.query('#search-button') as HTMLButtonElement;
+    searchButton.addEventListener('click', function () {
+      spectator.component.findPerson();
+    });
+    searchButton.click();
+    spectator.fixture.detectChanges();
+
+    expect(findPersonSpy).toHaveBeenCalled();
+    expect(component.tbLoadingStatus).toBeFalse();
   });
 });

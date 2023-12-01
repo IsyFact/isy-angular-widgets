@@ -1,21 +1,19 @@
-import {TestBed} from '@angular/core/testing';
 import {WidgetsConfigService} from './widgets-config.service';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
 describe('Unit tests: WidgetsConfigService', () => {
-  let service: WidgetsConfigService;
+  let spectator: SpectatorService<WidgetsConfigService>;
+  const createdService = createServiceFactory(WidgetsConfigService);
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(WidgetsConfigService);
-  });
+  beforeEach(() => (spectator = createdService()));
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(spectator.service).toBeTruthy();
   });
 
   it('should get the translated text', () => {
-    const text: string = 'hauptfenster.logout';
-    let translatedText = service.getTranslation(text);
+    const text = 'hauptfenster.logout';
+    let translatedText = spectator.service.getTranslation(text);
     expect(translatedText).toEqual('Abmelden');
 
     const data: object = {
@@ -23,8 +21,8 @@ describe('Unit tests: WidgetsConfigService', () => {
         logout: 'Logout'
       }
     };
-    service.setTranslation(data);
-    translatedText = service.getTranslation(text);
+    spectator.service.setTranslation(data);
+    translatedText = spectator.service.getTranslation(text);
     expect(translatedText).toEqual('Logout');
   });
 });

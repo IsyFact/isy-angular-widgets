@@ -13,6 +13,7 @@
   >
     <ng-template pTemplate="caption">
       <p-button
+        id="create-button"
         class="mr-1"
         icon="pi pi-plus"
         [label]="'isyAngularWidgetsDemo.actions.createObject' | translate"
@@ -20,6 +21,7 @@
       >
       </p-button>
       <p-button
+        id="edit-button"
         icon="pi pi-pencil"
         [label]="'isyAngularWidgetsDemo.actions.editObject' | translate"
         [disabled]="!selectedObject"
