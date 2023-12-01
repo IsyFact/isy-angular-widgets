@@ -195,9 +195,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       nachname: new FormControl('', required)
     });
     expect(component.form.controls.nachname.dirty).toBeFalse();
-
     component.onFormControlFocus(component.form.controls.nachname);
-    spectator.fixture.detectChanges();
     expect(component.form.controls.nachname.dirty).toBeTrue();
   });
 });
