@@ -5,7 +5,7 @@ import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockComponent, MockModule} from 'ng-mocks';
+import {MockModule} from 'ng-mocks';
 import {RequiredLabelComponent} from '../required-label/required-label.component';
 
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
@@ -25,7 +25,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       }),
       MockModule(ReactiveFormsModule)
     ],
-    declarations: [MockComponent(RequiredLabelComponent)],
+    declarations: [RequiredLabelComponent],
     providers: [{provide: FormBuilder, useValue: formBuilder}]
   });
 
