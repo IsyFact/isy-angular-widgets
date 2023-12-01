@@ -176,7 +176,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   });
 
   it('form control should be dirty after focus', () => {
-    const nachnameSpy = spyOn(spectator.component, 'onFormControlFocus');
+    const nachnameSpy = spyOn(component, 'onFormControlFocus');
     component.form.get('nachname')!.setValue('nachname');
     spectator.fixture.detectChanges();
 
@@ -184,7 +184,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     input.focus();
 
     spectator.detectChanges();
-    expect(spectator.component.form.controls.nachname.dirty).toBeTrue();
+    expect(component.form.controls.nachname.dirty).toBeTrue();
 
     expect(nachnameSpy).toHaveBeenCalledWith(component.form.controls.nachname);
   });
