@@ -190,7 +190,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(nachnameSpy).toHaveBeenCalledWith(component.form.controls.nachname);
   });
 
-  it('should mark form as dirty on focus', ()=> {
+  it('should mark form as dirty on focus', () => {
     component.form = new FormGroup({
       nachname: new FormControl('', required)
     });
