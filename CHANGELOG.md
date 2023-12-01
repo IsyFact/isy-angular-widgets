@@ -1,7 +1,7 @@
 # 16.0.1 - 
 ## Fixes
-- ISY-375 - Analyse: Einsatz von ng-mocks
-- ISY-631 - DemoApp: Wizard validiert sofort
+- ISY-375: Analyse: Einsatz von ng-mocks
+- ISY-631: DemoApp: Wizard validiert sofort
 
 # 16.0.0 - 10.11.2023
 ## Breaking Changes
