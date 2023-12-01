@@ -1,7 +1,7 @@
 import {fakeAsync} from '@angular/core/testing';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {RouterTestingModule} from '@angular/router/testing';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {Person} from '../../shared/model/person';
 import {getEmptyPerson} from './person-data';
@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ObjektSuchenModule} from './objekt-suchen.module';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {required} from '../../shared/validation/validator';
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -574,5 +575,28 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     expect(findPersonSpy).toHaveBeenCalled();
     expect(component.tbLoadingStatus).toBeFalse();
+  });
+
+  it('form control should be dirty after focus', () => {
+    const idSpy = spyOn(component, 'onFormControlFocus');
+
+    component.openWizard = true;
+    spectator.fixture.detectChanges();
+
+    component.idForm = new FormGroup({
+      id: new FormControl('', required)
+    });
+
+    const input = spectator.query('#person-id') as HTMLInputElement;
+    input.focus();
+    spectator.detectChanges();
+
+    expect(idSpy).toHaveBeenCalledWith(component.idForm.controls.id);
+  });
+
+  it('should mark form as dirty on focus', () => {
+    expect(component.idForm.controls.id.dirty).toBeFalse();
+    component.onFormControlFocus(component.idForm.controls.id);
+    expect(component.idForm.controls.id.dirty).toBeTrue();
   });
 });
