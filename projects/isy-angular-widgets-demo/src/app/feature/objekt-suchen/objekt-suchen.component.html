@@ -276,10 +276,17 @@
     <div [formGroup]="idForm">
       <div class="grid m-0">
         <div class="col-1 text-right align-self-center">
-          <label id="id-label" for="person-id">ID</label>
+          <label id="id-label" for="person-id">ID</label><demo-required-label></demo-required-label>
         </div>
         <div class="col">
-          <input id="person-id" type="text" class="w-full" pInputText [formControlName]="'id'" />
+          <input
+            id="person-id"
+            type="text"
+            class="w-full"
+            pInputText
+            [formControlName]="'id'"
+            (focus)="onFormControlFocus(idForm.controls.id)"
+          />
         </div>
       </div>
     </div>
@@ -298,39 +305,59 @@
       <div class="grid m-0">
         <div class="col-2 text-right align-self-center">
           <label id="geburtsname-label" class="align-content-end" for="geburtsname">
-            {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
-          </label>
+            {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }} </label
+          ><demo-required-label></demo-required-label>
         </div>
         <div class="col">
-          <input id="geburtsname" class="w-full" type="text" pInputText [formControlName]="'geburtsname'" />
+          <input
+            id="geburtsname"
+            class="w-full"
+            type="text"
+            pInputText
+            [formControlName]="'geburtsname'"
+            (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsname)"
+          />
         </div>
       </div>
       <div class="grid m-0">
         <div class="col-2 text-right align-self-center">
           <label id="geburtsort-label" class="align-content-end" for="geburtsort">
-            {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
-          </label>
+            {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }} </label
+          ><demo-required-label></demo-required-label>
         </div>
         <div class="col">
-          <input id="geburtsort" class="w-full" type="text" pInputText [formControlName]="'geburtsort'" />
+          <input
+            id="geburtsort"
+            class="w-full"
+            type="text"
+            pInputText
+            [formControlName]="'geburtsort'"
+            (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsort)"
+          />
         </div>
       </div>
       <div class="grid m-0">
         <div class="col-2 text-right align-self-center">
           <label id="geburtsdatum-label" class="align-content-end" for="geburtdatum">
-            {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
-          </label>
+            {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }} </label
+          ><demo-required-label></demo-required-label>
         </div>
         <div class="col-3">
-          <p-calendar id="geburtdatum" dateFormat="dd.mm.yy" [formControlName]="'geburtsdatum'" [showIcon]="true">
+          <p-calendar
+            id="geburtdatum"
+            dateFormat="dd.mm.yy"
+            [formControlName]="'geburtsdatum'"
+            [showIcon]="true"
+            (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
+          >
           </p-calendar>
         </div>
       </div>
       <div class="grid m-0">
         <div class="col-2 text-right align-self-center">
           <label id="staatsangehoerigkeit-label" class="align-content-end" for="staatangehoerigkeit">
-            {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
-          </label>
+            {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }} </label
+          ><demo-required-label></demo-required-label>
         </div>
         <div class="col-2">
           <p-dropdown
@@ -341,6 +368,7 @@
             optionLabel="name"
             [options]="countryMap"
             [formControlName]="'staatsangehoerigkeit'"
+            (focusout)="onFormControlFocus(geburtsInformationenForm.controls.staatsangehoerigkeit)"
           >
             <ng-template let-land pTemplate="item">
               <div class="country-item">
