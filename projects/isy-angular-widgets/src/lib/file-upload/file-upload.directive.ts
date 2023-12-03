@@ -14,7 +14,6 @@ import {FileUpload} from 'primeng/fileupload';
   ]
 })
 export class FileUploadDirective implements ControlValueAccessor {
-
   constructor(private fileUpload: FileUpload) {}
 
   writeValue(value: unknown): void {
