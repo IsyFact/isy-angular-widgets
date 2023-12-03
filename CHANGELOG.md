@@ -2,6 +2,7 @@
 ## Fixes
 - ISY-375: Analyse: Einsatz von ng-mocks
 - ISY-631: DemoApp: Wizard validiert sofort
+- ISY-619: Wizard: DatePicker wird nicht vollständig angezeigt
 
 # 16.0.0 - 10.11.2023
 ## Breaking Changes
