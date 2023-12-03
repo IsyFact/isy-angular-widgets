@@ -1,0 +1,6 @@
+/* Used for PrimeNg Dropdown because no class for touched/invalid/dirty state implemented */
+:host ::ng-deep p-dropdown.ng-touched.ng-invalid.ng-dirty {
+  .p-dropdown {
+    border-color: var(--red-500);
+  }
+}
