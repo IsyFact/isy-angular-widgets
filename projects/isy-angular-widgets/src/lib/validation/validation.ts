@@ -55,10 +55,10 @@ export class Validation {
     const regexInputMask = /^([x0-9]{2}\.[x0-9]{2}\.[x0-9]{4})$/;
     let isDateValid = false;
 
-    if (input.match(regexInputMask)) {
+    if (RegExp(regexInputMask).exec(input)) {
       const [day, month, year] = input.split('.');
 
-      if (!(input.match('x') !== null || `${day}` === '00' || `${month}` === '00')) {
+      if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
         const isoFormattedStr = `${year}-${month}-${day}`;
         const date = new Date(isoFormattedStr);
         const timestamp = date.getTime();
@@ -70,7 +70,7 @@ export class Validation {
     const regexInputUnspecified =
       /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(0{2}\.0{2}\.\d{4})$|^(0{2}\.0{2}\.0{4})$|^(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(x{2}\.x{2}\.\d{4})$|^(x{2}\.x{2}\.x{4})$/;
 
-    if (!(input.match(regexInputUnspecified) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
+    if (!(RegExp(regexInputUnspecified).exec(input) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
 
     return null;
   }

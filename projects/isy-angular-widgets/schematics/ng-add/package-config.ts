@@ -21,7 +21,7 @@ const FILE_NAME = 'package.json';
  */
 function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
   return Object.keys(obj)
-    .sort()
+    .sort((a, b) => a.localeCompare(b))
     .reduce((result: Record<string, string>, key) => {
       result[key] = obj[key];
       return result;

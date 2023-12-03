@@ -1,9 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {StepperComponent} from './stepper.component';
-import {StepsModule} from 'primeng/steps';
 import {MenuItem} from 'primeng/api';
-import {RouterTestingModule} from '@angular/router/testing';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {MockComponent} from 'ng-mocks';
+import {Steps} from 'primeng/steps';
 
 const stepperItems: MenuItem[] = [
   {
@@ -21,19 +20,17 @@ const startIndex: number = 0;
 
 describe('Unit Tests: StepperComponent', () => {
   let component: StepperComponent;
-  let fixture: ComponentFixture<StepperComponent>;
+  let spectator: Spectator<StepperComponent>;
+  const createdComponent = createComponentFactory({
+    component: StepperComponent,
+    declarations: [MockComponent(Steps)]
+  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [StepperComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(StepperComponent);
-    component = fixture.componentInstance;
+  beforeEach(() => {
+    spectator = createdComponent();
+    component = spectator.component;
     component.items = stepperItems;
     component.index = startIndex;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -82,25 +79,6 @@ describe('Unit Tests: StepperComponent', () => {
     expect(component.index).toEqual(startIndex + 1);
     component.reset();
     expect(component.index).toEqual(startIndex);
-  });
-});
-
-describe('Integration Test: StepperComponent', () => {
-  let component: StepperComponent;
-  let fixture: ComponentFixture<StepperComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [StepperComponent],
-      imports: [StepsModule, RouterTestingModule]
-    }).compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(StepperComponent);
-    component = fixture.componentInstance;
-    component.items = stepperItems;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

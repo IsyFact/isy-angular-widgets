@@ -1,49 +1,58 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
-import {RouterTestingModule} from '@angular/router/testing';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DropdownModule} from 'primeng/dropdown';
-import {TableModule} from 'primeng/table';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {By} from '@angular/platform-browser';
-import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
-import {MessageService} from 'primeng/api';
 import {SecurityService} from '../../../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
 import {permissions} from '../../app.permission';
 import {DebugElement} from '@angular/core';
+import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
+import {MessageService} from 'primeng/api';
+import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
+import {ComponentFixture} from '@angular/core/testing';
 
-describe('Integration Tests: PersonBearbeitenComponent', () => {
-  let component: ObjektAnzeigenComponent;
-  let fixture: ComponentFixture<ObjektAnzeigenComponent>;
-  let messageService: MessageService;
+describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
   let securityService: SecurityService;
   const inputFields: {[key: string]: DebugElement & {disabled?: boolean}} = {};
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ObjektAnzeigenComponent],
-      imports: [
-        RouterTestingModule,
-        ObjektAnzeigenModule,
-        BrowserAnimationsModule,
-        DropdownModule,
-        TableModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TranslateTestingModule.withTranslations('de', {
-          'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
-        })
-      ],
-      providers: [MessageService, SecurityService, UserInfoPublicService]
-    }).compileComponents();
+  let component: ObjektAnzeigenComponent;
+  let fixture: ComponentFixture<ObjektAnzeigenComponent>;
+  let debugElement: DebugElement;
+  let spectator: Spectator<ObjektAnzeigenComponent>;
+  const createdComponent = createComponentFactory({
+    component: ObjektAnzeigenComponent,
+    imports: [
+      ObjektAnzeigenModule,
+      TranslateTestingModule.withTranslations('de', {
+        'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
+      })
+    ],
+    providers: [MessageService]
+  });
 
-    messageService = TestBed.inject(MessageService);
-    userInfoService = TestBed.inject(UserInfoPublicService);
-    securityService = TestBed.inject(SecurityService);
+  beforeEach(() => {
+    spectator = createdComponent();
+
+    component = spectator.component;
+    fixture = spectator.fixture;
+    debugElement = fixture.debugElement;
+
+    userInfoService = new UserInfoPublicService();
+    securityService = new SecurityService();
+
+    inputFields.lastName = debugElement.query(By.css('#last-name'));
+    inputFields.firstName = debugElement.query(By.css('#first-name'));
+    inputFields.birthName = debugElement.query(By.css('#birth-name'));
+    inputFields.birthplace = debugElement.query(By.css('#birth-place'));
+    inputFields.nationality = debugElement.query(By.css('#nationality'));
+    inputFields.gender = debugElement.query(By.css('p-dropdown:has(#gender) .p-inputtext'));
+    inputFields.phoneNumber = debugElement.query(By.css('#phone-number'));
+    inputFields.birthDate = debugElement.query(By.css('#birth-date'));
+    inputFields.dateOfEntry = debugElement.query(By.css('#date-of-entry'));
+    inputFields.dateOfDeparture = debugElement.query(By.css('#date-of-departure'));
+    inputFields.passportExpirationDate = debugElement.query(By.css('#passport-expiration-date'));
+    inputFields.creditCardNumber = debugElement.query(By.css('#credit-card-number'));
+    inputFields.creditCardExpirationDate = debugElement.query(By.css('#credit-card-expiration-date'));
   });
 
   /**
@@ -63,28 +72,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     securityService.setRoles(userInfoData);
     securityService.setPermissions(permissions);
     component.showSecretFields = true;
-    fixture.detectChanges();
   }
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ObjektAnzeigenComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-
-    inputFields.lastName = fixture.debugElement.query(By.css('#last-name'));
-    inputFields.firstName = fixture.debugElement.query(By.css('#first-name'));
-    inputFields.birthName = fixture.debugElement.query(By.css('#birth-name'));
-    inputFields.birthplace = fixture.debugElement.query(By.css('#birth-place'));
-    inputFields.nationality = fixture.debugElement.query(By.css('#nationality'));
-    inputFields.gender = fixture.debugElement.query(By.css('p-dropdown:has(#gender)'));
-    inputFields.phoneNumber = fixture.debugElement.query(By.css('#phone-number'));
-    inputFields.birthDate = fixture.debugElement.query(By.css('#birth-date'));
-    inputFields.dateOfEntry = fixture.debugElement.query(By.css('#date-of-entry'));
-    inputFields.dateOfDeparture = fixture.debugElement.query(By.css('#date-of-departure'));
-    inputFields.passportExpirationDate = fixture.debugElement.query(By.css('#passport-expiration-date'));
-    inputFields.creditCardNumber = fixture.debugElement.query(By.css('#credit-card-number'));
-    inputFields.creditCardExpirationDate = fixture.debugElement.query(By.css('#credit-card-expiration-date'));
-  });
 
   it('creates', () => {
     expect(component).toBeTruthy();
@@ -109,21 +97,18 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
   });
 
   it('should hide button group for saving changes if not in edit mode', () => {
-    const saveButtonGroup = fixture.debugElement.query(By.css('#divSaveCancel'));
-
+    const saveButtonGroup = debugElement.query(By.css('#divSaveCancel'));
     expect(saveButtonGroup).toBeNull();
   });
 
   it('shoud enable input fields in edit mode', () => {
     clickButton('#button-edit');
     fixture.detectChanges();
-
     expect(inputFields.firstName.disabled).toBeFalsy();
   });
 
   it('should hide secret fields by default', () => {
-    const secretFieldsContainer = fixture.debugElement.query(By.css('#divShowSecretFields'));
-
+    const secretFieldsContainer = debugElement.query(By.css('#divShowSecretFields'));
     expect(secretFieldsContainer).toBeNull();
   });
 
@@ -132,7 +117,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
     expect(component.showSecretFields).toBeTrue();
     fixture.detectChanges();
-    const secretFieldsContainer = fixture.debugElement.query(By.css('#div-show-secret-fields'));
+    const secretFieldsContainer = debugElement.query(By.css('#div-show-secret-fields'));
     expect(secretFieldsContainer).toBeTruthy();
   });
 
@@ -140,7 +125,7 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     clickButton('#button-edit');
     fixture.detectChanges();
 
-    const invalidFields = fixture.debugElement.queryAll(By.css('.ng-invalid'));
+    const invalidFields = spectator.queryAll('.ng-invalid');
     expect(invalidFields.length).toBe(0);
   });
 
@@ -188,10 +173,11 @@ describe('Integration Tests: PersonBearbeitenComponent', () => {
     expect(cancelButton).toBeNull();
   });
 
-  it('should show message if personalien have been saved', () => {
-    const messageSpy = spyOn(messageService, 'add');
+  it('should display notificatioon message if personalien have been saved', () => {
+    const msg = createSpyObject(MessageService);
+    msg.add({});
     component.savePersonalien();
     fixture.detectChanges();
-    expect(messageSpy).toHaveBeenCalled();
+    expect(msg.add).toHaveBeenCalled();
   });
 });

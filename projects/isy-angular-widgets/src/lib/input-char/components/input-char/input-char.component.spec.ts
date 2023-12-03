@@ -1,28 +1,30 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {InputCharComponent} from './input-char.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {By} from '@angular/platform-browser';
-import {InputCharModule} from '../../input-char.module';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {MockComponents} from 'ng-mocks';
+import {Dialog} from 'primeng/dialog';
+import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
+import {InputCharModule} from '../../input-char.module';
+
+let component: InputCharComponent;
+let spectator: Spectator<InputCharComponent>;
 
 describe('Unit Tests: InputCharComponent', () => {
+  const dialogDefaultWidth = '775px';
+  const dialogDefaultHeight = '460px';
+  const createdComponent = createComponentFactory({
+    component: InputCharComponent,
+    declarations: [MockComponents(Dialog, InputCharDialogComponent)]
+  });
+
   describe('with default datentyp', () => {
-    let component: InputCharComponent;
-    let fixture: ComponentFixture<InputCharComponent>;
+    beforeEach(() => {
+      spectator = createdComponent();
+      component = spectator.component;
 
-    beforeEach(async () => {
-      await TestBed.configureTestingModule({
-        declarations: [InputCharComponent],
-        schemas: [NO_ERRORS_SCHEMA]
-      }).compileComponents();
-
-      fixture = TestBed.createComponent(InputCharComponent);
-      component = fixture.componentInstance;
       component.ngOnChanges();
-      fixture.detectChanges();
+      spectator.fixture.detectChanges();
     });
 
     it('should create', () => {
@@ -32,27 +34,22 @@ describe('Unit Tests: InputCharComponent', () => {
     it('should have default datatype DATENTYP_C', () => {
       expect(component.datentyp).toEqual(Datentyp.DATENTYP_C);
     });
+
+    it('should have the correct default size', () => {
+      expect(component.width).toEqual(dialogDefaultWidth);
+      expect(component.height).toEqual(dialogDefaultHeight);
+    });
   });
 
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
-      let component: InputCharComponent;
-      let fixture: ComponentFixture<InputCharComponent>;
+      beforeEach(() => {
+        spectator = createdComponent();
+        component = spectator.component;
 
-      const dialogDefaultWidth = '775px';
-      const dialogDefaultHeight = '460px';
-
-      beforeEach(async () => {
-        await TestBed.configureTestingModule({
-          declarations: [InputCharComponent],
-          schemas: [NO_ERRORS_SCHEMA]
-        }).compileComponents();
-
-        fixture = TestBed.createComponent(InputCharComponent);
-        component = fixture.componentInstance;
         component.datentyp = datentyp as Datentyp;
-        fixture.componentRef.setInput('datentyp', datentyp);
-        fixture.detectChanges();
+        spectator.fixture.componentRef.setInput('datentyp', datentyp);
+        spectator.fixture.detectChanges();
       });
 
       it('should create', () => {
@@ -72,94 +69,82 @@ describe('Unit Tests: InputCharComponent', () => {
       });
 
       it('should display the input char button', () => {
-        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         component.isInputDisabled = true;
-        fixture.detectChanges();
+        spectator.fixture.detectChanges();
         expect(button.disabled).toBeTruthy();
       });
 
       it('should not display the input char button', () => {
-        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         component.isInputDisabled = false;
-        fixture.detectChanges();
+        spectator.fixture.detectChanges();
         expect(button.disabled).toBeFalsy();
       });
 
       it('should have the input char button disabled when isInputDisabled property is true', () => {
-        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         component.isInputDisabled = true;
-        fixture.detectChanges();
+        spectator.fixture.detectChanges();
 
         expect(button.disabled).toBeTruthy();
       });
 
       it('should have the input char button not disabled when isInputDisabled property is false', () => {
-        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         component.isInputDisabled = false;
-        fixture.detectChanges();
+        spectator.fixture.detectChanges();
 
         expect(button.disabled).toBeFalsy();
       });
 
       it('should display after clicking the button', () => {
-        const button = fixture.debugElement.query(By.css('.input-char-button')).nativeElement as HTMLButtonElement;
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
 
         button.click();
-        fixture.detectChanges();
+        spectator.fixture.detectChanges();
 
         expect(component.visible).toBeTrue();
-      });
-
-      it('should have the correct default size', () => {
-        expect(component.width).toEqual(dialogDefaultWidth);
-        expect(component.height).toEqual(dialogDefaultHeight);
       });
     });
   });
 });
 
 describe('Integration Test: InputCharComponent', () => {
+  const service = new CharacterService();
+
+  let spectator: Spectator<InputCharComponent>;
+  const createdComponent = createComponentFactory({
+    component: InputCharComponent,
+    imports: [InputCharModule]
+  });
+
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
-      let component: InputCharComponent;
-      let fixture: ComponentFixture<InputCharComponent>;
-      const service = new CharacterService();
-
-      beforeEach(async () => {
-        await TestBed.configureTestingModule({
-          declarations: [InputCharComponent],
-          imports: [InputCharModule, BrowserAnimationsModule]
-        }).compileComponents();
-
-        fixture = TestBed.createComponent(InputCharComponent);
-        component = fixture.componentInstance;
-        fixture.componentRef.setInput('datentyp', datentyp);
-        fixture.debugElement.query(By.css('.input-char-button')).nativeElement.click();
-        fixture.detectChanges();
+      beforeEach(() => {
+        spectator = createdComponent();
+        spectator.fixture.componentRef.setInput('datentyp', datentyp);
+        spectator.click('.input-char-button');
       });
 
       it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(spectator.component).toBeTruthy();
       });
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = fixture.debugElement.queryAll(
-          By.css('#schriftzeichengruppe-select-button .p-buttonset .p-button')
-        );
+        const groupButtons = spectator.queryAll('#schriftzeichengruppe-select-button .p-buttonset .p-button');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = fixture.debugElement.queryAll(
-          By.css('#right-panel-side p-selectbutton .p-buttonset .p-button')
-        );
+        const groupButtons = spectator.queryAll('#right-panel-side p-selectbutton .p-buttonset .p-button');
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
     });

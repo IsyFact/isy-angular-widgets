@@ -1,30 +1,29 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ChartComponent} from './chart.component';
 import {ChartModule} from 'primeng/chart';
 import {responsiveOptions} from '../../data/chart-configs';
 import {barChartData} from '../../data/chart-data';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Integration Tests: ChartComponent', () => {
   let component: ChartComponent;
-  let fixture: ComponentFixture<ChartComponent>;
+  let spectator: Spectator<ChartComponent>;
+  const createdComponent = createComponentFactory({
+    component: ChartComponent,
+    imports: [ChartModule]
+  });
 
   const type = 'bar';
   const data = barChartData;
   const options = responsiveOptions;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ChartComponent],
-      imports: [ChartModule]
-    }).compileComponents();
+  beforeEach(() => {
+    spectator = createdComponent();
+    component = spectator.component;
 
-    fixture = TestBed.createComponent(ChartComponent);
-    component = fixture.componentInstance;
     component.type = type;
     component.data = data;
     component.options = options;
-    fixture.detectChanges();
+    spectator.fixture.detectChanges();
   });
 
   it('should create', () => {

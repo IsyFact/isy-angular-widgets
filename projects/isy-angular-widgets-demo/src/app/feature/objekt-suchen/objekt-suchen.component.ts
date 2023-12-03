@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {Person, Personalien, PersonId} from '../../shared/model/person';
-import {FormGroup} from '@angular/forms';
-import {markFormArrayAsDirty, resetForm} from '../../shared/validation/form-helper';
+import {AbstractControl, FormGroup} from '@angular/forms';
+import {markFormAsDirty, markFormControlAsDirty, resetForm} from '../../shared/validation/form-helper';
 import {
   initGeburtsInformationenForm,
   initIdForm,
@@ -138,8 +138,15 @@ export class ObjektSuchenComponent {
     this.neuePerson = getEmptyPerson();
 
     this.initReactiveForms();
-    markFormArrayAsDirty(this.allWizardForms);
     this.subscribeToAllForms();
+  }
+
+  /**
+   * Is called on input field touch
+   * @param control The touched form control
+   */
+  onFormControlFocus(control: AbstractControl<unknown>): void {
+    markFormControlAsDirty(control);
   }
 
   /**
@@ -420,6 +427,7 @@ export class ObjektSuchenComponent {
     this.personen$ = of([]);
     if (this.editForm) {
       resetForm(this.editForm);
+      markFormAsDirty(this.editForm);
     }
     this.selectedPerson = undefined;
   }

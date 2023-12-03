@@ -2,10 +2,12 @@
 ## Fixes
 - ISY-375 - Analyse: Einsatz von ng-mocks
 - ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
+- ISY-631: DemoApp: Wizard validiert sofort
+- ISY-619: Wizard: DatePicker wird nicht vollständig angezeigt
 
 # 16.0.0 - 10.11.2023
 ## Breaking Changes
-- ISY-144 Upgrade Angular und PrimeNG Bibliothek auf Version 16
+- ISY-144: Upgrade Angular und PrimeNG Bibliothek auf Version 16
   * `WidgetsConfigService#getTranslation` erlaubt jetzt auch Werte vom Typ `undefined`
 
 ## Features

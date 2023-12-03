@@ -21,6 +21,7 @@
         </td>
         <td>
           <button
+            id="sachverhalte-button"
             pButton
             pRipple
             icon="pi pi-trash"
@@ -41,7 +42,7 @@
     <button pButton type="button" pRipple icon="pi pi-plus" (click)="createSachverhalt(newSachverhalt)"></button>
   </div>
   <ng-template pTemplate="footer">
-    <button pButton (click)="saveSachverhalte()">OK</button>
+    <button id="ok-button" pButton (click)="saveSachverhalte()">OK</button>
     <button pButton class="p-button-outlined" (click)="closeDialog()">
       {{ 'isyAngularWidgetsDemo.actions.cancel' | translate }}
     </button>

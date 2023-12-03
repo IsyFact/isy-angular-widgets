@@ -1,17 +1,23 @@
 <div [formGroup]="form">
   <div class="grid m-0">
-    <div class="col-1 text-right align-self-center">
-      <label id="nachname-label" for="Nachname">
-        {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
-      </label>
+    <div class="col-2 text-right align-self-center">
+      <label id="nachname-label" for="Nachname"> {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }} </label
+      ><demo-required-label></demo-required-label>
     </div>
     <div class="col">
-      <input id="Nachname" type="text" class="w-full" pInputText [formControlName]="'nachname'" />
+      <input
+        id="Nachname"
+        type="text"
+        class="w-full"
+        pInputText
+        [formControlName]="'nachname'"
+        (focus)="onFormControlFocus(form.controls.nachname)"
+      />
     </div>
   </div>
 
   <div class="grid m-0">
-    <div class="col-1 text-right align-self-center">
+    <div class="col-2 text-right align-self-center">
       <label id="vorname-label" class="align-content-end" for="Vorname">
         {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
       </label>
@@ -22,13 +28,20 @@
   </div>
 
   <div class="grid m-0">
-    <div class="col-1 text-right align-self-center">
+    <div class="col-2 text-right align-self-center">
       <label id="geschlecht-label" class="align-content-end" for="Geschlecht">
-        {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
-      </label>
+        {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }} </label
+      ><demo-required-label></demo-required-label>
     </div>
     <div class="col">
-      <input id="Geschlecht" type="text" class="w-full" pInputText [formControlName]="'geschlecht'" />
+      <input
+        id="Geschlecht"
+        type="text"
+        class="w-full"
+        pInputText
+        [formControlName]="'geschlecht'"
+        (focus)="onFormControlFocus(form.controls.geschlecht)"
+      />
     </div>
   </div>
 </div>

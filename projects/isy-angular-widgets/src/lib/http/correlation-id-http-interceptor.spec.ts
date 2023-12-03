@@ -18,9 +18,9 @@ import {NgModule} from '@angular/core';
 class TargetModule {}
 
 describe('Unit tests: CorrelationIdHttpInterceptor', () => {
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
   const X_CORRELATION_ID = 'x-correlation-id';
-  const url = '/any-url';
+  const URL = '/any-url';
 
   beforeEach(async () => {
     return MockBuilder(CorrelationIdHttpInterceptor, TargetModule)
@@ -35,13 +35,13 @@ describe('Unit tests: CorrelationIdHttpInterceptor', () => {
     const client = ngMocks.findInstance(HttpClient);
     const httpMock = ngMocks.findInstance(HttpTestingController);
 
-    client.get(url).subscribe();
+    client.get(URL).subscribe();
 
-    const req = httpMock.expectOne(url);
+    const req = httpMock.expectOne(URL);
     req.flush('');
     httpMock.verify();
 
     expect(req.request.headers.has(X_CORRELATION_ID)).toBeTruthy();
-    expect(req.request.headers.get(X_CORRELATION_ID)).toMatch(uuidRegex);
+    expect(req.request.headers.get(X_CORRELATION_ID)).toMatch(UUID_REGEX);
   });
 });

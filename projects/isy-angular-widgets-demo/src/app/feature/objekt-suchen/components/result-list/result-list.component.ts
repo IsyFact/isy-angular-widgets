@@ -9,7 +9,7 @@ import {countries} from '../../country-data';
 })
 export class ResultListComponent {
   @Input() personen: Person[] = [];
-  @Input() selectedObject?: Person | undefined;
+  @Input() selectedObject: Person | undefined;
   @Input() loading!: boolean;
 
   /**
