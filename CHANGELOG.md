@@ -3,12 +3,13 @@
 - ISY-375: Analyse: Einsatz von ng-mocks
 - ISY-631: DemoApp: Wizard validiert sofort
 - ISY-619: Wizard: DatePicker wird nicht vollständig angezeigt
+## Features
+- ISY-575: Felder für Dateiupload sollen in Formulare integriert werden können
 
 # 16.0.0 - 10.11.2023
 ## Breaking Changes
 - ISY-144: Upgrade Angular und PrimeNG Bibliothek auf Version 16
   * `WidgetsConfigService#getTranslation` erlaubt jetzt auch Werte vom Typ `undefined`
-
 ## Features
 - `IncompleteDate`: Registrierung auf `onInput`-Output ist jetzt möglich
 
