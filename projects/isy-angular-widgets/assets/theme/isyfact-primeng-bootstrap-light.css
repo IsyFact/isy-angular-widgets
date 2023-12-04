@@ -2598,7 +2598,7 @@ p-password.p-password-clearable.p-password-mask .p-password-clear-icon {
 .fc.fc-theme-standard .fc-toolbar .fc-button .fc-icon-chevron-right,
 .fc.fc-unthemed .fc-toolbar .fc-button .fc-icon-chevron-left,
 .fc.fc-unthemed .fc-toolbar .fc-button .fc-icon-chevron-right {
-  font-family: PrimeIcons !important;
+  font-family: "PrimeIcons !important", sans-serif;
   text-indent: 0;
   font-size: 1rem;
 }
@@ -2648,7 +2648,7 @@ p-password.p-password-clearable.p-password-mask .p-password-clear-icon {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  font-family: PrimeIcons !important;
+  font-family: "PrimeIcons !important", sans-serif;
   font-size: 1rem;
   width: 2rem;
   height: 2rem;
