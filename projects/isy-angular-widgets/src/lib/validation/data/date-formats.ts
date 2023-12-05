@@ -15,7 +15,6 @@ export const DATE_FORMATS_REGEX: dateFormats = [
   /^(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$/, // yyyy-MM-ddTHH:mm:ssX
   /^(\d{4})-(\d{2})-(\d{2})$/, // yyyy-MM-dd
   /^(\d{2})\.(\d{2})\.(\d{4})$/, // dd.MM.yyyy
-  /^(\d{2})-(\d{2})-(\d{4})$/, // dd-MM-yyyy
-  /^(\d{4})-(\d{2})-(\d{2})$/, // yyyy-MM-dd
-  /^(\d{2})-(\d{2})-(\d{4})$/ // MM-dd-yyyy
+  /^(\d{2})-(\d{2})-(\d{4})$/, // MM-dd-yyyy
+  /^(\d{2})\/(\d{2})\/(\d{4})$/ // MM/dd/yyyy
 ];
