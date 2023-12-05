@@ -1,11 +1,7 @@
 import {fakeAsync} from '@angular/core/testing';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {RouterTestingModule} from '@angular/router/testing';
-<<<<<<< HEAD
-import {FormGroup} from '@angular/forms';
-=======
 import {FormControl, FormGroup} from '@angular/forms';
->>>>>>> origin
 import {MessageService} from 'primeng/api';
 import {Person} from '../../shared/model/person';
 import {getEmptyPerson} from './person-data';
@@ -14,10 +10,7 @@ import {Observable} from 'rxjs';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ObjektSuchenModule} from './objekt-suchen.module';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-<<<<<<< HEAD
-=======
 import {required} from '../../shared/validation/validator';
->>>>>>> origin
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -583,8 +576,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(findPersonSpy).toHaveBeenCalled();
     expect(component.tbLoadingStatus).toBeFalse();
   });
-<<<<<<< HEAD
-=======
 
   it('form control should be dirty after focus', () => {
     const idSpy = spyOn(component, 'onFormControlFocus');
@@ -608,5 +599,4 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     component.onFormControlFocus(component.idForm.controls.id);
     expect(component.idForm.controls.id.dirty).toBeTrue();
   });
->>>>>>> origin
 });
