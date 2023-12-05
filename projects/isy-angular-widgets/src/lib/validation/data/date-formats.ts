@@ -5,7 +5,10 @@ export const INPUT_MASK_REGEX: RegExp = /^([x0-9]{2}\.[x0-9]{2}\.[x0-9]{4})$/;
 export const INPUT_UNSPECIFIED_REGEX: RegExp =
   /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(0{2}\.0{2}\.\d{4})$|^(0{2}\.0{2}\.0{4})$|^(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(x{2}\.x{2}\.\d{4})$|^(x{2}\.x{2}\.x{4})$/;
 
-export const DATE_FORMATS = ['dd.MM.yyyy', 'MM/dd/yyyy', 'yyyy-MM-dd', 'yyyy-MM-dd\'T\'HH:mm:ssX'];
+// date-fns employs single quote symbols for character escaping, such as 'T'.
+// This can create conflicts when using ESLint alongside Prettier for code formatting. Consequently, singlequotes are deactivated in the following line.
+// eslint-disable-next-line @typescript-eslint/quotes
+export const DATE_FORMATS = ['dd.MM.yyyy', 'MM/dd/yyyy', 'yyyy-MM-dd', `yyyy-MM-dd'T'HH:mm:ssX`];
 
 type dateFormats = RegExp[];
 

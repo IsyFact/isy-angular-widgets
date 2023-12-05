@@ -141,7 +141,10 @@ export class Validation {
    * @returns The object {DATETIME: true} if the validation fails; null otherwise
    */
   static isoDateTime(c: AbstractControl): ValidationErrors | null {
-    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat('yyyy-MM-dd\'T\'HH:mm:ssX', 'DATETIME', true);
+    // date-fns employs single quote symbols for character escaping, such as 'T'.
+    // This can create conflicts when using ESLint alongside Prettier for code formatting. Consequently, singlequotes are deactivated in the following line.
+    // eslint-disable-next-line @typescript-eslint/quotes
+    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat(`yyyy-MM-dd'T'HH:mm:ssX`, 'DATETIME', true);
     return isoDateTimeValidatorFn(c);
   }
 
