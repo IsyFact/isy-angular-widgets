@@ -1,5 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {parseISO, isValid, parse, isFuture, isPast, isMatch} from 'date-fns';
+import {parseISO, parse, isFuture, isPast, isMatch} from 'date-fns';
 import {DATE_FORMATS, DATE_FORMATS_REGEX, INPUT_MASK_REGEX, INPUT_UNSPECIFIED_REGEX} from './data/date-formats';
 
 /**
@@ -80,7 +80,7 @@ export class Validation {
     if (INPUT_MASK_REGEX.test(input)) {
       const [day, month, year] = input.split('.');
 
-      if (!(input.match('x') !== null || `${day}` === '00' || `${month}` === '00')) {
+      if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
         const isoFormattedStr = `${year}-${month}-${day}`;
         const date = new Date(isoFormattedStr);
         const timestamp = date.getTime();
