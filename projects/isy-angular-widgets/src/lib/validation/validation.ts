@@ -141,7 +141,7 @@ export class Validation {
    * @returns The object {DATETIME: true} if the validation fails; null otherwise
    */
   static isoDateTime(c: AbstractControl): ValidationErrors | null {
-    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat('yyyy-MM-dd\'T\'HH:mm:ssX', 'DATETIME', false);
+    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat('yyyy-MM-dd\'T\'HH:mm:ssX', 'DATETIME', true);
     return isoDateTimeValidatorFn(c);
   }
 
