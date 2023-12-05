@@ -165,9 +165,12 @@ describe('Unit Test: Validation', () => {
       expect(result).toBeNull();
     });
 
-    it('should break the loop when a valid date format is found', () => {
-      const result = Validation.isInFuture(new FormControl('12-01-2024'));
-      expect(result).toBeNull();
+    it('should handle Date instance correctly', () => {
+      const dateInTheFuture = new Date();
+      dateInTheFuture.setDate(dateInTheFuture.getDate() + 1);
+      const control = new FormControl(dateInTheFuture);
+      const errors = Validation.isInFuture(control);
+      expect(errors).toBeNull();
     });
 
     it('should return null if date is not valid', () => {
@@ -201,9 +204,12 @@ describe('Unit Test: Validation', () => {
       expect(result).toBeNull();
     });
 
-    it('should break the loop when a valid date format is found', () => {
-      const result = Validation.isInPast(new FormControl('12-01-2022'));
-      expect(result).toBeNull();
+    it('should handle Date instance correctly', () => {
+      const dateInThePast = new Date();
+      dateInThePast.setDate(dateInThePast.getDate() - 1);
+      const control = new FormControl(dateInThePast);
+      const errors = Validation.isInPast(control);
+      expect(errors).toBeNull();
     });
 
     it('should return null if date is not valid', () => {

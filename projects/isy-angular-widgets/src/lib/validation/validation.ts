@@ -1,6 +1,6 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {parseISO, isValid, isBefore, startOfDay, parse, isAfter, format} from 'date-fns';
-import {DATE_FORMATS_LIST, INPUT_MASK_REGEX, INPUT_UNSPECIFIED_REGEX} from './data/date-formats';
+import {parseISO, isValid, parse, isFuture, isPast, isMatch} from 'date-fns';
+import {DATE_FORMATS, DATE_FORMATS_REGEX, INPUT_MASK_REGEX, INPUT_UNSPECIFIED_REGEX} from './data/date-formats';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
@@ -14,30 +14,24 @@ export class Validation {
    * @returns The object {FUTURE: true} if the validation fails; null otherwise
    */
   static isInFuture(c: AbstractControl): ValidationErrors | null {
-    const input = (c.value as string) ?? null;
+    const input = (c.value as string | Date) ?? null;
 
     if (!input) return null;
 
-    const today = startOfDay(new Date());
-    let parsedDate: Date;
-    parsedDate = parseISO(input);
+    let parsedDate: Date | null = null;
 
-    if (isNaN(parsedDate.getTime())) {
-      const formatsToTry = DATE_FORMATS_LIST;
+    if (input instanceof Date) {
+      parsedDate = input;
+    } else {
+      parsedDate = parseISO(input);
 
-      for (const format of formatsToTry) {
-        parsedDate = parse(input, format, new Date());
-        if (!isNaN(parsedDate.getTime())) {
-          break;
-        }
+      if (isNaN(parsedDate.getTime())) {
+        parsedDate =
+          DATE_FORMATS.map((format) => parse(input, format, new Date())).find((date) => !isNaN(date.getTime())) ?? null;
       }
     }
 
-    if (isValid(parsedDate) && isBefore(parsedDate, today)) {
-      return {FUTURE: true};
-    }
-
-    return null;
+    return parsedDate && !isFuture(parsedDate) ? {FUTURE: true} : null;
   }
 
   /**
@@ -48,30 +42,24 @@ export class Validation {
    * @returns The object {PAST: true} if the validation fails; null otherwise
    */
   static isInPast(c: AbstractControl): ValidationErrors | null {
-    const input = (c.value as string) ?? null;
+    const input = (c.value as string | Date) ?? null;
 
     if (!input) return null;
 
-    const today = startOfDay(new Date());
-    let parsedDate: Date;
-    parsedDate = parseISO(input);
+    let parsedDate: Date | null = null;
 
-    if (isNaN(parsedDate.getTime())) {
-      const formatsToTry = DATE_FORMATS_LIST;
+    if (input instanceof Date) {
+      parsedDate = input;
+    } else {
+      parsedDate = parseISO(input);
 
-      for (const format of formatsToTry) {
-        parsedDate = parse(input, format, new Date());
-        if (!isNaN(parsedDate.getTime())) {
-          break;
-        }
+      if (isNaN(parsedDate.getTime())) {
+        parsedDate =
+          DATE_FORMATS.map((format) => parse(input, format, new Date())).find((date) => !isNaN(date.getTime())) ?? null;
       }
     }
 
-    if (isValid(parsedDate) && isAfter(parsedDate, today)) {
-      return {PAST: true};
-    }
-
-    return null;
+    return parsedDate && !isPast(parsedDate) ? {PAST: true} : null;
   }
 
   /**
@@ -119,27 +107,9 @@ export class Validation {
 
       if (!input) return null;
 
-      let parsedDate: Date;
-      let isValidDate = false;
-      const isoDateTimeLength = 20;
-
-      switch (dateFormat) {
-        case 'ISO8601':
-          parsedDate = parseISO(input);
-          isValidDate = strict
-            ? isValid(parsedDate) && input.endsWith('Z') && input.length === isoDateTimeLength
-            : isValid(parsedDate);
-          break;
-        case 'HH:mm:ss':
-          const isoTimeLength = dateFormat.length;
-          parsedDate = parse(input, 'HH:mm:ss', new Date());
-          isValidDate = strict ? isValid(parsedDate) && input.length === isoTimeLength : isValid(parsedDate);
-          break;
-        default:
-          parsedDate = parse(input, dateFormat, new Date());
-          isValidDate = strict ? isValid(parsedDate) && format(parsedDate, dateFormat) === input : isValid(parsedDate);
-          break;
-      }
+      const isValidDate = strict
+        ? isMatch(input, dateFormat) && DATE_FORMATS_REGEX.some((format) => format.test(input))
+        : isMatch(input, dateFormat) || false;
 
       return isValidDate ? null : {[messageKey]: {format: dateFormat}};
     };
@@ -171,7 +141,7 @@ export class Validation {
    * @returns The object {DATETIME: true} if the validation fails; null otherwise
    */
   static isoDateTime(c: AbstractControl): ValidationErrors | null {
-    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat('ISO8601', 'DATETIME', true);
+    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat('yyyy-MM-dd\'T\'HH:mm:ssX', 'DATETIME', false);
     return isoDateTimeValidatorFn(c);
   }
 
