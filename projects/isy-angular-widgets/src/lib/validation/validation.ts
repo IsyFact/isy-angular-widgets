@@ -109,7 +109,7 @@ export class Validation {
 
       const isValidDate = strict
         ? isMatch(input, dateFormat) && DATE_FORMATS_REGEX.some((format) => format.test(input))
-        : isMatch(input, dateFormat) || false;
+        : isMatch(input, dateFormat);
 
       return isValidDate ? null : {[messageKey]: {format: dateFormat}};
     };
