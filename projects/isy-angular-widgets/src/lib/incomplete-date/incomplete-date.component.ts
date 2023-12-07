@@ -182,7 +182,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   transformDatePart(partOfDate: string, char: string): string {
     const partOfDateReplaced = partOfDate.replace(/_/g, '');
 
-    return partOfDateReplaced == char || partOfDateReplaced.length === 0
+    return partOfDateReplaced === char || partOfDateReplaced.length === 0
       ? char.repeat(partOfDate.length)
       : '0' + partOfDateReplaced;
   }
