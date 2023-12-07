@@ -13,7 +13,10 @@ body {
   background: var(--surface-b);
 }
 
-.p-inputgroup .p-inputtext, .p-fluid .p-inputgroup .p-inputtext, .p-inputgroup .p-inputwrapper, .p-inputgroup .p-inputwrapper>.p-component {
+.p-inputgroup .p-inputtext,
+.p-fluid .p-inputgroup .p-inputtext,
+.p-inputgroup .p-inputwrapper,
+.p-inputgroup .p-inputwrapper > .p-component {
   // Added because input group child element has default width 1% instead of 100%
   width: 100%;
 }
