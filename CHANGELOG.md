@@ -1,3 +1,7 @@
+# 17.0.1 -
+## Fixes
+- ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
+
 # 16.0.1 - 
 ## Fixes
 - ISY-375: Analyse: Einsatz von ng-mocks
