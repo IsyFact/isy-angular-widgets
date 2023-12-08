@@ -1,6 +1,7 @@
 # 17.0.1 -
 ## Fixes
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
+- ISY-575: Felder für Dateiupload sollen in Formulare integriert werden können
 
 # 16.0.1 - 
 ## Fixes
