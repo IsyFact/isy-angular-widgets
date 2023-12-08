@@ -1,6 +1,7 @@
 # 16.0.1 - 
 ## Fixes
-- ISY-375: Analyse: Einsatz von ng-mocks
+- ISY-375 - Analyse: Einsatz von ng-mocks
+- ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
 - ISY-631: DemoApp: Wizard validiert sofort
 - ISY-619: Wizard: DatePicker wird nicht vollständig angezeigt
 
