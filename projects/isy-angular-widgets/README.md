@@ -113,7 +113,7 @@ Prinzipiell kann aber jede beliebige I18N-Bibliothek eingesetzt werden.
 Zunächst wird `@ngx-translate` installiert.
 
 ```bash
-npm install @ngx-translate/core@14 @ngx-translate/http-loader@7 --save
+npm install @ngx-translate/core @ngx-translate/http-loader --save
 ```
 
 Anschließend können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
