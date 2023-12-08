@@ -17,6 +17,6 @@ body {
 .p-fluid .p-inputgroup .p-inputtext,
 .p-inputgroup .p-inputwrapper,
 .p-inputgroup .p-inputwrapper > .p-component {
-  // Added because input group child element has default width 1% instead of 100%
+  // Workaround: Added because input group child element has default width 1% instead of 100%
   width: 100%;
 }
