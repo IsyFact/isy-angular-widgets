@@ -1,3 +1,7 @@
+# 17.0.1 - 
+## Fixes
+- ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
+
 # 17.0.0 - 08.12.2023
 ## Breaking Changes
 - ISY-144: Upgrade Angular und PrimeNG Bibliothek auf Version 17
