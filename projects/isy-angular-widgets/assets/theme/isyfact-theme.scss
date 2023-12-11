@@ -12,3 +12,7 @@ body {
   // Now the galleria thumbnail container background color is the same as the default grey background color from PrimeNg
   background: var(--surface-b);
 }
+
+:disabled {
+  cursor: not-allowed;
+}
