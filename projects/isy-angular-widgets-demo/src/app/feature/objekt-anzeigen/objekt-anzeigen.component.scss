@@ -1,0 +1,17 @@
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar {
+  background: transparent;
+  padding: 0;
+}
+
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar {
+  width: 0;
+}
+
+:host ::ng-deep .p-fileupload .p-fileupload-content {
+  padding: 0;
+  border-color: transparent;
+}
+
+:host ::ng-deep .p-fileupload-files {
+  border-color: black;
+}

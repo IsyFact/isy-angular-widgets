@@ -6,6 +6,7 @@ import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
 import {Validation} from '../../../../../isy-angular-widgets/src/lib/validation/validation';
+import {FileUploadHandlerEvent} from 'primeng/fileupload';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -39,7 +40,8 @@ export class ObjektAnzeigenComponent {
       abreisedatum: 'xx.xx.2024',
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
-      ablaufdatumKreditkarte: ''
+      ablaufdatumKreditkarte: '',
+      identityDocument: ''
     },
     sachverhalte: [
       'Hat einen Antrag auf BAFÖG gestellt',
@@ -80,9 +82,18 @@ export class ObjektAnzeigenComponent {
       creditCardExpirationDate: new FormControl(
         this.person.personalien.ablaufdatumKreditkarte,
         Validation.dateFormat('DD.MM.YYYY', true, 'Ungültig')
-      )
+      ),
+      identityDocument: new FormControl('', required)
     });
     this.personalInfoForm.disable();
+    this.personalInfoForm.controls.identityDocument.disable();
+  }
+
+  uploadFile(event: FileUploadHandlerEvent): void {
+    for (const file of event.files) {
+      this.personalInfoForm.patchValue({myFile: file});
+      this.personalInfoForm.get('identityDocument')!.updateValueAndValidity();
+    }
   }
 
   savePersonalien(): void {

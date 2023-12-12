@@ -23,6 +23,7 @@ import {ObjektAnzeigenRoutingModule} from './objekt-anzeigen-routing.module';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
 import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/security/security.module';
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
@@ -49,7 +50,8 @@ import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/securit
     ReactiveFormsModule,
     InputTextareaModule,
     InputCharModule,
-    SecurityModule
+    SecurityModule,
+    FileUploadModule
   ],
   providers: []
 })
