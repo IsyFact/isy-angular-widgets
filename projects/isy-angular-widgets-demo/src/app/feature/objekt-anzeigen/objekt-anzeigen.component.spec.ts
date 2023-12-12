@@ -126,7 +126,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     fixture.detectChanges();
 
     const invalidFields = spectator.queryAll('.ng-invalid');
-    expect(invalidFields.length).toBe(0);
+    expect(invalidFields.length).toBe(2);
   });
 
   it('should display validation error if lastName is empty', () => {

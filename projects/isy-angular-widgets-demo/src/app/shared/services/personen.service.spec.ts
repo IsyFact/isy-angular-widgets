@@ -27,7 +27,8 @@ describe('Unit Tests: PersonenService', () => {
       abreisedatum: 'xx.xx.xxxx',
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
-      ablaufdatumKreditkarte: ''
+      ablaufdatumKreditkarte: '',
+      identityDocument: ''
     },
     sachverhalte: []
   };
