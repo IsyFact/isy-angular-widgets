@@ -1,10 +1,18 @@
-# 16.0.1 - 
+# 17.0.1 -
 ## Features
 - ISY-576: moment.js wurde durch date-fns ersetzt
 ## Fixes
+- ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
+
+# 17.0.0 - 08.12.2023
+## Breaking Changes
+- ISY-144: Upgrade Angular und PrimeNG Bibliothek auf Version 17
+## Fixes
 - ISY-375: Analyse: Einsatz von ng-mocks
-- ISY-631: DemoApp: Wizard validiert sofort
-- ISY-619: Wizard: DatePicker wird nicht vollständig angezeigt
+- ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
+- ISY-619: Überlappende Date Picker werden jetzt in Wizards korrekt dargestellt
+## Demo-Anwendung
+- ISY-631: Formulare im Demo-Wizard zeigen jetzt keine Validierungsfehler mehr direkt nach Öffnen des Dialogs an
 
 # 16.0.0 - 10.11.2023
 ## Breaking Changes

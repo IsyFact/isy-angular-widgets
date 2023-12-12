@@ -101,7 +101,7 @@ export class Validation {
    * @param strict Strict parsing means that an exact match is required - including delimiters, whitespaces, etc.
    * @returns A validator function with the given configuration
    */
-  static dateFormat(dateFormat: string, messageKey: string, strict: boolean = false): ValidatorFn {
+  static dateFormat(dateFormat: string, messageKey: string, strict: boolean): ValidatorFn {
     return (c: AbstractControl<string>): ValidationErrors | null => {
       const input = c.value ?? null;
 

@@ -140,10 +140,10 @@ export function ngAdd(): Rule {
 
     // Add necessary dependencies to new CLI project.
 
-    addPackageToPackageJson(tree, '@angular/common', '^16.2.12');
-    addPackageToPackageJson(tree, '@angular/core', '^16.2.12');
+    addPackageToPackageJson(tree, '@angular/common', '^17.0.6');
+    addPackageToPackageJson(tree, '@angular/core', '^17.0.6');
     addPackageToPackageJson(tree, 'primeicons', '^6.0.1');
-    addPackageToPackageJson(tree, 'primeng', '^16.9.1');
+    addPackageToPackageJson(tree, 'primeng', '^17.0.0');
     addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
     addPackageToPackageJson(tree, 'date-fns', '^2.30.0');
 

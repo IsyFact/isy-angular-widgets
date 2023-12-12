@@ -63,7 +63,10 @@
         </div>
         <div class="col">
           <input id="last-name" formControlName="lastName" type="text" pInputText isyInputChar />
-          <small class="p-error block" *ngIf="personalInfoForm.controls['lastName'].invalid">
+          <small
+            class="p-error block"
+            *ngIf="personalInfoForm.controls['lastName'].invalid && personalInfoForm.controls['lastName'].touched"
+          >
             {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
           </small>
         </div>
@@ -164,7 +167,13 @@
         <div class="col">
           <isy-incomplete-date inputId="date-of-entry" formControlName="dateOfEntry" [dateInPastConstraint]="true">
           </isy-incomplete-date>
-          <small class="p-error block" *ngIf="personalInfoForm.controls['dateOfEntry'].invalid">
+          <small
+            class="p-error block"
+            *ngIf="
+              personalInfoForm.controls['dateOfEntry'].invalid &&
+              (personalInfoForm.controls['dateOfEntry'].touched || personalInfoForm.controls['dateOfEntry'].dirty)
+            "
+          >
             {{ 'isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate }}
           </small>
         </div>

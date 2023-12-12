@@ -110,10 +110,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "isy-angular-widgets-demo:build:production"
+              "buildTarget": "isy-angular-widgets-demo:build:production"
             },
             "development": {
-              "browserTarget": "isy-angular-widgets-demo:build:development"
+              "buildTarget": "isy-angular-widgets-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -121,7 +121,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "isy-angular-widgets-demo:build"
+            "buildTarget": "isy-angular-widgets-demo:build"
           }
         },
         "test": {
