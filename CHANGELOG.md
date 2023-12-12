@@ -1,4 +1,7 @@
-# 17.0.1 - 
+# 17.0.1 -
+## Fixes
+- ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
+- ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
 ## Demo-Anwendung
 - ISY-575: Felder für Dateiupload sollen in Formulare integriert werden können
   * In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
@@ -6,11 +9,10 @@
 # 17.0.0 - 08.12.2023
 ## Breaking Changes
 - ISY-144: Upgrade Angular und PrimeNG Bibliothek auf Version 17
-
 ## Fixes
+- ISY-375: Analyse: Einsatz von ng-mocks
 - ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
 - ISY-619: Überlappende Date Picker werden jetzt in Wizards korrekt dargestellt
-
 ## Demo-Anwendung
 - ISY-631: Formulare im Demo-Wizard zeigen jetzt keine Validierungsfehler mehr direkt nach Öffnen des Dialogs an
 
