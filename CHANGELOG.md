@@ -3,6 +3,7 @@
 - ISY-576: moment.js wurde durch date-fns ersetzt
 ## Fixes
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
+- ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
 
 # 17.0.0 - 08.12.2023
 ## Breaking Changes
