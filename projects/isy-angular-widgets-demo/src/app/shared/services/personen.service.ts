@@ -127,7 +127,8 @@ export class PersonenService {
           abreisedatum: 'xx.xx.xxxx',
           ablaufdatumReisepass: '',
           kreditkartennummer: '',
-          ablaufdatumKreditkarte: ''
+          ablaufdatumKreditkarte: '',
+          identityDocument: ''
         },
         sachverhalte: []
       }
@@ -179,7 +180,8 @@ export class PersonenService {
         abreisedatum: 'xx.xx.xxxx',
         ablaufdatumReisepass: '',
         kreditkartennummer: '',
-        ablaufdatumKreditkarte: ''
+        ablaufdatumKreditkarte: '',
+        identityDocument: ''
       },
       sachverhalte: []
     };

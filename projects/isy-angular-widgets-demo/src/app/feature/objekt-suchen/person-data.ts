@@ -23,7 +23,8 @@ export function getEmptyPerson(): Person {
       abreisedatum: 'xx.xx.xxxx',
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
-      ablaufdatumKreditkarte: ''
+      ablaufdatumKreditkarte: '',
+      identityDocument: ''
     },
     sachverhalte: []
   };
