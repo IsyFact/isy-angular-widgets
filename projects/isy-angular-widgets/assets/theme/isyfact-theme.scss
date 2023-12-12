@@ -13,6 +13,14 @@ body {
   background: var(--surface-b);
 }
 
+.p-inputgroup .p-inputtext,
+.p-fluid .p-inputgroup .p-inputtext,
+.p-inputgroup .p-inputwrapper,
+.p-inputgroup .p-inputwrapper > .p-component {
+  // Workaround: Added because input group child element has default width 1% instead of 100%
+  width: 100%;
+}
+
 :disabled {
   cursor: not-allowed;
 }
