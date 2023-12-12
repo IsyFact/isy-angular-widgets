@@ -1,6 +1,7 @@
 # 17.0.1 -
 ## Fixes
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
+- ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
 
 # 17.0.0 - 08.12.2023
 ## Breaking Changes
