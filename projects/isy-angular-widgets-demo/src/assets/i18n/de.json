@@ -94,7 +94,8 @@
       "solved": "Gelöst",
       "newEntryPlaceholder": "Neuer Eintrag",
       "kreditkartennummer": "Kreditkartennummer",
-      "ablaufdatumKreditkarte": "Ablaufdatum der Kreditkarte"
+      "ablaufdatumKreditkarte": "Ablaufdatum der Kreditkarte",
+      "identityDocument": "Ausweisdokument"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",
