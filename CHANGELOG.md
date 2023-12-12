@@ -1,3 +1,8 @@
+# 17.0.1 - 
+## Demo-Anwendung
+- ISY-575: Felder für Dateiupload sollen in Formulare integriert werden können
+  * In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
+
 # 17.0.0 - 08.12.2023
 ## Breaking Changes
 - ISY-144: Upgrade Angular und PrimeNG Bibliothek auf Version 17
