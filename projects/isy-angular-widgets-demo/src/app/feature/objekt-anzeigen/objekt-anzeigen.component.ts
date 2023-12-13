@@ -76,11 +76,8 @@ export class ObjektAnzeigenComponent {
       passportExpirationDate: new FormControl(this.person.personalien.ablaufdatumReisepass, Validation.isInFuture),
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
       creditCardNumber: new FormControl(this.person.personalien.kreditkartennummer, Validation.validCreditCardNumber),
-      // Demo: Validator dateFormat - Checks that the date is a valid date
-      creditCardExpirationDate: new FormControl(
-        this.person.personalien.ablaufdatumKreditkarte,
-        Validation.dateFormat('DD.MM.YYYY', true, 'Ungültig')
-      )
+      // Demo: Validator dateFormat - Checks that the date is a valid date in ISO8601
+      creditCardExpirationDate: new FormControl(this.person.personalien.ablaufdatumKreditkarte, Validation.isoDate)
     });
     this.personalInfoForm.disable();
   }
