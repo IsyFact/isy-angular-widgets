@@ -81,7 +81,7 @@ export class ObjektAnzeigenComponent {
       // Demo: Validator dateFormat - Checks that the date is a valid date
       creditCardExpirationDate: new FormControl(
         this.person.personalien.ablaufdatumKreditkarte,
-        Validation.dateFormat('DD.MM.YYYY', true, 'Ungültig')
+        Validation.dateFormat('DD.MM.YYYY', 'Ungültig', true)
       ),
       identityDocument: new FormControl({value: '', disabled: true}, required)
     });
