@@ -7,57 +7,53 @@ import {DATE_FORMATS, DATE_FORMATS_REGEX, INPUT_MASK_REGEX, INPUT_UNSPECIFIED_RE
  */
 export class Validation {
   /**
-   * If the specified value is a valid date, it will be checked if the date is in the future.
+   * Checks if the specified value is a valid date.
+   * @param c The control element the validator is appended to
+   * @returns The object Date if the date is valid; null otherwise
+   */
+  private static isDate(c: AbstractControl): Date | null {
+    const input = (c.value as string | Date) ?? null;
+
+    if (!input) return null;
+
+    let parsedDate: Date | null = null;
+
+    if (input instanceof Date) {
+      parsedDate = input;
+    } else {
+      parsedDate = parseISO(input);
+
+      if (isNaN(parsedDate.getTime())) {
+        parsedDate =
+          DATE_FORMATS.map((format) => parse(input, format, new Date())).find((date) => !isNaN(date.getTime())) ?? null;
+      }
+    }
+
+    return parsedDate;
+  }
+
+  /**
+   * Checks if the date is in the future.
    * If the date corresponds to today's date or is in the past, a "FUTURE" error is thrown.
    * For invalid dates, no error is thrown.
    * @param c The control element the validator is appended to
    * @returns The object {FUTURE: true} if the validation fails; null otherwise
    */
   static isInFuture(c: AbstractControl): ValidationErrors | null {
-    const input = (c.value as string | Date) ?? null;
-
-    if (!input) return null;
-
-    let parsedDate: Date | null = null;
-
-    if (input instanceof Date) {
-      parsedDate = input;
-    } else {
-      parsedDate = parseISO(input);
-
-      if (isNaN(parsedDate.getTime())) {
-        parsedDate =
-          DATE_FORMATS.map((format) => parse(input, format, new Date())).find((date) => !isNaN(date.getTime())) ?? null;
-      }
-    }
+    const parsedDate = Validation.isDate(c);
 
     return parsedDate && !isFuture(parsedDate) ? {FUTURE: true} : null;
   }
 
   /**
-   * If the given value is a valid date, it will be checked if the date is in the past.
+   * Checks if the date is in the past.
    * If the date is today's date or is in the future, a "PAST" error is thrown.
    * For invalid dates, no error is thrown.
    * @param c The control element the validator is appended to
    * @returns The object {PAST: true} if the validation fails; null otherwise
    */
   static isInPast(c: AbstractControl): ValidationErrors | null {
-    const input = (c.value as string | Date) ?? null;
-
-    if (!input) return null;
-
-    let parsedDate: Date | null = null;
-
-    if (input instanceof Date) {
-      parsedDate = input;
-    } else {
-      parsedDate = parseISO(input);
-
-      if (isNaN(parsedDate.getTime())) {
-        parsedDate =
-          DATE_FORMATS.map((format) => parse(input, format, new Date())).find((date) => !isNaN(date.getTime())) ?? null;
-      }
-    }
+    const parsedDate = Validation.isDate(c);
 
     return parsedDate && !isPast(parsedDate) ? {PAST: true} : null;
   }
