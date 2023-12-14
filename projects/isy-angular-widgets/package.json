@@ -32,8 +32,8 @@
     "save": "dependencies"
   },
   "peerDependencies": {
-    "@angular/common": "^17.0.6",
-    "@angular/core": "^17.0.6",
+    "@angular/common": "^17.0.7",
+    "@angular/core": "^17.0.7",
     "primeicons": "^6.0.1",
     "primeng": "^17.1.0",
     "primeflex": "^3.3.1",
