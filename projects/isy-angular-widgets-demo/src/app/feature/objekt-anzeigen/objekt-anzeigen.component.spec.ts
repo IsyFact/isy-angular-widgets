@@ -200,4 +200,16 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(component.personalInfoForm.get('identityDocument')?.value).toEqual(fileName);
     expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeFalse();
   });
+
+  it('should check the file upload HTML element', ()=> {
+    const fileUpload = spectator.query('#identity-document') as HTMLElement;
+    expect(fileUpload.innerText).toContain('Choose');
+    expect(fileUpload.tagName).toContain('P-FILEUPLOAD');
+
+    const fileUploadArray = spectator.queryAll('p-button');
+    expect(fileUploadArray).not.toBeUndefined();
+
+    const fileUploadRow = spectator.query('.p-fileupload-row');
+    expect(fileUploadRow).not.toBeUndefined();
+  });
 });
