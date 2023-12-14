@@ -91,7 +91,7 @@ export class ObjektAnzeigenComponent {
   uploadFile(event: FileUploadHandlerEvent): void {
     this.personalInfoForm.get('identityDocument')?.setValue(event.files[0].name);
     this.personalInfoForm.get('identityDocument')?.enable();
-
+    this.personalInfoForm.updateValueAndValidity();
   }
 
   savePersonalien(): void {
