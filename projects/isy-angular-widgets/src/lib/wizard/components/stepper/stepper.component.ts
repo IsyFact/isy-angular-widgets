@@ -6,8 +6,7 @@ import {MenuItem} from 'primeng/api';
  */
 @Component({
   selector: 'isy-stepper',
-  templateUrl: './stepper.component.html',
-  styleUrls: ['./stepper.component.scss']
+  templateUrl: './stepper.component.html'
 })
 export class StepperComponent {
   @Input() items!: MenuItem[];

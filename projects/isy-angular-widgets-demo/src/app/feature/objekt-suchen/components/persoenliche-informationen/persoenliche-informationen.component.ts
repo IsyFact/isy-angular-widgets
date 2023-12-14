@@ -7,8 +7,7 @@ import {markFormControlAsDirty} from '../../../../shared/validation/form-helper'
  */
 @Component({
   selector: 'demo-persoenliche-informationen',
-  templateUrl: './persoenliche-informationen.component.html',
-  styleUrls: ['./persoenliche-informationen.component.scss']
+  templateUrl: './persoenliche-informationen.component.html'
 })
 export class PersoenlicheInformationenComponent {
   /**

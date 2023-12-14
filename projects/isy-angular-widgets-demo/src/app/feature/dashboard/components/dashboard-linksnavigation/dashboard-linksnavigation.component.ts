@@ -6,8 +6,7 @@ import {linksnavigationMenu} from './linksnavigation-menu';
 
 @Component({
   selector: 'demo-dashboard-linksnavigation',
-  templateUrl: './dashboard-linksnavigation.component.html',
-  styleUrls: ['./dashboard-linksnavigation.component.scss']
+  templateUrl: './dashboard-linksnavigation.component.html'
 })
 export class DashboardLinksnavigationComponent implements OnInit {
   private selectedLanguage: string = 'de';
