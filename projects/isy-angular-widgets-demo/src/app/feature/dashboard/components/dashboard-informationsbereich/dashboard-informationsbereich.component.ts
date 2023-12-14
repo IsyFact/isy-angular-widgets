@@ -6,8 +6,7 @@ import {informationsbereichMenu} from './informationsbereich-menu';
 
 @Component({
   selector: 'demo-dashboard-informationsbereich',
-  templateUrl: './dashboard-informationsbereich.component.html',
-  styleUrls: ['./dashboard-informationsbereich.component.scss']
+  templateUrl: './dashboard-informationsbereich.component.html'
 })
 export class DashboardInformationsbereichComponent implements OnInit {
   private readonly selectedLanguage: string = 'de';

@@ -31,8 +31,7 @@ const defaultHeight = 30;
  */
 @Component({
   selector: 'isy-wizard',
-  templateUrl: './wizard.component.html',
-  styleUrls: ['./wizard.component.scss']
+  templateUrl: './wizard.component.html'
 })
 export class WizardComponent implements OnInit, AfterContentInit {
   /**
