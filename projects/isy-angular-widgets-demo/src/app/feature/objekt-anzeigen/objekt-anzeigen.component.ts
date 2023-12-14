@@ -83,16 +83,15 @@ export class ObjektAnzeigenComponent {
         this.person.personalien.ablaufdatumKreditkarte,
         Validation.dateFormat('DD.MM.YYYY', 'Ungültig', true)
       ),
-      identityDocument: new FormControl({value: '', disabled: true}, required)
+      identityDocument: new FormControl('', required)
     });
     this.personalInfoForm.disable();
   }
 
   uploadFile(event: FileUploadHandlerEvent): void {
-    for (const file of event.files) {
-      this.personalInfoForm.patchValue({myFile: file});
-      this.personalInfoForm.get('identityDocument')!.updateValueAndValidity();
-    }
+    this.personalInfoForm.get('identityDocument')?.setValue(event.files[0].name);
+    this.personalInfoForm.get('identityDocument')?.enable();
+
   }
 
   savePersonalien(): void {
