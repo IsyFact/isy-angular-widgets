@@ -182,12 +182,14 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(msg.add).toHaveBeenCalled();
   });
 
-  it('should upload file', ()=> {
+  it('should upload file', () => {
     const fileName = 'test.txt';
     const event: FileUploadHandlerEvent = {
-      files: [new File(['test'], 'test.txt', {
-        type: 'text/plain'
-      })]
+      files: [
+        new File(['test'], 'test.txt', {
+          type: 'text/plain'
+        })
+      ]
     };
 
     expect(component.personalInfoForm.get('identityDocument')?.value).not.toEqual(fileName);
@@ -197,8 +199,5 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
 
     expect(component.personalInfoForm.get('identityDocument')?.value).toEqual(fileName);
     expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeFalse();
-
   });
 });
-
-
