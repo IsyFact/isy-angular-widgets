@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   }
 
   setupTranslatedLabels(labels: string[]): void {
-    this.chartData.map((chart) => (chart.labels = labels));
+    this.chartData.forEach((chart) => (chart.labels = labels));
   }
 
   refreshCharLabels(): void {
