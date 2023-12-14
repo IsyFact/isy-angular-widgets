@@ -2,15 +2,18 @@ export const ISO_8601_REGEX: RegExp = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):
 
 export const INPUT_MASK_REGEX: RegExp = /^([x0-9]{2}\.[x0-9]{2}\.[x0-9]{4})$/;
 
+// Multiple regex combined to one (SonarQube error)
+/* eslint-disable editorconfig/indent */
+// ESLint deactivated because deprecated rule
 export const INPUT_UNSPECIFIED_REGEX = new RegExp(
-  [
-    '/^(0{2}\\.([0-1][1-2]|1[0-2])\\.\\d{4})$|^(0{2}\\.0{2}\\.\\d{4})$|^(0{2}\\.0{2}\\.0{4})$|',
-    '^(x{2}\\.([0-1][1-2]|1[0-2])\\.\\d{4})$|^(x{2}\\.x{2}\\.\\d{4})$|^(x{2}\\.x{2}\\.x{4})$/'
-  ]
-    .join(',')
-    .replace(/,/g, '')
-    .replace(/\//g, '')
+  /* 00.12.1234 */ /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|/.source +
+    /* 00.00.1234 */ /^(0{2}\.0{2}\.\d{4})$|/.source +
+    /* 00.00.0000 */ /^(0{2}\.0{2}\.0{4})$|/.source +
+    /* xx.12.1234 */ /^(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|/.source +
+    /* xx.xx.1234 */ /^(x{2}\.x{2}\.\d{4})$|/.source +
+    /* xx.xx.xxxx */ /^(x{2}\.x{2}\.x{4})$/.source
 );
+/* eslint-enable editorconfig/indent */
 
 // date-fns employs single quote symbols for character escaping, such as 'T'.
 // This can create conflicts when using ESLint alongside Prettier for code formatting. Consequently, singlequotes are deactivated in the following line.
