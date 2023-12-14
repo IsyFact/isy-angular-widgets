@@ -4,8 +4,7 @@ import {countries} from '../../country-data';
 
 @Component({
   selector: 'demo-result-list',
-  templateUrl: './result-list.component.html',
-  styleUrls: ['./result-list.component.scss']
+  templateUrl: './result-list.component.html'
 })
 export class ResultListComponent {
   @Input() personen: Person[] = [];

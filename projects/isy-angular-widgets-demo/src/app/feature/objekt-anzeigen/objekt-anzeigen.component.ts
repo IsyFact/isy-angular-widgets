@@ -12,8 +12,7 @@ import {Validation} from '../../../../../isy-angular-widgets/src/lib/validation/
  */
 @Component({
   selector: 'demo-objekt-anzeigen',
-  templateUrl: './objekt-anzeigen.component.html',
-  styleUrls: ['./objekt-anzeigen.component.scss']
+  templateUrl: './objekt-anzeigen.component.html'
 })
 export class ObjektAnzeigenComponent {
   readonly intelligenceNotesMaxLength = 255;

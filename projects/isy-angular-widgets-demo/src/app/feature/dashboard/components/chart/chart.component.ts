@@ -4,8 +4,7 @@ import {UIChart} from 'primeng/chart';
 
 @Component({
   selector: 'demo-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss']
+  templateUrl: './chart.component.html'
 })
 export class ChartComponent {
   @ViewChild('chart') chart!: UIChart;
