@@ -9,6 +9,7 @@ import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
 import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
+import {FileUploadHandlerEvent} from 'primeng/fileupload';
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
@@ -180,4 +181,24 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     fixture.detectChanges();
     expect(msg.add).toHaveBeenCalled();
   });
+
+  it('should upload file', ()=> {
+    const fileName = 'test.txt';
+    const event: FileUploadHandlerEvent = {
+      files: [new File(['test'], 'test.txt', {
+        type: 'text/plain'
+      })]
+    };
+
+    expect(component.personalInfoForm.get('identityDocument')?.value).not.toEqual(fileName);
+    expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeTrue();
+
+    component.uploadFile(event);
+
+    expect(component.personalInfoForm.get('identityDocument')?.value).toEqual(fileName);
+    expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeFalse();
+
+  });
 });
+
+
