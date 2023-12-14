@@ -201,7 +201,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeFalse();
   });
 
-  it('should check the file upload HTML element', ()=> {
+  it('should check the file upload HTML element', () => {
     const fileUpload = spectator.query('#identity-document') as HTMLElement;
     expect(fileUpload.innerText).toContain('Choose');
     expect(fileUpload.tagName).toContain('P-FILEUPLOAD');
