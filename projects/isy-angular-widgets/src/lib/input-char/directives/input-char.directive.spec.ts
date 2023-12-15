@@ -125,9 +125,15 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputValue).toEqual(`${zeichen}${value}${value}`);
   });
 
-  it('should get the current input position', () => {
+  it('should get the current input position on keyup', () => {
     input.value = 'test';
     input.dispatchEvent(new KeyboardEvent('keyup'));
+    expect(directive.selectionPosition).toEqual(input.value.length);
+  });
+
+  it('should get the current input position on mouseup', () => {
+    input.value = 'test';
+    input.dispatchEvent(new MouseEvent('mouseup'));
     expect(directive.selectionPosition).toEqual(input.value.length);
   });
 });
