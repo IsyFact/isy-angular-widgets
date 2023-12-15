@@ -60,6 +60,11 @@ $select_button_on_hover_text_color: white;
     }
   }
 
+  .character-select-button .p-buttonset .p-button:first-of-type,
+  .character-select-button .p-buttonset .p-button:last-of-type {
+    border-radius: 0;
+  }
+
   // Styles specific for left side (incl. select buttons)
   #left-panel-side {
     .p-accordion-header .p-accordion-header-link:focus {

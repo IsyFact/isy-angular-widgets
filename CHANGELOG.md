@@ -1,5 +1,6 @@
 # 17.0.1 -
 ## Fixes
+- ISY-614: Die Ecken des CharPickers werden bei Themes mit runden Ecken korrekt dargestellt
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
 - ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
 ## Features

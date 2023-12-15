@@ -6,7 +6,8 @@ import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 @Component({
   selector: 'isy-input-char',
-  templateUrl: './input-char.component.html'
+  templateUrl: './input-char.component.html',
+  styleUrls: ['./input-char.component.scss']
 })
 export class InputCharComponent implements OnChanges {
   /**
