@@ -9,6 +9,7 @@ import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
 import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
+import {FileUploadHandlerEvent} from 'primeng/fileupload';
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
@@ -126,7 +127,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     fixture.detectChanges();
 
     const invalidFields = spectator.queryAll('.ng-invalid');
-    expect(invalidFields.length).toBe(0);
+    expect(invalidFields.length).toBe(2);
   });
 
   it('should display validation error if lastName is empty', () => {
@@ -179,5 +180,36 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     component.savePersonalien();
     fixture.detectChanges();
     expect(msg.add).toHaveBeenCalled();
+  });
+
+  it('should upload file', () => {
+    const fileName = 'test.txt';
+    const event: FileUploadHandlerEvent = {
+      files: [
+        new File(['test'], 'test.txt', {
+          type: 'text/plain'
+        })
+      ]
+    };
+
+    expect(component.personalInfoForm.get('identityDocument')?.value).not.toEqual(fileName);
+    expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeTrue();
+
+    component.uploadFile(event);
+
+    expect(component.personalInfoForm.get('identityDocument')?.value).toEqual(fileName);
+    expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeFalse();
+  });
+
+  it('should check the file upload HTML element', () => {
+    const fileUpload = spectator.query('#identity-document') as HTMLElement;
+    expect(fileUpload.innerText).toContain('Choose');
+    expect(fileUpload.tagName).toContain('P-FILEUPLOAD');
+
+    const fileUploadArray = spectator.queryAll('p-button');
+    expect(fileUploadArray).not.toBeUndefined();
+
+    const fileUploadRow = spectator.query('.p-fileupload-row');
+    expect(fileUploadRow).not.toBeUndefined();
   });
 });

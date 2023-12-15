@@ -27,6 +27,7 @@ export interface Personalien {
   ablaufdatumReisepass: string;
   kreditkartennummer: string;
   ablaufdatumKreditkarte: string;
+  identityDocument: unknown;
 }
 
 /**

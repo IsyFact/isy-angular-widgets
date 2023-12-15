@@ -6,13 +6,15 @@ import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
 import {Validation} from '../../../../../isy-angular-widgets/src/lib/validation/validation';
+import {FileUploadHandlerEvent} from 'primeng/fileupload';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
  */
 @Component({
   selector: 'demo-objekt-anzeigen',
-  templateUrl: './objekt-anzeigen.component.html'
+  templateUrl: './objekt-anzeigen.component.html',
+  styleUrls: ['./objekt-anzeigen.component.scss']
 })
 export class ObjektAnzeigenComponent {
   readonly intelligenceNotesMaxLength = 255;
@@ -38,7 +40,8 @@ export class ObjektAnzeigenComponent {
       abreisedatum: 'xx.xx.2024',
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
-      ablaufdatumKreditkarte: ''
+      ablaufdatumKreditkarte: '',
+      identityDocument: ''
     },
     sachverhalte: [
       'Hat einen Antrag auf BAFÖG gestellt',
@@ -76,9 +79,16 @@ export class ObjektAnzeigenComponent {
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
       creditCardNumber: new FormControl(this.person.personalien.kreditkartennummer, Validation.validCreditCardNumber),
       // Demo: Validator dateFormat - Checks that the date is a valid date in ISO8601
-      creditCardExpirationDate: new FormControl(this.person.personalien.ablaufdatumKreditkarte, Validation.isoDate)
+      creditCardExpirationDate: new FormControl(this.person.personalien.ablaufdatumKreditkarte, Validation.isoDate),
+      identityDocument: new FormControl(this.person.personalien.identityDocument, required)
     });
     this.personalInfoForm.disable();
+  }
+
+  uploadFile(event: FileUploadHandlerEvent): void {
+    this.personalInfoForm.get('identityDocument')?.setValue(event.files[0].name);
+    this.personalInfoForm.get('identityDocument')?.enable();
+    this.personalInfoForm.updateValueAndValidity();
   }
 
   savePersonalien(): void {

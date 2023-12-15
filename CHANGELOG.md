@@ -5,6 +5,9 @@
 - ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
 ## Features
 - ISY-576: moment.js wurde durch date-fns ersetzt
+## Demo-Anwendung
+- ISY-575: Felder für Dateiupload sollen in Formulare integriert werden können
+  * In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
 
 # 17.0.0 - 08.12.2023
 ## Breaking Changes

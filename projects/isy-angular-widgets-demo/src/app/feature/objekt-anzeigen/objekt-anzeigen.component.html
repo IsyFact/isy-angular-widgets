@@ -80,7 +80,7 @@
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="birth-place">
-            {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
+            {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
           </label>
         </div>
         <div class="col">
@@ -224,6 +224,25 @@
             type="text"
             pInputText
           />
+        </div>
+        <div class="col-1 text-right align-self-center">
+          <label for="identity-document">
+            {{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}
+          </label>
+        </div>
+        <div class="col-3">
+          <p-fileUpload
+            id="identity-document"
+            formControlName="identityDocument"
+            ngDefaultControl
+            [name]="'myfile'"
+            [accept]="'image/*,.pdf,.txt'"
+            [auto]="true"
+            [maxFileSize]="1000000"
+            [customUpload]="true"
+            (uploadHandler)="uploadFile($event)"
+          >
+          </p-fileUpload>
         </div>
       </div>
       <div class="grid m-0 mt-5" *isyPermitted="'secretFieldsInputSwitch'">
