@@ -80,6 +80,14 @@ describe('Integration Tests: InputCharDirective', () => {
     expectInputCharButtonIsDisabled(inputCharButton, done);
   });
 
+  it('should handle changes to the datentyp attribute correctly', () => {
+    expect(directive.datentyp).toBe(Datentyp.DATENTYP_C);
+    input.setAttribute('ng-reflect-datentyp', Datentyp.DATENTYP_A);
+    spectator.detectChanges();
+    directive.handleDatentypChange(input, 'ng-reflect-datentyp');
+    expect(directive.componentRef.instance.datentyp).toBe(Datentyp.DATENTYP_A);
+  });
+
   it('should set the input char button to disabled when the input is readonly', (done) => {
     expect(input).toBeTruthy();
     expect(inputCharButton).toBeTruthy();
