@@ -21,10 +21,15 @@ body {
   width: 100%;
 }
 
-:disabled {
+:disabled  {
   cursor: not-allowed;
 }
 
 .p-calendar-disabled {
   cursor: not-allowed;
+}
+
+.input-char-button:disabled {
+  cursor: not-allowed;
+  pointer-events: visible;
 }
