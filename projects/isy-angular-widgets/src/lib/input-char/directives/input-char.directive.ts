@@ -99,21 +99,20 @@ export class InputCharDirective implements OnInit, OnDestroy {
     });
   }
 
-  private updateInputDisabledState(): void {
+  updateInputDisabledState(): void {
     const {disabled, readOnly} = this.htmlInputElement;
     this.componentRef.setInput('isInputDisabled', disabled || readOnly);
   }
 
-  private handleDisabledReadonlyChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
-    if ((attributeName === 'disabled' || attributeName === 'readonly') && (input.disabled || input.readOnly)) {
+  handleDisabledReadonlyChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
+    if (attributeName === 'disabled' || attributeName === 'readonly') {
+      const isDisabledOrReadOnly = input.disabled || input.readOnly;
       this.componentRef.instance.visible = false;
-      this.componentRef.setInput('isInputDisabled', true);
-    } else {
-      this.componentRef.setInput('isInputDisabled', false);
+      this.componentRef.setInput('isInputDisabled', isDisabledOrReadOnly);
     }
   }
 
-  private handleDatentypChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
+  handleDatentypChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
     if (attributeName === 'ng-reflect-datentyp') {
       this.componentRef.setInput('datentyp', input.getAttribute('ng-reflect-datentyp'));
     }
