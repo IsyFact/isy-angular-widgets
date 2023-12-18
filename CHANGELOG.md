@@ -8,6 +8,8 @@
 ## Demo-Anwendung
 - ISY-575: Felder für Dateiupload sollen in Formulare integriert werden können
   * In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
+- ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
+  * Einbau isy-incomplete-date und w-full Kombination
 
 # 17.0.0 - 08.12.2023
 ## Breaking Changes
