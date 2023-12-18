@@ -13,12 +13,17 @@ body {
   background: var(--surface-b);
 }
 
+.p-inputmask,
 .p-inputgroup .p-inputtext,
 .p-fluid .p-inputgroup .p-inputtext,
 .p-inputgroup .p-inputwrapper,
 .p-inputgroup .p-inputwrapper > .p-component {
   // Workaround: Added because input group child element has default width 1% instead of 100%
-  width: 100%;
+  width: auto !important;
+}
+
+.w-full .p-inputmask {
+  width: 100% !important;
 }
 
 :disabled {
