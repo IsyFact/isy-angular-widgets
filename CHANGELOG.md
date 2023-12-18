@@ -5,6 +5,7 @@
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
 - ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
 ## Features
+- ISY-685: Hervorheben von Inaktiven Buttons mit Hilfe von Cursor und Tooltip
 - ISY-576: moment.js wurde durch date-fns ersetzt
 ## Demo-Anwendung
 - ISY-575: Felder für Dateiupload sollen in Formulare integriert werden können
