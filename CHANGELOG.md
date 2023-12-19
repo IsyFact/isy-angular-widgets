@@ -1,5 +1,6 @@
 # 17.0.1 -
 ## Fixes
+- ISY-618: Incomplete-Date-Widget akzeptiert auch normale Dateneingabe mit Punkt
 - ISY-641: Input-Char-Eingabefelder in der Demo App werden bei deaktivierter Form deaktiviert
 - ISY-614: Die Ecken des CharPickers werden bei Themes mit runden Ecken korrekt dargestellt
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit

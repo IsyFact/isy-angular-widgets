@@ -111,8 +111,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   }
 
   /**
-   * Autocompletes the input of day and month when entering dot
-   * E.g. unspecified dates: x. -> xx, 1. -> 01
+   * Autocompletes the day and month input based on the cursor position and key pressed.
+   * If the dot key ('.') is pressed without a preceding number, it inserts "xx" to represent an uncertain day or month.
+   * If the dot key is pressed after a single digit, it auto-completes to a two-digit format (e.g., '1.' becomes '01').
+   * If the dot key is pressed when the cursor is at position 3 and the day is fully entered (i.e., two digits), the completion is ignored.
+   * Otherwise, it auto-completes the day.
    * @param event KeyboardEvent
    */
   onKeydown(event: Event): void {
@@ -123,39 +126,39 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     if (event instanceof KeyboardEvent && event.key === '.' && inputMousePosition < monthPartEndPos) {
       const input = event.target as HTMLInputElement;
       const [day, month, year] = input.value.split('.');
-      let partDay = `${day}`;
+      const partDay = `${day}`;
       let partMonth = `${month}`;
       const partYear = `${year}`;
+      let partDayTranformed = partDay;
       const partDayReplaced = partDay.replace(/_/g, '');
       const partMonthReplaced = partMonth.replace(/_/g, '');
       const dateUnspecifiedChar = 'x';
       const cursorPositionAtFirstDayLetter = 0;
       const cursorPositionAtSecondDayLetter = 1;
       const cursorPositionAtDotAfterDayLetter = 2;
-      const cursorPositionAtFirstMonthLetter = 3;
       const cursorPositionAtSecondMonthLetter = 4;
       const cursorPositionAtDotAfterMonthLetter = 5;
       const onePosition = 1;
       const twoPositions = 2;
       const threePositions = 3;
 
-      if (partDayReplaced.length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
+      if (partDayReplaced.length <= 1) partDayTranformed = this.transformDatePart(partDay, dateUnspecifiedChar);
 
       if (
         inputMousePosition >= dayPartEndPos &&
         inputMousePosition < monthPartEndPos &&
         partMonthReplaced.length <= 1
       ) {
-        partDay = partDayReplaced.length === 0 ? dateUnspecifiedChar.repeat(partDay.length) : partDay;
-        partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
+        partDayTranformed =
+          partDayReplaced.length === 0 ? dateUnspecifiedChar.repeat(partDayTranformed.length) : partDayTranformed;
+        if (inputMousePosition > dayPartEndPos) partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
       }
 
-      const dateStr = [partDay, partMonth, partYear].join('.');
+      const dateStr = [partDayTranformed, partMonth, partYear].join('.');
       input.value = this.inputValue = dateStr;
 
       switch (inputMousePosition) {
         case cursorPositionAtFirstDayLetter:
-        case cursorPositionAtFirstMonthLetter:
           inputMousePosition += threePositions;
           break;
         case cursorPositionAtSecondDayLetter:
@@ -169,7 +172,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
       }
 
       input.setSelectionRange(inputMousePosition, inputMousePosition);
-      this.onChange(this.inputValue);
+      if (inputMousePosition !== dayPartEndPos && partDayTranformed !== partDay) this.onChange(this.inputValue);
     }
   }
 

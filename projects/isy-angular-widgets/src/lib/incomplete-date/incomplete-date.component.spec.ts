@@ -89,7 +89,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 3 when entering dot', () => {
     input.value = '__.__.____';
     setupEvent(keyEvent, 3, 3);
-    expect(input.value).toBe('xx.xx.____');
+    expect(input.value).toBe('xx.__.____');
   });
 
   it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
@@ -264,6 +264,12 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     input.value = 'xx.xx.____';
     setupEvent(keyEvent, 6, 6);
     expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should not autocomplete the input value from 01.__.____ to 01.xx.____ with current cursor position 3 when entering dot in the month part', () => {
+    input.value = '01.__.____';
+    setupEvent(keyEvent, 3, 3);
+    expect(input.value).toBe('01.__.____');
   });
 
   it('should create', () => {
