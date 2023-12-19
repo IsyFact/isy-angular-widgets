@@ -23,6 +23,8 @@ body {
 }
 
 .w-full .p-inputmask {
+  // Needed for stretching PrimeNg InputMask with the usage of the PrimeFlex class w-full
+  // Open PrimeNg Issue: https://github.com/primefaces/primeng/issues/14404
   width: 100% !important;
 }
 
