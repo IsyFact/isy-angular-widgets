@@ -245,7 +245,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    * @param onSavingChange Used for spying on the savingChange emitter
    */
   function spyOnWizardEmitters(onIndexChange: boolean, onVisibilityChange: boolean, onSavingChange: boolean): void {
-    if (onIndexChange) spyOn(wizard.indexChange, 'emit');
+    if (onIndexChange) spyOn(wizard.stepperIndexChange, 'emit');
     if (onVisibilityChange) spyOn(wizard.isVisibleChange, 'emit');
     if (onSavingChange) spyOn(wizard.savingChange, 'emit');
   }
@@ -314,7 +314,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should emit the index on init', () => {
-    const emitIndexSpy = spyOn(wizard.indexChange, 'emit');
+    const emitIndexSpy = spyOn(wizard.stepperIndexChange, 'emit');
     wizard.ngOnInit();
     expectFirstStep();
     expect(emitIndexSpy).toHaveBeenCalledWith(startIndex);
@@ -524,7 +524,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     spyOnWizardEmitters(true, false, false);
 
     wizard.ngOnInit();
-    expect(wizard.indexChange.emit).toHaveBeenCalledWith(wizard.index);
+    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(wizard.index);
   });
 
   it('should have a wizard that correctly moves backward', () => {

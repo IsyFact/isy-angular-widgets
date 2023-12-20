@@ -3,10 +3,12 @@ import {
   Component,
   ContentChildren,
   EventEmitter,
-  Input, OnChanges,
+  Input,
+  OnChanges,
   OnInit,
   Output,
-  QueryList, SimpleChanges
+  QueryList,
+  SimpleChanges
 } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {WizardDirective} from '../../directives/wizard.directive';
@@ -40,7 +42,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   /**
    * Emits the currently displayed page
    */
-  @Output() indexChange = new EventEmitter<number>();
+  @Output() stepperIndexChange = new EventEmitter<number>();
 
   /**
    * Emits when the user is currently trying to save to be handled from outside
@@ -133,7 +135,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * Fired on initialization
    */
   ngOnInit(): void {
-    this.indexChange.emit(this.index);
+    this.stepperIndexChange.emit(this.index);
   }
 
   /**
