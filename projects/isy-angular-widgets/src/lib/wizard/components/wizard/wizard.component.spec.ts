@@ -1,12 +1,25 @@
 import {ComponentFixture, fakeAsync, tick} from '@angular/core/testing';
 import {WizardComponent} from './wizard.component';
-import {StepperComponent} from '../stepper/stepper.component';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Component, QueryList, ViewChild} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {WizardModule} from '../../wizard.module';
 import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
+import {MenuItem} from 'primeng/api';
+
+const stepperItems: MenuItem[] = [
+  {
+    label: 'Auswahl 1'
+  },
+  {
+    label: 'Auswahl 1'
+  },
+  {
+    label: 'Auswahl 1'
+  }
+];
+const stepsNumber: number = stepperItems.length;
 
 const width = 50;
 const height = 30;
@@ -44,7 +57,6 @@ class TestComponent {
 }
 
 let wizard: WizardComponent;
-let stepper: StepperComponent;
 let contentChildren: QueryList<WizardDirective>;
 let fixture: ComponentFixture<TestComponent>;
 
@@ -60,30 +72,30 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function initGlobalVariables(): void {
     wizard = spectator.component.wizard;
-    stepper = wizard.stepper;
+    wizard.items = stepperItems;
     contentChildren = wizard.content!;
   }
 
   /**
-   * Checks if the stepper is on the first step
+   * Checks if the wizard is on the first step
    */
   function expectFirstStep(): void {
-    expect(stepper.index).toEqual(startIndex);
+    expect(wizard.index).toEqual(startIndex);
   }
 
   /**
-   * Checks if the stepper is on the second step
+   * Checks if the wizard is on the second step
    * @param movements The N-th movement (step)
    */
   function expectNthStep(movements: number): void {
-    expect(stepper.index).toEqual(startIndex + movements);
+    expect(wizard.index).toEqual(startIndex + movements);
   }
 
   /**
-   * Checks if the stepper is on the last step
+   * Checks if the wizard is on the last step
    */
   function expectLastStep(): void {
-    expect(stepper.index).toEqual(contentChildren.length - 1);
+    expect(wizard.index).toEqual(contentChildren.length - 1);
   }
 
   /**
@@ -111,23 +123,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   }
 
   /**
-   * Checks if the wizard was closed
-   */
-  function expectWizardClosed(): void {
-    const indexes = stepper.index && wizard.index;
-    expect(indexes).toEqual(startIndex);
-
-    const stepperIndexEmitter = wizard.stepperIndexChange.emit;
-    expect(stepperIndexEmitter).toHaveBeenCalledWith(startIndex);
-
-    const propsOnClose = wizard.isVisible && wizard.isSaved;
-    expect(propsOnClose).toBeFalse();
-
-    const emitters = wizard.isVisibleChange.emit && wizard.savingChange.emit;
-    expect(emitters).toHaveBeenCalledWith(wizard.isVisible);
-  }
-
-  /**
    * Moves the wizard to the last step (position)
    */
   function moveToLastStep(): void {
@@ -137,9 +132,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   }
 
   /**
-   * Checks if the stepper was moved to the last step
+   * Checks if the wizard was moved to the last step
    */
-  function expectStepperMovedUntilEnd(): void {
+  function expectwizardMovedUntilEnd(): void {
     expectFirstStep();
     moveToLastStep();
     expectLastStep();
@@ -151,7 +146,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    * Checks if the save button is available
    */
   function expectSaveButtonIsAvailable(): void {
-    expectStepperMovedUntilEnd();
+    expectwizardMovedUntilEnd();
     expectIsSaved(false);
   }
 
@@ -183,22 +178,20 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   }
 
   /**
-   * Checks if the stepper moved to the first step
+   * Checks if the wizard moved to the first step
    */
   function expectMovementToFirstStep(): void {
-    const emitIndexSpy = spyOn(wizard.stepperIndexChange, 'emit');
-    expect(stepper.items.length).toEqual(childrenLabels.length);
+    expect(wizard.items.length).toEqual(childrenLabels.length);
 
     const wizardPropsOnMovement = wizard.isSaved && wizard.allowNext;
     expect(wizardPropsOnMovement).toBeFalse();
 
-    expect(stepper.index).not.toEqual(stepper.items.length - 1);
+    expect(wizard.index).not.toEqual(wizard.items.length - 1);
 
     setNextStepAvailable();
     pressNextButton();
 
     expectNthStep(1);
-    expect(emitIndexSpy).toHaveBeenCalledWith(stepper.index);
   }
 
   /**
@@ -206,8 +199,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    * @param currentStep The current wizard position (step)
    */
   function expectMovementToNextStep(currentStep: number): void {
-    expect(stepper.index).toEqual(currentStep + 1);
-    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(stepper.index);
+    expect(wizard.index).toEqual(currentStep + 1);
   }
 
   /**
@@ -243,16 +235,17 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   function pressCloseButton(): void {
     const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
     closeButton.click();
+    fixture.detectChanges();
   }
 
   /**
    * Spys on selected wizard emitters
-   * @param onIndexChange Used for spying on the stepperIndexChange emitter
+   * @param onIndexChange Used for spying on the wizardIndexChange emitter
    * @param onVisibilityChange Used for spying on the isVisibleChange emitter
    * @param onSavingChange Used for spying on the savingChange emitter
    */
   function spyOnWizardEmitters(onIndexChange: boolean, onVisibilityChange: boolean, onSavingChange: boolean): void {
-    if (onIndexChange) spyOn(wizard.stepperIndexChange, 'emit');
+    if (onIndexChange) spyOn(wizard.indexChange, 'emit');
     if (onVisibilityChange) spyOn(wizard.isVisibleChange, 'emit');
     if (onSavingChange) spyOn(wizard.savingChange, 'emit');
   }
@@ -268,8 +261,14 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
-  it('should create Wizard', () => {
-    expect(wizard).toBeTruthy();
+  it(`should have ${stepsNumber} steps`, () => {
+    expect(wizard.items.length).toEqual(stepsNumber);
+  });
+
+  it('should have the correct stepper items titles', () => {
+    for (let i = 0; i < wizard.items.length; i++) {
+      expect(wizard.items[i]).toEqual(stepperItems[i]);
+    }
   });
 
   it('should have expected width and height', () => {
@@ -295,19 +294,19 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectNextStepIsAllowed(false);
   });
 
-  it('should have an internal Stepper', () => {
-    expect(stepper).toBeTruthy();
+  it('should have an internal wizard', () => {
+    expect(wizard).toBeTruthy();
   });
 
   it('should have the correct number of available steps', () => {
-    expect(stepper.items.length).toEqual(childrenLabels.length);
+    expect(wizard.items.length).toEqual(childrenLabels.length);
   });
 
-  it('should be closable', () => {
+  it('should be closable by default', () => {
     expectIsClosable(true);
   });
 
-  it('should have correctly initialized stepper items', () => {
+  it('should have correctly initialized wizard items', () => {
     const afterContentInitSpy = spyOn(wizard, 'ngAfterContentInit');
     wizard.ngAfterContentInit();
     expect(afterContentInitSpy).toHaveBeenCalled();
@@ -315,7 +314,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should emit the index on init', () => {
-    const emitIndexSpy = spyOn(wizard.stepperIndexChange, 'emit');
+    const emitIndexSpy = spyOn(wizard.indexChange, 'emit');
     wizard.ngOnInit();
     expectFirstStep();
     expect(emitIndexSpy).toHaveBeenCalledWith(startIndex);
@@ -332,7 +331,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectFirstStep();
   });
 
-  it('should have a visible back button while stepper index is < stepper index', () => {
+  it('should have a visible back button while wizard index is < wizard index', () => {
     const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
     expect(backButton).not.toBeNull();
     expectFirstStep();
@@ -340,25 +339,25 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectNthStep(1);
   });
 
-  it('should have a disabled back button while stepper index is 0', () => {
+  it('should have a disabled back button while wizard index is 0', () => {
     expectFirstStep();
     expect(isElementDisabled(backButtonDeclaration)).toBeTrue();
   });
 
-  it('should have a disabled back button while stepper index is 0 and the form is invalid', () => {
+  it('should have a disabled back button while wizard index is 0 and the form is invalid', () => {
     expectFirstStep();
     expectNextStepIsAllowed(false);
     expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
   });
 
-  it('should have a disabled back button while stepper index is 0 and the form is valid', () => {
+  it('should have a disabled back button while wizard index is 0 and the form is valid', () => {
     expectFirstStep();
     expectNextStepIsAllowed(false);
     setNextStepAvailable();
     expect(isElementDisabled(nextButtonDeclaration)).toBeFalse();
   });
 
-  it('should have a disabled back button while stepper index is equals to max index', () => {
+  it('should have a disabled back button while wizard index is equals to max index', () => {
     expectNextStepIsAllowed(false);
 
     moveToLastStep();
@@ -368,28 +367,28 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(isElementDisabled(backButtonDeclaration)).toBeFalse();
   });
 
-  it('should have a disabled next button while stepper index is equals to max index', () => {
+  it('should have a disabled next button while wizard index is equals to max index', () => {
     expectNextStepIsAllowed(false);
     moveToLastStep();
     setNextStepAvailable();
     expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
   });
 
-  it('should have a next button while stepper index is 0', () => {
+  it('should have a next button while wizard index is 0', () => {
     expectFirstStep();
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
     expect(nextButton).not.toBeNull();
   });
 
-  it('should have a next button while stepper index is < max stepper index', () => {
+  it('should have a next button while wizard index is < max wizard index', () => {
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
     expect(nextButton).not.toBeNull();
     expectFirstStep();
 
     wizard.move(true);
-    expect(stepper.index).not.toEqual(startIndex);
+    expect(wizard.index).not.toEqual(startIndex);
     expectNthStep(1);
-    expect(stepper.index).not.toBeGreaterThan(contentChildren.length - 1);
+    expect(wizard.index).not.toBeGreaterThan(contentChildren.length - 1);
   });
 
   it('should have the right back button label', () => {
@@ -402,14 +401,11 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(backButton.className).toContain(CLASS_FLEX && CLASS_ALIGN_CENTER && CLASS_JUSTIFY_CENTER && CLASS_MR_2);
   });
 
-  it('should have a functional back button while stepper index > 0', () => {
+  it('should have a functional back button while wizard index > 0', () => {
     expectMovementToFirstStep();
     expectMovementToNextStep(startIndex);
-
     pressBackButton();
-
     expectFirstStep();
-    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(startIndex);
   });
 
   it('should have a next button with the correct title', () => {
@@ -430,13 +426,13 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should use the correct save button label', () => {
-    expectStepperMovedUntilEnd();
+    expectwizardMovedUntilEnd();
     const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
     expect(saveButton.innerHTML).toContain(wizard.labelSaveButton);
   });
 
   it('should have some classes on the save button', () => {
-    expectStepperMovedUntilEnd();
+    expectwizardMovedUntilEnd();
     const nextButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
     expect(nextButton.className).toContain(CLASS_FLEX);
     expect(nextButton.className).toContain(CLASS_ALIGN_CENTER);
@@ -444,7 +440,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have a visible save button on last step', () => {
-    expectStepperMovedUntilEnd();
+    expectwizardMovedUntilEnd();
 
     const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
     expect(saveButton).not.toBeNull();
@@ -488,8 +484,8 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   it('should have an enabled close button on any step', () => {
     for (let i = 0; i < contentChildren.length - 1; i++) {
-      expect(stepper.index).toEqual(i);
-      stepper.move(true);
+      expect(wizard.index).toEqual(i);
+      wizard.move(true);
 
       expectIsSaved(false);
       expectIsClosable(true);
@@ -503,14 +499,15 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     }
   });
 
-  it('should have a functional close button', () => {
-    spyOn(stepper, 'reset');
-    spyOnWizardEmitters(true, true, true);
+  it('should close on close button click', () => {
+    wizard.isVisible = true;
+    wizard.closable = true;
+    fixture.detectChanges();
 
-    expectIsClosable(true);
+    const closeDialogSpy = spyOn(wizard, 'closeDialog');
     pressCloseButton();
-    expectIsSaved(false);
-    expectWizardClosed();
+
+    expect(closeDialogSpy).toHaveBeenCalled();
   });
 
   it('should call the close handler after close button was pressed', () => {
@@ -527,58 +524,27 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     spyOnWizardEmitters(true, false, false);
 
     wizard.ngOnInit();
-    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(wizard.index);
+    expect(wizard.indexChange.emit).toHaveBeenCalledWith(wizard.index);
   });
 
-  it('should correctly reset', () => {
-    const resetSpy = spyOn(stepper, 'reset');
-    stepper.reset();
-    expect(resetSpy).toHaveBeenCalled();
-    expectFirstStep();
-  });
-
-  it('should have a stepper that correctly moves forward', () => {
-    expectFirstStep();
-    stepper.move(true);
-    expectNthStep(1);
-  });
-
-  it('should have a stepper that correctly moves forward (via the parent)', () => {
+  it('should have a wizard that correctly moves backward', () => {
     expectFirstStep();
     wizard.move(true);
     expectNthStep(1);
-  });
 
-  it('should have a stepper that correctly moves backward', () => {
-    expectFirstStep();
-    stepper.move(true);
-    expectNthStep(1);
-
-    stepper.move(false);
-    expectFirstStep();
-  });
-
-  it('should have a stepper that correctly moves backward (via the parent)', () => {
-    expectFirstStep();
     wizard.move(false);
     expectFirstStep();
   });
 
-  it('should have a stepper that does not move out of bound on forward movement', () => {
+  it('should have a wizard that does not move out of bound on forward movement', () => {
     moveToLastStep();
-    stepper.move(true);
-    expect(stepper.index).toEqual(stepper.items.length);
-  });
-
-  it('should have a stepper that does not move out of bound on backward movement', () => {
-    expectFirstStep();
-    stepper.move(false);
-    expectFirstStep();
+    wizard.move(true);
+    expect(wizard.index).toEqual(wizard.items.length);
   });
 
   it('should have a not save functionality', () => {
     const state = false;
-    spyOn(stepper, 'move').withArgs(state);
+    spyOn(wizard, 'move').withArgs(state);
     spyOnWizardEmitters(false, false, true);
     wizard.save(state);
     expect(wizard.savingChange.emit).toHaveBeenCalledWith(state);
@@ -590,14 +556,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     wizard.save(state);
     expect(wizard.isSaved).not.toEqual(state);
     expect(wizard.savingChange.emit).toHaveBeenCalledWith(state);
-  });
-
-  it('should be able to close', () => {
-    spyOn(stepper, 'reset');
-    spyOnWizardEmitters(true, true, true);
-
-    wizard.closeDialog();
-    expectWizardClosed();
   });
 
   it('should be closable 300ms after saving', fakeAsync(() => {
