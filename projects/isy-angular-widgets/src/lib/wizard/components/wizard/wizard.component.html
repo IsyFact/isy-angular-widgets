@@ -22,7 +22,7 @@
         pButton
         [class]="'flex align-items-center justify-content-center mr-2'"
         [disabled]="index === 0"
-        (click)="move(false)"
+        (click)="previous()"
       >
         {{ labelBackButton }}
       </button>
@@ -33,7 +33,7 @@
         pButton
         [class]="'flex align-items-center justify-content-center mr-4'"
         [disabled]="index === items.length - 1 || !allowNext"
-        (click)="move(true)"
+        (click)="next()"
       >
         {{ labelNextButton }}
       </button>
@@ -44,7 +44,7 @@
         pButton
         [class]="'flex align-items-center justify-content-center'"
         [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
-        (click)="save(true)"
+        (click)="save()"
       >
         {{ labelSaveButton }}
       </button>

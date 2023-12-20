@@ -158,12 +158,17 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   /**
-   * Moves the wizard to the next or previous position
-   * @param next used for forward/backward navigation
+   * Moves the wizard to the next position
    */
-  move(next: boolean): void {
-    if (next) this.index++;
-    else this.index--;
+  next(): void {
+    this.index++;
+  }
+
+  /**
+   * Moves the wizard to the previous position
+   */
+  previous(): void {
+    this.index--;
   }
 
   /**
@@ -172,7 +177,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   closeDialog(): void {
     this.resetWizard();
     this.close();
-    this.save(false);
+    this.savingChange.emit(false);
   }
 
   /**
@@ -192,9 +197,8 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
 
   /**
    * Informs about the save action
-   * @param save reports the saving status
    */
-  save(save: boolean): void {
-    this.savingChange.emit(save);
+  save(): void {
+    this.savingChange.emit(true);
   }
 }
