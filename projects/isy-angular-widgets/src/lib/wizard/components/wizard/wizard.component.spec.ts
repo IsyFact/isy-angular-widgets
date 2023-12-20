@@ -233,18 +233,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     fixture.detectChanges();
   }
 
-  /**
-   * Spys on selected wizard emitters
-   * @param onIndexChange Used for spying on the wizardIndexChange emitter
-   * @param onVisibilityChange Used for spying on the isVisibleChange emitter
-   * @param onSavingChange Used for spying on the savingChange emitter
-   */
-  function spyOnWizardEmitters(onIndexChange: boolean, onVisibilityChange: boolean, onSavingChange: boolean): void {
-    if (onIndexChange) spyOn(wizard.stepperIndexChange, 'emit');
-    if (onVisibilityChange) spyOn(wizard.isVisibleChange, 'emit');
-    if (onSavingChange) spyOn(wizard.savingChange, 'emit');
-  }
-
   beforeEach(() => {
     spectator = createdComponent();
     fixture = spectator.fixture;
@@ -306,7 +294,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectIsClosable(true);
   });
 
-  it('should reset the wizard', ()=> {
+  it('should reset the wizard', () => {
     expectFirstStep();
     moveToLastStep();
     wizard.ngOnChanges({
