@@ -113,67 +113,73 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   /**
    * Autocompletes the day and month input based on the cursor position and key pressed.
    * If the dot key ('.') is pressed without a preceding number, it inserts "xx" to represent an uncertain day or month.
-   * If the dot key is pressed after a single digit, it auto-completes to a two-digit format (e.g., '1.' becomes '01').
+   * If the dot key is pressed after a single digit, it autocompletes to a two-digit format (e.g., '1.' becomes '01').
    * If the dot key is pressed when the cursor is at position 3 and the day is fully entered (i.e., two digits), the completion is ignored.
-   * Otherwise, it auto-completes the day.
+   * Otherwise, it autocompletes the day.
    * @param event KeyboardEvent
    */
   onKeydown(event: Event): void {
-    let inputMousePosition = (event.target as HTMLInputElement).selectionStart!;
     const dayPartEndPos = 3;
     const monthPartEndPos = 6;
+    const input = event.target as HTMLInputElement;
+    const cursorPosition = input.selectionStart!;
 
-    if (event instanceof KeyboardEvent && event.key === '.' && inputMousePosition < monthPartEndPos) {
-      const input = event.target as HTMLInputElement;
-      const [day, month, year] = input.value.split('.');
-      const partDay = `${day}`;
-      let partMonth = `${month}`;
-      const partYear = `${year}`;
-      let partDayTranformed = partDay;
-      const partDayReplaced = partDay.replace(/_/g, '');
-      const partMonthReplaced = partMonth.replace(/_/g, '');
-      const dateUnspecifiedChar = 'x';
-      const cursorPositionAtFirstDayLetter = 0;
-      const cursorPositionAtSecondDayLetter = 1;
-      const cursorPositionAtDotAfterDayLetter = 2;
-      const cursorPositionAtSecondMonthLetter = 4;
-      const cursorPositionAtDotAfterMonthLetter = 5;
-      const onePosition = 1;
-      const twoPositions = 2;
-      const threePositions = 3;
+    if (!(event instanceof KeyboardEvent) || event.key !== '.' || cursorPosition >= monthPartEndPos) return;
 
-      if (partDayReplaced.length <= 1) partDayTranformed = this.transformDatePart(partDay, dateUnspecifiedChar);
+    const [day, month, year] = input.value.split('.');
+    let partDay = `${day}`;
+    let partMonth = `${month}`;
+    const partDayReplaced = partDay.replace(/_/g, '');
+    const partMonthReplaced = partMonth.replace(/_/g, '');
+    const dateUnspecifiedChar = 'x';
 
-      if (
-        inputMousePosition >= dayPartEndPos &&
-        inputMousePosition < monthPartEndPos &&
-        partMonthReplaced.length <= 1
-      ) {
-        partDayTranformed =
-          partDayReplaced.length === 0 ? dateUnspecifiedChar.repeat(partDayTranformed.length) : partDayTranformed;
-        if (inputMousePosition > dayPartEndPos) partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
-      }
+    if (partDayReplaced.length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
 
-      const dateStr = [partDayTranformed, partMonth, partYear].join('.');
-      input.value = this.inputValue = dateStr;
-
-      switch (inputMousePosition) {
-        case cursorPositionAtFirstDayLetter:
-          inputMousePosition += threePositions;
-          break;
-        case cursorPositionAtSecondDayLetter:
-        case cursorPositionAtSecondMonthLetter:
-          inputMousePosition += twoPositions;
-          break;
-        case cursorPositionAtDotAfterDayLetter:
-        case cursorPositionAtDotAfterMonthLetter:
-          inputMousePosition += onePosition;
-          break;
-      }
-
-      input.setSelectionRange(inputMousePosition, inputMousePosition);
-      if (inputMousePosition !== dayPartEndPos && partDayTranformed !== partDay) this.onChange(this.inputValue);
+    if (cursorPosition >= dayPartEndPos && cursorPosition < monthPartEndPos && partMonthReplaced.length <= 1) {
+      partDay = partDayReplaced.length === 0 ? dateUnspecifiedChar.repeat(partDay.length) : partDay;
+      if (cursorPosition > dayPartEndPos) partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
     }
+
+    const dateStr = [partDay, partMonth, year].join('.');
+    input.value = this.inputValue = dateStr;
+
+    const newCursorPosition = this.calculateNewCursorPosition(cursorPosition);
+    input.setSelectionRange(newCursorPosition, newCursorPosition);
+
+    if (newCursorPosition !== dayPartEndPos && partDay !== day) this.onChange(this.inputValue);
+  }
+
+  /**
+   * Calculates the new cursor position
+   * @param cursorPosition as a number
+   * @returns newCursorPosition as a number
+   */
+  private calculateNewCursorPosition(cursorPosition: number): number {
+    let newCursorPosition = cursorPosition;
+    const cursorPositionAtFirstDayLetter = 0;
+    const cursorPositionAtSecondDayLetter = 1;
+    const cursorPositionAtDotAfterDayLetter = 2;
+    const cursorPositionAtSecondMonthLetter = 4;
+    const cursorPositionAtDotAfterMonthLetter = 5;
+    const onePosition = 1;
+    const twoPositions = 2;
+    const threePositions = 3;
+
+    switch (newCursorPosition) {
+      case cursorPositionAtFirstDayLetter:
+        newCursorPosition += threePositions;
+        break;
+      case cursorPositionAtSecondDayLetter:
+      case cursorPositionAtSecondMonthLetter:
+        newCursorPosition += twoPositions;
+        break;
+      case cursorPositionAtDotAfterDayLetter:
+      case cursorPositionAtDotAfterMonthLetter:
+        newCursorPosition += onePosition;
+        break;
+    }
+
+    return newCursorPosition;
   }
 
   /**
