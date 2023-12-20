@@ -2,7 +2,7 @@ import {ComponentFixture, fakeAsync, tick} from '@angular/core/testing';
 import {WizardComponent} from './wizard.component';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {RouterTestingModule} from '@angular/router/testing';
-import {Component, QueryList, ViewChild} from '@angular/core';
+import {Component, QueryList, SimpleChange, ViewChild} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {WizardModule} from '../../wizard.module';
 import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
@@ -306,6 +306,15 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectIsClosable(true);
   });
 
+  it('should reset the wizard', ()=> {
+    expectFirstStep();
+    moveToLastStep();
+    wizard.ngOnChanges({
+      isVisible: new SimpleChange(true, false, true)
+    });
+    expectFirstStep();
+  });
+
   it('items should be correctly initialized', () => {
     const afterContentInitSpy = spyOn(wizard, 'ngAfterContentInit');
     wizard.ngAfterContentInit();
@@ -373,6 +382,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectFirstStep();
 
     wizard.next();
+
     expect(wizard.index).not.toEqual(startIndex);
     expectNthStep(1);
     expect(wizard.index).not.toBeGreaterThan(contentChildren.length - 1);
@@ -498,10 +508,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should should emit an event after init', () => {
-    spyOnWizardEmitters(true, false, false);
-
+    const indexChangeSpy = spyOn(wizard.stepperIndexChange, 'emit');
     wizard.ngOnInit();
-    expect(wizard.stepperIndexChange.emit).toHaveBeenCalledWith(wizard.index);
+    expect(indexChangeSpy).toHaveBeenCalledWith(wizard.index);
   });
 
   it('should have a wizard that correctly moves backward', () => {
