@@ -1,4 +1,4 @@
-import {ComponentFixture, fakeAsync, tick} from '@angular/core/testing';
+import {ComponentFixture} from '@angular/core/testing';
 import {WizardComponent} from './wizard.component';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -108,7 +108,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   /**
    * Checks if the close button is currently available and the wizard closable
-   * @param isClosable State of the wizard closability
+   * @param isClosable State of the wizard to be closable
    */
   function expectIsClosable(isClosable: boolean): void {
     expect(wizard.closable).toEqual(isClosable);
@@ -129,6 +129,8 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     for (let i = 0; i < contentChildren.length - 1; i++) {
       wizard.next();
     }
+    fixture.detectChanges();
+    expectLastStep();
   }
 
   /**
@@ -137,7 +139,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   function expectWizardMovedUntilEnd(): void {
     expectFirstStep();
     moveToLastStep();
-    expectLastStep();
     expectIsSaved(false);
     fixture.detectChanges();
   }
@@ -343,7 +344,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectNextStepIsAllowed(false);
 
     moveToLastStep();
-    expectLastStep();
 
     setNextStepAvailable();
     expect(isElementDisabled(backButtonDeclaration)).toBeFalse();
@@ -479,8 +479,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should close on close button click', () => {
-    wizard.isVisible = true;
-    wizard.closable = true;
     fixture.detectChanges();
 
     const closeDialogSpy = spyOn(wizard, 'closeDialog');
@@ -533,26 +531,21 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(saveButton).toBeNull();
   });
 
-  it('should be closable 300ms after saving', fakeAsync(() => {
-    expectIsClosable(true);
-
-    moveToLastStep();
-    fixture.detectChanges();
-    expectLastStep();
-
+  it('should be closable after saving', () => {
     expectIsSaved(false);
     expectIsClosable(true);
-
-    const isCloseButtonDisabled = isElementDisabled(closeButtonDeclaration);
-    expect(isCloseButtonDisabled).toBeFalse();
-
+    moveToLastStep();
     pressSaveButton();
     expectIsClosable(true);
+  });
 
-    tick(300);
-    wizard.closable = true;
+  it('should be closed', ()=> {
+    const visibilityChangedSpy = spyOn(wizard.isVisibleChange, 'emit');
+    pressCloseButton();
 
-    expectIsClosable(true);
-    expect(isCloseButtonDisabled).toBeFalse();
-  }));
+    expect(wizard.index).toEqual(0);
+    expect(wizard.isVisible).toBeFalse();
+
+    expect(visibilityChangedSpy).toHaveBeenCalledWith(false);
+  });
 });
