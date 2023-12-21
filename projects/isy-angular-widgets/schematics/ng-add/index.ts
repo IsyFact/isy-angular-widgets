@@ -1,3 +1,4 @@
+// # NOSONAR
 import {Rule, SchematicContext, SchematicsException, Tree} from '@angular-devkit/schematics';
 import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
 import {addPackageToPackageJson} from './package-config';
