@@ -39,7 +39,6 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    */
   @ContentChildren(WizardDirective) content!: QueryList<WizardDirective>;
 
-
   /**
    * @deprecated The Output should not be used. Use the Output indexChange
    * Emits the currently displayed page
@@ -50,7 +49,6 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * Emits the currently displayed page
    */
   @Output() indexChange = new EventEmitter<number>();
-
 
   /**
    * Emits when the user is currently trying to save to be handled from outside
