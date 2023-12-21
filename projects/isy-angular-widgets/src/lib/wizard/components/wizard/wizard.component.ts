@@ -141,10 +141,10 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * Fired on initialization
    */
   ngOnInit(): void {
-    this.emitIndex();
     this.indexChange.subscribe(() => {
       this.stepperIndexChange.emit(this.index);
     });
+    this.indexChange.emit(this.index);
   }
 
   /**
@@ -171,19 +171,11 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   /**
-   * Emits the current index
-   */
-  emitIndex(): void {
-    this.stepperIndexChange.emit(this.index);
-    this.indexChange.emit(this.index);
-  }
-
-  /**
    * Moves the wizard to the next position
    */
   next(): void {
     this.index++;
-    this.emitIndex();
+    this.indexChange.emit(this.index);
   }
 
   /**
@@ -191,7 +183,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    */
   previous(): void {
     this.index--;
-    this.emitIndex();
+    this.indexChange.emit(this.index);
   }
 
   /**
