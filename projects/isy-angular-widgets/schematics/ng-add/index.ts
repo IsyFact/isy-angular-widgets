@@ -143,9 +143,9 @@ export function ngAdd(): Rule {
     addPackageToPackageJson(tree, '@angular/common', '^17.0.7');
     addPackageToPackageJson(tree, '@angular/core', '^17.0.7');
     addPackageToPackageJson(tree, 'primeicons', '^6.0.1');
-    addPackageToPackageJson(tree, 'primeng', '^17.1.0');
+    addPackageToPackageJson(tree, 'primeng', '^17.2.0');
     addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
-    addPackageToPackageJson(tree, 'date-fns', '^3.0.0');
+    addPackageToPackageJson(tree, 'date-fns', '^3.0.5');
 
     // Install isy-angular-widgets
     context.addTask(new NodePackageInstallTask());
