@@ -1,4 +1,3 @@
-// # NOSONAR
 import {Rule, SchematicContext, SchematicsException, Tree} from '@angular-devkit/schematics';
 import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
 import {addPackageToPackageJson} from './package-config';
@@ -141,12 +140,12 @@ export function ngAdd(): Rule {
 
     // Add necessary dependencies to new CLI project.
 
-    addPackageToPackageJson(tree, '@angular/common', '^17.0.7');
-    addPackageToPackageJson(tree, '@angular/core', '^17.0.7');
-    addPackageToPackageJson(tree, 'primeicons', '^6.0.1');
-    addPackageToPackageJson(tree, 'primeng', '^17.2.0');
-    addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
-    addPackageToPackageJson(tree, 'date-fns', '^3.0.5');
+    addPackageToPackageJson(tree, '@angular/common', '^17.0.7'); // NOSONAR
+    addPackageToPackageJson(tree, '@angular/core', '^17.0.7'); // NOSONAR
+    addPackageToPackageJson(tree, 'primeicons', '^6.0.1'); // NOSONAR
+    addPackageToPackageJson(tree, 'primeng', '^17.2.0'); // NOSONAR
+    addPackageToPackageJson(tree, 'primeflex', '^3.3.1'); // NOSONAR
+    addPackageToPackageJson(tree, 'date-fns', '^3.0.5'); // NOSONAR
 
     // Install isy-angular-widgets
     context.addTask(new NodePackageInstallTask());
