@@ -142,7 +142,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    */
   ngOnInit(): void {
     this.emitIndex();
-    this.indexChange.subscribe(change => {
+    this.indexChange.subscribe(() => {
       this.stepperIndexChange.emit(this.index);
     });
   }
@@ -158,6 +158,10 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
     });
   }
 
+  /**
+   * Fired on changes
+   * @param changes Includes all DOM changes
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.isVisible && this.isVisible) {
       if (changes.isVisible.currentValue === false) {
@@ -166,6 +170,9 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
     }
   }
 
+  /**
+   * Emits the current index
+   */
   emitIndex(): void {
     this.stepperIndexChange.emit(this.index);
     this.indexChange.emit(this.index);
