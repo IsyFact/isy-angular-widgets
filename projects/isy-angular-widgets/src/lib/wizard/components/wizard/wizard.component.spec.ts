@@ -335,21 +335,26 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have a disabled back button while current index is 0 and the form is valid', () => {
     expectFirstStep();
     expectNextStepIsAllowed(false);
+
     setNextStepAvailable();
     expect(isElementDisabled(nextButtonDeclaration)).toBeFalse();
   });
 
   it('should have a disabled back button while current index is equals to max index', () => {
     expectNextStepIsAllowed(false);
+
     moveToLastStep();
     setNextStepAvailable();
+
     expect(isElementDisabled(backButtonDeclaration)).toBeFalse();
   });
 
   it('should have a disabled next button while current index is equals to max index', () => {
     expectNextStepIsAllowed(false);
+
     moveToLastStep();
     setNextStepAvailable();
+
     expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
   });
 
@@ -360,13 +365,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have a next button while current index is < max index', () => {
-    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
-    expect(nextButton).not.toBeNull();
-    expectFirstStep();
+    setNextStepAvailable();
+    pressNextButton();
 
-    wizard.next();
-
-    expect(wizard.index).not.toEqual(startIndex);
     expectNthStep(1);
     expect(wizard.index).not.toBeGreaterThan(contentChildren.length - 1);
   });
@@ -384,6 +385,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have a functional back button while current index > 0', () => {
     expectMovementToFirstStep();
     expectMovementToNextStep(startIndex);
+
     pressBackButton();
     expectFirstStep();
   });
@@ -395,6 +397,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   it('should have a next button with some classes', () => {
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+
     expect(nextButton.className).toContain(CLASS_ALIGN_CENTER);
     expect(nextButton.className).toContain(CLASS_JUSTIFY_CENTER);
     expect(nextButton.className).toContain(CLASS_MR_4);
@@ -409,6 +412,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have some classes on the save button', () => {
     expectWizardMovedUntilEnd();
     const nextButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
+
     expect(nextButton.className).toContain(CLASS_FLEX);
     expect(nextButton.className).toContain(CLASS_ALIGN_CENTER);
     expect(nextButton.className).toContain(CLASS_JUSTIFY_CENTER);
@@ -425,7 +429,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(isElementDisabled(saveButtonDeclaration)).toBeTrue();
   });
 
-  it('should have functional save button', () => {
+  it('should have a functional save button', () => {
     const param = true;
     spyOn(wizard.savingChange, 'emit').withArgs(param);
     expectSaveButtonIsAvailable();
@@ -444,6 +448,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
     expect(nextButton).not.toBeNull();
+
+    const isNextButtonDisabled = isElementDisabled(nextButtonDeclaration);
+    expect(isNextButtonDisabled).toBeTrue();
   });
 
   it('should use the correct close button title', () => {
