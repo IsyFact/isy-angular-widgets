@@ -493,13 +493,13 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(closeDialogSpy).toHaveBeenCalled();
   });
 
-  it('should should emit an event after init', () => {
+  it('should emit an event after init', () => {
     const indexChangeSpy = spyOn(wizard.indexChange, 'emit');
     wizard.ngOnInit();
     expect(indexChangeSpy).toHaveBeenCalledWith(wizard.index);
   });
 
-  it('should have a wizard that correctly moves backward', () => {
+  it('should correctly moving backward', () => {
     setNextStepAvailable();
 
     pressNextButton();
@@ -509,7 +509,17 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectFirstStep();
   });
 
-  it('should have a wizard that does not move out of bound on forward movement', () => {
+  it('should correctly moving forward', () => {
+    const indexChangedSpy = spyOn(wizard.indexChange, 'emit');
+    expectFirstStep();
+    setNextStepAvailable();
+
+    pressNextButton();
+    expectNthStep(1);
+    expect(indexChangedSpy).toHaveBeenCalledWith(wizard.index);
+  });
+
+  it('should not move out of bound on forward movement', () => {
     moveToLastStep();
     expect(wizard.index).toEqual(wizard.items.length - 1);
   });
