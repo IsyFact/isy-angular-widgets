@@ -4,6 +4,8 @@
 - ISY-614: Die Ecken des CharPickers werden bei Themes mit runden Ecken korrekt dargestellt
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
 - ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
+- ISY-722: Refactoring Tätigkeiten Version 17.0.0
+  * EventEmitter `stepperIndexChange` als deprecated markiert und Nachfolger `indexChange` definiert
 ## Features
 - ISY-576: moment.js wurde durch date-fns ersetzt
 ## Demo-Anwendung
