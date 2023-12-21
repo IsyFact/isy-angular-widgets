@@ -539,7 +539,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectIsClosable(true);
   });
 
-  it('should be closed', ()=> {
+  it('should be closed', () => {
     const visibilityChangedSpy = spyOn(wizard.isVisibleChange, 'emit');
     pressCloseButton();
 
