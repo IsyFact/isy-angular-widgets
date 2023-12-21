@@ -177,7 +177,6 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   closeDialog(): void {
     this.resetWizard();
     this.close();
-    this.savingChange.emit(false);
   }
 
   /**
