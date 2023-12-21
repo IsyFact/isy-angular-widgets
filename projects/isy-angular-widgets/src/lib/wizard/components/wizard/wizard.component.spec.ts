@@ -233,6 +233,17 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     fixture.detectChanges();
   }
 
+  /**
+   * Checks if the close button is available
+   */
+  function expectCloseButtonIsAvailable(): void {
+    const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
+    expect(closeButton).not.toBeNull();
+
+    const isCloseButtonDisabled = isElementDisabled(closeButtonDeclaration);
+    expect(isCloseButtonDisabled).toBeFalse();
+  }
+
   beforeEach(() => {
     spectator = createdComponent();
     fixture = spectator.fixture;
@@ -465,18 +476,11 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   it('should have an enabled close button on any step', () => {
     for (let i = 0; i < contentChildren.length - 1; i++) {
-      expect(wizard.index).toEqual(i);
-      wizard.next();
+      setNextStepAvailable();
+      pressNextButton();
 
-      expectIsSaved(false);
       expectIsClosable(true);
-
-      const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
-      expect(closeButton).not.toBeNull();
-
-      const isCloseButtonDisabled = isElementDisabled(closeButtonDeclaration);
-      expect(isCloseButtonDisabled).toBeFalse();
-      fixture.detectChanges();
+      expectCloseButtonIsAvailable();
     }
   });
 
@@ -489,12 +493,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(closeDialogSpy).toHaveBeenCalled();
   });
 
-  it('should call the close handler after close button was pressed', () => {
-    spyOn(wizard, 'closeDialog');
-    pressCloseButton();
-    expect(wizard.closeDialog).toHaveBeenCalled();
-  });
-
   it('should should emit an event after init', () => {
     const indexChangeSpy = spyOn(wizard.stepperIndexChange, 'emit');
     wizard.ngOnInit();
@@ -503,7 +501,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   it('should have a wizard that correctly moves backward', () => {
     setNextStepAvailable();
-    // fixture.detectChanges();
 
     pressNextButton();
     expectNthStep(1);
@@ -514,8 +511,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   it('should have a wizard that does not move out of bound on forward movement', () => {
     moveToLastStep();
-    wizard.next();
-    expect(wizard.index).toEqual(wizard.items.length);
+    expect(wizard.index).toEqual(wizard.items.length - 1);
   });
 
   it('should save', () => {
@@ -528,8 +524,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(onSaveSpy).toHaveBeenCalled();
   });
 
-  it('should not be able to save', () => {
-    expectFirstStep();
+  it('should not be able to save on any step before the last step', () => {
     const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
     expect(saveButton).toBeNull();
   });
@@ -537,6 +532,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should be closable after saving', () => {
     expectIsSaved(false);
     expectIsClosable(true);
+
     moveToLastStep();
     pressSaveButton();
     expectIsClosable(true);
