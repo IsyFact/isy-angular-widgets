@@ -39,10 +39,18 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    */
   @ContentChildren(WizardDirective) content!: QueryList<WizardDirective>;
 
+
   /**
+   * @deprecated The Output should not be used. Use the Output indexChange
    * Emits the currently displayed page
    */
   @Output() stepperIndexChange = new EventEmitter<number>();
+
+  /**
+   * Emits the currently displayed page
+   */
+  @Output() indexChange = new EventEmitter<number>();
+
 
   /**
    * Emits when the user is currently trying to save to be handled from outside
@@ -136,6 +144,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    */
   ngOnInit(): void {
     this.stepperIndexChange.emit(this.index);
+    this.indexChange.emit(this.index);
   }
 
   /**

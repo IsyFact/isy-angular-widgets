@@ -292,7 +292,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should emit the current index on init', () => {
-    const emitIndexSpy = spyOn(wizard.stepperIndexChange, 'emit');
+    const emitIndexSpy = spyOn(wizard.indexChange, 'emit');
     wizard.ngOnInit();
     expect(emitIndexSpy).toHaveBeenCalledWith(startIndex);
   });
@@ -494,7 +494,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should should emit an event after init', () => {
-    const indexChangeSpy = spyOn(wizard.stepperIndexChange, 'emit');
+    const indexChangeSpy = spyOn(wizard.indexChange, 'emit');
     wizard.ngOnInit();
     expect(indexChangeSpy).toHaveBeenCalledWith(wizard.index);
   });
