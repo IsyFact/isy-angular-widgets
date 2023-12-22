@@ -151,11 +151,13 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * Fired after content initialization
    */
   ngAfterContentInit(): void {
-    this.items = (this.content) ? this.content.map((item) => {
-      return {
-        label: item.isyWizardDirective
-      };
-    }) : [];
+    if (this.content) {
+      this.items = this.content.map((item) => {
+        return {
+          label: item.isyWizardDirective
+        };
+      });
+    }
   }
 
   /**

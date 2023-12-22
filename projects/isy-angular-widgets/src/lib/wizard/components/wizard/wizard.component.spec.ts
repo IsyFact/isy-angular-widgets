@@ -57,7 +57,6 @@ let wizard: WizardComponent;
 let contentChildren: QueryList<WizardDirective>;
 let fixture: ComponentFixture<TestComponent>;
 
-
 /**
  * Checks if the next button is active
  * @param isAllowed State of next step availability
@@ -66,13 +65,13 @@ function expectNextStepIsAllowed(isAllowed: boolean): void {
   expect(wizard.allowNext).toEqual(isAllowed);
 }
 
-describe('Unit Tests: WizardComponent', ()=> {
+describe('Unit Tests: WizardComponent', () => {
   let spectator: Spectator<WizardComponent>;
   const createdComponent = createComponentFactory({
     component: WizardComponent,
     declarations: [MockComponents(Dialog, Steps)]
   });
-  beforeEach(()=> {
+  beforeEach(() => {
     spectator = createdComponent();
     wizard = spectator.component;
   });
