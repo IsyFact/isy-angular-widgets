@@ -163,10 +163,8 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * @param changes Includes all DOM changes
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.isVisible && this.isVisible) {
-      if (changes.isVisible.currentValue === false) {
-        this.resetWizard();
-      }
+    if (this.isVisible && changes.isVisible?.currentValue === false) {
+      this.resetWizard();
     }
   }
 
