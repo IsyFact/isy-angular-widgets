@@ -12,7 +12,7 @@
 >
   <p-steps [model]="items" [(activeIndex)]="index"> </p-steps>
 
-  <ng-container [ngTemplateOutlet]="this.content!.get(index)!.templateRef"></ng-container>
+  <ng-container [ngTemplateOutlet]="this.content?.get(index)?.templateRef ?? null"></ng-container>
 
   <ng-template pTemplate="footer">
     <div class="flex justify-content-end flex-wrap card-container">

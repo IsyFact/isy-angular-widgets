@@ -37,7 +37,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   /**
    * Stores the content that will be projected inside the template
    */
-  @ContentChildren(WizardDirective) content!: QueryList<WizardDirective>;
+  @ContentChildren(WizardDirective) content?: QueryList<WizardDirective>;
 
   /**
    * @deprecated The Output should not be used. Use the Output indexChange
@@ -151,11 +151,11 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * Fired after content initialization
    */
   ngAfterContentInit(): void {
-    this.items = this.content.map((item) => {
+    this.items = (this.content) ? this.content.map((item) => {
       return {
         label: item.isyWizardDirective
       };
-    });
+    }) : [];
   }
 
   /**
