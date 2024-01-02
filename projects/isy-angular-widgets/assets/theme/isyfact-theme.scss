@@ -13,12 +13,19 @@ body {
   background: var(--surface-b);
 }
 
+.p-inputmask,
 .p-inputgroup .p-inputtext,
 .p-fluid .p-inputgroup .p-inputtext,
 .p-inputgroup .p-inputwrapper,
 .p-inputgroup .p-inputwrapper > .p-component {
   // Workaround: Added because input group child element has default width 1% instead of 100%
-  width: 100%;
+  width: auto !important;
+}
+
+.w-full .p-inputmask {
+  // Needed for stretching PrimeNg InputMask with the usage of the PrimeFlex class w-full
+  // Open PrimeNg Issue: https://github.com/primefaces/primeng/issues/14404
+  width: 100% !important;
 }
 
 :disabled {

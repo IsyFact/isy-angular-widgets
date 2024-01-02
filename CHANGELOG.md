@@ -8,6 +8,7 @@
 - ISY-576: moment.js wurde durch date-fns ersetzt
 ## Demo-Anwendung
 - ISY-575: In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
+- ISY-633: Einbau isy-incomplete-date und w-full Kombination
 
 # 17.0.0 - 08.12.2023
 ## Breaking Changes
