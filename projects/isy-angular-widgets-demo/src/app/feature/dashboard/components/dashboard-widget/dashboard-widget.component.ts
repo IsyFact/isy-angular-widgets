@@ -41,8 +41,4 @@ export class DashboardWidgetComponent implements OnInit {
   changeLanguage(language: string): void {
     this.translate.use(language);
   }
-
-  getBackgroundColorClass(color: string): string {
-    return `${color}-background`;
-  }
 }
