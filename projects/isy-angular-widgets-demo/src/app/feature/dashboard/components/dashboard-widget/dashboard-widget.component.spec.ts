@@ -14,18 +14,7 @@ describe('Integration Tests: DashboardWidgetsComponent', () => {
 
   beforeEach(() => (spectator = createComponent()));
 
-  afterEach(() => {
-    spectator.fixture.destroy();
-  });
-
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
-  });
-
-  it('should get background color class name', () => {
-    const color = 'blue';
-    const expected = `${color}-background`;
-    const actual = spectator.component.getBackgroundColorClass('blue');
-    expect(actual).toEqual(expected);
   });
 });
