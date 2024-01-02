@@ -9,7 +9,7 @@ import {MenuTranslationService} from '../../../../shared/services/menu-translati
   styleUrls: ['./dashboard-widget.component.scss']
 })
 export class DashboardWidgetComponent implements OnInit {
-  @Input() menuItems!: MenuItem[];
+  @Input() menuItems: MenuItem[] = [];
 
   @Input() backgroundColor!: string;
 
