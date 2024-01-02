@@ -36,13 +36,13 @@ describe('Integration Tests: InputCharDirective', () => {
   let directive: InputCharDirective;
   let inputCharButton: HTMLButtonElement;
   let input: HTMLInputElement;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: TestComponent,
     declarations: [InputCharDirective]
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     fixture = spectator.fixture;
     directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
     directive = directiveElement[0].injector.get(InputCharDirective);

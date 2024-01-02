@@ -5,14 +5,14 @@ import {PanelMenu} from 'primeng/panelmenu';
 
 describe('Integration Tests: DashboardWidgetsComponent', () => {
   let spectator: Spectator<DashboardWidgetComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: DashboardWidgetComponent,
     imports: [TranslateModule.forRoot()],
     declarations: [PanelMenu],
     providers: [TranslateService]
   });
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => (spectator = createComponent()));
 
   afterEach(() => {
     spectator.fixture.destroy();
