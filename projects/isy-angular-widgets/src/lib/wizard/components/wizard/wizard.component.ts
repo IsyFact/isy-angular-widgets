@@ -130,7 +130,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   /**
    * The current wizard index
    */
-  index: number = 0;
+  @Input() index: number = 0;
 
   /**
    * Stores the items of the wizard
