@@ -9,13 +9,13 @@ import {FormsModule} from '@angular/forms';
 describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   let component: DialogSachverhalteBearbeitenComponent;
   let spectator: Spectator<DialogSachverhalteBearbeitenComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: DialogSachverhalteBearbeitenComponent,
     imports: [TableModule, DialogModule, TranslateModule.forRoot(), FormsModule]
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     component = spectator.component;
   });
 

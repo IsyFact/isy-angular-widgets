@@ -83,7 +83,7 @@ describe('Unit Tests: WizardComponent', () => {
 
 describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let spectator: Spectator<TestComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: TestComponent,
     imports: [WizardModule, RouterTestingModule, IncompleteDateModule]
   });
@@ -241,7 +241,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   }
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     fixture = spectator.fixture;
     initGlobalVariables();
     fixture.detectChanges();
