@@ -16,38 +16,39 @@
 
   <ng-template pTemplate="footer">
     <div class="flex justify-content-end flex-wrap card-container">
-      <button
-        *ngIf="!isSaved"
-        id="back-button"
-        pButton
-        [class]="'flex align-items-center justify-content-center mr-2'"
-        [disabled]="stepper.index === 0"
-        (click)="move(false)"
-      >
-        {{ labelBackButton }}
-      </button>
+      @if (!isSaved) {
+        <button
+          id="back-button"
+          pButton
+          [class]="'flex align-items-center justify-content-center mr-2'"
+          [disabled]="stepper.index === 0"
+          (click)="move(false)"
+        >
+          {{ labelBackButton }}
+        </button>
 
-      <button
-        *ngIf="!isSaved"
-        id="next-button"
-        pButton
-        [class]="'flex align-items-center justify-content-center mr-4'"
-        [disabled]="stepper.index === wizardItems.length - 1 || !allowNext"
-        (click)="move(true)"
-      >
-        {{ labelNextButton }}
-      </button>
+        <button
+          id="next-button"
+          pButton
+          [class]="'flex align-items-center justify-content-center mr-4'"
+          [disabled]="stepper.index === wizardItems.length - 1 || !allowNext"
+          (click)="move(true)"
+        >
+          {{ labelNextButton }}
+        </button>
+      }
 
-      <button
-        *ngIf="stepper.index === wizardItems.length - 1 && !isSaved"
-        id="save-button"
-        pButton
-        [class]="'flex align-items-center justify-content-center'"
-        [disabled]="(stepper.index !== wizardItems.length - 1 || !allowNext) && !isSaved"
-        (click)="save(true)"
-      >
-        {{ labelSaveButton }}
-      </button>
+      @if (stepper.index === wizardItems.length - 1 && !isSaved) {
+        <button
+          id="save-button"
+          pButton
+          [class]="'flex align-items-center justify-content-center'"
+          [disabled]="(stepper.index !== wizardItems.length - 1 || !allowNext) && !isSaved"
+          (click)="save(true)"
+        >
+          {{ labelSaveButton }}
+        </button>
+      }
 
       <button
         id="close-button"

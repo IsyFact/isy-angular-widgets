@@ -2,7 +2,7 @@ import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
 import {SecurityService} from './security-service';
 
 /**
- * A structural directive similar to *ngIf. Adds or removes HTML elements based on a permission check.
+ * A structural directive similar to *ngIf (now @if block). Adds or removes HTML elements based on a permission check.
  * It takes the ID of a permission which is required to use the HTML-element.
  *
  * Usage: <div *isyPermitted="'permissionId'"></div>

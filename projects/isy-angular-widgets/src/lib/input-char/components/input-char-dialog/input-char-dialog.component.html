@@ -41,9 +41,9 @@
     >
     </p-selectButton>
     <div id="lower-right-panel">
-      <isy-input-char-preview *ngIf="selectedZeichenObjekt" [zeichenObjekt]="selectedZeichenObjekt" class="flex-grow-1">
-      </isy-input-char-preview>
-
+      @if (selectedZeichenObjekt) {
+        <isy-input-char-preview [zeichenObjekt]="selectedZeichenObjekt" class="flex-grow-1"> </isy-input-char-preview>
+      }
       <button
         pButton
         [disabled]="!selectedZeichenObjekt"
