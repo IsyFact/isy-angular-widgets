@@ -20,7 +20,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
   let debugElement: DebugElement;
   let spectator: Spectator<ObjektAnzeigenComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: ObjektAnzeigenComponent,
     imports: [
       ObjektAnzeigenModule,
@@ -32,7 +32,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
 
     component = spectator.component;
     fixture = spectator.fixture;

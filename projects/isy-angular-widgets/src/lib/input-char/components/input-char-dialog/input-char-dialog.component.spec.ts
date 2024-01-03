@@ -21,14 +21,14 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
   const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
 
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
     imports: [MockModule(AccordionModule), MockModule(SelectButtonModule), MockModule(FormsModule)],
     declarations: [MockComponent(InputCharPreviewComponent)]
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     component = spectator.component;
     fixture = spectator.fixture;
     component.allCharacters = sonderzeichenListe;
@@ -198,13 +198,13 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 });
 
 describe('Integration Tests: InputCharDialogComponent', () => {
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
     imports: [InputCharModule]
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     fixture = spectator.fixture;
 
     fixture.componentRef.setInput('allCharacters', sonderzeichenListe);

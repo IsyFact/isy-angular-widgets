@@ -10,7 +10,7 @@ describe('Integration Tests: DashboardComponent', () => {
 
   let component: DashboardComponent;
   let spectator: Spectator<DashboardComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: DashboardComponent,
     imports: [DashboardModule, TranslateModule.forRoot()],
     providers: [TranslateService]
@@ -26,7 +26,7 @@ describe('Integration Tests: DashboardComponent', () => {
   }
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     component = spectator.component;
   });
 

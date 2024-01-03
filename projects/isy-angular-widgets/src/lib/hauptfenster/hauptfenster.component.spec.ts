@@ -21,12 +21,12 @@ class HauptFensterWrapperComponent {
 
 describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: HauptfensterComponent,
     declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
   });
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
@@ -86,12 +86,12 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
 describe('Integration Test: HauptfensterComponent', () => {
   let spectator: Spectator<HauptFensterWrapperComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: HauptFensterWrapperComponent,
     imports: [HauptfensterModule]
   });
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => (spectator = createComponent()));
 
   it('should display custom html in template of Titelzeile', () => {
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;

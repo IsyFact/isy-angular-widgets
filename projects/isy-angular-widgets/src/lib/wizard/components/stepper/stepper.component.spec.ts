@@ -21,13 +21,13 @@ const startIndex: number = 0;
 describe('Unit Tests: StepperComponent', () => {
   let component: StepperComponent;
   let spectator: Spectator<StepperComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: StepperComponent,
     declarations: [MockComponent(Steps)]
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     component = spectator.component;
     component.items = stepperItems;
     component.index = startIndex;

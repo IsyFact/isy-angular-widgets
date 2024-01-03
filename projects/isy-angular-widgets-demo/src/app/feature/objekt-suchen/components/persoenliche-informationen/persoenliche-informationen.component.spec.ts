@@ -16,7 +16,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   let component: PersoenlicheInformationenComponent;
   let spectator: Spectator<PersoenlicheInformationenComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: PersoenlicheInformationenComponent,
     imports: [
       TranslateTestingModule.withTranslations('de', {
@@ -31,7 +31,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     component = spectator.component;
     component.form = initPersoenlicheInformationenForm(person);
     markFormAsDirty(component.form);

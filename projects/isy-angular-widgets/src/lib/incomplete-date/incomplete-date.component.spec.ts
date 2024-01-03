@@ -14,7 +14,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
   const errorKey = 'UNSPECIFIEDDATE';
   let spectator: Spectator<IncompleteDateComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: IncompleteDateComponent,
     imports: [IncompleteDateModule]
   });
@@ -42,7 +42,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   }
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     component = spectator.component;
     init();
     input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
