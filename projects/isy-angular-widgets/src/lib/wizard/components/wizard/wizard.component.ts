@@ -195,7 +195,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   /**
-   * Is resetting the wizard position
+   * Resets the wizard position
    */
   private resetWizard(): void {
     this.index = 0;
