@@ -1,4 +1,4 @@
-# 17.0.1 -
+# 17.1.0 -
 ## Fixes
 - ISY-641: Input-Char-Eingabefelder in der Demo App werden bei deaktivierter Form deaktiviert
 - ISY-614: Die Ecken des CharPickers werden bei Themes mit runden Ecken korrekt dargestellt
@@ -6,6 +6,8 @@
 - ISY-684: Die Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern wurde verbessert
 ## Features
 - ISY-576: moment.js wurde durch date-fns ersetzt
+- ISY-722: In isy-wizard wurde der Output `stepperIndexChange` in `indexChange` umbenannt
+  * Infolgedessen wurde der bestehende Output `stepperIndexChange` als deprecated markiert
 ## Demo-Anwendung
 - ISY-575: In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
 

@@ -4,13 +4,13 @@ import {
   ContentChildren,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   QueryList,
-  ViewChild
+  SimpleChanges
 } from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import {StepperComponent} from '../stepper/stepper.component';
 import {WizardDirective} from '../../directives/wizard.directive';
 
 /**
@@ -33,21 +33,22 @@ const defaultHeight = 30;
   selector: 'isy-wizard',
   templateUrl: './wizard.component.html'
 })
-export class WizardComponent implements OnInit, AfterContentInit {
-  /**
-   * Used for getting access over the stepper
-   */
-  @ViewChild('stepper') stepper!: StepperComponent;
-
+export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   /**
    * Stores the content that will be projected inside the template
    */
-  @ContentChildren(WizardDirective) content!: QueryList<WizardDirective>;
+  @ContentChildren(WizardDirective) content?: QueryList<WizardDirective>;
+
+  /**
+   * @deprecated The Output should not be used. Use the Output indexChange
+   * Emits the currently displayed page
+   */
+  @Output() stepperIndexChange = new EventEmitter<number>();
 
   /**
    * Emits the currently displayed page
    */
-  @Output() stepperIndexChange = new EventEmitter<number>();
+  @Output() indexChange = new EventEmitter<number>();
 
   /**
    * Emits when the user is currently trying to save to be handled from outside
@@ -129,63 +130,75 @@ export class WizardComponent implements OnInit, AfterContentInit {
   /**
    * The current wizard index
    */
-  index: number = 0;
+  @Input() index: number = 0;
 
   /**
    * Stores the items of the wizard
    */
-  wizardItems: MenuItem[] = [];
+  items: MenuItem[] = [];
 
   /**
    * Fired on initialization
    */
   ngOnInit(): void {
-    this.stepperIndexChange.emit(this.index);
+    this.indexChange.subscribe(() => {
+      this.stepperIndexChange.emit(this.index);
+    });
+    this.indexChange.emit(this.index);
   }
 
   /**
    * Fired after content initialization
    */
   ngAfterContentInit(): void {
-    this.wizardItems = this.content.map((item) => {
-      return {
-        label: item.isyWizardDirective
-      };
-    });
+    if (this.content) {
+      this.items = this.content.map((item) => {
+        return {
+          label: item.isyWizardDirective
+        };
+      });
+    }
   }
 
   /**
-   * Moves the stepper to the next or previous position
-   * @param next used for forward/backward navigation
+   * Fired on changes
+   * @param changes Includes all DOM changes
    */
-  move(next: boolean): void {
-    this.stepper.move(next);
-    this.stepperIndexChange.emit(this.stepper.index);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.isVisible && changes.isVisible?.currentValue === false) {
+      this.resetWizard();
+    }
+  }
+
+  /**
+   * Moves the wizard to the next position
+   */
+  next(): void {
+    this.index++;
+    this.indexChange.emit(this.index);
+  }
+
+  /**
+   * Moves the wizard to the previous position
+   */
+  previous(): void {
+    this.index--;
+    this.indexChange.emit(this.index);
   }
 
   /**
    * Is closing the dialog
    */
   closeDialog(): void {
-    this.resetStepper();
+    this.resetWizard();
     this.close();
-    this.save(false);
   }
 
   /**
-   * Informs about the save action
-   * @param save reports the saving status
+   * Resets the wizard position
    */
-  save(save: boolean): void {
-    this.savingChange.emit(save);
-  }
-
-  /**
-   * Is resetting the stepper position
-   */
-  private resetStepper(): void {
-    this.stepper.reset();
-    this.stepperIndexChange.emit(0);
+  private resetWizard(): void {
+    this.index = 0;
   }
 
   /**
@@ -194,5 +207,12 @@ export class WizardComponent implements OnInit, AfterContentInit {
   private close(): void {
     this.isVisible = false;
     this.isVisibleChange.emit(this.isVisible);
+  }
+
+  /**
+   * Informs about the save action
+   */
+  save(): void {
+    this.savingChange.emit(true);
   }
 }
