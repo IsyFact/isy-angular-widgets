@@ -10,9 +10,7 @@
           />
         </a>
       } @else {
-        <ng-template>
-          <ng-content select="[LogoAnbieterAwl]"></ng-content>
-        </ng-template>
+        <ng-content select="[LogoAnbieterAwl]"></ng-content>
       }
     </div>
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
@@ -24,9 +22,7 @@
             [src]="logoAwl"
           />
         } @else {
-          <ng-template>
-            <ng-content select="[LogoAwl]"></ng-content>
-          </ng-template>
+          <ng-content select="[LogoAwl]"></ng-content>
         }
       </div>
       <div class="flex flex-row-reverse">
@@ -52,9 +48,7 @@
     @if (title) {
       <div>{{ title }}</div>
     } @else {
-      <ng-template>
-        <ng-content select="[Titelzeile]"></ng-content>
-      </ng-template>
+      <ng-content select="[Titelzeile]"></ng-content>
     }
   </div>
 
