@@ -30,14 +30,6 @@ export enum Schriftzeichengruppe {
 /**
  * @internal
  */
-export interface SchriftZeichen {
-  id: string;
-  gruppe: string;
-}
-
-/**
- * @internal
- */
 export interface Zeichenobjekt {
   readonly zeichen: string;
   readonly grundzeichen: string;
