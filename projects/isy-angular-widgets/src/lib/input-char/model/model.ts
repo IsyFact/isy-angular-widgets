@@ -30,10 +30,28 @@ export enum Schriftzeichengruppe {
 /**
  * @internal
  */
+export enum ButtonType {
+  /* Alle button */
+  ALLE = 'ALLE',
+  /* Grundzeichen button */
+  GRUNDZEICHEN = 'GRUNDZEICHEN',
+  /* Schriftzeichen button */
+  SCHRIFTZEICHEN = 'SCHRIFTZEICHEN'
+}
+
+/**
+ * @internal
+ */
 export interface Zeichenobjekt {
   readonly zeichen: string;
   readonly grundzeichen: string;
   readonly schriftzeichengruppe: Schriftzeichengruppe;
   readonly name: string;
   readonly codepoint: string;
+}
+
+export interface SelectButtonOptions {
+  readonly all: {label: string}[];
+  readonly grundzeichen: string[];
+  readonly schriftzeichenGruppen: Schriftzeichengruppe[];
 }
