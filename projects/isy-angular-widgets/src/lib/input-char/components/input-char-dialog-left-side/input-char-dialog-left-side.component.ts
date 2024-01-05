@@ -8,7 +8,6 @@ import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
   styleUrl: './input-char-dialog-left-side.component.css'
 })
 export class InputCharDialogLeftSideComponent implements OnChanges {
-
   @Output() atSelection = new EventEmitter<unknown>();
 
   /**
@@ -16,7 +15,7 @@ export class InputCharDialogLeftSideComponent implements OnChanges {
    */
   @Input() allCharacters: Zeichenobjekt[] = [];
 
-  @Input() options: SelectButtonOptions = {all:[], grundzeichen: [], schriftzeichenGruppen: []};
+  @Input() options: SelectButtonOptions = {all: [], grundzeichen: [], schriftzeichenGruppen: []};
 
   /**
    * The currently displayed characters.
