@@ -1,0 +1,5 @@
+#left-panel-side {
+  left: 0;
+  width: 30%;
+  overflow-y: scroll;
+}

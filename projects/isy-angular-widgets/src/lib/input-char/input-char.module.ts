@@ -10,9 +10,16 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {InputCharPreviewComponent} from './components/input-char-preview/input-char-preview.component';
 import {InputCharDialogComponent} from './components/input-char-dialog/input-char-dialog.component';
 import {InputCharDirective} from './directives/input-char.directive';
+import {InputCharDialogLeftSideComponent} from './components/input-char-dialog-left-side/input-char-dialog-left-side.component';
 
 @NgModule({
-  declarations: [InputCharComponent, InputCharPreviewComponent, InputCharDialogComponent, InputCharDirective],
+  declarations: [
+    InputCharComponent,
+    InputCharPreviewComponent,
+    InputCharDialogComponent,
+    InputCharDialogLeftSideComponent,
+    InputCharDirective
+  ],
   exports: [InputCharComponent, InputCharDirective],
   imports: [CommonModule, InputTextModule, ButtonModule, FormsModule, AccordionModule, DialogModule, SelectButtonModule]
 })
