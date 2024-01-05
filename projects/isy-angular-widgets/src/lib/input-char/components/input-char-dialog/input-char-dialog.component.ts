@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
+import {Schriftzeichengruppe, SelectButtonOptions, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 /**
@@ -69,6 +69,12 @@ export class InputCharDialogComponent implements OnChanges {
    */
   allCharsModel?: {label: string};
 
+  opt: SelectButtonOptions = {
+    all: this.allCharsOptions,
+    grundzeichen: this.grundZeichenListe,
+    schriftzeichenGruppen: this.schriftZeichenGruppen
+  };
+
   constructor(public widgetsConfigService: WidgetsConfigService) {
     this.allCharsOptions = [{label: this.getTranslation('inputChar.all') || 'Alle'}];
     this.allCharsModel = this.allCharsOptions[0];
@@ -83,71 +89,11 @@ export class InputCharDialogComponent implements OnChanges {
   }
 
   /**
-   * Resets all the user selections.
-   */
-  private resetAllSelection(): void {
-    this.allCharsModel = undefined;
-  }
-
-  /**
-   * Resets all the user base selections.
-   */
-  private resetGrundzeichenSelection(): void {
-    this.selectedGrundzeichen = undefined;
-  }
-
-  /**
-   * Resets all the user group selections.
-   */
-  private resetSchriftzeichenGruppeSelection(): void {
-    this.selectedSchriftzeichenGruppe = undefined;
-  }
-
-  /**
    * Setting up the characters list who must be displayed.
    * @internal
    */
   private resetDisplayedCharacters(): void {
     this.displayedCharacters = this.allCharacters;
-    this.selectFirstEntry();
-  }
-
-  /**
-   * Is fired when the all button get clicked
-   * @internal
-   */
-  onAllSelection(): void {
-    this.resetGrundzeichenSelection();
-    this.resetSchriftzeichenGruppeSelection();
-
-    this.resetDisplayedCharacters();
-  }
-
-  /**
-   * Is fired when a base get selected
-   * @internal
-   */
-  onGrundzeichenSelection(): void {
-    this.resetAllSelection();
-    this.resetSchriftzeichenGruppeSelection();
-
-    this.displayedCharacters = this.allCharacters.filter(
-      (z) => (z.grundzeichen === '' ? '*' : z.grundzeichen) === this.selectedGrundzeichen
-    );
-    this.selectFirstEntry();
-  }
-
-  /**
-   * Is fired when a base get selected
-   * @internal
-   */
-  onSchriftzeichenGruppeSelection(): void {
-    this.resetAllSelection();
-    this.resetGrundzeichenSelection();
-
-    this.displayedCharacters = this.allCharacters.filter(
-      (z) => z.schriftzeichengruppe === this.selectedSchriftzeichenGruppe
-    );
     this.selectFirstEntry();
   }
 
