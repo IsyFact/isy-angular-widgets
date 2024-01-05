@@ -8,6 +8,8 @@ import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
   styleUrl: './input-char-dialog-left-side.component.css'
 })
 export class InputCharDialogLeftSideComponent implements OnChanges {
+  protected readonly ButtonType = ButtonType;
+
   @Output() atSelection = new EventEmitter<unknown>();
 
   /**
