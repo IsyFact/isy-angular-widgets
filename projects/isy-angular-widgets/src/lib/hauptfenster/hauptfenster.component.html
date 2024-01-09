@@ -1,17 +1,17 @@
 <div class="isy-hauptfenster">
   <div class="grid grid-nogutter">
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
-<!--      @if (logoAnbieterAwl) {-->
-<!--        <a href="">-->
-<!--          <img-->
-<!--            alt="{{ configService.getTranslation('hauptfenster.altLogoAnbieterAwl') }}"-->
-<!--            class="isy-hauptfenster-logo-anbieter-awl"-->
-<!--            [src]="logoAnbieterAwl"-->
-<!--          />-->
-<!--        </a>-->
-<!--      } @else {-->
-<!--        <ng-content select="[LogoAnbieterAwl]"></ng-content>-->
-<!--      }-->
+      <!--      @if (logoAnbieterAwl) {-->
+      <!--        <a href="">-->
+      <!--          <img-->
+      <!--            alt="{{ configService.getTranslation('hauptfenster.altLogoAnbieterAwl') }}"-->
+      <!--            class="isy-hauptfenster-logo-anbieter-awl"-->
+      <!--            [src]="logoAnbieterAwl"-->
+      <!--          />-->
+      <!--        </a>-->
+      <!--      } @else {-->
+      <!--        <ng-content select="[LogoAnbieterAwl]"></ng-content>-->
+      <!--      }-->
 
       <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
         <img
@@ -26,15 +26,15 @@
     </div>
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
       <div class="flex flex-row-reverse">
-<!--        @if (logoAwl) {-->
-<!--          <img-->
-<!--            alt="{{ configService.getTranslation('hauptfenster.altLogoAwl') }}"-->
-<!--            class="isy-hauptfenster-logo-awl"-->
-<!--            [src]="logoAwl"-->
-<!--          />-->
-<!--        } @else {-->
-<!--          <ng-content select="[LogoAwl]"></ng-content>-->
-<!--        }-->
+        <!--        @if (logoAwl) {-->
+        <!--          <img-->
+        <!--            alt="{{ configService.getTranslation('hauptfenster.altLogoAwl') }}"-->
+        <!--            class="isy-hauptfenster-logo-awl"-->
+        <!--            [src]="logoAwl"-->
+        <!--          />-->
+        <!--        } @else {-->
+        <!--          <ng-content select="[LogoAwl]"></ng-content>-->
+        <!--        }-->
         <img
           alt="{{ configService.getTranslation('hauptfenster.altLogoAwl') }}"
           class="isy-hauptfenster-logo-awl"
@@ -65,11 +65,11 @@
     </ng-template>
   </p-megaMenu>
   <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
-<!--    @if (title) {-->
-<!--      <div>{{ title }}</div>-->
-<!--    } @else {-->
-<!--      <ng-content select="[Titelzeile]"></ng-content>-->
-<!--    }-->
+    <!--    @if (title) {-->
+    <!--      <div>{{ title }}</div>-->
+    <!--    } @else {-->
+    <!--      <ng-content select="[Titelzeile]"></ng-content>-->
+    <!--    }-->
 
     <div *ngIf="title; else customTitelzeile">{{ title }}</div>
     <ng-template #customTitelzeile>
