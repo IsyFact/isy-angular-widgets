@@ -1,5 +1,6 @@
 # 17.1.0 -
 ## Fixes
+- ISY-632: Prozentuale Größe für die Linksnavigation wird nun korrekt angezeigt
 - ISY-641: Input-Char-Eingabefelder in der Demo App werden bei deaktivierter Form deaktiviert
 - ISY-614: Die Ecken des CharPickers werden bei Themes mit runden Ecken korrekt dargestellt
 - ISY-633: isy-incomplete-date korrekt kann jetzt in der Breite angepasst werden
