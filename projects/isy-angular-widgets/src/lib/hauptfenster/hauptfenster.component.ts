@@ -83,16 +83,16 @@ export class HauptfensterComponent {
   @Input() applicationGroupColor: string = '#A13D6D';
 
   /**
-   * Determines the width of the Linksnavigation, e.g. "15em". Suggested unit is em.
-   * Default is 15em.
+   * Determines the width of the Linksnavigation, e.g. "15%".
+   * Default is 10%.
    */
-  @Input() linksNavigationWidth = '15em';
+  @Input() linksNavigationWidth = '10%';
 
   /**
-   * Determines the width of the Informationsbereich, e.g. "15em". Suggested unit is em.
-   * Default is 15em.
+   * Determines the width of the Informationsbereich, e.g. "15%".
+   * Default is 10%.
    */
-  @Input() informationsbereichWidth = '15em';
+  @Input() informationsbereichWidth = '10%';
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
