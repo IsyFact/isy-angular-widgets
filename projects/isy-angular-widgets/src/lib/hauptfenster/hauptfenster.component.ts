@@ -84,15 +84,15 @@ export class HauptfensterComponent {
 
   /**
    * Determines the width of the Linksnavigation, e.g. "15%".
-   * Default is 15%.
+   * Default is 10%.
    */
-  @Input() linksNavigationWidth = '15%';
+  @Input() linksNavigationWidth = '10%';
 
   /**
    * Determines the width of the Informationsbereich, e.g. "15%".
-   * Default is 15%.
+   * Default is 10%.
    */
-  @Input() informationsbereichWidth = '15%';
+  @Input() informationsbereichWidth = '10%';
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
