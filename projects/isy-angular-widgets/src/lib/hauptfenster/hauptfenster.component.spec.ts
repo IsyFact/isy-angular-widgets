@@ -8,12 +8,7 @@ import {HauptfensterModule} from './hauptfenster.module';
 
 @Component({
   template: `
-    <isy-hauptfenster [title]="title">
-      <div Titelzeile>
-        <h1 class="custom-title">Titel inside H1!</h1>
-      </div>
-    </isy-hauptfenster>
-  `
+    <isy-hauptfenster [title]="title"></isy-hauptfenster>`
 })
 class HauptFensterWrapperComponent {
   @Input() title!: string;
@@ -93,13 +88,13 @@ describe('Integration Test: HauptfensterComponent', () => {
 
   beforeEach(() => (spectator = createComponent()));
 
-  it('should display custom html in template of Titelzeile', () => {
+  it('should not display custom html in template of Titelzeile', () => {
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
     const h1El = titelzeileEl.querySelector('.custom-title');
-    expect(h1El!.textContent).toEqual('Titel inside H1!');
+    expect(h1El!).toBeNull();
   });
 
-  it('should not display custom html in Titelzeile if titel input is used', () => {
+  it('should display custom html in Titelzeile if titel input is used', () => {
     const customTitle = 'Custom Title';
     spectator.component.title = customTitle;
     spectator.fixture.detectChanges();
