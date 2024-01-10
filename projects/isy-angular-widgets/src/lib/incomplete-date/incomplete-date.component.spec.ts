@@ -272,6 +272,18 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(input.value).toBe('01.__.____');
   });
 
+  it('should autocomplete the input value from 01.01.2024 to 01.01.2024', () => {
+    input.value = '01.__.____';
+    setupEvent(keyEvent, 2, 2);
+    expect(input.value).toBe('01.__.____');
+    input.value = '01.01.____';
+    setupEvent(keyEvent, 5, 5);
+    expect(input.value).toBe('01.01.____');
+    input.value = '01.01.2024';
+    component.onComplete();
+    expect(input.value).toBe('01.01.2024');
+  });
+
   it('should create', () => {
     expect(component).toBeDefined();
   });
