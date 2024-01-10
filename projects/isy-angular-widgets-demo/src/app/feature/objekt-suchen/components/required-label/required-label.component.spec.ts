@@ -5,9 +5,9 @@ describe('Unit Tests: RequiredLabelComponent', () => {
   const labelText = '*';
   const className = 'required-field';
   let spectator: Spectator<RequiredLabelComponent>;
-  const createdComponent = createComponentFactory(RequiredLabelComponent);
+  const createComponent = createComponentFactory(RequiredLabelComponent);
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

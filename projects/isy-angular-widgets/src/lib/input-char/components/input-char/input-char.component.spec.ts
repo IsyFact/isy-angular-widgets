@@ -13,14 +13,14 @@ let spectator: Spectator<InputCharComponent>;
 describe('Unit Tests: InputCharComponent', () => {
   const dialogDefaultWidth = '775px';
   const dialogDefaultHeight = '460px';
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: InputCharComponent,
     declarations: [MockComponents(Dialog, InputCharDialogComponent)]
   });
 
   describe('with default datentyp', () => {
     beforeEach(() => {
-      spectator = createdComponent();
+      spectator = createComponent();
       component = spectator.component;
 
       component.ngOnChanges();
@@ -44,7 +44,7 @@ describe('Unit Tests: InputCharComponent', () => {
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
-        spectator = createdComponent();
+        spectator = createComponent();
         component = spectator.component;
 
         component.datentyp = datentyp as Datentyp;
@@ -119,7 +119,7 @@ describe('Integration Test: InputCharComponent', () => {
   const service = new CharacterService();
 
   let spectator: Spectator<InputCharComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: InputCharComponent,
     imports: [InputCharModule]
   });
@@ -127,7 +127,7 @@ describe('Integration Test: InputCharComponent', () => {
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
-        spectator = createdComponent();
+        spectator = createComponent();
         spectator.fixture.componentRef.setInput('datentyp', datentyp);
         spectator.click('.input-char-button');
       });

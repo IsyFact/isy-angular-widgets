@@ -51,8 +51,12 @@
   <ng-content select="[Seitentoolbar]" class="dont-print"></ng-content>
 
   <div class="grid grid-nogutter flex-grow-1">
-    <div class="isy-hauptfenster-linksnavigation dont-print" *ngIf="showLinksnavigation">
-      <div [style.width]="linksNavigationWidth" [hidden]="collapsedLinksnavigation" id="open-links-navigation">
+    <div
+      class="isy-hauptfenster-linksnavigation dont-print"
+      *ngIf="showLinksnavigation"
+      [style.width]="linksNavigationWidth"
+    >
+      <div [hidden]="collapsedLinksnavigation" id="open-links-navigation">
         <div *ngIf="allowSidebarCollapse" class="collapseButton">
           <button
             class="p-button-text"
@@ -79,12 +83,12 @@
       <ng-content></ng-content>
     </div>
 
-    <div class="isy-hauptfenster-informationsbereich dont-print" *ngIf="showInformationsbereich">
-      <div
-        [style.width]="informationsbereichWidth"
-        [hidden]="collapsedInformationsbereich"
-        id="open-informationsbereich"
-      >
+    <div
+      class="isy-hauptfenster-informationsbereich dont-print"
+      *ngIf="showInformationsbereich"
+      [style.width]="informationsbereichWidth"
+    >
+      <div [hidden]="collapsedInformationsbereich" id="open-informationsbereich">
         <div *ngIf="allowSidebarCollapse" class="collapseButton">
           <button
             class="p-button-text"

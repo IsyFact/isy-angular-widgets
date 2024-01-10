@@ -9,7 +9,7 @@ import {MenuTranslationService} from '../../../../shared/services/menu-translati
   styleUrls: ['./dashboard-widget.component.scss']
 })
 export class DashboardWidgetComponent implements OnInit {
-  @Input() menuItems!: MenuItem[];
+  @Input() menuItems: MenuItem[] = [];
 
   @Input() backgroundColor!: string;
 
@@ -40,9 +40,5 @@ export class DashboardWidgetComponent implements OnInit {
 
   changeLanguage(language: string): void {
     this.translate.use(language);
-  }
-
-  getBackgroundColorClass(color: string): string {
-    return `${color}-background`;
   }
 }

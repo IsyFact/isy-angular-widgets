@@ -5,14 +5,14 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Integration Tests: DashboardInformationsbereichComponent', () => {
   let spectator: Spectator<DashboardInformationsbereichComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: DashboardInformationsbereichComponent,
     imports: [TranslateModule.forRoot()],
     declarations: [PanelMenu],
     providers: [TranslateService]
   });
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

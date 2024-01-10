@@ -7,7 +7,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 describe('Integration Tests: ChartComponent', () => {
   let component: ChartComponent;
   let spectator: Spectator<ChartComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: ChartComponent,
     imports: [ChartModule]
   });
@@ -17,7 +17,7 @@ describe('Integration Tests: ChartComponent', () => {
   const options = responsiveOptions;
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     component = spectator.component;
 
     component.type = type;

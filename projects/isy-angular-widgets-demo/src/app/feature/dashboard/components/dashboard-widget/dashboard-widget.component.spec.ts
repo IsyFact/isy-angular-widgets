@@ -5,27 +5,16 @@ import {PanelMenu} from 'primeng/panelmenu';
 
 describe('Integration Tests: DashboardWidgetsComponent', () => {
   let spectator: Spectator<DashboardWidgetComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: DashboardWidgetComponent,
     imports: [TranslateModule.forRoot()],
     declarations: [PanelMenu],
     providers: [TranslateService]
   });
 
-  beforeEach(() => (spectator = createdComponent()));
-
-  afterEach(() => {
-    spectator.fixture.destroy();
-  });
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
-  });
-
-  it('should get background color class name', () => {
-    const color = 'blue';
-    const expected = `${color}-background`;
-    const actual = spectator.component.getBackgroundColorClass('blue');
-    expect(actual).toEqual(expected);
   });
 });

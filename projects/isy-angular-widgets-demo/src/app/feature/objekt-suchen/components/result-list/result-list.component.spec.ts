@@ -11,13 +11,13 @@ import {Person} from '../../../../shared/model/person';
 describe('Integration Tests: ResultListComponent', () => {
   let person: Person;
   let spectator: Spectator<ResultListComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: ResultListComponent,
     imports: [TranslateTestingModule.withTranslations({}), FormsModule, PanelModule, TableModule, ButtonModule]
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     const personenService = new PersonenService();
     person = personenService.generatePerson();
   });

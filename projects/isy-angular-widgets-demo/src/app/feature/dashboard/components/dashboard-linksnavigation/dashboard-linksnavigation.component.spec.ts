@@ -5,14 +5,14 @@ import {PanelMenu} from 'primeng/panelmenu';
 
 describe('Integration Tests: DashboardLinksnavigationComponent', () => {
   let spectator: Spectator<DashboardLinksnavigationComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: DashboardLinksnavigationComponent,
     imports: [TranslateModule.forRoot()],
     declarations: [PanelMenu],
     providers: [TranslateService]
   });
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
