@@ -22,14 +22,14 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   let dateService: DateService;
   let component: ObjektSuchenComponent;
   let spectator: Spectator<ObjektSuchenComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: ObjektSuchenComponent,
     imports: [ObjektSuchenModule, TranslateModule.forRoot(), RouterTestingModule],
     providers: [TranslateService, MessageService]
   });
 
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     component = spectator.component;
     dateService = new DateService();
   });

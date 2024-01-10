@@ -4,9 +4,9 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 describe('Unit Tests: PageNotFoundComponent', () => {
   const startPage = 'Startseite';
   let spectator: Spectator<PageNotFoundComponent>;
-  const createdComponent = createComponentFactory(PageNotFoundComponent);
+  const createComponent = createComponentFactory(PageNotFoundComponent);
 
-  beforeEach(() => (spectator = createdComponent()));
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

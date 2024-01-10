@@ -1,21 +1,23 @@
-# 17.0.1 -
+# 17.1.0 -
 ## Fixes
 - ISY-618: Incomplete-Date-Widget akzeptiert auch normale Dateneingabe mit Punkt
+- ISY-632: Prozentuale Größe für die Linksnavigation wird nun korrekt angezeigt
 - ISY-641: Input-Char-Eingabefelder in der Demo App werden bei deaktivierter Form deaktiviert
 - ISY-614: Die Ecken des CharPickers werden bei Themes mit runden Ecken korrekt dargestellt
-- ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
-- ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
+- ISY-633: isy-incomplete-date korrekt kann jetzt in der Breite angepasst werden
+- ISY-684: Die Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern wurde verbessert
 ## Features
 - ISY-576: moment.js wurde durch date-fns ersetzt
+- ISY-722: In isy-wizard wurde der Output `stepperIndexChange` in `indexChange` umbenannt
+  * Infolgedessen wurde der bestehende Output `stepperIndexChange` als deprecated markiert
 ## Demo-Anwendung
-- ISY-575: Felder für Dateiupload sollen in Formulare integriert werden können
-  * In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
+- ISY-575: In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
 
 # 17.0.0 - 08.12.2023
 ## Breaking Changes
 - ISY-144: Upgrade Angular und PrimeNG Bibliothek auf Version 17
 ## Fixes
-- ISY-375: Analyse: Einsatz von ng-mocks
+- ISY-375: ng-mocks wird jetzt für Tests eingesetzt und demonstriert
 - ISY-574: Der Invalid-Status im ungewissen Datum-Eingabefeld wird jetzt korrekt angezeigt
 - ISY-619: Überlappende Date Picker werden jetzt in Wizards korrekt dargestellt
 ## Demo-Anwendung
