@@ -1,26 +1,14 @@
 import {DialogSachverhalteBearbeitenComponent} from './dialog-sachverhalte-bearbeiten.component';
 import {TableModule} from 'primeng/table';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-<<<<<<< HEAD
-=======
 import {PersonenService} from '../../../../shared/services/personen.service';
 import {DialogModule} from 'primeng/dialog';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
->>>>>>> origin
 
 describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   let component: DialogSachverhalteBearbeitenComponent;
   let spectator: Spectator<DialogSachverhalteBearbeitenComponent>;
-<<<<<<< HEAD
-  const createdComponent = createComponentFactory({
-    component: DialogSachverhalteBearbeitenComponent,
-    imports: [TableModule]
-  });
-
-  beforeEach(() => {
-    spectator = createdComponent();
-=======
   const createComponent = createComponentFactory({
     component: DialogSachverhalteBearbeitenComponent,
     imports: [TableModule, DialogModule, TranslateModule.forRoot(), FormsModule]
@@ -28,7 +16,6 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
 
   beforeEach(() => {
     spectator = createComponent();
->>>>>>> origin
     component = spectator.component;
   });
 

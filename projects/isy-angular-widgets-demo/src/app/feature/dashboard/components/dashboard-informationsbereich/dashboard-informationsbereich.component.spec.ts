@@ -2,20 +2,6 @@ import {DashboardInformationsbereichComponent} from './dashboard-informationsber
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {PanelMenu} from 'primeng/panelmenu';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-<<<<<<< HEAD
-import {MockComponent} from 'ng-mocks';
-
-describe('Integration Tests: DashboardInformationsbereichComponent', () => {
-  let spectator: Spectator<DashboardInformationsbereichComponent>;
-  const createdComponent = createComponentFactory({
-    component: DashboardInformationsbereichComponent,
-    declarations: [MockComponent(PanelMenu)],
-    imports: [TranslateModule.forRoot()],
-    providers: [TranslateService]
-  });
-
-  beforeEach(() => (spectator = createdComponent()));
-=======
 
 describe('Integration Tests: DashboardInformationsbereichComponent', () => {
   let spectator: Spectator<DashboardInformationsbereichComponent>;
@@ -27,7 +13,6 @@ describe('Integration Tests: DashboardInformationsbereichComponent', () => {
   });
 
   beforeEach(() => (spectator = createComponent()));
->>>>>>> origin
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

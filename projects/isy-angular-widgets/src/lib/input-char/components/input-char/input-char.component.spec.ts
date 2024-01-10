@@ -1,13 +1,4 @@
 import {InputCharComponent} from './input-char.component';
-<<<<<<< HEAD
-import {InputCharModule} from '../../input-char.module';
-import {Datentyp} from '../../model/datentyp';
-import {CharacterService} from '../../services/character.service';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockComponent} from 'ng-mocks';
-import {Dialog} from 'primeng/dialog';
-import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
-=======
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
@@ -15,7 +6,6 @@ import {MockComponents} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {InputCharModule} from '../../input-char.module';
->>>>>>> origin
 
 let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
@@ -29,22 +19,10 @@ describe('Unit Tests: InputCharComponent', () => {
   });
 
   describe('with default datentyp', () => {
-<<<<<<< HEAD
-    const createdComponent = createComponentFactory({
-      component: InputCharComponent,
-      declarations: [MockComponent(Dialog), MockComponent(InputCharDialogComponent)]
-    });
-
-    beforeEach(() => {
-      spectator = createdComponent();
-      component = spectator.component;
-
-=======
     beforeEach(() => {
       spectator = createComponent();
       component = spectator.component;
 
->>>>>>> origin
       component.ngOnChanges();
       spectator.fixture.detectChanges();
     });
@@ -65,21 +43,8 @@ describe('Unit Tests: InputCharComponent', () => {
 
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
-<<<<<<< HEAD
-      const dialogDefaultWidth = '775px';
-      const dialogDefaultHeight = '460px';
-
-      const createdComponent = createComponentFactory({
-        component: InputCharComponent,
-        declarations: [MockComponent(Dialog), MockComponent(InputCharDialogComponent)]
-      });
-
-      beforeEach(() => {
-        spectator = createdComponent();
-=======
       beforeEach(() => {
         spectator = createComponent();
->>>>>>> origin
         component = spectator.component;
 
         component.datentyp = datentyp as Datentyp;
@@ -153,17 +118,6 @@ describe('Unit Tests: InputCharComponent', () => {
 describe('Integration Test: InputCharComponent', () => {
   const service = new CharacterService();
 
-<<<<<<< HEAD
-  Object.keys(Datentyp).forEach((datentyp) => {
-    describe(`with ${datentyp}`, () => {
-      let spectator: Spectator<InputCharComponent>;
-      const createdComponent = createComponentFactory({
-        component: InputCharComponent,
-        imports: [InputCharModule]
-      });
-      beforeEach(() => {
-        spectator = createdComponent();
-=======
   let spectator: Spectator<InputCharComponent>;
   const createComponent = createComponentFactory({
     component: InputCharComponent,
@@ -174,7 +128,6 @@ describe('Integration Test: InputCharComponent', () => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
         spectator = createComponent();
->>>>>>> origin
         spectator.fixture.componentRef.setInput('datentyp', datentyp);
         spectator.click('.input-char-button');
       });

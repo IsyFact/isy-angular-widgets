@@ -1,21 +1,6 @@
 import {ResultListComponent} from './result-list.component';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-<<<<<<< HEAD
-import {MockComponent} from 'ng-mocks';
-import {Panel} from 'primeng/panel';
-import {Table} from 'primeng/table';
-
-describe('Integration Tests: ResultListComponent', () => {
-  let spectator: Spectator<ResultListComponent>;
-  const createdComponent = createComponentFactory({
-    component: ResultListComponent,
-    declarations: [MockComponent(Panel), MockComponent(Table)],
-    imports: [TranslateTestingModule.withTranslations({})]
-  });
-
-  beforeEach(() => (spectator = createdComponent()));
-=======
 import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
 import {PersonenService} from '../../../../shared/services/personen.service';
@@ -36,7 +21,6 @@ describe('Integration Tests: ResultListComponent', () => {
     const personenService = new PersonenService();
     person = personenService.generatePerson();
   });
->>>>>>> origin
 
   /**
    * Adds a click event listener to the given button
@@ -69,8 +53,6 @@ describe('Integration Tests: ResultListComponent', () => {
 
   it('should not be selected by default', () => {
     expect(spectator.component.selectedObject).toBeUndefined();
-<<<<<<< HEAD
-=======
   });
 
   it('should emit after create action', () => {
@@ -95,6 +77,5 @@ describe('Integration Tests: ResultListComponent', () => {
     spectator.fixture.detectChanges();
 
     expect(editActionSpy).toHaveBeenCalledWith(person);
->>>>>>> origin
   });
 });

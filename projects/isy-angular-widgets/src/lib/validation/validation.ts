@@ -73,11 +73,7 @@ export class Validation {
 
     let isDateValid = false;
 
-<<<<<<< HEAD
-    if (RegExp(regexInputMask).exec(input)) {
-=======
     if (INPUT_MASK_REGEX.test(input)) {
->>>>>>> origin
       const [day, month, year] = input.split('.');
 
       if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
@@ -89,14 +85,7 @@ export class Validation {
       }
     }
 
-<<<<<<< HEAD
-    const regexInputUnspecified =
-      /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(0{2}\.0{2}\.\d{4})$|^(0{2}\.0{2}\.0{4})$|^(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(x{2}\.x{2}\.\d{4})$|^(x{2}\.x{2}\.x{4})$/;
-
-    if (!(RegExp(regexInputUnspecified).exec(input) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
-=======
     if (!(INPUT_UNSPECIFIED_REGEX.test(input) || isDateValid)) return {UNSPECIFIEDDATE: true};
->>>>>>> origin
 
     return null;
   }

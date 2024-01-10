@@ -1,11 +1,7 @@
 import {fakeAsync} from '@angular/core/testing';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {RouterTestingModule} from '@angular/router/testing';
-<<<<<<< HEAD
-import {FormGroup} from '@angular/forms';
-=======
 import {FormControl, FormGroup} from '@angular/forms';
->>>>>>> origin
 import {MessageService} from 'primeng/api';
 import {Person} from '../../shared/model/person';
 import {getEmptyPerson} from './person-data';
@@ -14,10 +10,7 @@ import {Observable} from 'rxjs';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ObjektSuchenModule} from './objekt-suchen.module';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-<<<<<<< HEAD
-=======
 import {required} from '../../shared/validation/validator';
->>>>>>> origin
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -29,22 +22,14 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   let dateService: DateService;
   let component: ObjektSuchenComponent;
   let spectator: Spectator<ObjektSuchenComponent>;
-<<<<<<< HEAD
-  const createdComponent = createComponentFactory({
-=======
   const createComponent = createComponentFactory({
->>>>>>> origin
     component: ObjektSuchenComponent,
     imports: [ObjektSuchenModule, TranslateModule.forRoot(), RouterTestingModule],
     providers: [TranslateService, MessageService]
   });
 
   beforeEach(() => {
-<<<<<<< HEAD
-    spectator = createdComponent();
-=======
     spectator = createComponent();
->>>>>>> origin
     component = spectator.component;
     dateService = new DateService();
   });

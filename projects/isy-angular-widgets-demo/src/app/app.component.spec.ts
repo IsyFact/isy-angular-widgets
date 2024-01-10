@@ -4,20 +4,12 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 describe('Integration Tests: AppComponent', () => {
   let spectator: Spectator<AppComponent>;
-<<<<<<< HEAD
-  const createdComponent = createComponentFactory({
-=======
   const createComponent = createComponentFactory({
->>>>>>> origin
     component: AppComponent,
     imports: [AppModule]
   });
 
-<<<<<<< HEAD
-  beforeEach(() => (spectator = createdComponent()));
-=======
   beforeEach(() => (spectator = createComponent()));
->>>>>>> origin
 
   it('should create the application', () => {
     expect(spectator.component).toBeTruthy();

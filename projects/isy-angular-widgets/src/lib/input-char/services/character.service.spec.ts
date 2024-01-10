@@ -7,24 +7,6 @@ describe('Unit Tests: CharacterService', () => {
   let service: CharacterService;
   let spectator: SpectatorService<CharacterService>;
   const createdService = createServiceFactory(CharacterService);
-<<<<<<< HEAD
-
-  beforeEach(() => {
-    spectator = createdService();
-    service = spectator.service;
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  const numberOfSonderZeichen = 908;
-  it(`should return ${numberOfSonderZeichen} characters`, () => {
-    expect(service.getCharacters().length).toEqual(numberOfSonderZeichen);
-  });
-
-=======
->>>>>>> origin
   const groupCounts = new Map<Schriftzeichengruppe, number>([
     [Schriftzeichengruppe.LATEIN, 649],
     [Schriftzeichengruppe.N1, 18],

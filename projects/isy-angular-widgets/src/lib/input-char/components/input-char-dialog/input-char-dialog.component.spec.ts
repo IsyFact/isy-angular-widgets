@@ -2,14 +2,8 @@ import {InputCharDialogComponent} from './input-char-dialog.component';
 import {By} from '@angular/platform-browser';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-<<<<<<< HEAD
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {InputCharModule} from '../../input-char.module';
-import {MockComponent} from 'ng-mocks';
-=======
 import {InputCharModule} from '../../input-char.module';
 import {MockComponent, MockModule} from 'ng-mocks';
->>>>>>> origin
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
@@ -27,24 +21,14 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
   const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
 
-<<<<<<< HEAD
-  const createdComponent = createComponentFactory({
-    component: InputCharDialogComponent,
-    imports: [AccordionModule, SelectButtonModule, FormsModule],
-=======
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
     imports: [MockModule(AccordionModule), MockModule(SelectButtonModule), MockModule(FormsModule)],
->>>>>>> origin
     declarations: [MockComponent(InputCharPreviewComponent)]
   });
 
   beforeEach(() => {
-<<<<<<< HEAD
-    spectator = createdComponent();
-=======
     spectator = createComponent();
->>>>>>> origin
     component = spectator.component;
     fixture = spectator.fixture;
     component.allCharacters = sonderzeichenListe;
@@ -214,15 +198,6 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 });
 
 describe('Integration Tests: InputCharDialogComponent', () => {
-<<<<<<< HEAD
-  const createdComponent = createComponentFactory({
-    component: InputCharDialogComponent,
-    imports: [InputCharModule, BrowserAnimationsModule]
-  });
-
-  beforeEach(() => {
-    spectator = createdComponent();
-=======
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
     imports: [InputCharModule]
@@ -230,7 +205,6 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
   beforeEach(() => {
     spectator = createComponent();
->>>>>>> origin
     fixture = spectator.fixture;
 
     fixture.componentRef.setInput('allCharacters', sonderzeichenListe);

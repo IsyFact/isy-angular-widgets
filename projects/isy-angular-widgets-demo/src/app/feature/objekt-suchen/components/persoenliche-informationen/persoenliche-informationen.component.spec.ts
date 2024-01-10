@@ -1,20 +1,13 @@
 import {PersoenlicheInformationenComponent} from './persoenliche-informationen.component';
-<<<<<<< HEAD
-import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
-=======
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
->>>>>>> origin
 import {markFormAsDirty} from '../../../../shared/validation/form-helper';
 import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MockModule} from 'ng-mocks';
-<<<<<<< HEAD
-=======
 import {RequiredLabelComponent} from '../required-label/required-label.component';
 import {required} from '../../../../shared/validation/validator';
->>>>>>> origin
 
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -23,11 +16,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   let component: PersoenlicheInformationenComponent;
   let spectator: Spectator<PersoenlicheInformationenComponent>;
-<<<<<<< HEAD
-  const createdComponent = createComponentFactory({
-=======
   const createComponent = createComponentFactory({
->>>>>>> origin
     component: PersoenlicheInformationenComponent,
     imports: [
       TranslateTestingModule.withTranslations('de', {
@@ -37,19 +26,12 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       }),
       MockModule(ReactiveFormsModule)
     ],
-<<<<<<< HEAD
-=======
     declarations: [RequiredLabelComponent],
->>>>>>> origin
     providers: [{provide: FormBuilder, useValue: formBuilder}]
   });
 
   beforeEach(() => {
-<<<<<<< HEAD
-    spectator = createdComponent();
-=======
     spectator = createComponent();
->>>>>>> origin
     component = spectator.component;
     component.form = initPersoenlicheInformationenForm(person);
     markFormAsDirty(component.form);
@@ -192,8 +174,6 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
     const geschlechtLabel = spectator.query('label#geschlecht-label') as HTMLElement;
     expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht');
-<<<<<<< HEAD
-=======
   });
 
   it('form control should be dirty after focus', () => {
@@ -217,6 +197,5 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(component.form.controls.nachname.dirty).toBeFalse();
     component.onFormControlFocus(component.form.controls.nachname);
     expect(component.form.controls.nachname.dirty).toBeTrue();
->>>>>>> origin
   });
 });
