@@ -63,7 +63,10 @@
         </div>
         <div class="col">
           <input id="last-name" formControlName="lastName" type="text" pInputText isyInputChar />
-          <small class="p-error block" *ngIf="personalInfoForm.controls['lastName'].invalid">
+          <small
+            class="p-error block"
+            *ngIf="personalInfoForm.controls['lastName'].invalid && personalInfoForm.controls['lastName'].touched"
+          >
             {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
           </small>
         </div>
@@ -77,7 +80,7 @@
         </div>
         <div class="col-1 text-right align-self-center">
           <label class="align-content-end" for="birth-place">
-            {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
+            {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
           </label>
         </div>
         <div class="col">
@@ -164,7 +167,13 @@
         <div class="col">
           <isy-incomplete-date inputId="date-of-entry" formControlName="dateOfEntry" [dateInPastConstraint]="true">
           </isy-incomplete-date>
-          <small class="p-error block" *ngIf="personalInfoForm.controls['dateOfEntry'].invalid">
+          <small
+            class="p-error block"
+            *ngIf="
+              personalInfoForm.controls['dateOfEntry'].invalid &&
+              (personalInfoForm.controls['dateOfEntry'].touched || personalInfoForm.controls['dateOfEntry'].dirty)
+            "
+          >
             {{ 'isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate }}
           </small>
         </div>
@@ -215,6 +224,25 @@
             type="text"
             pInputText
           />
+        </div>
+        <div class="col-1 text-right align-self-center">
+          <label for="identity-document">
+            {{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}
+          </label>
+        </div>
+        <div class="col-3">
+          <p-fileUpload
+            id="identity-document"
+            formControlName="identityDocument"
+            ngDefaultControl
+            [name]="'myfile'"
+            [accept]="'image/*,.pdf,.txt'"
+            [auto]="true"
+            [maxFileSize]="1000000"
+            [customUpload]="true"
+            (uploadHandler)="uploadFile($event)"
+          >
+          </p-fileUpload>
         </div>
       </div>
       <div class="grid m-0 mt-5" *isyPermitted="'secretFieldsInputSwitch'">

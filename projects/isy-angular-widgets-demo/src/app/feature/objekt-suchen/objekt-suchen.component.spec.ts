@@ -1,7 +1,11 @@
 import {fakeAsync} from '@angular/core/testing';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {RouterTestingModule} from '@angular/router/testing';
+<<<<<<< HEAD
 import {FormGroup} from '@angular/forms';
+=======
+import {FormControl, FormGroup} from '@angular/forms';
+>>>>>>> origin
 import {MessageService} from 'primeng/api';
 import {Person} from '../../shared/model/person';
 import {getEmptyPerson} from './person-data';
@@ -10,6 +14,10 @@ import {Observable} from 'rxjs';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ObjektSuchenModule} from './objekt-suchen.module';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+<<<<<<< HEAD
+=======
+import {required} from '../../shared/validation/validator';
+>>>>>>> origin
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -21,14 +29,22 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   let dateService: DateService;
   let component: ObjektSuchenComponent;
   let spectator: Spectator<ObjektSuchenComponent>;
+<<<<<<< HEAD
   const createdComponent = createComponentFactory({
+=======
+  const createComponent = createComponentFactory({
+>>>>>>> origin
     component: ObjektSuchenComponent,
     imports: [ObjektSuchenModule, TranslateModule.forRoot(), RouterTestingModule],
     providers: [TranslateService, MessageService]
   });
 
   beforeEach(() => {
+<<<<<<< HEAD
     spectator = createdComponent();
+=======
+    spectator = createComponent();
+>>>>>>> origin
     component = spectator.component;
     dateService = new DateService();
   });
@@ -51,7 +67,17 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   function expectFormControlsToBeReseted(form: FormGroup): void {
     Object.keys(form.controls).forEach((key) => {
       expect(form.controls[key].value).toBeNull();
-      expect(form.controls[key].dirty).toBeTrue();
+    });
+  }
+
+  /**
+   * Checks if a form is dirty
+   * @param form the form who must be checked
+   * @param isDirty the current dirty state
+   */
+  function expectFormControlsToBeDirty(form: FormGroup, isDirty: boolean): void {
+    Object.keys(form.controls).forEach((key) => {
+      expect(form.controls[key].dirty).toEqual(isDirty);
     });
   }
 
@@ -206,9 +232,15 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     component.onWizardClose(false);
     spectator.fixture.detectChanges();
     expectPersonToBeReseted(component.neuePerson);
+
     expectFormControlsToBeReseted(component.idForm);
+    expectFormControlsToBeDirty(component.idForm, false);
+
     expectFormControlsToBeReseted(component.persoenlicheInformationenForm);
+    expectFormControlsToBeDirty(component.persoenlicheInformationenForm, false);
+
     expectFormControlsToBeReseted(component.geburtsInformationenForm);
+    expectFormControlsToBeDirty(component.geburtsInformationenForm, false);
   });
 
   it('should check the incoming save status - false (never arrives)', () => {
@@ -543,5 +575,43 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     addNewEntryToPersonenList();
     enableClearSearch = component.enableClearSearch();
     expect(enableClearSearch).toBeTrue();
+  });
+
+  it('should find person', () => {
+    const findPersonSpy = spyOn(spectator.component, 'findPerson');
+    expect(component.tbLoadingStatus).toBeFalse();
+
+    const searchButton = spectator.query('#search-button') as HTMLButtonElement;
+    searchButton.addEventListener('click', function () {
+      spectator.component.findPerson();
+    });
+    searchButton.click();
+    spectator.fixture.detectChanges();
+
+    expect(findPersonSpy).toHaveBeenCalled();
+    expect(component.tbLoadingStatus).toBeFalse();
+  });
+
+  it('form control should be dirty after focus', () => {
+    const idSpy = spyOn(component, 'onFormControlFocus');
+
+    component.openWizard = true;
+    spectator.fixture.detectChanges();
+
+    component.idForm = new FormGroup({
+      id: new FormControl('', required)
+    });
+
+    const input = spectator.query('#person-id') as HTMLInputElement;
+    input.focus();
+    spectator.detectChanges();
+
+    expect(idSpy).toHaveBeenCalledWith(component.idForm.controls.id);
+  });
+
+  it('should mark form as dirty on focus', () => {
+    expect(component.idForm.controls.id.dirty).toBeFalse();
+    component.onFormControlFocus(component.idForm.controls.id);
+    expect(component.idForm.controls.id.dirty).toBeTrue();
   });
 });

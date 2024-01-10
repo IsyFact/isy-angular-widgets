@@ -94,7 +94,8 @@
       "solved": "Solved",
       "newEntryPlaceholder": "New Entry",
       "kreditkartennummer": "Credit card number",
-      "ablaufdatumKreditkarte": "Credit card expiration date"
+      "ablaufdatumKreditkarte": "Credit card expiration date",
+      "identityDocument": "Identity Document"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",

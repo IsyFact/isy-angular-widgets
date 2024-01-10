@@ -7,8 +7,14 @@ import {permissions} from '../../app.permission';
 import {DebugElement} from '@angular/core';
 import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
+<<<<<<< HEAD
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
+=======
+import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
+import {ComponentFixture} from '@angular/core/testing';
+import {FileUploadHandlerEvent} from 'primeng/fileupload';
+>>>>>>> origin
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
@@ -19,7 +25,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let fixture: ComponentFixture<ObjektAnzeigenComponent>;
   let debugElement: DebugElement;
   let spectator: Spectator<ObjektAnzeigenComponent>;
+<<<<<<< HEAD
   const createdComponent = createComponentFactory({
+=======
+  const createComponent = createComponentFactory({
+>>>>>>> origin
     component: ObjektAnzeigenComponent,
     imports: [
       ObjektAnzeigenModule,
@@ -31,7 +41,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   beforeEach(() => {
+<<<<<<< HEAD
     spectator = createdComponent();
+=======
+    spectator = createComponent();
+>>>>>>> origin
 
     component = spectator.component;
     fixture = spectator.fixture;
@@ -126,7 +140,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     fixture.detectChanges();
 
     const invalidFields = spectator.queryAll('.ng-invalid');
+<<<<<<< HEAD
     expect(invalidFields.length).toBe(0);
+=======
+    expect(invalidFields.length).toBe(2);
+>>>>>>> origin
   });
 
   it('should display validation error if lastName is empty', () => {
@@ -172,4 +190,46 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     const cancelButton = fixture.nativeElement.querySelector('#button-cancel') as HTMLButtonElement;
     expect(cancelButton).toBeNull();
   });
+<<<<<<< HEAD
+=======
+
+  it('should display notificatioon message if personalien have been saved', () => {
+    const msg = createSpyObject(MessageService);
+    msg.add({});
+    component.savePersonalien();
+    fixture.detectChanges();
+    expect(msg.add).toHaveBeenCalled();
+  });
+
+  it('should upload file', () => {
+    const fileName = 'test.txt';
+    const event: FileUploadHandlerEvent = {
+      files: [
+        new File(['test'], 'test.txt', {
+          type: 'text/plain'
+        })
+      ]
+    };
+
+    expect(component.personalInfoForm.get('identityDocument')?.value).not.toEqual(fileName);
+    expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeTrue();
+
+    component.uploadFile(event);
+
+    expect(component.personalInfoForm.get('identityDocument')?.value).toEqual(fileName);
+    expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeFalse();
+  });
+
+  it('should check the file upload HTML element', () => {
+    const fileUpload = spectator.query('#identity-document') as HTMLElement;
+    expect(fileUpload.innerText).toContain('Choose');
+    expect(fileUpload.tagName).toContain('P-FILEUPLOAD');
+
+    const fileUploadArray = spectator.queryAll('p-button');
+    expect(fileUploadArray).not.toBeUndefined();
+
+    const fileUploadRow = spectator.query('.p-fileupload-row');
+    expect(fileUploadRow).not.toBeUndefined();
+  });
+>>>>>>> origin
 });

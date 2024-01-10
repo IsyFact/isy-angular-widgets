@@ -1,42 +1,61 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import moment, {MomentInput} from 'moment';
+import {parseISO, parse, isFuture, isPast, isMatch} from 'date-fns';
+import {DATE_FORMATS, DATE_FORMATS_REGEX, INPUT_MASK_REGEX, INPUT_UNSPECIFIED_REGEX} from './data/date-formats';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
  */
 export class Validation {
   /**
-   * If the specified value is a valid date, it will be checked if the date is in the future.
+   * Checks if the specified value is a valid date.
+   * @param c The control element the validator is appended to
+   * @returns The object Date if the date is valid; null otherwise
+   */
+  private static isDate(c: AbstractControl): Date | null {
+    const input = (c.value as string | Date) ?? null;
+
+    if (!input) return null;
+
+    let parsedDate: Date | null = null;
+
+    if (input instanceof Date) {
+      parsedDate = input;
+    } else {
+      parsedDate = parseISO(input);
+
+      if (isNaN(parsedDate.getTime())) {
+        parsedDate =
+          DATE_FORMATS.map((format) => parse(input, format, new Date())).find((date) => !isNaN(date.getTime())) ?? null;
+      }
+    }
+
+    return parsedDate;
+  }
+
+  /**
+   * Checks if the date is in the future.
    * If the date corresponds to today's date or is in the past, a "FUTURE" error is thrown.
    * For invalid dates, no error is thrown.
    * @param c The control element the validator is appended to
    * @returns The object {FUTURE: true} if the validation fails; null otherwise
    */
-  static isInFuture(c: AbstractControl<MomentInput>): ValidationErrors | null {
-    const today = moment().startOf('day');
-    // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
-    if (dateValue.isValid() && dateValue.isSameOrBefore(today)) {
-      return {FUTURE: true};
-    }
-    return null;
+  static isInFuture(c: AbstractControl): ValidationErrors | null {
+    const parsedDate = Validation.isDate(c);
+
+    return parsedDate && !isFuture(parsedDate) ? {FUTURE: true} : null;
   }
 
   /**
-   * If the given value is a valid date, it will be checked if the date is in the past.
+   * Checks if the date is in the past.
    * If the date is today's date or is in the future, a "PAST" error is thrown.
    * For invalid dates, no error is thrown.
    * @param c The control element the validator is appended to
    * @returns The object {PAST: true} if the validation fails; null otherwise
    */
-  static isInPast(c: AbstractControl<MomentInput>): ValidationErrors | null {
-    const today = moment().startOf('day');
-    // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
-    if (dateValue.isValid() && dateValue.isSameOrAfter(today)) {
-      return {PAST: true};
-    }
-    return null;
+  static isInPast(c: AbstractControl): ValidationErrors | null {
+    const parsedDate = Validation.isDate(c);
+
+    return parsedDate && !isPast(parsedDate) ? {PAST: true} : null;
   }
 
   /**
@@ -48,14 +67,17 @@ export class Validation {
    * @returns The object {UNSPECIFIEDDATE: true} if the validation fails; null otherwise
    */
   static validUnspecifiedDate(c: AbstractControl): ValidationErrors | null {
-    const input = c.value as string;
+    const input = (c.value as string) ?? null;
 
     if (!input) return null;
 
-    const regexInputMask = /^([x0-9]{2}\.[x0-9]{2}\.[x0-9]{4})$/;
     let isDateValid = false;
 
+<<<<<<< HEAD
     if (RegExp(regexInputMask).exec(input)) {
+=======
+    if (INPUT_MASK_REGEX.test(input)) {
+>>>>>>> origin
       const [day, month, year] = input.split('.');
 
       if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
@@ -67,10 +89,14 @@ export class Validation {
       }
     }
 
+<<<<<<< HEAD
     const regexInputUnspecified =
       /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(0{2}\.0{2}\.\d{4})$|^(0{2}\.0{2}\.0{4})$|^(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(x{2}\.x{2}\.\d{4})$|^(x{2}\.x{2}\.x{4})$/;
 
     if (!(RegExp(regexInputUnspecified).exec(input) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
+=======
+    if (!(INPUT_UNSPECIFIED_REGEX.test(input) || isDateValid)) return {UNSPECIFIEDDATE: true};
+>>>>>>> origin
 
     return null;
   }
@@ -78,22 +104,21 @@ export class Validation {
   /**
    * Checks that the date is a valid date. To be used as a factory that returns a validator function.
    * @param dateFormat The format to be checked.
-   * @param strict Strict parsing means that an exact match is required - including delimiters, whitespaces, etc.
    * @param messageKey Key of the validator message
+   * @param strict Strict parsing means that an exact match is required - including delimiters, whitespaces, etc.
    * @returns A validator function with the given configuration
    */
-  static dateFormat(dateFormat: string, strict: boolean, messageKey: string): ValidatorFn {
-    return (c: AbstractControl<MomentInput>): ValidationErrors | null => {
-      const input = c.value;
-      if (!input) {
-        return null;
-      }
-      const parsedDate = moment(input, dateFormat, strict);
-      if (!dateFormat || !parsedDate || !parsedDate.isValid()) {
-        return {[messageKey]: {format: dateFormat}};
-      }
+  static dateFormat(dateFormat: string, messageKey: string, strict: boolean): ValidatorFn {
+    return (c: AbstractControl<string>): ValidationErrors | null => {
+      const input = c.value ?? null;
 
-      return null;
+      if (!input) return null;
+
+      const isValidDate = strict
+        ? isMatch(input, dateFormat) && DATE_FORMATS_REGEX.some((format) => format.test(input))
+        : isMatch(input, dateFormat);
+
+      return isValidDate ? null : {[messageKey]: {format: dateFormat}};
     };
   }
 
@@ -103,7 +128,7 @@ export class Validation {
    * @returns The object {DATE: true} if the validation fails; null otherwise
    */
   static isoDate(c: AbstractControl): ValidationErrors | null {
-    const isoDateValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DD', true, 'DATE');
+    const isoDateValidatorFn: ValidatorFn = Validation.dateFormat('yyyy-MM-dd', 'DATE', true);
     return isoDateValidatorFn(c);
   }
 
@@ -113,7 +138,7 @@ export class Validation {
    * @returns The object {TIME: true} if the validation fails; null otherwise
    */
   static isoTime(c: AbstractControl): ValidationErrors | null {
-    const isoTimeValidatorFn: ValidatorFn = Validation.dateFormat('HH:mm:ss', true, 'TIME');
+    const isoTimeValidatorFn: ValidatorFn = Validation.dateFormat('HH:mm:ss', 'TIME', true);
     return isoTimeValidatorFn(c);
   }
 
@@ -123,7 +148,10 @@ export class Validation {
    * @returns The object {DATETIME: true} if the validation fails; null otherwise
    */
   static isoDateTime(c: AbstractControl): ValidationErrors | null {
-    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DDTHH:mm:ss[Z]', true, 'DATETIME');
+    // date-fns employs single quote symbols for character escaping, such as 'T'.
+    // This can create conflicts when using ESLint alongside Prettier for code formatting. Consequently, singlequotes are deactivated in the following line.
+    // eslint-disable-next-line @typescript-eslint/quotes
+    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat(`yyyy-MM-dd'T'HH:mm:ssX`, 'DATETIME', true);
     return isoDateTimeValidatorFn(c);
   }
 

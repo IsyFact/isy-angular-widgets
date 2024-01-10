@@ -36,13 +36,21 @@ describe('Integration Tests: InputCharDirective', () => {
   let directive: InputCharDirective;
   let inputCharButton: HTMLButtonElement;
   let input: HTMLInputElement;
+<<<<<<< HEAD
   const createdComponent = createComponentFactory({
+=======
+  const createComponent = createComponentFactory({
+>>>>>>> origin
     component: TestComponent,
     declarations: [InputCharDirective]
   });
 
   beforeEach(() => {
+<<<<<<< HEAD
     spectator = createdComponent();
+=======
+    spectator = createComponent();
+>>>>>>> origin
     fixture = spectator.fixture;
     directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
     directive = directiveElement[0].injector.get(InputCharDirective);
@@ -51,11 +59,19 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   /**
+<<<<<<< HEAD
    * Setting up timeout
    * @param inputCharButton The current HTML button
    * @param done Action method that should be called when the async work is complete.
    */
   function setTimeOut(inputCharButton: HTMLButtonElement, done: DoneFn): void {
+=======
+   * Expect that button is disabled
+   * @param inputCharButton The current HTML button
+   * @param done Action method that should be called when the async work is complete.
+   */
+  function expectInputCharButtonIsDisabled(inputCharButton: HTMLButtonElement, done: DoneFn): void {
+>>>>>>> origin
     setTimeout(() => {
       fixture.detectChanges();
       expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
@@ -77,7 +93,19 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputCharButton).toBeTruthy();
 
     input.disabled = true;
+<<<<<<< HEAD
     setTimeOut(inputCharButton, done);
+=======
+    expectInputCharButtonIsDisabled(inputCharButton, done);
+  });
+
+  it('should handle changes to the datentyp attribute correctly', () => {
+    expect(directive.datentyp).toBe(Datentyp.DATENTYP_C);
+    input.setAttribute('ng-reflect-datentyp', Datentyp.DATENTYP_A);
+    spectator.detectChanges();
+    directive.handleDatentypChange(input, 'ng-reflect-datentyp');
+    expect(directive.componentRef.instance.datentyp).toBe(Datentyp.DATENTYP_A);
+>>>>>>> origin
   });
 
   it('should set the input char button to disabled when the input is readonly', (done) => {
@@ -85,7 +113,11 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputCharButton).toBeTruthy();
 
     input.readOnly = true;
+<<<<<<< HEAD
     setTimeOut(inputCharButton, done);
+=======
+    expectInputCharButtonIsDisabled(inputCharButton, done);
+>>>>>>> origin
   });
 
   it('should have mouse position 0 by default', () => {
@@ -125,9 +157,22 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputValue).toEqual(`${zeichen}${value}${value}`);
   });
 
+<<<<<<< HEAD
   it('should get the current input position', () => {
+=======
+  it('should get the current input position on keyup', () => {
+>>>>>>> origin
     input.value = 'test';
     input.dispatchEvent(new KeyboardEvent('keyup'));
     expect(directive.selectionPosition).toEqual(input.value.length);
   });
+<<<<<<< HEAD
+=======
+
+  it('should get the current input position on mouseup', () => {
+    input.value = 'test';
+    input.dispatchEvent(new MouseEvent('mouseup'));
+    expect(directive.selectionPosition).toEqual(input.value.length);
+  });
+>>>>>>> origin
 });

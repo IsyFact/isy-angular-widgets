@@ -99,11 +99,16 @@ export class InputCharDirective implements OnInit, OnDestroy {
     });
   }
 
+<<<<<<< HEAD
   private updateInputDisabledState(): void {
+=======
+  updateInputDisabledState(): void {
+>>>>>>> origin
     const {disabled, readOnly} = this.htmlInputElement;
     this.componentRef.setInput('isInputDisabled', disabled || readOnly);
   }
 
+<<<<<<< HEAD
   private handleDisabledReadonlyChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
     if ((attributeName === 'disabled' || attributeName === 'readonly') && (input.disabled || input.readOnly)) {
       this.componentRef.instance.visible = false;
@@ -114,6 +119,17 @@ export class InputCharDirective implements OnInit, OnDestroy {
   }
 
   private handleDatentypChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
+=======
+  handleDisabledReadonlyChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
+    if (attributeName === 'disabled' || attributeName === 'readonly') {
+      const isDisabledOrReadOnly = input.disabled || input.readOnly;
+      this.componentRef.instance.visible = false;
+      this.componentRef.setInput('isInputDisabled', isDisabledOrReadOnly);
+    }
+  }
+
+  handleDatentypChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
+>>>>>>> origin
     if (attributeName === 'ng-reflect-datentyp') {
       this.componentRef.setInput('datentyp', input.getAttribute('ng-reflect-datentyp'));
     }

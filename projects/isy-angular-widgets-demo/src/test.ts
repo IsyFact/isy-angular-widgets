@@ -10,4 +10,8 @@ getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDyn
   teardown: {destroyAfterEach: true}
 });
 
+<<<<<<< HEAD
+=======
+// Is Fixing the component style (very slow performance) overload after each test
+>>>>>>> origin
 afterEach(() => getTestBed().inject(ɵSharedStylesHost).ngOnDestroy());

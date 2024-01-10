@@ -10,9 +10,9 @@
   }"
   (visibleChange)="isVisibleChange.emit($event)"
 >
-  <isy-stepper #stepper [items]="wizardItems" [index]="index"> </isy-stepper>
+  <p-steps [model]="items" [(activeIndex)]="index"> </p-steps>
 
-  <ng-container [ngTemplateOutlet]="this.content!.get(stepper.index)!.templateRef"></ng-container>
+  <ng-container [ngTemplateOutlet]="this.content?.get(index)?.templateRef ?? null"></ng-container>
 
   <ng-template pTemplate="footer">
     <div class="flex justify-content-end flex-wrap card-container">
@@ -21,8 +21,8 @@
         id="back-button"
         pButton
         [class]="'flex align-items-center justify-content-center mr-2'"
-        [disabled]="stepper.index === 0"
-        (click)="move(false)"
+        [disabled]="index === 0"
+        (click)="previous()"
       >
         {{ labelBackButton }}
       </button>
@@ -32,19 +32,19 @@
         id="next-button"
         pButton
         [class]="'flex align-items-center justify-content-center mr-4'"
-        [disabled]="stepper.index === wizardItems.length - 1 || !allowNext"
-        (click)="move(true)"
+        [disabled]="index === items.length - 1 || !allowNext"
+        (click)="next()"
       >
         {{ labelNextButton }}
       </button>
 
       <button
-        *ngIf="stepper.index === wizardItems.length - 1 && !isSaved"
+        *ngIf="index === items.length - 1 && !isSaved"
         id="save-button"
         pButton
         [class]="'flex align-items-center justify-content-center'"
-        [disabled]="(stepper.index !== wizardItems.length - 1 || !allowNext) && !isSaved"
-        (click)="save(true)"
+        [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
+        (click)="save()"
       >
         {{ labelSaveButton }}
       </button>
