@@ -6,6 +6,7 @@
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
 - ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
 ## Features
+- ISY-756: IsyFact-Theme wurde überarbeitet
 - ISY-722: In isy-wizard wurde der Output `stepperIndexChange` in `indexChange` umbenannt
   * Infolgedessen wurde der bestehende Output `stepperIndexChange` als deprecated markiert
 ## Demo-Anwendung
