@@ -1,4 +1,4 @@
-# 17.1.0 -
+# 17.1.0 - 11.01.2024
 ## Fixes
 - ISY-632: Prozentuale Größe für die Linksnavigation wird nun korrekt angezeigt
 - ISY-641: Input-Char-Eingabefelder in der Demo App werden bei deaktivierter Form deaktiviert
