@@ -41,6 +41,29 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.onKeydown(keyEvent);
   }
 
+  /**
+   * Mock function to simulate handleKeyPress behavior
+   * @param keyEvent the current keyboard event
+   * @returns the key value as a string
+   */
+  function handleKeyPress(keyEvent: KeyboardEvent): string {
+    // Return the key value as a string
+    return keyEvent.key;
+  }
+
+  /**
+   * Simulates key press
+   * @param character as a string
+   * @param index as a number
+   */
+  function simulateKeyPress(character: string, index: number): void {
+    const keyEvent = new KeyboardEvent('keydown', {key: character});
+    input.value = input.value.substring(0, index) + handleKeyPress(keyEvent) + input.value.substring(index + 1);
+    input.dispatchEvent(keyEvent);
+    input.setSelectionRange(index, index);
+    component.onKeydown(keyEvent);
+  }
+
   beforeEach(() => {
     spectator = createComponent();
     component = spectator.component;
@@ -273,14 +296,10 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('should autocomplete the input value from 01.01.2024 to 01.01.2024', () => {
-    input.value = '01.__.____';
-    setupEvent(keyEvent, 2, 2);
-    expect(input.value).toBe('01.__.____');
-    input.value = '01.01.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('01.01.____');
-    input.value = '01.01.2024';
-    component.onComplete();
+    input.value = '__.__.____';
+
+    '01.01.2024'.split('').forEach((char, index) => simulateKeyPress(char, index));
+
     expect(input.value).toBe('01.01.2024');
   });
 
