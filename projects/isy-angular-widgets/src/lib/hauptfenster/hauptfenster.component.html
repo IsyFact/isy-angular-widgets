@@ -56,8 +56,8 @@
 
   <div class="grid grid-nogutter flex-grow-1">
     @if (showLinksnavigation) {
-      <div class="isy-hauptfenster-linksnavigation dont-print">
-        <div [style.width]="linksNavigationWidth" [hidden]="collapsedLinksnavigation" id="open-links-navigation">
+      <div class="isy-hauptfenster-linksnavigation dont-print" [style.width]="linksNavigationWidth">
+        <div [hidden]="collapsedLinksnavigation" id="open-links-navigation">
           @if (allowSidebarCollapse) {
             <div class="collapseButton">
               <button
@@ -88,9 +88,8 @@
     </div>
 
     @if (showInformationsbereich) {
-      <div class="isy-hauptfenster-informationsbereich dont-print">
+      <div class="isy-hauptfenster-informationsbereich dont-print" [style.width]="informationsbereichWidth">
         <div
-          [style.width]="informationsbereichWidth"
           [hidden]="collapsedInformationsbereich"
           id="open-informationsbereich"
         >

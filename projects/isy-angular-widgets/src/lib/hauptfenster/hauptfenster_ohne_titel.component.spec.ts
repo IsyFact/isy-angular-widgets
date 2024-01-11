@@ -70,7 +70,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     spectator.component.linksNavigationWidth = customLinksnavigationWidth;
     spectator.component.showLinksnavigation = true;
     spectator.fixture.detectChanges();
-    const linksnavigation = spectator.query('#open-links-navigation') as HTMLElement;
+    const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
     expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
   });
 
@@ -79,7 +79,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     spectator.component.informationsbereichWidth = customInformationsbereichWidth;
     spectator.component.showInformationsbereich = true;
     spectator.fixture.detectChanges();
-    const informationsbereich = spectator.query('#open-informationsbereich') as HTMLElement;
+    const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
 });
