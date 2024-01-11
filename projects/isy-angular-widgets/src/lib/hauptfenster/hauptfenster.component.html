@@ -89,10 +89,7 @@
 
     @if (showInformationsbereich) {
       <div class="isy-hauptfenster-informationsbereich dont-print" [style.width]="informationsbereichWidth">
-        <div
-          [hidden]="collapsedInformationsbereich"
-          id="open-informationsbereich"
-        >
+        <div [hidden]="collapsedInformationsbereich" id="open-informationsbereich">
           @if (allowSidebarCollapse) {
             <div class="collapseButton">
               <button

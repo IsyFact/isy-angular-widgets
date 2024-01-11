@@ -13,68 +13,70 @@ class HauptFensterWrapperComponent {
   @Input() title!: string;
 }
 
-describe('Unit Tests: HauptfensterComponent', () => {
-  let spectator: Spectator<HauptfensterComponent>;
-  const createComponent = createComponentFactory({
-    component: HauptfensterComponent,
-    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
-  });
+describe('HauptfensterComponent with available title', () => {
+  describe('Unit Tests: HauptfensterComponent', () => {
+    let spectator: Spectator<HauptfensterComponent>;
+    const createComponent = createComponentFactory({
+      component: HauptfensterComponent,
+      declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
+    });
 
-  beforeEach(() => (spectator = createComponent()));
+    beforeEach(() => (spectator = createComponent()));
 
-  it('should create', () => {
-    expect(spectator.component).toBeTruthy();
-  });
+    it('should create', () => {
+      expect(spectator.component).toBeTruthy();
+    });
 
-  it('should display the title input in Titelzeile', () => {
-    const customTitle = 'Custom Title';
-    spectator.component.title = customTitle;
-    spectator.fixture.detectChanges();
-    const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
+    it('should display the title input in Titelzeile', () => {
+      const customTitle = 'Custom Title';
+      spectator.component.title = customTitle;
+      spectator.fixture.detectChanges();
+      const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
 
-    expect(titelzeileEl.textContent).toEqual(customTitle);
-  });
+      expect(titelzeileEl.textContent).toEqual(customTitle);
+    });
 
-  it('should show "Abmelden" as the title of the logout button', () => {
-    const logoutTitle = 'Abmelden';
-    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const logoutButtonText = logoutButton.textContent ?? '';
-    expect(logoutButtonText.trim()).toEqual(logoutTitle);
-  });
+    it('should show "Abmelden" as the title of the logout button', () => {
+      const logoutTitle = 'Abmelden';
+      const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+      const logoutButtonText = logoutButton.textContent ?? '';
+      expect(logoutButtonText.trim()).toEqual(logoutTitle);
+    });
 
-  it('should call the logout function when the button is clocked', () => {
-    const spy = spyOn(spectator.component.logoutEvent, 'emit');
-    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    logoutButton.click();
-    expect(spy).toHaveBeenCalledWith(spectator.component.userInfo);
-  });
+    it('should call the logout function when the button is clocked', () => {
+      const spy = spyOn(spectator.component.logoutEvent, 'emit');
+      const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+      logoutButton.click();
+      expect(spy).toHaveBeenCalledWith(spectator.component.userInfo);
+    });
 
-  it('should have a hidden linksnavigation by default', () => {
-    const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
-    expect(linksnavigation).toBeFalsy();
-  });
+    it('should have a hidden linksnavigation by default', () => {
+      const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
+      expect(linksnavigation).toBeFalsy();
+    });
 
-  it('should have a hidden informationsbereich by default', () => {
-    const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
-    expect(informationsbereich).toBeFalsy();
-  });
+    it('should have a hidden informationsbereich by default', () => {
+      const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
+      expect(informationsbereich).toBeFalsy();
+    });
 
-  it('should use the provided Linksnavigation width', () => {
-    const customLinksnavigationWidth = '10%';
-    spectator.component.linksNavigationWidth = customLinksnavigationWidth;
-    spectator.component.showLinksnavigation = true;
-    spectator.fixture.detectChanges();
-    const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
-    expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
-  });
+    it('should use the provided Linksnavigation width', () => {
+      const customLinksnavigationWidth = '10%';
+      spectator.component.linksNavigationWidth = customLinksnavigationWidth;
+      spectator.component.showLinksnavigation = true;
+      spectator.fixture.detectChanges();
+      const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
+      expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
+    });
 
-  it('should use the provided Informationsbereich width', () => {
-    const customInformationsbereichWidth = '10%';
-    spectator.component.informationsbereichWidth = customInformationsbereichWidth;
-    spectator.component.showInformationsbereich = true;
-    spectator.fixture.detectChanges();
-    const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
-    expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
+    it('should use the provided Informationsbereich width', () => {
+      const customInformationsbereichWidth = '10%';
+      spectator.component.informationsbereichWidth = customInformationsbereichWidth;
+      spectator.component.showInformationsbereich = true;
+      spectator.fixture.detectChanges();
+      const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
+      expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
+    });
   });
 });
 
