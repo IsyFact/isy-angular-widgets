@@ -5,7 +5,7 @@ import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 @Component({
   selector: 'isy-input-char-dialog-left-side',
   templateUrl: './input-char-dialog-left-side.component.html',
-  styleUrl: './input-char-dialog-left-side.component.css'
+  styleUrl: './input-char-dialog-left-side.component.scss'
 })
 export class InputCharDialogLeftSideComponent implements OnChanges {
   protected readonly ButtonType = ButtonType;

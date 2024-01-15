@@ -1,32 +1,32 @@
-<!--<div class="split" id="left-panel-side">-->
-<p-selectButton
-  id="all-select-button"
-  optionLabel="label"
-  [options]="options.all"
-  [(ngModel)]="allCharsModel"
-  (onChange)="onButtonSelection(ButtonType.ALLE)"
->
-</p-selectButton>
+<div class="split" id="left-panel-side">
+  <p-selectButton
+    id="all-select-button"
+    optionLabel="label"
+    [options]="options.all"
+    [(ngModel)]="allCharsModel"
+    (onChange)="onButtonSelection(ButtonType.ALLE)"
+  >
+  </p-selectButton>
 
-<p-accordion [multiple]="true">
-  <p-accordionTab [header]="widgetsConfigService.getTranslation('inputChar.headerBaseChars')">
-    <p-selectButton
-      id="grundzeichen-select-button"
-      [options]="options.grundzeichen"
-      [(ngModel)]="selectedGrundzeichen"
-      (onChange)="onButtonSelection(ButtonType.GRUNDZEICHEN)"
-    >
-    </p-selectButton>
-  </p-accordionTab>
+  <p-accordion [multiple]="true">
+    <p-accordionTab [header]="widgetsConfigService.getTranslation('inputChar.headerBaseChars')">
+      <p-selectButton
+        id="grundzeichen-select-button"
+        [options]="options.grundzeichen"
+        [(ngModel)]="selectedGrundzeichen"
+        (onChange)="onButtonSelection(ButtonType.GRUNDZEICHEN)"
+      >
+      </p-selectButton>
+    </p-accordionTab>
 
-  <p-accordionTab [header]="getTranslation('inputChar.headerGroups')">
-    <p-selectButton
-      id="schriftzeichengruppe-select-button"
-      [options]="options.schriftzeichenGruppen"
-      [(ngModel)]="selectedSchriftzeichenGruppe"
-      (onChange)="onButtonSelection(ButtonType.SCHRIFTZEICHEN)"
-    >
-    </p-selectButton>
-  </p-accordionTab>
-</p-accordion>
-<!--</div>-->
+    <p-accordionTab [header]="getTranslation('inputChar.headerGroups')">
+      <p-selectButton
+        id="schriftzeichengruppe-select-button"
+        [options]="options.schriftzeichenGruppen"
+        [(ngModel)]="selectedSchriftzeichenGruppe"
+        (onChange)="onButtonSelection(ButtonType.SCHRIFTZEICHEN)"
+      >
+      </p-selectButton>
+    </p-accordionTab>
+  </p-accordion>
+</div>

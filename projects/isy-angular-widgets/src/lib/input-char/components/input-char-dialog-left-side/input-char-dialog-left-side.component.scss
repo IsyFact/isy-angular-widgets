@@ -1,0 +1,62 @@
+.split {
+  height: 100%;
+  max-height: 394px;
+  position: absolute;
+  z-index: 1;
+  top: 14%;
+  overflow-x: hidden;
+}
+
+#left-panel-side {
+  left: 0;
+  width: 30%;
+  overflow-y: scroll;
+}
+
+::ng-deep {
+  // Styles specific for left side (incl. select buttons)
+  #left-panel-side {
+    .p-accordion-header .p-accordion-header-link:focus {
+      box-shadow: none !important;
+    }
+
+    p-accordiontab {
+      // Fix specific for a buggy PrimeNG 14 behaviour where sometimes, content is shown although accordion is collapsed.
+      :not(.p-accordion-tab-active) .p-toggleable-content:not(.ng-animating) {
+        height: 0;
+      }
+
+      .p-accordion-content {
+        border: 0;
+        padding: 0;
+      }
+    }
+
+    // Styles specific for left side select buttons
+    p-selectButton .p-ripple.p-element.p-button {
+      border: none;
+    }
+
+    // Styles specific for the Grundzeichen select button
+    #grundzeichen-select-button .p-ripple.p-element.p-button {
+      width: 50px;
+    }
+
+    // Styles specific for the "Select All" button
+    #all-select-button .p-ripple.p-element.p-button {
+      width: 100%;
+      font-weight: 600;
+      text-align: start;
+      height: 50px;
+      box-shadow: none !important;
+
+      &:not(.p-highlight) {
+        background-color: var(--surface-b);
+      }
+
+      span {
+        padding: 1rem;
+      }
+    }
+  }
+}
