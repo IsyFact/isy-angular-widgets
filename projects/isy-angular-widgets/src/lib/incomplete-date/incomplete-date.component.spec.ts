@@ -55,11 +55,11 @@ describe('Integration Tests: IncompleteDateComponent', () => {
       if (key === '.') input.value = input.value.substring(0, input.selectionStart!);
       else input.value = input.value.substring(0, input.selectionStart!) + key;
 
-      const pos = input.selectionStart;
-      input.value += initialDateStr.substring(pos!);
+      const cursorPosition = input.selectionStart;
+      input.value += initialDateStr.substring(cursorPosition!);
 
       input.dispatchEvent(keyEvent);
-      setupEvent(keyEvent, pos!, pos!);
+      setupEvent(keyEvent, cursorPosition!, cursorPosition!);
 
       spectator.detectChanges();
     });
@@ -72,27 +72,27 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
   });
 
-  it('should autocomplete the input value from 01.01.2024 to 01.01.2024', () => {
+  it('should autocomplete the input sequence "01.01.2024" to "01.01.2024"', () => {
     typeSequence(['0', '1', '.', '0', '1', '.', '2', '0', '2', '4']);
     expect(input.value).toBe('01.01.2024');
   });
 
-  it('should autocomplete the input value from 1.01.2024 to 01.01.2024', () => {
+  it('should autocomplete the input sequence "1.01.2024" to "01.01.2024"', () => {
     typeSequence(['1', '.', '0', '1', '.', '2', '0', '2', '4']);
     expect(input.value).toBe('01.01.2024');
   });
 
-  it('should autocomplete the input value from 1.1.2024 to 01.01.2024', () => {
+  it('should autocomplete the input sequence "1.1.2024" to "01.01.2024"', () => {
     typeSequence(['1', '.', '1', '.', '2', '0', '2', '4']);
     expect(input.value).toBe('01.01.2024');
   });
 
-  it('should autocomplete the input value from x.x.____ to xx.xx.____', () => {
+  it('should autocomplete the input sequence "x.x.____" to "xx.xx.____"', () => {
     typeSequence(['x', '.', 'x', '.']);
     expect(input.value).toBe('xx.xx.____');
   });
 
-  it('should autocomplete the input value from "." to xx.__.____', () => {
+  it('should autocomplete the input sequence "._.__.____" to "xx.__.____"', () => {
     typeSequence(['.']);
     expect(input.value).toBe('xx.__.____');
   });
