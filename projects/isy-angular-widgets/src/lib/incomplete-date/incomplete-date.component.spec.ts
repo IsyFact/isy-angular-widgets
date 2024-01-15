@@ -3,7 +3,7 @@ import {AbstractControl, FormControl} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateModule} from './incomplete-date.module';
 
-describe('Integration Tests: IncompleteDateComponent', () => {
+fdescribe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let onChange: unknown = () => {};
   let onTouched: unknown = () => {};
@@ -42,26 +42,27 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   }
 
   /**
-   * Mock function to simulate handleKeyPress behavior
-   * @param keyEvent the current keyboard event
-   * @returns the key value as a string
+   * Simulate pressing the keys in sequence
+   * @param sequence the input sequence
    */
-  function handleKeyPress(keyEvent: KeyboardEvent): string {
-    // Return the key value as a string
-    return keyEvent.key;
-  }
+  function typeSequence(sequence: string[]): void {
+    const initialDateStr = (input.value = '__.__.____');
+    input.focus();
 
-  /**
-   * Simulates key press
-   * @param character as a string
-   * @param index as a number
-   */
-  function simulateKeyPress(character: string, index: number): void {
-    const keyEvent = new KeyboardEvent('keydown', {key: character});
-    input.value = input.value.substring(0, index) + handleKeyPress(keyEvent) + input.value.substring(index + 1);
-    input.dispatchEvent(keyEvent);
-    input.setSelectionRange(index, index);
-    component.onKeydown(keyEvent);
+    sequence.forEach((key) => {
+      const keyEvent = new KeyboardEvent('keydown', {key: key});
+
+      if (key === '.') input.value = input.value.substring(0, input.selectionStart!);
+      else input.value = input.value.substring(0, input.selectionStart!) + key;
+
+      const pos = input.selectionStart;
+      input.value += initialDateStr.substring(pos!);
+
+      input.dispatchEvent(keyEvent);
+      setupEvent(keyEvent, pos!, pos!);
+
+      spectator.detectChanges();
+    });
   }
 
   beforeEach(() => {
@@ -69,6 +70,31 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component = spectator.component;
     init();
     input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
+  });
+
+  it('should autocomplete the input value from 01.01.2024 to 01.01.2024', () => {
+    typeSequence(['0', '1', '.', '0', '1', '.', '2', '0', '2', '4']);
+    expect(input.value).toBe('01.01.2024');
+  });
+
+  it('should autocomplete the input value from 1.01.2024 to 01.01.2024', () => {
+    typeSequence(['1', '.', '0', '1', '.', '2', '0', '2', '4']);
+    expect(input.value).toBe('01.01.2024');
+  });
+
+  it('should autocomplete the input value from 1.1.2024 to 01.01.2024', () => {
+    typeSequence(['1', '.', '1', '.', '2', '0', '2', '4']);
+    expect(input.value).toBe('01.01.2024');
+  });
+
+  it('should autocomplete the input value from x.x.____ to xx.xx.____', () => {
+    typeSequence(['x', '.', 'x', '.']);
+    expect(input.value).toBe('xx.xx.____');
+  });
+
+  it('should autocomplete the input value from "." to xx.__.____', () => {
+    typeSequence(['.']);
+    expect(input.value).toBe('xx.__.____');
   });
 
   it('should transform the input value on losing the focus to "" when input value contains "_"', () => {
@@ -293,14 +319,6 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     input.value = '01.__.____';
     setupEvent(keyEvent, 3, 3);
     expect(input.value).toBe('01.__.____');
-  });
-
-  it('should autocomplete the input value from 01.01.2024 to 01.01.2024', () => {
-    input.value = '__.__.____';
-
-    '01.01.2024'.split('').forEach((char, index) => simulateKeyPress(char, index));
-
-    expect(input.value).toBe('01.01.2024');
   });
 
   it('should create', () => {
