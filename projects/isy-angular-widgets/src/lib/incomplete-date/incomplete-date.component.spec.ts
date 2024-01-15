@@ -3,7 +3,7 @@ import {AbstractControl, FormControl} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateModule} from './incomplete-date.module';
 
-fdescribe('Integration Tests: IncompleteDateComponent', () => {
+describe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let onChange: unknown = () => {};
   let onTouched: unknown = () => {};
