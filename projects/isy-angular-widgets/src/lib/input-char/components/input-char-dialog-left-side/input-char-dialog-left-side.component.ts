@@ -68,8 +68,8 @@ export class InputCharDialogLeftSideComponent implements OnChanges {
   selectedZeichenObjekt?: Zeichenobjekt;
 
   constructor(public widgetsConfigService: WidgetsConfigService) {
-    // this.allCharsOptions = [{label: this.getTranslation('inputChar.all') || 'Alle'}];
-    // this.allCharsModel = this.allCharsOptions[0];
+    this.allCharsOptions = [{label: this.getTranslation('inputChar.all') || 'Alle'}];
+    this.allCharsModel = this.allCharsOptions[0];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
