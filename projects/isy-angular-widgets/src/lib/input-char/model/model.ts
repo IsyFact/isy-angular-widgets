@@ -27,12 +27,13 @@ export enum Schriftzeichengruppe {
   KYRILLISCH = 'KYRILLISCH'
 }
 
-/**
- * @internal
- */
-export interface SchriftZeichen {
-  id: string;
-  gruppe: string;
+export enum ButtonType {
+  /* Alle button */
+  ALLE = 'ALLE',
+  /* Grundzeichen button */
+  GRUNDZEICHEN = 'GRUNDZEICHEN',
+  /* Schriftzeichen button */
+  SCHRIFTZEICHEN = 'SCHRIFTZEICHEN'
 }
 
 /**
@@ -44,4 +45,10 @@ export interface Zeichenobjekt {
   readonly schriftzeichengruppe: Schriftzeichengruppe;
   readonly name: string;
   readonly codepoint: string;
+}
+
+export interface SelectButtonOptions {
+  readonly all: {label: string}[];
+  readonly grundzeichen: string[];
+  readonly schriftzeichenGruppen: Schriftzeichengruppe[];
 }
