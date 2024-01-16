@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InputCharDialogButtonSelectionSideComponent } from './input-char-dialog-button-selection-side.component';
+import {InputCharDialogButtonSelectionSideComponent} from './input-char-dialog-button-selection-side.component';
 
 describe('InputCharDialogButtonSelectionSideComponent', () => {
   let component: InputCharDialogButtonSelectionSideComponent;
@@ -9,9 +9,8 @@ describe('InputCharDialogButtonSelectionSideComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [InputCharDialogButtonSelectionSideComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(InputCharDialogButtonSelectionSideComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
