@@ -43,7 +43,7 @@ export enum ButtonType {
  * @internal
  */
 export interface ButtonTypeEvent {
-  readonly type: ButtonType,
+  readonly type: ButtonType;
   readonly grundzeichen?: string;
   readonly schriftzeichenGruppe?: Schriftzeichengruppe;
 }
