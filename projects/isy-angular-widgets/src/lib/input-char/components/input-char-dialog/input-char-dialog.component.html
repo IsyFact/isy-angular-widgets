@@ -1,36 +1,9 @@
 <div>
-  <div class="split" id="left-panel-side">
-    <p-selectButton
-      [options]="allCharsOptions"
-      optionLabel="label"
-      (onChange)="onAllSelection()"
-      [(ngModel)]="allCharsModel"
-      id="all-select-button"
-    >
-    </p-selectButton>
-
-    <p-accordion [multiple]="true">
-      <p-accordionTab [header]="widgetsConfigService.getTranslation('inputChar.headerBaseChars')">
-        <p-selectButton
-          [options]="grundZeichenListe"
-          [(ngModel)]="selectedGrundzeichen"
-          (onChange)="onGrundzeichenSelection()"
-          id="grundzeichen-select-button"
-        >
-        </p-selectButton>
-      </p-accordionTab>
-
-      <p-accordionTab [header]="getTranslation('inputChar.headerGroups')">
-        <p-selectButton
-          [options]="schriftZeichenGruppen"
-          [(ngModel)]="selectedSchriftzeichenGruppe"
-          (onChange)="onSchriftzeichenGruppeSelection()"
-          id="schriftzeichengruppe-select-button"
-        >
-        </p-selectButton>
-      </p-accordionTab>
-    </p-accordion>
-  </div>
+  <isy-input-char-dialog-button-selection-side
+    (atSelection)="onSelection($event)"
+    [grundZeichenListe]="grundZeichenListe"
+    [schriftZeichenGruppen]="schriftZeichenGruppen"
+  ></isy-input-char-dialog-button-selection-side>
 
   <div class="split" id="right-panel-side">
     <p-selectButton

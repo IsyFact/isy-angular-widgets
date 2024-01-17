@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
+import {ButtonType, ButtonTypeEvent, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 /**
@@ -69,10 +69,7 @@ export class InputCharDialogComponent implements OnChanges {
    */
   allCharsModel?: {label: string};
 
-  constructor(public widgetsConfigService: WidgetsConfigService) {
-    this.allCharsOptions = [{label: this.getTranslation('inputChar.all') || 'Alle'}];
-    this.allCharsModel = this.allCharsOptions[0];
-  }
+  constructor(public widgetsConfigService: WidgetsConfigService) {}
 
   /**
    * Fire on input changes
@@ -83,24 +80,21 @@ export class InputCharDialogComponent implements OnChanges {
   }
 
   /**
-   * Resets all the user selections.
+   * Fired on user selection
+   * @param event Incoming event
    */
-  private resetAllSelection(): void {
-    this.allCharsModel = undefined;
-  }
+  onSelection(event: ButtonTypeEvent): void {
+    if (event.type === ButtonType.ALLE) {
+      this.onAllSelection();
+    }
 
-  /**
-   * Resets all the user base selections.
-   */
-  private resetGrundzeichenSelection(): void {
-    this.selectedGrundzeichen = undefined;
-  }
+    if (event.type === ButtonType.GRUNDZEICHEN) {
+      this.onGrundzeichenSelection(event.grundzeichen);
+    }
 
-  /**
-   * Resets all the user group selections.
-   */
-  private resetSchriftzeichenGruppeSelection(): void {
-    this.selectedSchriftzeichenGruppe = undefined;
+    if (event.type === ButtonType.SCHRIFTZEICHENGRUPPE) {
+      this.onSchriftzeichenGruppeSelection(event.schriftzeichenGruppe);
+    }
   }
 
   /**
@@ -117,36 +111,29 @@ export class InputCharDialogComponent implements OnChanges {
    * @internal
    */
   onAllSelection(): void {
-    this.resetGrundzeichenSelection();
-    this.resetSchriftzeichenGruppeSelection();
-
     this.resetDisplayedCharacters();
   }
 
   /**
    * Is fired when a base get selected
+   * @param selectedGrundzeichen From the user selected grundzeichen
    * @internal
    */
-  onGrundzeichenSelection(): void {
-    this.resetAllSelection();
-    this.resetSchriftzeichenGruppeSelection();
-
+  onGrundzeichenSelection(selectedGrundzeichen?: string): void {
     this.displayedCharacters = this.allCharacters.filter(
-      (z) => (z.grundzeichen === '' ? '*' : z.grundzeichen) === this.selectedGrundzeichen
+      (z) => (z.grundzeichen === '' ? '*' : z.grundzeichen) === selectedGrundzeichen
     );
     this.selectFirstEntry();
   }
 
   /**
    * Is fired when a base get selected
+   * @param selectedSchriftzeichenGruppe From the user selected schriftzeichengruppe
    * @internal
    */
-  onSchriftzeichenGruppeSelection(): void {
-    this.resetAllSelection();
-    this.resetGrundzeichenSelection();
-
+  onSchriftzeichenGruppeSelection(selectedSchriftzeichenGruppe?: Schriftzeichengruppe): void {
     this.displayedCharacters = this.allCharacters.filter(
-      (z) => z.schriftzeichengruppe === this.selectedSchriftzeichenGruppe
+      (z) => z.schriftzeichengruppe === selectedSchriftzeichenGruppe
     );
     this.selectFirstEntry();
   }
