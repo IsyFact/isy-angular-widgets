@@ -1,1 +1,32 @@
-<p>input-char-dialog-button-selection-side works!</p>
+<div class="split" id="left-panel-side">
+  <p-selectButton
+    [options]="[{label: getTranslation('inputChar.all') || 'Alle'}]"
+    optionLabel="label"
+    (onChange)="onAllSelection()"
+    [(ngModel)]="allCharsModel"
+    id="all-select-button"
+  >
+  </p-selectButton>
+
+  <p-accordion [multiple]="true">
+    <p-accordionTab [header]="getTranslation('inputChar.headerBaseChars')">
+      <p-selectButton
+        [options]="grundZeichenListe"
+        [(ngModel)]="selectedGrundzeichen"
+        (onChange)="onGrundzeichenSelection()"
+        id="grundzeichen-select-button"
+      >
+      </p-selectButton>
+    </p-accordionTab>
+
+    <p-accordionTab [header]="getTranslation('inputChar.headerGroups')">
+      <p-selectButton
+        [options]="schriftZeichenGruppen"
+        [(ngModel)]="selectedSchriftzeichenGruppe"
+        (onChange)="onSchriftzeichenGruppeSelection()"
+        id="schriftzeichengruppe-select-button"
+      >
+      </p-selectButton>
+    </p-accordionTab>
+  </p-accordion>
+</div>
