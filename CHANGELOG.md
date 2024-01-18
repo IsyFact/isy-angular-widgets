@@ -1,5 +1,7 @@
 # 17.1.0 - 18.01.2024
 ## Fixes
+- ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
+  der Form 'xx'. Dies ermöglicht die Eingabe herkömmlicher Datumsformate mit Punkten, wie zum Beispiel '01.01.2024'
 - ISY-632: Prozentuale Größe für die Linksnavigation wird nun korrekt angezeigt
 - ISY-641: Input-Char-Eingabefelder in der Demo App werden bei deaktivierter Form deaktiviert
 - ISY-614: Die Ecken des CharPickers werden bei Themes mit runden Ecken korrekt dargestellt
