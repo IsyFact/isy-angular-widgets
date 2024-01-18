@@ -43,24 +43,32 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   /**
    * Simulate pressing the keys in sequence
+   * Dispatching a keydown event in a unit test simulates only the event itself and does not automatically trigger the default behavior
+   * that a real keydown event would cause in a browser (like changing an input value).
+   * Thus the value of the input element is set manually before dispatching the keydown event in the setupEvent (onKeydown) function.
    * @param sequence the input sequence
    */
   function typeSequence(sequence: string[]): void {
+    // The input mask has to be initially set since dispatching the keydown event alone does not alter the input value.
     const initialDateStr = (input.value = '__.__.____');
     input.focus();
 
+    /*
+    The input values are manually set for each key. On each execution of the setupEvent function,
+    a sequential key is selected and linked to a corresponding result. This result is then synchronized with the input mask,
+    updating the input for the next iteration.
+    */
     sequence.forEach((key) => {
       const keyEvent = new KeyboardEvent('keydown', {key: key});
+      input.selectionStart =
+        input.selectionStart === 2 || input.selectionStart === 5 ? input.selectionStart + 1 : input.selectionStart;
 
       if (key === '.') input.value = input.value.substring(0, input.selectionStart!);
       else input.value = input.value.substring(0, input.selectionStart!) + key;
 
       const cursorPosition = input.selectionStart;
       input.value += initialDateStr.substring(cursorPosition!);
-
-      input.dispatchEvent(keyEvent);
       setupEvent(keyEvent, cursorPosition!, cursorPosition!);
-
       spectator.detectChanges();
     });
   }
@@ -84,6 +92,11 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should autocomplete the input sequence "1.1.2024" to "01.01.2024"', () => {
     typeSequence(['1', '.', '1', '.', '2', '0', '2', '4']);
+    expect(input.value).toBe('01.01.2024');
+  });
+
+  it('should autocomplete the input sequence "01012024" to "01.01.2024"', () => {
+    typeSequence(['0', '1', '0', '1', '2', '0', '2', '4']);
     expect(input.value).toBe('01.01.2024');
   });
 
