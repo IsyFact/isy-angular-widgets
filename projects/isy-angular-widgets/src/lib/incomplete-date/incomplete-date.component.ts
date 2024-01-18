@@ -38,7 +38,6 @@ import {InputMask} from 'primeng/inputmask';
 @Component({
   selector: 'isy-incomplete-date',
   templateUrl: './incomplete-date.component.html',
-  styleUrls: ['./incomplete-date.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
