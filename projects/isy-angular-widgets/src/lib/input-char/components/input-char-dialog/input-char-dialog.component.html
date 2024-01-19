@@ -1,8 +1,8 @@
 <div>
   <isy-input-char-dialog-button-selection-side
+    [header]="alleHeader"
+    [data]="data"
     (atSelection)="onSelection($event)"
-    [grundZeichenListe]="grundZeichenListe"
-    [schriftZeichenGruppen]="schriftZeichenGruppen"
   ></isy-input-char-dialog-button-selection-side>
 
   <div class="split" id="right-panel-side">
