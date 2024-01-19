@@ -43,9 +43,8 @@ export enum ButtonType {
  * @internal
  */
 export interface ButtonTypeEvent {
-  readonly type: ButtonType;
-  readonly grundzeichen?: string;
-  readonly schriftzeichenGruppe?: Schriftzeichengruppe;
+  readonly enum: ButtonType;
+  readonly value: string;
 }
 
 /**
@@ -57,4 +56,13 @@ export interface Zeichenobjekt {
   readonly schriftzeichengruppe: Schriftzeichengruppe;
   readonly name: string;
   readonly codepoint: string;
+}
+
+export interface InputCharData {
+  [key: string]: string[];
+}
+
+export interface ZeichenSelection {
+  identifier: string;
+  zeichen: string;
 }
