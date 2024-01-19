@@ -7,6 +7,7 @@
       "close": "Close"
     },
     "inputChar": {
+      "headerAllCharacters": "All",
       "headerBaseChars": "Base",
       "headerGroups": "Groups",
       "insert": "Insert",
