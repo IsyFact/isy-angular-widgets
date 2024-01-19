@@ -18,6 +18,7 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 
   beforeEach(() => {
+    // ToDo: Init groups
     spectator = createComponent();
     component = spectator.component;
   });
@@ -34,6 +35,7 @@ describe('Integration Tests: InputCharDialogButtonSelectionSideComponent', () =>
   });
 
   beforeEach(() => {
+    // ToDo: Init groups
     spectator = createComponent();
     component = spectator.component;
   });
