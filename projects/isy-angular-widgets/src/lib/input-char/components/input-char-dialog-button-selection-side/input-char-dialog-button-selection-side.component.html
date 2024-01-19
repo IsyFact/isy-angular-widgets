@@ -1,32 +1,18 @@
 <div class="split" id="left-panel-side">
-  <p-selectButton
-    [options]="[{label: getTranslation('inputChar.all') || 'Alle'}]"
-    optionLabel="label"
-    (onChange)="onAllSelection()"
-    [(ngModel)]="allCharsModel"
-    id="all-select-button"
-  >
+  <p-selectButton [options]="[header]" (onChange)="onSelection('')" [(ngModel)]="selection" id="all-select-button">
   </p-selectButton>
 
   <p-accordion [multiple]="true">
-    <p-accordionTab [header]="getTranslation('inputChar.headerBaseChars')">
-      <p-selectButton
-        [options]="grundZeichenListe"
-        [(ngModel)]="selectedGrundzeichen"
-        (onChange)="onGrundzeichenSelection()"
-        id="grundzeichen-select-button"
-      >
-      </p-selectButton>
-    </p-accordionTab>
-
-    <p-accordionTab [header]="getTranslation('inputChar.headerGroups')">
-      <p-selectButton
-        [options]="schriftZeichenGruppen"
-        [(ngModel)]="selectedSchriftzeichenGruppe"
-        (onChange)="onSchriftzeichenGruppeSelection()"
-        id="schriftzeichengruppe-select-button"
-      >
-      </p-selectButton>
-    </p-accordionTab>
+    @for (item of data[0] | keyvalue; track data[0]) {
+      <p-accordionTab [header]="item.key">
+        <p-selectButton
+          [options]="item.value"
+          [(ngModel)]="selection"
+          (onChange)="onSelection(item.key)"
+          id="grundzeichen-select-button"
+        >
+        </p-selectButton>
+      </p-accordionTab>
+    }
   </p-accordion>
 </div>

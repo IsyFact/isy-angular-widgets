@@ -1,121 +1,50 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ButtonType, ButtonTypeEvent, Schriftzeichengruppe} from '../../model/model';
-import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {InputCharData, ZeichenSelection} from '../../model/model';
 
 @Component({
   selector: 'isy-input-char-dialog-button-selection-side',
   templateUrl: './input-char-dialog-button-selection-side.component.html',
   styleUrl: './input-char-dialog-button-selection-side.component.scss'
 })
-export class InputCharDialogButtonSelectionSideComponent {
+export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnChanges {
   /**
-   * Emits the user selection
-   */
-  @Output() atSelection = new EventEmitter<ButtonTypeEvent>();
-
-  /**
-   * The array who stores all the grundzeichen.
+   * ...
    * @internal
    */
-  @Input() grundZeichenListe: string[] = [];
+  @Output() atSelection = new EventEmitter<ZeichenSelection>();
 
   /**
-   * The array who stores all the Schriftzeichen.
+   * ...
    * @internal
    */
-  @Input() schriftZeichenGruppen: Schriftzeichengruppe[] = [];
+  @Input() header!: string;
 
   /**
-   * Filled with one option for "All Characters"; solely technical reasons.
+   * The array who stores an array with every data who must be displayed.
    * @internal
    */
-  allCharsOptions = [{label: 'Alle'}];
+  @Input() data!: InputCharData[];
 
   /**
-   * Filled when all chars are selected; solely technical reasons.
+   * ...
    * @internal
    */
-  allCharsModel?: {label: string};
+  selection: string = '';
 
-  /**
-   * The currently selected Grundzeichen.
-   * @internal
-   */
-  selectedGrundzeichen?: string;
+  allSelected: boolean = true;
 
-  /**
-   * The currently selected Schriftzeichengruppe.
-   * @internal
-   */
-  selectedSchriftzeichenGruppe?: Schriftzeichengruppe;
-
-  constructor(public widgetsConfigService: WidgetsConfigService) {
-    this.allCharsModel = this.allCharsOptions[0];
+  ngOnInit(): void {
+    this.selection = this.header;
   }
 
-  /**
-   * Is fired when the all button get clicked
-   * @internal
-   */
-  onAllSelection(): void {
-    this.atSelection.emit({type: ButtonType.ALLE});
-
-    this.resetGrundzeichenSelection();
-    this.resetSchriftzeichenGruppeSelection();
+  ngOnChanges(): void {
+    if (this.allSelected) {
+      this.selection = this.header;
+    }
   }
 
-  /**
-   * Is fired when a base get selected
-   * @internal
-   */
-  onGrundzeichenSelection(): void {
-    this.atSelection.emit({type: ButtonType.GRUNDZEICHEN, grundzeichen: this.selectedGrundzeichen});
-
-    this.resetAllSelection();
-    this.resetSchriftzeichenGruppeSelection();
-  }
-
-  /**
-   * Is fired when a base get selected
-   * @internal
-   */
-  onSchriftzeichenGruppeSelection(): void {
-    this.atSelection.emit({
-      type: ButtonType.SCHRIFTZEICHENGRUPPE,
-      schriftzeichenGruppe: this.selectedSchriftzeichenGruppe
-    });
-
-    this.resetAllSelection();
-    this.resetGrundzeichenSelection();
-  }
-
-  /**
-   * Resets all the user selections.
-   */
-  resetAllSelection(): void {
-    this.allCharsModel = undefined;
-  }
-
-  /**
-   * Resets all the user base selections.
-   */
-  resetGrundzeichenSelection(): void {
-    this.selectedGrundzeichen = undefined;
-  }
-
-  /**
-   * Resets all the user group selections.
-   */
-  resetSchriftzeichenGruppeSelection(): void {
-    this.selectedSchriftzeichenGruppe = undefined;
-  }
-
-  /**
-   * Get translated text
-   * @param path to the translated text
-   * @returns translated text
-   */
-  getTranslation(path: string): string {
-    return this.widgetsConfigService.getTranslation(path) as string;
+  onSelection(key: string): void {
+    this.allSelected = key === '';
+    this.atSelection.emit({identifier: key, zeichen: this.selection});
   }
 }
