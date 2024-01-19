@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {ButtonType, ButtonTypeEvent, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
+import {InputCharData, Schriftzeichengruppe, Zeichenobjekt, ZeichenSelection} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {TranslateService} from '@ngx-translate/core';
+import {CharacterService} from '../../services/character.service';
 
 /**
  * @internal
@@ -19,7 +21,7 @@ export class InputCharDialogComponent implements OnChanges {
   /**
    * All characters the dialog should display.
    */
-  @Input() allCharacters: Zeichenobjekt[] = [];
+  @Input() charList: Zeichenobjekt[] = [];
 
   /**
    * The currently displayed characters.
@@ -69,7 +71,19 @@ export class InputCharDialogComponent implements OnChanges {
    */
   allCharsModel?: {label: string};
 
-  constructor(public widgetsConfigService: WidgetsConfigService) {}
+  data!: InputCharData[];
+
+  alleHeader!: string;
+
+  constructor(
+    public widgetsConfigService: WidgetsConfigService,
+    public translate: TranslateService,
+    private charService: CharacterService
+  ) {
+    this.translate.onLangChange.subscribe(() => {
+      this.initSelectButtonsData();
+    });
+  }
 
   /**
    * Fire on input changes
@@ -80,21 +94,34 @@ export class InputCharDialogComponent implements OnChanges {
   }
 
   /**
-   * Fired on user selection
-   * @param event Incoming event
+   * Fired on user zeichen selection
+   * @param selected Incoming event
    */
-  onSelection(event: ButtonTypeEvent): void {
-    if (event.type === ButtonType.ALLE) {
-      this.onAllSelection();
-    }
+  // onSelection(selection: ButtonTypeEvent): void {
+  //   if (selection.enum === ButtonType.ALLE) {
+  //     this.onAllSelection();
+  //   }
+  //
+  //   if (selection.enum === ButtonType.GRUNDZEICHEN) {
+  //     this.onGrundzeichenSelection(selection.value);
+  //   }
+  //
+  //   if (selection.enum === ButtonType.SCHRIFTZEICHENGRUPPE) {
+  //     this.onSchriftzeichenGruppeSelection(selection.value);
+  //   }
+  // }
+  onSelection(selected: ZeichenSelection): void {
+    const t = this.data[0];
+  }
 
-    if (event.type === ButtonType.GRUNDZEICHEN) {
-      this.onGrundzeichenSelection(event.grundzeichen);
-    }
-
-    if (event.type === ButtonType.SCHRIFTZEICHENGRUPPE) {
-      this.onSchriftzeichenGruppeSelection(event.schriftzeichenGruppe);
-    }
+  initSelectButtonsData(): void {
+    this.alleHeader = this.widgetsConfigService.getTranslation('inputChar.headerAllCharacters')!;
+    this.data = [
+      {
+        [this.widgetsConfigService.getTranslation('inputChar.headerBaseChars') as string]: this.grundZeichenListe,
+        [this.widgetsConfigService.getTranslation('inputChar.headerGroups') as string]: this.schriftZeichenGruppen
+      }
+    ];
   }
 
   /**
@@ -102,7 +129,7 @@ export class InputCharDialogComponent implements OnChanges {
    * @internal
    */
   private resetDisplayedCharacters(): void {
-    this.displayedCharacters = this.allCharacters;
+    this.displayedCharacters = this.charList;
     this.selectFirstEntry();
   }
 
@@ -116,25 +143,21 @@ export class InputCharDialogComponent implements OnChanges {
 
   /**
    * Is fired when a base get selected
-   * @param selectedGrundzeichen From the user selected grundzeichen
+   * @param grundzeichen From the user selected grundzeichen
    * @internal
    */
-  onGrundzeichenSelection(selectedGrundzeichen?: string): void {
-    this.displayedCharacters = this.allCharacters.filter(
-      (z) => (z.grundzeichen === '' ? '*' : z.grundzeichen) === selectedGrundzeichen
-    );
+  onGrundzeichenSelection(grundzeichen?: string): void {
+    this.displayedCharacters = this.charService.filterByGrundzeichen(this.charList, grundzeichen);
     this.selectFirstEntry();
   }
 
   /**
    * Is fired when a base get selected
-   * @param selectedSchriftzeichenGruppe From the user selected schriftzeichengruppe
+   * @param schriftzeichenGruppe From the user selected schriftzeichengruppe
    * @internal
    */
-  onSchriftzeichenGruppeSelection(selectedSchriftzeichenGruppe?: Schriftzeichengruppe): void {
-    this.displayedCharacters = this.allCharacters.filter(
-      (z) => z.schriftzeichengruppe === selectedSchriftzeichenGruppe
-    );
+  onSchriftzeichenGruppeSelection(schriftzeichenGruppe?: Schriftzeichengruppe): void {
+    this.displayedCharacters = this.charService.filterBySchriftzeichenGruppe(this.charList, schriftzeichenGruppe);
     this.selectFirstEntry();
   }
 
@@ -153,6 +176,7 @@ export class InputCharDialogComponent implements OnChanges {
   private setupCharPicker(): void {
     this.grundZeichenListe = this.getAvailableGrundzeichen();
     this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
+    this.initSelectButtonsData();
     this.resetDisplayedCharacters();
     this.allCharsModel = this.allCharsOptions[0];
   }
@@ -162,14 +186,7 @@ export class InputCharDialogComponent implements OnChanges {
    * @returns An array containing all different Schriftzeichengruppen.
    */
   private getAvailableSchriftzeichenGruppen(): Schriftzeichengruppe[] {
-    const res: Schriftzeichengruppe[] = [];
-    for (const char of this.allCharacters) {
-      if (!res.includes(char.schriftzeichengruppe)) {
-        res.push(char.schriftzeichengruppe);
-      }
-    }
-
-    return res;
+    return this.charService.getSchriftzeichenGruppen(this.charList);
   }
 
   /**
@@ -178,16 +195,7 @@ export class InputCharDialogComponent implements OnChanges {
    * @returns An array containing all different Grundzeichen.
    */
   private getAvailableGrundzeichen(): string[] {
-    const res = [...new Set(this.allCharacters.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
-
-    // Put * to the first position if present
-    const specialPos = res.indexOf('*');
-    if (specialPos > 0) {
-      res.splice(specialPos, 1);
-      res.unshift('*');
-    }
-
-    return res;
+    return this.charService.getGrundzeichen(this.charList);
   }
 
   /**
