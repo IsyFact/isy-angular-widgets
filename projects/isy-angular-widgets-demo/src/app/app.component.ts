@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, Renderer2, RendererFactory2} from '@angular/core';
 import {UserInfo} from '../../../isy-angular-widgets/src/lib/api/userinfo';
 import {SecurityService} from '../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   primeNGI18nSubscription: Subscription;
   isyAngularWidgetsI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
+  renderer: Renderer2;
 
   constructor(
     private securityService: SecurityService,
@@ -33,7 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private primeNGConfig: PrimeNGConfig,
     private widgetsConfigService: WidgetsConfigService,
-    private menuTranslationService: MenuTranslationService
+    private menuTranslationService: MenuTranslationService,
+    private rendererFactory: RendererFactory2
   ) {
     // Add translation
     translate.addLangs(['de', 'en']);
@@ -50,6 +52,8 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((data: WidgetsTranslation) => {
         this.widgetsConfigService.setTranslation(data);
       });
+
+    this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
   changeLanguage(language: string): void {
@@ -57,6 +61,9 @@ export class AppComponent implements OnInit, OnDestroy {
     // Currently, it's not clear, if firing the onChange Event from PrimeNG on initial null values or triggering value accessors for initial null values from Angular Forms is inappropriate
     if (language) {
       this.translate.use(language);
+
+      // Updating the HTML tag's lang attribute to improve website accessibility, enabling assistive technologies to correctly interpret and pronounce the content language.
+      this.renderer.setAttribute(document.documentElement, 'lang', language);
     }
   }
 
