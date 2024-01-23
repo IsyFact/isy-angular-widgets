@@ -1,7 +1,7 @@
 import {createPipeFactory, SpectatorPipe} from '@ngneat/spectator';
 import {IncompleteDatePipe} from './incomplete-date.pipe';
 
-fdescribe('Unit Tests: IncompleteDatePipe', () => {
+describe('Unit Tests: IncompleteDatePipe', () => {
   let spectator: SpectatorPipe<IncompleteDatePipe>;
   const createPipe = createPipeFactory(IncompleteDatePipe);
 
