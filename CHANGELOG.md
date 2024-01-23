@@ -8,6 +8,7 @@
 - ISY-633: isy-incomplete-date: Keine Breitenkonfigurierbarkeit
 - ISY-684: Bessere Unterscheidbarkeit von inaktiven und aktiven Eingabefehlern
 ## Features
+- ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datum Werten wurde hinzugefügt
 - ISY-722: In isy-wizard wurde der Output `stepperIndexChange` in `indexChange` umbenannt
   * Infolgedessen wurde der bestehende Output `stepperIndexChange` als deprecated markiert
 ## Demo-Anwendung
