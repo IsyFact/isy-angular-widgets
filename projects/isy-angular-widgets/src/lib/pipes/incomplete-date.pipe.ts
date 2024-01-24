@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {INCOMPLETE_DATE_GERMAN_FORMAT_REGEX, INCOMPLETE_DATE_REGEX} from './data/regex';
+import {INCOMPLETE_DATE_FORMATS_REGEX, INCOMPLETE_DATE_GERMAN_FORMATS_REGEX} from './data/regex';
 import {DATE_FORMAT_ERROR} from './data/errors';
 
 /**
@@ -25,10 +25,11 @@ export class IncompleteDatePipe implements PipeTransform {
     const valueInLowerCase = value.toLowerCase();
 
     // Check if the value matches the German date format and return as is if it does
-    if (INCOMPLETE_DATE_GERMAN_FORMAT_REGEX.test(valueInLowerCase)) return valueInLowerCase;
+    if (INCOMPLETE_DATE_GERMAN_FORMATS_REGEX.some((format) => format.test(valueInLowerCase))) return valueInLowerCase;
 
     // Check if the value matches a specified date format, throw an error if it doesn't
-    if (!INCOMPLETE_DATE_REGEX.test(valueInLowerCase)) throw new Error(DATE_FORMAT_ERROR);
+    if (!INCOMPLETE_DATE_FORMATS_REGEX.some((format) => format.test(valueInLowerCase)))
+      throw new Error(DATE_FORMAT_ERROR);
 
     const [year, month, day] = valueInLowerCase.split('-');
 

@@ -30,7 +30,7 @@ describe('Unit Tests: IncompleteDatePipe', () => {
 
   it('should throw an error for invalid date formats', () => {
     expect(() => {
-      spectator = createPipe('{{ "invalid-date" | incompleteDatePipe }}');
+      spectator = createPipe('{{ "2024-xx-00" | incompleteDatePipe }}');
     }).toThrow();
   });
 });
