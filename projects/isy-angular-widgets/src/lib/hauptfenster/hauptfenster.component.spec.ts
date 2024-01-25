@@ -33,15 +33,6 @@ describe('HauptfensterComponent with available title', () => {
       expect(spectator.component).toBeTruthy();
     });
 
-    it('should display the title input in Titelzeile', () => {
-      const customTitle = 'Custom Title';
-      spectator.component.title = customTitle;
-      spectator.fixture.detectChanges();
-      const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
-
-      expect(titelzeileEl.textContent).toEqual(customTitle);
-    });
-
     it('should show "Abmelden" as the title of the logout button', () => {
       const logoutTitle = 'Abmelden';
       const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
@@ -95,13 +86,12 @@ describe('Integration Test: HauptfensterComponent', () => {
 
   beforeEach(() => (spectator = createComponent()));
 
-  it('should not display custom html in template of Titelzeile', () => {
+  it('should display custom title in template of Titelzeile if titel input is undefined', () => {
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
-    const h1El = titelzeileEl.querySelector('.custom-title');
-    expect(h1El!).toBeNull();
+    expect(titelzeileEl.textContent).toEqual('Titel inside H1!');
   });
 
-  it('should display custom html in Titelzeile if titel input is used', () => {
+  it('should display custom title if titel input is used', () => {
     const customTitle = 'Custom Title';
     spectator.component.title = customTitle;
     spectator.fixture.detectChanges();
