@@ -7,7 +7,13 @@ import {MockComponents} from 'ng-mocks';
 import {HauptfensterModule} from './hauptfenster.module';
 
 @Component({
-  template: '<isy-hauptfenster [title]="title"></isy-hauptfenster>'
+  template: `
+    <isy-hauptfenster [title]="title">
+      <div Titelzeile>
+        <h1 class="custom-title">Titel inside H1!</h1>
+      </div>
+    </isy-hauptfenster>
+  `
 })
 class HauptFensterWrapperComponent {
   @Input() title!: string;
