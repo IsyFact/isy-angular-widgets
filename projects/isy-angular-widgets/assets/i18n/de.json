@@ -13,6 +13,10 @@
       "insert": "Einfügen",
       "aria": {
         "togglePicker": "Sonderzeichenpicker öffnen/schließen"
+      },
+      "enum": {
+        "basis": "GRUNDZEICHEN",
+        "gruppen": "SCHRIFTZEICHENGRUPPE"
       }
     },
     "hauptfenster": {
