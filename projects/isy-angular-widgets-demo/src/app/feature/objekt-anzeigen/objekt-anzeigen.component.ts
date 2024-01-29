@@ -26,7 +26,7 @@ export class ObjektAnzeigenComponent {
     id: '1',
     personalien: {
       geburtsdatum: '03.08.1980',
-      geburtsname: ' Mustermann',
+      geburtsname: 'Mustermann',
       geburtsort: 'Köln',
       geschlecht: 'Männlich',
       nachname: 'Mustermann',

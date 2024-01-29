@@ -27,8 +27,8 @@
 }
 
 .isy-hauptfenster-linksnavigation {
-  border-right: 1px solid var(--gray-300);
-  background-color: #f3f3f3;
+  border-right: 1px solid var(--surface-border);
+  background-color: var(--surface-ground);
 
   .collapseButton {
     display: flex;
@@ -37,8 +37,8 @@
 }
 
 .isy-hauptfenster-informationsbereich {
-  border-left: 1px solid var(--gray-300);
-  background-color: #f3f3f3;
+  border-right: 1px solid var(--surface-border);
+  background-color: var(--surface-ground);
 
   .collapseButton {
     display: flex;
