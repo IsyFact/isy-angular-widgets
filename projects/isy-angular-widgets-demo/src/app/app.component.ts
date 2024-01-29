@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {UserInfo} from '../../../isy-angular-widgets/src/lib/api/userinfo';
 import {SecurityService} from '../../../isy-angular-widgets/src/lib/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
@@ -11,6 +11,7 @@ import {MenuTranslationService} from './shared/services/menu-translation.service
 import {WidgetsTranslation} from '../../../isy-angular-widgets/src/lib/i18n/widgets-translation';
 import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/widgets-config.service';
 import {permissions} from './app.permission';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'demo-root',
@@ -33,7 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private primeNGConfig: PrimeNGConfig,
     private widgetsConfigService: WidgetsConfigService,
-    private menuTranslationService: MenuTranslationService
+    private menuTranslationService: MenuTranslationService,
+    @Inject(DOCUMENT) private document: Document
   ) {
     // Add translation
     translate.addLangs(['de', 'en']);
@@ -50,6 +52,11 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((data: WidgetsTranslation) => {
         this.widgetsConfigService.setTranslation(data);
       });
+
+    // Updating the HTML tag's lang attribute to improve website accessibility, enabling assistive technologies to correctly interpret and pronounce the content language.
+    this.translate.onLangChange.subscribe((langEvent) => {
+      this.document.documentElement.lang = langEvent.lang;
+    });
   }
 
   changeLanguage(language: string): void {
