@@ -1,9 +1,11 @@
 <div>
-  <isy-input-char-dialog-button-selection-side
-    [header]="alleHeader"
-    [data]="data"
-    (atSelection)="onSelection($event)"
-  ></isy-input-char-dialog-button-selection-side>
+  <div class="split" id="left-panel-side">
+    <isy-input-char-dialog-button-selection-side
+      [header]="alleHeader"
+      [data]="data"
+      (atSelection)="onSelection($event)"
+    ></isy-input-char-dialog-button-selection-side>
+  </div>
 
   <div class="split" id="right-panel-side">
     <p-selectButton
