@@ -31,6 +31,10 @@ export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnCh
    */
   selection: string = '';
 
+  /**
+   * ...
+   * @internal
+   */
   allSelected: boolean = true;
 
   ngOnInit(): void {

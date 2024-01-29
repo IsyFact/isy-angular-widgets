@@ -1,5 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {InputCharData, Schriftzeichengruppe, Zeichenobjekt, ZeichenSelection} from '../../model/model';
+import {
+  ButtonTypeIdentifier,
+  InputCharData,
+  Schriftzeichengruppe,
+  Zeichenobjekt,
+  ZeichenSelection
+} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {TranslateService} from '@ngx-translate/core';
 import {CharacterService} from '../../services/character.service';
@@ -97,21 +103,22 @@ export class InputCharDialogComponent implements OnChanges {
    * Fired on user zeichen selection
    * @param selected Incoming event
    */
-  // onSelection(selection: ButtonTypeEvent): void {
-  //   if (selection.enum === ButtonType.ALLE) {
-  //     this.onAllSelection();
-  //   }
-  //
-  //   if (selection.enum === ButtonType.GRUNDZEICHEN) {
-  //     this.onGrundzeichenSelection(selection.value);
-  //   }
-  //
-  //   if (selection.enum === ButtonType.SCHRIFTZEICHENGRUPPE) {
-  //     this.onSchriftzeichenGruppeSelection(selection.value);
-  //   }
-  // }
   onSelection(selected: ZeichenSelection): void {
-    const t = this.data[0];
+    const buttonType = this.getTranslation(`inputChar.enum.${selected.identifier.toLowerCase()}`);
+
+    if (!buttonType) {
+      this.onAllSelection();
+    }
+
+    if (buttonType === (ButtonTypeIdentifier.GRUNDZEICHEN as string)) {
+      this.onGrundzeichenSelection(selected.zeichen);
+    }
+
+    if (buttonType === (ButtonTypeIdentifier.SCHRIFTZEICHENGRUPPE as string)) {
+      this.onSchriftzeichenGruppeSelection(selected.zeichen as Schriftzeichengruppe);
+    }
+
+    // const t = this.data[0];
   }
 
   initSelectButtonsData(): void {
