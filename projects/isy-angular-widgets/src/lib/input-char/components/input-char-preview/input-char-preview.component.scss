@@ -1,7 +1,7 @@
-$dot-color: #888;
+/* $dot-color: #888; */
 $dot-thickness: 2px;
 $serif-font: BundesSerif, 'Liberation Serif', serif;
-$sans-serif-font: BundesSans, 'Liberation Sans', sans-serif;
+/* $sans-serif-font: BundesSans, 'Liberation Sans', sans-serif; */
 $letter-size: 5em;
 $letters-preview-width: 30%;
 
@@ -16,12 +16,12 @@ $letters-preview-width: 30%;
 }
 
 #sans-letter {
-  font-family: $sans-serif-font;
+  font-family: var(--font-family);
 }
 
 #letters-preview {
-  border-bottom: $dot-thickness $dot-color dotted;
-  border-top: $dot-thickness $dot-color dotted;
+  border-bottom: $dot-thickness var(--text-color) dotted;
+  border-top: $dot-thickness var(--text-color) dotted;
   width: $letters-preview-width;
   float: left;
 

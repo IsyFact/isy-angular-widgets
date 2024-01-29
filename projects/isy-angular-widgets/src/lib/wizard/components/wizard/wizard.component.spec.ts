@@ -338,7 +338,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have a disabled back button while current index is 0 and the form is valid', () => {
     expectFirstStep();
     expectNextStepIsAllowed(false);
-
     setNextStepAvailable();
     expect(isElementDisabled(nextButtonDeclaration)).toBeFalse();
   });
