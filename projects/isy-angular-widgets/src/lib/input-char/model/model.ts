@@ -30,21 +30,11 @@ export enum Schriftzeichengruppe {
 /**
  * @internal
  */
-export enum ButtonType {
-  /* Alle button */
-  ALLE = 'ALLE',
+export enum ButtonTypeIdentifier {
   /* Grundzeichen button */
   GRUNDZEICHEN = 'GRUNDZEICHEN',
   /* Schriftzeichen button */
   SCHRIFTZEICHENGRUPPE = 'SCHRIFTZEICHENGRUPPE'
-}
-
-/**
- * @internal
- */
-export interface ButtonTypeEvent {
-  readonly enum: ButtonType;
-  readonly value: string;
 }
 
 /**
