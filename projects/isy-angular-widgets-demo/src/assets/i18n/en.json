@@ -70,8 +70,8 @@
       "addOrEditFact": "Add/Edit fact"
     },
     "labels": {
-      "nachname": "First name",
-      "vorname": "Last name",
+      "nachname": "Last name",
+      "vorname": "First name",
       "geburtsname": "Birth name",
       "geburtsort": "Birthplace",
       "geschlecht": "Gender",
