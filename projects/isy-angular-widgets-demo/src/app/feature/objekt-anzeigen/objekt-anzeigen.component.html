@@ -1,15 +1,18 @@
 <p-panel
+  sm:col-5
+  sm:text-right
+  text-left
   iconPos="start"
   [header]="'isyAngularWidgetsDemo.displayObject.masterDataHeader' | translate"
   [toggleable]="true"
 >
   <div class="grid mt-1 align-items-center">
-    <div class="col-12 md:col-6 lg:col-4 py-0">
+    <div class="col-12 lg:col-6 xl:col-4 py-0">
       <div class="grid p-1 align-items-center">
-        <label for="basis-nachname" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+        <label for="basis-nachname" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
           {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
         </label>
-        <div class="col-12 md:col-6 sm:col-7">
+        <div class="col-12 sm:col-8 md:col-7 lg:col-6">
           <input
             id="basis-nachname"
             class="w-full"
@@ -21,12 +24,12 @@
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-6 lg:col-4 py-0">
+    <div class="col-12 lg:col-6 xl:col-4 py-0">
       <div class="grid p-1 align-items-center">
-        <label for="basis-vorname" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+        <label for="basis-vorname" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
           {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
         </label>
-        <div class="col-12 md:col-6 sm:col-7">
+        <div class="col-12 sm:col-8 md:col-7 lg:col-6">
           <input
             id="basis-vorname"
             class="w-full"
@@ -38,12 +41,12 @@
         </div>
       </div>
     </div>
-    <div class="col-12 md:col-6 lg:col-4 py-0">
+    <div class="col-12 lg:col-6 xl:col-4 py-0">
       <div class="grid p-1 align-items-center">
-        <label for="basis-geburtsdatum" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+        <label for="basis-geburtsdatum" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
           {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
         </label>
-        <div class="col-12 md:col-6 sm:col-7">
+        <div class="col-12 sm:col-8 md:col-7 lg:col-6">
           <input
             id="basis-geburtsdatum"
             class="w-full"
@@ -62,12 +65,12 @@
   <p-tabPanel id="panel-personalien" [header]="'isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate">
     <form [formGroup]="personalInfoForm">
       <div class="grid mt-1">
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="first-name" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="first-name" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <input
                 id="first-name"
                 formControlName="firstName"
@@ -83,12 +86,12 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="last-name" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="last-name" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <input id="last-name" formControlName="lastName" type="text" pInputText isyInputChar />
               <small
                 class="p-error block"
@@ -99,32 +102,32 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="birth-name" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="birth-name" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <input id="birth-name" formControlName="birthName" type="text" pInputText isyInputChar />
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="birth-place" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="birth-place" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <input id="birth-place" formControlName="birthplace" class="w-full" type="text" pInputText />
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="gender" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="gender" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <p-dropdown
                 inputId="gender"
                 formControlName="gender"
@@ -140,12 +143,12 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="birth-date" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="birth-date" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <p-calendar
                 inputId="birth-date"
                 dateFormat="dd.mm.yy"
@@ -157,22 +160,22 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="nationality" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="nationality" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="phone-number" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="phone-number" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.telefonnummer' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <p-inputMask
                 inputId="phone-number"
                 formControlName="phoneNumber"
@@ -184,12 +187,12 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="date-of-entry" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="date-of-entry" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <isy-incomplete-date inputId="date-of-entry" formControlName="dateOfEntry" [dateInPastConstraint]="true">
               </isy-incomplete-date>
               <small
@@ -204,22 +207,22 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="date-of-departure" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="date-of-departure" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.abreisedatum' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <input id="date-of-departure" formControlName="dateOfDeparture" class="w-full" type="text" pInputText />
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="passport-expiration-date" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="passport-expiration-date" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.ablaufdatumReisepass' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <p-calendar
                 inputId="passport-expiration-date"
                 dateFormat="dd.mm.yy"
@@ -231,22 +234,22 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="credit-card-number" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="credit-card-number" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.kreditkartennummer' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <input id="credit-card-number" formControlName="creditCardNumber" class="w-full" type="text" pInputText />
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="credit-card-expiration-date" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="credit-card-expiration-date" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.ablaufdatumKreditkarte' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <input
                 id="credit-card-expiration-date"
                 formControlName="creditCardExpirationDate"
@@ -257,12 +260,12 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-4 py-0">
+        <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
-            <label for="identity-document" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+            <label for="identity-document" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
               {{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}
             </label>
-            <div class="col-12 md:col-6 sm:col-7">
+            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <p-fileUpload
                 id="identity-document"
                 formControlName="identityDocument"
@@ -289,22 +292,22 @@
 
       <div id="div-show-secret-fields" *ngIf="showSecretFields">
         <div class="grid m-0 align-items-center">
-          <div class="col-12 md:col-6 lg:col-4 py-0">
+          <div class="col-12 lg:col-6 xl:col-4 py-0">
             <div class="grid p-1 align-items-center">
-              <label for="id-required" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+              <label for="id-required" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
                 {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
               </label>
-              <div class="col-12 md:col-6 sm:col-7">
+              <div class="col-12 sm:col-8 md:col-7 lg:col-6">
                 <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
               </div>
             </div>
           </div>
-          <div class="col-12 md:col-6 lg:col-4 py-0">
+          <div class="col-12 lg:col-6 xl:col-4 py-0">
             <div class="grid p-1 align-items-center">
-              <label for="security-level" class="col-12 md:col-6 sm:col-5 sm:text-right text-left">
+              <label for="security-level" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
                 {{ 'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate }}
               </label>
-              <div class="col-12 md:col-6 sm:col-7">
+              <div class="col-12 sm:col-8 md:col-7 lg:col-6">
                 <p-inputNumber
                   id="security-level"
                   formControlName="securityLevel"
@@ -321,10 +324,13 @@
           </div>
           <div class="col-12 lg:col-12 md:col-12 py-0">
             <div class="grid p-1 align-items-center">
-              <label for="intelligence-notes" class="col-12 lg:col-2 md:col-3 sm:col-5 sm:text-right text-left">
+              <label
+                for="intelligence-notes"
+                class="col-12 sm:col-4 md:col-5 lg:col-3 xl:col-2 sm:text-right text-left"
+              >
                 {{ 'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate }}
               </label>
-              <div class="col-12 lg:col-6 md:col-9 sm:col-7">
+              <div class="col-12 sm:col-8 md:col-7 lg:col-9 xl:col-6">
                 <textarea
                   pInputTextarea
                   id="intelligence-notes"
