@@ -8,13 +8,13 @@ import {InputCharData, ZeichenSelection} from '../../model/model';
 })
 export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnChanges {
   /**
-   * ...
+   * Fired on select button selection
    * @internal
    */
   @Output() atSelection = new EventEmitter<ZeichenSelection>();
 
   /**
-   * ...
+   * Header title of select all button
    * @internal
    */
   @Input() header!: string;
@@ -26,13 +26,13 @@ export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnCh
   @Input() data!: InputCharData[];
 
   /**
-   * ...
+   * Current select button value
    * @internal
    */
   selection: string = '';
 
   /**
-   * ...
+   * The boolean that decides whether the all select button is selected
    * @internal
    */
   allSelected: boolean = true;
