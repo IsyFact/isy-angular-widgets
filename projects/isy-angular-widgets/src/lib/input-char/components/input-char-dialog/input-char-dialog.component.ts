@@ -117,16 +117,14 @@ export class InputCharDialogComponent implements OnChanges {
     if (buttonType === (ButtonTypeIdentifier.SCHRIFTZEICHENGRUPPE as string)) {
       this.onSchriftzeichenGruppeSelection(selected.zeichen as Schriftzeichengruppe);
     }
-
-    // const t = this.data[0];
   }
 
   initSelectButtonsData(): void {
-    this.alleHeader = this.widgetsConfigService.getTranslation('inputChar.headerAllCharacters')!;
+    this.alleHeader = this.getTranslation('inputChar.headerAllCharacters')!;
     this.data = [
       {
-        [this.widgetsConfigService.getTranslation('inputChar.headerBaseChars') as string]: this.grundZeichenListe,
-        [this.widgetsConfigService.getTranslation('inputChar.headerGroups') as string]: this.schriftZeichenGruppen
+        [this.getTranslation('inputChar.headerBaseChars')]: this.grundZeichenListe,
+        [this.getTranslation('inputChar.headerGroups')]: this.schriftZeichenGruppen
       }
     ];
   }
