@@ -1,5 +1,9 @@
-<!--<div class="split" id="left-panel-side">-->
-<p-selectButton [options]="[header]" (onChange)="onSelection('')" [(ngModel)]="selection" id="all-select-button">
+<p-selectButton
+  id="all-select-button"
+  [options]="[header]"
+  [(ngModel)]="selection"
+  (onChange)="onSelection('')"
+>
 </p-selectButton>
 
 <p-accordion [multiple]="true">
@@ -15,4 +19,3 @@
     </p-accordionTab>
   }
 </p-accordion>
-<!--</div>-->
