@@ -1,14 +1,14 @@
-<p-selectButton id="all-select-button" [options]="[header]" [(ngModel)]="selection" (onChange)="onSelection('')">
+<p-selectButton id="all-select-button" [options]="[allButtonOptions]" [(ngModel)]="selection" (onChange)="onSelection('')">
 </p-selectButton>
 
 <p-accordion [multiple]="true">
-  @for (item of data[0] | keyvalue; track data[0]) {
+  @for (item of dataToDisplay[0] | keyvalue; track dataToDisplay[0]) {
     <p-accordionTab [header]="item.key">
       <p-selectButton
         [options]="item.value"
         [(ngModel)]="selection"
         (onChange)="onSelection(item.key)"
-        id="grundzeichen-select-button"
+        id="accordion-select-button"
       >
       </p-selectButton>
     </p-accordionTab>

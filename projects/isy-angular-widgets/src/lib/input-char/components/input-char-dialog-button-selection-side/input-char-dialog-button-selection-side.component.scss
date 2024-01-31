@@ -47,8 +47,8 @@ $select_button_on_hover_background_color: grey;
     border: none;
   }
 
-  // Styles specific for the Grundzeichen select button
-  #grundzeichen-select-button .p-ripple.p-element.p-button {
+  // Styles specific for the select button inside the accordion
+  #accordion-select-button .p-ripple.p-element.p-button {
     width: 50px;
   }
 

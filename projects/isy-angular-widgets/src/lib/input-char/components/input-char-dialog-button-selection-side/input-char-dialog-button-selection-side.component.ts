@@ -17,13 +17,13 @@ export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnCh
    * Header title of select all button
    * @internal
    */
-  @Input() header!: string;
+  @Input() allButtonOptions!: string;
 
   /**
    * The array who stores an array with every data who must be displayed.
    * @internal
    */
-  @Input() data!: InputCharData[];
+  @Input() dataToDisplay!: InputCharData[];
 
   /**
    * Current select button value
@@ -42,7 +42,7 @@ export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnCh
    * @internal
    */
   ngOnInit(): void {
-    this.selection = this.header;
+    this.selection = this.allButtonOptions;
   }
 
   /**
@@ -51,7 +51,7 @@ export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnCh
    */
   ngOnChanges(): void {
     if (this.allSelected) {
-      this.selection = this.header;
+      this.selection = this.allButtonOptions;
     }
   }
 

@@ -81,13 +81,13 @@ export class InputCharDialogComponent implements OnChanges {
    * Includes the displaying data for the left side of the view
    * @internal
    */
-  data!: InputCharData[];
+  leftViewData!: InputCharData[];
 
   /**
    * Header of all select button
    * @internal
    */
-  alleHeader!: string;
+  allButtonHeader!: string;
 
   constructor(
     public widgetsConfigService: WidgetsConfigService,
@@ -132,8 +132,8 @@ export class InputCharDialogComponent implements OnChanges {
    * @internal
    */
   initSelectButtonsData(): void {
-    this.alleHeader = this.getTranslation('inputChar.headerAllCharacters')!;
-    this.data = [
+    this.allButtonHeader = this.getTranslation('inputChar.headerAllCharacters')!;
+    this.leftViewData = [
       {
         [this.getTranslation('inputChar.headerBaseChars')]: this.grundZeichenListe,
         [this.getTranslation('inputChar.headerGroups')]: this.schriftZeichenGruppen
@@ -220,9 +220,7 @@ export class InputCharDialogComponent implements OnChanges {
    * @internal
    */
   insertSelectedZeichen(): void {
-    if (this.selectedZeichenObjekt) {
-      this.insertCharacter.emit(this.selectedZeichenObjekt.zeichen);
-    }
+    this.insertCharacter.emit(this.selectedZeichenObjekt!.zeichen);
   }
 
   /**
