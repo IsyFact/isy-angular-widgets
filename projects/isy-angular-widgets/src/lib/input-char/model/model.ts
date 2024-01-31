@@ -48,10 +48,16 @@ export interface Zeichenobjekt {
   readonly codepoint: string;
 }
 
+/**
+ * @internal
+ */
 export interface InputCharData {
   [key: string]: string[];
 }
 
+/**
+ * @internal
+ */
 export interface ZeichenSelection {
   identifier: string;
   zeichen: string;
