@@ -12,11 +12,11 @@ import {DropdownModule} from 'primeng/dropdown';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {InputTextModule} from 'primeng/inputtext';
-import {WizardModule} from '../../../../../isy-angular-widgets/src/lib/wizard/wizard.module';
+import {WizardModule} from '@isy-angular-widgets/wizard/wizard.module';
 import {TableModule} from 'primeng/table';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
-import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
+import {InputCharModule} from '@isy-angular-widgets/input-char/input-char.module';
 import {RequiredLabelComponent} from './components/required-label/required-label.component';
 
 @NgModule({
