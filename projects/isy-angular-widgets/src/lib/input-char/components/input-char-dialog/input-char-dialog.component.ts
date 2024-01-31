@@ -77,8 +77,16 @@ export class InputCharDialogComponent implements OnChanges {
    */
   allCharsModel?: {label: string};
 
+  /**
+   * Includes the displaying data for the left side of the view
+   * @internal
+   */
   data!: InputCharData[];
 
+  /**
+   * Header of all select button
+   * @internal
+   */
   alleHeader!: string;
 
   constructor(
@@ -119,6 +127,10 @@ export class InputCharDialogComponent implements OnChanges {
     }
   }
 
+  /**
+   * Inits the select button view data
+   * @internal
+   */
   initSelectButtonsData(): void {
     this.alleHeader = this.getTranslation('inputChar.headerAllCharacters')!;
     this.data = [

@@ -37,18 +37,30 @@ export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnCh
    */
   allSelected: boolean = true;
 
+  /**
+   * Fire on input init
+   * @internal
+   */
   ngOnInit(): void {
     this.selection = this.header;
   }
 
+  /**
+   * Fire on input changes
+   * @internal
+   */
   ngOnChanges(): void {
     if (this.allSelected) {
       this.selection = this.header;
     }
   }
 
-  onSelection(key: string): void {
-    this.allSelected = key === '';
-    this.atSelection.emit({identifier: key, zeichen: this.selection});
+  /**
+   * Fired on select button click
+   * @param identifier Used for the identification of the clicked select button
+   */
+  onSelection(identifier: string): void {
+    this.allSelected = identifier === '';
+    this.atSelection.emit({identifier: identifier, zeichen: this.selection});
   }
 }
