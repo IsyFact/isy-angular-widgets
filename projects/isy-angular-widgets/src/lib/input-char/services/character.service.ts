@@ -11,6 +11,7 @@ export class CharacterService {
   getCharacters(): Zeichenobjekt[] {
     return sonderzeichenliste as Zeichenobjekt[];
   }
+
   getGrundzeichen(list: Zeichenobjekt[]): string[] {
     const res = [...new Set(list.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
 
@@ -22,6 +23,7 @@ export class CharacterService {
     }
     return res;
   }
+
   getSchriftzeichenGruppen(list: Zeichenobjekt[]): Schriftzeichengruppe[] {
     const res: Schriftzeichengruppe[] = [];
     for (const char of list) {
@@ -31,10 +33,12 @@ export class CharacterService {
     }
     return res;
   }
+
   getCharactersByDataType(datentyp: Datentyp): Zeichenobjekt[] {
     const allowedGroups = this.getGroupsByDataType(datentyp);
     return this.getCharacters().filter((z) => allowedGroups.includes(z.schriftzeichengruppe));
   }
+
   getGroupsByDataType(dataTyp: Datentyp): Schriftzeichengruppe[] {
     switch (dataTyp) {
       case Datentyp.DATENTYP_A:
@@ -71,9 +75,11 @@ export class CharacterService {
         ];
     }
   }
+
   filterByGrundzeichen(list: Zeichenobjekt[], grundzeichen?: string): Zeichenobjekt[] {
     return list.filter((z) => (z.grundzeichen === '' ? '*' : z.grundzeichen) === grundzeichen);
   }
+
   filterBySchriftzeichenGruppe(list: Zeichenobjekt[], schriftzeichenGruppe?: Schriftzeichengruppe): Zeichenobjekt[] {
     return list.filter((z) => z.schriftzeichengruppe === schriftzeichenGruppe);
   }

@@ -49,7 +49,7 @@ $select_button_on_hover_background_color: grey;
 
   // Styles specific for the select button inside the accordion
   #accordion-select-button .p-ripple.p-element.p-button {
-    width: 50px;
+    min-width: 50px;
   }
 
   // Styles specific for the "Select All" button
