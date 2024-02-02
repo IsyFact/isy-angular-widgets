@@ -21,15 +21,14 @@ npm install
 
 ### Widgets-Bibliothek lokal an ein neues Projekt anbinden
 
-1. Öffnen isy-angular-widgets
-2. Im root directory "npm run build:widgets_lib" ausführen
-3. Umgehen auf Pfad "/isy-angular-widgets/dist/isy-angular-widgets" und Pfad kopieren
-4. Neues Angular-Projekt anlegen (npm install wird ausgeführt)
-5. Umgehen auf root directory und Ausführung von "ng add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets" (kopierter Pfad von Schritt 3)
-6. Im Modul, wo die eine ausgewählte Komponente z.B. Input-Char verwendet werden soll, müssen folgende Module unter "modules" hinzugefügt werden: BrowserAnimationsModule und je nach Fall vlt. auch BrowserModule oder/auch CommonModule
-7. Innerhalb der Datei angular.json, unter: architect->build->options muss folgendes property hinzugefügt werden: "preserveSymlinks": true - Hintergrund: Bei Windows entsteht oft wegen den Pfaden ein Fehler und es tritt eine Fehlermeldung bezüglich inject() auf. Unter Linux gibt es keine Probleme
-8. Applikation starten
-9. Aus isy-angular-widgets ein beliebiges Widget integrieren
+1. Öffnen isy-angular-widgets.
+2. Im Root-Verzeichnis des Projekts "npm run build-and-pack:widgets_lib" ausführen. Dieser Schritt ist erforderlich, um die Bibliothek zu packen. Unter Windows kann es aufgrund von Pfadproblemen zu Fehlern kommen, die so vermieden werden. Unter Linux treten diese Probleme üblicherweise nicht auf.
+3. Navigation zum Pfad "/isy-angular-widgets/dist/isy-angular-widgets/isyfact-isy-angular-widgets-0.0.0.tgz" und Pfad kopieren
+4. Neues Angular17-Projekt anlegen.
+5. Im Root-Verzeichnis des neuen Angular-Projekts "ng add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets/isyfact-isy-angular-widgets-0.0.0.tgz" ausführen (kopierter Pfad von Schritt 3).
+6. In `app.config.ts` die Methode `provideAnimations` importieren und bereitstellen.
+7. Applikation starten.
+8. Aus isy-angular-widgets ein beliebiges Widget integrieren. Die Widgets können nun direkt in Standalone-Komponenten importiert werden.
 
 ### Demo-Anwendung starten
 

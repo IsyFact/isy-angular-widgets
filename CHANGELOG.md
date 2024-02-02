@@ -1,5 +1,6 @@
 # 17.1.0 - 18.01.2024
 ## Fixes
+- ISY-775: Die beiden Readme-Dateien wurden für Standalone-Prokjekte aktualisiert
 - ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
   der Form 'xx'. Dies ermöglicht die Eingabe herkömmlicher Datumsformate mit Punkten, wie zum Beispiel '01.01.2024'
 - ISY-632: Prozentuale Größe für die Linksnavigation wird nun korrekt angezeigt
