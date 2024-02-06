@@ -5,7 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
-import {Validation} from '../../../../../isy-angular-widgets/src/lib/validation/validation';
+import {Validation} from '@isy-angular-widgets/validation/validation';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
 
 /*
@@ -26,7 +26,7 @@ export class ObjektAnzeigenComponent {
     id: '1',
     personalien: {
       geburtsdatum: '03.08.1980',
-      geburtsname: ' Mustermann',
+      geburtsname: 'Mustermann',
       geburtsort: 'Köln',
       geschlecht: 'Männlich',
       nachname: 'Mustermann',

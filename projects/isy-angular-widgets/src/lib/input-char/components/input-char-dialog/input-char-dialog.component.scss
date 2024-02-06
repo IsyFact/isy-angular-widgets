@@ -39,21 +39,21 @@ $select_button_on_hover_background_color: grey;
   // Common styles of all select buttons
   p-selectButton .p-ripple.p-element.p-button {
     background-color: transparent;
-    color: $select_button_text_color;
+    color: var(--text-color);
     cursor: pointer;
 
     &:hover {
-      background-color: $select_button_on_hover_background_color;
-      color: $select_button_text_color;
+      background-color: var(--highlight-bg);
     }
 
     &.p-highlight {
-      background-color: darkgrey;
+      background-color: var(--primary-color);
+      color: var(--primary-color-text);
     }
 
     &.p-highlight:hover {
-      background-color: $select_button_on_hover_background_color;
-      color: white;
+      background-color: var(--highlight-bg);
+      color: var(--text-color);
     }
   }
 
