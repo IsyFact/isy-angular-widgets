@@ -14,6 +14,7 @@
 - ISY-722: In isy-wizard wurde der Output `stepperIndexChange` in `indexChange` umbenannt
   * Infolgedessen wurde der bestehende Output `stepperIndexChange` als deprecated markiert
 ## Demo-Anwendung
+- ISY-389: Imports in der Demo-Anwendung zur Library geht nun über den Library-Namen 
 - ISY-575: In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
 
 # 17.0.0 - 08.12.2023
