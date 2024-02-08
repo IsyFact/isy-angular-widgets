@@ -16,13 +16,13 @@ import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {ToastModule} from 'primeng/toast';
 import {CheckboxModule} from 'primeng/checkbox';
-import {IncompleteDateModule} from '../../../../../isy-angular-widgets/src/lib/incomplete-date/incomplete-date.module';
+import {IncompleteDateModule} from '@isy-angular-widgets/incomplete-date/incomplete-date.module';
 import {InputMaskModule} from 'primeng/inputmask';
 import {CalendarModule} from 'primeng/calendar';
 import {ObjektAnzeigenRoutingModule} from './objekt-anzeigen-routing.module';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-import {InputCharModule} from '../../../../../isy-angular-widgets/src/lib/input-char/input-char.module';
-import {SecurityModule} from '../../../../../isy-angular-widgets/src/lib/security/security.module';
+import {InputCharModule} from '@isy-angular-widgets/input-char/input-char.module';
+import {SecurityModule} from '@isy-angular-widgets/security/security.module';
 import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({

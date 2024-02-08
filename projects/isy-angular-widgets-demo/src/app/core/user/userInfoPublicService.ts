@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UserInfo, UserInfoService} from '../../../../../isy-angular-widgets/src/lib/api/userinfo';
+import {UserInfo, UserInfoService} from '@isy-angular-widgets/api/userinfo';
 
 @Injectable()
 export class UserInfoPublicService implements UserInfoService {
