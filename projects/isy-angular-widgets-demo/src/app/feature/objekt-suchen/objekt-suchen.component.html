@@ -245,12 +245,12 @@
             >
               <ng-template pTemplate="selectedItem">
                 <div class="country-item country-item-value" *ngIf="selectedPerson!.personalien.staatsangehoerigkeit">
-                  <div>{{ selectedPerson!.personalien.staatsangehoerigkeit }}</div>
+                  <span>{{ selectedPerson!.personalien.staatsangehoerigkeit }}</span>
                 </div>
               </ng-template>
               <ng-template let-land pTemplate="item">
                 <div class="country-item">
-                  <div>{{ land }}</div>
+                  <span>{{ land }}</span>
                 </div>
               </ng-template>
             </p-dropdown>
@@ -397,7 +397,7 @@
           >
             <ng-template let-land pTemplate="item">
               <div class="country-item">
-                <div>{{ land.name }}</div>
+                <span>{{ land.name }}</span>
               </div>
             </ng-template>
           </p-dropdown>
