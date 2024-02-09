@@ -1,7 +1,4 @@
 <p-panel
-  sm:col-5
-  sm:text-right
-  text-left
   iconPos="start"
   [header]="'isyAngularWidgetsDemo.displayObject.masterDataHeader' | translate"
   [toggleable]="true"
@@ -64,7 +61,7 @@
 <p-tabView id="tab-view">
   <p-tabPanel id="panel-personalien" [header]="'isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate">
     <form [formGroup]="personalInfoForm">
-      <div class="grid mt-1">
+      <div class="grid mt-1 align-items-center">
         <div class="col-12 lg:col-6 xl:col-4 py-0">
           <div class="grid p-1 align-items-center">
             <label for="first-name" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
@@ -139,6 +136,7 @@
                   'isyAngularWidgetsDemo.labels.optionDivers' | translate
                 ]"
                 styleClass="w-full"
+                appendTo="body"
               ></p-dropdown>
             </div>
           </div>
@@ -150,11 +148,12 @@
             </label>
             <div class="col-12 sm:col-8 md:col-7 lg:col-6">
               <p-calendar
-                inputId="birth-date"
+                inputID="birth-date"
                 dateFormat="dd.mm.yy"
                 formControlName="birthDate"
                 [showIcon]="true"
                 styleClass="w-full"
+                appendTo="body"
               >
               </p-calendar>
             </div>
@@ -229,6 +228,7 @@
                 formControlName="passportExpirationDate"
                 [showIcon]="true"
                 styleClass="w-full"
+                appendTo="body"
               >
               </p-calendar>
             </div>
@@ -294,10 +294,10 @@
         <div class="grid m-0 align-items-center">
           <div class="col-12 lg:col-6 xl:col-4 py-0">
             <div class="grid p-1 align-items-center">
-              <label for="id-required" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
+              <label for="id-required" class="col-4 md:col-5 lg:col-6 sm:text-right text-left">
                 {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
               </label>
-              <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+              <div class="col-8 md:col-7 lg:col-6">
                 <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
               </div>
             </div>

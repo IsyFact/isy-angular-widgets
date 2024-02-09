@@ -52,6 +52,7 @@
             [(ngModel)]="person.personalien.geburtsdatum"
             [showIcon]="true"
             styleClass="w-full"
+            appendTo="body"
           >
           </p-calendar>
         </div>
@@ -90,15 +91,16 @@
             [(ngModel)]="person.personalien.staatsangehoerigkeit"
             [showClear]="true"
             styleClass="w-full"
+            appendTo="body"
           >
             <ng-template pTemplate="selectedItem">
               <div class="country-item country-item-value" *ngIf="person.personalien.staatsangehoerigkeit">
-                <div>{{ person.personalien.staatsangehoerigkeit }}</div>
+                <span>{{ person.personalien.staatsangehoerigkeit }}</span>
               </div>
             </ng-template>
             <ng-template let-land pTemplate="item">
               <div class="country-item">
-                <div>{{ land }}</div>
+                <span>{{ land }}</span>
               </div>
             </ng-template>
           </p-dropdown>
@@ -149,9 +151,21 @@
     <div class="grid align-items-center">
       <div class="col-12 xl:col-6 py-0">
         <div class="grid p-1 align-items-center">
-          <label for="edit-id" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">ID</label>
+          <label for="edit-id" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">
+            {{ 'isyAngularWidgetsDemo.labels.id' | translate }}
+          </label>
           <div class="col-12 sm:col-8 md:col-9 xl:col-8">
             <input id="edit-id" class="w-full" type="text" pInputText [formControlName]="'editID'" />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 xl:col-6 py-0">
+        <div class="grid p-1 align-items-center">
+          <label for="edit-vorname" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">
+            {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
+          </label>
+          <div class="col-12 sm:col-8 md:col-9 xl:col-8">
+            <input id="edit-vorname" class="w-full" type="text" pInputText [formControlName]="'editVorname'" />
           </div>
         </div>
       </div>
@@ -177,36 +191,6 @@
       </div>
       <div class="col-12 xl:col-6 py-0">
         <div class="grid p-1 align-items-center">
-          <label for="edit-geburtsname" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">
-            {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
-          </label>
-          <div class="col-12 sm:col-8 md:col-9 xl:col-8">
-            <input id="edit-geburtsort" class="w-full" type="text" pInputText [formControlName]="'editGeburtsort'" />
-          </div>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6 py-0">
-        <div class="grid p-1 align-items-center">
-          <label for="edit-vorname" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">
-            {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
-          </label>
-          <div class="col-12 sm:col-8 md:col-9 xl:col-8">
-            <input id="edit-vorname" class="w-full" type="text" pInputText [formControlName]="'editVorname'" />
-          </div>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6 py-0">
-        <div class="grid p-1 align-items-center">
-          <label for="edit-geschlecht" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">
-            {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
-          </label>
-          <div class="col-12 sm:col-8 md:col-9 xl:col-8">
-            <input id="edit-geschlecht" class="w-full" type="text" pInputText [formControlName]="'editGeschlecht'" />
-          </div>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6 py-0">
-        <div class="grid p-1 align-items-center">
           <label for="edit-geburtsdatum" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">
             {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
           </label>
@@ -217,8 +201,29 @@
               [formControlName]="'editGeburtsdatum'"
               [showIcon]="true"
               styleClass="w-full"
+              appendTo="body"
             >
             </p-calendar>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 xl:col-6 py-0">
+        <div class="grid p-1 align-items-center">
+          <label for="edit-geburtsort" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">
+            {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
+          </label>
+          <div class="col-12 sm:col-8 md:col-9 xl:col-8">
+            <input id="edit-geburtsort" class="w-full" type="text" pInputText [formControlName]="'editGeburtsort'" />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 xl:col-6 py-0">
+        <div class="grid p-1 align-items-center">
+          <label for="edit-geschlecht" class="col-12 sm:col-4 md:col-3 xl:col-4 sm:text-right text-left">
+            {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
+          </label>
+          <div class="col-12 sm:col-8 md:col-9 xl:col-8">
+            <input id="edit-geschlecht" class="w-full" type="text" pInputText [formControlName]="'editGeschlecht'" />
           </div>
         </div>
       </div>
@@ -236,6 +241,7 @@
               [formControlName]="'editStaatsangehoerigkeit'"
               [editable]="true"
               styleClass="w-full"
+              appendTo="body"
             >
               <ng-template pTemplate="selectedItem">
                 <div class="country-item country-item-value" *ngIf="selectedPerson!.personalien.staatsangehoerigkeit">
@@ -365,6 +371,7 @@
             [showIcon]="true"
             [appendTo]="'body'"
             (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
+            appendTo="body"
           >
           </p-calendar>
         </div>
@@ -386,6 +393,7 @@
             [formControlName]="'staatsangehoerigkeit'"
             [appendTo]="'body'"
             (focusout)="onFormControlFocus(geburtsInformationenForm.controls.staatsangehoerigkeit)"
+            appendTo="body"
           >
             <ng-template let-land pTemplate="item">
               <div class="country-item">
