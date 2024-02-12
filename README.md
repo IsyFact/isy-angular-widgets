@@ -4,7 +4,7 @@
 
 Auf dem PC müssen die neueste [Node und Npm LTS Version](https://nodejs.org/en/download/) installiert sein.
 
-Anschließend muss das Projekt aus GitHub bezogen werden
+Anschließend muss das Projekt aus GitHub bezogen werden.
 
 ```shell
 git clone https://github.com/IsyFact/isy-angular-widgets.git
@@ -21,14 +21,21 @@ npm install
 
 ### Widgets-Bibliothek lokal an ein neues Projekt anbinden
 
-1. Öffnen isy-angular-widgets.
-2. Im Root-Verzeichnis des Projekts "npm run build-and-pack:widgets_lib" ausführen. Dieser Schritt ist erforderlich, um die Bibliothek zu packen. Unter Windows kann es aufgrund von Pfadproblemen zu Fehlern kommen, die so vermieden werden. Unter Linux treten diese Probleme üblicherweise nicht auf.
-3. Navigation zum Pfad "/isy-angular-widgets/dist/isy-angular-widgets/isyfact-isy-angular-widgets-0.0.0.tgz" und Pfad kopieren
-4. Neues Angular17-Projekt anlegen.
-5. Im Root-Verzeichnis des neuen Angular-Projekts "ng add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets/isyfact-isy-angular-widgets-0.0.0.tgz" ausführen (kopierter Pfad von Schritt 3).
-6. In `app.config.ts` die Methode `provideAnimations` importieren und bereitstellen.
-7. Applikation starten.
-8. Aus isy-angular-widgets ein beliebiges Widget integrieren. Die Widgets können nun direkt in Standalone-Komponenten importiert werden.
+Im Root-Verzeichnis des Projekts wird durch den nachstehenden Shortcut-Befehl aus der `package.json` die Widgets-Bibliothek gebaut und anschließend verpackt.
+
+```shell
+npm run build-and-pack:widgets_lib
+```
+
+Im nächsten Schritt erfolgt die Installation dieser Bibliothek in einem neuen Angular-Projekt. Hierfür wird der Pfad zur TGZ-Datei benötigt. Im Root-Verzeichnis des neuen Angular-Projekts ist der folgende Befehl auszuführen.
+
+```shell
+ng add [WIDGETS_LIB_PATH].tgz
+```
+
+Anschließend ist die Aktivierung von Animationen notwendig. Je nach Projekttyp gibt es unterschiedliche Vorgehensweisen.
+In Standalone-Projekten muss in `app.config.ts` die Methode `provideAnimations` importiert und bereitstellt werden.
+In None-Standalone-Projekten erfolgt das Aktivieren von Animationen durch das Importieren und Hinzufügen von `BrowserAnimationsModule` zum `AppModule`.
 
 ### Demo-Anwendung starten
 

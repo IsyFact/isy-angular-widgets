@@ -74,7 +74,7 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
-Im nächsten Schritt in der Datei `app.component.ts` die notwendigen Module importieren, wie beispielsweise `HauptfensterModule`, `PanelModule` und `MenuModule`:
+Im nächsten Schritt werden die notwendigen Module `HauptfensterModule`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
 
 ```typescript
 // Other imports ...
@@ -126,7 +126,7 @@ npm install @ngx-translate/core @ngx-translate/http-loader --save
 ```
 
 Im nächsten Schritt können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
-Dazu wird zunächst folgende Importe benötigt und in `appConfig` bereitgestellt: 
+Dazu werden zunächst folgende Importe benötigt und in `appConfig` bereitgestellt: 
 `provideHttpClient`, `importProvidersFrom`, `TranslateModule`, `HttpClient`, `TranslateHttpLoader`, `TranslateLoader`
 
 ```typescript
