@@ -10,7 +10,9 @@
     "allowSyntheticDefaultImports": true,
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
-      "isy-angular-widgets": ["dist/isy-angular-widgets"]
+      "isy-angular-widgets": ["dist/isy-angular-widgets"],
+      "@isy-angular-widgets/*": ["./projects/isy-angular-widgets/src/lib/*"],
+      "@isy-angular-widgets/public-api": ["./projects/isy-angular-widgets/src/public-api"]
     },
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {UserInfo} from '../../../isy-angular-widgets/src/lib/api/userinfo';
-import {SecurityService} from '../../../isy-angular-widgets/src/lib/security/security-service';
+import {UserInfo} from '@isy-angular-widgets/api/userinfo';
+import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
@@ -8,8 +8,8 @@ import {Subscription} from 'rxjs';
 import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
-import {WidgetsTranslation} from '../../../isy-angular-widgets/src/lib/i18n/widgets-translation';
-import {WidgetsConfigService} from '../../../isy-angular-widgets/src/lib/i18n/widgets-config.service';
+import {WidgetsTranslation} from '@isy-angular-widgets/i18n/widgets-translation';
+import {WidgetsConfigService} from '@isy-angular-widgets/i18n/widgets-config.service';
 import {permissions} from './app.permission';
 import {DOCUMENT} from '@angular/common';
 
