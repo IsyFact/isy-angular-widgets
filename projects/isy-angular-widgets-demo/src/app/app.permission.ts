@@ -1,4 +1,4 @@
-import {PermissionMaps} from '../../../isy-angular-widgets/src/public-api';
+import {PermissionMaps} from '@isy-angular-widgets/public-api';
 
 // Permission to role mapping could also be loaded from server
 export const permissions: PermissionMaps = {

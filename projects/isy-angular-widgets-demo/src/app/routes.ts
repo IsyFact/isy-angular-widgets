@@ -1,5 +1,5 @@
 import {ActivatedRouteSnapshot, Routes} from '@angular/router';
-import {AuthGuard} from '../../../isy-angular-widgets/src/lib/security/security-guard';
+import {AuthGuard} from '@isy-angular-widgets/security/security-guard';
 import {inject} from '@angular/core';
 import {Observable} from 'rxjs';
 import {PageNotFoundComponent} from './shared/errors/page-not-found/page-not-found.component';

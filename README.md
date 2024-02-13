@@ -4,7 +4,7 @@
 
 Auf dem PC müssen die neueste [Node und Npm LTS Version](https://nodejs.org/en/download/) installiert sein.
 
-Anschließend muss das Projekt aus GitHub bezogen werden
+Anschließend muss das Projekt aus GitHub bezogen werden.
 
 ```shell
 git clone https://github.com/IsyFact/isy-angular-widgets.git
@@ -21,15 +21,21 @@ npm install
 
 ### Widgets-Bibliothek lokal an ein neues Projekt anbinden
 
-1. Öffnen isy-angular-widgets
-2. Im root directory "npm run build:widgets_lib" ausführen
-3. Umgehen auf Pfad "/isy-angular-widgets/dist/isy-angular-widgets" und Pfad kopieren
-4. Neues Angular-Projekt anlegen (npm install wird ausgeführt)
-5. Umgehen auf root directory und Ausführung von "ng add /pathToWidgets/isy-angular-widgets/dist/isy-angular-widgets" (kopierter Pfad von Schritt 3)
-6. Im Modul, wo die eine ausgewählte Komponente z.B. Input-Char verwendet werden soll, müssen folgende Module unter "modules" hinzugefügt werden: BrowserAnimationsModule und je nach Fall vlt. auch BrowserModule oder/auch CommonModule
-7. Innerhalb der Datei angular.json, unter: architect->build->options muss folgendes property hinzugefügt werden: "preserveSymlinks": true - Hintergrund: Bei Windows entsteht oft wegen den Pfaden ein Fehler und es tritt eine Fehlermeldung bezüglich inject() auf. Unter Linux gibt es keine Probleme
-8. Applikation starten
-9. Aus isy-angular-widgets ein beliebiges Widget integrieren
+Im Root-Verzeichnis des Projekts wird durch den nachstehenden Shortcut-Befehl aus der `package.json` die Widgets-Bibliothek gebaut und anschließend verpackt.
+
+```shell
+npm run build-and-pack:widgets_lib
+```
+
+Im nächsten Schritt erfolgt die Installation dieser Bibliothek in einem neuen Angular-Projekt. Hierfür wird der Pfad zur TGZ-Datei benötigt. Im Root-Verzeichnis des neuen Angular-Projekts ist der folgende Befehl auszuführen.
+
+```shell
+ng add [WIDGETS_LIB_PATH].tgz
+```
+
+Anschließend ist die Aktivierung von Animationen notwendig. Je nach Projekttyp gibt es unterschiedliche Vorgehensweisen.
+In Standalone-Projekten muss in `app.config.ts` die Methode `provideAnimations` importiert und bereitstellt werden.
+In None-Standalone-Projekten erfolgt das Aktivieren von Animationen durch das Importieren und Hinzufügen von `BrowserAnimationsModule` zum `AppModule`.
 
 ### Demo-Anwendung starten
 
