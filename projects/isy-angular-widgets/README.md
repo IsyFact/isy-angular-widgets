@@ -126,7 +126,7 @@ npm install @ngx-translate/core @ngx-translate/http-loader --save
 ```
 
 Im nächsten Schritt können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
-Dazu werden zunächst folgende Importe benötigt und in `appConfig` bereitgestellt: 
+Dazu müssen zunächst folgende Importe bereitgestellt werden, z.B. in `appConfig`: 
 `provideHttpClient`, `importProvidersFrom`, `TranslateModule`, `HttpClient`, `TranslateHttpLoader`, `TranslateLoader`
 
 ```typescript
@@ -159,7 +159,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-Anschließend lassen sich die Übersetzungen für PrimeNG und `isy-angular-widgets` in der Datei `app.component.ts` bereitstellen. Hierfür ist es erforderlich, das benötigte Modul `TranslateModule` zu importieren.
+Anschließend lassen sich die Übersetzungen für PrimeNG und `isy-angular-widgets` in der Datei `app.component.ts` bereitstellen. Dazu muss das erforderliche `TranslateModule` beispielsweise in der `app.component.ts` zur Verfügung gestellt werden.
 
 ```typescript
 import {Component, OnDestroy, OnInit} from '@angular/core';
