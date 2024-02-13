@@ -8,7 +8,7 @@
 - ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an um die Zugänglichkeit der Website zu verbessern
 - ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datum Werten wurde hinzugefügt
 ## Demo-Anwendung
-- ISY-634: Überarbeitung der Formulare auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität
+- ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität überarbeitet
 - ISY-389: Imports in der Demo-Anwendung zur Library geht nun über den Library-Namen 
 
 # 17.1.0 - 18.01.2024
