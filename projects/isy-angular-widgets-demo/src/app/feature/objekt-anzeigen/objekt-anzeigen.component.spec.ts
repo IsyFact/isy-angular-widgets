@@ -203,7 +203,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
 
   it('should check the file upload HTML element', () => {
     const fileUpload = spectator.query('#identity-document') as HTMLElement;
-    expect(fileUpload.innerText).toContain('Choose');
+    expect(fileUpload.innerText).toContain('Ausweisdokument');
     expect(fileUpload.tagName).toContain('P-FILEUPLOAD');
 
     const fileUploadArray = spectator.queryAll('p-button');

@@ -170,10 +170,10 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(vornameLabel.textContent!.trim()).toEqual('Vorname');
 
     const nachnameLabel = spectator.query('label#nachname-label') as HTMLElement;
-    expect(nachnameLabel.textContent!.trim()).toEqual('Nachname');
+    expect(nachnameLabel.textContent!.trim()).toEqual('Nachname *');
 
     const geschlechtLabel = spectator.query('label#geschlecht-label') as HTMLElement;
-    expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht');
+    expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht *');
   });
 
   it('form control should be dirty after focus', () => {

@@ -1,3 +1,17 @@
+# 17.2.0 - 
+## Fixes
+- ISY-775: Die beiden Readme-Dateien wurden für Standalone-Prokjekte aktualisiert
+- ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
+  der Form 'xx'. Dies ermöglicht die Eingabe herkömmlicher Datumsformate mit Punkten, wie zum Beispiel '01.01.2024'
+## Features 
+- ISY-756: IsyFact-Theme wurde überarbeitet
+- ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an um die Zugänglichkeit der Website zu verbessern
+- ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datum Werten wurde hinzugefügt
+## Demo-Anwendung
+- ISY-647: Alle Formulare wurden von rechtsbündigen Labels auf Floating-Labels umgestellt
+- ISY-634: Überarbeitung der Formulare auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität
+- ISY-389: Imports in der Demo-Anwendung zur Library geht nun über den Library-Namen 
+
 # 17.1.0 - 18.01.2024
 ## Fixes
 - ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in

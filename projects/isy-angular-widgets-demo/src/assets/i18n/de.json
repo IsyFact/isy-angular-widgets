@@ -70,6 +70,7 @@
       "addOrEditFact": "Sachverhalt hinzufügen/bearbeiten"
     },
     "labels": {
+      "id": "ID",
       "nachname": "Nachname",
       "vorname": "Vorname",
       "geburtsname": "Geburtsname",
