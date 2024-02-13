@@ -1,3 +1,7 @@
+# 17.1.1
+## Fixes
+- ISY-905: Linksnavigation und Informationsbereich können jetzt wieder korrekt eingeklappt werden
+
 # 17.1.0 - 18.01.2024
 ## Fixes
 - ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
