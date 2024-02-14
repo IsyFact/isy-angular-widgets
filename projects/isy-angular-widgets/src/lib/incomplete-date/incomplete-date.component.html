@@ -1,21 +1,16 @@
-<span class="p-float-label">
-  <p-inputMask
-    [readonly]="readonly"
-    [disabled]="disabled"
-    (onInput)="onInputChange($event)"
-    (onBlur)="onBlur()"
-    (onComplete)="onComplete()"
-    (onKeydown)="onKeydown($event)"
-    mask="**.**.****"
-    [(ngModel)]="inputValue"
-    characterPattern="^[x]"
-    [placeholder]="placeholder"
-    [inputId]="inputId!"
-    [autoClear]="false"
-    styleClass="w-full"
-  >
-  </p-inputMask>
-  @if (inputLabel) {
-    <label [attr.for]="inputId!">{{ inputLabel }}</label>
-  }
-</span>
+<p-inputMask
+  [readonly]="readonly"
+  [disabled]="disabled"
+  (onInput)="onInputChange($event)"
+  (onBlur)="onBlur()"
+  (onComplete)="onComplete()"
+  (onKeydown)="onKeydown($event)"
+  mask="**.**.****"
+  [(ngModel)]="inputValue"
+  characterPattern="^[x]"
+  [placeholder]="placeholder"
+  [inputId]="inputId!"
+  [autoClear]="false"
+  styleClass="w-full"
+>
+</p-inputMask>

@@ -1,7 +1,4 @@
 <p-panel
-  sm:col-5
-  sm:text-right
-  text-left
   iconPos="start"
   [header]="'isyAngularWidgetsDemo.displayObject.masterDataHeader' | translate"
   [toggleable]="true"
@@ -191,13 +188,18 @@
         </div>
         <div class="col-12 md:col-6 xl:col-4">
           <div class="field">
-            <isy-incomplete-date
-              inputId="date-of-entry"
-              formControlName="dateOfEntry"
-              [dateInPastConstraint]="true"
-              inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
-            >
-            </isy-incomplete-date>
+            <span class="p-float-label">
+              <isy-incomplete-date
+                inputId="date-of-entry"
+                formControlName="dateOfEntry"
+                [dateInPastConstraint]="true"
+                inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
+              >
+              </isy-incomplete-date>
+              <label for="date-of-entry">
+                {{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}
+              </label>
+            </span>
             <small
               class="p-error block"
               *ngIf="

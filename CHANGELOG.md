@@ -9,19 +9,6 @@
 - ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datum Werten wurde hinzugefügt
 ## Demo-Anwendung
 - ISY-647: Alle Formulare wurden von rechtsbündigen Labels auf Floating-Labels umgestellt
-- ISY-634: Überarbeitung der Formulare auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität
-- ISY-389: Imports in der Demo-Anwendung zur Library geht nun über den Library-Namen 
-
-# 17.1.0 - 18.01.2024
-## Fixes
-- ISY-775: Die beiden Readme-Dateien wurden für Standalone-Prokjekte aktualisiert
-- ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
-  der Form 'xx'. Dies ermöglicht die Eingabe herkömmlicher Datumsformate mit Punkten, wie zum Beispiel '01.01.2024'
-## Features
-- ISY-756: IsyFact-Theme wurde überarbeitet
-- ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an um die Zugänglichkeit der Website zu verbessern
-- ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datum Werten wurde hinzugefügt
-## Demo-Anwendung
 - ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität überarbeitet
 - ISY-389: Imports in der Demo-Anwendung zur Library geht nun über den Library-Namen 
 
@@ -36,7 +23,6 @@
 - ISY-722: In isy-wizard wurde der Output `stepperIndexChange` in `indexChange` umbenannt
   * Infolgedessen wurde der bestehende Output `stepperIndexChange` als deprecated markiert
 ## Demo-Anwendung
-- ISY-634: Demo-Anwendung - Responsive Überarbeitung der Formulare auf den Seiten Objekt-Suchen und Objekt-Anzeigen
 - ISY-575: In der Demo-Anwendung wurde ein exemplarischer Dateiupload mit dem attribut `ngDefaultControl` hinzugefügt
 
 # 17.0.0 - 08.12.2023
