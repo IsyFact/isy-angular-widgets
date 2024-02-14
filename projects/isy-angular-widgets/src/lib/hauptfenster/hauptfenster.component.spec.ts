@@ -83,7 +83,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
 
-  it('should not change its Linksnavigation width when collapsed (using linksNavigationWidth)', () => {
+  it('should not change its Linksnavigation width when collapsed', () => {
     spectator.component.showLinksnavigation = true;
     spectator.fixture.detectChanges();
     const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
@@ -102,7 +102,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     expect(linksnavigation.style.width).toEqual(width);
   });
 
-  it('should not change its Informationsbereich width when collapsed (using informationsbereichWidth)', () => {
+  it('should not change its Informationsbereich width when collapsed', () => {
     spectator.component.showInformationsbereich = true;
     spectator.fixture.detectChanges();
     const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
