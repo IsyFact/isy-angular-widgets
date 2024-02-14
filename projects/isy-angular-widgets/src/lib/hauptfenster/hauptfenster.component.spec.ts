@@ -158,6 +158,7 @@ describe('Integration Test: HauptfensterComponent', () => {
     (linksnavigation.querySelector('.collapseButton button') as HTMLElement).click();
     spectator.fixture.detectChanges();
     const width = linksnavigation.style.width;
+    console.log(width);
 
     spectator.component.wideLinksnavigationContent = true;
     spectator.fixture.detectChanges();

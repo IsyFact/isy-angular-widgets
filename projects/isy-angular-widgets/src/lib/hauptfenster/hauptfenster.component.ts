@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MegaMenuItem} from 'primeng/api';
-import {UserInfo} from '../api/userinfo';
-import {WidgetsConfigService} from '../i18n/widgets-config.service';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { MegaMenuItem } from "primeng/api";
+import { UserInfo } from "../api/userinfo";
+import { WidgetsConfigService } from "../i18n/widgets-config.service";
 
 /**
  * The Anwendungsrahmen that contains general, application independent elements as logos or navigation bars.
@@ -83,16 +83,16 @@ export class HauptfensterComponent {
   @Input() applicationGroupColor: string = '#A13D6D';
 
   /**
-   * Determines the width of the Linksnavigation, e.g. "15%".
-   * Default is 10%.
-   */
-  @Input() linksNavigationWidth = '10%';
+   * Determines the width of the Linksnavigation, e.g. "15em". Suggested unit is em.
+   * Default is 15em.
+   * */
+  @Input() linksNavigationWidth = '15em';
 
   /**
-   * Determines the width of the Informationsbereich, e.g. "15%".
-   * Default is 10%.
+   * Determines the width of the Informationsbereich, e.g. "15em". Suggested unit is em.
+   * Default is 15em.
    */
-  @Input() informationsbereichWidth = '10%';
+  @Input() informationsbereichWidth = '15em';
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
