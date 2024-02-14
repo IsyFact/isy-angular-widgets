@@ -17,8 +17,6 @@ import {HauptfensterModule} from './hauptfenster.module';
 })
 class HauptFensterWrapperComponent {
   title!: string;
-  wideLinksnavigationContent = false;
-  wideInformationsbereichContent = false;
 }
 
 describe('Unit Tests: HauptfensterComponent', () => {
