@@ -74,7 +74,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @Input() inputId?: string;
 
-  @Input() inputClass?: string;
+  inputClass = 'w-full';
 
   /**
    * Currently displayed date string
@@ -106,7 +106,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     this.classMutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         // Check if the 'class' attribute has changed
-        if (mutation.attributeName === 'class') this.inputClass = element.className;
+        if (mutation.attributeName === 'class') this.inputClass = element.className + ' w-full';
       });
     });
 

@@ -75,13 +75,14 @@
       "addOrEditFact": "Sachverhalt hinzufügen/bearbeiten"
     },
     "labels": {
+      "id": "ID",
       "nachname": "Nachname",
       "vorname": "Vorname",
       "geburtsname": "Geburtsname",
       "geburtsort": "Geburtsort",
       "geschlecht": "Geschlecht",
       "geburtsdatum": "Geburtsdatum",
-      "staatsangehoerigkeit": "Staatsangehörigkeit",
+      "staatsangehoerigkeit": "Nationalität",
       "chooseCountry": "Land wählen",
       "actions": "Aktionen",
       "optionMale": "Männlich",
