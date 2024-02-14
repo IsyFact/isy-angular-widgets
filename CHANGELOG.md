@@ -1,6 +1,7 @@
 # 17.1.1
 ## Fixes
 - ISY-905: Linksnavigation und Informationsbereich können jetzt wieder korrekt eingeklappt werden
+- ISY-905: Die Breite der Seitenleisten liegt nun standardmäßig wieder bei 15em
 
 # 17.1.0 - 18.01.2024
 ## Fixes
