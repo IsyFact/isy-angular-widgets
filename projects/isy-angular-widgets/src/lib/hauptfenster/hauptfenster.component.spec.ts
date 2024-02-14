@@ -1,5 +1,5 @@
 import {HauptfensterComponent} from './hauptfenster.component';
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MegaMenu, MegaMenuSub} from 'primeng/megamenu';
 import {Button} from 'primeng/button';
@@ -8,15 +8,23 @@ import {HauptfensterModule} from './hauptfenster.module';
 
 @Component({
   template: `
-    <isy-hauptfenster [title]="title">
+    <isy-hauptfenster [title]="title" [showLinksnavigation]="true" [showInformationsbereich]="true">
+      @if (wideLinksnavigationContent) {
+        <div Linksnavigation [style.width]="'500px'">TEST</div>
+      }
       <div Titelzeile>
         <h1 class="custom-title">Titel inside H1!</h1>
       </div>
+      @if (wideInformationsbereichContent) {
+        <div Informationsbereich [style.width]="'500px'">TEST</div>
+      }
     </isy-hauptfenster>
   `
 })
 class HauptFensterWrapperComponent {
-  @Input() title!: string;
+  title!: string;
+  wideLinksnavigationContent = false;
+  wideInformationsbereichContent = false;
 }
 
 describe('Unit Tests: HauptfensterComponent', () => {
@@ -82,6 +90,44 @@ describe('Unit Tests: HauptfensterComponent', () => {
     const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
+
+  it('should not change its Linksnavigation width when collapsed (using linksNavigationWidth)', () => {
+    spectator.component.showLinksnavigation = true;
+    spectator.fixture.detectChanges();
+    const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
+    (linksnavigation.querySelector('.collapseButton button') as HTMLElement).click();
+    spectator.fixture.detectChanges();
+    const width = linksnavigation.style.width;
+
+    spectator.component.linksNavigationWidth = '20%';
+    spectator.fixture.detectChanges();
+
+    expect(linksnavigation.style.width).toEqual(width);
+
+    spectator.component.linksNavigationWidth = '10%';
+    spectator.fixture.detectChanges();
+
+    expect(linksnavigation.style.width).toEqual(width);
+  });
+
+  it('should not change its Informationsbereich width when collapsed (using informationsbereichWidth)', () => {
+    spectator.component.showInformationsbereich = true;
+    spectator.fixture.detectChanges();
+    const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
+    (informationsbereich.querySelector('.collapseButton button') as HTMLElement).click();
+    spectator.fixture.detectChanges();
+    const width = informationsbereich.style.width;
+
+    spectator.component.linksNavigationWidth = '20%';
+    spectator.fixture.detectChanges();
+
+    expect(informationsbereich.style.width).toEqual(width);
+
+    spectator.component.linksNavigationWidth = '10%';
+    spectator.fixture.detectChanges();
+
+    expect(informationsbereich.style.width).toEqual(width);
+  });
 });
 
 describe('Integration Test: HauptfensterComponent', () => {
@@ -105,5 +151,29 @@ describe('Integration Test: HauptfensterComponent', () => {
     spectator.fixture.detectChanges();
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
     expect(titelzeileEl.textContent).toEqual(customTitle);
+  });
+
+  it('should not change its Linksnavigation width when collapsed (using content)', () => {
+    const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
+    (linksnavigation.querySelector('.collapseButton button') as HTMLElement).click();
+    spectator.fixture.detectChanges();
+    const width = linksnavigation.style.width;
+
+    spectator.component.wideLinksnavigationContent = true;
+    spectator.fixture.detectChanges();
+
+    expect(linksnavigation.style.width).toEqual(width);
+  });
+
+  it('should not change its Informationsbereich width when collapsed (using content)', () => {
+    const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
+    (informationsbereich.querySelector('.collapseButton button') as HTMLElement).click();
+    spectator.fixture.detectChanges();
+    const width = informationsbereich.style.width;
+
+    spectator.component.wideLinksnavigationContent = true;
+    spectator.fixture.detectChanges();
+
+    expect(informationsbereich.style.width).toEqual(width);
   });
 });
