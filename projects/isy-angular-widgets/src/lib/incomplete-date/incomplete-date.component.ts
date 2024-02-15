@@ -63,6 +63,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   @Input() readonly = false;
 
   /**
+   * The label for the input element.
+   */
+  @Input() inputLabel = '';
+
+  /**
    * The placeholder for the input element.
    */
   @Input() placeholder = '';
@@ -74,8 +79,6 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @Input() inputId?: string;
 
-  inputClass = 'w-full';
-
   /**
    * Currently displayed date string
    */
@@ -86,6 +89,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   @Output() onInput: EventEmitter<Event> = new EventEmitter<Event>();
 
   @ViewChild(InputMask) field?: InputMask;
+
+  @ViewChild('p-inputMask') inputMask!: ElementRef;
 
   classMutationObserver?: MutationObserver;
 
@@ -106,7 +111,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     this.classMutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         // Check if the 'class' attribute has changed
-        if (mutation.attributeName === 'class') this.inputClass = element.className + ' w-full';
+        if (mutation.attributeName === 'class') {
+          const isInvalid = element.className.includes('ng-invalid');
+          element.querySelector('p-inputmask')?.classList.remove(isInvalid ? 'ng-valid' : 'ng-invalid');
+          if (isInvalid) element.querySelector('p-inputmask')?.classList.add('ng-invalid');
+        }
       });
     });
 
