@@ -54,7 +54,7 @@
     <div
       class="isy-hauptfenster-linksnavigation dont-print"
       *ngIf="showLinksnavigation"
-      [style.width]="linksNavigationWidth"
+      [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
     >
       <div [hidden]="collapsedLinksnavigation" id="open-links-navigation">
         <div *ngIf="allowSidebarCollapse" class="collapseButton">
@@ -86,7 +86,7 @@
     <div
       class="isy-hauptfenster-informationsbereich dont-print"
       *ngIf="showInformationsbereich"
-      [style.width]="informationsbereichWidth"
+      [style.width]="collapsedInformationsbereich ? null : informationsbereichWidth"
     >
       <div [hidden]="collapsedInformationsbereich" id="open-informationsbereich">
         <div *ngIf="allowSidebarCollapse" class="collapseButton">
