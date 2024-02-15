@@ -74,28 +74,37 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
-Je nach IDE müssen die Importe für das Hauptfenster-Modul noch manuell in der `app.module.ts` ergänzt werden.
+Im nächsten Schritt werden die notwendigen Module `HauptfensterModule`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
 
 ```typescript
 // Other imports ...
+import {Component} from '@angular/core';
 import {HauptfensterModule} from '@isyfact/isy-angular-widgets';
+import {MenuModule} from 'primeng/menu';
+import {PanelModule} from 'primeng/panel';
 
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    // Other imports ...
-    BrowserModule,
-    BrowserAnimationsModule,
-    HauptfensterModule,
-    MenuModule,
-    PanelModule
-  ]
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [HauptfensterModule, PanelModule, MenuModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
-export class AppModule {
-}
+export class AppComponent {}
+```
+
+Abschließend ist es erforderlich, in `app.config.ts` die Methode `provideAnimations` zu importieren und bereitzustellen, um Animationen zu aktivieren:
+
+```typescript
+// Other imports ...
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {routes} from './app.routes';
+import {provideAnimations} from '@angular/platform-browser/animations';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes), provideAnimations()]
+};
 ```
 
 ## I18N
@@ -116,54 +125,61 @@ Zunächst wird `@ngx-translate` installiert.
 npm install @ngx-translate/core @ngx-translate/http-loader --save
 ```
 
-Anschließend können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
-Dazu wird zunächst das `TranslateModule` in der Datei `app.module.ts` installiert.
+Im nächsten Schritt können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
+Dazu müssen zunächst folgende Importe bereitgestellt werden, z.B. in `appConfig`: 
+`provideHttpClient`, `importProvidersFrom`, `TranslateModule`, `HttpClient`, `TranslateHttpLoader`, `TranslateLoader`
 
 ```typescript
 // Other imports ...
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {routes} from './app.routes';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import {HttpClient, provideHttpClient} from '@angular/common/http';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    // Other imports ...
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: function HttpLoaderFactory(http: HttpClient) {
-          return new TranslateHttpLoader(http);
-        },
-        deps: [HttpClient]
-      }
-    })
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideAnimations(),
+    provideHttpClient(),
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: function HttpLoaderFactory(http: HttpClient) {
+            return new TranslateHttpLoader(http);
+          },
+          deps: [HttpClient]
+        }
+      })
+    )
   ]
-})
-export class AppModule {
-}
+};
 ```
 
-Anschließend können in der Datei `app.component.ts` die Übersetzungen für PrimeNG und `isy-angular-widgets` bereitgestellt werden.
+Anschließend lassen sich die Übersetzungen für PrimeNG und `isy-angular-widgets` in der Datei `app.component.ts` bereitstellen. Dazu muss das erforderliche `TranslateModule` beispielsweise in der `app.component.ts` zur Verfügung gestellt werden.
 
 ```typescript
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PrimeNGConfig} from "primeng/api";
-import {WidgetsConfigService} from "@isyfact/isy-angular-widgets";
-import {TranslateService} from "@ngx-translate/core";
+import {HauptfensterModule, WidgetsConfigService} from '@isyfact/isy-angular-widgets';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {PrimeNGConfig} from 'primeng/api';
+import {MenuModule} from 'primeng/menu';
+import {PanelModule} from 'primeng/panel';
 import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [HauptfensterModule, PanelModule, MenuModule, TranslateModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy {
-  primeNgSub?: Subscription
-  widgetSub?: Subscription
+  primeNgSub?: Subscription;
+  widgetSub?: Subscription;
 
   constructor(
     private primeNgConfig: PrimeNGConfig,
@@ -179,17 +195,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
   translate(lang: string) {
     this.translateService.use(lang);
-    this.primeNgSub =this.translateService.get('primeng')
-      .subscribe(res => this.primeNgConfig.setTranslation(res));
-    this.widgetSub = this.translateService.get('isyAngularWidgets')
-      .subscribe(res => this.widgetConfig.setTranslation(res));
+    this.primeNgSub = this.translateService
+      .get('primeng')
+      .subscribe((res) => this.primeNgConfig.setTranslation(res));
+    this.widgetSub = this.translateService
+      .get('isyAngularWidgets')
+      .subscribe((res) => this.widgetConfig.setTranslation(res));
   }
 
   ngOnDestroy(): void {
-    if(this.primeNgSub) {
+    if (this.primeNgSub) {
       this.primeNgSub.unsubscribe();
     }
-    if(this.widgetSub) {
+    if (this.widgetSub) {
       this.widgetSub.unsubscribe();
     }
   }
