@@ -12,7 +12,6 @@
 - ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität überarbeitet
 - ISY-389: Imports in der Demo-Anwendung zur Library geht nun über den Library-Namen
 
-
 # 17.1.0 - 18.01.2024
 ## Fixes
 - ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
