@@ -338,6 +338,14 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(component).toBeDefined();
   });
 
+  it('should set valid writeValue to inputValue', () => {
+    component.writeValue('01.01.2023');
+
+    expect(component.inputValue).toBe('01.01.2023');
+    expect(onChange).not.toHaveBeenCalled();
+    expect(onTouched).not.toHaveBeenCalled();
+  });
+
   it('should correctly respond to class attribute changes', () => {
     component.ngAfterViewInit();
     const inputMask = spectator.query('p-inputmask') as HTMLElement;
