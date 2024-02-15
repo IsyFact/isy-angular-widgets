@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { MegaMenuItem } from "primeng/api";
-import { UserInfo } from "../api/userinfo";
-import { WidgetsConfigService } from "../i18n/widgets-config.service";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {MegaMenuItem} from 'primeng/api';
+import {UserInfo} from '../api/userinfo';
+import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
 /**
  * The Anwendungsrahmen that contains general, application independent elements as logos or navigation bars.
