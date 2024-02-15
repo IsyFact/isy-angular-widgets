@@ -346,6 +346,19 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(onTouched).not.toHaveBeenCalled();
   });
 
+  it('should correctly respond to class attribute changes', () => {
+    component.ngAfterViewInit();
+    const inputMask = spectator.query('p-inputmask') as HTMLElement;
+    const hostElement = spectator.element;
+    expect(inputMask.classList.contains('ng-invalid')).toBe(false);
+    hostElement.classList.add('ng-invalid');
+    // fakesyn and tick do not work
+    setTimeout(() => {
+      expect(inputMask).toBeTruthy();
+      expect(inputMask.classList.contains('ng-invalid')).toBe(true);
+    }, 50);
+  });
+
   it('should disable the state', () => {
     component.setDisabledState(true);
     expect(component.disabled).toBeTrue();
