@@ -85,7 +85,7 @@ export class HauptfensterComponent {
   /**
    * Determines the width of the Linksnavigation, e.g. "15em". Suggested unit is em.
    * Default is 15em.
-   * */
+   */
   @Input() linksNavigationWidth = '15em';
 
   /**
