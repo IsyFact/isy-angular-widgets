@@ -7,11 +7,16 @@
       "close": "Schließen"
     },
     "inputChar": {
+      "headerAllCharacters": "Alle",
       "headerBaseChars": "Basis",
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
       "aria": {
         "togglePicker": "Sonderzeichenpicker öffnen/schließen"
+      },
+      "enum": {
+        "basis": "GRUNDZEICHEN",
+        "gruppen": "SCHRIFTZEICHENGRUPPE"
       }
     },
     "hauptfenster": {
