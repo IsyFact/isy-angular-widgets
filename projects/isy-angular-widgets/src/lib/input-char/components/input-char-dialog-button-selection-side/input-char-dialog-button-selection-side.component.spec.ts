@@ -40,6 +40,7 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
     component = spectator.component;
     component.allButtonOptions = headerStr;
     component.dataToDisplay = inputData;
+    component.ngOnChanges();
     spectator.detectChanges();
   });
 

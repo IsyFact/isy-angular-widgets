@@ -6,6 +6,7 @@ import {MockComponents} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {InputCharModule} from '../../input-char.module';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
@@ -15,7 +16,9 @@ describe('Unit Tests: InputCharComponent', () => {
   const dialogDefaultHeight = '460px';
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    declarations: [MockComponents(Dialog, InputCharDialogComponent)]
+    declarations: [MockComponents(Dialog, InputCharDialogComponent)],
+    imports: [TranslateModule.forRoot()],
+    providers: [TranslateService]
   });
 
   describe('with default datentyp', () => {
@@ -117,11 +120,11 @@ describe('Unit Tests: InputCharComponent', () => {
 
 describe('Integration Test: InputCharComponent', () => {
   const service = new CharacterService();
-
   let spectator: Spectator<InputCharComponent>;
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    imports: [InputCharModule]
+    imports: [InputCharModule, TranslateModule.forRoot()],
+    providers: [TranslateService]
   });
 
   Object.keys(Datentyp).forEach((datentyp) => {
