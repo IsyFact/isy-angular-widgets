@@ -3,13 +3,10 @@
   [header]="'isyAngularWidgetsDemo.displayObject.masterDataHeader' | translate"
   [toggleable]="true"
 >
-  <div class="grid mt-1 align-items-center">
-    <div class="col-12 lg:col-6 xl:col-4 py-0">
-      <div class="grid p-1 align-items-center">
-        <label for="basis-nachname" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-          {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
-        </label>
-        <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+  <div class="grid mt-3">
+    <div class="col-12 md:col-6 xl:col-4">
+      <div class="field">
+        <span class="p-float-label">
           <input
             id="basis-nachname"
             class="w-full"
@@ -18,15 +15,15 @@
             disabled
             [(ngModel)]="person.personalien.nachname"
           />
-        </div>
+          <label for="basis-nachname">
+            {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
+          </label>
+        </span>
       </div>
     </div>
-    <div class="col-12 lg:col-6 xl:col-4 py-0">
-      <div class="grid p-1 align-items-center">
-        <label for="basis-vorname" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-          {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
-        </label>
-        <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+    <div class="col-12 md:col-6 xl:col-4">
+      <div class="field">
+        <span class="p-float-label">
           <input
             id="basis-vorname"
             class="w-full"
@@ -35,15 +32,15 @@
             disabled
             [(ngModel)]="person.personalien.vorname"
           />
-        </div>
+          <label for="basis-vorname">
+            {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
+          </label>
+        </span>
       </div>
     </div>
-    <div class="col-12 lg:col-6 xl:col-4 py-0">
-      <div class="grid p-1 align-items-center">
-        <label for="basis-geburtsdatum" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-          {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
-        </label>
-        <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+    <div class="col-12 md:col-6 xl:col-4">
+      <div class="field">
+        <span class="p-float-label">
           <input
             id="basis-geburtsdatum"
             class="w-full"
@@ -52,7 +49,10 @@
             disabled
             [(ngModel)]="person.personalien.geburtsdatum"
           />
-        </div>
+          <label for="basis-geburtsdatum">
+            {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
+          </label>
+        </span>
       </div>
     </div>
   </div>
@@ -61,13 +61,10 @@
 <p-tabView id="tab-view">
   <p-tabPanel id="panel-personalien" [header]="'isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate">
     <form [formGroup]="personalInfoForm">
-      <div class="grid mt-1 align-items-center">
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="first-name" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+      <div class="grid mt-3">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <input
                 id="first-name"
                 formControlName="firstName"
@@ -77,54 +74,54 @@
                 type="text"
                 pInputText
               />
-              <small class="p-error block" *ngIf="personalInfoForm.controls['firstName'].invalid">
-                {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
-              </small>
-            </div>
+              <label for="first-name">
+                {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
+              </label>
+            </span>
+            <small class="p-error block" *ngIf="personalInfoForm.controls['firstName'].invalid">
+              {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
+            </small>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="last-name" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <input id="last-name" formControlName="lastName" type="text" pInputText isyInputChar />
-              <small
-                class="p-error block"
-                *ngIf="personalInfoForm.controls['lastName'].invalid && personalInfoForm.controls['lastName'].touched"
-              >
-                {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
-              </small>
-            </div>
+              <label for="last-name">
+                {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
+              </label>
+            </span>
+            <small
+              class="p-error block"
+              *ngIf="personalInfoForm.controls['lastName'].invalid && personalInfoForm.controls['lastName'].touched"
+            >
+              {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
+            </small>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="birth-name" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <input id="birth-name" formControlName="birthName" type="text" pInputText isyInputChar />
-            </div>
+              <label for="birth-name">
+                {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="birth-place" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <input id="birth-place" formControlName="birthplace" class="w-full" type="text" pInputText />
-            </div>
+              <label for="birth-place">
+                {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="gender" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <p-dropdown
                 inputId="gender"
                 formControlName="gender"
@@ -138,15 +135,15 @@
                 styleClass="w-full"
                 appendTo="body"
               ></p-dropdown>
-            </div>
+              <label for="gender">
+                {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="birth-date" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <p-calendar
                 inputId="birth-date"
                 dateFormat="dd.mm.yy"
@@ -156,25 +153,25 @@
                 appendTo="body"
               >
               </p-calendar>
-            </div>
+              <label for="birth-date">
+                {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="nationality" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
-            </div>
+              <label for="nationality">
+                {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="phone-number" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.telefonnummer' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <p-inputMask
                 inputId="phone-number"
                 formControlName="phoneNumber"
@@ -183,45 +180,50 @@
                 mask="+99 9999 / 9999999"
               >
               </p-inputMask>
-            </div>
+              <label for="phone-number">
+                {{ 'isyAngularWidgetsDemo.labels.telefonnummer' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="date-of-entry" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
-              <isy-incomplete-date inputId="date-of-entry" formControlName="dateOfEntry" [dateInPastConstraint]="true">
-              </isy-incomplete-date>
-              <small
-                class="p-error block"
-                *ngIf="
-                  personalInfoForm.controls['dateOfEntry'].invalid &&
-                  (personalInfoForm.controls['dateOfEntry'].touched || personalInfoForm.controls['dateOfEntry'].dirty)
-                "
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
+              <isy-incomplete-date
+                inputId="date-of-entry"
+                formControlName="dateOfEntry"
+                [dateInPastConstraint]="true"
+                inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
               >
-                {{ 'isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate }}
-              </small>
-            </div>
+              </isy-incomplete-date>
+              <label for="date-of-entry">
+                {{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}
+              </label>
+            </span>
+            <small
+              class="p-error block"
+              *ngIf="
+                personalInfoForm.controls['dateOfEntry'].invalid &&
+                (personalInfoForm.controls['dateOfEntry'].touched || personalInfoForm.controls['dateOfEntry'].dirty)
+              "
+            >
+              {{ 'isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate }}
+            </small>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="date-of-departure" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.abreisedatum' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <input id="date-of-departure" formControlName="dateOfDeparture" class="w-full" type="text" pInputText />
-            </div>
+              <label for="date-of-departure">
+                {{ 'isyAngularWidgetsDemo.labels.abreisedatum' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="passport-expiration-date" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.ablaufdatumReisepass' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <p-calendar
                 inputId="passport-expiration-date"
                 dateFormat="dd.mm.yy"
@@ -229,27 +231,26 @@
                 [showIcon]="true"
                 styleClass="w-full"
                 appendTo="body"
-              >
-              </p-calendar>
-            </div>
+              ></p-calendar>
+              <label for="passport-expiration-date">
+                {{ 'isyAngularWidgetsDemo.labels.ablaufdatumReisepass' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="credit-card-number" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.kreditkartennummer' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <input id="credit-card-number" formControlName="creditCardNumber" class="w-full" type="text" pInputText />
-            </div>
+              <label for="credit-card-number">
+                {{ 'isyAngularWidgetsDemo.labels.kreditkartennummer' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="credit-card-expiration-date" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.ablaufdatumKreditkarte' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <span class="p-float-label">
               <input
                 id="credit-card-expiration-date"
                 formControlName="creditCardExpirationDate"
@@ -257,28 +258,27 @@
                 type="text"
                 pInputText
               />
-            </div>
+              <label for="credit-card-expiration-date">
+                {{ 'isyAngularWidgetsDemo.labels.ablaufdatumKreditkarte' | translate }}
+              </label>
+            </span>
           </div>
         </div>
-        <div class="col-12 lg:col-6 xl:col-4 py-0">
-          <div class="grid p-1 align-items-center">
-            <label for="identity-document" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-              {{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}
-            </label>
-            <div class="col-12 sm:col-8 md:col-7 lg:col-6">
-              <p-fileUpload
-                id="identity-document"
-                formControlName="identityDocument"
-                ngDefaultControl
-                [name]="'myfile'"
-                [accept]="'image/*,.pdf,.txt'"
-                [auto]="true"
-                [maxFileSize]="1000000"
-                [customUpload]="true"
-                (uploadHandler)="uploadFile($event)"
-              >
-              </p-fileUpload>
-            </div>
+        <div class="col-12 md:col-6 xl:col-4">
+          <div class="field">
+            <p-fileUpload
+              id="identity-document"
+              formControlName="identityDocument"
+              ngDefaultControl
+              [name]="'myfile'"
+              [accept]="'image/*,.pdf,.txt'"
+              [auto]="true"
+              [maxFileSize]="1000000"
+              [customUpload]="true"
+              (uploadHandler)="uploadFile($event)"
+              chooseLabel="{{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}"
+            >
+            </p-fileUpload>
           </div>
         </div>
       </div>
@@ -292,22 +292,17 @@
 
       <div id="div-show-secret-fields" *ngIf="showSecretFields">
         <div class="grid m-0 align-items-center">
-          <div class="col-12 lg:col-6 xl:col-4 py-0">
-            <div class="grid p-1 align-items-center">
-              <label for="id-required" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
+          <div class="col-12 md:col-6 xl:col-4">
+            <div class="field field-checkbox">
+              <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
+              <label for="id-required" class="m-0 ml-3">
                 {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
               </label>
-              <div class="col-12 sm:col-8 md:col-7 lg:col-6">
-                <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
-              </div>
             </div>
           </div>
-          <div class="col-12 lg:col-6 xl:col-4 py-0">
-            <div class="grid p-1 align-items-center">
-              <label for="security-level" class="col-12 sm:col-4 md:col-5 lg:col-6 sm:text-right text-left">
-                {{ 'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate }}
-              </label>
-              <div class="col-12 sm:col-8 md:col-7 lg:col-6">
+          <div class="col-12 md:col-6 xl:col-4">
+            <div class="field">
+              <span class="p-float-label">
                 <p-inputNumber
                   id="security-level"
                   formControlName="securityLevel"
@@ -319,18 +314,15 @@
                   inputStyleClass="w-full"
                 >
                 </p-inputNumber>
-              </div>
+                <label for="security-level">
+                  {{ 'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate }}
+                </label>
+              </span>
             </div>
           </div>
-          <div class="col-12 lg:col-12 md:col-12 py-0">
-            <div class="grid p-1 align-items-center">
-              <label
-                for="intelligence-notes"
-                class="col-12 sm:col-4 md:col-5 lg:col-3 xl:col-2 sm:text-right text-left"
-              >
-                {{ 'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate }}
-              </label>
-              <div class="col-12 sm:col-8 md:col-7 lg:col-9 xl:col-6">
+          <div class="col-12 xl:col-8">
+            <div class="field">
+              <span class="p-float-label">
                 <textarea
                   pInputTextarea
                   id="intelligence-notes"
@@ -339,12 +331,15 @@
                   [rows]="5"
                 >
                 </textarea>
-                <small class="p-error block" *ngIf="personalInfoForm.controls['intelligenceNotes'].invalid">
-                  {{
-                    'isyAngularWidgetsDemo.messages.maxLengthError' | translate: {numChars: intelligenceNotesMaxLength}
-                  }}
-                </small>
-              </div>
+                <label for="intelligence-notes">
+                  {{ 'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate }}
+                </label>
+              </span>
+              <small class="p-error block" *ngIf="personalInfoForm.controls['intelligenceNotes'].invalid">
+                {{
+                  'isyAngularWidgetsDemo.messages.maxLengthError' | translate: {numChars: intelligenceNotesMaxLength}
+                }}
+              </small>
             </div>
           </div>
         </div>

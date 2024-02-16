@@ -421,7 +421,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     spectator.fixture.detectChanges();
 
     const idLabel = spectator.fixture.nativeElement.querySelector('label#id-label');
-    expect(idLabel.textContent).toEqual('ID');
+    expect(idLabel.textContent).toEqual('ID *');
   });
 
   it('should check the reactive forms init', () => {
