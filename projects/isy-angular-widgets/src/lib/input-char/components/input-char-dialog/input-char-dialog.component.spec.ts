@@ -31,7 +31,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     spectator = createComponent();
     component = spectator.component;
     fixture = spectator.fixture;
-    component.allCharacters = sonderzeichenListe;
+    component.charList = sonderzeichenListe;
     component.ngOnChanges();
     fixture.detectChanges();
   });
