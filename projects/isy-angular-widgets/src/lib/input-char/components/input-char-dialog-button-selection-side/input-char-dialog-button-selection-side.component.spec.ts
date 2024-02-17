@@ -71,7 +71,7 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 });
 
-fdescribe('Integration Tests: InputCharDialogButtonSelectionSideComponent', () => {
+describe('Integration Tests: InputCharDialogButtonSelectionSideComponent', () => {
   const createComponent = createComponentFactory({
     component: InputCharDialogButtonSelectionSideComponent,
     imports: [SelectButtonModule, AccordionModule, FormsModule]
