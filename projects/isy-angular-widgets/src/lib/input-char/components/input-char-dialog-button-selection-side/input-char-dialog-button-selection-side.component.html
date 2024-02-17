@@ -13,7 +13,7 @@
         [options]="item.value"
         [(ngModel)]="selection"
         (onChange)="onSelection(item.key)"
-        id="accordion-select-button"
+        id="{{ item.key }}-accordion-select-button"
       >
       </p-selectButton>
     </p-accordionTab>

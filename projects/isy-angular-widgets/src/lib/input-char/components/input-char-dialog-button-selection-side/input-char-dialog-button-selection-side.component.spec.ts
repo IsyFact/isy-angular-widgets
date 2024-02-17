@@ -36,10 +36,13 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({
+      props: {
+        dataToDisplay: inputData,
+        allButtonOptions: headerStr
+      }
+    });
     component = spectator.component;
-    component.allButtonOptions = headerStr;
-    component.dataToDisplay = inputData;
     spectator.detectChanges();
   });
 
@@ -75,10 +78,13 @@ describe('Integration Tests: InputCharDialogButtonSelectionSideComponent', () =>
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({
+      props: {
+        dataToDisplay: inputData,
+        allButtonOptions: headerStr
+      }
+    });
     component = spectator.component;
-    component.allButtonOptions = headerStr;
-    component.dataToDisplay = inputData;
     spectator.detectChanges();
   });
 
