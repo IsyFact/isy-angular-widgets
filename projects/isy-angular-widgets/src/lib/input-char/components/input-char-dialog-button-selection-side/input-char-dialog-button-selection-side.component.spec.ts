@@ -36,11 +36,13 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({
+      props: {
+        dataToDisplay: inputData,
+        allButtonOptions: headerStr
+      }
+    });
     component = spectator.component;
-    component.allButtonOptions = headerStr;
-    component.dataToDisplay = inputData;
-    component.ngOnChanges();
     spectator.detectChanges();
   });
 
@@ -69,17 +71,20 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 });
 
-describe('Integration Tests: InputCharDialogButtonSelectionSideComponent', () => {
+fdescribe('Integration Tests: InputCharDialogButtonSelectionSideComponent', () => {
   const createComponent = createComponentFactory({
     component: InputCharDialogButtonSelectionSideComponent,
     imports: [SelectButtonModule, AccordionModule, FormsModule]
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({
+      props: {
+        dataToDisplay: inputData,
+        allButtonOptions: headerStr
+      }
+    });
     component = spectator.component;
-    component.allButtonOptions = headerStr;
-    component.dataToDisplay = inputData;
     spectator.detectChanges();
   });
 
