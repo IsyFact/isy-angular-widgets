@@ -83,15 +83,14 @@ jobs:
         run: npm run compodoc:build
       - name: Build demo application
         run: npm run build:widgets_demo
-      - name: Configure Git
+      - name: Copy index.html to 404.html and move it to root folder
         run: |
-          git config user.email "huy.tran@msg.group"
-          git config user.name "Huy Tran"
-      - name: Deploy documentation to GitHub Pages
-        run: npx angular-cli-ghpages --dir=docs --no-silent
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Deploy demo application to GitHub Pages
-        run: npx angular-cli-ghpages --dir=docs/isy-angular-widgets-demo --no-silent
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          cp docs/isy-angular-widgets-demo/index.html docs/isy-angular-widgets-demo/404.html
+          cp docs/isy-angular-widgets-demo/404.html docs/404.html
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: 'docs'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
