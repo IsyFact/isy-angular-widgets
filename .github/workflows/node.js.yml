@@ -83,6 +83,10 @@ jobs:
         run: npm run compodoc:build
       - name: Build demo application
         run: npm run build:widgets_demo
+      - name: Copy index.html to 404.html and move it to root folder
+        run: |
+          cp docs/isy-angular-widgets-demo/index.html docs/isy-angular-widgets-demo/404.html
+          mv docs/isy-angular-widgets-demo/404.html docs/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
