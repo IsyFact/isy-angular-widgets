@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feature/ISY-538-Demo_Deployment_mit_GitHub_Pages"]
   pull_request:
     branches: [ "main" ]
 
@@ -23,7 +23,6 @@ concurrency:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -81,12 +80,12 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - name: Create docs
-        run: |
-              npm run compodoc:build
+        run: npm run compodoc:build
+      - name: Build demo application
+        run: npm run build:widgets_demo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload documentation repository
           path: 'docs'
       - name: Deploy to GitHub Pages
         id: deployment

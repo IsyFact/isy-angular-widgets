@@ -15,7 +15,7 @@
     "build": "ng build isy-angular-widgets && ng build isy-angular-widgets-demo && npm run build:schematics",
     "build:widgets_lib": "ng build isy-angular-widgets && npm run build:schematics && npm run postbuild",
     "build-and-pack:widgets_lib": "npm run build:widgets_lib && npm run pack:widgets_lib",
-    "build:widgets_demo": "ng build isy-angular-widgets-demo",
+    "build:widgets_demo": "ng build isy-angular-widgets-demo --output-path docs/isy-angular-widgets-demo --base-href /isy-angular-widgets/isy-angular-widgets-demo/",
     "build:schematics": "tsc -p ./projects/isy-angular-widgets/tsconfig.schematics.json",
     "postbuild": "cd ./projects/isy-angular-widgets && copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/isy-angular-widgets/",
     "pack:widgets_lib": "cd dist/isy-angular-widgets && npm pack",
