@@ -58,6 +58,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/isy-angular-widgets/isy-angular-widgets-demo/",
             "outputPath": "dist/isy-angular-widgets-demo",
             "index": "projects/isy-angular-widgets-demo/src/index.html",
             "main": "projects/isy-angular-widgets-demo/src/main.ts",
