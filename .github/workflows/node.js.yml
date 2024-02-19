@@ -79,14 +79,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - name: Create docs
-        run: npm run compodoc:build
       - name: Build demo application
         run: npm run build:widgets_demo
-      - name: Copy index.html to 404.html and move it to root folder
+      - name: Create and move documentation
         run: |
-          cp docs/isy-angular-widgets-demo/index.html docs/isy-angular-widgets-demo/404.html
-          cp docs/isy-angular-widgets-demo/404.html docs/404.html
+          npm run compodoc:build
+          mv docs docs_temp
+          mkdir docs
+          mv docs_temp docs/documentation
+      - name: Move demo application to root
+        run: |
+          mv dist/isy-angular-widgets-demo/* docs/
+      - name: Copy index.html to 404.html for Angular app
+        run: |
+          cp docs/index.html docs/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
@@ -94,3 +100,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+      - name: Show deployment URLs
+        run: |
+          echo "Demo Application URL: https://isyfact.github.io/isy-angular-widgets/"
+          echo "Documentation URL: https://isyfact.github.io/isy-angular-widgets/documentation/"

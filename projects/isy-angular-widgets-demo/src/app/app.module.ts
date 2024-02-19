@@ -50,7 +50,7 @@ import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitent
       loader: {
         provide: TranslateLoader,
         useFactory: function HttpLoaderFactory(http: HttpClient) {
-          return new TranslateHttpLoader(http);
+          return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
         },
         deps: [HttpClient]
       }
