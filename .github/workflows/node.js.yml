@@ -5,102 +5,105 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main", "feature/ISY-538-Demo_Deployment_mit_GitHub_Pages"]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#
-#    strategy:
-#      matrix:
-#        node-version: [18.x]
-#        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-#
-#    steps:
-#      - uses: actions/checkout@v3
-#        with:
-#          fetch-depth: 0
-#      - name: Use Node.js ${{ matrix.node-version }}
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: ${{ matrix.node-version }}
-#          cache: 'npm'
-#      - run: npm ci
-#      - run: npm run prettier:check
-#      - run: npm run lint
-#      - run: npm test
-#      - name: Sonar Cache
-#        uses: actions/cache@v3
-#        with:
-#          path: ~/.sonar/cache
-#          key: ${{ runner.os }}-sonar
-#          restore-keys: ${{ runner.os }}-sonar
-#      - name: SonarCloud Scan
-#        run: >
-#          npx sonarqube-scanner@3
-#          -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
-#          -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
-#          -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#      - run: npm run build --if-present
-
-  docs:
+  build_and_test:
     runs-on: ubuntu-latest
-#    needs: [build]
+
     strategy:
       matrix:
         node-version: [ 18.x ]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    if: ${{ github.event.action }} == 'opened'
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - name: Build demo application
-        run: npm run build:widgets_demo
-      - name: Create and move documentation
+      - name: Install dependencies
+        run: npm ci
+      - name: Check code formatting and linting
+        run: |
+          npm run prettier:check
+          npm run lint
+      - name: Run tests
+        run: npm test
+      - name: Restore SonarCloud cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Perform SonarCloud scan
+        run: >
+          npx sonarqube-scanner@3
+          -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
+          -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
+          -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Build project
+        run: npm run build --if-present
+
+  build_and_deploy_demo_and_docs:
+    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Build and prepare documentation for deployment
         run: |
           npm run compodoc:build
           mv docs docs_temp
           mkdir docs
           mv docs_temp docs/documentation
-      - name: Move demo application to root
+      - name: Build and prepare demo application for deployment
         run: |
+          npm run build:widgets_demo
           mv dist/isy-angular-widgets-demo/* docs/
-      - name: Copy index.html to 404.html for Angular app
-        run: |
           cp docs/index.html docs/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: 'docs'
-      - name: Deploy to GitHub Pages
+      - name: Deploy demo and documentation to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-      - name: Show deployment URLs
+      - name: Display deployment URLs
         run: |
-          echo "Demo Application URL: https://isyfact.github.io/isy-angular-widgets/"
+          echo "Demo URL: https://isyfact.github.io/isy-angular-widgets/"
           echo "Documentation URL: https://isyfact.github.io/isy-angular-widgets/documentation/"
