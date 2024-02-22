@@ -130,8 +130,11 @@ describe('Integration Test: InputCharComponent', () => {
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
-        spectator = createComponent();
-        spectator.fixture.componentRef.setInput('datentyp', datentyp);
+        // spectator.fixture.componentRef.setInput('datentyp', datentyp);
+        spectator = createComponent({props: {
+          datentyp: datentyp as Datentyp
+        }});
+        spectator.detectChanges();
         spectator.click('.input-char-button');
       });
 
