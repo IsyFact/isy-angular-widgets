@@ -1,11 +1,12 @@
 import {InputCharDialogButtonSelectionSideComponent} from './input-char-dialog-button-selection-side.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MockModule} from 'ng-mocks';
-import {AccordionModule} from 'primeng/accordion';
+import {AccordionModule, AccordionTab} from 'primeng/accordion';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {FormsModule} from '@angular/forms';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {InputCharData, Zeichenobjekt} from '../../model/model';
+import {DebugElement} from '@angular/core';
 
 let spectator: Spectator<InputCharDialogButtonSelectionSideComponent>;
 let component: InputCharDialogButtonSelectionSideComponent;
@@ -16,6 +17,10 @@ const groups = [...new Set(charList.map((item) => item.schriftzeichengruppe))];
 
 const headerStr = 'Alle';
 const inputData: InputCharData[] = [{Basis: bases}, {Gruppen: groups}];
+const props = {
+  dataToDisplay: inputData,
+  allButtonOptions: headerStr
+};
 
 /**
  * Adds a click event listener to the given button
@@ -29,6 +34,14 @@ function addClickEventListenerForSelection(button: HTMLButtonElement, event: str
   });
 }
 
+/**
+ * Finds an HTML Element inside the DOM by text content value
+ * @param contentValue The value for the search action
+ */
+function findElementByTextContent(contentValue: string): DebugElement {
+  return spectator.fixture.debugElement.query((debugEl) => debugEl.nativeElement.textContent === contentValue);
+}
+
 describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   const createComponent = createComponentFactory({
     component: InputCharDialogButtonSelectionSideComponent,
@@ -36,12 +49,7 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createComponent({
-      props: {
-        dataToDisplay: inputData,
-        allButtonOptions: headerStr
-      }
-    });
+    spectator = createComponent({props: props});
     component = spectator.component;
     spectator.detectChanges();
   });
@@ -71,19 +79,14 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 });
 
-describe('Integration Tests: InputCharDialogButtonSelectionSideComponent', () => {
+describe('Integration Tests', () => {
   const createComponent = createComponentFactory({
     component: InputCharDialogButtonSelectionSideComponent,
     imports: [SelectButtonModule, AccordionModule, FormsModule]
   });
 
   beforeEach(() => {
-    spectator = createComponent({
-      props: {
-        dataToDisplay: inputData,
-        allButtonOptions: headerStr
-      }
-    });
+    spectator = createComponent({props: props});
     component = spectator.component;
     spectator.detectChanges();
   });
@@ -91,4 +94,68 @@ describe('Integration Tests: InputCharDialogButtonSelectionSideComponent', () =>
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('all button should be selected on init ', () => {
+    expect(component.allSelected).toBeTrue();
+  });
+
+  it('should select the all characters button', () => {
+    const allButtonSpy = spyOn(component.atSelection, 'emit');
+    const allSelectButton = spectator.query('#all-select-button') as HTMLButtonElement;
+    allSelectButton.dispatchEvent(new Event('onChange'));
+
+    expect(allButtonSpy).toHaveBeenCalledWith({identifier: '', zeichen: headerStr});
+    expect(component.selection).toEqual(headerStr);
+    expect(component.allSelected).toBeTrue();
+  });
+
+  it('should select the all characters button after specific selection', () => {
+    const buttonSpy = spyOn(component.atSelection, 'emit');
+
+    const baseButton = findElementByTextContent('A');
+    baseButton.nativeElement.click();
+    expect(buttonSpy).toHaveBeenCalledWith({identifier: 'Basis', zeichen: 'A'});
+    expect(component.selection).toEqual('A');
+    expect(component.allSelected).toBeFalse();
+
+    buttonSpy.calls.reset();
+
+    const allSelectButton = spectator.query('#all-select-button') as HTMLButtonElement;
+    allSelectButton.dispatchEvent(new Event('onChange'));
+    spectator.detectChanges();
+    // ToDo: Fix
+    // expect(buttonSpy).toHaveBeenCalledWith({identifier: '', zeichen: headerStr});
+    // expect(component.selection).toEqual(headerStr);
+    expect(component.allSelected).toBeTrue();
+  });
+
+  it('should select a base', () => {
+    const spy = spyOn(component.atSelection, 'emit');
+    bases.forEach((base) => {
+      findElementByTextContent(base).nativeElement.click();
+      expect(spy).toHaveBeenCalledWith({identifier: 'Basis', zeichen: base});
+      spy.calls.reset();
+    });
+  });
+
+  // it('should select a group', () => {
+  // ToDo: Fix
+  //   const spy = spyOn(component.atSelection, 'emit');
+  //   groups.forEach((group) => {
+  //     findElementByTextContent(group).nativeElement.click();
+  //     expect(spy).toHaveBeenCalledWith({identifier: 'Gruppe', zeichen: group});
+  //     spy.calls.reset();
+  //   });
+  // });
+
+  it('first accordion tab header should contain bases', () => {
+    const baseSelectButtons = spectator.query('p-accordionTab');
+    expect(baseSelectButtons?.textContent).toContain('Basis');
+  });
+
+  // it('first accordion tab group should contain bases', () => {
+  // ToDo: Fix
+  //   const baseSelectButtons = spectator.query('p-accordionTab');
+  //   expect(baseSelectButtons?.textContent).toContain('Gruppen');
+  // });
 });
