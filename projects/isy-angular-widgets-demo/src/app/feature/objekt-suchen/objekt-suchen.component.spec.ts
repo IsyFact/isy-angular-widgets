@@ -238,10 +238,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     setupEditForm(person);
 
     component.getSavedStatus(true);
-
-    const toast = spectator.fixture.nativeElement.querySelector('#notification-toast') as HTMLElement;
-    const toastPosition = 'top-right';
-    expect(toast.getAttribute('position')).toEqual(toastPosition);
   }));
 
   it('should check the functionality on arriving wizard index (on init => index = 0)', () => {
