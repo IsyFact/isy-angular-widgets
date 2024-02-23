@@ -20,8 +20,6 @@ const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
-  const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
-  const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
 
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
@@ -64,19 +62,6 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
     fixture.detectChanges();
   };
-
-  // const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-  //   const schriftzeichengruppeSelectButton = fixture.debugElement.query(
-  //     By.css('#schriftzeichengruppe-select-button')
-  //   ).componentInstance;
-  //   expect(schriftzeichengruppeSelectButton).toBeTruthy();
-  //
-  //   // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-  //   component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
-  //
-  //   schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
-  //   fixture.detectChanges();
-  // };
 
   sonderzeichenListe.forEach((zeichen: Zeichenobjekt) => {
     it(`should emit the chosen character ${zeichen.zeichen} after button press`, () => {

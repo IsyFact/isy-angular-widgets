@@ -5,11 +5,14 @@ import {AccordionModule} from 'primeng/accordion';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {FormsModule} from '@angular/forms';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {InputCharData, Zeichenobjekt} from '../../model/model';
+import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {ComponentFixture} from '@angular/core/testing';
 
 let spectator: Spectator<MultiSelectButtonComponent>;
 let component: MultiSelectButtonComponent;
+let fixture: ComponentFixture<MultiSelectButtonComponent>;
 
 const charList = sonderzeichenliste as Zeichenobjekt[];
 const bases = [...new Set(charList.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
@@ -51,6 +54,7 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   beforeEach(() => {
     spectator = createComponent({props: props});
     component = spectator.component;
+    fixture = spectator.fixture;
     spectator.detectChanges();
   });
 
@@ -116,52 +120,68 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   //     );
   //   });
   // });
-  //
-  // groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-  //   it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
-  //     selectSchriftzeichengruppe(schriftzeichengruppe);
-  //
-  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-  //     expect(component.selectedGrundzeichen).toBeUndefined();
-  //     expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
-  //   });
-  //
-  //   it('should show only characters with a selected schriftzeichengruppe', () => {
-  //     const charactersSelectButton = fixture.debugElement.query(
-  //       By.css('#right-panel-side p-selectButton')
-  //     ).componentInstance;
-  //     expect(charactersSelectButton).toBeTruthy();
-  //
-  //     selectSchriftzeichengruppe(schriftzeichengruppe);
-  //
-  //     const options = charactersSelectButton.options;
-  //     expect(options).toBeTruthy();
-  //     for (const character of options) {
-  //       expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
-  //     }
-  //   });
-  //
-  //   it('should show all characters with a selected schriftzeichengruppe', () => {
-  //     const schriftzeichengruppeSelectButton = fixture.debugElement.query(
-  //       By.css('#schriftzeichengruppe-select-button')
-  //     ).componentInstance;
-  //     expect(schriftzeichengruppeSelectButton).toBeTruthy();
-  //     const charactersSelectButton = fixture.debugElement.query(
-  //       By.css('#right-panel-side p-selectButton')
-  //     ).componentInstance;
-  //     expect(charactersSelectButton).toBeTruthy();
-  //
-  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-  //     component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
-  //
-  //     schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
-  //     fixture.detectChanges();
-  //
-  //     expect(charactersSelectButton.options.length).toEqual(
-  //       sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
-  //     );
-  //   });
-  // });
+
+  const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
+    const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+      By.css('.schriftzeichengruppe-select-button')
+    ).componentInstance;
+    expect(schriftzeichengruppeSelectButton).toBeTruthy();
+
+    // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+    // component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
+
+    schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
+    fixture.detectChanges();
+  };
+
+  // TODO Test that tests basic functionality: emit an event on click
+
+  groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+    // TODO this probably will be an integration test as this component doesnt know the selected group
+    it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
+      selectSchriftzeichengruppe(schriftzeichengruppe);
+
+      // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+      expect(component.selectedGrundzeichen).toBeUndefined();
+      expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
+    });
+
+    it('should show only characters with a selected schriftzeichengruppe', () => {
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('#right-panel-side p-selectButton')
+      ).componentInstance;
+      expect(charactersSelectButton).toBeTruthy();
+
+      selectSchriftzeichengruppe(schriftzeichengruppe);
+
+      const options = charactersSelectButton.options;
+      expect(options).toBeTruthy();
+      for (const character of options) {
+        expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
+      }
+    });
+
+    it('should show all characters with a selected schriftzeichengruppe', () => {
+      const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+        By.css('#schriftzeichengruppe-select-button')
+      ).componentInstance;
+      expect(schriftzeichengruppeSelectButton).toBeTruthy();
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('#right-panel-side p-selectButton')
+      ).componentInstance;
+      expect(charactersSelectButton).toBeTruthy();
+
+      // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+      component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
+
+      schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
+      fixture.detectChanges();
+
+      expect(charactersSelectButton.options.length).toEqual(
+        sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
+      );
+    });
+  });
 });
 
 describe('Integration Tests', () => {
