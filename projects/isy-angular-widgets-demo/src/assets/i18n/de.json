@@ -40,7 +40,8 @@
       "savePersonDetail": "Die Personalie mit dem Namen {{firstName}} {{lastName}} wurde erfolgreich gespeichert.",
       "requiredMessage": "Dieses Feld ist ein Pflichtfeld.",
       "maxLengthError": "Es dürfen maximal {{numChars}} Zeichen verwendet werden.",
-      "inputUnspecifiedError": "Das Datum ist ungültig."
+      "inputUnspecifiedError": "Das Datum ist ungültig.",
+      "dateInPastError": "Das Datum muss in der Vergangenheit liegen."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",

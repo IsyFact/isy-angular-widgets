@@ -5,7 +5,6 @@ import {PersoenlicheInformationenComponent} from './components/persoenliche-info
 import {ResultListComponent} from './components/result-list/result-list.component';
 import {DateService} from './services/date.service';
 import {CalendarModule} from 'primeng/calendar';
-import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
 import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
@@ -30,7 +29,6 @@ import {RequiredLabelComponent} from './components/required-label/required-label
     CommonModule,
     ObjektSuchenRoutingModule,
     CalendarModule,
-    ToastModule,
     DialogModule,
     PanelModule,
     DropdownModule,

@@ -63,25 +63,24 @@
     <form [formGroup]="personalInfoForm">
       <div class="grid mt-3">
         <div class="col-12 md:col-6 xl:col-4">
-          <div class="field">
-            <span class="p-float-label">
-              <input
-                id="first-name"
-                formControlName="firstName"
-                class="w-full"
-                required
-                minlength="2"
-                type="text"
-                pInputText
-              />
-              <label for="first-name">
-                {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
-              </label>
-            </span>
-            <small class="p-error block" *ngIf="personalInfoForm.controls['firstName'].invalid">
-              {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
-            </small>
-          </div>
+          <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
+          ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet. -->
+          <isy-form-wrapper
+            label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+            fieldId="first-name"
+            [control]="personalInfoForm.controls.firstName | formControl"
+            [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
+          >
+            <input
+              id="first-name"
+              formControlName="firstName"
+              class="w-full"
+              required
+              minlength="2"
+              type="text"
+              pInputText
+            />
+          </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
           <div class="field">
@@ -142,22 +141,25 @@
           </div>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
-          <div class="field">
-            <span class="p-float-label">
-              <p-calendar
-                inputId="birth-date"
-                dateFormat="dd.mm.yy"
-                formControlName="birthDate"
-                [showIcon]="true"
-                styleClass="w-full"
-                appendTo="body"
-              >
-              </p-calendar>
-              <label for="birth-date">
-                {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
-              </label>
-            </span>
-          </div>
+          <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird, 
+          ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet.
+          Die Formcontrol nutzt einen benutzerdefinierten Validator. -->
+          <isy-form-wrapper
+            label="{{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}"
+            fieldId="birth-date"
+            [control]="personalInfoForm.controls.birthDate | formControl"
+            [validationMessages]="{PAST: 'isyAngularWidgetsDemo.messages.dateInPastError' | translate}"
+          >
+            <p-calendar
+              inputId="birth-date"
+              dateFormat="dd.mm.yy"
+              formControlName="birthDate"
+              [showIcon]="true"
+              styleClass="w-full"
+              appendTo="body"
+            >
+            </p-calendar>
+          </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
           <div class="field">
