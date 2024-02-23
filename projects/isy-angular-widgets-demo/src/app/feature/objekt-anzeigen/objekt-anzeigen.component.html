@@ -149,7 +149,8 @@
             fieldId="birth-date"
             [control]="personalInfoForm.controls.birthDate | formControl"
             [validationMessages]="{PAST: 'isyAngularWidgetsDemo.messages.dateInPastError' | translate}"
-            ><p-calendar
+          >
+            <p-calendar
               inputId="birth-date"
               dateFormat="dd.mm.yy"
               formControlName="birthDate"
