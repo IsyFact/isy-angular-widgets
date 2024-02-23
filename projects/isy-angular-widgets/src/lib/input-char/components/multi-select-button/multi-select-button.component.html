@@ -7,7 +7,7 @@
 </p-selectButton>
 
 <p-accordion [multiple]="true">
-  @for (item of dataToDisplay[0] | keyvalue; track dataToDisplay[0]) {
+  @for (item of dataToDisplay | keyvalue; track dataToDisplay) {
     <p-accordionTab [header]="item.key">
       <p-selectButton
         [options]="item.value"

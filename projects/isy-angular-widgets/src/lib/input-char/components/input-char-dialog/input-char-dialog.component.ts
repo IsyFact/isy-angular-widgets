@@ -1,11 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {
-  ButtonTypeIdentifier,
-  InputCharData,
-  Schriftzeichengruppe,
-  Zeichenobjekt,
-  ZeichenSelection
-} from '../../model/model';
+import {InputCharData, Schriftzeichengruppe, Zeichenobjekt, ZeichenSelection} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {TranslateService} from '@ngx-translate/core';
 import {CharacterService} from '../../services/character.service';
@@ -42,22 +36,10 @@ export class InputCharDialogComponent implements OnChanges {
   grundZeichenListe: string[] = [];
 
   /**
-   * The currently selected Grundzeichen.
-   * @internal
-   */
-  selectedGrundzeichen?: string;
-
-  /**
    * The array who stores all the Schriftzeichen.
    * @internal
    */
   schriftZeichenGruppen: Schriftzeichengruppe[] = [];
-
-  /**
-   * The currently selected Schriftzeichengruppe.
-   * @internal
-   */
-  selectedSchriftzeichenGruppe?: Schriftzeichengruppe;
 
   /**
    * Stores the current selected Zeichenobjekt.
@@ -66,22 +48,10 @@ export class InputCharDialogComponent implements OnChanges {
   selectedZeichenObjekt?: Zeichenobjekt;
 
   /**
-   * Filled with one option for "All Characters"; solely technical reasons.
-   * @internal
-   */
-  allCharsOptions = [{label: 'Alle'}];
-
-  /**
-   * Filled when all chars are selected; solely technical reasons.
-   * @internal
-   */
-  allCharsModel?: {label: string};
-
-  /**
    * Includes the displaying data for the left side of the view
    * @internal
    */
-  leftViewData!: InputCharData[];
+  leftViewData: InputCharData = {};
 
   /**
    * Header of all select button
@@ -112,18 +82,22 @@ export class InputCharDialogComponent implements OnChanges {
    * @param selected Incoming event
    */
   onSelection(selected: ZeichenSelection): void {
-    const buttonType = this.getTranslation(`inputChar.enum.${selected.identifier.toLowerCase()}`);
-
-    if (!buttonType) {
-      this.onAllSelection();
-    }
-
-    if (buttonType === (ButtonTypeIdentifier.GRUNDZEICHEN as string)) {
-      this.onGrundzeichenSelection(selected.zeichen);
-    }
-
-    if (buttonType === (ButtonTypeIdentifier.SCHRIFTZEICHENGRUPPE as string)) {
-      this.onSchriftzeichenGruppeSelection(selected.zeichen as Schriftzeichengruppe);
+    console.log(selected);
+    console.log(this.getTranslation('inputChar.headerBaseChars'));
+    switch (selected.identifier) {
+      case this.getTranslation('inputChar.headerBaseChars'): {
+        console.log('!');
+        this.onGrundzeichenSelection(selected.zeichen);
+        break;
+      }
+      case this.getTranslation('inputChar.headerGroups'): {
+        this.onSchriftzeichenGruppeSelection(selected.zeichen as Schriftzeichengruppe);
+        break;
+      }
+      default: {
+        this.onAllSelection();
+        break;
+      }
     }
   }
 
@@ -133,12 +107,10 @@ export class InputCharDialogComponent implements OnChanges {
    */
   initSelectButtonsData(): void {
     this.allButtonHeader = this.getTranslation('inputChar.headerAllCharacters')!;
-    this.leftViewData = [
-      {
-        [this.getTranslation('inputChar.headerBaseChars')]: this.grundZeichenListe,
-        [this.getTranslation('inputChar.headerGroups')]: this.schriftZeichenGruppen
-      }
-    ];
+    this.leftViewData = {
+      [this.getTranslation('inputChar.headerBaseChars')]: this.grundZeichenListe,
+      [this.getTranslation('inputChar.headerGroups')]: this.schriftZeichenGruppen
+    };
   }
 
   /**
@@ -195,7 +167,6 @@ export class InputCharDialogComponent implements OnChanges {
     this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
     this.initSelectButtonsData();
     this.resetDisplayedCharacters();
-    this.allCharsModel = this.allCharsOptions[0];
   }
 
   /**

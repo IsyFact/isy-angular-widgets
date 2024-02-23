@@ -2,11 +2,11 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import {InputCharData, ZeichenSelection} from '../../model/model';
 
 @Component({
-  selector: 'isy-input-char-dialog-button-selection-side',
-  templateUrl: './input-char-dialog-button-selection-side.component.html',
-  styleUrl: './input-char-dialog-button-selection-side.component.scss'
+  selector: 'isy-multi-select-button',
+  templateUrl: './multi-select-button.component.html',
+  styleUrl: './multi-select-button.component.scss'
 })
-export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnChanges {
+export class MultiSelectButtonComponent implements OnInit, OnChanges {
   /**
    * Fired on select button selection
    * @internal
@@ -17,13 +17,13 @@ export class InputCharDialogButtonSelectionSideComponent implements OnInit, OnCh
    * Header title of select all button
    * @internal
    */
-  @Input() allButtonOptions!: string;
+  @Input() allButtonOptions: string = '';
 
   /**
    * The array who stores an array with every data who must be displayed.
    * @internal
    */
-  @Input() dataToDisplay!: InputCharData[];
+  @Input() dataToDisplay: InputCharData = {};
 
   /**
    * Current select button value

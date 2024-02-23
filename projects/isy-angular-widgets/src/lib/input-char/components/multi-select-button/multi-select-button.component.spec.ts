@@ -1,22 +1,22 @@
-import {InputCharDialogButtonSelectionSideComponent} from './input-char-dialog-button-selection-side.component';
+import {MultiSelectButtonComponent} from './multi-select-button.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MockModule} from 'ng-mocks';
-import {AccordionModule, AccordionTab} from 'primeng/accordion';
+import {AccordionModule} from 'primeng/accordion';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {FormsModule} from '@angular/forms';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {InputCharData, Zeichenobjekt} from '../../model/model';
 import {DebugElement} from '@angular/core';
 
-let spectator: Spectator<InputCharDialogButtonSelectionSideComponent>;
-let component: InputCharDialogButtonSelectionSideComponent;
+let spectator: Spectator<MultiSelectButtonComponent>;
+let component: MultiSelectButtonComponent;
 
 const charList = sonderzeichenliste as Zeichenobjekt[];
 const bases = [...new Set(charList.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
 const groups = [...new Set(charList.map((item) => item.schriftzeichengruppe))];
 
 const headerStr = 'Alle';
-const inputData: InputCharData[] = [{Basis: bases}, {Gruppen: groups}];
+const inputData: InputCharData = {Basis: bases, Gruppen: groups};
 const props = {
   dataToDisplay: inputData,
   allButtonOptions: headerStr
@@ -44,7 +44,7 @@ function findElementByTextContent(contentValue: string): DebugElement {
 
 describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   const createComponent = createComponentFactory({
-    component: InputCharDialogButtonSelectionSideComponent,
+    component: MultiSelectButtonComponent,
     imports: [MockModule(AccordionModule), MockModule(SelectButtonModule), MockModule(FormsModule)]
   });
 
@@ -77,11 +77,96 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
 
     expect(spy).toHaveBeenCalledWith('');
   });
+
+  // bases.forEach((grundzeichen: string) => {
+  //   it(`should only have a ${grundzeichen} base enabled active after corresponding selection"`, () => {
+  //     selectGrundzeichen(grundzeichen);
+  //
+  //     expect(component.allCharsModel).toBeUndefined();
+  //     expect(component.selectedGrundzeichen).toEqual(grundzeichen);
+  //     expect(component.selectedSchriftzeichenGruppe).toBeUndefined();
+  //   });
+  //
+  //   it(`should show only characters with a selected base ${grundzeichen}`, () => {
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     selectGrundzeichen(grundzeichen);
+  //
+  //     const options = charactersSelectButton.options;
+  //     expect(options).toBeTruthy();
+  //     for (const char of options) {
+  //       expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
+  //     }
+  //   });
+  //
+  //   it(`should show all characters with a selected base ${grundzeichen}`, () => {
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     selectGrundzeichen(grundzeichen);
+  //
+  //     expect(charactersSelectButton.options.length).toEqual(
+  //       sonderzeichenListe.filter((char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen)
+  //         .length
+  //     );
+  //   });
+  // });
+  //
+  // groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+  //   it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
+  //     selectSchriftzeichengruppe(schriftzeichengruppe);
+  //
+  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+  //     expect(component.selectedGrundzeichen).toBeUndefined();
+  //     expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
+  //   });
+  //
+  //   it('should show only characters with a selected schriftzeichengruppe', () => {
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     selectSchriftzeichengruppe(schriftzeichengruppe);
+  //
+  //     const options = charactersSelectButton.options;
+  //     expect(options).toBeTruthy();
+  //     for (const character of options) {
+  //       expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
+  //     }
+  //   });
+  //
+  //   it('should show all characters with a selected schriftzeichengruppe', () => {
+  //     const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+  //       By.css('#schriftzeichengruppe-select-button')
+  //     ).componentInstance;
+  //     expect(schriftzeichengruppeSelectButton).toBeTruthy();
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+  //     component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
+  //
+  //     schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
+  //     fixture.detectChanges();
+  //
+  //     expect(charactersSelectButton.options.length).toEqual(
+  //       sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
+  //     );
+  //   });
+  // });
 });
 
 describe('Integration Tests', () => {
   const createComponent = createComponentFactory({
-    component: InputCharDialogButtonSelectionSideComponent,
+    component: MultiSelectButtonComponent,
     imports: [SelectButtonModule, AccordionModule, FormsModule]
   });
 
