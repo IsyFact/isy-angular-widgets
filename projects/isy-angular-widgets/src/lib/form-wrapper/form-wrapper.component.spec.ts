@@ -24,6 +24,16 @@ describe('FormWrapperComponent', () => {
     expect(spectator.component).toBeTruthy();
   });
 
+  it('should display the label text', () => {
+    const testLabel = 'Test Label';
+    spectator.setInput('label', testLabel);
+    spectator.setInput('control', new FormControl(''));
+    spectator.detectChanges();
+    const labelElement = spectator.query('label');
+    expect(labelElement).toBeTruthy();
+    expect(labelElement?.textContent).toContain(testLabel);
+  });
+
   it('should display the correct error message for the validation failure', () => {
     const control = spectator.component.control;
     control.markAsTouched();
