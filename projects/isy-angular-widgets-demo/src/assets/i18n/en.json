@@ -35,7 +35,8 @@
       "savePersonDetail": "The personal data with the name {{firstName}} {{lastName}} was successfully saved.",
       "requiredMessage": "This field is required.",
       "maxLengthError": "A maximum of {{numChars}} characters may be used.",
-      "inputUnspecifiedError": "The date is invalid."
+      "inputUnspecifiedError": "The date is invalid.",
+      "dateInPastError": "The date must be in the past."
     },
     "displayObject": {
       "masterDataHeader": "Master data",

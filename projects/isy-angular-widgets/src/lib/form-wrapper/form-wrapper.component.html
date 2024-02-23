@@ -1,0 +1,11 @@
+<div class="field">
+  <span class="p-float-label">
+    <ng-content></ng-content>
+    <label [for]="fieldId">{{ label }}</label>
+  </span>
+  @if (errorMessage) {
+    <small role="alert" class="p-error block">
+      {{ errorMessage }}
+    </small>
+  }
+</div>
