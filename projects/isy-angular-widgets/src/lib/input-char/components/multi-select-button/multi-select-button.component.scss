@@ -6,7 +6,8 @@ $select_button_on_hover_background_color: grey;
 
 ::ng-deep {
   // Common styles of all select buttons
-  p-selectButton .p-ripple.p-element.p-button {
+  .p-selectButton .p-ripple.p-element.p-button {
+    border: none;
     background-color: transparent;
     color: $select_button_text_color;
     cursor: pointer;
@@ -42,18 +43,13 @@ $select_button_on_hover_background_color: grey;
     }
   }
 
-  // Styles specific for left side select buttons
-  p-selectButton .p-ripple.p-element.p-button {
-    border: none;
-  }
-
   // Styles specific for the select button inside the accordion
-  #accordion-select-button .p-ripple.p-element.p-button {
+  .select-button .p-ripple.p-element.p-button {
     min-width: 50px;
   }
 
   // Styles specific for the "Select All" button
-  #all-select-button .p-ripple.p-element.p-button {
+  .all-select-button .p-ripple.p-element.p-button {
     width: 100%;
     font-weight: 600;
     text-align: start;

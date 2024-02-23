@@ -29,6 +29,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
       MockModule(AccordionModule),
       MockModule(SelectButtonModule),
       MockModule(FormsModule),
+      // TODO Mock Translation
       TranslateModule.forRoot()
     ],
     declarations: [MockComponent(InputCharPreviewComponent), MockComponent(MultiSelectButtonComponent)],
@@ -102,12 +103,16 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 describe('Integration Tests: InputCharDialogComponent', () => {
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
-    imports: [InputCharModule]
+    imports: [InputCharModule, TranslateModule.forRoot()],
+    providers: [TranslateService]
   });
 
   beforeEach(() => {
+    console.log('1');
     spectator = createComponent();
+    console.log('2');
     fixture = spectator.fixture;
+    console.log('3');
 
     fixture.componentRef.setInput('allCharacters', sonderzeichenListe);
     fixture.detectChanges();
@@ -117,13 +122,15 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     ...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))
   ].length;
   it(`should show ${numberOfBases} available bases`, () => {
-    const baseButtons = spectator.queryAll('#grundzeichen-select-button .p-buttonset div');
+    console.log('!');
+    const baseButtons = spectator.queryAll('.Gruppen-select-button .p-buttonset div');
+    console.log(baseButtons);
     expect(baseButtons.length).toEqual(numberOfBases);
   });
 
   const numberOfGroups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))].length;
   it(`should show ${numberOfGroups} available groups`, () => {
-    const groupButtons = spectator.queryAll('#schriftzeichengruppe-select-button .p-buttonset div');
+    const groupButtons = spectator.queryAll('.Basis-select-button .p-buttonset div');
     expect(groupButtons.length).toEqual(numberOfGroups);
   });
 });

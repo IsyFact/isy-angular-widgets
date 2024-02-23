@@ -1,5 +1,5 @@
 <p-selectButton
-  id="all-select-button"
+  class="all-select-button"
   [options]="[allButtonOptions]"
   [(ngModel)]="selection"
   (onChange)="onSelection('')"
@@ -13,7 +13,7 @@
         [options]="item.value"
         [(ngModel)]="selection"
         (onChange)="onSelection(item.key)"
-        id="{{ item.key }}-accordion-select-button"
+        class="{{ item.key }}-select-button"
       >
       </p-selectButton>
     </p-accordionTab>
