@@ -27,11 +27,14 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     declarations: [MockComponent(InputCharPreviewComponent)]
   });
 
+  const props = {
+    allCharacters: sonderzeichenListe
+  };
+
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({props: props});
     component = spectator.component;
     fixture = spectator.fixture;
-    component.allCharacters = sonderzeichenListe;
     component.ngOnChanges();
     fixture.detectChanges();
   });
