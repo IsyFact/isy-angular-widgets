@@ -45,10 +45,11 @@
     </ng-template>
   </p-megaMenu>
   <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
-    <div *ngIf="title; else customTitelzeile">{{ title }}</div>
-    <ng-template #customTitelzeile>
+    @if (title) {
+      <div>{{ title }}</div>
+    } @else {
       <ng-content select="[Titelzeile]"></ng-content>
-    </ng-template>
+    }
   </div>
 
   <ng-content select="[Seitentoolbar]" class="dont-print"></ng-content>
