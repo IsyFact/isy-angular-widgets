@@ -12,17 +12,15 @@ describe('Integration Tests: ChartComponent', () => {
     imports: [ChartModule]
   });
 
-  const type = 'bar';
-  const data = barChartData;
-  const options = responsiveOptions;
+  const props = {
+    type: 'bar',
+    data: barChartData,
+    options: responsiveOptions
+  };
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({props: props});
     component = spectator.component;
-
-    component.type = type;
-    component.data = data;
-    component.options = options;
     spectator.fixture.detectChanges();
   });
 
@@ -31,9 +29,9 @@ describe('Integration Tests: ChartComponent', () => {
   });
 
   it('should have be correctly initialized', () => {
-    expect(component.chart.type).toEqual(type);
-    expect(component.chart.data).toEqual(data);
-    expect(component.chart.options).toEqual(options);
+    expect(component.chart.type).toEqual(props.type);
+    expect(component.chart.data).toEqual(props.data);
+    expect(component.chart.options).toEqual(props.options);
   });
 
   it('should be responsive', () => {
