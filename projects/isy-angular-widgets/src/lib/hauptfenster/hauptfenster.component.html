@@ -64,6 +64,7 @@
           @if (allowSidebarCollapse) {
             <div class="collapseButton">
               <button
+                *ngIf="allowSidebarCollapse"
                 class="p-button-text"
                 pButton
                 icon="pi pi-angle-double-left"
@@ -71,9 +72,8 @@
                 (click)="collapsedLinksnavigation = true"
               ></button>
             </div>
-          } @else {
-            <ng-content select="[Linksnavigation]"></ng-content>
           }
+          <ng-content select="[Linksnavigation]"></ng-content>
         </div>
         <div [hidden]="!collapsedLinksnavigation">
           <button
@@ -107,9 +107,8 @@
                 (click)="collapsedInformationsbereich = true"
               ></button>
             </div>
-          } @else {
-            <ng-content select="[Informationsbereich]"></ng-content>
           }
+          <ng-content select="[Informationsbereich]"></ng-content>
         </div>
         <div [hidden]="!collapsedInformationsbereich">
           <button
