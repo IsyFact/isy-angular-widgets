@@ -1,8 +1,8 @@
 <div class="split" id="left-panel-side">
   <isy-multi-select-button
-    [allButtonOptions]="allButtonHeader"
+    (valueChange)="onSelection($event)"
     [dataToDisplay]="leftViewData"
-    (atSelection)="onSelection($event)"
+    [allButtonOptionsLabel]="allButtonHeader"
   ></isy-multi-select-button>
 </div>
 

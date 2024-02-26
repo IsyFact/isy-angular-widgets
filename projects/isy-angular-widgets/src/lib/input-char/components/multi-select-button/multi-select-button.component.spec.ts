@@ -1,14 +1,14 @@
-import {MultiSelectButtonComponent} from './multi-select-button.component';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockModule} from 'ng-mocks';
-import {AccordionModule} from 'primeng/accordion';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {FormsModule} from '@angular/forms';
+import { MultiSelectButtonComponent } from './multi-select-button.component';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { MockModule } from 'ng-mocks';
+import { AccordionModule } from 'primeng/accordion';
+import { SelectButton, SelectButtonModule } from 'primeng/selectbutton';
+import { FormsModule } from '@angular/forms';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
-import {DebugElement} from '@angular/core';
-import {By} from '@angular/platform-browser';
-import {ComponentFixture} from '@angular/core/testing';
+import { InputCharData, Schriftzeichengruppe, Zeichenobjekt } from '../../model/model';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { ComponentFixture } from '@angular/core/testing';
 
 let spectator: Spectator<MultiSelectButtonComponent>;
 let component: MultiSelectButtonComponent;
@@ -121,19 +121,6 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   //   });
   // });
 
-  const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    const schriftzeichengruppeSelectButton = fixture.debugElement.query(
-      By.css('.schriftzeichengruppe-select-button')
-    ).componentInstance;
-    expect(schriftzeichengruppeSelectButton).toBeTruthy();
-
-    // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-    // component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
-
-    schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
-    fixture.detectChanges();
-  };
-
   // TODO Test that tests basic functionality: emit an event on click
 
   groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
@@ -190,6 +177,19 @@ describe('Integration Tests', () => {
     imports: [SelectButtonModule, AccordionModule, FormsModule]
   });
 
+  const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
+    const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+      By.css('.schriftzeichengruppe-select-button')
+    ).componentInstance as SelectButton;
+    expect(schriftzeichengruppeSelectButton).toBeTruthy();
+
+    // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+    // component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
+
+    schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
+    schriftzeichengruppeSelectButton.fixture.detectChanges();
+  };
+
   beforeEach(() => {
     spectator = createComponent({props: props});
     component = spectator.component;
@@ -210,7 +210,7 @@ describe('Integration Tests', () => {
     allSelectButton.dispatchEvent(new Event('onChange'));
 
     expect(allButtonSpy).toHaveBeenCalledWith({identifier: '', zeichen: headerStr});
-    expect(component.selection).toEqual(headerStr);
+    expect(component.value).toEqual(headerStr);
     expect(component.allSelected).toBeTrue();
   });
 
@@ -220,7 +220,7 @@ describe('Integration Tests', () => {
     const baseButton = findElementByTextContent('A');
     baseButton.nativeElement.click();
     expect(buttonSpy).toHaveBeenCalledWith({identifier: 'Basis', zeichen: 'A'});
-    expect(component.selection).toEqual('A');
+    expect(component.value).toEqual('A');
     expect(component.allSelected).toBeFalse();
 
     buttonSpy.calls.reset();
@@ -242,6 +242,17 @@ describe('Integration Tests', () => {
       spy.calls.reset();
     });
   });
+
+  groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+    // TODO this probably will be an integration test as this component doesnt know the selected group
+    it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
+      selectSchriftzeichengruppe(schriftzeichengruppe);
+
+      // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+      expect(component.selectedGrundzeichen).toBeUndefined();
+      expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
+    });
+  }
 
   // it('should select a group', () => {
   // ToDo: Fix

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {InputCharData, Schriftzeichengruppe, Zeichenobjekt, ZeichenSelection} from '../../model/model';
+import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {TranslateService} from '@ngx-translate/core';
 import {CharacterService} from '../../services/character.service';
@@ -81,17 +81,15 @@ export class InputCharDialogComponent implements OnChanges {
    * Fired on user zeichen selection
    * @param selected Incoming event
    */
-  onSelection(selected: ZeichenSelection): void {
+  onSelection(selected: {group: string; value: string} | undefined): void {
     console.log(selected);
-    console.log(this.getTranslation('inputChar.headerBaseChars'));
-    switch (selected.identifier) {
+    switch (selected?.group) {
       case this.getTranslation('inputChar.headerBaseChars'): {
-        console.log('!');
-        this.onGrundzeichenSelection(selected.zeichen);
+        this.onGrundzeichenSelection(selected.value);
         break;
       }
       case this.getTranslation('inputChar.headerGroups'): {
-        this.onSchriftzeichenGruppeSelection(selected.zeichen as Schriftzeichengruppe);
+        this.onSchriftzeichenGruppeSelection(selected.value as Schriftzeichengruppe);
         break;
       }
       default: {

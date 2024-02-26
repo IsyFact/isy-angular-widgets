@@ -1,18 +1,20 @@
 <p-selectButton
   class="all-select-button"
-  [options]="[allButtonOptions]"
-  [(ngModel)]="selection"
-  (onChange)="onSelection('')"
+  (onChange)="triggerUpdate(undefined)"
+  [(ngModel)]="allOptionsModel"
+  [options]="[{label: allButtonOptionsLabel}]"
+  optionLabel="label"
 >
 </p-selectButton>
 
 <p-accordion [multiple]="true">
   @for (item of dataToDisplay | keyvalue; track dataToDisplay) {
-    <p-accordionTab [header]="item.key">
+    <p-accordionTab [header]="item.key" [disabled]="disabled">
       <p-selectButton
+        [disabled]="disabled"
         [options]="item.value"
-        [(ngModel)]="selection"
-        (onChange)="onSelection(item.key)"
+        [(ngModel)]="models[item.key]"
+        (onChange)="triggerUpdate(item.key)"
         class="{{ item.key }}-select-button"
       >
       </p-selectButton>

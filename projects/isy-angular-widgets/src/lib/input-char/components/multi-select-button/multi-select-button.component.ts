@@ -1,23 +1,18 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {InputCharData, ZeichenSelection} from '../../model/model';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {InputCharData} from '../../model/model';
+import {ControlValueAccessor} from '@angular/forms';
 
 @Component({
   selector: 'isy-multi-select-button',
   templateUrl: './multi-select-button.component.html',
   styleUrl: './multi-select-button.component.scss'
 })
-export class MultiSelectButtonComponent implements OnInit, OnChanges {
-  /**
-   * Fired on select button selection
-   * @internal
-   */
-  @Output() atSelection = new EventEmitter<ZeichenSelection>();
-
+export class MultiSelectButtonComponent implements OnChanges, ControlValueAccessor {
   /**
    * Header title of select all button
    * @internal
    */
-  @Input() allButtonOptions: string = '';
+  @Input() allButtonOptionsLabel: string = '';
 
   /**
    * The array who stores an array with every data who must be displayed.
@@ -25,42 +20,53 @@ export class MultiSelectButtonComponent implements OnInit, OnChanges {
    */
   @Input() dataToDisplay: InputCharData = {};
 
+  @Input() disabled = false;
+
   /**
    * Current select button value
    * @internal
    */
-  selection: string = '';
+  @Input() value: {group: string; value: string} | undefined;
 
-  /**
-   * The boolean that decides whether the all select button is selected
-   * @internal
-   */
-  allSelected: boolean = true;
+  @Output() valueChange = new EventEmitter<{group: string; value: string} | undefined>();
 
-  /**
-   * Fire on input init
-   * @internal
-   */
-  ngOnInit(): void {
-    this.selection = this.allButtonOptions;
+  models: {[key: string]: string} = {};
+
+  allOptions = [{label: this.allButtonOptionsLabel}];
+
+  allOptionsModel: {label: string} | undefined = this.allOptions[0];
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.allOptions[0].label = this.allButtonOptionsLabel;
   }
 
-  /**
-   * Fire on input changes
-   * @internal
-   */
-  ngOnChanges(): void {
-    if (this.allSelected) {
-      this.selection = this.allButtonOptions;
+  onChange: (_: unknown) => unknown = () => {};
+
+  onTouched: () => void = () => {};
+
+  triggerUpdate(group: string | undefined): void {
+    this.writeValue(group ? {group: group, value: this.models[group]} : undefined);
+    this.valueChange.emit(this.value);
+  }
+
+  writeValue(obj: {group: string; value: string} | undefined): void {
+    this.value = obj;
+
+    for (const item in this.models) {
+      this.models[item] = item === obj?.group ? obj.value : '';
     }
+    this.allOptionsModel = obj ? undefined : {label: this.allButtonOptionsLabel};
   }
 
-  /**
-   * Fired on select button click
-   * @param identifier Used for the identification of the clicked select button
-   */
-  onSelection(identifier: string): void {
-    this.allSelected = identifier === '';
-    this.atSelection.emit({identifier: identifier, zeichen: this.selection});
+  registerOnChange(fn: unknown): void {
+    this.onChange = fn as () => unknown;
+  }
+
+  registerOnTouched(fn: unknown): void {
+    this.onTouched = fn as () => unknown;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 }
