@@ -63,4 +63,18 @@ describe('FormWrapperComponent', () => {
       })
     ).toThrowError('control Input is required and must be an instance of FormControl');
   });
+
+  it(`label should not include a '*' by default if field is optional (non required)`, () => {
+    const label = spectator.query('#label') as HTMLElement;
+    expect(label.innerHTML).toEqual(defaultProps.label);
+  });
+
+  it(`label should include a '*' if field is required`, () => {
+    spectator.component.required = true;
+    spectator.detectChanges();
+
+    const actual = `${defaultProps.label} *`;
+    const label = spectator.query('#label') as HTMLElement;
+    expect(label.innerHTML).toEqual(actual);
+  });
 });
