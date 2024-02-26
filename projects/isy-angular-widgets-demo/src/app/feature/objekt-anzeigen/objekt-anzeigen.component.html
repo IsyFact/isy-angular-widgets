@@ -289,61 +289,65 @@
           {{ 'isyAngularWidgetsDemo.actions.showSecretFields' | translate }}
         </label>
       </div>
-
-      <div id="div-show-secret-fields" *ngIf="showSecretFields">
-        <div class="grid m-0 align-items-center">
-          <div class="col-12 md:col-6 xl:col-4">
-            <div class="field field-checkbox">
-              <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
-              <label for="id-required" class="m-0 ml-3">
-                {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
-              </label>
-            </div>
-          </div>
-          <div class="col-12 md:col-6 xl:col-4">
-            <div class="field">
-              <span class="p-float-label">
-                <p-inputNumber
-                  id="security-level"
-                  formControlName="securityLevel"
-                  [showButtons]="true"
-                  [min]="0"
-                  [max]="9"
-                  class="w-full"
-                  styleClass="w-full"
-                  inputStyleClass="w-full"
-                >
-                </p-inputNumber>
-                <label for="security-level">
-                  {{ 'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate }}
+      @if (showSecretFields) {
+        <div id="div-show-secret-fields">
+          <div class="grid m-0 align-items-center">
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="field field-checkbox">
+                <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
+                <label for="id-required" class="m-0 ml-3">
+                  {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
                 </label>
-              </span>
+              </div>
             </div>
-          </div>
-          <div class="col-12 xl:col-8">
-            <div class="field">
-              <span class="p-float-label">
-                <textarea
-                  pInputTextarea
-                  id="intelligence-notes"
-                  formControlName="intelligenceNotes"
-                  class="w-full"
-                  [rows]="5"
-                >
-                </textarea>
-                <label for="intelligence-notes">
-                  {{ 'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate }}
-                </label>
-              </span>
-              <small class="p-error block" *ngIf="personalInfoForm.controls['intelligenceNotes'].invalid">
-                {{
-                  'isyAngularWidgetsDemo.messages.maxLengthError' | translate: {numChars: intelligenceNotesMaxLength}
-                }}
-              </small>
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="field">
+                <span class="p-float-label">
+                  <p-inputNumber
+                    id="security-level"
+                    formControlName="securityLevel"
+                    [showButtons]="true"
+                    [min]="0"
+                    [max]="9"
+                    class="w-full"
+                    styleClass="w-full"
+                    inputStyleClass="w-full"
+                  >
+                  </p-inputNumber>
+                  <label for="security-level">
+                    {{ 'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate }}
+                  </label>
+                </span>
+              </div>
+            </div>
+            <div class="col-12 xl:col-8">
+              <div class="field">
+                <span class="p-float-label">
+                  <textarea
+                    pInputTextarea
+                    id="intelligence-notes"
+                    formControlName="intelligenceNotes"
+                    class="w-full"
+                    [rows]="5"
+                  >
+                  </textarea>
+                  <label for="intelligence-notes">
+                    {{ 'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate }}
+                  </label>
+                </span>
+                @if (personalInfoForm.controls['intelligenceNotes'].invalid) {
+                  <small class="p-error block">
+                    {{
+                      'isyAngularWidgetsDemo.messages.maxLengthError'
+                        | translate: {numChars: intelligenceNotesMaxLength}
+                    }}
+                  </small>
+                }
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      }
     </form>
 
     <div class="justify-content-center flex mt-3">
