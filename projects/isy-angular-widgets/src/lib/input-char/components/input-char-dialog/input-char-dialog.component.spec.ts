@@ -29,7 +29,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
   const props = {
     allCharacters: sonderzeichenListe
-  }
+  };
 
   beforeEach(() => {
     spectator = createComponent({props: props});
