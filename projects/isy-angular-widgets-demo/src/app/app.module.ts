@@ -19,6 +19,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {SeitenToolbarComponent} from '@isy-angular-widgets/seiten-toolbar/seiten-toolbar.component';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +36,8 @@ import {MessageService} from 'primeng/api';
     FormsModule,
     DropdownModule,
     ToastModule,
+    SeitenToolbarComponent,
+    ButtonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

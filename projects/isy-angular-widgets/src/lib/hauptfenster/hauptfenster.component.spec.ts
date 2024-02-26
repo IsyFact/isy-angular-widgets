@@ -120,6 +120,20 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
     expect(informationsbereich.style.width).toEqual(width);
   });
+
+  it('should display the Seitentoolbarnavigation when showSeitentoolbarnavigation is true', () => {
+    spectator.setInput('showSeitentoolbarnavigation', true);
+    spectator.fixture.detectChanges();
+    const toolbar = spectator.query('.isy-hauptfenster-seitentoolbar');
+    expect(toolbar).toExist();
+  });
+
+  it('should not display the Seitentoolbarnavigation when showSeitentoolbarnavigation is false', () => {
+    spectator.setInput('showSeitentoolbarnavigation', false);
+    spectator.fixture.detectChanges();
+    const toolbar = spectator.query('.isy-hauptfenster-seitentoolbar');
+    expect(toolbar).not.toExist();
+  });
 });
 
 describe('Integration Test: HauptfensterComponent', () => {

@@ -53,6 +53,11 @@ export class HauptfensterComponent {
   @Input() title?: string;
 
   /**
+   * Determines whether to show or hide the Seitentoolbarnavigation, a sticky toolbar at the top of the screen.
+   */
+  @Input() showSeitentoolbarnavigation: boolean = false;
+
+  /**
    * Determines whether to show or hide the Linksnavigation, a navigation bar on the left screen side.
    */
   @Input() showLinksnavigation: boolean = false;

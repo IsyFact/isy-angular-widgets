@@ -1,11 +1,11 @@
 # 17.2.0 - 
 ## Fixes
-
 - ISY-775: Die beiden Readme-Dateien wurden für Standalone-Projekte aktualisiert
 - ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
   der Form 'xx'. Dies ermöglicht die Eingabe herkömmlicher Datumsformate mit Punkten, wie zum Beispiel '01.01.2024'
 - ISY-905: Linksnavigation und Informationsbereich können jetzt wieder korrekt eingeklappt werden und die Breite der Seitenleisten liegt nun standardmäßig wieder bei 15em
 ## Features
+- ISY-874: Sticky-Seiten-Toolbar wurde zum Hauptfenster hinzugefügt
 - ISY-756: IsyFact-Theme wurde überarbeitet
 - ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an, um die Zugänglichkeit der Website zu verbessern
 - ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datumswerten wurde hinzugefügt

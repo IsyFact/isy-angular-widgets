@@ -48,7 +48,9 @@
     </ng-template>
   </div>
 
-  <ng-content select="[Seitentoolbar]" class="dont-print"></ng-content>
+  <div class="isy-hauptfenster-seitentoolbar dont-print" *ngIf="showSeitentoolbarnavigation">
+    <ng-content select="[Seitentoolbar]"></ng-content>
+  </div>
 
   <div class="grid grid-nogutter flex-grow-1">
     <div
