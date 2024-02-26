@@ -70,14 +70,18 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   };
 
   it('should always have the correct value when clicking through multiple selections', () => {
+    spyOn(component.valueChange, 'emit');
+
     bases.forEach((base: string) => {
       selectBasis(base);
       expect(component.value).toEqual({group: 'Base', value: base});
+      expect(component.valueChange.emit).toHaveBeenCalledWith({group: 'Base', value: base});
     });
 
     groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
       selectSchriftzeichengruppe(schriftzeichengruppe);
       expect(component.value).toEqual({group: 'Groups', value: schriftzeichengruppe});
+      expect(component.valueChange.emit).toHaveBeenCalledWith({group: 'Groups', value: schriftzeichengruppe});
     });
   });
 
