@@ -16,6 +16,7 @@ export class FormWrapperComponent implements OnInit {
   @Input() fieldId!: string;
   @Input() control!: FormControl;
   @Input() validationMessages: {[key: string]: string} = {};
+  @Input() required? = false;
 
   /**
    * Validates the control input on component initialization.
