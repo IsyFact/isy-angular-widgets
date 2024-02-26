@@ -55,33 +55,37 @@
   <ng-content select="[Seitentoolbar]" class="dont-print"></ng-content>
 
   <div class="grid grid-nogutter flex-grow-1">
-    <div
-      class="isy-hauptfenster-linksnavigation dont-print"
-      *ngIf="showLinksnavigation"
-      [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
-    >
-      <div [hidden]="collapsedLinksnavigation" id="open-links-navigation">
-        <div *ngIf="allowSidebarCollapse" class="collapseButton">
+    @if (showLinksnavigation) {
+      <div
+        class="isy-hauptfenster-linksnavigation dont-print"
+        [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
+      >
+        <div [hidden]="collapsedLinksnavigation" id="open-links-navigation">
+          @if(allowSidebarCollapse) {
+          <div class="collapseButton">
+            <button
+              class="p-button-text"
+              pButton
+              icon="pi pi-angle-double-left"
+              [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
+              (click)="collapsedLinksnavigation = true"
+            ></button>
+          </div>
+          } @else {
+            <ng-content select="[Linksnavigation]"></ng-content>
+          }
+        </div>
+        <div [hidden]="!collapsedLinksnavigation">
           <button
             class="p-button-text"
             pButton
-            icon="pi pi-angle-double-left"
-            [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
-            (click)="collapsedLinksnavigation = true"
+            icon="pi pi-angle-double-right"
+            [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
+            (click)="collapsedLinksnavigation = false"
           ></button>
         </div>
-        <ng-content select="[Linksnavigation]"></ng-content>
       </div>
-      <div [hidden]="!collapsedLinksnavigation">
-        <button
-          class="p-button-text"
-          pButton
-          icon="pi pi-angle-double-right"
-          [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
-          (click)="collapsedLinksnavigation = false"
-        ></button>
-      </div>
-    </div>
+    }
 
     <div class="col overflow-auto">
       <ng-content></ng-content>
