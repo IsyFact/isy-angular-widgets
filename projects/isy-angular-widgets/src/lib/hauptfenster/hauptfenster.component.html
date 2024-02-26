@@ -1,37 +1,40 @@
 <div class="isy-hauptfenster">
   <div class="grid grid-nogutter">
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
-      <a href="" *ngIf="logoAnbieterAwl; else customLogoAnbieterAwl">
-        <img
-          alt="{{ configService.getTranslation('hauptfenster.altLogoAnbieterAwl') }}"
-          class="isy-hauptfenster-logo-anbieter-awl"
-          [src]="logoAnbieterAwl"
-        />
-      </a>
-      <ng-template #customLogoAnbieterAwl>
+      @if (logoAnbieterAwl) {
+        <a href="">
+          <img
+            alt="{{ configService.getTranslation('hauptfenster.altLogoAnbieterAwl') }}"
+            class="isy-hauptfenster-logo-anbieter-awl"
+            [src]="logoAnbieterAwl"
+          />
+        </a>
+      } @else {
         <ng-content select="[LogoAnbieterAwl]"></ng-content>
-      </ng-template>
+      }
     </div>
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
       <div class="flex flex-row-reverse">
-        <img
-          alt="{{ configService.getTranslation('hauptfenster.altLogoAwl') }}"
-          class="isy-hauptfenster-logo-awl"
-          [src]="logoAwl"
-          *ngIf="logoAwl; else customLogoAwl"
-        />
-        <ng-template #customLogoAwl>
+        @if (logoAwl) {
+          <img
+            alt="{{ configService.getTranslation('hauptfenster.altLogoAwl') }}"
+            class="isy-hauptfenster-logo-awl"
+            [src]="logoAwl"
+          />
+        } @else {
           <ng-content select="[LogoAwl]"></ng-content>
-        </ng-template>
+        }
       </div>
       <div class="flex flex-row-reverse">
         <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)">
           {{ configService.getTranslation('hauptfenster.logout') }}
         </p-button>
-        <div *ngIf="userInfo" class="flex align-items-center justify-content-center mr-2">
-          <em class="pi pi-user mr-1"></em>
-          {{ userInfo.displayName }}
-        </div>
+        @if (userInfo) {
+          <div class="flex align-items-center justify-content-center mr-2">
+            <em class="pi pi-user mr-1"></em>
+            {{ userInfo.displayName }}
+          </div>
+        }
       </div>
     </div>
   </div>
