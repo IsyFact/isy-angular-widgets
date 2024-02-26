@@ -2,11 +2,10 @@ import {MultiSelectButtonComponent} from './multi-select-button.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MockModule} from 'ng-mocks';
 import {AccordionModule} from 'primeng/accordion';
-import {SelectButtonModule} from 'primeng/selectbutton';
+import {SelectButton, SelectButtonModule} from 'primeng/selectbutton';
 import {FormsModule} from '@angular/forms';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
-import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {ComponentFixture} from '@angular/core/testing';
 
@@ -22,28 +21,8 @@ const headerStr = 'All';
 const inputData: InputCharData = {Base: bases, Groups: groups};
 const props = {
   dataToDisplay: inputData,
-  allButtonOptions: headerStr
+  allButtonOptionsLabel: headerStr
 };
-
-/**
- * Adds a click event listener to the given button
- * @param button The button who needs an event
- * @param event Event who must be
- * @param param Zeichen method parameter
- */
-function addClickEventListenerForSelection(button: HTMLButtonElement, event: string, param: string): void {
-  // button.addEventListener(event, function () {
-  //   spectator.component.onSelection(param);
-  // });
-}
-
-/**
- * Finds an HTML Element inside the DOM by text content value
- * @param contentValue The value for the search action
- */
-function findElementByTextContent(contentValue: string): DebugElement {
-  return spectator.fixture.debugElement.query((debugEl) => debugEl.nativeElement.textContent === contentValue);
-}
 
 describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   const createComponent = createComponentFactory({
@@ -61,29 +40,45 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have undefined value after all button click', () => {
+    const allSelectButton = spectator.debugElement.query(By.directive(SelectButton)).componentInstance as SelectButton;
+    component.value = {group: 'Base', value: 'A'};
 
-  it('all select button should have the correct option value', () => {
-    const allSelectButton = spectator.query('#all-select-button') as HTMLButtonElement;
-    const allSelectButtonAttributes = allSelectButton.attributes;
+    allSelectButton.onChange.emit();
 
-    const allSelectButtonInnerText = allSelectButtonAttributes.getNamedItem('ng-reflect-options')?.textContent;
-    expect(allSelectButtonInnerText).toEqual(headerStr);
-  });
-
-  it('should firing event on all button click', () => {
-    const spy = spyOn(component, 'onChange');
-    const allSelectButton = spectator.query('.all-select-button') as HTMLButtonElement;
-    const eventType = 'onChange';
-
-    addClickEventListenerForSelection(allSelectButton, eventType, '');
-    allSelectButton.dispatchEvent(new Event(eventType));
-    spectator.detectChanges();
-
-    expect(spy).toHaveBeenCalledWith('');
+    expect(component.value).toBeUndefined();
   });
 
   it('all button should be selected on init ', () => {
     expect(component.value).toBeUndefined();
+  });
+
+  const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
+    const schriftzeichengruppeSelectButton = fixture.debugElement.query(By.css('.Groups-select-button'))
+      .componentInstance as SelectButton;
+
+    schriftzeichengruppeSelectButton.onChange.emit({value: schriftzeichengruppe});
+    fixture.detectChanges();
+  };
+
+  const selectBasis = (basis: string): void => {
+    const baseSelectButton = fixture.debugElement.query(By.css('.Base-select-button'))
+      .componentInstance as SelectButton;
+
+    baseSelectButton.onChange.emit({value: basis});
+    fixture.detectChanges();
+  };
+
+  it('should always have the correct value when clicking through multiple selections', () => {
+    bases.forEach((base: string) => {
+      selectBasis(base);
+      expect(component.value).toEqual({group: 'Base', value: base});
+    });
+
+    groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+      selectSchriftzeichengruppe(schriftzeichengruppe);
+      expect(component.value).toEqual({group: 'Groups', value: schriftzeichengruppe});
+    });
   });
 
   // bases.forEach((grundzeichen: string) => {
@@ -228,6 +223,18 @@ describe('Integration Tests', () => {
     });
   });
 
+  it('should always have the correct value when clicking through multiple selections', () => {
+    bases.forEach((base: string) => {
+      selectBasis(base);
+      expect(component.value).toEqual({group: 'Base', value: base});
+    });
+
+    groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+      selectSchriftzeichengruppe(schriftzeichengruppe);
+      expect(component.value).toEqual({group: 'Groups', value: schriftzeichengruppe});
+    });
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -263,5 +270,11 @@ describe('Integration Tests', () => {
     Object.keys(inputData).forEach((group, index) => {
       expect(baseSelectButtons[index].textContent).toContain(group);
     });
+  });
+
+  it('should show the correct text on select all button', () => {
+    const allSelectButton = spectator.debugElement.query(By.directive(SelectButton));
+
+    expect(allSelectButton.nativeElement.textContent).toEqual(headerStr);
   });
 });
