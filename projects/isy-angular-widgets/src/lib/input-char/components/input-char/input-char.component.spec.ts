@@ -44,10 +44,9 @@ describe('Unit Tests: InputCharComponent', () => {
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
-        spectator = createComponent();
+        spectator = createComponent({props: {datentyp: datentyp as Datentyp}});
         component = spectator.component;
 
-        component.datentyp = datentyp as Datentyp;
         spectator.fixture.componentRef.setInput('datentyp', datentyp);
         spectator.fixture.detectChanges();
       });

@@ -24,9 +24,12 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputCharModule} from '@isy-angular-widgets/input-char/input-char.module';
 import {SecurityModule} from '@isy-angular-widgets/security/security.module';
 import {FileUploadModule} from 'primeng/fileupload';
+import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
+import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 
 @NgModule({
   declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
+  providers: [],
   imports: [
     CommonModule,
     ObjektAnzeigenRoutingModule,
@@ -51,8 +54,9 @@ import {FileUploadModule} from 'primeng/fileupload';
     InputTextareaModule,
     InputCharModule,
     SecurityModule,
-    FileUploadModule
-  ],
-  providers: []
+    FileUploadModule,
+    FormWrapperComponent,
+    FormControlPipe
+  ]
 })
 export class ObjektAnzeigenModule {}

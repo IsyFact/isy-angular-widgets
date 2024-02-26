@@ -6,9 +6,11 @@
 - ISY-905: Linksnavigation und Informationsbereich können jetzt wieder korrekt eingeklappt werden und die Breite der Seitenleisten liegt nun standardmäßig wieder bei 15em
 ## Features
 - ISY-874: Sticky-Seiten-Toolbar wurde zum Hauptfenster hinzugefügt
+- ISY-681: Formwrapper und Formcontrol-Pipe wurden hinzugefügt
 - ISY-756: IsyFact-Theme wurde überarbeitet
 - ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an, um die Zugänglichkeit der Website zu verbessern
 - ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datumswerten wurde hinzugefügt
+- ISY-876: Meldungen werden immer am unteren rechten Rand angezeigt
 ## Demo-Anwendung
 - ISY-647: Alle Formulare wurden von rechtsbündigen Labels auf Floating-Labels umgestellt
 - ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität überarbeitet
