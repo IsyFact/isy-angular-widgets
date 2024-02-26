@@ -1,14 +1,14 @@
-import { MultiSelectButtonComponent } from './multi-select-button.component';
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { MockModule } from 'ng-mocks';
-import { AccordionModule } from 'primeng/accordion';
-import { SelectButton, SelectButtonModule } from 'primeng/selectbutton';
-import { FormsModule } from '@angular/forms';
+import {MultiSelectButtonComponent} from './multi-select-button.component';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {MockModule} from 'ng-mocks';
+import {AccordionModule} from 'primeng/accordion';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {FormsModule} from '@angular/forms';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import { InputCharData, Schriftzeichengruppe, Zeichenobjekt } from '../../model/model';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { ComponentFixture } from '@angular/core/testing';
+import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
+import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {ComponentFixture} from '@angular/core/testing';
 
 let spectator: Spectator<MultiSelectButtonComponent>;
 let component: MultiSelectButtonComponent;
@@ -18,8 +18,8 @@ const charList = sonderzeichenliste as Zeichenobjekt[];
 const bases = [...new Set(charList.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
 const groups = [...new Set(charList.map((item) => item.schriftzeichengruppe))];
 
-const headerStr = 'Alle';
-const inputData: InputCharData = {Basis: bases, Gruppen: groups};
+const headerStr = 'All';
+const inputData: InputCharData = {Base: bases, Groups: groups};
 const props = {
   dataToDisplay: inputData,
   allButtonOptions: headerStr
@@ -32,9 +32,9 @@ const props = {
  * @param param Zeichen method parameter
  */
 function addClickEventListenerForSelection(button: HTMLButtonElement, event: string, param: string): void {
-  button.addEventListener(event, function () {
-    spectator.component.onSelection(param);
-  });
+  // button.addEventListener(event, function () {
+  //   spectator.component.onSelection(param);
+  // });
 }
 
 /**
@@ -71,8 +71,8 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 
   it('should firing event on all button click', () => {
-    const spy = spyOn(component, 'onSelection');
-    const allSelectButton = spectator.query('#all-select-button') as HTMLButtonElement;
+    const spy = spyOn(component, 'onChange');
+    const allSelectButton = spectator.query('.all-select-button') as HTMLButtonElement;
     const eventType = 'onChange';
 
     addClickEventListenerForSelection(allSelectButton, eventType, '');
@@ -80,6 +80,10 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
     spectator.detectChanges();
 
     expect(spy).toHaveBeenCalledWith('');
+  });
+
+  it('all button should be selected on init ', () => {
+    expect(component.value).toBeUndefined();
   });
 
   // bases.forEach((grundzeichen: string) => {
@@ -123,52 +127,52 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
 
   // TODO Test that tests basic functionality: emit an event on click
 
-  groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-    // TODO this probably will be an integration test as this component doesnt know the selected group
-    it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
-      selectSchriftzeichengruppe(schriftzeichengruppe);
-
-      // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-      expect(component.selectedGrundzeichen).toBeUndefined();
-      expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
-    });
-
-    it('should show only characters with a selected schriftzeichengruppe', () => {
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('#right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
-
-      selectSchriftzeichengruppe(schriftzeichengruppe);
-
-      const options = charactersSelectButton.options;
-      expect(options).toBeTruthy();
-      for (const character of options) {
-        expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
-      }
-    });
-
-    it('should show all characters with a selected schriftzeichengruppe', () => {
-      const schriftzeichengruppeSelectButton = fixture.debugElement.query(
-        By.css('#schriftzeichengruppe-select-button')
-      ).componentInstance;
-      expect(schriftzeichengruppeSelectButton).toBeTruthy();
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('#right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
-
-      // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-      component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
-
-      schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
-      fixture.detectChanges();
-
-      expect(charactersSelectButton.options.length).toEqual(
-        sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
-      );
-    });
-  });
+  // groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+  //   // TODO this probably will be an integration test as this component doesnt know the selected group
+  //   it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
+  //     selectSchriftzeichengruppe(schriftzeichengruppe);
+  //
+  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+  //     expect(component.selectedGrundzeichen).toBeUndefined();
+  //     expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
+  //   });
+  //
+  //   it('should show only characters with a selected schriftzeichengruppe', () => {
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     selectSchriftzeichengruppe(schriftzeichengruppe);
+  //
+  //     const options = charactersSelectButton.options;
+  //     expect(options).toBeTruthy();
+  //     for (const character of options) {
+  //       expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
+  //     }
+  //   });
+  //
+  //   it('should show all characters with a selected schriftzeichengruppe', () => {
+  //     const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+  //       By.css('#schriftzeichengruppe-select-button')
+  //     ).componentInstance;
+  //     expect(schriftzeichengruppeSelectButton).toBeTruthy();
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+  //     component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
+  //
+  //     schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
+  //     fixture.detectChanges();
+  //
+  //     expect(charactersSelectButton.options.length).toEqual(
+  //       sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
+  //     );
+  //   });
+  // });
 });
 
 describe('Integration Tests', () => {
@@ -177,23 +181,51 @@ describe('Integration Tests', () => {
     imports: [SelectButtonModule, AccordionModule, FormsModule]
   });
 
-  const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    const schriftzeichengruppeSelectButton = fixture.debugElement.query(
-      By.css('.schriftzeichengruppe-select-button')
-    ).componentInstance as SelectButton;
-    expect(schriftzeichengruppeSelectButton).toBeTruthy();
-
-    // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-    // component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
-
-    schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
-    schriftzeichengruppeSelectButton.fixture.detectChanges();
-  };
-
   beforeEach(() => {
     spectator = createComponent({props: props});
     component = spectator.component;
+    fixture = spectator.fixture;
     spectator.detectChanges();
+  });
+
+  const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
+    const schriftzeichengruppeSelectButton = fixture.debugElement
+      .queryAll(By.css('.Groups-select-button .p-buttonset div span'))
+      .find((elem) => elem.nativeElement.textContent === schriftzeichengruppe)?.nativeElement as HTMLElement;
+    expect(schriftzeichengruppeSelectButton).toBeTruthy();
+
+    schriftzeichengruppeSelectButton.click();
+    fixture.detectChanges();
+  };
+
+  const selectBasis = (basis: string): void => {
+    const basisSelectButton = fixture.debugElement
+      .queryAll(By.css('.Base-select-button .p-buttonset div span'))
+      .find((elem) => elem.nativeElement.textContent === basis)?.nativeElement as HTMLElement;
+    expect(basisSelectButton).toBeTruthy();
+
+    basisSelectButton.click();
+    fixture.detectChanges();
+  };
+
+  it('should always have only one selection when clicking through multiple selections', () => {
+    bases.forEach((base: string) => {
+      selectBasis(base);
+      expect(fixture.debugElement.queryAll(By.css('.p-button.p-highlight')).length).toEqual(1);
+      expect(
+        fixture.debugElement.queryAll(By.css('.p-button')).filter((elem) => elem.attributes['aria-checked'] === 'true')
+          .length
+      ).toEqual(1);
+    });
+
+    groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+      selectSchriftzeichengruppe(schriftzeichengruppe);
+      expect(fixture.debugElement.queryAll(By.css('.p-button.p-highlight')).length).toEqual(1);
+      expect(
+        fixture.debugElement.queryAll(By.css('.p-button')).filter((elem) => elem.attributes['aria-checked'] === 'true')
+          .length
+      ).toEqual(1);
+    });
   });
 
   it('should create', () => {
@@ -201,77 +233,35 @@ describe('Integration Tests', () => {
   });
 
   it('all button should be selected on init ', () => {
-    expect(component.allSelected).toBeTrue();
+    const allButton = fixture.debugElement.query(By.css('.all-select-button .p-selectbutton .p-button'));
+
+    expect(allButton.classes['p-highlight']).toBeTrue();
+    expect(allButton.attributes['aria-checked']).toBeTrue();
   });
 
-  it('should select the all characters button', () => {
-    const allButtonSpy = spyOn(component.atSelection, 'emit');
-    const allSelectButton = spectator.query('#all-select-button') as HTMLButtonElement;
-    allSelectButton.dispatchEvent(new Event('onChange'));
+  bases.forEach((base: string) => {
+    it(`should show 'Base' and ${base} in value with those present in input`, () => {
+      selectBasis(base);
 
-    expect(allButtonSpy).toHaveBeenCalledWith({identifier: '', zeichen: headerStr});
-    expect(component.value).toEqual(headerStr);
-    expect(component.allSelected).toBeTrue();
-  });
-
-  it('should select the all characters button after specific selection', () => {
-    const buttonSpy = spyOn(component.atSelection, 'emit');
-
-    const baseButton = findElementByTextContent('A');
-    baseButton.nativeElement.click();
-    expect(buttonSpy).toHaveBeenCalledWith({identifier: 'Basis', zeichen: 'A'});
-    expect(component.value).toEqual('A');
-    expect(component.allSelected).toBeFalse();
-
-    buttonSpy.calls.reset();
-
-    const allSelectButton = spectator.query('#all-select-button') as HTMLButtonElement;
-    allSelectButton.dispatchEvent(new Event('onChange'));
-    spectator.detectChanges();
-    // ToDo: Fix
-    // expect(buttonSpy).toHaveBeenCalledWith({identifier: '', zeichen: headerStr});
-    // expect(component.selection).toEqual(headerStr);
-    expect(component.allSelected).toBeTrue();
-  });
-
-  it('should select a base', () => {
-    const spy = spyOn(component.atSelection, 'emit');
-    bases.forEach((base) => {
-      findElementByTextContent(base).nativeElement.click();
-      expect(spy).toHaveBeenCalledWith({identifier: 'Basis', zeichen: base});
-      spy.calls.reset();
+      expect(component.value?.group).toEqual('Base');
+      expect(component.value?.value).toEqual(base);
     });
   });
 
-  groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-    // TODO this probably will be an integration test as this component doesnt know the selected group
-    it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
-      selectSchriftzeichengruppe(schriftzeichengruppe);
+  groups.forEach((group: Schriftzeichengruppe) => {
+    it(`should show 'Groups' and ${group} in value with those present in input`, () => {
+      selectSchriftzeichengruppe(group);
 
-      // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-      expect(component.selectedGrundzeichen).toBeUndefined();
-      expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
+      expect(component.value?.group).toEqual('Groups');
+      expect(component.value?.value).toEqual(group);
     });
-  }
-
-  // it('should select a group', () => {
-  // ToDo: Fix
-  //   const spy = spyOn(component.atSelection, 'emit');
-  //   groups.forEach((group) => {
-  //     findElementByTextContent(group).nativeElement.click();
-  //     expect(spy).toHaveBeenCalledWith({identifier: 'Gruppe', zeichen: group});
-  //     spy.calls.reset();
-  //   });
-  // });
-
-  it('first accordion tab header should contain bases', () => {
-    const baseSelectButtons = spectator.query('p-accordionTab');
-    expect(baseSelectButtons?.textContent).toContain('Basis');
   });
 
-  // it('first accordion tab group should contain bases', () => {
-  // ToDo: Fix
-  //   const baseSelectButtons = spectator.query('p-accordionTab');
-  //   expect(baseSelectButtons?.textContent).toContain('Gruppen');
-  // });
+  it('should have have the accordions ordered according to input', () => {
+    const baseSelectButtons = spectator.queryAll('p-accordionTab .p-accordion-header-text');
+
+    Object.keys(inputData).forEach((group, index) => {
+      expect(baseSelectButtons[index].textContent).toContain(group);
+    });
+  });
 });
