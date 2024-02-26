@@ -68,6 +68,7 @@
           <isy-form-wrapper
             label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
             fieldId="first-name"
+            [required]="true"
             [control]="personalInfoForm.controls.firstName | formControl"
             [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
           >
@@ -141,7 +142,7 @@
           </div>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
-          <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird, 
+          <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
           ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet.
           Die Formcontrol nutzt einen benutzerdefinierten Validator. -->
           <isy-form-wrapper
