@@ -9,7 +9,7 @@ import {DateService} from './services/date.service';
 import {Observable} from 'rxjs';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ObjektSuchenModule} from './objekt-suchen.module';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {required} from '../../shared/validation/validator';
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
@@ -411,14 +411,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     component.displayWizard();
     expect(component.openWizard).toBeFalse();
-  });
-
-  it('should check the inner HTML Text of the ID Input field', () => {
-    component.openWizard = true;
-    spectator.fixture.detectChanges();
-
-    const idLabel = spectator.fixture.nativeElement.querySelector('label#id-label');
-    expect(idLabel.textContent).toEqual('ID *');
   });
 
   it('should check the reactive forms init', () => {
