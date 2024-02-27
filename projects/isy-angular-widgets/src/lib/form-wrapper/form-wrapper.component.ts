@@ -16,7 +16,6 @@ export class FormWrapperComponent implements OnInit {
   @Input() fieldId!: string;
   @Input() control!: FormControl;
   @Input() validationMessages: {[key: string]: string} = {};
-  @Input() required? = false;
 
   /**
    * Validates the control input on component initialization.
@@ -43,5 +42,19 @@ export class FormWrapperComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  /**
+   * Computes and returns the error key availability state
+   * Iterates over control errors and matches them with a given error name
+   * @param error the name of searched error
+   * @returns the error availability
+   */
+  isErrorAvailable(error: string): boolean {
+    let isAvailable = false;
+    if (this.control.errors) {
+      Object.keys(this.control.errors).filter((value) => (isAvailable = value.includes(error)));
+    }
+    return isAvailable;
   }
 }
