@@ -1,7 +1,6 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ReactiveFormsModule, FormControl, Validators} from '@angular/forms';
 import {FormWrapperComponent} from './form-wrapper.component';
-import {By} from '@angular/platform-browser';
 
 describe('FormWrapperComponent', () => {
   let spectator: Spectator<FormWrapperComponent>;
