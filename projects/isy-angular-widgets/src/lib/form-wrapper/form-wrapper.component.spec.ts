@@ -1,6 +1,7 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ReactiveFormsModule, FormControl, Validators} from '@angular/forms';
 import {FormWrapperComponent} from './form-wrapper.component';
+import {By} from '@angular/platform-browser';
 
 describe('FormWrapperComponent', () => {
   let spectator: Spectator<FormWrapperComponent>;
@@ -65,16 +66,16 @@ describe('FormWrapperComponent', () => {
   });
 
   it('label should not include a "*" by default if field is optional (non required)', () => {
-    const label = spectator.query('#label') as HTMLElement;
+    spectator.component.control = new FormControl('');
+    spectator.detectChanges();
+
+    const label = spectator.query('label[for="testField"]') as HTMLElement;
     expect(label.innerHTML).toEqual(defaultProps.label);
   });
 
   it('label should include a "*" if field is required', () => {
-    spectator.component.required = true;
-    spectator.detectChanges();
-
     const actual = `${defaultProps.label} *`;
-    const label = spectator.query('#label') as HTMLElement;
+    const label = spectator.query('label[for="testField"]') as HTMLElement;
     expect(label.innerHTML).toEqual(actual);
   });
 });
