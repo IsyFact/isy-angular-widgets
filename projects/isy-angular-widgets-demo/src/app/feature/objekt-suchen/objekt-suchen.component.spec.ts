@@ -9,7 +9,7 @@ import {DateService} from './services/date.service';
 import {Observable} from 'rxjs';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ObjektSuchenModule} from './objekt-suchen.module';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {required} from '../../shared/validation/validator';
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
