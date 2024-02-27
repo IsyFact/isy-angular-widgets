@@ -31,10 +31,12 @@
       [ariaLabel]="'isyAngularWidgetsDemo.settings.languages.label' | translate"
     >
       <ng-template pTemplate="selectedItem">
-        <div class="flex align-items-center gap-2" *ngIf="selectedLanguage">
-          <span [class]="'fi fi-' + getLanguageIcon(selectedLanguage)"></span>
-          <div>{{ 'isyAngularWidgetsDemo.settings.languages.' + selectedLanguage | translate }}</div>
-        </div>
+        @if (selectedLanguage) {
+          <div class="flex align-items-center gap-2">
+            <span [class]="'fi fi-' + getLanguageIcon(selectedLanguage)"></span>
+            <div>{{ 'isyAngularWidgetsDemo.settings.languages.' + selectedLanguage | translate }}</div>
+          </div>
+        }
       </ng-template>
       <ng-template let-language pTemplate="item">
         <div class="flex align-items-center gap-2">
@@ -57,10 +59,12 @@
       ]"
       (onChange)="selectPermission($event.value)"
     >
-      <!--  Workaround since PrimeNG 16.7.x ist not able to display optionValue -->
-      <ng-template pTemplate="selectedItem" *ngIf="userInfo.roles">
-        <span>{{ userInfo.roles[0] }}</span>
-      </ng-template>
+      @if (userInfo.roles) {
+        <!--  Workaround since PrimeNG 16.7.x ist not able to display optionValue -->
+        <ng-template pTemplate="selectedItem">
+          <span>{{ userInfo.roles[0] }}</span>
+        </ng-template>
+      }
     </p-dropdown>
   </div>
   <main>

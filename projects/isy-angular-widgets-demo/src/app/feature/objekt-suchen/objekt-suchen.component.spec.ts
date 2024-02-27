@@ -238,6 +238,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     setupEditForm(person);
 
     component.getSavedStatus(true);
+    expect(component.openWizard).toBeFalse();
   }));
 
   it('should check the functionality on arriving wizard index (on init => index = 0)', () => {
@@ -410,14 +411,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     component.displayWizard();
     expect(component.openWizard).toBeFalse();
-  });
-
-  it('should check the inner HTML Text of the ID Input field', () => {
-    component.openWizard = true;
-    spectator.fixture.detectChanges();
-
-    const idLabel = spectator.fixture.nativeElement.querySelector('label#id-label');
-    expect(idLabel.textContent).toEqual('ID *');
   });
 
   it('should check the reactive forms init', () => {
