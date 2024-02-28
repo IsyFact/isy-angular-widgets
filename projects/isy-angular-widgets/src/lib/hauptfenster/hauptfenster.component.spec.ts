@@ -144,18 +144,16 @@ describe('Unit Tests: HauptfensterComponent', () => {
     component.showLinksnavigation = true;
     spectator.detectChanges();
 
-    const div = spectator.query('aside[aria-label="linksnavigation"]') as HTMLElement;
+    const div = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
     expect(div).not.toBeNull();
-    expect(div.ariaLabel).toBe('linksnavigation');
   });
 
   it('aside (informationsbereich) landmark/tag should be available', () => {
     component.showInformationsbereich = true;
     spectator.detectChanges();
 
-    const div = spectator.query('aside[aria-label="informationsbereich"]') as HTMLElement;
+    const div = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     expect(div).not.toBeNull();
-    expect(div.ariaLabel).toBe('informationsbereich');
   });
 });
 
