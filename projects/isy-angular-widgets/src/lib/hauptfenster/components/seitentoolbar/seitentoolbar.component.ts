@@ -10,14 +10,14 @@ import {Router, RouterModule} from '@angular/router';
   selector: 'isy-seiten-toolbar',
   standalone: true,
   imports: [ToolbarModule, ButtonModule, RouterModule],
-  templateUrl: './seiten-toolbar.component.html',
-  styleUrls: ['./seiten-toolbar.component.scss']
+  templateUrl: './seitentoolbar.component.html',
+  styleUrls: ['./seitentoolbar.component.scss']
 })
-export class SeitenToolbarComponent {
+export class SeitentoolbarComponent {
   /**
    * Label for the home button.
    */
-  @Input() sidebarHomeButtonLabel?: string = 'Zurück zur Startseite';
+  @Input() sidebarHomeButtonLabel?: string;
 
   /**
    * Route for the home button.

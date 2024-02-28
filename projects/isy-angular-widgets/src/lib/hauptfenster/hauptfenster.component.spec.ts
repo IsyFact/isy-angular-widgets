@@ -5,7 +5,7 @@ import {MegaMenu, MegaMenuSub} from 'primeng/megamenu';
 import {Button} from 'primeng/button';
 import {MockComponents} from 'ng-mocks';
 import {HauptfensterModule} from './hauptfenster.module';
-import {SeitenToolbarComponent} from '@isy-angular-widgets/seiten-toolbar/seiten-toolbar.component';
+import {SeitentoolbarComponent} from './components/seitentoolbar/seitentoolbar.component';
 
 @Component({
   template: `
@@ -24,7 +24,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
-    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub, SeitenToolbarComponent)]
+    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub, SeitentoolbarComponent)]
   });
 
   beforeEach(() => (spectator = createComponent()));
