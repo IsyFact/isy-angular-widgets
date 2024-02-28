@@ -67,12 +67,12 @@ function expectNextStepIsAllowed(isAllowed: boolean): void {
 
 describe('Unit Tests: WizardComponent', () => {
   let spectator: Spectator<WizardComponent>;
-  const createdComponent = createComponentFactory({
+  const createComponent = createComponentFactory({
     component: WizardComponent,
     declarations: [MockComponents(Dialog, Steps)]
   });
   beforeEach(() => {
-    spectator = createdComponent();
+    spectator = createComponent();
     wizard = spectator.component;
   });
 

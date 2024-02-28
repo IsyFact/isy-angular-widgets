@@ -146,13 +146,12 @@ describe('Integration Test: HauptfensterComponent', () => {
 
   beforeEach(() => (spectator = createComponent()));
 
-  it('should display custom html in template of Titelzeile', () => {
+  it('should display custom title in template of Titelzeile if titel input is undefined', () => {
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
-    const h1El = titelzeileEl.querySelector('.custom-title');
-    expect(h1El!.textContent).toEqual('Titel inside H1!');
+    expect(titelzeileEl.textContent).toEqual('Titel inside H1!');
   });
 
-  it('should not display custom html in Titelzeile if titel input is used', () => {
+  it('should display custom title if titel input is used', () => {
     const customTitle = 'Custom Title';
     spectator.component.title = customTitle;
     spectator.fixture.detectChanges();
