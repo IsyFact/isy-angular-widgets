@@ -67,16 +67,11 @@ export class FormWrapperComponent implements OnInit {
   }
 
   /**
-   * Computes and returns the error key availability state
-   * Iterates over control errors and matches them with a given error name
-   * @param error the name of searched error
-   * @returns the error availability
+   * Computes and returns the information about the required state
+   * @returns the required state
    */
-  isErrorAvailable(error: string): boolean {
-    let isAvailable = false;
-    if (this.control.errors) {
-      Object.keys(this.control.errors).filter((value) => (isAvailable = value.includes(error)));
-    }
-    return isAvailable;
+  isRequired(): boolean {
+    const result = Object.keys(this.validationMessages).filter((value) => value.includes('required'));
+    return result.length > 0;
   }
 }
