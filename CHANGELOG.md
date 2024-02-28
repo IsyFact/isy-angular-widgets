@@ -11,6 +11,7 @@
 - ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an, um die Zugänglichkeit der Website zu verbessern
 - ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datumswerten wurde hinzugefügt
 - ISY-876: Meldungen werden immer am unteren rechten Rand angezeigt
+- ISY-877: Form-Wrapper um Pflichtfeldfunktionalität erweitert
 ## Demo-Anwendung
 - ISY-647: Alle Formulare wurden von rechtsbündigen Labels auf Floating-Labels umgestellt
 - ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität überarbeitet
