@@ -1,5 +1,5 @@
 <div class="isy-hauptfenster">
-  <div class="grid grid-nogutter">
+  <header class="grid grid-nogutter">
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       @if (logoAnbieterAwl) {
         <a href="">
@@ -37,13 +37,15 @@
         }
       </div>
     </div>
-  </div>
+  </header>
 
-  <p-megaMenu [model]="items" class="dont-print" styleClass="flex">
-    <ng-template pTemplate="end">
-      <ng-content select="[Hauptnavigation-Tools]"></ng-content>
-    </ng-template>
-  </p-megaMenu>
+  <nav>
+    <p-megaMenu [model]="items" class="dont-print" styleClass="flex">
+      <ng-template pTemplate="end">
+        <ng-content select="[Hauptnavigation-Tools]"></ng-content>
+      </ng-template>
+    </p-megaMenu>
+  </nav>
   <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
     @if (title) {
       <div>{{ title }}</div>
@@ -64,7 +66,8 @@
 
   <div class="grid grid-nogutter flex-grow-1">
     @if (showLinksnavigation) {
-      <div
+      <aside
+        [attr.aria-label]="configService.getTranslation('hauptfenster.aria.leftNavigation')"
         class="isy-hauptfenster-linksnavigation dont-print"
         [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
       >
@@ -91,15 +94,16 @@
             (click)="collapsedLinksnavigation = false"
           ></button>
         </div>
-      </div>
+      </aside>
     }
 
-    <div class="col overflow-auto">
+    <main class="col overflow-auto">
       <ng-content></ng-content>
-    </div>
+    </main>
 
     @if (showInformationsbereich) {
-      <div
+      <aside
+        [attr.aria-label]="configService.getTranslation('hauptfenster.aria.informationArea')"
         class="isy-hauptfenster-informationsbereich dont-print"
         [style.width]="collapsedInformationsbereich ? null : informationsbereichWidth"
       >
@@ -126,7 +130,7 @@
             (click)="collapsedInformationsbereich = false"
           ></button>
         </div>
-      </div>
+      </aside>
     }
   </div>
 </div>
