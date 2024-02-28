@@ -125,25 +125,19 @@ describe('Unit Tests: HauptfensterComponent', () => {
     expect(informationsbereich.style.width).toEqual(width);
   });
 
-  it('banner landmark should be available', () => {
-    const div = spectator.query('div[role="banner"]') as HTMLElement;
+  it('banner landmark/tag should be available', () => {
+    const div = spectator.query('header') as HTMLElement;
     expect(div).not.toBeNull();
-    expect(div.role).toBe('banner');
-    expect(div.ariaLabel).toBe('banner');
   });
 
-  it('main landmark should be available', () => {
-    const div = spectator.query('div[role="main"]') as HTMLElement;
+  it('main landmark/tag should be available', () => {
+    const div = spectator.query('main') as HTMLElement;
     expect(div).not.toBeNull();
-    expect(div.role).toBe('main');
-    expect(div.ariaLabel).toBe('main');
   });
 
-  it('nav landmark should be available', () => {
-    const div = spectator.query('p-megaMenu[role="navigation"]') as HTMLElement;
+  it('nav landmark/tag should be available', () => {
+    const div = spectator.query('nav') as HTMLElement;
     expect(div).not.toBeNull();
-    expect(div.role).toBe('navigation');
-    expect(div.ariaLabel).toBe('navigation');
   });
 
   it('aside (linksnavigation) landmark/tag should be available', () => {
