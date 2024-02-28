@@ -27,6 +27,9 @@
     },
     "p-calendar": {
       "iconAriaLabel": "Datepicker öffnen/schließen"
+    },
+    "seitentoolbar": {
+      "sidebarHomeButtonLabel": "Zurück zur Startseite"
     }
   },
   "isyAngularWidgetsDemo": {

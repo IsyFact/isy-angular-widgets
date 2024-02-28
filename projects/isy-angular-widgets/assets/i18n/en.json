@@ -25,6 +25,12 @@
         "collapseInformationsbereich": "Collapse right side bar",
         "expandInformationsbereich": "Expand right side bar"
       }
+    },
+    "p-calendar": {
+      "iconAriaLabel": "Open/Close Datepicker"
+    },
+    "seitentoolbar": {
+      "sidebarHomeButtonLabel": "Back to the homepage"
     }
   },
   "primeng": {
