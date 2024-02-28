@@ -99,6 +99,16 @@ export class HauptfensterComponent {
    */
   @Input() informationsbereichWidth = '15em';
 
+  /**
+   * Label for the home button.
+   */
+  @Input() seitentoolbarStartseiteButtonLabel?: string;
+
+  /**
+   * Route for the home button.
+   */
+  @Input() seitentoolbarStartseiteRoute?: string;
+
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
   constructor(public configService: WidgetsConfigService) {}

@@ -26,9 +26,9 @@ describe('SeitenToolbarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the homeButtonLabel input value', () => {
+  it('should display the sidebarHomeButtonLabel input value', () => {
     const testLabel = 'Home';
-    spectator.setInput('homeButtonLabel', testLabel);
+    spectator.setInput('sidebarHomeButtonLabel', testLabel);
     const buttonElement = spectator.query('.p-toolbar-left p-button');
     expect(buttonElement).toBeTruthy();
     expect(buttonElement?.textContent).toContain(testLabel);
@@ -37,12 +37,12 @@ describe('SeitenToolbarComponent', () => {
   it('should navigate home when navigateHome is called', async () => {
     const navigateSpy = spyOn(mockRouter, 'navigate').and.returnValue(Promise.resolve(true));
     await component.navigateHome();
-    expect(navigateSpy).toHaveBeenCalledWith([component.homeRoute]);
+    expect(navigateSpy).toHaveBeenCalledWith([component.sidebarHomeRoute]);
   });
 
   it('should navigate to the route defined by homeRoute input when navigateHome is called', async () => {
     const testRoute = '/custom-home';
-    spectator.setInput('homeRoute', testRoute);
+    spectator.setInput('sidebarHomeRoute', testRoute);
     const navigateSpy = spyOn(mockRouter, 'navigate').and.returnValue(Promise.resolve(true));
     await spectator.component.navigateHome();
     expect(navigateSpy).toHaveBeenCalledWith([testRoute]);

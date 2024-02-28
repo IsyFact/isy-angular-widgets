@@ -5,6 +5,7 @@ import {MegaMenu, MegaMenuSub} from 'primeng/megamenu';
 import {Button} from 'primeng/button';
 import {MockComponents} from 'ng-mocks';
 import {HauptfensterModule} from './hauptfenster.module';
+import {SeitenToolbarComponent} from '@isy-angular-widgets/seiten-toolbar/seiten-toolbar.component';
 
 @Component({
   template: `
@@ -23,7 +24,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
-    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
+    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub, SeitenToolbarComponent)]
   });
 
   beforeEach(() => (spectator = createComponent()));
@@ -124,14 +125,14 @@ describe('Unit Tests: HauptfensterComponent', () => {
   it('should display the Seitentoolbarnavigation when showSeitentoolbarnavigation is true', () => {
     spectator.setInput('showSeitentoolbarnavigation', true);
     spectator.fixture.detectChanges();
-    const toolbar = spectator.query('.isy-hauptfenster-seitentoolbar');
+    const toolbar = spectator.query('isy-seiten-toolbar');
     expect(toolbar).toExist();
   });
 
   it('should not display the Seitentoolbarnavigation when showSeitentoolbarnavigation is false', () => {
     spectator.setInput('showSeitentoolbarnavigation', false);
     spectator.fixture.detectChanges();
-    const toolbar = spectator.query('.isy-hauptfenster-seitentoolbar');
+    const toolbar = spectator.query('isy-seiten-toolbar');
     expect(toolbar).not.toExist();
   });
 });

@@ -17,12 +17,12 @@ export class SeitenToolbarComponent {
   /**
    * Label for the home button.
    */
-  @Input() homeButtonLabel: string = 'Zurück zur Startseite';
+  @Input() sidebarHomeButtonLabel?: string = 'Zurück zur Startseite';
 
   /**
    * Route for the home button.
    */
-  @Input() homeRoute: string = '/';
+  @Input() sidebarHomeRoute?: string = '/';
 
   constructor(private router: Router) {}
 
@@ -31,6 +31,6 @@ export class SeitenToolbarComponent {
    * @returns A promise that resolves when the navigation is complete.
    */
   async navigateHome(): Promise<void> {
-    await this.router.navigate([this.homeRoute]);
+    await this.router.navigate([this.sidebarHomeRoute]);
   }
 }

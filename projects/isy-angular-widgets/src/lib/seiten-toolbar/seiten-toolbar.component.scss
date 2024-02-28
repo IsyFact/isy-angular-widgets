@@ -1,3 +1,9 @@
-::ng-deep .p-toolbar {
-  background-color: var(--surface-section);
+::ng-deep isy-seiten-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .p-toolbar {
+    background-color: var(--surface-section);
+  }
 }
