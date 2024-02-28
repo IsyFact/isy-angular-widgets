@@ -59,7 +59,7 @@
   <div class="grid grid-nogutter flex-grow-1">
     @if (showLinksnavigation) {
       <aside
-        aria-label="linksnavigation"
+        [attr.aria-label]="configService.getTranslation('hauptfenster.aria.leftNavigation')"
         class="isy-hauptfenster-linksnavigation dont-print"
         [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
       >
@@ -95,7 +95,7 @@
 
     @if (showInformationsbereich) {
       <aside
-        aria-label="informationsbereich"
+        [attr.aria-label]="configService.getTranslation('hauptfenster.aria.informationArea')"
         class="isy-hauptfenster-informationsbereich dont-print"
         [style.width]="collapsedInformationsbereich ? null : informationsbereichWidth"
       >

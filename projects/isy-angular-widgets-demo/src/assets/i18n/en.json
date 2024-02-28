@@ -22,7 +22,9 @@
         "collapseLinksnavigation": "Collapse left side bar",
         "expandLinksnavigation": "Expand left side bar",
         "collapseInformationsbereich": "Collapse right side bar",
-        "expandInformationsbereich": "Expand right side bar"
+        "expandInformationsbereich": "Expand right side bar",
+        "leftNavigation": "leftnavigation",
+        "informationArea": "informationarea"
       }
     },
     "p-calendar": {
