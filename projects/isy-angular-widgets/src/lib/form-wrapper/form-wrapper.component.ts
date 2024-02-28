@@ -16,6 +16,13 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
  *       'required': 'Email is required',
  *       'email': 'Please enter a valid email address'
  *     }">
+ *     <input
+ *        id="email"
+ *        formControlName="email"
+ *        class="w-full"
+ *        type="text"
+ *        pInputText
+ *     />
  *   </isy-form-wrapper>
  * </form>
  * ```
