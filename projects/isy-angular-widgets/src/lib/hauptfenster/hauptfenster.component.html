@@ -1,5 +1,5 @@
 <div class="isy-hauptfenster">
-  <div class="grid grid-nogutter" role="banner">
+  <div class="grid grid-nogutter" role="banner" aria-label="banner">
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       @if (logoAnbieterAwl) {
         <a href="">
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <p-megaMenu [model]="items" class="dont-print" styleClass="flex" role="navigation" aria-label="Navigation">
+  <p-megaMenu [model]="items" class="dont-print" styleClass="flex" role="navigation" aria-label="navigation">
     <ng-template pTemplate="end">
       <ng-content select="[Hauptnavigation-Tools]"></ng-content>
     </ng-template>
@@ -57,7 +57,7 @@
   <div class="grid grid-nogutter flex-grow-1">
     @if (showLinksnavigation) {
       <aside
-        aria-labelledby="linksnavigation"
+        aria-label="linksnavigation"
         class="isy-hauptfenster-linksnavigation dont-print"
         [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
       >
@@ -87,13 +87,13 @@
       </aside>
     }
 
-    <div role="main" class="col overflow-auto">
+    <div role="main" aria-label="main" class="col overflow-auto">
       <ng-content></ng-content>
     </div>
 
     @if (showInformationsbereich) {
       <aside
-        aria-labelledby="informationsbereich"
+        aria-label="informationsbereich"
         class="isy-hauptfenster-informationsbereich dont-print"
         [style.width]="collapsedInformationsbereich ? null : informationsbereichWidth"
       >

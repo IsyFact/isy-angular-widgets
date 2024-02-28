@@ -21,20 +21,24 @@ class HauptFensterWrapperComponent {
 
 describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
+  let component: HauptfensterComponent;
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
     declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
   });
 
-  beforeEach(() => (spectator = createComponent()));
+  beforeEach(() => {
+    spectator = createComponent();
+    component = spectator.component;
+  });
 
   it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should display the title input in Titelzeile', () => {
     const customTitle = 'Custom Title';
-    spectator.component.title = customTitle;
+    component.title = customTitle;
     spectator.fixture.detectChanges();
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
 
@@ -49,10 +53,10 @@ describe('Unit Tests: HauptfensterComponent', () => {
   });
 
   it('should call the logout function when the button is clocked', () => {
-    const spy = spyOn(spectator.component.logoutEvent, 'emit');
+    const spy = spyOn(component.logoutEvent, 'emit');
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
     logoutButton.click();
-    expect(spy).toHaveBeenCalledWith(spectator.component.userInfo);
+    expect(spy).toHaveBeenCalledWith(component.userInfo);
   });
 
   it('should have a hidden linksnavigation by default', () => {
@@ -67,8 +71,8 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
   it('should use the provided Linksnavigation width', () => {
     const customLinksnavigationWidth = '10%';
-    spectator.component.linksNavigationWidth = customLinksnavigationWidth;
-    spectator.component.showLinksnavigation = true;
+    component.linksNavigationWidth = customLinksnavigationWidth;
+    component.showLinksnavigation = true;
     spectator.fixture.detectChanges();
     const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
     expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
@@ -76,49 +80,88 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
   it('should use the provided Informationsbereich width', () => {
     const customInformationsbereichWidth = '10%';
-    spectator.component.informationsbereichWidth = customInformationsbereichWidth;
-    spectator.component.showInformationsbereich = true;
+    component.informationsbereichWidth = customInformationsbereichWidth;
+    component.showInformationsbereich = true;
     spectator.fixture.detectChanges();
     const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
 
   it('should not change its Linksnavigation width when collapsed', () => {
-    spectator.component.showLinksnavigation = true;
+    component.showLinksnavigation = true;
     spectator.fixture.detectChanges();
     const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
     (linksnavigation.querySelector('.collapseButton button') as HTMLElement).click();
     spectator.fixture.detectChanges();
     const width = linksnavigation.style.width;
 
-    spectator.component.linksNavigationWidth = '20%';
+    component.linksNavigationWidth = '20%';
     spectator.fixture.detectChanges();
 
     expect(linksnavigation.style.width).toEqual(width);
 
-    spectator.component.linksNavigationWidth = '10%';
+    component.linksNavigationWidth = '10%';
     spectator.fixture.detectChanges();
 
     expect(linksnavigation.style.width).toEqual(width);
   });
 
   it('should not change its Informationsbereich width when collapsed', () => {
-    spectator.component.showInformationsbereich = true;
+    component.showInformationsbereich = true;
     spectator.fixture.detectChanges();
     const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     (informationsbereich.querySelector('.collapseButton button') as HTMLElement).click();
     spectator.fixture.detectChanges();
     const width = informationsbereich.style.width;
 
-    spectator.component.linksNavigationWidth = '20%';
+    component.linksNavigationWidth = '20%';
     spectator.fixture.detectChanges();
 
     expect(informationsbereich.style.width).toEqual(width);
 
-    spectator.component.linksNavigationWidth = '10%';
+    component.linksNavigationWidth = '10%';
     spectator.fixture.detectChanges();
 
     expect(informationsbereich.style.width).toEqual(width);
+  });
+
+  it('banner landmark should be available', () => {
+    const div = spectator.query('div[role="banner"]') as HTMLElement;
+    expect(div).not.toBeNull();
+    expect(div.role).toBe('banner');
+    expect(div.ariaLabel).toBe('banner');
+  });
+
+  it('main landmark should be available', () => {
+    const div = spectator.query('div[role="main"]') as HTMLElement;
+    expect(div).not.toBeNull();
+    expect(div.role).toBe('main');
+    expect(div.ariaLabel).toBe('main');
+  });
+
+  it('nav landmark should be available', () => {
+    const div = spectator.query('p-megaMenu[role="navigation"]') as HTMLElement;
+    expect(div).not.toBeNull();
+    expect(div.role).toBe('navigation');
+    expect(div.ariaLabel).toBe('navigation');
+  });
+
+  it('aside (linksnavigation) landmark/tag should be available', () => {
+    component.showLinksnavigation = true;
+    spectator.detectChanges();
+
+    const div = spectator.query('aside[aria-label="linksnavigation"]') as HTMLElement;
+    expect(div).not.toBeNull();
+    expect(div.ariaLabel).toBe('linksnavigation');
+  });
+
+  it('aside (informationsbereich) landmark/tag should be available', () => {
+    component.showInformationsbereich = true;
+    spectator.detectChanges();
+
+    const div = spectator.query('aside[aria-label="informationsbereich"]') as HTMLElement;
+    expect(div).not.toBeNull();
+    expect(div.ariaLabel).toBe('informationsbereich');
   });
 });
 
