@@ -15,6 +15,11 @@ import {Router, RouterModule} from '@angular/router';
 })
 export class SeitentoolbarComponent {
   /**
+   * Determines whether to show or hide the Seitentoolbar, a sticky toolbar at the top of the screen.
+   */
+  @Input() showSidebar: boolean = false;
+
+  /**
    * Label for the home button.
    */
   @Input() sidebarHomeButtonLabel?: string;

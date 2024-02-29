@@ -4,7 +4,6 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
 /**
  * A component that wraps form controls and displays validation messages.
  * It requires the usage of reactive forms and supports standalone usage.
- *
  * @example
  * ```html
  * <form [formGroup]="myForm">
@@ -30,9 +29,6 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
  * ```typescript
  * import { ReactiveFormsModule } from '@angular/forms';
  * ```
- * @selector isy-form-wrapper
- * @standalone true
- * @imports ReactiveFormsModule
  */
 @Component({
   selector: 'isy-form-wrapper',
