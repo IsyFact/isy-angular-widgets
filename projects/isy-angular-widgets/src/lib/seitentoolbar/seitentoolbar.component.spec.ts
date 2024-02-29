@@ -28,6 +28,7 @@ describe('SeitenToolbarComponent', () => {
 
   it('should display the sidebarHomeButtonLabel input value', () => {
     const testLabel = 'Home';
+    spectator.setInput('showSidebar', true);
     spectator.setInput('sidebarHomeButtonLabel', testLabel);
     const buttonElement = spectator.query('.p-toolbar-left p-button');
     expect(buttonElement).toBeTruthy();
@@ -46,5 +47,19 @@ describe('SeitenToolbarComponent', () => {
     const navigateSpy = spyOn(mockRouter, 'navigate').and.returnValue(Promise.resolve(true));
     await spectator.component.navigateHome();
     expect(navigateSpy).toHaveBeenCalledWith([testRoute]);
+  });
+
+  it('should display the Seitentoolbar when showSidebar is true', () => {
+    spectator.setInput('showSidebar', true);
+    spectator.fixture.detectChanges();
+    const toolbar = spectator.query('.p-toolbar-left');
+    expect(toolbar).toExist();
+  });
+
+  it('should not display the Seitentoolbar when showSidebar is false', () => {
+    spectator.setInput('showSidebar', false);
+    spectator.fixture.detectChanges();
+    const toolbar = spectator.query('.p-toolbar-left');
+    expect(toolbar).not.toExist();
   });
 });

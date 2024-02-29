@@ -3,21 +3,25 @@ like in the following example. The side bar regions can be disabled with corresp
 <isy-hauptfenster
   logoAwl="../assets/default-application-logo.jpg"
   logoAnbieterAwl="../assets/default-vendor-logo.png"
-  [showSeitentoolbarnavigation]="true"
   [showLinksnavigation]="true"
   [showInformationsbereich]="true"
   linksNavigationWidth="10%"
   [items]="items"
   [userInfo]="userInfo"
-  seitentoolbarStartseiteButtonLabel="Zurück zur Übersicht"
-  seitentoolbarStartseiteRoute="/dashboard"
 >
   <!-- The Seitentoolbar is at the top of the page and can be used for navigation or other tools. -->
-  <div SeitentoolbarMitte></div>
-  <div SeitentoolbarRechts>
-    <p-button icon="pi pi-print" class="mr-1"></p-button>
-    <p-button icon="pi pi-info-circle"></p-button>
-  </div>
+  <isy-seiten-toolbar
+    [showSidebar]="true"
+    sidebarHomeButtonLabel="Zurück zur Übersicht"
+    sidebarHomeRoute="/dashboard"
+    Seitentoolbar
+  >
+    <div middle></div>
+    <div right>
+      <p-button icon="pi pi-print" class="mr-1"></p-button>
+      <p-button icon="pi pi-info-circle"></p-button>
+    </div>
+  </isy-seiten-toolbar>
 
   <!-- The Linksnavigation is the left side bar. You could build some kind of menu here. -->
   <div Linksnavigation>

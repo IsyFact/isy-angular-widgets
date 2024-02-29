@@ -53,11 +53,6 @@ export class HauptfensterComponent {
   @Input() title?: string;
 
   /**
-   * Determines whether to show or hide the Seitentoolbarnavigation, a sticky toolbar at the top of the screen.
-   */
-  @Input() showSeitentoolbarnavigation: boolean = false;
-
-  /**
    * Determines whether to show or hide the Linksnavigation, a navigation bar on the left screen side.
    */
   @Input() showLinksnavigation: boolean = false;
@@ -98,16 +93,6 @@ export class HauptfensterComponent {
    * Default is 15em.
    */
   @Input() informationsbereichWidth = '15em';
-
-  /**
-   * Label for the home button.
-   */
-  @Input() seitentoolbarStartseiteButtonLabel?: string;
-
-  /**
-   * Route for the home button.
-   */
-  @Input() seitentoolbarStartseiteRoute?: string;
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 

@@ -11,3 +11,5 @@ export * from './lib/input-char/public-api';
 export * from './lib/validation/public-api';
 export * from './lib/http/public-api';
 export * from './lib/i18n/public-api';
+export * from './lib/seitentoolbar/public-api';
+export * from './lib/pipes/public-api';

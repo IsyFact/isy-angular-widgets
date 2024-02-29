@@ -20,9 +20,19 @@ import {MenuTranslationService} from './shared/services/menu-translation.service
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
+import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitentoolbar.component';
 
 @NgModule({
   declarations: [AppComponent],
+  providers: [
+    AuthGuard,
+    UserInfoPublicService,
+    {provide: UserInfoService, useClass: UserInfoPublicService},
+    SecurityService,
+    MenuTranslationService,
+    MessageService
+  ],
+  bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -44,16 +54,8 @@ import {ButtonModule} from 'primeng/button';
         },
         deps: [HttpClient]
       }
-    })
-  ],
-  providers: [
-    AuthGuard,
-    UserInfoPublicService,
-    {provide: UserInfoService, useClass: UserInfoPublicService},
-    SecurityService,
-    MenuTranslationService,
-    MessageService
-  ],
-  bootstrap: [AppComponent]
+    }),
+    SeitentoolbarComponent
+  ]
 })
 export class AppModule {}
