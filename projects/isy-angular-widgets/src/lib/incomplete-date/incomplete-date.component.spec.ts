@@ -1,5 +1,5 @@
 import {IncompleteDateComponent} from './incomplete-date.component';
-import {AbstractControl, FormControl} from '@angular/forms';
+import {AbstractControl, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateModule} from './incomplete-date.module';
 
@@ -78,6 +78,20 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component = spectator.component;
     init();
     input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
+  });
+
+  it('NG_VALUE_ACCESSOR should be covered', ()=> {
+    typeSequence(['0', '1', '.', '0', '1', '.', '2', '0', '2', '4']);
+    const valueAccessor = spectator.fixture.debugElement.injector.get(NG_VALUE_ACCESSOR);
+    spectator.fixture.detectChanges();
+    expect(valueAccessor).not.toBeUndefined();
+  });
+
+  it('NG_VALIDATORS should be covered', ()=> {
+    typeSequence(['0', '1', '.', '0', '1', '.', '2', '0', '2', '4']);
+    const validatotrs = spectator.fixture.debugElement.injector.get(NG_VALIDATORS);
+    spectator.fixture.detectChanges();
+    expect(validatotrs).not.toBeUndefined();
   });
 
   it('should autocomplete the input sequence "01.01.2024" to "01.01.2024"', () => {
