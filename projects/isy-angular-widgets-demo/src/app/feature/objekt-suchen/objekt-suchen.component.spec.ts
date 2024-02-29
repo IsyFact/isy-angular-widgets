@@ -588,4 +588,21 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     component.onFormControlFocus(component.idForm.controls.id);
     expect(component.idForm.controls.id.dirty).toBeTrue();
   });
+
+  it('should setup countries again after language change', () => {
+    const setupCountriesSpy = spyOn(component, 'setupCountries');
+    component.translate.use('en');
+    spectator.detectChanges();
+    expect(setupCountriesSpy).toHaveBeenCalled();
+  });
+
+  it('should find persons', () => {
+    const searchButtonSpy = spyOn(component, 'findPerson');
+
+    const searchButton = spectator.query('#search-button') as HTMLButtonElement;
+    searchButton.addEventListener('onClick', component.findPerson);
+    searchButton.dispatchEvent(new MouseEvent('onClick'));
+
+    expect(searchButtonSpy).toHaveBeenCalled();
+  });
 });
