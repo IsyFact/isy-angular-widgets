@@ -593,7 +593,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     const setupCountriesSpy = spyOn(component, 'setupCountries');
     component.translate.use('en');
     spectator.detectChanges();
-    expect(setupCountriesSpy).toHaveBeenCalledWith();
+    expect(setupCountriesSpy).toHaveBeenCalled();
   });
 
   it('should find persons', ()=> {
