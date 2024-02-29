@@ -87,9 +87,9 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('NG_VALIDATORS should be covered', () => {
-    const validatotrs = spectator.fixture.debugElement.injector.get(NG_VALIDATORS);
+    const validators = spectator.fixture.debugElement.injector.get(NG_VALIDATORS);
     spectator.fixture.detectChanges();
-    expect(validatotrs).not.toBeUndefined();
+    expect(validators).not.toBeUndefined();
   });
 
   it('should autocomplete the input sequence "01.01.2024" to "01.01.2024"', () => {
