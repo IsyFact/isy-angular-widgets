@@ -596,7 +596,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(setupCountriesSpy).toHaveBeenCalled();
   });
 
-  it('should find persons', ()=> {
+  it('should find persons', () => {
     const searchButtonSpy = spyOn(component, 'findPerson');
 
     const searchButton = spectator.query('#search-button') as HTMLButtonElement;
