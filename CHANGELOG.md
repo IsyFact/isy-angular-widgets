@@ -5,6 +5,7 @@
   der Form 'xx'. Dies ermöglicht die Eingabe herkömmlicher Datumsformate mit Punkten, wie zum Beispiel '01.01.2024'
 - ISY-905: Linksnavigation und Informationsbereich können jetzt wieder korrekt eingeklappt werden und die Breite der Seitenleisten liegt nun standardmäßig wieder bei 15em
 ## Features
+- ISY-874: Sticky-Seiten-Toolbar wurde zum Hauptfenster hinzugefügt
 - ISY-681: Formwrapper und Formcontrol-Pipe wurden hinzugefügt
 - ISY-756: IsyFact-Theme wurde überarbeitet
 - ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an, um die Zugänglichkeit der Website zu verbessern

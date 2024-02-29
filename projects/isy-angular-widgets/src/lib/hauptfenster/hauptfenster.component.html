@@ -54,7 +54,15 @@
     }
   </div>
 
-  <ng-content select="[Seitentoolbar]" class="dont-print"></ng-content>
+  @if (showSeitentoolbarnavigation) {
+    <isy-seiten-toolbar
+      [sidebarHomeButtonLabel]="seitentoolbarStartseiteButtonLabel"
+      [sidebarHomeRoute]="seitentoolbarStartseiteRoute"
+    >
+      <ng-content select="[SeitentoolbarMitte]" middle></ng-content>
+      <ng-content select="[SeitentoolbarRechts]" right></ng-content>
+    </isy-seiten-toolbar>
+  }
 
   <div class="grid grid-nogutter flex-grow-1">
     @if (showLinksnavigation) {

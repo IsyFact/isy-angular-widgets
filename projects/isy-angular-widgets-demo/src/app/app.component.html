@@ -1,27 +1,36 @@
+<!-- The Isy-Hauptfenster is the main frame of isy-angular-widgets. It provides three regions to be filled,
+like in the following example. The side bar regions can be disabled with corresponding parameters. -->
 <isy-hauptfenster
   logoAwl="../assets/default-application-logo.jpg"
   logoAnbieterAwl="../assets/default-vendor-logo.png"
+  [showSeitentoolbarnavigation]="true"
   [showLinksnavigation]="true"
   [showInformationsbereich]="true"
   linksNavigationWidth="10%"
   [items]="items"
   [userInfo]="userInfo"
+  seitentoolbarStartseiteButtonLabel="Zurück zur Übersicht"
+  seitentoolbarStartseiteRoute="/dashboard"
 >
-  <!--  The Isy-Hauptfenster is the main frame of isy-angular-widgets. It provides three regions to be filled,
-        like in the following example. The side bar regions can be disabled with corresponding parameters. -->
-  <div Linksnavigation>
-    <!--    The Linksnavigation is the left side bar. You could build some kind of menu here. -->
-    <p-panelMenu [model]="sidebarItems"></p-panelMenu>
+  <!-- The Seitentoolbar is at the top of the page and can be used for navigation or other tools. -->
+  <div SeitentoolbarMitte></div>
+  <div SeitentoolbarRechts>
+    <p-button icon="pi pi-print" class="mr-1"></p-button>
+    <p-button icon="pi pi-info-circle"></p-button>
+  </div>
 
+  <!-- The Linksnavigation is the left side bar. You could build some kind of menu here. -->
+  <div Linksnavigation>
+    <p-panelMenu [model]="sidebarItems"></p-panelMenu>
     <router-outlet name="linksnavigation"></router-outlet>
   </div>
-  <!--  The region without a tag is the content region, to be filled by the router. -->
+  <!-- The region without a tag is the content region, to be filled by the router. -->
   <div Informationsbereich>
-    <!--    The Informationsbereich is the right side bar. -->
+    <!-- The Informationsbereich is the right side bar. -->
     <router-outlet name="informationsbereich"></router-outlet>
   </div>
   <div Hauptnavigation-Tools>
-    <!--    The Hauptnavigation-Tools are a region within the Menu and could for example be used for a language selector. -->
+    <!-- The Hauptnavigation-Tools are a region within the Menu and could for example be used for a language selector. -->
     <p-dropdown
       id="language-selector"
       class="ml-2"

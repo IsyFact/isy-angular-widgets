@@ -5,6 +5,7 @@ import {MegaMenu, MegaMenuSub} from 'primeng/megamenu';
 import {Button} from 'primeng/button';
 import {MockComponents} from 'ng-mocks';
 import {HauptfensterModule} from './hauptfenster.module';
+import {SeitentoolbarComponent} from './components/seitentoolbar/seitentoolbar.component';
 
 @Component({
   template: `
@@ -24,7 +25,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
   let component: HauptfensterComponent;
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
-    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
+    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub, SeitentoolbarComponent)]
   });
 
   beforeEach(() => {
@@ -123,6 +124,20 @@ describe('Unit Tests: HauptfensterComponent', () => {
     spectator.fixture.detectChanges();
 
     expect(informationsbereich.style.width).toEqual(width);
+  });
+
+  it('should display the Seitentoolbarnavigation when showSeitentoolbarnavigation is true', () => {
+    spectator.setInput('showSeitentoolbarnavigation', true);
+    spectator.fixture.detectChanges();
+    const toolbar = spectator.query('isy-seiten-toolbar');
+    expect(toolbar).toExist();
+  });
+
+  it('should not display the Seitentoolbarnavigation when showSeitentoolbarnavigation is false', () => {
+    spectator.setInput('showSeitentoolbarnavigation', false);
+    spectator.fixture.detectChanges();
+    const toolbar = spectator.query('isy-seiten-toolbar');
+    expect(toolbar).not.toExist();
   });
 
   it('banner landmark/tag should be available', () => {

@@ -1,0 +1,16 @@
+<p-toolbar>
+  <div class="p-toolbar-left">
+    <p-button
+      [link]="true"
+      label="{{ sidebarHomeButtonLabel }}"
+      icon="pi pi-arrow-circle-left"
+      (click)="navigateHome()"
+    ></p-button>
+  </div>
+  <div class="p-toolbar-middle">
+    <ng-content select="[middle]"></ng-content>
+  </div>
+  <div class="p-toolbar-right">
+    <ng-content select="[right]"></ng-content>
+  </div>
+</p-toolbar>
