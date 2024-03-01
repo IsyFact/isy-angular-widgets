@@ -46,6 +46,12 @@
   }
 }
 
+:host ::ng-deep .p-megamenu {
+  .p-menuitem-text {
+    color: var(--surface-900);
+  }
+}
+
 @media print {
   .dont-print {
     display: none;
