@@ -1,6 +1,6 @@
 # 17.2.0 - 
 ## Fixes
-- ISY-978: Zeilenumbruch in PrimeNg Tabelleüberschriften kommt nicht mehr vor 
+- ISY-978: Zeilenumbruch in PrimeNg Tabellenüberschriften kommt nicht mehr vor 
 - ISY-775: Die beiden Readme-Dateien wurden für Standalone-Projekte aktualisiert
 - ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
   der Form 'xx'. Dies ermöglicht die Eingabe herkömmlicher Datumsformate mit Punkten, wie zum Beispiel '01.01.2024'
