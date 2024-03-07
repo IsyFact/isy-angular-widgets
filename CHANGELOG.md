@@ -14,6 +14,7 @@
 - ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datumswerten wurde hinzugefügt
 - ISY-876: Meldungen werden immer am unteren rechten Rand angezeigt
 - ISY-877: Form-Wrapper um Pflichtfeldfunktionalität erweitert
+- ISY-914: Wizard Dialog um Responsivität hinzugefügt
 ## Demo-Anwendung
 - ISY-647: Alle Formulare wurden von rechtsbündigen Labels auf Floating-Labels umgestellt
 - ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität überarbeitet
