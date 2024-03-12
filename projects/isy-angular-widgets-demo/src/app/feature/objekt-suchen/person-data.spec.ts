@@ -25,6 +25,8 @@ describe('Unit Tests: person-data', () => {
     expect(person.personalien.ablaufdatumReisepass).toEqual('');
     expect(person.personalien.kreditkartennummer).toEqual('');
     expect(person.personalien.ablaufdatumKreditkarte).toEqual('');
+    expect(person.personalien.bilanz).toEqual(0);
+    expect(person.personalien.status).toEqual('');
     expect(person.sachverhalte).toEqual([]);
   }
 

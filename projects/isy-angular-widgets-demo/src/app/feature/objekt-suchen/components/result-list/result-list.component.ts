@@ -21,6 +21,14 @@ export class ResultListComponent {
 
   personalien: Personalien[] = [];
   geschlechter = [{geschlecht: 'm'}, {geschlecht: 'w'}, {geschlecht: 'x'}];
+  stati = [
+    {label: 'Unqualifiziert', value: 'Unqualifiziert'},
+    {label: 'Qualifiziert', value: 'Qualifiziert'},
+    {label: 'Neu', value: 'Neu'},
+    {label: 'Verhandlung', value: 'Verhandlung'},
+    {label: 'Erneuerung', value: 'Erneuerung'},
+    {label: 'Vorschlag', value: 'Vorschlag'}
+  ];
 
   readonly laender: string[];
 

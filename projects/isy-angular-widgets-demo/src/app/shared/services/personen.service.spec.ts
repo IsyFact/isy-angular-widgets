@@ -28,7 +28,9 @@ describe('Unit Tests: PersonenService', () => {
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
       ablaufdatumKreditkarte: '',
-      identityDocument: ''
+      identityDocument: '',
+      bilanz: 0,
+      status: ''
     },
     sachverhalte: []
   };
@@ -63,7 +65,10 @@ describe('Unit Tests: PersonenService', () => {
 
     expect(personalien.ausweispflichtig).toBeTrue();
     expect(personalien.sicherheitsstufe).toEqual(0);
-    expect(personalien.geschlecht).toEqual('x');
+
+    const isGeschlechtIncluded = service.geschlechter.includes(personalien.geschlecht);
+    expect(isGeschlechtIncluded).toBeTrue();
+
     expect(personalien.geburtsdatum).toEqual('01.01.1337');
     expect(personalien.einreisedatum).toEqual('xx.xx.xxxx');
     expect(personalien.abreisedatum).toEqual('xx.xx.xxxx');
@@ -72,6 +77,12 @@ describe('Unit Tests: PersonenService', () => {
     expect(personalien.ablaufdatumReisepass).toBe(empty);
     expect(personalien.kreditkartennummer).toBe(empty);
     expect(personalien.ablaufdatumKreditkarte).toBe(empty);
+    expect(personalien.bilanz).toBeGreaterThan(60000);
+    expect(personalien.bilanz).toBeLessThan(100000);
+
+    const isStatusIncluded = service.stati.includes(personalien.status);
+    expect(isStatusIncluded).toBeTrue();
+
     expect(person.sachverhalte).toEqual([]);
   });
 
