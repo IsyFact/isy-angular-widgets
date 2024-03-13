@@ -84,53 +84,6 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
       expect(component.valueChange.emit).toHaveBeenCalledWith({group: 'Groups', value: schriftzeichengruppe});
     });
   });
-
-  // groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-  //   // TODO this probably will be an integration test as this component doesnt know the selected group
-  //   it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
-  //     selectSchriftzeichengruppe(schriftzeichengruppe);
-  //
-  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-  //     expect(component.selectedGrundzeichen).toBeUndefined();
-  //     expect(component.selectedSchriftzeichenGruppe).toEqual(schriftzeichengruppe);
-  //   });
-  //
-  //   it('should show only characters with a selected schriftzeichengruppe', () => {
-  //     const charactersSelectButton = fixture.debugElement.query(
-  //       By.css('#right-panel-side p-selectButton')
-  //     ).componentInstance;
-  //     expect(charactersSelectButton).toBeTruthy();
-  //
-  //     selectSchriftzeichengruppe(schriftzeichengruppe);
-  //
-  //     const options = charactersSelectButton.options;
-  //     expect(options).toBeTruthy();
-  //     for (const character of options) {
-  //       expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
-  //     }
-  //   });
-  //
-  //   it('should show all characters with a selected schriftzeichengruppe', () => {
-  //     const schriftzeichengruppeSelectButton = fixture.debugElement.query(
-  //       By.css('#schriftzeichengruppe-select-button')
-  //     ).componentInstance;
-  //     expect(schriftzeichengruppeSelectButton).toBeTruthy();
-  //     const charactersSelectButton = fixture.debugElement.query(
-  //       By.css('#right-panel-side p-selectButton')
-  //     ).componentInstance;
-  //     expect(charactersSelectButton).toBeTruthy();
-  //
-  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
-  //     component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
-  //
-  //     schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
-  //     fixture.detectChanges();
-  //
-  //     expect(charactersSelectButton.options.length).toEqual(
-  //       sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
-  //     );
-  //   });
-  // });
 });
 
 describe('Integration Tests', () => {
@@ -259,7 +212,7 @@ describe('Integration Tests', () => {
   });
 
   groups.forEach((group: Schriftzeichengruppe) => {
-    it(`should only have a ${group} base enabled active after corresponding selection"`, () => {
+    it(`should only have a ${group} group enabled active after corresponding selection"`, () => {
       const allSelectButton = spectator.debugElement.query(By.css('.all-select-button'))
         .componentInstance as SelectButton;
       const baseSelectButton = spectator.debugElement.query(By.css('.Base-select-button'))

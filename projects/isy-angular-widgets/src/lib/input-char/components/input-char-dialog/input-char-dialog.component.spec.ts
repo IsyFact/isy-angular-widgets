@@ -148,4 +148,44 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     const groupButtons = spectator.queryAll('.Basis-select-button .p-buttonset div');
     expect(groupButtons.length).toEqual(numberOfGroups);
   });
+
+  // groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
+  //   // TODO this probably will be an integration test as this component doesnt know the selected group
+  //
+  //   it('should show only characters with a selected schriftzeichengruppe', () => {
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     selectSchriftzeichengruppe(schriftzeichengruppe);
+  //
+  //     const options = charactersSelectButton.options;
+  //     expect(options).toBeTruthy();
+  //     for (const character of options) {
+  //       expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
+  //     }
+  //   });
+  //
+  //   it('should show all characters with a selected schriftzeichengruppe', () => {
+  //     const schriftzeichengruppeSelectButton = fixture.debugElement.query(
+  //       By.css('#schriftzeichengruppe-select-button')
+  //     ).componentInstance;
+  //     expect(schriftzeichengruppeSelectButton).toBeTruthy();
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     // Couldn't figure out how to trigger a ngModel change from a test, so this is a bad placeholder
+  //     component.selectedSchriftzeichenGruppe = schriftzeichengruppe;
+  //
+  //     schriftzeichengruppeSelectButton.onChange.emit(schriftzeichengruppe);
+  //     fixture.detectChanges();
+  //
+  //     expect(charactersSelectButton.options.length).toEqual(
+  //       sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
+  //     );
+  //   });
+  // });
 });
