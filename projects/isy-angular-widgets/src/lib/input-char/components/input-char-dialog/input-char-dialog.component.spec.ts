@@ -83,6 +83,36 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     const button = spectator.query('#lower-right-panel button') as HTMLButtonElement;
     expect(button.innerHTML).toContain('Einfügen');
   });
+
+  //
+  //   it(`should show only characters with a selected base ${grundzeichen}`, () => {
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     selectGrundzeichen(grundzeichen);
+  //
+  //     const options = charactersSelectButton.options;
+  //     expect(options).toBeTruthy();
+  //     for (const char of options) {
+  //       expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
+  //     }
+  //   });
+
+  //   it(`should show all characters with a selected base ${grundzeichen}`, () => {
+  //     const charactersSelectButton = fixture.debugElement.query(
+  //       By.css('#right-panel-side p-selectButton')
+  //     ).componentInstance;
+  //     expect(charactersSelectButton).toBeTruthy();
+  //
+  //     selectGrundzeichen(grundzeichen);
+  //
+  //     expect(charactersSelectButton.options.length).toEqual(
+  //       sonderzeichenListe.filter((char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen)
+  //         .length
+  //     );
+  //   });
 });
 
 describe('Integration Tests: InputCharDialogComponent', () => {

@@ -85,47 +85,6 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
     });
   });
 
-  // bases.forEach((grundzeichen: string) => {
-  //   it(`should only have a ${grundzeichen} base enabled active after corresponding selection"`, () => {
-  //     selectGrundzeichen(grundzeichen);
-  //
-  //     expect(component.allCharsModel).toBeUndefined();
-  //     expect(component.selectedGrundzeichen).toEqual(grundzeichen);
-  //     expect(component.selectedSchriftzeichenGruppe).toBeUndefined();
-  //   });
-  //
-  //   it(`should show only characters with a selected base ${grundzeichen}`, () => {
-  //     const charactersSelectButton = fixture.debugElement.query(
-  //       By.css('#right-panel-side p-selectButton')
-  //     ).componentInstance;
-  //     expect(charactersSelectButton).toBeTruthy();
-  //
-  //     selectGrundzeichen(grundzeichen);
-  //
-  //     const options = charactersSelectButton.options;
-  //     expect(options).toBeTruthy();
-  //     for (const char of options) {
-  //       expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
-  //     }
-  //   });
-  //
-  //   it(`should show all characters with a selected base ${grundzeichen}`, () => {
-  //     const charactersSelectButton = fixture.debugElement.query(
-  //       By.css('#right-panel-side p-selectButton')
-  //     ).componentInstance;
-  //     expect(charactersSelectButton).toBeTruthy();
-  //
-  //     selectGrundzeichen(grundzeichen);
-  //
-  //     expect(charactersSelectButton.options.length).toEqual(
-  //       sonderzeichenListe.filter((char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen)
-  //         .length
-  //     );
-  //   });
-  // });
-
-  // TODO Test that tests basic functionality: emit an event on click
-
   // groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
   //   // TODO this probably will be an integration test as this component doesnt know the selected group
   //   it('should only have a schriftzeichengruppe enabled active after corresponding selection', () => {
@@ -280,5 +239,39 @@ describe('Integration Tests', () => {
     const allSelectButton = spectator.debugElement.query(By.directive(SelectButton));
 
     expect(allSelectButton.nativeElement.textContent).toEqual(headerStr);
+  });
+
+  bases.forEach((base: string) => {
+    it(`should only have a ${base} base enabled active after corresponding selection"`, () => {
+      const allSelectButton = spectator.debugElement.query(By.css('.all-select-button'))
+        .componentInstance as SelectButton;
+      const baseSelectButton = spectator.debugElement.query(By.css('.Base-select-button'))
+        .componentInstance as SelectButton;
+      const groupSelectButton = spectator.debugElement.query(By.css('.Groups-select-button'))
+        .componentInstance as SelectButton;
+
+      selectBasis(base);
+
+      expect(allSelectButton.value).toBeUndefined();
+      expect(baseSelectButton.value).toEqual(base);
+      expect(groupSelectButton.value).toBeUndefined();
+    });
+  });
+
+  groups.forEach((group: Schriftzeichengruppe) => {
+    it(`should only have a ${group} base enabled active after corresponding selection"`, () => {
+      const allSelectButton = spectator.debugElement.query(By.css('.all-select-button'))
+        .componentInstance as SelectButton;
+      const baseSelectButton = spectator.debugElement.query(By.css('.Base-select-button'))
+        .componentInstance as SelectButton;
+      const groupSelectButton = spectator.debugElement.query(By.css('.Groups-select-button'))
+        .componentInstance as SelectButton;
+
+      selectSchriftzeichengruppe(group);
+
+      expect(allSelectButton.value).toBeUndefined();
+      expect(baseSelectButton.value).toBeUndefined();
+      expect(groupSelectButton.value).toEqual(group);
+    });
   });
 });
