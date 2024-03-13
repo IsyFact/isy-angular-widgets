@@ -24,7 +24,7 @@ const props = {
   allButtonOptionsLabel: headerStr
 };
 
-describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
+describe('Unit Tests: MultiSelectButtonComponent', () => {
   const createComponent = createComponentFactory({
     component: MultiSelectButtonComponent,
     imports: [MockModule(AccordionModule), MockModule(SelectButtonModule), MockModule(FormsModule)]
@@ -86,7 +86,7 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 });
 
-describe('Integration Tests', () => {
+describe('Integration Tests: MultiSelectButtonComponent', () => {
   const createComponent = createComponentFactory({
     component: MultiSelectButtonComponent,
     imports: [SelectButtonModule, AccordionModule, FormsModule]
@@ -154,6 +154,8 @@ describe('Integration Tests', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // TODO Test NgModel Functions
 
   it('all button should be selected on init ', () => {
     const allButton = fixture.debugElement.query(By.css('.all-select-button .p-selectbutton .p-button'));
