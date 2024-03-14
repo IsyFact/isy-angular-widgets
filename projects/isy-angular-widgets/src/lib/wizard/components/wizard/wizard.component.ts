@@ -133,21 +133,20 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() index: number = 0;
 
   /**
-   * Stores the items of the wizard
-   */
-  items: MenuItem[] = [];
-
-
-  /**
    * Breakpoint for PrimeNg dialog responsiveness
    */
-  breaktpoints : {[key: string]: string} = {
+  @Input() breaktpoints : {[key: string]: string} = {
     '3840px': '95vw',
     '1920px': '95vw',
-    '1366': '85vw',
+    '1366px': '85vw',
     '768px': '95vw',
     '412px': '95vw'
   };
+
+  /**
+   * Stores the items of the wizard
+   */
+  items: MenuItem[] = [];
 
   /**
    * Fired on initialization
