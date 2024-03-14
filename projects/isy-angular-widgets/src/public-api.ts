@@ -13,4 +13,3 @@ export * from './lib/http/public-api';
 export * from './lib/i18n/public-api';
 export * from './lib/seitentoolbar/public-api';
 export * from './lib/pipes/public-api';
-export * from './lib/form-wrapper/public-api';
