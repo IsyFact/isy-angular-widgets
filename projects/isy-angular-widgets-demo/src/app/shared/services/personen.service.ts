@@ -167,7 +167,7 @@ export class PersonenService {
       personalien: {
         nachname: this.nachname[this.rng()],
         vorname: this.vorname[this.rng()],
-        geschlecht: 'x',
+        geschlecht: this.rChar(),
         geburtsdatum: '01.01.1337',
         geburtsort: this.staaten[this.rng()],
         staatsangehoerigkeit: this.staaten[this.rng()],
@@ -215,5 +215,11 @@ export class PersonenService {
   rng(): number {
     const crypto = window.crypto;
     return crypto.getRandomValues(new Uint32Array(1))[0] % this.maxEntries;
+  }
+
+  rChar(): string {
+    const characters: string[] = ['w', 'm', 'x'];
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    return characters[randomIndex];
   }
 }
