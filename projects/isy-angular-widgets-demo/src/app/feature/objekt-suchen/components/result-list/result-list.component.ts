@@ -20,7 +20,7 @@ export class ResultListComponent {
   @Output() addObjectPressed = new EventEmitter<void>();
 
   personalien: Personalien[] = [];
-  geschlechter = [{geschlecht: 'm'}, {geschlecht: 'w'}, {geschlecht: 'x'}];
+  geschlechter = ['m', 'w', 'x'];
 
   readonly laender: string[];
 
