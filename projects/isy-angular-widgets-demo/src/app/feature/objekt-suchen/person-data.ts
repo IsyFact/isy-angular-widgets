@@ -24,7 +24,9 @@ export function getEmptyPerson(): Person {
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
       ablaufdatumKreditkarte: '',
-      identityDocument: ''
+      identityDocument: '',
+      bilanz: 0,
+      status: ''
     },
     sachverhalte: []
   };
@@ -52,5 +54,7 @@ export function resetPerson(person: Person): void {
   person.personalien.ablaufdatumReisepass = '';
   person.personalien.kreditkartennummer = '';
   person.personalien.ablaufdatumKreditkarte = '';
+  person.personalien.bilanz = 0;
+  person.personalien.status = '';
   person.sachverhalte = [];
 }

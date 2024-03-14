@@ -99,7 +99,9 @@
       "newEntryPlaceholder": "New Entry",
       "kreditkartennummer": "Credit card number",
       "ablaufdatumKreditkarte": "Credit card expiration date",
-      "identityDocument": "Identity Document"
+      "identityDocument": "Identity Document",
+      "bilanz": "Balance",
+      "alle": "All"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",

@@ -41,7 +41,9 @@ export class ObjektAnzeigenComponent {
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
       ablaufdatumKreditkarte: '',
-      identityDocument: ''
+      identityDocument: '',
+      bilanz: 0,
+      status: ''
     },
     sachverhalte: [
       'Hat einen Antrag auf BAFÖG gestellt',

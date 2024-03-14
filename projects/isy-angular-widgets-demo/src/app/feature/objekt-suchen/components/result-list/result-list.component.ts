@@ -20,7 +20,15 @@ export class ResultListComponent {
   @Output() addObjectPressed = new EventEmitter<void>();
 
   personalien: Personalien[] = [];
-  geschlechter = ['m', 'w', 'x'];
+  geschlechter = [{geschlecht: 'm'}, {geschlecht: 'w'}, {geschlecht: 'x'}];
+  stati = [
+    {label: 'Unqualifiziert', value: 'Unqualifiziert'},
+    {label: 'Qualifiziert', value: 'Qualifiziert'},
+    {label: 'Neu', value: 'Neu'},
+    {label: 'Verhandlung', value: 'Verhandlung'},
+    {label: 'Erneuerung', value: 'Erneuerung'},
+    {label: 'Vorschlag', value: 'Vorschlag'}
+  ];
 
   readonly laender: string[];
 

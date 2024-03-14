@@ -99,7 +99,9 @@
       "newEntryPlaceholder": "Neuer Eintrag",
       "kreditkartennummer": "Kreditkartennummer",
       "ablaufdatumKreditkarte": "Ablaufdatum der Kreditkarte",
-      "identityDocument": "Ausweisdokument"
+      "identityDocument": "Ausweisdokument",
+      "bilanz": "Bilanz",
+      "alle": "Alle"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",
