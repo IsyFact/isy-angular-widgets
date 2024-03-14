@@ -63,7 +63,7 @@ describe('Unit Tests: PersonenService', () => {
 
     expect(personalien.ausweispflichtig).toBeTrue();
     expect(personalien.sicherheitsstufe).toEqual(0);
-    expect(personalien.geschlecht).toEqual('x');
+    expect(personalien.geschlecht).toEqual('m');
     expect(personalien.geburtsdatum).toEqual('01.01.1337');
     expect(personalien.einreisedatum).toEqual('xx.xx.xxxx');
     expect(personalien.abreisedatum).toEqual('xx.xx.xxxx');
