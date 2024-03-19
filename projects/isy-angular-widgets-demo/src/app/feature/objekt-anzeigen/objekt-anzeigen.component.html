@@ -283,6 +283,90 @@
         </div>
       </div>
 
+      <p-divider></p-divider>
+
+      <div id="residenceSection" class="card">
+        <h4>
+          {{ 'isyAngularWidgetsDemo.labels.residence' | translate }}
+        </h4>
+        <div class="grid mt-3">
+          <div class="col-12 md:col-6 xl:col-4">
+            <div class="field">
+              <span class="p-float-label">
+                <input id="streetName" formControlName="streetName" class="w-full" type="text" pInputText />
+                <label for="streetName">
+                  {{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}
+                </label>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12 md:col-6 xl:col-4">
+            <div class="field">
+              <span class="p-float-label">
+                <input id="streetNumber" formControlName="streetNumber" class="w-full" type="text" pInputText />
+                <label for="streetNumber">
+                  {{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}
+                </label>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12 md:col-6 xl:col-4">
+            <div class="field">
+              <span class="p-float-label">
+                <input id="zip" formControlName="zip" class="w-full" type="text" pInputText />
+                <label for="zip">
+                  {{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}
+                </label>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12 md:col-6 xl:col-4">
+            <div class="field">
+              <span class="p-float-label">
+                <input id="city" formControlName="city" class="w-full" type="text" pInputText />
+                <label for="city">
+                  {{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}
+                </label>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12 md:col-6 xl:col-4">
+            <div class="field">
+              <span class="p-float-label">
+                <input id="country" formControlName="country" class="w-full" type="text" pInputText />
+                <label for="country">
+                  {{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}
+                </label>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          pButton
+          label="{{ 'isyAngularWidgetsDemo.actions.addResidence' | translate }}"
+          icon="pi pi-plus"
+          iconPos="left"
+          [disabled]="personalInfoForm.disabled"
+          (click)="duplicateAddressFields()"
+        ></button>
+        <button
+          pButton
+          label="{{ 'isyAngularWidgetsDemo.actions.removeResidence' | translate }}"
+          icon="pi pi-times"
+          class="p-button-outlined"
+          iconPos="left"
+          [disabled]="personalInfoForm.disabled"
+          (click)="removeAddressFields()"
+        ></button>
+      </div>
+
+      <p-divider></p-divider>
+
       <div class="field field-checkbox my-5">
         <p-inputSwitch inputId="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-inputSwitch>
         <label for="show-secret-fields" class="m-0 ml-3">
@@ -294,7 +378,7 @@
           <div class="grid m-0 align-items-center">
             <div class="col-12 md:col-6 xl:col-4">
               <div class="field field-checkbox">
-                <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
+                <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"></p-checkbox>
                 <label for="id-required" class="m-0 ml-3">
                   {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
                 </label>
@@ -414,7 +498,7 @@
         </tr>
       </ng-template>
     </p-table>
-    <demo-dialog-sachverhalte-bearbeiten [person]="person"> </demo-dialog-sachverhalte-bearbeiten>
+    <demo-dialog-sachverhalte-bearbeiten [person]="person"></demo-dialog-sachverhalte-bearbeiten>
   </p-tabPanel>
 </p-tabView>
 <p-toast></p-toast>
