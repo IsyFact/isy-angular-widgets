@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Address, Person} from '../../shared/model/person';
+import {Address} from '../../shared/model/person';
 import {TranslateService} from '@ngx-translate/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
@@ -7,6 +7,7 @@ import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
 import {Validation} from '@isy-angular-widgets/validation/validation';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
+import {initializedPerson} from './data';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -27,44 +28,7 @@ export class ObjektAnzeigenComponent {
 
   adressFormArray?: FormArray;
 
-  @Input() person: Person = {
-    id: '1',
-    personalien: {
-      geburtsdatum: '03.08.1980',
-      geburtsname: 'Mustermann',
-      geburtsort: 'Köln',
-      geschlecht: 'Männlich',
-      nachname: 'Mustermann',
-      staatsangehoerigkeit: 'Deutsch',
-      vorname: 'Max',
-      ausweispflichtig: true,
-      telefonnummer: '',
-      geheimdienstnotizen: '',
-      sicherheitsstufe: 0,
-      einreisedatum: 'xx.xx.2000',
-      abreisedatum: 'xx.xx.2024',
-      ablaufdatumReisepass: '',
-      kreditkartennummer: '',
-      ablaufdatumKreditkarte: '',
-      identityDocument: '',
-      bilanz: 0,
-      status: '',
-      addresses: [
-        {
-          street: 'Frankfurterstr.',
-          number: 6,
-          zip: 12345,
-          city: 'Köln',
-          country: 'Deutschland'
-        }
-      ]
-    },
-    sachverhalte: [
-      'Hat einen Antrag auf BAFÖG gestellt',
-      'Wurde wegen Falschparkens ermahnt',
-      'Steht auf der NO-FLY-Liste'
-    ]
-  };
+  @Input() person = initializedPerson;
 
   constructor(
     public translate: TranslateService,
@@ -138,7 +102,8 @@ export class ObjektAnzeigenComponent {
     const newAddress = this.createNewAddressFomrGroup();
     const addresses = this.personalInfoForm.get('addresses') as FormArray;
     addresses.push(newAddress);
-    // ToDo: Update the save functionality and unit tests???
+    // ToDo: Update the save functionality and unit tests ???
+    //       Enable validation for the new added form group
   }
 
   isAnyAddressAvailable(): boolean {
@@ -160,5 +125,6 @@ export class ObjektAnzeigenComponent {
     if (this.isAnyAddressAvailable()) {
       addresses.removeAt(addresses.length - 1);
     }
+    // ToDo: Must be the form validity updated ???
   }
 }

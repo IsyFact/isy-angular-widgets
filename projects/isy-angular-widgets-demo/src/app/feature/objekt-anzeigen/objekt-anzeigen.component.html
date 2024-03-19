@@ -288,93 +288,96 @@
       <h4>
         {{ 'isyAngularWidgetsDemo.labels.residence' | translate }}
       </h4>
-
       @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
         <h6>{{ i + 1 }}.</h6>
-        <div class="grid mt-3" [formArrayName]="'addresses'">
-          <ng-container [formGroupName]="i">
-            <div class="col-12 md:col-6 xl:col-4">
-              <div class="field">
-                <span class="p-float-label">
-                  <input
-                    formControlName="{{ addressFormControlNames[0] }}"
-                    id="streetName"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                  <label for="streetName">
-                    {{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}
-                  </label>
-                </span>
-              </div>
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <div class="grid mt-3" [formArrayName]="'addresses'">
+              <ng-container [formGroupName]="i">
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        formControlName="{{ addressFormControlNames[0] }}"
+                        id="streetName"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="streetName">
+                        {{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        formControlName="{{ addressFormControlNames[1] }}"
+                        id="streetNumber"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="streetNumber">
+                        {{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        formControlName="{{ addressFormControlNames[2] }}"
+                        id="zip"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="zip">
+                        {{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        formControlName="{{ addressFormControlNames[3] }}"
+                        id="city"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="city">
+                        {{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        id="country"
+                        formControlName="{{ addressFormControlNames[4] }}"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="country">
+                        {{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+              </ng-container>
             </div>
-            <div class="col-12 md:col-6 xl:col-4">
-              <div class="field">
-                <span class="p-float-label">
-                  <input
-                    formControlName="{{ addressFormControlNames[1] }}"
-                    id="streetNumber"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                  <label for="streetNumber">
-                    {{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}
-                  </label>
-                </span>
-              </div>
-            </div>
-            <div class="col-12 md:col-6 xl:col-4">
-              <div class="field">
-                <span class="p-float-label">
-                  <input
-                    formControlName="{{ addressFormControlNames[2] }}"
-                    id="zip"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                  <label for="zip">
-                    {{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}
-                  </label>
-                </span>
-              </div>
-            </div>
-            <div class="col-12 md:col-6 xl:col-4">
-              <div class="field">
-                <span class="p-float-label">
-                  <input
-                    formControlName="{{ addressFormControlNames[3] }}"
-                    id="city"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                  <label for="city">
-                    {{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}
-                  </label>
-                </span>
-              </div>
-            </div>
-            <div class="col-12 md:col-6 xl:col-4">
-              <div class="field">
-                <span class="p-float-label">
-                  <input
-                    id="country"
-                    formControlName="{{ addressFormControlNames[4] }}"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                  <label for="country">
-                    {{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}
-                  </label>
-                </span>
-              </div>
-            </div>
-          </ng-container>
-        </div>
+          </p-inputGroupAddon>
+        </p-inputGroup>
       }
       <button
         pButton

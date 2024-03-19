@@ -27,6 +27,8 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 import {DividerModule} from 'primeng/divider';
+import {InputGroupModule} from 'primeng/inputgroup';
+import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 
 @NgModule({
   declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
@@ -58,7 +60,9 @@ import {DividerModule} from 'primeng/divider';
     FileUploadModule,
     FormWrapperComponent,
     FormControlPipe,
-    DividerModule
+    DividerModule,
+    InputGroupModule,
+    InputGroupAddonModule
   ]
 })
 export class ObjektAnzeigenModule {}
