@@ -70,7 +70,9 @@
       "clearSeebach": "Suche leeren",
       "showSecretFields": "Zeige geheime Felder",
       "intelligenceNotes": "Geheimdienstnotizen",
-      "addOrEditFact": "Sachverhalt hinzufügen/bearbeiten"
+      "addOrEditFact": "Sachverhalt hinzufügen/bearbeiten",
+      "addResidence": "Wohnsitz hinzufügen",
+      "removeResidence": "Wohnsitz entfernen"
     },
     "labels": {
       "id": "ID",
@@ -101,7 +103,14 @@
       "ablaufdatumKreditkarte": "Ablaufdatum der Kreditkarte",
       "identityDocument": "Ausweisdokument",
       "bilanz": "Bilanz",
-      "alle": "Alle"
+      "residence": "Wohnsitz",
+      "address": {
+        "street": "Straße",
+        "number": "Nummer",
+        "zipCode": "PLZ",
+        "city": "Ort",
+        "country": "Land"
+      }
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",
