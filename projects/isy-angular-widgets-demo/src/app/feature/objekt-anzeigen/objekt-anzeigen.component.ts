@@ -43,7 +43,16 @@ export class ObjektAnzeigenComponent {
       ablaufdatumKreditkarte: '',
       identityDocument: '',
       bilanz: 0,
-      status: ''
+      status: '',
+      address: [
+        {
+          street: 'Frankfurterstr.',
+          number: 6,
+          zip: 12345,
+          city: 'Köln',
+          country: 'Deutschland'
+        }
+      ]
     },
     sachverhalte: [
       'Hat einen Antrag auf BAFÖG gestellt',
@@ -57,39 +66,49 @@ export class ObjektAnzeigenComponent {
     private fb: FormBuilder,
     private messageService: MessageService
   ) {
+    const personalien = this.person.personalien;
+    const addresses = personalien.address;
+
     this.personalInfoForm = this.fb.group({
-      lastName: new FormControl(this.person.personalien.nachname, required),
-      birthName: new FormControl(this.person.personalien.geburtsname),
-      birthplace: new FormControl(this.person.personalien.geburtsort),
-      firstName: new FormControl(this.person.personalien.vorname, required),
-      gender: new FormControl(this.person.personalien.geschlecht),
+      lastName: new FormControl(personalien.nachname, required),
+      birthName: new FormControl(personalien.geburtsname),
+      birthplace: new FormControl(personalien.geburtsort),
+      firstName: new FormControl(personalien.vorname, required),
+      gender: new FormControl(personalien.geschlecht),
       // Demo: Validator isInPast - If the given value is a valid date, it will be checked if the date is in the past
-      birthDate: new FormControl(this.person.personalien.geburtsdatum, Validation.isInPast),
-      nationality: new FormControl(this.person.personalien.staatsangehoerigkeit),
-      phoneNumber: new FormControl(this.person.personalien.telefonnummer),
-      dateOfEntry: new FormControl(this.person.personalien.einreisedatum),
-      idRequired: new FormControl(this.person.personalien.ausweispflichtig),
-      securityLevel: new FormControl(this.person.personalien.sicherheitsstufe),
+      birthDate: new FormControl(personalien.geburtsdatum, Validation.isInPast),
+      nationality: new FormControl(personalien.staatsangehoerigkeit),
+      phoneNumber: new FormControl(personalien.telefonnummer),
+      dateOfEntry: new FormControl(personalien.einreisedatum),
+      idRequired: new FormControl(personalien.ausweispflichtig),
+      securityLevel: new FormControl(personalien.sicherheitsstufe),
       intelligenceNotes: new FormControl(
-        this.person.personalien.geheimdienstnotizen,
+        personalien.geheimdienstnotizen,
         Validators.maxLength(this.intelligenceNotesMaxLength)
       ),
       // Demo: Validator validUnspecifiedDate - Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY
-      dateOfDeparture: new FormControl(this.person.personalien.abreisedatum, Validation.validUnspecifiedDate),
+      dateOfDeparture: new FormControl(personalien.abreisedatum, Validation.validUnspecifiedDate),
       // Demo: Validator isInFuture - If the specified value is a valid date, it will be checked if the date is in the future
-      passportExpirationDate: new FormControl(this.person.personalien.ablaufdatumReisepass, Validation.isInFuture),
+      passportExpirationDate: new FormControl(personalien.ablaufdatumReisepass, Validation.isInFuture),
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
-      creditCardNumber: new FormControl(this.person.personalien.kreditkartennummer, Validation.validCreditCardNumber),
+      creditCardNumber: new FormControl(personalien.kreditkartennummer, Validation.validCreditCardNumber),
       // Demo: Validator dateFormat - Checks that the date is a valid date in ISO8601
-      creditCardExpirationDate: new FormControl(this.person.personalien.ablaufdatumKreditkarte, Validation.isoDate),
-      identityDocument: new FormControl(this.person.personalien.identityDocument, required)
+      creditCardExpirationDate: new FormControl(personalien.ablaufdatumKreditkarte, Validation.isoDate),
+      identityDocument: new FormControl(personalien.identityDocument, required),
+      streetName: new FormControl(addresses ? addresses[0].street : '', required),
+      streetNumber: new FormControl(addresses ? addresses[0].number : '', required),
+      zip: new FormControl(addresses ? addresses[0].zip : '', required),
+      city: new FormControl(addresses ? addresses[0].city : '', required),
+      country: new FormControl(addresses ? addresses[0].country : '', required)
     });
+
     this.personalInfoForm.disable();
   }
 
   uploadFile(event: FileUploadHandlerEvent): void {
-    this.personalInfoForm.get('identityDocument')?.setValue(event.files[0].name);
-    this.personalInfoForm.get('identityDocument')?.enable();
+    const identityDocument = this.personalInfoForm.get('identityDocument');
+    identityDocument?.setValue(event.files[0].name);
+    identityDocument?.enable();
     this.personalInfoForm.updateValueAndValidity();
   }
 
@@ -106,4 +125,8 @@ export class ObjektAnzeigenComponent {
       }) as string
     });
   }
+
+  duplicateAddressFields(): void {}
+
+  removeAddressFields(): void {}
 }
