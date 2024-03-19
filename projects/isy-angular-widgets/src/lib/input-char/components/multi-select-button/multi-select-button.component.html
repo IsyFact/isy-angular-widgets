@@ -15,7 +15,7 @@
         [options]="item.value"
         [(ngModel)]="models[item.key]"
         (onChange)="triggerUpdate(item.key)"
-        class="{{ item.key }}-select-button"
+        [ngClass]="item.key === 'Base' || item.key === 'Basis' ? 'base-select-button' : 'groups-select-button'"
       >
       </p-selectButton>
     </p-accordionTab>
