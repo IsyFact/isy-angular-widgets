@@ -7,7 +7,7 @@ import {FormsModule} from '@angular/forms';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {By} from '@angular/platform-browser';
-import {ComponentFixture, fakeAsync, tick} from '@angular/core/testing';
+import {ComponentFixture} from '@angular/core/testing';
 
 let spectator: Spectator<MultiSelectButtonComponent>;
 let component: MultiSelectButtonComponent;
@@ -24,7 +24,7 @@ const props = {
   allButtonOptionsLabel: headerStr
 };
 
-describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
+describe('Unit Tests: MultiSelectButtonComponent', () => {
   const createComponent = createComponentFactory({
     component: MultiSelectButtonComponent,
     imports: [MockModule(AccordionModule), MockModule(SelectButtonModule), MockModule(FormsModule)]
@@ -99,7 +99,7 @@ describe('Unit Tests: InputCharDialogButtonSelectionSideComponent', () => {
   });
 });
 
-describe('Integration Tests', () => {
+describe('Integration Tests: MultiSelectButtonComponent', () => {
   const createComponent = createComponentFactory({
     component: MultiSelectButtonComponent,
     imports: [SelectButtonModule, AccordionModule, FormsModule]
