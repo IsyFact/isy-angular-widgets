@@ -19,8 +19,8 @@
 - ISY-914: Wizard Dialog um Responsivität hinzugefügt
 ## Demo-Anwendung
 - ISY-647: Alle Formulare wurden von rechtsbündigen Labels auf Floating-Labels umgestellt
-- ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität überarbeitet
-- ISY-389: Imports in der Demo-Anwendung zur Library geht nun über den Library-Namen
+- ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt anzeigen_ für verbesserte Responsivität überarbeitet
+- ISY-389: Imports in der Demo-Anwendung zur Library gehen nun über den Library-Namen
 - ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
 
 # 17.1.0 - 18.01.2024
