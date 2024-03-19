@@ -30,6 +30,7 @@ export interface Personalien {
   identityDocument: unknown;
   bilanz: number;
   status: string;
+  address?: Address[];
 }
 
 /**
@@ -37,4 +38,15 @@ export interface Personalien {
  */
 export interface PersonId {
   id: string;
+}
+
+/**
+ * An interface used for the persons address
+ */
+interface Address {
+  street: string;
+  number: number | string;
+  zip: number;
+  city: string;
+  country: string;
 }
