@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Person} from '../../shared/model/person';
+import {Address, Person} from '../../shared/model/person';
 import {TranslateService} from '@ngx-translate/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
@@ -18,6 +18,7 @@ import {FileUploadHandlerEvent} from 'primeng/fileupload';
 })
 export class ObjektAnzeigenComponent {
   readonly intelligenceNotesMaxLength = 255;
+
   showSecretFields = false;
 
   personalInfoForm: FormGroup;
@@ -48,7 +49,7 @@ export class ObjektAnzeigenComponent {
       identityDocument: '',
       bilanz: 0,
       status: '',
-      address: [
+      addresses: [
         {
           street: 'Frankfurterstr.',
           number: 6,
@@ -71,15 +72,8 @@ export class ObjektAnzeigenComponent {
     private messageService: MessageService
   ) {
     const personalien = this.person.personalien;
-    const addresses = personalien.address;
-
-    const addressGroup = this.fb.group({
-      streetName: new FormControl(addresses ? addresses[0].street : '', required),
-      streetNumber: new FormControl(addresses ? addresses[0].number : '', required),
-      zip: new FormControl(addresses ? addresses[0].zip : '', required),
-      city: new FormControl(addresses ? addresses[0].city : '', required),
-      country: new FormControl(addresses ? addresses[0].country : '', required)
-    });
+    const addresses = personalien.addresses;
+    const addressGroup = addresses ? this.createNewAddressFomrGroup(addresses[0]) : this.createNewAddressFomrGroup();
 
     this.personalInfoForm = this.fb.group({
       lastName: new FormControl(personalien.nachname, required),
@@ -114,7 +108,9 @@ export class ObjektAnzeigenComponent {
     // Exports the addresses form array for the iteration inside the template
     this.adressFormArray = this.personalInfoForm.get('addresses') as FormArray;
     // Exports the form control names of the addresses form array
-    this.addressFormControlNames = this.getAddressFormControlNames();
+    this.addressFormControlNames = Object.keys(
+      (this.personalInfoForm.get('addresses') as FormArray).controls[0].value as string[]
+    );
   }
 
   uploadFile(event: FileUploadHandlerEvent): void {
@@ -138,18 +134,31 @@ export class ObjektAnzeigenComponent {
     });
   }
 
-  getAddressFormControlNames(): string[] {
-    const formControls = (this.personalInfoForm.get('addresses') as FormArray).controls[0].value as string[];
-    return Object.keys(formControls);
+  addNewAddress(): void {
+    const newAddress = this.createNewAddressFomrGroup();
+    const addresses = this.personalInfoForm.get('addresses') as FormArray;
+    addresses.push(newAddress);
+    // ToDo: Update the save functionality and unit tests???
   }
 
-  duplicateAddressFields(): void {
-    // ToDo: Add new address form fields to form (without conflict!)
-    //       Hint: Replace form control with second form only for address???
+  isAnyAddressAvailable(): boolean {
+    return (this.personalInfoForm.get('addresses') as FormArray).length > 1;
   }
 
-  removeAddressFields(): void {
-    // ToDo: Detect the group of fields who must be removed and remove them from form
-    //       Hint: UUID for form control name usage or anything else?
+  createNewAddressFomrGroup(value?: Address): FormGroup {
+    return this.fb.group({
+      streetName: new FormControl(value ? value.street : '', required),
+      streetNumber: new FormControl(value ? value.number : '', required),
+      zip: new FormControl(value ? value.zip : '', required),
+      city: new FormControl(value ? value.city : '', required),
+      country: new FormControl(value ? value.country : '', required)
+    });
+  }
+
+  removeAddress(): void {
+    const addresses = this.personalInfoForm.get('addresses') as FormArray;
+    if (this.isAnyAddressAvailable()) {
+      addresses.removeAt(addresses.length - 1);
+    }
   }
 }

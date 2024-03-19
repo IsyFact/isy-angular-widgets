@@ -382,7 +382,7 @@
         icon="pi pi-plus"
         iconPos="left"
         [disabled]="personalInfoForm.disabled"
-        (click)="duplicateAddressFields()"
+        (click)="addNewAddress()"
       ></button>
       <button
         pButton
@@ -390,8 +390,8 @@
         icon="pi pi-times"
         class="p-button-outlined"
         iconPos="left"
-        [disabled]="personalInfoForm.disabled"
-        (click)="removeAddressFields()"
+        [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable()"
+        (click)="removeAddress()"
       ></button>
 
       <p-divider></p-divider>
