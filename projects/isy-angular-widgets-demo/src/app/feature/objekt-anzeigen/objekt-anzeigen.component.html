@@ -285,85 +285,114 @@
 
       <p-divider></p-divider>
 
-      <div id="residenceSection" class="card">
-        <h4>
-          {{ 'isyAngularWidgetsDemo.labels.residence' | translate }}
-        </h4>
-        <div class="grid mt-3">
-          <div class="col-12 md:col-6 xl:col-4">
-            <div class="field">
-              <span class="p-float-label">
-                <input id="streetName" formControlName="streetName" class="w-full" type="text" pInputText />
-                <label for="streetName">
-                  {{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}
-                </label>
-              </span>
-            </div>
-          </div>
+      <h4>
+        {{ 'isyAngularWidgetsDemo.labels.residence' | translate }}
+      </h4>
 
-          <div class="col-12 md:col-6 xl:col-4">
-            <div class="field">
-              <span class="p-float-label">
-                <input id="streetNumber" formControlName="streetNumber" class="w-full" type="text" pInputText />
-                <label for="streetNumber">
-                  {{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}
-                </label>
-              </span>
+      @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
+        <h6>{{ i + 1 }}.</h6>
+        <div class="grid mt-3" [formArrayName]="'addresses'">
+          <ng-container [formGroupName]="i">
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="field">
+                <span class="p-float-label">
+                  <input
+                    formControlName="{{ addressFormControlNames[0] }}"
+                    id="streetName"
+                    class="w-full"
+                    type="text"
+                    pInputText
+                  />
+                  <label for="streetName">
+                    {{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}
+                  </label>
+                </span>
+              </div>
             </div>
-          </div>
-
-          <div class="col-12 md:col-6 xl:col-4">
-            <div class="field">
-              <span class="p-float-label">
-                <input id="zip" formControlName="zip" class="w-full" type="text" pInputText />
-                <label for="zip">
-                  {{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}
-                </label>
-              </span>
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="field">
+                <span class="p-float-label">
+                  <input
+                    formControlName="{{ addressFormControlNames[1] }}"
+                    id="streetNumber"
+                    class="w-full"
+                    type="text"
+                    pInputText
+                  />
+                  <label for="streetNumber">
+                    {{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}
+                  </label>
+                </span>
+              </div>
             </div>
-          </div>
-
-          <div class="col-12 md:col-6 xl:col-4">
-            <div class="field">
-              <span class="p-float-label">
-                <input id="city" formControlName="city" class="w-full" type="text" pInputText />
-                <label for="city">
-                  {{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}
-                </label>
-              </span>
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="field">
+                <span class="p-float-label">
+                  <input
+                    formControlName="{{ addressFormControlNames[2] }}"
+                    id="zip"
+                    class="w-full"
+                    type="text"
+                    pInputText
+                  />
+                  <label for="zip">
+                    {{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}
+                  </label>
+                </span>
+              </div>
             </div>
-          </div>
-
-          <div class="col-12 md:col-6 xl:col-4">
-            <div class="field">
-              <span class="p-float-label">
-                <input id="country" formControlName="country" class="w-full" type="text" pInputText />
-                <label for="country">
-                  {{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}
-                </label>
-              </span>
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="field">
+                <span class="p-float-label">
+                  <input
+                    formControlName="{{ addressFormControlNames[3] }}"
+                    id="city"
+                    class="w-full"
+                    type="text"
+                    pInputText
+                  />
+                  <label for="city">
+                    {{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}
+                  </label>
+                </span>
+              </div>
             </div>
-          </div>
+            <div class="col-12 md:col-6 xl:col-4">
+              <div class="field">
+                <span class="p-float-label">
+                  <input
+                    id="country"
+                    formControlName="{{ addressFormControlNames[4] }}"
+                    class="w-full"
+                    type="text"
+                    pInputText
+                  />
+                  <label for="country">
+                    {{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}
+                  </label>
+                </span>
+              </div>
+            </div>
+          </ng-container>
         </div>
-
-        <button
-          pButton
-          label="{{ 'isyAngularWidgetsDemo.actions.addResidence' | translate }}"
-          icon="pi pi-plus"
-          iconPos="left"
-          [disabled]="personalInfoForm.disabled"
-          (click)="duplicateAddressFields()"
-        ></button>
-        <button
-          pButton
-          label="{{ 'isyAngularWidgetsDemo.actions.removeResidence' | translate }}"
-          icon="pi pi-times"
-          class="p-button-outlined"
-          iconPos="left"
-          [disabled]="personalInfoForm.disabled"
-          (click)="removeAddressFields()"
-        ></button>
-      </div>
+      }
+      <button
+        pButton
+        label="{{ 'isyAngularWidgetsDemo.actions.addResidence' | translate }}"
+        icon="pi pi-plus"
+        iconPos="left"
+        [disabled]="personalInfoForm.disabled"
+        (click)="duplicateAddressFields()"
+      ></button>
+      <button
+        pButton
+        label="{{ 'isyAngularWidgetsDemo.actions.removeResidence' | translate }}"
+        icon="pi pi-times"
+        class="p-button-outlined"
+        iconPos="left"
+        [disabled]="personalInfoForm.disabled"
+        (click)="removeAddressFields()"
+      ></button>
 
       <p-divider></p-divider>
 

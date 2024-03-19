@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Person} from '../../shared/model/person';
 import {TranslateService} from '@ngx-translate/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
@@ -21,6 +21,10 @@ export class ObjektAnzeigenComponent {
   showSecretFields = false;
 
   personalInfoForm: FormGroup;
+
+  addressFormControlNames: string[] = [];
+
+  adressFormArray?: FormArray;
 
   @Input() person: Person = {
     id: '1',
@@ -69,6 +73,14 @@ export class ObjektAnzeigenComponent {
     const personalien = this.person.personalien;
     const addresses = personalien.address;
 
+    const addressGroup = this.fb.group({
+      streetName: new FormControl(addresses ? addresses[0].street : '', required),
+      streetNumber: new FormControl(addresses ? addresses[0].number : '', required),
+      zip: new FormControl(addresses ? addresses[0].zip : '', required),
+      city: new FormControl(addresses ? addresses[0].city : '', required),
+      country: new FormControl(addresses ? addresses[0].country : '', required)
+    });
+
     this.personalInfoForm = this.fb.group({
       lastName: new FormControl(personalien.nachname, required),
       birthName: new FormControl(personalien.geburtsname),
@@ -95,14 +107,14 @@ export class ObjektAnzeigenComponent {
       // Demo: Validator dateFormat - Checks that the date is a valid date in ISO8601
       creditCardExpirationDate: new FormControl(personalien.ablaufdatumKreditkarte, Validation.isoDate),
       identityDocument: new FormControl(personalien.identityDocument, required),
-      streetName: new FormControl(addresses ? addresses[0].street : '', required),
-      streetNumber: new FormControl(addresses ? addresses[0].number : '', required),
-      zip: new FormControl(addresses ? addresses[0].zip : '', required),
-      city: new FormControl(addresses ? addresses[0].city : '', required),
-      country: new FormControl(addresses ? addresses[0].country : '', required)
+      addresses: this.fb.array([addressGroup])
     });
-
     this.personalInfoForm.disable();
+
+    // Exports the addresses form array for the iteration inside the template
+    this.adressFormArray = this.personalInfoForm.get('addresses') as FormArray;
+    // Exports the form control names of the addresses form array
+    this.addressFormControlNames = this.getAddressFormControlNames();
   }
 
   uploadFile(event: FileUploadHandlerEvent): void {
@@ -126,7 +138,18 @@ export class ObjektAnzeigenComponent {
     });
   }
 
-  duplicateAddressFields(): void {}
+  getAddressFormControlNames(): string[] {
+    const formControls = (this.personalInfoForm.get('addresses') as FormArray).controls[0].value as string[];
+    return Object.keys(formControls);
+  }
 
-  removeAddressFields(): void {}
+  duplicateAddressFields(): void {
+    // ToDo: Add new address form fields to form (without conflict!)
+    //       Hint: Replace form control with second form only for address???
+  }
+
+  removeAddressFields(): void {
+    // ToDo: Detect the group of fields who must be removed and remove them from form
+    //       Hint: UUID for form control name usage or anything else?
+  }
 }
