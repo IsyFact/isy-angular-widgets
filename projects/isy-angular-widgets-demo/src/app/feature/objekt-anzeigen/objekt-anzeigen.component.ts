@@ -74,6 +74,8 @@ export class ObjektAnzeigenComponent {
     this.adressFormArray = this.getAddresses();
     // Exports the form control names of the addresses form array
     this.addressFormControlNames = Object.keys(this.getAddresses().controls[0].value as string[]);
+
+    // ToDo: Add Hover text for delete buttons (don't forget the translation)
   }
 
   uploadFile(event: FileUploadHandlerEvent): void {

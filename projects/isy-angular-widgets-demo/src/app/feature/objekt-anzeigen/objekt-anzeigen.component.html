@@ -296,12 +296,14 @@
                 <h4 class="m-0 pb-3">{{ i + 1 }}.</h4>
               </div>
               <div class="col-6">
-                <button
-                  pButton
+                <p-button
                   icon="pi pi-trash"
+                  [severity]="'danger'"
+                  [rounded]="true"
+                  [outlined]="true"
                   [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
-                  (click)="removeAddress(i)"
-                ></button>
+                  (click)="removeAddress(i)">
+                </p-button>
               </div>
             </div>
             <div class="grid mt-3" [formArrayName]="'addresses'">
