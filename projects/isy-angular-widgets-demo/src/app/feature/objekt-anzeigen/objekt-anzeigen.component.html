@@ -291,7 +291,19 @@
       @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
         <p-inputGroup class="mb-3">
           <p-inputGroupAddon>
-            <h4 class="m-0">{{ i + 1 }}.</h4>
+            <div class="grid p-0">
+              <div class="col-6">
+                <h4 class="m-0 pb-3">{{ i + 1 }}.</h4>
+              </div>
+              <div class="col-6">
+                <button
+                  pButton
+                  icon="pi pi-trash"
+                  [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
+                  (click)="removeAddress(i)"
+                ></button>
+              </div>
+            </div>
             <div class="grid mt-3" [formArrayName]="'addresses'">
               <ng-container [formGroupName]="i">
                 <div class="col-12 md:col-6 xl:col-4">
@@ -386,15 +398,6 @@
         iconPos="left"
         [disabled]="personalInfoForm.disabled"
         (click)="addNewAddress()"
-      ></button>
-      <button
-        pButton
-        label="{{ 'isyAngularWidgetsDemo.actions.removeResidence' | translate }}"
-        icon="pi pi-times"
-        class="p-button-outlined"
-        iconPos="left"
-        [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable()"
-        (click)="removeAddress()"
       ></button>
 
       <p-divider></p-divider>

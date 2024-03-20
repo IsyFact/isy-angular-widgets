@@ -101,14 +101,9 @@ export class ObjektAnzeigenComponent {
     // ToDo: Check if address already added and invalid - if yes -> don't add a new address
     const newAddress = this.createNewAddressFomrGroup();
     markFormAsDirty(newAddress);
-    newAddress.markAllAsTouched();
 
     const addresses = this.getAddresses();
     addresses.push(newAddress);
-    addresses.markAllAsTouched();
-
-    markFormAsDirty(this.personalInfoForm);
-    this.personalInfoForm.markAllAsTouched();
     // ToDo: Update the save functionality and unit tests ???
   }
 
@@ -126,11 +121,13 @@ export class ObjektAnzeigenComponent {
     });
   }
 
-  removeAddress(): void {
+  disableDeleteButton(): boolean {
+    return this.getAddresses().length === 1;
+  }
+
+  removeAddress(index: number): void {
     const addresses = this.getAddresses();
-    if (this.isAnyAddressAvailable()) {
-      addresses.removeAt(addresses.length - 1);
-    }
+    addresses.removeAt(index);
     // ToDo: Must be the form validity updated ???
   }
 
@@ -143,12 +140,7 @@ export class ObjektAnzeigenComponent {
     this.personalInfoForm.disable();
     const addresses = this.getAddresses();
     const availableAddresses = addresses.length - 1;
-
-    addresses.controls.forEach((control) => {
-      const x = control as FormGroup;
-      x.updateValueAndValidity();
-      console.log(x.controls);
-    });
+    // ToDo: Check valid state
   }
 
   getAddresses(): FormArray {
