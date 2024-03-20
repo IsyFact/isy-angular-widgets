@@ -8,6 +8,7 @@ import {PersonalInformation} from './model/forms';
 import {Validation} from '@isy-angular-widgets/validation/validation';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
 import {initializedPerson} from './data';
+import {markFormAsDirty} from '../../shared/validation/form-helper';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -70,11 +71,9 @@ export class ObjektAnzeigenComponent {
     this.personalInfoForm.disable();
 
     // Exports the addresses form array for the iteration inside the template
-    this.adressFormArray = this.personalInfoForm.get('addresses') as FormArray;
+    this.adressFormArray = this.getAddresses();
     // Exports the form control names of the addresses form array
-    this.addressFormControlNames = Object.keys(
-      (this.personalInfoForm.get('addresses') as FormArray).controls[0].value as string[]
-    );
+    this.addressFormControlNames = Object.keys(this.getAddresses().controls[0].value as string[]);
   }
 
   uploadFile(event: FileUploadHandlerEvent): void {
@@ -99,15 +98,22 @@ export class ObjektAnzeigenComponent {
   }
 
   addNewAddress(): void {
+    // ToDo: Check if address already added and invalid - if yes -> don't add a new address
     const newAddress = this.createNewAddressFomrGroup();
-    const addresses = this.personalInfoForm.get('addresses') as FormArray;
+    markFormAsDirty(newAddress);
+    newAddress.markAllAsTouched();
+
+    const addresses = this.getAddresses();
     addresses.push(newAddress);
+    addresses.markAllAsTouched();
+
+    markFormAsDirty(this.personalInfoForm);
+    this.personalInfoForm.markAllAsTouched();
     // ToDo: Update the save functionality and unit tests ???
-    //       Enable validation for the new added form group
   }
 
   isAnyAddressAvailable(): boolean {
-    return (this.personalInfoForm.get('addresses') as FormArray).length > 1;
+    return this.getAddresses().length > 1;
   }
 
   createNewAddressFomrGroup(value?: Address): FormGroup {
@@ -121,10 +127,31 @@ export class ObjektAnzeigenComponent {
   }
 
   removeAddress(): void {
-    const addresses = this.personalInfoForm.get('addresses') as FormArray;
+    const addresses = this.getAddresses();
     if (this.isAnyAddressAvailable()) {
       addresses.removeAt(addresses.length - 1);
     }
     // ToDo: Must be the form validity updated ???
+  }
+
+  onEdit(): void {
+    // ToDo: on edit functionalitty + if error stop action OR delete address with error ???
+    this.personalInfoForm.enable();
+  }
+
+  onCancel(): void {
+    this.personalInfoForm.disable();
+    const addresses = this.getAddresses();
+    const availableAddresses = addresses.length - 1;
+
+    addresses.controls.forEach((control) => {
+      const x = control as FormGroup;
+      x.updateValueAndValidity();
+      console.log(x.controls);
+    });
+  }
+
+  getAddresses(): FormArray {
+    return this.personalInfoForm.get('addresses') as FormArray;
   }
 }
