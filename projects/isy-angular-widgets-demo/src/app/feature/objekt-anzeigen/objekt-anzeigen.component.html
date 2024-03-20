@@ -286,12 +286,12 @@
       <p-divider></p-divider>
 
       <h4>
-        {{ 'isyAngularWidgetsDemo.labels.residence' | translate }}
+        {{ 'isyAngularWidgetsDemo.labels.residences' | translate }}
       </h4>
       @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
-        <h6>{{ i + 1 }}.</h6>
-        <p-inputGroup>
+        <p-inputGroup class="mb-3">
           <p-inputGroupAddon>
+            <h4 class="m-0">{{ i + 1 }}.</h4>
             <div class="grid mt-3" [formArrayName]="'addresses'">
               <ng-container [formGroupName]="i">
                 <div class="col-12 md:col-6 xl:col-4">
@@ -474,7 +474,7 @@
           icon="pi pi-user-edit"
           iconPos="left"
           [label]="'isyAngularWidgetsDemo.actions.edit' | translate"
-          (click)="personalInfoForm.enable()"
+          (click)="onEdit()"
         ></button>
       } @else {
         <div id="div-save-cancel" class="p-buttonset">
@@ -494,7 +494,7 @@
             class="p-button-outlined"
             iconPos="left"
             [label]="'isyAngularWidgetsDemo.actions.cancel' | translate"
-            (click)="this.personalInfoForm.disable()"
+            (click)="onCancel()"
           ></button>
         </div>
       }
