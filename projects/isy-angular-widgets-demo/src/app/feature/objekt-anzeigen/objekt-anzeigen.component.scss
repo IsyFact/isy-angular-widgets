@@ -22,3 +22,12 @@
 #address-delete-button {
   float: right;
 }
+
+.p-inputgroup-addon {
+  width: 100%;
+}
+
+:host ::ng-deep div[data-pc-name="inputgroupaddon"] {
+  /* p-inputgroup-addon child */
+  width: 100%;
+}
