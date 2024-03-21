@@ -1,4 +1,4 @@
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {charsAndNumbers, onlyChars, charsAndMinus, onlyNumbers, required} from '../../shared/validation/validator';
 import {Person} from '../../shared/model/person';
 
@@ -18,6 +18,11 @@ const requiredAndOnlyChars = [required, onlyChars];
 const requiredAndCharsAndNumbers = [required, charsAndNumbers];
 
 /**
+ * Used for forms building
+ */
+const fb = new FormBuilder();
+
+/**
  * @returns an initialized form group
  * Initializes the 'id' Form
  * @param person A person with the existing values as input
@@ -35,7 +40,11 @@ export function initIdForm(person: Person): FormGroup {
  */
 export function initPersoenlicheInformationenForm(person: Person): FormGroup {
   return new FormGroup({
-    vorname: new FormControl(person.personalien.vorname, charsAndMinus),
+    vornamen: fb.array([
+      {
+        vorname: new FormControl(person.personalien.vorname, charsAndMinus)
+      }
+    ]),
     nachname: new FormControl(person.personalien.nachname, requiredAndOnlyChars),
     geschlecht: new FormControl(person.personalien.geschlecht, requiredAndOnlyChars)
   });
