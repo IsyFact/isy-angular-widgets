@@ -1,5 +1,5 @@
 import {FormControl, FormGroup} from '@angular/forms';
-import {charsAndNumbers, onlyChars, onlyNumbers, required} from '../../shared/validation/validator';
+import {charsAndNumbers, onlyChars, charsAndMinus, onlyNumbers, required} from '../../shared/validation/validator';
 import {Person} from '../../shared/model/person';
 
 /**
@@ -35,7 +35,7 @@ export function initIdForm(person: Person): FormGroup {
  */
 export function initPersoenlicheInformationenForm(person: Person): FormGroup {
   return new FormGroup({
-    vorname: new FormControl(person.personalien.vorname, onlyChars),
+    vorname: new FormControl(person.personalien.vorname, charsAndMinus),
     nachname: new FormControl(person.personalien.nachname, requiredAndOnlyChars),
     geschlecht: new FormControl(person.personalien.geschlecht, requiredAndOnlyChars)
   });
