@@ -291,18 +291,20 @@
       @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
         <p-inputGroup class="mb-3">
           <p-inputGroupAddon>
-            <div class="grid p-0">
-              <div class="col-6">
-                <h4 class="m-0 pb-3">{{ i + 1 }}.</h4>
+            <div class="grid">
+              <div class="col">
+                <h4 class="m-0 pb-3 align-items-end">{{ i + 1 }}.</h4>
               </div>
-              <div class="col-6">
+              <div class="col">
                 <p-button
+                  id="address-delete-button"
                   icon="pi pi-trash"
-                  [severity]="'danger'"
+                  [text]="true"
                   [rounded]="true"
-                  [outlined]="true"
+                  [severity]="'danger'"
                   [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
-                  (click)="removeAddress(i)">
+                  (click)="removeAddress(i)"
+                >
                 </p-button>
               </div>
             </div>
