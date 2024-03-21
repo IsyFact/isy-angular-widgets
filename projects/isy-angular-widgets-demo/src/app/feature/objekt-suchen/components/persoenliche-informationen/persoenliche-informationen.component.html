@@ -12,21 +12,35 @@
             (focus)="onFormControlFocus(form.controls.nachname)"
           />
           <label id="nachname-label" for="Nachname">
-            {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }} <demo-required-label></demo-required-label>
+            {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
+            <demo-required-label></demo-required-label>
           </label>
         </span>
       </div>
     </div>
-    <div class="col-12">
-      <div class="field">
-        <span class="p-float-label">
-          <input id="Vorname" type="text" class="w-full" pInputText [formControlName]="'vorname'" />
-          <label id="vorname-label" class="align-content-end" for="Vorname">
-            {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
-          </label>
-        </span>
+    @for (vorname of getVornamen()!.controls; track vorname; let i = $index) {
+      <div [formArrayName]="'vornamen'">
+        <div [formGroupName]="i">
+          <div class="col-12">
+            <div class="field">
+              <span class="p-float-label">
+                <input
+                  id="Vorname"
+                  type="text"
+                  class="w-full"
+                  pInputText
+                  formControlName="{{ vornameFormControlNames[0] }}"
+                  (focusout)="onVornameFocusOut()"
+                />
+                <label id="vorname-label" class="align-content-end" for="Vorname">
+                  {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
+                </label>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    }
     <div class="col-12">
       <div class="field">
         <span class="p-float-label">
@@ -39,7 +53,8 @@
             (focus)="onFormControlFocus(form.controls.geschlecht)"
           />
           <label id="geschlecht-label" class="align-content-end" for="Geschlecht">
-            {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }} <demo-required-label></demo-required-label>
+            {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
+            <demo-required-label></demo-required-label>
           </label>
         </span>
       </div>
