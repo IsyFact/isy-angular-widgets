@@ -36,7 +36,7 @@ jobs:
           npm run lint
       - name: Run tests
         run: npm test
-      - name: Restore SonarCloud cache
+      - name: Cache SonarCloud
         uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
