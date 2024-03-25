@@ -4,6 +4,7 @@
   [modal]="modal"
   [closable]="closable"
   [draggable]="draggable"
+  [breakpoints]="breaktpoints"
   [style]="{
     width: width + 'vw',
     height: height + 'vw'
@@ -16,38 +17,38 @@
 
   <ng-template pTemplate="footer">
     <div class="flex justify-content-end flex-wrap card-container">
-      <button
-        *ngIf="!isSaved"
-        id="back-button"
-        pButton
-        [class]="'flex align-items-center justify-content-center mr-2'"
-        [disabled]="index === 0"
-        (click)="previous()"
-      >
-        {{ labelBackButton }}
-      </button>
+      @if (!isSaved) {
+        <button
+          id="back-button"
+          pButton
+          [class]="'flex align-items-center justify-content-center mr-2'"
+          [disabled]="index === 0"
+          (click)="previous()"
+        >
+          {{ labelBackButton }}
+        </button>
+        <button
+          id="next-button"
+          pButton
+          [class]="'flex align-items-center justify-content-center mr-4'"
+          [disabled]="index === items.length - 1 || !allowNext"
+          (click)="next()"
+        >
+          {{ labelNextButton }}
+        </button>
+      }
 
-      <button
-        *ngIf="!isSaved"
-        id="next-button"
-        pButton
-        [class]="'flex align-items-center justify-content-center mr-4'"
-        [disabled]="index === items.length - 1 || !allowNext"
-        (click)="next()"
-      >
-        {{ labelNextButton }}
-      </button>
-
-      <button
-        *ngIf="index === items.length - 1 && !isSaved"
-        id="save-button"
-        pButton
-        [class]="'flex align-items-center justify-content-center'"
-        [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
-        (click)="save()"
-      >
-        {{ labelSaveButton }}
-      </button>
+      @if (index === items.length - 1 && !isSaved) {
+        <button
+          id="save-button"
+          pButton
+          [class]="'flex align-items-center justify-content-center'"
+          [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
+          (click)="save()"
+        >
+          {{ labelSaveButton }}
+        </button>
+      }
 
       <button
         id="close-button"

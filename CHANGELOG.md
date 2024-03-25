@@ -1,19 +1,26 @@
-# 17.2.0 - 
+# 17.2.0 - 19.03.2024
 ## Fixes
-- ISY-775: Die beiden Readme-Dateien wurden für Standalone-Projekte aktualisiert
-- ISY-618: Eingabe eines Punktes an Cursor-Position 3 führt nun nicht mehr zur automatischen Vervollständigung des Monats in
-  der Form 'xx'. Dies ermöglicht die Eingabe herkömmlicher Datumsformate mit Punkten, wie zum Beispiel '01.01.2024'
-- ISY-905: Linksnavigation und Informationsbereich können jetzt wieder korrekt eingeklappt werden und die Breite der Seitenleisten liegt nun standardmäßig wieder bei 15em
+- ISY-775: Abschnitt Getting Started in der Readme beschreibt Einsatz des Bausteins mit Standalone Components
+- ISY-618: Das Eingabefeld für ungewisse Datumswerte kann jetzt normale Datumswerte mit der Eingabe von Punkten vervollständigen
+- ISY-905: Linksnavigation und Informationsbereich können jetzt wieder korrekt eingeklappt werden und die Breite der Linksnavigation und des Informationsbereichs liegt nun standardmäßig wieder bei 15em
+- ISY-1014: Die `isy-seiten-toolbar` wird jetzt immer über dem Hauptmenü des `isy-hauptfenster` angezeigt
+- ISY-907: Kontrast im Hauptmenü des `isy-hauptfenster` wurde verbessert
 ## Features
-- ISY-681: Formwrapper und Formcontrol-Pipe wurden hinzugefügt
-- ISY-756: IsyFact-Theme wurde überarbeitet
-- ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an, um die Zugänglichkeit der Website zu verbessern
-- ISY-682: Pipe 'IncompleteDatePipe' zur Anzeige von ungewissen Datumswerten wurde hinzugefügt
-- ISY-876: Meldungen werden immer am unteren rechten Rand angezeigt
+- ISY-906: Verwendung von HTML Landmarks `nav` (Hauptnavigation), `banner` (Header) und `aside` (Linksnavigation & Informationsbereich) im `isy-hauptfenster`
+- ISY-874: Hinzufügen der Component `isy-seiten-toolbar`, die für das Seitentoolbar Template des `isy-hauptfenster` entwickelt wurde und beim vertikalen Scrollen am oberen Rand des Bildschirms haften bleibt
+- ISY-681: Hinzufügen der Component `isy-form-wrapper` mit folgenden Funktionalitäten für beliebige Eingabefelder
+  * Automatische Platzierung und Styling des Labels
+  * Automatische Platzierung und Styling von Fehlernachrichten
+- ISY-877: `isy-form-wrapper` Component um Pflichtfeldfunktionalität erweitert
+- ISY-682: Pipe `IncompleteDatePipe` zur Anzeige von ungewissen Datumswerten wurde hinzugefügt
+- ISY-914: Die `isy-wizard` Komponente beinhaltet verschiedene Breakpoints für eine verbesserte Unterstützung von Responsive Layouts
 ## Demo-Anwendung
+- ISY-876: Toast Notifications werden jetzt immer am unteren rechten Rand angezeigt
+- ISY-630: Das HTML lang-Attribut passt sich der gewählten Sprache automatisch an, um die Zugänglichkeit der Website zu verbessern
 - ISY-647: Alle Formulare wurden von rechtsbündigen Labels auf Floating-Labels umgestellt
-- ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt-Anzeigen_ für verbesserte Responsivität überarbeitet
-- ISY-389: Imports in der Demo-Anwendung zur Library geht nun über den Library-Namen
+- ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt Anzeigen_ für verbesserte Responsivität überarbeitet
+- ISY-978: Die Tabelle auf der Seite _Objekt suchen_ zeigt exemplarisch, wie ein Zeilenumbruch in der Tabellenüberschrift verhindert werden kann
+- ISY-816: Die Tabelle auf der Seite _Objekt suchen_ verwendet jetzt die PrimeNG Standard Filter und Sortierung
 
 # 17.1.0 - 18.01.2024
 ## Fixes

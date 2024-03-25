@@ -78,11 +78,13 @@
             styleClass="w-full"
             appendTo="body"
           >
-            <ng-template pTemplate="selectedItem">
-              <div class="country-item country-item-value" *ngIf="person.personalien.staatsangehoerigkeit">
-                <span>{{ person.personalien.staatsangehoerigkeit }}</span>
-              </div>
-            </ng-template>
+            @if (person.personalien.staatsangehoerigkeit) {
+              <ng-template pTemplate="selectedItem">
+                <div class="country-item country-item-value">
+                  <div>{{ person.personalien.staatsangehoerigkeit }}</div>
+                </div>
+              </ng-template>
+            }
             <ng-template let-land pTemplate="item">
               <div class="country-item">
                 <span>{{ land }}</span>
@@ -115,15 +117,16 @@
   </div>
 </p-panel>
 
-<demo-result-list
-  *ngIf="personen$ | async as personen"
-  [personen]="personen"
-  [selectedObject]="selectedPerson"
-  (edit)="editSelectedPerson($event)"
-  (create)="openAddNewObjectDialog()"
-  [loading]="tbLoadingStatus"
->
-</demo-result-list>
+@if (personen$ | async; as personen) {
+  <demo-result-list
+    [personen]="personen"
+    [selectedObject]="selectedPerson"
+    (edit)="editSelectedPerson($event)"
+    (create)="openAddNewObjectDialog()"
+    [loading]="tbLoadingStatus"
+  >
+  </demo-result-list>
+}
 
 <p-dialog
   [header]="'isyAngularWidgetsDemo.editObjectDialog.header' | translate"
@@ -133,264 +136,279 @@
     width: width + 'vw'
   }"
 >
-  <div [formGroup]="editForm" *ngIf="selectedPerson && editForm">
-    <div class="grid mt-3">
-      <div class="col-12 xl:col-6">
-        <div class="field">
-          <span class="p-float-label">
-            <input id="edit-id" class="w-full" type="text" pInputText [formControlName]="'editID'" />
-            <label for="edit-id">{{ 'isyAngularWidgetsDemo.labels.id' | translate }}</label>
-          </span>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6">
-        <div class="field">
-          <span class="p-float-label">
-            <input id="edit-vorname" class="w-full" type="text" pInputText [formControlName]="'editVorname'" />
-            <label for="edit-vorname">
-              {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
-            </label>
-          </span>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6">
-        <div class="field">
-          <span class="p-float-label">
-            <input id="edit-nachname" class="w-full" type="text" pInputText [formControlName]="'editNachname'" />
-            <label for="edit-nachname">
-              {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
-            </label>
-          </span>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6">
-        <div class="field">
-          <span class="p-float-label">
-            <input id="edit-geburtsname" class="w-full" type="text" pInputText [formControlName]="'editGeburtsname'" />
-            <label for="edit-geburtsname">
-              {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
-            </label>
-          </span>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6">
-        <div class="field">
-          <span class="p-float-label">
-            <p-calendar
-              id="edit-geburtsdatum"
-              dateFormat="dd.mm.yy"
-              [formControlName]="'editGeburtsdatum'"
-              [showIcon]="true"
-              styleClass="w-full"
-              appendTo="body"
-            >
-            </p-calendar>
-            <label for="edit-geburtsdatum">
-              {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
-            </label>
-          </span>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6">
-        <div class="field">
-          <span class="p-float-label">
-            <input id="edit-geburtsort" class="w-full" type="text" pInputText [formControlName]="'editGeburtsort'" />
-            <label for="edit-geburtsort">
-              {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
-            </label>
-          </span>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6">
-        <div class="field">
-          <span class="p-float-label">
-            <input id="edit-geschlecht" class="w-full" type="text" pInputText [formControlName]="'editGeschlecht'" />
-            <label for="edit-geschlecht">
-              {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
-            </label>
-          </span>
-        </div>
-      </div>
-      <div class="col-12 xl:col-6">
-        <div class="field">
-          <span class="p-float-label">
-            <p-dropdown
-              inputId="edit-staatsangehörigkeit"
-              [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
-              [options]="laender"
-              [showClear]="true"
-              [formControlName]="'editStaatsangehoerigkeit'"
-              [editable]="true"
-              styleClass="w-full"
-              appendTo="body"
-            >
-              <ng-template pTemplate="selectedItem">
-                <div class="country-item country-item-value" *ngIf="selectedPerson!.personalien.staatsangehoerigkeit">
-                  <span>{{ selectedPerson!.personalien.staatsangehoerigkeit }}</span>
-                </div>
-              </ng-template>
-              <ng-template let-land pTemplate="item">
-                <div class="country-item">
-                  <span>{{ land }}</span>
-                </div>
-              </ng-template>
-            </p-dropdown>
-            <label for="edit-staatsangehörigkeit">
-              {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
-            </label>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="flex justify-content-end flex-wrap card-container pt-2">
-      <p-button
-        class="flex align-items-center justify-content-center mr-1"
-        [label]="'isyAngularWidgetsDemo.actions.save' | translate"
-        (onClick)="saveChanges()"
-        [disabled]="!editForm.valid || !allowSave"
-      >
-      </p-button>
-      <p-button
-        class="flex align-items-center justify-content-center mr-1"
-        [label]="'isyAngularWidgetsDemo.actions.close' | translate"
-        (onClick)="displayEditDialog()"
-      >
-      </p-button>
-    </div>
-  </div>
-</p-dialog>
-
-<isy-wizard
-  *ngIf="openWizard"
-  [width]="50"
-  [height]="30"
-  [headerTitle]="'isyAngularWidgetsDemo.createObjectDialog.header' | translate"
-  [allowNext]="isFormValid"
-  [(isVisible)]="openWizard"
-  (isVisibleChange)="onWizardClose($event)"
-  (stepperIndexChange)="getWizardIndex($event)"
-  (savingChange)="getSavedStatus($event)"
-  [isSaved]="savedSuccessfully"
-  [closable]="displayX"
->
-  <!--  Every side of the wizard needs to have the *isyWizardDirective. -->
-
-  <!-- Step 1: ID Entry -->
-  <!--  Use with a simple form -->
-  <div *isyWizardDirective="'isyAngularWidgetsDemo.createObjectDialog.stepIdEntry' | translate">
-    <div [formGroup]="idForm">
-      <div class="grid mt-5">
-        <div class="col-12">
+  @if (selectedPerson && editForm) {
+    <div [formGroup]="editForm">
+      <div class="grid mt-3">
+        <div class="col-12 xl:col-6">
           <div class="field">
             <span class="p-float-label">
-              <input
-                id="person-id"
-                type="text"
-                class="w-full"
-                pInputText
-                [formControlName]="'id'"
-                (focus)="onFormControlFocus(idForm.controls.id)"
-              />
-              <label id="id-label" for="person-id">ID <demo-required-label></demo-required-label></label>
+              <input id="edit-id" class="w-full" type="text" pInputText [formControlName]="'editID'" />
+              <label for="edit-id">{{ 'isyAngularWidgetsDemo.labels.id' | translate }}</label>
             </span>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 2: Personal information -->
-  <!--  Use with a custom component -->
-  <form *isyWizardDirective="'isyAngularWidgetsDemo.createObjectDialog.stepPersonalInfo' | translate">
-    <demo-persoenliche-informationen [form]="persoenlicheInformationenForm"> </demo-persoenliche-informationen>
-  </form>
-
-  <!-- Step 3: Birth information -->
-  <!--  Use with a complex form -->
-  <div *isyWizardDirective="'isyAngularWidgetsDemo.createObjectDialog.stepBirthInfo' | translate">
-    <div [formGroup]="geburtsInformationenForm">
-      <div class="grid mt-5">
-        <div class="col-12">
+        <div class="col-12 xl:col-6">
           <div class="field">
             <span class="p-float-label">
-              <input
-                id="geburtsname"
-                class="w-full"
-                type="text"
-                pInputText
-                [formControlName]="'geburtsname'"
-                (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsname)"
-              />
-              <label id="geburtsname-label" class="align-content-end" for="geburtsname">
-                {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }} <demo-required-label></demo-required-label>
+              <input id="edit-vorname" class="w-full" type="text" pInputText [formControlName]="'editVorname'" />
+              <label for="edit-vorname">
+                {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
               </label>
             </span>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 xl:col-6">
           <div class="field">
             <span class="p-float-label">
-              <input
-                id="geburtsort"
-                class="w-full"
-                type="text"
-                pInputText
-                [formControlName]="'geburtsort'"
-                (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsort)"
-              />
-              <label id="geburtsort-label" class="align-content-end" for="geburtsort">
-                {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }} <demo-required-label></demo-required-label>
+              <input id="edit-nachname" class="w-full" type="text" pInputText [formControlName]="'editNachname'" />
+              <label for="edit-nachname">
+                {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
               </label>
             </span>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 xl:col-6">
+          <div class="field">
+            <span class="p-float-label">
+              <input
+                id="edit-geburtsname"
+                class="w-full"
+                type="text"
+                pInputText
+                [formControlName]="'editGeburtsname'"
+              />
+              <label for="edit-geburtsname">
+                {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
+              </label>
+            </span>
+          </div>
+        </div>
+        <div class="col-12 xl:col-6">
           <div class="field">
             <span class="p-float-label">
               <p-calendar
-                id="geburtdatum"
+                inputId="edit-geburtsdatum"
                 dateFormat="dd.mm.yy"
-                [formControlName]="'geburtsdatum'"
+                [formControlName]="'editGeburtsdatum'"
                 [showIcon]="true"
+                styleClass="w-full"
                 appendTo="body"
-                (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
               >
               </p-calendar>
-              <label id="geburtsdatum-label" class="align-content-end" for="geburtdatum">
+              <label for="edit-geburtsdatum">
                 {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
-                <demo-required-label></demo-required-label>
               </label>
             </span>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 xl:col-6">
+          <div class="field">
+            <span class="p-float-label">
+              <input id="edit-geburtsort" class="w-full" type="text" pInputText [formControlName]="'editGeburtsort'" />
+              <label for="edit-geburtsort">
+                {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
+              </label>
+            </span>
+          </div>
+        </div>
+        <div class="col-12 xl:col-6">
+          <div class="field">
+            <span class="p-float-label">
+              <input id="edit-geschlecht" class="w-full" type="text" pInputText [formControlName]="'editGeschlecht'" />
+              <label for="edit-geschlecht">
+                {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
+              </label>
+            </span>
+          </div>
+        </div>
+        <div class="col-12 xl:col-6">
           <div class="field">
             <span class="p-float-label">
               <p-dropdown
-                id="staatangehoerigkeit"
+                inputId="edit-staatsangehörigkeit"
                 [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
+                [options]="laender"
                 [showClear]="true"
-                optionValue="name"
-                optionLabel="name"
-                [options]="countryMap"
-                [formControlName]="'staatsangehoerigkeit'"
+                [formControlName]="'editStaatsangehoerigkeit'"
+                [editable]="true"
+                styleClass="w-full"
                 appendTo="body"
-                (focusout)="onFormControlFocus(geburtsInformationenForm.controls.staatsangehoerigkeit)"
               >
+                <ng-template pTemplate="selectedItem">
+                  @if (selectedPerson!.personalien.staatsangehoerigkeit) {
+                    <div class="country-item country-item-value">
+                      <div>{{ selectedPerson!.personalien.staatsangehoerigkeit }}</div>
+                    </div>
+                  }
+                </ng-template>
                 <ng-template let-land pTemplate="item">
                   <div class="country-item">
-                    <span>{{ land.name }}</span>
+                    <span>{{ land }}</span>
                   </div>
                 </ng-template>
               </p-dropdown>
-              <label id="staatsangehoerigkeit-label" class="align-content-end" for="staatangehoerigkeit">
+              <label for="edit-staatsangehörigkeit">
                 {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
-                <demo-required-label></demo-required-label>
               </label>
             </span>
           </div>
         </div>
       </div>
+      <div class="flex justify-content-end flex-wrap card-container pt-2">
+        <p-button
+          class="flex align-items-center justify-content-center mr-1"
+          [label]="'isyAngularWidgetsDemo.actions.save' | translate"
+          (onClick)="saveChanges()"
+          [disabled]="!editForm.valid || !allowSave"
+        >
+        </p-button>
+        <p-button
+          class="flex align-items-center justify-content-center mr-1"
+          [label]="'isyAngularWidgetsDemo.actions.close' | translate"
+          (onClick)="displayEditDialog()"
+        >
+        </p-button>
+      </div>
     </div>
-  </div>
-</isy-wizard>
+  }
+</p-dialog>
+
+@if (openWizard) {
+  <isy-wizard
+    [width]="50"
+    [height]="50"
+    [headerTitle]="'isyAngularWidgetsDemo.createObjectDialog.header' | translate"
+    [allowNext]="isFormValid"
+    [(isVisible)]="openWizard"
+    (isVisibleChange)="onWizardClose($event)"
+    (stepperIndexChange)="getWizardIndex($event)"
+    (savingChange)="getSavedStatus($event)"
+    [isSaved]="savedSuccessfully"
+    [closable]="displayX"
+  >
+    <!--  Every side of the wizard needs to have the *isyWizardDirective. -->
+
+    <!-- Step 1: ID Entry -->
+    <!--  Use with a simple form -->
+    <div *isyWizardDirective="'isyAngularWidgetsDemo.createObjectDialog.stepIdEntry' | translate">
+      <div [formGroup]="idForm">
+        <div class="grid mt-5">
+          <div class="col-12">
+            <div class="field">
+              <span class="p-float-label">
+                <input
+                  id="person-id"
+                  type="text"
+                  class="w-full"
+                  pInputText
+                  [formControlName]="'id'"
+                  (focus)="onFormControlFocus(idForm.controls.id)"
+                />
+                <label for="person-id"
+                  >{{ 'isyAngularWidgetsDemo.labels.id' | translate }} <demo-required-label></demo-required-label
+                ></label>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Personal information -->
+    <!--  Use with a custom component -->
+    <form *isyWizardDirective="'isyAngularWidgetsDemo.createObjectDialog.stepPersonalInfo' | translate">
+      <demo-persoenliche-informationen [form]="persoenlicheInformationenForm"> </demo-persoenliche-informationen>
+    </form>
+
+    <!-- Step 3: Birth information -->
+    <!--  Use with a complex form -->
+    <div *isyWizardDirective="'isyAngularWidgetsDemo.createObjectDialog.stepBirthInfo' | translate">
+      <div [formGroup]="geburtsInformationenForm">
+        <div class="grid mt-5">
+          <div class="col-12">
+            <div class="field">
+              <span class="p-float-label">
+                <input
+                  id="geburtsname"
+                  class="w-full"
+                  type="text"
+                  pInputText
+                  [formControlName]="'geburtsname'"
+                  (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsname)"
+                />
+                <label class="align-content-end" for="geburtsname">
+                  {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
+                  <demo-required-label></demo-required-label>
+                </label>
+              </span>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="field">
+              <span class="p-float-label">
+                <input
+                  id="geburtsort"
+                  class="w-full"
+                  type="text"
+                  pInputText
+                  [formControlName]="'geburtsort'"
+                  (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsort)"
+                />
+                <label class="align-content-end" for="geburtsort">
+                  {{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}
+                  <demo-required-label></demo-required-label>
+                </label>
+              </span>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="field">
+              <span class="p-float-label">
+                <p-calendar
+                  inputId="geburtdatum"
+                  dateFormat="dd.mm.yy"
+                  [formControlName]="'geburtsdatum'"
+                  [showIcon]="true"
+                  appendTo="body"
+                  (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
+                >
+                </p-calendar>
+                <label class="align-content-end" for="geburtdatum">
+                  {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
+                  <demo-required-label></demo-required-label>
+                </label>
+              </span>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="field">
+              <span class="p-float-label">
+                <p-dropdown
+                  inputId="staatangehoerigkeit"
+                  [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
+                  [showClear]="true"
+                  optionValue="name"
+                  optionLabel="name"
+                  [options]="countryMap"
+                  [formControlName]="'staatsangehoerigkeit'"
+                  appendTo="body"
+                  (focusout)="onFormControlFocus(geburtsInformationenForm.controls.staatsangehoerigkeit)"
+                >
+                  <ng-template let-land pTemplate="item">
+                    <div class="country-item">
+                      <span>{{ land.name }}</span>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+                <label class="align-content-end" for="staatangehoerigkeit">
+                  {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
+                  <demo-required-label></demo-required-label>
+                </label>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </isy-wizard>
+}

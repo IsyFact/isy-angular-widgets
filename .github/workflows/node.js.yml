@@ -9,48 +9,40 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
-  build:
-
+  build_and_test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [ 18.x ]
 
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm run prettier:check
-      - run: npm run lint
-      - run: npm test
-      - name: Sonar Cache
-        uses: actions/cache@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Check code formatting and linting
+        run: |
+          npm run prettier:check
+          npm run lint
+      - name: Run tests
+        run: npm test
+      - name: Cache SonarCloud
+        uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      - name: SonarCloud Scan
+      - name: Perform SonarCloud scan
         run: >
           npx sonarqube-scanner@3
           -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
@@ -59,35 +51,64 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - run: npm run build --if-present
+      - name: Build project
+        run: npm run build --if-present
 
-  docs:
+  build_and_deploy_demo_and_docs:
+    if: ${{ github.event_name == 'push' }}
+
+    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [build_and_test]
     strategy:
       matrix:
         node-version: [ 18.x ]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    if: ${{ github.event.action }} == 'opened'
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - name: Create docs
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Install dependencies
+        run: npm ci
+      - name: Build and prepare documentation for deployment
         run: |
-              npm run compodoc:build
+          npm run compodoc:build
+          mv docs docs_temp
+          mkdir docs
+          mv docs_temp docs/documentation
+      - name: Build and prepare demo application for deployment
+        run: |
+          npm run build:widgets_demo
+          mv dist/isy-angular-widgets-demo/* docs/
+          cp docs/index.html docs/404.html
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
-          # Upload documentation repository
           path: 'docs'
-      - name: Deploy to GitHub Pages
+      - name: Deploy demo and documentation to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
+      - name: Display deployment URLs
+        run: |
+          echo "Demo URL: https://isyfact.github.io/isy-angular-widgets/"
+          echo "Documentation URL: https://isyfact.github.io/isy-angular-widgets/documentation/"

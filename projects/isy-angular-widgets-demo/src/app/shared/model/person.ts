@@ -28,6 +28,8 @@ export interface Personalien {
   kreditkartennummer: string;
   ablaufdatumKreditkarte: string;
   identityDocument: unknown;
+  bilanz: number;
+  status: string;
 }
 
 /**

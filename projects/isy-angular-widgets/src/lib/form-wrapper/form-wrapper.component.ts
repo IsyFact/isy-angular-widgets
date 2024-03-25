@@ -4,6 +4,31 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
 /**
  * A component that wraps form controls and displays validation messages.
  * It requires the usage of reactive forms and supports standalone usage.
+ * @example
+ * ```html
+ * <form [formGroup]="myForm">
+ *   <isy-form-wrapper
+ *     label="Email"
+ *     fieldId="email"
+ *     [control]="myForm.controls.email| formControl"
+ *     [validationMessages]="{
+ *       'required': 'Email is required',
+ *       'email': 'Please enter a valid email address'
+ *     }">
+ *     <input
+ *        id="email"
+ *        formControlName="email"
+ *        class="w-full"
+ *        type="text"
+ *        pInputText
+ *     />
+ *   </isy-form-wrapper>
+ * </form>
+ * ```
+ * Ensure you have imported `ReactiveFormsModule` in your module:
+ * ```typescript
+ * import { ReactiveFormsModule } from '@angular/forms';
+ * ```
  */
 @Component({
   selector: 'isy-form-wrapper',
@@ -42,5 +67,14 @@ export class FormWrapperComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  /**
+   * Computes and returns the information about the required state
+   * @returns the required state
+   */
+  isRequired(): boolean {
+    const result = Object.keys(this.validationMessages).filter((value) => value.includes('required'));
+    return result.length > 0;
   }
 }

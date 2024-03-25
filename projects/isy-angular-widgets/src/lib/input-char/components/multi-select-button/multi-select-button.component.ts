@@ -36,17 +36,29 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
 
   allOptionsModel: {label: string} | undefined = this.allOptions[0];
 
+  /**
+   * Lifecycle hook that is called when any data-bound property of the component changes.
+   * @param changes - An object containing the changed properties and their current and previous values.
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.allButtonOptionsLabel) {
       this.allOptions[0].label = this.allButtonOptionsLabel;
     }
   }
 
+  /**
+   * Triggers an update of the selected group and emits the updated value.
+   * @param group - The selected group.
+   */
   triggerUpdate(group: string | undefined): void {
     this.writeValue(group ? {group: group, value: this.models[group]} : undefined);
     this.valueChange.emit(this.value);
   }
 
+  /**
+   * Writes a new value to the multi-select button component.
+   * @param obj - The new value to be set. It should be an object with `group` and `value` properties.
+   */
   writeValue(obj: {group: string; value: string} | undefined): void {
     this.value = obj;
     this.models = Object.keys(this.models).reduce<{[key: string]: string}>((acc, key) => {
@@ -56,14 +68,27 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
     this.allOptionsModel = obj ? undefined : this.allOptions[0];
   }
 
+  /**
+   * Registers a callback function that will be called when the value of the multi-select button changes.
+   * @param fn - The callback function to be registered.
+   */
   registerOnChange(fn: unknown): void {
     this.onChange = fn as () => unknown;
   }
 
+  /**
+   * Registers a callback function that should be called when the control receives a "blur" event.
+   * This is used by Angular forms to update the control's "touched" state.
+   * @param fn - The callback function to be registered.
+   */
   registerOnTouched(fn: unknown): void {
     this.onTouched = fn as () => unknown;
   }
 
+  /**
+   * Sets the disabled state of the component.
+   * @param isDisabled - A boolean value indicating whether the component should be disabled or not.
+   */
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }

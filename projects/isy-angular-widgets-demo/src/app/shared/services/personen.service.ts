@@ -107,6 +107,12 @@ export class PersonenService {
     'Island'
   ];
 
+  geschlechter: string[] = ['w', 'm', 'x'];
+
+  stati: string[] = ['Unqualifiziert', 'Qualifiziert', 'Neu', 'Verhandlung', 'Erneuerung', 'Vorschlag'];
+
+  bilanz: {min: number; max: number} = {min: 60000, max: 100000};
+
   findPersonById(id: string): Observable<Person[]> {
     return of<Person[]>([
       {
@@ -128,7 +134,9 @@ export class PersonenService {
           ablaufdatumReisepass: '',
           kreditkartennummer: '',
           ablaufdatumKreditkarte: '',
-          identityDocument: ''
+          identityDocument: '',
+          bilanz: 0,
+          status: ''
         },
         sachverhalte: []
       }
@@ -167,7 +175,7 @@ export class PersonenService {
       personalien: {
         nachname: this.nachname[this.rng()],
         vorname: this.vorname[this.rng()],
-        geschlecht: 'x',
+        geschlecht: this.rStr(this.geschlechter),
         geburtsdatum: '01.01.1337',
         geburtsort: this.staaten[this.rng()],
         staatsangehoerigkeit: this.staaten[this.rng()],
@@ -181,7 +189,9 @@ export class PersonenService {
         ablaufdatumReisepass: '',
         kreditkartennummer: '',
         ablaufdatumKreditkarte: '',
-        identityDocument: ''
+        identityDocument: '',
+        bilanz: this.rNum(this.bilanz.min, this.bilanz.max),
+        status: this.rStr(this.stati)
       },
       sachverhalte: []
     };
@@ -215,5 +225,14 @@ export class PersonenService {
   rng(): number {
     const crypto = window.crypto;
     return crypto.getRandomValues(new Uint32Array(1))[0] % this.maxEntries;
+  }
+
+  rStr(list: string[]): string {
+    const randomIndex = Math.floor(Math.random() * list.length);
+    return list[randomIndex];
+  }
+
+  rNum(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

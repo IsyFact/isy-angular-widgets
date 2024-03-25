@@ -27,7 +27,9 @@
         "collapseLinksnavigation": "Linksnavigation ausblenden",
         "expandLinksnavigation": "Linksnavigation einblenden",
         "collapseInformationsbereich": "Informationsbereich ausblenden",
-        "expandInformationsbereich": "Informationsbereich einblenden"
+        "expandInformationsbereich": "Informationsbereich einblenden",
+        "leftNavigation": "linksnavigation",
+        "informationArea": "informationsbereich"
       }
     },
     "p-calendar": {
@@ -102,7 +104,9 @@
       "newEntryPlaceholder": "Neuer Eintrag",
       "kreditkartennummer": "Kreditkartennummer",
       "ablaufdatumKreditkarte": "Ablaufdatum der Kreditkarte",
-      "identityDocument": "Ausweisdokument"
+      "identityDocument": "Ausweisdokument",
+      "bilanz": "Bilanz",
+      "alle": "Alle"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",

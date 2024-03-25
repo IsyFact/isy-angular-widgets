@@ -27,7 +27,9 @@
         "collapseLinksnavigation": "Collapse left side bar",
         "expandLinksnavigation": "Expand left side bar",
         "collapseInformationsbereich": "Collapse right side bar",
-        "expandInformationsbereich": "Expand right side bar"
+        "expandInformationsbereich": "Expand right side bar",
+        "leftNavigation": "leftnavigation",
+        "informationArea": "informationarea"
       }
     },
     "p-calendar": {
@@ -102,7 +104,9 @@
       "newEntryPlaceholder": "New Entry",
       "kreditkartennummer": "Credit card number",
       "ablaufdatumKreditkarte": "Credit card expiration date",
-      "identityDocument": "Identity Document"
+      "identityDocument": "Identity Document",
+      "bilanz": "Balance",
+      "alle": "All"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",
@@ -328,11 +332,11 @@
         "code": "IS"
       },
       {
-        "name": "Vereinigte Arabische Emirate",
+        "name": "United Arab Emirates",
         "code": "AE"
       },
       {
-        "name": "Kongo, Demokratische Republik",
+        "name": "Democratic Republic of the Congo",
         "code": "CD"
       }
     ],

@@ -58,6 +58,9 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
    */
   allButtonHeader!: string;
 
+  /**
+   * The MutationObserver used to observe changes in the DOM.
+   */
   private mutationObserver?: MutationObserver;
 
   constructor(

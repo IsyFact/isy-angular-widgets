@@ -23,7 +23,9 @@
         "collapseLinksnavigation": "Linksnavigation ausblenden",
         "expandLinksnavigation": "Linksnavigation einblenden",
         "collapseInformationsbereich": "Informationsbereich ausblenden",
-        "expandInformationsbereich": "Informationsbereich einblenden"
+        "expandInformationsbereich": "Informationsbereich einblenden",
+        "leftNavigation": "linksnavigation",
+        "informationArea": "informationsbereich"
       }
     }
   },

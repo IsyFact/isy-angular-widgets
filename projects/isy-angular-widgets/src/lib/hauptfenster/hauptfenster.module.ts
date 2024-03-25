@@ -6,7 +6,7 @@ import {MegaMenuModule} from 'primeng/megamenu';
 
 @NgModule({
   declarations: [HauptfensterComponent],
-  imports: [ButtonModule, CommonModule, MegaMenuModule],
-  exports: [HauptfensterComponent]
+  exports: [HauptfensterComponent],
+  imports: [ButtonModule, CommonModule, MegaMenuModule]
 })
 export class HauptfensterModule {}
