@@ -8,14 +8,15 @@ import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {By} from '@angular/platform-browser';
 import {ComponentFixture} from '@angular/core/testing';
+import {InputCharModule} from '@isy-angular-widgets/public-api';
 
 let spectator: Spectator<MultiSelectButtonComponent>;
 let component: MultiSelectButtonComponent;
 let fixture: ComponentFixture<MultiSelectButtonComponent>;
 
-const charList = sonderzeichenliste as Zeichenobjekt[];
-const bases = [...new Set(charList.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
-const groups = [...new Set(charList.map((item) => item.schriftzeichengruppe))];
+const charset = sonderzeichenliste as Zeichenobjekt[];
+const bases = [...new Set(charset.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
+const groups = [...new Set(charset.map((item) => item.schriftzeichengruppe))];
 
 const headerStr = 'All';
 const inputData: InputCharData = {Base: bases, Groups: groups};
@@ -102,7 +103,7 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
 describe('Integration Tests: MultiSelectButtonComponent', () => {
   const createComponent = createComponentFactory({
     component: MultiSelectButtonComponent,
-    imports: [SelectButtonModule, AccordionModule, FormsModule]
+    imports: [SelectButtonModule, AccordionModule, FormsModule, InputCharModule]
   });
 
   beforeEach(() => {
@@ -114,7 +115,7 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
     const schriftzeichengruppeSelectButton = fixture.debugElement
-      .queryAll(By.css('.groups-select-button .p-buttonset div span'))
+      .queryAll(By.css('.charset1-select-button .p-buttonset div span'))
       .find((elem) => elem.nativeElement.textContent === schriftzeichengruppe)?.nativeElement as HTMLElement;
     expect(schriftzeichengruppeSelectButton).toBeTruthy();
 
@@ -124,7 +125,7 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   const selectBasis = (basis: string): void => {
     const basisSelectButton = fixture.debugElement
-      .queryAll(By.css('.base-select-button .p-buttonset div span'))
+      .queryAll(By.css('.charset0-select-button .p-buttonset div span'))
       .find((elem) => elem.nativeElement.textContent === basis)?.nativeElement as HTMLElement;
     expect(basisSelectButton).toBeTruthy();
 
@@ -135,20 +136,20 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
   it('should always have only one selection when clicking through multiple selections', () => {
     bases.forEach((base: string) => {
       selectBasis(base);
-      expect(fixture.debugElement.queryAll(By.css('.base-select-button .p-button.p-highlight')).length).toEqual(1);
+      expect(fixture.debugElement.queryAll(By.css('.charset0-select-button .p-button.p-highlight')).length).toEqual(1);
       expect(
         fixture.debugElement
-          .queryAll(By.css('.base-select-button .p-button'))
+          .queryAll(By.css('.charset0-select-button .p-button'))
           .filter((elem) => elem.attributes['aria-checked'] === 'true').length
       ).toEqual(1);
     });
 
     groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
       selectSchriftzeichengruppe(schriftzeichengruppe);
-      expect(fixture.debugElement.queryAll(By.css('.groups-select-button .p-button.p-highlight')).length).toEqual(1);
+      expect(fixture.debugElement.queryAll(By.css('.charset1-select-button .p-button.p-highlight')).length).toEqual(1);
       expect(
         fixture.debugElement
-          .queryAll(By.css('.groups-select-button .p-button'))
+          .queryAll(By.css('.charset1-select-button .p-button'))
           .filter((elem) => elem.attributes['aria-checked'] === 'true').length
       ).toEqual(1);
     });
@@ -169,14 +170,6 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  // class p-highlight does not exist on init
-  /* it('all button should be selected on init ', () => {
-    const allButton = fixture.debugElement.query(By.css('.all-select-button .p-selectbutton .p-button'));
-    spectator.fixture.detectChanges();
-    expect(allButton.classes['p-highlight']).toBeTrue();
-    expect(allButton.attributes['aria-checked']).toBeTrue();
-  }); */
 
   bases.forEach((base: string) => {
     it(`should show 'Base' and ${base} in value with those present in input`, () => {
@@ -212,9 +205,9 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
     it(`should only have a ${base} base enabled active after corresponding selection"`, () => {
       const allSelectButton = spectator.debugElement.query(By.css('.all-select-button'))
         .componentInstance as SelectButton;
-      const baseSelectButton = spectator.debugElement.query(By.css('.base-select-button'))
+      const baseSelectButton = spectator.debugElement.query(By.css('.charset0-select-button'))
         .componentInstance as SelectButton;
-      const groupSelectButton = spectator.debugElement.query(By.css('.groups-select-button'))
+      const groupSelectButton = spectator.debugElement.query(By.css('.charset1-select-button'))
         .componentInstance as SelectButton;
 
       selectBasis(base);
@@ -229,9 +222,9 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
     it(`should only have a ${group} group enabled active after corresponding selection"`, () => {
       const allSelectButton = spectator.debugElement.query(By.css('.all-select-button'))
         .componentInstance as SelectButton;
-      const baseSelectButton = spectator.debugElement.query(By.css('.base-select-button'))
+      const baseSelectButton = spectator.debugElement.query(By.css('.charset0-select-button'))
         .componentInstance as SelectButton;
-      const groupSelectButton = spectator.debugElement.query(By.css('.groups-select-button'))
+      const groupSelectButton = spectator.debugElement.query(By.css('.charset1-select-button'))
         .componentInstance as SelectButton;
 
       selectSchriftzeichengruppe(group);

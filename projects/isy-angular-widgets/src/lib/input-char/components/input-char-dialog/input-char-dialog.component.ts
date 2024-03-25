@@ -1,7 +1,6 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output} from '@angular/core';
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
-import {TranslateService} from '@ngx-translate/core';
 import {CharacterService} from '../../services/character.service';
 
 /**
@@ -12,7 +11,7 @@ import {CharacterService} from '../../services/character.service';
   templateUrl: './input-char-dialog.component.html',
   styleUrls: ['./input-char-dialog.component.scss']
 })
-export class InputCharDialogComponent implements OnChanges {
+export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * Emits a character chosen to insert by the user.
    */
@@ -59,14 +58,36 @@ export class InputCharDialogComponent implements OnChanges {
    */
   allButtonHeader!: string;
 
+  private mutationObserver?: MutationObserver;
+
   constructor(
-    public widgetsConfigService: WidgetsConfigService,
-    public translate: TranslateService,
-    private charService: CharacterService
-  ) {
-    this.translate.onLangChange.subscribe(() => {
-      this.initSelectButtonsData();
+    public configService: WidgetsConfigService,
+    private charService: CharacterService,
+    private elementRef: ElementRef
+  ) {}
+
+  ngAfterViewInit(): void {
+    // Observe changes in the DOM using MutationObserver
+    this.mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target.textContent) {
+          this.initSelectButtonsData();
+        }
+      });
     });
+
+    // Start observing the target element for attribute changes
+    this.mutationObserver.observe(this.elementRef.nativeElement as HTMLElement, {
+      characterData: true,
+      subtree: true
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Disconnect the MutationObserver to avoid memory leaks
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect();
+    }
   }
 
   /**
@@ -82,7 +103,6 @@ export class InputCharDialogComponent implements OnChanges {
    * @param selected Incoming event
    */
   onSelection(selected: {group: string; value: string} | undefined): void {
-    console.log(selected);
     switch (selected?.group) {
       case this.getTranslation('inputChar.headerBaseChars'): {
         this.onGrundzeichenSelection(selected.value);
@@ -104,7 +124,6 @@ export class InputCharDialogComponent implements OnChanges {
    * @internal
    */
   initSelectButtonsData(): void {
-    this.allButtonHeader = this.getTranslation('inputChar.headerAllCharacters')!;
     this.leftViewData = {
       [this.getTranslation('inputChar.headerBaseChars')]: this.grundZeichenListe,
       [this.getTranslation('inputChar.headerGroups')]: this.schriftZeichenGruppen
@@ -115,7 +134,7 @@ export class InputCharDialogComponent implements OnChanges {
    * Setting up the characters list who must be displayed.
    * @internal
    */
-  private resetDisplayedCharacters(): void {
+  resetDisplayedCharacters(): void {
     this.displayedCharacters = this.charList;
     this.selectFirstEntry();
   }
@@ -160,7 +179,7 @@ export class InputCharDialogComponent implements OnChanges {
    * Initialize the char picker with it's Grundzeichen, Schriftzeichengruppen and initial state.
    * @internal
    */
-  private setupCharPicker(): void {
+  setupCharPicker(): void {
     this.grundZeichenListe = this.getAvailableGrundzeichen();
     this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
     this.initSelectButtonsData();
@@ -198,6 +217,6 @@ export class InputCharDialogComponent implements OnChanges {
    * @returns translated text
    */
   getTranslation(path: string): string {
-    return this.widgetsConfigService.getTranslation(path) as string;
+    return this.configService.getTranslation(path) as string;
   }
 }

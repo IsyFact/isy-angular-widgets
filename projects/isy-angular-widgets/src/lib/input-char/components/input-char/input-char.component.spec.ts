@@ -6,7 +6,7 @@ import {MockComponents} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {InputCharModule} from '../../input-char.module';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
 
 let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
@@ -16,9 +16,7 @@ describe('Unit Tests: InputCharComponent', () => {
   const dialogDefaultHeight = '460px';
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    declarations: [MockComponents(Dialog, InputCharDialogComponent)],
-    imports: [TranslateModule.forRoot()],
-    providers: [TranslateService]
+    declarations: [MockComponents(Dialog, InputCharDialogComponent)]
   });
 
   describe('with default datentyp', () => {
@@ -123,18 +121,21 @@ describe('Integration Test: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    imports: [InputCharModule, TranslateModule.forRoot()],
-    providers: [TranslateService]
+    declarations: [Dialog, InputCharDialogComponent],
+    imports: [InputCharModule],
+    providers: [WidgetsConfigService, CharacterService]
   });
 
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
-        // spectator.fixture.componentRef.setInput('datentyp', datentyp);
-        spectator = createComponent({props: {
-          datentyp: datentyp as Datentyp
-        }});
+        spectator = createComponent({
+          props: {
+            datentyp: datentyp as Datentyp
+          }
+        });
         spectator.detectChanges();
+        spectator.component.ngOnChanges();
         spectator.click('.input-char-button');
       });
 
@@ -144,13 +145,13 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.queryAll('#schriftzeichengruppe-select-button .p-buttonset .p-button');
+        const groupButtons = spectator.queryAll('.charset1-select-button div span');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = spectator.queryAll('#right-panel-side p-selectbutton .p-buttonset .p-button');
+        const groupButtons = spectator.queryAll('#right-panel-side div span');
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
     });

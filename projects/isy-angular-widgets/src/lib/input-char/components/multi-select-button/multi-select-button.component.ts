@@ -37,12 +37,10 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
   allOptionsModel: {label: string} | undefined = this.allOptions[0];
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.allOptions[0].label = this.allButtonOptionsLabel;
+    if (changes.allButtonOptionsLabel) {
+      this.allOptions[0].label = this.allButtonOptionsLabel;
+    }
   }
-
-  onChange: (_: unknown) => unknown = () => {};
-
-  onTouched: () => void = () => {};
 
   triggerUpdate(group: string | undefined): void {
     this.writeValue(group ? {group: group, value: this.models[group]} : undefined);
@@ -51,11 +49,11 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
 
   writeValue(obj: {group: string; value: string} | undefined): void {
     this.value = obj;
-
-    for (const item in this.models) {
-      this.models[item] = item === obj?.group ? obj.value : '';
-    }
-    this.allOptionsModel = obj ? undefined : {label: this.allButtonOptionsLabel};
+    this.models = Object.keys(this.models).reduce<{[key: string]: string}>((acc, key) => {
+      acc[key] = key === obj?.group ? obj.value : '';
+      return acc;
+    }, {});
+    this.allOptionsModel = obj ? undefined : this.allOptions[0];
   }
 
   registerOnChange(fn: unknown): void {
@@ -69,4 +67,8 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
+
+  onChange: (_: unknown) => unknown = () => {};
+
+  onTouched: () => void = () => {};
 }

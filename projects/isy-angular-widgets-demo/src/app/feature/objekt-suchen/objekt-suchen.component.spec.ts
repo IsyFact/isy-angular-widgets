@@ -238,6 +238,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     setupEditForm(person);
 
     component.getSavedStatus(true);
+    expect(component.openWizard).toBeFalse();
   }));
 
   it('should check the functionality on arriving wizard index (on init => index = 0)', () => {

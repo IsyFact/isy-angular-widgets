@@ -2,7 +2,7 @@
   <isy-multi-select-button
     (valueChange)="onSelection($event)"
     [dataToDisplay]="leftViewData"
-    [allButtonOptionsLabel]="allButtonHeader"
+    allButtonOptionsLabel="{{ configService.getTranslation('inputChar.headerAllCharacters') }}"
   ></isy-multi-select-button>
 </div>
 
@@ -24,7 +24,7 @@
       class="flex-shrink-0 font-bold"
       (click)="insertSelectedZeichen()"
     >
-      {{ getTranslation('inputChar.insert') }}
+      {{ configService.getTranslation('inputChar.insert') }}
     </button>
   </div>
 </div>
