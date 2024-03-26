@@ -167,10 +167,6 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
     });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   bases.forEach((base: string) => {
     it(`should show 'Base' and ${base} in value with those present in input`, () => {
       selectBasis(base);
@@ -187,7 +183,7 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
     });
   });
 
-  it('should have have the accordions ordered according to input', () => {
+  it('should order the accordions according to input', () => {
     const baseSelectButtons = spectator.queryAll('p-accordionTab .p-accordion-header-text');
 
     Object.keys(inputData).forEach((group, index) => {

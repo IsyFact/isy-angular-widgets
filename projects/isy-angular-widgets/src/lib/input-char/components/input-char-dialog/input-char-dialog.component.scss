@@ -32,9 +32,6 @@
 // To style PrimeNG widgets within a composition, we were unable to use own classes. A SASS interface is currently
 // not available. For a quick fix, the deprecated ng-deep is used; SASS variables should be used later.
 
-$select_button_text_color: black;
-$select_button_on_hover_background_color: grey;
-
 ::ng-deep {
   // Common styles of all select buttons
   p-selectButton .p-ripple.p-element.p-button {
