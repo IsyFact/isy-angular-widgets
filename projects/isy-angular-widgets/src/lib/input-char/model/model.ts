@@ -30,9 +30,11 @@ export enum Schriftzeichengruppe {
 /**
  * @internal
  */
-export interface SchriftZeichen {
-  id: string;
-  gruppe: string;
+export enum ButtonTypeIdentifier {
+  /* Grundzeichen button */
+  GRUNDZEICHEN = 'GRUNDZEICHEN',
+  /* Schriftzeichen button */
+  SCHRIFTZEICHENGRUPPE = 'SCHRIFTZEICHENGRUPPE'
 }
 
 /**
@@ -44,4 +46,19 @@ export interface Zeichenobjekt {
   readonly schriftzeichengruppe: Schriftzeichengruppe;
   readonly name: string;
   readonly codepoint: string;
+}
+
+/**
+ * @internal
+ */
+export interface InputCharData {
+  [key: string]: string[];
+}
+
+/**
+ * @internal
+ */
+export interface ZeichenSelection {
+  identifier: string;
+  zeichen: string;
 }

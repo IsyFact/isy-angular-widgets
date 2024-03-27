@@ -6,6 +6,7 @@ import {MockComponents} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {InputCharModule} from '../../input-char.module';
+import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
 
 let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
@@ -116,18 +117,24 @@ describe('Unit Tests: InputCharComponent', () => {
 
 describe('Integration Test: InputCharComponent', () => {
   const service = new CharacterService();
-
   let spectator: Spectator<InputCharComponent>;
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    imports: [InputCharModule]
+    declarations: [Dialog, InputCharDialogComponent],
+    imports: [InputCharModule],
+    providers: [WidgetsConfigService, CharacterService]
   });
 
   Object.keys(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
-        spectator = createComponent();
-        spectator.fixture.componentRef.setInput('datentyp', datentyp);
+        spectator = createComponent({
+          props: {
+            datentyp: datentyp as Datentyp
+          }
+        });
+        spectator.detectChanges();
+        spectator.component.ngOnChanges();
         spectator.click('.input-char-button');
       });
 
@@ -137,13 +144,13 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.queryAll('#schriftzeichengruppe-select-button .p-buttonset .p-button');
+        const groupButtons = spectator.queryAll('.charset-selectbutton--1 div span');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = spectator.queryAll('#right-panel-side p-selectbutton .p-buttonset .p-button');
+        const groupButtons = spectator.queryAll('.right-panel-side div span');
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
     });

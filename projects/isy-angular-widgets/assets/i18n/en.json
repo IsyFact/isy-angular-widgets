@@ -7,10 +7,10 @@
       "close": "Close"
     },
     "inputChar": {
+      "headerAllCharacters": "All",
       "headerBaseChars": "Base",
       "headerGroups": "Groups",
       "insert": "Insert",
-      "all": "All",
       "aria": {
         "togglePicker": "Open/Close Special Character Picker"
       }

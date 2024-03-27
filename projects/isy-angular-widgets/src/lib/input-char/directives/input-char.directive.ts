@@ -78,6 +78,10 @@ export class InputCharDirective implements OnInit, OnDestroy {
     this.attributeMutationObserver?.disconnect();
   }
 
+  /**
+   * Sets up the input character directive.
+   * This method updates the input disabled state and observes changes in the DOM using MutationObserver.
+   */
   setupInputChar(): void {
     this.updateInputDisabledState();
 
@@ -99,11 +103,19 @@ export class InputCharDirective implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Updates the disabled state of the input element.
+   */
   updateInputDisabledState(): void {
     const {disabled, readOnly} = this.htmlInputElement;
     this.componentRef.setInput('isInputDisabled', disabled || readOnly);
   }
 
+  /**
+   * Handles the change in disabled or readonly attribute of the input element.
+   * @param input - The HTMLInputElement to handle.
+   * @param attributeName - The name of the attribute that changed (disabled or readonly).
+   */
   handleDisabledReadonlyChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
     if (attributeName === 'disabled' || attributeName === 'readonly') {
       const isDisabledOrReadOnly = input.disabled || input.readOnly;
@@ -112,12 +124,23 @@ export class InputCharDirective implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Handles the change of the datentyp attribute for the input element.
+   * If the attributeName is 'ng-reflect-datentyp', it sets the 'datentyp' input of the component.
+   * @param input - The HTMLInputElement that triggered the change event.
+   * @param attributeName - The name of the attribute that changed.
+   */
   handleDatentypChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
     if (attributeName === 'ng-reflect-datentyp') {
       this.componentRef.setInput('datentyp', input.getAttribute('ng-reflect-datentyp'));
     }
   }
 
+  /**
+   * Retrieves the position of the current selection within an input element.
+   * @param event - The MouseEvent or KeyboardEvent that triggered the selection.
+   * @returns The position of the selection within the input element.
+   */
   getSelectionPosition(event: MouseEvent | KeyboardEvent): number {
     return (event.target as HTMLInputElement).selectionStart!;
   }
@@ -130,6 +153,12 @@ export class InputCharDirective implements OnInit, OnDestroy {
     this.selectionPosition += charLength;
   }
 
+  /**
+   * Builds the input value by inserting a character at the current selection position.
+   * @param value - The original input value.
+   * @param zeichen - The character to be inserted.
+   * @returns The updated input value with the character inserted at the current selection position.
+   */
   buildInputValue(value: string, zeichen: string): string {
     const beforeZeichen = value.substring(0, this.selectionPosition);
     const afterZeichen = value.substring(this.selectionPosition);
