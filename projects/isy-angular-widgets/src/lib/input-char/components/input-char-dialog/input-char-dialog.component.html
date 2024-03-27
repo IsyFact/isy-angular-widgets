@@ -1,4 +1,4 @@
-<div class="split" id="left-panel-side">
+<div class="split left-panel-side">
   <isy-multi-select-button
     (valueChange)="onSelection($event)"
     [dataToDisplay]="leftViewData"
@@ -6,7 +6,7 @@
   ></isy-multi-select-button>
 </div>
 
-<div class="split" id="right-panel-side">
+<div class="split right-panel-side">
   <p-selectButton
     [options]="displayedCharacters"
     [optionLabel]="'zeichen'"
@@ -14,7 +14,7 @@
     class="flex-grow-1 overflow-y-scroll character-select-button"
   >
   </p-selectButton>
-  <div id="lower-right-panel">
+  <div class="lower-right-panel">
     @if (selectedZeichenObjekt) {
       <isy-input-char-preview [zeichenObjekt]="selectedZeichenObjekt" class="flex-grow-1"></isy-input-char-preview>
     }

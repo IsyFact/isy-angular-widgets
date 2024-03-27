@@ -1,5 +1,5 @@
 <p-selectButton
-  class="all-select-button"
+  class="all-selectbutton"
   (onChange)="triggerUpdate(undefined)"
   [(ngModel)]="allOptionsModel"
   [options]="[{label: allButtonOptionsLabel}]"
@@ -15,7 +15,7 @@
         [options]="item.value"
         [(ngModel)]="models[item.key]"
         (onChange)="triggerUpdate(item.key)"
-        class="charset{{ $index }}-select-button"
+        class="charset-selectbutton charset-selectbutton--{{ $index }}"
       >
       </p-selectButton>
     </p-accordionTab>

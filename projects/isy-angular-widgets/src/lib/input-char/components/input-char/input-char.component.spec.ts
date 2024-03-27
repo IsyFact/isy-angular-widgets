@@ -144,13 +144,13 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.queryAll('.charset1-select-button div span');
+        const groupButtons = spectator.queryAll('.charset-selectbutton--1 div span');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = spectator.queryAll('#right-panel-side div span');
+        const groupButtons = spectator.queryAll('.right-panel-side div span');
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
     });

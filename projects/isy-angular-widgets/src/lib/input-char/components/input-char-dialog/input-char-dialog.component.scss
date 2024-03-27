@@ -7,13 +7,13 @@
   overflow-x: hidden;
 }
 
-#left-panel-side {
+.left-panel-side {
   left: 0;
   width: 30%;
   overflow-y: scroll;
 }
 
-#right-panel-side {
+.right-panel-side {
   right: 0;
   width: 70%;
   padding: 5px;
@@ -21,7 +21,7 @@
   flex-direction: column;
 }
 
-#lower-right-panel {
+.lower-right-panel {
   display: flex;
   bottom: 0;
   width: 100%;
@@ -33,34 +33,8 @@
 // not available. For a quick fix, the deprecated ng-deep is used; SASS variables should be used later.
 
 ::ng-deep {
-  // Common styles of all select buttons
-  p-selectButton .p-ripple.p-element.p-button {
-    background-color: transparent;
-    color: var(--text-color);
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--highlight-bg);
-    }
-
-    &.p-highlight {
-      background-color: var(--primary-color);
-      color: var(--primary-color-text);
-    }
-
-    &.p-highlight:hover {
-      background-color: var(--highlight-bg);
-      color: var(--text-color);
-    }
-  }
-
-  .character-select-button .p-buttonset .p-button:first-of-type,
-  .character-select-button .p-buttonset .p-button:last-of-type {
-    border-radius: 0;
-  }
-
   // Styles specific for right side select buttons
-  #right-panel-side p-selectButton {
+  .right-panel-side p-selectButton {
     .p-ripple.p-element.p-button {
       padding: 0.25rem;
       width: 32px;
@@ -73,12 +47,5 @@
         height: 24px;
       }
     }
-  }
-
-  // Using InputChar inside a primeNG panel container with toggleable option causes a display issue in the InputChar dialog
-  // Base and group character are displayed at the same time and overlap each other
-  // The issue is fixed by overwriting the CSS style below
-  .p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
-    overflow: hidden;
   }
 }

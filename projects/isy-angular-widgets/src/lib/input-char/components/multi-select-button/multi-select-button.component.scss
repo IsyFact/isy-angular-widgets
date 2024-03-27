@@ -1,67 +1,83 @@
 // To style PrimeNG widgets within a composition, we were unable to use own classes. A SASS interface is currently
 // not available. For a quick fix, the deprecated ng-deep is used; SASS variables should be used later.
 
-$select_button_text_color: black;
-$select_button_on_hover_background_color: grey;
-
 ::ng-deep {
   // Common styles of all select buttons
-  .p-selectButton .p-ripple.p-element.p-button {
-    border: none;
+  p-selectButton .p-ripple.p-element.p-button {
     background-color: transparent;
-    color: $select_button_text_color;
+    color: var(--text-color);
     cursor: pointer;
 
     &:hover {
-      background-color: $select_button_on_hover_background_color;
-      color: $select_button_text_color;
+      background-color: var(--highlight-bg);
     }
 
     &.p-highlight {
-      background-color: darkgrey;
+      background-color: var(--primary-color);
+      color: var(--primary-color-text);
     }
 
     &.p-highlight:hover {
-      background-color: $select_button_on_hover_background_color;
-      color: white;
+      background-color: var(--highlight-bg);
+      color: var(--text-color);
     }
   }
 
-  .p-accordion-header .p-accordion-header-link:focus {
-    box-shadow: none !important;
-  }
-
-  p-accordiontab {
-    // Fix specific for a buggy PrimeNG 14 behaviour where sometimes, content is shown although accordion is collapsed.
-    :not(.p-accordion-tab-active) .p-toggleable-content:not(.ng-animating) {
-      height: 0;
+  // Styles specific for left side (incl. select buttons)
+  .p-accordion {
+    .p-accordion-header .p-accordion-header-link:focus {
+      box-shadow: none !important;
     }
 
-    .p-accordion-content {
-      border: 0;
-      padding: 0;
-    }
-  }
+    p-accordiontab {
+      // Fix specific for a buggy PrimeNG 14 behaviour where sometimes, content is shown although accordion is collapsed.
+      :not(.p-accordion-tab-active) .p-toggleable-content:not(.ng-animating) {
+        height: 0;
+      }
 
-  // Styles specific for the select button inside the accordion
-  .select-button .p-ripple.p-element.p-button {
-    min-width: 50px;
+      .p-accordion-content {
+        border: 0;
+        padding: 0;
+      }
+    }
+
+    // Styles specific for left side select buttons
+    p-selectButton .p-ripple.p-element.p-button {
+      border: none;
+    }
+
+    // Styles specific for the Grundzeichen select button
+    .charset-selectbutton .p-ripple.p-element.p-button {
+      min-width: 50px;
+    }
+
+    .charset-selectbutton .p-selectbutton {
+      padding: 3px 2px;
+    }
   }
 
   // Styles specific for the "Select All" button
-  .all-select-button .p-ripple.p-element.p-button {
+  .all-selectbutton .p-ripple.p-element.p-button {
     width: 100%;
     font-weight: 600;
     text-align: start;
     height: 50px;
+    border: none;
     box-shadow: none !important;
 
     &:not(.p-highlight) {
-      background-color: var(--surface-b);
+      background-color: var(--surface-ground);
     }
 
     span {
       padding: 1rem;
     }
+  }
+
+  // Using InputChar inside a primeNG panel container with toggleable option causes a display issue in the InputChar dialog
+  // Base and group character are displayed at the same time and overlap each other
+  // The issue is fixed by overwriting the CSS style below
+  .p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
+    overflow: hidden;
   }
 }
