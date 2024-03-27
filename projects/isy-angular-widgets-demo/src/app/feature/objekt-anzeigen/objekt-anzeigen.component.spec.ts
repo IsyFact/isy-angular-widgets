@@ -213,11 +213,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   it('should add a new address to the FormArray when addNewAddress is called', () => {
-    const initialLength = spectator.component.getAddresses().length;
-    spectator.component.addNewAddress();
-    expect(spectator.component.getAddresses().length).toBe(initialLength + 1);
+    const initialLength = component.getAddresses().length;
+    component.addNewAddress();
+    expect(component.getAddresses().length).toBe(initialLength + 1);
 
-    const newAddress = spectator.component.getAddresses().at(initialLength);
+    const newAddress = component.getAddresses().at(initialLength);
     expect(newAddress.get('streetName')?.value).toBe('');
     expect(newAddress.get('streetNumber')?.value).toBe('');
     expect(newAddress.get('zip')?.value).toBe('');
@@ -226,29 +226,29 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   it('should return true if there is only one address', () => {
-    const addresses = spectator.component.getAddresses();
+    const addresses = component.getAddresses();
     addresses.clear();
-    addresses.push(spectator.component.createNewAddressFormGroup());
-    expect(spectator.component.disableDeleteButton()).toBeTrue();
+    addresses.push(component.createNewAddressFormGroup());
+    expect(component.disableDeleteButton()).toBeTrue();
   });
 
   it('should return false if there are multiple addresses', () => {
-    const addresses = spectator.component.getAddresses();
-    addresses.push(spectator.component.createNewAddressFormGroup());
-    expect(spectator.component.getAddresses().length).toBeGreaterThan(1);
-    expect(spectator.component.disableDeleteButton()).toBeFalse();
+    const addresses = component.getAddresses();
+    addresses.push(component.createNewAddressFormGroup());
+    expect(component.getAddresses().length).toBeGreaterThan(1);
+    expect(component.disableDeleteButton()).toBeFalse();
   });
 
   it('should disable the form and perform necessary cleanups on onCancel', () => {
-    spectator.component.personalInfoForm.enable();
-    spectator.component.onCancel();
-    expect(spectator.component.personalInfoForm.disabled).toBeTrue();
+    component.personalInfoForm.enable();
+    component.onCancel();
+    expect(component.personalInfoForm.disabled).toBeTrue();
   });
 
   it('should remove the address at the given index from the FormArray', () => {
-    const addresses = spectator.component.getAddresses();
+    const addresses = component.getAddresses();
     addresses.push(
-      spectator.component.createNewAddressFormGroup({
+      component.createNewAddressFormGroup({
         street: 'Street 1',
         number: '1',
         zip: 123456,
@@ -258,7 +258,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     );
 
     addresses.push(
-      spectator.component.createNewAddressFormGroup({
+      component.createNewAddressFormGroup({
         street: 'Street 2',
         number: '2',
         zip: 654321,
@@ -267,10 +267,10 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
       })
     );
 
-    const initialCount = spectator.component.getAddresses().length;
-    spectator.component.removeAddress(0);
-    expect(spectator.component.getAddresses().length).toBe(initialCount - 1);
-    const remainingAddress = spectator.component.getAddresses().at(0).value;
+    const initialCount = component.getAddresses().length;
+    component.removeAddress(0);
+    expect(component.getAddresses().length).toBe(initialCount - 1);
+    const remainingAddress = component.getAddresses().at(0).value;
     expect(remainingAddress.streetName).toEqual('Street 1');
     expect(remainingAddress.city).toEqual('City A');
   });
