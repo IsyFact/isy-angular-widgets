@@ -1,5 +1,5 @@
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {charsAndNumbers, onlyChars, charsAndMinus, onlyNumbers, required} from '../../shared/validation/validator';
+import {FormControl, FormGroup} from '@angular/forms';
+import {charsAndNumbers, onlyChars, onlyNumbers, required} from '../../shared/validation/validator';
 import {Person} from '../../shared/model/person';
 
 /**
@@ -16,11 +16,6 @@ const requiredAndOnlyChars = [required, onlyChars];
  * An Array with 2 validation rules: [requires, allow only characters (including German letters and numbers]
  */
 const requiredAndCharsAndNumbers = [required, charsAndNumbers];
-
-/**
- * Used for forms building
- */
-const fb = new FormBuilder();
 
 /**
  * @returns an initialized form group
@@ -40,11 +35,7 @@ export function initIdForm(person: Person): FormGroup {
  */
 export function initPersoenlicheInformationenForm(person: Person): FormGroup {
   return new FormGroup({
-    vornamen: fb.array([
-      {
-        vorname: new FormControl(person.personalien.vorname, charsAndMinus)
-      }
-    ]),
+    vorname: new FormControl(person.personalien.vorname, onlyChars),
     nachname: new FormControl(person.personalien.nachname, requiredAndOnlyChars),
     geschlecht: new FormControl(person.personalien.geschlecht, requiredAndOnlyChars)
   });
