@@ -38,7 +38,7 @@ export class ObjektAnzeigenComponent {
   ) {
     const personalien = this.person.personalien;
     const addresses = personalien.addresses;
-    const addressGroup = addresses ? this.createNewAddressFomrGroup(addresses[0]) : this.createNewAddressFomrGroup();
+    const addressGroup = addresses ? this.createNewAddressFormGroup(addresses[0]) : this.createNewAddressFormGroup();
 
     this.personalInfoForm = this.fb.group({
       lastName: new FormControl(personalien.nachname, required),
@@ -101,7 +101,7 @@ export class ObjektAnzeigenComponent {
 
   addNewAddress(): void {
     // ToDo: Check if address already added and invalid - if yes -> don't add a new address
-    const newAddress = this.createNewAddressFomrGroup();
+    const newAddress = this.createNewAddressFormGroup();
     markFormAsDirty(newAddress);
 
     const addresses = this.getAddresses();
@@ -113,7 +113,7 @@ export class ObjektAnzeigenComponent {
     return this.getAddresses().length > 1;
   }
 
-  createNewAddressFomrGroup(value?: Address): FormGroup {
+  createNewAddressFormGroup(value?: Address): FormGroup {
     return this.fb.group({
       streetName: new FormControl(value ? value.street : '', required),
       streetNumber: new FormControl(value ? value.number : '', required),
@@ -140,9 +140,6 @@ export class ObjektAnzeigenComponent {
 
   onCancel(): void {
     this.personalInfoForm.disable();
-    const addresses = this.getAddresses();
-    const availableAddresses = addresses.length - 1;
-    // ToDo: Check valid state
   }
 
   getAddresses(): FormArray {
