@@ -47,17 +47,17 @@
     }
 
     // Styles specific for the Grundzeichen select button
-    .charset-selectbutton .p-ripple.p-element.p-button {
+    .charset-selectButton .p-ripple.p-element.p-button {
       min-width: 50px;
     }
 
-    .charset-selectbutton .p-selectbutton {
+    .charset-selectButton .p-selectbutton {
       padding: 3px 2px;
     }
   }
 
   // Styles specific for the "Select All" button
-  .all-selectbutton .p-ripple.p-element.p-button {
+  .all-selectButton .p-ripple.p-element.p-button {
     width: 100%;
     font-weight: 600;
     text-align: start;

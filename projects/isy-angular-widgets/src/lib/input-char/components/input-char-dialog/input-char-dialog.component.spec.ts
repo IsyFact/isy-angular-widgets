@@ -179,7 +179,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
     const schriftzeichengruppeSelectButton = fixture.debugElement
-      .queryAll(By.css('.charset-selectbutton--1 .p-buttonset div span'))
+      .queryAll(By.css('.charset-selectButton--1 .p-buttonset div span'))
       .find((elem) => elem.nativeElement.textContent === schriftzeichengruppe)?.nativeElement as HTMLElement;
     expect(schriftzeichengruppeSelectButton).toBeTruthy();
 
@@ -189,7 +189,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
   const selectBasis = (basis: string): void => {
     const basisSelectButton = fixture.debugElement
-      .queryAll(By.css('.charset-selectbutton--0 .p-buttonset div span'))
+      .queryAll(By.css('.charset-selectButton--0 .p-buttonset div span'))
       .find((elem) => elem.nativeElement.textContent === basis)?.nativeElement as HTMLElement;
     expect(basisSelectButton).toBeTruthy();
 
@@ -198,12 +198,12 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   };
 
   it(`should show ${bases.length} available bases`, () => {
-    const baseButtons = spectator.queryAll('.charset-selectbutton--0 .p-buttonset div');
+    const baseButtons = spectator.queryAll('.charset-selectButton--0 .p-buttonset div');
     expect(baseButtons.length).toEqual(bases.length);
   });
 
   it(`should show ${groups.length} available groups`, () => {
-    const groupButtons = spectator.queryAll('.charset-selectbutton--1 .p-buttonset div');
+    const groupButtons = spectator.queryAll('.charset-selectButton--1 .p-buttonset div');
     expect(groupButtons.length).toEqual(groups.length);
   });
 

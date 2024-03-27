@@ -115,7 +115,7 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
     const schriftzeichengruppeSelectButton = fixture.debugElement
-      .queryAll(By.css('.charset-selectbutton--1 .p-buttonset div span'))
+      .queryAll(By.css('.charset-selectButton--1 .p-buttonset div span'))
       .find((elem) => elem.nativeElement.textContent === schriftzeichengruppe)?.nativeElement as HTMLElement;
     expect(schriftzeichengruppeSelectButton).toBeTruthy();
 
@@ -125,7 +125,7 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   const selectBasis = (basis: string): void => {
     const basisSelectButton = fixture.debugElement
-      .queryAll(By.css('.charset-selectbutton--0 .p-buttonset div span'))
+      .queryAll(By.css('.charset-selectButton--0 .p-buttonset div span'))
       .find((elem) => elem.nativeElement.textContent === basis)?.nativeElement as HTMLElement;
     expect(basisSelectButton).toBeTruthy();
 
@@ -136,20 +136,20 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
   it('should always have only one selection when clicking through multiple selections', () => {
     bases.forEach((base: string) => {
       selectBasis(base);
-      expect(fixture.debugElement.queryAll(By.css('.charset-selectbutton--0 .p-button.p-highlight')).length).toEqual(1);
+      expect(fixture.debugElement.queryAll(By.css('.charset-selectButton--0 .p-button.p-highlight')).length).toEqual(1);
       expect(
         fixture.debugElement
-          .queryAll(By.css('.charset-selectbutton--0 .p-button'))
+          .queryAll(By.css('.charset-selectButton--0 .p-button'))
           .filter((elem) => elem.attributes['aria-checked'] === 'true').length
       ).toEqual(1);
     });
 
     groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
       selectSchriftzeichengruppe(schriftzeichengruppe);
-      expect(fixture.debugElement.queryAll(By.css('.charset-selectbutton--1 .p-button.p-highlight')).length).toEqual(1);
+      expect(fixture.debugElement.queryAll(By.css('.charset-selectButton--1 .p-button.p-highlight')).length).toEqual(1);
       expect(
         fixture.debugElement
-          .queryAll(By.css('.charset-selectbutton--1 .p-button'))
+          .queryAll(By.css('.charset-selectButton--1 .p-button'))
           .filter((elem) => elem.attributes['aria-checked'] === 'true').length
       ).toEqual(1);
     });
@@ -199,11 +199,11 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   bases.forEach((base: string) => {
     it(`should only have a ${base} base enabled active after corresponding selection"`, () => {
-      const allSelectButton = spectator.debugElement.query(By.css('.all-selectbutton'))
+      const allSelectButton = spectator.debugElement.query(By.css('.all-selectButton'))
         .componentInstance as SelectButton;
-      const baseSelectButton = spectator.debugElement.query(By.css('.charset-selectbutton--0'))
+      const baseSelectButton = spectator.debugElement.query(By.css('.charset-selectButton--0'))
         .componentInstance as SelectButton;
-      const groupSelectButton = spectator.debugElement.query(By.css('.charset-selectbutton--1'))
+      const groupSelectButton = spectator.debugElement.query(By.css('.charset-selectButton--1'))
         .componentInstance as SelectButton;
 
       selectBasis(base);
@@ -216,11 +216,11 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   groups.forEach((group: Schriftzeichengruppe) => {
     it(`should only have a ${group} group enabled active after corresponding selection"`, () => {
-      const allSelectButton = spectator.debugElement.query(By.css('.all-selectbutton'))
+      const allSelectButton = spectator.debugElement.query(By.css('.all-selectButton'))
         .componentInstance as SelectButton;
-      const baseSelectButton = spectator.debugElement.query(By.css('.charset-selectbutton--0'))
+      const baseSelectButton = spectator.debugElement.query(By.css('.charset-selectButton--0'))
         .componentInstance as SelectButton;
-      const groupSelectButton = spectator.debugElement.query(By.css('.charset-selectbutton--1'))
+      const groupSelectButton = spectator.debugElement.query(By.css('.charset-selectButton--1'))
         .componentInstance as SelectButton;
 
       selectSchriftzeichengruppe(group);
