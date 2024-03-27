@@ -144,7 +144,7 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.queryAll('.charset-selectButton--1 div span');
+        const groupButtons = spectator.queryAll('.charset-selectbutton--1 div span');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
