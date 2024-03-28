@@ -1,3 +1,7 @@
+# 17.3.0
+## Demo-Anwendung
+- ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
+
 # 17.2.0 - 19.03.2024
 ## Fixes
 - ISY-775: Abschnitt Getting Started in der Readme beschreibt Einsatz des Bausteins mit Standalone Components
@@ -21,6 +25,7 @@
 - ISY-634: Formulare wurden auf den Seiten _Objekt suchen_ und _Objekt Anzeigen_ für verbesserte Responsivität überarbeitet
 - ISY-978: Die Tabelle auf der Seite _Objekt suchen_ zeigt exemplarisch, wie ein Zeilenumbruch in der Tabellenüberschrift verhindert werden kann
 - ISY-816: Die Tabelle auf der Seite _Objekt suchen_ verwendet jetzt die PrimeNG Standard Filter und Sortierung
+- ISY-389: Imports in der Demo-Anwendung zur Library gehen nun über den Library-Namen
 
 # 17.1.0 - 18.01.2024
 ## Fixes

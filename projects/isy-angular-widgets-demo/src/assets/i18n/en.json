@@ -75,7 +75,9 @@
       "clearSeebach": "Clear search",
       "showSecretFields": "Show secret fields",
       "intelligenceNotes": "Intelligence notes",
-      "addOrEditFact": "Add/Edit fact"
+      "addOrEditFact": "Add/Edit fact",
+      "addResidence": "Add residence",
+      "removeResidence": "Remove residence"
     },
     "labels": {
       "id": "ID",
@@ -106,7 +108,16 @@
       "ablaufdatumKreditkarte": "Credit card expiration date",
       "identityDocument": "Identity Document",
       "bilanz": "Balance",
-      "alle": "All"
+      "alle": "All",
+      "residences": "Residences",
+      "address": {
+        "street": "Street",
+        "number": "Number",
+        "zipCode": "ZIP",
+        "city": "City",
+        "country": "Country"
+      },
+      "deleteButton": "to delete selected value"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",

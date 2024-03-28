@@ -18,3 +18,7 @@
   margin-right: 0;
   margin-bottom: 3px;
 }
+
+:host ::ng-deep div[data-pc-name='inputgroupaddon'] {
+  width: 100%;
+}

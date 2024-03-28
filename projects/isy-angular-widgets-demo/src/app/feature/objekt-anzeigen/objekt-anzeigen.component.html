@@ -276,12 +276,137 @@
               [maxFileSize]="1000000"
               [customUpload]="true"
               (uploadHandler)="uploadFile($event)"
+              chooseIcon="pi pi-upload"
               chooseLabel="{{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}"
             >
             </p-fileUpload>
           </div>
         </div>
       </div>
+
+      <p-divider></p-divider>
+
+      <h4>
+        {{ 'isyAngularWidgetsDemo.labels.residences' | translate }}
+      </h4>
+      @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
+        <p-inputGroup class="mb-3">
+          <p-inputGroupAddon class="w-full">
+            <div class="grid align-items-center">
+              <div class="col">
+                <h4 class="m-0">{{ i + 1 }}.</h4>
+              </div>
+              <div class="col text-right">
+                <p-button
+                  class="address-delete-button"
+                  icon="pi pi-trash"
+                  [text]="true"
+                  [rounded]="true"
+                  [severity]="'danger'"
+                  [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
+                  (click)="removeAddress(i)"
+                  ariaLabel="{{ 'isyAngularWidgetsDemo.labels.deleteButton' | translate }}"
+                >
+                </p-button>
+              </div>
+            </div>
+            <div class="grid mt-3" [formArrayName]="'addresses'">
+              <ng-container [formGroupName]="i">
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        formControlName="{{ addressFormControlNames[0] }}"
+                        id="streetName"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="streetName">
+                        {{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        formControlName="{{ addressFormControlNames[1] }}"
+                        id="streetNumber"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="streetNumber">
+                        {{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        formControlName="{{ addressFormControlNames[2] }}"
+                        id="zip"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="zip">
+                        {{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        formControlName="{{ addressFormControlNames[3] }}"
+                        id="city"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="city">
+                        {{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <div class="field">
+                    <span class="p-float-label">
+                      <input
+                        id="country"
+                        formControlName="{{ addressFormControlNames[4] }}"
+                        class="w-full"
+                        type="text"
+                        pInputText
+                      />
+                      <label for="country">
+                        {{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}
+                      </label>
+                    </span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </p-inputGroupAddon>
+        </p-inputGroup>
+      }
+      <button
+        pButton
+        label="{{ 'isyAngularWidgetsDemo.actions.addResidence' | translate }}"
+        icon="pi pi-plus"
+        iconPos="left"
+        [disabled]="personalInfoForm.disabled"
+        (click)="addNewAddress()"
+      ></button>
+
+      <p-divider></p-divider>
 
       <div class="field field-checkbox my-5">
         <p-inputSwitch inputId="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-inputSwitch>
@@ -294,7 +419,7 @@
           <div class="grid m-0 align-items-center">
             <div class="col-12 md:col-6 xl:col-4">
               <div class="field field-checkbox">
-                <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"> </p-checkbox>
+                <p-checkbox id="id-required" formControlName="idRequired" [binary]="true"></p-checkbox>
                 <label for="id-required" class="m-0 ml-3">
                   {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
                 </label>
@@ -358,7 +483,7 @@
           icon="pi pi-user-edit"
           iconPos="left"
           [label]="'isyAngularWidgetsDemo.actions.edit' | translate"
-          (click)="personalInfoForm.enable()"
+          (click)="onEdit()"
         ></button>
       } @else {
         <div id="div-save-cancel" class="p-buttonset">
@@ -378,7 +503,7 @@
             class="p-button-outlined"
             iconPos="left"
             [label]="'isyAngularWidgetsDemo.actions.cancel' | translate"
-            (click)="this.personalInfoForm.disable()"
+            (click)="onCancel()"
           ></button>
         </div>
       }
@@ -414,7 +539,7 @@
         </tr>
       </ng-template>
     </p-table>
-    <demo-dialog-sachverhalte-bearbeiten [person]="person"> </demo-dialog-sachverhalte-bearbeiten>
+    <demo-dialog-sachverhalte-bearbeiten [person]="person"></demo-dialog-sachverhalte-bearbeiten>
   </p-tabPanel>
 </p-tabView>
 <p-toast></p-toast>

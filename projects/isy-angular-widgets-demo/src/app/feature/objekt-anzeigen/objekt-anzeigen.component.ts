@@ -1,12 +1,13 @@
 import {Component, Input} from '@angular/core';
-import {Person} from '../../shared/model/person';
+import {Address} from '../../shared/model/person';
 import {TranslateService} from '@ngx-translate/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
 import {Validation} from '@isy-angular-widgets/validation/validation';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
+import {initializedPerson} from './data';
+import {markFormAsDirty} from '../../shared/validation/form-helper';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -18,78 +19,64 @@ import {FileUploadHandlerEvent} from 'primeng/fileupload';
 })
 export class ObjektAnzeigenComponent {
   readonly intelligenceNotesMaxLength = 255;
+
   showSecretFields = false;
 
   personalInfoForm: FormGroup;
 
-  @Input() person: Person = {
-    id: '1',
-    personalien: {
-      geburtsdatum: '03.08.1980',
-      geburtsname: 'Mustermann',
-      geburtsort: 'Köln',
-      geschlecht: 'Männlich',
-      nachname: 'Mustermann',
-      staatsangehoerigkeit: 'Deutsch',
-      vorname: 'Max',
-      ausweispflichtig: true,
-      telefonnummer: '',
-      geheimdienstnotizen: '',
-      sicherheitsstufe: 0,
-      einreisedatum: 'xx.xx.2000',
-      abreisedatum: 'xx.xx.2024',
-      ablaufdatumReisepass: '',
-      kreditkartennummer: '',
-      ablaufdatumKreditkarte: '',
-      identityDocument: '',
-      bilanz: 0,
-      status: ''
-    },
-    sachverhalte: [
-      'Hat einen Antrag auf BAFÖG gestellt',
-      'Wurde wegen Falschparkens ermahnt',
-      'Steht auf der NO-FLY-Liste'
-    ]
-  };
+  addressFormControlNames: string[] = [];
+
+  adressFormArray?: FormArray;
+
+  @Input() person = initializedPerson;
 
   constructor(
     public translate: TranslateService,
     private fb: FormBuilder,
     private messageService: MessageService
   ) {
+    const personalien = this.person.personalien;
+    const addresses = personalien.addresses;
+    const addressGroup = addresses ? this.createNewAddressFormGroup(addresses[0]) : this.createNewAddressFormGroup();
+
     this.personalInfoForm = this.fb.group({
-      lastName: new FormControl(this.person.personalien.nachname, required),
-      birthName: new FormControl(this.person.personalien.geburtsname),
-      birthplace: new FormControl(this.person.personalien.geburtsort),
-      firstName: new FormControl(this.person.personalien.vorname, required),
-      gender: new FormControl(this.person.personalien.geschlecht),
+      lastName: [personalien.nachname, Validators.required],
+      birthName: [personalien.geburtsname],
+      birthplace: [personalien.geburtsort],
+      firstName: [personalien.vorname, Validators.required],
+      gender: [personalien.geschlecht],
       // Demo: Validator isInPast - If the given value is a valid date, it will be checked if the date is in the past
-      birthDate: new FormControl(this.person.personalien.geburtsdatum, Validation.isInPast),
-      nationality: new FormControl(this.person.personalien.staatsangehoerigkeit),
-      phoneNumber: new FormControl(this.person.personalien.telefonnummer),
-      dateOfEntry: new FormControl(this.person.personalien.einreisedatum),
-      idRequired: new FormControl(this.person.personalien.ausweispflichtig),
-      securityLevel: new FormControl(this.person.personalien.sicherheitsstufe),
-      intelligenceNotes: new FormControl(
-        this.person.personalien.geheimdienstnotizen,
-        Validators.maxLength(this.intelligenceNotesMaxLength)
-      ),
+      birthDate: [personalien.geburtsdatum, Validation.isInPast],
+      nationality: [personalien.staatsangehoerigkeit],
+      phoneNumber: [personalien.telefonnummer],
+      dateOfEntry: [personalien.einreisedatum],
+      idRequired: [personalien.ausweispflichtig],
+      securityLevel: [personalien.sicherheitsstufe],
+      intelligenceNotes: [personalien.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength)],
       // Demo: Validator validUnspecifiedDate - Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY
-      dateOfDeparture: new FormControl(this.person.personalien.abreisedatum, Validation.validUnspecifiedDate),
+      dateOfDeparture: [personalien.abreisedatum, Validation.validUnspecifiedDate],
       // Demo: Validator isInFuture - If the specified value is a valid date, it will be checked if the date is in the future
-      passportExpirationDate: new FormControl(this.person.personalien.ablaufdatumReisepass, Validation.isInFuture),
+      passportExpirationDate: [personalien.ablaufdatumReisepass, Validation.isInFuture],
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
-      creditCardNumber: new FormControl(this.person.personalien.kreditkartennummer, Validation.validCreditCardNumber),
+      creditCardNumber: [personalien.kreditkartennummer, Validation.validCreditCardNumber],
       // Demo: Validator dateFormat - Checks that the date is a valid date in ISO8601
-      creditCardExpirationDate: new FormControl(this.person.personalien.ablaufdatumKreditkarte, Validation.isoDate),
-      identityDocument: new FormControl(this.person.personalien.identityDocument, required)
+      creditCardExpirationDate: [personalien.ablaufdatumKreditkarte, Validation.isoDate],
+      identityDocument: [personalien.identityDocument, Validators.required],
+      addresses: this.fb.array([addressGroup])
     });
+
     this.personalInfoForm.disable();
+
+    // Exports the addresses form array for the iteration inside the template
+    this.adressFormArray = this.getAddresses();
+    // Exports the form control names of the addresses form array
+    this.addressFormControlNames = Object.keys(this.getAddresses().controls[0].value as string[]);
   }
 
   uploadFile(event: FileUploadHandlerEvent): void {
-    this.personalInfoForm.get('identityDocument')?.setValue(event.files[0].name);
-    this.personalInfoForm.get('identityDocument')?.enable();
+    const identityDocument = this.personalInfoForm.get('identityDocument');
+    identityDocument?.setValue(event.files[0].name);
+    identityDocument?.enable();
     this.personalInfoForm.updateValueAndValidity();
   }
 
@@ -105,5 +92,51 @@ export class ObjektAnzeigenComponent {
         lastName: person.lastName
       }) as string
     });
+  }
+
+  addNewAddress(): void {
+    const newAddress = this.createNewAddressFormGroup();
+    markFormAsDirty(newAddress);
+
+    const addresses = this.getAddresses();
+    addresses.push(newAddress);
+  }
+
+  isAnyAddressAvailable(): boolean {
+    return this.getAddresses().length > 1;
+  }
+
+  createNewAddressFormGroup(value?: Address): FormGroup {
+    return this.fb.group({
+      streetName: [value?.street ?? ''],
+      streetNumber: [value?.number ?? ''],
+      zip: [value?.zip ?? ''],
+      city: [value?.city ?? ''],
+      country: [value?.country ?? '']
+    });
+  }
+
+  disableDeleteButton(): boolean {
+    return this.getAddresses().length === 1;
+  }
+
+  removeAddress(index: number): void {
+    const addresses = this.getAddresses();
+
+    if (index >= 0 && addresses.length > 1) {
+      addresses.removeAt(index);
+    }
+  }
+
+  onEdit(): void {
+    this.personalInfoForm.enable();
+  }
+
+  onCancel(): void {
+    this.personalInfoForm.disable();
+  }
+
+  getAddresses(): FormArray {
+    return this.personalInfoForm.get('addresses') as FormArray;
   }
 }

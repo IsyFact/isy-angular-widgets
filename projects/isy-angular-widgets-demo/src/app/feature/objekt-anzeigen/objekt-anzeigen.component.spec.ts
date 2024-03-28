@@ -174,7 +174,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(cancelButton).toBeNull();
   });
 
-  it('should display notificatioon message if personalien have been saved', () => {
+  it('should display notification message if personalien have been saved', () => {
     const msg = createSpyObject(MessageService);
     msg.add({});
     component.savePersonalien();
@@ -210,5 +210,68 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
 
     const fileUploadRow = spectator.query('.p-fileupload-row');
     expect(fileUploadRow).not.toBeUndefined();
+  });
+
+  it('should add a new address to the FormArray when addNewAddress is called', () => {
+    const initialLength = component.getAddresses().length;
+    component.addNewAddress();
+    expect(component.getAddresses().length).toBe(initialLength + 1);
+
+    const newAddress = component.getAddresses().at(initialLength);
+    expect(newAddress.get('streetName')?.value).toBe('');
+    expect(newAddress.get('streetNumber')?.value).toBe('');
+    expect(newAddress.get('zip')?.value).toBe('');
+    expect(newAddress.get('city')?.value).toBe('');
+    expect(newAddress.get('country')?.value).toBe('');
+  });
+
+  it('should return true if there is only one address', () => {
+    const addresses = component.getAddresses();
+    addresses.clear();
+    addresses.push(component.createNewAddressFormGroup());
+    expect(component.disableDeleteButton()).toBeTrue();
+  });
+
+  it('should return false if there are multiple addresses', () => {
+    const addresses = component.getAddresses();
+    addresses.push(component.createNewAddressFormGroup());
+    expect(component.getAddresses().length).toBeGreaterThan(1);
+    expect(component.disableDeleteButton()).toBeFalse();
+  });
+
+  it('should disable the form on onCancel', () => {
+    component.personalInfoForm.enable();
+    component.onCancel();
+    expect(component.personalInfoForm.disabled).toBeTrue();
+  });
+
+  it('should remove the address at the given index from the FormArray', () => {
+    const addresses = component.getAddresses();
+    addresses.push(
+      component.createNewAddressFormGroup({
+        street: 'Street 1',
+        number: '1',
+        zip: 123456,
+        city: 'City A',
+        country: 'Country A'
+      })
+    );
+
+    addresses.push(
+      component.createNewAddressFormGroup({
+        street: 'Street 2',
+        number: '2',
+        zip: 654321,
+        city: 'City B',
+        country: 'Country B'
+      })
+    );
+
+    const initialCount = component.getAddresses().length;
+    component.removeAddress(0);
+    expect(component.getAddresses().length).toBe(initialCount - 1);
+    const remainingAddress = component.getAddresses().at(0).value;
+    expect(remainingAddress.streetName).toEqual('Street 1');
+    expect(remainingAddress.city).toEqual('City A');
   });
 });
