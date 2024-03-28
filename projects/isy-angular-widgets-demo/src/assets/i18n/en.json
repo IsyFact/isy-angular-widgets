@@ -111,7 +111,8 @@
         "zipCode": "ZIP",
         "city": "City",
         "country": "Country"
-      }
+      },
+      "deleteButton": "to delete selected value"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",

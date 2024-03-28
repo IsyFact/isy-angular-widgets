@@ -110,7 +110,8 @@
         "zipCode": "PLZ",
         "city": "Ort",
         "country": "Land"
-      }
+      },
+      "deleteButton": "löschen des ausgewählten Werts"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",
