@@ -1,9 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {Address} from '../../shared/model/person';
 import {TranslateService} from '@ngx-translate/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import {required} from '../../shared/validation/validator';
 import {PersonalInformation} from './model/forms';
 import {Validation} from '@isy-angular-widgets/validation/validation';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
@@ -41,33 +40,31 @@ export class ObjektAnzeigenComponent {
     const addressGroup = addresses ? this.createNewAddressFormGroup(addresses[0]) : this.createNewAddressFormGroup();
 
     this.personalInfoForm = this.fb.group({
-      lastName: new FormControl(personalien.nachname, required),
-      birthName: new FormControl(personalien.geburtsname),
-      birthplace: new FormControl(personalien.geburtsort),
-      firstName: new FormControl(personalien.vorname, required),
-      gender: new FormControl(personalien.geschlecht),
+      lastName: [personalien.nachname, Validators.required],
+      birthName: [personalien.geburtsname],
+      birthplace: [personalien.geburtsort],
+      firstName: [personalien.vorname, Validators.required],
+      gender: [personalien.geschlecht],
       // Demo: Validator isInPast - If the given value is a valid date, it will be checked if the date is in the past
-      birthDate: new FormControl(personalien.geburtsdatum, Validation.isInPast),
-      nationality: new FormControl(personalien.staatsangehoerigkeit),
-      phoneNumber: new FormControl(personalien.telefonnummer),
-      dateOfEntry: new FormControl(personalien.einreisedatum),
-      idRequired: new FormControl(personalien.ausweispflichtig),
-      securityLevel: new FormControl(personalien.sicherheitsstufe),
-      intelligenceNotes: new FormControl(
-        personalien.geheimdienstnotizen,
-        Validators.maxLength(this.intelligenceNotesMaxLength)
-      ),
+      birthDate: [personalien.geburtsdatum, Validation.isInPast],
+      nationality: [personalien.staatsangehoerigkeit],
+      phoneNumber: [personalien.telefonnummer],
+      dateOfEntry: [personalien.einreisedatum],
+      idRequired: [personalien.ausweispflichtig],
+      securityLevel: [personalien.sicherheitsstufe],
+      intelligenceNotes: [personalien.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength)],
       // Demo: Validator validUnspecifiedDate - Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY
-      dateOfDeparture: new FormControl(personalien.abreisedatum, Validation.validUnspecifiedDate),
+      dateOfDeparture: [personalien.abreisedatum, Validation.validUnspecifiedDate],
       // Demo: Validator isInFuture - If the specified value is a valid date, it will be checked if the date is in the future
-      passportExpirationDate: new FormControl(personalien.ablaufdatumReisepass, Validation.isInFuture),
+      passportExpirationDate: [personalien.ablaufdatumReisepass, Validation.isInFuture],
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
-      creditCardNumber: new FormControl(personalien.kreditkartennummer, Validation.validCreditCardNumber),
+      creditCardNumber: [personalien.kreditkartennummer, Validation.validCreditCardNumber],
       // Demo: Validator dateFormat - Checks that the date is a valid date in ISO8601
-      creditCardExpirationDate: new FormControl(personalien.ablaufdatumKreditkarte, Validation.isoDate),
-      identityDocument: new FormControl(personalien.identityDocument, required),
+      creditCardExpirationDate: [personalien.ablaufdatumKreditkarte, Validation.isoDate],
+      identityDocument: [personalien.identityDocument, Validators.required],
       addresses: this.fb.array([addressGroup])
     });
+
     this.personalInfoForm.disable();
 
     // Exports the addresses form array for the iteration inside the template
@@ -100,13 +97,11 @@ export class ObjektAnzeigenComponent {
   }
 
   addNewAddress(): void {
-    // ToDo: Check if address already added and invalid - if yes -> don't add a new address
     const newAddress = this.createNewAddressFormGroup();
     markFormAsDirty(newAddress);
 
     const addresses = this.getAddresses();
     addresses.push(newAddress);
-    // ToDo: Update the save functionality and unit tests ???
   }
 
   isAnyAddressAvailable(): boolean {
@@ -115,11 +110,11 @@ export class ObjektAnzeigenComponent {
 
   createNewAddressFormGroup(value?: Address): FormGroup {
     return this.fb.group({
-      streetName: new FormControl(value ? value.street : '', required),
-      streetNumber: new FormControl(value ? value.number : '', required),
-      zip: new FormControl(value ? value.zip : '', required),
-      city: new FormControl(value ? value.city : '', required),
-      country: new FormControl(value ? value.country : '', required)
+      streetName: [value?.street ?? ''],
+      streetNumber: [value?.number ?? ''],
+      zip: [value?.zip ?? ''],
+      city: [value?.city ?? ''],
+      country: [value?.country ?? '']
     });
   }
 
@@ -129,12 +124,13 @@ export class ObjektAnzeigenComponent {
 
   removeAddress(index: number): void {
     const addresses = this.getAddresses();
-    addresses.removeAt(index);
-    // ToDo: Must be the form validity updated ???
+
+    if (index >= 0 && index < addresses.length) {
+      addresses.removeAt(index);
+    }
   }
 
   onEdit(): void {
-    // ToDo: on edit functionalitty + if error stop action OR delete address with error ???
     this.personalInfoForm.enable();
   }
 

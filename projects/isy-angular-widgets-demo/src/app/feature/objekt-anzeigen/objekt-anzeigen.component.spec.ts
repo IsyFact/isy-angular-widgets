@@ -174,7 +174,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(cancelButton).toBeNull();
   });
 
-  it('should display notificatioon message if personalien have been saved', () => {
+  it('should display notification message if personalien have been saved', () => {
     const msg = createSpyObject(MessageService);
     msg.add({});
     component.savePersonalien();
@@ -239,7 +239,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(component.disableDeleteButton()).toBeFalse();
   });
 
-  it('should disable the form and perform necessary cleanups on onCancel', () => {
+  it('should disable the form on onCancel', () => {
     component.personalInfoForm.enable();
     component.onCancel();
     expect(component.personalInfoForm.disabled).toBeTrue();

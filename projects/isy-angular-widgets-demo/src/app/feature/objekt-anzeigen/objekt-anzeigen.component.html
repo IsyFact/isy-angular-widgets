@@ -290,14 +290,14 @@
       </h4>
       @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
         <p-inputGroup class="mb-3">
-          <p-inputGroupAddon>
-            <div class="grid">
+          <p-inputGroupAddon class="w-full">
+            <div class="grid align-items-center">
               <div class="col">
-                <h4 class="m-0 pb-3 align-items-end">{{ i + 1 }}.</h4>
+                <h4 class="m-0">{{ i + 1 }}.</h4>
               </div>
-              <div class="col">
+              <div class="col text-right">
                 <p-button
-                  id="address-delete-button"
+                  class="address-delete-button"
                   icon="pi pi-trash"
                   [text]="true"
                   [rounded]="true"
