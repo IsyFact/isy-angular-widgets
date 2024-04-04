@@ -23,8 +23,7 @@ import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/inp
     ObjektSuchenComponent,
     PersoenlicheInformationenComponent,
     ResultListComponent,
-    RequiredLabelComponent,
-    InputCharDirective
+    RequiredLabelComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +38,8 @@ import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/inp
     ReactiveFormsModule,
     WizardModule,
     TableModule,
-    MultiSelectModule
+    MultiSelectModule,
+    InputCharDirective
   ],
   providers: [DateService]
 })

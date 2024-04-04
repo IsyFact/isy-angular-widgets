@@ -31,7 +31,7 @@ import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 
 @NgModule({
-  declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent, InputCharDirective],
+  declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
   providers: [],
   imports: [
     CommonModule,
@@ -61,7 +61,8 @@ import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/inp
     FormControlPipe,
     DividerModule,
     InputGroupModule,
-    InputGroupAddonModule
+    InputGroupAddonModule,
+    InputCharDirective
   ]
 })
 export class ObjektAnzeigenModule {}
