@@ -2,6 +2,13 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, On
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
+import {CommonModule} from '@angular/common'; // For common directives like *ngIf, *ngFor, etc.
+import {ButtonModule} from 'primeng/button';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {AccordionModule} from 'primeng/accordion';
+import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
+import {FormsModule} from '@angular/forms';
+import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 
 /**
  * @internal
@@ -9,7 +16,17 @@ import {CharacterService} from '../../services/character.service';
 @Component({
   selector: 'isy-input-char-dialog',
   templateUrl: './input-char-dialog.component.html',
-  styleUrls: ['./input-char-dialog.component.scss']
+  styleUrls: ['./input-char-dialog.component.scss'], // Add necessary Angular modules here
+  standalone: true,
+  imports: [
+    CommonModule,
+    ButtonModule,
+    SelectButtonModule,
+    AccordionModule,
+    FormsModule,
+    InputCharPreviewComponent,
+    MultiSelectButtonComponent
+  ]
 })
 export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**

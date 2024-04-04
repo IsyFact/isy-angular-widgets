@@ -3,11 +3,17 @@ import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
 
 @Component({
   selector: 'isy-input-char',
   templateUrl: './input-char.component.html',
-  styleUrls: ['./input-char.component.scss']
+  styleUrls: ['./input-char.component.scss'],
+  standalone: true,
+  providers: [CharacterService],
+  imports: [InputCharDialogComponent, DialogModule, ButtonModule]
 })
 export class InputCharComponent implements OnChanges {
   /**

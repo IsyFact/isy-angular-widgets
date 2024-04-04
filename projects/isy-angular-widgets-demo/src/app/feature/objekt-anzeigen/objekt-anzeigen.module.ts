@@ -21,7 +21,6 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {CalendarModule} from 'primeng/calendar';
 import {ObjektAnzeigenRoutingModule} from './objekt-anzeigen-routing.module';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-import {InputCharModule} from '@isy-angular-widgets/input-char/input-char.module';
 import {SecurityModule} from '@isy-angular-widgets/security/security.module';
 import {FileUploadModule} from 'primeng/fileupload';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
@@ -29,9 +28,10 @@ import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 import {DividerModule} from 'primeng/divider';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
+import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 
 @NgModule({
-  declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
+  declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent, InputCharDirective],
   providers: [],
   imports: [
     CommonModule,
@@ -55,7 +55,6 @@ import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
     CalendarModule,
     ReactiveFormsModule,
     InputTextareaModule,
-    InputCharModule,
     SecurityModule,
     FileUploadModule,
     FormWrapperComponent,
