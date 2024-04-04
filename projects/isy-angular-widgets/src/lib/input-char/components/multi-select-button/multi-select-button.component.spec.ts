@@ -8,7 +8,6 @@ import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {By} from '@angular/platform-browser';
 import {ComponentFixture} from '@angular/core/testing';
-/* import {InputCharModule} from '@isy-angular-widgets/public-api'; */
 
 let spectator: Spectator<MultiSelectButtonComponent>;
 let component: MultiSelectButtonComponent;
