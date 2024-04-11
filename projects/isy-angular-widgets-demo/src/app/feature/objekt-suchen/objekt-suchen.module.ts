@@ -15,8 +15,8 @@ import {WizardModule} from '@isy-angular-widgets/wizard/wizard.module';
 import {TableModule} from 'primeng/table';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
-import {InputCharModule} from '@isy-angular-widgets/input-char/input-char.module';
 import {RequiredLabelComponent} from './components/required-label/required-label.component';
+import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import {RequiredLabelComponent} from './components/required-label/required-label
     WizardModule,
     TableModule,
     MultiSelectModule,
-    InputCharModule
+    InputCharDirective
   ],
   providers: [DateService]
 })

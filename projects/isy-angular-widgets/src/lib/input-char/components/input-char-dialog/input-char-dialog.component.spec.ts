@@ -2,7 +2,6 @@ import {InputCharDialogComponent} from './input-char-dialog.component';
 import {By} from '@angular/platform-browser';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {InputCharModule} from '../../input-char.module';
 import {MockComponent, MockModule} from 'ng-mocks';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
@@ -24,8 +23,13 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
-    imports: [MockModule(AccordionModule), MockModule(SelectButtonModule), MockModule(FormsModule)],
-    declarations: [MockComponent(InputCharPreviewComponent), MockComponent(MultiSelectButtonComponent)],
+    imports: [
+      MockModule(AccordionModule),
+      MockModule(SelectButtonModule),
+      MockModule(FormsModule),
+      MockComponent(InputCharPreviewComponent),
+      MockComponent(MultiSelectButtonComponent)
+    ],
     mocks: [WidgetsConfigService]
   });
 
@@ -165,8 +169,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 describe('Integration Tests: InputCharDialogComponent', () => {
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
-    imports: [AccordionModule, SelectButtonModule, FormsModule, InputCharModule],
-    declarations: [InputCharPreviewComponent, MultiSelectButtonComponent],
+    imports: [AccordionModule, SelectButtonModule, FormsModule, InputCharPreviewComponent, MultiSelectButtonComponent],
     providers: [WidgetsConfigService]
   });
 
