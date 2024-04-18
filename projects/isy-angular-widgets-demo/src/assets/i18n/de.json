@@ -78,7 +78,8 @@
       "intelligenceNotes": "Geheimdienstnotizen",
       "addOrEditFact": "Sachverhalt hinzufügen/bearbeiten",
       "addResidence": "Wohnsitz hinzufügen",
-      "removeResidence": "Wohnsitz entfernen"
+      "removeResidence": "Wohnsitz entfernen",
+      "backToOverview": "Zurück zur Übersicht"
     },
     "labels": {
       "id": "ID",

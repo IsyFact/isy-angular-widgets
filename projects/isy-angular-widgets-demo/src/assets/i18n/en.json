@@ -78,7 +78,8 @@
       "intelligenceNotes": "Intelligence notes",
       "addOrEditFact": "Add/Edit fact",
       "addResidence": "Add residence",
-      "removeResidence": "Remove residence"
+      "removeResidence": "Remove residence",
+      "backToOverview": "Back to overview"
     },
     "labels": {
       "id": "ID",
