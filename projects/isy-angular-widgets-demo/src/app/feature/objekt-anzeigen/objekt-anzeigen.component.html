@@ -70,42 +70,48 @@
             fieldId="first-name"
             [control]="personalInfoForm.controls.firstName | formControl"
             [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
+            [ifta]="true"
           >
             <input
               id="first-name"
               formControlName="firstName"
               class="w-full"
-              required
               minlength="2"
+              maxlength="16"
               type="text"
+              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
               pInputText
             />
           </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
-          <div class="field">
-            <span class="p-float-label">
-              <input id="last-name" formControlName="lastName" type="text" pInputText isyInputChar />
-              <label for="last-name">
-                {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
-              </label>
-            </span>
-            @if (personalInfoForm.controls['lastName'].invalid && personalInfoForm.controls['lastName'].touched) {
-              <small class="p-error block">
-                {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
-              </small>
-            }
-          </div>
+          <isy-form-wrapper
+            label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+            fieldId="last-name"
+            [control]="personalInfoForm.controls.lastName | formControl"
+            [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
+            [ifta]="true"
+          >
+            <input
+              id="last-name"
+              formControlName="lastName"
+              type="text"
+              pInputText
+              isyInputChar
+              maxlength="16"
+              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
+            />
+          </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
-          <div class="field">
-            <span class="p-float-label">
-              <input id="birth-name" formControlName="birthName" type="text" pInputText isyInputChar />
-              <label for="birth-name">
-                {{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}
-              </label>
-            </span>
-          </div>
+          <isy-form-wrapper
+            label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
+            fieldId="birth-name"
+            [control]="personalInfoForm.controls.birthName | formControl"
+            [ifta]="true"
+          >
+            <input id="birth-name" formControlName="birthName" type="text" pInputText isyInputChar />
+          </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
           <div class="field">
