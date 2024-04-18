@@ -8,7 +8,8 @@ import {Zeichenobjekt} from '../../model/model';
 @Component({
   selector: 'isy-input-char-preview',
   templateUrl: './input-char-preview.component.html',
-  styleUrls: ['./input-char-preview.component.scss']
+  styleUrls: ['./input-char-preview.component.scss'],
+  standalone: true
 })
 export class InputCharPreviewComponent {
   @Input() zeichenObjekt?: Zeichenobjekt;

@@ -2,10 +2,9 @@ import {InputCharComponent} from './input-char.component';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockComponents} from 'ng-mocks';
-import {Dialog} from 'primeng/dialog';
+import {MockComponents, MockModule} from 'ng-mocks';
+import {DialogModule} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
-import {InputCharModule} from '../../input-char.module';
 import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
 
 let component: InputCharComponent;
@@ -16,7 +15,7 @@ describe('Unit Tests: InputCharComponent', () => {
   const dialogDefaultHeight = '460px';
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    declarations: [MockComponents(Dialog, InputCharDialogComponent)]
+    imports: [MockModule(DialogModule), MockComponents(InputCharDialogComponent)]
   });
 
   describe('with default datentyp', () => {
@@ -120,8 +119,7 @@ describe('Integration Test: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    declarations: [Dialog, InputCharDialogComponent],
-    imports: [InputCharModule],
+    imports: [DialogModule, InputCharDialogComponent],
     providers: [WidgetsConfigService, CharacterService]
   });
 

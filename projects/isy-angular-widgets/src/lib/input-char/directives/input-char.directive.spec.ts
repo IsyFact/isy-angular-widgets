@@ -38,7 +38,7 @@ describe('Integration Tests: InputCharDirective', () => {
   let input: HTMLInputElement;
   const createComponent = createComponentFactory({
     component: TestComponent,
-    declarations: [InputCharDirective]
+    imports: [InputCharDirective]
   });
 
   beforeEach(() => {

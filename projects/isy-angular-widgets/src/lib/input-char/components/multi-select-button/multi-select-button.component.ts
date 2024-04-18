@@ -1,11 +1,16 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {CommonModule} from '@angular/common'; // Import CommonModule for common directives
+import {ControlValueAccessor, FormsModule} from '@angular/forms'; // Import FormsModule if you're using template-driven forms
 import {InputCharData} from '../../model/model';
-import {ControlValueAccessor} from '@angular/forms';
+import {AccordionModule} from 'primeng/accordion';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 @Component({
   selector: 'isy-multi-select-button',
   templateUrl: './multi-select-button.component.html',
-  styleUrl: './multi-select-button.component.scss'
+  styleUrls: ['./multi-select-button.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, AccordionModule, SelectButtonModule]
 })
 export class MultiSelectButtonComponent implements OnChanges, ControlValueAccessor {
   /**
