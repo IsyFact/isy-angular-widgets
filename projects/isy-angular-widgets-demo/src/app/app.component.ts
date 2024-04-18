@@ -81,7 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Handles the keydown event on the window.
+   * Handles the keyup event on the window.
    * If the Tab key is pressed and the focus has not been set, it prevents the default behavior
    * and triggers the requestFocusChange event in the pageTitleService.
    * @param event The KeyboardEvent object.
