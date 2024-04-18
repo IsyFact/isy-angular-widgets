@@ -1,7 +1,9 @@
 <div class="field">
   <div [class]="ifta ? 'ifta' : 'p-float-label'">
     <ng-content></ng-content>
-    <label [for]="fieldId">{{ isRequired() ? label + ' *' : label }}</label>
+    <label [class]="control.value ? 'filled' : 'unfilled'" [for]="fieldId">{{
+      isRequired() ? label + ' *' : label
+    }}</label>
   </div>
   @if (errorMessage && control.invalid && control.touched) {
     <small role="alert" class="p-error block">

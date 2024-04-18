@@ -14,7 +14,13 @@
   pointer-events: none;
   transition: all 0.2s ease-out;
   font-size: 1rem;
+}
+:host ::ng-deep .ifta label.filled {
   color: var(--blue-500);
+}
+
+:host ::ng-deep .ifta label.unfilled {
+  color: var(--primary-color);
 }
 
 :host ::ng-deep .ifta .p-button.p-button-icon-only {
