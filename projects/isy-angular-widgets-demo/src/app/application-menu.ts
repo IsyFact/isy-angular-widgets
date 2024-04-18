@@ -8,11 +8,13 @@ export const applicationMenu = [
           items: [
             {
               label: 'isyAngularWidgetsDemo.menuItems.searchObject',
-              routerLink: 'objekt-suchen'
+              routerLink: 'objekt-suchen',
+              styleClass: 'skip-link'
             },
             {
               label: 'isyAngularWidgetsDemo.menuItems.displayObject',
-              routerLink: 'objekt-anzeigen/42'
+              routerLink: 'objekt-anzeigen/42',
+              styleClass: 'skip-link'
             }
           ]
         }
@@ -27,13 +29,16 @@ export const applicationMenu = [
           label: 'isyAngularWidgetsDemo.menuItems.exampleGroup1',
           items: [
             {
-              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem1'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem1',
+              styleClass: 'skip-link'
             },
             {
-              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem2'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem2',
+              styleClass: 'skip-link'
             },
             {
-              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem3'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem3',
+              styleClass: 'skip-link'
             }
           ]
         },
@@ -41,13 +46,16 @@ export const applicationMenu = [
           label: 'isyAngularWidgetsDemo.menuItems.exampleGroup2',
           items: [
             {
-              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem1'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem1',
+              styleClass: 'skip-link'
             },
             {
-              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem2'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem2',
+              styleClass: 'skip-link'
             },
             {
-              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem3'
+              label: 'isyAngularWidgetsDemo.menuItems.exampleSubMenuItem3',
+              styleClass: 'skip-link'
             }
           ]
         }

@@ -1,10 +1,10 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 import {UserInfo} from '@isy-angular-widgets/api/userinfo';
 import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
-import {Subscription} from 'rxjs';
+import {Subscription, filter} from 'rxjs';
 import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
@@ -12,6 +12,8 @@ import {WidgetsTranslation} from '@isy-angular-widgets/i18n/widgets-translation'
 import {WidgetsConfigService} from '@isy-angular-widgets/i18n/widgets-config.service';
 import {permissions} from './app.permission';
 import {DOCUMENT} from '@angular/common';
+import {PageTitleService} from './shared/services/page-title.service';
+import {NavigationEnd, Router, RouterEvent, Event} from '@angular/router';
 
 @Component({
   selector: 'demo-root',
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
   primeNGI18nSubscription: Subscription;
   isyAngularWidgetsI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
+  focusHasBeenSet?: boolean;
 
   constructor(
     private securityService: SecurityService,
@@ -35,6 +38,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private primeNGConfig: PrimeNGConfig,
     private widgetsConfigService: WidgetsConfigService,
     private menuTranslationService: MenuTranslationService,
+    public pageTitleService: PageTitleService,
+    public router: Router,
     @Inject(DOCUMENT) private document: Document
   ) {
     // Add translation
@@ -57,6 +62,49 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translate.onLangChange.subscribe((langEvent) => {
       this.document.documentElement.lang = langEvent.lang;
     });
+
+    // Call the setupPageTitle method of the pageTitleService to initialize the page title
+    this.pageTitleService.setupPageTitle();
+
+    // Reset focusHasBeenSet flag on navigation end
+    this.router.events.pipe(filter((event: Event | RouterEvent) => event instanceof NavigationEnd)).subscribe(() => {
+      this.focusHasBeenSet = false;
+    });
+
+    // Subscribe to requestFocusChange event
+    this.pageTitleService.requestFocusChange.subscribe((id) => {
+      // Set focus on input element if focusHasBeenSet is false
+      if (!this.focusHasBeenSet) {
+        this.setFocusOnInput(id);
+      }
+    });
+  }
+
+  /**
+   * Handles the keydown event on the window.
+   * If the Tab key is pressed and the focus has not been set, it prevents the default behavior
+   * and triggers the requestFocusChange event in the pageTitleService.
+   * @param event The KeyboardEvent object.
+   */
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Tab' && !this.focusHasBeenSet) {
+      event.preventDefault();
+      // Replace 'id' with the id of the input element you want to focus on e.g. on 'Objekt suchen' page
+      this.pageTitleService.requestFocusChange.next('id');
+    }
+  }
+
+  /**
+   * Sets focus on the input element with the specified id.
+   * @param id The id of the input element.
+   */
+  setFocusOnInput(id: string): void {
+    const inputElement = document.getElementById(id) as HTMLInputElement;
+    if (inputElement) {
+      inputElement?.focus();
+      this.focusHasBeenSet = true;
+    }
   }
 
   changeLanguage(language: string): void {

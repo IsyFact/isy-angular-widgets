@@ -46,6 +46,10 @@
   }
 }
 
+:host ::ng-deep .skip-link a:focus {
+  box-shadow: var(--focus-ring);
+}
+
 :host ::ng-deep .p-megamenu {
   .p-menuitem-text {
     color: var(--surface-900);
