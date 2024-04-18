@@ -1,6 +1,8 @@
 # 17.3.0
 ## Demo-Anwendung
 - ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
+## Fixes
+- IFS-3590: _Charpicker-_, _Objekt-Anlegen_- und _Objekt-Bearbeiten-Dialog_  werden jetzt immer oberhalb der Hauptnavigation angezeigt
 
 # 17.2.0 - 19.03.2024
 ## Fixes
