@@ -88,6 +88,10 @@ describe('FormWrapperComponent', () => {
     expect(spectator.component.ifta).toEqual(iftaValue);
   });
 
+  it('should default the ifta input to false', () => {
+    expect(spectator.component.ifta).toEqual(false);
+  });
+
   it('should have "filled" class for label when control has value', () => {
     spectator.component.control.setValue('test value');
     spectator.detectChanges();
