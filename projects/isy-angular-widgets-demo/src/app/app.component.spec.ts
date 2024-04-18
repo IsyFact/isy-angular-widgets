@@ -62,9 +62,9 @@ describe('Integration Tests: AppComponent', () => {
   });
 
   it('should prevent tab key default action if focus has not been set', () => {
-    const event = new KeyboardEvent('keydown', {key: 'Tab'});
+    const event = new KeyboardEvent('keyup', {key: 'Tab'});
     spyOn(event, 'preventDefault');
-    spectator.component.handleKeyDown(event);
+    spectator.component.handleKeyUp(event);
     expect(event.preventDefault).toHaveBeenCalled();
   });
 
