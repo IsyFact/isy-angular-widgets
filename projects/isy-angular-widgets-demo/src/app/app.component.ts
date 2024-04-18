@@ -86,8 +86,8 @@ export class AppComponent implements OnInit, OnDestroy {
    * and triggers the requestFocusChange event in the pageTitleService.
    * @param event The KeyboardEvent object.
    */
-  @HostListener('window:keydown', ['$event'])
-  handleKeyDown(event: KeyboardEvent): void {
+  @HostListener('keyup', ['$event'])
+  handleKeyUp(event: KeyboardEvent): void {
     if (event.key === 'Tab' && !this.focusHasBeenSet) {
       event.preventDefault();
       // Replace 'id' with the id of the input element you want to focus on e.g. on 'Objekt suchen' page
