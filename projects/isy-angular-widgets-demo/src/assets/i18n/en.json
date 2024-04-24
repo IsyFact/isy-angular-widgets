@@ -79,7 +79,10 @@
       "addOrEditFact": "Add/Edit fact",
       "addResidence": "Add residence",
       "removeResidence": "Remove residence",
-      "backToOverview": "Back to overview"
+      "backToOverview": "Back to overview",
+      "skipNavigationLink": {
+        "backToOverview": "Skip navigation link to site Dashboard with back to overview"
+      }
     },
     "labels": {
       "id": "ID",

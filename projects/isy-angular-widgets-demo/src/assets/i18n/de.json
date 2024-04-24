@@ -79,7 +79,10 @@
       "addOrEditFact": "Sachverhalt hinzufügen/bearbeiten",
       "addResidence": "Wohnsitz hinzufügen",
       "removeResidence": "Wohnsitz entfernen",
-      "backToOverview": "Zurück zur Übersicht"
+      "backToOverview": "Zurück zur Übersicht",
+      "skipNavigationLink": {
+        "backToOverview": "Sprunglink zur Seite Dashboard mit zurück zur Übersicht"
+      }
     },
     "labels": {
       "id": "ID",
