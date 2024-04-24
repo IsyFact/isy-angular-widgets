@@ -169,8 +169,8 @@
     },
     "websiteTitles": {
       "dashboard": "Dashboard",
-      "objectSearch": "Search object",
-      "objectDisplay": "Display object"
+      "searchObject": "Search object",
+      "displayObject": "Display object"
     },
     "settings": {
       "header": "Settings Demo App",

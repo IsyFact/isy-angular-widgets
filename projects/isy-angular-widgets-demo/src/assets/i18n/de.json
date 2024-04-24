@@ -168,8 +168,8 @@
     },
     "websiteTitles": {
       "dashboard": "Dashboard",
-      "objectSearch": "Objekt suchen",
-      "objectDisplay": "Objekt anzeigen"
+      "searchObject": "Objekt suchen",
+      "displayObject": "Objekt anzeigen"
     },
     "settings": {
       "header": "Einstellungen Demo App",
