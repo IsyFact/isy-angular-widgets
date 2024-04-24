@@ -109,6 +109,7 @@
       "identityDocument": "Identity Document",
       "bilanz": "Balance",
       "alle": "All",
+      "residence": "{{numChars}}. Residence",
       "residences": "Residences",
       "address": {
         "street": "Street",

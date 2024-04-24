@@ -108,6 +108,7 @@
       "ablaufdatumKreditkarte": "Ablaufdatum der Kreditkarte",
       "identityDocument": "Ausweisdokument",
       "bilanz": "Bilanz",
+      "residence": "{{numChars}}. Wohnsitz",
       "residences": "Wohnsitze",
       "address": {
         "street": "Straße",
