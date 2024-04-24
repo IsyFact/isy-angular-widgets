@@ -81,7 +81,9 @@
       "removeResidence": "Wohnsitz entfernen",
       "backToOverview": "Zurück zur Übersicht",
       "skipNavigationLink": {
-        "backToOverview": "Sprunglink zur Seite Dashboard mit zurück zur Übersicht"
+        "backToOverview": "Sprunglink zur Seite Dashboard mit zurück zur Übersicht",
+        "searchObject": "zur Seite Objekt suchen",
+        "displayObject": "zur Seite Objekt anzeigen"
       }
     },
     "labels": {

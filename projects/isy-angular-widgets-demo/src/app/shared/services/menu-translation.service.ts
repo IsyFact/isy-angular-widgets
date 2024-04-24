@@ -25,7 +25,7 @@ export class MenuTranslationService {
   constructor(private translate: TranslateService) {}
 
   /**
-   * Translates all `label` fields of  {@link MenuItem} and all submenu items.
+   * Translates all `label` and `title` fields of  {@link MenuItem} and all submenu items.
    * @param items Menu items to translate
    * @returns translated {@link MegaMenuItem}
    */
@@ -36,6 +36,9 @@ export class MenuTranslationService {
       const translatedItem = {...untranslatedItem};
 
       translatedItem.label = (await firstValueFrom(this.translate.get(untranslatedItem.label as string))) as string;
+      if (translatedItem.title) {
+        translatedItem.title = (await firstValueFrom(this.translate.get(untranslatedItem.title as string))) as string;
+      }
 
       if (translatedItem.items) {
         translatedItem.items = await this.translateMenuItems(translatedItem.items);

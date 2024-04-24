@@ -20,11 +20,13 @@ export const navigationMenu = [
     items: [
       {
         label: 'isyAngularWidgetsDemo.menuItems.searchObject',
+        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.searchObject',
         routerLink: 'objekt-suchen',
         styleClass: 'skip-link'
       },
       {
         label: 'isyAngularWidgetsDemo.menuItems.displayObject',
+        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.displayObject',
         routerLink: 'objekt-anzeigen/42',
         styleClass: 'skip-link'
       }

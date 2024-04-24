@@ -81,7 +81,9 @@
       "removeResidence": "Remove residence",
       "backToOverview": "Back to overview",
       "skipNavigationLink": {
-        "backToOverview": "Skip navigation link to site Dashboard with back to overview"
+        "backToOverview": "Skip navigation link to site Dashboard with back to overview",
+        "searchObject": "To page search object",
+        "displayObject": "To page display object"
       }
     },
     "labels": {
