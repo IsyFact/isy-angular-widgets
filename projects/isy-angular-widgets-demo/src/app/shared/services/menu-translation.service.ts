@@ -4,14 +4,17 @@ import {firstValueFrom} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 
 /**
- * A service to translate labels of {@link MenuItem} or {@link MegaMenuItem} using the ngx-translation service.
- * Instead of label descriptions, the i18n key has to be provided in the label field of a menu item.
+ * A service to translate labels and titles of {@link MenuItem} or {@link MegaMenuItem} using the ngx-translation service.
+ * Instead of label or title descriptions, the i18n key has to be provided in the label or title field of a menu item.
  * @example
  * const items = [
  *   {
  *      label: 'my-lib.menu.label',
  *      items: [
- *        { label: 'my-lib.menu.other-label' }
+ *        {
+ *          label: 'my-lib.menu.other-label',
+ *          title: 'my-lib.menu.title'
+ *        }
  *      ]
  *   }
  * ];
@@ -51,7 +54,7 @@ export class MenuTranslationService {
   }
 
   /**
-   * Translates all `label` fields of  {@link MegaMenuItem} and all submenu items.
+   * Translates all `label` and `title` fields of  {@link MegaMenuItem} and all submenu items.
    * @param items MegaMenu items to translate
    * @returns translated {@link MegaMenuItem}
    */
@@ -62,6 +65,9 @@ export class MenuTranslationService {
       const translatedItem = {...untranslatedItem};
 
       translatedItem.label = (await firstValueFrom(this.translate.get(untranslatedItem.label as string))) as string;
+      if (translatedItem.title) {
+        translatedItem.title = (await firstValueFrom(this.translate.get(untranslatedItem.title as string))) as string;
+      }
 
       if (translatedItem.items) {
         const translatedSubItems = [];
@@ -69,7 +75,6 @@ export class MenuTranslationService {
         for (const item of translatedItem.items) {
           translatedSubItems.push(await this.translateMenuItems(item));
         }
-
         translatedItem.items = translatedSubItems;
       }
 
