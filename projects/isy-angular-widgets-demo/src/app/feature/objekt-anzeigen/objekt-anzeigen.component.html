@@ -239,11 +239,11 @@
               <div class="col-12 md:col-6 xl:col-4">
                 <isy-form-wrapper
                   label="{{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}"
-                  fieldId="country"
+                  fieldId="country{{ i }}"
                   [control]="addresses.get('country')! | formControl"
                 >
                   <input
-                    id="country"
+                    id="country{{ i }}"
                     formControlName="{{ addressFormControlNames[4] }}"
                     class="w-full"
                     type="text"
@@ -254,12 +254,12 @@
               <div class="col-12 md:col-6 xl:col-4">
                 <isy-form-wrapper
                   label="{{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}"
-                  fieldId="zip"
+                  fieldId="zip{{ i }}"
                   [control]="addresses.get('zip')! | formControl"
                 >
                   <input
                     formControlName="{{ addressFormControlNames[2] }}"
-                    id="zip"
+                    id="zip{{ i }}"
                     class="w-full"
                     type="text"
                     pInputText
@@ -269,12 +269,12 @@
               <div class="col-12 md:col-6 xl:col-4">
                 <isy-form-wrapper
                   label="{{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}"
-                  fieldId="city"
+                  fieldId="city{{ i }}"
                   [control]="addresses.get('city')! | formControl"
                 >
                   <input
                     formControlName="{{ addressFormControlNames[3] }}"
-                    id="city"
+                    id="city{{ i }}"
                     class="w-full"
                     type="text"
                     pInputText
@@ -284,12 +284,12 @@
               <div class="col-12 md:col-6 xl:col-4">
                 <isy-form-wrapper
                   label="{{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}"
-                  fieldId="streetName"
+                  fieldId="streetName{{ i }}"
                   [control]="addresses.get('streetName')! | formControl"
                 >
                   <input
                     formControlName="{{ addressFormControlNames[0] }}"
-                    id="streetName"
+                    id="streetName{{ i }}"
                     class="w-full"
                     type="text"
                     pInputText
@@ -299,12 +299,12 @@
               <div class="col-12 md:col-6 xl:col-4">
                 <isy-form-wrapper
                   label="{{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}"
-                  fieldId="streetNumber"
+                  fieldId="streetNumber{{ i }}"
                   [control]="addresses.get('streetNumber')! | formControl"
                 >
                   <input
                     formControlName="{{ addressFormControlNames[1] }}"
-                    id="streetNumber"
+                    id="streetNumber{{ i }}"
                     class="w-full"
                     type="text"
                     pInputText
