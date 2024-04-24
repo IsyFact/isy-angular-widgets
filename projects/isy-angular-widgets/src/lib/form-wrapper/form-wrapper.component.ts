@@ -71,6 +71,23 @@ export class FormWrapperComponent implements OnInit {
     return null;
   }
 
+  getLabelClass(): string {
+    if (this.ifta) return ' ifta';
+    return ' static-label';
+  }
+
+  getLabelClassDynamic(): string {
+    return this.control.value ? ' label--filled' : ' label--unfilled';
+  }
+
+  getLabel(): string {
+    return this.isRequired() ? `${this.label} *` : this.label;
+  }
+
+  shouldShowError(): boolean {
+    return this.errorMessage !== null && this.errorMessage !== '' && this.control.invalid && this.control.touched;
+  }
+
   /**
    * Computes and returns the information about the required state
    * @returns the required state

@@ -29,6 +29,7 @@ import {DividerModule} from 'primeng/divider';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
+import {FieldsetModule} from 'primeng/fieldset';
 
 @NgModule({
   declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
@@ -62,7 +63,8 @@ import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/inp
     DividerModule,
     InputGroupModule,
     InputGroupAddonModule,
-    InputCharDirective
+    InputCharDirective,
+    FieldsetModule
   ]
 })
 export class ObjektAnzeigenModule {}

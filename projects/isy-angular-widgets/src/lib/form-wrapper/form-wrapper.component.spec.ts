@@ -96,13 +96,25 @@ describe('FormWrapperComponent', () => {
     spectator.component.control.setValue('test value');
     spectator.detectChanges();
     const labelElement = spectator.query('label');
-    expect(labelElement?.classList).toContain('filled');
+    expect(labelElement?.classList).toContain('label--filled');
   });
 
   it('should have "unfilled" class for label when control has no value', () => {
     spectator.component.control.setValue('');
     spectator.detectChanges();
     const labelElement = spectator.query('label');
-    expect(labelElement?.classList).toContain('unfilled');
+    expect(labelElement?.classList).toContain('label--unfilled');
+  });
+
+  it('should return "ifta" class when ifta is true', () => {
+    spectator.component.ifta = true;
+    const labelClass = spectator.component.getLabelClass();
+    expect(labelClass).toEqual(' ifta');
+  });
+
+  it('should return "static-label" class when ifta is false', () => {
+    spectator.component.ifta = false;
+    const labelClass = spectator.component.getLabelClass();
+    expect(labelClass).toEqual(' static-label');
   });
 });

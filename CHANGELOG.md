@@ -1,5 +1,6 @@
 # 17.3.0
 ## Features
+- IFS-3644: Alle Formulare wurden von Float- auf Static-Label umgestellt
 - IFS-3645: Infield Top-Aligned Label wurde zum `isy-form-wrapper` hinzugefügt
 ## Demo-Anwendung
 - ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt

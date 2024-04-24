@@ -17,6 +17,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
 import {RequiredLabelComponent} from './components/required-label/required-label.component';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
+import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
+import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/inp
     ResultListComponent,
     RequiredLabelComponent
   ],
+  providers: [DateService],
   imports: [
     CommonModule,
     ObjektSuchenRoutingModule,
@@ -39,8 +42,9 @@ import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/inp
     WizardModule,
     TableModule,
     MultiSelectModule,
-    InputCharDirective
-  ],
-  providers: [DateService]
+    InputCharDirective,
+    FormWrapperComponent,
+    FormControlPipe
+  ]
 })
 export class ObjektSuchenModule {}

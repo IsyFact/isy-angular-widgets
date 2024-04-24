@@ -15,11 +15,11 @@
   transition: all 0.2s ease-out;
   font-size: 1rem;
 }
-:host ::ng-deep .ifta label.filled {
+:host ::ng-deep .label--filled {
   color: var(--blue-500);
 }
 
-:host ::ng-deep .ifta label.unfilled {
+:host ::ng-deep .label--unfilled {
   color: var(--primary-color);
 }
 
