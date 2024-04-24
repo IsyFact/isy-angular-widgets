@@ -35,6 +35,16 @@ describe('SeitenToolbarComponent', () => {
     expect(buttonElement?.textContent).toContain(testLabel);
   });
 
+  it('should get the sidebarHomeButtonAriaLabel input value', () => {
+    const testAriaLabel = 'Navigate to Home';
+    spectator.setInput('showSidebar', true);
+    spectator.setInput('sidebarHomeButtonAriaLabel', testAriaLabel);
+    const buttonElement = spectator.query('.p-toolbar-left p-button');
+    expect(buttonElement).toBeTruthy();
+    expect(buttonElement?.textContent).toContainText('');
+    expect(buttonElement?.ariaLabel).withContext(testAriaLabel);
+  });
+
   it('should navigate home when navigateHome is called', async () => {
     const navigateSpy = spyOn(mockRouter, 'navigate').and.returnValue(Promise.resolve(true));
     await component.navigateHome();
