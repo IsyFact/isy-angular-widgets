@@ -224,6 +224,7 @@
             [severity]="'danger'"
             [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
             (click)="removeAddress(i)"
+            (onKeyDown)="removeAddress(i)"
             ariaLabel="{{ 'isyAngularWidgetsDemo.labels.deleteButton' | translate }}"
           >
           </p-button>
