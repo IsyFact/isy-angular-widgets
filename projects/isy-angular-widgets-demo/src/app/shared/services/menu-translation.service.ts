@@ -39,6 +39,7 @@ export class MenuTranslationService {
       const translatedItem = {...untranslatedItem};
 
       translatedItem.label = (await firstValueFrom(this.translate.get(untranslatedItem.label as string))) as string;
+
       if (translatedItem.title) {
         translatedItem.title = (await firstValueFrom(this.translate.get(untranslatedItem.title as string))) as string;
       }
