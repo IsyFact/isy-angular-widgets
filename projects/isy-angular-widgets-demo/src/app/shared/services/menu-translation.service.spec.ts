@@ -25,10 +25,12 @@ describe('Unit Tests: MenuTranslationService', () => {
   });
 
   it('should translate MenuItems labels and titles', async () => {
-    const items: MenuItem[] = [{
-      label: 'menu.label',
-      title: 'menu.title'
-    }];
+    const items: MenuItem[] = [
+      {
+        label: 'menu.label',
+        title: 'menu.title'
+      }
+    ];
 
     const translatedItems = await spectator.service.translateMenuItems(items);
 
@@ -41,10 +43,12 @@ describe('Unit Tests: MenuTranslationService', () => {
       {
         label: 'menu.label',
         title: 'menu.title',
-        items: [{
-          label: 'submenu.label',
-          title: 'submenu.title'
-        }]
+        items: [
+          {
+            label: 'submenu.label',
+            title: 'submenu.title'
+          }
+        ]
       }
     ];
 
@@ -56,10 +60,12 @@ describe('Unit Tests: MenuTranslationService', () => {
   });
 
   it('should translate MegaMenuItems labels and titles', async () => {
-    const items: MegaMenuItem[] = [{
-      label: 'menu.label',
-      title: 'menu.title'
-    }];
+    const items: MegaMenuItem[] = [
+      {
+        label: 'menu.label',
+        title: 'menu.title'
+      }
+    ];
 
     const translatedItems = await spectator.service.translateMegaMenuItems(items);
 
@@ -73,13 +79,17 @@ describe('Unit Tests: MenuTranslationService', () => {
         label: 'menu.label',
         title: 'menu.title',
         items: [
-          [{
-            label: 'menu.header',
-            items: [{
-              label: 'submenu.label',
-              title: 'submenu.title'
-            }]
-          }]
+          [
+            {
+              label: 'menu.header',
+              items: [
+                {
+                  label: 'submenu.label',
+                  title: 'submenu.title'
+                }
+              ]
+            }
+          ]
         ]
       }
     ];
