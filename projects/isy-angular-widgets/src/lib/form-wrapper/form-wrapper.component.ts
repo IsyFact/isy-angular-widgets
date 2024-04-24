@@ -71,19 +71,42 @@ export class FormWrapperComponent implements OnInit {
     return null;
   }
 
+  /**
+   * Returns the CSS class for the label based on the current state.
+   * @returns The CSS class for the label.
+   */
   getLabelClass(): string {
     if (this.ifta) return ' ifta';
     return ' static-label';
   }
 
+  /**
+   * Returns the CSS class for the label based on the value of the control.
+   * If the control value is truthy, it returns 'label--filled',
+   * otherwise it returns 'label--unfilled'.
+   * @returns The CSS class for the label.
+   */
   getLabelClassDynamic(): string {
     return this.control.value ? ' label--filled' : ' label--unfilled';
   }
 
+  /**
+   * Retrieves the label for the form wrapper component.
+   * If the label is required, it appends an asterisk (*) to the label.
+   * @returns The label for the form wrapper component.
+   */
   getLabel(): string {
     return this.isRequired() ? `${this.label} *` : this.label;
   }
 
+  /**
+   * Determines whether the error message should be shown.
+   * The error message should be shown if:
+   * - The errorMessage is not null or empty
+   * - The control is invalid
+   * - The control has been touched
+   * @returns A boolean value indicating whether the error message should be shown.
+   */
   shouldShowError(): boolean {
     return this.errorMessage !== null && this.errorMessage !== '' && this.control.invalid && this.control.touched;
   }
