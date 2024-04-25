@@ -43,7 +43,8 @@
       "requiredMessage": "Dieses Feld ist ein Pflichtfeld.",
       "maxLengthError": "Es dürfen maximal {{numChars}} Zeichen verwendet werden.",
       "inputUnspecifiedError": "Das Datum ist ungültig.",
-      "dateInPastError": "Das Datum muss in der Vergangenheit liegen."
+      "dateInPastError": "Das Datum muss in der Vergangenheit liegen.",
+      "changePage": "Seitenwechsel erfolgt. Neue Seite:"
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -77,7 +78,13 @@
       "intelligenceNotes": "Geheimdienstnotizen",
       "addOrEditFact": "Sachverhalt hinzufügen/bearbeiten",
       "addResidence": "Wohnsitz hinzufügen",
-      "removeResidence": "Wohnsitz entfernen"
+      "removeResidence": "Wohnsitz entfernen",
+      "backToOverview": "Zurück zur Übersicht",
+      "skipNavigationLink": {
+        "backToOverview": "Sprunglink zur Seite Dashboard mit zurück zur Übersicht",
+        "searchObject": "zur Seite Objekt suchen",
+        "displayObject": "zur Seite Objekt anzeigen"
+      }
     },
     "labels": {
       "id": "ID",
@@ -163,6 +170,11 @@
       "exampleWidgetFourthAreaInformation": "Informationen",
       "exampleWidgetFourthAreaEvaluation": "Auswertung",
       "exampleDashboardChartLabels": ["Beamte", "Externe", "Behörden"]
+    },
+    "websiteTitles": {
+      "dashboard": "Dashboard",
+      "searchObject": "Objekt suchen",
+      "displayObject": "Objekt anzeigen"
     },
     "settings": {
       "header": "Einstellungen Demo App",

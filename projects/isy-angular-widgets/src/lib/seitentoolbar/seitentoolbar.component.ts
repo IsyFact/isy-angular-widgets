@@ -25,6 +25,11 @@ export class SeitentoolbarComponent {
   @Input() sidebarHomeButtonLabel?: string;
 
   /**
+   * AriaLabel for the home button.
+   */
+  @Input() sidebarHomeButtonAriaLabel?: string;
+
+  /**
    * Route for the home button.
    */
   @Input() sidebarHomeRoute?: string = '/';

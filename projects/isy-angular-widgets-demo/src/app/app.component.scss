@@ -12,3 +12,7 @@
     max-height: 80px !important;
   }
 }
+
+:host ::ng-deep .skip-link a:focus {
+  box-shadow: var(--focus-ring);
+}
