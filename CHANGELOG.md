@@ -1,6 +1,10 @@
 # 17.3.0
 ## Demo-Anwendung
 - ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
+- ISY-903: Verbesserung der Barrierefreiheit innerhalb der Demo Anwendung durch folgende Anpassungen:
+  * Navigationslinks werden beim Verwenden von Screenreadern vor und nach dem Seitenwechsel angekündigt
+  * Sprunglinks erhalten einen Fokus
+  * Alle Browser-Tabs haben einen individuellen Titel und werden nach Seitenwechsel entsprechend angepasst
 ## Fixes
 - IFS-3590: _Charpicker-_, _Objekt-Anlegen_- und _Objekt-Bearbeiten-Dialog_  werden jetzt immer oberhalb der Hauptnavigation angezeigt
 
