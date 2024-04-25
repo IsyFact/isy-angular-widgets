@@ -87,7 +87,7 @@ export class FormWrapperComponent implements OnInit {
    * @returns The CSS class for the label.
    */
   getLabelClassDynamic(): string {
-    return this.control.value ? ' label--filled' : ' label--unfilled';
+    return this.control.value && this.ifta ? ' label--filled' : ' label--unfilled';
   }
 
   /**
