@@ -14,11 +14,16 @@
   border-color: black;
 }
 
-:host ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button {
-  margin-right: 0;
-  margin-bottom: 3px;
-}
-
 :host ::ng-deep div[data-pc-name='inputgroupaddon'] {
   width: 100%;
+}
+
+:host ::ng-deep p-fieldset {
+  position: relative;
+}
+
+:host ::ng-deep .address-delete-button {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
 }

@@ -6,8 +6,9 @@ import {getEmptyPerson} from '../../person-data';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MockModule} from 'ng-mocks';
-import {RequiredLabelComponent} from '../required-label/required-label.component';
 import {required} from '../../../../shared/validation/validator';
+import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
+import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -26,12 +27,20 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       }),
       MockModule(ReactiveFormsModule)
     ],
-    declarations: [RequiredLabelComponent],
+    declarations: [FormWrapperComponent, FormControlPipe],
     providers: [{provide: FormBuilder, useValue: formBuilder}]
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({
+      props: {
+        form: new FormGroup({
+          vorname: new FormControl('', required),
+          nachname: new FormControl('', required),
+          geschlecht: new FormControl('', required)
+        })
+      }
+    });
     component = spectator.component;
     component.form = initPersoenlicheInformationenForm(person);
     markFormAsDirty(component.form);
@@ -166,13 +175,13 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   });
 
   it('should evaluate the HTML label text of the input fields', () => {
-    const vornameLabel = spectator.query('label#vorname-label') as HTMLElement;
+    const vornameLabel = spectator.query('[for="vorname-dialog"]') as HTMLElement;
     expect(vornameLabel.textContent!.trim()).toEqual('Vorname');
 
-    const nachnameLabel = spectator.query('label#nachname-label') as HTMLElement;
+    const nachnameLabel = spectator.query('[for="nachname-dialog"]') as HTMLElement;
     expect(nachnameLabel.textContent!.trim()).toEqual('Nachname *');
 
-    const geschlechtLabel = spectator.query('label#geschlecht-label') as HTMLElement;
+    const geschlechtLabel = spectator.query('[for="geschlecht-dialog"]') as HTMLElement;
     expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht *');
   });
 
@@ -181,7 +190,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     component.form.get('nachname')!.setValue('nachname');
     spectator.fixture.detectChanges();
 
-    const input = spectator.query('#Nachname') as HTMLInputElement;
+    const input = spectator.query('#nachname-dialog') as HTMLInputElement;
     input.focus();
 
     spectator.detectChanges();

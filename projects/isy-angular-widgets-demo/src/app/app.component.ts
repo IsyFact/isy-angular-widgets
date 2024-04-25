@@ -1,4 +1,4 @@
-import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 import {UserInfo} from '@isy-angular-widgets/api/userinfo';
 import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
@@ -40,6 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private menuTranslationService: MenuTranslationService,
     public pageTitleService: PageTitleService,
     public router: Router,
+    private cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private document: Document
   ) {
     // Add translation
@@ -112,6 +113,9 @@ export class AppComponent implements OnInit, OnDestroy {
     // Currently, it's not clear, if firing the onChange Event from PrimeNG on initial null values or triggering value accessors for initial null values from Angular Forms is inappropriate
     if (language) {
       this.translate.use(language);
+      this.translate.onLangChange.subscribe(() => {
+        this.cdr.detectChanges();
+      });
     }
   }
 
