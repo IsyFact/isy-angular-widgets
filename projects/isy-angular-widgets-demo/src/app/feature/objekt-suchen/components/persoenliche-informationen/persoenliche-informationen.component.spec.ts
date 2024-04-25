@@ -6,7 +6,6 @@ import {getEmptyPerson} from '../../person-data';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MockModule} from 'ng-mocks';
-import {RequiredLabelComponent} from '../required-label/required-label.component';
 import {required} from '../../../../shared/validation/validator';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
@@ -28,7 +27,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       }),
       MockModule(ReactiveFormsModule)
     ],
-    declarations: [RequiredLabelComponent, FormWrapperComponent, FormControlPipe],
+    declarations: [FormWrapperComponent, FormControlPipe],
     providers: [{provide: FormBuilder, useValue: formBuilder}]
   });
 

@@ -15,18 +15,12 @@ import {WizardModule} from '@isy-angular-widgets/wizard/wizard.module';
 import {TableModule} from 'primeng/table';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
-import {RequiredLabelComponent} from './components/required-label/required-label.component';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 
 @NgModule({
-  declarations: [
-    ObjektSuchenComponent,
-    PersoenlicheInformationenComponent,
-    ResultListComponent,
-    RequiredLabelComponent
-  ],
+  declarations: [ObjektSuchenComponent, PersoenlicheInformationenComponent, ResultListComponent],
   providers: [DateService],
   imports: [
     CommonModule,

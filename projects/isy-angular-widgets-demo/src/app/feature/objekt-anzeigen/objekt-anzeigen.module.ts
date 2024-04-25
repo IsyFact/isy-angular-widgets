@@ -26,8 +26,6 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 import {DividerModule} from 'primeng/divider';
-import {InputGroupModule} from 'primeng/inputgroup';
-import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {FieldsetModule} from 'primeng/fieldset';
 
@@ -61,8 +59,6 @@ import {FieldsetModule} from 'primeng/fieldset';
     FormWrapperComponent,
     FormControlPipe,
     DividerModule,
-    InputGroupModule,
-    InputGroupAddonModule,
     InputCharDirective,
     FieldsetModule
   ]

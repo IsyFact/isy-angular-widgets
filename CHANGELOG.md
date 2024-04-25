@@ -1,9 +1,10 @@
 # 17.3.0
 ## Features
-- IFS-3644: Alle Formulare wurden von Float- auf Static-Label umgestellt
+- IFS-3644: Im `isy-form-wrapper` wurde das Label der Formularfelder von Float-Label auf Static-Label geändert
 - IFS-3645: Infield Top-Aligned Label wurde zum `isy-form-wrapper` hinzugefügt
 ## Demo-Anwendung
 - ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
+- IFS-3644: Die Komponente `isy-form-wrapper` wurde nun für alle Formularfelder in der Demo-App eingesetzt, und die nicht mehr benötigte `RequiredLabelComponent` wurde von der Seite _Objekt suchen_ entfernt
 ## Fixes
 - IFS-3590: _Charpicker-_, _Objekt-Anlegen_- und _Objekt-Bearbeiten-Dialog_  werden jetzt immer oberhalb der Hauptnavigation angezeigt
 
