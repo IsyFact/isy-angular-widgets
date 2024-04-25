@@ -4,8 +4,11 @@
       <p-button
         [link]="true"
         label="{{ sidebarHomeButtonLabel }}"
+        ariaLabel="{{ sidebarHomeButtonAriaLabel }}"
         icon="pi pi-arrow-circle-left"
-        (click)="navigateHome()"
+        (onClick)="navigateHome()"
+        (onKeyPress)="navigateHome()"
+        onKeyDown=""
       ></p-button>
     </div>
     <div class="p-toolbar-middle">

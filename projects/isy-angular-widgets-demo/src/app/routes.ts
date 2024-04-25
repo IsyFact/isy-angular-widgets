@@ -17,18 +17,24 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     data: {
-      title: 'Dashboard'
+      title: 'isyAngularWidgetsDemo.websiteTitles.dashboard'
     },
     loadChildren: async () => (await import('./feature/dashboard/dashboard.module')).DashboardModule,
     canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },
   {
     path: 'objekt-anzeigen',
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.displayObject'
+    },
     loadChildren: async () => (await import('./feature/objekt-anzeigen/objekt-anzeigen.module')).ObjektAnzeigenModule,
     canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },
   {
     path: 'objekt-suchen',
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.searchObject'
+    },
     loadChildren: async () => (await import('./feature/objekt-suchen/objekt-suchen.module')).ObjektSuchenModule,
     canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },

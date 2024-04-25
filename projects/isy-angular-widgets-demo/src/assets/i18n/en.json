@@ -43,7 +43,8 @@
       "requiredMessage": "This field is required.",
       "maxLengthError": "A maximum of {{numChars}} characters may be used.",
       "inputUnspecifiedError": "The date is invalid.",
-      "dateInPastError": "The date must be in the past."
+      "dateInPastError": "The date must be in the past.",
+      "changePage": "Page is changed. New page:"
     },
     "displayObject": {
       "masterDataHeader": "Master data",
@@ -77,7 +78,13 @@
       "intelligenceNotes": "Intelligence notes",
       "addOrEditFact": "Add/Edit fact",
       "addResidence": "Add residence",
-      "removeResidence": "Remove residence"
+      "removeResidence": "Remove residence",
+      "backToOverview": "Back to overview",
+      "skipNavigationLink": {
+        "backToOverview": "Skip navigation link to site Dashboard with back to overview",
+        "searchObject": "To page search object",
+        "displayObject": "To page display object"
+      }
     },
     "labels": {
       "id": "ID",
@@ -165,6 +172,11 @@
       "exampleWidgetFourthAreaInformation": "Information",
       "exampleWidgetFourthAreaEvaluation": "Evaluation",
       "exampleDashboardChartLabels": ["Officials", "Externals", "Authorities"]
+    },
+    "websiteTitles": {
+      "dashboard": "Dashboard",
+      "searchObject": "Search object",
+      "displayObject": "Display object"
     },
     "settings": {
       "header": "Settings Demo App",

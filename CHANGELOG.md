@@ -5,6 +5,10 @@
 ## Demo-Anwendung
 - ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
 - IFS-3644: Die Komponente `isy-form-wrapper` wurde nun für alle Formularfelder in der Demo-App eingesetzt, und die nicht mehr benötigte `RequiredLabelComponent` wurde von der Seite _Objekt suchen_ entfernt
+- ISY-903: Verbesserung der Barrierefreiheit innerhalb der Demo Anwendung durch folgende Anpassungen:
+  * Navigationslinks werden beim Verwenden von Screenreadern vor und nach dem Seitenwechsel angekündigt
+  * Sprunglinks erhalten einen Fokus
+  * Alle Browser-Tabs haben einen individuellen Titel und werden nach Seitenwechsel entsprechend angepasst
 ## Fixes
 - IFS-3590: _Charpicker-_, _Objekt-Anlegen_- und _Objekt-Bearbeiten-Dialog_  werden jetzt immer oberhalb der Hauptnavigation angezeigt
 

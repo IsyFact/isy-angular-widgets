@@ -4,11 +4,13 @@ export const navigationMenu = [
     expanded: true,
     items: [
       {
-        label: 'isyAngularWidgetsDemo.menuItems.exampleQuickLink1'
+        label: 'isyAngularWidgetsDemo.menuItems.exampleQuickLink1',
+        styleClass: 'skip-link'
       },
       {
         label: 'isyAngularWidgetsDemo.menuItems.exampleQuickLink2',
-        visible: true
+        visible: true,
+        styleClass: 'skip-link'
       }
     ]
   },
@@ -18,11 +20,15 @@ export const navigationMenu = [
     items: [
       {
         label: 'isyAngularWidgetsDemo.menuItems.searchObject',
-        routerLink: 'objekt-suchen'
+        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.searchObject',
+        routerLink: 'objekt-suchen',
+        styleClass: 'skip-link'
       },
       {
         label: 'isyAngularWidgetsDemo.menuItems.displayObject',
-        routerLink: 'objekt-anzeigen/42'
+        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.displayObject',
+        routerLink: 'objekt-anzeigen/42',
+        styleClass: 'skip-link'
       }
     ]
   }
