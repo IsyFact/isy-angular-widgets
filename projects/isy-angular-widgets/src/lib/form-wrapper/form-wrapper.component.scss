@@ -1,0 +1,28 @@
+:host ::ng-deep .ifta {
+  position: relative;
+}
+
+:host ::ng-deep .ifta input,
+:host ::ng-deep .ifta textarea {
+  padding-top: 30px;
+}
+
+:host ::ng-deep .ifta label {
+  position: absolute;
+  top: 10px;
+  left: 13px;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+  font-size: 1rem;
+}
+:host ::ng-deep .ifta label.filled {
+  color: var(--blue-500);
+}
+
+:host ::ng-deep .ifta label.unfilled {
+  color: var(--primary-color);
+}
+
+:host ::ng-deep .ifta .p-button.p-button-icon-only {
+  padding: 1.18rem 0;
+}

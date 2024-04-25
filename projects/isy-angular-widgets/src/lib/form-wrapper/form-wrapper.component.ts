@@ -34,13 +34,15 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
   selector: 'isy-form-wrapper',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './form-wrapper.component.html'
+  templateUrl: './form-wrapper.component.html',
+  styleUrls: ['./form-wrapper.component.scss']
 })
 export class FormWrapperComponent implements OnInit {
   @Input() label!: string;
   @Input() fieldId!: string;
   @Input() control!: FormControl;
   @Input() validationMessages: {[key: string]: string} = {};
+  @Input() ifta: boolean = false;
 
   /**
    * Validates the control input on component initialization.

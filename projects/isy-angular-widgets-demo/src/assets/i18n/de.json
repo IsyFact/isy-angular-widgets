@@ -125,6 +125,9 @@
       },
       "deleteButton": "löschen des ausgewählten Werts"
     },
+    "placeholders": {
+      "maxLength": "max. {{maxlength}} Zeichen"
+    },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",
       "frequentTasks": "Häufige Aufgaben",

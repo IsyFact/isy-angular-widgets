@@ -80,4 +80,29 @@ describe('FormWrapperComponent', () => {
     const label = spectator.query('label[for="testField"]') as HTMLElement;
     expect(label.innerHTML).toEqual(actual);
   });
+
+  it('should set the ifta input correctly', () => {
+    const iftaValue = true;
+    spectator.setInput('ifta', iftaValue);
+    spectator.detectChanges();
+    expect(spectator.component.ifta).toEqual(iftaValue);
+  });
+
+  it('should default the ifta input to false', () => {
+    expect(spectator.component.ifta).toEqual(false);
+  });
+
+  it('should have "filled" class for label when control has value', () => {
+    spectator.component.control.setValue('test value');
+    spectator.detectChanges();
+    const labelElement = spectator.query('label');
+    expect(labelElement?.classList).toContain('filled');
+  });
+
+  it('should have "unfilled" class for label when control has no value', () => {
+    spectator.component.control.setValue('');
+    spectator.detectChanges();
+    const labelElement = spectator.query('label');
+    expect(labelElement?.classList).toContain('unfilled');
+  });
 });

@@ -126,6 +126,9 @@
       },
       "deleteButton": "to delete selected value"
     },
+    "placeholders": {
+      "maxLength": "max. {{maxlength}} charaters"
+    },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",
       "frequentTasks": "Frequent tasks",
