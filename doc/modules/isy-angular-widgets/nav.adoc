@@ -1,2 +1,2 @@
 * xref:isy-angular-widgets:konzept/konzept.adoc[Konzept]
-* xref:isy-angular-widgets:nutzungsvorgaben/nutzungsvorgaben.adoc[Nutzungsvorgaben]
+* https://isyfact.github.io/isy-angular-widgets/documentation/[Nutzungsvorgaben]
