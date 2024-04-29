@@ -1,0 +1,11 @@
+site:
+  title: isy-angular-widgets Dokumentation
+content:
+  sources:
+    - url: ./..
+      branches: HEAD
+      start_path: doc
+ui:
+  bundle:
+    url: ./ui-bundle
+    snapshot: true

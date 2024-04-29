@@ -1,0 +1,7 @@
+name: isy-angular-widgets-doc
+title: isy-angular-widgets Dokumentation
+version: '17.2.x'
+display_version: '17.2.0'
+start_page: isy-angular-widgets:konzept/konzept.adoc
+nav:
+  - modules/isy-angular-widgets/nav.adoc
