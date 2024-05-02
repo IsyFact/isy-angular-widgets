@@ -1,0 +1,25 @@
+export const INPUT_MASK_REGEX: RegExp = /^([x0-9]{2}\.[x0-9]{2}\.[x0-9]{4})$/;
+
+export const INPUT_MASK_REGEX_ISO_DATE: RegExp = /^([x0-9]{4}-[x0-9]{2}-[x0-9]{2})$/;
+
+// Multiple regex combined to one (SonarQube error)
+/* eslint-disable editorconfig/indent */
+// ESLint deactivated because deprecated rule
+export const INPUT_UNSPECIFIED_REGEX = new RegExp(
+  /* 00.12.1234 */ /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|/.source +
+    /* 00.00.1234 */ /^(0{2}\.0{2}\.\d{4})$|/.source +
+    /* 00.00.0000 */ /^(0{2}\.0{2}\.0{4})$|/.source +
+    /* xx.12.1234 */ /^(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|/.source +
+    /* xx.xx.1234 */ /^(x{2}\.x{2}\.\d{4})$|/.source +
+    /* xx.xx.xxxx */ /^(x{2}\.x{2}\.x{4})$/.source
+);
+
+export const INPUT_UNSPECIFIED_REGEX_ISO_DATE = new RegExp(
+  /* 00.12.1234 */ /^(\d{4}-([0-1][1-2]|1[0-2])-0{2})$|/.source +
+    /* 00.00.1234 */ /^(\d{4}-0{2}-0{2})$|/.source +
+    /* 00.00.0000 */ /^(0{4}-0{2}-0{2})$|/.source +
+    /* xx.12.1234 */ /^(\d{4}-([0-1][1-2]|1[0-2])-x{2})$|/.source +
+    /* xx.xx.1234 */ /^(\d{4}-x{2}-x{2})$|/.source +
+    /* xx.xx.xxxx */ /^(x{4}-x{2}-x{2})$/.source
+);
+/* eslint-enable editorconfig/indent */

@@ -2,10 +2,11 @@ import {IncompleteDateComponent} from './incomplete-date.component';
 import {AbstractControl, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateModule} from './incomplete-date.module';
+import {Validation} from '@isy-angular-widgets/public-api';
 
 describe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
-  let onChange: unknown = () => {};
+  let onChange: (value: string) => void = () => {};
   let onTouched: unknown = () => {};
   let input: HTMLInputElement;
   const keyEvent = new KeyboardEvent('keydown', {
@@ -428,5 +429,41 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should return the string "_1" correctly', () => {
     expect(component.transformDatePart('_1', 'x')).toBe('01');
+  });
+
+  it('should return null when transferISO8601 is true', () => {
+    component.transferISO8601 = true;
+    const control = new FormControl();
+    const result = component.validate(control);
+    expect(result).toBeNull();
+  });
+
+  it('should return ValidationErrors when transferISO8601 is false', () => {
+    component.transferISO8601 = false;
+    const control = new FormControl();
+    const result = component.validate(control);
+    expect(result).toEqual(Validation.validUnspecifiedDate(control));
+  });
+
+  it('should convert date format to transfer format', () => {
+    component.transferISO8601 = true;
+    const input = '01.01.2024';
+    const expectedOutput = '2024-01-01';
+    const result = component.convertToTransferDateFormat(input);
+    expect(result).toBe(expectedOutput);
+  });
+
+  it('should return the same value if transferISO8601 is false', () => {
+    const input = '01.01.2024';
+    const result = component.convertToTransferDateFormat(input);
+    expect(result).toBe(input);
+  });
+
+  it('should call onChange method with inputValue if transferISO8601 is true', () => {
+    component.transferISO8601 = true;
+    component.inputValue = '2022-01-01';
+    spyOn(component, 'onChange');
+    component.ngAfterViewInit();
+    expect(component.onChange).toHaveBeenCalledWith('2022-01-01');
   });
 });

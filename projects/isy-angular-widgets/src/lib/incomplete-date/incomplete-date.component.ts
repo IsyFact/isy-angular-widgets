@@ -84,6 +84,16 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   inputValue: string = '';
 
+  /**
+   * Specifies whether to transfer the date value in ISO 8601 format.
+   * If set to true, the date value will be transferred in ISO 8601 format.
+   * If set to false, the date value will be transferred in German date format.
+   */
+  @Input() transferISO8601 = false;
+
+  // ISO string data-side date format
+  transferValue?: string;
+
   // To align with PrimeNG API
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onInput: EventEmitter<Event> = new EventEmitter<Event>();
@@ -121,6 +131,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
     // Start observing the target element for attribute changes
     this.classMutationObserver.observe(element, {attributes: true});
+
+    if (this.transferISO8601) this.onChange(this.inputValue);
   }
 
   ngOnDestroy(): void {
@@ -138,14 +150,18 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   }
 
   /**
-   * Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY.
-   * If the date in german format is not valid and not unspecified, a "UNSPECIFIEDDATE" error is thrown.
-   * E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx
+   * If `transferISO8601` is true, it calls `Validation.validUnspecifiedISODate` to validate the control.
+   * Otherwise, it calls `Validation.validUnspecifiedDate` to validate the control.
+   * The Validation checks that the date is a valid unspecified date or valid date in German format DD.MM.YYYY resp. ISO 8601 YYYY-MM-DD.
+   * If the date is invalid and not unspecified, a `UNSPECIFIEDDATE` resp. `UNSPECIFIEDISODATE` error is thrown.
+   * E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx,
+   * YYYY-MM-00, YYYY-00-00, 0000-00-00, YYYY-MM-xx, YYYY-xx-xx, xxxx-xx-xx
    * For valid or valid unspecified dates, no error is thrown.
-   * @param c The control element the validator is appended to
-   * @returns The object {UNSPECIFIEDDATE: true} if the validation fails; null otherwise
+   * @param c The abstract control to validate.
+   * @returns A `ValidationErrors` object if the control is invalid, otherwise null.
    */
   validate(c: AbstractControl): ValidationErrors | null {
+    if (this.transferISO8601) return Validation.validUnspecifiedISODate(c);
     return Validation.validUnspecifiedDate(c);
   }
 
@@ -260,7 +276,6 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     input.value = this.inputValue;
 
     if (this.inputValue.includes('_')) input.value = '';
-
     this.onTouched();
     this.onChange(this.inputValue);
   }
@@ -274,8 +289,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Calls the given function on component change
    * @param fn The function to be called on component change
    */
-  registerOnChange(fn: unknown): void {
-    this.onChange = fn as () => unknown;
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = (value): void => {
+      this.transferValue = this.convertToTransferDateFormat(value);
+      fn(this.transferValue);
+    };
   }
 
   /**
@@ -296,7 +314,21 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     this.disabled = isDisabled;
   }
 
-  onChange: (_: unknown) => unknown = () => {};
+  /**
+   * Converts the given value to the transfer date format.
+   * If `transferISO8601` is true, the value is expected to be in the format "dd.mm.yyyy".
+   * Otherwise, the original value is returned.
+   * @param value - The value to convert.
+   * @returns The converted value in the format "yyyy-mm-dd" if `transferISO8601` is true, otherwise the original value.
+   */
+  convertToTransferDateFormat(value: string): string {
+    if (!this.transferISO8601) return value;
+
+    const [day, month, year] = value.split('.');
+    return `${year}-${month}-${day}`;
+  }
+
+  onChange: (value: string) => unknown = () => {};
 
   onTouched: () => void = () => {};
 }

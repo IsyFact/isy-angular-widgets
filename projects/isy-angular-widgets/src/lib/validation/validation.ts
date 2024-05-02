@@ -1,5 +1,11 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 import moment, {MomentInput} from 'moment';
+import {
+  INPUT_MASK_REGEX,
+  INPUT_MASK_REGEX_ISO_DATE,
+  INPUT_UNSPECIFIED_REGEX,
+  INPUT_UNSPECIFIED_REGEX_ISO_DATE
+} from './data/date-formats';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
@@ -48,14 +54,13 @@ export class Validation {
    * @returns The object {UNSPECIFIEDDATE: true} if the validation fails; null otherwise
    */
   static validUnspecifiedDate(c: AbstractControl): ValidationErrors | null {
-    const input = c.value as string;
+    const input = (c.value as string) ?? null;
 
     if (!input) return null;
 
-    const regexInputMask = /^([x0-9]{2}\.[x0-9]{2}\.[x0-9]{4})$/;
     let isDateValid = false;
 
-    if (RegExp(regexInputMask).exec(input)) {
+    if (INPUT_MASK_REGEX.test(input)) {
       const [day, month, year] = input.split('.');
 
       if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
@@ -67,10 +72,39 @@ export class Validation {
       }
     }
 
-    const regexInputUnspecified =
-      /^(0{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(0{2}\.0{2}\.\d{4})$|^(0{2}\.0{2}\.0{4})$|^(x{2}\.([0-1][1-2]|1[0-2])\.\d{4})$|^(x{2}\.x{2}\.\d{4})$|^(x{2}\.x{2}\.x{4})$/;
+    if (!(INPUT_UNSPECIFIED_REGEX.test(input) || isDateValid)) return {UNSPECIFIEDDATE: true};
 
-    if (!(RegExp(regexInputUnspecified).exec(input) !== null || isDateValid)) return {UNSPECIFIEDDATE: true};
+    return null;
+  }
+
+  /**
+   * Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY.
+   * If the date in german format is not valid and not unspecified, a "DATE" error is thrown.
+   * E.g. unspecified dates: YYYY-MM-00, YYYY-00-00, 0000-00-00, YYYY-MM-xx, YYYY-xx-xx, xxxx-xx-xx
+   * For valid or valid unspecified dates, no error is thrown.
+   * @param c The control element the validator is appended to
+   * @returns The object {UNSPECIFIEDISODATE: true} if the validation fails; null otherwise
+   */
+  static validUnspecifiedISODate(c: AbstractControl): ValidationErrors | null {
+    const input = (c.value as string) ?? null;
+
+    if (!input) return null;
+
+    let isDateValid = false;
+
+    if (INPUT_MASK_REGEX_ISO_DATE.test(input)) {
+      const [year, month, day] = input.split('-');
+
+      if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
+        const isoFormattedStr = `${year}-${month}-${day}`;
+        const date = new Date(isoFormattedStr);
+        const timestamp = date.getTime();
+
+        if (!isNaN(timestamp)) isDateValid = date.toISOString().startsWith(isoFormattedStr);
+      }
+    }
+
+    if (!(INPUT_UNSPECIFIED_REGEX_ISO_DATE.test(input) || isDateValid)) return {UNSPECIFIEDISODATE: true};
 
     return null;
   }

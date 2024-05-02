@@ -26,110 +26,114 @@ describe('Unit Test: Validation', () => {
     }
   }
 
-  describe('unspecifiedDate', () => {
+  describe('unspecifiedDate when input is valid', () => {
+    let control: AbstractControl;
+
+    beforeEach(() => {
+      control = new FormControl('');
+    });
+
+    const validInputs = [
+      '',
+      '11.11.2023',
+      '00.11.2023',
+      '00.00.2023',
+      '00.00.0000',
+      'xx.11.2023',
+      'xx.xx.2023',
+      'xx.xx.xxxx'
+    ];
+
+    validInputs.forEach((input) => {
+      it(`should return null for valid input ${input}`, () => {
+        control.setValue(input);
+        const errors = Validation.validUnspecifiedDate(control);
+        expect(errors).toBeNull();
+      });
+    });
+  });
+
+  describe('unspecifiedDate when input is invalid', () => {
     const errorKey = 'UNSPECIFIEDDATE';
+    let control: AbstractControl;
 
-    it('should return no validation error, if input is empty', () => {
-      const validDateControl: AbstractControl = new FormControl('');
-      const errors = Validation.validUnspecifiedDate(validDateControl);
-      expect(errors).toBeNull();
+    beforeEach(() => {
+      control = new FormControl('');
     });
 
-    it('should return null if date is valid', () => {
-      const validDateControl: AbstractControl = new FormControl('11.11.2023');
-      const errors = Validation.validUnspecifiedDate(validDateControl);
-      expect(errors).toBeNull();
+    const invalidInputs = [
+      {input: '50.11.2023', description: 'invalid day'},
+      {input: '01.30.2023', description: 'invalid month'},
+      {input: '00.13.2023', description: 'invalid month in unspecified date format 00.MM.YYYY'},
+      {input: '01.00.2023', description: 'unspecified month in german date format DD.00.YYYY'},
+      {input: 'xx.13.2023', description: 'invalid month in unspecified date format xx.MM.YYYY'},
+      {input: '01.xx.2023', description: 'unspecified month in german date format DD.xx.YYYY'},
+      {input: 'xx.01.xxxx', description: 'unspecified year in german date format xx.MM.xxxx'},
+      {input: '01.xx.xxxx', description: 'unspecified month and year in german date format DD.xx.xxxx'},
+      {input: '01.01.xxxx', description: 'unspecified year in german date format DD.MM.xxxx'}
+    ];
+
+    invalidInputs.forEach(({input, description}) => {
+      it(`should return ${errorKey} for ${description}`, () => {
+        control.setValue(input);
+        const errors = Validation.validUnspecifiedDate(control);
+        expect(errors).toEqual({[errorKey]: true});
+      });
+    });
+  });
+
+  describe('validUnspecifiedISODate when input is valid', () => {
+    let control: AbstractControl;
+
+    beforeEach(() => {
+      control = new FormControl('');
     });
 
-    it('should return UNSPECIFIEDDATE if the day is invalid', () => {
-      const control: AbstractControl = new FormControl('50.11.2023');
-      const errors = Validation.validUnspecifiedDate(control);
-      errorHaveToBeDefined(errors, errorKey);
+    const validInputs = [
+      '',
+      '2023-11-11',
+      '2023-11-00',
+      '2023-00-00',
+      '0000-00-00',
+      '2023-11-xx',
+      '2023-xx-xx',
+      'xxxx-xx-xx'
+    ];
+
+    validInputs.forEach((input) => {
+      it(`should return null for '${input}'`, () => {
+        control.setValue(input);
+        const errors = Validation.validUnspecifiedISODate(control);
+        expect(errors).toBeNull();
+      });
+    });
+  });
+
+  describe('validUnspecifiedISODate when input is invalid', () => {
+    let control: AbstractControl;
+    const errorKey = 'UNSPECIFIEDISODATE';
+
+    beforeEach(() => {
+      control = new FormControl('');
     });
 
-    it('should return UNSPECIFIEDDATE if the month is invalid', () => {
-      const control: AbstractControl = new FormControl('01.30.2023');
-      const errors = Validation.validUnspecifiedDate(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
+    const testCases = [
+      {input: '2023-11-50', desc: 'invalid day'},
+      {input: '2023-30-01', desc: 'invalid month'},
+      {input: '2023-13-00', desc: 'invalid month with unspecified day'},
+      {input: '2023-13-xx', desc: 'invalid month in unspecified date'},
+      {input: '2023-xx-01', desc: 'valid day in unspecified month and year'},
+      {input: 'xxxx-01-xx', desc: 'valid month in unspecified year and day'},
+      {input: 'xxxx-xx-01', desc: 'valid day in fully unspecified date'},
+      {input: 'xxxx-01-01', desc: 'valid date in german format but unspecified year'}
+    ];
 
-    it('should return null if date is unspecified in german date format 00.MM.YYYY', () => {
-      const validDateControl: AbstractControl = new FormControl('00.11.2023');
-      const errors = Validation.validUnspecifiedDate(validDateControl);
-      expect(errors).toBeNull();
-    });
-
-    it('should return null if date is unspecified in german date format 00.00.YYYY', () => {
-      const validDateControl: AbstractControl = new FormControl('00.00.2023');
-      const errors = Validation.validUnspecifiedDate(validDateControl);
-      expect(errors).toBeNull();
-    });
-
-    it('should return null if date is unspecified in german date format 00.00.0000', () => {
-      const validDateControl: AbstractControl = new FormControl('00.00.0000');
-      const errors = Validation.validUnspecifiedDate(validDateControl);
-      expect(errors).toBeNull();
-    });
-
-    it('should return UNSPECIFIEDDATE if date is unspecified and the month is invalid in german date format 00.MM.YYYY', () => {
-      const control: AbstractControl = new FormControl('00.13.2023');
-      const errors = Validation.validUnspecifiedDate(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
-
-    it('should return UNSPECIFIEDDATE if date is in german date format DD.00.YYYY', () => {
-      const control: AbstractControl = new FormControl('01.00.2023');
-      const errors = Validation.validUnspecifiedDate(control);
-
-      errorHaveToBeDefined(errors, errorKey);
-    });
-
-    it('should return null if date is unspecified in german date format xx.MM.YYYY', () => {
-      const validDateControl: AbstractControl = new FormControl('xx.11.2023');
-      const errors = Validation.validUnspecifiedDate(validDateControl);
-      expect(errors).toBeNull();
-    });
-
-    it('should return null if date is unspecified in german date format xx.xx.YYYY', () => {
-      const validDateControl: AbstractControl = new FormControl('xx.xx.2023');
-      const errors = Validation.validUnspecifiedDate(validDateControl);
-      expect(errors).toBeNull();
-    });
-
-    it('should return null if date is unspecified in german date format xx.xx.xxxx', () => {
-      const validDateControl: AbstractControl = new FormControl('xx.xx.xxxx');
-      const errors = Validation.validUnspecifiedDate(validDateControl);
-      expect(errors).toBeNull();
-    });
-
-    it('should return UNSPECIFIEDDATE if date is unspecified and the month is invalid in german date format xx.MM.YYYY', () => {
-      const control: AbstractControl = new FormControl('xx.13.2023');
-      const errors = Validation.validUnspecifiedDate(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
-
-    it('should return UNSPECIFIEDDATE if date is in german date format DD.xx.2022', () => {
-      const control: AbstractControl = new FormControl('01.xx.2023');
-      const errors = Validation.validUnspecifiedDate(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
-
-    it('should return UNSPECIFIEDDATE if date is in german date format xx.MM.xxxx', () => {
-      const control: AbstractControl = new FormControl('xx.01.xxxx');
-      const errors = Validation.validUnspecifiedDate(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
-
-    it('should return UNSPECIFIEDDATE if date is in german date format DD.xx.xxxx', () => {
-      const control: AbstractControl = new FormControl('01.xx.xxxx');
-      const errors = Validation.validUnspecifiedDate(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
-
-    it('should return UNSPECIFIEDDATE if date is in german date format DD.MM.xxxx', () => {
-      const control: AbstractControl = new FormControl('01.01.xxxx');
-      const errors = Validation.validUnspecifiedDate(control);
-      errorHaveToBeDefined(errors, errorKey);
+    testCases.forEach(({input, desc}) => {
+      it(`should return ${errorKey} if ${desc}`, () => {
+        control.setValue(input);
+        const errors = Validation.validUnspecifiedISODate(control);
+        expect(errors).toEqual({[errorKey]: true});
+      });
     });
   });
 
