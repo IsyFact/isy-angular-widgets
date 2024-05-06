@@ -1,0 +1,7 @@
+name: isy-angular-widgets
+title: isy-angular-widgets Dokumentation
+version: '17.2.x'
+display_version: '17.2'
+start_page: ROOT:konzept/konzept.adoc
+nav:
+  - modules/ROOT/nav.adoc

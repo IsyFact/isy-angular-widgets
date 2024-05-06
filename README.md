@@ -1,5 +1,9 @@
 ## Development Setup
 
+### Konzeptdokumentation
+
+Eine ausführliche Dokumentation zum Konzept der _isy-angular-widgets_ Bibliothek, ist auf der Seite [Konzept Angular](isy-angular-widgets-doc/modules/ROOT/pages/konzept/konzept.adoc) beschrieben.
+
 ### Prerequisites
 
 Auf dem PC müssen die neueste [Node und Npm LTS Version](https://nodejs.org/en/download/) installiert sein.

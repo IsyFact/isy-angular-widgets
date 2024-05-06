@@ -11,6 +11,8 @@
   * Alle Browser-Tabs haben einen individuellen Titel und werden nach Seitenwechsel entsprechend angepasst
 ## Fixes
 - IFS-3590: _Charpicker-_, _Objekt-Anlegen_- und _Objekt-Bearbeiten-Dialog_  werden jetzt immer oberhalb der Hauptnavigation angezeigt
+## Dokumentation
+- IFS-3646: Hinzufügen einer AsciiDoc Dokumentation für den Angular Baustein
 
 # 17.2.0 - 19.03.2024
 ## Fixes
