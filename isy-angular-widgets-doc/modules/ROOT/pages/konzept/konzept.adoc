@@ -13,13 +13,9 @@ include::glossary:licence:partial$licence.adoc[]
 [[einleitung]]
 == Einleitung
 
-In diesem Konzept werden die Anforderungen und Vorgaben der IsyFact, die im
-xref:isyfact-standards-doku:isy-bedienkonzept:bedienkonzept.adoc[Bedienkonzept und Styleguide] definiert sind, als
-Komponenten-Bibliothek umgesetzt oder in der dazugehörigen Demo-Anwendung exemplarisch dargestellt, um eine einheitliche
-Umsetzung der User Interfaces in der gesamten Anwendungslandschaft zu gewährleisten.
+In diesem Konzept werden die Anforderungen und Vorgaben der IsyFact, die im xref:isyfact-standards-doku:isy-bedienkonzept:bedienkonzept.adoc[Bedienkonzept und Styleguide] definiert sind, als Komponenten-Bibliothek umgesetzt oder in der dazugehörigen Demo-Anwendung exemplarisch dargestellt, um eine einheitliche Umsetzung der User Interfaces in der gesamten Anwendungslandschaft zu gewährleisten.
 
-Dieses Dokument beschreibt alle Aspekte, die bei der Frontend-Entwicklung einer Anwendung zu berücksichtigen sind,
-um die definierten Anforderungen zu erfüllen.
+Dieses Dokument beschreibt alle Aspekte, die bei der Frontend-Entwicklung einer Anwendung zu berücksichtigen sind, um die definierten Anforderungen zu erfüllen.
 
 [[aufbau-und-zweck-des-dokuments]]
 == Aufbau und Zweck des Dokuments
@@ -74,8 +70,7 @@ Beispiel-Tabelle
 [[vorgaben]]
 == Vorgaben
 
-Die folgenden architektonischen und technischen Vorgaben beziehen sich auf die Umsetzung der
-in Kapitel <<anforderungen>> genannten Anforderungen in der zu diesem Baustein gehörenden Bibliothek.
+Die folgenden architektonischen und technischen Vorgaben beziehen sich auf die Umsetzung der in Kapitel <<anforderungen>> genannten Anforderungen in der zu diesem Baustein gehörenden Bibliothek.
 
 [[bedeutung-der-standardbibliothek]]
 === Bedeutung der Standardbibliothek
