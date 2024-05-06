@@ -12,214 +12,77 @@ describe('Unit Tests: IncompleteDateService', () => {
   });
 
   describe('transformValue', () => {
-    it('should return a valid date in DD.00.YYYY format correctly', () => {
-      expect(service.transformValue('01.01.2023')).toBe('01.01.2023');
-    });
+    const testCases = [
+      {inputVal: '01.01.2023', expected: '01.01.2023'},
+      {inputVal: '01.01.2999', expected: '01.01.2999'},
+      {inputVal: '00.01.2023', expected: '00.01.2023'},
+      {inputVal: '00.00.2023', expected: '00.00.2023'},
+      {inputVal: '01.00.2023', expected: '00.00.2023'},
+      {inputVal: '99.00.2023', expected: '00.00.2023'},
+      {inputVal: '00.01.0000', expected: '00.00.0000'},
+      {inputVal: '00.00.0000', expected: '00.00.0000'},
+      {inputVal: '01.01.9___', expected: '01.01.2029'},
+      {inputVal: '01.01.99__', expected: '01.01.2099'},
+      {inputVal: '01.01.999_', expected: '01.01.2999'},
+      {inputVal: '01.01.21__', expected: '01.01.2021'},
+      {inputVal: '01.01.9___', expected: '01.01.2019', options: true},
+      {inputVal: '01.01.50__', expected: '01.01.1950', options: true},
+      {inputVal: '01.01.999_', expected: '01.01.1999', options: true},
+      {inputVal: '01.01.03__', expected: '01.01.2003', options: true}
+    ];
 
-    it('should return a valid future date in DD.00.YYYY format correctly', () => {
-      expect(service.transformValue('01.01.2024')).toBe('01.01.2024');
-    });
-
-    it('should return an incomplete date in DD.00.YYYY format correctly', () => {
-      expect(service.transformValue('00.01.2023')).toBe('00.01.2023');
-    });
-
-    it('should return an incomplete date in DD.00.YYYY format correctly', () => {
-      expect(service.transformValue('00.00.2023')).toBe('00.00.2023');
-    });
-
-    it('should transform an incomplete date in DD.00.YYYY format correctly', () => {
-      expect(service.transformValue('01.00.2023')).toBe('00.00.2023');
-    });
-
-    it('should transform an incomplete date with invalid day in DD.00.YYYY format correctly to 00.00.YYYY', () => {
-      expect(service.transformValue('99.00.2023')).toBe('00.00.2023');
-    });
-
-    it('should transform an incomplete invalid date day in 00.MM.0000 format correctly to 00.00.0000', () => {
-      expect(service.transformValue('00.01.0000')).toBe('00.00.0000');
-    });
-
-    it('should transform a valid future date in correctly DD.MM.YYYY format', () => {
-      expect(service.transformValue('01.01.2024')).toBe('01.01.2024');
-    });
-
-    it('should transform an incomplete date in correctly 00.00.0000 format', () => {
-      expect(service.transformValue('00.00.0000')).toBe('00.00.0000');
-    });
-
-    it('should transform a future date for DD.MM.YYYY', () => {
-      expect(service.transformValue('01.01.9___')).toBe('01.01.2029');
-    });
-
-    it('should transform a future date for DD.MM.YYYY', () => {
-      expect(service.transformValue('01.01.99__')).toBe('01.01.2099');
-    });
-
-    it('should transform a future date for DD.MM.YYYY', () => {
-      expect(service.transformValue('01.01.999_')).toBe('01.01.2999');
-    });
-
-    it('should transform a past date for DD.MM.YYYY', () => {
-      expect(service.transformValue('01.01.21__')).toBe('01.01.2021');
-    });
-
-    it('should transform a future date to past date year for DD.MM.YYYY with dateInPastConstraint', () => {
-      expect(service.transformValue('01.01.9___', true)).toBe('01.01.2019');
-    });
-
-    it('should transform a future date to previous century for DD.MM.YYYY with dateInPastConstraint', () => {
-      expect(service.transformValue('01.01.50__', true)).toBe('01.01.1950');
-    });
-
-    it('should transform a future date to previous century for DD.MM.YYYY with dateInPastConstraint', () => {
-      expect(service.transformValue('01.01.999_', true)).toBe('01.01.1999');
-    });
-
-    it('should transform a past date for DD.MM.YYYY with dateInPastConstraint', () => {
-      expect(service.transformValue('01.01.03__', true)).toBe('01.01.2003');
+    testCases.forEach(({inputVal, expected, options}) => {
+      const description = `${inputVal} ${options ? 'with options' : ''} should transform to ${expected}`;
+      it(description, () => {
+        expect(service.transformValue(inputVal, options)).toBe(expected);
+      });
     });
   });
 
   describe('transformValue (X for incomplete)', () => {
-    it('should return an incomplete date in xx.MM.YYYY format correctly', () => {
-      expect(service.transformValue('xx.01.2023')).toBe('xx.01.2023');
-    });
+    const testCases = [
+      {inputVal: 'xx.01.2023', expected: 'xx.01.2023'},
+      {inputVal: 'x1.01.2023', expected: 'xx.01.2023'},
+      {inputVal: '1x.01.2023', expected: 'xx.01.2023'},
+      {inputVal: '01.xx.2023', expected: 'xx.xx.2023'},
+      {inputVal: 'xx.xx.2023', expected: 'xx.xx.2023'},
+      {inputVal: 'x1.xx.2023', expected: 'xx.xx.2023'},
+      {inputVal: '1x.xx.2023', expected: 'xx.xx.2023'},
+      {inputVal: 'xx.x1.2023', expected: 'xx.xx.2023'},
+      {inputVal: 'xx.1x.2023', expected: 'xx.xx.2023'},
+      {inputVal: 'x1.x1.2023', expected: 'xx.xx.2023'},
+      {inputVal: '1x.1x.2023', expected: 'xx.xx.2023'},
+      {inputVal: '1x.x1.2023', expected: 'xx.xx.2023'},
+      {inputVal: 'x1.1x.2023', expected: 'xx.xx.2023'},
+      {inputVal: '01.01.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: 'xx.01.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: 'x1.01.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: '1x.01.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: '01.xx.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: '01.x1.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: '01.1x.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: 'xx.x1.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: '01.01.xxx_', expected: 'xx.xx.xxxx'},
+      {inputVal: '01.01.xx__', expected: 'xx.xx.xxxx'},
+      {inputVal: '01.01.x___', expected: 'xx.xx.xxxx'},
+      {inputVal: 'xx.xx.xxxx', expected: 'xx.xx.xxxx'},
+      {inputVal: 'xx.01.9__', expected: 'xx.01.2029'},
+      {inputVal: 'xx.01.99__', expected: 'xx.01.2099'},
+      {inputVal: 'xx.01.999_', expected: 'xx.01.2999'},
+      {inputVal: 'xx.xx.9___', expected: 'xx.xx.2029'},
+      {inputVal: 'xx.xx.99__', expected: 'xx.xx.2099'},
+      {inputVal: 'xx.xx.999_', expected: 'xx.xx.2999'},
+      {inputVal: 'xx.01.9___', expected: 'xx.01.2019', options: true},
+      {inputVal: 'xx.01.50__', expected: 'xx.01.1950', options: true},
+      {inputVal: 'xx.01.999_', expected: 'xx.01.1999', options: true},
+      {inputVal: 'xx.01.03__', expected: 'xx.01.2003', options: true}
+    ];
 
-    it('should transform an incomplete date in xD.MM.YYYY format correctly to xx.01.2023', () => {
-      expect(service.transformValue('x1.01.2023')).toBe('xx.01.2023');
-    });
-
-    it('should transform an incomplete date in Dx.MM.YYYY format correctly to xx.01.2023', () => {
-      expect(service.transformValue('1x.01.2023')).toBe('xx.01.2023');
-    });
-
-    it('should transform an incomplete date in DD.xx.YYYY format correctly to xx.xx.2023', () => {
-      expect(service.transformValue('01.xx.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should return an incomplete date in xx.xx.YYYY format correctly', () => {
-      expect(service.transformValue('xx.xx.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in xD.xx.YYYY format correctly', () => {
-      expect(service.transformValue('x1.xx.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in Dx.xx.YYYY format correctly to xx.xx.2023', () => {
-      expect(service.transformValue('1x.xx.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in xx.xM.YYYY format correctly to xx.xx.2023', () => {
-      expect(service.transformValue('xx.x1.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in xx.Mx.YYYY format correctly to xx.xx.2023', () => {
-      expect(service.transformValue('xx.1x.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in xD.xM.YYYY format correctly to xx.xx.2023', () => {
-      expect(service.transformValue('x1.x1.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in Dx.Mx.YYYY format correctly to xx.xx.2023', () => {
-      expect(service.transformValue('1x.1x.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in Dx.xM.YYYY format correctly to xx.xx.2023', () => {
-      expect(service.transformValue('1x.x1.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in Dx.Mx.YYYY format correctly to xx.xx.2023', () => {
-      expect(service.transformValue('x1.1x.2023')).toBe('xx.xx.2023');
-    });
-
-    it('should transform an incomplete date in DD.MM.xxxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('01.01.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in xx.MM.xxxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('xx.01.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in xD.MM.xxxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('x1.01.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in Dx.MM.xxxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('1x.01.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in DD.xx.xxxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('01.xx.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in DD.xM.xxxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('01.x1.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in DD.Mx.xxxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('01.1x.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in xx.xM.xxxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('xx.x1.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in DD.MM.xxx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('01.01.xxx_')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in DD.MM.xx format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('01.01.xx__')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete date in xx.Mx.x format correctly to xx.xx.xxxx', () => {
-      expect(service.transformValue('01.01.x___')).toBe('xx.xx.xxxx');
-    });
-
-    it('should return an incomplete date in xx.xx.xxxx format correctly', () => {
-      expect(service.transformValue('xx.xx.xxxx')).toBe('xx.xx.xxxx');
-    });
-
-    it('should transform an incomplete future date in xx.MM.Y format correctly to xx.01.2029', () => {
-      expect(service.transformValue('xx.01.9__')).toBe('xx.01.2029');
-    });
-
-    it('should transform an incomplete future date in xx.MM.YY format correctly to xx.01.2099', () => {
-      expect(service.transformValue('xx.01.99__')).toBe('xx.01.2099');
-    });
-
-    it('should transform an incomplete future date in xx.MM.YYY format correctly to xx.01.2999', () => {
-      expect(service.transformValue('xx.01.999_')).toBe('xx.01.2999');
-    });
-
-    it('should transform an incomplete future date in xx.xx.Y format correctly to xx.xx.2029', () => {
-      expect(service.transformValue('xx.xx.9___')).toBe('xx.xx.2029');
-    });
-
-    it('should transform an incomplete future date in xx.xx.YY format correctly to xx.xx.2099', () => {
-      expect(service.transformValue('xx.xx.99__')).toBe('xx.xx.2099');
-    });
-
-    it('should transform an incomplete future date in xx.xx.YYY format correctly to xx.xx.2999', () => {
-      expect(service.transformValue('xx.xx.999_')).toBe('xx.xx.2999');
-    });
-
-    it('should transform an incomplete future date to past date year for xx.MM.YYYY with dateInPastConstraint', () => {
-      expect(service.transformValue('xx.01.9___', true)).toBe('xx.01.2019');
-    });
-
-    it('should transform an incomplete future date to previous century for xx.MM.YYYY with dateInPastConstraint', () => {
-      expect(service.transformValue('xx.01.50__', true)).toBe('xx.01.1950');
-    });
-
-    it('should transform an incomplete future date to previous century for xx.MM.YYYY with dateInPastConstraint', () => {
-      expect(service.transformValue('xx.01.999_', true)).toBe('xx.01.1999');
-    });
-
-    it('should transform an incomplete future date for xx.MM.YYYY with dateInPastConstraint', () => {
-      expect(service.transformValue('xx.01.03__', true)).toBe('xx.01.2003');
+    testCases.forEach(({inputVal, options, expected}) => {
+      const description = `should transform ${inputVal} ${options ? 'with options' : ''} to ${expected}`;
+      it(description, () => {
+        expect(service.transformValue(inputVal, options)).toBe(expected);
+      });
     });
   });
 });

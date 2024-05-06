@@ -2,10 +2,11 @@ import {IncompleteDateComponent} from './incomplete-date.component';
 import {AbstractControl, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateModule} from './incomplete-date.module';
+import {Validation} from '@isy-angular-widgets/public-api';
 
 describe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
-  let onChange: unknown = () => {};
+  let onChange: (value: string) => void = () => {};
   let onTouched: unknown = () => {};
   let input: HTMLInputElement;
   const keyEvent = new KeyboardEvent('keydown', {
@@ -92,34 +93,21 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(validators).not.toBeUndefined();
   });
 
-  it('should autocomplete the input sequence "01.01.2024" to "01.01.2024"', () => {
-    typeSequence(['0', '1', '.', '0', '1', '.', '2', '0', '2', '4']);
-    expect(input.value).toBe('01.01.2024');
-  });
+  const testCases0 = [
+    {sequence: ['0', '1', '.', '0', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
+    {sequence: ['1', '.', '0', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
+    {sequence: ['1', '.', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
+    {sequence: ['0', '1', '0', '1', '2', '0', '2', '4'], expected: '01.01.2024'},
+    {sequence: ['x', '.', 'x', '.'], expected: 'xx.xx.____'},
+    {sequence: ['.'], expected: 'xx.__.____'}
+  ];
 
-  it('should autocomplete the input sequence "1.01.2024" to "01.01.2024"', () => {
-    typeSequence(['1', '.', '0', '1', '.', '2', '0', '2', '4']);
-    expect(input.value).toBe('01.01.2024');
-  });
-
-  it('should autocomplete the input sequence "1.1.2024" to "01.01.2024"', () => {
-    typeSequence(['1', '.', '1', '.', '2', '0', '2', '4']);
-    expect(input.value).toBe('01.01.2024');
-  });
-
-  it('should autocomplete the input sequence "01012024" to "01.01.2024"', () => {
-    typeSequence(['0', '1', '0', '1', '2', '0', '2', '4']);
-    expect(input.value).toBe('01.01.2024');
-  });
-
-  it('should autocomplete the input sequence "x.x.____" to "xx.xx.____"', () => {
-    typeSequence(['x', '.', 'x', '.']);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input sequence "._.__.____" to "xx.__.____"', () => {
-    typeSequence(['.']);
-    expect(input.value).toBe('xx.__.____');
+  testCases0.forEach(({sequence, expected}) => {
+    it(`should autocomplete ${JSON.stringify(sequence)} to ${expected}`, () => {
+      input.value = '';
+      typeSequence(sequence);
+      expect(input.value).toBe(expected);
+    });
   });
 
   it('should transform the input value on losing the focus to "" when input value contains "_"', () => {
@@ -142,208 +130,49 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(onInputSpy).toHaveBeenCalledWith(keyEvent);
   });
 
-  it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 0 when entering dot', () => {
-    input.value = '__.__.____';
-    setupEvent(keyEvent, 0, 0);
-    expect(input.value).toBe('xx.__.____');
-  });
+  const testCases1 = [
+    {inputVal: '__.__.____', cursor: 0, expected: 'xx.__.____'},
+    {inputVal: '__.__.____', cursor: 1, expected: 'xx.__.____'},
+    {inputVal: '__.__.____', cursor: 2, expected: 'xx.__.____'},
+    {inputVal: '__.__.____', cursor: 3, expected: 'xx.__.____'},
+    {inputVal: '__.__.____', cursor: 4, expected: 'xx.xx.____'},
+    {inputVal: '__.__.____', cursor: 5, expected: 'xx.xx.____'},
+    {inputVal: 'x_.__.____', cursor: 1, expected: 'xx.__.____'},
+    {inputVal: '_x.__.____', cursor: 2, expected: 'xx.__.____'},
+    {inputVal: '__.x_.____', cursor: 4, expected: 'xx.xx.____'},
+    {inputVal: '__._x.____', cursor: 5, expected: 'xx.xx.____'},
+    {inputVal: 'x_.x_.____', cursor: 1, expected: 'xx.x_.____'},
+    {inputVal: '_x.x_.____', cursor: 2, expected: 'xx.x_.____'},
+    {inputVal: '1_.__.____', cursor: 1, expected: '01.__.____'},
+    {inputVal: '_1.__.____', cursor: 2, expected: '01.__.____'},
+    {inputVal: '__.1_.____', cursor: 4, expected: 'xx.01.____'},
+    {inputVal: '__._1.____', cursor: 5, expected: 'xx.01.____'},
+    {inputVal: '1_.1_.____', cursor: 1, expected: '01.1_.____'},
+    {inputVal: '_1.1_.____', cursor: 2, expected: '01.1_.____'},
+    {inputVal: '1_._x.____', cursor: 5, expected: '01.xx.____'},
+    {inputVal: '_1._x.____', cursor: 5, expected: '01.xx.____'},
+    {inputVal: 'xx.xx.____', cursor: 6, expected: 'xx.xx.____'},
+    {inputVal: '01.__.____', cursor: 3, expected: '01.__.____'},
+    {inputVal: 'x_.x_.____', cursor: 4, expected: 'xx.xx.____'},
+    {inputVal: '_x.x_.____', cursor: 4, expected: 'xx.xx.____'},
+    {inputVal: 'x_._x.____', cursor: 5, expected: 'xx.xx.____'},
+    {inputVal: '_x._x.____', cursor: 5, expected: 'xx.xx.____'},
+    {inputVal: '1_.x_.____', cursor: 4, expected: '01.xx.____'},
+    {inputVal: '_1.x_.____', cursor: 4, expected: '01.xx.____'},
+    {inputVal: '1_.1_.____', cursor: 4, expected: '01.01.____'},
+    {inputVal: '_1.1_.____', cursor: 4, expected: '01.01.____'},
+    {inputVal: '1_._1.____', cursor: 5, expected: '01.01.____'},
+    {inputVal: '_1._1.____', cursor: 5, expected: '01.01.____'},
+    {inputVal: '1_.x_.____', cursor: 1, expected: '01.x_.____'},
+    {inputVal: '_1.x_.____', cursor: 2, expected: '01.x_.____'}
+  ];
 
-  it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 1 when entering dot', () => {
-    input.value = '__.__.____';
-    setupEvent(keyEvent, 1, 1);
-    expect(input.value).toBe('xx.__.____');
-  });
-
-  it('should autocomplete the input value from __.__.____ to xx.__.____ with current cursor position 2 when entering dot', () => {
-    input.value = '__.__.____';
-    setupEvent(keyEvent, 2, 2);
-    expect(input.value).toBe('xx.__.____');
-  });
-
-  it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 3 when entering dot', () => {
-    input.value = '__.__.____';
-    setupEvent(keyEvent, 3, 3);
-    expect(input.value).toBe('xx.__.____');
-  });
-
-  it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
-    input.value = '__.__.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from __.__.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
-    input.value = '__.__.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from x_.__.____ to xx.__.____ with current cursor position 1 when entering dot', () => {
-    input.value = 'x_.__.____';
-    setupEvent(keyEvent, 1, 1);
-    expect(input.value).toBe('xx.__.____');
-  });
-
-  it('should autocomplete the input value from _x.__.____ to xx.__.____ with current cursor position 2 when entering dot', () => {
-    input.value = '_x.__.____';
-    setupEvent(keyEvent, 2, 2);
-    expect(input.value).toBe('xx.__.____');
-  });
-
-  it('should autocomplete the input value from __.x_.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
-    input.value = '__.x_.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from __._x.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
-    input.value = '__._x.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from x_.x_.____ to xx.x_.____ with current cursor position 1 when entering dot', () => {
-    input.value = 'x_.x_.____';
-    setupEvent(keyEvent, 1, 1);
-    expect(input.value).toBe('xx.x_.____');
-  });
-
-  it('should autocomplete the input value from _x.x_.____ to xx.x_.____ with current cursor position 2 when entering dot', () => {
-    input.value = '_x.x_.____';
-    setupEvent(keyEvent, 2, 2);
-    expect(input.value).toBe('xx.x_.____');
-  });
-
-  it('should autocomplete the input value from x_.x_.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
-    input.value = 'x_.x_.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from _x.x_.____ to xx.xx.____ with current cursor position 4 when entering dot', () => {
-    input.value = '_x.x_.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from x_._x.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
-    input.value = 'x_._x.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from _x._x.____ to xx.xx.____ with current cursor position 5 when entering dot', () => {
-    input.value = '_x._x.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should autocomplete the input value from 1_.__.____ to 01.__.____ with current cursor position 1 when entering dot', () => {
-    input.value = '1_.__.____';
-    setupEvent(keyEvent, 1, 1);
-    expect(input.value).toBe('01.__.____');
-  });
-
-  it('should autocomplete the input value from _1.__.____ to 01.__.____ with current cursor position 2 when entering dot', () => {
-    input.value = '_1.__.____';
-    setupEvent(keyEvent, 2, 2);
-    expect(input.value).toBe('01.__.____');
-  });
-
-  it('should autocomplete the input value from __.1_.____ to xx.01.____ with current cursor position 4 when entering dot', () => {
-    input.value = '__.1_.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('xx.01.____');
-  });
-
-  it('should autocomplete the input value from __._1.____ to xx.01.____ with current cursor position 5 when entering dot', () => {
-    input.value = '__._1.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('xx.01.____');
-  });
-
-  it('should autocomplete the input value from 1_.1_.____ to 01.1_.____ with current cursor position 1 when entering dot', () => {
-    input.value = '1_.1_.____';
-    setupEvent(keyEvent, 1, 1);
-    expect(input.value).toBe('01.1_.____');
-  });
-
-  it('should autocomplete the input value from _1.1_.____ to 01.1_.____ with current cursor position 2 when entering dot', () => {
-    input.value = '_1.1_.____';
-    setupEvent(keyEvent, 2, 2);
-    expect(input.value).toBe('01.1_.____');
-  });
-
-  it('should autocomplete the input value from 1_.1_.____ to 01.01.____ with current cursor position 4 when entering dot', () => {
-    input.value = '1_.1_.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('01.01.____');
-  });
-
-  it('should autocomplete the input value from _1.1_.____ to 01.01.____ with current cursor position 4 when entering dot', () => {
-    input.value = '_1.1_.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('01.01.____');
-  });
-
-  it('should autocomplete the input value from 1_._1.____ to 01.01.____ with current cursor position 5 when entering dot', () => {
-    input.value = '1_._1.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('01.01.____');
-  });
-
-  it('should autocomplete the input value from _1._1.____ to 01.01.____ with current cursor position 5 when entering dot', () => {
-    input.value = '_1._1.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('01.01.____');
-  });
-
-  it('should autocomplete the input value from 1_.x_.____ to 01.x_.____ with current cursor position 1 when entering dot', () => {
-    input.value = '1_.x_.____';
-    setupEvent(keyEvent, 1, 1);
-    expect(input.value).toBe('01.x_.____');
-  });
-
-  it('should autocomplete the input value from _1.x_.____ to 01.x_.____ with current cursor position 2 when entering dot', () => {
-    input.value = '_1.x_.____';
-    setupEvent(keyEvent, 2, 2);
-    expect(input.value).toBe('01.x_.____');
-  });
-
-  it('should autocomplete the input value from 1_.x_.____ to 01.xx.____ with current cursor position 4 when entering dot', () => {
-    input.value = '1_.x_.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('01.xx.____');
-  });
-
-  it('should autocomplete the input value from _1.x_.____ to 01.xx.____ with current cursor position 4 when entering dot', () => {
-    input.value = '_1.x_.____';
-    setupEvent(keyEvent, 4, 4);
-    expect(input.value).toBe('01.xx.____');
-  });
-
-  it('should autocomplete the input value from 1_._x.____ to 01.xx.____ with current cursor position 5 when entering dot', () => {
-    input.value = '1_._x.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('01.xx.____');
-  });
-
-  it('should autocomplete the input value from _1._x.____ to 01.xx.____ with current cursor position 5 when entering dot', () => {
-    input.value = '_1._x.____';
-    setupEvent(keyEvent, 5, 5);
-    expect(input.value).toBe('01.xx.____');
-  });
-
-  it('should not autocomplete the input value from xx.xx.____ to xx.xx.____ with current cursor position 6 when entering dot in the year part', () => {
-    input.value = 'xx.xx.____';
-    setupEvent(keyEvent, 6, 6);
-    expect(input.value).toBe('xx.xx.____');
-  });
-
-  it('should not autocomplete the input value from 01.__.____ to 01.xx.____ with current cursor position 3 when entering dot in the month part', () => {
-    input.value = '01.__.____';
-    setupEvent(keyEvent, 3, 3);
-    expect(input.value).toBe('01.__.____');
+  testCases1.forEach(({inputVal, cursor, expected}) => {
+    it(`should autocomplete ${inputVal} at cursor ${cursor} to ${expected}`, () => {
+      input.value = inputVal;
+      setupEvent(keyEvent, cursor, cursor);
+      expect(input.value).toBe(expected);
+    });
   });
 
   it('should create', () => {
@@ -410,23 +239,53 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(errors[errorKey]).toBeDefined();
   });
 
-  it('should return the string "__" correctly', () => {
-    expect(component.transformDatePart('__', 'x')).toBe('xx');
+  const testCases2 = [
+    {inputVal: '__', fillChar: 'x', expected: 'xx'},
+    {inputVal: 'x_', fillChar: 'x', expected: 'xx'},
+    {inputVal: '_x', fillChar: 'x', expected: 'xx'},
+    {inputVal: '1_', fillChar: 'x', expected: '01'},
+    {inputVal: '_1', fillChar: 'x', expected: '01'}
+  ];
+
+  testCases2.forEach(({inputVal, fillChar, expected}) => {
+    it(`should return the string ${inputVal} correctly transformed`, () => {
+      expect(component.transformDatePart(inputVal, fillChar)).toBe(expected);
+    });
   });
 
-  it('should return the string "x_" correctly', () => {
-    expect(component.transformDatePart('x_', 'x')).toBe('xx');
+  it('should return the result from Validation.validUnspecifiedISODate when transferISO8601 is true', () => {
+    component.transferISO8601 = true;
+    const control = new FormControl();
+    const result = component.validate(control);
+    expect(result).toEqual(Validation.validUnspecifiedISODate(control));
   });
 
-  it('should return the string "_x" correctly', () => {
-    expect(component.transformDatePart('_x', 'x')).toBe('xx');
+  it('should return the result from Validation.validUnspecifiedDate when transferISO8601 is false', () => {
+    component.transferISO8601 = false;
+    const control = new FormControl();
+    const result = component.validate(control);
+    expect(result).toEqual(Validation.validUnspecifiedDate(control));
   });
 
-  it('should return the string "1_" correctly', () => {
-    expect(component.transformDatePart('1_', 'x')).toBe('01');
+  it('should convert date format to transfer format', () => {
+    component.transferISO8601 = true;
+    const input = '01.01.2024';
+    const expectedOutput = '2024-01-01';
+    const result = component.convertToTransferDateFormat(input);
+    expect(result).toBe(expectedOutput);
   });
 
-  it('should return the string "_1" correctly', () => {
-    expect(component.transformDatePart('_1', 'x')).toBe('01');
+  it('should return the same value if transferISO8601 is false', () => {
+    const input = '01.01.2024';
+    const result = component.convertToTransferDateFormat(input);
+    expect(result).toBe(input);
+  });
+
+  it('should call onChange method with inputValue if transferISO8601 is true', () => {
+    component.transferISO8601 = true;
+    component.inputValue = '2022-01-01';
+    spyOn(component, 'onChange');
+    component.ngAfterViewInit();
+    expect(component.onChange).toHaveBeenCalledWith('2022-01-01');
   });
 });
