@@ -152,7 +152,19 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     {inputVal: '1_._x.____', cursor: 5, expected: '01.xx.____'},
     {inputVal: '_1._x.____', cursor: 5, expected: '01.xx.____'},
     {inputVal: 'xx.xx.____', cursor: 6, expected: 'xx.xx.____'},
-    {inputVal: '01.__.____', cursor: 3, expected: '01.__.____'}
+    {inputVal: '01.__.____', cursor: 3, expected: '01.__.____'},
+    {inputVal: 'x_.x_.____', cursor: 4, expected: 'xx.xx.____'},
+    {inputVal: '_x.x_.____', cursor: 4, expected: 'xx.xx.____'},
+    {inputVal: 'x_._x.____', cursor: 5, expected: 'xx.xx.____'},
+    {inputVal: '_x._x.____', cursor: 5, expected: 'xx.xx.____'},
+    {inputVal: '1_.x_.____', cursor: 4, expected: '01.xx.____'},
+    {inputVal: '_1.x_.____', cursor: 4, expected: '01.xx.____'},
+    {inputVal: '1_.1_.____', cursor: 4, expected: '01.01.____'},
+    {inputVal: '_1.1_.____', cursor: 4, expected: '01.01.____'},
+    {inputVal: '1_._1.____', cursor: 5, expected: '01.01.____'},
+    {inputVal: '_1._1.____', cursor: 5, expected: '01.01.____'},
+    {inputVal: '1_.x_.____', cursor: 1, expected: '01.x_.____'},
+    {inputVal: '_1.x_.____', cursor: 2, expected: '01.x_.____'}
   ];
 
   testCases1.forEach(({inputVal, cursor, expected}) => {
@@ -241,14 +253,14 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     });
   });
 
-  it('should return null when transferISO8601 is true', () => {
+  it('should return the result from Validation.validUnspecifiedISODate when transferISO8601 is true', () => {
     component.transferISO8601 = true;
     const control = new FormControl();
     const result = component.validate(control);
-    expect(result).toBeNull();
+    expect(result).toEqual(Validation.validUnspecifiedISODate(control));
   });
 
-  it('should return ValidationErrors when transferISO8601 is false', () => {
+  it('should return the result from Validation.validUnspecifiedDate when transferISO8601 is false', () => {
     component.transferISO8601 = false;
     const control = new FormControl();
     const result = component.validate(control);

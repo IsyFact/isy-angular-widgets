@@ -86,8 +86,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   /**
    * Specifies whether to transfer the date value in ISO 8601 format.
-   * If set to true, the date value will be transferred in ISO 8601 format.
-   * If set to false, the date value will be transferred in German date format.
+   * If set to true, the date value will be transferred in ISO 8601 format (YYYY-MM-DD).
+   * If set to false, the date value will be transferred in German date format (DD.MM.YYYY).
    */
   @Input() transferISO8601 = false;
 
