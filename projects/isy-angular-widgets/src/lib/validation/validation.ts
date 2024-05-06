@@ -78,8 +78,8 @@ export class Validation {
   }
 
   /**
-   * Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY.
-   * If the date in german format is not valid and not unspecified, a "DATE" error is thrown.
+   * Checks that the date is a valid unspecified date or valid date in ISO 8601 format YYYY-MM-DD.
+   * If the date in ISO 8601 format is not valid and not unspecified, a "DATE" error is thrown.
    * E.g. unspecified dates: YYYY-MM-00, YYYY-00-00, 0000-00-00, YYYY-MM-xx, YYYY-xx-xx, xxxx-xx-xx
    * For valid or valid unspecified dates, no error is thrown.
    * @param c The control element the validator is appended to

@@ -14,7 +14,7 @@ describe('Unit Tests: IncompleteDateService', () => {
   describe('transformValue', () => {
     const testCases = [
       {inputVal: '01.01.2023', expected: '01.01.2023'},
-      {inputVal: '01.01.2024', expected: '01.01.2024'},
+      {inputVal: '01.01.2999', expected: '01.01.2999'},
       {inputVal: '00.01.2023', expected: '00.01.2023'},
       {inputVal: '00.00.2023', expected: '00.00.2023'},
       {inputVal: '01.00.2023', expected: '00.00.2023'},
@@ -64,6 +64,7 @@ describe('Unit Tests: IncompleteDateService', () => {
       {inputVal: 'xx.x1.xxxx', expected: 'xx.xx.xxxx'},
       {inputVal: '01.01.xxx_', expected: 'xx.xx.xxxx'},
       {inputVal: '01.01.xx__', expected: 'xx.xx.xxxx'},
+      {inputVal: '01.01.x___', expected: 'xx.xx.xxxx'},
       {inputVal: 'xx.xx.xxxx', expected: 'xx.xx.xxxx'},
       {inputVal: 'xx.01.9__', expected: 'xx.01.2029'},
       {inputVal: 'xx.01.99__', expected: 'xx.01.2099'},
