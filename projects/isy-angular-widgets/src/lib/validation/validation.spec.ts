@@ -70,8 +70,7 @@ describe('Unit Test: Validation', () => {
       {input: '01.xx.2023', description: 'unspecified month in german date format DD.xx.YYYY'},
       {input: 'xx.01.xxxx', description: 'unspecified year in german date format xx.MM.xxxx'},
       {input: '01.xx.xxxx', description: 'unspecified month and year in german date format DD.xx.xxxx'},
-      {input: '01.01.xxxx', description: 'unspecified year in german date format DD.MM.xxxx'},
-      {input: '2023-00-01', desc: 'valid day and year with unspecified month'}
+      {input: '01.01.xxxx', description: 'unspecified year in german date format DD.MM.xxxx'}
     ];
 
     invalidInputs.forEach(({input, description}) => {
@@ -126,7 +125,8 @@ describe('Unit Test: Validation', () => {
       {input: '2023-xx-01', desc: 'valid day in unspecified month and year'},
       {input: 'xxxx-01-xx', desc: 'valid month in unspecified year and day'},
       {input: 'xxxx-xx-01', desc: 'valid day in fully unspecified date'},
-      {input: 'xxxx-01-01', desc: 'valid date in german format but unspecified year'}
+      {input: 'xxxx-01-01', desc: 'valid date in german format but unspecified year'},
+      {input: '2023-00-01', desc: 'valid day and year with unspecified month'}
     ];
 
     testCases.forEach(({input, desc}) => {
