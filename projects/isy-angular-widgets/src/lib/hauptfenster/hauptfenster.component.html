@@ -69,7 +69,7 @@
               <button
                 class="p-button-text"
                 pButton
-                icon="pi pi-chevron-down"
+                icon="pi pi-chevron-left"
                 [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
                 (click)="collapsedLinksnavigation = true"
               ></button>
@@ -81,7 +81,7 @@
           <button
             class="p-button-text"
             pButton
-            icon="pi pi-chevron-up"
+            icon="pi pi-chevron-right"
             [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
             (click)="collapsedLinksnavigation = false"
           ></button>
@@ -105,7 +105,7 @@
               <button
                 class="p-button-text"
                 pButton
-                icon="pi pi-chevron-down"
+                icon="pi pi-chevron-right"
                 [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')"
                 (click)="collapsedInformationsbereich = true"
               ></button>
@@ -117,7 +117,7 @@
           <button
             pButton
             class="p-button-text"
-            icon="pi pi-chevron-up"
+            icon="pi pi-chevron-left"
             [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandInformationsbereich')"
             (click)="collapsedInformationsbereich = false"
           ></button>
