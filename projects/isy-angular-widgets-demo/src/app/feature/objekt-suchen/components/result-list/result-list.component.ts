@@ -19,6 +19,11 @@ export class ResultListComponent {
   @Output() objectSelected = new EventEmitter<Person>();
   @Output() addObjectPressed = new EventEmitter<void>();
 
+  /**
+   * The boolean that decides the active state of a panel tab
+   */
+  isCollapsed: boolean = false;
+
   personalien: Personalien[] = [];
   geschlechter = [{geschlecht: 'm'}, {geschlecht: 'w'}, {geschlecht: 'x'}];
   stati = [
