@@ -1,5 +1,6 @@
 # 17.3.0
 ## Features
+- IFS-3684: Das Basis-Theme _Bootstrap4 Light Blue_ wurde als SCSS in das _IsyFact-Theme_ integriert. Eine Live-Bearbeitung der Variablen ist nun möglich
 - IFS-3118: Eingabefeld für ungewisses Datum `isy-incomplete-date` kann nun Datumswerte in ISO 8601 für die Datenübertragung ausgeben. Validator für ungewissen Datumswert in ISO 8601 wurde zur Bibliothek hinzugefügt
 - IFS-3644: Im `isy-form-wrapper` wurde das Label der Formularfelder von Float-Label auf Static-Label geändert
 - IFS-3645: Infield Top-Aligned Label wurde zum `isy-form-wrapper` hinzugefügt
