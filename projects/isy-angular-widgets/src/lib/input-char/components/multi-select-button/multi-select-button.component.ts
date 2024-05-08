@@ -59,8 +59,7 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
    */
   closeAllAccordionTabs(): void {
     this.activeIndexes = [];
-    if (this.accordion)
-      this.accordion.updateSelectionState();
+    if (this.accordion) this.accordion.updateSelectionState();
   }
 
   /**
