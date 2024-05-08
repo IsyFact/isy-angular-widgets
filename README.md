@@ -2,7 +2,7 @@
 
 ### Konzeptdokumentation
 
-Eine ausführliche Dokumentation zum Konzept der _isy-angular-widgets_ Bibliothek, ist auf der Seite [Konzept Angular](isy-angular-widgets-doc/modules/ROOT/pages/konzept/konzept.adoc) beschrieben.
+Eine ausführliche Dokumentation zum Konzept der _isy-angular-widgets_ Bibliothek, ist auf der Seite [Konzept Angular](https://isyfact.github.io/isy-angular-widgets-doc/current/konzept/konzept.html) beschrieben.
 
 ### Prerequisites
 
