@@ -1,13 +1,14 @@
 <p-selectButton
   class="all-selectbutton"
   (onChange)="triggerUpdate(undefined)"
+  (click)="closeAllAccordionTabs()"
   [(ngModel)]="allOptionsModel"
   [options]="[{label: allButtonOptionsLabel}]"
   optionLabel="label"
 >
 </p-selectButton>
 
-<p-accordion [multiple]="true">
+<p-accordion [activeIndex]="activeIndexes">
   @for (item of dataToDisplay | keyvalue; track dataToDisplay) {
     <p-accordionTab [header]="item.key" [disabled]="disabled">
       <p-selectButton

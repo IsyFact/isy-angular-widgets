@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common'; // Import CommonModule for common directives
 import {ControlValueAccessor, FormsModule} from '@angular/forms'; // Import FormsModule if you're using template-driven forms
 import {InputCharData} from '../../model/model';
-import {AccordionModule} from 'primeng/accordion';
+import {Accordion, AccordionModule} from 'primeng/accordion';
 import {SelectButtonModule} from 'primeng/selectbutton';
 
 @Component({
@@ -49,6 +49,18 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
     if (changes.allButtonOptionsLabel) {
       this.allOptions[0].label = this.allButtonOptionsLabel;
     }
+  }
+
+  @ViewChild('accordion') accordion: Accordion | undefined;
+  activeIndexes: number[] = [];
+
+  /**
+   * Close all accordion tabs
+   */
+  closeAllAccordionTabs(): void {
+    this.activeIndexes = [];
+    if (this.accordion)
+      this.accordion.updateSelectionState();
   }
 
   /**
