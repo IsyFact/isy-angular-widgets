@@ -51,15 +51,32 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
     }
   }
 
-  @ViewChild('accordion') accordion: Accordion | undefined;
-  activeIndexes: number[] = [];
+  activeIndices: number[] = [];
 
   /**
    * Close all accordion tabs
    */
   closeAllAccordionTabs(): void {
-    this.activeIndexes = [];
-    if (this.accordion) this.accordion.updateSelectionState();
+    this.activeIndices = [];
+  }
+
+  /**
+   * Prevents accordion tab to close when clicking a base or group within the accordion
+   */
+  toggleTab(index: number, event: Event): void {
+    if (
+      event.target instanceof HTMLElement &&
+      !event.target.classList.contains('p-button-label') &&
+      !event.target.classList.contains('p-button')
+    ) {
+      const position = this.activeIndices.indexOf(index);
+      const positionClose = -1;
+      if (position === positionClose) {
+        this.activeIndices = [...this.activeIndices, index];
+      } else {
+        this.activeIndices = [...this.activeIndices.slice(0, position), ...this.activeIndices.slice(position + 1)];
+      }
+    }
   }
 
   /**
