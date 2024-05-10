@@ -125,6 +125,7 @@ export class ObjektSuchenComponent {
    */
   tbLoadingStatus = false;
 
+  //ToDo: Test for default value and on collapse
   /**
    * The boolean that decides the active state of a panel tab
    */

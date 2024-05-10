@@ -51,6 +51,7 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
     }
   }
 
+  //ToDo: Test for default value and by clicking the all button
   activeIndices: number[] = [];
 
   /**

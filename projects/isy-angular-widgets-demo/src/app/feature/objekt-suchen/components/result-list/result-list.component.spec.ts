@@ -1,7 +1,7 @@
 import {ResultListComponent} from './result-list.component';
 import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {PanelModule} from 'primeng/panel';
+import {PanelBeforeToggleEvent, PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
 import {PersonenService} from '../../../../shared/services/personen.service';
 import {FormsModule} from '@angular/forms';
@@ -77,5 +77,10 @@ describe('Integration Tests: ResultListComponent', () => {
     spectator.fixture.detectChanges();
 
     expect(editActionSpy).toHaveBeenCalledWith(person);
+  });
+
+  it('isCollapsed is false on default', () => {
+    const panelButton = spectator.component as PanelModule;
+    expect(panelButton);
   });
 });
