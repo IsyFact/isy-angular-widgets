@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewCh
 import {CommonModule} from '@angular/common'; // Import CommonModule for common directives
 import {ControlValueAccessor, FormsModule} from '@angular/forms'; // Import FormsModule if you're using template-driven forms
 import {InputCharData} from '../../model/model';
-import {Accordion, AccordionModule} from 'primeng/accordion';
+import {AccordionModule} from 'primeng/accordion';
 import {SelectButtonModule} from 'primeng/selectbutton';
 
 @Component({
@@ -51,7 +51,6 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
     }
   }
 
-  //ToDo: Test for default value and by clicking the all button
   activeIndices: number[] = [];
 
   /**
@@ -63,6 +62,8 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
 
   /**
    * Prevents accordion tab to close when clicking a base or group within the accordion
+   * @param index - The index of the tab.
+   * @param event - The click event.
    */
   toggleTab(index: number, event: Event): void {
     if (
