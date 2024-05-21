@@ -128,7 +128,10 @@
       "deleteButton": "to delete selected value"
     },
     "placeholders": {
-      "maxLength": "max. {{maxlength}} charaters"
+      "maxLength": "max. {{maxlength}} charaters",
+      "creditCardNumber": "Enter number with 16 digits",
+      "creditCardExpirationDate": "YYY-MM-DD",
+      "dateOfDeparture": "xx.xx.xxxx"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",

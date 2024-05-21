@@ -127,7 +127,10 @@
       "deleteButton": "löschen des ausgewählten Werts"
     },
     "placeholders": {
-      "maxLength": "max. {{maxlength}} Zeichen"
+      "maxLength": "max. {{maxlength}} Zeichen",
+      "creditCardNumber": "Nummer mit 16 Ziffern eingeben",
+      "creditCardExpirationDate": "YYY-MM-DD",
+      "dateOfDeparture": "xx.xx.xxxx"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",
