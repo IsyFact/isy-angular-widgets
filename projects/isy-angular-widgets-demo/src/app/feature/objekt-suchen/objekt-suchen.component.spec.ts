@@ -605,4 +605,11 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     expect(searchButtonSpy).toHaveBeenCalled();
   });
+
+  it('the dialog header close icon should have an aria-label attribute', () => {
+    spectator.component.displayEditDialog();
+    spectator.detectChanges();
+    const element = spectator.query('.p-dialog-header button.p-dialog-header-close') as HTMLElement;
+    expect(element.hasAttribute('aria-label')).toBeTrue();
+  });
 });

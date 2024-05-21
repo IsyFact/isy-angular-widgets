@@ -96,4 +96,11 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
 
     expect(spectator.component.newSachverhalteListe).toEqual(['sachverhaltB']);
   });
+
+  it('the dialog header close icon should have an aria-label attribute', () => {
+    component.visible = true;
+    setupPerson();
+    const element = spectator.query('.p-dialog-header button.p-dialog-header-close') as HTMLElement;
+    expect(element.hasAttribute('aria-label')).toBeTrue();
+  });
 });

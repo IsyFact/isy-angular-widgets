@@ -1,5 +1,9 @@
 @if (person) {
-  <p-dialog [header]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate" [(visible)]="visible">
+  <p-dialog
+    [header]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
+    [(visible)]="visible"
+    [closeAriaLabel]="'isyAngularWidgetsDemo.aria.close' | translate"
+  >
     <p-table [value]="newSachverhalteListe" responsiveLayout="scroll">
       <ng-template pTemplate="header">
         <tr>

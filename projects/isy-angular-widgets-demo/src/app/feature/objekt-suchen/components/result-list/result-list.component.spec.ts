@@ -78,4 +78,21 @@ describe('Integration Tests: ResultListComponent', () => {
 
     expect(editActionSpy).toHaveBeenCalledWith(person);
   });
+
+  const sortIconFields = [
+    'personalien.nachname',
+    'personalien.vorname',
+    'personalien.geschlecht',
+    'personalien.staatsangehoerigkeit',
+    'personalien.geburtsdatum',
+    'personalien.bilanz',
+    'personalien.status'
+  ];
+
+  sortIconFields.forEach((field) => {
+    it(`the sort icon ${field} should have an aria-label attribute`, () => {
+      const element = spectator.query(`p-sorticon[field="${field}"]`) as HTMLElement;
+      expect(element.hasAttribute('aria-label')).toBeTrue();
+    });
+  });
 });

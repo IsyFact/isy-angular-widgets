@@ -34,12 +34,24 @@
         <th scope="col" pSortableColumn="personalien.nachname" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.nachname"></p-sortIcon>
+          <p-sortIcon
+            field="personalien.nachname"
+            [attr.aria-label]="
+              'isyAngularWidgetsDemo.aria.sort'
+                | translate: {sortField: 'isyAngularWidgetsDemo.labels.nachname' | translate}
+            "
+          ></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.vorname" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
           <p-columnFilter type="text" field="personalien.vorname" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.vorname"></p-sortIcon>
+          <p-sortIcon
+            field="personalien.vorname"
+            [attr.aria-label]="
+              'isyAngularWidgetsDemo.aria.sort'
+                | translate: {sortField: 'isyAngularWidgetsDemo.labels.vorname' | translate}
+            "
+          ></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.geschlecht" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
@@ -69,22 +81,46 @@
               </p-multiSelect>
             </ng-template>
           </p-columnFilter>
-          <p-sortIcon field="personalien.geschlecht"></p-sortIcon>
+          <p-sortIcon
+            field="personalien.geschlecht"
+            [attr.aria-label]="
+              'isyAngularWidgetsDemo.aria.sort'
+                | translate: {sortField: 'isyAngularWidgetsDemo.labels.geschlecht' | translate}
+            "
+          ></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.staatsangehoerigkeit" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
           <p-columnFilter type="text" field="personalien.staatsangehoerigkeit" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.staatsangehoerigkeit"></p-sortIcon>
+          <p-sortIcon
+            field="personalien.staatsangehoerigkeit"
+            [attr.aria-label]="
+              'isyAngularWidgetsDemo.aria.sort'
+                | translate: {sortField: 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate}
+            "
+          ></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.geburtsdatum" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
           <p-columnFilter type="date" field="personalien.geburtsdatum" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.geburtsdatum"></p-sortIcon>
+          <p-sortIcon
+            field="personalien.geburtsdatum"
+            [attr.aria-label]="
+              'isyAngularWidgetsDemo.aria.sort'
+                | translate: {sortField: 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate}
+            "
+          ></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.bilanz" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.bilanz' | translate }}
           <p-columnFilter type="numeric" field="personalien.bilanz" display="menu" currency="EUR"></p-columnFilter>
-          <p-sortIcon field="personalien.bilanz"></p-sortIcon>
+          <p-sortIcon
+            field="personalien.bilanz"
+            [attr.aria-label]="
+              'isyAngularWidgetsDemo.aria.sort'
+                | translate: {sortField: 'isyAngularWidgetsDemo.labels.bilanz' | translate}
+            "
+          ></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.status" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
@@ -102,7 +138,13 @@
               </p-dropdown>
             </ng-template>
           </p-columnFilter>
-          <p-sortIcon field="personalien.status"></p-sortIcon>
+          <p-sortIcon
+            field="personalien.status"
+            [attr.aria-label]="
+              'isyAngularWidgetsDemo.aria.sort'
+                | translate: {sortField: 'isyAngularWidgetsDemo.labels.state' | translate}
+            "
+          ></p-sortIcon>
         </th>
         <th scope="col" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.actions' | translate }}
@@ -123,18 +165,21 @@
             [icon]="'pi pi-pencil'"
             [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"
             (onClick)="emitEditAction(person)"
+            ariaLabel="{{ 'isyAngularWidgetsDemo.aria.edit' | translate }}"
           >
           </p-button>
           <p-button
             [icon]="'pi pi-download'"
-            [styleClass]="'p-button-rounded p-button-text p-button-raised  mr-1'"
+            [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"
             [disabled]="true"
+            ariaLabel="{{ 'isyAngularWidgetsDemo.aria.download' | translate }}"
           >
           </p-button>
           <p-button
             [icon]="'pi pi-trash'"
             [styleClass]="'p-button-rounded p-button-text p-button-raised'"
             [disabled]="true"
+            ariaLabel="{{ 'isyAngularWidgetsDemo.aria.delete' | translate }}"
           >
           </p-button>
         </td>

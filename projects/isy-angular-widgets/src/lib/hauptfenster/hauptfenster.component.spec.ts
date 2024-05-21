@@ -5,10 +5,12 @@ import {MegaMenu, MegaMenuSub} from 'primeng/megamenu';
 import {Button} from 'primeng/button';
 import {MockComponents} from 'ng-mocks';
 import {HauptfensterModule} from './hauptfenster.module';
+import {UserInfo} from '../api/userinfo';
+import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
 @Component({
   template: `
-    <isy-hauptfenster [title]="title">
+    <isy-hauptfenster [title]="title" [userInfo]="userInfo">
       <div Titelzeile>
         <h1 class="custom-title">Titel inside H1!</h1>
       </div>
@@ -22,14 +24,29 @@ class HauptFensterWrapperComponent {
 describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
   let component: HauptfensterComponent;
+  let mockConfigService: jasmine.SpyObj<WidgetsConfigService>;
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
-    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)]
+    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)],
+    mocks: [WidgetsConfigService]
   });
 
+  const userInfo: UserInfo = {
+    displayName: 'Max Mustermann'
+  };
+
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({props: {userInfo}});
     component = spectator.component;
+    mockConfigService = spectator.inject(WidgetsConfigService);
+    mockConfigService.getTranslation.and.callFake((key: string) => {
+      const translations: {[key: string]: string} = {
+        'hauptfenster.aria.accountName': 'Account Details',
+        'hauptfenster.logout': 'Abmelden'
+      };
+      return translations[key];
+    });
+    spectator.detectChanges();
   });
 
   it('should create', () => {
@@ -154,6 +171,11 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
     const div = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     expect(div).not.toBeNull();
+  });
+
+  it('the account name icon should have an aria-label attribute', () => {
+    const element = spectator.query('.pi.pi-user') as HTMLElement;
+    expect(element.hasAttribute('aria-label')).toBeTrue();
   });
 });
 

@@ -20,8 +20,12 @@ like in the following example. The side bar regions can be disabled with corresp
   >
     <div middle></div>
     <div right>
-      <p-button icon="pi pi-print" class="mr-1"></p-button>
-      <p-button icon="pi pi-info-circle"></p-button>
+      <p-button
+        icon="pi pi-print"
+        class="mr-1"
+        ariaLabel="{{ 'isyAngularWidgetsDemo.aria.print' | translate }}"
+      ></p-button>
+      <p-button icon="pi pi-info-circle" ariaLabel="{{ 'isyAngularWidgetsDemo.aria.info' | translate }}"></p-button>
     </div>
   </isy-seiten-toolbar>
 

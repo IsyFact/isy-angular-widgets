@@ -10,6 +10,7 @@ import {MenuItem} from 'primeng/api';
 import {MockComponents} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {Steps} from 'primeng/steps';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 const stepperItems: MenuItem[] = [
   {
@@ -512,5 +513,29 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(wizard.isVisible).toBeFalse();
 
     expect(visibilityChangedSpy).toHaveBeenCalledWith(false);
+  });
+});
+
+describe('Accessibility Test: WizardComponent', () => {
+  let spectator: Spectator<TestComponent>;
+  const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
+  const createComponent = createComponentFactory({
+    component: TestComponent,
+    imports: [WizardModule, RouterTestingModule, IncompleteDateModule],
+    mocks: [WidgetsConfigService]
+  });
+
+  beforeEach(() => {
+    mockConfigService.getTranslation.and.returnValue('Close');
+    spectator = createComponent({providers: [{provide: WidgetsConfigService, useValue: mockConfigService}]});
+    wizard = spectator.component.wizard;
+    wizard.items = stepperItems;
+    contentChildren = wizard.content!;
+    spectator.detectChanges();
+  });
+
+  it('the dialog close icon should have an aria-label attribute with "Close"', () => {
+    const element = spectator.query('.p-dialog-header-icons .p-dialog-header-close') as HTMLElement;
+    expect(element.getAttribute('aria-label')).toBe('Close');
   });
 });

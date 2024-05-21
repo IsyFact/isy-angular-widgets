@@ -4,7 +4,10 @@
       "back": "Back",
       "next": "Next",
       "save": "Save",
-      "close": "Close"
+      "close": "Close",
+      "aria": {
+        "close": "Close"
+      }
     },
     "inputChar": {
       "headerAllCharacters": "All",
@@ -12,7 +15,8 @@
       "headerGroups": "Groups",
       "insert": "Insert",
       "aria": {
-        "togglePicker": "Open/Close Special Character Picker"
+        "togglePicker": "Open/Close Special Character Picker",
+        "closePicker": "Close Special Character Picker"
       },
       "enum": {
         "base": "GRUNDZEICHEN",
@@ -29,7 +33,8 @@
         "collapseInformationsbereich": "Collapse right side bar",
         "expandInformationsbereich": "Expand right side bar",
         "leftNavigation": "leftnavigation",
-        "informationArea": "informationarea"
+        "informationArea": "informationarea",
+        "accountName": "Account name"
       }
     },
     "p-calendar": {
@@ -85,6 +90,15 @@
         "searchObject": "To page search object",
         "displayObject": "To page display object"
       }
+    },
+    "aria": {
+      "print": "Print",
+      "info": "Informationen",
+      "sort": "Sort by {{sortField}}",
+      "edit": "Edit",
+      "download": "Download",
+      "delete": "Delete",
+      "close": "Close"
     },
     "labels": {
       "id": "ID",

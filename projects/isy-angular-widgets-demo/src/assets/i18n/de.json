@@ -4,7 +4,10 @@
       "back": "Zurück",
       "next": "weiter",
       "save": "Speichern",
-      "close": "Schließen"
+      "close": "Schließen",
+      "aria": {
+        "close": "Schließen"
+      }
     },
     "inputChar": {
       "headerAllCharacters": "Alle",
@@ -12,7 +15,8 @@
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
       "aria": {
-        "togglePicker": "Sonderzeichenpicker öffnen/schließen"
+        "togglePicker": "Sonderzeichenpicker öffnen/schließen",
+        "closePicker": "Sonderzeichenpicker schließen"
       },
       "enum": {
         "basis": "GRUNDZEICHEN",
@@ -29,7 +33,8 @@
         "collapseInformationsbereich": "Informationsbereich ausblenden",
         "expandInformationsbereich": "Informationsbereich einblenden",
         "leftNavigation": "linksnavigation",
-        "informationArea": "informationsbereich"
+        "informationArea": "informationsbereich",
+        "accountName": "Kontoname"
       }
     },
     "p-calendar": {
@@ -85,6 +90,15 @@
         "searchObject": "zur Seite Objekt suchen",
         "displayObject": "zur Seite Objekt anzeigen"
       }
+    },
+    "aria": {
+      "print": "Drucken",
+      "info": "Informationen",
+      "sort": "Sortieren nach {{sortField}}",
+      "edit": "Bearbeiten",
+      "download": "Herunterladen",
+      "delete": "Löschen",
+      "close": "Schließen"
     },
     "labels": {
       "id": "ID",
