@@ -1,5 +1,6 @@
 <p-dialog
   [header]="headerTitle"
+  [closeAriaLabel]="configService.getTranslation('wizard.aria.close')"
   [(visible)]="isVisible"
   [modal]="modal"
   [closable]="closable"

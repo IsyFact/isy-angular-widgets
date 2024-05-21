@@ -4,7 +4,10 @@
       "back": "Zurück",
       "next": "weiter",
       "save": "Speichern",
-      "close": "Schließen"
+      "close": "Schließen",
+      "aria": {
+        "close": "Schließen"
+      }
     },
     "inputChar": {
       "headerAllCharacters": "Alle",
@@ -12,7 +15,8 @@
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
       "aria": {
-        "togglePicker": "Sonderzeichenpicker öffnen/schließen"
+        "togglePicker": "Sonderzeichenpicker öffnen/schließen",
+        "closePicker": "Sonderzeichenpicker schließen"
       }
     },
     "hauptfenster": {
@@ -25,7 +29,9 @@
         "collapseInformationsbereich": "Informationsbereich ausblenden",
         "expandInformationsbereich": "Informationsbereich einblenden",
         "leftNavigation": "linksnavigation",
-        "informationArea": "informationsbereich"
+        "informationArea": "informationsbereich",
+        "accountName": "Kontoname",
+        "flag": "Flagge {{lang}}"
       }
     }
   },

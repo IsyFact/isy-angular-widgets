@@ -154,3 +154,31 @@ describe('Integration Test: InputCharComponent', () => {
     });
   });
 });
+
+describe('Accessibility Test: InputCharComponent', () => {
+  let spectator: Spectator<InputCharComponent>;
+  const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
+  const createComponent = createComponentFactory({
+    component: InputCharComponent,
+    providers: [CharacterService],
+    mocks: [WidgetsConfigService]
+  });
+
+  beforeEach(() => {
+    mockConfigService.getTranslation.and.returnValue('Close picker');
+    spectator = createComponent({
+      props: {
+        datentyp: Datentyp.DATENTYP_C as Datentyp
+      },
+      providers: [{provide: WidgetsConfigService, useValue: mockConfigService}]
+    });
+    spectator.detectChanges();
+    spectator.component.ngOnChanges();
+    spectator.click('.input-char-button');
+  });
+
+  it('the dialog close icon should have an aria-label attribute with "Close picker"', () => {
+    const element = spectator.query('.p-dialog-header-icons .p-dialog-header-close') as HTMLElement;
+    expect(element.getAttribute('aria-label')).toBe('Close picker');
+  });
+});

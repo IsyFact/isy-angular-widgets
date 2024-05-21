@@ -4,7 +4,10 @@
       "back": "Back",
       "next": "Next",
       "save": "Save",
-      "close": "Close"
+      "close": "Close",
+      "aria": {
+        "close": "Close"
+      }
     },
     "inputChar": {
       "headerAllCharacters": "All",
@@ -12,7 +15,8 @@
       "headerGroups": "Groups",
       "insert": "Insert",
       "aria": {
-        "togglePicker": "Open/Close Special Character Picker"
+        "togglePicker": "Open/Close Special Character Picker",
+        "closePicker": "Close Special Character Picker"
       }
     },
     "hauptfenster": {
@@ -25,7 +29,9 @@
         "collapseInformationsbereich": "Collapse right side bar",
         "expandInformationsbereich": "Expand right side bar",
         "leftNavigation": "leftnavigation",
-        "informationArea": "informationarea"
+        "informationArea": "informationarea",
+        "accountName": "Account name",
+        "flag": "Flag {{lang}}"
       }
     }
   },
