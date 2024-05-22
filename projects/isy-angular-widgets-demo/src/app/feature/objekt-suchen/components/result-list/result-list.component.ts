@@ -5,6 +5,7 @@ import {countries} from '../../country-data';
 interface Column {
   field: string;
   header: string;
+  type: string;
   inputFormating: boolean;
   currency?: [currencyCode: string, display: string];
 }
@@ -50,10 +51,10 @@ export class ResultListComponent implements OnInit {
 
   ngOnInit(): void {
     this.cols = [
-      {field: 'geschlecht', header: 'Geschlecht', inputFormating: false},
-      {field: 'staatsangehoerigkeit', header: 'Nationalität', inputFormating: false},
-      {field: 'geburtsdatum', header: 'Geburtsdatum', inputFormating: false},
-      {field: 'bilanz', header: 'Bilanz', inputFormating: true, currency: ['EUR', 'symbol']}
+      {field: 'geschlecht', header: 'Geschlecht', type: 'text', inputFormating: false},
+      {field: 'staatsangehoerigkeit', header: 'Nationalität', type: 'text', inputFormating: false},
+      {field: 'geburtsdatum', header: 'Geburtsdatum', type: 'date', inputFormating: false},
+      {field: 'bilanz', header: 'Bilanz', type: 'numeric', inputFormating: true, currency: ['EUR', 'symbol']}
     ];
 
     this.selectedColumns = this.cols;

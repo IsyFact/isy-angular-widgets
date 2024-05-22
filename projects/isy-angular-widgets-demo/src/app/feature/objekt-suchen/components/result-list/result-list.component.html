@@ -66,75 +66,75 @@
             "
           ></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.geschlecht" class="white-space-nowrap">
-          {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}
-          <p-columnFilter
-            type="text"
-            field="personalien.geschlecht"
-            matchMode="in"
-            display="menu"
-            [showMatchModes]="false"
-            [showOperator]="false"
-            [showAddButton]="false"
-          >
-            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-              <p-multiSelect
-                optionLabel="geschlecht"
-                optionValue="geschlecht"
-                placeholder="{{ 'isyAngularWidgetsDemo.labels.alle' | translate }}"
-                [ngModel]="value"
-                [options]="geschlechter"
-                (onChange)="filter($event.value)"
-              >
-                <ng-template let-option pTemplate="item">
-                  <div class="p-multiselect-representative-option">
-                    <span class="p-ml-1">{{ option.geschlecht }}</span>
-                  </div>
-                </ng-template>
-              </p-multiSelect>
-            </ng-template>
-          </p-columnFilter>
-          <p-sortIcon
-            field="personalien.geschlecht"
-            [attr.aria-label]="
-              'isyAngularWidgetsDemo.aria.sort'
-                | translate: {sortField: 'isyAngularWidgetsDemo.labels.geschlecht' | translate}
-            "
-          ></p-sortIcon>
-        </th>
-        <th scope="col" pSortableColumn="personalien.staatsangehoerigkeit" class="white-space-nowrap">
-          {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
-          <p-columnFilter type="text" field="personalien.staatsangehoerigkeit" display="menu"></p-columnFilter>
-          <p-sortIcon
-            field="personalien.staatsangehoerigkeit"
-            [attr.aria-label]="
-              'isyAngularWidgetsDemo.aria.sort'
-                | translate: {sortField: 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate}
-            "
-          ></p-sortIcon>
-        </th>
-        <th scope="col" pSortableColumn="personalien.geburtsdatum" class="white-space-nowrap">
-          {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}
-          <p-columnFilter type="date" field="personalien.geburtsdatum" display="menu"></p-columnFilter>
-          <p-sortIcon
-            field="personalien.geburtsdatum"
-            [attr.aria-label]="
-              'isyAngularWidgetsDemo.aria.sort'
-                | translate: {sortField: 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate}
-            "
-          ></p-sortIcon>
-        </th>
-        <th scope="col" pSortableColumn="personalien.bilanz" class="white-space-nowrap">
-          {{ 'isyAngularWidgetsDemo.labels.bilanz' | translate }}
-          <p-columnFilter type="numeric" field="personalien.bilanz" display="menu" currency="EUR"></p-columnFilter>
-          <p-sortIcon
-            field="personalien.bilanz"
-            [attr.aria-label]="
-              'isyAngularWidgetsDemo.aria.sort'
-                | translate: {sortField: 'isyAngularWidgetsDemo.labels.bilanz' | translate}
-            "
-          ></p-sortIcon>
-        </th>
+        <!--        <th scope="col" pSortableColumn="personalien.geschlecht" class="white-space-nowrap">-->
+        <!--          {{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}-->
+        <!--          <p-columnFilter-->
+        <!--            type="text"-->
+        <!--            field="personalien.geschlecht"-->
+        <!--            matchMode="in"-->
+        <!--            display="menu"-->
+        <!--            [showMatchModes]="false"-->
+        <!--            [showOperator]="false"-->
+        <!--            [showAddButton]="false"-->
+        <!--          >-->
+        <!--            <ng-template pTemplate="filter" let-value let-filter="filterCallback">-->
+        <!--              <p-multiSelect-->
+        <!--                optionLabel="geschlecht"-->
+        <!--                optionValue="geschlecht"-->
+        <!--                placeholder="{{ 'isyAngularWidgetsDemo.labels.alle' | translate }}"-->
+        <!--                [ngModel]="value"-->
+        <!--                [options]="geschlechter"-->
+        <!--                (onChange)="filter($event.value)"-->
+        <!--              >-->
+        <!--                <ng-template let-option pTemplate="item">-->
+        <!--                  <div class="p-multiselect-representative-option">-->
+        <!--                    <span class="p-ml-1">{{ option.geschlecht }}</span>-->
+        <!--                  </div>-->
+        <!--                </ng-template>-->
+        <!--              </p-multiSelect>-->
+        <!--            </ng-template>-->
+        <!--          </p-columnFilter>-->
+        <!--          <p-sortIcon-->
+        <!--            field="personalien.geschlecht"-->
+        <!--            [attr.aria-label]="-->
+        <!--              'isyAngularWidgetsDemo.aria.sort'-->
+        <!--                | translate: {sortField: 'isyAngularWidgetsDemo.labels.geschlecht' | translate}-->
+        <!--            "-->
+        <!--          ></p-sortIcon>-->
+        <!--        </th>-->
+        <!--        <th scope="col" pSortableColumn="personalien.staatsangehoerigkeit" class="white-space-nowrap">-->
+        <!--          {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}-->
+        <!--          <p-columnFilter type="text" field="personalien.staatsangehoerigkeit" display="menu"></p-columnFilter>-->
+        <!--          <p-sortIcon-->
+        <!--            field="personalien.staatsangehoerigkeit"-->
+        <!--            [attr.aria-label]="-->
+        <!--              'isyAngularWidgetsDemo.aria.sort'-->
+        <!--                | translate: {sortField: 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate}-->
+        <!--            "-->
+        <!--          ></p-sortIcon>-->
+        <!--        </th>-->
+        <!--        <th scope="col" pSortableColumn="personalien.geburtsdatum" class="white-space-nowrap">-->
+        <!--          {{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}-->
+        <!--          <p-columnFilter type="date" field="personalien.geburtsdatum" display="menu"></p-columnFilter>-->
+        <!--          <p-sortIcon-->
+        <!--            field="personalien.geburtsdatum"-->
+        <!--            [attr.aria-label]="-->
+        <!--              'isyAngularWidgetsDemo.aria.sort'-->
+        <!--                | translate: {sortField: 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate}-->
+        <!--            "-->
+        <!--          ></p-sortIcon>-->
+        <!--        </th>-->
+        <!--        <th scope="col" pSortableColumn="personalien.bilanz" class="white-space-nowrap">-->
+        <!--          {{ 'isyAngularWidgetsDemo.labels.bilanz' | translate }}-->
+        <!--          <p-columnFilter type="numeric" field="personalien.bilanz" display="menu" currency="EUR"></p-columnFilter>-->
+        <!--          <p-sortIcon-->
+        <!--            field="personalien.bilanz"-->
+        <!--            [attr.aria-label]="-->
+        <!--              'isyAngularWidgetsDemo.aria.sort'-->
+        <!--                | translate: {sortField: 'isyAngularWidgetsDemo.labels.bilanz' | translate}-->
+        <!--            "-->
+        <!--          ></p-sortIcon>-->
+        <!--        </th>-->
         <th scope="col" pSortableColumn="personalien.status" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
           <p-columnFilter field="personalien.status" matchMode="equals" display="menu">
@@ -159,8 +159,39 @@
             "
           ></p-sortIcon>
         </th>
-        <th *ngFor="let col of columns" scope="col">
+        <th *ngFor="let col of columns" scope="col" pSortableColumn="col.field" class="white-space-nowrap">
           {{ col.header }}
+          <p-columnFilter
+            type="col.type"
+            field="col.field"
+            display="menu"
+            currency="col.currency.currencyCode"
+          ></p-columnFilter>
+          @if (col.field == 'geschlecht') {
+            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+              <p-multiSelect
+                optionLabel="geschlecht"
+                optionValue="geschlecht"
+                placeholder="{{ 'isyAngularWidgetsDemo.labels.alle' | translate }}"
+                [ngModel]="value"
+                [options]="geschlechter"
+                (onChange)="filter($event.value)"
+              >
+                <ng-template let-option pTemplate="item">
+                  <div class="p-multiselect-representative-option">
+                    <span class="p-ml-1">{{ option.geschlecht }}</span>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </ng-template>
+          }
+          <p-sortIcon
+            field="col.field"
+            [attr.aria-label]="
+              'isyAngularWidgetsDemo.aria.sort'
+                | translate: {sortField: 'isyAngularWidgetsDemo.labels.bilanz' | translate}
+            "
+          ></p-sortIcon>
         </th>
         <th scope="col" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.actions' | translate }}
@@ -171,10 +202,10 @@
       <tr [pSelectableRow]="rowData">
         <td>{{ person.personalien.nachname }}</td>
         <td>{{ person.personalien.vorname }}</td>
-        <td>{{ person.personalien.geschlecht }}</td>
-        <td>{{ person.personalien.staatsangehoerigkeit }}</td>
-        <td>{{ person.personalien.geburtsdatum }}</td>
-        <td>{{ person.personalien.bilanz | currency: 'EUR' : 'symbol' }}</td>
+        <!--        <td>{{ person.personalien.geschlecht }}</td>-->
+        <!--        <td>{{ person.personalien.staatsangehoerigkeit }}</td>-->
+        <!--        <td>{{ person.personalien.geburtsdatum }}</td>-->
+        <!--        <td>{{ person.personalien.bilanz | currency: 'EUR' : 'symbol' }}</td>-->
         <td>{{ person.personalien.status }}</td>
         <td *ngFor="let col of columns">
           @if (col.inputFormating) {
