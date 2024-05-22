@@ -124,17 +124,53 @@
         <!--            "-->
         <!--          ></p-sortIcon>-->
         <!--        </th>-->
-        <!--        <th scope="col" pSortableColumn="personalien.bilanz" class="white-space-nowrap">-->
-        <!--          {{ 'isyAngularWidgetsDemo.labels.bilanz' | translate }}-->
-        <!--          <p-columnFilter type="numeric" field="personalien.bilanz" display="menu" currency="EUR"></p-columnFilter>-->
-        <!--          <p-sortIcon-->
-        <!--            field="personalien.bilanz"-->
-        <!--            [attr.aria-label]="-->
-        <!--              'isyAngularWidgetsDemo.aria.sort'-->
-        <!--                | translate: {sortField: 'isyAngularWidgetsDemo.labels.bilanz' | translate}-->
-        <!--            "-->
-        <!--          ></p-sortIcon>-->
-        <!--        </th>-->
+        <!--                <th scope="col" pSortableColumn="personalien.bilanz" class="white-space-nowrap">-->
+        <!--                  {{ 'isyAngularWidgetsDemo.labels.bilanz' | translate }}-->
+        <!--                  <p-columnFilter type="numeric" field="personalien.bilanz" display="menu" currency="EUR"></p-columnFilter>-->
+        <!--                  <p-sortIcon-->
+        <!--                    field="personalien.bilanz"-->
+        <!--                    [attr.aria-label]="-->
+        <!--                      'isyAngularWidgetsDemo.aria.sort'-->
+        <!--                        | translate: {sortField: 'isyAngularWidgetsDemo.labels.bilanz' | translate}-->
+        <!--                    "-->
+        <!--                  ></p-sortIcon>-->
+        <!--                </th>-->
+        @for (col of columns; track col.id) {
+          <th scope="col" [pSortableColumn]="col.field" class="white-space-nowrap">
+            {{ col.header }}
+            <p-columnFilter
+              [type]="col.type"
+              [field]="col.field"
+              display="menu"
+              currency="col.currency.currencyCode"
+            ></p-columnFilter>
+            @if (col.field == 'personalien.geschlecht') {
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-multiSelect
+                  optionLabel="geschlecht"
+                  optionValue="geschlecht"
+                  placeholder="{{ 'isyAngularWidgetsDemo.labels.alle' | translate }}"
+                  [ngModel]="value"
+                  [options]="geschlechter"
+                  (onChange)="filter($event.value)"
+                >
+                  <ng-template let-option pTemplate="item">
+                    <div class="p-multiselect-representative-option">
+                      <span class="p-ml-1">{{ option.geschlecht }}</span>
+                    </div>
+                  </ng-template>
+                </p-multiSelect>
+              </ng-template>
+            }
+            <p-sortIcon
+              [field]="col.field"
+              [attr.aria-label]="
+                'isyAngularWidgetsDemo.aria.sort'
+                  | translate: {sortField: 'isyAngularWidgetsDemo.labels.bilanz' | translate}
+              "
+            ></p-sortIcon>
+          </th>
+        }
         <th scope="col" pSortableColumn="personalien.status" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
           <p-columnFilter field="personalien.status" matchMode="equals" display="menu">
@@ -159,40 +195,6 @@
             "
           ></p-sortIcon>
         </th>
-        <th *ngFor="let col of columns" scope="col" pSortableColumn="col.field" class="white-space-nowrap">
-          {{ col.header }}
-          <p-columnFilter
-            type="col.type"
-            field="col.field"
-            display="menu"
-            currency="col.currency.currencyCode"
-          ></p-columnFilter>
-          @if (col.field == 'geschlecht') {
-            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-              <p-multiSelect
-                optionLabel="geschlecht"
-                optionValue="geschlecht"
-                placeholder="{{ 'isyAngularWidgetsDemo.labels.alle' | translate }}"
-                [ngModel]="value"
-                [options]="geschlechter"
-                (onChange)="filter($event.value)"
-              >
-                <ng-template let-option pTemplate="item">
-                  <div class="p-multiselect-representative-option">
-                    <span class="p-ml-1">{{ option.geschlecht }}</span>
-                  </div>
-                </ng-template>
-              </p-multiSelect>
-            </ng-template>
-          }
-          <p-sortIcon
-            field="col.field"
-            [attr.aria-label]="
-              'isyAngularWidgetsDemo.aria.sort'
-                | translate: {sortField: 'isyAngularWidgetsDemo.labels.bilanz' | translate}
-            "
-          ></p-sortIcon>
-        </th>
         <th scope="col" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.actions' | translate }}
         </th>
@@ -202,18 +204,16 @@
       <tr [pSelectableRow]="rowData">
         <td>{{ person.personalien.nachname }}</td>
         <td>{{ person.personalien.vorname }}</td>
-        <!--        <td>{{ person.personalien.geschlecht }}</td>-->
-        <!--        <td>{{ person.personalien.staatsangehoerigkeit }}</td>-->
-        <!--        <td>{{ person.personalien.geburtsdatum }}</td>-->
-        <!--        <td>{{ person.personalien.bilanz | currency: 'EUR' : 'symbol' }}</td>-->
+        @for (col of columns; track col.id) {
+          <td>
+            @if (col.inputFormating) {
+              {{ person.personalien[col.id] | currency: col.currency.currencyCode : col.currency.display }}
+            } @else {
+              {{ person.personalien[col.id] }}
+            }
+          </td>
+        }
         <td>{{ person.personalien.status }}</td>
-        <td *ngFor="let col of columns">
-          @if (col.inputFormating) {
-            {{ person.personalien[col.field] | currency: col.currency.currencyCode : col.currency.display }}
-          } @else {
-            {{ person.personalien[col.field] }}
-          }
-        </td>
         <td>
           <p-button
             [icon]="'pi pi-pencil'"
