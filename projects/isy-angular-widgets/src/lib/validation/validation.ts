@@ -145,7 +145,7 @@ export class Validation {
   static validCreditCardExpirationDate(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('month');
     const dateValue = moment(c.value, ['MM/YY'], true);
-    if (!dateValue.isValid() || dateValue.isSameOrBefore(today)) {
+    if (!dateValue.isValid() || dateValue.isBefore(today)) {
       return {CREDITCARDEXPIRATIONDATE: true};
     }
     return null;
