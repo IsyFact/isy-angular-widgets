@@ -231,6 +231,13 @@ describe('Unit Test: Validation', () => {
       errorHaveToBeDefined(errors, errorKey);
     });
 
+    it('should return null if the date is a valid credit card expiration date', () => {
+      const actualDate = moment().format('MM/YY');
+      const control: AbstractControl = new FormControl(actualDate);
+      const errors = Validation.validCreditCardExpirationDate(control);
+      expect(errors).toBeNull();
+    });
+
     it('should return CREDITCARDEXPIRATIONDATE if the date is not a valid credit card expiration date', () => {
       const errorKey = 'CREDITCARDEXPIRATIONDATE';
       const control: AbstractControl = new FormControl('13/99');
