@@ -1,7 +1,6 @@
-import {ChangeDetectorRef, OnInit, Component, EventEmitter, Input, Output} from '@angular/core';
+import {OnInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Person, Personalien} from '../../../../shared/model/person';
 import {countries} from '../../country-data';
-import {PersonenService} from '../../../../shared/services/personen.service';
 
 interface Column {
   field: string;
@@ -43,25 +42,15 @@ export class ResultListComponent implements OnInit {
 
   readonly laender: string[];
 
-  constructor(
-    private personService: PersonenService,
-    private cd: ChangeDetectorRef
-  ) {
+  constructor() {
     this.laender = countries;
   }
 
-  ngOnInit() : void {
-    void this.personService.getPersonsMini().then((person: Person) : void => {
-      this.person = person;
-      this.cd.markForCheck();
-    });
-
-    this.cols = [
-      {field: 'geschlecht', header: 'Geschlecht'}
-    ];
+  ngOnInit(): void {
+    this.cols = [{field: 'geschlecht', header: 'Geschlecht'}];
 
     this.selectedColumns = this.cols;
-  };
+  }
 
   emitEditAction(person?: Person): void {
     this.edit.emit(person);
