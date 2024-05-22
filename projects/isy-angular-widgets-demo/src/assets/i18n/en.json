@@ -42,7 +42,7 @@
       "savePersonDetail": "The personal data with the name {{firstName}} {{lastName}} was successfully saved.",
       "requiredMessage": "This field is required.",
       "maxLengthError": "A maximum of {{numChars}} characters may be used.",
-      "inputUnspecifiedError": "The date is invalid.",
+      "dateError": "The date is invalid.",
       "dateInPastError": "The date must be in the past.",
       "changePage": "Page is changed. New page:"
     },
@@ -103,6 +103,7 @@
       "telefonnummer": "Phone number",
       "einreisedatum": "Date of entry",
       "abreisedatum": "Date of departure",
+      "ablaufdatumPersonalausweis": "ID expiration date",
       "ablaufdatumReisepass": "Passport expiration date",
       "ausweispflichtig": "ID required",
       "sicherheitsstufe": "Security level",
@@ -130,7 +131,8 @@
     "placeholders": {
       "maxLength": "max. {{maxlength}} charaters",
       "creditCardNumber": "Enter number with 16 digits",
-      "creditCardExpirationDate": "YYY-MM-DD",
+      "identityCardExpirationDate": "YYY-MM-DD",
+      "creditCardExpirationDate": "MM/YY",
       "dateOfDeparture": "xx.xx.xxxx"
     },
     "menuItems": {

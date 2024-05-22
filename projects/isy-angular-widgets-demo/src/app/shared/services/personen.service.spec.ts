@@ -25,6 +25,7 @@ describe('Unit Tests: PersonenService', () => {
       geheimdienstnotizen: '',
       einreisedatum: 'xx.xx.xxxx',
       abreisedatum: 'xx.xx.xxxx',
+      ablaufdatumPersonalausweis: '',
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
       ablaufdatumKreditkarte: '',
@@ -74,6 +75,7 @@ describe('Unit Tests: PersonenService', () => {
     expect(personalien.abreisedatum).toEqual('xx.xx.xxxx');
     expect(personalien.telefonnummer).toBe(empty);
     expect(personalien.geheimdienstnotizen).toBe(empty);
+    expect(personalien.ablaufdatumPersonalausweis).toBe(empty);
     expect(personalien.ablaufdatumReisepass).toBe(empty);
     expect(personalien.kreditkartennummer).toBe(empty);
     expect(personalien.ablaufdatumKreditkarte).toBe(empty);

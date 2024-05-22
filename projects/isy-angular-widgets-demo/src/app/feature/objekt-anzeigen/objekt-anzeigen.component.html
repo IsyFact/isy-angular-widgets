@@ -133,7 +133,7 @@
             label="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
             fieldId="date-of-entry"
             [control]="personalInfoForm.controls.dateOfEntry | formControl"
-            [validationMessages]="{UNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.inputUnspecifiedError' | translate}"
+            [validationMessages]="{UNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
           >
             <isy-incomplete-date
               inputId="date-of-entry"
@@ -157,6 +157,22 @@
               mask="**.**.****"
               slotChar="_"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.dateOfDeparture' | translate }}"
+            />
+          </isy-form-wrapper>
+        </div>
+        <div class="col-12 md:col-6 xl:col-4">
+          <isy-form-wrapper
+            label="{{ 'isyAngularWidgetsDemo.labels.ablaufdatumPersonalausweis' | translate }}"
+            fieldId="credit-card-expiration-date"
+            [control]="personalInfoForm.controls.identityCardExpirationDate | formControl"
+          >
+            <p-inputMask
+              inputId="identity-card-expiration-date"
+              formControlName="identityCardExpirationDate"
+              mask="9999-99-99"
+              slotChar="_"
+              styleClass="w-full"
+              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.identityCardExpirationDate' | translate }}"
             />
           </isy-form-wrapper>
         </div>
@@ -197,11 +213,14 @@
             label="{{ 'isyAngularWidgetsDemo.labels.ablaufdatumKreditkarte' | translate }}"
             fieldId="credit-card-expiration-date"
             [control]="personalInfoForm.controls.creditCardExpirationDate | formControl"
+            [validationMessages]="{
+              CREDITCARDEXPIRATIONDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate
+            }"
           >
             <p-inputMask
               inputId="credit-card-expiration-date"
               formControlName="creditCardExpirationDate"
-              mask="9999-99-99"
+              mask="99/99"
               slotChar="_"
               styleClass="w-full"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.creditCardExpirationDate' | translate }}"

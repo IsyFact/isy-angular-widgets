@@ -217,6 +217,35 @@ describe('Unit Test: Validation', () => {
     });
   });
 
+  describe('validCreditCardExpirationDate', () => {
+    it('should return null if the date is in the future', () => {
+      const control: AbstractControl = new FormControl(moment().add(1, 'year').format('MM/YY'));
+      const errors = Validation.validCreditCardExpirationDate(control);
+      expect(errors).toBeNull();
+    });
+
+    it('should return CREDITCARDEXPIRATIONDATE if the date is in the past', () => {
+      const errorKey = 'CREDITCARDEXPIRATIONDATE';
+      const control: AbstractControl = new FormControl(moment().subtract(1, 'year').format('MM/YY'));
+      const errors = Validation.validCreditCardExpirationDate(control);
+      errorHaveToBeDefined(errors, errorKey);
+    });
+
+    it('should return CREDITCARDEXPIRATIONDATE if the date is not a valid credit card expiration date', () => {
+      const errorKey = 'CREDITCARDEXPIRATIONDATE';
+      const control: AbstractControl = new FormControl('13/99');
+      const errors = Validation.validCreditCardExpirationDate(control);
+      errorHaveToBeDefined(errors, errorKey);
+    });
+
+    it('should return CREDITCARDEXPIRATIONDATE if no value is given', () => {
+      const errorKey = 'CREDITCARDEXPIRATIONDATE';
+      const control: AbstractControl = new FormControl();
+      const errors = Validation.validCreditCardExpirationDate(control);
+      errorHaveToBeDefined(errors, errorKey);
+    });
+  });
+
   describe('isoDate', () => {
     it('should return no validation error, if input is a valid iso-date', () => {
       const validIsoDateControl: AbstractControl = new FormControl('2018-11-11');

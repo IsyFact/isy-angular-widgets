@@ -24,6 +24,7 @@ export interface Personalien {
   geheimdienstnotizen: string;
   einreisedatum: string;
   abreisedatum: string;
+  ablaufdatumPersonalausweis: string;
   ablaufdatumReisepass: string;
   kreditkartennummer: string;
   ablaufdatumKreditkarte: string;

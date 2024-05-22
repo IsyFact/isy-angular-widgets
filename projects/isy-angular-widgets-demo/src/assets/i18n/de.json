@@ -42,7 +42,7 @@
       "savePersonDetail": "Die Personalie mit dem Namen {{firstName}} {{lastName}} wurde erfolgreich gespeichert.",
       "requiredMessage": "Dieses Feld ist ein Pflichtfeld.",
       "maxLengthError": "Es dürfen maximal {{numChars}} Zeichen verwendet werden.",
-      "inputUnspecifiedError": "Das Datum ist ungültig.",
+      "dateError": "Das Datum ist ungültig.",
       "dateInPastError": "Das Datum muss in der Vergangenheit liegen.",
       "changePage": "Seitenwechsel erfolgt. Neue Seite:"
     },
@@ -103,6 +103,7 @@
       "telefonnummer": "Telefonnummer",
       "einreisedatum": "Einreisedatum",
       "abreisedatum": "Abreisedatum",
+      "ablaufdatumPersonalausweis": "Ablaufdatum des Personalausweises",
       "ablaufdatumReisepass": "Ablaufdatum des Reisepasses",
       "ausweispflichtig": "Ausweispflichtig",
       "sicherheitsstufe": "Sicherheitsstufe",
@@ -129,7 +130,8 @@
     "placeholders": {
       "maxLength": "max. {{maxlength}} Zeichen",
       "creditCardNumber": "Nummer mit 16 Ziffern eingeben",
-      "creditCardExpirationDate": "YYY-MM-DD",
+      "identityCardExpirationDate": "YYY-MM-DD",
+      "creditCardExpirationDate": "MM/YY",
       "dateOfDeparture": "xx.xx.xxxx"
     },
     "menuItems": {

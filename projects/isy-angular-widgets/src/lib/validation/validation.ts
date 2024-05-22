@@ -21,7 +21,11 @@ export class Validation {
   static isInFuture(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
+    const dateValue = moment(
+      c.value,
+      [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY', 'MM/YY'],
+      true
+    );
     if (dateValue.isValid() && dateValue.isSameOrBefore(today)) {
       return {FUTURE: true};
     }
@@ -129,6 +133,22 @@ export class Validation {
 
       return null;
     };
+  }
+
+  /**
+   * Checks if the date is a valid credit card expiration date. The date must be in the future.
+   * If the date is not a valid credit card expiration date, a "CREDITCARDEXPIRATIONDATE" error is thrown.
+   * For valid credit card expiration dates, no error is thrown.
+   * @param c The control element the validator is appended to
+   * @returns The object {CREDITCARDEXPIRATIONDATE: true} if the validation fails; null otherwise
+   */
+  static validCreditCardExpirationDate(c: AbstractControl<MomentInput>): ValidationErrors | null {
+    const today = moment().startOf('month');
+    const dateValue = moment(c.value, ['MM/YY'], true);
+    if (!dateValue.isValid() || dateValue.isSameOrBefore(today)) {
+      return {CREDITCARDEXPIRATIONDATE: true};
+    }
+    return null;
   }
 
   /**

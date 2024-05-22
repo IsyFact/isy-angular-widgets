@@ -21,6 +21,7 @@ export function getEmptyPerson(): Person {
       geheimdienstnotizen: '',
       einreisedatum: 'xx.xx.xxxx',
       abreisedatum: 'xx.xx.xxxx',
+      ablaufdatumPersonalausweis: '',
       ablaufdatumReisepass: '',
       kreditkartennummer: '',
       ablaufdatumKreditkarte: '',
@@ -51,6 +52,7 @@ export function resetPerson(person: Person): void {
   person.personalien.geheimdienstnotizen = '';
   person.personalien.einreisedatum = 'xx.xx.xxxx';
   person.personalien.abreisedatum = 'xx.xx.xxxx';
+  person.personalien.ablaufdatumPersonalausweis = '';
   person.personalien.ablaufdatumReisepass = '';
   person.personalien.kreditkartennummer = '';
   person.personalien.ablaufdatumKreditkarte = '';

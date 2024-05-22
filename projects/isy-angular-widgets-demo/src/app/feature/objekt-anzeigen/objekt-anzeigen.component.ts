@@ -55,12 +55,13 @@ export class ObjektAnzeigenComponent {
       intelligenceNotes: [personalien.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength)],
       // Demo: Validator validUnspecifiedDate - Checks that the date is a valid unspecified date or valid date in german format DD.MM.YYYY
       dateOfDeparture: [personalien.abreisedatum, Validation.validUnspecifiedDate],
+      // Demo: Validator dateFormat - Checks that the date is a valid date in ISO8601
+      identityCardExpirationDate: [personalien.ablaufdatumPersonalausweis, Validation.isoDate],
       // Demo: Validator isInFuture - If the specified value is a valid date, it will be checked if the date is in the future
       passportExpirationDate: [personalien.ablaufdatumReisepass, Validation.isInFuture],
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
       creditCardNumber: [personalien.kreditkartennummer, Validation.validCreditCardNumber],
-      // Demo: Validator dateFormat - Checks that the date is a valid date in ISO8601
-      creditCardExpirationDate: [personalien.ablaufdatumKreditkarte, Validation.isoDate],
+      creditCardExpirationDate: [personalien.ablaufdatumKreditkarte, Validation.validCreditCardExpirationDate],
       identityDocument: [personalien.identityDocument, Validators.required],
       addresses: this.fb.array([addressGroup])
     });
