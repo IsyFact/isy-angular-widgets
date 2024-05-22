@@ -159,7 +159,7 @@
             "
           ></p-sortIcon>
         </th>
-        <th *ngFor="let col of columns">
+        <th *ngFor="let col of columns" scope="col">
           {{ col.header }}
         </th>
         <th scope="col" class="white-space-nowrap">
@@ -177,7 +177,11 @@
         <td>{{ person.personalien.bilanz | currency: 'EUR' : 'symbol' }}</td>
         <td>{{ person.personalien.status }}</td>
         <td *ngFor="let col of columns">
-          {{ person.personalien[col.field] }}
+          @if (col.inputFormating) {
+            {{ person.personalien[col.field] | currency: col.currency.currencyCode : col.currency.display }}
+          } @else {
+            {{ person.personalien[col.field] }}
+          }
         </td>
         <td>
           <p-button
