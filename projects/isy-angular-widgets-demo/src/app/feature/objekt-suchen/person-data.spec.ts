@@ -22,6 +22,7 @@ describe('Unit Tests: person-data', () => {
     expect(person.personalien.geheimdienstnotizen).toEqual('');
     expect(person.personalien.einreisedatum).toEqual('xx.xx.xxxx');
     expect(person.personalien.abreisedatum).toEqual('xx.xx.xxxx');
+    expect(person.personalien.ablaufdatumPersonalausweis).toEqual('');
     expect(person.personalien.ablaufdatumReisepass).toEqual('');
     expect(person.personalien.kreditkartennummer).toEqual('');
     expect(person.personalien.ablaufdatumKreditkarte).toEqual('');
