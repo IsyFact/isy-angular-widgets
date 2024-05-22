@@ -222,6 +222,10 @@ export class PersonenService {
     return generiert;
   }
 
+  async getPersonsMini() : Promise<Person> {
+    return Promise.resolve(this.generatePerson());
+  }
+
   rng(): number {
     const crypto = window.crypto;
     return crypto.getRandomValues(new Uint32Array(1))[0] % this.maxEntries;

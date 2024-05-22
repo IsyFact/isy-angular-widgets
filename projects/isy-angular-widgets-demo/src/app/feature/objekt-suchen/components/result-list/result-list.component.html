@@ -6,30 +6,43 @@
 >
   <p-table
     [value]="personen"
+    [columns]="selectedColumns"
     [globalFilterFields]="['name', 'status', 'geschlecht']"
     selectionMode="single"
     [(selection)]="selectedObject"
     [loading]="loading"
   >
     <ng-template pTemplate="caption">
-      <p-button
-        id="create-button"
-        class="mr-1"
-        icon="pi pi-plus"
-        [label]="'isyAngularWidgetsDemo.actions.createObject' | translate"
-        (onClick)="emitCreateAction()"
-      >
-      </p-button>
-      <p-button
-        id="edit-button"
-        icon="pi pi-pencil"
-        [label]="'isyAngularWidgetsDemo.actions.editObject' | translate"
-        [disabled]="!selectedObject"
-        (onClick)="emitEditAction(selectedObject)"
-      >
-      </p-button>
+      <div>
+        <p-button
+          id="create-button"
+          class="mr-1"
+          icon="pi pi-plus"
+          [label]="'isyAngularWidgetsDemo.actions.createObject' | translate"
+          (onClick)="emitCreateAction()"
+        >
+        </p-button>
+        <p-button
+          id="edit-button"
+          icon="pi pi-pencil"
+          [label]="'isyAngularWidgetsDemo.actions.editObject' | translate"
+          [disabled]="!selectedObject"
+          (onClick)="emitEditAction(selectedObject)"
+        >
+        </p-button>
+      </div>
+      <div class="pt-3">
+        <p-multiSelect
+          display="chip"
+          [options]="cols"
+          [(ngModel)]="selectedColumns"
+          optionLabel="header"
+          selectedItemsLabel="{0} columns selected"
+          placeholder="Choose Columns"
+        />
+      </div>
     </ng-template>
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header" let-columns>
       <tr>
         <th scope="col" pSortableColumn="personalien.nachname" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
@@ -146,12 +159,15 @@
             "
           ></p-sortIcon>
         </th>
+        <th *ngFor="let col of columns">
+          {{ col.header }}
+        </th>
         <th scope="col" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.actions' | translate }}
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-person>
+    <ng-template pTemplate="body" let-rowData let-person let-columns="columns">
       <tr [pSelectableRow]="rowData">
         <td>{{ person.personalien.nachname }}</td>
         <td>{{ person.personalien.vorname }}</td>
@@ -160,6 +176,9 @@
         <td>{{ person.personalien.geburtsdatum }}</td>
         <td>{{ person.personalien.bilanz | currency: 'EUR' : 'symbol' }}</td>
         <td>{{ person.personalien.status }}</td>
+        <td *ngFor="let col of columns">
+          {{ person.personalien[col.field] }}
+        </td>
         <td>
           <p-button
             [icon]="'pi pi-pencil'"
