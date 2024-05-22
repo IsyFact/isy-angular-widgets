@@ -7,7 +7,7 @@ import {PersonenService} from '../../../../shared/services/personen.service';
 import {FormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {Person} from '../../../../shared/model/person';
-import { MultiSelectModule } from 'primeng/multiselect';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 describe('Integration Tests: ResultListComponent', () => {
   let person: Person;
