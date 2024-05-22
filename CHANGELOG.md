@@ -12,6 +12,7 @@
   * Navigationslinks werden beim Verwenden von Screenreadern vor und nach dem Seitenwechsel angekündigt
   * Sprunglinks erhalten einen Fokus
   * Alle Browser-Tabs haben einen individuellen Titel und werden nach Seitenwechsel entsprechend angepasst
+- IFS-2802: Zum Verringern der Tabellenbreite wird exemplarisch auf der Seite _Objekt-Suchen_ eine Spaltenfilterung in die Tabelle hinzugefügt
 ## Fixes
 - IFS-3590: _Charpicker-_, _Objekt-Anlegen_- und _Objekt-Bearbeiten-Dialog_  werden jetzt immer oberhalb der Hauptnavigation angezeigt
 ## Dokumentation
