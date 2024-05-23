@@ -67,7 +67,9 @@
     },
     "resultList": {
       "header": "Ergebnisliste",
-      "emptyText": "Keine Ergebnisse vorhanden."
+      "emptyText": "Keine Ergebnisse vorhanden.",
+      "selectOneStatus": "Wähle einen Status",
+      "selectOneOrMore": "Wähle ein oder mehrer Ergebnisse"
     },
     "actions": {
       "createObject": "Objekt anlegen",

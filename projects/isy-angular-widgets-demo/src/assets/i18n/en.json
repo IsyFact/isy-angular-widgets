@@ -67,7 +67,9 @@
     },
     "resultList": {
       "header": "Result list",
-      "emptyText": "No results available."
+      "emptyText": "No results available.",
+      "selectOneStatus": "Select a state",
+      "selectOneOrMore": "Select one or more results"
     },
     "actions": {
       "createObject": "Create object",

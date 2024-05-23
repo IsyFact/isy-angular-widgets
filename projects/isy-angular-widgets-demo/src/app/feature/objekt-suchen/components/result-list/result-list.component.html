@@ -149,7 +149,7 @@
                 <p-multiSelect
                   optionLabel="geschlecht"
                   optionValue="geschlecht"
-                  placeholder="{{ 'isyAngularWidgetsDemo.labels.alle' | translate }}"
+                  placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
                   [ngModel]="value"
                   [options]="geschlechter"
                   (onChange)="filter($event.value)"
@@ -179,7 +179,7 @@
                 [ngModel]="value"
                 [options]="stati"
                 (onChange)="filter($event.value)"
-                placeholder="{{ 'isyAngularWidgetsDemo.labels.alle' | translate }}"
+                placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneStatus' | translate }}"
               >
                 <ng-template let-option pTemplate="item">
                   <span>{{ option.label }}</span>
