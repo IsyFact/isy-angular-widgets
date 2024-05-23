@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common'; // Import CommonModule for common directives
 import {ControlValueAccessor, FormsModule} from '@angular/forms'; // Import FormsModule if you're using template-driven forms
 import {InputCharData} from '../../model/model';
