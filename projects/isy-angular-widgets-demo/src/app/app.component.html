@@ -31,7 +31,7 @@ like in the following example. The side bar regions can be disabled with corresp
 
   <!-- The Linksnavigation is the left side bar. You could build some kind of menu here. -->
   <div Linksnavigation>
-    <p-panelMenu [model]="sidebarItems"></p-panelMenu>
+    <p-panelMenu [model]="sidebarItems" [multiple]="true"></p-panelMenu>
     <router-outlet name="linksnavigation"></router-outlet>
   </div>
   <!-- The region without a tag is the content region, to be filled by the router. -->

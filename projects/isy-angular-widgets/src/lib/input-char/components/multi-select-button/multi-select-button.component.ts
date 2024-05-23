@@ -51,6 +51,38 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
     }
   }
 
+  activeIndices: number[] = [];
+
+  /**
+   * Close all accordion tabs
+   */
+  closeAllAccordionTabs(): void {
+    this.activeIndices = [];
+  }
+
+  /**
+   * Prevents accordion tab to close when clicking a base or group within the accordion.
+   * To ensure that the accordion remains open when buttons within it are clicked, utilize the activeIndex property.
+   * This function prevents the accordion from closing upon button clicks inside it.
+   * @param index - The index of the tab.
+   * @param event - The click event.
+   */
+  toggleTab(index: number, event: Event): void {
+    if (
+      event.target instanceof HTMLElement &&
+      !event.target.classList.contains('p-button-label') &&
+      !event.target.classList.contains('p-button')
+    ) {
+      const position = this.activeIndices.indexOf(index);
+      const positionClose = -1;
+      if (position === positionClose) {
+        this.activeIndices = [...this.activeIndices, index];
+      } else {
+        this.activeIndices = [...this.activeIndices.slice(0, position), ...this.activeIndices.slice(position + 1)];
+      }
+    }
+  }
+
   /**
    * Triggers an update of the selected group and emits the updated value.
    * @param group - The selected group.

@@ -125,6 +125,11 @@ export class ObjektSuchenComponent {
    */
   tbLoadingStatus = false;
 
+  /**
+   * The boolean that decides the active state of a panel tab
+   */
+  isCollapsed: boolean = false;
+
   constructor(
     public personService: PersonenService,
     private messageService: MessageService,

@@ -5,6 +5,7 @@
 - IFS-3118: Eingabefeld für ungewisses Datum `isy-incomplete-date` kann nun Datumswerte in ISO 8601 für die Datenübertragung ausgeben. Validator für ungewissen Datumswert in ISO 8601 wurde zur Bibliothek hinzugefügt
 - IFS-3644: Im `isy-form-wrapper` wurde das Label der Formularfelder von Float-Label auf Static-Label geändert
 - IFS-3645: Infield Top-Aligned Label wurde zum `isy-form-wrapper` hinzugefügt
+- IFS-3605: Icons zum Öffnen und Schließen der Seitenleisten sind in einfache Chevrons verändert worden
 ## Demo-Anwendung
 - IFS-3606: Verbesserung der Barrierefreiheit durch Hinzufügen der PrimeNG-Eingabemaske zu den Eingabefeldern
 - ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
@@ -13,8 +14,10 @@
   * Navigationslinks werden beim Verwenden von Screenreadern vor und nach dem Seitenwechsel angekündigt
   * Sprunglinks erhalten einen Fokus
   * Alle Browser-Tabs haben einen individuellen Titel und werden nach Seitenwechsel entsprechend angepasst
+- IFS-3605: Panels werden optisch an Accordions angenähert
 ## Fixes
 - IFS-3590: _Charpicker-_, _Objekt-Anlegen_- und _Objekt-Bearbeiten-Dialog_  werden jetzt immer oberhalb der Hauptnavigation angezeigt
+- IFS-3605: Accordion im _Charpicker_ klappt nun beim Klicken auf "Alle" die anderen Accordion-Tabs ein
 ## Dokumentation
 - IFS-3646: Hinzufügen einer AsciiDoc Dokumentation für den Angular Baustein
 
