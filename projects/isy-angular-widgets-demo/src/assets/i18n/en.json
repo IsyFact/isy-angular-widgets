@@ -4,7 +4,10 @@
       "back": "Back",
       "next": "Next",
       "save": "Save",
-      "close": "Close"
+      "close": "Close",
+      "aria": {
+        "close": "Close"
+      }
     },
     "inputChar": {
       "headerAllCharacters": "All",
@@ -12,7 +15,8 @@
       "headerGroups": "Groups",
       "insert": "Insert",
       "aria": {
-        "togglePicker": "Open/Close Special Character Picker"
+        "togglePicker": "Open/Close Special Character Picker",
+        "closePicker": "Close Special Character Picker"
       },
       "enum": {
         "base": "GRUNDZEICHEN",
@@ -29,7 +33,8 @@
         "collapseInformationsbereich": "Collapse right side bar",
         "expandInformationsbereich": "Expand right side bar",
         "leftNavigation": "leftnavigation",
-        "informationArea": "informationarea"
+        "informationArea": "informationarea",
+        "accountName": "Account name"
       }
     },
     "p-calendar": {
@@ -42,7 +47,7 @@
       "savePersonDetail": "The personal data with the name {{firstName}} {{lastName}} was successfully saved.",
       "requiredMessage": "This field is required.",
       "maxLengthError": "A maximum of {{numChars}} characters may be used.",
-      "inputUnspecifiedError": "The date is invalid.",
+      "dateError": "The date is invalid.",
       "dateInPastError": "The date must be in the past.",
       "changePage": "Page is changed. New page:"
     },
@@ -86,6 +91,15 @@
         "displayObject": "To page display object"
       }
     },
+    "aria": {
+      "print": "Print",
+      "info": "Informationen",
+      "sort": "Sort by {{sortField}}",
+      "edit": "Edit",
+      "download": "Download",
+      "delete": "Delete",
+      "close": "Close"
+    },
     "labels": {
       "id": "ID",
       "nachname": "Last name",
@@ -103,6 +117,7 @@
       "telefonnummer": "Phone number",
       "einreisedatum": "Date of entry",
       "abreisedatum": "Date of departure",
+      "ablaufdatumPersonalausweis": "ID expiration date",
       "ablaufdatumReisepass": "Passport expiration date",
       "ausweispflichtig": "ID required",
       "sicherheitsstufe": "Security level",
@@ -128,7 +143,11 @@
       "deleteButton": "to delete selected value"
     },
     "placeholders": {
-      "maxLength": "max. {{maxlength}} charaters"
+      "maxLength": "max. {{maxlength}} charaters",
+      "creditCardNumber": "Enter number with 16 digits",
+      "identityCardExpirationDate": "YYY-MM-DD",
+      "creditCardExpirationDate": "MM/YY",
+      "dateOfDeparture": "xx.xx.xxxx"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept specifications",

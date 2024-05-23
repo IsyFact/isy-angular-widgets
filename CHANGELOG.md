@@ -1,10 +1,13 @@
 # 17.3.0
 ## Features
+- IFS-2876: Aria-Label-Attribute wurde zur Verbesserung der Barrierefreiheit verwendet
+- IFS-3684: Das Basis-Theme _Bootstrap4 Light Blue_ wurde als SCSS in das _IsyFact-Theme_ integriert. Eine Live-Bearbeitung der Variablen ist nun möglich
 - IFS-3118: Eingabefeld für ungewisses Datum `isy-incomplete-date` kann nun Datumswerte in ISO 8601 für die Datenübertragung ausgeben. Validator für ungewissen Datumswert in ISO 8601 wurde zur Bibliothek hinzugefügt
 - IFS-3644: Im `isy-form-wrapper` wurde das Label der Formularfelder von Float-Label auf Static-Label geändert
 - IFS-3645: Infield Top-Aligned Label wurde zum `isy-form-wrapper` hinzugefügt
 - IFS-3605: Icons zum Öffnen und Schließen der Seitenleisten sind in einfache Chevrons verändert worden
 ## Demo-Anwendung
+- IFS-3606: Verbesserung der Barrierefreiheit durch Hinzufügen der PrimeNG-Eingabemaske zu den Eingabefeldern
 - ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
 - IFS-3644: Die Komponente `isy-form-wrapper` wurde nun für alle Formularfelder in der Demo-App eingesetzt, und die nicht mehr benötigte `RequiredLabelComponent` wurde von der Seite _Objekt suchen_ entfernt
 - ISY-903: Verbesserung der Barrierefreiheit innerhalb der Demo Anwendung durch folgende Anpassungen:

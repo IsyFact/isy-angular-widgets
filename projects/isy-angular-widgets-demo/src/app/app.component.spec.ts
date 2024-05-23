@@ -24,6 +24,16 @@ describe('Integration Tests: AppComponent', () => {
     mockDocument = spectator.inject(DOCUMENT);
   });
 
+  it('the print button should have an aria-label attribute', () => {
+    const element = spectator.query('p-button[icon="pi pi-print"] button') as HTMLElement;
+    expect(element.hasAttribute('aria-label')).toBeTrue();
+  });
+
+  it('the info button should have an aria-label attribute', () => {
+    const element = spectator.query('p-button[icon="pi pi-info-circle"] button') as HTMLElement;
+    expect(element.hasAttribute('aria-label')).toBeTrue();
+  });
+
   it('should create the application', () => {
     expect(spectator.component).toBeTruthy();
   });

@@ -90,7 +90,7 @@
           [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
           [options]="laender"
           [(ngModel)]="person.personalien.staatsangehoerigkeit"
-          [showClear]="true"
+          [showClear]="person.personalien.staatsangehoerigkeit === '' ? false : true"
           styleClass="w-full"
           appendTo="body"
         >
@@ -144,6 +144,7 @@
 
 <p-dialog
   [header]="'isyAngularWidgetsDemo.editObjectDialog.header' | translate"
+  [closeAriaLabel]="'isyAngularWidgetsDemo.aria.close' | translate"
   [(visible)]="openEditForm"
   [modal]="modal"
   [style]="{
@@ -242,7 +243,7 @@
               inputId="edit-staatsangehörigkeit"
               [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
               [options]="laender"
-              [showClear]="true"
+              [showClear]="editForm.controls.editStaatsangehoerigkeit.value === '' ? false : true"
               [formControlName]="'editStaatsangehoerigkeit'"
               [editable]="true"
               styleClass="w-full"
@@ -397,7 +398,7 @@
               <p-dropdown
                 inputId="staatangehoerigkeit"
                 [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
-                [showClear]="true"
+                [showClear]="geburtsInformationenForm.controls.staatsangehoerigkeit.value === '' ? false : true"
                 optionValue="name"
                 optionLabel="name"
                 [options]="countryMap"

@@ -16,6 +16,7 @@ export const initializedPerson: Person = {
     sicherheitsstufe: 0,
     einreisedatum: 'xx.xx.2000',
     abreisedatum: 'xx.xx.2024',
+    ablaufdatumPersonalausweis: '',
     ablaufdatumReisepass: '',
     kreditkartennummer: '',
     ablaufdatumKreditkarte: '',

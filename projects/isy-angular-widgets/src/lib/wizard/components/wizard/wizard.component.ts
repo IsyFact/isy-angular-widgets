@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {WizardDirective} from '../../directives/wizard.directive';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 /**
  * The width of the wizard of not otherwise specified by the user.
@@ -147,6 +148,8 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * Stores the items of the wizard
    */
   items: MenuItem[] = [];
+
+  constructor(public configService: WidgetsConfigService) {}
 
   /**
    * Fired on initialization

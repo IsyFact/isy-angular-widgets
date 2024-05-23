@@ -1,9 +1,9 @@
-@import './isyfact-primeng-bootstrap-light.css';
 @import './isyfact-liberation-fonts.css';
+@import './bootstrap4/bootstrap4-light/blue/theme.scss';
 
 body {
   margin: 0;
-  font-family: var(--font-family);
+  font-family: $fontFamily;
 }
 
 .p-galleria .p-galleria-thumbnail-container {

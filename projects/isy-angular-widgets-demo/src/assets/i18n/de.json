@@ -4,7 +4,10 @@
       "back": "Zurück",
       "next": "weiter",
       "save": "Speichern",
-      "close": "Schließen"
+      "close": "Schließen",
+      "aria": {
+        "close": "Schließen"
+      }
     },
     "inputChar": {
       "headerAllCharacters": "Alle",
@@ -12,7 +15,8 @@
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
       "aria": {
-        "togglePicker": "Sonderzeichenpicker öffnen/schließen"
+        "togglePicker": "Sonderzeichenpicker öffnen/schließen",
+        "closePicker": "Sonderzeichenpicker schließen"
       },
       "enum": {
         "basis": "GRUNDZEICHEN",
@@ -29,7 +33,8 @@
         "collapseInformationsbereich": "Informationsbereich ausblenden",
         "expandInformationsbereich": "Informationsbereich einblenden",
         "leftNavigation": "linksnavigation",
-        "informationArea": "informationsbereich"
+        "informationArea": "informationsbereich",
+        "accountName": "Kontoname"
       }
     },
     "p-calendar": {
@@ -42,7 +47,7 @@
       "savePersonDetail": "Die Personalie mit dem Namen {{firstName}} {{lastName}} wurde erfolgreich gespeichert.",
       "requiredMessage": "Dieses Feld ist ein Pflichtfeld.",
       "maxLengthError": "Es dürfen maximal {{numChars}} Zeichen verwendet werden.",
-      "inputUnspecifiedError": "Das Datum ist ungültig.",
+      "dateError": "Das Datum ist ungültig.",
       "dateInPastError": "Das Datum muss in der Vergangenheit liegen.",
       "changePage": "Seitenwechsel erfolgt. Neue Seite:"
     },
@@ -86,6 +91,15 @@
         "displayObject": "zur Seite Objekt anzeigen"
       }
     },
+    "aria": {
+      "print": "Drucken",
+      "info": "Informationen",
+      "sort": "Sortieren nach {{sortField}}",
+      "edit": "Bearbeiten",
+      "download": "Herunterladen",
+      "delete": "Löschen",
+      "close": "Schließen"
+    },
     "labels": {
       "id": "ID",
       "nachname": "Nachname",
@@ -103,6 +117,7 @@
       "telefonnummer": "Telefonnummer",
       "einreisedatum": "Einreisedatum",
       "abreisedatum": "Abreisedatum",
+      "ablaufdatumPersonalausweis": "Ablaufdatum des Personalausweises",
       "ablaufdatumReisepass": "Ablaufdatum des Reisepasses",
       "ausweispflichtig": "Ausweispflichtig",
       "sicherheitsstufe": "Sicherheitsstufe",
@@ -127,7 +142,11 @@
       "deleteButton": "löschen des ausgewählten Werts"
     },
     "placeholders": {
-      "maxLength": "max. {{maxlength}} Zeichen"
+      "maxLength": "max. {{maxlength}} Zeichen",
+      "creditCardNumber": "Nummer mit 16 Ziffern eingeben",
+      "identityCardExpirationDate": "YYY-MM-DD",
+      "creditCardExpirationDate": "MM/YY",
+      "dateOfDeparture": "xx.xx.xxxx"
     },
     "menuItems": {
       "bedienkonzeptSpecifications": "Bedienkonzept Vorgaben",

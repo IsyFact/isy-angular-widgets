@@ -78,12 +78,7 @@ Momentan wird an einer erweiterten Version des Theme-Designers, dem Advanced-The
 Nach der Roadmap von PrimeNG (https://primeng.org/roadmap) ist die Veröffentlichung für Q4 2023 geplant.
 Bis dahin wird auf der Designer-Website auf das PrimeNG Sass-Theme verwiesen, um auf die aktuelle Theming-API für weitere Anpassungsoptionen zuzugreifen.
 
-Damit das Isyfact-Theme mit den neuen Bausteinen kompatibel bleibt, sind die untenstehenden Schritte erforderlich um die globalen Styles (isyfact-primeng-bootstrap-light.css) zu generieren.
-
-Als Basis-Theme wird _Bootstrap4 Light Blue_ verwendet.
-
-1. Das Repo primeng-sass-theme von https://github.com/primefaces/primeng-sass-theme klonen
-2. In den Dateien primeng-sass-theme/themes/bootstrap4/bootstrap4-light/_variables_light.scss und primeng-sass-theme/themes/bootstrap4/bootstrap4-light/blue/_variables.scss folgende Properties-Variablen anpassen:
+Das _Bootstrap4 Light Blue_ wurde als Basis-Theme verwendet und als SCSS in das _IsyFact-Theme_ integriert, was eine Live-Bearbeitung der Variablen ermöglicht. Die bestehenden Farbwerte wurden beibehalten. Anpassungen der Properties-Variablen erfolgten in den Dateien `isy-angular-widgets/assets/theme/bootstrap4/bootstrap4-light/_variables_light.scss` und `isy-angular-widgets/assets/theme/bootstrap4/bootstrap4-light/blue/_variables.scss`:
 
 #### Datei _variables_light.scss
 | Properties-Variablen     | Wert                                     | 
@@ -113,11 +108,6 @@ Als Basis-Theme wird _Bootstrap4 Light Blue_ verwendet.
 | $highlightBg             | #cce3ec                  |
 | $highlightTextColor      | #495057                  |
 | $highlightFocusBg        | darken($highlightBg, 8%) |
-
-
-3. Sass installieren: `npm install -g sass` 
-4. CSS-Theme generieren im Ordner primeng-sass-theme/themes/bootstrap4/bootstrap4-light/blue mit `sass --update theme.scss:isyfact-primeng-bootstrap-light.css --style=compressed`
-6. In der Widgets-Library die Datei isy-angular-widgets/projects/isy-angular-widgets/assets/theme/isyfact-primeng-bootstrap-light.css mit der neu generierten Datei ersetzen.
 
 ## Erstellen von Releases
 

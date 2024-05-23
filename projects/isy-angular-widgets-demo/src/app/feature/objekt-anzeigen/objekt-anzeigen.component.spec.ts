@@ -51,6 +51,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     inputFields.birthDate = debugElement.query(By.css('#birth-date'));
     inputFields.dateOfEntry = debugElement.query(By.css('#date-of-entry'));
     inputFields.dateOfDeparture = debugElement.query(By.css('#date-of-departure'));
+    inputFields.identityCardExpirationDate = debugElement.query(By.css('#identity-card-expiration-date'));
     inputFields.passportExpirationDate = debugElement.query(By.css('#passport-expiration-date'));
     inputFields.creditCardNumber = debugElement.query(By.css('#credit-card-number'));
     inputFields.creditCardExpirationDate = debugElement.query(By.css('#credit-card-expiration-date'));
@@ -92,6 +93,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
     expect(inputFields.dateOfEntry.nativeElement.value).toEqual('xx.xx.2000');
     expect(inputFields.dateOfDeparture.nativeElement.value).toEqual('xx.xx.2024');
+    expect(inputFields.identityCardExpirationDate.nativeElement.value).toEqual('');
     expect(inputFields.passportExpirationDate.nativeElement.value).toEqual('');
     expect(inputFields.creditCardNumber.nativeElement.value).toEqual('');
     expect(inputFields.creditCardExpirationDate.nativeElement.value).toEqual('');
@@ -127,7 +129,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     fixture.detectChanges();
 
     const invalidFields = spectator.queryAll('.ng-invalid');
-    expect(invalidFields.length).toBe(2);
+    expect(invalidFields.length).toBe(3);
   });
 
   it('should display validation error if lastName is empty', () => {
