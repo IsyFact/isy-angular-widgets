@@ -61,7 +61,9 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
   }
 
   /**
-   * Prevents accordion tab to close when clicking a base or group within the accordion
+   * Prevents accordion tab to close when clicking a base or group within the accordion.
+   * To ensure that the accordion remains open when buttons within it are clicked, utilize the activeIndex property.
+   * This function prevents the accordion from closing upon button clicks inside it.
    * @param index - The index of the tab.
    * @param event - The click event.
    */

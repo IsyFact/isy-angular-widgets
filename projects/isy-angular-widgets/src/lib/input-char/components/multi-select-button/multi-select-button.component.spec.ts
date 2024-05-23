@@ -98,7 +98,7 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
     expect(component.disabled).toBeTrue();
   });
 
-  it('should initialize activeIndices as an empty array', () => {
+  it('should toogle only one section at once', () => {
     expect(component.activeIndices).toEqual([]);
   });
 

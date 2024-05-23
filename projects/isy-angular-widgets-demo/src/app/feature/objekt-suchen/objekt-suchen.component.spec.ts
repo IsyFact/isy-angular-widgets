@@ -605,4 +605,15 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     expect(searchButtonSpy).toHaveBeenCalled();
   });
+
+  it('should have isCollapsed set to false by default', () => {
+    expect(spectator.component.isCollapsed).toBeFalse();
+  });
+
+  it('should toggle isCollapsed to true when clicked', () => {
+    const panelButton = spectator.query('button.p-panel-toggler') as HTMLButtonElement;
+    panelButton.click();
+    spectator.fixture.detectChanges();
+    expect(spectator.component.isCollapsed).toBeTrue();
+  });
 });

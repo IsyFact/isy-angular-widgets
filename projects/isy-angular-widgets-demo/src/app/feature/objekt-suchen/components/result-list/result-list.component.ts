@@ -19,7 +19,6 @@ export class ResultListComponent {
   @Output() objectSelected = new EventEmitter<Person>();
   @Output() addObjectPressed = new EventEmitter<void>();
 
-  //ToDo: Test for default value and on collapse
   /**
    * The boolean that decides the active state of a panel tab
    */
