@@ -1,25 +1,26 @@
-# 17.3.0
+# 17.3.0 - 24.05.2024
 ## Features
-- IFS-2876: Aria-Label-Attribute wurde zur Verbesserung der Barrierefreiheit verwendet
+- IFS-2876: Aria-Label-Attribute wurden zur Verbesserung der Barrierefreiheit an Icons und Buttons in den Komponenten `isy-hauptfenster`, `isy-wizard` und `isyInputChar` hinzugefügt
 - IFS-3684: Das Basis-Theme _Bootstrap4 Light Blue_ wurde als SCSS in das _IsyFact-Theme_ integriert. Eine Live-Bearbeitung der Variablen ist nun möglich
-- IFS-3118: Eingabefeld für ungewisses Datum `isy-incomplete-date` kann nun Datumswerte in ISO 8601 für die Datenübertragung ausgeben. Validator für ungewissen Datumswert in ISO 8601 wurde zur Bibliothek hinzugefügt
+- IFS-3118: Das Eingabefeld für ungewisse Datums `isy-incomplete-date` kann nun Datumswerte im ISO 8601 Format für die Datenübertragung ausgeben. Ein Validator für ungewisse Datumswerte im ISO 8601 Format wurde zur Bibliothek hinzugefügt
 - IFS-3644: Im `isy-form-wrapper` wurde das Label der Formularfelder von Float-Label auf Static-Label geändert
-- IFS-3645: Infield Top-Aligned Label wurde zum `isy-form-wrapper` hinzugefügt
+- IFS-3645: Infield Top-Aligned Label (IFTA Label) wurde zum `isy-form-wrapper` als optionale Labelvariante hinzugefügt
 - IFS-3605: Icons zum Öffnen und Schließen der Seitenleisten sind in einfache Chevrons verändert worden
 ## Demo-Anwendung
-- IFS-3606: Verbesserung der Barrierefreiheit durch Hinzufügen der PrimeNG-Eingabemaske zu den Eingabefeldern
-- ISY-1044: Widget für die Erfassung von mehreren Eingabewerten auf der Seite _Objekt anzeigen_ hinzugefügt
-- IFS-3644: Die Komponente `isy-form-wrapper` wurde nun für alle Formularfelder in der Demo-App eingesetzt, und die nicht mehr benötigte `RequiredLabelComponent` wurde von der Seite _Objekt suchen_ entfernt
-- ISY-903: Verbesserung der Barrierefreiheit innerhalb der Demo Anwendung durch folgende Anpassungen:
-  * Navigationslinks werden beim Verwenden von Screenreadern vor und nach dem Seitenwechsel angekündigt
-  * Sprunglinks erhalten einen Fokus
-  * Alle Browser-Tabs haben einen individuellen Titel und werden nach Seitenwechsel entsprechend angepasst
+- ISY-1044: Ein Widget für die Erfassung von mehreren Eingabewerten ist auf der Seite _Objekt anzeigen_ hinzugefügt
+- IFS-3644: Die Komponente `isy-form-wrapper` wurde für alle Formularfelder in der Demo-App eingesetzt und die nicht mehr benötigte `RequiredLabelComponent` wurde von der Seite _Objekt suchen_ entfernt
+- Die Barrierefreiheit ist innerhalb der Demo Anwendung durch folgende Anpassungen verbessert worden:
+  * IFS-2933: Navigationslinks werden beim Verwenden von Screenreadern vor und nach dem Seitenwechsel angekündigt
+  * IFS-2933: Sprunglinks erhalten einen Fokus
+  * IFS-2933: Alle Browser-Tabs haben einen individuellen Titel und werden nach einem Seitenwechsel entsprechend angepasst
+  * IFS-2876: Aria-Label-Attribute wurden an Icons und Buttons hinzugefügt
+  * IFS-3606: Zum Beschriften von Formularelementen, wie Datums oder Kreditkartenspezifikationen, wurde die PrimeNG-Eingabemaske hinzugefügt
 - IFS-3605: Panels werden optisch an Accordions angenähert
 ## Fixes
-- IFS-3590: _Charpicker-_, _Objekt-Anlegen_- und _Objekt-Bearbeiten-Dialog_  werden jetzt immer oberhalb der Hauptnavigation angezeigt
+- IFS-3590: Die Dialoge _Charpicker_, _Objekt-Anlegen_ und _Objekt-Bearbeiten_ werden oberhalb der Hauptnavigation des `isy-hauptfenster` angezeigt
 - IFS-3605: Accordion im _Charpicker_ klappt nun beim Klicken auf "Alle" die anderen Accordion-Tabs ein
 ## Dokumentation
-- IFS-3646: Hinzufügen einer AsciiDoc Dokumentation für den Angular Baustein
+- IFS-3646: Eine Antora Dokumentation für den Angular Baustein wurde hinzugefügt
 
 # 17.2.0 - 19.03.2024
 ## Fixes
