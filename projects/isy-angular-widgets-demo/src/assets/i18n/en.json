@@ -145,7 +145,7 @@
     "placeholders": {
       "maxLength": "max. {{maxlength}} charaters",
       "creditCardNumber": "Enter number with 16 digits",
-      "identityCardExpirationDate": "YYY-MM-DD",
+      "identityCardExpirationDate": "YYYY-MM-DD",
       "creditCardExpirationDate": "MM/YY",
       "dateOfDeparture": "xx.xx.xxxx"
     },
