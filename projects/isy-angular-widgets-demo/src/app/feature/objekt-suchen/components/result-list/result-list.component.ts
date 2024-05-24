@@ -1,21 +1,14 @@
-import {OnInit, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Person, Personalien} from '../../../../shared/model/person';
 import {countries} from '../../country-data';
-
-interface Column {
-  id: string;
-  field: string;
-  header: string;
-  type: string;
-  inputFormating: boolean;
-  currency?: [currencyCode: string, display: string];
-}
+import {ResultColumn} from '../../model/result-column';
+import {resultColumn} from '../../data/result-column';
 
 @Component({
   selector: 'demo-result-list',
   templateUrl: './result-list.component.html'
 })
-export class ResultListComponent implements OnInit {
+export class ResultListComponent {
   @Input() personen: Person[] = [];
   @Input() selectedObject: Person | undefined;
   @Input() loading!: boolean;
@@ -31,8 +24,8 @@ export class ResultListComponent implements OnInit {
   personalien: Personalien[] = [];
   person!: Awaited<Person>;
 
-  cols!: Column[];
-  selectedColumns!: Column[];
+  initialColumns: ResultColumn[] = [];
+  selectedColumns: ResultColumn[] = [];
 
   geschlechter = [{geschlecht: 'm'}, {geschlecht: 'w'}, {geschlecht: 'x'}];
   stati = [
@@ -48,36 +41,7 @@ export class ResultListComponent implements OnInit {
 
   constructor() {
     this.laender = countries;
-  }
-
-  ngOnInit(): void {
-    this.cols = [
-      {id: 'geschlecht', field: 'personalien.geschlecht', header: 'Geschlecht', type: 'text', inputFormating: false},
-      {
-        id: 'staatsangehoerigkeit',
-        field: 'personalien.staatsangehoerigkeit',
-        header: 'Nationalität',
-        type: 'text',
-        inputFormating: false
-      },
-      {
-        id: 'geburtsdatum',
-        field: 'personalien.geburtsdatum',
-        header: 'Geburtsdatum',
-        type: 'date',
-        inputFormating: false
-      },
-      {
-        id: 'bilanz',
-        field: 'personalien.bilanz',
-        header: 'Bilanz',
-        type: 'numeric',
-        inputFormating: true,
-        currency: ['EUR', 'symbol']
-      }
-    ];
-
-    this.selectedColumns = this.cols;
+    this.initialColumns = this.selectedColumns = [...resultColumn];
   }
 
   emitEditAction(person?: Person): void {
