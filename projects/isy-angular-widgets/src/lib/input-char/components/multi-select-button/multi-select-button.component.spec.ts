@@ -97,6 +97,51 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
     component.setDisabledState(true);
     expect(component.disabled).toBeTrue();
   });
+
+  it('should toogle only one section at once', () => {
+    expect(component.activeIndices).toEqual([]);
+  });
+
+  it('should set activeIndices to an empty array when closeAllAccordionTabs is called', () => {
+    component.activeIndices = [0, 1];
+    component.closeAllAccordionTabs();
+    expect(component.activeIndices).toEqual([]);
+  });
+
+  it('should add index to activeIndices when toggleTab is called with an element that does not contain the classes p-button or p-button-label', () => {
+    const index = 0;
+    const event: unknown = {target: document.createElement('div')};
+    component.toggleTab(index, event as Event);
+    expect(component.activeIndices).toContain(index);
+  });
+
+  it('should remove index from activeIndices when toggleTab is called with an element that is already in activeIndices and does not contain the classes p-button or p-button-label', () => {
+    const index = 0;
+    const event: unknown = {target: document.createElement('div')};
+    component.activeIndices = [index];
+    component.toggleTab(index, event as Event);
+    expect(component.activeIndices).not.toContain(index);
+  });
+
+  it('should not modify activeIndices when toggleTab is called with an element that contains class p-button-label', () => {
+    const index = 0;
+    const buttonElement = document.createElement('button');
+    buttonElement.classList.add('p-button-label');
+    const event: unknown = {target: buttonElement};
+    component.activeIndices = [index];
+    component.toggleTab(index, event as Event);
+    expect(component.activeIndices).toEqual([index]);
+  });
+
+  it('should not modify activeIndices when toggleTab is called with an element that contains class p-button', () => {
+    const index = 0;
+    const buttonElement = document.createElement('button');
+    buttonElement.classList.add('p-button');
+    const event: unknown = {target: buttonElement};
+    component.activeIndices = [index];
+    component.toggleTab(index, event as Event);
+    expect(component.activeIndices).toEqual([index]);
+  });
 });
 
 describe('Integration Tests: MultiSelectButtonComponent', () => {
