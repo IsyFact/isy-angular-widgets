@@ -1,3 +1,6 @@
+# 17.4.0  -
+## Fixes
+IFS-3677: Beim Aktualisieren der Demo-Anwendung bleiben die Inhalte der Seitenleiten nun erhalten
 # 17.3.0 - 24.05.2024
 ## Features
 - IFS-2876: Aria-Label-Attribute wurden zur Verbesserung der Barrierefreiheit an Icons und Buttons in den Komponenten `isy-hauptfenster`, `isy-wizard` und `isyInputChar` hinzugefügt
