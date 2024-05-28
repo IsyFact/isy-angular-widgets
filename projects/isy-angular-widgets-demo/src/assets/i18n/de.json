@@ -69,7 +69,8 @@
       "header": "Ergebnisliste",
       "emptyText": "Keine Ergebnisse vorhanden.",
       "selectOneStatus": "Wähle einen Status",
-      "selectOneOrMore": "Wähle ein oder mehrer Ergebnisse"
+      "selectOneOrMore": "Wähle ein oder mehrer Ergebnisse",
+      "columnFilterPlaceholder": "Wähle Spalten aus"
     },
     "actions": {
       "createObject": "Objekt anlegen",

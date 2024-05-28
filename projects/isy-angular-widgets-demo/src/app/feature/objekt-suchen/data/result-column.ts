@@ -6,22 +6,22 @@ import {ResultColumn} from '../model/result-column';
 export const resultColumn: ResultColumn[] = [
   {
     field: 'geschlecht',
-    header: 'Geschlecht',
+    header: 'isyAngularWidgetsDemo.labels.geschlecht',
     type: 'text'
   },
   {
     field: 'staatsangehoerigkeit',
-    header: 'Nationalität',
+    header: 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit',
     type: 'text'
   },
   {
     field: 'geburtsdatum',
-    header: 'Geburtsdatum',
+    header: 'isyAngularWidgetsDemo.labels.geburtsdatum',
     type: 'date'
   },
   {
     field: 'bilanz',
-    header: 'Bilanz',
+    header: 'isyAngularWidgetsDemo.labels.bilanz',
     type: 'numeric',
     currency: {currencyCode: 'EUR', display: 'symbol'}
   }

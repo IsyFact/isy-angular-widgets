@@ -69,7 +69,8 @@
       "header": "Result list",
       "emptyText": "No results available.",
       "selectOneStatus": "Select a state",
-      "selectOneOrMore": "Select one or more results"
+      "selectOneOrMore": "Select one or more results",
+      "columnFilterPlaceholder": "Choose Columns"
     },
     "actions": {
       "createObject": "Create object",
