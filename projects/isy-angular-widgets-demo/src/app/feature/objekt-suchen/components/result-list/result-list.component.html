@@ -101,6 +101,13 @@
                   </p-multiSelect>
                 </ng-template>
               </p-columnFilter>
+            } @else if (col.currency){
+              <p-columnFilter
+                [type]="col.type"
+                field="personalien.{{ col.field }}"
+                display="menu"
+                [currency]="col.currency.currencyCode"
+              ></p-columnFilter>
             } @else {
               <p-columnFilter [type]="col.type" field="personalien.{{ col.field }}" display="menu"></p-columnFilter>
             }
