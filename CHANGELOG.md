@@ -1,3 +1,9 @@
+# 17.4.0
+## Features
+## Demo-Anwendung
+- IFS-2802: Zum Verringern der Tabellenbreite wird exemplarisch auf der Seite _Objekt-Suchen_ eine Spaltenfilterung in die Tabelle hinzugefügt
+## Fixes
+## Dokumentation
 # 17.3.0 - 24.05.2024
 ## Features
 - IFS-2876: Aria-Label-Attribute wurden zur Verbesserung der Barrierefreiheit an Icons und Buttons in den Komponenten `isy-hauptfenster`, `isy-wizard` und `isyInputChar` hinzugefügt
@@ -7,11 +13,6 @@
 - IFS-3645: Infield Top-Aligned Label (IFTA Label) wurde zum `isy-form-wrapper` als optionale Labelvariante hinzugefügt
 - IFS-3605: Icons zum Öffnen und Schließen der Seitenleisten sind in einfache Chevrons verändert worden
 ## Demo-Anwendung
-- ISY-903: Verbesserung der Barrierefreiheit innerhalb der Demo Anwendung durch folgende Anpassungen:
-  * Navigationslinks werden beim Verwenden von Screenreadern vor und nach dem Seitenwechsel angekündigt
-  * Sprunglinks erhalten einen Fokus
-  * Alle Browser-Tabs haben einen individuellen Titel und werden nach Seitenwechsel entsprechend angepasst
-- IFS-2802: Zum Verringern der Tabellenbreite wird exemplarisch auf der Seite _Objekt-Suchen_ eine Spaltenfilterung in die Tabelle hinzugefügt
 - ISY-1044: Ein Widget für die Erfassung von mehreren Eingabewerten ist auf der Seite _Objekt anzeigen_ hinzugefügt
 - IFS-3644: Die Komponente `isy-form-wrapper` wurde für alle Formularfelder in der Demo-App eingesetzt und die nicht mehr benötigte `RequiredLabelComponent` wurde von der Seite _Objekt suchen_ entfernt
 - Die Barrierefreiheit ist innerhalb der Demo Anwendung durch folgende Anpassungen verbessert worden:
