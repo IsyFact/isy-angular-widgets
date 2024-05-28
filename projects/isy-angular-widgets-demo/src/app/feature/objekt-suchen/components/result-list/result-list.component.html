@@ -80,24 +80,27 @@
                 field="personalien.{{ col.field }}"
                 matchMode="in"
                 display="menu"
-                currency="col.currency.currencyCode"
-              ></p-columnFilter>
-              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                <p-multiSelect
-                  optionLabel="geschlecht"
-                  optionValue="geschlecht"
-                  placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
-                  [ngModel]="value"
-                  [options]="geschlechter"
-                  (onChange)="filter($event.value)"
-                >
-                  <ng-template let-option pTemplate="item">
-                    <div class="p-multiselect-representative-option">
-                      <span class="p-ml-1">{{ option.geschlecht }}</span>
-                    </div>
-                  </ng-template>
-                </p-multiSelect>
-              </ng-template>
+                [showMatchModes]="false"
+                [showOperator]="false"
+                [showAddButton]="false"
+              >
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-multiSelect
+                    optionLabel="geschlecht"
+                    optionValue="geschlecht"
+                    placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
+                    [ngModel]="value"
+                    [options]="geschlechter"
+                    (onChange)="filter($event.value)"
+                  >
+                    <ng-template let-option pTemplate="item">
+                      <div class="p-multiselect-representative-option">
+                        <span class="p-ml-1">{{ option.geschlecht }}</span>
+                      </div>
+                    </ng-template>
+                  </p-multiSelect>
+                </ng-template>
+              </p-columnFilter>
             } @else {
               <p-columnFilter [type]="col.type" field="personalien.{{ col.field }}" display="menu"></p-columnFilter>
             }
