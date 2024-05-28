@@ -2,12 +2,8 @@
   styleClass="isy-demo-app-result-panel"
   [header]="('isyAngularWidgetsDemo.resultList.header' | translate) + ' (' + personen.length + ')'"
   [toggleable]="true"
-  [(collapsed)]="isCollapsed"
   iconPos="start"
 >
-  <ng-template pTemplate="headericons">
-    <i class="{{ isCollapsed ? 'pi pi-chevron-right' : 'pi pi-chevron-down' }}"></i>
-  </ng-template>
   <p-table
     [value]="personen"
     [columns]="selectedColumns"
