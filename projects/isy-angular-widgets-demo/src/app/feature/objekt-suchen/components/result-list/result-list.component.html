@@ -38,8 +38,8 @@
       <div class="pt-3">
         <p-multiSelect
           display="chip"
-          [options]="initialColumns"
-          [(ngModel)]="selectedColumns"
+          [options]="translatedInitialColumns"
+          [(ngModel)]="translatedSelectedColumns"
           optionLabel="header"
           [placeholder]="'isyAngularWidgetsDemo.resultList.columnFilterPlaceholder' | translate"
         />
@@ -85,16 +85,16 @@
               >
                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                   <p-multiSelect
-                    optionLabel="geschlecht"
-                    optionValue="geschlecht"
+                    optionLabel="gender"
+                    optionValue="gender"
                     placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
                     [ngModel]="value"
-                    [options]="geschlechter"
+                    [options]="gender"
                     (onChange)="filter($event.value)"
                   >
                     <ng-template let-option pTemplate="item">
                       <div class="p-multiselect-representative-option">
-                        <span class="p-ml-1">{{ option.geschlecht }}</span>
+                        <span class="p-ml-1">{{ option.gender | translate }}</span>
                       </div>
                     </ng-template>
                   </p-multiSelect>
@@ -125,12 +125,12 @@
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
               <p-dropdown
                 [ngModel]="value"
-                [options]="stati"
+                [options]="translatedStatus"
                 (onChange)="filter($event.value)"
                 placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneStatus' | translate }}"
               >
                 <ng-template let-option pTemplate="item">
-                  <span>{{ option.label }}</span>
+                  <span>{{ option.label | translate }}</span>
                 </ng-template>
               </p-dropdown>
             </ng-template>
@@ -157,11 +157,11 @@
             @if (col.currency) {
               {{ person.personalien[col.field] | currency: col.currency.currencyCode : col.currency.display }}
             } @else {
-              {{ person.personalien[col.field] }}
+              {{ person.personalien[col.field] | translate }}
             }
           </td>
         }
-        <td>{{ person.personalien.status }}</td>
+        <td>{{ person.personalien.status | translate }}</td>
         <td>
           <p-button
             [icon]="'pi pi-pencil'"

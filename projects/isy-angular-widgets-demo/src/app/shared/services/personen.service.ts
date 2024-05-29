@@ -1,6 +1,7 @@
 import {Person} from '../model/person';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -107,9 +108,20 @@ export class PersonenService {
     'Island'
   ];
 
-  geschlechter: string[] = ['w', 'm', 'x'];
+  gender: string[] = [
+    'isyAngularWidgetsDemo.labels.female',
+    'isyAngularWidgetsDemo.labels.male',
+    'isyAngularWidgetsDemo.labels.divers'
+  ];
 
-  stati: string[] = ['Unqualifiziert', 'Qualifiziert', 'Neu', 'Verhandlung', 'Erneuerung', 'Vorschlag'];
+  status: string[] = [
+    'isyAngularWidgetsDemo.labels.unqualified',
+    'isyAngularWidgetsDemo.labels.unqualified',
+    'isyAngularWidgetsDemo.labels.new',
+    'isyAngularWidgetsDemo.labels.negotiation',
+    'isyAngularWidgetsDemo.labels.renewal',
+    'isyAngularWidgetsDemo.labels.proposal'
+  ];
 
   bilanz: {min: number; max: number} = {min: 60000, max: 100000};
 
@@ -176,7 +188,7 @@ export class PersonenService {
       personalien: {
         nachname: this.nachname[this.rng()],
         vorname: this.vorname[this.rng()],
-        geschlecht: this.rStr(this.geschlechter),
+        geschlecht: this.rStr(this.gender),
         geburtsdatum: '01.01.1337',
         geburtsort: this.staaten[this.rng()],
         staatsangehoerigkeit: this.staaten[this.rng()],
@@ -193,7 +205,7 @@ export class PersonenService {
         ablaufdatumKreditkarte: '',
         identityDocument: '',
         bilanz: this.rNum(this.bilanz.min, this.bilanz.max),
-        status: this.rStr(this.stati)
+        status: this.rStr(this.status)
       },
       sachverhalte: []
     };

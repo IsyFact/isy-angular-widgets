@@ -7,3 +7,8 @@ export interface ResultColumn {
   type: string;
   currency?: {currencyCode: string; display: string};
 }
+
+export interface ResultStatus {
+  label: string;
+  value: string;
+}

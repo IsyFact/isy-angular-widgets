@@ -143,7 +143,16 @@
         "city": "City",
         "country": "Country"
       },
-      "deleteButton": "to delete selected value"
+      "deleteButton": "to delete selected value",
+      "unqualified": "Unqualified",
+      "qualified": "Qualified",
+      "new": "New",
+      "negotiation": "Negotiation",
+      "renewal": "Renewal",
+      "proposal": "Proposal",
+      "female": "Female",
+      "male": "Male",
+      "divers": "Divers"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} charaters",

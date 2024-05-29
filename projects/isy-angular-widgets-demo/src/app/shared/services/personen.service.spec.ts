@@ -67,7 +67,7 @@ describe('Unit Tests: PersonenService', () => {
     expect(personalien.ausweispflichtig).toBeTrue();
     expect(personalien.sicherheitsstufe).toEqual(0);
 
-    const isGeschlechtIncluded = service.geschlechter.includes(personalien.geschlecht);
+    const isGeschlechtIncluded = service.gender.includes(personalien.geschlecht);
     expect(isGeschlechtIncluded).toBeTrue();
 
     expect(personalien.geburtsdatum).toEqual('01.01.1337');
@@ -82,7 +82,7 @@ describe('Unit Tests: PersonenService', () => {
     expect(personalien.bilanz).toBeGreaterThan(60000);
     expect(personalien.bilanz).toBeLessThan(100000);
 
-    const isStatusIncluded = service.stati.includes(personalien.status);
+    const isStatusIncluded = service.status.includes(personalien.status);
     expect(isStatusIncluded).toBeTrue();
 
     expect(person.sachverhalte).toEqual([]);

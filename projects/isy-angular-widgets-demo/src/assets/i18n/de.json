@@ -142,7 +142,16 @@
         "city": "Ort",
         "country": "Land"
       },
-      "deleteButton": "löschen des ausgewählten Werts"
+      "deleteButton": "löschen des ausgewählten Werts",
+      "unqualified": "Unqualifiziert",
+      "qualified": "Qualifiziert",
+      "new": "Neu",
+      "negotiation": "Verhandlung",
+      "renewal": "Erneuerung",
+      "proposal": "Vorschlag",
+      "female": "Weiblich",
+      "male": "Männlich",
+      "divers": "Divers"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} Zeichen",
