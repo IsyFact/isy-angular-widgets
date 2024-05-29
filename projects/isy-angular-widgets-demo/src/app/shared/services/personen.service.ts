@@ -1,7 +1,6 @@
 import {Person} from '../model/person';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
