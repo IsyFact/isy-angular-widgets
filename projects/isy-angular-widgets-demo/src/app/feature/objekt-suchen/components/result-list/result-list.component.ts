@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Person, Personalien} from '../../../../shared/model/person';
-import {ResultColumn, ResultStatus} from '../../model/result-column';
-import {resultColumn, status, gender} from '../../data/result-column';
+import {ResultColumn, ResultState} from '../../model/result-column';
+import {resultColumn, state, gender} from '../../data/result-column';
 import {TranslateService} from '@ngx-translate/core';
 import {Subscription} from 'rxjs';
 
@@ -34,11 +34,11 @@ export class ResultListComponent implements OnInit, OnDestroy {
   selectedColumns: ResultColumn[] = [...this.initialColumns];
   translatedInitialColumns: ResultColumn[] = [];
   translatedSelectedColumns: ResultColumn[] = [];
-  translatedStatus: ResultStatus[] = [];
+  translatedState: ResultState[] = [];
   translatedGender: {gender: string}[] = [];
 
   gender = gender;
-  status = status;
+  state = state;
 
   private langChangeSubscription: Subscription;
 
@@ -46,8 +46,8 @@ export class ResultListComponent implements OnInit, OnDestroy {
     this.langChangeSubscription = new Subscription();
   }
 
-  private translateData(): void {
-    [this.translatedInitialColumns, this.translatedSelectedColumns] = [this.initialColumns, this.selectedColumns].map(
+  private translateData(selectedColumns: ResultColumn[]): void {
+    [this.translatedInitialColumns, this.translatedSelectedColumns] = [this.initialColumns, selectedColumns].map(
       (columns) =>
         columns.map((option) => ({
           ...option,
@@ -55,7 +55,7 @@ export class ResultListComponent implements OnInit, OnDestroy {
         }))
     );
 
-    this.translatedStatus = this.status.map((option) => ({
+    this.translatedState = this.state.map((option) => ({
       ...option,
       label: this.translate.instant(option.label) as string,
       value: option.value
@@ -68,7 +68,7 @@ export class ResultListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.translateData();
+    this.translateData(this.selectedColumns);
     this.langChangeSubscription = this.translate.onLangChange.subscribe(this.translateData.bind(this));
   }
 

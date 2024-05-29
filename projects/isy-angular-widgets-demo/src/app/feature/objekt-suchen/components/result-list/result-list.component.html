@@ -125,7 +125,7 @@
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
               <p-dropdown
                 [ngModel]="value"
-                [options]="translatedStatus"
+                [options]="state"
                 (onChange)="filter($event.value)"
                 placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneStatus' | translate }}"
               >

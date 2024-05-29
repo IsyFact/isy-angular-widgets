@@ -1,4 +1,4 @@
-import {ResultColumn, ResultStatus} from '../model/result-column';
+import {ResultColumn, ResultState} from '../model/result-column';
 
 /**
  * Represents the result columns for a table.
@@ -27,7 +27,7 @@ export const resultColumn: ResultColumn[] = [
   }
 ];
 
-export const status: ResultStatus[] = [
+export const state: ResultState[] = [
   {label: 'isyAngularWidgetsDemo.labels.unqualified', value: 'isyAngularWidgetsDemo.labels.unqualified'},
   {label: 'isyAngularWidgetsDemo.labels.qualified', value: 'isyAngularWidgetsDemo.labels.qualified'},
   {label: 'isyAngularWidgetsDemo.labels.new', value: 'isyAngularWidgetsDemo.labels.new'},
