@@ -116,7 +116,7 @@ export class PersonenService {
 
   status: string[] = [
     'isyAngularWidgetsDemo.labels.unqualified',
-    'isyAngularWidgetsDemo.labels.unqualified',
+    'isyAngularWidgetsDemo.labels.qualified',
     'isyAngularWidgetsDemo.labels.new',
     'isyAngularWidgetsDemo.labels.negotiation',
     'isyAngularWidgetsDemo.labels.renewal',
