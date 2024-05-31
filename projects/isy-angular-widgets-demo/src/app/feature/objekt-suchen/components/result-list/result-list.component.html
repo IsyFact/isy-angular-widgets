@@ -11,7 +11,7 @@
   <p-table
     [value]="personen"
     [columns]="selectedColumns"
-    [globalFilterFields]="['name', 'status', 'geschlecht']"
+    [globalFilterFields]="['name', 'state', 'gender']"
     selectionMode="single"
     [(selection)]="selectedObject"
     [loading]="loading"
@@ -73,7 +73,7 @@
         @for (col of columns; track col.field) {
           <th scope="col" pSortableColumn="personalien.{{ col.field }}" class="white-space-nowrap">
             {{ col.header | translate }}
-            @if (col.field == 'geschlecht') {
+            @if (col.field == 'gender') {
               <p-columnFilter
                 [type]="col.type"
                 field="personalien.{{ col.field }}"

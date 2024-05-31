@@ -37,7 +37,7 @@ export function initPersoenlicheInformationenForm(person: Person): FormGroup {
   return new FormGroup({
     vorname: new FormControl(person.personalien.vorname, onlyChars),
     nachname: new FormControl(person.personalien.nachname, requiredAndOnlyChars),
-    geschlecht: new FormControl(person.personalien.geschlecht, requiredAndOnlyChars)
+    gender: new FormControl(person.personalien.gender, requiredAndOnlyChars)
   });
 }
 
@@ -67,7 +67,7 @@ export function initObjektBearbeitenForm(person: Person): FormGroup {
     editGeburtsname: new FormControl(person.personalien.geburtsname, requiredAndOnlyChars),
     editGeburtsort: new FormControl(person.personalien.geburtsort, requiredAndOnlyChars),
     editVorname: new FormControl(person.personalien.vorname, requiredAndOnlyChars),
-    editGeschlecht: new FormControl(person.personalien.geschlecht, required),
+    editGender: new FormControl(person.personalien.gender, required),
     editGeburtsdatum: new FormControl(person.personalien.geburtsdatum, required),
     editStaatsangehoerigkeit: new FormControl(person.personalien.staatsangehoerigkeit, required)
   });

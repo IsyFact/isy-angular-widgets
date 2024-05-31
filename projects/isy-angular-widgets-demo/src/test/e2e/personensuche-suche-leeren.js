@@ -3,7 +3,7 @@ import {Selector} from 'testcafe';
 const idInput = Selector('input#ID');
 const nameInput = Selector('input#Nachname');
 const vornameInput = Selector('input#Vorname');
-const geschlechtInput = Selector('input#Geschlecht');
+const genderInput = Selector('input#Gender');
 const geburtsnameInput = Selector('input#Geburtsname');
 const geburtsortInput = Selector('input#Geburtsort');
 const calenderInput = Selector('.p-calendar .p-inputtext');
@@ -19,7 +19,7 @@ test('Suche leeren', async (t) => {
     .typeText(geburtsnameInput, 'Meier', {speed: 0.8})
     .typeText(geburtsortInput, 'Berlin', {speed: 0.9})
     .typeText(calenderInput, '25.10.2002', {speed: 0.7})
-    .typeText(geschlechtInput, 'Weiblich', {speed: 0.8})
+    .typeText(genderInput, 'Weiblich', {speed: 0.8})
     .pressKey('tab')
     .expect(idInput.value)
     .eql('7899')
@@ -33,7 +33,7 @@ test('Suche leeren', async (t) => {
     .eql('25.10.2002')
     .expect(geburtsortInput.value)
     .eql('Berlin')
-    .expect(geschlechtInput.value)
+    .expect(genderInput.value)
     .eql('Weiblich')
     .click(leerenButton)
 
@@ -49,6 +49,6 @@ test('Suche leeren', async (t) => {
     .eql('')
     .expect(geburtsortInput.value)
     .eql('')
-    .expect(geschlechtInput.value)
+    .expect(genderInput.value)
     .eql('');
 });

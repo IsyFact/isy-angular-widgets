@@ -109,7 +109,7 @@
       "vorname": "Vorname",
       "geburtsname": "Geburtsname",
       "geburtsort": "Geburtsort",
-      "geschlecht": "Geschlecht",
+      "gender": "Geschlecht",
       "geburtsdatum": "Geburtsdatum",
       "staatsangehoerigkeit": "Nationalität",
       "chooseCountry": "Land wählen",

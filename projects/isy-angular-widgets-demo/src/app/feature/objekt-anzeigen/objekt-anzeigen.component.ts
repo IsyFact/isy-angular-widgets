@@ -44,7 +44,7 @@ export class ObjektAnzeigenComponent {
       birthName: [personalien.geburtsname],
       birthplace: [personalien.geburtsort],
       firstName: [personalien.vorname, Validators.required],
-      gender: [personalien.geschlecht],
+      gender: [personalien.gender],
       // Demo: Validator isInPast - If the given value is a valid date, it will be checked if the date is in the past
       birthDate: [personalien.geburtsdatum, Validation.isInPast],
       nationality: [personalien.staatsangehoerigkeit],

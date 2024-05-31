@@ -5,8 +5,8 @@ import {ResultColumn, ResultState} from '../model/result-column';
  */
 export const resultColumn: ResultColumn[] = [
   {
-    field: 'geschlecht',
-    header: 'isyAngularWidgetsDemo.labels.geschlecht',
+    field: 'gender',
+    header: 'isyAngularWidgetsDemo.labels.gender',
     type: 'text'
   },
   {

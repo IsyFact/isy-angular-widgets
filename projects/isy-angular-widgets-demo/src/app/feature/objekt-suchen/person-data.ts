@@ -10,7 +10,7 @@ export function getEmptyPerson(): Person {
     personalien: {
       nachname: '',
       vorname: '',
-      geschlecht: '',
+      gender: '',
       geburtsdatum: '',
       geburtsort: '',
       staatsangehoerigkeit: '',
@@ -27,7 +27,7 @@ export function getEmptyPerson(): Person {
       ablaufdatumKreditkarte: '',
       identityDocument: '',
       bilanz: 0,
-      status: ''
+      state: ''
     },
     sachverhalte: []
   };
@@ -41,7 +41,7 @@ export function resetPerson(person: Person): void {
   person.id = '';
   person.personalien.nachname = '';
   person.personalien.vorname = '';
-  person.personalien.geschlecht = '';
+  person.personalien.gender = '';
   person.personalien.geburtsdatum = '';
   person.personalien.geburtsort = '';
   person.personalien.staatsangehoerigkeit = '';
@@ -57,6 +57,6 @@ export function resetPerson(person: Person): void {
   person.personalien.kreditkartennummer = '';
   person.personalien.ablaufdatumKreditkarte = '';
   person.personalien.bilanz = 0;
-  person.personalien.status = '';
+  person.personalien.state = '';
   person.sachverhalte = [];
 }

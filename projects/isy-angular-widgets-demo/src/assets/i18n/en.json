@@ -109,7 +109,7 @@
       "vorname": "First name",
       "geburtsname": "Birth name",
       "geburtsort": "Birthplace",
-      "geschlecht": "Gender",
+      "gender": "Gender",
       "geburtsdatum": "Birth date",
       "staatsangehoerigkeit": "Nationality",
       "chooseCountry": "Choose country",
@@ -133,7 +133,6 @@
       "ablaufdatumKreditkarte": "Credit card expiration date",
       "identityDocument": "Identity Document",
       "bilanz": "Balance",
-      "alle": "All",
       "residence": "{{numChars}}. Residence",
       "residences": "Residences",
       "address": {

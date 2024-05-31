@@ -13,7 +13,7 @@ export interface Person {
 export interface Personalien {
   nachname: string;
   vorname: string;
-  geschlecht: string;
+  gender: string;
   geburtsdatum: string;
   geburtsort: string;
   staatsangehoerigkeit: string;
@@ -30,7 +30,7 @@ export interface Personalien {
   ablaufdatumKreditkarte: string;
   identityDocument: unknown;
   bilanz: number;
-  status: string;
+  state: string;
   addresses?: Address[];
 }
 

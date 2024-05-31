@@ -113,7 +113,7 @@ export class PersonenService {
     'isyAngularWidgetsDemo.labels.divers'
   ];
 
-  status: string[] = [
+  state: string[] = [
     'isyAngularWidgetsDemo.labels.unqualified',
     'isyAngularWidgetsDemo.labels.qualified',
     'isyAngularWidgetsDemo.labels.new',
@@ -131,7 +131,7 @@ export class PersonenService {
         personalien: {
           nachname: 'Wilhelm',
           vorname: 'Frederik',
-          geschlecht: 'x',
+          gender: 'x',
           geburtsdatum: '01.01.1337',
           geburtsort: 'England',
           staatsangehoerigkeit: 'Französisch',
@@ -148,7 +148,7 @@ export class PersonenService {
           ablaufdatumKreditkarte: '',
           identityDocument: '',
           bilanz: 0,
-          status: ''
+          state: ''
         },
         sachverhalte: []
       }
@@ -173,7 +173,7 @@ export class PersonenService {
     return (
       person.personalien.nachname !== '' ||
       person.personalien.vorname !== '' ||
-      person.personalien.geschlecht !== '' ||
+      person.personalien.gender !== '' ||
       person.personalien.geburtsdatum !== '' ||
       person.personalien.geburtsort !== '' ||
       !(person.personalien.staatsangehoerigkeit === '' || person.personalien.staatsangehoerigkeit === null) ||
@@ -187,7 +187,7 @@ export class PersonenService {
       personalien: {
         nachname: this.nachname[this.rng()],
         vorname: this.vorname[this.rng()],
-        geschlecht: this.rStr(this.gender),
+        gender: this.rStr(this.gender),
         geburtsdatum: '01.01.1337',
         geburtsort: this.staaten[this.rng()],
         staatsangehoerigkeit: this.staaten[this.rng()],
@@ -204,7 +204,7 @@ export class PersonenService {
         ablaufdatumKreditkarte: '',
         identityDocument: '',
         bilanz: this.rNum(this.bilanz.min, this.bilanz.max),
-        status: this.rStr(this.status)
+        state: this.rStr(this.state)
       },
       sachverhalte: []
     };
@@ -217,8 +217,8 @@ export class PersonenService {
     if (suche.personalien.vorname !== '') {
       generiert.personalien.vorname = suche.personalien.vorname;
     }
-    if (suche.personalien.geschlecht !== '') {
-      generiert.personalien.geschlecht = suche.personalien.geschlecht;
+    if (suche.personalien.gender !== '') {
+      generiert.personalien.gender = suche.personalien.gender;
     }
     if (suche.personalien.geburtsdatum) {
       generiert.personalien.geburtsdatum = suche.personalien.geburtsdatum;
