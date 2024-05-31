@@ -68,7 +68,7 @@
     "resultList": {
       "header": "Result list",
       "emptyText": "No results available.",
-      "selectOneStatus": "Select a state",
+      "selectOneState": "Select a state",
       "selectOneOrMore": "Select one or more results",
       "columnFilterPlaceholder": "Choose Columns"
     },

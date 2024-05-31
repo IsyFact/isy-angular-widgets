@@ -119,15 +119,15 @@
             ></p-sortIcon>
           </th>
         }
-        <th scope="col" pSortableColumn="personalien.status" class="white-space-nowrap">
+        <th scope="col" pSortableColumn="personalien.state" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
-          <p-columnFilter field="personalien.status" matchMode="equals" display="menu">
+          <p-columnFilter field="personalien.state" matchMode="equals" display="menu">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
               <p-dropdown
                 [ngModel]="value"
                 [options]="state"
                 (onChange)="filter($event.value)"
-                placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneStatus' | translate }}"
+                placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneState' | translate }}"
               >
                 <ng-template let-option pTemplate="item">
                   <span>{{ option.label | translate }}</span>
@@ -136,7 +136,7 @@
             </ng-template>
           </p-columnFilter>
           <p-sortIcon
-            field="personalien.status"
+            field="personalien.state"
             [attr.aria-label]="
               'isyAngularWidgetsDemo.aria.sort'
                 | translate: {sortField: 'isyAngularWidgetsDemo.labels.state' | translate}
@@ -161,7 +161,7 @@
             }
           </td>
         }
-        <td>{{ person.personalien.status | translate }}</td>
+        <td>{{ person.personalien.state | translate }}</td>
         <td>
           <p-button
             [icon]="'pi pi-pencil'"
