@@ -18,7 +18,6 @@ import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
-import {DashboardRoutingModule} from '../dashboard/dashboard.routing.module';
 
 @NgModule({
   declarations: [ObjektSuchenComponent, PersoenlicheInformationenComponent, ResultListComponent],
@@ -39,8 +38,7 @@ import {DashboardRoutingModule} from '../dashboard/dashboard.routing.module';
     MultiSelectModule,
     InputCharDirective,
     FormWrapperComponent,
-    FormControlPipe,
-    DashboardRoutingModule
+    FormControlPipe
   ]
 })
 export class ObjektSuchenModule {}
