@@ -4,18 +4,20 @@ import {AppModule} from './app.module';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {Subject} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('Integration Tests: AppComponent', () => {
   let spectator: Spectator<AppComponent>;
   let mockDocument: Document;
   const createComponent = createComponentFactory({
     component: AppComponent,
-    imports: [AppModule],
+    imports: [AppModule, TranslateModule.forRoot()],
     providers: [
       {
         provide: DOCUMENT,
         useValue: document
-      }
+      },
+      TranslateService
     ]
   });
 

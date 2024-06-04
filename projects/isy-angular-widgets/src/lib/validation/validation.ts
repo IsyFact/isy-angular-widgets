@@ -21,11 +21,7 @@ export class Validation {
   static isInFuture(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    const dateValue = moment(
-      c.value,
-      [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY', 'MM/YY'],
-      true
-    );
+    const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
     if (dateValue.isValid() && dateValue.isSameOrBefore(today)) {
       return {FUTURE: true};
     }
