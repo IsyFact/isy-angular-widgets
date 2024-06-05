@@ -1,17 +1,15 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Person, Personalien} from '../../../../shared/model/person';
 import {ResultColumn, ResultState} from '../../model/result-column';
 import {resultColumn, state, gender} from '../../data/result-column';
-import {TranslateService} from '@ngx-translate/core';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'demo-result-list',
   templateUrl: './result-list.component.html'
 })
-export class ResultListComponent implements OnInit, OnDestroy {
+export class ResultListComponent {
   @Input() personen: Person[] = [];
-  @Input() selectedObject: Person | undefined;
+  @Input() selectedObject?: Person;
   @Input() loading!: boolean;
 
   /**
@@ -31,50 +29,9 @@ export class ResultListComponent implements OnInit, OnDestroy {
   person!: Awaited<Person>;
 
   initialColumns: ResultColumn[] = [...resultColumn];
-  selectedColumns: ResultColumn[] = [...this.initialColumns];
-  translatedInitialColumns: ResultColumn[] = [];
-  translatedSelectedColumns: ResultColumn[] = [];
-  translatedState: ResultState[] = [];
-  translatedGender: {gender: string}[] = [];
-
-  gender = gender;
-  state = state;
-
-  private langChangeSubscription: Subscription;
-
-  constructor(private translate: TranslateService) {
-    this.langChangeSubscription = new Subscription();
-  }
-
-  private translateData(selectedColumns: ResultColumn[]): void {
-    [this.translatedInitialColumns, this.translatedSelectedColumns] = [this.initialColumns, selectedColumns].map(
-      (columns) =>
-        columns.map((option) => ({
-          ...option,
-          header: this.translate.instant(option.header) as string
-        }))
-    );
-
-    this.translatedState = this.state.map((option) => ({
-      ...option,
-      label: this.translate.instant(option.label) as string,
-      value: option.value
-    }));
-
-    this.translatedGender = this.gender.map((option) => ({
-      ...option,
-      gender: this.translate.instant(option.gender) as string
-    }));
-  }
-
-  ngOnInit(): void {
-    this.translateData(this.selectedColumns);
-    this.langChangeSubscription = this.translate.onLangChange.subscribe(this.translateData.bind(this));
-  }
-
-  ngOnDestroy(): void {
-    this.langChangeSubscription.unsubscribe();
-  }
+  selectedColumns: ResultColumn[] = [...resultColumn];
+  gender: {gender: string}[] = [...gender];
+  state: ResultState[] = [...state];
 
   emitEditAction(person?: Person): void {
     this.edit.emit(person);

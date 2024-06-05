@@ -107,20 +107,9 @@ export class PersonenService {
     'Island'
   ];
 
-  gender: string[] = [
-    'isyAngularWidgetsDemo.labels.female',
-    'isyAngularWidgetsDemo.labels.male',
-    'isyAngularWidgetsDemo.labels.divers'
-  ];
+  gender: string[] = ['x', 'y', 'z'];
 
-  state: string[] = [
-    'isyAngularWidgetsDemo.labels.unqualified',
-    'isyAngularWidgetsDemo.labels.qualified',
-    'isyAngularWidgetsDemo.labels.new',
-    'isyAngularWidgetsDemo.labels.negotiation',
-    'isyAngularWidgetsDemo.labels.renewal',
-    'isyAngularWidgetsDemo.labels.proposal'
-  ];
+  state: string[] = ['Unqualifiziert', 'Qualifiziert', 'Neu', 'Verhandlung', 'Erneuerung', 'Vorschlag'];
 
   bilanz: {min: number; max: number} = {min: 60000, max: 100000};
 
@@ -218,7 +207,7 @@ export class PersonenService {
       generiert.personalien.vorname = suche.personalien.vorname;
     }
     if (suche.personalien.gender !== '') {
-      generiert.personalien.gender = suche.personalien.gender;
+      generiert.personalien.gender = suche.personalien.gender as string;
     }
     if (suche.personalien.geburtsdatum) {
       generiert.personalien.geburtsdatum = suche.personalien.geburtsdatum;
