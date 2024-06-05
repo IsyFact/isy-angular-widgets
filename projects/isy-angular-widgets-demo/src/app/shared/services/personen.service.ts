@@ -107,7 +107,7 @@ export class PersonenService {
     'Island'
   ];
 
-  gender: string[] = ['x', 'y', 'z'];
+  gender: string[] = ['w', 'm', 'x'];
 
   state: string[] = ['Unqualifiziert', 'Qualifiziert', 'Neu', 'Verhandlung', 'Erneuerung', 'Vorschlag'];
 
@@ -207,7 +207,7 @@ export class PersonenService {
       generiert.personalien.vorname = suche.personalien.vorname;
     }
     if (suche.personalien.gender !== '') {
-      generiert.personalien.gender = suche.personalien.gender as string;
+      generiert.personalien.gender = suche.personalien.gender;
     }
     if (suche.personalien.geburtsdatum) {
       generiert.personalien.geburtsdatum = suche.personalien.geburtsdatum;

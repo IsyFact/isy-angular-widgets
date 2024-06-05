@@ -36,4 +36,4 @@ export const state: ResultState[] = [
   {label: 'Vorschlag', value: 'Vorschlag'}
 ];
 
-export const gender = [{gender: 'x'}, {gender: 'y'}, {gender: 'z'}];
+export const gender = [{gender: 'w'}, {gender: 'm'}, {gender: 'x'}];
