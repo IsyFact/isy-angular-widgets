@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {
     // Add translation
     translate.addLangs(['de', 'en']);
-    translate.setDefaultLang('de');
+    this.translate.use(this.selectedLanguage);
 
     // Set PrimeNG translation
     this.primeNGI18nSubscription = this.translate.stream('primeng').subscribe((data: Translation) => {
