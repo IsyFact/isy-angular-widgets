@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs';
 })
 export class ResultListComponent implements OnInit, OnDestroy {
   @Input() personen: Person[] = [];
-  @Input() selectedObject: Person | undefined;
+  @Input() selectedObject?: Person;
   @Input() loading!: boolean;
 
   /**
@@ -31,7 +31,7 @@ export class ResultListComponent implements OnInit, OnDestroy {
   person!: Awaited<Person>;
 
   initialColumns: ResultColumn[] = [...resultColumn];
-  selectedColumns: ResultColumn[] = [...this.initialColumns];
+  selectedColumns: ResultColumn[] = [...resultColumn];
   translatedInitialColumns: ResultColumn[] = [];
   translatedSelectedColumns: ResultColumn[] = [];
   translatedState: ResultState[] = [];
@@ -46,8 +46,8 @@ export class ResultListComponent implements OnInit, OnDestroy {
     this.langChangeSubscription = new Subscription();
   }
 
-  private translateData(selectedColumns: ResultColumn[]): void {
-    [this.translatedInitialColumns, this.translatedSelectedColumns] = [this.initialColumns, selectedColumns].map(
+  private translateData(): void {
+    [this.translatedInitialColumns, this.translatedSelectedColumns] = [this.initialColumns, this.selectedColumns].map(
       (columns) =>
         columns.map((option) => ({
           ...option,
@@ -65,11 +65,18 @@ export class ResultListComponent implements OnInit, OnDestroy {
       ...option,
       gender: this.translate.instant(option.gender) as string
     }));
+
+    this.initialColumns = this.translatedInitialColumns;
+    this.selectedColumns = this.translatedSelectedColumns;
+    this.gender = this.translatedGender;
+    this.state = this.translatedState;
   }
 
   ngOnInit(): void {
-    this.translateData(this.selectedColumns);
-    this.langChangeSubscription = this.translate.onLangChange.subscribe(this.translateData.bind(this));
+    this.translateData();
+    this.langChangeSubscription = this.translate.onLangChange.subscribe(() => {
+      this.translateData();
+    });
   }
 
   ngOnDestroy(): void {
