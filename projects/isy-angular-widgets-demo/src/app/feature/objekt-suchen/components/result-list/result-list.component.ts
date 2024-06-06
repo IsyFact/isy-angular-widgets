@@ -30,46 +30,43 @@ export class ResultListComponent implements OnInit, OnDestroy {
   personalien: Personalien[] = [];
   person!: Awaited<Person>;
 
-  initialColumns: ResultColumn[] = [...resultColumn];
+  untranslatedinitialColumns: ResultColumn[] = [...resultColumn];
   selectedColumns: ResultColumn[] = [...resultColumn];
-  translatedInitialColumns: ResultColumn[] = [];
-  translatedSelectedColumns: ResultColumn[] = [];
-  translatedState: ResultState[] = [];
-  translatedGender: {gender: string}[] = [];
+  initialColumns: ResultColumn[] = [];
+  state: ResultState[] = [...state];
+  gender: {gender: string}[] = [...gender];
 
-  gender = gender;
-  state = state;
-
-  private langChangeSubscription: Subscription;
+  langChangeSubscription: Subscription;
 
   constructor(private translate: TranslateService) {
     this.langChangeSubscription = new Subscription();
   }
 
-  private translateData(): void {
-    [this.translatedInitialColumns, this.translatedSelectedColumns] = [this.initialColumns, this.selectedColumns].map(
-      (columns) =>
-        columns.map((option) => ({
-          ...option,
-          header: this.translate.instant(option.header) as string
-        }))
-    );
+  translateData(): void {
+    this.initialColumns = this.translateColumns(this.untranslatedinitialColumns);
+    this.selectedColumns = this.translateColumns(this.selectedColumns);
+    this.gender = this.translateArray(gender, 'gender');
+    this.state = this.translateArray(state, 'label');
+  }
 
-    this.translatedState = this.state.map((option) => ({
-      ...option,
-      label: this.translate.instant(option.label) as string,
-      value: option.value
+  translateColumns(columns: ResultColumn[]): ResultColumn[] {
+    return columns
+      .map((option) => {
+        option.header = this.untranslatedinitialColumns.find((column) => column.field === option.field)
+          ?.header as string;
+        return option;
+      })
+      .map((column) => ({
+        ...column,
+        header: this.translate.instant(column.header) as string
+      }));
+  }
+
+  translateArray<T>(array: T[], field: keyof T): T[] {
+    return array.map((item) => ({
+      ...item,
+      [field]: this.translate.instant(item[field] as unknown as string) as unknown as T[keyof T]
     }));
-
-    this.translatedGender = this.gender.map((option) => ({
-      ...option,
-      gender: this.translate.instant(option.gender) as string
-    }));
-
-    this.initialColumns = this.translatedInitialColumns;
-    this.selectedColumns = this.translatedSelectedColumns;
-    this.gender = this.translatedGender;
-    this.state = this.translatedState;
   }
 
   ngOnInit(): void {

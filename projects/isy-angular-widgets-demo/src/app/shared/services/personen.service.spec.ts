@@ -14,7 +14,7 @@ describe('Unit Tests: PersonenService', () => {
     personalien: {
       nachname: 'Wilhelm',
       vorname: 'Frederik',
-      gender: 'x',
+      gender: 'Männlich',
       geburtsdatum: '01.01.1337',
       geburtsort: 'England',
       staatsangehoerigkeit: 'Französisch',
