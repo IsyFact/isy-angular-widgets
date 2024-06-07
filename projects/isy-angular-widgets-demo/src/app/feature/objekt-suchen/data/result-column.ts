@@ -1,4 +1,4 @@
-import {ResultColumn, ResultState} from '../model/result-column';
+import {ResultColumn, ResultFilter} from '../model/result-column';
 
 /**
  * Represents the result columns for a table.
@@ -27,7 +27,10 @@ export const resultColumn: ResultColumn[] = [
   }
 ];
 
-export const state: ResultState[] = [
+/**
+ * Represents the state options for a result filter.
+ */
+export const state: ResultFilter[] = [
   {label: 'isyAngularWidgetsDemo.labels.unqualified', value: 'isyAngularWidgetsDemo.labels.unqualified'},
   {label: 'isyAngularWidgetsDemo.labels.qualified', value: 'isyAngularWidgetsDemo.labels.qualified'},
   {label: 'isyAngularWidgetsDemo.labels.new', value: 'isyAngularWidgetsDemo.labels.new'},
@@ -36,8 +39,11 @@ export const state: ResultState[] = [
   {label: 'isyAngularWidgetsDemo.labels.proposal', value: 'isyAngularWidgetsDemo.labels.proposal'}
 ];
 
-export const gender = [
-  {gender: 'isyAngularWidgetsDemo.labels.female'},
-  {gender: 'isyAngularWidgetsDemo.labels.male'},
-  {gender: 'isyAngularWidgetsDemo.labels.divers'}
+/**
+ * Represents the gender options for a result filter.
+ */
+export const gender: ResultFilter[] = [
+  {label: 'isyAngularWidgetsDemo.labels.female', value: 'isyAngularWidgetsDemo.labels.female'},
+  {label: 'isyAngularWidgetsDemo.labels.male', value: 'isyAngularWidgetsDemo.labels.male'},
+  {label: 'isyAngularWidgetsDemo.labels.divers', value: 'isyAngularWidgetsDemo.labels.divers'}
 ];

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Person, Personalien} from '../../../../shared/model/person';
-import {ResultColumn, ResultState} from '../../model/result-column';
+import {ResultColumn, ResultFilter} from '../../model/result-column';
 import {resultColumn, state, gender} from '../../data/result-column';
 import {TranslateService} from '@ngx-translate/core';
 import {Subscription} from 'rxjs';
@@ -29,26 +29,33 @@ export class ResultListComponent implements OnInit, OnDestroy {
 
   personalien: Personalien[] = [];
   person!: Awaited<Person>;
-
+  langChangeSubscription: Subscription;
   untranslatedinitialColumns: ResultColumn[] = [...resultColumn];
   selectedColumns: ResultColumn[] = [...resultColumn];
   initialColumns: ResultColumn[] = [];
-  state: ResultState[] = [...state];
-  gender: {gender: string}[] = [...gender];
-
-  langChangeSubscription: Subscription;
+  state: ResultFilter[] = [...state];
+  gender: ResultFilter[] = [...gender];
 
   constructor(private translate: TranslateService) {
     this.langChangeSubscription = new Subscription();
   }
 
+  /**
+   * Translates the data for the result list.
+   * This method translates the initial columns, selected columns, gender filter, and state filter.
+   */
   translateData(): void {
     this.initialColumns = this.translateColumns(this.untranslatedinitialColumns);
     this.selectedColumns = this.translateColumns(this.selectedColumns);
-    this.gender = this.translateArray(gender, 'gender');
-    this.state = this.translateArray(state, 'label');
+    this.gender = this.translateFilter(gender);
+    this.state = this.translateFilter(state);
   }
 
+  /**
+   * Translates the columns of the result list.
+   * @param columns - The array of ResultColumn objects to be translated.
+   * @returns The translated array of ResultColumn objects.
+   */
   translateColumns(columns: ResultColumn[]): ResultColumn[] {
     return columns
       .map((option) => {
@@ -62,10 +69,15 @@ export class ResultListComponent implements OnInit, OnDestroy {
       }));
   }
 
-  translateArray<T>(array: T[], field: keyof T): T[] {
-    return array.map((item) => ({
-      ...item,
-      [field]: this.translate.instant(item[field] as unknown as string) as unknown as T[keyof T]
+  /**
+   * Translates the labels of the given ResultFilter array using the translation service.
+   * @param value - The array of ResultFilter objects to be translated.
+   * @returns The translated ResultFilter array.
+   */
+  translateFilter(value: ResultFilter[]): ResultFilter[] {
+    return value.map((option) => ({
+      ...option,
+      label: this.translate.instant(option.label) as string
     }));
   }
 

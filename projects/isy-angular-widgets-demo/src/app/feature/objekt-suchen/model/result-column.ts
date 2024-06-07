@@ -8,7 +8,10 @@ export interface ResultColumn {
   currency?: {currencyCode: string; display: string};
 }
 
-export interface ResultState {
+/**
+ * An interface that defines a result filter.
+ */
+export interface ResultFilter {
   label: string;
   value: string;
 }

@@ -85,8 +85,6 @@
               >
                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                   <p-multiSelect
-                    optionLabel="gender"
-                    optionValue="gender"
                     placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
                     [ngModel]="value"
                     [options]="gender"
@@ -94,7 +92,7 @@
                   >
                     <ng-template let-option pTemplate="item">
                       <div class="p-multiselect-representative-option">
-                        <span class="p-ml-1">{{ option.gender | translate }}</span>
+                        <span class="p-ml-1">{{ option.label }}</span>
                       </div>
                     </ng-template>
                   </p-multiSelect>
@@ -130,7 +128,7 @@
                 placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneState' | translate }}"
               >
                 <ng-template let-option pTemplate="item">
-                  <span>{{ option.label | translate }}</span>
+                  <span>{{ option.label }}</span>
                 </ng-template>
               </p-dropdown>
             </ng-template>
