@@ -28,18 +28,18 @@
     </div>
     <div class="col-12">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}"
-        fieldId="geschlecht-dialog"
-        [control]="form.get('geschlecht')! | formControl"
+        label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+        fieldId="gender-dialog"
+        [control]="form.get('gender')! | formControl"
         [validationMessages]="{required: ''}"
       >
         <input
-          id="geschlecht-dialog"
+          id="gender-dialog"
           type="text"
           class="w-full"
           pInputText
-          [formControlName]="'geschlecht'"
-          (focus)="onFormControlFocus(form.controls.geschlecht)"
+          [formControlName]="'gender'"
+          (focus)="onFormControlFocus(form.controls.gender)"
         />
       </isy-form-wrapper>
     </div>

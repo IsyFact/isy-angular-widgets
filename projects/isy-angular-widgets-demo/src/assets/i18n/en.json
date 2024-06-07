@@ -67,7 +67,10 @@
     },
     "resultList": {
       "header": "Result list",
-      "emptyText": "No results available."
+      "emptyText": "No results available.",
+      "selectOneState": "Select a state",
+      "selectOneOrMore": "Select one or more results",
+      "columnFilterPlaceholder": "Choose Columns"
     },
     "actions": {
       "createObject": "Create object",
@@ -106,7 +109,7 @@
       "vorname": "First name",
       "geburtsname": "Birth name",
       "geburtsort": "Birthplace",
-      "geschlecht": "Gender",
+      "gender": "Gender",
       "geburtsdatum": "Birth date",
       "staatsangehoerigkeit": "Nationality",
       "chooseCountry": "Choose country",
@@ -130,7 +133,6 @@
       "ablaufdatumKreditkarte": "Credit card expiration date",
       "identityDocument": "Identity Document",
       "bilanz": "Balance",
-      "alle": "All",
       "residence": "{{numChars}}. Residence",
       "residences": "Residences",
       "address": {
@@ -140,7 +142,16 @@
         "city": "City",
         "country": "Country"
       },
-      "deleteButton": "to delete selected value"
+      "deleteButton": "to delete selected value",
+      "unqualified": "Unqualified",
+      "qualified": "Qualified",
+      "new": "New",
+      "negotiation": "Negotiation",
+      "renewal": "Renewal",
+      "proposal": "Proposal",
+      "female": "Female",
+      "male": "Male",
+      "divers": "Divers"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} charaters",

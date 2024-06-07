@@ -67,7 +67,10 @@
     },
     "resultList": {
       "header": "Ergebnisliste",
-      "emptyText": "Keine Ergebnisse vorhanden."
+      "emptyText": "Keine Ergebnisse vorhanden.",
+      "selectOneState": "Wähle einen Status",
+      "selectOneOrMore": "Wähle ein oder mehrer Ergebnisse",
+      "columnFilterPlaceholder": "Wähle Spalten aus"
     },
     "actions": {
       "createObject": "Objekt anlegen",
@@ -106,7 +109,7 @@
       "vorname": "Vorname",
       "geburtsname": "Geburtsname",
       "geburtsort": "Geburtsort",
-      "geschlecht": "Geschlecht",
+      "gender": "Geschlecht",
       "geburtsdatum": "Geburtsdatum",
       "staatsangehoerigkeit": "Nationalität",
       "chooseCountry": "Land wählen",
@@ -139,7 +142,16 @@
         "city": "Ort",
         "country": "Land"
       },
-      "deleteButton": "löschen des ausgewählten Werts"
+      "deleteButton": "löschen des ausgewählten Werts",
+      "unqualified": "Unqualifiziert",
+      "qualified": "Qualifiziert",
+      "new": "Neu",
+      "negotiation": "Verhandlung",
+      "renewal": "Erneuerung",
+      "proposal": "Vorschlag",
+      "female": "Weiblich",
+      "male": "Männlich",
+      "divers": "Divers"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} Zeichen",

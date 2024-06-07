@@ -14,7 +14,7 @@ describe('Unit Tests: PersonenService', () => {
     personalien: {
       nachname: 'Wilhelm',
       vorname: 'Frederik',
-      geschlecht: 'x',
+      gender: 'Männlich',
       geburtsdatum: '01.01.1337',
       geburtsort: 'England',
       staatsangehoerigkeit: 'Französisch',
@@ -31,7 +31,7 @@ describe('Unit Tests: PersonenService', () => {
       ablaufdatumKreditkarte: '',
       identityDocument: '',
       bilanz: 0,
-      status: ''
+      state: ''
     },
     sachverhalte: []
   };
@@ -67,8 +67,11 @@ describe('Unit Tests: PersonenService', () => {
     expect(personalien.ausweispflichtig).toBeTrue();
     expect(personalien.sicherheitsstufe).toEqual(0);
 
-    const isGeschlechtIncluded = service.geschlechter.includes(personalien.geschlecht);
-    expect(isGeschlechtIncluded).toBeTrue();
+    const isGenderIncluded = service.gender.includes(personalien.gender);
+    expect(isGenderIncluded).toBeTrue();
+
+    const isStateIncluded = service.state.includes(personalien.state);
+    expect(isStateIncluded).toBeTrue();
 
     expect(personalien.geburtsdatum).toEqual('01.01.1337');
     expect(personalien.einreisedatum).toEqual('xx.xx.xxxx');
@@ -82,9 +85,6 @@ describe('Unit Tests: PersonenService', () => {
     expect(personalien.bilanz).toBeGreaterThan(60000);
     expect(personalien.bilanz).toBeLessThan(100000);
 
-    const isStatusIncluded = service.stati.includes(personalien.status);
-    expect(isStatusIncluded).toBeTrue();
-
     expect(person.sachverhalte).toEqual([]);
   });
 
@@ -93,7 +93,7 @@ describe('Unit Tests: PersonenService', () => {
     const personalien = person.personalien;
     personalien.vorname = '';
     personalien.nachname = '';
-    personalien.geschlecht = '';
+    personalien.gender = '';
     personalien.geburtsdatum = '';
     personalien.geburtsort = '';
     personalien.staatsangehoerigkeit = '';
@@ -123,7 +123,7 @@ describe('Unit Tests: PersonenService', () => {
     const personalien = person.personalien;
     personalien.vorname = '';
     personalien.nachname = '';
-    personalien.geschlecht = '';
+    personalien.gender = '';
     personalien.geburtsdatum = '';
     personalien.geburtsort = '';
     personalien.staatsangehoerigkeit = '';
@@ -147,7 +147,7 @@ describe('Unit Tests: PersonenService', () => {
 
     expect(mergedPerson.personalien.nachname).toEqual(mockedPerson.personalien.nachname);
     expect(mergedPerson.personalien.vorname).toEqual(mockedPerson.personalien.vorname);
-    expect(mergedPerson.personalien.geschlecht).toEqual(mockedPerson.personalien.geschlecht);
+    expect(mergedPerson.personalien.gender).toEqual(mockedPerson.personalien.gender);
     expect(mergedPerson.personalien.geburtsdatum).toEqual(mockedPerson.personalien.geburtsdatum);
     expect(mergedPerson.personalien.geburtsort).toEqual(mockedPerson.personalien.geburtsort);
     expect(mergedPerson.personalien.staatsangehoerigkeit).toEqual(mockedPerson.personalien.staatsangehoerigkeit);

@@ -23,7 +23,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       TranslateTestingModule.withTranslations('de', {
         'isyAngularWidgetsDemo.labels.vorname': 'Vorname',
         'isyAngularWidgetsDemo.labels.nachname': 'Nachname',
-        'isyAngularWidgetsDemo.labels.geschlecht': 'Geschlecht'
+        'isyAngularWidgetsDemo.labels.gender': 'Geschlecht'
       }),
       MockModule(ReactiveFormsModule)
     ],
@@ -37,7 +37,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
         form: new FormGroup({
           vorname: new FormControl('', required),
           nachname: new FormControl('', required),
-          geschlecht: new FormControl('', required)
+          gender: new FormControl('', required)
         })
       }
     });
@@ -56,12 +56,12 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(form.valid).toBeFalse();
     expect(form.get('vorname')!.value).toEqual(person.personalien.vorname);
     expect(form.get('nachname')!.value).toEqual(person.personalien.nachname);
-    expect(form.get('geschlecht')!.value).toEqual(person.personalien.geschlecht);
+    expect(form.get('gender')!.value).toEqual(person.personalien.gender);
   });
 
   it('should validate the form fields', () => {
     const invalidValue = 1;
-    const formFields = ['nachname', 'geschlecht'];
+    const formFields = ['nachname', 'gender'];
 
     formFields.forEach((formFieldName) => {
       const field = component.form.get(formFieldName);
@@ -129,28 +129,28 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(vornameInput!.errors).toBeNull();
   });
 
-  it('should validate geschlecht form field', () => {
-    const geschlechtStr = 'geschlecht';
-    const geschlechtInput = component.form.get(geschlechtStr);
-    expect(geschlechtInput!.errors).not.toBeNull();
+  it('should validate gender form field', () => {
+    const genderStr = 'gender';
+    const genderInput = component.form.get(genderStr);
+    expect(genderInput!.errors).not.toBeNull();
 
-    geschlechtInput!.setValue(1);
-    expect(geschlechtInput!.errors).not.toBeNull();
+    genderInput!.setValue(1);
+    expect(genderInput!.errors).not.toBeNull();
 
-    geschlechtInput!.setValue('');
-    expect(geschlechtInput!.errors).not.toBeNull();
+    genderInput!.setValue('');
+    expect(genderInput!.errors).not.toBeNull();
 
-    geschlechtInput!.setValue(' ');
-    expect(geschlechtInput!.errors).not.toBeNull();
+    genderInput!.setValue(' ');
+    expect(genderInput!.errors).not.toBeNull();
 
-    geschlechtInput!.setValue('!');
-    expect(geschlechtInput!.errors).not.toBeNull();
+    genderInput!.setValue('!');
+    expect(genderInput!.errors).not.toBeNull();
 
-    geschlechtInput!.setValue(geschlechtStr);
-    expect(geschlechtInput!.errors).toBeNull();
+    genderInput!.setValue(genderStr);
+    expect(genderInput!.errors).toBeNull();
 
-    geschlechtInput!.setValue(germanCharsStr);
-    expect(geschlechtInput!.errors).toBeNull();
+    genderInput!.setValue(germanCharsStr);
+    expect(genderInput!.errors).toBeNull();
   });
 
   it('should validate the form', () => {
@@ -159,7 +159,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
     const nachnameInput = component.form.get('nachname');
     const vornameInput = component.form.get('vorname');
-    const geschlechtInput = component.form.get('geschlecht');
+    const genderInput = component.form.get('gender');
 
     nachnameInput!.setValue('nachname');
     expect(nachnameInput?.errors).toBeNull();
@@ -169,8 +169,8 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(vornameInput?.errors).toBeNull();
     expect(form.valid).toBeFalse();
 
-    geschlechtInput!.setValue('geschlecht');
-    expect(geschlechtInput?.errors).toBeNull();
+    genderInput!.setValue('gender');
+    expect(genderInput?.errors).toBeNull();
     expect(form.valid).toBeTrue();
   });
 
@@ -181,8 +181,8 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     const nachnameLabel = spectator.query('[for="nachname-dialog"]') as HTMLElement;
     expect(nachnameLabel.textContent!.trim()).toEqual('Nachname *');
 
-    const geschlechtLabel = spectator.query('[for="geschlecht-dialog"]') as HTMLElement;
-    expect(geschlechtLabel.textContent!.trim()).toEqual('Geschlecht *');
+    const genderLabel = spectator.query('[for="gender-dialog"]') as HTMLElement;
+    expect(genderLabel.textContent!.trim()).toEqual('Geschlecht *');
   });
 
   it('form control should be dirty after focus', () => {

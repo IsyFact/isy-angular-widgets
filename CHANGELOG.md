@@ -1,6 +1,10 @@
-# 17.4.0  -
+# 17.4.0
+## Features
+## Demo-Anwendung
+- IFS-2802: Zum Verringern der Tabellenbreite wird exemplarisch auf der Seite _Objekt-Suchen_ eine Spaltenfilterung in die Tabelle hinzugefügt
 ## Fixes
 IFS-3677: Beim Aktualisieren der Demo-Anwendung bleiben die Inhalte der Seitenleiten nun erhalten
+## Dokumentation
 # 17.3.0 - 24.05.2024
 ## Features
 - IFS-2876: Aria-Label-Attribute wurden zur Verbesserung der Barrierefreiheit an Icons und Buttons in den Komponenten `isy-hauptfenster`, `isy-wizard` und `isyInputChar` hinzugefügt

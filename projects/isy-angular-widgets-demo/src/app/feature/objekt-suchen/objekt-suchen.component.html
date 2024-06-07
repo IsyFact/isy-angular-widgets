@@ -72,11 +72,11 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}"
+        label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
         fieldId="gender"
-        [control]="persoenlicheInformationenForm.get('geschlecht')! | formControl"
+        [control]="persoenlicheInformationenForm.get('gender')! | formControl"
       >
-        <input id="gender" class="w-full" type="text" pInputText [(ngModel)]="person.personalien.geschlecht" />
+        <input id="gender" class="w-full" type="text" pInputText [(ngModel)]="person.personalien.gender" />
       </isy-form-wrapper>
     </div>
     <div class="col-12 md:col-6 xl:col-4">
@@ -224,12 +224,12 @@
         </div>
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.geschlecht' | translate }}"
-            fieldId="edit-geschlecht"
-            [control]="editForm.get('editGeschlecht')! | formControl"
+            label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+            fieldId="edit-gender"
+            [control]="editForm.get('editGender')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <input id="edit-geschlecht" class="w-full" type="text" pInputText [formControlName]="'editGeschlecht'" />
+            <input id="edit-gender" class="w-full" type="text" pInputText [formControlName]="'editGender'" />
           </isy-form-wrapper>
         </div>
         <div class="col-12 xl:col-6">

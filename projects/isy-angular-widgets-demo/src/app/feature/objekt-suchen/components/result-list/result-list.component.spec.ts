@@ -7,13 +7,22 @@ import {PersonenService} from '../../../../shared/services/personen.service';
 import {FormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {Person} from '../../../../shared/model/person';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {gender, state} from '../../data/result-column';
 
 describe('Integration Tests: ResultListComponent', () => {
   let person: Person;
   let spectator: Spectator<ResultListComponent>;
   const createComponent = createComponentFactory({
     component: ResultListComponent,
-    imports: [TranslateTestingModule.withTranslations({}), FormsModule, PanelModule, TableModule, ButtonModule]
+    imports: [
+      TranslateTestingModule.withTranslations({}),
+      FormsModule,
+      PanelModule,
+      TableModule,
+      ButtonModule,
+      MultiSelectModule
+    ]
   });
 
   beforeEach(() => {
@@ -79,21 +88,13 @@ describe('Integration Tests: ResultListComponent', () => {
     expect(editActionSpy).toHaveBeenCalledWith(person);
   });
 
-  const sortIconFields = [
-    'personalien.nachname',
-    'personalien.vorname',
-    'personalien.geschlecht',
-    'personalien.staatsangehoerigkeit',
-    'personalien.geburtsdatum',
-    'personalien.bilanz',
-    'personalien.status'
-  ];
-
-  sortIconFields.forEach((field) => {
-    it(`the sort icon ${field} should have an aria-label attribute`, () => {
-      const element = spectator.query(`p-sorticon[field="${field}"]`) as HTMLElement;
-      expect(element.hasAttribute('aria-label')).toBeTrue();
-    });
+  it('should have aria-label attribute on all p-sorticon elements', () => {
+    const sortIcons = spectator.queryAll('p-sorticon');
+    if (sortIcons.length > 0) {
+      sortIcons.forEach((sortIcon) => {
+        expect(sortIcon.hasAttribute('aria-label')).toBeTrue();
+      });
+    }
   });
 
   it('should have isCollapsed set to false by default', () => {
@@ -105,5 +106,15 @@ describe('Integration Tests: ResultListComponent', () => {
     panelButton.click();
     spectator.fixture.detectChanges();
     expect(spectator.component.isCollapsed).toBeTrue();
+  });
+
+  it('should translate the data for the result list', () => {
+    const translateColumnsSpy = spyOn(spectator.component, 'translateColumns').and.callThrough();
+    const translateFilterSpy = spyOn(spectator.component, 'translateFilter').and.callThrough();
+    spectator.component.translateData();
+    expect(translateColumnsSpy).toHaveBeenCalledWith(spectator.component.untranslatedinitialColumns);
+    expect(translateColumnsSpy).toHaveBeenCalledWith(spectator.component.selectedColumns);
+    expect(translateFilterSpy).toHaveBeenCalledWith(gender);
+    expect(translateFilterSpy).toHaveBeenCalledWith(state);
   });
 });

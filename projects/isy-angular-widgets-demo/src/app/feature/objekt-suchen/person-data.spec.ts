@@ -11,7 +11,7 @@ describe('Unit Tests: person-data', () => {
     expect(person.id).toEqual('');
     expect(person.personalien.nachname).toEqual('');
     expect(person.personalien.vorname).toEqual('');
-    expect(person.personalien.geschlecht).toEqual('');
+    expect(person.personalien.gender).toEqual('');
     expect(person.personalien.geburtsdatum).toEqual('');
     expect(person.personalien.geburtsort).toEqual('');
     expect(person.personalien.staatsangehoerigkeit).toEqual('');
@@ -27,7 +27,7 @@ describe('Unit Tests: person-data', () => {
     expect(person.personalien.kreditkartennummer).toEqual('');
     expect(person.personalien.ablaufdatumKreditkarte).toEqual('');
     expect(person.personalien.bilanz).toEqual(0);
-    expect(person.personalien.status).toEqual('');
+    expect(person.personalien.state).toEqual('');
     expect(person.sachverhalte).toEqual([]);
   }
 

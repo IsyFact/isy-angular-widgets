@@ -6,7 +6,7 @@ export const initializedPerson: Person = {
     geburtsdatum: '03.08.1980',
     geburtsname: 'Mustermann',
     geburtsort: 'Köln',
-    geschlecht: 'Männlich',
+    gender: 'Männlich',
     nachname: 'Mustermann',
     staatsangehoerigkeit: 'Deutsch',
     vorname: 'Max',
@@ -22,7 +22,7 @@ export const initializedPerson: Person = {
     ablaufdatumKreditkarte: '',
     identityDocument: '',
     bilanz: 0,
-    status: '',
+    state: '',
     addresses: [
       {
         street: 'Frankfurterstr.',

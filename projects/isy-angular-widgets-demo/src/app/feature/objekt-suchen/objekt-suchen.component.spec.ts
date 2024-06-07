@@ -97,7 +97,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(person.id).toEqual(emptyEntry);
     expect(person.personalien.vorname).toEqual(emptyEntry);
     expect(person.personalien.nachname).toEqual(emptyEntry);
-    expect(person.personalien.geschlecht).toEqual(emptyEntry);
+    expect(person.personalien.gender).toEqual(emptyEntry);
     expect(person.personalien.geburtsname).toEqual(emptyEntry);
     expect(person.personalien.geburtsort).toEqual(emptyEntry);
     expect(person.personalien.geburtsdatum).toEqual(emptyEntry);
@@ -133,7 +133,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     person.personalien.vorname = 'vorname';
     person.personalien.nachname = 'nachname';
     person.personalien.geburtsname = 'geburtsname';
-    person.personalien.geschlecht = 'geschlecht';
+    person.personalien.gender = 'geschlecht';
     person.personalien.geburtsort = 'geburtsort';
     person.personalien.geburtsdatum = '01.01.2023';
     person.personalien.staatsangehoerigkeit = 'Deutschland';
@@ -154,7 +154,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     const persoenlicheInfoForm = component.persoenlicheInformationenForm;
     persoenlicheInfoForm.controls.vorname.setValue('vorname');
     persoenlicheInfoForm.controls.nachname.setValue('nachname');
-    persoenlicheInfoForm.controls.geschlecht.setValue('geschlecht');
+    persoenlicheInfoForm.controls.gender.setValue('geschlecht');
 
     const geburtsInfoForm = component.geburtsInformationenForm;
     geburtsInfoForm.controls.geburtsname.setValue('geburtsname');
@@ -177,7 +177,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     editForm.controls.editVorname.setValue(person.personalien.vorname);
     editForm.controls.editNachname.setValue(person.personalien.nachname);
     editForm.controls.editGeburtsname.setValue(person.personalien.geburtsname);
-    editForm.controls.editGeschlecht.setValue(person.personalien.geschlecht);
+    editForm.controls.editGender.setValue(person.personalien.gender);
     editForm.controls.editGeburtsort.setValue(person.personalien.geburtsort);
     editForm.controls.editGeburtsdatum.setValue(person.personalien.geburtsdatum);
     editForm.controls.editStaatsangehoerigkeit.setValue(person.personalien.staatsangehoerigkeit);
@@ -255,8 +255,8 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(vorname?.errors).toBeNull();
     const nachname = personalInfoForm.get('nachname');
     expect(nachname?.errors).not.toBeNull();
-    const geschlecht = personalInfoForm.get('geschlecht');
-    expect(geschlecht?.errors).not.toBeNull();
+    const gender = personalInfoForm.get('gender');
+    expect(gender?.errors).not.toBeNull();
     expectFormValuesAreEmpty(personalInfoForm, true);
 
     const birthForm = component.allWizardForms[2];
@@ -291,7 +291,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     const currentForm = component.allWizardForms[wizardIndex - 1];
     currentForm.get('vorname')?.setValue('vorname');
     currentForm.get('nachname')?.setValue('nachname');
-    currentForm.get('geschlecht')?.setValue('geschlecht');
+    currentForm.get('gender')?.setValue('geschlecht');
     component.getWizardIndex(wizardIndex);
 
     expectFormIsValid(currentForm);
@@ -477,7 +477,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     const persoenlicheInfoForm = component.persoenlicheInformationenForm;
     expect(persoenlicheInfoForm.controls.vorname.value).toEqual(newPerson.personalien.vorname);
     expect(persoenlicheInfoForm.controls.nachname.value).toEqual(newPerson.personalien.nachname);
-    expect(persoenlicheInfoForm.controls.geschlecht.value).toEqual(newPerson.personalien.geschlecht);
+    expect(persoenlicheInfoForm.controls.gender.value).toEqual(newPerson.personalien.gender);
 
     const geburtsInfoForm = component.geburtsInformationenForm;
     expect(geburtsInfoForm.controls.geburtsname.value).toEqual(newPerson.personalien.geburtsname);
