@@ -58,8 +58,8 @@ $focusOutlineOffset: 0 !default;
 $focusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
 
 //action icons
-$actionIconWidth: 2rem !default;
-$actionIconHeight: 2rem !default;
+$actionIconWidth: 2.875rem !default; // changed from 2rem !default;
+$actionIconHeight: 2.875rem !default; // changed from 2rem !default;
 $actionIconBg: transparent !default;
 $actionIconBorder: 0 none !default;
 $actionIconColor: $shade600 !default;
@@ -69,7 +69,7 @@ $actionIconHoverColor: $shade700 !default;
 $actionIconBorderRadius: 50% !default;
 
 //input field (e.g. inputtext, spinner, inputmask)
-$inputPadding: 0.5rem 0.75rem !default;
+$inputPadding: 0.875rem 0.75rem !default; // changed from 0.5rem 0.75rem !default;
 $inputTextFontSize: 1rem !default;
 $inputBg: $shade000 !default;
 $inputTextColor: $shade700 !default;
@@ -86,7 +86,7 @@ $inputFilledFocusBg: $shade100 !default;
 //input groups
 $inputGroupBg: $shade200 !default;
 $inputGroupTextColor: $shade700 !default;
-$inputGroupAddOnMinWidth: 2.357rem !default;
+$inputGroupAddOnMinWidth: 2.875rem !default; // changed from 2.357rem !default;
 
 //input lists (e.g. dropdown, autocomplete, multiselect, orderlist)
 $inputListBg: $shade000 !default;
@@ -123,9 +123,9 @@ $passwordMediumBg: #ffc107 !default;
 $passwordStrongBg: #28a745 !default;
 
 //button
-$buttonPadding: 0.5rem 0.75rem !default;
-$buttonIconOnlyWidth: 2.357rem !default;
-$buttonIconOnlyPadding: 0.5rem 0 !default;
+$buttonPadding: 0.875rem 0.75rem !default;
+$buttonIconOnlyWidth: 3rem !default; // changed from 2.357rem
+$buttonIconOnlyPadding: 0.875rem 0 !default; // changed from 0.5rem
 $buttonBg: $primaryColor !default;
 $buttonTextColor: $primaryTextColor !default;
 $buttonBorder: 1px solid $primaryColor !default;
