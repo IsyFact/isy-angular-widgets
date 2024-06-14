@@ -45,7 +45,7 @@ interface Grid {
 }
 
 export interface ChartInitData {
-  type: string;
+  type: 'bar' | 'line' | 'scatter' | 'bubble' | 'pie' | 'doughnut' | 'polarArea' | 'radar' | undefined;
   data?: ChartData;
   options?: ChartOptions;
 }
