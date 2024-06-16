@@ -123,9 +123,9 @@ $passwordMediumBg: #ffc107 !default;
 $passwordStrongBg: #28a745 !default;
 
 //button
-$buttonPadding: 0.875rem 0.75rem !default;
-$buttonIconOnlyWidth: 3rem !default; // changed from 2.357rem
-$buttonIconOnlyPadding: 0.875rem 0 !default; // changed from 0.5rem
+$buttonPadding: 0.875rem 0.75rem !default; // changed from 0.5rem 0.75rem !default
+$buttonIconOnlyWidth: 3rem !default; // changed from 2.357rem !default
+$buttonIconOnlyPadding: 0.875rem 0 !default; // changed from 0.5rem !default
 $buttonBg: $primaryColor !default;
 $buttonTextColor: $primaryTextColor !default;
 $buttonBorder: 1px solid $primaryColor !default;
