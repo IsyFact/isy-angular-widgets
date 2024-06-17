@@ -28,7 +28,7 @@ import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 import {DividerModule} from 'primeng/divider';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {FieldsetModule} from 'primeng/fieldset';
-import {SvzDropdownComponent} from 'isy-schluesselverzeichnis-dropdown';
+import {IsySvzDropdownComponent} from '@isyfact/isy-svz-dropdown-new';
 
 @NgModule({
   declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
@@ -62,7 +62,7 @@ import {SvzDropdownComponent} from 'isy-schluesselverzeichnis-dropdown';
     DividerModule,
     InputCharDirective,
     FieldsetModule,
-    SvzDropdownComponent
+    IsySvzDropdownComponent
   ]
 })
 export class ObjektAnzeigenModule {}
