@@ -78,7 +78,8 @@
               "projects/isy-angular-widgets/assets/theme/isyfact-liberation-fonts.css"
             ],
             "scripts": [],
-            "allowedCommonJsDependencies": ["moment"]
+            "allowedCommonJsDependencies": ["moment"],
+            "preserveSymlinks": true
           },
           "configurations": {
             "production": {
