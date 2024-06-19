@@ -1,6 +1,7 @@
 # 17.4.0
 ## Features
 ## Demo-Anwendung
+- IFS-2763: Checkboxen sind durch Screenreader erreichbar
 - IFS-2802: Zum Verringern der Tabellenbreite wird exemplarisch auf der Seite _Objekt-Suchen_ eine Spaltenfilterung in die Tabelle hinzugefügt
 ## Fixes
 IFS-3677: Beim Aktualisieren der Demo-Anwendung bleiben die Inhalte der Seitenleiten nun erhalten

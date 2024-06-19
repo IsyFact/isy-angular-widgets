@@ -81,23 +81,25 @@ Bis dahin wird auf der Designer-Website auf das PrimeNG Sass-Theme verwiesen, um
 Das _Bootstrap4 Light Blue_ wurde als Basis-Theme verwendet und als SCSS in das _IsyFact-Theme_ integriert, was eine Live-Bearbeitung der Variablen ermöglicht. Die bestehenden Farbwerte wurden beibehalten. Anpassungen der Properties-Variablen erfolgten in den Dateien `isy-angular-widgets/assets/theme/bootstrap4/bootstrap4-light/_variables_light.scss` und `isy-angular-widgets/assets/theme/bootstrap4/bootstrap4-light/blue/_variables.scss`:
 
 #### Datei _variables_light.scss
-| Properties-Variablen     | Wert                                     | 
-|--------------------------|------------------------------------------|
-| *reused color variables* |                                          |                   
-| $shade200                | #cce3ec                                  |
-| *global*                 |                                          |
-| $fontFamily              | BundesSans,'Liberation Sans',sans-serif  |
-| $textColor               | $shade700                                |
-| $textSecondaryColor      | $shade700                                |
-| $borderRadius            | 0px                                      |
-| $disabledOpacity         | .75                                      |
-| *input field*            |                                          |
-| $inputFocusBorderColor   | $highlightBg                             |
-| *button*                 |                                          |
-| $secondaryButtonBg       | $primaryColor                            |
-| * :root*                 |                                          |
-| font-family              | BundesSans,'Liberation Sans',sans-serif; |
-| --font-family            | BundesSans,'Liberation Sans',sans-serif; |
+| Properties-Variablen                | Wert                                     | 
+|-------------------------------------|------------------------------------------|
+| *reused color variables*            |                                          |                   
+| $shade200                           | #cce3ec                                  |
+| *global*                            |                                          |
+| $fontFamily                         | BundesSans,'Liberation Sans',sans-serif  |
+| $textColor                          | $shade700                                |
+| $textSecondaryColor                 | $shade700                                |
+| $borderRadius                       | 0px                                      |
+| $disabledOpacity                    | .75                                      |
+| *input field*                       |                                          |
+| $inputFocusBorderColor              | $highlightBg                             |
+| *button*                            |                                          |
+| $secondaryButtonBg                  | $primaryColor                            |
+| *galleria*                          |                                          |
+| $galleriaThumbnailContainerBg       | rgba(250, 8, 20, 0.9)                    |
+| * :root*                            |                                          |
+| font-family                         | BundesSans,'Liberation Sans',sans-serif; |
+| --font-family                       | BundesSans,'Liberation Sans',sans-serif; |
 
 #### _variables.scss
 | Properties-Variablen     | Wert                     | 

@@ -1,4 +1,3 @@
-import {fakeAsync} from '@angular/core/testing';
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -233,13 +232,13 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(component.openWizard).toBeFalse();
   });
 
-  it('should check the incoming save status - true (client clicks on wizard save button)', fakeAsync(() => {
+  it('should check the incoming save status - true (client clicks on wizard save button)', () => {
     const person = getInitPerson();
     setupEditForm(person);
 
     component.getSavedStatus(true);
     expect(component.openWizard).toBeFalse();
-  }));
+  });
 
   it('should check the functionality on arriving wizard index (on init => index = 0)', () => {
     const wizardIndex = 0;
@@ -622,5 +621,15 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     panelButton.click();
     spectator.fixture.detectChanges();
     expect(spectator.component.isCollapsed).toBeTrue();
+  });
+
+  it('should have table column multiselect checkbox label', () => {
+    const multiselectTrigger = spectator.query('.p-multiselect-trigger') as HTMLElement;
+    multiselectTrigger.click();
+    spectator.fixture.detectChanges();
+    const multiselectItem = spectator.queryAll('p-multiselectitem span');
+    multiselectItem.forEach((item) => {
+      expect(item.textContent).not.toEqual('');
+    });
   });
 });

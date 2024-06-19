@@ -10,6 +10,7 @@ import {MessageService} from 'primeng/api';
 import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
@@ -24,6 +25,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     component: ObjektAnzeigenComponent,
     imports: [
       ObjektAnzeigenModule,
+      HttpClientModule,
       TranslateTestingModule.withTranslations('de', {
         'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
       })
@@ -122,6 +124,21 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     fixture.detectChanges();
     const secretFieldsContainer = debugElement.query(By.css('#div-show-secret-fields'));
     expect(secretFieldsContainer).toBeTruthy();
+  });
+
+  it('should have show secret field label', () => {
+    const secretFieldsLabel = debugElement.query(By.css('label[for="show-secret-fields"]'));
+    expect(secretFieldsLabel).toBeTruthy();
+    expect(secretFieldsLabel.nativeElement.textContent).not.toEqual('');
+  });
+
+  it('should have checkbox id required label', () => {
+    setupRolesAndPermissions();
+    component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
+    fixture.detectChanges();
+    const idRequiredLabel = debugElement.query(By.css('label[for="id-required"]'));
+    expect(idRequiredLabel).toBeTruthy();
+    expect(idRequiredLabel.nativeElement.textContent).not.toEqual('');
   });
 
   it('should not throwing a validation error', () => {

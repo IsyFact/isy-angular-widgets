@@ -9,7 +9,7 @@ import {UIChart} from 'primeng/chart';
 export class ChartComponent {
   @ViewChild('chart') chart!: UIChart;
 
-  @Input() type!: string;
+  @Input() type!: 'bar' | 'line' | 'pie' | 'doughnut' | 'polarArea' | 'radar' | 'bubble' | 'scatter';
 
   @Input() data!: ChartData;
 

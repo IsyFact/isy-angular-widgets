@@ -13,7 +13,7 @@ describe('Integration Tests: ChartComponent', () => {
   });
 
   const props = {
-    type: 'bar',
+    type: 'bar' as 'bar' | 'line' | 'pie' | 'doughnut' | 'polarArea' | 'radar' | 'bubble' | 'scatter',
     data: barChartData,
     options: responsiveOptions
   };
