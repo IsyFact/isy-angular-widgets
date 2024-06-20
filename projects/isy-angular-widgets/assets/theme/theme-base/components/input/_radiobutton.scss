@@ -10,6 +10,7 @@
     color: $textColor;
     border-radius: 50%;
     transition: $formElementTransition;
+    outline-color: transparent;
 
     &:not(.p-disabled):not(.p-highlight):hover {
       border-color: $inputHoverBorderColor;
@@ -34,6 +35,24 @@
         border-color: $radiobuttonActiveHoverBorderColor;
         background: $radiobuttonActiveHoverBg;
         color: $radiobuttonIconActiveHoverColor;
+      }
+    }
+  }
+
+  &.p-variant-filled {
+    .p-radiobutton-box {
+      background-color: $inputFilledBg;
+
+      &:not(.p-disabled):hover {
+        background-color: $inputFilledHoverBg;
+      }
+
+      &.p-highlight {
+        background: $radiobuttonActiveBg;
+
+        &:not(.p-disabled):hover {
+          background: $radiobuttonActiveHoverBg;
+        }
       }
     }
   }

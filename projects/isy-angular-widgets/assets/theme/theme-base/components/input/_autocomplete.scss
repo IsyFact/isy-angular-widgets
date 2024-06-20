@@ -81,6 +81,10 @@
       transition: $listItemTransition;
       border-radius: $inputListItemBorderRadius;
 
+      &:first-child {
+        margin-top: 0;
+      }
+
       &.p-highlight {
         color: $highlightTextColor;
         background: $highlightBg;
@@ -109,6 +113,12 @@
       color: $submenuHeaderTextColor;
       background: $submenuHeaderBg;
       font-weight: $submenuHeaderFontWeight;
+    }
+
+    .p-autocomplete-empty-message {
+      padding: $inputListItemPadding;
+      color: $inputListItemTextColor;
+      background: $inputListItemBg;
     }
   }
 }
