@@ -70,7 +70,7 @@ export class InputCharDirective implements OnInit, OnDestroy {
     this.componentRef.instance.insertCharacter.subscribe((zeichen) => {
       this.htmlInputElement.value = this.buildInputValue(this.htmlInputElement.value, zeichen);
       this.setNextInputPosition(zeichen.length);
-      this.htmlInputElement.dispatchEvent(new Event('change', {}));
+      this.htmlInputElement.dispatchEvent(new Event('input'));
     });
   }
 
