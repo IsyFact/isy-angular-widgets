@@ -28,6 +28,8 @@ export class ObjektAnzeigenComponent {
 
   adressFormArray?: FormArray;
 
+  apiURL: string = 'http://localhost:8080/rest/schluesselverzeichnis/v1/katalog/religionen';
+
   @Input() person = initializedPerson;
 
   constructor(
