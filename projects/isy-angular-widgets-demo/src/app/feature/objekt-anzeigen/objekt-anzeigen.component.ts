@@ -80,7 +80,6 @@ export class ObjektAnzeigenComponent {
   }
 
   savePersonalien(): void {
-    this.personalInfoForm.disable();
     this.personalInfoForm.clearValidators();
     const person = this.personalInfoForm.value as PersonalInformation;
     this.messageService.add({

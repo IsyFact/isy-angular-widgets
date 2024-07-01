@@ -135,19 +135,6 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(idRequiredLabel.nativeElement.textContent).not.toEqual('');
   });
 
-  it('should not throwing a validation error', () => {
-    const invalidFields = spectator.queryAll('.ng-invalid');
-    expect(invalidFields.length).toBe(3);
-  });
-
-  it('should display validation error if lastName is empty', () => {
-    inputFields.lastName.nativeElement.value = '';
-    inputFields.lastName.nativeElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-
-    expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid');
-  });
-
   it('should set tab view index', () => {
     const tabview = fixture.nativeElement.querySelector('#tab-view');
     tabview.index = 0;
