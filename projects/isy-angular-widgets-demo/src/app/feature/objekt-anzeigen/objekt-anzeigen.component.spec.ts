@@ -106,12 +106,6 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(saveButtonGroup).toBeNull();
   });
 
-  it('shoud enable input fields in edit mode', () => {
-    clickButton('#button-edit');
-    fixture.detectChanges();
-    expect(inputFields.firstName.disabled).toBeFalsy();
-  });
-
   it('should hide secret fields by default', () => {
     const secretFieldsContainer = debugElement.query(By.css('#divShowSecretFields'));
     expect(secretFieldsContainer).toBeNull();
@@ -141,25 +135,6 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(idRequiredLabel.nativeElement.textContent).not.toEqual('');
   });
 
-  it('should not throwing a validation error', () => {
-    clickButton('#button-edit');
-    fixture.detectChanges();
-
-    const invalidFields = spectator.queryAll('.ng-invalid');
-    expect(invalidFields.length).toBe(3);
-  });
-
-  it('should display validation error if lastName is empty', () => {
-    clickButton('#button-edit');
-    fixture.detectChanges();
-
-    inputFields.lastName.nativeElement.value = '';
-    inputFields.lastName.nativeElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-
-    expect(inputFields.lastName.nativeElement.classList).toContain('ng-invalid');
-  });
-
   it('should set tab view index', () => {
     const tabview = fixture.nativeElement.querySelector('#tab-view');
     tabview.index = 0;
@@ -178,19 +153,6 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(component.showSecretFields).toBeFalse();
     const secretFields = fixture.nativeElement.querySelector('show-secret-fields');
     expect(secretFields).toBeNull();
-  });
-
-  it('should display the (edit, save, cancel) buttons', () => {
-    expect(component.personalInfoForm.disabled).toBeTrue();
-
-    const editButton = fixture.nativeElement.querySelector('#button-edit') as HTMLButtonElement;
-    expect(editButton).not.toBeNull();
-
-    const saveButton = fixture.nativeElement.querySelector('#button-save') as HTMLButtonElement;
-    expect(saveButton).toBeNull();
-
-    const cancelButton = fixture.nativeElement.querySelector('#button-cancel') as HTMLButtonElement;
-    expect(cancelButton).toBeNull();
   });
 
   it('should display notification message if personalien have been saved', () => {
@@ -212,12 +174,8 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     };
 
     expect(component.personalInfoForm.get('identityDocument')?.value).not.toEqual(fileName);
-    expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeTrue();
-
     component.uploadFile(event);
-
     expect(component.personalInfoForm.get('identityDocument')?.value).toEqual(fileName);
-    expect(component.personalInfoForm.get('identityDocument')?.disabled).toBeFalse();
   });
 
   it('should check the file upload HTML element', () => {
@@ -256,12 +214,6 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     addresses.push(component.createNewAddressFormGroup());
     expect(component.getAddresses().length).toBeGreaterThan(1);
     expect(component.disableDeleteButton()).toBeFalse();
-  });
-
-  it('should disable the form on onCancel', () => {
-    component.personalInfoForm.enable();
-    component.onCancel();
-    expect(component.personalInfoForm.disabled).toBeTrue();
   });
 
   it('should remove the address at the given index from the FormArray', () => {

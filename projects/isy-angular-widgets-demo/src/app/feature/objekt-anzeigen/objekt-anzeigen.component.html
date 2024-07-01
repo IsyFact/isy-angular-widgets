@@ -424,37 +424,17 @@
     </form>
 
     <div class="justify-content-center flex mt-3">
-      @if (personalInfoForm.disabled) {
+      <div id="div-save" class="p-buttonset">
         <button
           pButton
-          id="button-edit"
-          icon="pi pi-user-edit"
+          id="button-save"
+          icon="pi pi-save"
           iconPos="left"
-          [label]="'isyAngularWidgetsDemo.actions.edit' | translate"
-          (click)="onEdit()"
+          [disabled]="!personalInfoForm.valid"
+          [label]="'isyAngularWidgetsDemo.actions.save' | translate"
+          (click)="savePersonalien()"
         ></button>
-      } @else {
-        <div id="div-save-cancel" class="p-buttonset">
-          <button
-            pButton
-            id="button-save"
-            icon="pi pi-save"
-            iconPos="left"
-            [disabled]="!personalInfoForm.valid"
-            [label]="'isyAngularWidgetsDemo.actions.save' | translate"
-            (click)="savePersonalien()"
-          ></button>
-          <button
-            pButton
-            id="button-cancel"
-            icon="pi pi-times"
-            class="p-button-outlined"
-            iconPos="left"
-            [label]="'isyAngularWidgetsDemo.actions.cancel' | translate"
-            (click)="onCancel()"
-          ></button>
-        </div>
-      }
+      </div>
     </div>
   </p-tabPanel>
 

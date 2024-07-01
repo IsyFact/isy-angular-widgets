@@ -66,8 +66,6 @@ export class ObjektAnzeigenComponent {
       addresses: this.fb.array([addressGroup])
     });
 
-    this.personalInfoForm.disable();
-
     // Exports the addresses form array for the iteration inside the template
     this.adressFormArray = this.getAddresses();
     // Exports the form control names of the addresses form array
@@ -82,7 +80,6 @@ export class ObjektAnzeigenComponent {
   }
 
   savePersonalien(): void {
-    this.personalInfoForm.disable();
     this.personalInfoForm.clearValidators();
     const person = this.personalInfoForm.value as PersonalInformation;
     this.messageService.add({
@@ -127,14 +124,6 @@ export class ObjektAnzeigenComponent {
     if (index >= 0 && addresses.length > 1) {
       addresses.removeAt(index);
     }
-  }
-
-  onEdit(): void {
-    this.personalInfoForm.enable();
-  }
-
-  onCancel(): void {
-    this.personalInfoForm.disable();
   }
 
   getAddresses(): FormArray {
