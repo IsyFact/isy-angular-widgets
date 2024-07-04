@@ -63,23 +63,28 @@
         </div>
         <div class="col-12 md:col-6 xl:col-4">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+            label="Staat"
             fieldId="gender"
             [control]="personalInfoForm.controls.gender | formControl"
           >
-            <p-dropdown
-              inputId="gender"
+            <isy-schluesselverzeichnis-dropdown
+              [apiURL]="apiURL"
+              svzDropdownPlaceholder="Wähle eine Option"
               formControlName="gender"
-              [filter]="true"
-              filterBy="name"
-              [options]="[
-                'isyAngularWidgetsDemo.labels.optionMale' | translate,
-                'isyAngularWidgetsDemo.labels.optionFemale' | translate,
-                'isyAngularWidgetsDemo.labels.optionDivers' | translate
-              ]"
-              styleClass="w-full"
-              appendTo="body"
-            ></p-dropdown>
+            ></isy-schluesselverzeichnis-dropdown>
+<!--            <p-dropdown-->
+<!--              inputId="gender"-->
+<!--              formControlName="gender"-->
+<!--              [filter]="true"-->
+<!--              filterBy="name"-->
+<!--              [options]="[-->
+<!--                'isyAngularWidgetsDemo.labels.optionMale' | translate,-->
+<!--                'isyAngularWidgetsDemo.labels.optionFemale' | translate,-->
+<!--                'isyAngularWidgetsDemo.labels.optionDivers' | translate-->
+<!--              ]"-->
+<!--              styleClass="w-full"-->
+<!--              appendTo="body"-->
+<!--            ></p-dropdown>-->
           </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
@@ -244,11 +249,11 @@
           </p-fileUpload>
         </div>
         <div class="col-12 md:col-6 xl:col-4 align-content-end">
-          <isy-svz-dropdown
+          <isy-schluesselverzeichnis-dropdown
             [apiURL]="apiURL"
             svzDropdownPlaceholder="Wähle eine Option"
             svzDropdownLabel="Staat"
-          ></isy-svz-dropdown>
+          ></isy-schluesselverzeichnis-dropdown>
         </div>
       </div>
 
