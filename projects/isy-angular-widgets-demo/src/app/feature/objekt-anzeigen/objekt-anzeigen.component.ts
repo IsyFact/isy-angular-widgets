@@ -62,7 +62,7 @@ export class ObjektAnzeigenComponent {
       // Demo: Validator validCreditCardNumber - Checks the entry to see if it is a valid credit card number
       creditCardNumber: [personalien.kreditkartennummer, Validation.validCreditCardNumber],
       creditCardExpirationDate: [personalien.ablaufdatumKreditkarte, Validation.validCreditCardExpirationDate],
-      identityDocument: [personalien.identityDocument, Validators.required],
+      identityDocument: [personalien.identityDocument],
       addresses: this.fb.array([addressGroup])
     });
 
