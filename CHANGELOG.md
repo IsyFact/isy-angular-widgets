@@ -1,12 +1,13 @@
-# 17.4.0
+# 17.3.1 - 05.07.2024
 ## Features
 ## Demo-Anwendung
-- IFS-2934: Zur Verbesserung der Zugänglichkeit wurde die Bearbeitungsmaske auf der Seite _Objekt-Anzeigen_ entfernt
-- IFS-2763: Checkboxen sind durch Screenreader erreichbar
+- Die Barrierefreiheit ist innerhalb der Demo Anwendung durch folgende Anpassungen verbessert worden:
+  * IFS-2934: Die Bearbeitungsmaske auf der Seite _Objekt-Anzeigen_ wurde entfernt
+  * IFS-2763: Checkboxen sind durch Screenreader erreichbar
 - IFS-2802: Zum Verringern der Tabellenbreite wird exemplarisch auf der Seite _Objekt-Suchen_ eine Spaltenfilterung in die Tabelle hinzugefügt
 ## Fixes
-- IFS-3882: Beim _Charpicker_ wird der Validator nun aktualisiert
-- IFS-3677: Beim Aktualisieren der Demo-Anwendung bleiben die Inhalte der Seitenleiten nun erhalten
+- IFS-3882: Beim _Charpicker_ `isy-input-char` wird der Validator aktualisiert, wenn Sonderzeichen hinzugefügt werden
+- IFS-3677: Beim Aktualisieren der Demo-Anwendung bleiben die Inhalte der Seitenleisten innerhalb des `isy-hauptfenster` erhalten
 ## Dokumentation
 # 17.3.0 - 24.05.2024
 ## Features
