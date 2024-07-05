@@ -1,5 +1,4 @@
 # 17.3.1 - 05.07.2024
-## Features
 ## Demo-Anwendung
 - Die Barrierefreiheit ist innerhalb der Demo Anwendung durch folgende Anpassungen verbessert worden:
   * IFS-2934: Die Bearbeitungsmaske auf der Seite _Objekt-Anzeigen_ wurde entfernt
@@ -8,7 +7,7 @@
 ## Fixes
 - IFS-3882: Beim _Charpicker_ `isy-input-char` wird der Validator aktualisiert, wenn Sonderzeichen hinzugefügt werden
 - IFS-3677: Beim Aktualisieren der Demo-Anwendung bleiben die Inhalte der Seitenleisten innerhalb des `isy-hauptfenster` erhalten
-## Dokumentation
+
 # 17.3.0 - 24.05.2024
 ## Features
 - IFS-2876: Aria-Label-Attribute wurden zur Verbesserung der Barrierefreiheit an Icons und Buttons in den Komponenten `isy-hauptfenster`, `isy-wizard` und `isyInputChar` hinzugefügt
