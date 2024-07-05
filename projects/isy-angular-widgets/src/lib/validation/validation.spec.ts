@@ -245,11 +245,10 @@ describe('Unit Test: Validation', () => {
       errorHaveToBeDefined(errors, errorKey);
     });
 
-    it('should return CREDITCARDEXPIRATIONDATE if no value is given', () => {
-      const errorKey = 'CREDITCARDEXPIRATIONDATE';
-      const control: AbstractControl = new FormControl();
+    it('should return null if no value is given', () => {
+      const control: AbstractControl = new FormControl('');
       const errors = Validation.validCreditCardExpirationDate(control);
-      errorHaveToBeDefined(errors, errorKey);
+      expect(errors).toBeNull();
     });
   });
 
