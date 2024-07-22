@@ -1,6 +1,7 @@
 # 17.4.0
 ## Features
 - IFS-3940: Die i18n Übersetzungsdateien für die PrimeNG Komponenten wurde aktualisiert
+- IFS-3944: Der Linksnavigation im `isy-hauptfenster` wurde ein Title hinzugefügt
 
 # 17.3.1 - 05.07.2024
 ## Demo-Anwendung
