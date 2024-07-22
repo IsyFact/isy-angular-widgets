@@ -1,3 +1,7 @@
+# 17.4.0
+## Features
+- IFS-3940: Die i18n Übersetzungsdateien für die PrimeNG Komponenten wurde aktualisiert
+
 # 17.3.1 - 05.07.2024
 ## Demo-Anwendung
 - Die Barrierefreiheit ist innerhalb der Demo Anwendung durch folgende Anpassungen verbessert worden:
