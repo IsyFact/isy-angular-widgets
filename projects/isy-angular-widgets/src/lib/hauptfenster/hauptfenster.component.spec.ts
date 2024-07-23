@@ -7,7 +7,6 @@ import {MockComponents} from 'ng-mocks';
 import {HauptfensterModule} from './hauptfenster.module';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
-import {fakeAsync, tick} from '@angular/core/testing';
 
 @Component({
   template: `
