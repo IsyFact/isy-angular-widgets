@@ -28,6 +28,7 @@ import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 import {DividerModule} from 'primeng/divider';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {FieldsetModule} from 'primeng/fieldset';
+import {FocusBlurDirective} from '@isy-angular-widgets/directives/focus-blur.directive';
 
 @NgModule({
   declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
@@ -60,7 +61,8 @@ import {FieldsetModule} from 'primeng/fieldset';
     FormControlPipe,
     DividerModule,
     InputCharDirective,
-    FieldsetModule
+    FieldsetModule,
+    FocusBlurDirective
   ]
 })
 export class ObjektAnzeigenModule {}

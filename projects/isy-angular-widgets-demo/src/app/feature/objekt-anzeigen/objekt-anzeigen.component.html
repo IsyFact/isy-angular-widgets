@@ -20,6 +20,7 @@
               type="text"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
               pInputText
+              isyFocusBlur
             />
           </isy-form-wrapper>
         </div>
@@ -39,6 +40,7 @@
               isyInputChar
               maxlength="16"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
+              isyFocusBlur
             />
           </isy-form-wrapper>
         </div>
@@ -49,7 +51,7 @@
             [control]="personalInfoForm.controls.birthName | formControl"
           >
             <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
-            <input id="birth-name" formControlName="birthName" type="text" pInputText isyInputChar />
+            <input id="birth-name" formControlName="birthName" type="text" pInputText isyInputChar isyFocusBlur />
           </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
@@ -58,7 +60,7 @@
             fieldId="birth-place"
             [control]="personalInfoForm.controls.birthplace | formControl"
           >
-            <input id="birth-place" formControlName="birthplace" class="w-full" type="text" pInputText />
+            <input id="birth-place" formControlName="birthplace" class="w-full" type="text" pInputText isyFocusBlur />
           </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
@@ -79,6 +81,7 @@
               ]"
               styleClass="w-full"
               appendTo="body"
+              isyFocusBlur
             ></p-dropdown>
           </isy-form-wrapper>
         </div>
@@ -99,6 +102,7 @@
               [showIcon]="true"
               styleClass="w-full"
               appendTo="body"
+              isyFocusBlur
             >
             </p-calendar>
           </isy-form-wrapper>
@@ -109,7 +113,7 @@
             fieldId="nationality"
             [control]="personalInfoForm.controls.nationality | formControl"
           >
-            <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
+            <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText isyFocusBlur />
           </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">
@@ -124,6 +128,7 @@
               type="text"
               styleClass="w-full"
               mask="+99 9999 / 9999999"
+              isyFocusBlur
             />
           </isy-form-wrapper>
         </div>
@@ -139,6 +144,7 @@
               formControlName="dateOfEntry"
               [dateInPastConstraint]="true"
               inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
+              isyFocusBlur
             >
             </isy-incomplete-date>
           </isy-form-wrapper>
@@ -156,6 +162,7 @@
               mask="**.**.****"
               slotChar="_"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.dateOfDeparture' | translate }}"
+              isyFocusBlur
             />
           </isy-form-wrapper>
         </div>
@@ -172,6 +179,7 @@
               slotChar="_"
               styleClass="w-full"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.identityCardExpirationDate' | translate }}"
+              isyFocusBlur
             />
           </isy-form-wrapper>
         </div>
@@ -188,6 +196,7 @@
               [showIcon]="true"
               styleClass="w-full"
               appendTo="body"
+              isyFocusBlur
             ></p-calendar>
           </isy-form-wrapper>
         </div>
@@ -204,6 +213,7 @@
               mask="9999 9999 9999 9999"
               slotChar="_"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.creditCardNumber' | translate }}"
+              isyFocusBlur
             />
           </isy-form-wrapper>
         </div>
@@ -223,6 +233,7 @@
               slotChar="_"
               styleClass="w-full"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.creditCardExpirationDate' | translate }}"
+              isyFocusBlur
             />
           </isy-form-wrapper>
         </div>
