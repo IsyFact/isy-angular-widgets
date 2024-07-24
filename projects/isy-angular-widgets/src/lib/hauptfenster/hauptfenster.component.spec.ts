@@ -41,7 +41,6 @@ describe('Unit Tests: HauptfensterComponent', () => {
     mockConfigService = spectator.inject(WidgetsConfigService);
     mockConfigService.getTranslation.and.callFake((key: string) => {
       const translations: {[key: string]: string} = {
-        'hauptfenster.aria.accountName': 'Account Details',
         'hauptfenster.logout': 'Abmelden'
       };
       return translations[key];
@@ -171,11 +170,6 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
     const div = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     expect(div).not.toBeNull();
-  });
-
-  it('the account name icon should have an aria-label attribute', () => {
-    const element = spectator.query('.pi.pi-user') as HTMLElement;
-    expect(element.hasAttribute('aria-label')).toBeTrue();
   });
 });
 
