@@ -15,7 +15,7 @@
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
       "aria": {
-        "togglePicker": "Sonderzeichenpicker öffnen/schließen",
+        "togglePicker": "Sonderzeichenpicker öffnen",
         "closePicker": "Sonderzeichenpicker schließen"
       }
     },

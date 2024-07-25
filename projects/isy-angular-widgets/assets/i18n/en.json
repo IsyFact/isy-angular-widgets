@@ -15,7 +15,7 @@
       "headerGroups": "Groups",
       "insert": "Insert",
       "aria": {
-        "togglePicker": "Open/Close Special Character Picker",
+        "togglePicker": "Open Special Character Picker",
         "closePicker": "Close Special Character Picker"
       }
     },
