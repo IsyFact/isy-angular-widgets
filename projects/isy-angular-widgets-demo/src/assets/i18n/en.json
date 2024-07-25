@@ -97,7 +97,6 @@
     "aria": {
       "print": "Print",
       "info": "Informationen",
-      "sort": "Sort by {{sortField}}",
       "edit": "Edit",
       "download": "Download",
       "delete": "Delete",
