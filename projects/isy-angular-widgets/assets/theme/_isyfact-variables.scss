@@ -1,0 +1,71 @@
+/*
+ To make precise adjustments to the Isyfact design, certain variables in the PrimeNG Bootstrap Light Theme are overwritten.
+ This avoids direct modifications to the original theme variables, ensuring the integrity and maintainability of the standard theme.
+ This approach allows for specific customizations while preserving the updatability of the standard theme.
+*/
+
+// Variables adjusted to meet the Isyfact design requirements
+
+// Variables in theme file _variables.scss
+
+$primaryColor: #45484d !default;
+$primaryDarkColor: #89909a !default;
+$primaryDarkerColor: #89909a !default;
+$primaryAccentBg: #cce5ff !default;
+
+$highlightBg: #cce3ec !default;
+$highlightTextColor: #495057 !default;
+$highlightFocusBg: darken($highlightBg, 8%) !default;
+
+// Variables in theme file _variables_light.scss
+
+//reused color variables
+$shade200: #cce3ec;
+
+//global
+$fontFamily: BundesSans, 'Liberation Sans', sans-serif;
+$textColor: #495057;
+$textSecondaryColor: #495057;
+$borderRadius: 0px;
+$disabledOpacity: 0.75;
+
+//input field
+$inputFocusBorderColor: $highlightBg;
+
+//button
+$secondaryButtonBg: $primaryColor;
+
+// Variables in theme file _variables_light.scss adjusted to meet the accessible target size of at least 44x44 pixels for interactive elements
+
+//action icons
+$actionIconWidth: 2.875rem !default;
+$actionIconHeight: 2.875rem !default;
+
+//input field (e.g. inputtext, spinner, inputmask)
+$inputPadding: 0.875rem 0.75rem !default;
+
+//input switch
+$inputSwitchHeight: 2.75rem !default;
+$inputSwitchWidth: 4.85rem !default;
+$inputSwitchHandleWidth: 2.15rem !default;
+$inputSwitchHandleHeight: 2.15rem !default;
+
+//input groups
+$inputGroupAddOnMinWidth: 2.875rem !default;
+
+//button
+$buttonPadding: 0.875rem 0.75rem !default;
+$buttonIconOnlyWidth: 3rem !default;
+$buttonIconOnlyPadding: 0.875rem 0 !default;
+
+//tabview
+$tabviewHeaderPadding: 1rem 1.25rem !default;
+
+//menu (e.g. menu, menubar, tieredmenu)
+$menuitemPadding: 1rem 1.25rem !default;
+
+//chexbox
+$checkboxWidth: 44px;
+$checkboxHeight: 44px;
+$checkboxIconFontSize: 2rem;
+$checkboxIconFontSize: 2rem;

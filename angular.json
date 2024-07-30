@@ -30,7 +30,15 @@
             "codeCoverage": true,
             "main": "projects/isy-angular-widgets/src/test.ts",
             "tsConfig": "projects/isy-angular-widgets/tsconfig.spec.json",
-            "karmaConfig": "projects/isy-angular-widgets/karma.conf.js"
+            "karmaConfig": "projects/isy-angular-widgets/karma.conf.js",
+            "styles": [
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeflex/primeflex.min.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/flag-icons/css/flag-icons.min.css",
+              "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss",
+              "projects/isy-angular-widgets/assets/theme/isyfact-liberation-fonts.css"
+            ]
           }
         },
         "lint": {

@@ -369,9 +369,9 @@
       </div>
       @if (showSecretFields) {
         <div id="div-show-secret-fields">
-          <div class="grid m-0 align-items-center">
+          <div class="grid m-0 align-items-end">
             <div class="col-12 md:col-6 xl:col-4">
-              <div class="field field-checkbox">
+              <div class="flex align-items-center">
                 <p-checkbox inputId="id-required" formControlName="idRequired" [binary]="true"></p-checkbox>
                 <label for="id-required" class="m-0 ml-3">
                   {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}

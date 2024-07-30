@@ -1,5 +1,11 @@
+@import './isyfact-variables.scss';
 @import './isyfact-liberation-fonts.css';
 @import './bootstrap4/bootstrap4-light/blue/theme.scss';
+
+:root {
+  font-family: $fontFamily;
+  --font-family: $fontFamily;
+}
 
 body {
   margin: 0;
@@ -7,9 +13,11 @@ body {
 }
 
 .p-galleria .p-galleria-thumbnail-container {
-  // Added because the default background color of the galleria thumbnail container is to dark
-  // We choose a default color from the PrimeNg CSS variable palette (comes from 'isyfact-primeng-bootstrap-light.css')
-  // Now the galleria thumbnail container background color is the same as the default grey background color from PrimeNg
+  /*
+   Added because the default background color of the galleria thumbnail container is to dark
+   We choose a default color from the PrimeNg CSS variable palette (comes from 'isyfact-primeng-bootstrap-light.css')
+   Now the galleria thumbnail container background color is the same as the default grey background color from PrimeNg
+  */
   background: var(--surface-ground);
 }
 

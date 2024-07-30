@@ -78,38 +78,8 @@ Momentan wird an einer erweiterten Version des Theme-Designers, dem Advanced-The
 Nach der Roadmap von PrimeNG (https://primeng.org/roadmap) ist die Veröffentlichung für Q4 2023 geplant.
 Bis dahin wird auf der Designer-Website auf das PrimeNG Sass-Theme verwiesen, um auf die aktuelle Theming-API für weitere Anpassungsoptionen zuzugreifen.
 
-Das _Bootstrap4 Light Blue_ wurde als Basis-Theme verwendet und als SCSS in das _IsyFact-Theme_ integriert, was eine Live-Bearbeitung der Variablen ermöglicht. Die bestehenden Farbwerte wurden beibehalten. Anpassungen der Properties-Variablen erfolgten in den Dateien `isy-angular-widgets/assets/theme/bootstrap4/bootstrap4-light/_variables_light.scss` und `isy-angular-widgets/assets/theme/bootstrap4/bootstrap4-light/blue/_variables.scss`:
-
-#### Datei _variables_light.scss
-| Properties-Variablen                | Wert                                     | 
-|-------------------------------------|------------------------------------------|
-| *reused color variables*            |                                          |                   
-| $shade200                           | #cce3ec                                  |
-| *global*                            |                                          |
-| $fontFamily                         | BundesSans,'Liberation Sans',sans-serif  |
-| $textColor                          | $shade700                                |
-| $textSecondaryColor                 | $shade700                                |
-| $borderRadius                       | 0px                                      |
-| $disabledOpacity                    | .75                                      |
-| *input field*                       |                                          |
-| $inputFocusBorderColor              | $highlightBg                             |
-| *button*                            |                                          |
-| $secondaryButtonBg                  | $primaryColor                            |
-| *galleria*                          |                                          |
-| $galleriaThumbnailContainerBg       | rgba(250, 8, 20, 0.9)                    |
-| * :root*                            |                                          |
-| font-family                         | BundesSans,'Liberation Sans',sans-serif; |
-| --font-family                       | BundesSans,'Liberation Sans',sans-serif; |
-
-#### _variables.scss
-| Properties-Variablen     | Wert                     | 
-|--------------------------|--------------------------|
-| $primaryColor            | #45484d                  |
-| $primaryDarkColor        | #89909a                  |
-| $primaryDarkerColor      | #89909a                  |
-| $highlightBg             | #cce3ec                  |
-| $highlightTextColor      | #495057                  |
-| $highlightFocusBg        | darken($highlightBg, 8%) |
+Das _Bootstrap4 Light Blue_ wurde als Basis-Theme verwendet und als SCSS in das _IsyFact-Theme_ integriert, was eine Live-Bearbeitung der Variablen ermöglicht. Um präzise Anpassungen am IsyFact-Design vorzunehmen, werden bestimmte Variablen des Basis-Themes überschrieben. Dies vermeidet direkte Änderungen an den ursprünglichen Theme-Variablen und gewährleistet die Integrität und Wartbarkeit des Basis-Themes. Dieser Ansatz ermöglicht spezifische Anpassungen, während die Aktualisierbarkeit des Basis-Themes erhalten bleibt.
+Anpassungen der Properties-Variablen erfolgt in der Datei `isy-angular-widgets/assets/theme/_isyfact-theme.scss`:
 
 ## Erstellen von Releases
 

@@ -58,7 +58,7 @@ export class InputCharDirective implements OnInit, OnDestroy {
     private element: ElementRef
   ) {
     this.htmlInputElement = this.element.nativeElement as HTMLInputElement;
-    this.htmlInputElement.style.width = 'calc(100% - 2.357rem)';
+    this.htmlInputElement.style.width = 'calc(100% - 3rem)';
   }
 
   ngOnInit(): void {

@@ -1,5 +1,6 @@
 # 17.4.0
 ## Features
+- IFS-3927: Die barrierefreie Zielgröße von mindestens 44x44 Pixel für bedienbare Elemente wurde durch das Theming realisiert
 - IFS-3940: Die i18n Übersetzungsdateien für die PrimeNG Komponenten wurde aktualisiert
 - IFS-3944: Der Linksnavigation im `isy-hauptfenster` wurde ein Title hinzugefügt
 ## Demo-Anwendung
