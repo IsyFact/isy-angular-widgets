@@ -151,7 +151,8 @@
       "proposal": "Vorschlag",
       "female": "Weiblich",
       "male": "Männlich",
-      "divers": "Divers"
+      "divers": "Divers",
+      "leftSidebarTitle": "Demo-Anwendung"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} Zeichen",
