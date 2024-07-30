@@ -10,6 +10,7 @@
       }
     },
     "inputChar": {
+      "title": "Special Character Picker",
       "headerAllCharacters": "All",
       "headerBaseChars": "Base",
       "headerGroups": "Groups",
