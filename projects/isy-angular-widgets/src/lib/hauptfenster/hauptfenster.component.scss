@@ -29,21 +29,11 @@
 .isy-hauptfenster-linksnavigation {
   border-right: 1px solid var(--surface-border);
   background-color: var(--surface-ground);
-
-  .collapseButton {
-    display: flex;
-    justify-content: flex-end;
-  }
 }
 
 .isy-hauptfenster-informationsbereich {
   border-right: 1px solid var(--surface-border);
   background-color: var(--surface-ground);
-
-  .collapseButton {
-    display: flex;
-    justify-content: flex-start;
-  }
 }
 
 :host ::ng-deep .p-megamenu {

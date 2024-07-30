@@ -68,14 +68,19 @@
       >
         <div [hidden]="collapsedLinksnavigation" id="open-links-navigation">
           @if (allowSidebarCollapse) {
-            <div class="collapseButton">
-              <button
-                class="p-button-text"
-                pButton
-                icon="pi pi-chevron-left"
-                [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
-                (click)="collapsedLinksnavigation = true"
-              ></button>
+            <div class="align-items-center grid grid-nogutter">
+              <div class="pl-3 col-9">
+                <span class="font-bold">{{ linksNavigationTitle }}</span>
+              </div>
+              <div class="flex justify-content-end col-3">
+                <button
+                  class="p-button-text"
+                  pButton
+                  icon="pi pi-chevron-left"
+                  [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
+                  (click)="collapsedLinksnavigation = true"
+                ></button>
+              </div>
             </div>
           }
           <ng-content select="[Linksnavigation]"></ng-content>
@@ -104,7 +109,7 @@
       >
         <div [hidden]="collapsedInformationsbereich" id="open-informationsbereich">
           @if (allowSidebarCollapse) {
-            <div class="collapseButton">
+            <div class="flex justify-content-start">
               <button
                 class="p-button-text"
                 pButton

@@ -53,6 +53,11 @@ export class HauptfensterComponent {
   @Input() title?: string;
 
   /**
+   * The left navigation title to be displayed in the left sidebar.
+   */
+  @Input() linksNavigationTitle?: string;
+
+  /**
    * Determines whether to show or hide the Linksnavigation, a navigation bar on the left screen side.
    */
   @Input() showLinksnavigation: boolean = false;

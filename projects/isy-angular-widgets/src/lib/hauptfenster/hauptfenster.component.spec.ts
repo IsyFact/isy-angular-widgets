@@ -108,7 +108,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     component.showLinksnavigation = true;
     spectator.fixture.detectChanges();
     const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
-    (linksnavigation.querySelector('.collapseButton button') as HTMLElement).click();
+    (linksnavigation.querySelector('.p-button-text') as HTMLElement).click();
     spectator.fixture.detectChanges();
     const width = linksnavigation.style.width;
 
@@ -127,7 +127,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     component.showInformationsbereich = true;
     spectator.fixture.detectChanges();
     const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
-    (informationsbereich.querySelector('.collapseButton button') as HTMLElement).click();
+    (informationsbereich.querySelector('.p-button-text') as HTMLElement).click();
     spectator.fixture.detectChanges();
     const width = informationsbereich.style.width;
 
@@ -140,6 +140,19 @@ describe('Unit Tests: HauptfensterComponent', () => {
     spectator.fixture.detectChanges();
 
     expect(informationsbereich.style.width).toEqual(width);
+  });
+
+  it('should display the linksNavigationTitle when Linksnavigation is shown', () => {
+    component.showLinksnavigation = true;
+    const customLinksNavigationTitle = 'Custom Title';
+    component.linksNavigationTitle = customLinksNavigationTitle;
+
+    spectator.fixture.detectChanges();
+
+    const labelElement = spectator.query('span.font-bold') as HTMLElement;
+
+    expect(labelElement).toBeTruthy();
+    expect(labelElement.textContent).toContain(customLinksNavigationTitle);
   });
 
   it('banner landmark/tag should be available', () => {
