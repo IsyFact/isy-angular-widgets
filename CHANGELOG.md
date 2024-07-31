@@ -1,9 +1,11 @@
 # 17.4.0
 ## Features
-- IFS-3940: Die i18n Übersetzungsdateien für die PrimeNG Komponenten wurde aktualisiert
-- IFS-3944: Der Linksnavigation im `isy-hauptfenster` wurde ein Title hinzugefügt
+- IFS-3940: Die i18n Übersetzungsdateien für die PrimeNG Komponenten wurden aktualisiert
+- IFS-3944: Der Linksnavigation im `isy-hauptfenster` wurde die Property _linksNavigationTitle_ zum Setzen eines Titels hinzugefügt
+- IFS-2935: Zur Verbesserung der Screenreader Kompatibilität wurden Labels und Aria-Labels in den Komponenten `isy-input-char` und `isy-hauptfenster` angepasst
 ## Demo-Anwendung
-- IFS-3944: Der Linksnavigation wurde ein Title hinzugefügt und auf die Default-Breite gesetzt
+- IFS-3944: Die Linksnavigation hat einen Title und ist auf die Default-Breite gesetzt
+- IFS-2935: Zur Verbesserung der Screenreader Kompatibilität wurden Labels und Aria-Labels in der gesamten Demo-Anwendung angepasst
 
 # 17.3.1 - 05.07.2024
 ## Demo-Anwendung
