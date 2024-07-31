@@ -39,7 +39,7 @@ export class InputCharComponent implements OnChanges {
   /**
    * A title to show
    */
-  @Input() header: string = 'Titel';
+  @Input() header?: string;
 
   /**
    * Determines whether the char picker can be closed
