@@ -74,6 +74,7 @@
               >
                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                   <p-multiSelect
+                    [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
                     placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
                     [ngModel]="value"
                     [options]="gender"
@@ -105,6 +106,7 @@
           <p-columnFilter field="personalien.state" matchMode="equals" display="menu">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
               <p-dropdown
+                [ariaLabel]="'isyAngularWidgetsDemo.labels.state' | translate"
                 [ngModel]="value"
                 [options]="state"
                 (onChange)="filter($event.value)"
