@@ -152,7 +152,8 @@
       "proposal": "Proposal",
       "female": "Female",
       "male": "Male",
-      "divers": "Divers"
+      "divers": "Divers",
+      "leftSidebarTitle": "Demo-App"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} charaters",
