@@ -139,7 +139,7 @@
       "address": {
         "street": "Street",
         "number": "Number",
-        "zipCode": "ZIP",
+        "zipCode": "Zip Code",
         "city": "City",
         "country": "Country"
       },
