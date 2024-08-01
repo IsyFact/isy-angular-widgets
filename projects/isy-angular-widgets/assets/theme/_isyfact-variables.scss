@@ -69,21 +69,23 @@ $menuitemPadding: 1rem 1.25rem !default;
 //chexbox
 $checkboxWidth: 24px;
 $checkboxHeight: 24px;
-$checkboxIconFontSize: 2rem;
-$checkboxIconFontSize: 2rem;
 
 // Variables in theme file _variables_light.scss adjusted to meet color requirements of the Isyfact design for the input field
 
 $errorColor: #a4252c;
 $inputBorder: 1px solid #212529;
-$inputFocusBorderColor: #006edd !default;
+$inputFocusBorderColor: #0055b9 !default;
 $inputPlaceholderTextColor: #83878c !default;
 
 .p-inputtext {
   &:enabled:focus {
-    box-shadow: 0 0 0 2px rgba(0, 110, 221, 1);
-    border-color: #006edd;
+    box-shadow: 0 0 0 2px rgba(0, 85, 185);
+    border-color: #0055b9;
   }
+}
+
+.p-inputtext:disabled {
+  background-color: #7897ae;
 }
 
 //dropdown
