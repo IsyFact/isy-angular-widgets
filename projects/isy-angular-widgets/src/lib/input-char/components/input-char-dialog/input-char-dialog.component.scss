@@ -1,6 +1,6 @@
 .split {
   height: 100%;
-  max-height: 394px;
+  max-height: 380px;
   position: absolute;
   z-index: 1;
   top: 17.4%;
@@ -37,15 +37,11 @@
   .right-panel-side p-selectbutton {
     .p-ripple.p-element.p-button {
       padding: 0.25rem;
-      width: 32px;
+      width: 46px;
+      height: 46px;
       font-size: 1.25rem;
       border-width: 0 1px 1px 0;
       border-style: solid;
-
-      // Specific fix for the " " (space, U+0020) selectButton to have full height. To be revised in later versions.
-      span {
-        height: 24px;
-      }
     }
   }
 }

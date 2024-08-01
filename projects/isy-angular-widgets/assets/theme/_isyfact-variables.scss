@@ -26,7 +26,7 @@ $fontFamily: BundesSans, 'Liberation Sans', sans-serif;
 $textColor: #495057;
 $textSecondaryColor: #495057;
 $borderRadius: 0px;
-$disabledOpacity: 1;
+$disabledOpacity: 0.75;
 
 //input field
 $inputFocusBorderColor: $highlightBg;
@@ -85,3 +85,6 @@ $inputPlaceholderTextColor: #83878c !default;
     border-color: #006edd;
   }
 }
+
+//dropdown
+$inputListItemPadding: 0.875rem 1.5rem !default;
