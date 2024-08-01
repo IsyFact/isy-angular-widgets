@@ -75,19 +75,18 @@ export class FormWrapperComponent implements OnInit {
    * Returns the CSS class for the label based on the current state.
    * @returns The CSS class for the label.
    */
-  getLabelClass(): string {
-    if (this.ifta) return ' ifta';
-    return ' static-label';
+  get labelOptionClass(): string {
+    return this.ifta ? ' ifta' : ' static-label';
   }
 
   /**
    * Returns the CSS class for the label based on the value of the control.
    * If the control value is truthy, it returns 'label--filled',
-   * otherwise it returns 'label--unfilled'.
+   * otherwise it returns ''.
    * @returns The CSS class for the label.
    */
-  getLabelClassDynamic(): string {
-    return this.control.value && this.ifta ? ' label--filled' : ' label--unfilled';
+  get labelFilledClass(): string {
+    return this.control.value && this.ifta ? ' label--filled' : '';
   }
 
   /**

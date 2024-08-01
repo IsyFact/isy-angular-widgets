@@ -95,40 +95,19 @@ describe('FormWrapperComponent', () => {
   it('should return "label--filled" class when control has value and ifta is true', () => {
     spectator.component.control.setValue('test value');
     spectator.component.ifta = true;
-    const labelClass = spectator.component.getLabelClassDynamic();
+    const labelClass = spectator.component.labelFilledClass;
     expect(labelClass).toEqual(' label--filled');
-  });
-
-  it('should return "label--unfilled" class when control has no value and ifta is true', () => {
-    spectator.component.control.setValue('');
-    spectator.component.ifta = true;
-    const labelClass = spectator.component.getLabelClassDynamic();
-    expect(labelClass).toEqual(' label--unfilled');
-  });
-
-  it('should return "label--unfilled" class when control has value and ifta is false', () => {
-    spectator.component.control.setValue('test value');
-    spectator.component.ifta = false;
-    const labelClass = spectator.component.getLabelClassDynamic();
-    expect(labelClass).toEqual(' label--unfilled');
-  });
-
-  it('should return "label--unfilled" class when control has no value and ifta is false', () => {
-    spectator.component.control.setValue('');
-    spectator.component.ifta = false;
-    const labelClass = spectator.component.getLabelClassDynamic();
-    expect(labelClass).toEqual(' label--unfilled');
   });
 
   it('should return "ifta" class when ifta is true', () => {
     spectator.component.ifta = true;
-    const labelClass = spectator.component.getLabelClass();
+    const labelClass = spectator.component.labelOptionClass;
     expect(labelClass).toEqual(' ifta');
   });
 
   it('should return "static-label" class when ifta is false', () => {
     spectator.component.ifta = false;
-    const labelClass = spectator.component.getLabelClass();
+    const labelClass = spectator.component.labelOptionClass;
     expect(labelClass).toEqual(' static-label');
   });
 });

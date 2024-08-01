@@ -27,7 +27,7 @@ $fontFamily: BundesSans, 'Liberation Sans', sans-serif;
 $textColor: #495057;
 $textSecondaryColor: #495057;
 $borderRadius: 0px;
-$disabledOpacity: 0.75;
+$disabledOpacity: 1;
 
 //input field
 $inputFocusBorderColor: $highlightBg;
@@ -72,3 +72,17 @@ $checkboxWidth: 44px;
 $checkboxHeight: 44px;
 $checkboxIconFontSize: 2rem;
 $checkboxIconFontSize: 2rem;
+
+// Variables in theme file _variables_light.scss adjusted to meet color requirements of the Isyfact design for the input field
+
+$errorColor: #a4252c;
+$inputBorder: 1px solid #212529;
+$inputFocusBorderColor: #006edd !default;
+$inputPlaceholderTextColor: #83878c !default;
+
+.p-inputtext {
+  &:enabled:focus {
+    box-shadow: 0 0 0 2px rgba(0, 110, 221, 1);
+    border-color: #006edd;
+  }
+}
