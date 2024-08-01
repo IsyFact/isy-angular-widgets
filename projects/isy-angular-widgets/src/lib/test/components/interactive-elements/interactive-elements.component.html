@@ -1,0 +1,38 @@
+<!-- Interactive PrimeNG elements used in the demo app, tested for a minimum size of 44x44 pixels -->
+
+<p-button id="button-icon" icon="pi pi-print" class="mr-1" ariaLabel="Print"></p-button>
+
+<p-dropdown
+  id="permissions-dropdown"
+  [options]="[
+    {role: 'Admin', permission: 'admin'},
+    {role: 'User', permission: 'user'}
+  ]"
+>
+</p-dropdown>
+
+<isy-hauptfenster
+  [collapsedLinksnavigation]="false"
+  [showLinksnavigation]="true"
+  [items]="[{label: 'Menu entry 1'}, {label: 'Menu entry 2'}, {label: 'Menu entry 3'}]"
+  [applicationGroupColor]="'#458648'"
+  [linksNavigationWidth]="'200px'"
+>
+  <p-menu
+    Linksnavigation
+    [model]="[
+      {label: 'Menu entry 1', icon: 'pi pi-check'},
+      {label: 'Menu entry 2', icon: 'pi pi-check'},
+      {label: 'Menu entry 3', icon: 'pi pi-check'}
+    ]"
+  ></p-menu>
+  <p-panel header="Content">
+    <p-tabView id="tab-view"> <p-tabPanel [header]="'Tabview header item'"></p-tabPanel></p-tabView
+  ></p-panel>
+</isy-hauptfenster>
+
+<input type="text" pInputText isyInputChar />
+
+<p-inputSwitch></p-inputSwitch>
+
+<p-fileUpload chooseIcon="pi pi-upload"></p-fileUpload>

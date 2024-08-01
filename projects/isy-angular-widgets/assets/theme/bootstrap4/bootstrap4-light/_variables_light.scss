@@ -16,7 +16,7 @@ $colors: (
 //reused color variables
 $shade000: #ffffff !default; //surface
 $shade100: #efefef !default; //header background
-$shade200: #cce3ec !default; //hover background
+$shade200: #e9ecef !default; //hover background
 $shade300: #dee2e6 !default; //border, divider
 $shade400: #ced4da !default; //input border
 $shade500: #adb5bd !default; //unused
@@ -26,12 +26,13 @@ $shade800: #343a40 !default; //unused
 $shade900: #212529 !default; //text color
 
 //global
-$fontFamily: BundesSans, 'Liberation Sans', sans-serif !default;
+$fontFamily: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol' !default;
 $fontSize: 1rem !default;
 $fontWeight: normal !default;
-$textColor: $shade700 !default;
-$textSecondaryColor: $shade700 !default;
-$borderRadius: 0px !default;
+$textColor: $shade900 !default;
+$textSecondaryColor: $shade600 !default;
+$borderRadius: 4px !default;
 $transitionDuration: 0.15s !default;
 $formElementTransition:
   background-color $transitionDuration,
@@ -42,7 +43,7 @@ $listItemTransition: box-shadow $transitionDuration !default;
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $shade300 !default;
 $inlineSpacing: 0.5rem !default;
-$disabledOpacity: 0.75 !default;
+$disabledOpacity: 0.65 !default;
 $maskBg: rgba(0, 0, 0, 0.4) !default;
 $loadingIconFontSize: 2rem !default;
 $errorColor: #dc3545 !default;
@@ -77,7 +78,7 @@ $inputTextColor: $shade700 !default;
 $inputIconColor: $shade700 !default;
 $inputBorder: 1px solid $shade400 !default;
 $inputHoverBorderColor: $shade400 !default;
-$inputFocusBorderColor: $highlightBg !default;
+$inputFocusBorderColor: $primaryColor !default;
 $inputErrorBorderColor: $errorColor !default;
 $inputPlaceholderTextColor: $shade600 !default;
 $inputFilledBg: $shade100 !default;
@@ -149,7 +150,7 @@ $plainButtonTextColor: $textSecondaryColor !default;
 $plainButtonHoverBgColor: $shade200 !default;
 $plainButtonActiveBgColor: $shade300 !default;
 
-$secondaryButtonBg: $primaryColor !default;
+$secondaryButtonBg: #6c757d !default;
 $secondaryButtonTextColor: #ffffff !default;
 $secondaryButtonBorder: 1px solid #6c757d !default;
 $secondaryButtonHoverBg: #5a6268 !default;
@@ -764,7 +765,7 @@ $galleriaIndicatorsBgOnItem: rgba(0, 0, 0, 0.5) !default;
 $galleriaIndicatorBgOnItem: rgba(255, 255, 255, 0.4) !default;
 $galleriaIndicatorHoverBgOnItem: rgba(255, 255, 255, 0.6) !default;
 
-$galleriaThumbnailContainerBg: rgba(250, 8, 20, 0.9) !default;
+$galleriaThumbnailContainerBg: rgba(0, 0, 0, 0.9) !default;
 $galleriaThumbnailContainerPadding: 1rem 0.25rem !default;
 $galleriaThumbnailNavigatorBg: transparent !default;
 $galleriaThumbnailNavigatorColor: $shade100 !default;
@@ -849,8 +850,10 @@ $imagePreviewActionIconFontSize: 1.5rem !default;
 $imagePreviewActionIconBorderRadius: 50% !default;
 
 :root {
-  font-family: BundesSans, 'Liberation Sans', sans-serif;
-  --font-family: BundesSans, 'Liberation Sans', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   --surface-a: #{$shade000};
   --surface-b: #{$shade100};
   --surface-c: #{$shade200};

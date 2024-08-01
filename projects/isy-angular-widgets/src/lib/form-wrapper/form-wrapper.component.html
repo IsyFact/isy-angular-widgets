@@ -1,5 +1,5 @@
-<div [class]="'flex flex-column gap-2' + getLabelClass()">
-  <label [class]="'label' + getLabelClassDynamic()" [for]="fieldId">{{ getLabel() }}</label>
+<div [class]="'flex flex-column gap-2' + labelOptionClass">
+  <label [class]="'label' + labelFilledClass" [for]="fieldId">{{ getLabel() }}</label>
   <div><ng-content></ng-content></div>
   @if (shouldShowError()) {
     <small role="alert" class="p-error block">
