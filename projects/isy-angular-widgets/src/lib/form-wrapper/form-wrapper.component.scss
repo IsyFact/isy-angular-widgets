@@ -20,10 +20,6 @@
   color: var(--blue-500);
 }
 
-:host ::ng-deep .label--unfilled {
-  color: var(--primary-color);
-}
-
 :host ::ng-deep .ifta .p-button.p-button-icon-only {
   padding: 1.18rem 0;
 }
