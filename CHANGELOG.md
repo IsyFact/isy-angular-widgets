@@ -1,6 +1,6 @@
 # 17.4.0
 ## Features
-- IFS-3687: Die Rahmen- und Textfarbe des Eingabefeldes wurden an die im Bedienkonzept definierten Farben angepasst
+- IFS-3687: Die Rahmen- und Textfarbe von Eingabefeldern wurden an die im Bedienkonzept definierten Farben angepasst
 - IFS-3927: Die barrierefreie Zielgröße von mindestens 44x44 Pixel für bedienbare Elemente wurde durch das Theming realisiert
 - IFS-3940: Die i18n Übersetzungsdateien für die PrimeNG Komponenten wurden aktualisiert
 - IFS-3944: Der Linksnavigation im `isy-hauptfenster` wurde die Property _linksNavigationTitle_ zum Setzen eines Titels hinzugefügt
