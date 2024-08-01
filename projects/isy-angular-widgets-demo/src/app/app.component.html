@@ -9,36 +9,6 @@ like in the following example. The side bar regions can be disabled with corresp
   [userInfo]="userInfo"
   linksNavigationTitle="{{ 'isyAngularWidgetsDemo.labels.leftSidebarTitle' | translate }}"
 >
-  <!-- The Seitentoolbar is at the top of the page and can be used for navigation or other tools. -->
-  <isy-seiten-toolbar
-    class="skip-link"
-    [showSidebar]="true"
-    sidebarHomeButtonLabel="{{ 'isyAngularWidgetsDemo.actions.backToOverview' | translate }}"
-    sidebarHomeButtonAriaLabel="{{ 'isyAngularWidgetsDemo.actions.skipNavigationLink.backToOverview' | translate }}"
-    sidebarHomeRoute="/dashboard"
-    Seitentoolbar
-  >
-    <div middle></div>
-    <div right>
-      <p-button
-        icon="pi pi-print"
-        class="mr-1"
-        ariaLabel="{{ 'isyAngularWidgetsDemo.aria.print' | translate }}"
-      ></p-button>
-      <p-button icon="pi pi-info-circle" ariaLabel="{{ 'isyAngularWidgetsDemo.aria.info' | translate }}"></p-button>
-    </div>
-  </isy-seiten-toolbar>
-
-  <!-- The Linksnavigation is the left side bar. You could build some kind of menu here. -->
-  <div Linksnavigation>
-    <p-panelMenu [model]="sidebarItems" [multiple]="true"></p-panelMenu>
-    <router-outlet name="linksnavigation"></router-outlet>
-  </div>
-  <!-- The region without a tag is the content region, to be filled by the router. -->
-  <div Informationsbereich>
-    <!-- The Informationsbereich is the right side bar. -->
-    <router-outlet name="informationsbereich"></router-outlet>
-  </div>
   <div Hauptnavigation-Tools>
     <!-- The Hauptnavigation-Tools are a region within the Menu and could for example be used for a language selector. -->
     <p-dropdown
@@ -64,14 +34,13 @@ like in the following example. The side bar regions can be disabled with corresp
         </div>
       </ng-template>
     </p-dropdown>
-
     <p-dropdown
       id="permissions-dropdown"
       class="ml-2"
       optionLabel="role"
       dataKey="role"
       optionValue="permission"
-      [ariaLabel]="'isyAngularWidgetsDemo.settings.languages.label' | translate"
+      [ariaLabel]="'isyAngularWidgetsDemo.settings.role' | translate"
       [options]="[
         {role: 'Admin', permission: 'admin'},
         {role: 'User', permission: 'user'}
@@ -79,13 +48,46 @@ like in the following example. The side bar regions can be disabled with corresp
       (onChange)="selectPermission($event.value)"
     >
       @if (userInfo.roles) {
-        <!--  Workaround since PrimeNG 16.7.x ist not able to display optionValue -->
+        <!--  Workaround since PrimeNG 16.7.x is not able to display optionValue -->
         <ng-template pTemplate="selectedItem">
           <span>{{ userInfo.roles[0] }}</span>
         </ng-template>
       }
     </p-dropdown>
   </div>
+
+  <!-- The Seitentoolbar is at the top of the page and can be used for navigation or other tools. -->
+  <isy-seiten-toolbar
+    class="skip-link"
+    [showSidebar]="true"
+    sidebarHomeButtonLabel="{{ 'isyAngularWidgetsDemo.actions.backToOverview' | translate }}"
+    sidebarHomeButtonAriaLabel="{{ 'isyAngularWidgetsDemo.actions.skipNavigationLink.backToOverview' | translate }}"
+    sidebarHomeRoute="/dashboard"
+    Seitentoolbar
+  >
+    <div middle></div>
+    <div right>
+      <p-button
+        icon="pi pi-print"
+        class="mr-1"
+        ariaLabel="{{ 'isyAngularWidgetsDemo.aria.print' | translate }}"
+      ></p-button>
+      <p-button icon="pi pi-info-circle" ariaLabel="{{ 'isyAngularWidgetsDemo.aria.info' | translate }}"></p-button>
+    </div>
+  </isy-seiten-toolbar>
+
+  <!-- The Linksnavigation is the left side bar. You could build some kind of menu here. -->
+  <div Linksnavigation>
+    <p-panelMenu [model]="sidebarItems" [multiple]="true"></p-panelMenu>
+    <router-outlet name="linksnavigation"></router-outlet>
+  </div>
+
+  <!-- The region without a tag is the content region, to be filled by the router. -->
+  <div Informationsbereich>
+    <!-- The Informationsbereich is the right side bar. -->
+    <router-outlet name="informationsbereich"></router-outlet>
+  </div>
+
   <router-outlet></router-outlet>
 </isy-hauptfenster>
 <p-toast id="notification-toast" position="bottom-right">

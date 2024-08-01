@@ -10,12 +10,13 @@
       }
     },
     "inputChar": {
+      "title": "Special Character Picker",
       "headerAllCharacters": "All",
       "headerBaseChars": "Base",
       "headerGroups": "Groups",
       "insert": "Insert",
       "aria": {
-        "togglePicker": "Open/Close Special Character Picker",
+        "togglePicker": "Open Special Character Picker",
         "closePicker": "Close Special Character Picker"
       },
       "enum": {
@@ -70,6 +71,7 @@
       "emptyText": "No results available.",
       "selectOneState": "Select a state",
       "selectOneOrMore": "Select one or more results",
+      "columnFilterAriaLabel": "Filter for table columns",
       "columnFilterPlaceholder": "Choose Columns"
     },
     "actions": {
@@ -97,7 +99,6 @@
     "aria": {
       "print": "Print",
       "info": "Informationen",
-      "sort": "Sort by {{sortField}}",
       "edit": "Edit",
       "download": "Download",
       "delete": "Delete",
@@ -138,7 +139,7 @@
       "address": {
         "street": "Street",
         "number": "Number",
-        "zipCode": "ZIP",
+        "zipCode": "Zip Code",
         "city": "City",
         "country": "Country"
       },

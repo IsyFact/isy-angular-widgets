@@ -88,15 +88,6 @@ describe('Integration Tests: ResultListComponent', () => {
     expect(editActionSpy).toHaveBeenCalledWith(person);
   });
 
-  it('should have aria-label attribute on all p-sorticon elements', () => {
-    const sortIcons = spectator.queryAll('p-sorticon');
-    if (sortIcons.length > 0) {
-      sortIcons.forEach((sortIcon) => {
-        expect(sortIcon.hasAttribute('aria-label')).toBeTrue();
-      });
-    }
-  });
-
   it('should have isCollapsed set to false by default', () => {
     expect(spectator.component.isCollapsed).toBeFalse();
   });

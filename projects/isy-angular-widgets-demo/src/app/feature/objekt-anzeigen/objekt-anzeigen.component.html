@@ -70,8 +70,8 @@
             <p-dropdown
               inputId="gender"
               formControlName="gender"
+              [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
               [filter]="true"
-              filterBy="name"
               [options]="[
                 'isyAngularWidgetsDemo.labels.optionMale' | translate,
                 'isyAngularWidgetsDemo.labels.optionFemale' | translate,
@@ -385,7 +385,7 @@
                 [control]="personalInfoForm.controls.securityLevel | formControl"
               >
                 <p-inputNumber
-                  id="security-level"
+                  inputId="security-level"
                   formControlName="securityLevel"
                   [showButtons]="true"
                   [min]="0"

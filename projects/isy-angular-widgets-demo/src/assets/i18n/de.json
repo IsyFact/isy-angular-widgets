@@ -10,12 +10,13 @@
       }
     },
     "inputChar": {
+      "title": "Sonderzeichenpicker",
       "headerAllCharacters": "Alle",
       "headerBaseChars": "Basis",
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
       "aria": {
-        "togglePicker": "Sonderzeichenpicker öffnen/schließen",
+        "togglePicker": "Sonderzeichenpicker öffnen",
         "closePicker": "Sonderzeichenpicker schließen"
       },
       "enum": {
@@ -70,6 +71,7 @@
       "emptyText": "Keine Ergebnisse vorhanden.",
       "selectOneState": "Wähle einen Status",
       "selectOneOrMore": "Wähle ein oder mehrer Ergebnisse",
+      "columnFilterAriaLabel": "Filter für Tabellenspalten",
       "columnFilterPlaceholder": "Wähle Spalten aus"
     },
     "actions": {
@@ -97,7 +99,6 @@
     "aria": {
       "print": "Drucken",
       "info": "Informationen",
-      "sort": "Sortieren nach {{sortField}}",
       "edit": "Bearbeiten",
       "download": "Herunterladen",
       "delete": "Löschen",
@@ -138,7 +139,7 @@
       "address": {
         "street": "Straße",
         "number": "Nummer",
-        "zipCode": "PLZ",
+        "zipCode": "Postleitzahl",
         "city": "Ort",
         "country": "Land"
       },

@@ -31,10 +31,7 @@
         </p-button>
         @if (userInfo) {
           <div class="flex align-items-center justify-content-center mr-2">
-            <em
-              class="pi pi-user mr-1"
-              [attr.aria-label]="configService.getTranslation('hauptfenster.aria.accountName')"
-            ></em>
+            <em class="pi pi-user mr-1"></em>
             {{ userInfo.displayName }}
           </div>
         }

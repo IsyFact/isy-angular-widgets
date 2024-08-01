@@ -88,6 +88,7 @@
         <p-dropdown
           inputId="nationality"
           [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
+          [ariaLabel]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
           [options]="laender"
           [(ngModel)]="person.personalien.staatsangehoerigkeit"
           [showClear]="person.personalien.staatsangehoerigkeit === '' ? false : true"
@@ -235,13 +236,14 @@
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
             label="{{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}"
-            fieldId="edit-staatsangehörigkeit"
+            fieldId="edit-nationality"
             [control]="editForm.get('editStaatsangehoerigkeit')! | formControl"
             [validationMessages]="{required: ''}"
           >
             <p-dropdown
-              inputId="edit-staatsangehörigkeit"
+              inputId="edit-nationality"
               [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
+              [ariaLabel]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
               [options]="laender"
               [showClear]="editForm.controls.editStaatsangehoerigkeit.value === '' ? false : true"
               [formControlName]="'editStaatsangehoerigkeit'"
@@ -397,6 +399,7 @@
             >
               <p-dropdown
                 inputId="staatangehoerigkeit"
+                [ariaLabel]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
                 [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
                 [showClear]="geburtsInformationenForm.controls.staatsangehoerigkeit.value === '' ? false : true"
                 optionValue="name"

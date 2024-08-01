@@ -8,7 +8,7 @@
 ></button>
 
 <p-dialog
-  [header]="header!"
+  [header]="configService.getTranslation('inputChar.title')"
   [(visible)]="visible"
   [closable]="closable"
   [closeAriaLabel]="configService.getTranslation('inputChar.aria.closePicker')"

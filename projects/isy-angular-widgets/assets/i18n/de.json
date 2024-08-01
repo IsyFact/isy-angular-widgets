@@ -10,12 +10,13 @@
       }
     },
     "inputChar": {
+      "title": "Sonderzeichenpicker",
       "headerAllCharacters": "Alle",
       "headerBaseChars": "Basis",
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
       "aria": {
-        "togglePicker": "Sonderzeichenpicker öffnen/schließen",
+        "togglePicker": "Sonderzeichenpicker öffnen",
         "closePicker": "Sonderzeichenpicker schließen"
       }
     },
@@ -30,7 +31,6 @@
         "expandInformationsbereich": "Informationsbereich einblenden",
         "leftNavigation": "linksnavigation",
         "informationArea": "informationsbereich",
-        "accountName": "Kontoname",
         "flag": "Flagge {{lang}}"
       }
     }

@@ -41,6 +41,7 @@
           [options]="initialColumns"
           [(ngModel)]="selectedColumns"
           optionLabel="header"
+          [ariaLabel]="'isyAngularWidgetsDemo.resultList.columnFilterAriaLabel' | translate"
           [placeholder]="'isyAngularWidgetsDemo.resultList.columnFilterPlaceholder' | translate"
         />
       </div>
@@ -50,24 +51,12 @@
         <th scope="col" pSortableColumn="personalien.nachname" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
-          <p-sortIcon
-            field="personalien.nachname"
-            [attr.aria-label]="
-              'isyAngularWidgetsDemo.aria.sort'
-                | translate: {sortField: 'isyAngularWidgetsDemo.labels.nachname' | translate}
-            "
-          ></p-sortIcon>
+          <p-sortIcon field="personalien.nachname"></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.vorname" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
           <p-columnFilter type="text" field="personalien.vorname" display="menu"></p-columnFilter>
-          <p-sortIcon
-            field="personalien.vorname"
-            [attr.aria-label]="
-              'isyAngularWidgetsDemo.aria.sort'
-                | translate: {sortField: 'isyAngularWidgetsDemo.labels.vorname' | translate}
-            "
-          ></p-sortIcon>
+          <p-sortIcon field="personalien.vorname"></p-sortIcon>
         </th>
 
         @for (col of columns; track col.field) {
@@ -85,6 +74,7 @@
               >
                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                   <p-multiSelect
+                    [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
                     placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
                     [ngModel]="value"
                     [options]="gender"
@@ -108,13 +98,7 @@
             } @else {
               <p-columnFilter [type]="col.type" field="personalien.{{ col.field }}" display="menu"></p-columnFilter>
             }
-            <p-sortIcon
-              field="personalien.{{ col.field }}"
-              [attr.aria-label]="
-                'isyAngularWidgetsDemo.aria.sort'
-                  | translate: {sortField: 'isyAngularWidgetsDemo.labels.' + col.field | translate}
-              "
-            ></p-sortIcon>
+            <p-sortIcon field="personalien.{{ col.field }}"></p-sortIcon>
           </th>
         }
         <th scope="col" pSortableColumn="personalien.state" class="white-space-nowrap">
@@ -122,6 +106,7 @@
           <p-columnFilter field="personalien.state" matchMode="equals" display="menu">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
               <p-dropdown
+                [ariaLabel]="'isyAngularWidgetsDemo.labels.state' | translate"
                 [ngModel]="value"
                 [options]="state"
                 (onChange)="filter($event.value)"
@@ -133,13 +118,7 @@
               </p-dropdown>
             </ng-template>
           </p-columnFilter>
-          <p-sortIcon
-            field="personalien.state"
-            [attr.aria-label]="
-              'isyAngularWidgetsDemo.aria.sort'
-                | translate: {sortField: 'isyAngularWidgetsDemo.labels.state' | translate}
-            "
-          ></p-sortIcon>
+          <p-sortIcon field="personalien.state"></p-sortIcon>
         </th>
         <th scope="col" class="white-space-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.actions' | translate }}

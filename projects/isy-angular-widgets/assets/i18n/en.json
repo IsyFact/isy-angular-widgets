@@ -10,12 +10,13 @@
       }
     },
     "inputChar": {
+      "title": "Special Character Picker",
       "headerAllCharacters": "All",
       "headerBaseChars": "Base",
       "headerGroups": "Groups",
       "insert": "Insert",
       "aria": {
-        "togglePicker": "Open/Close Special Character Picker",
+        "togglePicker": "Open Special Character Picker",
         "closePicker": "Close Special Character Picker"
       }
     },
@@ -30,7 +31,6 @@
         "expandInformationsbereich": "Expand right side bar",
         "leftNavigation": "leftnavigation",
         "informationArea": "informationarea",
-        "accountName": "Account name",
         "flag": "Flag {{lang}}"
       }
     }
