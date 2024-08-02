@@ -1,13 +1,14 @@
-# 17.4.0
+# 17.4.0 - 02.08.2024
 ## Features
 - IFS-3687: Die Rahmen- und Textfarbe von Eingabefeldern wurden an die im Bedienkonzept definierten Farben angepasst
 - IFS-3927: Die barrierefreie Zielgröße von mindestens 44x44 Pixel für bedienbare Elemente wurde durch das Theming realisiert
-- IFS-3940: Die i18n Übersetzungsdateien für die PrimeNG Komponenten wurden aktualisiert
-- IFS-3944: Der Linksnavigation im `isy-hauptfenster` wurde die Property _linksNavigationTitle_ zum Setzen eines Titels hinzugefügt
-- IFS-2935: Zur Verbesserung der Screenreader Kompatibilität wurden Labels und Aria-Labels in den Komponenten `isy-input-char` und `isy-hauptfenster` angepasst
+- IFS-3940: Die i18n-Übersetzungsdateien für die PrimeNG-Komponenten wurden in der Bibliothek aktualisiert
+- IFS-3944: Der Linksnavigation im `isy-hauptfenster` wurde die Eigenschaft _linksNavigationTitle_ zur Titelfestlegung hinzugefügt
+- IFS-2935: Zur Verbesserung der Screenreader-Kompatibilität wurden Labels und Aria-Labels in den Komponenten `isy-input-char` und `isy-hauptfenster` angepasst
 ## Demo-Anwendung
-- IFS-3944: Die Linksnavigation hat einen Title und ist auf die Default-Breite gesetzt
-- IFS-2935: Zur Verbesserung der Screenreader Kompatibilität wurden Labels und Aria-Labels in der gesamten Demo-Anwendung angepasst
+- IFS-3940: Die i18n-Übersetzungsdateien für die PrimeNG-Komponenten wurden in der Demo-Anwendung aktualisiert
+- IFS-3944: Die Linksnavigation hat einen Titel und ist auf die Default-Breite gesetzt
+- IFS-2935: Zur Verbesserung der Screenreader-Kompatibilität wurden Labels und Aria-Labels in der gesamten Demo-Anwendung angepasst
 
 # 17.3.1 - 05.07.2024
 ## Demo-Anwendung
