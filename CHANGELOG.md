@@ -1,3 +1,7 @@
+# 17.4.1 - 08.08.2024
+## Feature
+- IFS-3776: Die Schematics zum Einbinden der _isy-angular-widgets_ Bibliothek wurde aktualisiert
+
 # 17.4.0 - 02.08.2024
 ## Features
 - IFS-3687: Die Rahmen- und Textfarbe von Eingabefeldern wurden an die im Bedienkonzept definierten Farben angepasst
