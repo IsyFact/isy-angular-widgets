@@ -102,12 +102,12 @@
         ```json
         {
             "peerDependencies": {
-            "@angular/common": "^18.1.3",
-            "@angular/core": "^18.1.3",
+            "@angular/common": "^18.1.4",
+            "@angular/core": "^18.1.4",
             "moment": "^2.30.1",
             "primeflex": "^3.3.1",
             "primeicons": "^7.0.0",
-            "primeng": "^17.18.7"
+            "primeng": "^17.18.8"
             },
             "dependencies": {
             "tslib": "^2.6.3"
