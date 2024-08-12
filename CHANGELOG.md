@@ -1,3 +1,7 @@
+# 17.5.0 - 12.08.12.2024
+## Breaking Changes
+- IFS-3776: Upgrade Angular auf von Version 17 auf 18
+
 # 17.4.0 - 02.08.2024
 ## Features
 - IFS-3687: Die Rahmen- und Textfarbe von Eingabefeldern wurden an die im Bedienkonzept definierten Farben angepasst

@@ -1,14 +1,14 @@
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {MockBuilder, MockRender, NG_MOCKS_INTERCEPTORS, ngMocks} from 'ng-mocks';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {ZipkinOpenTracingHttpInterceptor} from './zipkin-open-tracing-http-interceptor';
 import {OpenTraceHeaders} from './open-tracing-headers';
 
 @NgModule({
-  imports: [HttpClientModule],
   providers: [
     ZipkinOpenTracingHttpInterceptor,
+    provideHttpClient(withInterceptorsFromDi()),
     {
       multi: true,
       provide: HTTP_INTERCEPTORS,
@@ -26,7 +26,7 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
     return MockBuilder(ZipkinOpenTracingHttpInterceptor, TargetModule)
       .exclude(NG_MOCKS_INTERCEPTORS)
       .keep(HTTP_INTERCEPTORS)
-      .replace(HttpClientModule, HttpClientTestingModule);
+      .provide([provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]);
   });
 
   it('should add Zipkin traceId header', () => {

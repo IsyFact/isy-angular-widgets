@@ -123,7 +123,7 @@ export class Validation {
         return null;
       }
       const parsedDate = moment(input, dateFormat, strict);
-      if (!dateFormat || !parsedDate || !parsedDate.isValid()) {
+      if (!dateFormat || !parsedDate?.isValid()) {
         return {[messageKey]: {format: dateFormat}};
       }
 

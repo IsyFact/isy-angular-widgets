@@ -140,12 +140,12 @@ export function ngAdd(): Rule {
 
     // Add necessary dependencies to new CLI project.
 
-    addPackageToPackageJson(tree, '@angular/common', '^17.0.0');
-    addPackageToPackageJson(tree, '@angular/core', '^17.0.0');
-    addPackageToPackageJson(tree, 'primeicons', '^6.0.0');
-    addPackageToPackageJson(tree, 'primeng', '^17.0.0');
-    addPackageToPackageJson(tree, 'primeflex', '^3.3.0');
-    addPackageToPackageJson(tree, 'moment', '^2.29.4');
+    addPackageToPackageJson(tree, '@angular/common', '^18.1.4');
+    addPackageToPackageJson(tree, '@angular/core', '^18.1.4');
+    addPackageToPackageJson(tree, 'primeicons', '^7.0.0');
+    addPackageToPackageJson(tree, 'primeng', '^17.18.8');
+    addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
+    addPackageToPackageJson(tree, 'moment', '^2.30.1');
 
     // Install isy-angular-widgets
     context.addTask(new NodePackageInstallTask());

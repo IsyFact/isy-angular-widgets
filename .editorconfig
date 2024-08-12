@@ -11,6 +11,8 @@ end_of_line = lf
 
 [*.ts]
 quote_type = single
+indent_style = none
+indent_size = none
 
 [*.md]
 max_line_length = off
