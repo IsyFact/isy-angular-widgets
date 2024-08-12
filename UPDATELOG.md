@@ -121,8 +121,6 @@
 7. **Tests durchgeführt:**
     - **Unit- und Integration-Tests:** Mit `npm run test` ausgeführt, um sicherzustellen, dass alle Tests bestehen.
 
-
-
 8. **Manuelle Überprüfung:**
    - Manuelle Tests der Hauptfunktionalitäten der Anwendung durchgeführt.
    - Überprüfung der Benutzeroberfläche auf Darstellungsfehler.
