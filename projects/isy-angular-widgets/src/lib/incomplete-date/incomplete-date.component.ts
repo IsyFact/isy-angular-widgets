@@ -91,6 +91,12 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   @Input() transferISO8601 = false;
 
+  /**
+   * The date format "00.00.0000" for unknown dates will no longer be supported in the future.
+   * It will be phased out and should no longer be used.
+   */
+  @Input() allowZeroFormat = false;
+
   // ISO string data-side date format
   transferValue?: string;
 
@@ -154,6 +160,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Otherwise, it calls `Validation.validUnspecifiedDate` to validate the control.
    * The Validation checks that the date is a valid unspecified date or valid date in German format DD.MM.YYYY resp. ISO 8601 YYYY-MM-DD.
    * If the date is invalid and not unspecified, a `UNSPECIFIEDDATE` resp. `UNSPECIFIEDISODATE` error is thrown.
+   * If the year is '0000' and `allowZeroFormat` is false, a `UNSPECIFIEDDATE` resp. `UNSPECIFIEDISODATE` error is thrown.
    * E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx,
    * YYYY-MM-00, YYYY-00-00, 0000-00-00, YYYY-MM-xx, YYYY-xx-xx, xxxx-xx-xx
    * For valid or valid unspecified dates, no error is thrown.
@@ -161,8 +168,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * @returns A `ValidationErrors` object if the control is invalid, otherwise null.
    */
   validate(c: AbstractControl): ValidationErrors | null {
-    if (this.transferISO8601) return Validation.validUnspecifiedISODate(c);
-    return Validation.validUnspecifiedDate(c);
+    if (this.transferISO8601) return Validation.validUnspecifiedISODate(c, this.allowZeroFormat);
+    return Validation.validUnspecifiedDate(c, this.allowZeroFormat);
   }
 
   /**
@@ -263,7 +270,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Transforms the input value if necessary and updates it when user completes the mask pattern
    */
   onComplete(): void {
-    this.inputValue = this.incompleteDateService.transformValue(this.inputValue);
+    this.inputValue = this.incompleteDateService.transformValue(
+      this.inputValue,
+      this.dateInPastConstraint,
+      this.allowZeroFormat
+    );
     this.onChange(this.inputValue);
   }
 
@@ -271,7 +282,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Transforms the current input on losing the focus
    */
   onBlur(): void {
-    this.inputValue = this.incompleteDateService.transformValue(this.inputValue, this.dateInPastConstraint);
+    this.inputValue = this.incompleteDateService.transformValue(
+      this.inputValue,
+      this.dateInPastConstraint,
+      this.allowZeroFormat
+    );
     const input = this.field?.inputViewChild!.nativeElement as HTMLInputElement;
     input.value = this.inputValue;
 
