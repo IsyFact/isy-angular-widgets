@@ -1,6 +1,6 @@
 # Update Log
 
-## Update von Angular v17 auf v18 - 08.08.2024
+## Update von Angular v17 auf v18
 
 ### Aktualisierungsschritte
 
@@ -16,7 +16,6 @@
     addPackageToPackageJson(tree, '@angular/core', '^18.1.4');
     addPackageToPackageJson(tree, 'primeicons', '^7.0.0');
     addPackageToPackageJson(tree, 'primeng', '^17.18.8');
-    addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
     addPackageToPackageJson(tree, 'moment', '^2.30.1');
     ```
 
@@ -25,19 +24,19 @@
     - `zipkin-open-tracing-http-interceptor.spec.ts`
     - `wizard.component.spec.ts`
 
-    Veraltete Module ersetzt:
+    Veraltete Module:
     - `HttpClientModule` durch `provideHttpClient()` ersetzt
     - `HttpClientTestingModule` durch `provideHttpClientTesting()` ersetzt
     - `RouterTestingModule`  durch `provideRouter()` ersetzt
 
-4. **Code-Anpassungen in der _isy-angular-widgets-demo_ Anwendung:**
+4. **Code-Anpassungen in der _isy-angular-widgets-demo_ (Demo-Anwendung):**
 
     Anpassungen vorgenommen in:
     - `app.module.ts`
     - `objekt-suchen.component.spec.ts`
     - `objekt-anzeigen.component.spec.ts`
 
-    Veraltete Module ersetzt:
+    Veraltete Module:
     - `HttpClientModule` durch `provideHttpClient()` ersetzt
     - `RouterTestingModule`  durch `provideRouter()` ersetzt
 
@@ -105,7 +104,6 @@
             "@angular/common": "^18.1.4",
             "@angular/core": "^18.1.4",
             "moment": "^2.30.1",
-            "primeflex": "^3.3.1",
             "primeicons": "^7.0.0",
             "primeng": "^17.18.8"
             },
@@ -119,7 +117,7 @@
     - **Prettier:** Mit `npm run prettier:check` ausgeführt.
 
 7. **Tests durchgeführt:**
-    - **Unit- und Integration-Tests:** Mit `npm run test` ausgeführt, um sicherzustellen, dass alle Tests bestehen.
+    - **Unit- und Integrations-Tests:** Mit `npm run test` ausgeführt, um sicherzustellen, dass alle Tests bestehen.
 
 8. **Manuelle Überprüfung:**
    - Manuelle Tests der Hauptfunktionalitäten der Anwendung durchgeführt.

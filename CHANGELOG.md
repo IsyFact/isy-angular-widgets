@@ -1,6 +1,6 @@
-# 17.5.0 - 12.08.12.2024
+# 18.0.0
 ## Breaking Changes
-- IFS-3776: Upgrade Angular auf von Version 17 auf 18
+- IFS-3776: Upgrade der Angularversion von 17 auf 18
 
 # 17.4.1 - 08.08.2024
 ## Feature

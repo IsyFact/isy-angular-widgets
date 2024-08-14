@@ -87,7 +87,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   const createComponent = createComponentFactory({
     component: TestComponent,
     imports: [WizardModule, IncompleteDateModule],
-    providers: [WidgetsConfigService, provideRouter([])]
+    providers: [provideRouter([])]
   });
 
   /**
