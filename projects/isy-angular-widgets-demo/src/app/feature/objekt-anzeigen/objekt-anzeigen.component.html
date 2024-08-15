@@ -138,6 +138,7 @@
               inputId="date-of-entry"
               formControlName="dateOfEntry"
               [dateInPastConstraint]="true"
+              [allowZeroFormat]="true"
               inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
             >
             </isy-incomplete-date>
