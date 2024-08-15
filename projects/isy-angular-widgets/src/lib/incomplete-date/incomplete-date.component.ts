@@ -92,8 +92,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   @Input() transferISO8601 = false;
 
   /**
-   * The date format "00.00.0000" for unknown dates will no longer be supported in the future.
-   * It will be phased out and should no longer be used.
+   * @deprecated using the format "00.00.0000" for unknown dates is deprecated and will be removed in the future. Use "xx.xx.xxxx" instead.
    */
   @Input() allowZeroFormat = false;
 

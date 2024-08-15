@@ -9,6 +9,7 @@ import {
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
+ * TODO: Breaking changes - Review and update the naming of error message keys. For example, change UNSPECIFIEDDATE to INVALIDUNSPECIFIEDDATE
  */
 export class Validation {
   /**
