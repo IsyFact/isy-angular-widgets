@@ -1,10 +1,12 @@
 @import './isyfact-variables.scss';
 @import './isyfact-liberation-fonts.css';
-@import './bootstrap4/bootstrap4-light/blue/theme.scss';
+@import './fluent/fluent-light/theme.scss';
 
 :root {
   font-family: $fontFamily;
   --font-family: $fontFamily;
+  --surface-ground: #ddd;
+  --isy-hauptfenster-background: #336794;
 }
 
 body {
