@@ -9,13 +9,13 @@
 
 .left-panel-side {
   left: 0;
-  width: 30%;
+  width: 34%;
   overflow-y: scroll;
 }
 
 .right-panel-side {
   right: 0;
-  width: 70%;
+  width: 66%;
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -37,8 +37,8 @@
   .right-panel-side p-selectbutton {
     .p-ripple.p-element.p-button {
       padding: 0.25rem;
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
       font-size: 1.25rem;
       border-width: 0 1px 1px 0;
       border-style: solid;
