@@ -19,7 +19,7 @@ export class InputCharComponent implements OnChanges {
   /**
    * The width of the dialog.
    */
-  @Input() width = '775px';
+  @Input() width = '740px';
 
   /**
    * The height of the dialog.
