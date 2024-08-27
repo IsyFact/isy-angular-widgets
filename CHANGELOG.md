@@ -1,5 +1,6 @@
 # 17.5.0
 ## Feature
+- IFS-4016: Integration des FluentUI-Themes und Entfernung des Bootstrap-Light-Themes im Angular-Baustein
 - IFS-3943: Durch Hinzufügen der Eigenschaft `allowZeroFormat` unterstützt das Eingabefeld für ungewisse Datums `isy-incomplete-date` nun die Verwendung von "00.00.0000" zur Darstellung unbekannter Teile eines Datums.
 
 # 17.4.1 - 08.08.2024

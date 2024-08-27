@@ -11,7 +11,7 @@ let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
 
 describe('Unit Tests: InputCharComponent', () => {
-  const dialogDefaultWidth = '775px';
+  const dialogDefaultWidth = '740px';
   const dialogDefaultHeight = '460px';
   const createComponent = createComponentFactory({
     component: InputCharComponent,

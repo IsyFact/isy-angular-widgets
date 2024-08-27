@@ -49,6 +49,7 @@
     // Styles specific for the Grundzeichen select button
     .charset-selectbutton .p-ripple.p-element.p-button {
       min-width: 50px;
+      min-height: 44px;
     }
 
     .charset-selectbutton .p-selectbutton {
@@ -70,7 +71,7 @@
     }
 
     span {
-      padding: 1rem;
+      padding: 0.813rem;
     }
   }
 
