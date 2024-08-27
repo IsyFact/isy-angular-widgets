@@ -34,19 +34,15 @@ $actionIconWidth: 2.75rem !default;
 $actionIconHeight: 2.75rem !default;
 
 //input field (e.g. inputtext, spinner, inputmask)
-$inputPadding: 0.75rem 0.75rem !default;
+$inputPadding: 0.8125rem 0.75rem !default;
 
 //input groups
 $inputGroupAddOnMinWidth: 2.75rem !default;
 
 //button
-$buttonPadding: 0.75rem 0.75rem !default;
-$buttonIconOnlyWidth: 2.75rem !default;
-$buttonIconOnlyPadding: 0.75rem 0 !default;
-
-.p-button.p-button-link {
-  border: 1px solid transparent;
-}
+$buttonPadding: 0.8125rem 0.75rem !default;
+$buttonIconOnlyWidth: 2.875rem !default;
+$buttonIconOnlyPadding: 0.8125rem 0 !default;
 
 //table
 $tableHeaderBg: $neutralLight !default;
@@ -70,14 +66,9 @@ $inputListHeaderPadding: 0.75rem 0.85rem !default;
 //toast
 $toastPadding: 1rem !default;
 
-//dropdown
-.p-dropdown-label {
-  border: 1px solid transparent;
-}
-
 //panel
 $panelHeaderPadding: 0.8125rem !default;
-$accordionHeaderPadding: 0.8125rem !default;
+$accordionHeaderPadding: 0.875rem !default;
 
 //accordion
 $accordionSpacing: 0px !default;
