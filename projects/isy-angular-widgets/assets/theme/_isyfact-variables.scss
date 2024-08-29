@@ -16,16 +16,10 @@ $themeDarkAlt: #003a85 !default;
 
 //foreground
 $neutralPrimary: #212529 !default;
-$neutralLight: #ddd !default;
-$neutralLighter: #f2f2f2 !default;
-$neutralQuaternaryAlt: #dee2e6 !default;
-$neutralLighterAlt: $neutralLight !default;
-$neutralTertiary: #83878c !default;
 
 //global
 $fontFamily: BundesSans, 'Liberation Sans', sans-serif;
-$borderRadius: 0px !default;
-$disabledOpacity: 0.75 !default;
+$disabledOpacity: 0.8 !default;
 $errorColor: #a4252c !default;
 
 // Variables in theme file _variables.scss adjusted to meet the accessible target size of at least 44x44 pixels for interactive elements
@@ -45,15 +39,11 @@ $buttonPadding: 0.8125rem 0.75rem !default;
 $buttonIconOnlyWidth: 2.875rem !default;
 $buttonIconOnlyPadding: 0.8125rem 0 !default;
 
-//table
-$tableHeaderBg: $neutralLight !default;
-
 //tabview
 $tabviewHeaderPadding: 0.875rem 1rem !default;
 
 //menu (e.g. menu, menubar, tieredmenu)
 $menuitemPadding: 0.875rem 1.25rem !default;
-$horizontalMenuBg: $neutralLight !default;
 $submenuHeaderPadding: 0.8125rem 0.5rem !default;
 
 //chexbox
@@ -77,7 +67,6 @@ $accordionSpacing: 0px !default;
 // Variables in theme file _variables.scss adjusted to meet color requirements of the Isyfact design for the input field
 
 //input
-$inputBorder: 1px solid $neutralPrimary !default;
 $inputFocusBorderColor: $themePrimary !default;
 $inputPlaceholderTextColor: #83878c !default;
 
