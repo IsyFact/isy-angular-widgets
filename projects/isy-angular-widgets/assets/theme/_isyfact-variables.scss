@@ -14,13 +14,9 @@ $themeDark: #003a85 !default;
 $themeDarker: #003a85 !default;
 $themeDarkAlt: #003a85 !default;
 
-//foreground
-$neutralPrimary: #212529 !default;
-
 //global
 $fontFamily: BundesSans, 'Liberation Sans', sans-serif;
 $disabledOpacity: 0.8 !default;
-$errorColor: #a4252c !default;
 
 // Variables in theme file _variables.scss adjusted to meet the accessible target size of at least 44x44 pixels for interactive elements
 
@@ -75,8 +71,4 @@ $inputPlaceholderTextColor: #83878c !default;
     box-shadow: 0 0 0 2px rgba(0, 85, 185);
     border-color: $themePrimary;
   }
-}
-
-.p-inputtext:disabled {
-  background-color: #7897ae;
 }
