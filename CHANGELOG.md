@@ -1,6 +1,11 @@
+# 18.0.0
+## Features
+- IFS-4016: Integration des FluentUI-Themes und Entfernung des Bootstrap-Light-Themes im Angular-Baustein
+## Demo-Anwendung
+- IFS-4054: In der Demo Anwendung wurde eine neue Seite _PrimeNG-Widgets_ hinzugefügt, in der die meisten PrimeNG Widgets exemplarisch eingebaut sind
+
 # 17.5.0
 ## Feature
-- IFS-4016: Integration des FluentUI-Themes und Entfernung des Bootstrap-Light-Themes im Angular-Baustein
 - IFS-3943: Durch Hinzufügen der Eigenschaft `allowZeroFormat` unterstützt das Eingabefeld für ungewisse Datums `isy-incomplete-date` nun die Verwendung von "00.00.0000" zur Darstellung unbekannter Teile eines Datums.
 
 # 17.4.1 - 08.08.2024

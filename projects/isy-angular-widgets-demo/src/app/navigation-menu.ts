@@ -29,6 +29,12 @@ export const navigationMenu = [
         title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.displayObject',
         routerLink: 'objekt-anzeigen/42',
         styleClass: 'skip-link'
+      },
+      {
+        label: 'isyAngularWidgetsDemo.menuItems.primengWidgets',
+        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengWidgets',
+        routerLink: 'primeng-widgets',
+        styleClass: 'skip-link'
       }
     ]
   }

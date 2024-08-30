@@ -93,7 +93,8 @@
       "skipNavigationLink": {
         "backToOverview": "Skip navigation link to site Dashboard with back to overview",
         "searchObject": "To page search object",
-        "displayObject": "To page display object"
+        "displayObject": "To page display object",
+        "primengWidgets": "To page PrimeNG widgets"
       }
     },
     "aria": {
@@ -167,6 +168,7 @@
       "frequentTasks": "Frequent tasks",
       "searchObject": "Search object",
       "displayObject": "Display object",
+      "primengWidgets": "PrimeNG widgets",
       "exampleMenuItem": "Example menu item",
       "exampleGroup1": "Example group 1",
       "exampleGroup2": "Example group 2",
@@ -208,7 +210,8 @@
     "websiteTitles": {
       "dashboard": "Dashboard",
       "searchObject": "Search object",
-      "displayObject": "Display object"
+      "displayObject": "Display object",
+      "primengWidgets": "PrimeNG widgets"
     },
     "settings": {
       "header": "Settings Demo App",

@@ -93,7 +93,8 @@
       "skipNavigationLink": {
         "backToOverview": "Sprunglink zur Seite Dashboard mit zurück zur Übersicht",
         "searchObject": "zur Seite Objekt suchen",
-        "displayObject": "zur Seite Objekt anzeigen"
+        "displayObject": "zur Seite Objekt anzeigen",
+        "primengWidgets": "zur Seite PrimeNG Komponenten"
       }
     },
     "aria": {
@@ -167,6 +168,7 @@
       "frequentTasks": "Häufige Aufgaben",
       "searchObject": "Objekt suchen",
       "displayObject": "Objekt anzeigen",
+      "primengWidgets": "PrimeNG Komponenten",
       "exampleMenuItem": "Beispiel Menüpunkt",
       "exampleGroup1": "Beispiel Gruppe 1",
       "exampleGroup2": "Beispiel Gruppe 2",
@@ -208,7 +210,8 @@
     "websiteTitles": {
       "dashboard": "Dashboard",
       "searchObject": "Objekt suchen",
-      "displayObject": "Objekt anzeigen"
+      "displayObject": "Objekt anzeigen",
+      "primengWidgets": "PrimeNG Komponenten"
     },
     "settings": {
       "header": "Einstellungen Demo App",

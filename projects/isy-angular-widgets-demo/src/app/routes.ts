@@ -39,6 +39,14 @@ export const routes: Routes = [
     canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },
   {
+    path: 'primeng-widgets',
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengWidgets'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
