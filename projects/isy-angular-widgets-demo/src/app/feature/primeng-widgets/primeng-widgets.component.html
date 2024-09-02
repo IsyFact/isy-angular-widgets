@@ -1,8 +1,23 @@
 <p-tabView>
   <p-tabPanel header="PrimeNG Widgets">
     <div class="grid mt-3">
-      <div class="col-12 md:col-6 xl:col-4">
-
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="calender">Kalender</label>
+        <p-calendar
+          inputId="calender"
+          [showIcon]="true"
+          [showOnFocus]="false"
+          appendTo="body"
+          styleClass="w-full"
+        ></p-calendar>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="checkbox">Checkbox</label>
+        <p-checkbox
+          inputId="checkbox"
+          label="Käse"
+          [binary]="true"
+        ></p-checkbox>
       </div>
     </div>
   </p-tabPanel>
