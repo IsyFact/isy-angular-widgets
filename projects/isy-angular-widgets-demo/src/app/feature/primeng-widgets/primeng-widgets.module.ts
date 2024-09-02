@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {TabViewModule} from 'primeng/tabview';
 import {CalendarModule} from 'primeng/calendar';
 import {CheckboxModule} from 'primeng/checkbox';
+import {ColorPickerModule} from 'primeng/colorpicker';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -12,7 +13,8 @@ import {CheckboxModule} from 'primeng/checkbox';
     PrimengWidgetsRoutingModule,
     TabViewModule,
     CalendarModule,
-    CheckboxModule
+    CheckboxModule,
+    ColorPickerModule
   ]
 })
 export class PrimengWidgetsModule {}
