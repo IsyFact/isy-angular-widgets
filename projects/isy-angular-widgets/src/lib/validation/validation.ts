@@ -9,6 +9,7 @@ import {
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
+ * TODO: Breaking changes - Review and update the naming of error message keys. For example, change UNSPECIFIEDDATE to INVALIDUNSPECIFIEDDATE
  */
 export class Validation {
   /**
@@ -51,9 +52,10 @@ export class Validation {
    * E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx
    * For valid or valid unspecified dates, no error is thrown.
    * @param c The control element the validator is appended to
+   * @param allowZeroFormat If true, the zero date format should allowed
    * @returns The object {UNSPECIFIEDDATE: true} if the validation fails; null otherwise
    */
-  static validUnspecifiedDate(c: AbstractControl): ValidationErrors | null {
+  static validUnspecifiedDate(c: AbstractControl, allowZeroFormat?: boolean): ValidationErrors | null {
     const input = (c.value as string) ?? null;
 
     if (!input) return null;
@@ -62,9 +64,11 @@ export class Validation {
 
     if (INPUT_MASK_REGEX.test(input)) {
       const [day, month, year] = input.split('.');
+      const isoFormattedStr = `${year}-${month}-${day}`;
 
-      if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
-        const isoFormattedStr = `${year}-${month}-${day}`;
+      if (year === '0000' && !allowZeroFormat) return {UNSPECIFIEDDATE: true};
+
+      if (!(input.includes('x') || day === '00' || month === '00')) {
         const date = new Date(isoFormattedStr);
         const timestamp = date.getTime();
 
@@ -83,9 +87,10 @@ export class Validation {
    * E.g. unspecified dates: YYYY-MM-00, YYYY-00-00, 0000-00-00, YYYY-MM-xx, YYYY-xx-xx, xxxx-xx-xx
    * For valid or valid unspecified dates, no error is thrown.
    * @param c The control element the validator is appended to
+   * @param allowZeroFormat If true, the zero date format should allowed
    * @returns The object {UNSPECIFIEDISODATE: true} if the validation fails; null otherwise
    */
-  static validUnspecifiedISODate(c: AbstractControl): ValidationErrors | null {
+  static validUnspecifiedISODate(c: AbstractControl, allowZeroFormat = false): ValidationErrors | null {
     const input = (c.value as string) ?? null;
 
     if (!input) return null;
@@ -94,9 +99,11 @@ export class Validation {
 
     if (INPUT_MASK_REGEX_ISO_DATE.test(input)) {
       const [year, month, day] = input.split('-');
+      const isoFormattedStr = `${year}-${month}-${day}`;
 
-      if (!(/x/.exec(input) !== null || `${day}` === '00' || `${month}` === '00')) {
-        const isoFormattedStr = `${year}-${month}-${day}`;
+      if (year === '0000' && !allowZeroFormat) return {UNSPECIFIEDDATE: true};
+
+      if (!(input.includes('x') || day === '00' || month === '00')) {
         const date = new Date(isoFormattedStr);
         const timestamp = date.getTime();
 

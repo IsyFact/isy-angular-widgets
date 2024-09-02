@@ -1,5 +1,5 @@
 .isy-hauptfenster {
-  border-top: #336794 solid 10px;
+  border-top: var(--isy-hauptfenster-background) solid 10px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

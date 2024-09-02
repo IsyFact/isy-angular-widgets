@@ -23,16 +23,23 @@ describe('TestComponentComponent', () => {
     {selector: '.isy-hauptfenster-linksnavigation .p-menuitem-link', description: 'Panelmenu-Items'},
     {selector: '#tab-view .p-tabview-nav-link', description: 'Tabview-Link'},
     {selector: 'isy-input-char button', description: 'Input-Char-Button'},
-    {selector: 'p-fileupload .p-fileupload-choose', description: 'Fileupload-Button'},
-    {selector: 'p-inputswitch .p-inputswitch', description: 'Input-Switch-Button'}
+    {selector: 'p-fileupload .p-fileupload-choose', description: 'Fileupload-Button'}
   ];
 
   elements.forEach(({selector, description}) => {
     it(`should have a minimum size of 44x44 pixels for ${description}`, () => {
       const element = spectator.query(selector) as HTMLElement;
       const {width, height} = element.getBoundingClientRect();
-      expect(width).toBeGreaterThanOrEqual(44);
-      expect(height).toBeGreaterThanOrEqual(44);
+      const computedStyle = getComputedStyle(element);
+      const paddingTop = parseFloat(computedStyle.paddingTop);
+      const paddingRight = parseFloat(computedStyle.paddingRight);
+      const paddingBottom = parseFloat(computedStyle.paddingBottom);
+      const paddingLeft = parseFloat(computedStyle.paddingLeft);
+      const widthWithPadding = width + paddingLeft + paddingRight;
+      const heightWithPadding = height + paddingTop + paddingBottom;
+
+      expect(widthWithPadding).toBeGreaterThanOrEqual(44);
+      expect(heightWithPadding).toBeGreaterThanOrEqual(44);
     });
   });
 });

@@ -10,23 +10,44 @@ import {INCOMPLETE_DATE_REGEX, UNSPECIFIED_DATE_REGEX} from './data/regex';
 })
 export class IncompleteDateService {
   private readonly DATE_CHAR = 'x';
+  private readonly DATE_ZERO = '0000';
+  private readonly DATE_ZERO_FORMAT = '00.00.0000';
 
   /**
    * If the new date is a valid or incomplete date it should be transformed
    * into the german date format. Otherwise, return it empty.
    * @param newValue Value to be transformed
    * @param dateInPastConstraint If true, the date should be in the past
+   * @param allowZeroFormat If true, the zero date format e.g. "00.00.0000" for unknown dates should be allowed
    * @returns The transformed date in the german date format
    */
-  transformValue(newValue: string, dateInPastConstraint = false): string {
-    const maxPartYearLength = 4;
-    const coEfficient = 10;
+  transformValue(newValue: string, dateInPastConstraint = false, allowZeroFormat = false): string {
     let dateStr = newValue;
     const [day, month, year] = dateStr.split('.');
-    let partYear = `${year}`;
+
+    if (allowZeroFormat && year === this.DATE_ZERO) return this.DATE_ZERO_FORMAT;
+
+    const adjustedYear = this.adjustYear(year, dateInPastConstraint);
+    dateStr = [day, month, adjustedYear].join('.');
+
+    if (this.dateIsUnspecified(dateStr)) dateStr = this.getIncompleteDate(dateStr, allowZeroFormat);
+
+    return dateStr;
+  }
+
+  /**
+   * Adjusts a year to be in the past if needed
+   * E.g. the year "99" in a dateInPast setting is 1999 instead of 2099
+   * @param year Year as a string
+   * @param dateInPastConstraint If true, the date should be in the past
+   * @returns Adjusted year as a string
+   */
+  private adjustYear(year: string, dateInPastConstraint: boolean): string {
+    const maxPartYearLength = 4;
+    const coEfficient = 10;
+    let partYear = year;
     const partYearNoUnderscore = `${year}`.replace(/_/g, '');
 
-    // e.g. the year "99" in a dateInPast setting is 1999 instead of 2099
     if (partYearNoUnderscore.length < maxPartYearLength && !partYearNoUnderscore.includes(this.DATE_CHAR)) {
       if (partYearNoUnderscore.length !== 0) {
         const currentYear: number = new Date().getFullYear();
@@ -37,22 +58,19 @@ export class IncompleteDateService {
             ? (Number(partYear) - numX).toString()
             : Number(partYear).toString();
       }
-
-      dateStr = [`${day}`, `${month}`, partYear].join('.');
     }
 
-    if (this.dateIsUnspecified(dateStr)) dateStr = this.getIncompleteDate(dateStr);
-
-    return dateStr;
+    return partYear;
   }
 
   /**
    * Takes an incomplete date and transforms it into the german date format.
    * Example: x1.x1.1999 -> xx.xx.1999
    * @param date Date as a string
+   * @param allowZeroFormat If true, the zero date format e.g. "00.00.0000" for unknown dates should be allowed
    * @returns The transformed date in the german date format
    */
-  private getIncompleteDate(date: string): string {
+  private getIncompleteDate(date: string, allowZeroFormat = false): string {
     const formats = date.split('.');
     const dateKeys = ['day', 'month', 'year'];
 
@@ -78,7 +96,9 @@ export class IncompleteDateService {
     )
       return 'xx.xx.' + dateObject.year;
 
-    if (dateObject.month === '00' || dateObject.year === '0000') return '00.00.' + dateObject.year;
+    if (allowZeroFormat && dateObject.year === this.DATE_ZERO) return this.DATE_ZERO_FORMAT;
+
+    if (dateObject.month === '00') return '00.00.' + dateObject.year;
 
     return dateStr;
   }
