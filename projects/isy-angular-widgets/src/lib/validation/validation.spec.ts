@@ -27,6 +27,7 @@ describe('Unit Test: Validation', () => {
   }
 
   describe('unspecifiedDate when input is valid', () => {
+    const errorKey = 'UNSPECIFIEDDATE';
     let control: AbstractControl;
 
     beforeEach(() => {
@@ -47,9 +48,15 @@ describe('Unit Test: Validation', () => {
     validInputs.forEach((input) => {
       it(`should return null for valid input ${input}`, () => {
         control.setValue(input);
-        const errors = Validation.validUnspecifiedDate(control);
+        const errors = Validation.validUnspecifiedDate(control, true);
         expect(errors).toBeNull();
       });
+    });
+
+    it('should return an error for the input 00.00.0000 when the zero date format is not allowed', () => {
+      control.setValue('00.00.0000');
+      const errors = Validation.validUnspecifiedDate(control, false);
+      expect(errors).toEqual({[errorKey]: true});
     });
   });
 
@@ -76,13 +83,14 @@ describe('Unit Test: Validation', () => {
     invalidInputs.forEach(({input, description}) => {
       it(`should return ${errorKey} for ${description}`, () => {
         control.setValue(input);
-        const errors = Validation.validUnspecifiedDate(control);
+        const errors = Validation.validUnspecifiedDate(control, true);
         expect(errors).toEqual({[errorKey]: true});
       });
     });
   });
 
   describe('validUnspecifiedISODate when input is valid', () => {
+    const errorKey = 'UNSPECIFIEDDATE';
     let control: AbstractControl;
 
     beforeEach(() => {
@@ -103,9 +111,15 @@ describe('Unit Test: Validation', () => {
     validInputs.forEach((input) => {
       it(`should return null for '${input}'`, () => {
         control.setValue(input);
-        const errors = Validation.validUnspecifiedISODate(control);
+        const errors = Validation.validUnspecifiedISODate(control, true);
         expect(errors).toBeNull();
       });
+    });
+
+    it('should return an error for the input 0000-00-00 when the zero date format is not allowed', () => {
+      control.setValue('0000-00-00');
+      const errors = Validation.validUnspecifiedISODate(control, false);
+      expect(errors).toEqual({[errorKey]: true});
     });
   });
 

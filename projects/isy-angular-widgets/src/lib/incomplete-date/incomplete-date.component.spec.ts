@@ -257,14 +257,16 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.transferISO8601 = true;
     const control = new FormControl();
     const result = component.validate(control);
-    expect(result).toEqual(Validation.validUnspecifiedISODate(control));
+    expect(result).toEqual(Validation.validUnspecifiedISODate(control, false));
+    expect(result).toEqual(Validation.validUnspecifiedISODate(control, true));
   });
 
   it('should return the result from Validation.validUnspecifiedDate when transferISO8601 is false', () => {
     component.transferISO8601 = false;
     const control = new FormControl();
     const result = component.validate(control);
-    expect(result).toEqual(Validation.validUnspecifiedDate(control));
+    expect(result).toEqual(Validation.validUnspecifiedDate(control, false));
+    expect(result).toEqual(Validation.validUnspecifiedDate(control, true));
   });
 
   it('should convert date format to transfer format', () => {

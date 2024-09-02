@@ -78,7 +78,7 @@ Momentan wird an einer erweiterten Version des Theme-Designers, dem Advanced-The
 Nach der Roadmap von PrimeNG (https://primeng.org/roadmap) ist die Veröffentlichung für Q4 2023 geplant.
 Bis dahin wird auf der Designer-Website auf das PrimeNG Sass-Theme verwiesen, um auf die aktuelle Theming-API für weitere Anpassungsoptionen zuzugreifen.
 
-Das Theme _Bootstrap4 Light Blue_ wurde als Basis-Theme verwendet und als SCSS in das _IsyFact-Theme_ integriert, was eine Live-Bearbeitung der Variablen ermöglicht.
+Das Theme _FluentUI_ wurde als Basis-Theme verwendet und als SCSS in das _IsyFact-Theme_ integriert, was eine Live-Bearbeitung der Variablen ermöglicht.
 Um präzise Anpassungen am IsyFact-Design vorzunehmen, werden bestimmte Variablen des Basis-Themes überschrieben.
 Dies vermeidet direkte Änderungen an den ursprünglichen Theme-Variablen und gewährleistet die Integrität und Wartbarkeit des Basis-Themes.
 Dieser Ansatz ermöglicht spezifische Anpassungen, während die Aktualisierbarkeit des Basis-Themes erhalten bleibt.
