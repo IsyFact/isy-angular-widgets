@@ -5,7 +5,8 @@ export const permissions: PermissionMaps = {
   routes: {
     dashboard: ['admin', 'user'],
     'objekt-anzeigen': ['admin'],
-    'objekt-suchen': ['admin', 'user']
+    'objekt-suchen': ['admin', 'user'],
+    'primeng-widgets': ['admin', 'user']
   },
   elements: {
     personenSuche: ['admin'],
