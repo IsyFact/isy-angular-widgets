@@ -2,7 +2,7 @@
   <p-tabPanel header="PrimeNG Widgets">
     <div class="grid mt-3">
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="calender">Kalender</label>
+        <label for="calender">Calendar</label>
         <p-calendar
           inputId="calender"
           [showIcon]="true"
@@ -20,15 +20,51 @@
         ></p-checkbox>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="colorpicker">Farb-Picker</label>
+        <label for="colorpicker">Colorpicker</label>
         <p-colorPicker inputId="colorpicker"></p-colorPicker>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="inputGroup">InputGroup</label>
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input id="inputGroup" pInputText placeholder="Nutzername" class="w-full"/>
+        </p-inputGroup>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="inputMask">InputMask</label>
+        <p-inputMask
+          inputId="inputMask"
+          mask="(999) 999-9999"
+          placeholder="(999) 999-9999"
+          styleClass="w-full"/>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="inputSwitch">InputSwitch</label>
+        <p-inputSwitch inputId="inputSwitch"></p-inputSwitch>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="inputTextarea">InputTextarea</label>
+        <textarea
+          id="inputTextarea"
+          pInputTextarea
+          class="w-full"
+        ></textarea>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="inputNumber">InputNumber</label>
+        <p-inputNumber inputId="inputNumber" styleClass="w-full"/>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="inputOpt">InputOpt</label>
+        <p-inputOtp id="inputOpt"></p-inputOtp>
       </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
     <div class="grid mt-3">
       <div class="col-12 md:col-6 xl:col-4">
-
       </div>
     </div>
   </p-tabPanel>
