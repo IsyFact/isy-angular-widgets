@@ -240,6 +240,7 @@
             (uploadHandler)="uploadFile($event)"
             chooseIcon="pi pi-upload"
             chooseLabel="{{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}"
+            chooseStyleClass="p-button-outlined"
           >
           </p-fileUpload>
         </div>
@@ -358,6 +359,7 @@
         iconPos="left"
         [disabled]="personalInfoForm.disabled"
         (click)="addNewAddress()"
+        [outlined]="true"
       ></button>
 
       <p-divider></p-divider>
@@ -394,6 +396,8 @@
                   class="w-full"
                   styleClass="w-full"
                   inputStyleClass="w-full"
+                  incrementButtonClass="p-button-outlined"
+                  decrementButtonClass="p-button-outlined"
                 >
                 </p-inputNumber>
               </isy-form-wrapper>

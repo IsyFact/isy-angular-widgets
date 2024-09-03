@@ -12,7 +12,7 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {FormsModule} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, provideHttpClient} from '@angular/common/http';
 import {DropdownModule} from 'primeng/dropdown';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -30,7 +30,8 @@ import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitent
     {provide: UserInfoService, useClass: UserInfoPublicService},
     SecurityService,
     MenuTranslationService,
-    MessageService
+    MessageService,
+    provideHttpClient()
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -41,7 +42,6 @@ import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitent
     CoreModule,
     SharedModule,
     PanelMenuModule,
-    HttpClientModule,
     FormsModule,
     DropdownModule,
     ToastModule,

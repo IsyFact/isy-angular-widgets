@@ -1,7 +1,6 @@
 import {ComponentFixture} from '@angular/core/testing';
 import {WizardComponent} from './wizard.component';
 import {WizardDirective} from '../../directives/wizard.directive';
-import {RouterTestingModule} from '@angular/router/testing';
 import {Component, QueryList, SimpleChange, ViewChild} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {WizardModule} from '../../wizard.module';
@@ -11,6 +10,7 @@ import {MockComponents} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
 import {Steps} from 'primeng/steps';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {provideRouter} from '@angular/router';
 
 const stepperItems: MenuItem[] = [
   {
@@ -86,7 +86,8 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let spectator: Spectator<TestComponent>;
   const createComponent = createComponentFactory({
     component: TestComponent,
-    imports: [WizardModule, RouterTestingModule, IncompleteDateModule]
+    imports: [WizardModule, IncompleteDateModule],
+    providers: [provideRouter([])]
   });
 
   /**
@@ -521,8 +522,9 @@ describe('Accessibility Test: WizardComponent', () => {
   const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
   const createComponent = createComponentFactory({
     component: TestComponent,
-    imports: [WizardModule, RouterTestingModule, IncompleteDateModule],
-    mocks: [WidgetsConfigService]
+    imports: [WizardModule, IncompleteDateModule],
+    mocks: [WidgetsConfigService],
+    providers: [provideRouter([])]
   });
 
   beforeEach(() => {

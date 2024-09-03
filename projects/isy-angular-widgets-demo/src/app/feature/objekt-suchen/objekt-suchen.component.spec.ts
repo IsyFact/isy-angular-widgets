@@ -1,5 +1,4 @@
 import {ObjektSuchenComponent} from './objekt-suchen.component';
-import {RouterTestingModule} from '@angular/router/testing';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {Person} from '../../shared/model/person';
@@ -10,6 +9,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ObjektSuchenModule} from './objekt-suchen.module';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {required} from '../../shared/validation/validator';
+import {provideRouter} from '@angular/router';
 
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -23,8 +23,8 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   let spectator: Spectator<ObjektSuchenComponent>;
   const createComponent = createComponentFactory({
     component: ObjektSuchenComponent,
-    imports: [ObjektSuchenModule, TranslateModule.forRoot(), RouterTestingModule],
-    providers: [TranslateService, MessageService]
+    imports: [ObjektSuchenModule, TranslateModule.forRoot()],
+    providers: [TranslateService, MessageService, provideRouter([])]
   });
 
   beforeEach(() => {
