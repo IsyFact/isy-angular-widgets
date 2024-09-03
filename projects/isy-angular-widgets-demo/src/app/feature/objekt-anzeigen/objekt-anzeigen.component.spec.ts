@@ -10,7 +10,7 @@ import {MessageService} from 'primeng/api';
 import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
-import {HttpClientModule} from '@angular/common/http';
+import {provideHttpClient} from '@angular/common/http';
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
@@ -25,12 +25,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     component: ObjektAnzeigenComponent,
     imports: [
       ObjektAnzeigenModule,
-      HttpClientModule,
       TranslateTestingModule.withTranslations('de', {
         'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
       })
     ],
-    providers: [MessageService]
+    providers: [MessageService, provideHttpClient()]
   });
 
   beforeEach(() => {
@@ -58,15 +57,6 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     inputFields.creditCardNumber = debugElement.query(By.css('#credit-card-number'));
     inputFields.creditCardExpirationDate = debugElement.query(By.css('#credit-card-expiration-date'));
   });
-
-  /**
-   * Is clicking a button
-   * @param sbutton the ID of the button who must be clicked
-   */
-  function clickButton(sbutton: string): void {
-    const button = fixture.nativeElement.querySelector(sbutton) as HTMLButtonElement;
-    button.click();
-  }
 
   /**
    * Is setting up roles and permissions
