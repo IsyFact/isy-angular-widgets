@@ -1,10 +1,11 @@
-# 18.0.0
+# 18.0.0 - 03.09.2024
 ## Breaking Changes
 - IFS-3776: Upgrade der Angularversion von 17 auf 18
-## Feature
-- IFS-4016: Integration des FluentUI-Themes und Entfernung des Bootstrap-Light-Themes im Angular-Baustein
+## Features
+- IFS-4016: Themewechsel im Angular-Baustein - Integration des FluentUI-Themes und Entfernung des Bootstrap-Light-Themes
+- IFS-4054: Die Sekundärbuttons auf den Seiten _Objekt-Suchen_ und _Objekt-Anzeigen_ wurden als Outlined-Buttons dargestellt
 
-# 17.5.0
+# 17.5.0 - 16.08.2024
 ## Feature
 - IFS-3943: Durch Hinzufügen der Eigenschaft `allowZeroFormat` unterstützt das Eingabefeld für ungewisse Datums `isy-incomplete-date` nun die Verwendung von "00.00.0000" zur Darstellung unbekannter Teile eines Datums.
 
