@@ -13,6 +13,9 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {InputOtpModule} from 'primeng/inputotp';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {KnobModule} from 'primeng/knob';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {PasswordModule} from 'primeng/password';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -30,7 +33,10 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     InputNumberModule,
     InputOtpModule,
     InputTextModule,
-    InputTextareaModule
+    InputTextareaModule,
+    KnobModule,
+    KeyFilterModule,
+    PasswordModule
   ]
 })
 export class PrimengWidgetsModule {}
