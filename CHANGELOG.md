@@ -1,6 +1,6 @@
 # 18.0.0 - 03.09.2024
 ## Breaking Changes
-- IFS-3776: Upgrade der Angularversion von 17 auf 18
+- IFS-3776: Upgrade der Angularversion von 17 auf 18 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
 ## Features
 - IFS-4016: Themewechsel im Angular-Baustein - Integration des FluentUI-Themes und Entfernung des Bootstrap-Light-Themes
 - IFS-4054: Die Sekundärbuttons auf den Seiten _Objekt-Suchen_ und _Objekt-Anzeigen_ wurden als Outlined-Buttons dargestellt
