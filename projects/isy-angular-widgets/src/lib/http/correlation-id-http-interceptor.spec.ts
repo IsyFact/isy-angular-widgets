@@ -1,13 +1,13 @@
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {CorrelationIdHttpInterceptor} from './correlation-id-http-interceptor';
 import {MockBuilder, MockRender, NG_MOCKS_INTERCEPTORS, ngMocks} from 'ng-mocks';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 
 @NgModule({
-  imports: [HttpClientModule],
   providers: [
     CorrelationIdHttpInterceptor,
+    provideHttpClient(withInterceptorsFromDi()),
     {
       multi: true,
       provide: HTTP_INTERCEPTORS,
@@ -26,7 +26,7 @@ describe('Unit tests: CorrelationIdHttpInterceptor', () => {
     return MockBuilder(CorrelationIdHttpInterceptor, TargetModule)
       .exclude(NG_MOCKS_INTERCEPTORS)
       .keep(HTTP_INTERCEPTORS)
-      .replace(HttpClientModule, HttpClientTestingModule);
+      .provide([provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]);
   });
 
   it('should add correlation id header', () => {

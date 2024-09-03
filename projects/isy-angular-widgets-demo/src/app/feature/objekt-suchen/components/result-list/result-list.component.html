@@ -63,7 +63,7 @@
         @for (col of columns; track col.field) {
           <th scope="col" pSortableColumn="personalien.{{ col.field }}" class="white-space-nowrap">
             {{ col.header | translate }}
-            @if (col.field == 'gender') {
+            @if (col.field === 'gender') {
               <p-columnFilter
                 [type]="col.type"
                 field="personalien.{{ col.field }}"

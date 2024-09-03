@@ -10,7 +10,7 @@
 </p-selectButton>
 
 <p-accordion [activeIndex]="activeIndices">
-  @for (item of dataToDisplay | keyvalue; track dataToDisplay) {
+  @for (item of dataToDisplay | keyvalue; track item.key) {
     <p-accordionTab
       [header]="item.key"
       [disabled]="disabled"

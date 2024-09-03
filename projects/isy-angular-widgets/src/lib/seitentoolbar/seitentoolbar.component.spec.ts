@@ -1,7 +1,6 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {SeitentoolbarComponent} from './seitentoolbar.component';
-import {RouterTestingModule} from '@angular/router/testing';
-import {Router} from '@angular/router';
+import {provideRouter, Router} from '@angular/router';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 
@@ -12,7 +11,8 @@ describe('SeitenToolbarComponent', () => {
 
   const createComponent = createComponentFactory({
     component: SeitentoolbarComponent,
-    imports: [ToolbarModule, ButtonModule, RouterTestingModule]
+    imports: [ToolbarModule, ButtonModule],
+    providers: [provideRouter([])]
   });
 
   beforeEach(() => {
