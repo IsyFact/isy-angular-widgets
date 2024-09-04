@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {Country} from './model/country';
-import {countryData} from './data/country';
+import {countryCityMapping, countryData} from './data/country';
 
 @Component({
   selector: 'demo-primeng-widgets',
@@ -10,8 +10,10 @@ import {countryData} from './data/country';
 })
 export class PrimengWidgetsComponent {
   countries: Country[] = countryData;
-
   filteredCountries: Country[] = [];
+
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  cities: any[] = countryCityMapping;
 
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];

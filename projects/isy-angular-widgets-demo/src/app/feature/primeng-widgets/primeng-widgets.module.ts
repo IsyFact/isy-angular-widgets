@@ -25,6 +25,7 @@ import {ChipsModule} from 'primeng/chips';
 import {IconFieldModule} from 'primeng/iconfield';
 import {InputIconModule} from 'primeng/inputicon';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {CascadeSelectModule} from 'primeng/cascadeselect';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -54,7 +55,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     ChipsModule,
     IconFieldModule,
     InputIconModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    CascadeSelectModule
   ]
 })
 export class PrimengWidgetsModule {}

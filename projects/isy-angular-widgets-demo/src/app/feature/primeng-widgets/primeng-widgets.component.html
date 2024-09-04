@@ -25,7 +25,7 @@
           <p-inputGroupAddon>
             <i class="pi pi-user"></i>
           </p-inputGroupAddon>
-          <input id="inputGroup" pInputText placeholder="Nutzername" class="w-full" />
+          <input id="inputGroup" pInputText placeholder="User" class="w-full" />
         </p-inputGroup>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
@@ -109,6 +109,18 @@
           [suggestions]="filteredCountries"
           (completeMethod)="filterCountry($event)"
         ></p-autoComplete>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="cascadeSelect">CascadeSelect</label>
+        <p-cascadeSelect
+          id="cascadeSelect"
+          [options]="cities"
+          optionLabel="name"
+          optionGroupLabel="name"
+          [optionGroupChildren]="['states', 'cities']"
+          placeholder="Select a City"
+          styleClass="w-full"
+        ></p-cascadeSelect>
       </div>
     </div>
   </p-tabPanel>
