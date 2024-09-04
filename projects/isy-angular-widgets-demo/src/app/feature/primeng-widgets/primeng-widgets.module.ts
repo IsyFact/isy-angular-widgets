@@ -20,6 +20,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {RatingModule} from 'primeng/rating';
 import {SliderModule} from 'primeng/slider';
 import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+import {ChipsModule} from 'primeng/chips';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -44,7 +46,9 @@ import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
     RadioButtonModule,
     RatingModule,
     SliderModule,
-    TriStateCheckboxModule
+    TriStateCheckboxModule,
+    ToggleButtonModule,
+    ChipsModule
   ]
 })
 export class PrimengWidgetsModule {}
