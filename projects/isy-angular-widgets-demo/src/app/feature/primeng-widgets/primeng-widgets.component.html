@@ -132,6 +132,25 @@
           styleClass="w-full"
         ></p-dropdown>
       </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="listbox">Listbox</label>
+        <p-listbox
+          id="listbox"
+          [options]="countries"
+          optionLabel="name"
+          styleClass="w-full"
+        ></p-listbox>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="multiSelect">MultiSelect</label>
+        <p-multiSelect
+          id="multiSelect"
+          [options]="countries"
+          optionLabel="name"
+          placeholder="Select Countries"
+          styleClass="w-full"
+        ></p-multiSelect>
+      </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">

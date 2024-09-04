@@ -27,6 +27,8 @@ import {InputIconModule} from 'primeng/inputicon';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CascadeSelectModule} from 'primeng/cascadeselect';
 import {DropdownModule} from 'primeng/dropdown';
+import {ListboxModule} from 'primeng/listbox';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -58,7 +60,9 @@ import {DropdownModule} from 'primeng/dropdown';
     InputIconModule,
     AutoCompleteModule,
     CascadeSelectModule,
-    DropdownModule
+    DropdownModule,
+    ListboxModule,
+    MultiSelectModule
   ]
 })
 export class PrimengWidgetsModule {}
