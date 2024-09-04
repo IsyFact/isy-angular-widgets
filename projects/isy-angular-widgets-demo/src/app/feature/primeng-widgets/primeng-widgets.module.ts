@@ -24,6 +24,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 import {ChipsModule} from 'primeng/chips';
 import {IconFieldModule} from 'primeng/iconfield';
 import {InputIconModule} from 'primeng/inputicon';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -52,7 +53,8 @@ import {InputIconModule} from 'primeng/inputicon';
     ToggleButtonModule,
     ChipsModule,
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    AutoCompleteModule
   ]
 })
 export class PrimengWidgetsModule {}
