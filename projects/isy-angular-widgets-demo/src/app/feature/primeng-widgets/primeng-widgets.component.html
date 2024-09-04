@@ -122,6 +122,16 @@
           styleClass="w-full"
         ></p-cascadeSelect>
       </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="dropdown">Dropdown</label>
+        <p-dropdown
+          id="dropdown"
+          [options]="countries"
+          optionLabel="name"
+          placeholder="Select a Country"
+          styleClass="w-full"
+        ></p-dropdown>
+      </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
