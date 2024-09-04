@@ -22,6 +22,8 @@ import {SliderModule} from 'primeng/slider';
 import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {ChipsModule} from 'primeng/chips';
+import {IconFieldModule} from 'primeng/iconfield';
+import {InputIconModule} from 'primeng/inputicon';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -48,7 +50,9 @@ import {ChipsModule} from 'primeng/chips';
     SliderModule,
     TriStateCheckboxModule,
     ToggleButtonModule,
-    ChipsModule
+    ChipsModule,
+    IconFieldModule,
+    InputIconModule
   ]
 })
 export class PrimengWidgetsModule {}
