@@ -18,6 +18,8 @@ import {KeyFilterModule} from 'primeng/keyfilter';
 import {PasswordModule} from 'primeng/password';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {RatingModule} from 'primeng/rating';
+import {SliderModule} from 'primeng/slider';
+import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -40,7 +42,9 @@ import {RatingModule} from 'primeng/rating';
     KeyFilterModule,
     PasswordModule,
     RadioButtonModule,
-    RatingModule
+    RatingModule,
+    SliderModule,
+    TriStateCheckboxModule
   ]
 })
 export class PrimengWidgetsModule {}
