@@ -1,4 +1,4 @@
-import {Country} from '../model/country';
+import {Country, CountryCityMap} from '../model/country';
 
 export const countryData: Country[] = [
   {name: 'Afghanistan', code: 'AF'},
@@ -242,4 +242,76 @@ export const countryData: Country[] = [
   {name: 'Yemen', code: 'YE'},
   {name: 'Zambia', code: 'ZM'},
   {name: 'Zimbabwe', code: 'ZW'}
+];
+
+export const countryCityMapping: CountryCityMap[] = [
+  {
+    name: 'Australia',
+    states: [
+      {
+        name: 'New South Wales',
+        cities: [
+          {name: 'Sydney', code: 'A-SY'},
+          {name: 'Newcastle', code: 'A-NE'},
+          {name: 'Wollongong', code: 'A-WO'}
+        ]
+      },
+      {
+        name: 'Queensland',
+        cities: [
+          {name: 'Brisbane', code: 'A-BR'},
+          {name: 'Townsville', code: 'A-TO'}
+        ]
+      }
+    ]
+  },
+  {
+    name: 'Canada',
+    states: [
+      {
+        name: 'Quebec',
+        cities: [
+          {name: 'Montreal', code: 'C-MO'},
+          {name: 'Quebec City', code: 'C-QU'}
+        ]
+      },
+      {
+        name: 'Ontario',
+        cities: [
+          {name: 'Ottawa', code: 'C-OT'},
+          {name: 'Toronto', code: 'C-TO'}
+        ]
+      }
+    ]
+  },
+  {
+    name: 'United States',
+    states: [
+      {
+        name: 'California',
+        cities: [
+          {name: 'Los Angeles', code: 'US-LA'},
+          {name: 'San Diego', code: 'US-SD'},
+          {name: 'San Francisco', code: 'US-SF'}
+        ]
+      },
+      {
+        name: 'Florida',
+        cities: [
+          {name: 'Jacksonville', code: 'US-JA'},
+          {name: 'Miami', code: 'US-MI'},
+          {name: 'Tampa', code: 'US-TA'},
+          {name: 'Orlando', code: 'US-OR'}
+        ]
+      },
+      {
+        name: 'Texas',
+        cities: [
+          {name: 'Austin', code: 'US-AU'},
+          {name: 'Dallas', code: 'US-DA'},
+          {name: 'Houston', code: 'US-HO'}
+        ]
+      }
+    ]
+  }
 ];
