@@ -16,6 +16,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {KnobModule} from 'primeng/knob';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {PasswordModule} from 'primeng/password';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {RatingModule} from 'primeng/rating';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -36,7 +38,9 @@ import {PasswordModule} from 'primeng/password';
     InputTextareaModule,
     KnobModule,
     KeyFilterModule,
-    PasswordModule
+    PasswordModule,
+    RadioButtonModule,
+    RatingModule
   ]
 })
 export class PrimengWidgetsModule {}
