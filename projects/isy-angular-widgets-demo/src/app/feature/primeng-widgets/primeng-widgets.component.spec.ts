@@ -1,6 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {PrimengWidgetsComponent} from './primeng-widgets.component';
+import {FormsModule} from '@angular/forms';
+import {fileOptionData} from './data/file-option-data';
+import {countryData} from './data/country';
+import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 
 describe('PrimengWidgetsComponent', () => {
   let component: PrimengWidgetsComponent;
@@ -8,7 +11,8 @@ describe('PrimengWidgetsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PrimengWidgetsComponent]
+      declarations: [PrimengWidgetsComponent],
+      imports: [FormsModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PrimengWidgetsComponent);
@@ -18,5 +22,30 @@ describe('PrimengWidgetsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have initial counties and filtered counties', () => {
+    expect(component.countries.length).toBe(countryData.length);
+    expect(component.filteredCountries.length).toBe(0);
+  });
+
+  it('should filter countries based on the given query', () => {
+    let query = 'United';
+    const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
+    component.filterCountry(event);
+    expect(component.filteredCountries.length).toBeGreaterThan(0);
+
+    query = 'No country';
+    const noCountryEvent: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
+    component.filterCountry(noCountryEvent);
+    expect(component.filteredCountries.length).toBe(0);
+  });
+
+  it('should have the correct initial values for the files array', () => {
+    expect(component.files.length).toBe(fileOptionData.length);
+  });
+
+  it('should have the initial stateOptions array with two values', () => {
+    expect(component.stateOptions.length).toBe(2);
   });
 });
