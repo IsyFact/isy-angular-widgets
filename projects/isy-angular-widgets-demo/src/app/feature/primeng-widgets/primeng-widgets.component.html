@@ -150,6 +150,15 @@
         <label for="selectButton">SelectButton</label>
         <p-selectButton id="selectButton" [options]="stateOptions"></p-selectButton>
       </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="treeSelect">TreeSelect</label>
+        <p-treeSelect
+          inputId="treeSelect"
+          [options]="files"
+          placeholder="Select Item"
+          containerStyleClass="w-full"
+        ></p-treeSelect>
+      </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">

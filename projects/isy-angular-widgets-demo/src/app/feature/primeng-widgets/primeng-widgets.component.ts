@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
+import {FileOption} from './model/file-option';
+import {fileOptionData} from './data/file-option-data';
 
 @Component({
   selector: 'demo-primeng-widgets',
@@ -11,6 +13,7 @@ import {countryCityMapping, countryData} from './data/country';
 export class PrimengWidgetsComponent {
   countries: Country[] = countryData;
   filteredCountries: Country[] = [];
+  files: FileOption[] = fileOptionData;
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   cities: any[] = countryCityMapping;

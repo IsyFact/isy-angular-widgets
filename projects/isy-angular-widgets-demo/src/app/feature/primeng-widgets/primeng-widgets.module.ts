@@ -30,6 +30,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ListboxModule} from 'primeng/listbox';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {TreeSelectModule} from 'primeng/treeselect';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -64,7 +65,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     DropdownModule,
     ListboxModule,
     MultiSelectModule,
-    SelectButtonModule
+    SelectButtonModule,
+    TreeSelectModule
   ]
 })
 export class PrimengWidgetsModule {}
