@@ -14,12 +14,12 @@ import {MenuItem} from 'primeng/api';
 export class PrimengWidgetsComponent {
   countries: Country[] = countryData;
   filteredCountries: Country[] = [];
-  files: FileOption[] = fileOptionData;
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   cities: any[] = countryCityMapping;
 
   stateOptions: string[] = ['Off', 'On'];
+  files: FileOption[] = fileOptionData;
   option: MenuItem[] = optionData;
 
   filterCountry(event: AutoCompleteCompleteEvent): void {
