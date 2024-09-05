@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PrimengWidgetsComponent} from './primeng-widgets.component';
 import {FormsModule} from '@angular/forms';
-import {fileOptionData} from './data/file-option-data';
+import {fileOptionData} from './data/file-option';
 import {countryData} from './data/country';
 import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 

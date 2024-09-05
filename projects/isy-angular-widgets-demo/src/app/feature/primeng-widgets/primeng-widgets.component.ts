@@ -3,7 +3,7 @@ import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
 import {FileOption} from './model/file-option';
-import {fileOptionData} from './data/file-option-data';
+import {fileOptionData} from './data/file-option';
 
 @Component({
   selector: 'demo-primeng-widgets',
