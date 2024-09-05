@@ -159,6 +159,14 @@
           containerStyleClass="w-full"
         ></p-treeSelect>
       </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="button">Button </label>
+        <p-button id="button" label="Primary Colored Button"></p-button>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="splitButton">SplitButton</label>
+        <p-splitButton id="splitButton" label="Save" icon="pi pi-save" [model]="option"></p-splitButton>
+      </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">

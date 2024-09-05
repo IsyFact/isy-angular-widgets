@@ -1,4 +1,5 @@
 import {FileOption} from '../model/file-option';
+import {MenuItem} from 'primeng/api';
 
 export const fileOptionData: FileOption[] = [
   {
@@ -65,4 +66,11 @@ export const fileOptionData: FileOption[] = [
       }
     ]
   }
+];
+
+export const optionData: MenuItem[] = [
+  {label: 'Update', icon: 'pi pi-refresh'},
+  {label: 'Delete', icon: 'pi pi-times'},
+  {label: 'Add', icon: 'pi pi-plus'},
+  {label: 'Cancel', icon: 'pi pi-minus'}
 ];

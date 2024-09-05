@@ -3,7 +3,8 @@ import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
 import {FileOption} from './model/file-option';
-import {fileOptionData} from './data/file-option';
+import {fileOptionData, optionData} from './data/file-option';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'demo-primeng-widgets',
@@ -19,6 +20,7 @@ export class PrimengWidgetsComponent {
   cities: any[] = countryCityMapping;
 
   stateOptions: string[] = ['Off', 'On'];
+  option: MenuItem[] = optionData;
 
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];
