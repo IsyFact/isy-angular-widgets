@@ -134,12 +134,7 @@
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="listbox">Listbox</label>
-        <p-listbox
-          id="listbox"
-          [options]="countries"
-          optionLabel="name"
-          styleClass="w-full"
-        ></p-listbox>
+        <p-listbox id="listbox" [options]="countries" optionLabel="name" styleClass="w-full"></p-listbox>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="multiSelect">MultiSelect</label>
@@ -150,6 +145,10 @@
           placeholder="Select Countries"
           styleClass="w-full"
         ></p-multiSelect>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="selectButton">SelectButton</label>
+        <p-selectButton id="selectButton" [options]="stateOptions"></p-selectButton>
       </div>
     </div>
   </p-tabPanel>

@@ -29,6 +29,7 @@ import {CascadeSelectModule} from 'primeng/cascadeselect';
 import {DropdownModule} from 'primeng/dropdown';
 import {ListboxModule} from 'primeng/listbox';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -62,7 +63,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
     CascadeSelectModule,
     DropdownModule,
     ListboxModule,
-    MultiSelectModule
+    MultiSelectModule,
+    SelectButtonModule
   ]
 })
 export class PrimengWidgetsModule {}

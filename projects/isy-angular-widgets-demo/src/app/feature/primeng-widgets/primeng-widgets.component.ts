@@ -15,6 +15,8 @@ export class PrimengWidgetsComponent {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   cities: any[] = countryCityMapping;
 
+  stateOptions: string[] = ['Off', 'On'];
+
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];
     const query = event.query;
