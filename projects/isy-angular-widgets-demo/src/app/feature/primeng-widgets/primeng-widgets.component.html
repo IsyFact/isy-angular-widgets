@@ -242,6 +242,37 @@
         </ng-template>
       </p-table>
     </div>
+    <div class="flex flex-column gap-2">
+      <label for="treeTable">TreeTable</label>
+      <p-treeTable id="treeTable" [value]="itSolutions" selectionMode="single">
+        <ng-template pTemplate="header">
+          <tr>
+            <th ttSortableColumn="name">
+              Name
+              <p-treeTableSortIcon field="name"></p-treeTableSortIcon>
+            </th>
+            <th ttSortableColumn="size">
+              Size
+              <p-treeTableSortIcon field="size"></p-treeTableSortIcon>
+            </th>
+            <th ttSortableColumn="type">
+              Type
+              <p-treeTableSortIcon field="type"></p-treeTableSortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-itSolution let-subSolution="rowData">
+          <tr [ttRow]="itSolution" [ttSelectableRow]="itSolution">
+            <td>
+              <p-treeTableToggler [rowNode]="itSolution"></p-treeTableToggler>
+              {{ subSolution.name }}
+            </td>
+            <td>{{ subSolution.size }}</td>
+            <td>{{ subSolution.type }}</td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+    </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
     <div class="grid mt-3">

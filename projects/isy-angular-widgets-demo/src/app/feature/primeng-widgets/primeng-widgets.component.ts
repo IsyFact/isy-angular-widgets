@@ -6,8 +6,8 @@ import {FileOption} from './model/file-option';
 import {fileOptionData, optionData} from './data/file-option';
 import {MenuItem, TreeNode} from 'primeng/api';
 import {organizationData} from './data/organization';
-import {DeliveryStatus, Product} from './model/product';
-import {deliveryData, productData} from './data/product';
+import {DeliveryStatus, ItSolution, Product} from './model/product';
+import {deliveryData, itSolutionData, productData} from './data/product';
 
 @Component({
   selector: 'demo-primeng-widgets',
@@ -29,6 +29,7 @@ export class PrimengWidgetsComponent {
   products: Product[] = productData;
   selectedProduct: Product = {};
   deliveryStatus: DeliveryStatus[] = deliveryData;
+  itSolutions: ItSolution[] = itSolutionData;
 
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];

@@ -19,3 +19,16 @@ export interface DeliveryStatus {
   status: string;
   date: string;
 }
+
+/**
+ * An interface for displaying IT solutions with name, size, type and possible sub solutions
+ */
+export interface ItSolution {
+  key: string;
+  data: {
+    name: string;
+    size: string;
+    type: string;
+  };
+  children?: ItSolution[];
+}
