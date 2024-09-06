@@ -188,6 +188,49 @@
       <label for="paginator">Paginator</label>
       <p-paginator id="paginator" [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[5, 10, 20]"></p-paginator>
     </div>
+    <div class="flex flex-column gap-2">
+      <label for="table">Table</label>
+      <p-table
+        id="table"
+        [value]="products"
+        selectionMode="single"
+        [(selection)]="selectedProduct"
+        styleClass="p-datatable-striped"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="code">
+              Code
+              <p-columnFilter field="code" type="text" display="menu"></p-columnFilter>
+              <p-sortIcon field="code"></p-sortIcon>
+            </th>
+            <th pSortableColumn="name">
+              Name
+              <p-columnFilter field="name" type="text" display="menu"></p-columnFilter>
+              <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="category">
+              Category
+              <p-columnFilter field="category" type="text" display="menu"></p-columnFilter>
+              <p-sortIcon field="category"></p-sortIcon>
+            </th>
+            <th pSortableColumn="price">
+              Price
+              <p-columnFilter field="price" type="numeric" currency="EUR" display="menu" />
+              <p-sortIcon field="price"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr [pSelectableRow]="product">
+            <td>{{ product.code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.price | currency: 'EUR' }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
     <div class="grid mt-3">

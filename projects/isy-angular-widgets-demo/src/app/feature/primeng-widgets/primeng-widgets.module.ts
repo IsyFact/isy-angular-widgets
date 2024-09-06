@@ -37,6 +37,8 @@ import {SpeedDialModule} from 'primeng/speeddial';
 import {OrganizationChartModule} from 'primeng/organizationchart';
 import {PaginatorModule} from 'primeng/paginator';
 import {ScrollerModule} from 'primeng/scroller';
+import {TableModule} from 'primeng/table';
+import {CurrencyPipe} from '@angular/common';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -78,7 +80,9 @@ import {ScrollerModule} from 'primeng/scroller';
     SpeedDialModule,
     OrganizationChartModule,
     PaginatorModule,
-    ScrollerModule
+    ScrollerModule,
+    TableModule,
+    CurrencyPipe
   ]
 })
 export class PrimengWidgetsModule {}
