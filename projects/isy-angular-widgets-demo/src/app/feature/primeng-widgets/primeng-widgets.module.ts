@@ -34,6 +34,7 @@ import {TreeSelectModule} from 'primeng/treeselect';
 import {ButtonModule} from 'primeng/button';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {SpeedDialModule} from 'primeng/speeddial';
+import {OrganizationChartModule} from 'primeng/organizationchart';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -72,7 +73,8 @@ import {SpeedDialModule} from 'primeng/speeddial';
     TreeSelectModule,
     ButtonModule,
     SplitButtonModule,
-    SpeedDialModule
+    SpeedDialModule,
+    OrganizationChartModule
   ]
 })
 export class PrimengWidgetsModule {}

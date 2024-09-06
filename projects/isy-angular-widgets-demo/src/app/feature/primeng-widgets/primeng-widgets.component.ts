@@ -4,7 +4,8 @@ import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
 import {FileOption} from './model/file-option';
 import {fileOptionData, optionData} from './data/file-option';
-import {MenuItem} from 'primeng/api';
+import {MenuItem, TreeNode} from 'primeng/api';
+import {organizationData} from './data/organization';
 
 @Component({
   selector: 'demo-primeng-widgets',
@@ -21,6 +22,7 @@ export class PrimengWidgetsComponent {
   stateOptions: string[] = ['Off', 'On'];
   files: FileOption[] = fileOptionData;
   option: MenuItem[] = optionData;
+  organization: TreeNode[] = organizationData;
 
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];
