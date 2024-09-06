@@ -174,10 +174,17 @@
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="scroller">Scroller</label>
         <p-scroller id="scroller" [items]="countries" [itemSize]="50" scrollHeight="200px" styleClass="w-full">
-          <ng-template pTemplate="country" let-country>
+          <ng-template pTemplate="item" let-country>
             <div style="height: 50px">{{ country.name }}</div>
           </ng-template>
         </p-scroller>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="timeline">Timeline</label>
+        <p-timeline id="timeline" [value]="deliveryStatus">
+          <ng-template let-delivery pTemplate="opposite"> {{ delivery.status }} </ng-template>
+          <ng-template let-delivery pTemplate="content"> {{ delivery.date }} </ng-template>
+        </p-timeline>
       </div>
     </div>
     <div class="flex flex-column gap-2">

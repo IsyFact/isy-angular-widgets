@@ -1,4 +1,4 @@
-import {Product} from '../model/product';
+import {DeliveryStatus, Product} from '../model/product';
 
 export const productData: Product[] = [
   {
@@ -141,4 +141,11 @@ export const productData: Product[] = [
     inventoryStatus: 'OUTOFSTOCK',
     rating: 3
   }
+];
+
+export const deliveryData: DeliveryStatus[] = [
+  {status: 'Ordered', date: '15/10/2020 10:30'},
+  {status: 'Processing', date: '15/10/2020 14:00'},
+  {status: 'Shipped', date: '15/10/2020 16:15'},
+  {status: 'Delivered', date: '16/10/2020 10:00'}
 ];

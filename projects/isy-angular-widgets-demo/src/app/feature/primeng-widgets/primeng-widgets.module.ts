@@ -39,6 +39,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import {ScrollerModule} from 'primeng/scroller';
 import {TableModule} from 'primeng/table';
 import {CurrencyPipe} from '@angular/common';
+import {TimelineModule} from 'primeng/timeline';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -82,7 +83,8 @@ import {CurrencyPipe} from '@angular/common';
     PaginatorModule,
     ScrollerModule,
     TableModule,
-    CurrencyPipe
+    CurrencyPipe,
+    TimelineModule
   ]
 })
 export class PrimengWidgetsModule {}

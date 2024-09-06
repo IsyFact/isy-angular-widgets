@@ -11,3 +11,11 @@ export interface Product {
   category?: string;
   rating?: number;
 }
+
+/**
+ * An interface for displaying delivery status with status and date
+ */
+export interface DeliveryStatus {
+  status: string;
+  date: string;
+}
