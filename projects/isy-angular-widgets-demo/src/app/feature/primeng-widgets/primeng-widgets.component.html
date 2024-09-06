@@ -186,6 +186,10 @@
           <ng-template let-delivery pTemplate="content"> {{ delivery.date }} </ng-template>
         </p-timeline>
       </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="tree">Tree</label>
+        <p-tree id="tree" [value]="files" class="w-full"></p-tree>
+      </div>
     </div>
     <div class="flex flex-column gap-2">
       <label for="organizationChart">OrganizationChart</label>
