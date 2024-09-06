@@ -35,6 +35,8 @@ import {ButtonModule} from 'primeng/button';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {SpeedDialModule} from 'primeng/speeddial';
 import {OrganizationChartModule} from 'primeng/organizationchart';
+import {PaginatorModule} from 'primeng/paginator';
+import {ScrollerModule} from 'primeng/scroller';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -74,7 +76,9 @@ import {OrganizationChartModule} from 'primeng/organizationchart';
     ButtonModule,
     SplitButtonModule,
     SpeedDialModule,
-    OrganizationChartModule
+    OrganizationChartModule,
+    PaginatorModule,
+    ScrollerModule
   ]
 })
 export class PrimengWidgetsModule {}
