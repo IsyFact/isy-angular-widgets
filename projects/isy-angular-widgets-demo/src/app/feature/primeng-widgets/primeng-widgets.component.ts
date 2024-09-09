@@ -47,9 +47,10 @@ export class PrimengWidgetsComponent {
     this.filteredCountries = filtered;
   }
 
-  confirm(event: Event) {
+  confirmDialog(event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
+      key: 'confirmDialog',
       message: 'Are you sure that you want to proceed?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
@@ -58,6 +59,21 @@ export class PrimengWidgetsComponent {
       rejectButtonStyleClass:"p-button-text",
       accept: () => {
         this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'You have accepted'});
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
+      }
+    });
+  }
+
+  confirmPopup(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      key: 'confirmPopup',
+      message: 'Are you sure you want to proceed?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted'});
       },
       reject: () => {
         this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected'});

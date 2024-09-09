@@ -53,6 +53,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ToastModule} from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -109,7 +110,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ScrollPanelModule,
     ToolbarModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ConfirmPopupModule
   ]
 })
 export class PrimengWidgetsModule {}

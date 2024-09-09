@@ -193,8 +193,14 @@
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="confirmDialog">ConfirmDialog</label>
         <p-toast></p-toast>
-        <p-confirmDialog id="confirmDialog"></p-confirmDialog>
-        <p-button (onClick)="confirm($event)" label="Save"></p-button>
+        <p-confirmDialog key="confirmDialog"></p-confirmDialog>
+        <p-button (onClick)="confirmDialog($event)" label="Save"></p-button>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="confirmPopup">ConfirmPopup</label>
+        <p-toast></p-toast>
+        <p-confirmPopup key="confirmPopup"></p-confirmPopup>
+        <p-button (onClick)="confirmPopup($event)" label="Save"></p-button>
       </div>
     </div>
     <div class="flex flex-column gap-2">
