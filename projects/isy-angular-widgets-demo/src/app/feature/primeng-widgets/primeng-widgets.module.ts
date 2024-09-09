@@ -55,6 +55,8 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {DialogModule} from 'primeng/dialog';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {SidebarModule} from 'primeng/sidebar';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -113,7 +115,9 @@ import {DialogModule} from 'primeng/dialog';
     ToastModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
-    DialogModule
+    DialogModule,
+    OverlayPanelModule,
+    SidebarModule
   ]
 })
 export class PrimengWidgetsModule {}

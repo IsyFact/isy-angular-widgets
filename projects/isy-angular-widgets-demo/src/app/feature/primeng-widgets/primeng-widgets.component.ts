@@ -34,7 +34,8 @@ export class PrimengWidgetsComponent {
   deliveryStatus: DeliveryStatus[] = deliveryData;
   itSolutions: ItSolution[] = itSolutionData;
 
-  visible: boolean = false;
+  visibleDialog: boolean = false;
+  visibleSidebar: boolean = false;
 
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];
@@ -84,6 +85,14 @@ export class PrimengWidgetsComponent {
   }
 
   showDialog() {
-    this.visible = true;
+    this.visibleDialog = true;
+  }
+
+  closeDialog() {
+    this.visibleDialog = false;
+  }
+
+  showSidebar() {
+    this.visibleSidebar = true;
   }
 }

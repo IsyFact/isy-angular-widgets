@@ -205,14 +205,31 @@
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="dialog">Dialog</label>
         <p-button (onClick)="showDialog()" label="Dialog" />
-        <p-dialog id="dialog" header="Dialog" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+        <p-dialog id="dialog" header="Dialog" [modal]="true" [(visible)]="visibleDialog" [style]="{ width: '25rem' }">
           <div class="flex flex-column gap-2">
             Content
           </div>
           <div class="flex justify-content-end">
-            <p-button label="Ok" (onClick)="visible = false"></p-button>
+            <p-button label="Ok" (onClick)="closeDialog()"></p-button>
           </div>
         </p-dialog>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="overlayPanel">OverlayPanel</label>
+        <p-button (onClick)="overlayPanel.toggle($event)" label="OverlayPanel"></p-button>
+        <p-overlayPanel id="overlayPanel" #overlayPanel>
+          <div class="flex flex-column gap-2">
+            Content
+          </div>
+        </p-overlayPanel>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="sidebar">Sidebar</label>
+        <p-button (onClick)="showSidebar()" label="Sidebar"></p-button>
+        <p-sidebar id="sidebar" [(visible)]="visibleSidebar" position="left">
+          <h1>Sidebar</h1>
+          Content
+        </p-sidebar>
       </div>
     </div>
     <div class="flex flex-column gap-2">
