@@ -205,10 +205,8 @@
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="dialog">Dialog</label>
         <p-button (onClick)="showDialog()" label="Dialog" />
-        <p-dialog id="dialog" header="Dialog" [modal]="true" [(visible)]="visibleDialog" [style]="{ width: '25rem' }">
-          <div class="flex flex-column gap-2">
-            Content
-          </div>
+        <p-dialog id="dialog" header="Dialog" [modal]="true" [(visible)]="visibleDialog" [style]="{width: '25rem'}">
+          <div class="flex flex-column gap-2">Content</div>
           <div class="flex justify-content-end">
             <p-button label="Ok" (onClick)="closeDialog()"></p-button>
           </div>
@@ -218,9 +216,7 @@
         <label for="overlayPanel">OverlayPanel</label>
         <p-button (onClick)="overlayPanel.toggle($event)" label="OverlayPanel"></p-button>
         <p-overlayPanel id="overlayPanel" #overlayPanel>
-          <div class="flex flex-column gap-2">
-            Content
-          </div>
+          <div class="flex flex-column gap-2">Content</div>
         </p-overlayPanel>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
@@ -230,6 +226,18 @@
           <h1>Sidebar</h1>
           Content
         </p-sidebar>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="tooltip">Tooltip</label>
+        <input
+          id="tooltip"
+          type="text"
+          pInputText
+          pTooltip="Enter something"
+          tooltipPosition="bottom"
+          placeholder="Tooltip"
+          class="w-full"
+        />
       </div>
     </div>
     <div class="flex flex-column gap-2">
@@ -442,14 +450,14 @@
       <label for="toolbar">Toolbar</label>
       <p-toolbar id="toolbar">
         <div class="p-toolbar-group-start">
-          <p-button icon="pi pi-print" class="mr-2"/>
+          <p-button icon="pi pi-print" class="mr-2" />
           <p-button icon="pi pi-upload"></p-button>
         </div>
         <div class="p-toolbar-group-center">
-        <span class="p-input-icon-left">
+          <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
             <input pInputText placeholder="Search" />
-        </span>
+          </span>
         </div>
         <div class="p-toolbar-group-end">
           <p-splitButton label="Save" icon="pi pi-check" [model]="option"></p-splitButton>

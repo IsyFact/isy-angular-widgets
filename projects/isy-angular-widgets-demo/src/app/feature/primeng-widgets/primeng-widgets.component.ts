@@ -16,7 +16,10 @@ import {deliveryData, itSolutionData, productData} from './data/product';
   providers: [ConfirmationService, MessageService]
 })
 export class PrimengWidgetsComponent {
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) {}
+  constructor(
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
 
   countries: Country[] = countryData;
   filteredCountries: Country[] = [];
@@ -50,49 +53,49 @@ export class PrimengWidgetsComponent {
     this.filteredCountries = filtered;
   }
 
-  confirmDialog(event: Event) {
+  confirmDialog(event: Event): void {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       key: 'confirmDialog',
       message: 'Are you sure that you want to proceed?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
-      acceptIcon:"none",
-      rejectIcon:"none",
-      rejectButtonStyleClass:"p-button-text",
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      rejectButtonStyleClass: 'p-button-text',
       accept: () => {
-        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'You have accepted'});
+        this.messageService.add({severity: 'success', summary: 'Confirmed', detail: 'You have accepted'});
       },
       reject: () => {
-        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
+        this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
       }
     });
   }
 
-  confirmPopup(event: Event) {
+  confirmPopup(event: Event): void {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       key: 'confirmPopup',
       message: 'Are you sure you want to proceed?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted'});
+        this.messageService.add({severity: 'info', summary: 'Confirmed', detail: 'You have accepted'});
       },
       reject: () => {
-        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
+        this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
       }
     });
   }
 
-  showDialog() {
+  showDialog(): void {
     this.visibleDialog = true;
   }
 
-  closeDialog() {
+  closeDialog(): void {
     this.visibleDialog = false;
   }
 
-  showSidebar() {
+  showSidebar(): void {
     this.visibleSidebar = true;
   }
 }

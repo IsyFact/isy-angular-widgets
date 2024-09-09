@@ -57,6 +57,7 @@ import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {DialogModule} from 'primeng/dialog';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -117,7 +118,8 @@ import {SidebarModule} from 'primeng/sidebar';
     ConfirmPopupModule,
     DialogModule,
     OverlayPanelModule,
-    SidebarModule
+    SidebarModule,
+    TooltipModule
   ]
 })
 export class PrimengWidgetsModule {}
