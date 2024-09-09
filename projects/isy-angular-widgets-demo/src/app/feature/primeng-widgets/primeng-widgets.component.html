@@ -276,22 +276,14 @@
     <div class="flex flex-column gap-2">
       <label for="accordion">Accordion</label>
       <p-accordion id="accordion">
-        <p-accordionTab header="Header 1">
-          Content 1
-        </p-accordionTab>
-        <p-accordionTab header="Header 2">
-          Content 2
-        </p-accordionTab>
-        <p-accordionTab header="Header 3">
-          Content 3
-        </p-accordionTab>
+        <p-accordionTab header="Header 1"> Content 1 </p-accordionTab>
+        <p-accordionTab header="Header 2"> Content 2 </p-accordionTab>
+        <p-accordionTab header="Header 3"> Content 3 </p-accordionTab>
       </p-accordion>
     </div>
     <div class="flex flex-column gap-2">
       <label for="card">Card</label>
-      <p-card id="card" header="Card">
-        Content
-      </p-card>
+      <p-card id="card" header="Card"> Content </p-card>
     </div>
     <div class="flex flex-column gap-2">
       <label for="divider">Divider</label>
@@ -301,28 +293,20 @@
     </div>
     <div class="flex flex-column gap-2">
       <label for="fieldset">Fieldset</label>
-      <p-fieldset id="fieldset" legend="Fieldset">
-        Content
-      </p-fieldset>
+      <p-fieldset id="fieldset" legend="Fieldset"> Content </p-fieldset>
     </div>
     <div class="flex flex-column gap-2">
       <label for="panel">Panel</label>
-      <p-panel id="panel" header="Panel">
-        Content
-      </p-panel>
+      <p-panel id="panel" header="Panel"> Content </p-panel>
     </div>
     <div class="flex flex-column gap-2">
       <label for="splitter">Splitter</label>
-      <p-splitter id="splitter" [style]="{ height: '75px' }">
+      <p-splitter id="splitter" [style]="{height: '75px'}">
         <ng-template pTemplate>
-          <div class="col flex align-items-center justify-content-center">
-            Left Side
-          </div>
+          <div class="col flex align-items-center justify-content-center">Left Side</div>
         </ng-template>
         <ng-template pTemplate>
-          <div class="col flex align-items-center justify-content-center">
-            Right Side
-          </div>
+          <div class="col flex align-items-center justify-content-center">Right Side</div>
         </ng-template>
       </p-splitter>
     </div>
@@ -332,55 +316,86 @@
         <p-stepperPanel header="Header I">
           <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
             <div class="flex flex-column h-12rem">
-              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+              <div
+                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+              >
                 Content I
               </div>
             </div>
             <div class="flex pt-4 justify-content-end">
-              <p-button
-                label="Next"
-                icon="pi pi-arrow-right"
-                iconPos="right"
-                (onClick)="nextCallback.emit()" />
+              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
           </ng-template>
         </p-stepperPanel>
         <p-stepperPanel header="Header II">
-          <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+          <ng-template
+            pTemplate="content"
+            let-prevCallback="prevCallback"
+            let-nextCallback="nextCallback"
+            let-index="index"
+          >
             <div class="flex flex-column h-12rem">
-              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+              <div
+                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+              >
                 Content II
               </div>
             </div>
             <div class="flex pt-4 justify-content-between">
-              <p-button
-                label="Back"
-                icon="pi pi-arrow-left"
-                (onClick)="prevCallback.emit()" />
-              <p-button
-                label="Next"
-                icon="pi pi-arrow-right"
-                iconPos="right"
-                (onClick)="nextCallback.emit()" />
+              <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
+              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
           </ng-template>
         </p-stepperPanel>
         <p-stepperPanel header="Header III">
           <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
             <div class="flex flex-column h-12rem">
-              <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+              <div
+                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+              >
                 Content III
               </div>
             </div>
             <div class="flex pt-4 justify-content-start">
-              <p-button
-                label="Back"
-                icon="pi pi-arrow-left"
-                (onClick)="prevCallback.emit()" />
+              <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
             </div>
           </ng-template>
         </p-stepperPanel>
       </p-stepper>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="scrollPanel">ScrollPanel</label>
+      <p-scrollPanel id="scrollPanel" [style]="{height: '150px'}">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </p>
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+          dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+          modi.
+        </p>
+        <p>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+          atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique
+          sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
+          facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
+          impedit quo minus.
+        </p>
+      </p-scrollPanel>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="tabView">TabView</label>
+      <p-tabView id="tabView">
+        <p-tabPanel header="Header 1"> Content 1 </p-tabPanel>
+        <p-tabPanel header="Header 2"> Content 2 </p-tabPanel>
+        <p-tabPanel header="Header 3"> Content 3 </p-tabPanel>
+      </p-tabView>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">

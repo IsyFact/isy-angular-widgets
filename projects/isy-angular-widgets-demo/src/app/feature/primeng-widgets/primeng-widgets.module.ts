@@ -49,6 +49,7 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {PanelModule} from 'primeng/panel';
 import {SplitterModule} from 'primeng/splitter';
 import {StepperModule} from 'primeng/stepper';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -102,7 +103,8 @@ import {StepperModule} from 'primeng/stepper';
     FieldsetModule,
     PanelModule,
     SplitterModule,
-    StepperModule
+    StepperModule,
+    ScrollPanelModule
   ]
 })
 export class PrimengWidgetsModule {}
