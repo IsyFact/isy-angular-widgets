@@ -51,10 +51,11 @@ import {SplitterModule} from 'primeng/splitter';
 import {StepperModule} from 'primeng/stepper';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {ToolbarModule} from 'primeng/toolbar';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
-  providers: [],
   imports: [
     PrimengWidgetsRoutingModule,
     TabViewModule,
@@ -106,7 +107,9 @@ import {ToolbarModule} from 'primeng/toolbar';
     SplitterModule,
     StepperModule,
     ScrollPanelModule,
-    ToolbarModule
+    ToolbarModule,
+    ToastModule,
+    ConfirmDialogModule
   ]
 })
 export class PrimengWidgetsModule {}

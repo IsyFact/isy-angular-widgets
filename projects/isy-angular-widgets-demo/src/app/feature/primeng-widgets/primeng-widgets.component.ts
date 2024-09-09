@@ -4,7 +4,7 @@ import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
 import {FileOption} from './model/file-option';
 import {fileOptionData, optionData} from './data/file-option';
-import {MenuItem, TreeNode} from 'primeng/api';
+import {ConfirmationService, MenuItem, MessageService, TreeNode} from 'primeng/api';
 import {organizationData} from './data/organization';
 import {DeliveryStatus, ItSolution, Product} from './model/product';
 import {deliveryData, itSolutionData, productData} from './data/product';
@@ -12,9 +12,12 @@ import {deliveryData, itSolutionData, productData} from './data/product';
 @Component({
   selector: 'demo-primeng-widgets',
   templateUrl: './primeng-widgets.component.html',
-  styleUrl: './primeng-widgets.component.scss'
+  styleUrl: './primeng-widgets.component.scss',
+  providers: [ConfirmationService, MessageService]
 })
 export class PrimengWidgetsComponent {
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) {}
+
   countries: Country[] = countryData;
   filteredCountries: Country[] = [];
 
@@ -42,5 +45,23 @@ export class PrimengWidgetsComponent {
     }
 
     this.filteredCountries = filtered;
+  }
+
+  confirm(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Are you sure that you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon:"none",
+      rejectIcon:"none",
+      rejectButtonStyleClass:"p-button-text",
+      accept: () => {
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'You have accepted'});
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
+      }
+    });
   }
 }
