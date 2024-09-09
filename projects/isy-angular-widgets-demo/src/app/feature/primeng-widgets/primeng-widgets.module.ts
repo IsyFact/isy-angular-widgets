@@ -50,6 +50,7 @@ import {PanelModule} from 'primeng/panel';
 import {SplitterModule} from 'primeng/splitter';
 import {StepperModule} from 'primeng/stepper';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {ToolbarModule} from 'primeng/toolbar';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -104,7 +105,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     PanelModule,
     SplitterModule,
     StepperModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    ToolbarModule
   ]
 })
 export class PrimengWidgetsModule {}
