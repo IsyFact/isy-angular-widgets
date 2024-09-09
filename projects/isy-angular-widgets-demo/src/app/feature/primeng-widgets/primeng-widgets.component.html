@@ -192,15 +192,27 @@
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="confirmDialog">ConfirmDialog</label>
+        <p-button (onClick)="confirmDialog($event)" label="Save"></p-button>
         <p-toast></p-toast>
         <p-confirmDialog key="confirmDialog"></p-confirmDialog>
-        <p-button (onClick)="confirmDialog($event)" label="Save"></p-button>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="confirmPopup">ConfirmPopup</label>
+        <p-button (onClick)="confirmPopup($event)" label="Save"></p-button>
         <p-toast></p-toast>
         <p-confirmPopup key="confirmPopup"></p-confirmPopup>
-        <p-button (onClick)="confirmPopup($event)" label="Save"></p-button>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="dialog">Dialog</label>
+        <p-button (onClick)="showDialog()" label="Dialog" />
+        <p-dialog id="dialog" header="Dialog" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+          <div class="flex flex-column gap-2">
+            Content
+          </div>
+          <div class="flex justify-content-end">
+            <p-button label="Ok" (onClick)="visible = false"></p-button>
+          </div>
+        </p-dialog>
       </div>
     </div>
     <div class="flex flex-column gap-2">

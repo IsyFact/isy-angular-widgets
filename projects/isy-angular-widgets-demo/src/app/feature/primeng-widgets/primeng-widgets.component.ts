@@ -34,6 +34,8 @@ export class PrimengWidgetsComponent {
   deliveryStatus: DeliveryStatus[] = deliveryData;
   itSolutions: ItSolution[] = itSolutionData;
 
+  visible: boolean = false;
+
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];
     const query = event.query;
@@ -79,5 +81,9 @@ export class PrimengWidgetsComponent {
         this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
       }
     });
+  }
+
+  showDialog() {
+    this.visible = true;
   }
 }
