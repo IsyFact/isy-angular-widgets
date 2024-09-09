@@ -8,6 +8,7 @@ import {ConfirmationService, MenuItem, MessageService, TreeNode} from 'primeng/a
 import {organizationData} from './data/organization';
 import {DeliveryStatus, ItSolution, Product} from './model/product';
 import {deliveryData, itSolutionData, productData} from './data/product';
+import {UploadEvent} from 'primeng/fileupload';
 
 @Component({
   selector: 'demo-primeng-widgets',
@@ -97,5 +98,9 @@ export class PrimengWidgetsComponent {
 
   showSidebar(): void {
     this.visibleSidebar = true;
+  }
+
+  onUpload(event: UploadEvent) {
+    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   }
 }

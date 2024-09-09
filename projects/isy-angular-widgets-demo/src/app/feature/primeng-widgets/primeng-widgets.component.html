@@ -239,6 +239,19 @@
           class="w-full"
         />
       </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="fileUpload">FileUpload</label>
+        <p-fileUpload
+          id="fileUpload"
+          mode="basic"
+          chooseIcon="pi pi-upload"
+          chooseLabel="FileUpload"
+          name="myfile"
+          accept="image/*,.pdf,.txt"
+          [maxFileSize]="1000000"
+          (onUpload)="onUpload($event)"
+        ></p-fileUpload>
+      </div>
     </div>
     <div class="flex flex-column gap-2">
       <label for="organizationChart">OrganizationChart</label>
