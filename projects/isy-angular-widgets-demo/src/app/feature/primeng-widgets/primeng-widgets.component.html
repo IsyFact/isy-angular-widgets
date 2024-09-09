@@ -299,6 +299,33 @@
       <p-divider id="divider"></p-divider>
       Text behind divider.
     </div>
+    <div class="flex flex-column gap-2">
+      <label for="fieldset">Fieldset</label>
+      <p-fieldset id="fieldset" legend="Fieldset">
+        Content
+      </p-fieldset>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="panel">Panel</label>
+      <p-panel id="panel" header="Panel">
+        Content
+      </p-panel>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="splitter">Splitter</label>
+      <p-splitter id="splitter" [style]="{ height: '75px' }">
+        <ng-template pTemplate>
+          <div class="col flex align-items-center justify-content-center">
+            Left Side
+          </div>
+        </ng-template>
+        <ng-template pTemplate>
+          <div class="col flex align-items-center justify-content-center">
+            Right Side
+          </div>
+        </ng-template>
+      </p-splitter>
+    </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
     <div class="grid mt-3">
