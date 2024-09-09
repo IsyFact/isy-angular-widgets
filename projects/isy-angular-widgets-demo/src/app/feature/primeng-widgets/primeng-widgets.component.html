@@ -210,22 +210,22 @@
       >
         <ng-template pTemplate="header">
           <tr>
-            <th pSortableColumn="code">
+            <th pSortableColumn="code" scope="col">
               Code
               <p-columnFilter field="code" type="text" display="menu"></p-columnFilter>
               <p-sortIcon field="code"></p-sortIcon>
             </th>
-            <th pSortableColumn="name">
+            <th pSortableColumn="name" scope="col">
               Name
               <p-columnFilter field="name" type="text" display="menu"></p-columnFilter>
               <p-sortIcon field="name"></p-sortIcon>
             </th>
-            <th pSortableColumn="category">
+            <th pSortableColumn="category" scope="col">
               Category
               <p-columnFilter field="category" type="text" display="menu"></p-columnFilter>
               <p-sortIcon field="category"></p-sortIcon>
             </th>
-            <th pSortableColumn="price">
+            <th pSortableColumn="price" scope="col">
               Price
               <p-columnFilter field="price" type="numeric" currency="EUR" display="menu" />
               <p-sortIcon field="price"></p-sortIcon>
@@ -247,15 +247,15 @@
       <p-treeTable id="treeTable" [value]="itSolutions" selectionMode="single">
         <ng-template pTemplate="header">
           <tr>
-            <th ttSortableColumn="name">
+            <th ttSortableColumn="name" scope="col">
               Name
               <p-treeTableSortIcon field="name"></p-treeTableSortIcon>
             </th>
-            <th ttSortableColumn="size">
+            <th ttSortableColumn="size" scope="col">
               Size
               <p-treeTableSortIcon field="size"></p-treeTableSortIcon>
             </th>
-            <th ttSortableColumn="type">
+            <th ttSortableColumn="type" scope="col">
               Type
               <p-treeTableSortIcon field="type"></p-treeTableSortIcon>
             </th>
