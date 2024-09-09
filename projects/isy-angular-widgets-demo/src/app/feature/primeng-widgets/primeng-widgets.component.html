@@ -273,6 +273,32 @@
         </ng-template>
       </p-treeTable>
     </div>
+    <div class="flex flex-column gap-2">
+      <label for="accordion">Accordion</label>
+      <p-accordion id="accordion">
+        <p-accordionTab header="Header 1">
+          Content 1
+        </p-accordionTab>
+        <p-accordionTab header="Header 2">
+          Content 2
+        </p-accordionTab>
+        <p-accordionTab header="Header 3">
+          Content 3
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="card">Card</label>
+      <p-card id="card" header="Card">
+        Content
+      </p-card>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="divider">Divider</label>
+      Text above divider.
+      <p-divider id="divider"></p-divider>
+      Text behind divider.
+    </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
     <div class="grid mt-3">

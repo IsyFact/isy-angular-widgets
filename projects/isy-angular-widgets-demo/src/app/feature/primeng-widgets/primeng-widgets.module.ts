@@ -42,6 +42,9 @@ import {CurrencyPipe} from '@angular/common';
 import {TimelineModule} from 'primeng/timeline';
 import {TreeModule} from 'primeng/tree';
 import {TreeTableModule} from 'primeng/treetable';
+import {AccordionModule} from 'primeng/accordion';
+import {CardModule} from 'primeng/card';
+import {DividerModule} from 'primeng/divider';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -88,7 +91,10 @@ import {TreeTableModule} from 'primeng/treetable';
     CurrencyPipe,
     TimelineModule,
     TreeModule,
-    TreeTableModule
+    TreeTableModule,
+    AccordionModule,
+    CardModule,
+    DividerModule
   ]
 })
 export class PrimengWidgetsModule {}
