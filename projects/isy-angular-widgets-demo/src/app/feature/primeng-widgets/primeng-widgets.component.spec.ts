@@ -48,4 +48,20 @@ describe('PrimengWidgetsComponent', () => {
   it('should have the initial stateOptions array with two values', () => {
     expect(component.stateOptions.length).toBe(2);
   });
+
+  it('should show dialog', () => {
+    component.showDialog();
+    expect(component.visibleDialog).toBeTrue();
+  });
+
+  it('should close dialog', () => {
+    component.visibleDialog = true;
+    component.closeDialog();
+    expect(component.visibleDialog).toBeFalse();
+  });
+
+  it('should show sidebar', () => {
+    component.showSidebar();
+    expect(component.visibleSidebar).toBeTrue();
+  });
 });

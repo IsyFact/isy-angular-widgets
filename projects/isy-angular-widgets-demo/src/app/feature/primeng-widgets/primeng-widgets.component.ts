@@ -100,7 +100,7 @@ export class PrimengWidgetsComponent {
     this.visibleSidebar = true;
   }
 
-  onUpload(event: UploadEvent) {
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+  onUpload(event: UploadEvent): void {
+    this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
   }
 }
