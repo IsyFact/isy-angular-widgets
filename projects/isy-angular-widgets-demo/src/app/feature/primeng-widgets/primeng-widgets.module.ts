@@ -60,6 +60,7 @@ import {SidebarModule} from 'primeng/sidebar';
 import {TooltipModule} from 'primeng/tooltip';
 import {FileUploadModule} from 'primeng/fileupload';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {ContextMenuModule} from 'primeng/contextmenu';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -123,7 +124,8 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     SidebarModule,
     TooltipModule,
     FileUploadModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    ContextMenuModule
   ]
 })
 export class PrimengWidgetsModule {}

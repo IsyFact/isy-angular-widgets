@@ -252,6 +252,12 @@
           (onUpload)="onUpload($event)"
         ></p-fileUpload>
       </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="contextMenu">ContextMenu</label>
+        <img #logo src="assets/default-application-logo.jpg" alt="Logo"
+             aria-haspopup="true" class="w-full">
+        <p-contextMenu id="contextMenu" [target]="logo" [model]="contextMenuOption"></p-contextMenu>
+      </div>
     </div>
     <div class="flex flex-column gap-2">
       <label for="organizationChart">OrganizationChart</label>
