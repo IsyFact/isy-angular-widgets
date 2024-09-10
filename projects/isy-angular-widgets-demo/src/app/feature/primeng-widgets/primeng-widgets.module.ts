@@ -64,6 +64,7 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import {MenuModule} from 'primeng/menu';
 import {MenubarModule} from 'primeng/menubar';
 import {MegaMenuModule} from 'primeng/megamenu';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -131,7 +132,8 @@ import {MegaMenuModule} from 'primeng/megamenu';
     ContextMenuModule,
     MenuModule,
     MenubarModule,
-    MegaMenuModule
+    MegaMenuModule,
+    PanelMenuModule
   ]
 })
 export class PrimengWidgetsModule {}

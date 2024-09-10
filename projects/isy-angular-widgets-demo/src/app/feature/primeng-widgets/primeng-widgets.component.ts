@@ -3,7 +3,7 @@ import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
 import {FileOption} from './model/file-option';
-import {contextMenuData, fileOptionData, menuBarData, optionData} from './data/file-option';
+import {contextMenuData, fileOptionData, menuBarData, optionData, panelMenuData} from './data/file-option';
 import {ConfirmationService, MegaMenuItem, MenuItem, MessageService, TreeNode} from 'primeng/api';
 import {organizationData} from './data/organization';
 import {DeliveryStatus, ItSolution, Product} from './model/product';
@@ -33,6 +33,7 @@ export class PrimengWidgetsComponent {
   option: MenuItem[] = optionData;
   contextMenuOption: MenuItem[] = contextMenuData;
   menuBarOption: MenuItem[] = menuBarData;
+  panelMenuOption: MenuItem[] = panelMenuData;
   organization: TreeNode[] = organizationData;
 
   products: Product[] = productData;
