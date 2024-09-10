@@ -59,6 +59,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
 import {TooltipModule} from 'primeng/tooltip';
 import {FileUploadModule} from 'primeng/fileupload';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -121,7 +122,8 @@ import {FileUploadModule} from 'primeng/fileupload';
     OverlayPanelModule,
     SidebarModule,
     TooltipModule,
-    FileUploadModule
+    FileUploadModule,
+    BreadcrumbModule
   ]
 })
 export class PrimengWidgetsModule {}

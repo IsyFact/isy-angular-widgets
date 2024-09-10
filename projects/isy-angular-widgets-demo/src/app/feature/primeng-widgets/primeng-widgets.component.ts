@@ -7,7 +7,7 @@ import {fileOptionData, optionData} from './data/file-option';
 import {ConfirmationService, MenuItem, MessageService, TreeNode} from 'primeng/api';
 import {organizationData} from './data/organization';
 import {DeliveryStatus, ItSolution, Product} from './model/product';
-import {deliveryData, itSolutionData, productData} from './data/product';
+import {deliveryData, electronicData, itSolutionData, productData} from './data/product';
 import {UploadEvent} from 'primeng/fileupload';
 
 @Component({
@@ -37,6 +37,7 @@ export class PrimengWidgetsComponent {
   selectedProduct: Product = {};
   deliveryStatus: DeliveryStatus[] = deliveryData;
   itSolutions: ItSolution[] = itSolutionData;
+  electronics: MenuItem[] = electronicData;
 
   visibleDialog: boolean = false;
   visibleSidebar: boolean = false;

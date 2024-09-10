@@ -477,6 +477,10 @@
         </div>
       </p-toolbar>
     </div>
+    <div class="flex flex-column gap-2">
+      <label for="breadcrumb">Breadcrumb</label>
+      <p-breadcrumb id="breadcrumb" [home]="{ icon: 'pi pi-home' }" [model]="electronics"></p-breadcrumb>
+    </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
     <div class="grid mt-3">

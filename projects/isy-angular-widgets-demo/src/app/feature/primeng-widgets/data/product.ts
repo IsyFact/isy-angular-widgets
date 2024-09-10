@@ -1,4 +1,5 @@
 import {DeliveryStatus, ItSolution, Product} from '../model/product';
+import {MenuItem} from 'primeng/api';
 
 export const productData: Product[] = [
   {
@@ -500,3 +501,11 @@ export const itSolutionData: ItSolution[] = [
     ]
   }
 ];
+
+export const electronicData: MenuItem[] = [
+  { label: 'Electronics' },
+  { label: 'Computer' },
+  { label: 'Accessories' },
+  { label: 'Keyboard' },
+  { label: 'Wireless' }
+]
