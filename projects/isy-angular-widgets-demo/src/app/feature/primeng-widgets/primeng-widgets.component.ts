@@ -4,10 +4,10 @@ import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
 import {FileOption} from './model/file-option';
 import {contextMenuData, fileOptionData, menuBarData, optionData} from './data/file-option';
-import {ConfirmationService, MenuItem, MessageService, TreeNode} from 'primeng/api';
+import {ConfirmationService, MegaMenuItem, MenuItem, MessageService, TreeNode} from 'primeng/api';
 import {organizationData} from './data/organization';
 import {DeliveryStatus, ItSolution, Product} from './model/product';
-import {deliveryData, electronicData, itSolutionData, productData} from './data/product';
+import {deliveryData, electronicData, itSolutionData, megaMenuProductData, productData} from './data/product';
 import {UploadEvent} from 'primeng/fileupload';
 
 @Component({
@@ -40,6 +40,7 @@ export class PrimengWidgetsComponent {
   deliveryStatus: DeliveryStatus[] = deliveryData;
   itSolutions: ItSolution[] = itSolutionData;
   electronics: MenuItem[] = electronicData;
+  megaMenuOptions: MegaMenuItem[] = megaMenuProductData;
 
   visibleDialog: boolean = false;
   visibleSidebar: boolean = false;

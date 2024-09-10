@@ -77,7 +77,7 @@ export const optionData: MenuItem[] = [
 
 export const contextMenuData: MenuItem[] = [
   {label: 'Save', icon: 'pi pi-save'},
-  { label: 'Copy', icon: 'pi pi-copy' }
+  {label: 'Copy', icon: 'pi pi-copy'}
 ];
 
 export const menuBarData: MenuItem[] = [

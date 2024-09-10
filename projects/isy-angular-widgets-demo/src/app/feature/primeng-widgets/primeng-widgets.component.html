@@ -254,8 +254,7 @@
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="contextMenu">ContextMenu</label>
-        <img #logo src="assets/default-application-logo.jpg" alt="Logo"
-             aria-haspopup="true" class="w-full">
+        <img #logo src="assets/default-application-logo.jpg" alt="Logo" aria-haspopup="true" class="w-full" />
         <p-contextMenu id="contextMenu" [target]="logo" [model]="contextMenuOption"></p-contextMenu>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
@@ -489,11 +488,15 @@
     </div>
     <div class="flex flex-column gap-2">
       <label for="breadcrumb">Breadcrumb</label>
-      <p-breadcrumb id="breadcrumb" [home]="{ icon: 'pi pi-home' }" [model]="electronics"></p-breadcrumb>
+      <p-breadcrumb id="breadcrumb" [home]="{icon: 'pi pi-home'}" [model]="electronics"></p-breadcrumb>
     </div>
     <div class="flex flex-column gap-2">
       <label for="menuBar">MenuBar</label>
       <p-menubar id="menuBar" [model]="menuBarOption"></p-menubar>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="megaMenu">MegaMenu</label>
+      <p-megaMenu id="megaMenu" [model]="megaMenuOptions"></p-megaMenu>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
