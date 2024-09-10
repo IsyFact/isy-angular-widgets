@@ -1,4 +1,4 @@
-import {TreeNode} from 'primeng/api';
+import {MenuItem, TreeNode} from 'primeng/api';
 
 export const organizationData: TreeNode[] = [
   {
@@ -31,4 +31,11 @@ export const organizationData: TreeNode[] = [
       }
     ]
   }
+];
+
+export const personalData: MenuItem[] = [
+  {label: 'Personal'},
+  {label: 'Seat'},
+  {label: 'Payment'},
+  {label: 'Confirmation'}
 ];

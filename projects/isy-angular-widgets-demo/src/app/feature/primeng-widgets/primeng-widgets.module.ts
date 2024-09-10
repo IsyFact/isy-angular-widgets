@@ -65,6 +65,9 @@ import {MenuModule} from 'primeng/menu';
 import {MenubarModule} from 'primeng/menubar';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {PanelMenuModule} from 'primeng/panelmenu';
+import {StepsModule} from 'primeng/steps';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {TieredMenuModule} from 'primeng/tieredmenu';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -133,7 +136,10 @@ import {PanelMenuModule} from 'primeng/panelmenu';
     MenuModule,
     MenubarModule,
     MegaMenuModule,
-    PanelMenuModule
+    PanelMenuModule,
+    StepsModule,
+    TabMenuModule,
+    TieredMenuModule
   ]
 })
 export class PrimengWidgetsModule {}

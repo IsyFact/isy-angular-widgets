@@ -263,7 +263,11 @@
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="panelMenu">PanelMenu</label>
-        <p-panelMenu id="panelMenu" [model]="panelMenuOption"></p-panelMenu>
+        <p-panelMenu id="panelMenu" [model]="fileContainerOptions"></p-panelMenu>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="tieredMenu">TieredMenu</label>
+        <p-tieredMenu id="tieredMenu" [model]="fileContainerOptions"></p-tieredMenu>
       </div>
     </div>
     <div class="flex flex-column gap-2">
@@ -501,6 +505,14 @@
     <div class="flex flex-column gap-2">
       <label for="megaMenu">MegaMenu</label>
       <p-megaMenu id="megaMenu" [model]="megaMenuOptions"></p-megaMenu>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="steps">Steps</label>
+      <p-steps id="steps" [model]="stepItem"></p-steps>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="tabMenu">TabMenu</label>
+      <p-tabMenu id="tabMenu" [model]="tabMenuOption"></p-tabMenu>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">

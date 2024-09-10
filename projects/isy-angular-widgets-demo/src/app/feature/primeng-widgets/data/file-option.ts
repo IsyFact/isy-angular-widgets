@@ -127,7 +127,7 @@ export const menuBarData: MenuItem[] = [
   }
 ];
 
-export const panelMenuData: MenuItem[] = [
+export const fileContainerData: MenuItem[] = [
   {
     label: 'Files',
     icon: 'pi pi-file',
@@ -204,4 +204,11 @@ export const panelMenuData: MenuItem[] = [
       }
     ]
   }
+];
+
+export const tabMenuData: MenuItem[] = [
+  {label: 'Dashboard', icon: 'pi pi-home'},
+  {label: 'Transactions', icon: 'pi pi-chart-line'},
+  {label: 'Products', icon: 'pi pi-list'},
+  {label: 'Messages', icon: 'pi pi-inbox'}
 ];
