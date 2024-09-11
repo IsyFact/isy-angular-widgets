@@ -75,6 +75,9 @@ import {BlockUIModule} from 'primeng/blockui';
 import {ChipModule} from 'primeng/chip';
 import {InplaceModule} from 'primeng/inplace';
 import {MeterGroupModule} from 'primeng/metergroup';
+import {ScrollTopModule} from 'primeng/scrolltop';
+import {SkeletonModule} from 'primeng/skeleton';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -153,7 +156,10 @@ import {MeterGroupModule} from 'primeng/metergroup';
     BlockUIModule,
     ChipModule,
     InplaceModule,
-    MeterGroupModule
+    MeterGroupModule,
+    ScrollTopModule,
+    SkeletonModule,
+    ProgressBarModule
   ]
 })
 export class PrimengWidgetsModule {}
