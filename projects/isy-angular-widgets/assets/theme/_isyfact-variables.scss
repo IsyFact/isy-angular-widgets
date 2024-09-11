@@ -72,3 +72,9 @@ $inputPlaceholderTextColor: #83878c !default;
     border-color: $themePrimary;
   }
 }
+
+//progress spinner
+.p-progress-spinner-circle {
+  stroke: $themePrimary;
+  animation: p-progress-spinner-dash 1.5s ease-in-out infinite;
+}
