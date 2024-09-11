@@ -32,3 +32,12 @@ export interface ItSolution {
   };
   children?: ItSolution[];
 }
+
+/**
+ * An interface for storage data
+ */
+export interface StorageStatus {
+  label: string;
+  color: string;
+  value: number;
+}

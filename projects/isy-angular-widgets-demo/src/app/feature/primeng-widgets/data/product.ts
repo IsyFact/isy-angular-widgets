@@ -1,4 +1,4 @@
-import {DeliveryStatus, ItSolution, Product} from '../model/product';
+import {DeliveryStatus, ItSolution, Product, StorageStatus} from '../model/product';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 
 export const productData: Product[] = [
@@ -618,4 +618,11 @@ export const megaMenuProductData: MegaMenuItem[] = [
       ]
     ]
   }
+];
+
+export const storageData: StorageStatus[] = [
+  { label: 'Apps', color: '#008272', value: 16 },
+  { label: 'Messages', color: '#ffb900', value: 8 },
+  { label: 'Media', color: '$themePrimary', value: 24 },
+  { label: 'System', color: '#e3008c', value: 10 }
 ];

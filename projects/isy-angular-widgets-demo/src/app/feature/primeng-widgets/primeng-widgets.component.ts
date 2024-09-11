@@ -14,8 +14,15 @@ import {
 } from './data/file-option';
 import {ConfirmationService, MegaMenuItem, MenuItem, Message, MessageService, TreeNode} from 'primeng/api';
 import {organizationData, personalData} from './data/organization';
-import {DeliveryStatus, ItSolution, Product} from './model/product';
-import {deliveryData, electronicData, itSolutionData, megaMenuProductData, productData} from './data/product';
+import {DeliveryStatus, ItSolution, Product, StorageStatus} from './model/product';
+import {
+  deliveryData,
+  electronicData,
+  itSolutionData,
+  megaMenuProductData,
+  productData,
+  storageData
+} from './data/product';
 import {UploadEvent} from 'primeng/fileupload';
 
 @Component({
@@ -53,6 +60,7 @@ export class PrimengWidgetsComponent {
   deliveryStatus: DeliveryStatus[] = deliveryData;
   itSolutions: ItSolution[] = itSolutionData;
   electronics: MenuItem[] = electronicData;
+  storageStatus: StorageStatus[] = storageData;
   megaMenuOptions: MegaMenuItem[] = megaMenuProductData;
 
   visibleDialog: boolean = false;

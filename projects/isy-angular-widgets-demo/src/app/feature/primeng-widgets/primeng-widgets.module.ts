@@ -72,6 +72,9 @@ import {MessagesModule} from 'primeng/messages';
 import {AvatarModule} from 'primeng/avatar';
 import {BadgeModule} from 'primeng/badge';
 import {BlockUIModule} from 'primeng/blockui';
+import {ChipModule} from 'primeng/chip';
+import {InplaceModule} from 'primeng/inplace';
+import {MeterGroupModule} from 'primeng/metergroup';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -147,7 +150,10 @@ import {BlockUIModule} from 'primeng/blockui';
     MessagesModule,
     AvatarModule,
     BadgeModule,
-    BlockUIModule
+    BlockUIModule,
+    ChipModule,
+    InplaceModule,
+    MeterGroupModule
   ]
 })
 export class PrimengWidgetsModule {}

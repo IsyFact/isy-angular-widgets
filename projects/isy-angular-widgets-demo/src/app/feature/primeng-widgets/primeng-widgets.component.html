@@ -300,6 +300,20 @@
           <p>Content</p>
         </p-panel>
       </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="chip">Chip</label>
+        <p-chip label="Apple" icon="pi pi-apple" [removable]="true"></p-chip>
+        <p-chip label="Facebook" icon="pi pi-facebook" [removable]="true"></p-chip>
+        <p-chip label="Google" icon="pi pi-google" [removable]="true"></p-chip>
+        <p-chip label="Microsoft" icon="pi pi-microsoft" [removable]="true"></p-chip>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="inplace">Inplace</label>
+        <p-inplace id="inplace">
+          <ng-template pTemplate="display"> View Content </ng-template>
+          <ng-template pTemplate="content"> Inplace Content </ng-template>
+        </p-inplace>
+      </div>
     </div>
     <div class="flex flex-column gap-2">
       <label for="organizationChart">OrganizationChart</label>
@@ -544,6 +558,10 @@
     <div class="flex flex-column gap-2">
       <label for="tabMenu">TabMenu</label>
       <p-tabMenu id="tabMenu" [model]="tabMenuOption"></p-tabMenu>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="meterGroup">MeterGroup</label>
+      <p-meterGroup id="meterGroup" [value]="storageStatus"></p-meterGroup>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
