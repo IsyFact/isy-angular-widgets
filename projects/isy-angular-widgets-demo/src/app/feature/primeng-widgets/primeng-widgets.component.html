@@ -247,6 +247,7 @@
           chooseIcon="pi pi-upload"
           chooseLabel="FileUpload"
           name="myfile"
+          url="https://www.primefaces.org/cdn/api/upload.php"
           accept="image/*,.pdf,.txt"
           [maxFileSize]="1000000"
           (onUpload)="onUpload($event)"
@@ -268,6 +269,15 @@
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="tieredMenu">TieredMenu</label>
         <p-tieredMenu id="tieredMenu" [model]="fileContainerOptions"></p-tieredMenu>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="messages">Messages</label>
+        <p-messages id="messages" [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="toast">Toast</label>
+        <p-toast key="toast"></p-toast>
+        <p-button (onClick)="showToastMessage()" label="Show" />
       </div>
     </div>
     <div class="flex flex-column gap-2">

@@ -9,9 +9,9 @@ import {
   menuBarData,
   optionData,
   fileContainerData,
-  tabMenuData
+  tabMenuData, messageData
 } from './data/file-option';
-import {ConfirmationService, MegaMenuItem, MenuItem, MessageService, TreeNode} from 'primeng/api';
+import {ConfirmationService, MegaMenuItem, MenuItem, Message, MessageService, TreeNode} from 'primeng/api';
 import {organizationData, personalData} from './data/organization';
 import {DeliveryStatus, ItSolution, Product} from './model/product';
 import {deliveryData, electronicData, itSolutionData, megaMenuProductData, productData} from './data/product';
@@ -42,6 +42,7 @@ export class PrimengWidgetsComponent {
   menuBarOption: MenuItem[] = menuBarData;
   fileContainerOptions: MenuItem[] = fileContainerData;
   tabMenuOption: MenuItem[] = tabMenuData;
+  messages: Message[] = messageData;
 
   organization: TreeNode[] = organizationData;
   stepItem: MenuItem[] = personalData;
@@ -113,6 +114,10 @@ export class PrimengWidgetsComponent {
 
   showSidebar(): void {
     this.visibleSidebar = true;
+  }
+
+  showToastMessage(): void {
+    this.messageService.add({ key:'toast', severity: 'success', summary: 'Success', detail: 'Message Content' });
   }
 
   onUpload(event: UploadEvent): void {
