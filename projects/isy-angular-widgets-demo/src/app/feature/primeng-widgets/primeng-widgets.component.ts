@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
@@ -24,18 +24,34 @@ import {
   storageData
 } from './data/product';
 import {UploadEvent} from 'primeng/fileupload';
+import {TerminalService} from 'primeng/terminal';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'demo-primeng-widgets',
   templateUrl: './primeng-widgets.component.html',
   styleUrl: './primeng-widgets.component.scss',
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService, TerminalService]
 })
-export class PrimengWidgetsComponent {
+export class PrimengWidgetsComponent implements OnDestroy {
+  subscription: Subscription;
+
   constructor(
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
-  ) {}
+    private messageService: MessageService,
+    private terminalService: TerminalService
+  ) {
+    this.subscription = this.terminalService.commandHandler.subscribe((command) => {
+      let response = command === 'date' ? new Date().toDateString() : 'Unknown command: ' + command;
+      this.terminalService.sendResponse(response);
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
   countries: Country[] = countryData;
   filteredCountries: Country[] = [];

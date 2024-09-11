@@ -329,12 +329,7 @@
             ultricies mi eget mauris. Eget egestas purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est
             ultricies integer. Mattis aliquam faucibus purus in massa tempor nec.
           </p>
-          <p-scrollTop
-            id="scrollTop"
-            target="parent"
-            [threshold]="10"
-            icon="pi pi-arrow-up"
-          ></p-scrollTop>
+          <p-scrollTop id="scrollTop" target="parent" [threshold]="10" icon="pi pi-arrow-up"></p-scrollTop>
         </div>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
@@ -347,6 +342,14 @@
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="progressSpinner">ProgressSpinner</label>
         <p-progressSpinner id="progressSpinner"></p-progressSpinner>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="tag">Tag</label>
+        <p-tag value="Primary"></p-tag>
+        <p-tag severity="success" value="Success"></p-tag>
+        <p-tag severity="info" value="Info"></p-tag>
+        <p-tag severity="warning" value="Warning"></p-tag>
+        <p-tag severity="danger" value="Danger"></p-tag>
       </div>
     </div>
     <div class="flex flex-column gap-2">
@@ -600,6 +603,14 @@
     <div class="flex flex-column gap-2">
       <label for="progressBar">ProgressBar</label>
       <p-progressBar id="progressBar" [value]="50"></p-progressBar>
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="terminal">Terminal</label>
+      <p-terminal
+        id="terminal"
+        welcomeMessage="Welcome to PrimeNG: Enter 'date' to display the current date"
+        prompt="primeng $"
+      ></p-terminal>
     </div>
   </p-tabPanel>
   <p-tabPanel header="IsyAngular Widgets">
