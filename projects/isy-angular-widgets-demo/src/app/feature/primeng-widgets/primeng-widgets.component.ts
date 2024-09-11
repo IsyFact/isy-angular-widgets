@@ -9,7 +9,8 @@ import {
   menuBarData,
   optionData,
   fileContainerData,
-  tabMenuData, messageData
+  tabMenuData,
+  messageData
 } from './data/file-option';
 import {ConfirmationService, MegaMenuItem, MenuItem, Message, MessageService, TreeNode} from 'primeng/api';
 import {organizationData, personalData} from './data/organization';
@@ -56,6 +57,7 @@ export class PrimengWidgetsComponent {
 
   visibleDialog: boolean = false;
   visibleSidebar: boolean = false;
+  blockedContent: boolean = false;
 
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];
@@ -117,10 +119,18 @@ export class PrimengWidgetsComponent {
   }
 
   showToastMessage(): void {
-    this.messageService.add({ key:'toast', severity: 'success', summary: 'Success', detail: 'Message Content' });
+    this.messageService.add({key: 'toast', severity: 'success', summary: 'Success', detail: 'Message Content'});
   }
 
   onUpload(event: UploadEvent): void {
     this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+  }
+
+  blockContent(): void {
+    this.blockedContent = true;
+  }
+
+  unblockContent(): void {
+    this.blockedContent = false;
   }
 }

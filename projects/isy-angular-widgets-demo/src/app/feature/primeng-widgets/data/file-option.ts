@@ -214,8 +214,8 @@ export const tabMenuData: MenuItem[] = [
 ];
 
 export const messageData: Message[] = [
-  { key: 'infoMessage', severity: 'info', detail: 'Info Message' },
-  { key: 'successMessage', severity: 'success', detail: 'Success Message' },
-  { key: 'warnMessage', severity: 'warn', detail: 'Warning Message' },
-  { key: 'errorMessage', severity: 'error', detail: 'Error Message' }
+  {key: 'infoMessage', severity: 'info', detail: 'Info Message'},
+  {key: 'successMessage', severity: 'success', detail: 'Success Message'},
+  {key: 'warnMessage', severity: 'warn', detail: 'Warning Message'},
+  {key: 'errorMessage', severity: 'error', detail: 'Error Message'}
 ];

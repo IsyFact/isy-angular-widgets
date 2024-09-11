@@ -68,7 +68,10 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 import {StepsModule} from 'primeng/steps';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {TieredMenuModule} from 'primeng/tieredmenu';
-import { MessagesModule } from 'primeng/messages';
+import {MessagesModule} from 'primeng/messages';
+import {AvatarModule} from 'primeng/avatar';
+import {BadgeModule} from 'primeng/badge';
+import {BlockUIModule} from 'primeng/blockui';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -141,7 +144,10 @@ import { MessagesModule } from 'primeng/messages';
     StepsModule,
     TabMenuModule,
     TieredMenuModule,
-    MessagesModule
+    MessagesModule,
+    AvatarModule,
+    BadgeModule,
+    BlockUIModule
   ]
 })
 export class PrimengWidgetsModule {}

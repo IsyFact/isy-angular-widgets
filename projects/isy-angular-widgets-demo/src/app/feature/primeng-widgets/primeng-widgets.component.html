@@ -276,8 +276,29 @@
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="toast">Toast</label>
-        <p-toast key="toast"></p-toast>
         <p-button (onClick)="showToastMessage()" label="Show" />
+        <p-toast key="toast"></p-toast>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="avatar">Avatar with badge</label>
+        <p-avatar id="avatar" icon="pi pi-user" pBadge value="4"></p-avatar>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="badge">Badge</label>
+        <p-badge id="badge" value="2"></p-badge>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+        <label for="blockUI">BlockUI</label>
+        <div class="flex justify-content-start gap-2">
+          <p-button label="Block" (onClick)="blockContent()" />
+          <p-button label="Unblock" (onClick)="unblockContent()" />
+        </div>
+        <p-blockUI id="blockUI" [target]="blockableContent" [blocked]="blockedContent">
+          <i class="pi pi-lock" style="font-size: 3rem"></i>
+        </p-blockUI>
+        <p-panel #blockableContent header="Header">
+          <p>Content</p>
+        </p-panel>
       </div>
     </div>
     <div class="flex flex-column gap-2">
