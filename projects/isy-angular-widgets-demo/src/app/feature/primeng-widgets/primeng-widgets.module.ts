@@ -78,6 +78,7 @@ import {MeterGroupModule} from 'primeng/metergroup';
 import {ScrollTopModule} from 'primeng/scrolltop';
 import {SkeletonModule} from 'primeng/skeleton';
 import { ProgressBarModule } from 'primeng/progressbar';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [PrimengWidgetsComponent],
@@ -159,7 +160,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
     MeterGroupModule,
     ScrollTopModule,
     SkeletonModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ProgressSpinnerModule
   ]
 })
 export class PrimengWidgetsModule {}
