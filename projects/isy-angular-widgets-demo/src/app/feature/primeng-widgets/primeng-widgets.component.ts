@@ -77,6 +77,7 @@ export class PrimengWidgetsComponent implements OnDestroy {
   itSolutions: ItSolution[] = itSolutionData;
   electronics: MenuItem[] = electronicData;
   storageStatus: StorageStatus[] = storageData;
+  pizza: string[] = [];
   megaMenuOptions: MegaMenuItem[] = megaMenuProductData;
 
   visibleDialog: boolean = false;
