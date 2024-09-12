@@ -14,7 +14,9 @@ describe('PrimengWidgetsComponent', () => {
       declarations: [PrimengWidgetsComponent],
       imports: [FormsModule]
     }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(PrimengWidgetsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -63,5 +65,16 @@ describe('PrimengWidgetsComponent', () => {
   it('should show sidebar', () => {
     component.showSidebar();
     expect(component.visibleSidebar).toBeTrue();
+  });
+
+  it('should block content', () => {
+    component.blockContent();
+    expect(component.blockedContent).toBeTrue();
+  });
+
+  it('should unblock content', () => {
+    component.blockedContent = true;
+    component.unblockContent();
+    expect(component.blockedContent).toBeFalse();
   });
 });

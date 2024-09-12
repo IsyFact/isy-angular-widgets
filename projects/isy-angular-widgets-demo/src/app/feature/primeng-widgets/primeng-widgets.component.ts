@@ -42,12 +42,12 @@ export class PrimengWidgetsComponent implements OnDestroy {
     private terminalService: TerminalService
   ) {
     this.subscription = this.terminalService.commandHandler.subscribe((command) => {
-      let response = command === 'date' ? new Date().toDateString() : 'Unknown command: ' + command;
+      const response = command === 'date' ? new Date().toDateString() : 'Unknown command: ' + command;
       this.terminalService.sendResponse(response);
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
