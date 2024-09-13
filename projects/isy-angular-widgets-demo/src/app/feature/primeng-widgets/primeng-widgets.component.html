@@ -567,53 +567,6 @@
     </div>
   </p-tabPanel>
   <p-tabPanel header="Interactive Components">
-    <h2>Input Fields</h2>
-    <div class="grid">
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>Calendar</h3>
-        <p-calendar
-          inputId="calender"
-          [showIcon]="true"
-          [showOnFocus]="false"
-          appendTo="body"
-          styleClass="w-full"
-          ariaLabel="Calender-Picker"
-        ></p-calendar>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>InputGroup</h3>
-        <p-inputGroup>
-          <p-inputGroupAddon>
-            <i class="pi pi-user"></i>
-          </p-inputGroupAddon>
-          <input id="inputGroup" pInputText placeholder="User" class="w-full" />
-        </p-inputGroup>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>InputMask</h3>
-        <p-inputMask inputId="inputMask" mask="(999) 999-9999" placeholder="(999) 999-9999" styleClass="w-full" />
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>InputTextarea</h3>
-        <textarea pInputTextarea class="w-full" aria-label="Textarea"></textarea>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>InputNumber</h3>
-        <p-inputNumber
-          inputId="inputNumber"
-          class="w-full"
-          styleClass="w-full"
-          ariaLabel="Input Number"
-          [showButtons]="true"
-          mode="currency"
-          currency="EUR"
-        ></p-inputNumber>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>InputOpt</h3>
-        <p-inputOtp [length]="6"></p-inputOtp>
-      </div>
-    </div>
     <p-divider></p-divider>
     <h2>Status Components</h2>
     <div class="grid">

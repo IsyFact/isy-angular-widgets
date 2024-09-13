@@ -81,9 +81,10 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {TagModule} from 'primeng/tag';
 import {TerminalModule} from 'primeng/terminal';
+import {PrimengFormComponent} from './components/primeng-form/primeng-form.component';
 
 @NgModule({
-  declarations: [PrimengWidgetsComponent],
+  declarations: [PrimengWidgetsComponent, PrimengFormComponent],
   imports: [
     PrimengWidgetsRoutingModule,
     TabViewModule,
