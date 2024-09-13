@@ -2,10 +2,6 @@
   <p-tabPanel header="PrimeNG Widgets">
     <div class="grid mt-3">
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="colorpicker">Colorpicker</label>
-        <p-colorPicker inputId="colorpicker"></p-colorPicker>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="keyFilter">KeyFilter</label>
         <input id="keyFilter" pInputText pKeyFilter="hex" class="w-full" />
       </div>
@@ -40,10 +36,6 @@
         ></p-toggleButton>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="chips">Chips</label>
-        <p-chips inputId="chips"></p-chips>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="iconField">IconField</label>
         <p-iconField id="iconField" iconPosition="left">
           <p-inputIcon styleClass="pi pi-search"></p-inputIcon>
@@ -53,27 +45,6 @@
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="inputText">InputText</label>
         <input id="inputText" type="text" pInputText class="w-full" />
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="autoComplete">AutoComplete</label>
-        <p-autoComplete
-          inputId="autoComplete"
-          optionLabel="name"
-          [suggestions]="filteredCountries"
-          (completeMethod)="filterCountry($event)"
-        ></p-autoComplete>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="cascadeSelect">CascadeSelect</label>
-        <p-cascadeSelect
-          id="cascadeSelect"
-          [options]="cities"
-          optionLabel="name"
-          optionGroupLabel="name"
-          [optionGroupChildren]="['states', 'cities']"
-          placeholder="Select a City"
-          styleClass="w-full"
-        ></p-cascadeSelect>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="dropdown">Dropdown</label>
@@ -564,29 +535,6 @@
         welcomeMessage="Welcome to PrimeNG: Enter 'date' to display the current date"
         prompt="primeng $"
       ></p-terminal>
-    </div>
-  </p-tabPanel>
-  <p-tabPanel header="Interactive Components">
-    <p-divider></p-divider>
-    <h2>Status Components</h2>
-    <div class="grid">
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>Checkbox</h3>
-        <div class="flex flex-column gap-2">
-          <p-checkbox [(ngModel)]="pizza" label="Cheese" name="pizza" value="Cheese"></p-checkbox>
-          <p-checkbox [(ngModel)]="pizza" label="Mushroom" name="pizza" value="Mushroom"></p-checkbox>
-          <p-checkbox [(ngModel)]="pizza" label="Pepper" name="pizza" value="Pepper"></p-checkbox>
-          <p-checkbox [(ngModel)]="pizza" label="Onion" name="pizza" value="Onion"></p-checkbox>
-        </div>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>InputSwitch</h3>
-        <p-inputSwitch inputId="inputSwitch" ariaLabel="Input Switch"></p-inputSwitch>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h3>Knob</h3>
-        <p-knob ariaLabel="Knob"></p-knob>
-      </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="Buttons">

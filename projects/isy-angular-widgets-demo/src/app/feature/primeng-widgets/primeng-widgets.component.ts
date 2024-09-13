@@ -1,5 +1,4 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {Country} from './model/country';
 import {countryCityMapping, countryData} from './data/country';
 import {FileOption} from './model/file-option';
@@ -54,10 +53,6 @@ export class PrimengWidgetsComponent implements OnDestroy {
   }
 
   countries: Country[] = countryData;
-  filteredCountries: Country[] = [];
-
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cities: any[] = countryCityMapping;
 
   stateOptions: string[] = ['Off', 'On'];
   files: FileOption[] = fileOptionData;
@@ -77,25 +72,11 @@ export class PrimengWidgetsComponent implements OnDestroy {
   itSolutions: ItSolution[] = itSolutionData;
   electronics: MenuItem[] = electronicData;
   storageStatus: StorageStatus[] = storageData;
-  pizza: string[] = [];
   megaMenuOptions: MegaMenuItem[] = megaMenuProductData;
 
   visibleDialog: boolean = false;
   visibleSidebar: boolean = false;
   blockedContent: boolean = false;
-
-  filterCountry(event: AutoCompleteCompleteEvent): void {
-    const filtered: Country[] = [];
-    const query = event.query;
-
-    for (const country of this.countries) {
-      if (country.name.toLowerCase().startsWith(query.toLowerCase())) {
-        filtered.push(country);
-      }
-    }
-
-    this.filteredCountries = filtered;
-  }
 
   confirmDialog(event: Event): void {
     this.confirmationService.confirm({

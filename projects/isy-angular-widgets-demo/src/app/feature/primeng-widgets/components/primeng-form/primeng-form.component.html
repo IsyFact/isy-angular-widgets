@@ -3,6 +3,18 @@
   <h2>Input Fields</h2>
   <div class="grid">
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>AutoComplete</h3>
+      <p-autoComplete
+        inputId="autoComplete"
+        optionLabel="name"
+        [suggestions]="filteredCountries"
+        (completeMethod)="filterCountry($event)"
+        placeholder="Enter a country"
+        styleClass="w-full"
+        inputStyleClass="w-full"
+      ></p-autoComplete>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Calendar</h3>
       <p-calendar
         inputId="calender"
@@ -12,6 +24,22 @@
         styleClass="w-full"
         ariaLabel="Calender-Picker"
       ></p-calendar>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>CascadeSelect</h3>
+      <p-cascadeSelect
+        id="cascadeSelect"
+        [options]="cities"
+        optionLabel="name"
+        optionGroupLabel="name"
+        [optionGroupChildren]="['states', 'cities']"
+        placeholder="Select a City"
+        styleClass="w-full"
+      ></p-cascadeSelect>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+      <h3>Chips</h3>
+      <p-chips inputId="chips" [max]="3" placeholder="Maximum 3 chips"></p-chips>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputGroup</h3>
@@ -45,6 +73,36 @@
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputOpt</h3>
       <p-inputOtp [length]="6"></p-inputOtp>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Status Components</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Checkbox</h3>
+      <div class="flex flex-column gap-2">
+        <p-checkbox label="Cheese" name="pizza" value="Cheese"></p-checkbox>
+        <p-checkbox label="Mushroom" name="pizza" value="Mushroom"></p-checkbox>
+        <p-checkbox label="Pepper" name="pizza" value="Pepper"></p-checkbox>
+        <p-checkbox label="Onion" name="pizza" value="Onion"></p-checkbox>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>InputSwitch</h3>
+      <p-inputSwitch inputId="inputSwitch" ariaLabel="Input Switch"></p-inputSwitch>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Knob</h3>
+      <p-knob ariaLabel="Knob"></p-knob>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Special Components</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Colorpicker</h3>
+      <p-colorPicker inputId="colorpicker" [(ngModel)]="color"></p-colorPicker>
+      <span class="ml-3">{{ color }}</span>
     </div>
   </div>
 </div>
