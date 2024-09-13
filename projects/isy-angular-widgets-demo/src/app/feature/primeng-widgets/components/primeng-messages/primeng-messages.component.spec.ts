@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrimengMessagesComponent } from './primeng-messages.component';
+import {PrimengMessagesComponent} from './primeng-messages.component';
 
 describe('PrimengMessagesComponent', () => {
   let component: PrimengMessagesComponent;
@@ -9,8 +9,7 @@ describe('PrimengMessagesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrimengMessagesComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PrimengMessagesComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrimengOverlayComponent } from './primeng-overlay.component';
+import {PrimengOverlayComponent} from './primeng-overlay.component';
 
 describe('PrimengOverlayComponent', () => {
   let component: PrimengOverlayComponent;
@@ -9,8 +9,7 @@ describe('PrimengOverlayComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrimengOverlayComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PrimengOverlayComponent);
     component = fixture.componentInstance;

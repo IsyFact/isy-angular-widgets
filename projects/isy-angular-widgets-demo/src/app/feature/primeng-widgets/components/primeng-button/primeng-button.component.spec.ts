@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrimengButtonComponent } from './primeng-button.component';
+import {PrimengButtonComponent} from './primeng-button.component';
 
 describe('PrimengButtonComponent', () => {
   let component: PrimengButtonComponent;
@@ -9,8 +9,7 @@ describe('PrimengButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrimengButtonComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PrimengButtonComponent);
     component = fixture.componentInstance;

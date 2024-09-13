@@ -11,9 +11,7 @@ import {PrimengOverlayComponent} from './feature/primeng-widgets/components/prim
 import {PrimengFileComponent} from './feature/primeng-widgets/components/primeng-file/primeng-file.component';
 import {PrimengMenuComponent} from './feature/primeng-widgets/components/primeng-menu/primeng-menu.component';
 import {PrimengChartComponent} from './feature/primeng-widgets/components/primeng-chart/primeng-chart.component';
-import {
-  PrimengMessagesComponent
-} from './feature/primeng-widgets/components/primeng-messages/primeng-messages.component';
+import {PrimengMessagesComponent} from './feature/primeng-widgets/components/primeng-messages/primeng-messages.component';
 import {PrimengMiscComponent} from './feature/primeng-widgets/components/primeng-misc/primeng-misc.component';
 
 /**

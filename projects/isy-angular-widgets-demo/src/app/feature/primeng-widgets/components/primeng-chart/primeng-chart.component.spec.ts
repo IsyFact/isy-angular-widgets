@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrimengChartComponent } from './primeng-chart.component';
+import {PrimengChartComponent} from './primeng-chart.component';
 
 describe('PrimengChartComponent', () => {
   let component: PrimengChartComponent;
@@ -9,8 +9,7 @@ describe('PrimengChartComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrimengChartComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PrimengChartComponent);
     component = fixture.componentInstance;

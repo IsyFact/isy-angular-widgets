@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrimengMiscComponent } from './primeng-misc.component';
+import {PrimengMiscComponent} from './primeng-misc.component';
 
 describe('PrimengMiscComponent', () => {
   let component: PrimengMiscComponent;
@@ -9,8 +9,7 @@ describe('PrimengMiscComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrimengMiscComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PrimengMiscComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'demo-primeng-overlay',
@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './primeng-overlay.component.html',
   styleUrl: './primeng-overlay.component.scss'
 })
-export class PrimengOverlayComponent {
-
-}
+export class PrimengOverlayComponent {}

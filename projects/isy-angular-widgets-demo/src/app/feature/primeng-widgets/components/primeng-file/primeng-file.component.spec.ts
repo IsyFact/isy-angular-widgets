@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrimengFileComponent } from './primeng-file.component';
+import {PrimengFileComponent} from './primeng-file.component';
 
 describe('PrimengFileComponent', () => {
   let component: PrimengFileComponent;
@@ -9,8 +9,7 @@ describe('PrimengFileComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrimengFileComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PrimengFileComponent);
     component = fixture.componentInstance;

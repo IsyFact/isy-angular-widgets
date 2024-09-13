@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'demo-primeng-panel',
@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './primeng-panel.component.html',
   styleUrl: './primeng-panel.component.scss'
 })
-export class PrimengPanelComponent {
-
-}
+export class PrimengPanelComponent {}

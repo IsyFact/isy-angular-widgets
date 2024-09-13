@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrimengMenuComponent } from './primeng-menu.component';
+import {PrimengMenuComponent} from './primeng-menu.component';
 
 describe('PrimengMenuComponent', () => {
   let component: PrimengMenuComponent;
@@ -9,8 +9,7 @@ describe('PrimengMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PrimengMenuComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PrimengMenuComponent);
     component = fixture.componentInstance;

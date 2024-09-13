@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'demo-isy-angular-components',
@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './isy-angular-components.component.html',
   styleUrl: './isy-angular-components.component.scss'
 })
-export class IsyAngularComponentsComponent {
-
-}
+export class IsyAngularComponentsComponent {}

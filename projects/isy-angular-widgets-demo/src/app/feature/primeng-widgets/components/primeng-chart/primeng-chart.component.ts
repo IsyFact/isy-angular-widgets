@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'demo-primeng-chart',
@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './primeng-chart.component.html',
   styleUrl: './primeng-chart.component.scss'
 })
-export class PrimengChartComponent {
-
-}
+export class PrimengChartComponent {}

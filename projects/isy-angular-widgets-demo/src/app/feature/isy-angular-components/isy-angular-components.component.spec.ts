@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { IsyAngularComponentsComponent } from './isy-angular-components.component';
+import {IsyAngularComponentsComponent} from './isy-angular-components.component';
 
 describe('IsyAngularComponentsComponent', () => {
   let component: IsyAngularComponentsComponent;
@@ -9,8 +9,7 @@ describe('IsyAngularComponentsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [IsyAngularComponentsComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(IsyAngularComponentsComponent);
     component = fixture.componentInstance;

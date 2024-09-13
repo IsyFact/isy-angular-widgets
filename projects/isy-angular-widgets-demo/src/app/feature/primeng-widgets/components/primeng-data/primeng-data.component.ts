@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'demo-primeng-data',
@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './primeng-data.component.html',
   styleUrl: './primeng-data.component.scss'
 })
-export class PrimengDataComponent {
-
-}
+export class PrimengDataComponent {}
