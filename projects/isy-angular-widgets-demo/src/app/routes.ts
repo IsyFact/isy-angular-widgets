@@ -3,6 +3,18 @@ import {AuthGuard} from '@isy-angular-widgets/security/security-guard';
 import {inject} from '@angular/core';
 import {Observable} from 'rxjs';
 import {PageNotFoundComponent} from './shared/errors/page-not-found/page-not-found.component';
+import {PrimengFormComponent} from './feature/primeng-widgets/components/primeng-form/primeng-form.component';
+import {PrimengButtonComponent} from './feature/primeng-widgets/components/primeng-button/primeng-button.component';
+import {PrimengDataComponent} from './feature/primeng-widgets/components/primeng-data/primeng-data.component';
+import {PrimengPanelComponent} from './feature/primeng-widgets/components/primeng-panel/primeng-panel.component';
+import {PrimengOverlayComponent} from './feature/primeng-widgets/components/primeng-overlay/primeng-overlay.component';
+import {PrimengFileComponent} from './feature/primeng-widgets/components/primeng-file/primeng-file.component';
+import {PrimengMenuComponent} from './feature/primeng-widgets/components/primeng-menu/primeng-menu.component';
+import {PrimengChartComponent} from './feature/primeng-widgets/components/primeng-chart/primeng-chart.component';
+import {
+  PrimengMessagesComponent
+} from './feature/primeng-widgets/components/primeng-messages/primeng-messages.component';
+import {PrimengMiscComponent} from './feature/primeng-widgets/components/primeng-misc/primeng-misc.component';
 
 /**
  * Determines if a given route can be accessed
@@ -39,9 +51,91 @@ export const routes: Routes = [
     canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },
   {
-    path: 'primeng-widgets',
+    path: 'primeng-widgets/primeng-form',
+    component: PrimengFormComponent,
     data: {
-      title: 'isyAngularWidgetsDemo.websiteTitles.primengWidgets'
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengForm'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-button',
+    component: PrimengButtonComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengButton'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-data',
+    component: PrimengDataComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengData'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-panel',
+    component: PrimengPanelComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengPanel'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-overlay',
+    component: PrimengOverlayComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengOverlay'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-file',
+    component: PrimengFileComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengFile'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-menu',
+    component: PrimengMenuComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengMenu'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-chart',
+    component: PrimengChartComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengChart'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-messages',
+    component: PrimengMessagesComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengMessages'
+    },
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
+    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+  },
+  {
+    path: 'primeng-widgets/primeng-misc',
+    component: PrimengMiscComponent,
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.primengMisc'
     },
     loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.module')).PrimengWidgetsModule,
     canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
