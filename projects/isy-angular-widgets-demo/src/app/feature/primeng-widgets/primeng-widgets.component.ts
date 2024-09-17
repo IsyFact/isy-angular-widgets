@@ -54,7 +54,6 @@ export class PrimengWidgetsComponent implements OnDestroy {
 
   countries: Country[] = countryData;
 
-  stateOptions: string[] = ['Off', 'On'];
   files: FileOption[] = fileOptionData;
   option: MenuItem[] = optionData;
   contextMenuOption: MenuItem[] = contextMenuData;

@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {Country} from '../../model/country';
 import {countryCityMapping, countryData} from '../../data/country';
+import {FileOption} from '../../model/file-option';
+import {fileOptionData} from '../../data/file-option';
 
 @Component({
   selector: 'demo-primeng-form',
@@ -11,7 +13,14 @@ import {countryCityMapping, countryData} from '../../data/country';
 export class PrimengFormComponent {
   countries: Country[] = countryData;
   filteredCountries: Country[] = [];
+  files: FileOption[] = fileOptionData;
+
   color: string = '#0055B9';
+  password: string = '';
+  ingredient: string = '';
+
+  stateOptions: string[] = ['Off', 'On'];
+  slider: number = 0;
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   cities: any[] = countryCityMapping;

@@ -2,8 +2,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PrimengWidgetsComponent} from './primeng-widgets.component';
 import {FormsModule} from '@angular/forms';
 import {fileOptionData} from './data/file-option';
-import {countryData} from './data/country';
-import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 
 describe('PrimengWidgetsComponent', () => {
   let component: PrimengWidgetsComponent;
@@ -28,10 +26,6 @@ describe('PrimengWidgetsComponent', () => {
 
   it('should have the correct initial values for the files array', () => {
     expect(component.files.length).toBe(fileOptionData.length);
-  });
-
-  it('should have the initial stateOptions array with two values', () => {
-    expect(component.stateOptions.length).toBe(2);
   });
 
   it('should show dialog', () => {

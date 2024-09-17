@@ -2,86 +2,11 @@
   <p-tabPanel header="PrimeNG Widgets">
     <div class="grid mt-3">
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="keyFilter">KeyFilter</label>
-        <input id="keyFilter" pInputText pKeyFilter="hex" class="w-full" />
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="password">Password</label>
-        <p-password inputId="password" feedback="false"></p-password>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="radioButton">RadioButton</label>
-        <p-radioButton inputId="radioButton" label="RadioButton"></p-radioButton>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="rating">Rating</label>
-        <p-rating id="rating"></p-rating>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="slider">Slider</label>
-        <p-slider id="slider" styleClass="w-full"></p-slider>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="triStateCheckbox">TriStateCheckbox</label>
-        <p-triStateCheckbox inputId="triStateCheckbox" label="TriStateCheckbox"></p-triStateCheckbox>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="toggleButton">ToggleButton</label>
-        <p-toggleButton
-          inputId="toggleButton"
-          onIcon="pi pi-lock"
-          offIcon="pi pi-lock-open"
-          onLabel="Locked"
-          offLabel="Unlocked"
-        ></p-toggleButton>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="iconField">IconField</label>
         <p-iconField id="iconField" iconPosition="left">
           <p-inputIcon styleClass="pi pi-search"></p-inputIcon>
           <input type="text" pInputText placeholder="Search" class="w-full" />
         </p-iconField>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="inputText">InputText</label>
-        <input id="inputText" type="text" pInputText class="w-full" />
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="dropdown">Dropdown</label>
-        <p-dropdown
-          id="dropdown"
-          [options]="countries"
-          optionLabel="name"
-          placeholder="Select a Country"
-          styleClass="w-full"
-        ></p-dropdown>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="listbox">Listbox</label>
-        <p-listbox id="listbox" [options]="countries" optionLabel="name" styleClass="w-full"></p-listbox>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="multiSelect">MultiSelect</label>
-        <p-multiSelect
-          id="multiSelect"
-          [options]="countries"
-          optionLabel="name"
-          placeholder="Select Countries"
-          styleClass="w-full"
-        ></p-multiSelect>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="selectButton">SelectButton</label>
-        <p-selectButton id="selectButton" [options]="stateOptions"></p-selectButton>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="treeSelect">TreeSelect</label>
-        <p-treeSelect
-          inputId="treeSelect"
-          [options]="files"
-          placeholder="Select Item"
-          containerStyleClass="w-full"
-        ></p-treeSelect>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="button">Button </label>
