@@ -26,23 +26,6 @@ describe('PrimengWidgetsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have initial counties and filtered counties', () => {
-    expect(component.countries.length).toBe(countryData.length);
-    expect(component.filteredCountries.length).toBe(0);
-  });
-
-  it('should filter countries based on the given query', () => {
-    let query = 'United';
-    const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
-    component.filterCountry(event);
-    expect(component.filteredCountries.length).toBeGreaterThan(0);
-
-    query = 'No country';
-    const noCountryEvent: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
-    component.filterCountry(noCountryEvent);
-    expect(component.filteredCountries.length).toBe(0);
-  });
-
   it('should have the correct initial values for the files array', () => {
     expect(component.files.length).toBe(fileOptionData.length);
   });

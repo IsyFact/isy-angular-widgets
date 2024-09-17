@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {Country} from './model/country';
-import {countryCityMapping, countryData} from './data/country';
+import {countryData} from './data/country';
 import {FileOption} from './model/file-option';
 import {
   contextMenuData,
