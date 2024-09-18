@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PrimengWidgetsComponent} from './primeng-widgets.component';
 import {FormsModule} from '@angular/forms';
-import {fileOptionData} from './data/file-option';
 
 describe('PrimengWidgetsComponent', () => {
   let component: PrimengWidgetsComponent;
@@ -22,10 +21,6 @@ describe('PrimengWidgetsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should have the correct initial values for the files array', () => {
-    expect(component.files.length).toBe(fileOptionData.length);
   });
 
   it('should show dialog', () => {

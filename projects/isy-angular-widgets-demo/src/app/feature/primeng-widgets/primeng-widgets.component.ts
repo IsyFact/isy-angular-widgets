@@ -1,27 +1,16 @@
 import {Component, OnDestroy} from '@angular/core';
-import {Country} from './model/country';
-import {countryData} from './data/country';
-import {FileOption} from './model/file-option';
 import {
   contextMenuData,
-  fileOptionData,
   menuBarData,
   optionData,
   fileContainerData,
   tabMenuData,
   messageData
 } from './data/file-option';
-import {ConfirmationService, MegaMenuItem, MenuItem, Message, MessageService, TreeNode} from 'primeng/api';
-import {organizationData, personalData} from './data/organization';
-import {DeliveryStatus, ItSolution, Product, StorageStatus} from './model/product';
-import {
-  deliveryData,
-  electronicData,
-  itSolutionData,
-  megaMenuProductData,
-  productData,
-  storageData
-} from './data/product';
+import {ConfirmationService, MegaMenuItem, MenuItem, Message, MessageService} from 'primeng/api';
+import {personalData} from './data/organization';
+import {StorageStatus} from './model/product';
+import {electronicData, megaMenuProductData, storageData} from './data/product';
 import {UploadEvent} from 'primeng/fileupload';
 import {TerminalService} from 'primeng/terminal';
 import {Subscription} from 'rxjs';
@@ -52,9 +41,6 @@ export class PrimengWidgetsComponent implements OnDestroy {
     }
   }
 
-  countries: Country[] = countryData;
-
-  files: FileOption[] = fileOptionData;
   option: MenuItem[] = optionData;
   contextMenuOption: MenuItem[] = contextMenuData;
   menuBarOption: MenuItem[] = menuBarData;
@@ -62,13 +48,8 @@ export class PrimengWidgetsComponent implements OnDestroy {
   tabMenuOption: MenuItem[] = tabMenuData;
   messages: Message[] = messageData;
 
-  organization: TreeNode[] = organizationData;
   stepItem: MenuItem[] = personalData;
 
-  products: Product[] = productData;
-  selectedProduct: Product = {};
-  deliveryStatus: DeliveryStatus[] = deliveryData;
-  itSolutions: ItSolution[] = itSolutionData;
   electronics: MenuItem[] = electronicData;
   storageStatus: StorageStatus[] = storageData;
   megaMenuOptions: MegaMenuItem[] = megaMenuProductData;

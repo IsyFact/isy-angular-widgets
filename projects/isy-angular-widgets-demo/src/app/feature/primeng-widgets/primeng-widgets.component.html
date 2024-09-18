@@ -2,32 +2,6 @@
   <p-tabPanel header="PrimeNG Widgets">
     <div class="grid mt-3">
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="iconField">IconField</label>
-        <p-iconField id="iconField" iconPosition="left">
-          <p-inputIcon styleClass="pi pi-search"></p-inputIcon>
-          <input type="text" pInputText placeholder="Search" class="w-full" />
-        </p-iconField>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="scroller">Scroller</label>
-        <p-scroller id="scroller" [items]="countries" [itemSize]="50" scrollHeight="200px" styleClass="w-full">
-          <ng-template pTemplate="item" let-country>
-            <div style="height: 50px">{{ country.name }}</div>
-          </ng-template>
-        </p-scroller>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="timeline">Timeline</label>
-        <p-timeline id="timeline" [value]="deliveryStatus">
-          <ng-template let-delivery pTemplate="opposite"> {{ delivery.status }} </ng-template>
-          <ng-template let-delivery pTemplate="content"> {{ delivery.date }} </ng-template>
-        </p-timeline>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="tree">Tree</label>
-        <p-tree id="tree" [value]="files" class="w-full"></p-tree>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="confirmDialog">ConfirmDialog</label>
         <p-button (onClick)="confirmDialog($event)" label="Save"></p-button>
         <p-toast></p-toast>
@@ -188,88 +162,6 @@
         <p-tag severity="warning" value="Warning"></p-tag>
         <p-tag severity="danger" value="Danger"></p-tag>
       </div>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="organizationChart">OrganizationChart</label>
-      <p-organizationChart id="organizationChart" [value]="organization"></p-organizationChart>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="paginator">Paginator</label>
-      <p-paginator id="paginator" [rows]="10" [totalRecords]="120" [rowsPerPageOptions]="[5, 10, 20]"></p-paginator>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="table">Table</label>
-      <p-table
-        id="table"
-        [value]="products"
-        selectionMode="single"
-        [(selection)]="selectedProduct"
-        styleClass="p-datatable-striped"
-      >
-        <ng-template pTemplate="header">
-          <tr>
-            <th pSortableColumn="code" scope="col">
-              Code
-              <p-columnFilter field="code" type="text" display="menu"></p-columnFilter>
-              <p-sortIcon field="code"></p-sortIcon>
-            </th>
-            <th pSortableColumn="name" scope="col">
-              Name
-              <p-columnFilter field="name" type="text" display="menu"></p-columnFilter>
-              <p-sortIcon field="name"></p-sortIcon>
-            </th>
-            <th pSortableColumn="category" scope="col">
-              Category
-              <p-columnFilter field="category" type="text" display="menu"></p-columnFilter>
-              <p-sortIcon field="category"></p-sortIcon>
-            </th>
-            <th pSortableColumn="price" scope="col">
-              Price
-              <p-columnFilter field="price" type="numeric" currency="EUR" display="menu" />
-              <p-sortIcon field="price"></p-sortIcon>
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product>
-          <tr [pSelectableRow]="product">
-            <td>{{ product.code }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.price | currency: 'EUR' }}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="treeTable">TreeTable</label>
-      <p-treeTable id="treeTable" [value]="itSolutions" selectionMode="single">
-        <ng-template pTemplate="header">
-          <tr>
-            <th ttSortableColumn="name" scope="col">
-              Name
-              <p-treeTableSortIcon field="name"></p-treeTableSortIcon>
-            </th>
-            <th ttSortableColumn="size" scope="col">
-              Size
-              <p-treeTableSortIcon field="size"></p-treeTableSortIcon>
-            </th>
-            <th ttSortableColumn="type" scope="col">
-              Type
-              <p-treeTableSortIcon field="type"></p-treeTableSortIcon>
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-itSolution let-subSolution="rowData">
-          <tr [ttRow]="itSolution" [ttSelectableRow]="itSolution">
-            <td>
-              <p-treeTableToggler [rowNode]="itSolution"></p-treeTableToggler>
-              {{ subSolution.name }}
-            </td>
-            <td>{{ subSolution.size }}</td>
-            <td>{{ subSolution.type }}</td>
-          </tr>
-        </ng-template>
-      </p-treeTable>
     </div>
     <div class="flex flex-column gap-2">
       <label for="accordion">Accordion</label>
