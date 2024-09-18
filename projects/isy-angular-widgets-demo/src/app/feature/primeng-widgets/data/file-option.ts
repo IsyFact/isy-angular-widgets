@@ -70,9 +70,9 @@ export const fileOptionData: FileOption[] = [
 
 export const optionData: MenuItem[] = [
   {label: 'Update', icon: 'pi pi-refresh'},
-  {label: 'Delete', icon: 'pi pi-times'},
+  {label: 'Edit', icon: 'pi pi-pencil'},
   {label: 'Add', icon: 'pi pi-plus'},
-  {label: 'Cancel', icon: 'pi pi-minus'}
+  {label: 'Delete', icon: 'pi pi-trash'}
 ];
 
 export const contextMenuData: MenuItem[] = [

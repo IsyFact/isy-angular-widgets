@@ -1,6 +1,9 @@
 import {PrimengWidgetsRoutingModule} from './primeng-widgets-routing.module';
 import {PrimengWidgetsComponent} from './primeng-widgets.component';
+import {PrimengFormComponent} from './components/primeng-form/primeng-form.component';
+import {PrimengButtonComponent} from './components/primeng-button/primeng-button.component';
 import {NgModule} from '@angular/core';
+
 import {TabViewModule} from 'primeng/tabview';
 import {CalendarModule} from 'primeng/calendar';
 import {CheckboxModule} from 'primeng/checkbox';
@@ -81,10 +84,9 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {TagModule} from 'primeng/tag';
 import {TerminalModule} from 'primeng/terminal';
-import {PrimengFormComponent} from './components/primeng-form/primeng-form.component';
 
 @NgModule({
-  declarations: [PrimengWidgetsComponent, PrimengFormComponent],
+  declarations: [PrimengWidgetsComponent, PrimengFormComponent, PrimengButtonComponent],
   imports: [
     PrimengWidgetsRoutingModule,
     TabViewModule,

@@ -9,18 +9,6 @@
         </p-iconField>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="button">Button </label>
-        <p-button id="button" label="Primary Colored Button"></p-button>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="splitButton">SplitButton</label>
-        <p-splitButton id="splitButton" label="Save" icon="pi pi-save" [model]="option"></p-splitButton>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="speedDial">SpeedDial</label>
-        <p-speedDial id="speedDial" [model]="option" direction="right"></p-speedDial>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="scroller">Scroller</label>
         <p-scroller id="scroller" [items]="countries" [itemSize]="50" scrollHeight="200px" styleClass="w-full">
           <ng-template pTemplate="item" let-country>
