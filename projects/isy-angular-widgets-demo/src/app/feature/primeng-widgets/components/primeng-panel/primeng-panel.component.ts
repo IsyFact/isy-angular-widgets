@@ -1,10 +1,13 @@
 import {Component} from '@angular/core';
+import {MenuItem} from 'primeng/api';
+
+import {optionData} from '../../data/file-option';
 
 @Component({
   selector: 'demo-primeng-panel',
-  standalone: true,
-  imports: [],
   templateUrl: './primeng-panel.component.html',
   styleUrl: './primeng-panel.component.scss'
 })
-export class PrimengPanelComponent {}
+export class PrimengPanelComponent {
+  option: MenuItem[] = optionData;
+}

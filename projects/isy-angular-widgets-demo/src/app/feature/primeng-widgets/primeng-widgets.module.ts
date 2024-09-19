@@ -3,6 +3,7 @@ import {PrimengWidgetsComponent} from './primeng-widgets.component';
 import {PrimengFormComponent} from './components/primeng-form/primeng-form.component';
 import {PrimengButtonComponent} from './components/primeng-button/primeng-button.component';
 import {PrimengDataComponent} from './components/primeng-data/primeng-data.component';
+import {PrimengPanelComponent} from './components/primeng-panel/primeng-panel.component';
 import {NgModule} from '@angular/core';
 
 import {TabViewModule} from 'primeng/tabview';
@@ -87,7 +88,13 @@ import {TagModule} from 'primeng/tag';
 import {TerminalModule} from 'primeng/terminal';
 
 @NgModule({
-  declarations: [PrimengWidgetsComponent, PrimengFormComponent, PrimengButtonComponent, PrimengDataComponent],
+  declarations: [
+    PrimengWidgetsComponent,
+    PrimengFormComponent,
+    PrimengButtonComponent,
+    PrimengDataComponent,
+    PrimengPanelComponent
+  ],
   imports: [
     PrimengWidgetsRoutingModule,
     TabViewModule,

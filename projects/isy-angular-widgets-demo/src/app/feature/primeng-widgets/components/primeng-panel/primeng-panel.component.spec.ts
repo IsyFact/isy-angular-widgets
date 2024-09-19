@@ -1,19 +1,19 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 
 import {PrimengPanelComponent} from './primeng-panel.component';
+import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 
-describe('PrimengPanelComponent', () => {
+describe('Unit Tests: PrimengPanelComponent', () => {
   let component: PrimengPanelComponent;
-  let fixture: ComponentFixture<PrimengPanelComponent>;
+  let spectator: Spectator<PrimengPanelComponent>;
+  const createComponent = createComponentFactory({
+    component: PrimengPanelComponent,
+    imports: [PrimengWidgetsModule]
+  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [PrimengPanelComponent]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(PrimengPanelComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {
