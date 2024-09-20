@@ -46,12 +46,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   it('should open confirm dialog and close it on accept', () => {
     confirmDialog = spectator.debugElement.query(By.css('p-confirmDialog')).componentInstance;
 
-    let openDialog = spyOn(confirmDialog, 'accept').and.callThrough();
+    const openDialog = spyOn(confirmDialog, 'accept').and.callThrough();
     component.confirmDialog(new Event(''));
 
     spectator.detectChanges();
 
-    let acceptButton = spectator.debugElement.query(By.css('.p-confirm-dialog-accept')).nativeElement;
+    const acceptButton = spectator.debugElement.query(By.css('.p-confirm-dialog-accept')).nativeElement;
     acceptButton.click();
 
     spectator.detectChanges();
@@ -62,12 +62,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   it('should open confirm dialog and close it on reject', () => {
     confirmDialog = spectator.debugElement.query(By.css('p-confirmDialog')).componentInstance;
 
-    let openDialog = spyOn(confirmDialog, 'reject').and.callThrough();
+    const openDialog = spyOn(confirmDialog, 'reject').and.callThrough();
     component.confirmDialog(new Event(''));
 
     spectator.detectChanges();
 
-    let rejectButton = spectator.debugElement.query(By.css('.p-confirm-dialog-reject')).nativeElement;
+    const rejectButton = spectator.debugElement.query(By.css('.p-confirm-dialog-reject')).nativeElement;
     rejectButton.click();
 
     spectator.detectChanges();
@@ -78,12 +78,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   it('should open confirm popup and close it on accept', () => {
     confirmPopup = spectator.debugElement.query(By.css('p-confirmPopup')).componentInstance;
 
-    let openPopup = spyOn(confirmPopup, 'accept').and.callThrough();
+    const openPopup = spyOn(confirmPopup, 'accept').and.callThrough();
     component.confirmPopup(new Event(''));
 
     spectator.detectChanges();
 
-    let acceptButton = spectator.debugElement.query(By.css('.p-confirm-popup-accept')).nativeElement;
+    const acceptButton = spectator.debugElement.query(By.css('.p-confirm-popup-accept')).nativeElement;
     acceptButton.click();
 
     spectator.detectChanges();
@@ -94,12 +94,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   it('should open confirm popup and close it on reject', () => {
     confirmPopup = spectator.debugElement.query(By.css('p-confirmPopup')).componentInstance;
 
-    let openPopup = spyOn(confirmPopup, 'reject').and.callThrough();
+    const openPopup = spyOn(confirmPopup, 'reject').and.callThrough();
     component.confirmPopup(new Event(''));
 
     spectator.detectChanges();
 
-    let rejectButton = spectator.debugElement.query(By.css('.p-confirm-popup-reject')).nativeElement;
+    const rejectButton = spectator.debugElement.query(By.css('.p-confirm-popup-reject')).nativeElement;
     rejectButton.click();
 
     spectator.detectChanges();
