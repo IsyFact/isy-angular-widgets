@@ -1,1 +1,59 @@
-<p>primeng-overlay works!</p>
+<div class="mx-3">
+  <h1>PrimeNG Overlays</h1>
+  <h2>Dialogs</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Sidebar</h3>
+      <p-button (onClick)="showSidebar()" label="Left Sidebar"></p-button>
+      <p-sidebar [(visible)]="visibleSidebar" position="left">
+        <h1>Sidebar Header</h1>
+        Content
+      </p-sidebar>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Dialog</h3>
+      <p-button (onClick)="showDialog()" label="Dialog" />
+      <p-dialog header="Dialog Header" [modal]="true" [(visible)]="visibleDialog" [style]="{width: '25rem'}">
+        <div class="flex flex-column gap-2">Content</div>
+        <div class="flex justify-content-end">
+          <p-button label="Ok" (onClick)="closeDialog()"></p-button>
+        </div>
+      </p-dialog>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>ConfirmDialog</h3>
+      <p-button (onClick)="confirmDialog($event)" label="Save"></p-button>
+      <p-toast></p-toast>
+      <p-confirmDialog key="confirmDialog"></p-confirmDialog>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>ConfirmPopup</h3>
+      <p-button (onClick)="confirmPopup($event)" label="Save"></p-button>
+      <p-toast></p-toast>
+      <p-confirmPopup key="confirmPopup"></p-confirmPopup>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Extra-Info Widgets</h2>
+  <div class="grid mb-3">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Tooltip</h3>
+      <input
+        id="tooltip"
+        type="text"
+        pInputText
+        pTooltip="Enter something"
+        tooltipPosition="bottom"
+        placeholder="Tooltip bottom"
+        class="w-full"
+      />
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>OverlayPanel</h3>
+      <p-button (onClick)="overlayPanel.toggle($event)" label="OverlayPanel"></p-button>
+      <p-overlayPanel #overlayPanel>
+        <div class="flex flex-column gap-2">Content</div>
+      </p-overlayPanel>
+    </div>
+  </div>
+</div>

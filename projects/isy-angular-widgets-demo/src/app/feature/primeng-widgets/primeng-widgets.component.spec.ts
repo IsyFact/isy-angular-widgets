@@ -23,22 +23,6 @@ describe('PrimengWidgetsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show dialog', () => {
-    component.showDialog();
-    expect(component.visibleDialog).toBeTrue();
-  });
-
-  it('should close dialog', () => {
-    component.visibleDialog = true;
-    component.closeDialog();
-    expect(component.visibleDialog).toBeFalse();
-  });
-
-  it('should show sidebar', () => {
-    component.showSidebar();
-    expect(component.visibleSidebar).toBeTrue();
-  });
-
   it('should block content', () => {
     component.blockContent();
     expect(component.blockedContent).toBeTrue();
