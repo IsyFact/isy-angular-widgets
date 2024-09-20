@@ -1,9 +1,10 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {PrimengFileComponent} from './primeng-file.component';
-import {PrimengWidgetsModule} from '../../primeng-widgets.module';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {UploadEvent} from 'primeng/fileupload';
 import {MessageService} from 'primeng/api';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+
+import {PrimengFileComponent} from './primeng-file.component';
+import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 
 describe('Unit Tests: PrimengFileComponent', () => {
   let component: PrimengFileComponent;
@@ -29,6 +30,10 @@ describe('Unit Tests: PrimengFileComponent', () => {
 
     component.onUpload(mockEvent);
 
-    expect(addMessageSpy).toHaveBeenCalledWith({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+    expect(addMessageSpy).toHaveBeenCalledWith({
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded with Basic Mode'
+    });
   });
 });
