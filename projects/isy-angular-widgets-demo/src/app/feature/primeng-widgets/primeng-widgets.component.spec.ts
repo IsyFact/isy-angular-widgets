@@ -22,15 +22,4 @@ describe('PrimengWidgetsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should block content', () => {
-    component.blockContent();
-    expect(component.blockedContent).toBeTrue();
-  });
-
-  it('should unblock content', () => {
-    component.blockedContent = true;
-    component.unblockContent();
-    expect(component.blockedContent).toBeFalse();
-  });
 });

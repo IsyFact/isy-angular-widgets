@@ -15,10 +15,7 @@ import {Subscription} from 'rxjs';
 export class PrimengWidgetsComponent implements OnDestroy {
   subscription: Subscription;
 
-  constructor(
-    private messageService: MessageService,
-    private terminalService: TerminalService
-  ) {
+  constructor(private terminalService: TerminalService) {
     this.subscription = this.terminalService.commandHandler.subscribe((command) => {
       const response = command === 'date' ? new Date().toDateString() : 'Unknown command: ' + command;
       this.terminalService.sendResponse(response);
@@ -29,19 +26,5 @@ export class PrimengWidgetsComponent implements OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  messages: Message[] = messageData;
-
-  storageStatus: StorageStatus[] = storageData;
-
-  blockedContent: boolean = false;
-
-  blockContent(): void {
-    this.blockedContent = true;
-  }
-
-  unblockContent(): void {
-    this.blockedContent = false;
   }
 }

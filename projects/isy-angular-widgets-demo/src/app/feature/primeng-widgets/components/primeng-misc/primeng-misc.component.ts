@@ -1,10 +1,39 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {TerminalService} from 'primeng/terminal';
+
+import {storageData} from '../../data/product';
+import {StorageStatus} from '../../model/product';
 
 @Component({
   selector: 'demo-primeng-misc',
-  standalone: true,
-  imports: [],
   templateUrl: './primeng-misc.component.html',
-  styleUrl: './primeng-misc.component.scss'
+  styleUrl: './primeng-misc.component.scss',
+  providers: [TerminalService]
 })
-export class PrimengMiscComponent {}
+export class PrimengMiscComponent implements OnDestroy {
+  blockedContent: boolean = false;
+  storageStatus: StorageStatus[] = storageData;
+  subscription: Subscription;
+
+  constructor(public terminalService: TerminalService) {
+    this.subscription = this.terminalService.commandHandler.subscribe((command) => {
+      const response = command === 'date' ? new Date().toDateString() : 'Unknown command: ' + command;
+      this.terminalService.sendResponse(response);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  blockContent(): void {
+    this.blockedContent = true;
+  }
+
+  unblockContent(): void {
+    this.blockedContent = false;
+  }
+}
