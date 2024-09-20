@@ -4,7 +4,6 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 @Component({
   selector: 'demo-primeng-overlay',
   templateUrl: './primeng-overlay.component.html',
-  styleUrl: './primeng-overlay.component.scss',
   providers: [ConfirmationService, MessageService]
 })
 export class PrimengOverlayComponent {

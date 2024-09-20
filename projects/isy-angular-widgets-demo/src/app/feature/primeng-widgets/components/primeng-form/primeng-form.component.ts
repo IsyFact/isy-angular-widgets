@@ -8,8 +8,7 @@ import {fileOptionData} from '../../data/file-option';
 
 @Component({
   selector: 'demo-primeng-form',
-  templateUrl: './primeng-form.component.html',
-  styleUrl: './primeng-form.component.scss'
+  templateUrl: './primeng-form.component.html'
 })
 export class PrimengFormComponent {
   countries: Country[] = countryData;

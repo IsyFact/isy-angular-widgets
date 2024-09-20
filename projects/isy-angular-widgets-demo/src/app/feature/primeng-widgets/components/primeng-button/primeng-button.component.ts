@@ -5,8 +5,7 @@ import {optionData} from '../../data/file-option';
 
 @Component({
   selector: 'demo-primeng-button',
-  templateUrl: './primeng-button.component.html',
-  styleUrl: './primeng-button.component.scss'
+  templateUrl: './primeng-button.component.html'
 })
 export class PrimengButtonComponent {
   options: MenuItem[] = optionData;

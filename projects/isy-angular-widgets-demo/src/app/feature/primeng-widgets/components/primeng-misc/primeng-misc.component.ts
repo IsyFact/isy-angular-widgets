@@ -8,7 +8,6 @@ import {StorageStatus} from '../../model/product';
 @Component({
   selector: 'demo-primeng-misc',
   templateUrl: './primeng-misc.component.html',
-  styleUrl: './primeng-misc.component.scss',
   providers: [TerminalService]
 })
 export class PrimengMiscComponent implements OnDestroy {

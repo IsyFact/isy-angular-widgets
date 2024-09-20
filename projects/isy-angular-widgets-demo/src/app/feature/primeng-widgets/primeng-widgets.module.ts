@@ -1,6 +1,4 @@
 import {NgModule} from '@angular/core';
-import {PrimengWidgetsRoutingModule} from './primeng-widgets-routing.module';
-import {PrimengWidgetsComponent} from './primeng-widgets.component';
 import {PrimengFormComponent} from './components/primeng-form/primeng-form.component';
 import {PrimengButtonComponent} from './components/primeng-button/primeng-button.component';
 import {PrimengDataComponent} from './components/primeng-data/primeng-data.component';
@@ -94,7 +92,6 @@ import {TerminalModule} from 'primeng/terminal';
 
 @NgModule({
   declarations: [
-    PrimengWidgetsComponent,
     PrimengFormComponent,
     PrimengButtonComponent,
     PrimengDataComponent,
@@ -106,7 +103,6 @@ import {TerminalModule} from 'primeng/terminal';
     PrimengMiscComponent
   ],
   imports: [
-    PrimengWidgetsRoutingModule,
     TabViewModule,
     CalendarModule,
     CheckboxModule,

@@ -5,8 +5,7 @@ import {messageData} from '../../data/file-option';
 
 @Component({
   selector: 'demo-primeng-messages',
-  templateUrl: './primeng-messages.component.html',
-  styleUrl: './primeng-messages.component.scss'
+  templateUrl: './primeng-messages.component.html'
 })
 export class PrimengMessagesComponent {
   constructor(public messageService: MessageService) {}

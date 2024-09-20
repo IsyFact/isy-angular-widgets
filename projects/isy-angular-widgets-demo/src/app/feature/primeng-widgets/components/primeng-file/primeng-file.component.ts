@@ -4,8 +4,7 @@ import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'demo-primeng-file',
-  templateUrl: './primeng-file.component.html',
-  styleUrl: './primeng-file.component.scss'
+  templateUrl: './primeng-file.component.html'
 })
 export class PrimengFileComponent {
   constructor(public messageService: MessageService) {}
