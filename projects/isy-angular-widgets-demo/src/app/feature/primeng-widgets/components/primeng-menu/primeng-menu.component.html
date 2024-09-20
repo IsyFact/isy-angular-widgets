@@ -1,1 +1,63 @@
-<p>primeng-menu works!</p>
+<div class="mx-3">
+  <h1>PrimeNG Menus</h1>
+  <h2>Content Splitter</h2>
+  <div class="grid">
+    <div class="col-12 flex-column gap-2">
+      <h3>Breadcrumb</h3>
+      <p-breadcrumb [home]="{icon: 'pi pi-home'}" [model]="electronics"></p-breadcrumb>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>Steps</h3>
+      <p-steps
+        [model]="stepItem"
+        [readonly]="false"
+        [activeIndex]="activeIndex"
+        (activeIndexChange)="onActiveIndexChange($event)"
+      ></p-steps>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>TabMenu</h3>
+      <p-tabMenu [model]="tabMenuOption"></p-tabMenu>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Navigation Menu</h2>
+  <div class="grid">
+    <div class="col-12 flex-column gap-2">
+      <h3>MenuBar</h3>
+      <p-menubar id="menuBar" [model]="menuBarOption"></p-menubar>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>MegaMenu</h3>
+      <p-megaMenu id="megaMenu" [model]="megaMenuOptions"></p-megaMenu>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>PanelMenu</h3>
+      <p-panelMenu id="panelMenu" [model]="fileContainerOptions"></p-panelMenu>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>TieredMenu</h3>
+      <p-tieredMenu id="tieredMenu" [model]="fileContainerOptions"></p-tieredMenu>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Other Menus</h2>
+  <div class="grid mb-3">
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>ContextMenu</h3>
+      <img
+        #logo
+        ngSrc="assets/default-application-logo.jpg"
+        alt="Logo"
+        aria-haspopup="true"
+        height="150"
+        width="335"
+      />
+      <p-contextMenu id="contextMenu" [target]="logo" [model]="contextMenuOption"></p-contextMenu>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Menu</h3>
+      <p-menu id="menu" [model]="option" styleClass="w-full"></p-menu>
+    </div>
+  </div>
+</div>

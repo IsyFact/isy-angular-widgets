@@ -6,6 +6,7 @@ import {PrimengDataComponent} from './components/primeng-data/primeng-data.compo
 import {PrimengPanelComponent} from './components/primeng-panel/primeng-panel.component';
 import {PrimengOverlayComponent} from './components/primeng-overlay/primeng-overlay.component';
 import {PrimengFileComponent} from './components/primeng-file/primeng-file.component';
+import {PrimengMenuComponent} from './components/primeng-menu/primeng-menu.component';
 import {NgModule} from '@angular/core';
 
 import {TabViewModule} from 'primeng/tabview';
@@ -45,7 +46,7 @@ import {OrganizationChartModule} from 'primeng/organizationchart';
 import {PaginatorModule} from 'primeng/paginator';
 import {ScrollerModule} from 'primeng/scroller';
 import {TableModule} from 'primeng/table';
-import {CurrencyPipe} from '@angular/common';
+import {CurrencyPipe, NgOptimizedImage} from '@angular/common';
 import {TimelineModule} from 'primeng/timeline';
 import {TreeModule} from 'primeng/tree';
 import {TreeTableModule} from 'primeng/treetable';
@@ -97,7 +98,8 @@ import {TerminalModule} from 'primeng/terminal';
     PrimengDataComponent,
     PrimengPanelComponent,
     PrimengOverlayComponent,
-    PrimengFileComponent
+    PrimengFileComponent,
+    PrimengMenuComponent
   ],
   imports: [
     PrimengWidgetsRoutingModule,
@@ -180,7 +182,8 @@ import {TerminalModule} from 'primeng/terminal';
     ProgressBarModule,
     ProgressSpinnerModule,
     TagModule,
-    TerminalModule
+    TerminalModule,
+    NgOptimizedImage
   ]
 })
 export class PrimengWidgetsModule {}

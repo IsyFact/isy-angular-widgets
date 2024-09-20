@@ -1,16 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
-import {
-  contextMenuData,
-  menuBarData,
-  optionData,
-  fileContainerData,
-  tabMenuData,
-  messageData
-} from './data/file-option';
-import {MegaMenuItem, MenuItem, Message, MessageService} from 'primeng/api';
-import {personalData} from './data/organization';
+import {messageData} from './data/file-option';
+import {Message, MessageService} from 'primeng/api';
 import {StorageStatus} from './model/product';
-import {electronicData, megaMenuProductData, storageData} from './data/product';
+import {storageData} from './data/product';
 import {TerminalService} from 'primeng/terminal';
 import {Subscription} from 'rxjs';
 
@@ -39,18 +31,9 @@ export class PrimengWidgetsComponent implements OnDestroy {
     }
   }
 
-  option: MenuItem[] = optionData;
-  contextMenuOption: MenuItem[] = contextMenuData;
-  menuBarOption: MenuItem[] = menuBarData;
-  fileContainerOptions: MenuItem[] = fileContainerData;
-  tabMenuOption: MenuItem[] = tabMenuData;
   messages: Message[] = messageData;
 
-  stepItem: MenuItem[] = personalData;
-
-  electronics: MenuItem[] = electronicData;
   storageStatus: StorageStatus[] = storageData;
-  megaMenuOptions: MegaMenuItem[] = megaMenuProductData;
 
   blockedContent: boolean = false;
 

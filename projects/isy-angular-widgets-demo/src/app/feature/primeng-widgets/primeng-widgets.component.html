@@ -2,23 +2,6 @@
   <p-tabPanel header="PrimeNG Widgets">
     <div class="grid mt-3">
       <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="contextMenu">ContextMenu</label>
-        <img #logo src="assets/default-application-logo.jpg" alt="Logo" aria-haspopup="true" class="w-full" />
-        <p-contextMenu id="contextMenu" [target]="logo" [model]="contextMenuOption"></p-contextMenu>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="menu">Menu</label>
-        <p-menu id="menu" [model]="option" styleClass="w-full"></p-menu>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="panelMenu">PanelMenu</label>
-        <p-panelMenu id="panelMenu" [model]="fileContainerOptions"></p-panelMenu>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-        <label for="tieredMenu">TieredMenu</label>
-        <p-tieredMenu id="tieredMenu" [model]="fileContainerOptions"></p-tieredMenu>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
         <label for="messages">Messages</label>
         <p-messages id="messages" [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
       </div>
@@ -99,26 +82,6 @@
         <p-tag severity="warning" value="Warning"></p-tag>
         <p-tag severity="danger" value="Danger"></p-tag>
       </div>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="breadcrumb">Breadcrumb</label>
-      <p-breadcrumb id="breadcrumb" [home]="{icon: 'pi pi-home'}" [model]="electronics"></p-breadcrumb>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="menuBar">MenuBar</label>
-      <p-menubar id="menuBar" [model]="menuBarOption"></p-menubar>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="megaMenu">MegaMenu</label>
-      <p-megaMenu id="megaMenu" [model]="megaMenuOptions"></p-megaMenu>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="steps">Steps</label>
-      <p-steps id="steps" [model]="stepItem"></p-steps>
-    </div>
-    <div class="flex flex-column gap-2">
-      <label for="tabMenu">TabMenu</label>
-      <p-tabMenu id="tabMenu" [model]="tabMenuOption"></p-tabMenu>
     </div>
     <div class="flex flex-column gap-2">
       <label for="meterGroup">MeterGroup</label>
