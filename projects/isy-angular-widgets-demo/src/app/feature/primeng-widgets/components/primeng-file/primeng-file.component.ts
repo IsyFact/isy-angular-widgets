@@ -8,9 +8,7 @@ import {MessageService} from 'primeng/api';
   styleUrl: './primeng-file.component.scss'
 })
 export class PrimengFileComponent {
-  constructor(
-    private messageService: MessageService,
-  ){}
+  constructor(public messageService: MessageService) {}
 
   onUpload(event: UploadEvent): void {
     this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
