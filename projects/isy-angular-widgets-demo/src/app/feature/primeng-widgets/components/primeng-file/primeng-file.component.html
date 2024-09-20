@@ -1,1 +1,18 @@
-<p>primeng-file works!</p>
+<div class="mx-3">
+  <h1>PrimeNG File</h1>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h2>FileUpload</h2>
+      <p-fileUpload
+        mode="basic"
+        chooseIcon="pi pi-upload"
+        chooseLabel="FileUpload"
+        name="fileUploadExample"
+        url="https://www.primefaces.org/cdn/api/upload.php"
+        accept="image/*,.pdf,.txt"
+        [maxFileSize]="1000000"
+        (onUpload)="onUpload($event)"
+      ></p-fileUpload>
+    </div>
+  </div>
+</div>

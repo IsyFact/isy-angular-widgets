@@ -11,7 +11,6 @@ import {MegaMenuItem, MenuItem, Message, MessageService} from 'primeng/api';
 import {personalData} from './data/organization';
 import {StorageStatus} from './model/product';
 import {electronicData, megaMenuProductData, storageData} from './data/product';
-import {UploadEvent} from 'primeng/fileupload';
 import {TerminalService} from 'primeng/terminal';
 import {Subscription} from 'rxjs';
 
@@ -57,10 +56,6 @@ export class PrimengWidgetsComponent implements OnDestroy {
 
   showToastMessage(): void {
     this.messageService.add({key: 'toast', severity: 'success', summary: 'Success', detail: 'Message Content'});
-  }
-
-  onUpload(event: UploadEvent): void {
-    this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
   }
 
   blockContent(): void {

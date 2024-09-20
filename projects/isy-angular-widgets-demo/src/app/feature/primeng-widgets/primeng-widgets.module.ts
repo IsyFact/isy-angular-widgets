@@ -5,6 +5,7 @@ import {PrimengButtonComponent} from './components/primeng-button/primeng-button
 import {PrimengDataComponent} from './components/primeng-data/primeng-data.component';
 import {PrimengPanelComponent} from './components/primeng-panel/primeng-panel.component';
 import {PrimengOverlayComponent} from './components/primeng-overlay/primeng-overlay.component';
+import {PrimengFileComponent} from './components/primeng-file/primeng-file.component';
 import {NgModule} from '@angular/core';
 
 import {TabViewModule} from 'primeng/tabview';
@@ -95,7 +96,8 @@ import {TerminalModule} from 'primeng/terminal';
     PrimengButtonComponent,
     PrimengDataComponent,
     PrimengPanelComponent,
-    PrimengOverlayComponent
+    PrimengOverlayComponent,
+    PrimengFileComponent
   ],
   imports: [
     PrimengWidgetsRoutingModule,
