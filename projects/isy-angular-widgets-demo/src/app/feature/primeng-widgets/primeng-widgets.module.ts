@@ -7,6 +7,7 @@ import {PrimengPanelComponent} from './components/primeng-panel/primeng-panel.co
 import {PrimengOverlayComponent} from './components/primeng-overlay/primeng-overlay.component';
 import {PrimengFileComponent} from './components/primeng-file/primeng-file.component';
 import {PrimengMenuComponent} from './components/primeng-menu/primeng-menu.component';
+import {PrimengMessagesComponent} from './components/primeng-messages/primeng-messages.component';
 import {NgModule} from '@angular/core';
 
 import {TabViewModule} from 'primeng/tabview';
@@ -99,7 +100,8 @@ import {TerminalModule} from 'primeng/terminal';
     PrimengPanelComponent,
     PrimengOverlayComponent,
     PrimengFileComponent,
-    PrimengMenuComponent
+    PrimengMenuComponent,
+    PrimengMessagesComponent
   ],
   imports: [
     PrimengWidgetsRoutingModule,

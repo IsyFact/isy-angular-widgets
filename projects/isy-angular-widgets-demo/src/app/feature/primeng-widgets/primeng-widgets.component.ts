@@ -37,10 +37,6 @@ export class PrimengWidgetsComponent implements OnDestroy {
 
   blockedContent: boolean = false;
 
-  showToastMessage(): void {
-    this.messageService.add({key: 'toast', severity: 'success', summary: 'Success', detail: 'Message Content'});
-  }
-
   blockContent(): void {
     this.blockedContent = true;
   }
