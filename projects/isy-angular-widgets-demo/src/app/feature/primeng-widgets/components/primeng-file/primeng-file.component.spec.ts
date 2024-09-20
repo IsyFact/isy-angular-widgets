@@ -33,7 +33,8 @@ describe('Unit Tests: PrimengFileComponent', () => {
     expect(addMessageSpy).toHaveBeenCalledWith({
       severity: 'info',
       summary: 'Success',
-      detail: 'File Uploaded with Basic Mode'
+      detail: 'File Uploaded with Basic Mode',
+      sticky: true
     });
   });
 });
