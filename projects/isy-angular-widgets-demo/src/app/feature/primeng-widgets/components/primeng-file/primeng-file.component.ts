@@ -11,6 +11,11 @@ export class PrimengFileComponent {
   constructor(public messageService: MessageService) {}
 
   onUpload(event: UploadEvent): void {
-    this.messageService.add({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded with Basic Mode',
+      sticky: true
+    });
   }
 }

@@ -1,22 +1,41 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {MessageService} from 'primeng/api';
 
 import {PrimengMessagesComponent} from './primeng-messages.component';
+import {PrimengWidgetsModule} from '../../primeng-widgets.module';
+import {messageData} from '../../data/file-option';
 
-describe('PrimengMessagesComponent', () => {
+describe('Unit Tests: PrimengMessagesComponent', () => {
   let component: PrimengMessagesComponent;
-  let fixture: ComponentFixture<PrimengMessagesComponent>;
+  let spectator: Spectator<PrimengMessagesComponent>;
+  const createComponent = createComponentFactory({
+    component: PrimengMessagesComponent,
+    imports: [PrimengWidgetsModule],
+    providers: [MessageService]
+  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [PrimengMessagesComponent]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(PrimengMessagesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should initialize messages with messageData', () => {
+    expect(component.messages).toEqual(messageData);
+  });
+
+  it('should add a success toast message on showToastMessage call', () => {
+    const spy = spyOn(component.messageService, 'add');
+    component.showToastMessage();
+    expect(spy).toHaveBeenCalledWith({
+      key: 'toast',
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Message Content',
+      sticky: true
+    });
   });
 });
