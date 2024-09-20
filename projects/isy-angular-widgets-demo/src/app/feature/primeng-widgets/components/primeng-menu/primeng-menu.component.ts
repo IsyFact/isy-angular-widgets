@@ -10,7 +10,7 @@ import {personalData} from '../../data/organization';
   templateUrl: './primeng-menu.component.html',
   styleUrl: './primeng-menu.component.scss'
 })
-export class PrimengMenuComponent{
+export class PrimengMenuComponent {
   electronics: MenuItem[] = electronicData;
   contextMenuOption: MenuItem[] = contextMenuData;
   option: MenuItem[] = optionData;
