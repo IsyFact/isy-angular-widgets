@@ -1,22 +1,109 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {ConfirmDialog} from 'primeng/confirmdialog';
+import {ConfirmPopup} from 'primeng/confirmpopup';
+import {By} from '@angular/platform-browser';
 
 import {PrimengOverlayComponent} from './primeng-overlay.component';
+import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 
-describe('PrimengOverlayComponent', () => {
+describe('Unit Tests: PrimengOverlayComponent', () => {
   let component: PrimengOverlayComponent;
-  let fixture: ComponentFixture<PrimengOverlayComponent>;
+  let spectator: Spectator<PrimengOverlayComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [PrimengOverlayComponent]
-    }).compileComponents();
+  let confirmDialog: ConfirmDialog;
+  let confirmPopup: ConfirmPopup;
 
-    fixture = TestBed.createComponent(PrimengOverlayComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  const createComponent = createComponentFactory({
+    component: PrimengOverlayComponent,
+    imports: [PrimengWidgetsModule]
+  });
+
+  beforeEach(() => {
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show dialog', () => {
+    component.showDialog();
+    expect(component.visibleDialog).toBeTrue();
+  });
+
+  it('should close dialog', () => {
+    component.visibleDialog = true;
+    component.closeDialog();
+    expect(component.visibleDialog).toBeFalse();
+  });
+
+  it('should show sidebar', () => {
+    component.showSidebar();
+    expect(component.visibleSidebar).toBeTrue();
+  });
+
+  it('should open confirm dialog and close it on accept', () => {
+    confirmDialog = spectator.debugElement.query(By.css('p-confirmDialog')).componentInstance;
+
+    let openDialog = spyOn(confirmDialog, 'accept').and.callThrough();
+    component.confirmDialog(new Event(''));
+
+    spectator.detectChanges();
+
+    let acceptButton = spectator.debugElement.query(By.css('.p-confirm-dialog-accept')).nativeElement;
+    acceptButton.click();
+
+    spectator.detectChanges();
+
+    expect(openDialog).toHaveBeenCalled();
+  });
+
+  it('should open confirm dialog and close it on reject', () => {
+    confirmDialog = spectator.debugElement.query(By.css('p-confirmDialog')).componentInstance;
+
+    let openDialog = spyOn(confirmDialog, 'reject').and.callThrough();
+    component.confirmDialog(new Event(''));
+
+    spectator.detectChanges();
+
+    let rejectButton = spectator.debugElement.query(By.css('.p-confirm-dialog-reject')).nativeElement;
+    rejectButton.click();
+
+    spectator.detectChanges();
+
+    expect(openDialog).toHaveBeenCalled();
+  });
+
+  it('should open confirm popup and close it on accept', () => {
+    confirmPopup = spectator.debugElement.query(By.css('p-confirmPopup')).componentInstance;
+
+    let openPopup = spyOn(confirmPopup, 'accept').and.callThrough();
+    component.confirmPopup(new Event(''));
+
+    spectator.detectChanges();
+
+    let acceptButton = spectator.debugElement.query(By.css('.p-confirm-popup-accept')).nativeElement;
+    acceptButton.click();
+
+    spectator.detectChanges();
+
+    expect(openPopup).toHaveBeenCalled();
+  });
+
+  it('should open confirm popup and close it on reject', () => {
+    confirmPopup = spectator.debugElement.query(By.css('p-confirmPopup')).componentInstance;
+
+    let openPopup = spyOn(confirmPopup, 'reject').and.callThrough();
+    component.confirmPopup(new Event(''));
+
+    spectator.detectChanges();
+
+    let rejectButton = spectator.debugElement.query(By.css('.p-confirm-popup-reject')).nativeElement;
+    rejectButton.click();
+
+    spectator.detectChanges();
+
+    expect(openPopup).toHaveBeenCalled();
   });
 });
