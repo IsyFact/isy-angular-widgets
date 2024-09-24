@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 
 /**
  * A component that wraps form controls and displays validation messages.
@@ -115,7 +115,6 @@ export class FormWrapperComponent implements OnInit {
    * @returns the required state
    */
   isRequired(): boolean {
-    const result = Object.keys(this.validationMessages).filter((value) => value.includes('required'));
-    return result.length > 0;
+    return this.control.hasValidator(Validators.required);
   }
 }
