@@ -25,6 +25,9 @@ export class PrimengFormComponent {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   cities: any[] = countryCityMapping;
 
+  // Variable to hold the text entered in the editor
+  text: string = '';
+
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];
     const query = event.query;

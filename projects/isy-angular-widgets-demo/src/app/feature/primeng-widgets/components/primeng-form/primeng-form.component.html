@@ -196,11 +196,19 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Chips</h3>
-      <p-chips inputId="chips" [max]="3" placeholder="Maximum 3 chips"></p-chips>
+      <div class="p-fluid">
+        <p-chips inputId="chips" [max]="3" placeholder="Maximum 3 chips"></p-chips>
+      </div>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Listbox</h3>
       <p-listbox id="listbox" [options]="countries" optionLabel="name" styleClass="w-full"></p-listbox>
+    </div>
+  </div>
+  <div class="grid mb-3">
+    <div class="col-12 flex-column gap-2">
+      <h3>Editor</h3>
+      <p-editor [(ngModel)]="text" [style]="{height: '320px'}" />
     </div>
   </div>
 </div>

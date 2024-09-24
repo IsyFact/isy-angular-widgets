@@ -89,6 +89,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {TagModule} from 'primeng/tag';
 import {TerminalModule} from 'primeng/terminal';
+import {EditorModule} from 'primeng/editor';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -183,7 +185,9 @@ import {TerminalModule} from 'primeng/terminal';
     ProgressSpinnerModule,
     TagModule,
     TerminalModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    EditorModule,
+    FormsModule
   ]
 })
 export class PrimengWidgetsModule {}
