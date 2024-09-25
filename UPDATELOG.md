@@ -78,7 +78,7 @@
                 "@angular/cli": "~18.1.4",
                 "@angular/compiler-cli": "^18.1.4",
                 "@compodoc/compodoc": "^1.1.25",
-                "@isyfact/eslint-plugin": "1.5.0",
+                "@isyfact/eslint-plugin": "2.0.0",
                 "@ngneat/spectator": "^19.0.0",
                 "@stylistic/eslint-plugin-ts": "^2.6.2",
                 "@types/node": "^22.2.0",
