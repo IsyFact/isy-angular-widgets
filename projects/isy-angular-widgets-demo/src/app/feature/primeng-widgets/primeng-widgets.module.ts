@@ -8,6 +8,7 @@ import {PrimengFileComponent} from './components/primeng-file/primeng-file.compo
 import {PrimengMenuComponent} from './components/primeng-menu/primeng-menu.component';
 import {PrimengMessagesComponent} from './components/primeng-messages/primeng-messages.component';
 import {PrimengMiscComponent} from './components/primeng-misc/primeng-misc.component';
+import {PrimengChartComponent} from './components/primeng-chart/primeng-chart.component';
 
 import {TabViewModule} from 'primeng/tabview';
 import {CalendarModule} from 'primeng/calendar';
@@ -91,6 +92,7 @@ import {TagModule} from 'primeng/tag';
 import {TerminalModule} from 'primeng/terminal';
 import {EditorModule} from 'primeng/editor';
 import {FormsModule} from '@angular/forms';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -102,7 +104,8 @@ import {FormsModule} from '@angular/forms';
     PrimengFileComponent,
     PrimengMenuComponent,
     PrimengMessagesComponent,
-    PrimengMiscComponent
+    PrimengMiscComponent,
+    PrimengChartComponent
   ],
   imports: [
     TabViewModule,
@@ -187,7 +190,8 @@ import {FormsModule} from '@angular/forms';
     TerminalModule,
     NgOptimizedImage,
     EditorModule,
-    FormsModule
+    FormsModule,
+    ChartModule
   ]
 })
 export class PrimengWidgetsModule {}

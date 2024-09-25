@@ -7,10 +7,16 @@ export interface ChartDatasetEntry {
   label?: string;
   data: (string | number)[];
   fill?: boolean;
-  borderColor?: string;
+  borderColor?: string | string[];
   tension?: number;
   borderDash?: string[];
-  backgroundColor?: string;
+  backgroundColor?: string | string[];
+  borderWidth?: number;
+  hoverBackgroundColor?: string | string[];
+  pointBackgroundColor?: string;
+  pointBorderColor?: string;
+  pointHoverBackgroundColor?: string;
+  pointHoverBorderColor?: string;
 }
 
 export interface ChartOptions {
