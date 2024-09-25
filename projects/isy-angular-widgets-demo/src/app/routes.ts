@@ -49,6 +49,15 @@ export const routes: Routes = [
     canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
   },
   {
+    path: 'isy-angular-components',
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.isyAngularComponents'
+    },
+    loadComponent: async () =>
+      (await import('./feature/isy-angular-components/isy-angular-components.component')).IsyAngularComponentsComponent
+    /* canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)] */
+  },
+  {
     path: 'primeng-widgets/primeng-form',
     component: PrimengFormComponent,
     data: {

@@ -24,6 +24,12 @@ export const applicationMenu = [
           label: 'isyAngularWidgetsDemo.menuItems.uiWidgets',
           items: [
             {
+              label: 'isyAngularWidgetsDemo.menuItems.isyAngularComponents',
+              title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.isyAngularComponents',
+              routerLink: 'isy-angular-components',
+              styleClass: 'skip-link'
+            },
+            {
               label: 'isyAngularWidgetsDemo.menuItems.primengForm',
               title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengForm',
               routerLink: 'primeng-widgets/primeng-form',
