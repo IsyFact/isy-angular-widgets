@@ -6,7 +6,8 @@ export const permissions: PermissionMaps = {
     dashboard: ['admin', 'user'],
     'objekt-anzeigen': ['admin'],
     'objekt-suchen': ['admin', 'user'],
-    'primeng-widgets': ['admin', 'user']
+    'primeng-widgets': ['admin', 'user'],
+    'isy-angular-components': ['admin', 'user']
   },
   elements: {
     personenSuche: ['admin'],

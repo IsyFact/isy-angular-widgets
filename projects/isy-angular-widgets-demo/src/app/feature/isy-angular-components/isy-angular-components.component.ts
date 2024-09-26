@@ -15,7 +15,6 @@ import {PanelModule} from 'primeng/panel';
   selector: 'demo-isy-angular-components',
   standalone: true,
   templateUrl: './isy-angular-components.component.html',
-  styleUrl: './isy-angular-components.component.scss',
   imports: [
     FormWrapperComponent,
     TranslateModule,
