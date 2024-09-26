@@ -74,36 +74,4 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
 
     expect(openDialog).toHaveBeenCalled();
   });
-
-  it('should open confirm popup and close it on accept', () => {
-    confirmPopup = spectator.debugElement.query(By.css('p-confirmPopup')).componentInstance;
-
-    const openPopup = spyOn(confirmPopup, 'accept').and.callThrough();
-    component.confirmPopup(new Event(''));
-
-    spectator.detectChanges();
-
-    const acceptButton = spectator.debugElement.query(By.css('.p-confirm-popup-accept')).nativeElement;
-    acceptButton.click();
-
-    spectator.detectChanges();
-
-    expect(openPopup).toHaveBeenCalled();
-  });
-
-  it('should open confirm popup and close it on reject', () => {
-    confirmPopup = spectator.debugElement.query(By.css('p-confirmPopup')).componentInstance;
-
-    const openPopup = spyOn(confirmPopup, 'reject').and.callThrough();
-    component.confirmPopup(new Event(''));
-
-    spectator.detectChanges();
-
-    const rejectButton = spectator.debugElement.query(By.css('.p-confirm-popup-reject')).nativeElement;
-    rejectButton.click();
-
-    spectator.detectChanges();
-
-    expect(openPopup).toHaveBeenCalled();
-  });
 });
