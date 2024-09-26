@@ -9,7 +9,11 @@
             label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
             fieldId="first-name"
             [control]="personalInfoForm.controls.firstName | formControl"
-            [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
+            [validationMessages]="
+              personalInfoForm.controls.firstName.errors?.required
+                ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
+                : {}
+            "
           >
             <input
               id="first-name"

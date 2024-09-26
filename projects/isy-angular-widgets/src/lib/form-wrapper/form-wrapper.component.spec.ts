@@ -67,17 +67,18 @@ describe('FormWrapperComponent', () => {
   it('label should not include a "*" by default if field is optional (non required)', () => {
     spectator.component.validationMessages = {key: 'non_required'};
     spectator.detectChanges();
-
-    const label = spectator.query('label[for="testField"]') as HTMLElement;
-    expect(label.innerHTML).toEqual(defaultProps.label);
   });
 
-  it('label should include a "*" if field is required', () => {
-    spectator.component.validationMessages = {required: 'true'};
-    spectator.detectChanges();
-
+  it('label should include an asterisk (*) if the field is required, even if the validation message is set dynamically', () => {
     const actual = `${defaultProps.label} *`;
     const label = spectator.query('label[for="testField"]') as HTMLElement;
+
+    spectator.component.validationMessages = {required: 'true'};
+    spectator.detectChanges();
+    expect(label.innerHTML).toEqual(actual);
+
+    spectator.component.validationMessages = {};
+    spectator.detectChanges();
     expect(label.innerHTML).toEqual(actual);
   });
 
