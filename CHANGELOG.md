@@ -1,7 +1,6 @@
 # 18.1.0
 ## Demo-Anwendung
-- IFS-4054: In der Demo Anwendung wurde eine neue Seite _PrimeNG-Widgets_ hinzugefügt, in der die meisten PrimeNG Widgets exemplarisch eingebaut sind
-
+- IFS-4054: In der Demo Anwendung wurde ein neuer Reiter _Bedienelemente_ hinzugefügt, in dem die meisten PrimeNG Widgets und Isy-Angular-Widgets exemplarisch eingebaut sind
 
 # 18.0.0 - 03.09.2024
 ## Breaking Changes
