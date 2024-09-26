@@ -10,7 +10,7 @@
             fieldId="first-name"
             [control]="personalInfoForm.controls.firstName | formControl"
             [validationMessages]="
-              personalInfoForm.controls.firstName.errors
+              personalInfoForm.controls.firstName.errors?.required
                 ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
                 : {}
             "

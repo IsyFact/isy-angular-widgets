@@ -64,6 +64,11 @@ describe('FormWrapperComponent', () => {
     ).toThrowError('control Input is required and must be an instance of FormControl');
   });
 
+  it('label should not include a "*" by default if field is optional (non required)', () => {
+    spectator.component.validationMessages = {key: 'non_required'};
+    spectator.detectChanges();
+  });
+
   it('label should include an asterisk (*) if the field is required, even if the validation message is set dynamically', () => {
     const actual = `${defaultProps.label} *`;
     const label = spectator.query('label[for="testField"]') as HTMLElement;

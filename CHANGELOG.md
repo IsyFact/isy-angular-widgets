@@ -1,4 +1,4 @@
-# 18.0.1 -
+# 18.1.0
 ## Fixes
 - IFS-4096: Die Pflichtfelderkennung der Komponente `isy-form-wrapper` wurde verbessert
 ## Demo-Anwendung

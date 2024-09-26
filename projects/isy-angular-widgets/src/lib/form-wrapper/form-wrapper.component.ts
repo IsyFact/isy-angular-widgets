@@ -41,7 +41,7 @@ export class FormWrapperComponent implements OnInit {
   @Input() label!: string;
   @Input() fieldId!: string;
   @Input() control!: FormControl;
-  @Input() validationMessages: {[key: string]: string} = {};
+  @Input() validationMessages?: {[key: string]: string} = {};
   @Input() ifta: boolean = false;
 
   /**
@@ -60,7 +60,7 @@ export class FormWrapperComponent implements OnInit {
    * @returns string | null The error message or null if no errors.
    */
   get errorMessage(): string | null {
-    if (this.control.errors) {
+    if (this.control.errors && this.validationMessages) {
       const errors = this.control.errors;
       for (const errorName in errors) {
         if (errors.hasOwnProperty(errorName)) {
