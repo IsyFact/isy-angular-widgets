@@ -1,22 +1,19 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IsyAngularComponentsComponent} from './isy-angular-components.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('IsyAngularComponentsComponent', () => {
-  let component: IsyAngularComponentsComponent;
-  let fixture: ComponentFixture<IsyAngularComponentsComponent>;
+  let spectator: Spectator<IsyAngularComponentsComponent>;
+  const createComponent = createComponentFactory({
+    component: IsyAngularComponentsComponent,
+    imports: [TranslateModule.forRoot()]
+  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [IsyAngularComponentsComponent]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(IsyAngularComponentsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    spectator = createComponent();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });
