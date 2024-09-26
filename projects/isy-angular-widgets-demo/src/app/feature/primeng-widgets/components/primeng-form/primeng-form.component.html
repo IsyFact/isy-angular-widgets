@@ -1,0 +1,212 @@
+<div class="mx-3">
+  <h1>PrimeNG Forms</h1>
+  <h2>Input Fields</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>InputText</h3>
+      <input id="inputText" type="text" pInputText class="w-full" />
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>InputMask</h3>
+      <p-inputMask inputId="inputMask" mask="(999) 999-9999" placeholder="(999) 999-9999" styleClass="w-full" />
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>AutoComplete</h3>
+      <p-autoComplete
+        inputId="autoComplete"
+        optionLabel="name"
+        [suggestions]="filteredCountries"
+        (completeMethod)="filterCountry($event)"
+        placeholder="Enter a country"
+        styleClass="w-full"
+        inputStyleClass="w-full"
+      ></p-autoComplete>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>IconField</h3>
+      <p-iconField iconPosition="left">
+        <p-inputIcon styleClass="pi pi-search"></p-inputIcon>
+        <input type="text" pInputText placeholder="Search" class="w-full" />
+      </p-iconField>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>InputGroup</h3>
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <input id="inputGroup" pInputText placeholder="User" class="w-full" />
+      </p-inputGroup>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>KeyFilter (hex)</h3>
+      <input id="keyFilter" pInputText pKeyFilter="hex" class="w-full" />
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Password</h3>
+      <p-password
+        inputId="password"
+        [(ngModel)]="password"
+        toggleMask="true"
+        styleClass="w-full"
+        inputStyleClass="w-full"
+      ></p-password>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Calendar</h3>
+      <p-calendar
+        inputId="calender"
+        [showIcon]="true"
+        [showOnFocus]="false"
+        appendTo="body"
+        styleClass="w-full"
+        ariaLabel="Calender-Picker"
+      ></p-calendar>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>InputNumber</h3>
+      <p-inputNumber
+        inputId="inputNumber"
+        class="w-full"
+        styleClass="w-full"
+        ariaLabel="Input Number"
+        [showButtons]="true"
+        mode="currency"
+        currency="EUR"
+      ></p-inputNumber>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>CascadeSelect</h3>
+      <p-cascadeSelect
+        id="cascadeSelect"
+        [options]="cities"
+        optionLabel="name"
+        optionGroupLabel="name"
+        [optionGroupChildren]="['states', 'cities']"
+        placeholder="Select a City"
+        styleClass="w-full"
+      ></p-cascadeSelect>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Dropdown</h3>
+      <p-dropdown
+        id="dropdown"
+        [options]="countries"
+        optionLabel="name"
+        [filter]="true"
+        filterBy="name"
+        placeholder="Select a Country"
+        styleClass="w-full"
+        appendTo="body"
+      ></p-dropdown>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>MultiSelect</h3>
+      <p-multiSelect
+        id="multiSelect"
+        [options]="countries"
+        optionLabel="name"
+        placeholder="Select Countries"
+        appendTo="body"
+        styleClass="w-full"
+      ></p-multiSelect>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>TreeSelect</h3>
+      <p-treeSelect
+        inputId="treeSelect"
+        [options]="files"
+        placeholder="Select Item"
+        containerStyleClass="w-full"
+      ></p-treeSelect>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>InputTextarea</h3>
+      <textarea pInputTextarea class="w-full" aria-label="Textarea"></textarea>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>InputOpt</h3>
+      <p-inputOtp [length]="6"></p-inputOtp>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Status Components</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Checkbox</h3>
+      <div class="flex flex-column gap-2">
+        <p-checkbox label="Cheese" name="pizza" value="Cheese"></p-checkbox>
+        <p-checkbox label="Mushroom" name="pizza" value="Mushroom"></p-checkbox>
+        <p-checkbox label="Pepper" name="pizza" value="Pepper"></p-checkbox>
+        <p-checkbox label="Onion" name="pizza" value="Onion"></p-checkbox>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>RadioButton</h3>
+      <div class="flex flex-column gap-2">
+        <p-radioButton label="Cheese" name="pizza" value="Cheese" [(ngModel)]="ingredient"></p-radioButton>
+        <p-radioButton label="Mushroom" name="pizza" value="Mushroom" [(ngModel)]="ingredient"></p-radioButton>
+        <p-radioButton label="Pepper" name="pizza" value="Pepper" [(ngModel)]="ingredient"></p-radioButton>
+        <p-radioButton label="Onion" name="pizza" value="Onion" [(ngModel)]="ingredient"></p-radioButton>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Knob</h3>
+      <p-knob ariaLabel="Knob"></p-knob>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>TriStateCheckbox</h3>
+      <p-triStateCheckbox inputId="triStateCheckbox" label="TriStateCheckbox"></p-triStateCheckbox>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Rating</h3>
+      <p-rating></p-rating>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Slider</h3>
+      <input type="text" pInputText [(ngModel)]="slider" class="w-full mb-3" />
+      <p-slider [(ngModel)]="slider" styleClass="w-full"></p-slider>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>InputSwitch</h3>
+      <p-inputSwitch inputId="inputSwitch" ariaLabel="Input Switch"></p-inputSwitch>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>ToggleButton</h3>
+      <p-toggleButton
+        inputId="toggleButton"
+        onIcon="pi pi-lock"
+        offIcon="pi pi-lock-open"
+        onLabel="Locked"
+        offLabel="Unlocked"
+      ></p-toggleButton>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>SelectButton</h3>
+      <p-selectButton [options]="stateOptions"></p-selectButton>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Special Components</h2>
+  <div class="grid mb-3">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Colorpicker</h3>
+      <p-colorPicker inputId="colorpicker" [(ngModel)]="color"></p-colorPicker>
+      <span class="ml-3">{{ color }}</span>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Chips</h3>
+      <div class="p-fluid">
+        <p-chips inputId="chips" [max]="3" placeholder="Maximum 3 chips"></p-chips>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Listbox</h3>
+      <p-listbox id="listbox" [options]="countries" optionLabel="name" styleClass="w-full"></p-listbox>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>Editor</h3>
+      <p-editor [(ngModel)]="text" [style]="{height: '320px'}" />
+    </div>
+  </div>
+</div>

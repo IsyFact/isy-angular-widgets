@@ -1,0 +1,160 @@
+<div class="mx-3">
+  <h1>PrimeNG Panels</h1>
+  <h2>Content Organisor</h2>
+  <div class="grid">
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <h3>Accordion</h3>
+      <p-accordion>
+        <p-accordionTab header="Header 1"> Content 1 </p-accordionTab>
+        <p-accordionTab header="Header 2"> Content 2 </p-accordionTab>
+        <p-accordionTab header="Header 3"> Content 3 </p-accordionTab>
+      </p-accordion>
+    </div>
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <h3>Panel</h3>
+      <p-panel header="Panel Header" [toggleable]="true"> Content </p-panel>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>TabView</h3>
+      <p-tabView>
+        <p-tabPanel header="Header 1"> Content 1 </p-tabPanel>
+        <p-tabPanel header="Header 2"> Content 2 </p-tabPanel>
+        <p-tabPanel header="Header 3"> Content 3 </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Content Container</h2>
+  <div class="grid">
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <h3>Card</h3>
+      <p-card header="Card Header" subheader="Card Subheader"> Content </p-card>
+    </div>
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <h3>Fieldset</h3>
+      <p-fieldset legend="Fieldset Header"> Content </p-fieldset>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>ScrollPanel</h3>
+      <p-scrollPanel [style]="{height: '150px'}">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </p>
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+          dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+          modi.
+        </p>
+        <p>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+          atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique
+          sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
+          facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
+          impedit quo minus.
+        </p>
+      </p-scrollPanel>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Separator</h2>
+  <div class="grid">
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <h3>Splitter</h3>
+      <p-splitter [style]="{height: '75px'}">
+        <ng-template pTemplate>
+          <div class="col flex align-items-center justify-content-center">Left Side</div>
+        </ng-template>
+        <ng-template pTemplate>
+          <div class="col flex align-items-center justify-content-center">Right Side</div>
+        </ng-template>
+      </p-splitter>
+    </div>
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <h3>Divider</h3>
+      Text above divider.
+      <p-divider></p-divider>
+      Text behind divider.
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Design Pattern</h2>
+  <div class="grid">
+    <div class="col-12 flex-column gap-2">
+      <h3>Toolbar</h3>
+      <p-toolbar>
+        <div class="p-toolbar-group-start">
+          <p-button icon="pi pi-print" class="mr-2" />
+          <p-button icon="pi pi-upload"></p-button>
+        </div>
+        <div class="p-toolbar-group-center">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText placeholder="Search" />
+          </span>
+        </div>
+        <div class="p-toolbar-group-end">
+          <p-splitButton label="Save" icon="pi pi-check" [model]="option"></p-splitButton>
+        </div>
+      </p-toolbar>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>Stepper</h3>
+      <p-stepper>
+        <p-stepperPanel header="Header I">
+          <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+            <div class="flex flex-column h-12rem">
+              <div
+                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+              >
+                Content I
+              </div>
+            </div>
+            <div class="flex pt-4 justify-content-end">
+              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
+            </div>
+          </ng-template>
+        </p-stepperPanel>
+        <p-stepperPanel header="Header II">
+          <ng-template
+            pTemplate="content"
+            let-prevCallback="prevCallback"
+            let-nextCallback="nextCallback"
+            let-index="index"
+          >
+            <div class="flex flex-column h-12rem">
+              <div
+                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+              >
+                Content II
+              </div>
+            </div>
+            <div class="flex pt-4 justify-content-between">
+              <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
+              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
+            </div>
+          </ng-template>
+        </p-stepperPanel>
+        <p-stepperPanel header="Header III">
+          <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
+            <div class="flex flex-column h-12rem">
+              <div
+                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+              >
+                Content III
+              </div>
+            </div>
+            <div class="flex pt-4 justify-content-start">
+              <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
+            </div>
+          </ng-template>
+        </p-stepperPanel>
+      </p-stepper>
+    </div>
+  </div>
+</div>

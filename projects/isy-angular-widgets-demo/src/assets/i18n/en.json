@@ -93,7 +93,18 @@
       "skipNavigationLink": {
         "backToOverview": "Skip navigation link to site Dashboard with back to overview",
         "searchObject": "To page search object",
-        "displayObject": "To page display object"
+        "displayObject": "To page display object",
+        "isyAngularComponents": "To page Isy-Angular Components",
+        "primengForm": "To page PrimeNG Form",
+        "primengButton": "To page PrimeNG Button",
+        "primengData": "To page PrimeNG Data",
+        "primengPanel": "To page PrimeNG Panel",
+        "primengOverlay": "To page PrimeNG Overlay",
+        "primengFile": "To page PrimeNG File",
+        "primengMenu": "To page PrimeNG Menu",
+        "primengChart": "To page PrimeNG Chart",
+        "primengMessages": "To page PrimeNG Messages",
+        "primengMisc": "To page PrimeNG Misc"
       }
     },
     "aria": {
@@ -167,6 +178,18 @@
       "frequentTasks": "Frequent tasks",
       "searchObject": "Search object",
       "displayObject": "Display object",
+      "isyAngularComponents": "Isy-Angular Components",
+      "uiWidgets": "UI Widgets",
+      "primengForm": "PrimeNG Form",
+      "primengButton": "PrimeNG Button",
+      "primengData": "PrimeNG Data",
+      "primengPanel": "PrimeNG Panel",
+      "primengOverlay": "PrimeNG Overlay",
+      "primengFile": "PrimeNG File",
+      "primengMenu": "PrimeNG Menu",
+      "primengChart": "PrimeNG Chart",
+      "primengMessages": "PrimeNG Messages",
+      "primengMisc": "PrimeNG Misc",
       "exampleMenuItem": "Example menu item",
       "exampleGroup1": "Example group 1",
       "exampleGroup2": "Example group 2",
@@ -174,9 +197,6 @@
       "exampleSubMenuItem2": "Example submenu item 2",
       "exampleSubMenuItem3": "Example submenu item 3",
       "exampleMenuItemDisabled": "Example menu item (Disabled)",
-      "quickLinks": "Quick-Links",
-      "exampleQuickLink1": "Example Quick-Link 1",
-      "exampleQuickLink2": "Example Quick-Link 2",
       "dashboardExampleTitle": "Frequently used",
       "dashboardExampleText": "Function name",
       "dashboardExampleMessageTitle": "Messages",
@@ -208,7 +228,18 @@
     "websiteTitles": {
       "dashboard": "Dashboard",
       "searchObject": "Search object",
-      "displayObject": "Display object"
+      "displayObject": "Display object",
+      "isyAngularComponents": "Isy-Angular Components",
+      "primengForm": "PrimeNG Form",
+      "primengButton": "PrimeNG Button",
+      "primengData": "PrimeNG Data",
+      "primengPanel": "PrimeNG Panel",
+      "primengOverlay": "PrimeNG Overlay",
+      "primengFile": "PrimeNG File",
+      "primengMenu": "PrimeNG Menu",
+      "primengChart": "PrimeNG Chart",
+      "primengMessages": "PrimeNG Messages",
+      "primengMisc": "PrimeNG Misc"
     },
     "settings": {
       "header": "Settings Demo App",

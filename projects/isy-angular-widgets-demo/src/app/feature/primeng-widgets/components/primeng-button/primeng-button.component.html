@@ -1,0 +1,110 @@
+<div class="mx-3">
+  <h1>PrimeNG Buttons</h1>
+  <h2>Colored Buttons</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Primary Color</h3>
+      <p-button label="Primary"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Secondary Color</h3>
+      <p-button label="Secondary" severity="secondary"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Success Color</h3>
+      <p-button label="Success" severity="success"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Info Color</h3>
+      <p-button label="Info" severity="info"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Warning Color</h3>
+      <p-button label="Warning" severity="warning"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Help Color</h3>
+      <p-button label="Help" severity="help"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Danger Color</h3>
+      <p-button label="Danger" severity="danger"></p-button>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Outlined Buttons</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Primary Color</h3>
+      <p-button label="Primary" [outlined]="true"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Secondary Color</h3>
+      <p-button label="Secondary" [outlined]="true" severity="secondary"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Success Color</h3>
+      <p-button label="Success" [outlined]="true" severity="success"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Info Color</h3>
+      <p-button label="Info" [outlined]="true" severity="info"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Warning Color</h3>
+      <p-button label="Warning" [outlined]="true" severity="warning"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Help Color</h3>
+      <p-button label="Help" [outlined]="true" severity="help"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Danger Color</h3>
+      <p-button label="Danger" [outlined]="true" severity="danger"></p-button>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Icon Buttons</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Primary Color</h3>
+      <p-button icon="pi pi-check" [rounded]="true" [outlined]="true"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Secondary Color</h3>
+      <p-button icon="pi pi-bookmark" [rounded]="true" severity="secondary" [outlined]="true"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Success Color</h3>
+      <p-button icon="pi pi-search" [rounded]="true" severity="success" [outlined]="true"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Info Color</h3>
+      <p-button icon="pi pi-user" [rounded]="true" severity="info" [outlined]="true"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Warning Color</h3>
+      <p-button icon="pi pi-bell" [rounded]="true" severity="warning" [outlined]="true"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Help Color</h3>
+      <p-button icon="pi pi-heart" [rounded]="true" severity="help" [outlined]="true"></p-button>
+    </div>
+    <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
+      <h3>Danger Color</h3>
+      <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true"></p-button>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Special Buttons</h2>
+  <div class="grid mb-3">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>SplitButton</h3>
+      <p-splitButton label="Save" icon="pi pi-save" [model]="options"></p-splitButton>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>SpeedDial</h3>
+      <p-speedDial id="speedDial" [model]="options" direction="right"></p-speedDial>
+    </div>
+  </div>
+</div>

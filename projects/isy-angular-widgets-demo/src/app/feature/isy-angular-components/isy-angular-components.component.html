@@ -1,0 +1,92 @@
+<form [formGroup]="personalInfoForm">
+  <div class="mx-3">
+    <h1>Isy-Angular Komponenten</h1>
+    <div class="grid">
+      <div class="col-12 flex-column gap-2">
+        <h2>Seitentoolbar</h2>
+        <isy-seiten-toolbar
+          class="skip-link"
+          [showSidebar]="true"
+          sidebarHomeButtonLabel="{{ 'isyAngularWidgetsDemo.actions.backToOverview' | translate }}"
+          sidebarHomeButtonAriaLabel="{{
+            'isyAngularWidgetsDemo.actions.skipNavigationLink.backToOverview' | translate
+          }}"
+          sidebarHomeRoute="/dashboard"
+          Seitentoolbar
+        >
+          <div middle></div>
+          <div right>
+            <p-button
+              icon="pi pi-print"
+              class="mr-1"
+              ariaLabel="{{ 'isyAngularWidgetsDemo.aria.print' | translate }}"
+              [outlined]="true"
+            ></p-button>
+            <p-button
+              icon="pi pi-info-circle"
+              ariaLabel="{{ 'isyAngularWidgetsDemo.aria.info' | translate }}"
+              [outlined]="true"
+            ></p-button>
+          </div>
+        </isy-seiten-toolbar>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+        <h2>FormWrapper</h2>
+        <isy-form-wrapper
+          label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+          fieldId="first-name"
+          [control]="personalInfoForm.controls.firstName | formControl"
+          [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
+        >
+          <input
+            id="first-name"
+            formControlName="firstName"
+            class="w-full"
+            minlength="2"
+            maxlength="16"
+            type="text"
+            placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
+            pInputText
+          />
+        </isy-form-wrapper>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+        <h2>IncompleteDate</h2>
+        <isy-form-wrapper
+          label="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
+          fieldId="date-of-entry"
+          [control]="personalInfoForm.controls.dateOfEntry | formControl"
+          [validationMessages]="{UNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
+        >
+          <isy-incomplete-date
+            inputId="date-of-entry"
+            formControlName="dateOfEntry"
+            [dateInPastConstraint]="true"
+            [allowZeroFormat]="true"
+            inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
+          >
+          </isy-incomplete-date>
+        </isy-form-wrapper>
+      </div>
+      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+        <h2>InputChar</h2>
+        <isy-form-wrapper
+          label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+          fieldId="last-name"
+          [control]="personalInfoForm.controls.lastName | formControl"
+          [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
+        >
+          <input
+            id="last-name"
+            formControlName="lastName"
+            type="text"
+            pInputText
+            isyInputChar
+            maxlength="16"
+            placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
+          />
+        </isy-form-wrapper>
+      </div>
+    </div>
+  </div>
+</form>

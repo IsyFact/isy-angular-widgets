@@ -1,0 +1,14 @@
+<div class="mx-3">
+  <h1>PrimeNG Messages</h1>
+  <div class="grid">
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h2>Messages</h2>
+      <p-messages id="messages" [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h2>Toast</h2>
+      <p-button (onClick)="showToastMessage()" label="Show" />
+      <p-toast key="toast" position="bottom-right"></p-toast>
+    </div>
+  </div>
+</div>

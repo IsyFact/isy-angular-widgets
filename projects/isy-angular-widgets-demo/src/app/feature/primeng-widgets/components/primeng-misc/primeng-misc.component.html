@@ -1,0 +1,164 @@
+<div class="mx-3">
+  <h1>PrimeNG Misc</h1>
+  <h2>Indicator</h2>
+  <div class="grid">
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <h3>Chip</h3>
+      <div class="flex justify-content-start gap-2">
+        <p-chip label="Apple" icon="pi pi-apple"></p-chip>
+        <p-chip label="Google" icon="pi pi-google"></p-chip>
+        <p-chip label="Microsoft" icon="pi pi-microsoft" [removable]="true"></p-chip>
+        <p-chip label="Facebook" icon="pi pi-facebook" [removable]="true"></p-chip>
+      </div>
+    </div>
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <h3>Tag</h3>
+      <div class="flex justify-content-start gap-2">
+        <p-tag value="Primary"></p-tag>
+        <p-tag severity="success" value="Success"></p-tag>
+        <p-tag severity="info" value="Info"></p-tag>
+        <p-tag severity="warning" value="Warning"></p-tag>
+        <p-tag severity="danger" value="Danger"></p-tag>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Avatar</h3>
+      <div class="flex justify-content-start gap-2">
+        <p-avatar icon="pi pi-user" size="xlarge"></p-avatar>
+        <p-avatar icon="pi pi-user" size="large"></p-avatar>
+        <p-avatar icon="pi pi-user"></p-avatar>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Avatar with Badge</h3>
+      <div class="flex justify-content-start gap-5 pt-3">
+        <p-avatar icon="pi pi-user" size="xlarge" pBadge value="4"></p-avatar>
+        <p-avatar icon="pi pi-user" size="large" pBadge value="3"></p-avatar>
+        <p-avatar icon="pi pi-user" pBadge value="2"></p-avatar>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Badge</h3>
+      <div class="flex justify-content-start gap-2">
+        <p-badge [value]="2" severity="success" badgeSize="large"></p-badge>
+        <p-badge [value]="4" severity="info" badgeSize="large"></p-badge>
+        <p-badge [value]="6" severity="warning" badgeSize="large"></p-badge>
+        <p-badge [value]="8" severity="danger" badgeSize="large"></p-badge>
+      </div>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Progress Indicator</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>ProgressSpinner</h3>
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>ProgressBar</h3>
+      <p-progressBar [value]="50"></p-progressBar>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>MeterGroup</h3>
+      <p-meterGroup [value]="storageStatus"></p-meterGroup>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Skeleton</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Rectangle</h3>
+      <p-skeleton styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="10rem" height="4rem"></p-skeleton>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Rounded</h3>
+      <p-skeleton styleClass="mb-2" borderRadius="16px"></p-skeleton>
+      <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+      <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+      <p-skeleton height="2rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+      <p-skeleton width="10rem" height="4rem" borderRadius="16px"></p-skeleton>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Square</h3>
+      <div class="flex justify-content-start gap-2">
+        <p-skeleton size="5rem"></p-skeleton>
+        <p-skeleton size="4rem"></p-skeleton>
+        <p-skeleton size="3rem"></p-skeleton>
+        <p-skeleton size="2rem"></p-skeleton>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Circle</h3>
+      <div class="flex justify-content-start gap-2">
+        <p-skeleton shape="circle" size="5rem"></p-skeleton>
+        <p-skeleton shape="circle" size="4rem"></p-skeleton>
+        <p-skeleton shape="circle" size="3rem"></p-skeleton>
+        <p-skeleton shape="circle" size="2rem"></p-skeleton>
+      </div>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Other Misc</h2>
+  <div class="grid">
+    <div class="col-12 flex-column gap-2">
+      <h3>Inplace</h3>
+      <p-inplace closable="closable">
+        <ng-template pTemplate="display">Click to Edit</ng-template>
+        <ng-template pTemplate="content">
+          <input type="text" value="Inplace Inputfield" pInputText />
+        </ng-template>
+      </p-inplace>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>ScrollTop</h3>
+      <div style="height: 150px; overflow: auto">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
+        </p>
+        <p>
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+          dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+          modi.
+        </p>
+        <p>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti
+          atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique
+          sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
+          facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
+          impedit quo minus.
+        </p>
+        <p-scrollTop target="parent" [threshold]="10" icon="pi pi-arrow-up"></p-scrollTop>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>BlockUI</h3>
+      <div class="flex justify-content-start gap-2 mb-3">
+        <p-button label="Block" (onClick)="blockContent()" />
+        <p-button label="Unblock" (onClick)="unblockContent()" />
+      </div>
+      <p-blockUI [target]="blockableContent" [blocked]="blockedContent">
+        <i class="pi pi-lock" style="font-size: 3rem"></i>
+      </p-blockUI>
+      <p-panel #blockableContent header="Header">
+        <p>Content</p>
+      </p-panel>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>Terminal</h3>
+      <p-terminal
+        welcomeMessage="Welcome to PrimeNG: Enter 'date' to display the current date"
+        prompt="primeng $"
+      ></p-terminal>
+    </div>
+  </div>
+</div>

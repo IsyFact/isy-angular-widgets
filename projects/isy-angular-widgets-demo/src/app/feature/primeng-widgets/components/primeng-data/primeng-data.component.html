@@ -1,0 +1,127 @@
+<div class="mx-3">
+  <h1>PrimeNG Data</h1>
+  <h2>Data Views</h2>
+  <div class="grid">
+    <div class="col-12 flex-column gap-2">
+      <h3>OrganizationChart</h3>
+      <p-organizationChart [value]="organization"></p-organizationChart>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Timeline</h3>
+      <p-timeline [value]="deliveryStatus">
+        <ng-template let-delivery pTemplate="opposite"> {{ delivery.status }} </ng-template>
+        <ng-template let-delivery pTemplate="content">
+          <small class="p-text-secondary">{{ delivery.date }} </small>
+        </ng-template>
+      </p-timeline>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Scroller</h3>
+      <p-scroller id="scroller" [items]="countries" [itemSize]="50" scrollHeight="200px" styleClass="w-full">
+        <ng-template pTemplate="item" let-country>
+          <div style="height: 50px">{{ country.name }}</div>
+        </ng-template>
+      </p-scroller>
+    </div>
+    <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
+      <h3>Tree</h3>
+      <p-tree [value]="files" class="w-full"></p-tree>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Tables</h2>
+  <div class="grid mb-3">
+    <div class="col-12 flex-column gap-2">
+      <h3>Paginator</h3>
+      <p-paginator
+        [rows]="10"
+        [totalRecords]="120"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} - {last} of {totalRecords}"
+      ></p-paginator>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>Table with striped rows, paginator, filter, sort and single row selection mode</h3>
+      <p-table
+        [value]="products"
+        selectionMode="single"
+        [(selection)]="selectedProduct"
+        [paginator]="true"
+        [rows]="5"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        styleClass="p-datatable-striped"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="code" scope="col">
+              Code
+              <p-columnFilter field="code" type="text" display="menu"></p-columnFilter>
+              <p-sortIcon field="code"></p-sortIcon>
+            </th>
+            <th pSortableColumn="name" scope="col">
+              Name
+              <p-columnFilter field="name" type="text" display="menu"></p-columnFilter>
+              <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="category" scope="col">
+              Category
+              <p-columnFilter field="category" type="text" display="menu"></p-columnFilter>
+              <p-sortIcon field="category"></p-sortIcon>
+            </th>
+            <th pSortableColumn="price" scope="col">
+              Price
+              <p-columnFilter field="price" type="numeric" currency="EUR" display="menu" />
+              <p-sortIcon field="price"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr [pSelectableRow]="product">
+            <td>{{ product.code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.price | currency: 'EUR' }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="col-12 flex-column gap-2">
+      <h3>TreeTable with paginator, sort and single row selection mode</h3>
+      <p-treeTable
+        [value]="itSolutions"
+        selectionMode="single"
+        [paginator]="true"
+        [rows]="3"
+        [rowsPerPageOptions]="[3, 5, 10]"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th ttSortableColumn="name" scope="col">
+              Name
+              <p-treeTableSortIcon field="name"></p-treeTableSortIcon>
+            </th>
+            <th ttSortableColumn="size" scope="col">
+              Size
+              <p-treeTableSortIcon field="size"></p-treeTableSortIcon>
+            </th>
+            <th ttSortableColumn="type" scope="col">
+              Type
+              <p-treeTableSortIcon field="type"></p-treeTableSortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-itSolution let-subSolution="rowData">
+          <tr [ttRow]="itSolution" [ttSelectableRow]="itSolution">
+            <td>
+              <p-treeTableToggler [rowNode]="itSolution"></p-treeTableToggler>
+              {{ subSolution.name }}
+            </td>
+            <td>{{ subSolution.size }}</td>
+            <td>{{ subSolution.type }}</td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+    </div>
+  </div>
+</div>

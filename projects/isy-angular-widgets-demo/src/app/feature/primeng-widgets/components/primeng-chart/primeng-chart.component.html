@@ -1,0 +1,46 @@
+<div class="mx-3">
+  <h1>PrimeNG Charts</h1>
+  <h2>Bar Charts</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Vertical</h3>
+      <p-chart type="bar" [data]="barChartData" [options]="verticalBarChartOptions"></p-chart>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Horizontal</h3>
+      <p-chart type="bar" [data]="barChartData" [options]="horizontalBarChartOptions"></p-chart>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Stacked</h3>
+      <p-chart type="bar" [data]="barChartData" [options]="stackedBarChartOptions"></p-chart>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Circled Charts</h2>
+  <div class="grid">
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Pie Chart</h3>
+      <p-chart type="pie" [data]="circledChartData" [options]="pieChartOptions"></p-chart>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Doughnut Chart</h3>
+      <p-chart type="doughnut" [data]="circledChartData" [options]="doughnutChartOptions"></p-chart>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>PolarArea Chart</h3>
+      <p-chart type="polarArea" [data]="circledChartData" [options]="polarAreaChartOptions"></p-chart>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <h2>Other Charts</h2>
+  <div class="grid mb-3">
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Line Chart</h3>
+      <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+    </div>
+    <div class="col-12 md:col-6 flex-column gap-2">
+      <h3>Radar Chart</h3>
+      <p-chart type="radar" [data]="radarChartData" [options]="radarChartOptions"></p-chart>
+    </div>
+  </div>
+</div>
