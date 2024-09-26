@@ -3,13 +3,11 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
-import {HauptfensterModule, IncompleteDateModule, SeitentoolbarComponent} from '@isy-angular-widgets/public-api';
+import {IncompleteDateModule, SeitentoolbarComponent} from '@isy-angular-widgets/public-api';
 import {initializedPerson} from '../objekt-anzeigen/data';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
-import {MenuModule} from 'primeng/menu';
-import {PanelModule} from 'primeng/panel';
 
 @Component({
   selector: 'demo-isy-angular-components',
@@ -24,10 +22,7 @@ import {PanelModule} from 'primeng/panel';
     InputCharDirective,
     InputTextModule,
     SeitentoolbarComponent,
-    ButtonModule,
-    HauptfensterModule,
-    PanelModule,
-    MenuModule
+    ButtonModule
   ]
 })
 export class IsyAngularComponentsComponent {

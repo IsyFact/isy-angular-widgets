@@ -32,8 +32,6 @@
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
         <h2>FormWrapper</h2>
-        <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
-        ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet. -->
         <isy-form-wrapper
           label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
           fieldId="first-name"
@@ -78,7 +76,6 @@
           [control]="personalInfoForm.controls.lastName | formControl"
           [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
         >
-          <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
           <input
             id="last-name"
             formControlName="lastName"

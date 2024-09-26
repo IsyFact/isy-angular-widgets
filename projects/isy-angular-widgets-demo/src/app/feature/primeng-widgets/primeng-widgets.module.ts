@@ -91,7 +91,6 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {TagModule} from 'primeng/tag';
 import {TerminalModule} from 'primeng/terminal';
 import {EditorModule} from 'primeng/editor';
-import {FormsModule} from '@angular/forms';
 import {ChartModule} from 'primeng/chart';
 
 @NgModule({
@@ -190,7 +189,6 @@ import {ChartModule} from 'primeng/chart';
     TerminalModule,
     NgOptimizedImage,
     EditorModule,
-    FormsModule,
     ChartModule
   ]
 })
