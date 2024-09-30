@@ -1,9 +1,10 @@
-# 18.1.0
+# 18.1.0 - 30.09.2024
 ## Fixes
 - IFS-4096: Die Pflichtfelderkennung der Komponente `isy-form-wrapper` wurde verbessert
+- IFS-3776: Im Updatelog wurde die Version des `@isyfact/eslint-plugin` korrigiert
 ## Demo-Anwendung
 - IFS-4054: In der Demo Anwendung wurde ein neuer Reiter _Bedienelemente_ hinzugefügt, in dem die meisten PrimeNG Widgets und Isy-Angular-Widgets exemplarisch eingebaut sind
-- IFS-4096: Ein Beispiel mit dynamischem Fehlertext und Pflichtfeldvalidierung wurde der Seite _Objekt-Anzeigen_ hinzugefügt
+- IFS-4096: Ein Beispiel der Komponente `isy-form-wrapper` mit dynamischem Fehlertext und Pflichtfeldvalidierung wurde der Seite _Objekt-Anzeigen_ hinzugefügt
 
 # 18.0.0 - 03.09.2024
 ## Breaking Changes
