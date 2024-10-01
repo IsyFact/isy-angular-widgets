@@ -1,4 +1,4 @@
-# 18.1.0 - 30.09.2024
+# 18.1.0 - 01.10.2024
 ## Fixes
 - IFS-4096: Die Pflichtfelderkennung der Komponente `isy-form-wrapper` wurde verbessert
 - IFS-3776: Im Updatelog wurde die Version des `@isyfact/eslint-plugin` korrigiert
