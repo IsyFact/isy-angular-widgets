@@ -25,6 +25,11 @@ export class InputCharDirective implements OnInit, OnDestroy {
   @Input() datentyp: Datentyp = Datentyp.DATENTYP_C;
 
   /**
+   * Determines whether the button is outlined
+   */
+  @Input() outlinedInputCharButton: boolean = true;
+
+  /**
    * Is getting fired on mouse up event
    * @param event the fired mouse event
    */
@@ -64,6 +69,7 @@ export class InputCharDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
     this.componentRef.instance.datentyp = this.datentyp!;
+    this.componentRef.instance.outlinedInputCharButton = this.outlinedInputCharButton;
 
     this.setupInputChar();
 
