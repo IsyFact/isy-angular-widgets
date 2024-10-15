@@ -19,16 +19,17 @@
   <ng-template pTemplate="footer">
     <div class="flex justify-content-end flex-wrap card-container">
       @if (!isSaved) {
-        <button
-          id="back-button"
-          pButton
-          [outlined]="true"
-          [class]="'flex align-items-center justify-content-center mr-2'"
-          [disabled]="index === 0"
-          (click)="previous()"
-        >
-          {{ labelBackButton }}
-        </button>
+        @if (index !== 0) {
+          <button
+            id="back-button"
+            pButton
+            [outlined]="true"
+            [class]="'flex align-items-center justify-content-center mr-2'"
+            (click)="previous()"
+          >
+            {{ labelBackButton }}
+          </button>
+        }
         @if (index !== items.length - 1) {
           <button
             id="next-button"
