@@ -41,6 +41,7 @@
               type="text"
               pInputText
               isyInputChar
+              [outlinedInputCharButton]="true"
               maxlength="16"
               placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
             />
@@ -53,7 +54,14 @@
             [control]="personalInfoForm.controls.birthName | formControl"
           >
             <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
-            <input id="birth-name" formControlName="birthName" type="text" pInputText isyInputChar />
+            <input
+              id="birth-name"
+              formControlName="birthName"
+              type="text"
+              pInputText
+              isyInputChar
+              [outlinedInputCharButton]="true"
+            />
           </isy-form-wrapper>
         </div>
         <div class="col-12 md:col-6 xl:col-4">

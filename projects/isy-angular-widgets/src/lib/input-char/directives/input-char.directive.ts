@@ -27,7 +27,7 @@ export class InputCharDirective implements OnInit, OnDestroy {
   /**
    * Determines whether the button is outlined
    */
-  @Input() outlinedInputCharButton: boolean = true;
+  @Input() outlinedInputCharButton: boolean = false;
 
   /**
    * Is getting fired on mouse up event

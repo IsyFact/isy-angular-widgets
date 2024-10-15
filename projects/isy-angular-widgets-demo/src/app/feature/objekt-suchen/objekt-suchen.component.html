@@ -23,7 +23,14 @@
         fieldId="first-name"
         [control]="persoenlicheInformationenForm.get('vorname')! | formControl"
       >
-        <input id="first-name" type="text" pInputText isyInputChar [(ngModel)]="person.personalien.vorname" />
+        <input
+          id="first-name"
+          type="text"
+          pInputText
+          isyInputChar
+          [outlinedInputCharButton]="true"
+          [(ngModel)]="person.personalien.vorname"
+        />
       </isy-form-wrapper>
     </div>
     <div class="col-12 md:col-6 xl:col-4">
@@ -32,7 +39,14 @@
         fieldId="last-name"
         [control]="persoenlicheInformationenForm.get('nachname')! | formControl"
       >
-        <input id="last-name" type="text" pInputText isyInputChar [(ngModel)]="person.personalien.nachname" />
+        <input
+          id="last-name"
+          type="text"
+          pInputText
+          isyInputChar
+          [outlinedInputCharButton]="true"
+          [(ngModel)]="person.personalien.nachname"
+        />
       </isy-form-wrapper>
     </div>
     <div class="col-12 md:col-6 xl:col-4">
