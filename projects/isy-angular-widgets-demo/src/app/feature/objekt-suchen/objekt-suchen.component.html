@@ -54,6 +54,7 @@
           inputId="birth-date"
           dateFormat="dd.mm.yy"
           [(ngModel)]="person.personalien.geburtsdatum"
+          [iconDisplay]="'input'"
           [showIcon]="true"
           styleClass="w-full"
           appendTo="body"
@@ -207,6 +208,7 @@
               inputId="edit-geburtsdatum"
               dateFormat="dd.mm.yy"
               [formControlName]="'editGeburtsdatum'"
+              [iconDisplay]="'input'"
               [showIcon]="true"
               styleClass="w-full"
               appendTo="body"
@@ -384,8 +386,10 @@
                 inputId="geburtdatum"
                 dateFormat="dd.mm.yy"
                 [formControlName]="'geburtsdatum'"
+                [iconDisplay]="'input'"
                 [showIcon]="true"
                 appendTo="body"
+                styleClass="w-full"
                 (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
               >
               </p-calendar>
@@ -408,6 +412,7 @@
                 [options]="countryMap"
                 [formControlName]="'staatsangehoerigkeit'"
                 appendTo="body"
+                styleClass="w-full"
                 (focusout)="onFormControlFocus(geburtsInformationenForm.controls.staatsangehoerigkeit)"
               >
                 <ng-template let-land pTemplate="item">
