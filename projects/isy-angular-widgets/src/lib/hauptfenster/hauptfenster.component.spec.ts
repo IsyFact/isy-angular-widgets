@@ -18,7 +18,8 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
   `
 })
 class HauptFensterWrapperComponent {
-  title!: string;
+  title?: string;
+  userInfo?: UserInfo;
 }
 
 describe('Unit Tests: HauptfensterComponent', () => {
@@ -66,6 +67,16 @@ describe('Unit Tests: HauptfensterComponent', () => {
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
     const logoutButtonText = logoutButton.textContent ?? '';
     expect(logoutButtonText.trim()).toEqual(logoutTitle);
+  });
+
+  it('should set outlinedLogoutButton property correctly', () => {
+    component.outlinedLogoutButton = true;
+    spectator.detectChanges();
+    expect(component.outlinedLogoutButton).toBeTrue();
+
+    component.outlinedLogoutButton = false;
+    spectator.detectChanges();
+    expect(component.outlinedLogoutButton).toBeFalse();
   });
 
   it('should call the logout function when the button is clocked', () => {
