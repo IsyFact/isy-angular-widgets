@@ -22,6 +22,7 @@
         <button
           id="back-button"
           pButton
+          [outlined]="true"
           [class]="'flex align-items-center justify-content-center mr-2'"
           [disabled]="index === 0"
           (click)="previous()"
@@ -54,6 +55,7 @@
       <button
         id="close-button"
         pButton
+        [outlined]="true"
         [class]="'flex align-items-center justify-content-center'"
         [disabled]="isSaved && !closable"
         (click)="closeDialog()"
