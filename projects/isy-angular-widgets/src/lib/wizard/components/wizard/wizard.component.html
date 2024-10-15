@@ -29,22 +29,24 @@
         >
           {{ labelBackButton }}
         </button>
-        <button
-          id="next-button"
-          pButton
-          [class]="'flex align-items-center justify-content-center mr-4'"
-          [disabled]="index === items.length - 1 || !allowNext"
-          (click)="next()"
-        >
-          {{ labelNextButton }}
-        </button>
+        @if (index !== items.length - 1) {
+          <button
+            id="next-button"
+            pButton
+            [class]="'flex align-items-center justify-content-center mr-4'"
+            [disabled]="index === items.length - 1 || !allowNext"
+            (click)="next()"
+          >
+            {{ labelNextButton }}
+          </button>
+        }
       }
 
       @if (index === items.length - 1 && !isSaved) {
         <button
           id="save-button"
           pButton
-          [class]="'flex align-items-center justify-content-center'"
+          [class]="'flex align-items-center justify-content-center ml-4'"
           [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
           (click)="save()"
         >
