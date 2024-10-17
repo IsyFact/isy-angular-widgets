@@ -62,16 +62,8 @@ $accordionSpacing: 0px !default;
 
 // Variables in theme file _variables.scss adjusted to meet color requirements of the Isyfact design for the input field
 
-//input
-$inputFocusBorderColor: $themePrimary !default;
+////input
 $inputPlaceholderTextColor: #83878c !default;
-
-.p-inputtext {
-  &:enabled:focus {
-    box-shadow: 0 0 0 2px rgba(0, 85, 185);
-    border-color: $themePrimary;
-  }
-}
 
 //progress spinner
 .p-progress-spinner-circle {
