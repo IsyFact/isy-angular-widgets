@@ -69,14 +69,30 @@ describe('Unit Tests: HauptfensterComponent', () => {
     expect(logoutButtonText.trim()).toEqual(logoutTitle);
   });
 
-  it('should set outlinedLogoutButton property correctly', () => {
+  it('should have outlined style by default for the logout button', () => {
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+    const outlinedState= logoutButton.getAttribute('ng-reflect-outlined');
+    expect(outlinedState).toBe('true');
+  });
+
+  it('should have outlined style when outlinedLogoutButton is true', () => {
     component.outlinedLogoutButton = true;
     spectator.detectChanges();
-    expect(component.outlinedLogoutButton).toBeTrue();
 
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+    const outlinedState= logoutButton.getAttribute('ng-reflect-outlined');
+
+    expect(outlinedState).toBe('true');
+  });
+
+  it('should not have outlined style when outlinedLogoutButton is false', () => {
     component.outlinedLogoutButton = false;
     spectator.detectChanges();
-    expect(component.outlinedLogoutButton).toBeFalse();
+
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+    const outlinedState= logoutButton.getAttribute('ng-reflect-outlined');
+
+    expect(outlinedState).toBe('false');
   });
 
   it('should call the logout function when the button is clocked', () => {
