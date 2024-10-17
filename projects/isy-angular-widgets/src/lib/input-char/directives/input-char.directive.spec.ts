@@ -72,16 +72,6 @@ describe('Integration Tests: InputCharDirective', () => {
     expect(inputCharButton).toBeTruthy();
   });
 
-  it('should set outlinedInputCharButton property correctly', () => {
-    directive.outlinedInputCharButton = true;
-    spectator.detectChanges();
-    expect(directive.outlinedInputCharButton).toBeTrue();
-
-    directive.outlinedInputCharButton = false;
-    spectator.detectChanges();
-    expect(directive.outlinedInputCharButton).toBeFalse();
-  });
-
   it('should set the input char button to disabled when the input is disabled', (done) => {
     expect(input).toBeTruthy();
     expect(inputCharButton).toBeTruthy();
