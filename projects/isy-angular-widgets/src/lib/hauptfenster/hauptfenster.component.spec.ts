@@ -71,7 +71,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
   it('should have outlined style by default for the logout button', () => {
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const outlinedState= logoutButton.getAttribute('ng-reflect-outlined');
+    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
     expect(outlinedState).toBe('true');
   });
 
@@ -80,7 +80,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     spectator.detectChanges();
 
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const outlinedState= logoutButton.getAttribute('ng-reflect-outlined');
+    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
 
     expect(outlinedState).toBe('true');
   });
@@ -90,7 +90,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     spectator.detectChanges();
 
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const outlinedState= logoutButton.getAttribute('ng-reflect-outlined');
+    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
 
     expect(outlinedState).toBe('false');
   });

@@ -103,7 +103,7 @@ describe('Unit Tests: InputCharComponent', () => {
 
       it('should not have outlined style by default for the input char button', () => {
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        const outlinedState= button.getAttribute('ng-reflect-outlined');
+        const outlinedState = button.getAttribute('ng-reflect-outlined');
         expect(outlinedState).toBe('false');
       });
 
@@ -112,7 +112,7 @@ describe('Unit Tests: InputCharComponent', () => {
         spectator.fixture.detectChanges();
 
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        const outlinedState= button.getAttribute('ng-reflect-outlined');
+        const outlinedState = button.getAttribute('ng-reflect-outlined');
 
         expect(outlinedState).toBe('true');
       });
@@ -122,7 +122,7 @@ describe('Unit Tests: InputCharComponent', () => {
         spectator.fixture.detectChanges();
 
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        const outlinedState= button.getAttribute('ng-reflect-outlined');
+        const outlinedState = button.getAttribute('ng-reflect-outlined');
 
         expect(outlinedState).toBe('false');
       });
