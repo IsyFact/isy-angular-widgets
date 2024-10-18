@@ -77,6 +77,10 @@ describe('Unit Tests: WizardComponent', () => {
     wizard = spectator.component;
   });
 
+  it('should create', () => {
+    expect(wizard).toBeTruthy();
+  });
+
   it('should not have an available next step on init by default', () => {
     expectNextStepIsAllowed(false);
   });
@@ -316,69 +320,20 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(afterContentInitSpy).toHaveBeenCalled();
   });
 
-  it('should have the right back button label', () => {
-    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
-    expect(backButton.innerHTML).toContain(wizard.labelBackButton);
-  });
-
-  it('should have an available back button on init', () => {
-    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
-    expect(backButton).not.toBeNull();
-  });
-
-  it('should have a disabled back button while current index is 0', () => {
-    expectFirstStep();
-    expect(isElementDisabled(backButtonDeclaration)).toBeTrue();
-  });
-
-  it('should have a disabled back button while current index is 0 and the form is invalid', () => {
-    expectFirstStep();
-    expectNextStepIsAllowed(false);
-    expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
-  });
-
-  it('should have a disabled back button while current index is 0 and the form is valid', () => {
-    expectFirstStep();
-    expectNextStepIsAllowed(false);
-    setNextStepAvailable();
-    expect(isElementDisabled(nextButtonDeclaration)).toBeFalse();
-  });
-
-  it('should have a disabled back button while current index is equals to max index', () => {
-    expectNextStepIsAllowed(false);
-
-    moveToLastStep();
-    setNextStepAvailable();
-
-    expect(isElementDisabled(backButtonDeclaration)).toBeFalse();
-  });
-
-  it('should have a disabled next button while current index is equals to max index', () => {
-    expectNextStepIsAllowed(false);
-
-    moveToLastStep();
-    setNextStepAvailable();
-
-    expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
-  });
-
-  it('should have a next button while current index is 0', () => {
-    expectFirstStep();
-    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
-    expect(nextButton).not.toBeNull();
-  });
-
-  it('should have a next button while current index is < max index', () => {
+  it('should use the correct back button label', () => {
     setNextStepAvailable();
     pressNextButton();
-
     expectNthStep(1);
-    expect(wizard.index).not.toBeGreaterThan(contentChildren.length - 1);
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+
+    expect(backButton.innerHTML).toContain(wizard.labelBackButton);
   });
 
-  it('should have the right back button label', () => {
+  it('should not have a back button while current index is 0', () => {
+    expectFirstStep();
     const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
-    expect(backButton.innerHTML).toContain(wizard.labelBackButton);
+
+    expect(backButton).toBeNull();
   });
 
   it('should have a functional back button while current index > 0', () => {
@@ -389,9 +344,59 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expectFirstStep();
   });
 
-  it('should have a next button with the correct title', () => {
+  it('should have a back button while current index is equal to max index', () => {
+    expectNextStepIsAllowed(false);
+
+    moveToLastStep();
+    setNextStepAvailable();
+
+    const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
+    expect(backButton).not.toBeNull();
+  });
+
+  it('should use the correct next button label', () => {
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
     expect(nextButton.innerHTML).toContain(wizard.labelNextButton);
+  });
+
+  it('should have a next button while current index is 0', () => {
+    expectFirstStep();
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    expect(nextButton).not.toBeNull();
+  });
+
+  it('should have a disabled next button while current index is 0 and the form is invalid', () => {
+    expectFirstStep();
+    expectNextStepIsAllowed(false);
+    expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
+  });
+
+  it('should not have a disabled next button while current index is 0 and the form is valid', () => {
+    expectFirstStep();
+    expectNextStepIsAllowed(false);
+    setNextStepAvailable();
+    expect(isElementDisabled(nextButtonDeclaration)).toBeFalse();
+  });
+
+  it('should have a next button while current index is < max index', () => {
+    setNextStepAvailable();
+    pressNextButton();
+
+    expectNthStep(1);
+    expect(wizard.index).not.toBeGreaterThan(contentChildren.length - 1);
+
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    expect(nextButton).not.toBeNull();
+  });
+
+  it('should not have a next button while current index is equal to max index', () => {
+    expectNextStepIsAllowed(false);
+
+    moveToLastStep();
+    setNextStepAvailable();
+
+    const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
+    expect(nextButton).toBeNull();
   });
 
   it('should use the correct save button label on last step', () => {
@@ -432,10 +437,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(backButton).not.toBeNull();
 
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
-    expect(nextButton).not.toBeNull();
-
-    const isNextButtonDisabled = isElementDisabled(nextButtonDeclaration);
-    expect(isNextButtonDisabled).toBeTrue();
+    expect(nextButton).toBeNull();
   });
 
   it('should use the correct close button title', () => {

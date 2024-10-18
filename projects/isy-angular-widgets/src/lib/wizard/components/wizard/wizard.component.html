@@ -19,31 +19,35 @@
   <ng-template pTemplate="footer">
     <div class="flex justify-content-end flex-wrap card-container">
       @if (!isSaved) {
-        <button
-          id="back-button"
-          pButton
-          [class]="'flex align-items-center justify-content-center mr-2'"
-          [disabled]="index === 0"
-          (click)="previous()"
-        >
-          {{ labelBackButton }}
-        </button>
-        <button
-          id="next-button"
-          pButton
-          [class]="'flex align-items-center justify-content-center mr-4'"
-          [disabled]="index === items.length - 1 || !allowNext"
-          (click)="next()"
-        >
-          {{ labelNextButton }}
-        </button>
+        @if (index !== 0) {
+          <button
+            id="back-button"
+            pButton
+            [outlined]="true"
+            [class]="'flex align-items-center justify-content-center mr-2'"
+            (click)="previous()"
+          >
+            {{ labelBackButton }}
+          </button>
+        }
+        @if (index !== items.length - 1) {
+          <button
+            id="next-button"
+            pButton
+            [class]="'flex align-items-center justify-content-center mr-4'"
+            [disabled]="index === items.length - 1 || !allowNext"
+            (click)="next()"
+          >
+            {{ labelNextButton }}
+          </button>
+        }
       }
 
       @if (index === items.length - 1 && !isSaved) {
         <button
           id="save-button"
           pButton
-          [class]="'flex align-items-center justify-content-center'"
+          [class]="'flex align-items-center justify-content-center ml-4'"
           [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
           (click)="save()"
         >
@@ -54,6 +58,7 @@
       <button
         id="close-button"
         pButton
+        [outlined]="true"
         [class]="'flex align-items-center justify-content-center'"
         [disabled]="isSaved && !closable"
         (click)="closeDialog()"

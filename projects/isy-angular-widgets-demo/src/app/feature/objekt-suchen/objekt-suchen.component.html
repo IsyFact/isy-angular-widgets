@@ -23,7 +23,14 @@
         fieldId="first-name"
         [control]="persoenlicheInformationenForm.get('vorname')! | formControl"
       >
-        <input id="first-name" type="text" pInputText isyInputChar [(ngModel)]="person.personalien.vorname" />
+        <input
+          id="first-name"
+          type="text"
+          pInputText
+          isyInputChar
+          [outlinedInputCharButton]="true"
+          [(ngModel)]="person.personalien.vorname"
+        />
       </isy-form-wrapper>
     </div>
     <div class="col-12 md:col-6 xl:col-4">
@@ -32,7 +39,14 @@
         fieldId="last-name"
         [control]="persoenlicheInformationenForm.get('nachname')! | formControl"
       >
-        <input id="last-name" type="text" pInputText isyInputChar [(ngModel)]="person.personalien.nachname" />
+        <input
+          id="last-name"
+          type="text"
+          pInputText
+          isyInputChar
+          [outlinedInputCharButton]="true"
+          [(ngModel)]="person.personalien.nachname"
+        />
       </isy-form-wrapper>
     </div>
     <div class="col-12 md:col-6 xl:col-4">
@@ -54,6 +68,7 @@
           inputId="birth-date"
           dateFormat="dd.mm.yy"
           [(ngModel)]="person.personalien.geburtsdatum"
+          [iconDisplay]="'input'"
           [showIcon]="true"
           styleClass="w-full"
           appendTo="body"
@@ -207,6 +222,7 @@
               inputId="edit-geburtsdatum"
               dateFormat="dd.mm.yy"
               [formControlName]="'editGeburtsdatum'"
+              [iconDisplay]="'input'"
               [showIcon]="true"
               styleClass="w-full"
               appendTo="body"
@@ -384,8 +400,10 @@
                 inputId="geburtdatum"
                 dateFormat="dd.mm.yy"
                 [formControlName]="'geburtsdatum'"
+                [iconDisplay]="'input'"
                 [showIcon]="true"
                 appendTo="body"
+                styleClass="w-full"
                 (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
               >
               </p-calendar>
@@ -408,6 +426,7 @@
                 [options]="countryMap"
                 [formControlName]="'staatsangehoerigkeit'"
                 appendTo="body"
+                styleClass="w-full"
                 (focusout)="onFormControlFocus(geburtsInformationenForm.controls.staatsangehoerigkeit)"
               >
                 <ng-template let-land pTemplate="item">

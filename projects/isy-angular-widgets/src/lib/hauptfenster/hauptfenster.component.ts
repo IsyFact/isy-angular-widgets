@@ -53,6 +53,11 @@ export class HauptfensterComponent {
   @Input() title?: string;
 
   /**
+   * Boolean to determine if the logout button should be outlined or not.
+   */
+  @Input() outlinedLogoutButton: boolean = true;
+
+  /**
    * The left navigation title to be displayed in the left sidebar.
    */
   @Input() linksNavigationTitle?: string;

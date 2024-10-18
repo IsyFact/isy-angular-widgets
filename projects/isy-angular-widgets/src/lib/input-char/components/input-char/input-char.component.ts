@@ -42,6 +42,11 @@ export class InputCharComponent implements OnChanges {
   @Input() header?: string;
 
   /**
+   * Determines whether the button is outlined
+   */
+  @Input() outlinedInputCharButton: boolean = false;
+
+  /**
    * Determines whether the char picker can be closed
    */
   @Input() closable: boolean = true;

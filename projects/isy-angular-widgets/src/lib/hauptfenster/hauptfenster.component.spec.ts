@@ -18,7 +18,8 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
   `
 })
 class HauptFensterWrapperComponent {
-  title!: string;
+  title?: string;
+  userInfo?: UserInfo;
 }
 
 describe('Unit Tests: HauptfensterComponent', () => {
@@ -66,6 +67,32 @@ describe('Unit Tests: HauptfensterComponent', () => {
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
     const logoutButtonText = logoutButton.textContent ?? '';
     expect(logoutButtonText.trim()).toEqual(logoutTitle);
+  });
+
+  it('should have outlined style by default for the logout button', () => {
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
+    expect(outlinedState).toBe('true');
+  });
+
+  it('should have outlined style when outlinedLogoutButton is true', () => {
+    component.outlinedLogoutButton = true;
+    spectator.detectChanges();
+
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
+
+    expect(outlinedState).toBe('true');
+  });
+
+  it('should not have outlined style when outlinedLogoutButton is false', () => {
+    component.outlinedLogoutButton = false;
+    spectator.detectChanges();
+
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
+    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
+
+    expect(outlinedState).toBe('false');
   });
 
   it('should call the logout function when the button is clocked', () => {

@@ -3,53 +3,66 @@ import {ReactiveFormsModule, FormControl, Validators} from '@angular/forms';
 import {FormWrapperComponent} from './form-wrapper.component';
 
 describe('FormWrapperComponent', () => {
-  let spectator: Spectator<FormWrapperComponent>;
+  let spectatorRequired: Spectator<FormWrapperComponent>;
+  let spectatorOptional: Spectator<FormWrapperComponent>;
   const createComponent = createComponentFactory({
     component: FormWrapperComponent,
     imports: [ReactiveFormsModule]
   });
 
-  const defaultProps = {
-    label: 'Test Label',
-    fieldId: 'testField',
+  const defaultRequiredProps = {
+    label: 'Required Label',
+    fieldId: 'requiredField',
     control: new FormControl('', Validators.required),
     validationMessages: {required: 'Field is required'}
   };
 
+  const defaultProps = {
+    label: 'Test Label',
+    fieldId: 'testField',
+    control: new FormControl(''),
+    validationMessages: {}
+  };
+
   beforeEach(() => {
-    spectator = createComponent({props: defaultProps});
+    spectatorRequired = createComponent({props: defaultRequiredProps});
+    spectatorOptional = createComponent({props: defaultProps});
   });
 
-  it('should create', () => {
-    expect(spectator.component).toBeTruthy();
+  it('should create required component', () => {
+    expect(spectatorRequired.component).toBeTruthy();
+  });
+
+  it('should create optional component', () => {
+    expect(spectatorOptional.component).toBeTruthy();
   });
 
   it('should display the label text', () => {
     const testLabel = 'Test Label';
-    spectator.setInput('label', testLabel);
-    spectator.setInput('control', new FormControl(''));
-    spectator.detectChanges();
-    const labelElement = spectator.query('label');
+    spectatorRequired.setInput('label', testLabel);
+    spectatorRequired.setInput('control', new FormControl(''));
+    spectatorRequired.detectChanges();
+    const labelElement = spectatorRequired.query('label');
     expect(labelElement).toBeTruthy();
     expect(labelElement?.textContent).toContain(testLabel);
   });
 
   it('should display the correct error message for the validation failure', () => {
-    const control = spectator.component.control;
+    const control = spectatorRequired.component.control;
     control.markAsTouched();
     control.setValue('');
-    spectator.detectChanges();
-    const errorMessage = spectator.query('.p-error');
+    spectatorRequired.detectChanges();
+    const errorMessage = spectatorRequired.query('.p-error');
     expect(errorMessage).toHaveText('Field is required');
   });
 
   it('should return null when there are no validation errors', () => {
-    const control = spectator.component.control;
+    const control = spectatorRequired.component.control;
     control.setValue('some valid value');
-    spectator.detectChanges();
+    spectatorRequired.detectChanges();
     control.markAsTouched();
     control.updateValueAndValidity();
-    const errorMessage = spectator.query('.p-error');
+    const errorMessage = spectatorRequired.query('.p-error');
     expect(errorMessage).toBeNull();
   });
 
@@ -65,50 +78,53 @@ describe('FormWrapperComponent', () => {
   });
 
   it('label should not include a "*" by default if field is optional (non required)', () => {
-    spectator.component.validationMessages = {key: 'non_required'};
-    spectator.detectChanges();
+    spectatorOptional.component.validationMessages = {key: 'non_required'};
+    spectatorOptional.detectChanges();
+
+    const label = spectatorOptional.query('label[for="testField"]') as HTMLElement;
+    expect(label.innerHTML).not.toContain('*');
   });
 
   it('label should include an asterisk (*) if the field is required, even if the validation message is set dynamically', () => {
-    const actual = `${defaultProps.label} *`;
-    const label = spectator.query('label[for="testField"]') as HTMLElement;
+    const actual = `${defaultRequiredProps.label} *`;
+    const label = spectatorRequired.query('label[for="requiredField"]') as HTMLElement;
 
-    spectator.component.validationMessages = {required: 'true'};
-    spectator.detectChanges();
+    spectatorRequired.component.validationMessages = {required: 'true'};
+    spectatorRequired.detectChanges();
     expect(label.innerHTML).toEqual(actual);
 
-    spectator.component.validationMessages = {};
-    spectator.detectChanges();
+    spectatorRequired.component.validationMessages = {};
+    spectatorRequired.detectChanges();
     expect(label.innerHTML).toEqual(actual);
   });
 
   it('should set the ifta input correctly', () => {
     const iftaValue = true;
-    spectator.setInput('ifta', iftaValue);
-    spectator.detectChanges();
-    expect(spectator.component.ifta).toEqual(iftaValue);
+    spectatorRequired.setInput('ifta', iftaValue);
+    spectatorRequired.detectChanges();
+    expect(spectatorRequired.component.ifta).toEqual(iftaValue);
   });
 
   it('should default the ifta input to false', () => {
-    expect(spectator.component.ifta).toEqual(false);
+    expect(spectatorRequired.component.ifta).toEqual(false);
   });
 
   it('should return "label--filled" class when control has value and ifta is true', () => {
-    spectator.component.control.setValue('test value');
-    spectator.component.ifta = true;
-    const labelClass = spectator.component.labelFilledClass;
+    spectatorRequired.component.control.setValue('test value');
+    spectatorRequired.component.ifta = true;
+    const labelClass = spectatorRequired.component.labelFilledClass;
     expect(labelClass).toEqual(' label--filled');
   });
 
   it('should return "ifta" class when ifta is true', () => {
-    spectator.component.ifta = true;
-    const labelClass = spectator.component.labelOptionClass;
+    spectatorRequired.component.ifta = true;
+    const labelClass = spectatorRequired.component.labelOptionClass;
     expect(labelClass).toEqual(' ifta');
   });
 
   it('should return "static-label" class when ifta is false', () => {
-    spectator.component.ifta = false;
-    const labelClass = spectator.component.labelOptionClass;
+    spectatorRequired.component.ifta = false;
+    const labelClass = spectatorRequired.component.labelOptionClass;
     expect(labelClass).toEqual(' static-label');
   });
 });

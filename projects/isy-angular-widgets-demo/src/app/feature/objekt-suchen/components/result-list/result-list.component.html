@@ -143,21 +143,23 @@
         <td>
           <p-button
             [icon]="'pi pi-pencil'"
-            [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"
+            [styleClass]="'p-button-rounded p-button-outlined mr-1'"
             (onClick)="emitEditAction(person)"
             ariaLabel="{{ 'isyAngularWidgetsDemo.aria.edit' | translate }}"
           >
           </p-button>
           <p-button
             [icon]="'pi pi-download'"
-            [styleClass]="'p-button-rounded p-button-text p-button-raised mr-1'"
+            severity="help"
+            [styleClass]="'p-button-rounded p-button-outlined mr-1'"
             [disabled]="true"
             ariaLabel="{{ 'isyAngularWidgetsDemo.aria.download' | translate }}"
           >
           </p-button>
           <p-button
             [icon]="'pi pi-trash'"
-            [styleClass]="'p-button-rounded p-button-text p-button-raised'"
+            severity="danger"
+            [styleClass]="'p-button-rounded p-button-outlined'"
             [disabled]="true"
             ariaLabel="{{ 'isyAngularWidgetsDemo.aria.delete' | translate }}"
           >

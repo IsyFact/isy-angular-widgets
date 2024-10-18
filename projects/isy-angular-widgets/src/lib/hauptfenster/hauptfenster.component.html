@@ -26,7 +26,11 @@
         }
       </div>
       <div class="flex flex-row-reverse">
-        <p-button id="isy-hauptfenster-logout-button" (click)="logoutEvent.emit(userInfo)">
+        <p-button
+          id="isy-hauptfenster-logout-button"
+          (click)="logoutEvent.emit(userInfo)"
+          [outlined]="outlinedLogoutButton"
+        >
           {{ configService.getTranslation('hauptfenster.logout') }}
         </p-button>
         @if (userInfo) {
