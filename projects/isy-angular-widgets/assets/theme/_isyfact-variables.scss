@@ -60,9 +60,12 @@ $accordionHeaderPadding: 0.875rem !default;
 //accordion
 $accordionSpacing: 0px !default;
 
-// Variables in theme file _variables.scss adjusted to meet color requirements of the Isyfact design for the input field
+// Variables in theme file _variables.scss adjusted to meet color requirements of the IsyFact design
 
-////input
+//font-weight
+$isyfact-bold: bold !default;
+
+//input
 $inputPlaceholderTextColor: #83878c !default;
 
 //progress spinner

@@ -262,9 +262,9 @@
 
       <p-divider></p-divider>
 
-      <h4>
+      <h3>
         {{ 'isyAngularWidgetsDemo.labels.residences' | translate }}
-      </h4>
+      </h3>
       @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
         <p-fieldset
           legend="{{ 'isyAngularWidgetsDemo.labels.residence' | translate: {numChars: i + 1} }}"

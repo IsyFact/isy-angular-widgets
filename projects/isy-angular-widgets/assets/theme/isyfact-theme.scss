@@ -13,6 +13,10 @@ body {
   font-family: $fontFamily;
 }
 
+label {
+  font-weight: $isyfact-bold;
+}
+
 .p-inputgroup .p-inputtext,
 .p-fluid .p-inputgroup .p-inputtext,
 .p-inputgroup .p-inputwrapper,
