@@ -69,7 +69,5 @@ $isyfact-bold: bold !default;
 $inputPlaceholderTextColor: #83878c !default;
 
 //progress spinner
-.p-progress-spinner-circle {
-  stroke: $themePrimary;
-  animation: p-progress-spinner-dash 1.5s ease-in-out infinite;
-}
+$isyfact-progress-spinner-stroke: $themePrimary !default;
+$isyfact-progress-spinner-animation: p-progress-spinner-dash 1.5s ease-in-out infinite !default;

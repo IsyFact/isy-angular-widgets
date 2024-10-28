@@ -28,3 +28,9 @@ label {
 :disabled {
   cursor: not-allowed;
 }
+
+// Set the color of the progress spinner to the primary color
+.p-progress-spinner-circle {
+  stroke: $isyfact-progress-spinner-stroke;
+  animation: $isyfact-progress-spinner-animation;
+}
