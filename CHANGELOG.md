@@ -5,7 +5,7 @@
   * Im `isy-wizard` wird nur noch der Primärbutton in der gefüllten Primärfarbe dargestellt, alle anderen Buttons werden als Outlined-Buttons dargestellt
   * Der Weiter-Button im `isy-wizard` wird im letzten Schritt des Wizards ausgeblendet
   * Der `InputCharComponent`-Komponente wurde die Eigenschaft `outlinedInputCharButton` hinzugefügt, um den Charpicker-Button als Outlined-Button darstellen zu können
-- IFS-4322: Im IsyFact-Theme wurde die scss-Variable `$isyfactFontWeight` hinzugefügt, um Labels fett darstellen zu können
+- IFS-4322: Im IsyFact-Theme wurde die scss-Variable `$isyfactLabelFontWeight` hinzugefügt, um Labels fett darstellen zu können
 ## Demo-Anwendung
 - IFS-4098: Für die Bereitstellung unterschiedlicher Buttonvarianten wurden folgende Komponenten in der Demo angepasst:
   * Date-Picker werden nun in der Default-Icon-Variante dargestellt
