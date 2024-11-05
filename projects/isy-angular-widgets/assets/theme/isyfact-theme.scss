@@ -14,7 +14,7 @@ body {
 }
 
 label {
-  font-weight: $isyfact-bold;
+  font-weight: $isyfactFontWeight;
 }
 
 .p-inputgroup .p-inputtext,
@@ -31,6 +31,6 @@ label {
 
 // Set the color of the progress spinner to the primary color
 .p-progress-spinner-circle {
-  stroke: $isyfact-progress-spinner-stroke;
-  animation: $isyfact-progress-spinner-animation;
+  stroke: $isyfactProgressSpinnerStroke;
+  animation: $isyfactProgressSpinnerAnimation;
 }

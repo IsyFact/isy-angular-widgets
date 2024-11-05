@@ -63,11 +63,11 @@ $accordionSpacing: 0px !default;
 // Variables in theme file _variables.scss adjusted to meet color requirements of the IsyFact design
 
 //font-weight
-$isyfact-bold: bold !default;
+$isyfactFontWeight: bold !default;
 
 //input
 $inputPlaceholderTextColor: #83878c !default;
 
 //progress spinner
-$isyfact-progress-spinner-stroke: $themePrimary !default;
-$isyfact-progress-spinner-animation: p-progress-spinner-dash 1.5s ease-in-out infinite !default;
+$isyfactProgressSpinnerStroke: $themePrimary !default;
+$isyfactProgressSpinnerAnimation: p-progress-spinner-dash 1.5s ease-in-out infinite !default;
