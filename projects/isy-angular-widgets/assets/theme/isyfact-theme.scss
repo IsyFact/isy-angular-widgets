@@ -13,6 +13,10 @@ body {
   font-family: $fontFamily;
 }
 
+label {
+  font-weight: $isyfactLabelFontWeight;
+}
+
 .p-inputgroup .p-inputtext,
 .p-fluid .p-inputgroup .p-inputtext,
 .p-inputgroup .p-inputwrapper,
@@ -23,4 +27,10 @@ body {
 
 :disabled {
   cursor: not-allowed;
+}
+
+// Set the color of the progress spinner to the primary color
+.p-progress-spinner-circle {
+  stroke: $isyfactProgressSpinnerStroke;
+  animation: $isyfactProgressSpinnerAnimation;
 }

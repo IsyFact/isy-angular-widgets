@@ -262,9 +262,9 @@
 
       <p-divider></p-divider>
 
-      <h4>
+      <h3>
         {{ 'isyAngularWidgetsDemo.labels.residences' | translate }}
-      </h4>
+      </h3>
       @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
         <p-fieldset
           legend="{{ 'isyAngularWidgetsDemo.labels.residence' | translate: {numChars: i + 1} }}"
@@ -279,7 +279,6 @@
             [severity]="'danger'"
             [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
             (click)="removeAddress(i)"
-            (onKeyPress)="removeAddress(i)"
             onKeyDown=""
             ariaLabel="{{ 'isyAngularWidgetsDemo.labels.deleteButton' | translate }}"
           >
@@ -389,10 +388,12 @@
           <div class="grid m-0 align-items-center">
             <div class="col-12 md:col-6 xl:col-4">
               <div class="flex align-items-center">
-                <p-checkbox inputId="id-required" formControlName="idRequired" [binary]="true"></p-checkbox>
-                <label for="id-required" class="m-0 ml-3">
-                  {{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}
-                </label>
+                <p-checkbox
+                  inputId="id-required"
+                  formControlName="idRequired"
+                  label="{{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}"
+                  [binary]="true"
+                ></p-checkbox>
               </div>
             </div>
             <div class="col-12 md:col-6 xl:col-4">
