@@ -265,6 +265,14 @@ export class Validation {
     };
   }
 
+  /**
+   * Identifies and returns an array of characters from the input string `value` that do not conform to the DIN norm.
+   * The function checks each character and its potential diacritics against the allowed characters and diacritics
+   * specified in the `allowedCharacters` parameter.
+   * @param value - The input string to be validated.
+   * @param allowedCharacters - An object containing the allowed base characters and diacritics.
+   * @returns An array of characters from the input string that are not allowed according to the DIN norm.
+   */
   private static getNonDinNormChars(value: string, allowedCharacters: AllowedSigns): string[] {
     const nonDinNormChars = [];
 
@@ -288,7 +296,6 @@ export class Validation {
             additionalDiacriticIndex,
             allowedCharacters
           );
-
           const hasAdditionalAllowed = Validation.hasAdditionalAllowed(
             value,
             i,
@@ -306,14 +313,16 @@ export class Validation {
               )
             ) {
               // --> not allowed with two diacritic characters or U+035F + allowed character, but should have a third
-              nonDinNormChars.push(value.charAt(i) + value.charAt(i + 1) + value.charAt(i + additionalDiacriticIndex));
+              nonDinNormChars.push(
+                value.charAt(i) + value.charAt(i + nextCharIndex) + value.charAt(i + additionalDiacriticIndex)
+              );
             }
             // skip two steps
             i += additionalDiacriticIndex;
           } else {
             if (!allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
               // --> not allowed with one diacritic character and should not have a third
-              nonDinNormChars.push(value.charAt(i) + value.charAt(i + 1));
+              nonDinNormChars.push(value.charAt(i) + value.charAt(i + nextCharIndex));
             }
             // skip one step
             i += nextCharIndex;
@@ -326,6 +335,14 @@ export class Validation {
     return nonDinNormChars;
   }
 
+  /**
+   * Checks if the character at the specified index in the given string has an additional diacritic.
+   * @param value - The string to check for additional diacritics.
+   * @param index - The index of the character in the string to check.
+   * @param additionalDiacriticIndex - The offset index to check for an additional diacritic.
+   * @param allowedCharacters - An object containing allowed characters and their diacritics.
+   * @returns `true` if the character at the specified index has an additional diacritic; otherwise, `false`.
+   */
   private static hasAdditionalDiacritic(
     value: string,
     index: number,
@@ -340,21 +357,42 @@ export class Validation {
     );
   }
 
+  /**
+   * Checks if the character at the specified index in the given string has an additional allowed diacritic.
+   * @param value - The string to be checked.
+   * @param index - The current index of the character in the string.
+   * @param additionalDiacriticIndex - The index offset for the additional diacritic.
+   * @param allowedCharacters - An object containing allowed characters.
+   * @returns `true` if the character at the specified index has an additional allowed diacritic, otherwise `false`.
+   */
   private static hasAdditionalAllowed(
     value: string,
     index: number,
     additionalDiacriticIndex: number,
     allowedCharacters: AllowedSigns
   ): boolean {
+    const nextCharIndex = 1;
+
     return (
       index + additionalDiacriticIndex < value.length &&
-      Validation.getHexCodePoint(value, index + 1) == '035F' &&
+      Validation.getHexCodePoint(value, index + nextCharIndex) == '035F' &&
       allowedCharacters.allowed.hasOwnProperty(
         'U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex)
       )
     );
   }
 
+  /**
+   * Returns the allowed characters based on the specified type.
+   * @param datentyp - The type of data for which allowed characters are to be retrieved.
+   *                   It can be one of the following values:
+   *                   - 'A': Includes latein and n1 characters.
+   *                   - 'B': Includes latein, n1, and n2 characters.
+   *                   - 'C': Includes latein, n1, n2, n3, and n4 characters.
+   *                   - 'D': Includes latein, n1, n2, n3, n4, e1, and eGriech characters.
+   *                   - 'E': Includes latein, n1, n2, n3, n4, e1, eGriech, and eKyrill characters.
+   * @returns An object containing the allowed characters and diacritic characters for the specified type.
+   */
   static getAllowedCharactersByType(datentyp: 'A' | 'B' | 'C' | 'D' | 'E'): AllowedSigns {
     switch (datentyp) {
       case 'A':
@@ -399,13 +437,27 @@ export class Validation {
     }
   }
 
+  /**
+   * Converts the Unicode code point of the character at the specified index in the input string
+   * to a hexadecimal string representation.
+   * @param input - The input string from which to get the character.
+   * @param index - The index of the character in the input string.
+   * @returns A string representing the hexadecimal code point of the character, padded to 4 digits.
+   *          Returns '0000' if the character code is NaN.
+   */
   static getHexCodePoint(input: string, index: number): string {
     const code = input.charCodeAt(index);
     const hexBase = 16;
     const hexStringLength = 4;
+
     return isNaN(code) ? '0000' : code.toString(hexBase).toUpperCase().padStart(hexStringLength, '0');
   }
 
+  /**
+   * Merges multiple `AllowedSigns` objects into a single `AllowedSigns` object.
+   * @param objects - The `AllowedSigns` objects to merge.
+   * @returns The merged `AllowedSigns` object containing combined `allowed` and `diacritic` properties.
+   */
   private static mergeObjects(...objects: AllowedSigns[]): AllowedSigns {
     const mergedAllowed: {[key: string]: boolean} = {};
     const mergedDiactric: {[key: string]: boolean} = {};
