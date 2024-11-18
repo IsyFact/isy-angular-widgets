@@ -52,6 +52,7 @@
             label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
             fieldId="birth-name"
             [control]="personalInfoForm.controls.birthName | formControl"
+            [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.validateDin91379Error' | translate}"
           >
             <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
             <input

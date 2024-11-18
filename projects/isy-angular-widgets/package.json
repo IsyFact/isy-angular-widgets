@@ -40,6 +40,7 @@
     "primeng": "^17.18.8"
   },
   "dependencies": {
+    "@isyfact/isy-angular-widgets": "file:",
     "tslib": "^2.6.3"
   }
 }

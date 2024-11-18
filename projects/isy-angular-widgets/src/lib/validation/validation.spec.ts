@@ -347,4 +347,157 @@ describe('Unit Test: Validation', () => {
       errorHaveToBeDefined(errors, errorKey);
     });
   });
+
+  describe('validateDin91379', () => {
+    // LATEIN - with combining diacritical marks
+    const LATEIN = '\u004D\u0306ĨrmaĽańĽańÛÂÝÂlbertoÝuta\u0043\u0328\u0306';
+    const N1 = '\u0020\u0027\u002C\u002D\u002E\u0060\u007E\u00A8\u00B4';
+    const N2 = '\u0021\u0022\u0023\u0024\u0025\u0026\u0028\u0029\u002A\u002B';
+    const N3 = '\u00A4\u00A6\u00B8\u00BC\u00BD\u00BE';
+    const N4 = '\u0009\u000A\u000D\u00A0';
+    const E1 = '\u2081';
+    const E_GRIECH = '\u03BB\u03BC\u03BD\u03BE';
+    const E_KYRILL = '\u041C\u042E\u0438\u044C';
+    const KEINE_GRUPPE = '\u0df4';
+
+    it('should return null for null input (for data type A)', () => {
+      const validator = Validation.validateDin91379('A');
+      const control = new FormControl(null);
+      const result = validator(control);
+      expect(result).toBeNull();
+    });
+
+    it('should return null for a valid input (for data type A)', () => {
+      const validator = Validation.validateDin91379('A');
+      const control = new FormControl(LATEIN + N1);
+      const result = validator(control);
+      expect(result).toBeNull();
+    });
+
+    it('should return a validation error for an invalid input (for data type A)', () => {
+      const validator = Validation.validateDin91379('A');
+      const control = new FormControl(LATEIN + N1 + N2);
+      const notAllowed = [...N2];
+      const nonDinNorm91379 = notAllowed.join(', ');
+      const result = validator(control);
+      expect(result).toEqual({pattern: true, DIN_NORM_91379: {nonDinNorm91379}});
+    });
+
+    it('should return null for a valid input (for data type B)', () => {
+      const validator = Validation.validateDin91379('B');
+      const control = new FormControl(LATEIN + N1 + N2);
+      const result = validator(control);
+      expect(result).toBeNull();
+    });
+
+    it('should return a validation error for an invalid input (for data type B)', () => {
+      const validator = Validation.validateDin91379('B');
+      const control = new FormControl(LATEIN + N1 + N2 + N3);
+      const notAllowed = [...N3];
+      const nonDinNorm91379 = notAllowed.join(', ');
+      const result = validator(control);
+      expect(result).toEqual({pattern: true, DIN_NORM_91379: {nonDinNorm91379}});
+    });
+
+    it('should return null for a valid input (for data type C)', () => {
+      const validator = Validation.validateDin91379('C');
+      const control = new FormControl(LATEIN + N1 + N2 + N3 + N4);
+      const result = validator(control);
+      expect(result).toBeNull();
+    });
+
+    it('should return a validation error for an invalid input (for data type C)', () => {
+      const validator = Validation.validateDin91379('C');
+      const control = new FormControl(LATEIN + N1 + N2 + N3 + N4 + E1);
+      const notAllowed = [...E1];
+      const nonDinNorm91379 = notAllowed.join(', ');
+      const result = validator(control);
+      expect(result).toEqual({pattern: true, DIN_NORM_91379: {nonDinNorm91379}});
+    });
+
+    it('should return null for a valid input (for data type D)', () => {
+      const validator = Validation.validateDin91379('D');
+      const control = new FormControl(LATEIN + N1 + N2 + N3 + N4 + E1 + E_GRIECH);
+      const result = validator(control);
+      expect(result).toBeNull();
+    });
+
+    it('should return a validation error for an invalid input (for data type D)', () => {
+      const validator = Validation.validateDin91379('D');
+      const control = new FormControl(LATEIN + N1 + N2 + N3 + N4 + E1 + E_GRIECH + E_KYRILL);
+      const notAllowed = [...E_KYRILL];
+      const nonDinNorm91379 = notAllowed.join(', ');
+      const result = validator(control);
+      expect(result).toEqual({pattern: true, DIN_NORM_91379: {nonDinNorm91379}});
+    });
+
+    it('should return null for a valid input (for data type E)', () => {
+      const validator = Validation.validateDin91379('E');
+      const control = new FormControl(LATEIN + N1 + N2 + N3 + N4 + E1 + E_GRIECH + E_KYRILL);
+      const result = validator(control);
+      expect(result).toBeNull();
+    });
+
+    it('should return a validation error for an invalid input (for data type E)', () => {
+      const validator = Validation.validateDin91379('E');
+      const control = new FormControl(LATEIN + N1 + N2 + N3 + N4 + E1 + E_GRIECH + E_KYRILL + KEINE_GRUPPE);
+      const notAllowed = [...KEINE_GRUPPE];
+      const nonDinNorm91379 = notAllowed.join(', ');
+      const result = validator(control);
+      expect(result).toEqual({pattern: true, DIN_NORM_91379: {nonDinNorm91379}});
+    });
+
+    it('should return a validation error for an invalid input with one diacritic', () => {
+      const validator = Validation.validateDin91379('A');
+      const control = new FormControl('\u0043\u030D');
+      const notAllowed = ['\u0043\u030D'];
+      const nonDinNorm91379 = notAllowed.join(', ');
+      const result = validator(control);
+      expect(result).toEqual({pattern: true, DIN_NORM_91379: {nonDinNorm91379}});
+    });
+
+    it('should return a validation error for an invalid input with additional allowed character', () => {
+      const validator = Validation.validateDin91379('A');
+      const control = new FormControl('\u004D\u035F\u0044');
+      const notAllowed = ['\u004D\u035F\u0044'];
+      const nonDinNorm91379 = notAllowed.join(', ');
+      const result = validator(control);
+      expect(result).toEqual({pattern: true, DIN_NORM_91379: {nonDinNorm91379}});
+    });
+
+    it('should return null for a valid input with two diacritics', () => {
+      const validator = Validation.validateDin91379('A');
+      const control = new FormControl('\u0043\u0328\u0306');
+      const result = validator(control);
+      expect(result).toBeNull();
+    });
+
+    it('should return a validation error for an invalid input with two diacritics', () => {
+      const validator = Validation.validateDin91379('A');
+      const control = new FormControl('\u004D\u0306\u0308');
+      const notAllowed = ['\u004D\u0306\u0308'];
+      const nonDinNorm91379 = notAllowed.join(', ');
+      const result = validator(control);
+      expect(result).toEqual({pattern: true, DIN_NORM_91379: {nonDinNorm91379}});
+    });
+
+    it('should return empty allowed characters for unknown type', () => {
+      const allowedCharacters = Validation.getAllowedCharactersByType('unknown' as 'A' | 'B' | 'C' | 'D' | 'E');
+      expect(allowedCharacters).toEqual({allowed: {}, diacritic: {}});
+    });
+
+    it('should return "0000" for an out-of-bounds index', () => {
+      const input = 'A';
+      const index = 1;
+      const result = Validation.getHexCodePoint(input, index);
+      expect(result).toBe('0000');
+    });
+
+    it('should return "0000" for an empty string', () => {
+      const input = '';
+      const index = 0;
+      const result = Validation.getHexCodePoint(input, index);
+      expect(result).toBe('0000');
+    });
+  });
 });

@@ -6,6 +6,7 @@ import {
   INPUT_UNSPECIFIED_REGEX,
   INPUT_UNSPECIFIED_REGEX_ISO_DATE
 } from './data/date-formats';
+import {AllowedSigns, dinNorm91379Characters} from './data/din-norm-91379-characters';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
@@ -239,5 +240,161 @@ export class Validation {
     }
 
     return null;
+  }
+
+  /**
+   * Checks whether the provided input matches the complex patterns defined in the given data type.
+   * If the input does not meet these criteria, the function returns a validation error. Otherwise, it returns null,
+   * indicating that the input is valid.
+   * @param datentyp The available types are A, B, C, D, and E. If none is specified, type C is used for validation by default.
+   * @returns A validator function that can be used to validate the form field.
+   */
+  static validateDin91379(datentyp: 'A' | 'B' | 'C' | 'D' | 'E'): ValidatorFn {
+    return (c: AbstractControl): ValidationErrors | null => {
+      const value: string = c.value as string;
+      if (!value) {
+        return null;
+      }
+
+      const allowedCharacters = Validation.getAllowedCharactersByType(datentyp);
+      const nonDinNormChars = Validation.getNonDinNormChars(value, allowedCharacters);
+
+      return nonDinNormChars.length > 0
+        ? {pattern: true, DIN_NORM_91379: {nonDinNorm91379: nonDinNormChars.join(', ')}}
+        : null;
+    };
+  }
+
+  private static getNonDinNormChars(value: string, allowedCharacters: AllowedSigns): string[] {
+    const nonDinNormChars = [];
+
+    for (let i = 0; i < value.length; i++) {
+      // base character
+      let unicodeCharacter = 'U+' + Validation.getHexCodePoint(value, i);
+
+      // current char is in allowed
+      if (allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
+        // current char has at least one diacritic
+        if (
+          i + 1 < value.length &&
+          allowedCharacters.diacritic?.hasOwnProperty('U+' + Validation.getHexCodePoint(value, i + 1))
+        ) {
+          const additionalDiacriticIndex = 2;
+          const hasAdditionalDiacritic = Validation.hasAdditionalDiacritic(value, i, additionalDiacriticIndex, allowedCharacters);
+
+          const hasAdditionalAllowed = Validation.hasAdditionalAllowed(value, i, additionalDiacriticIndex, allowedCharacters);
+
+          unicodeCharacter += '+' + Validation.getHexCodePoint(value, i + 1);
+
+          // current character has two diacritics or a diacritic combined with another allowed character
+          if (hasAdditionalDiacritic || hasAdditionalAllowed) {
+            if (
+              !allowedCharacters.allowed.hasOwnProperty(
+                unicodeCharacter + '+' + Validation.getHexCodePoint(value, i + additionalDiacriticIndex)
+              )
+            ) {
+              // --> not allowed with two diacritic characters or U+035F + allowed character, but should have a third
+              nonDinNormChars.push(value.charAt(i) + value.charAt(i + 1) + value.charAt(i + additionalDiacriticIndex));
+            }
+            // skip two steps
+            i += additionalDiacriticIndex;
+          } else {
+            if (!allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
+              // --> not allowed with one diacritic character and should not have a third
+              nonDinNormChars.push(value.charAt(i) + value.charAt(i + 1));
+            }
+            // skip one step
+            i += 1;
+          }
+        }
+      } else {
+        nonDinNormChars.push(value.charAt(i));
+      }
+    }
+    return nonDinNormChars;
+  }
+
+  private static hasAdditionalDiacritic(value: string, index: number, additionalDiacriticIndex: number, allowedCharacters: AllowedSigns): boolean {
+    return (
+      index + additionalDiacriticIndex < value.length &&
+      !!allowedCharacters.diacritic?.hasOwnProperty('U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex))
+    );
+  }
+
+  private static hasAdditionalAllowed(
+    value: string,
+    index: number,
+    additionalDiacriticIndex: number,
+    allowedCharacters: AllowedSigns
+  ): boolean {
+    return (
+      index + additionalDiacriticIndex < value.length &&
+            Validation.getHexCodePoint(value, index + 1) == '035F' &&
+            allowedCharacters.allowed.hasOwnProperty(
+              'U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex))
+    );
+  }
+
+  static getAllowedCharactersByType(datentyp: 'A' | 'B' | 'C' | 'D' | 'E'): AllowedSigns {
+    switch (datentyp) {
+      case 'A':
+        return Validation.mergeObjects(dinNorm91379Characters.latein, dinNorm91379Characters.n1);
+      case 'B':
+        return Validation.mergeObjects(
+          dinNorm91379Characters.latein,
+          dinNorm91379Characters.n1,
+          dinNorm91379Characters.n2
+        );
+      case 'C':
+        return Validation.mergeObjects(
+          dinNorm91379Characters.latein,
+          dinNorm91379Characters.n1,
+          dinNorm91379Characters.n2,
+          dinNorm91379Characters.n3,
+          dinNorm91379Characters.n4
+        );
+      case 'D':
+        return Validation.mergeObjects(
+          dinNorm91379Characters.latein,
+          dinNorm91379Characters.n1,
+          dinNorm91379Characters.n2,
+          dinNorm91379Characters.n3,
+          dinNorm91379Characters.n4,
+          dinNorm91379Characters.e1,
+          dinNorm91379Characters.eGriech
+        );
+      case 'E':
+        return Validation.mergeObjects(
+          dinNorm91379Characters.latein,
+          dinNorm91379Characters.n1,
+          dinNorm91379Characters.n2,
+          dinNorm91379Characters.n3,
+          dinNorm91379Characters.n4,
+          dinNorm91379Characters.e1,
+          dinNorm91379Characters.eGriech,
+          dinNorm91379Characters.eKyrill
+        );
+      default:
+        return {allowed: {}, diacritic: {}};
+    }
+  }
+
+  static getHexCodePoint(input: string, index: number): string {
+    const code = input.charCodeAt(index);
+    const hexBase = 16;
+    const hexStringLength = 4;
+    return isNaN(code) ? '0000' : code.toString(hexBase).toUpperCase().padStart(hexStringLength, '0');
+  }
+
+  private static mergeObjects(...objects: AllowedSigns[]): AllowedSigns {
+    const mergedAllowed: {[key: string]: boolean} = {};
+    const mergedDiactric: {[key: string]: boolean} = {};
+
+    objects.forEach((obj) => {
+      Object.assign(mergedAllowed, obj.allowed);
+      Object.assign(mergedDiactric, obj.diacritic);
+    });
+
+    return {allowed: mergedAllowed, diacritic: mergedDiactric};
   }
 }
