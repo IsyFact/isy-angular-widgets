@@ -274,17 +274,29 @@ export class Validation {
 
       // current char is in allowed
       if (allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
+        const nextCharIndex = 1;
+
         // current char has at least one diacritic
         if (
-          i + 1 < value.length &&
-          allowedCharacters.diacritic?.hasOwnProperty('U+' + Validation.getHexCodePoint(value, i + 1))
+          i + nextCharIndex < value.length &&
+          allowedCharacters.diacritic?.hasOwnProperty('U+' + Validation.getHexCodePoint(value, i + nextCharIndex))
         ) {
           const additionalDiacriticIndex = 2;
-          const hasAdditionalDiacritic = Validation.hasAdditionalDiacritic(value, i, additionalDiacriticIndex, allowedCharacters);
+          const hasAdditionalDiacritic = Validation.hasAdditionalDiacritic(
+            value,
+            i,
+            additionalDiacriticIndex,
+            allowedCharacters
+          );
 
-          const hasAdditionalAllowed = Validation.hasAdditionalAllowed(value, i, additionalDiacriticIndex, allowedCharacters);
+          const hasAdditionalAllowed = Validation.hasAdditionalAllowed(
+            value,
+            i,
+            additionalDiacriticIndex,
+            allowedCharacters
+          );
 
-          unicodeCharacter += '+' + Validation.getHexCodePoint(value, i + 1);
+          unicodeCharacter += '+' + Validation.getHexCodePoint(value, i + nextCharIndex);
 
           // current character has two diacritics or a diacritic combined with another allowed character
           if (hasAdditionalDiacritic || hasAdditionalAllowed) {
@@ -304,7 +316,7 @@ export class Validation {
               nonDinNormChars.push(value.charAt(i) + value.charAt(i + 1));
             }
             // skip one step
-            i += 1;
+            i += nextCharIndex;
           }
         }
       } else {
@@ -314,10 +326,17 @@ export class Validation {
     return nonDinNormChars;
   }
 
-  private static hasAdditionalDiacritic(value: string, index: number, additionalDiacriticIndex: number, allowedCharacters: AllowedSigns): boolean {
+  private static hasAdditionalDiacritic(
+    value: string,
+    index: number,
+    additionalDiacriticIndex: number,
+    allowedCharacters: AllowedSigns
+  ): boolean {
     return (
       index + additionalDiacriticIndex < value.length &&
-      !!allowedCharacters.diacritic?.hasOwnProperty('U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex))
+      !!allowedCharacters.diacritic?.hasOwnProperty(
+        'U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex)
+      )
     );
   }
 
@@ -329,9 +348,10 @@ export class Validation {
   ): boolean {
     return (
       index + additionalDiacriticIndex < value.length &&
-            Validation.getHexCodePoint(value, index + 1) == '035F' &&
-            allowedCharacters.allowed.hasOwnProperty(
-              'U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex))
+      Validation.getHexCodePoint(value, index + 1) == '035F' &&
+      allowedCharacters.allowed.hasOwnProperty(
+        'U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex)
+      )
     );
   }
 
