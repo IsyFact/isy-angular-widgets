@@ -41,8 +41,8 @@ export class ObjektAnzeigenComponent {
 
     this.personalInfoForm = this.fb.group({
       lastName: [personalien.nachname, Validators.required],
-      // Demo: Validator validateDin91379 - Checks that the form field is valid according to DIN 91379
-      birthName: [personalien.geburtsname, Validation.validateDin91379('A')],
+      // Demo: Validator validateDIN91379 - Checks that the form field is valid according to DIN 91379
+      birthName: [personalien.geburtsname, Validation.validateDIN91379('A')],
       birthplace: [personalien.geburtsort],
       firstName: [personalien.vorname, Validators.required],
       gender: [personalien.gender],

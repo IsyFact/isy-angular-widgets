@@ -51,7 +51,7 @@
       "dateError": "The date is invalid.",
       "dateInPastError": "The date must be in the past.",
       "changePage": "Page is changed. New page:",
-      "validateDin91379Error": "Invalid characters according to DIN 91379."
+      "validateDIN91379Error": "Invalid characters according to DIN 91379."
     },
     "displayObject": {
       "masterDataHeader": "Master data",

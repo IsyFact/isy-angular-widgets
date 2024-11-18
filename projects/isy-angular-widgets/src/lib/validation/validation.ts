@@ -249,7 +249,7 @@ export class Validation {
    * @param datentyp The available types are A, B, C, D, and E. If none is specified, type C is used for validation by default.
    * @returns A validator function that can be used to validate the form field.
    */
-  static validateDin91379(datentyp: 'A' | 'B' | 'C' | 'D' | 'E'): ValidatorFn {
+  static validateDIN91379(datentyp: 'A' | 'B' | 'C' | 'D' | 'E'): ValidatorFn {
     return (c: AbstractControl): ValidationErrors | null => {
       const value: string = c.value as string;
       if (!value) {
