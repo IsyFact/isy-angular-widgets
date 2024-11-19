@@ -252,6 +252,7 @@ export class Validation {
   static validateDIN91379(datentyp: 'A' | 'B' | 'C' | 'D' | 'E'): ValidatorFn {
     return (c: AbstractControl): ValidationErrors | null => {
       const value: string = c.value as string;
+
       if (!value) {
         return null;
       }
@@ -270,69 +271,149 @@ export class Validation {
    * The function checks each character and its potential diacritics against the allowed characters and diacritics
    * specified in the `allowedCharacters` parameter.
    * @param value - The input string to be validated.
-   * @param allowedCharacters - An object containing the allowed base characters and diacritics.
-   * @returns An array of characters from the input string that are not allowed according to the DIN norm.
+   * @param allowedCharacters - An object containing the allowed characters as per DIN norms.
+   * @returns An array of characters from the input string that are not allowed by DIN norms.
    */
   private static getNonDinNormChars(value: string, allowedCharacters: AllowedSigns): string[] {
     const nonDinNormChars = [];
+    const SINGLE_STEP = 1;
+    const DIACRITIC_STEP = 2;
 
-    for (let i = 0; i < value.length; i++) {
-      // base character
-      let unicodeCharacter = 'U+' + Validation.getHexCodePoint(value, i);
-
-      // current char is in allowed
-      if (allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
-        const nextCharIndex = 1;
-
-        // current char has at least one diacritic
-        if (
-          i + nextCharIndex < value.length &&
-          allowedCharacters.diacritic?.hasOwnProperty('U+' + Validation.getHexCodePoint(value, i + nextCharIndex))
-        ) {
-          const additionalDiacriticIndex = 2;
-          const hasAdditionalDiacritic = Validation.hasAdditionalDiacritic(
-            value,
-            i,
-            additionalDiacriticIndex,
-            allowedCharacters
-          );
-          const hasAdditionalAllowed = Validation.hasAdditionalAllowed(
-            value,
-            i,
-            additionalDiacriticIndex,
-            allowedCharacters
-          );
-
-          unicodeCharacter += '+' + Validation.getHexCodePoint(value, i + nextCharIndex);
-
-          // current character has two diacritics or a diacritic combined with another allowed character
-          if (hasAdditionalDiacritic || hasAdditionalAllowed) {
-            if (
-              !allowedCharacters.allowed.hasOwnProperty(
-                unicodeCharacter + '+' + Validation.getHexCodePoint(value, i + additionalDiacriticIndex)
-              )
-            ) {
-              // --> not allowed with two diacritic characters or U+035F + allowed character, but should have a third
-              nonDinNormChars.push(
-                value.charAt(i) + value.charAt(i + nextCharIndex) + value.charAt(i + additionalDiacriticIndex)
-              );
-            }
-            // skip two steps
-            i += additionalDiacriticIndex;
-          } else {
-            if (!allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
-              // --> not allowed with one diacritic character and should not have a third
-              nonDinNormChars.push(value.charAt(i) + value.charAt(i + nextCharIndex));
-            }
-            // skip one step
-            i += nextCharIndex;
-          }
-        }
-      } else {
-        nonDinNormChars.push(value.charAt(i));
+    for (let i = 0; i < value.length; ) {
+      const {unicodeCharacter, step} = this.processCharacter(value, i, allowedCharacters, SINGLE_STEP, DIACRITIC_STEP);
+      if (unicodeCharacter) {
+        nonDinNormChars.push(unicodeCharacter);
       }
+      i += step;
     }
     return nonDinNormChars;
+  }
+
+  /**
+   * Processes a character from the given string value at the specified index.
+   * Determines if the character is allowed based on the provided allowed characters.
+   * If the character is allowed, it processes it accordingly; otherwise, it returns the character itself.
+   * @param value - The string value containing the character to process.
+   * @param index - The index of the character in the string value.
+   * @param allowedCharacters - An object containing the allowed characters.
+   * @param SINGLE_STEP - The step value to use for single characters.
+   * @param DIACRITIC_STEP - The step value to use for diacritic characters.
+   * @returns An object containing the processed unicode character and the step value.
+   */
+  private static processCharacter(
+    value: string,
+    index: number,
+    allowedCharacters: AllowedSigns,
+    SINGLE_STEP: number,
+    DIACRITIC_STEP: number
+  ): {unicodeCharacter: string | null; step: number} {
+    const unicodeCharacter = 'U+' + Validation.getHexCodePoint(value, index);
+    const step = SINGLE_STEP;
+
+    if (allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
+      return this.processAllowedCharacter(value, index, allowedCharacters, SINGLE_STEP, DIACRITIC_STEP);
+    } else {
+      return {unicodeCharacter: value.charAt(index), step};
+    }
+  }
+
+  /**
+   * Processes a character at a given index in a string to determine if it is an allowed character,
+   * including handling diacritic characters.
+   * @param value - The string containing the character to process.
+   * @param index - The index of the character in the string to process.
+   * @param allowedCharacters - An object containing sets of allowed characters and diacritic characters.
+   * @param SINGLE_STEP - The step size for a single character.
+   * @param DIACRITIC_STEP - The step size for a diacritic character.
+   * @returns An object containing the Unicode representation of the character and the step size.
+   */
+  private static processAllowedCharacter(
+    value: string,
+    index: number,
+    allowedCharacters: AllowedSigns,
+    SINGLE_STEP: number,
+    DIACRITIC_STEP: number
+  ): {unicodeCharacter: string | null; step: number} {
+    let unicodeCharacter = 'U+' + Validation.getHexCodePoint(value, index);
+    const step = SINGLE_STEP;
+
+    if (
+      index + SINGLE_STEP < value.length &&
+      allowedCharacters.diacritic?.hasOwnProperty('U+' + Validation.getHexCodePoint(value, index + SINGLE_STEP))
+    ) {
+      const hasAdditionalDiacritic = Validation.hasAdditionalDiacritic(value, index, DIACRITIC_STEP, allowedCharacters);
+      const hasAdditionalAllowed = Validation.hasAdditionalAllowed(value, index, DIACRITIC_STEP, allowedCharacters);
+
+      unicodeCharacter += '+' + Validation.getHexCodePoint(value, index + SINGLE_STEP);
+
+      if (hasAdditionalDiacritic || hasAdditionalAllowed) {
+        return this.processAdditionalDiacritic(
+          value,
+          index,
+          allowedCharacters,
+          unicodeCharacter,
+          DIACRITIC_STEP,
+          SINGLE_STEP
+        );
+      } else {
+        return this.processSingleDiacritic(value, index, allowedCharacters, unicodeCharacter, SINGLE_STEP);
+      }
+    }
+
+    return {unicodeCharacter: null, step};
+  }
+
+  /**
+   * Processes additional diacritic characters in a given string value.
+   * @param value - The string value to process.
+   * @param index - The current index in the string value.
+   * @param allowedCharacters - An object containing allowed characters.
+   * @param unicodeCharacter - The current unicode character being processed.
+   * @param DIACRITIC_STEP - The step size for diacritic characters.
+   * @param SINGLE_STEP - The step size for single characters.
+   * @returns An object containing the combined unicode character (if any) and the step size.
+   */
+  private static processAdditionalDiacritic(
+    value: string,
+    index: number,
+    allowedCharacters: AllowedSigns,
+    unicodeCharacter: string,
+    DIACRITIC_STEP: number,
+    SINGLE_STEP: number
+  ): {unicodeCharacter: string | null; step: number} {
+    if (
+      !allowedCharacters.allowed.hasOwnProperty(
+        unicodeCharacter + '+' + Validation.getHexCodePoint(value, index + DIACRITIC_STEP)
+      )
+    ) {
+      const combinedChar =
+        value.charAt(index) + value.charAt(index + SINGLE_STEP) + value.charAt(index + DIACRITIC_STEP);
+      return {unicodeCharacter: combinedChar, step: DIACRITIC_STEP + SINGLE_STEP};
+    }
+    return {unicodeCharacter: null, step: DIACRITIC_STEP + SINGLE_STEP};
+  }
+
+  /**
+   * Processes a single diacritic character in a string.
+   * @param value - The string value being processed.
+   * @param index - The current index in the string.
+   * @param allowedCharacters - An object containing allowed characters.
+   * @param unicodeCharacter - The current unicode character being processed.
+   * @param SINGLE_STEP - The step size for processing characters.
+   * @returns An object containing the combined unicode character (if not allowed) and the step size.
+   */
+  private static processSingleDiacritic(
+    value: string,
+    index: number,
+    allowedCharacters: AllowedSigns,
+    unicodeCharacter: string,
+    SINGLE_STEP: number
+  ): {unicodeCharacter: string | null; step: number} {
+    if (!allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
+      const combinedChar = value.charAt(index) + value.charAt(index + SINGLE_STEP);
+      return {unicodeCharacter: combinedChar, step: SINGLE_STEP + SINGLE_STEP};
+    }
+    return {unicodeCharacter: null, step: SINGLE_STEP + SINGLE_STEP};
   }
 
   /**
@@ -438,14 +519,17 @@ export class Validation {
   }
 
   /**
-   * Converts the Unicode code point of the character at the specified index in the input string
-   * to a hexadecimal string representation.
-   * @param input - The input string from which to get the character.
-   * @param index - The index of the character in the input string.
-   * @returns A string representing the hexadecimal code point of the character, padded to 4 digits.
-   *          Returns '0000' if the character code is NaN.
+   * Converts the Unicode code point of a character at a specified index in a string to a hexadecimal string.
+   * If the input is not a string or the index is out of bounds, returns '0000'.
+   * @param input - The string from which to get the Unicode code point.
+   * @param index - The index of the character in the string.
+   * @returns The hexadecimal string representation of the Unicode code point, padded to 4 characters.
    */
   static getHexCodePoint(input: string, index: number): string {
+    if (!input || typeof input !== 'string') {
+      return '0000';
+    }
+
     const code = input.charCodeAt(index);
     const hexBase = 16;
     const hexStringLength = 4;
