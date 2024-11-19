@@ -260,9 +260,7 @@ export class Validation {
       const allowedCharacters = Validation.getAllowedCharactersByType(datentyp);
       const nonDinNormChars = Validation.getNonDinNormChars(value, allowedCharacters);
 
-      return nonDinNormChars.length > 0
-        ? {pattern: true, DIN_NORM_91379: {nonDinNorm91379: nonDinNormChars.join(', ')}}
-        : null;
+      return nonDinNormChars.length > 0 ? {DIN91379ERROR: true} : null;
     };
   }
 
