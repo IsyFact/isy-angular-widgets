@@ -3,24 +3,24 @@ export interface AllowedSigns {
   allowed: {[key: string]: boolean};
 }
 
-export interface DinNorm91379Characters {
-  latein: AllowedSigns;
+export interface Din91379Characters {
+  latin: AllowedSigns;
   n1: AllowedSigns;
   n2: AllowedSigns;
   n3: AllowedSigns;
   n4: AllowedSigns;
   e1: AllowedSigns;
-  eGriech: AllowedSigns;
-  eKyrill: AllowedSigns;
+  eGreek: AllowedSigns;
+  eCyrillic: AllowedSigns;
 }
 
-export const dinNorm91379Characters: DinNorm91379Characters = {
+export const din91379Characters: Din91379Characters = {
   /**
-   * Provides the allowed characters of DIN Norm 91379 (Latin) in hexadecimal notation.
+   * Provides the allowed characters of DIN 91379 (Latin) in hexadecimal notation.
    * allowed: codepoints that are defined/allowed in the character set
    * diacritic: codepoints that are only allowed in combination with one or two previous characters
    */
-  latein: {
+  latin: {
     diacritic: {
       'U+0300': true,
       'U+0301': true,
@@ -697,7 +697,7 @@ export const dinNorm91379Characters: DinNorm91379Characters = {
     }
   },
   /**
-   * Provides the allowed characters of DIN Norm 91379 (N1) in hexadecimal notation.
+   * Provides the allowed characters of DIN 91379 (N1) in hexadecimal notation.
    * allowed: codepoints that are defined/allowed in the character set
    * diacritic: codepoints that are only allowed in combination with one or two previous characters
    */
@@ -725,7 +725,7 @@ export const dinNorm91379Characters: DinNorm91379Characters = {
     }
   },
   /**
-   * Provides the allowed characters of DIN Norm 91379 (N2) in hexadecimal notation.
+   * Provides the allowed characters of DIN 91379 (N2) in hexadecimal notation.
    * allowed: codepoints that are defined/allowed in the character set
    * diacritic: codepoints that are only allowed in combination with one or two previous characters
    */
@@ -794,7 +794,7 @@ export const dinNorm91379Characters: DinNorm91379Characters = {
     }
   },
   /**
-   * Provides the allowed characters of DIN Norm 91379 (N3) in hexadecimal notation.
+   * Provides the allowed characters of DIN 91379 (N3) in hexadecimal notation.
    * allowed: codepoints that are defined/allowed in the character set
    * diacritic: codepoints that are only allowed in combination with one or two previous characters
    */
@@ -811,7 +811,7 @@ export const dinNorm91379Characters: DinNorm91379Characters = {
     }
   },
   /**
-   * Provides the allowed characters of DIN Norm 91379 (N4) in hexadecimal notation.
+   * Provides the allowed characters of DIN 91379 (N4) in hexadecimal notation.
    * allowed: codepoints that are defined/allowed in the character set
    * diacritic: codepoints that are only allowed in combination with one or two previous characters
    */
@@ -824,7 +824,7 @@ export const dinNorm91379Characters: DinNorm91379Characters = {
     }
   },
   /**
-   * Provides the allowed characters of DIN Norm 91379 (E1) in hexadecimal notation.
+   * Provides the allowed characters of DIN 91379 (E1) in hexadecimal notation.
    * allowed: codepoints that are defined/allowed in the character set
    * diacritic: codepoints that are only allowed in combination with one or two previous characters
    */
@@ -873,11 +873,11 @@ export const dinNorm91379Characters: DinNorm91379Characters = {
     }
   },
   /**
-   * Provides the allowed characters of DIN Norm 91379 (E_GRIECH) in hexadecimal notation.
+   * Provides the allowed characters of DIN 91379 (E_GREEK) in hexadecimal notation.
    * allowed: codepoints that are defined/allowed in the character set
    * diacritic: codepoints that are only allowed in combination with one or two previous characters
    */
-  eGriech: {
+  eGreek: {
     allowed: {
       'U+0386': true,
       'U+0388': true,
@@ -951,11 +951,11 @@ export const dinNorm91379Characters: DinNorm91379Characters = {
     }
   },
   /**
-   * Provides the allowed characters of DIN Norm 91379 (E_KYRILL) in hexadecimal notation.
+   * Provides the allowed characters of DIN 91379 (E_KYRILL) in hexadecimal notation.
    * allowed: codepoints that are defined/allowed in the character set
    * diacritic: codepoints that are only allowed in combination with one or two previous characters
    */
-  eKyrill: {
+  eCyrillic: {
     allowed: {
       'U+040D': true,
       'U+0410': true,

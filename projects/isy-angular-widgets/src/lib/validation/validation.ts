@@ -6,7 +6,7 @@ import {
   INPUT_UNSPECIFIED_REGEX,
   INPUT_UNSPECIFIED_REGEX_ISO_DATE
 } from './data/date-formats';
-import {AllowedSigns, dinNorm91379Characters} from './data/din-norm-91379-characters';
+import {AllowedSigns, din91379Characters} from './data/din-91379-characters';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
@@ -246,10 +246,10 @@ export class Validation {
    * Checks whether the provided input matches the complex patterns defined in the given data type.
    * If the input does not meet these criteria, the function returns a validation error. Otherwise, it returns null,
    * indicating that the input is valid.
-   * @param datentyp The available types are A, B, C, D, and E. If none is specified, type C is used for validation by default.
+   * @param dataType The available types are A, B, C, D, and E. If none is specified, type C is used for validation by default.
    * @returns A validator function that can be used to validate the form field.
    */
-  static validateDIN91379(datentyp: 'A' | 'B' | 'C' | 'D' | 'E'): ValidatorFn {
+  static validateDIN91379(dataType: 'A' | 'B' | 'C' | 'D' | 'E'): ValidatorFn {
     return (c: AbstractControl): ValidationErrors | null => {
       const value: string = c.value as string;
 
@@ -257,10 +257,10 @@ export class Validation {
         return null;
       }
 
-      const allowedCharacters = Validation.getAllowedCharactersByType(datentyp);
-      const nonDinNormChars = Validation.getNonDinNormChars(value, allowedCharacters);
+      const allowedCharacters = Validation.getAllowedCharactersByType(dataType);
+      const nonDinChars = Validation.getNonDinChars(value, allowedCharacters);
 
-      return nonDinNormChars.length > 0 ? {DIN91379ERROR: true} : null;
+      return nonDinChars.length > 0 ? {DIN91379ERROR: true} : null;
     };
   }
 
@@ -272,19 +272,19 @@ export class Validation {
    * @param allowedCharacters - An object containing the allowed characters as per DIN norms.
    * @returns An array of characters from the input string that are not allowed by DIN norms.
    */
-  private static getNonDinNormChars(value: string, allowedCharacters: AllowedSigns): string[] {
-    const nonDinNormChars = [];
+  private static getNonDinChars(value: string, allowedCharacters: AllowedSigns): string[] {
+    const nonDinChars = [];
     const SINGLE_STEP = 1;
     const DIACRITIC_STEP = 2;
 
     for (let i = 0; i < value.length; ) {
       const {unicodeCharacter, step} = this.processCharacter(value, i, allowedCharacters, SINGLE_STEP, DIACRITIC_STEP);
       if (unicodeCharacter) {
-        nonDinNormChars.push(unicodeCharacter);
+        nonDinChars.push(unicodeCharacter);
       }
       i += step;
     }
-    return nonDinNormChars;
+    return nonDinChars;
   }
 
   /**
@@ -450,11 +450,11 @@ export class Validation {
     additionalDiacriticIndex: number,
     allowedCharacters: AllowedSigns
   ): boolean {
-    const nextCharIndex = 1;
+    const SINGLE_STEP = 1;
 
     return (
       index + additionalDiacriticIndex < value.length &&
-      Validation.getHexCodePoint(value, index + nextCharIndex) == '035F' &&
+      Validation.getHexCodePoint(value, index + SINGLE_STEP) == '035F' &&
       allowedCharacters.allowed.hasOwnProperty(
         'U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex)
       )
@@ -463,53 +463,49 @@ export class Validation {
 
   /**
    * Returns the allowed characters based on the specified type.
-   * @param datentyp - The type of data for which allowed characters are to be retrieved.
+   * @param dataType - The type of data for which allowed characters are to be retrieved.
    *                   It can be one of the following values:
-   *                   - 'A': Includes latein and n1 characters.
-   *                   - 'B': Includes latein, n1, and n2 characters.
-   *                   - 'C': Includes latein, n1, n2, n3, and n4 characters.
-   *                   - 'D': Includes latein, n1, n2, n3, n4, e1, and eGriech characters.
-   *                   - 'E': Includes latein, n1, n2, n3, n4, e1, eGriech, and eKyrill characters.
+   *                   - 'A': Includes latin and n1 characters.
+   *                   - 'B': Includes latin, n1, and n2 characters.
+   *                   - 'C': Includes latin, n1, n2, n3, and n4 characters.
+   *                   - 'D': Includes latin, n1, n2, n3, n4, e1, and eGreek characters.
+   *                   - 'E': Includes latin, n1, n2, n3, n4, e1, eGreek, and eCyrillic characters.
    * @returns An object containing the allowed characters and diacritic characters for the specified type.
    */
-  static getAllowedCharactersByType(datentyp: 'A' | 'B' | 'C' | 'D' | 'E'): AllowedSigns {
-    switch (datentyp) {
+  static getAllowedCharactersByType(dataType: 'A' | 'B' | 'C' | 'D' | 'E'): AllowedSigns {
+    switch (dataType) {
       case 'A':
-        return Validation.mergeObjects(dinNorm91379Characters.latein, dinNorm91379Characters.n1);
+        return Validation.mergeObjects(din91379Characters.latin, din91379Characters.n1);
       case 'B':
-        return Validation.mergeObjects(
-          dinNorm91379Characters.latein,
-          dinNorm91379Characters.n1,
-          dinNorm91379Characters.n2
-        );
+        return Validation.mergeObjects(din91379Characters.latin, din91379Characters.n1, din91379Characters.n2);
       case 'C':
         return Validation.mergeObjects(
-          dinNorm91379Characters.latein,
-          dinNorm91379Characters.n1,
-          dinNorm91379Characters.n2,
-          dinNorm91379Characters.n3,
-          dinNorm91379Characters.n4
+          din91379Characters.latin,
+          din91379Characters.n1,
+          din91379Characters.n2,
+          din91379Characters.n3,
+          din91379Characters.n4
         );
       case 'D':
         return Validation.mergeObjects(
-          dinNorm91379Characters.latein,
-          dinNorm91379Characters.n1,
-          dinNorm91379Characters.n2,
-          dinNorm91379Characters.n3,
-          dinNorm91379Characters.n4,
-          dinNorm91379Characters.e1,
-          dinNorm91379Characters.eGriech
+          din91379Characters.latin,
+          din91379Characters.n1,
+          din91379Characters.n2,
+          din91379Characters.n3,
+          din91379Characters.n4,
+          din91379Characters.e1,
+          din91379Characters.eGreek
         );
       case 'E':
         return Validation.mergeObjects(
-          dinNorm91379Characters.latein,
-          dinNorm91379Characters.n1,
-          dinNorm91379Characters.n2,
-          dinNorm91379Characters.n3,
-          dinNorm91379Characters.n4,
-          dinNorm91379Characters.e1,
-          dinNorm91379Characters.eGriech,
-          dinNorm91379Characters.eKyrill
+          din91379Characters.latin,
+          din91379Characters.n1,
+          din91379Characters.n2,
+          din91379Characters.n3,
+          din91379Characters.n4,
+          din91379Characters.e1,
+          din91379Characters.eGreek,
+          din91379Characters.eCyrillic
         );
       default:
         return {allowed: {}, diacritic: {}};
@@ -517,13 +513,14 @@ export class Validation {
   }
 
   /**
-   * Converts the Unicode code point of a character at a specified index in a string to a hexadecimal string.
-   * If the input is not a string or the index is out of bounds, returns '0000'.
-   * @param input - The string from which to get the Unicode code point.
-   * @param index - The index of the character in the string.
-   * @returns The hexadecimal string representation of the Unicode code point, padded to 4 characters.
+   * Converts the Unicode code point at the specified index in the input string to a hexadecimal string.
+   * If the input is null, undefined, or not a string, returns '0000'.
+   * If the index is out of bounds or the code point is NaN, returns '0000'.
+   * @param input - The input string from which to get the code point.
+   * @param index - The index of the character in the string to convert to a hexadecimal code point.
+   * @returns The hexadecimal representation of the Unicode code point, padded to 4 characters.
    */
-  static getHexCodePoint(input: string, index: number): string {
+  static getHexCodePoint(input: string | null | undefined, index: number): string {
     if (!input || typeof input !== 'string') {
       return '0000';
     }
