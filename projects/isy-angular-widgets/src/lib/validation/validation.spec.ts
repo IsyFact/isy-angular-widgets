@@ -373,98 +373,98 @@ describe('Unit Test: Validation', () => {
 
     it('should return null for a valid input (for data type A)', () => {
       const validator = Validation.validateDIN91379('A');
-      const control = new FormControl(LATIN + N1);
+      const control = new FormControl(`${LATIN}${N1}`);
       const result = validator(control);
       expect(result).toBeNull();
     });
 
     it('should return a validation error for an invalid input (for data type A)', () => {
       const validator = Validation.validateDIN91379('A');
-      const control = new FormControl(LATIN + N1 + N2);
+      const control = new FormControl(`${LATIN}${N1}${N2}`);
       const errors = validator(control);
       errorHaveToBeDefined(errors, ERROR_KEY);
     });
 
     it('should return null for a valid input (for data type B)', () => {
       const validator = Validation.validateDIN91379('B');
-      const control = new FormControl(LATIN + N1 + N2);
+      const control = new FormControl(`${LATIN}${N1}${N2}`);
       const result = validator(control);
       expect(result).toBeNull();
     });
 
     it('should return a validation error for an invalid input (for data type B)', () => {
       const validator = Validation.validateDIN91379('B');
-      const control = new FormControl(LATIN + N1 + N2 + N3);
+      const control = new FormControl(`${LATIN}${N1}${N2}${N3}`);
       const errors = validator(control);
       errorHaveToBeDefined(errors, ERROR_KEY);
     });
 
     it('should return null for a valid input (for data type C)', () => {
       const validator = Validation.validateDIN91379('C');
-      const control = new FormControl(LATIN + N1 + N2 + N3 + N4);
+      const control = new FormControl(`${LATIN}${N1}${N2}${N3}${N4}`);
       const result = validator(control);
       expect(result).toBeNull();
     });
 
     it('should return a validation error for an invalid input (for data type C)', () => {
       const validator = Validation.validateDIN91379('C');
-      const control = new FormControl(LATIN + N1 + N2 + N3 + N4 + E1);
+      const control = new FormControl(`${LATIN}${N1}${N2}${N3}${N4}${E1}`);
       const errors = validator(control);
       errorHaveToBeDefined(errors, ERROR_KEY);
     });
 
     it('should return null for a valid input (for data type D)', () => {
       const validator = Validation.validateDIN91379('D');
-      const control = new FormControl(LATIN + N1 + N2 + N3 + N4 + E1 + E_GREEK);
+      const control = new FormControl(`${LATIN}${N1}${N2}${N3}${N4}${E1}${E_GREEK}`);
       const result = validator(control);
       expect(result).toBeNull();
     });
 
     it('should return a validation error for an invalid input (for data type D)', () => {
       const validator = Validation.validateDIN91379('D');
-      const control = new FormControl(LATIN + N1 + N2 + N3 + N4 + E1 + E_GREEK + E_CYRILLIC);
+      const control = new FormControl(`${LATIN}${N1}${N2}${N3}${N4}${E1}${E_GREEK}${E_CYRILLIC}`);
       const errors = validator(control);
       errorHaveToBeDefined(errors, ERROR_KEY);
     });
 
     it('should return null for a valid input (for data type E)', () => {
       const validator = Validation.validateDIN91379('E');
-      const control = new FormControl(LATIN + N1 + N2 + N3 + N4 + E1 + E_GREEK + E_CYRILLIC);
+      const control = new FormControl(`${LATIN}${N1}${N2}${N3}${N4}${E1}${E_GREEK}${E_CYRILLIC}`);
       const result = validator(control);
       expect(result).toBeNull();
     });
 
     it('should return a validation error for an invalid input (for data type E)', () => {
       const validator = Validation.validateDIN91379('E');
-      const control = new FormControl(LATIN + N1 + N2 + N3 + N4 + E1 + E_GREEK + E_CYRILLIC + NO_GROUP);
+      const control = new FormControl(`${LATIN}${N1}${N2}${N3}${N4}${E1}${E_GREEK}${E_CYRILLIC}${NO_GROUP}`);
       const errors = validator(control);
       errorHaveToBeDefined(errors, ERROR_KEY);
     });
 
     it('should return a validation error for an invalid input with one diacritic', () => {
       const validator = Validation.validateDIN91379('A');
-      const control = new FormControl(LATIN + N1 + '\u0043\u030D');
+      const control = new FormControl(`${LATIN}${N1}\u0043\u030D`);
       const errors = validator(control);
       errorHaveToBeDefined(errors, ERROR_KEY);
     });
 
     it('should return a validation error for an invalid input with additional allowed character', () => {
       const validator = Validation.validateDIN91379('A');
-      const control = new FormControl(LATIN + N1 + '\u004D\u035F\u0044');
+      const control = new FormControl(`${LATIN}${N1}\u004D\u035F\u0044`);
       const errors = validator(control);
       errorHaveToBeDefined(errors, ERROR_KEY);
     });
 
     it('should return null for a valid input with two diacritics', () => {
       const validator = Validation.validateDIN91379('A');
-      const control = new FormControl(LATIN + N1 + '\u0043\u0328\u0306');
+      const control = new FormControl(`${LATIN}${N1}\u0043\u0328\u0306`);
       const result = validator(control);
       expect(result).toBeNull();
     });
 
     it('should return a validation error for an invalid input with two diacritics', () => {
       const validator = Validation.validateDIN91379('A');
-      const control = new FormControl(LATIN + N1 + '\u004D\u0306\u0308');
+      const control = new FormControl(`${LATIN}${N1}\u004D\u0306\u0308`);
       const errors = validator(control);
       errorHaveToBeDefined(errors, ERROR_KEY);
     });

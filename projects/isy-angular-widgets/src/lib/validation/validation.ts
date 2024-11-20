@@ -310,7 +310,7 @@ export class Validation {
     SINGLE_STEP: number,
     DIACRITIC_STEP: number
   ): {unicodeCharacter: string | null; step: number} {
-    const unicodeCharacter = 'U+' + Validation.getHexCodePoint(value, index);
+    const unicodeCharacter = `U+${Validation.getHexCodePoint(value, index)}`;
     const step = SINGLE_STEP;
 
     if (allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
@@ -337,17 +337,17 @@ export class Validation {
     SINGLE_STEP: number,
     DIACRITIC_STEP: number
   ): {unicodeCharacter: string | null; step: number} {
-    let unicodeCharacter = 'U+' + Validation.getHexCodePoint(value, index);
+    let unicodeCharacter = `U+${Validation.getHexCodePoint(value, index)}`;
     const step = SINGLE_STEP;
 
     if (
       index + SINGLE_STEP < value.length &&
-      allowedCharacters.diacritic?.hasOwnProperty('U+' + Validation.getHexCodePoint(value, index + SINGLE_STEP))
+      allowedCharacters.diacritic?.hasOwnProperty(`U+${Validation.getHexCodePoint(value, index + SINGLE_STEP)}`)
     ) {
       const hasAdditionalDiacritic = Validation.hasAdditionalDiacritic(value, index, DIACRITIC_STEP, allowedCharacters);
       const hasAdditionalAllowed = Validation.hasAdditionalAllowed(value, index, DIACRITIC_STEP, allowedCharacters);
 
-      unicodeCharacter += '+' + Validation.getHexCodePoint(value, index + SINGLE_STEP);
+      unicodeCharacter += `+${Validation.getHexCodePoint(value, index + SINGLE_STEP)}`;
 
       if (hasAdditionalDiacritic || hasAdditionalAllowed) {
         return this.processAdditionalDiacritic(
@@ -386,11 +386,10 @@ export class Validation {
   ): {unicodeCharacter: string | null; step: number} {
     if (
       !allowedCharacters.allowed.hasOwnProperty(
-        unicodeCharacter + '+' + Validation.getHexCodePoint(value, index + DIACRITIC_STEP)
+        `${unicodeCharacter}+${Validation.getHexCodePoint(value, index + DIACRITIC_STEP)}`
       )
     ) {
-      const combinedChar =
-        value.charAt(index) + value.charAt(index + SINGLE_STEP) + value.charAt(index + DIACRITIC_STEP);
+      const combinedChar = `${value.charAt(index)}${value.charAt(index + SINGLE_STEP)}${value.charAt(index + DIACRITIC_STEP)}`;
       return {unicodeCharacter: combinedChar, step: DIACRITIC_STEP + SINGLE_STEP};
     }
     return {unicodeCharacter: null, step: DIACRITIC_STEP + SINGLE_STEP};
@@ -413,7 +412,7 @@ export class Validation {
     SINGLE_STEP: number
   ): {unicodeCharacter: string | null; step: number} {
     if (!allowedCharacters.allowed.hasOwnProperty(unicodeCharacter)) {
-      const combinedChar = value.charAt(index) + value.charAt(index + SINGLE_STEP);
+      const combinedChar = `${value.charAt(index)}${value.charAt(index + SINGLE_STEP)}`;
       return {unicodeCharacter: combinedChar, step: SINGLE_STEP + SINGLE_STEP};
     }
     return {unicodeCharacter: null, step: SINGLE_STEP + SINGLE_STEP};
@@ -436,7 +435,7 @@ export class Validation {
     return (
       index + additionalDiacriticIndex < value.length &&
       !!allowedCharacters.diacritic?.hasOwnProperty(
-        'U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex)
+        `U+${Validation.getHexCodePoint(value, index + additionalDiacriticIndex)}`
       )
     );
   }
@@ -459,9 +458,9 @@ export class Validation {
 
     return (
       index + additionalDiacriticIndex < value.length &&
-      Validation.getHexCodePoint(value, index + SINGLE_STEP) == '035F' &&
+      Validation.getHexCodePoint(value, index + SINGLE_STEP) === '035F' &&
       allowedCharacters.allowed.hasOwnProperty(
-        'U+' + Validation.getHexCodePoint(value, index + additionalDiacriticIndex)
+        `U+${Validation.getHexCodePoint(value, index + additionalDiacriticIndex)}`
       )
     );
   }
