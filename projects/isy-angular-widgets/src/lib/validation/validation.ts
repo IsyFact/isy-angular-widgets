@@ -6,7 +6,8 @@ import {
   INPUT_UNSPECIFIED_REGEX,
   INPUT_UNSPECIFIED_REGEX_ISO_DATE
 } from './data/date-formats';
-import {AllowedSigns, din91379Characters} from './data/din-91379-characters';
+import {din91379Characters} from './data/din-91379-characters';
+import {AllowedSigns} from './model/din-91379';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
@@ -251,7 +252,7 @@ export class Validation {
    *   - 'D': Type D
    *   - 'E': Type E
    * @returns A ValidatorFn that takes an AbstractControl and returns a ValidationErrors object
-   * if the control's value contains characters not allowed by the DIN 91379 standard for the specified data type,
+   * if the control's value contains characters not allowed by the DIN 91379 standard for the specified data type
    * or null if the value is valid or empty.
    */
   static validateDIN91379(dataType: 'A' | 'B' | 'C' | 'D' | 'E'): ValidatorFn {
@@ -518,7 +519,7 @@ export class Validation {
 
   /**
    * Converts the Unicode code point at the specified index in the input string to a hexadecimal string.
-   * If the input is null, undefined, or not a string, returns '0000'.
+   * If the input is null, undefined or not a string, returns '0000'.
    * If the index is out of bounds or the code point is NaN, returns '0000'.
    * @param input - The input string from which to get the code point.
    * @param index - The index of the character in the string to convert to a hexadecimal code point.
@@ -543,13 +544,13 @@ export class Validation {
    */
   private static mergeObjects(...objects: AllowedSigns[]): AllowedSigns {
     const mergedAllowed: {[key: string]: boolean} = {};
-    const mergedDiactric: {[key: string]: boolean} = {};
+    const mergedDiacritic: {[key: string]: boolean} = {};
 
     objects.forEach((obj) => {
       Object.assign(mergedAllowed, obj.allowed);
-      Object.assign(mergedDiactric, obj.diacritic);
+      Object.assign(mergedDiacritic, obj.diacritic);
     });
 
-    return {allowed: mergedAllowed, diacritic: mergedDiactric};
+    return {allowed: mergedAllowed, diacritic: mergedDiacritic};
   }
 }

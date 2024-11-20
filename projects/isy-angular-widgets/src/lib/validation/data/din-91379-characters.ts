@@ -1,25 +1,18 @@
-export interface AllowedSigns {
-  diacritic?: {[key: string]: boolean};
-  allowed: {[key: string]: boolean};
-}
+import {Din91379Characters} from '../model/din-91379';
 
-export interface Din91379Characters {
-  latin: AllowedSigns;
-  n1: AllowedSigns;
-  n2: AllowedSigns;
-  n3: AllowedSigns;
-  n4: AllowedSigns;
-  e1: AllowedSigns;
-  eGreek: AllowedSigns;
-  eCyrillic: AllowedSigns;
-}
-
+/**
+ * Provides the allowed characters of DIN 91379 in hexadecimal notation (05.10.2023).
+ * The characters are categorized into different groups:
+ * - `latin`: Allowed Latin characters with diacritics.
+ * - `n1`: Allowed characters for N1 category.
+ * - `n2`: Allowed characters for N2 category.
+ * - `n3`: Allowed characters for N3 category.
+ * - `n4`: Allowed characters for N4 category.
+ * - `e1`: Allowed characters for E1 category.
+ * - `eGreek`: Allowed Greek characters.
+ * - `eCyrillic`: Allowed Cyrillic characters.
+ */
 export const din91379Characters: Din91379Characters = {
-  /**
-   * Provides the allowed characters of DIN 91379 (Latin) in hexadecimal notation.
-   * allowed: codepoints that are defined/allowed in the character set
-   * diacritic: codepoints that are only allowed in combination with one or two previous characters
-   */
   latin: {
     diacritic: {
       'U+0300': true,
@@ -44,7 +37,6 @@ export const din91379Characters: Din91379Characters = {
       'U+030D': true
     },
     allowed: {
-      // Latin
       'U+0041': true,
       'U+0041+030B': true,
       'U+0042': true,
@@ -696,14 +688,8 @@ export const din91379Characters: Din91379Characters = {
       'U+1E17': true
     }
   },
-  /**
-   * Provides the allowed characters of DIN 91379 (N1) in hexadecimal notation.
-   * allowed: codepoints that are defined/allowed in the character set
-   * diacritic: codepoints that are only allowed in combination with one or two previous characters
-   */
   n1: {
     allowed: {
-      // N1
       'U+0020': true,
       'U+0027': true,
       'U+002C': true,
@@ -724,11 +710,6 @@ export const din91379Characters: Din91379Characters = {
       'U+2021': true
     }
   },
-  /**
-   * Provides the allowed characters of DIN 91379 (N2) in hexadecimal notation.
-   * allowed: codepoints that are defined/allowed in the character set
-   * diacritic: codepoints that are only allowed in combination with one or two previous characters
-   */
   n2: {
     allowed: {
       'U+0021': true,
@@ -793,11 +774,6 @@ export const din91379Characters: Din91379Characters = {
       'U+20AC': true
     }
   },
-  /**
-   * Provides the allowed characters of DIN 91379 (N3) in hexadecimal notation.
-   * allowed: codepoints that are defined/allowed in the character set
-   * diacritic: codepoints that are only allowed in combination with one or two previous characters
-   */
   n3: {
     allowed: {
       'U+00A4': true,
@@ -810,11 +786,6 @@ export const din91379Characters: Din91379Characters = {
       'U+2033': true
     }
   },
-  /**
-   * Provides the allowed characters of DIN 91379 (N4) in hexadecimal notation.
-   * allowed: codepoints that are defined/allowed in the character set
-   * diacritic: codepoints that are only allowed in combination with one or two previous characters
-   */
   n4: {
     allowed: {
       'U+0009': true,
@@ -823,11 +794,6 @@ export const din91379Characters: Din91379Characters = {
       'U+00A0': true
     }
   },
-  /**
-   * Provides the allowed characters of DIN 91379 (E1) in hexadecimal notation.
-   * allowed: codepoints that are defined/allowed in the character set
-   * diacritic: codepoints that are only allowed in combination with one or two previous characters
-   */
   e1: {
     allowed: {
       'U+0192': true,
@@ -872,11 +838,6 @@ export const din91379Characters: Din91379Characters = {
       'U+2265': true
     }
   },
-  /**
-   * Provides the allowed characters of DIN 91379 (E_GREEK) in hexadecimal notation.
-   * allowed: codepoints that are defined/allowed in the character set
-   * diacritic: codepoints that are only allowed in combination with one or two previous characters
-   */
   eGreek: {
     allowed: {
       'U+0386': true,
@@ -950,11 +911,6 @@ export const din91379Characters: Din91379Characters = {
       'U+03CE': true
     }
   },
-  /**
-   * Provides the allowed characters of DIN 91379 (E_KYRILL) in hexadecimal notation.
-   * allowed: codepoints that are defined/allowed in the character set
-   * diacritic: codepoints that are only allowed in combination with one or two previous characters
-   */
   eCyrillic: {
     allowed: {
       'U+040D': true,
