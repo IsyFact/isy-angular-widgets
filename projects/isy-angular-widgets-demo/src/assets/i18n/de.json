@@ -50,7 +50,8 @@
       "maxLengthError": "Es dürfen maximal {{numChars}} Zeichen verwendet werden.",
       "dateError": "Das Datum ist ungültig.",
       "dateInPastError": "Das Datum muss in der Vergangenheit liegen.",
-      "changePage": "Seitenwechsel erfolgt. Neue Seite:"
+      "changePage": "Seitenwechsel erfolgt. Neue Seite:",
+      "validateDIN91379Error": "Ungültige Zeichen gemäß DIN 91379."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
