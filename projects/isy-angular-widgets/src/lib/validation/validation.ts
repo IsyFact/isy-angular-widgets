@@ -243,11 +243,16 @@ export class Validation {
   }
 
   /**
-   * Checks whether the provided input matches the complex patterns defined in the given data type.
-   * If the input does not meet these criteria, the function returns a validation error. Otherwise, it returns null,
-   * indicating that the input is valid.
-   * @param dataType The available types are A, B, C, D, and E. If none is specified, type C is used for validation by default.
-   * @returns A validator function that can be used to validate the form field.
+   * Validates a string based on the DIN 91379 standard for the specified data type.
+   * @param dataType - The type of data to validate. It can be one of the following:
+   *   - 'A': Type A
+   *   - 'B': Type B
+   *   - 'C': Type C
+   *   - 'D': Type D
+   *   - 'E': Type E
+   * @returns A ValidatorFn that takes an AbstractControl and returns a ValidationErrors object
+   * if the control's value contains characters not allowed by the DIN 91379 standard for the specified data type,
+   * or null if the value is valid or empty.
    */
   static validateDIN91379(dataType: 'A' | 'B' | 'C' | 'D' | 'E'): ValidatorFn {
     return (c: AbstractControl): ValidationErrors | null => {
