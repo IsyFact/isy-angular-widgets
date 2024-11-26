@@ -32,8 +32,8 @@ export class ObjektAnzeigenComponent {
 
   constructor(
     public translate: TranslateService,
-    private fb: FormBuilder,
-    private messageService: MessageService
+    private readonly fb: FormBuilder,
+    private readonly messageService: MessageService
   ) {
     const personalien = this.person.personalien;
     const addresses = personalien.addresses;

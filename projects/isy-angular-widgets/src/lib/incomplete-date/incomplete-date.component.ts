@@ -115,8 +115,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * @param element The ElementRef representing the host element
    */
   constructor(
-    private incompleteDateService: IncompleteDateService,
-    private element: ElementRef
+    private readonly incompleteDateService: IncompleteDateService,
+    private readonly element: ElementRef
   ) {}
 
   ngAfterViewInit(): void {
@@ -281,15 +281,17 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Transforms the current input on losing the focus
    */
   onBlur(): void {
-    this.inputValue = this.incompleteDateService.transformValue(
-      this.inputValue,
-      this.dateInPastConstraint,
-      this.allowZeroFormat
-    );
+    if(this.inputValue) {
+      this.inputValue = this.incompleteDateService.transformValue(
+        this.inputValue,
+        this.dateInPastConstraint,
+        this.allowZeroFormat
+      );
+    }
     const input = this.field?.inputViewChild!.nativeElement as HTMLInputElement;
     input.value = this.inputValue;
-
-    if (this.inputValue.includes('_')) input.value = '';
+ 
+    if (this.inputValue.includes('_')) input.value = this.inputValue = '';
     this.onTouched();
     this.onChange(this.inputValue);
   }
