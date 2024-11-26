@@ -292,7 +292,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('should not produce an error when the input field is empty', () => {
-    component.inputValue = '';
+    component.inputValue = '__.__.____';
     component.onBlur();
     const validDateControl: AbstractControl = new FormControl(component.inputValue);
     const errors = component.validate(validDateControl);
