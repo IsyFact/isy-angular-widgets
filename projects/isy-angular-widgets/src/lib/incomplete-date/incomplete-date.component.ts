@@ -281,7 +281,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Transforms the current input on losing the focus
    */
   onBlur(): void {
-    if(this.inputValue) {
+    if (this.inputValue) {
       this.inputValue = this.incompleteDateService.transformValue(
         this.inputValue,
         this.dateInPastConstraint,
@@ -290,7 +290,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     }
     const input = this.field?.inputViewChild!.nativeElement as HTMLInputElement;
     input.value = this.inputValue;
- 
+
     if (this.inputValue.includes('_')) input.value = this.inputValue = '';
     this.onTouched();
     this.onChange(this.inputValue);
