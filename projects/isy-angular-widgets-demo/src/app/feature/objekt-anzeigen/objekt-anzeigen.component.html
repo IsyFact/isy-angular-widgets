@@ -77,12 +77,14 @@
         <div class="col-12 md:col-6 xl:col-4">
           <isy-form-wrapper
             label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+            [labelId]="true"
             fieldId="gender"
             [control]="personalInfoForm.controls.gender | formControl"
           >
             <p-dropdown
               inputId="gender"
               formControlName="gender"
+              ariaLabelledBy="gender"
               [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
               [filter]="true"
               [options]="[

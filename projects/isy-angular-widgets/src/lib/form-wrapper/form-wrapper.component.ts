@@ -39,6 +39,7 @@ import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 })
 export class FormWrapperComponent implements OnInit {
   @Input() label!: string;
+  @Input() labelId?: boolean;
   @Input() fieldId!: string;
   @Input() control!: FormControl;
   @Input() validationMessages?: {[key: string]: string} = {};
