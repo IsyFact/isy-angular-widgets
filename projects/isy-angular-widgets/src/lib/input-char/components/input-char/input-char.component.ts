@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {Zeichenobjekt} from '../../model/model';
@@ -81,6 +81,8 @@ export class InputCharComponent implements OnChanges {
    */
   @Input() isInputDisabled: boolean = false;
 
+  @ViewChild('openDialogButton') openDialogButton!: ElementRef<HTMLButtonElement>;
+
   /**
    * Controls the char picker visibility
    * @internal
@@ -94,7 +96,7 @@ export class InputCharComponent implements OnChanges {
   allCharacters: Zeichenobjekt[] = [];
 
   constructor(
-    private charService: CharacterService,
+    private readonly charService: CharacterService,
     public configService: WidgetsConfigService
   ) {}
 
@@ -107,5 +109,13 @@ export class InputCharComponent implements OnChanges {
    */
   toggleCharPicker(): void {
     this.visible = !this.visible;
+  }
+
+  onDialogClose(): void {
+    this.visible = false;
+    
+    if (!document.activeElement || document.activeElement === document.body) {
+      this.openDialogButton.nativeElement.focus();
+    }
   }
 }

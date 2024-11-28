@@ -290,4 +290,12 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.ngAfterViewInit();
     expect(component.onChange).toHaveBeenCalledWith('2022-01-01');
   });
+
+  it('should not produce an error when the input field is empty', () => {
+    component.inputValue = '__.__.____';
+    component.onBlur();
+    const validDateControl: AbstractControl = new FormControl(component.inputValue);
+    const errors = component.validate(validDateControl);
+    expect(errors).toBeNull();
+  });
 });
