@@ -113,9 +113,6 @@ export class InputCharComponent implements OnChanges {
 
   onDialogClose(): void {
     this.visible = false;
-    
-    if (!document.activeElement || document.activeElement === document.body) {
-      this.openDialogButton.nativeElement.focus();
-    }
+    this.openDialogButton.nativeElement.focus();
   }
 }

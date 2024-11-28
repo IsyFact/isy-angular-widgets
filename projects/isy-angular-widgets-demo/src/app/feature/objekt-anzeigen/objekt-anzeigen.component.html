@@ -373,6 +373,8 @@
         label="{{ 'isyAngularWidgetsDemo.actions.addResidence' | translate }}"
         icon="pi pi-plus"
         iconPos="left"
+        type="button"
+        pRipple
         [disabled]="personalInfoForm.disabled"
         (click)="addNewAddress()"
         [outlined]="true"
@@ -450,6 +452,8 @@
         <button
           pButton
           id="button-save"
+          type="button"
+          pRipple
           icon="pi pi-save"
           iconPos="left"
           [disabled]="!personalInfoForm.valid"
@@ -467,6 +471,8 @@
           icon="pi pi-pencil"
           iconPos="left"
           [label]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
+          (click)="isDialogVisible = true"
+          (keydown)="isDialogVisible = true"
         >
         </p-button>
       </ng-template>
@@ -489,7 +495,10 @@
         </tr>
       </ng-template>
     </p-table>
-    <demo-dialog-sachverhalte-bearbeiten [person]="person"></demo-dialog-sachverhalte-bearbeiten>
+    <demo-dialog-sachverhalte-bearbeiten
+      [(visible)]="isDialogVisible"
+      [person]="person"
+    ></demo-dialog-sachverhalte-bearbeiten>
   </p-tabPanel>
 </p-tabView>
 <p-toast></p-toast>

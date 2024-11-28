@@ -28,6 +28,8 @@ export class ObjektAnzeigenComponent {
 
   adressFormArray?: FormArray;
 
+  isDialogVisible = false;
+
   @Input() person = initializedPerson;
 
   constructor(
