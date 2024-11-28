@@ -235,4 +235,18 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(remainingAddress.streetName).toEqual('Street 1');
     expect(remainingAddress.city).toEqual('City A');
   });
+
+  it('should open the character dialog when the isy-input-char button is clicked', () => {
+    const button = spectator.query('.input-char-button') as HTMLButtonElement;
+    spectator.click(button);
+    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
+    expect(dialog).toBeTruthy();
+  });
+
+  it('should not open the character dialog when pressing the enter button in the input field', () => {
+    const input = spectator.query('#first-name') as HTMLButtonElement;
+    spectator.dispatchKeyboardEvent(input, 'keydown', 'Enter');
+    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
+    expect(dialog).toBeFalsy();
+  });
 });

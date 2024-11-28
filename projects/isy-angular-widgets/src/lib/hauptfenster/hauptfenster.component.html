@@ -76,6 +76,8 @@
               <div class="flex justify-content-end col-3">
                 <button
                   class="p-button-text"
+                  type="button"
+                  pRipple
                   pButton
                   icon="pi pi-chevron-left"
                   [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
@@ -89,6 +91,8 @@
         <div [hidden]="!collapsedLinksnavigation">
           <button
             class="p-button-text"
+            type="button"
+            pRipple
             pButton
             icon="pi pi-chevron-right"
             [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
@@ -113,6 +117,8 @@
             <div class="flex justify-content-start">
               <button
                 class="p-button-text"
+                type="button"
+                pRipple
                 pButton
                 icon="pi pi-chevron-right"
                 [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')"
@@ -126,6 +132,8 @@
           <button
             pButton
             class="p-button-text"
+            type="button"
+            pRipple
             icon="pi pi-chevron-left"
             [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandInformationsbereich')"
             (click)="collapsedInformationsbereich = false"

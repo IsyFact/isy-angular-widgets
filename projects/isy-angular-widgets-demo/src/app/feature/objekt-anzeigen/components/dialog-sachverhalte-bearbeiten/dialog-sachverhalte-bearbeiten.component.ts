@@ -8,7 +8,7 @@ import {Person} from '../../../../shared/model/person';
 export class DialogSachverhalteBearbeitenComponent implements OnChanges {
   @Input() person: Person | undefined;
   @Input() visible = false;
-  @Output() visibleChange = new EventEmitter();
+  @Output() visibleChange = new EventEmitter<boolean>();
 
   newSachverhalteListe: string[] = [];
   newSachverhalt: string = '';

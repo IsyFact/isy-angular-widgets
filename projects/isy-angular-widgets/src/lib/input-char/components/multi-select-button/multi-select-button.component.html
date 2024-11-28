@@ -5,7 +5,7 @@
   [(ngModel)]="allOptionsModel"
   [options]="[{label: allButtonOptionsLabel}]"
   optionLabel="label"
-  onkeydown="closeAllAccordionTabs()"
+  (keydown)="closeAllAccordionTabs()"
 >
 </p-selectButton>
 
@@ -15,7 +15,7 @@
       [header]="item.key"
       [disabled]="disabled"
       (click)="toggleTab($index, $event)"
-      onkeydown="toggleTab($index, $event)"
+      (keydown)="toggleTab($index, $event)"
     >
       <p-selectButton
         [disabled]="disabled"
