@@ -249,4 +249,17 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
     expect(dialog).toBeFalsy();
   });
+
+  it('should not open the the Sachverhalt dialog by default', () => {
+    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
+    expect(dialog).toBeFalsy();
+  });
+
+  it('should open the Sachverhalt dialog when the edit Sachverhalt button is clicked', () => {
+    const button = spectator.query('[icon="pi pi-pencil"]') as HTMLButtonElement;
+    expect(button).toBeTruthy();
+    spectator.click(button);
+    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
+    expect(dialog).toBeTruthy();
+  });
 });

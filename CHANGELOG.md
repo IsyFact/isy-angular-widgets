@@ -15,6 +15,8 @@
 - IFS-4322: Alle Labels werden nun in dicker Schrift dargestellt, um Labels von Inhalten besser unterscheiden zu können
 ## Fixes
 - IFS-4298: Der _Charpicker_ `isy-input-char` öffnet sich nicht mehr durch Drücken der Enter-Taste, wenn er nicht im Fokus ist
+- IFS-4298: Das Öffnen des Dialogs zum Hinzufügen und Bearbeiten von Sachverhalten auf der Seite _Objekt-Anzeigen_ funktionierte nicht und wurde im Zuge der Fehlerbehebung des _Charpickers_ `isy-input-char` mitbehoben.
+
 
 # 18.1.0 - 01.10.2024
 ## Fixes

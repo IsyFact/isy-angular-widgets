@@ -28,7 +28,8 @@
           </td>
           <td>
             <button
-              id="sachverhalte-button"
+              class="sachverhalte-button"
+              severity="danger"
               type="button"
               pButton
               pRipple
@@ -58,9 +59,11 @@
       ></button>
     </div>
     <ng-template pTemplate="footer">
-      <button id="ok-button" type="button" pRipple pButton (click)="saveSachverhalte()">OK</button>
       <button pButton outlined="true" type="button" pRipple (click)="closeDialog()">
         {{ 'isyAngularWidgetsDemo.actions.cancel' | translate }}
+      </button>
+      <button id="ok-button" type="button" pRipple pButton (click)="saveSachverhalte()">
+        {{ 'isyAngularWidgetsDemo.actions.save' | translate }}
       </button>
     </ng-template>
   </p-dialog>
