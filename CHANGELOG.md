@@ -16,7 +16,7 @@
 ## Fixes
 - IFS-4298: Der _Charpicker_ `isy-input-char` öffnet sich nicht mehr durch Drücken der Enter-Taste, wenn er nicht im Fokus ist
 - IFS-4298: Das Öffnen des Dialogs zum Hinzufügen und Bearbeiten von Sachverhalten auf der Seite _Objekt-Anzeigen_ funktionierte nicht und wurde im Zuge der Fehlerbehebung des _Charpickers_ `isy-input-char` mitbehoben.
-
+- IFS-4312: Das Eingabefeld `isy-incomplete-date` für ungewisse Datumswerte zeigt bei leerem Wert keinen Validierungsfehler an
 
 # 18.1.0 - 01.10.2024
 ## Fixes
