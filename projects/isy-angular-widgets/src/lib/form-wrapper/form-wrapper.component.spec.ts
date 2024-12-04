@@ -2,7 +2,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ReactiveFormsModule, FormControl, Validators} from '@angular/forms';
 import {FormWrapperComponent} from './form-wrapper.component';
 
-fdescribe('FormWrapperComponent', () => {
+describe('FormWrapperComponent', () => {
   let spectatorRequired: Spectator<FormWrapperComponent>;
   let spectatorOptional: Spectator<FormWrapperComponent>;
   const createComponent = createComponentFactory({
