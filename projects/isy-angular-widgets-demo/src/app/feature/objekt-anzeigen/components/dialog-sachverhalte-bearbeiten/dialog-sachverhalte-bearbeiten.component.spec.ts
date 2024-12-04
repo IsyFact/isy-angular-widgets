@@ -87,7 +87,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
     component.visible = true;
     setupPerson();
 
-    const deleteSachverhalteButton = spectator.query('#sachverhalte-button') as HTMLButtonElement;
+    const deleteSachverhalteButton = spectator.query('.sachverhalte-button') as HTMLButtonElement;
     deleteSachverhalteButton.addEventListener('click', function () {
       spectator.component.deleteSachverhalt('sachverhaltA');
     });
@@ -102,5 +102,25 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
     setupPerson();
     const element = spectator.query('.p-dialog-header button.p-dialog-header-close') as HTMLElement;
     expect(element.hasAttribute('aria-label')).toBeTrue();
+  });
+
+  it('should close the dialog when closeDialog is called', () => {
+    component.visible = true;
+    component.closeDialog();
+    expect(component.visible).toBeFalse();
+  });
+
+  it('should emit visibleChange event with true when dialog is opened', () => {
+    const visibilityChangeSpy = spyOn(component.visibleChange, 'emit');
+    component.visible = false;
+    component.visibleChange.emit(true);
+    expect(visibilityChangeSpy).toHaveBeenCalledWith(true);
+  });
+
+  it('should emit visibleChange event with false when dialog is closed', () => {
+    const visibilityChangeSpy = spyOn(component.visibleChange, 'emit');
+    component.visible = true;
+    component.visibleChange.emit(false);
+    expect(visibilityChangeSpy).toHaveBeenCalledWith(false);
   });
 });

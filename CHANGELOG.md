@@ -1,5 +1,6 @@
 # 18.2.0
 ## Features
+- IFS-3998: Der Validator `validateDIN91379` für die DIN 91379 wurde in die _isy-angular-widgets_ Bibliothek integriert
 - IFS-4098: Für die Bereitstellung unterschiedlicher Buttonvarianten wurden folgende Komponenten überarbeitet:
   * Im `isy-hauptfenster` wurde die Eigenschaft `outlinedLogoutButton` hinzugefügt, um den Logout-Button als Outlined-Button darstellen zu können
   * Im `isy-wizard` wird nur noch der Primärbutton in der gefüllten Primärfarbe dargestellt, alle anderen Buttons werden als Outlined-Buttons dargestellt
@@ -7,10 +8,15 @@
   * Der `InputCharComponent`-Komponente wurde die Eigenschaft `outlinedInputCharButton` hinzugefügt, um den Charpicker-Button als Outlined-Button darstellen zu können
 - IFS-4322: Im IsyFact-Theme wurde die scss-Variable `$isyfactLabelFontWeight` hinzugefügt, um Labels fett darstellen zu können
 ## Demo-Anwendung
+- IFS-3998: Ein Beispiel für die Anwendung des Validators `validateDIN91379` gemäß DIN 91379 wurde auf der Seite _Objekt-Anzeigen_ ergänzt
 - IFS-4098: Für die Bereitstellung unterschiedlicher Buttonvarianten wurden folgende Komponenten in der Demo angepasst:
   * Date-Picker werden nun in der Default-Icon-Variante dargestellt
   * In der Ergebnisliste auf der Seite _Objekt-Suchen_ werden die Aktionsbuttons als Outlined-Buttons und mit unterschiedlichen Farben/Severities dargestellt
 - IFS-4322: Alle Labels werden nun in dicker Schrift dargestellt, um Labels von Inhalten besser unterscheiden zu können
+- IFS-4298: Der Dialog zum Hinzufügen und Bearbeiten von Sachverhalten auf der Seite _Objekt-Anzeigen_ lässt sich nun öffnen
+## Fixes
+- IFS-4298: Der _Charpicker_ `isy-input-char` öffnet sich nicht mehr durch Drücken der Enter-Taste, wenn er nicht im Fokus ist
+- IFS-4312: Das Eingabefeld `isy-incomplete-date` für ungewisse Datumswerte zeigt bei leerem Wert keinen Validierungsfehler an
 
 # 18.1.0 - 01.10.2024
 ## Fixes

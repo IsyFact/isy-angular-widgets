@@ -22,6 +22,8 @@
         @if (index !== 0) {
           <button
             id="back-button"
+            type="button"
+            pRipple
             pButton
             [outlined]="true"
             [class]="'flex align-items-center justify-content-center mr-2'"
@@ -33,6 +35,8 @@
         @if (index !== items.length - 1) {
           <button
             id="next-button"
+            type="button"
+            pRipple
             pButton
             [class]="'flex align-items-center justify-content-center mr-4'"
             [disabled]="index === items.length - 1 || !allowNext"
@@ -46,6 +50,8 @@
       @if (index === items.length - 1 && !isSaved) {
         <button
           id="save-button"
+          type="button"
+          pRipple
           pButton
           [class]="'flex align-items-center justify-content-center ml-4'"
           [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
@@ -57,6 +63,8 @@
 
       <button
         id="close-button"
+        type="button"
+        pRipple
         pButton
         [outlined]="true"
         [class]="'flex align-items-center justify-content-center'"

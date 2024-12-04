@@ -28,12 +28,14 @@ export class ObjektAnzeigenComponent {
 
   adressFormArray?: FormArray;
 
+  isDialogVisible = false;
+
   @Input() person = initializedPerson;
 
   constructor(
     public translate: TranslateService,
-    private fb: FormBuilder,
-    private messageService: MessageService
+    private readonly fb: FormBuilder,
+    private readonly messageService: MessageService
   ) {
     const personalien = this.person.personalien;
     const addresses = personalien.addresses;
@@ -41,7 +43,8 @@ export class ObjektAnzeigenComponent {
 
     this.personalInfoForm = this.fb.group({
       lastName: [personalien.nachname, Validators.required],
-      birthName: [personalien.geburtsname],
+      // Demo: Validator validateDIN91379 - Checks that the form field is valid according to DIN 91379
+      birthName: [personalien.geburtsname, Validation.validateDIN91379('A')],
       birthplace: [personalien.geburtsort],
       firstName: [personalien.vorname, Validators.required],
       gender: [personalien.gender],
