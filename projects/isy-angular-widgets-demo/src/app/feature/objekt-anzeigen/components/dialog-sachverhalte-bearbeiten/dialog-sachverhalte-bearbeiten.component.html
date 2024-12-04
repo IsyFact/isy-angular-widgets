@@ -3,6 +3,8 @@
     [header]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
     [(visible)]="visible"
     [closeAriaLabel]="'isyAngularWidgetsDemo.aria.close' | translate"
+    [closable]="true"
+    (onHide)="closeDialog()"
   >
     <p-table [value]="newSachverhalteListe" responsiveLayout="scroll">
       <ng-template pTemplate="header">
@@ -26,11 +28,14 @@
           </td>
           <td>
             <button
-              id="sachverhalte-button"
+              class="sachverhalte-button"
+              severity="danger"
+              type="button"
               pButton
               pRipple
               icon="pi pi-trash"
-              class="p-button-rounded"
+              rounded="true"
+              outlined="true"
               (click)="deleteSachverhalt(sachverhalt)"
             ></button>
           </td>
@@ -44,12 +49,21 @@
         [placeholder]="'isyAngularWidgetsDemo.labels.newEntryPlaceholder' | translate"
         [(ngModel)]="newSachverhalt"
       />
-      <button pButton type="button" pRipple icon="pi pi-plus" (click)="createSachverhalt(newSachverhalt)"></button>
+      <button
+        pButton
+        outlined="true"
+        type="button"
+        pRipple
+        icon="pi pi-plus"
+        (click)="createSachverhalt(newSachverhalt)"
+      ></button>
     </div>
     <ng-template pTemplate="footer">
-      <button id="ok-button" pButton (click)="saveSachverhalte()">OK</button>
-      <button pButton class="p-button-outlined" (click)="closeDialog()">
+      <button pButton outlined="true" type="button" pRipple (click)="closeDialog()">
         {{ 'isyAngularWidgetsDemo.actions.cancel' | translate }}
+      </button>
+      <button id="ok-button" type="button" pRipple pButton (click)="saveSachverhalte()">
+        {{ 'isyAngularWidgetsDemo.actions.save' | translate }}
       </button>
     </ng-template>
   </p-dialog>
