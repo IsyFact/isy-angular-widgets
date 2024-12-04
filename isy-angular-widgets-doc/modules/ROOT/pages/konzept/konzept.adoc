@@ -13,7 +13,7 @@ include::glossary:licence:partial$licence.adoc[]
 [[einleitung]]
 == Einleitung
 
-In diesem Konzept werden die Anforderungen und Vorgaben der IsyFact, die im xref:isyfact-standards-doku:isy-bedienkonzept:bedienkonzept.adoc[Bedienkonzept und Styleguide] definiert sind, als Komponenten-Bibliothek umgesetzt oder in der dazugehörigen Demo-Anwendung exemplarisch dargestellt, um eine einheitliche Umsetzung der User Interfaces in der gesamten Anwendungslandschaft zu gewährleisten.
+In diesem Konzept werden die Anforderungen und Vorgaben der IsyFact, die im xref:isy-bedienkonzept-doc:ROOT:bedienkonzept.adoc[Bedienkonzept und Styleguide] definiert sind, als Komponenten-Bibliothek umgesetzt oder in der dazugehörigen Demo-Anwendung exemplarisch dargestellt, um eine einheitliche Umsetzung der User Interfaces in der gesamten Anwendungslandschaft zu gewährleisten.
 
 Dieses Dokument beschreibt alle Aspekte, die bei der Frontend-Entwicklung einer Anwendung zu berücksichtigen sind, um die definierten Anforderungen zu erfüllen.
 
