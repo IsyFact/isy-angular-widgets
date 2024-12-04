@@ -1,5 +1,5 @@
 name: isy-angular-widgets-doc
-title: isy-angular-widgets Dokumentation
+title: isy-angular-widgets
 version:
   main: '18.x.x'
   release/(*): $1
