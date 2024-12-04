@@ -7,7 +7,7 @@ include::glossary:licence:partial$licence.adoc[]
 [cols="5,2,3",options="header"]
 |====
 |Name |Art |Version
-|isy-angular-widgets |Bibliothek | {page-component-version}
+|isy-angular-widgets |Bibliothek | {page-component-display-version}
 |====
 
 [[einleitung]]
@@ -84,7 +84,7 @@ Die folgenden architektonischen und technischen Vorgaben beziehen sich auf die U
 [[technologieauswahl]]
 ==== Technologieauswahl
 
-[[testunterstützung]]
+[[testunterstuetzung]]
 ==== Testunterstützung
 
 [[querschnittliche-aspekte]]
