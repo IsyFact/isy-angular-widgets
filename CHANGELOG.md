@@ -17,6 +17,8 @@
 ## Fixes
 - IFS-4298: Der _Charpicker_ `isy-input-char` öffnet sich nicht mehr durch Drücken der Enter-Taste, wenn er nicht im Fokus ist
 - IFS-4312: Das Eingabefeld `isy-incomplete-date` für ungewisse Datumswerte zeigt bei leerem Wert keinen Validierungsfehler an
+## Dokumentation
+- IFS-4249: Die Antora-Version der Online-Dokumentation wird nun durch Git gesetzt
 
 # 18.1.0 - 01.10.2024
 ## Fixes
