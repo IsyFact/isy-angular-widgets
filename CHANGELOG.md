@@ -20,7 +20,7 @@
 - IFS-4322: Alle Labels werden nun in dicker Schrift dargestellt, um Labels von Inhalten besser unterscheiden zu können
 - IFS-4298: Der Dialog zum Hinzufügen und Bearbeiten von Sachverhalten auf der Seite _Objekt-Anzeigen_ lässt sich nun öffnen
 ## Fixes
-- IFS-4298: Der _Sonderzeichenpicker_ `isy-input-char` öffnet sich nicht mehr durch Drücken der Enter-Taste, wenn er nicht im Fokus ist
+- IFS-4298: Der _Charpicker_ `isy-input-char` öffnet sich nicht mehr durch Drücken der Enter-Taste, wenn er nicht im Fokus ist
 - IFS-4312: Das Eingabefeld `isy-incomplete-date` für ungewisse Datumswerte zeigt bei leerem Wert keinen Validierungsfehler an
 ## Dokumentation
 - IFS-4249: Die Antora-Version der Online-Dokumentation wird nun durch Git gesetzt
