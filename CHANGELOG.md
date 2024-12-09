@@ -1,4 +1,4 @@
-# 18.2.0
+# 18.2.0 - 09.12.2024
 ## Features
 - IFS-3998: Der Validator `validateDIN91379` für die DIN 91379 wurde in die _isy-angular-widgets_ Bibliothek integriert
 - IFS-4098: Für die Bereitstellung unterschiedlicher Buttonvarianten wurden folgende Komponenten überarbeitet:
@@ -6,12 +6,17 @@
   * Im `isy-wizard` wird nur noch der Primärbutton in der gefüllten Primärfarbe dargestellt, alle anderen Buttons werden als Outlined-Buttons dargestellt
   * Der Weiter-Button im `isy-wizard` wird im letzten Schritt des Wizards ausgeblendet
   * Der `InputCharComponent`-Komponente wurde die Eigenschaft `outlinedInputCharButton` hinzugefügt, um den Charpicker-Button als Outlined-Button darstellen zu können
-- IFS-4322: Im IsyFact-Theme wurde die scss-Variable `$isyfactLabelFontWeight` hinzugefügt, um Labels fett darstellen zu können
+- IFS-4322: Im IsyFact-Theme wurden neue scss-Variablen hinzugefügt:
+  * `$isyfactLabelFontWeight`, um Labels fett darstellen zu können
+  * `$isyfactProgressSpinnerStroke`, um die Farbe des Progress Spinners anpassen zu können
+  * `$isyfactProgressSpinnerAnimation`, um die Animation des Progress Spinners anpassen zu können
 ## Demo-Anwendung
 - IFS-3998: Ein Beispiel für die Anwendung des Validators `validateDIN91379` gemäß DIN 91379 wurde auf der Seite _Objekt-Anzeigen_ ergänzt
 - IFS-4098: Für die Bereitstellung unterschiedlicher Buttonvarianten wurden folgende Komponenten in der Demo angepasst:
   * Date-Picker werden nun in der Default-Icon-Variante dargestellt
   * In der Ergebnisliste auf der Seite _Objekt-Suchen_ werden die Aktionsbuttons als Outlined-Buttons und mit unterschiedlichen Farben/Severities dargestellt
+  * Der Charpicker-Button wird auf den Seiten _Objekt-Suchen_ und _Objekt-Anzeigen_ als Outlined-Button dargestellt
+  * Der Logout-Button wird als Outlined-Button dargestellt
 - IFS-4322: Alle Labels werden nun in dicker Schrift dargestellt, um Labels von Inhalten besser unterscheiden zu können
 - IFS-4298: Der Dialog zum Hinzufügen und Bearbeiten von Sachverhalten auf der Seite _Objekt-Anzeigen_ lässt sich nun öffnen
 ## Fixes
