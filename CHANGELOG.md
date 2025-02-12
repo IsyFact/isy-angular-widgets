@@ -1,3 +1,7 @@
+# NEXT - NEXT-RELEASE-DATE
+## Dokumentation
+- IFS-4508: Verweis auf Angular-Referenzimplementierung prominent platziert
+
 # 18.2.0 - 09.12.2024
 ## Features
 - IFS-3998: Der Validator `validateDIN91379` für die DIN 91379 wurde in die _isy-angular-widgets_ Bibliothek integriert
