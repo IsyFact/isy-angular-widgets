@@ -1,0 +1,4 @@
+* xref::konzept/konzept.adoc[Konzept]
+* https://isyfact.github.io/isy-angular-widgets/documentation/[Nutzungsvorgaben]
+* xref::referenzimplementierung.adoc[Referenzimplementierung]
+
