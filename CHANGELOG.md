@@ -1,4 +1,4 @@
-# NEXT - NEXT-RELEASE-DATE
+# 18.3.0
 ## Dokumentation
 - IFS-4508: Verweis auf Angular-Referenzimplementierung prominent platziert
 
