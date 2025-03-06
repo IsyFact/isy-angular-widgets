@@ -1,4 +1,6 @@
-# 18.3.0
+# 18.2.1
+## Fixes
+- IFS-4568: Der Build-Fehler in 18.2.0 aufgrund einer fehlenden Moduldatei wurde behoben
 ## Dokumentation
 - IFS-4508: Verweis auf Angular-Referenzimplementierung prominent platziert
 
