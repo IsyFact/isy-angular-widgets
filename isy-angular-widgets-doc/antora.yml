@@ -1,9 +1,6 @@
 name: isy-angular-widgets-doc
 title: isy-angular-widgets
-version:
-  main: '18.x.x'
-  release/(*): $1
-  (*): $1
+#version: '18.x.x'
 prerelease: '(DEV)'
 start_page: ROOT:konzept/konzept.adoc
 nav:
