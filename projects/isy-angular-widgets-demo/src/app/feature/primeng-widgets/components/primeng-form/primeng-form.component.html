@@ -54,14 +54,14 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Calendar</h3>
-      <p-calendar
+      <p-datepicker
         inputId="calender"
         [iconDisplay]="'input'"
         [showIcon]="true"
         appendTo="body"
         styleClass="w-full"
         ariaLabel="Calender-Picker"
-      ></p-calendar>
+      ></p-datepicker>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputNumber</h3>
@@ -82,14 +82,14 @@
         [options]="cities"
         optionLabel="name"
         optionGroupLabel="name"
-        [optionGroupChildren]="['states', 'cities']"
+        [optionGroupChildren]="$any(['states', 'cities'])"
         placeholder="Select a City"
         styleClass="w-full"
       ></p-cascadeSelect>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Dropdown</h3>
-      <p-dropdown
+      <p-select
         id="dropdown"
         [options]="countries"
         optionLabel="name"
@@ -98,7 +98,7 @@
         placeholder="Select a Country"
         styleClass="w-full"
         appendTo="body"
-      ></p-dropdown>
+      ></p-select>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>MultiSelect</h3>
@@ -156,7 +156,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>TriStateCheckbox</h3>
-      <p-triStateCheckbox inputId="triStateCheckbox" label="TriStateCheckbox"></p-triStateCheckbox>
+      <p-checkbox inputId="triStateCheckbox" label="TriStateCheckbox" [indeterminate]="true"></p-checkbox>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Rating</h3>
@@ -169,13 +169,13 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputSwitch</h3>
-      <p-inputSwitch inputId="inputSwitch" ariaLabel="Input Switch"></p-inputSwitch>
+      <p-toggleswitch inputId="inputSwitch" ariaLabel="Input Switch"></p-toggleswitch>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>ToggleButton</h3>
       <p-toggleButton
         inputId="toggleButton"
-        onIcon="pi pi-lock"
+        [onIcon]="'pi pi-lock'"
         offIcon="pi pi-lock-open"
         onLabel="Locked"
         offLabel="Unlocked"
@@ -197,7 +197,7 @@
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Chips</h3>
       <div class="p-fluid">
-        <p-chips inputId="chips" [max]="3" placeholder="Maximum 3 chips"></p-chips>
+        <p-autoComplete  multiple=true typeahead=false inputId="chips" [maxlength]="3" placeholder="Maximum 3 chips"></p-autoComplete>
       </div>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">

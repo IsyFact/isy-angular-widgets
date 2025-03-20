@@ -13,7 +13,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {FormsModule} from '@angular/forms';
 import {HttpClient, provideHttpClient} from '@angular/common/http';
-import {DropdownModule} from 'primeng/dropdown';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
@@ -21,6 +20,9 @@ import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitentoolbar.component';
+import {SelectModule} from 'primeng/select';
+import {providePrimeNG} from 'primeng/config';
+import Lara from '@primeng/themes/lara';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +33,13 @@ import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitent
     SecurityService,
     MenuTranslationService,
     MessageService,
-    provideHttpClient()
+    provideHttpClient(),
+
+    providePrimeNG({
+      theme: {
+        preset: Lara
+      }
+    })
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -43,7 +51,7 @@ import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitent
     SharedModule,
     PanelMenuModule,
     FormsModule,
-    DropdownModule,
+    SelectModule,
     ToastModule,
     ButtonModule,
     TranslateModule.forRoot({

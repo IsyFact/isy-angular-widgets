@@ -106,7 +106,7 @@
     <div class="col-12 flex-column gap-2">
       <h3>Stepper</h3>
       <p-stepper>
-        <p-stepperPanel header="Header I">
+        <p-stepper header="Header I">
           <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
             <div class="flex flex-column h-12rem">
               <div
@@ -119,8 +119,8 @@
               <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
           </ng-template>
-        </p-stepperPanel>
-        <p-stepperPanel header="Header II">
+        </p-stepper>
+        <p-stepper header="Header II">
           <ng-template
             pTemplate="content"
             let-prevCallback="prevCallback"
@@ -139,8 +139,8 @@
               <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
           </ng-template>
-        </p-stepperPanel>
-        <p-stepperPanel header="Header III">
+        </p-stepper>
+        <p-stepper header="Header III">
           <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
             <div class="flex flex-column h-12rem">
               <div
@@ -153,7 +153,7 @@
               <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
             </div>
           </ng-template>
-        </p-stepperPanel>
+        </p-stepper>
       </p-stepper>
     </div>
   </div>

@@ -19,7 +19,8 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
 @Component({
   selector: 'isy-hauptfenster',
   templateUrl: './hauptfenster.component.html',
-  styleUrls: ['./hauptfenster.component.scss']
+  styleUrls: ['./hauptfenster.component.scss'],
+  standalone: false
 })
 export class HauptfensterComponent {
   /**

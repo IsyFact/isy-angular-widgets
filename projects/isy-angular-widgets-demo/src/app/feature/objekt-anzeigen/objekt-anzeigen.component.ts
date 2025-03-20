@@ -15,7 +15,8 @@ import {markFormAsDirty} from '../../shared/validation/form-helper';
 @Component({
   selector: 'demo-objekt-anzeigen',
   templateUrl: './objekt-anzeigen.component.html',
-  styleUrls: ['./objekt-anzeigen.component.scss']
+  styleUrls: ['./objekt-anzeigen.component.scss'],
+  standalone: false
 })
 export class ObjektAnzeigenComponent {
   readonly intelligenceNotesMaxLength = 255;

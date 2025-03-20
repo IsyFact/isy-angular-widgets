@@ -32,7 +32,8 @@ const defaultHeight = 30;
  */
 @Component({
   selector: 'isy-wizard',
-  templateUrl: './wizard.component.html'
+  templateUrl: './wizard.component.html',
+  standalone: false
 })
 export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   /**

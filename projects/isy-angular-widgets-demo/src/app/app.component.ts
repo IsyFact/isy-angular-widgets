@@ -5,7 +5,7 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {Subscription, filter} from 'rxjs';
-import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
+import {MegaMenuItem, MenuItem, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {WidgetsTranslation} from '@isy-angular-widgets/i18n/widgets-translation';
@@ -14,11 +14,13 @@ import {permissions} from './app.permission';
 import {DOCUMENT} from '@angular/common';
 import {PageTitleService} from './shared/services/page-title.service';
 import {NavigationEnd, Router, RouterEvent, Event} from '@angular/router';
+import {PrimeNG} from 'primeng/config';
 
 @Component({
   selector: 'demo-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
   items: MegaMenuItem[] = [];
@@ -32,16 +34,16 @@ export class AppComponent implements OnInit, OnDestroy {
   focusHasBeenSet?: boolean;
 
   constructor(
-    private securityService: SecurityService,
-    private userInfoPublicService: UserInfoPublicService,
+    private readonly securityService: SecurityService,
+    private readonly userInfoPublicService: UserInfoPublicService,
     public translate: TranslateService,
-    private primeNGConfig: PrimeNGConfig,
-    private widgetsConfigService: WidgetsConfigService,
-    private menuTranslationService: MenuTranslationService,
+    private readonly primeng: PrimeNG,
+    private readonly widgetsConfigService: WidgetsConfigService,
+    private readonly menuTranslationService: MenuTranslationService,
     public pageTitleService: PageTitleService,
     public router: Router,
-    private cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private document: Document
+    private readonly cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private readonly document: Document
   ) {
     // Add translation
     translate.addLangs(['de', 'en']);
@@ -49,7 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set PrimeNG translation
     this.primeNGI18nSubscription = this.translate.stream('primeng').subscribe((data: Translation) => {
-      this.primeNGConfig.setTranslation(data);
+      this.primeng.setTranslation(data);
     });
 
     // Set Isy Angular Widgets translation

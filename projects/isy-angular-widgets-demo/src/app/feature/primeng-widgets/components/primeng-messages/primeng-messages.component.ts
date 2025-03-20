@@ -1,16 +1,17 @@
 import {Component} from '@angular/core';
-import {Message, MessageService} from 'primeng/api';
+import {ToastMessageOptions, MessageService} from 'primeng/api';
 
 import {messageData} from '../../data/file-option';
 
 @Component({
   selector: 'demo-primeng-messages',
-  templateUrl: './primeng-messages.component.html'
+  templateUrl: './primeng-messages.component.html',
+  standalone: false
 })
 export class PrimengMessagesComponent {
   constructor(public messageService: MessageService) {}
 
-  messages: Message[] = messageData;
+  messages: ToastMessageOptions[] = messageData;
 
   showToastMessage(): void {
     this.messageService.add({

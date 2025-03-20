@@ -1,5 +1,5 @@
 import {FileOption} from '../model/file-option';
-import {MenuItem, Message} from 'primeng/api';
+import {MenuItem, ToastMessageOptions} from 'primeng/api';
 
 export const fileOptionData: FileOption[] = [
   {
@@ -213,7 +213,7 @@ export const tabMenuData: MenuItem[] = [
   {label: 'Messages', icon: 'pi pi-inbox'}
 ];
 
-export const messageData: Message[] = [
+export const messageData: ToastMessageOptions[] = [
   {key: 'infoMessage', severity: 'info', detail: 'Info Message'},
   {key: 'successMessage', severity: 'success', detail: 'Success Message'},
   {key: 'warnMessage', severity: 'warn', detail: 'Warning Message'},

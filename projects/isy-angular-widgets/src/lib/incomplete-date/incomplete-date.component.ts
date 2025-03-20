@@ -49,7 +49,8 @@ import {InputMask} from 'primeng/inputmask';
       useExisting: forwardRef(() => IncompleteDateComponent),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit, OnDestroy {
   /**

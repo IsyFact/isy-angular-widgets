@@ -5,10 +5,10 @@
     <div class="col-12 xl:col-6 flex-column gap-2">
       <h3>Chip</h3>
       <div class="flex justify-content-start gap-2">
-        <p-chip label="Apple" icon="pi pi-apple"></p-chip>
-        <p-chip label="Google" icon="pi pi-google"></p-chip>
-        <p-chip label="Microsoft" icon="pi pi-microsoft" [removable]="true"></p-chip>
-        <p-chip label="Facebook" icon="pi pi-facebook" [removable]="true"></p-chip>
+        <p-autoComplete label="Apple" multiple=true typeahead=false></p-autoComplete>
+        <p-autoComplete label="Google" multiple=true typeahead=false></p-autoComplete>
+        <p-autoComplete label="Microsoft" multiple=true typeahead=false></p-autoComplete>
+        <p-autoComplete label="Facebook" multiple=true typeahead=false></p-autoComplete>
       </div>
     </div>
     <div class="col-12 xl:col-6 flex-column gap-2">
@@ -17,7 +17,7 @@
         <p-tag value="Primary"></p-tag>
         <p-tag severity="success" value="Success"></p-tag>
         <p-tag severity="info" value="Info"></p-tag>
-        <p-tag severity="warning" value="Warning"></p-tag>
+        <p-tag severity="warn" value="Warning"></p-tag>
         <p-tag severity="danger" value="Danger"></p-tag>
       </div>
     </div>
@@ -42,7 +42,7 @@
       <div class="flex justify-content-start gap-2">
         <p-badge [value]="2" severity="success" badgeSize="large"></p-badge>
         <p-badge [value]="4" severity="info" badgeSize="large"></p-badge>
-        <p-badge [value]="6" severity="warning" badgeSize="large"></p-badge>
+        <p-badge [value]="6" severity="warn" badgeSize="large"></p-badge>
         <p-badge [value]="8" severity="danger" badgeSize="large"></p-badge>
       </div>
     </div>

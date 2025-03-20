@@ -64,7 +64,7 @@
         fieldId="birth-date"
         [control]="geburtsInformationenForm.get('geburtsdatum')! | formControl"
       >
-        <p-calendar
+        <p-datepicker
           inputId="birth-date"
           dateFormat="dd.mm.yy"
           [(ngModel)]="person.personalien.geburtsdatum"
@@ -73,7 +73,7 @@
           styleClass="w-full"
           appendTo="body"
         >
-        </p-calendar>
+        </p-datepicker>
       </isy-form-wrapper>
     </div>
     <div class="col-12 md:col-6 xl:col-4">
@@ -100,7 +100,7 @@
         fieldId="nationality"
         [control]="geburtsInformationenForm.get('staatsangehoerigkeit')! | formControl"
       >
-        <p-dropdown
+        <p-select
           inputId="nationality"
           [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
           [ariaLabel]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
@@ -122,7 +122,7 @@
               <span>{{ land }}</span>
             </div>
           </ng-template>
-        </p-dropdown>
+        </p-select>
       </isy-form-wrapper>
     </div>
   </div>
@@ -218,7 +218,7 @@
             [control]="editForm.get('editGeburtsdatum')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <p-calendar
+            <p-datepicker
               inputId="edit-geburtsdatum"
               dateFormat="dd.mm.yy"
               [formControlName]="'editGeburtsdatum'"
@@ -227,7 +227,7 @@
               styleClass="w-full"
               appendTo="body"
             >
-            </p-calendar>
+            </p-datepicker>
           </isy-form-wrapper>
         </div>
         <div class="col-12 xl:col-6">
@@ -257,7 +257,7 @@
             [control]="editForm.get('editStaatsangehoerigkeit')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <p-dropdown
+            <p-select
               inputId="edit-nationality"
               [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
               [ariaLabel]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
@@ -280,7 +280,7 @@
                   <span>{{ land }}</span>
                 </div>
               </ng-template>
-            </p-dropdown>
+            </p-select>
           </isy-form-wrapper>
         </div>
       </div>
@@ -396,7 +396,7 @@
               [control]="geburtsInformationenForm.get('geburtsdatum')! | formControl"
               [validationMessages]="{required: ''}"
             >
-              <p-calendar
+              <p-datepicker
                 inputId="geburtdatum"
                 dateFormat="dd.mm.yy"
                 [formControlName]="'geburtsdatum'"
@@ -406,7 +406,7 @@
                 styleClass="w-full"
                 (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
               >
-              </p-calendar>
+              </p-datepicker>
             </isy-form-wrapper>
           </div>
           <div class="col-12">
@@ -416,7 +416,7 @@
               [control]="geburtsInformationenForm.get('staatsangehoerigkeit')! | formControl"
               [validationMessages]="{required: ''}"
             >
-              <p-dropdown
+              <p-select
                 inputId="staatangehoerigkeit"
                 [ariaLabel]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
                 [placeholder]="'isyAngularWidgetsDemo.labels.chooseCountry' | translate"
@@ -434,7 +434,7 @@
                     <span>{{ land.name }}</span>
                   </div>
                 </ng-template>
-              </p-dropdown>
+              </p-select>
             </isy-form-wrapper>
           </div>
         </div>
