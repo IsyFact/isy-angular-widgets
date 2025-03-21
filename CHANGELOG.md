@@ -1,3 +1,8 @@
+# 18.x - 
+## Fixes
+## Dokumentation
+- IFS-4549 Verwaltung der Version zentralisiert
+
 # 18.2.1 - 12.03.2025
 ## Fixes
 - IFS-4568: Der Build-Fehler in 18.2.0 aufgrund einer fehlenden Moduldatei wurde behoben
