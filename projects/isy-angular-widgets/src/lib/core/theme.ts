@@ -1,3 +1,3 @@
-import Nora from '@primeng/themes/Nora';
+import Nora from '@primeng/themes/nora';
 
 export const defaultTheme: unknown = Nora;
