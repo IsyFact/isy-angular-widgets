@@ -11,7 +11,8 @@ import {FileOption} from '../../model/file-option';
 
 @Component({
   selector: 'demo-primeng-data',
-  templateUrl: './primeng-data.component.html'
+  templateUrl: './primeng-data.component.html',
+  standalone: false
 })
 export class PrimengDataComponent {
   organization: TreeNode[] = organizationData;

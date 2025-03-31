@@ -7,8 +7,7 @@ describe('Integration Tests: DashboardWidgetsComponent', () => {
   let spectator: Spectator<DashboardWidgetComponent>;
   const createComponent = createComponentFactory({
     component: DashboardWidgetComponent,
-    imports: [TranslateModule.forRoot()],
-    declarations: [PanelMenu],
+    imports: [TranslateModule.forRoot(), PanelMenu],
     providers: [TranslateService]
   });
 

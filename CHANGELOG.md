@@ -1,5 +1,6 @@
-# 18.x - 
-## Fixes
+# 18.3.0 - 
+## Breaking Changes
+- IFS-4562: Upgrade Angular- und PrimeNG-Bibliothek auf Version 19 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
 ## Dokumentation
 - IFS-4549 Verwaltung der Version zentralisiert
 

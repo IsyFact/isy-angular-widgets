@@ -19,7 +19,8 @@ import {ChartOption} from '../../model/chart';
 
 @Component({
   selector: 'demo-primeng-chart',
-  templateUrl: './primeng-chart.component.html'
+  templateUrl: './primeng-chart.component.html',
+  standalone: false
 })
 export class PrimengChartComponent {
   barChartData: ChartData = barChartData;

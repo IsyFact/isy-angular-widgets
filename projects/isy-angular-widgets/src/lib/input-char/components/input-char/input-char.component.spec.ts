@@ -168,13 +168,13 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.queryAll('.charset-selectbutton--1 div span');
+        const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton button');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = spectator.queryAll('.right-panel-side div span');
+        const groupButtons = spectator.queryAll('.right-panel-side p-selectbutton p-togglebutton');
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
     });
@@ -204,7 +204,7 @@ describe('Accessibility Test: InputCharComponent', () => {
   });
 
   it('the dialog close icon should have an aria-label attribute with "Close picker"', () => {
-    const element = spectator.query('.p-dialog-header-icons .p-dialog-header-close') as HTMLElement;
+    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
     expect(element.getAttribute('aria-label')).toBe('Close picker');
   });
 });

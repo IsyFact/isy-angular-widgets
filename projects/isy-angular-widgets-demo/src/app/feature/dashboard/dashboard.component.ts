@@ -11,7 +11,8 @@ import {ChartComponent} from './components/chart/chart.component';
 @Component({
   selector: 'demo-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  standalone: false
 })
 export class DashboardComponent implements OnInit, AfterContentInit {
   @ViewChildren('chart') allCharts!: QueryList<ChartComponent>;

@@ -1,21 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
 import {linksnavigationMenu} from './linksnavigation-menu';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'demo-dashboard-linksnavigation',
-  templateUrl: './dashboard-linksnavigation.component.html'
+  templateUrl: './dashboard-linksnavigation.component.html',
+  standalone: false
 })
 export class DashboardLinksnavigationComponent implements OnInit {
-  private selectedLanguage: string = 'de';
+  private readonly selectedLanguage: string = 'de';
 
   items: MenuItem[] = [];
 
   constructor(
     public translate: TranslateService,
-    private menuTranslationService: MenuTranslationService
+    private readonly menuTranslationService: MenuTranslationService
   ) {}
 
   ngOnInit(): void {

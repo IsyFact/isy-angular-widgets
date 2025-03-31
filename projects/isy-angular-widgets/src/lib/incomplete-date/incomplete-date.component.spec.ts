@@ -1,7 +1,6 @@
-import {IncompleteDateComponent} from './incomplete-date.component';
 import {AbstractControl, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {IncompleteDateModule} from './incomplete-date.module';
+import {IncompleteDateComponent} from './incomplete-date.component';
 import {Validation} from '@isy-angular-widgets/public-api';
 
 describe('Integration Tests: IncompleteDateComponent', () => {
@@ -17,7 +16,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   let spectator: Spectator<IncompleteDateComponent>;
   const createComponent = createComponentFactory({
     component: IncompleteDateComponent,
-    imports: [IncompleteDateModule]
+    imports: [IncompleteDateComponent]
   });
 
   /**

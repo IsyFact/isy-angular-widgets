@@ -3,7 +3,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
-import {IncompleteDateModule, SeitentoolbarComponent} from '@isy-angular-widgets/public-api';
+import {IncompleteDateComponent} from '@isy-angular-widgets/incomplete-date/incomplete-date.component';
+import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitentoolbar.component';
 import {initializedPerson} from '../objekt-anzeigen/data';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {InputTextModule} from 'primeng/inputtext';
@@ -18,7 +19,7 @@ import {ButtonModule} from 'primeng/button';
     TranslateModule,
     FormControlPipe,
     ReactiveFormsModule,
-    IncompleteDateModule,
+    IncompleteDateComponent,
     InputCharDirective,
     InputTextModule,
     SeitentoolbarComponent,
@@ -30,7 +31,7 @@ export class IsyAngularComponentsComponent {
   person = initializedPerson;
   personalien = this.person.personalien;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder) {
     this.personalInfoForm = this.fb.group({
       firstName: [this.personalien.vorname, Validators.required],
       lastName: [this.personalien.nachname, Validators.required],

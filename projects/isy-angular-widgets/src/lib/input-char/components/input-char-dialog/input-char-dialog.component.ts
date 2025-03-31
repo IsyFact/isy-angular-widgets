@@ -16,7 +16,7 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
 @Component({
   selector: 'isy-input-char-dialog',
   templateUrl: './input-char-dialog.component.html',
-  styleUrls: ['./input-char-dialog.component.scss'], // Add necessary Angular modules here
+  styleUrls: ['./input-char-dialog.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -82,8 +82,8 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
 
   constructor(
     public configService: WidgetsConfigService,
-    private charService: CharacterService,
-    private elementRef: ElementRef
+    private readonly charService: CharacterService,
+    private readonly elementRef: ElementRef
   ) {}
 
   ngAfterViewInit(): void {

@@ -47,7 +47,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     inputFields.birthName = debugElement.query(By.css('#birth-name'));
     inputFields.birthplace = debugElement.query(By.css('#birth-place'));
     inputFields.nationality = debugElement.query(By.css('#nationality'));
-    inputFields.gender = debugElement.query(By.css('p-dropdown:has(#gender) .p-inputtext'));
+    inputFields.gender = debugElement.query(By.css('#gender'));
     inputFields.phoneNumber = debugElement.query(By.css('#phone-number'));
     inputFields.birthDate = debugElement.query(By.css('#birth-date'));
     inputFields.dateOfEntry = debugElement.query(By.css('#date-of-entry'));
@@ -126,11 +126,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   it('should set tab view index', () => {
-    const tabview = fixture.nativeElement.querySelector('#tab-view');
-    tabview.index = 0;
-    expect(tabview.index).toBe(0);
-    tabview.index = 1;
-    expect(tabview.index).toBe(1);
+    const tab = fixture.nativeElement.querySelector('p-tab');
+    tab.index = 0;
+    expect(tab.index).toBe(0);
+    tab.index = 1;
+    expect(tab.index).toBe(1);
   });
 
   it('should display permitted secret fields element', () => {
@@ -256,6 +256,10 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   it('should open the Sachverhalt dialog when the edit Sachverhalt button is clicked', () => {
+    const tab = spectator.query('p-tab[value="1"]') as HTMLElement;
+    tab.click();
+    fixture.detectChanges();
+
     const button = spectator.query('[icon="pi pi-pencil"]') as HTMLButtonElement;
     expect(button).toBeTruthy();
 

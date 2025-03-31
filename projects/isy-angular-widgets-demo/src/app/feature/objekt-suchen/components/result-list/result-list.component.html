@@ -106,7 +106,7 @@
           {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
           <p-columnFilter field="personalien.state" matchMode="equals" display="menu">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-              <p-dropdown
+              <p-select
                 [ariaLabel]="'isyAngularWidgetsDemo.labels.state' | translate"
                 [ngModel]="value"
                 [options]="state"
@@ -116,7 +116,7 @@
                 <ng-template let-option pTemplate="item">
                   <span>{{ option.label }}</span>
                 </ng-template>
-              </p-dropdown>
+              </p-select>
             </ng-template>
           </p-columnFilter>
           <p-sortIcon field="personalien.state"></p-sortIcon>

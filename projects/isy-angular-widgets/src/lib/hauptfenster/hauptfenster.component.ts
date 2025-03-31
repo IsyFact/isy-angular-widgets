@@ -2,6 +2,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MegaMenuItem} from 'primeng/api';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
+import {ButtonModule} from 'primeng/button';
+import {CommonModule} from '@angular/common';
+import {MegaMenuModule} from 'primeng/megamenu';
 
 /**
  * The Anwendungsrahmen that contains general, application independent elements as logos or navigation bars.
@@ -19,7 +22,9 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
 @Component({
   selector: 'isy-hauptfenster',
   templateUrl: './hauptfenster.component.html',
-  styleUrls: ['./hauptfenster.component.scss']
+  styleUrls: ['./hauptfenster.component.scss'],
+  imports: [ButtonModule, CommonModule, MegaMenuModule],
+  standalone: true
 })
 export class HauptfensterComponent {
   /**

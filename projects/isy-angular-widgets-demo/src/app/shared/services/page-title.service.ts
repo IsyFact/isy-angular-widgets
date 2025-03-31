@@ -15,10 +15,10 @@ export class PageTitleService {
   requestFocusChange: Subject<string> = new Subject<string>();
 
   constructor(
-    private router: Router,
-    private titleService: Title,
-    private activatedRoute: ActivatedRoute,
-    private translate: TranslateService
+    private readonly router: Router,
+    private readonly titleService: Title,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly translate: TranslateService
   ) {
     this.createLiveRegion();
   }

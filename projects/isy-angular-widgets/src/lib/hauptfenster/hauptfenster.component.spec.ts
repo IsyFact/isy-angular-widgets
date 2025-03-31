@@ -1,10 +1,9 @@
-import {HauptfensterComponent} from './hauptfenster.component';
 import {Component} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MegaMenu, MegaMenuSub} from 'primeng/megamenu';
-import {Button} from 'primeng/button';
+import {ButtonModule} from 'primeng/button';
 import {MockComponents} from 'ng-mocks';
-import {HauptfensterModule} from './hauptfenster.module';
+import {HauptfensterComponent} from './hauptfenster.component';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
@@ -15,7 +14,9 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
         <h1 class="custom-title">Titel inside H1!</h1>
       </div>
     </isy-hauptfenster>
-  `
+  `,
+  imports: [HauptfensterComponent, ButtonModule],
+  standalone: true
 })
 class HauptFensterWrapperComponent {
   title?: string;
@@ -28,8 +29,9 @@ describe('Unit Tests: HauptfensterComponent', () => {
   let mockConfigService: jasmine.SpyObj<WidgetsConfigService>;
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
-    declarations: [MockComponents(Button, MegaMenu, MegaMenuSub)],
-    mocks: [WidgetsConfigService]
+    declarations: [MockComponents(MegaMenu, MegaMenuSub)],
+    mocks: [WidgetsConfigService],
+    imports: [ButtonModule]
   });
 
   const userInfo: UserInfo = {
@@ -95,10 +97,11 @@ describe('Unit Tests: HauptfensterComponent', () => {
     expect(outlinedState).toBe('false');
   });
 
-  it('should call the logout function when the button is clocked', () => {
+  it('should call the logout function when the button is clicked', () => {
     const spy = spyOn(component.logoutEvent, 'emit');
-    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    logoutButton.click();
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button button') as HTMLButtonElement;
+
+    spectator.click(logoutButton);
     expect(spy).toHaveBeenCalledWith(component.userInfo);
   });
 
@@ -216,8 +219,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
 describe('Integration Test: HauptfensterComponent', () => {
   let spectator: Spectator<HauptFensterWrapperComponent>;
   const createComponent = createComponentFactory({
-    component: HauptFensterWrapperComponent,
-    imports: [HauptfensterModule]
+    component: HauptFensterWrapperComponent
   });
 
   beforeEach(() => (spectator = createComponent()));

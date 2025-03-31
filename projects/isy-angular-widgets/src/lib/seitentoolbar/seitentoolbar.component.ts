@@ -34,7 +34,7 @@ export class SeitentoolbarComponent {
    */
   @Input() sidebarHomeRoute?: string = '/';
 
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
 
   /**
    * Method to navigate to the homeRoute.

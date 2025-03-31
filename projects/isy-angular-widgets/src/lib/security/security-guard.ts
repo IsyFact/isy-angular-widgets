@@ -19,7 +19,7 @@ export class AuthGuard {
    * @param securityService A service that can be configured with permission configuration and return permissions for certain elements.
    * @internal
    */
-  constructor(private securityService: SecurityService) {}
+  constructor(private readonly securityService: SecurityService) {}
 
   /**
    * Determines if a given route can be accessed

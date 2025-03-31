@@ -15,7 +15,10 @@ module.exports = {
         'plugin:@angular-eslint/template/process-inline-templates',
         'plugin:@isyfact/recommended',
         'plugin:editorconfig/all'
-      ]
+      ],
+      rules: {
+        '@angular-eslint/prefer-standalone': 'off'
+      }
     },
     {
       files: ['*.spec.ts'],

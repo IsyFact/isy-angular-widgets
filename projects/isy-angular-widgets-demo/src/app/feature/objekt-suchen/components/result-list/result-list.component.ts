@@ -7,7 +7,8 @@ import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'demo-result-list',
-  templateUrl: './result-list.component.html'
+  templateUrl: './result-list.component.html',
+  standalone: false
 })
 export class ResultListComponent implements OnInit, OnDestroy {
   @Input() personen: Person[] = [];
@@ -36,7 +37,7 @@ export class ResultListComponent implements OnInit, OnDestroy {
   state: ResultFilter[] = [...state];
   gender: ResultFilter[] = [...gender];
 
-  constructor(private translate: TranslateService) {
+  constructor(private readonly translate: TranslateService) {
     this.langChangeSubscription = new Subscription();
   }
 

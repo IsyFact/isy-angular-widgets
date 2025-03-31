@@ -1,17 +1,12 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {ConfirmDialog} from 'primeng/confirmdialog';
-import {ConfirmPopup} from 'primeng/confirmpopup';
-import {By} from '@angular/platform-browser';
-
 import {PrimengOverlayComponent} from './primeng-overlay.component';
 import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 
 describe('Unit Tests: PrimengOverlayComponent', () => {
   let component: PrimengOverlayComponent;
   let spectator: Spectator<PrimengOverlayComponent>;
-
-  let confirmDialog: ConfirmDialog;
-  let confirmPopup: ConfirmPopup;
+  let confirmSpy: jasmine.Spy;
+  let messageSpy: jasmine.Spy;
 
   const createComponent = createComponentFactory({
     component: PrimengOverlayComponent,
@@ -21,6 +16,9 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   beforeEach(() => {
     spectator = createComponent();
     component = spectator.component;
+
+    confirmSpy = spyOn(component.confirmationService, 'confirm').and.callThrough();
+    messageSpy = spyOn(component.messageService, 'add').and.callThrough();
   });
 
   it('should create', () => {
@@ -44,34 +42,62 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   });
 
   it('should open confirm dialog and close it on accept', () => {
-    confirmDialog = spectator.debugElement.query(By.css('p-confirmDialog')).componentInstance;
+    component.confirmDialog({target: {}} as Event);
 
-    const openDialog = spyOn(confirmDialog, 'accept').and.callThrough();
-    component.confirmDialog(new Event(''));
+    expect(confirmSpy).toHaveBeenCalled();
 
-    spectator.detectChanges();
+    const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    confirmArgs.accept();
 
-    const acceptButton = spectator.debugElement.query(By.css('.p-confirm-dialog-accept')).nativeElement;
-    acceptButton.click();
-
-    spectator.detectChanges();
-
-    expect(openDialog).toHaveBeenCalled();
+    expect(messageSpy).toHaveBeenCalledWith({
+      severity: 'success',
+      summary: 'Confirmed',
+      detail: 'You have accepted'
+    });
   });
 
   it('should open confirm dialog and close it on reject', () => {
-    confirmDialog = spectator.debugElement.query(By.css('p-confirmDialog')).componentInstance;
+    component.confirmDialog({target: {}} as Event);
 
-    const openDialog = spyOn(confirmDialog, 'reject').and.callThrough();
-    component.confirmDialog(new Event(''));
+    expect(confirmSpy).toHaveBeenCalled();
 
-    spectator.detectChanges();
+    const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    confirmArgs.reject();
 
-    const rejectButton = spectator.debugElement.query(By.css('.p-confirm-dialog-reject')).nativeElement;
-    rejectButton.click();
+    expect(messageSpy).toHaveBeenCalledWith({
+      severity: 'error',
+      summary: 'Rejected',
+      detail: 'You have rejected'
+    });
+  });
 
-    spectator.detectChanges();
+  it('should open confirm popup and close it on accept', () => {
+    component.confirmPopup({target: {}} as Event);
 
-    expect(openDialog).toHaveBeenCalled();
+    expect(confirmSpy).toHaveBeenCalled();
+
+    const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    confirmArgs.accept();
+
+    expect(messageSpy).toHaveBeenCalledWith({
+      severity: 'info',
+      summary: 'Confirmed',
+      detail: 'You have accepted'
+    });
+  });
+
+  it('should open confirm popup and close it on reject', () => {
+    component.confirmPopup({target: {}} as Event);
+
+    expect(confirmSpy).toHaveBeenCalled();
+
+    const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    confirmArgs.reject();
+
+    expect(messageSpy).toHaveBeenCalledWith({
+      severity: 'error',
+      summary: 'Rejected',
+      detail: 'You have rejected'
+    });
   });
 });

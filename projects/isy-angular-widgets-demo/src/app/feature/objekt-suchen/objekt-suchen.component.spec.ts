@@ -608,7 +608,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   it('the dialog header close icon should have an aria-label attribute', () => {
     spectator.component.displayEditDialog();
     spectator.detectChanges();
-    const element = spectator.query('.p-dialog-header button.p-dialog-header-close') as HTMLElement;
+    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
     expect(element.hasAttribute('aria-label')).toBeTrue();
   });
 
@@ -624,12 +624,16 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should have table column multiselect checkbox label', () => {
-    const multiselectTrigger = spectator.query('.p-multiselect-trigger') as HTMLElement;
+    const multiselectTrigger = spectator.query('.p-multiselect-dropdown') as HTMLElement;
     multiselectTrigger.click();
     spectator.fixture.detectChanges();
-    const multiselectItem = spectator.queryAll('p-multiselectitem span');
-    multiselectItem.forEach((item) => {
-      expect(item.textContent).not.toEqual('');
-    });
+
+    const multiselectItems = spectator.queryAll('p-multiselect-item span');
+
+    expect(multiselectItems.length).toBeGreaterThan(0);
+
+    for (const item of multiselectItems) {
+      expect(item.textContent?.trim()).not.toBe('');
+    }
   });
 });
