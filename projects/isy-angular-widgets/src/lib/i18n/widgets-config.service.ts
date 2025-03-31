@@ -28,7 +28,7 @@ export class WidgetsConfigService {
     }
   };
 
-  private translationSource = new Subject<unknown>();
+  private readonly translationSource = new Subject<unknown>();
 
   getTranslation(path: string): string | undefined {
     // Needs to be refactored in the future

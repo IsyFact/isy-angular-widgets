@@ -1,502 +1,507 @@
-<p-tabView id="tab-view">
-  <p-tabPanel id="panel-personalien" [header]="'isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate">
-    <form [formGroup]="personalInfoForm">
-      <div class="grid mt-3">
-        <div class="col-12 md:col-6 xl:col-4">
-          <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
-          ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet. -->
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
-            fieldId="first-name"
-            [control]="personalInfoForm.controls.firstName | formControl"
-            [validationMessages]="
-              personalInfoForm.controls.firstName.errors?.required
-                ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
-                : {}
-            "
-          >
-            <input
-              id="first-name"
-              formControlName="firstName"
-              class="w-full"
-              minlength="2"
-              maxlength="16"
-              type="text"
-              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
-              pInputText
-            />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
-            fieldId="last-name"
-            [control]="personalInfoForm.controls.lastName | formControl"
-            [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
-          >
-            <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
-            <input
-              id="last-name"
-              formControlName="lastName"
-              type="text"
-              pInputText
-              isyInputChar
-              [outlinedInputCharButton]="true"
-              maxlength="16"
-              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
-            />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
-            fieldId="birth-name"
-            [control]="personalInfoForm.controls.birthName | formControl"
-            [validationMessages]="{DIN91379ERROR: 'isyAngularWidgetsDemo.messages.validateDIN91379Error' | translate}"
-          >
-            <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
-            <input
-              id="birth-name"
-              formControlName="birthName"
-              type="text"
-              pInputText
-              isyInputChar
-              [outlinedInputCharButton]="true"
-            />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}"
-            fieldId="birth-place"
-            [control]="personalInfoForm.controls.birthplace | formControl"
-          >
-            <input id="birth-place" formControlName="birthplace" class="w-full" type="text" pInputText />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
-            fieldId="gender"
-            [control]="personalInfoForm.controls.gender | formControl"
-          >
-            <p-select
-              inputId="gender"
-              formControlName="gender"
-              [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
-              [filter]="true"
-              [options]="[
-                'isyAngularWidgetsDemo.labels.optionMale' | translate,
-                'isyAngularWidgetsDemo.labels.optionFemale' | translate,
-                'isyAngularWidgetsDemo.labels.optionDivers' | translate
-              ]"
-              styleClass="w-full"
-              appendTo="body"
-            ></p-select>
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
-          ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet.
-          Die Formcontrol nutzt einen benutzerdefinierten Validator. -->
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}"
-            fieldId="birth-date"
-            [control]="personalInfoForm.controls.birthDate | formControl"
-            [validationMessages]="{PAST: 'isyAngularWidgetsDemo.messages.dateInPastError' | translate}"
-          >
-            <p-datepicker
-              inputId="birth-date"
-              dateFormat="dd.mm.yy"
-              formControlName="birthDate"
-              [iconDisplay]="'input'"
-              [showIcon]="true"
-              styleClass="w-full"
-              appendTo="body"
+<p-tabs value="0">
+  <p-tablist>
+    <p-tab value="0">{{ 'isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate }}</p-tab>
+    <p-tab value="1">{{ 'isyAngularWidgetsDemo.displayObject.tabFacts' | translate }}</p-tab>
+  </p-tablist>
+  <p-tabpanels>
+    <p-tabpanel id="panel-personalien" value="0">
+      <form [formGroup]="personalInfoForm">
+        <div class="grid mt-3">
+          <div class="col-12 md:col-6 xl:col-4">
+            <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
+            ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet. -->
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+              fieldId="first-name"
+              [control]="personalInfoForm.controls.firstName | formControl"
+              [validationMessages]="
+                personalInfoForm.controls.firstName.errors?.required
+                  ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
+                  : {}
+              "
             >
-            </p-datepicker>
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}"
-            fieldId="nationality"
-            [control]="personalInfoForm.controls.nationality | formControl"
-          >
-            <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.telefonnummer' | translate }}"
-            fieldId="phone-number"
-            [control]="personalInfoForm.controls.phoneNumber | formControl"
-          >
-            <p-inputMask
-              inputId="phone-number"
-              formControlName="phoneNumber"
-              type="text"
-              styleClass="w-full"
-              mask="+99 9999 / 9999999"
-            />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
-            fieldId="date-of-entry"
-            [control]="personalInfoForm.controls.dateOfEntry | formControl"
-            [validationMessages]="{UNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
-          >
-            <isy-incomplete-date
-              inputId="date-of-entry"
-              formControlName="dateOfEntry"
-              [dateInPastConstraint]="true"
-              [allowZeroFormat]="true"
-              inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
-            >
-            </isy-incomplete-date>
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.abreisedatum' | translate }}"
-            fieldId="date-of-departure"
-            [control]="personalInfoForm.controls.dateOfDeparture | formControl"
-          >
-            <p-inputMask
-              inputId="date-of-departure"
-              formControlName="dateOfDeparture"
-              styleClass="w-full"
-              mask="**.**.****"
-              slotChar="_"
-              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.dateOfDeparture' | translate }}"
-            />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.ablaufdatumPersonalausweis' | translate }}"
-            fieldId="identity-card-expiration-date"
-            [control]="personalInfoForm.controls.identityCardExpirationDate | formControl"
-          >
-            <p-inputMask
-              inputId="identity-card-expiration-date"
-              formControlName="identityCardExpirationDate"
-              mask="9999-99-99"
-              slotChar="_"
-              styleClass="w-full"
-              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.identityCardExpirationDate' | translate }}"
-            />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.ablaufdatumReisepass' | translate }}"
-            fieldId="passport-expiration-date"
-            [control]="personalInfoForm.controls.passportExpirationDate | formControl"
-          >
-            <p-datepicker
-              inputId="passport-expiration-date"
-              dateFormat="dd.mm.yy"
-              formControlName="passportExpirationDate"
-              [iconDisplay]="'input'"
-              [showIcon]="true"
-              styleClass="w-full"
-              appendTo="body"
-            ></p-datepicker>
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.kreditkartennummer' | translate }}"
-            fieldId="credit-card-number"
-            [control]="personalInfoForm.controls.creditCardNumber | formControl"
-          >
-            <p-inputMask
-              inputId="credit-card-number"
-              formControlName="creditCardNumber"
-              styleClass="w-full"
-              mask="9999 9999 9999 9999"
-              slotChar="_"
-              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.creditCardNumber' | translate }}"
-            />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4">
-          <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.ablaufdatumKreditkarte' | translate }}"
-            fieldId="credit-card-expiration-date"
-            [control]="personalInfoForm.controls.creditCardExpirationDate | formControl"
-            [validationMessages]="{
-              CREDITCARDEXPIRATIONDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate
-            }"
-          >
-            <p-inputMask
-              inputId="credit-card-expiration-date"
-              formControlName="creditCardExpirationDate"
-              mask="99/99"
-              slotChar="_"
-              styleClass="w-full"
-              placeholder="{{ 'isyAngularWidgetsDemo.placeholders.creditCardExpirationDate' | translate }}"
-            />
-          </isy-form-wrapper>
-        </div>
-        <div class="col-12 md:col-6 xl:col-4 align-content-end">
-          <p-fileUpload
-            id="identity-document"
-            formControlName="identityDocument"
-            ngDefaultControl
-            [name]="'myfile'"
-            [accept]="'image/*,.pdf,.txt'"
-            [auto]="true"
-            [maxFileSize]="1000000"
-            [customUpload]="true"
-            (uploadHandler)="uploadFile($event)"
-            chooseIcon="pi pi-upload"
-            chooseLabel="{{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}"
-            chooseStyleClass="p-button-outlined"
-          >
-          </p-fileUpload>
-        </div>
-      </div>
-
-      <p-divider></p-divider>
-
-      <h3>
-        {{ 'isyAngularWidgetsDemo.labels.residences' | translate }}
-      </h3>
-      @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
-        <p-fieldset
-          legend="{{ 'isyAngularWidgetsDemo.labels.residence' | translate: {numChars: i + 1} }}"
-          class="mb-3 flex"
-          styleClass="w-full"
-        >
-          <p-button
-            class="address-delete-button"
-            icon="pi pi-trash"
-            [text]="true"
-            [rounded]="true"
-            [severity]="'danger'"
-            [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
-            (click)="removeAddress(i)"
-            onKeyDown=""
-            ariaLabel="{{ 'isyAngularWidgetsDemo.labels.deleteButton' | translate }}"
-          >
-          </p-button>
-
-          <div class="grid mt-3" [formArrayName]="'addresses'">
-            <ng-container [formGroupName]="i">
-              <div class="col-12 md:col-6 xl:col-4">
-                <isy-form-wrapper
-                  label="{{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}"
-                  fieldId="country{{ i }}"
-                  [control]="addresses.get('country')! | formControl"
-                >
-                  <input
-                    id="country{{ i }}"
-                    formControlName="{{ addressFormControlNames[4] }}"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                </isy-form-wrapper>
-              </div>
-              <div class="col-12 md:col-6 xl:col-4">
-                <isy-form-wrapper
-                  label="{{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}"
-                  fieldId="zip{{ i }}"
-                  [control]="addresses.get('zip')! | formControl"
-                >
-                  <input
-                    formControlName="{{ addressFormControlNames[2] }}"
-                    id="zip{{ i }}"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                </isy-form-wrapper>
-              </div>
-              <div class="col-12 md:col-6 xl:col-4">
-                <isy-form-wrapper
-                  label="{{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}"
-                  fieldId="city{{ i }}"
-                  [control]="addresses.get('city')! | formControl"
-                >
-                  <input
-                    formControlName="{{ addressFormControlNames[3] }}"
-                    id="city{{ i }}"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                </isy-form-wrapper>
-              </div>
-              <div class="col-12 md:col-6 xl:col-4">
-                <isy-form-wrapper
-                  label="{{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}"
-                  fieldId="streetName{{ i }}"
-                  [control]="addresses.get('streetName')! | formControl"
-                >
-                  <input
-                    formControlName="{{ addressFormControlNames[0] }}"
-                    id="streetName{{ i }}"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                </isy-form-wrapper>
-              </div>
-              <div class="col-12 md:col-6 xl:col-4">
-                <isy-form-wrapper
-                  label="{{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}"
-                  fieldId="streetNumber{{ i }}"
-                  [control]="addresses.get('streetNumber')! | formControl"
-                >
-                  <input
-                    formControlName="{{ addressFormControlNames[1] }}"
-                    id="streetNumber{{ i }}"
-                    class="w-full"
-                    type="text"
-                    pInputText
-                  />
-                </isy-form-wrapper>
-              </div>
-            </ng-container>
+              <input
+                id="first-name"
+                formControlName="firstName"
+                class="w-full"
+                minlength="2"
+                maxlength="16"
+                type="text"
+                placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
+                pInputText
+              />
+            </isy-form-wrapper>
           </div>
-        </p-fieldset>
-      }
-      <button
-        pButton
-        label="{{ 'isyAngularWidgetsDemo.actions.addResidence' | translate }}"
-        icon="pi pi-plus"
-        iconPos="left"
-        type="button"
-        pRipple
-        [disabled]="personalInfoForm.disabled"
-        (click)="addNewAddress()"
-        [outlined]="true"
-      ></button>
-
-      <p-divider></p-divider>
-
-      <div class="field field-checkbox my-5">
-        <p-toggleswitch inputId="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-toggleswitch>
-        <label for="show-secret-fields" class="m-0 ml-3">
-          {{ 'isyAngularWidgetsDemo.actions.showSecretFields' | translate }}
-        </label>
-      </div>
-      @if (showSecretFields) {
-        <div id="div-show-secret-fields">
-          <div class="grid m-0 align-items-center">
-            <div class="col-12 md:col-6 xl:col-4">
-              <div class="flex align-items-center">
-                <p-checkbox
-                  inputId="id-required"
-                  formControlName="idRequired"
-                  [binary]="true"
-                ></p-checkbox>
-                <label for="id-required" class="ml-2">{{ 'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate }}</label>
-              </div>
-            </div>
-            <div class="col-12 md:col-6 xl:col-4">
-              <isy-form-wrapper
-                label="{{ 'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate }}"
-                fieldId="security-level"
-                [control]="personalInfoForm.controls.securityLevel | formControl"
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+              fieldId="last-name"
+              [control]="personalInfoForm.controls.lastName | formControl"
+              [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
+            >
+              <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
+              <input
+                id="last-name"
+                formControlName="lastName"
+                type="text"
+                pInputText
+                isyInputChar
+                [outlinedInputCharButton]="true"
+                maxlength="16"
+                placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
+              />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
+              fieldId="birth-name"
+              [control]="personalInfoForm.controls.birthName | formControl"
+              [validationMessages]="{DIN91379ERROR: 'isyAngularWidgetsDemo.messages.validateDIN91379Error' | translate}"
+            >
+              <!--  IsyInputChar can be configured with a Datentyp according to DIN 91379 -->
+              <input
+                id="birth-name"
+                formControlName="birthName"
+                type="text"
+                pInputText
+                isyInputChar
+                [outlinedInputCharButton]="true"
+              />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}"
+              fieldId="birth-place"
+              [control]="personalInfoForm.controls.birthplace | formControl"
+            >
+              <input id="birth-place" formControlName="birthplace" class="w-full" type="text" pInputText />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+              fieldId="gender"
+              [control]="personalInfoForm.controls.gender | formControl"
+            >
+              <p-select
+                inputId="gender"
+                formControlName="gender"
+                [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
+                [filter]="true"
+                [options]="[
+                  'isyAngularWidgetsDemo.labels.optionMale' | translate,
+                  'isyAngularWidgetsDemo.labels.optionFemale' | translate,
+                  'isyAngularWidgetsDemo.labels.optionDivers' | translate
+                ]"
+                styleClass="w-full"
+                appendTo="body"
+              ></p-select>
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
+            ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet.
+            Die Formcontrol nutzt einen benutzerdefinierten Validator. -->
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}"
+              fieldId="birth-date"
+              [control]="personalInfoForm.controls.birthDate | formControl"
+              [validationMessages]="{PAST: 'isyAngularWidgetsDemo.messages.dateInPastError' | translate}"
+            >
+              <p-datepicker
+                inputId="birth-date"
+                dateFormat="dd.mm.yy"
+                formControlName="birthDate"
+                [iconDisplay]="'input'"
+                [showIcon]="true"
+                styleClass="w-full"
+                appendTo="body"
               >
-                <p-inputNumber
-                  inputId="security-level"
-                  formControlName="securityLevel"
-                  [showButtons]="true"
-                  [min]="0"
-                  [max]="9"
-                  class="w-full"
-                  styleClass="w-full"
-                  inputStyleClass="w-full"
-                  incrementButtonClass="p-button-outlined"
-                  decrementButtonClass="p-button-outlined"
-                >
-                </p-inputNumber>
-              </isy-form-wrapper>
-            </div>
-            <div class="col-12 xl:col-8">
-              <isy-form-wrapper
-                label="{{ 'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate }}"
-                fieldId="intelligence-notes"
-                [control]="personalInfoForm.controls.intelligenceNotes | formControl"
-                [validationMessages]="{
-                  maxlength:
-                    'isyAngularWidgetsDemo.messages.maxLengthError' | translate: {numChars: intelligenceNotesMaxLength}
-                }"
+              </p-datepicker>
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}"
+              fieldId="nationality"
+              [control]="personalInfoForm.controls.nationality | formControl"
+            >
+              <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.telefonnummer' | translate }}"
+              fieldId="phone-number"
+              [control]="personalInfoForm.controls.phoneNumber | formControl"
+            >
+              <p-inputMask
+                inputId="phone-number"
+                formControlName="phoneNumber"
+                type="text"
+                styleClass="w-full"
+                mask="+99 9999 / 9999999"
+              />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
+              fieldId="date-of-entry"
+              [control]="personalInfoForm.controls.dateOfEntry | formControl"
+              [validationMessages]="{UNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
+            >
+              <isy-incomplete-date
+                inputId="date-of-entry"
+                formControlName="dateOfEntry"
+                [dateInPastConstraint]="true"
+                [allowZeroFormat]="true"
+                inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
               >
-                <textarea
-                  pInputTextarea
-                  id="intelligence-notes"
-                  formControlName="intelligenceNotes"
-                  class="w-full"
-                  [rows]="5"
-                >
-                </textarea>
-              </isy-form-wrapper>
-            </div>
+              </isy-incomplete-date>
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.abreisedatum' | translate }}"
+              fieldId="date-of-departure"
+              [control]="personalInfoForm.controls.dateOfDeparture | formControl"
+            >
+              <p-inputMask
+                inputId="date-of-departure"
+                formControlName="dateOfDeparture"
+                styleClass="w-full"
+                mask="**.**.****"
+                slotChar="_"
+                placeholder="{{ 'isyAngularWidgetsDemo.placeholders.dateOfDeparture' | translate }}"
+              />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.ablaufdatumPersonalausweis' | translate }}"
+              fieldId="identity-card-expiration-date"
+              [control]="personalInfoForm.controls.identityCardExpirationDate | formControl"
+            >
+              <p-inputMask
+                inputId="identity-card-expiration-date"
+                formControlName="identityCardExpirationDate"
+                mask="9999-99-99"
+                slotChar="_"
+                styleClass="w-full"
+                placeholder="{{ 'isyAngularWidgetsDemo.placeholders.identityCardExpirationDate' | translate }}"
+              />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.ablaufdatumReisepass' | translate }}"
+              fieldId="passport-expiration-date"
+              [control]="personalInfoForm.controls.passportExpirationDate | formControl"
+            >
+              <p-datepicker
+                inputId="passport-expiration-date"
+                dateFormat="dd.mm.yy"
+                formControlName="passportExpirationDate"
+                [iconDisplay]="'input'"
+                [showIcon]="true"
+                styleClass="w-full"
+                appendTo="body"
+              ></p-datepicker>
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.kreditkartennummer' | translate }}"
+              fieldId="credit-card-number"
+              [control]="personalInfoForm.controls.creditCardNumber | formControl"
+            >
+              <p-inputMask
+                inputId="credit-card-number"
+                formControlName="creditCardNumber"
+                styleClass="w-full"
+                mask="9999 9999 9999 9999"
+                slotChar="_"
+                placeholder="{{ 'isyAngularWidgetsDemo.placeholders.creditCardNumber' | translate }}"
+              />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.ablaufdatumKreditkarte' | translate }}"
+              fieldId="credit-card-expiration-date"
+              [control]="personalInfoForm.controls.creditCardExpirationDate | formControl"
+              [validationMessages]="{
+                CREDITCARDEXPIRATIONDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate
+              }"
+            >
+              <p-inputMask
+                inputId="credit-card-expiration-date"
+                formControlName="creditCardExpirationDate"
+                mask="99/99"
+                slotChar="_"
+                styleClass="w-full"
+                placeholder="{{ 'isyAngularWidgetsDemo.placeholders.creditCardExpirationDate' | translate }}"
+              />
+            </isy-form-wrapper>
+          </div>
+          <div class="col-12 md:col-6 xl:col-4 align-content-end">
+            <p-fileUpload
+              id="identity-document"
+              formControlName="identityDocument"
+              ngDefaultControl
+              [name]="'myfile'"
+              [accept]="'image/*,.pdf,.txt'"
+              [auto]="true"
+              [maxFileSize]="1000000"
+              [customUpload]="true"
+              (uploadHandler)="uploadFile($event)"
+              chooseIcon="pi pi-upload"
+              chooseLabel="{{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}"
+              chooseStyleClass="p-button-outlined"
+            >
+            </p-fileUpload>
           </div>
         </div>
-      }
-    </form>
 
-    <div class="justify-content-center flex mt-3">
-      <div id="div-save" class="p-buttonset">
+        <p-divider></p-divider>
+
+        <h3>
+          {{ 'isyAngularWidgetsDemo.labels.residences' | translate }}
+        </h3>
+        @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
+          <p-fieldset
+            legend="{{ 'isyAngularWidgetsDemo.labels.residence' | translate: {numChars: i + 1} }}"
+            class="mb-3 flex"
+            styleClass="w-full"
+          >
+            <p-button
+              class="address-delete-button"
+              icon="pi pi-trash"
+              [text]="true"
+              [rounded]="true"
+              [severity]="'danger'"
+              [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
+              (click)="removeAddress(i)"
+              onKeyDown=""
+              ariaLabel="{{ 'isyAngularWidgetsDemo.labels.deleteButton' | translate }}"
+            >
+            </p-button>
+
+            <div class="grid mt-3" [formArrayName]="'addresses'">
+              <ng-container [formGroupName]="i">
+                <div class="col-12 md:col-6 xl:col-4">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.address.country' | translate }}"
+                    fieldId="country{{ i }}"
+                    [control]="addresses.get('country')! | formControl"
+                  >
+                    <input
+                      id="country{{ i }}"
+                      formControlName="{{ addressFormControlNames[4] }}"
+                      class="w-full"
+                      type="text"
+                      pInputText
+                    />
+                  </isy-form-wrapper>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.address.zipCode' | translate }}"
+                    fieldId="zip{{ i }}"
+                    [control]="addresses.get('zip')! | formControl"
+                  >
+                    <input
+                      formControlName="{{ addressFormControlNames[2] }}"
+                      id="zip{{ i }}"
+                      class="w-full"
+                      type="text"
+                      pInputText
+                    />
+                  </isy-form-wrapper>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.address.city' | translate }}"
+                    fieldId="city{{ i }}"
+                    [control]="addresses.get('city')! | formControl"
+                  >
+                    <input
+                      formControlName="{{ addressFormControlNames[3] }}"
+                      id="city{{ i }}"
+                      class="w-full"
+                      type="text"
+                      pInputText
+                    />
+                  </isy-form-wrapper>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.address.street' | translate }}"
+                    fieldId="streetName{{ i }}"
+                    [control]="addresses.get('streetName')! | formControl"
+                  >
+                    <input
+                      formControlName="{{ addressFormControlNames[0] }}"
+                      id="streetName{{ i }}"
+                      class="w-full"
+                      type="text"
+                      pInputText
+                    />
+                  </isy-form-wrapper>
+                </div>
+                <div class="col-12 md:col-6 xl:col-4">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.address.number' | translate }}"
+                    fieldId="streetNumber{{ i }}"
+                    [control]="addresses.get('streetNumber')! | formControl"
+                  >
+                    <input
+                      formControlName="{{ addressFormControlNames[1] }}"
+                      id="streetNumber{{ i }}"
+                      class="w-full"
+                      type="text"
+                      pInputText
+                    />
+                  </isy-form-wrapper>
+                </div>
+              </ng-container>
+            </div>
+          </p-fieldset>
+        }
         <button
           pButton
-          id="button-save"
+          label="{{ 'isyAngularWidgetsDemo.actions.addResidence' | translate }}"
+          icon="pi pi-plus"
+          iconPos="left"
           type="button"
           pRipple
-          icon="pi pi-save"
-          iconPos="left"
-          [disabled]="!personalInfoForm.valid"
-          [label]="'isyAngularWidgetsDemo.actions.save' | translate"
-          (click)="savePersonalien()"
+          [disabled]="personalInfoForm.disabled"
+          (click)="addNewAddress()"
+          [outlined]="true"
         ></button>
-      </div>
-    </div>
-  </p-tabPanel>
 
-  <p-tabPanel id="panel-sachverhalte" [header]="'isyAngularWidgetsDemo.displayObject.tabFacts' | translate">
-    <p-table [value]="person.sachverhalte" responsiveLayout="scroll">
-      <ng-template pTemplate="caption">
-        <p-button
-          icon="pi pi-pencil"
-          iconPos="left"
-          [label]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
-          (click)="isDialogVisible = true"
-          (keydown)="isDialogVisible = true"
-        >
-        </p-button>
-      </ng-template>
-      <ng-template pTemplate="header">
-        <tr>
-          <th scope="col">
-            {{ 'isyAngularWidgetsDemo.labels.sachverhalte' | translate }}
-          </th>
-          <th scope="col">
-            {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
-          </th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-sachverhalt>
-        <tr>
-          <td>{{ sachverhalt }}</td>
-          <td>
-            {{ 'isyAngularWidgetsDemo.labels.solved' | translate }}
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-    <demo-dialog-sachverhalte-bearbeiten
-      [(visible)]="isDialogVisible"
-      [person]="person"
-    ></demo-dialog-sachverhalte-bearbeiten>
-  </p-tabPanel>
-</p-tabView>
+        <p-divider></p-divider>
+
+        <div class="field field-checkbox my-5">
+          <p-toggleswitch inputId="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-toggleswitch>
+          <label for="show-secret-fields" class="m-0 ml-3">
+            {{ 'isyAngularWidgetsDemo.actions.showSecretFields' | translate }}
+          </label>
+        </div>
+        @if (showSecretFields) {
+          <div id="div-show-secret-fields">
+            <div class="grid m-0 align-items-center">
+              <div class="col-12 md:col-6 xl:col-4">
+                <div class="flex align-items-center">
+                  <p-checkbox inputId="id-required" formControlName="idRequired" [binary]="true"></p-checkbox>
+                  <label for="id-required" class="ml-2">{{
+                    'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate
+                  }}</label>
+                </div>
+              </div>
+              <div class="col-12 md:col-6 xl:col-4">
+                <isy-form-wrapper
+                  label="{{ 'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate }}"
+                  fieldId="security-level"
+                  [control]="personalInfoForm.controls.securityLevel | formControl"
+                >
+                  <p-inputNumber
+                    inputId="security-level"
+                    formControlName="securityLevel"
+                    [showButtons]="true"
+                    [min]="0"
+                    [max]="9"
+                    class="w-full"
+                    styleClass="w-full"
+                    inputStyleClass="w-full"
+                    incrementButtonClass="p-button-outlined"
+                    decrementButtonClass="p-button-outlined"
+                  >
+                  </p-inputNumber>
+                </isy-form-wrapper>
+              </div>
+              <div class="col-12 xl:col-8">
+                <isy-form-wrapper
+                  label="{{ 'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate }}"
+                  fieldId="intelligence-notes"
+                  [control]="personalInfoForm.controls.intelligenceNotes | formControl"
+                  [validationMessages]="{
+                    maxlength:
+                      'isyAngularWidgetsDemo.messages.maxLengthError'
+                      | translate: {numChars: intelligenceNotesMaxLength}
+                  }"
+                >
+                  <textarea
+                    pTextarea
+                    id="intelligence-notes"
+                    formControlName="intelligenceNotes"
+                    class="w-full"
+                    [rows]="5"
+                  >
+                  </textarea>
+                </isy-form-wrapper>
+              </div>
+            </div>
+          </div>
+        }
+      </form>
+
+      <div class="justify-content-center flex mt-3">
+        <div id="div-save" class="p-buttonset">
+          <button
+            pButton
+            id="button-save"
+            type="button"
+            pRipple
+            icon="pi pi-save"
+            iconPos="left"
+            [disabled]="!personalInfoForm.valid"
+            [label]="'isyAngularWidgetsDemo.actions.save' | translate"
+            (click)="savePersonalien()"
+          ></button>
+        </div>
+      </div>
+    </p-tabpanel>
+
+    <p-tabpanel id="panel-sachverhalte" value="1">
+      <p-table [value]="person.sachverhalte" responsiveLayout="scroll">
+        <ng-template pTemplate="caption">
+          <p-button
+            icon="pi pi-pencil"
+            iconPos="left"
+            [label]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
+            (click)="isDialogVisible = true"
+            (keydown)="isDialogVisible = true"
+          >
+          </p-button>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col">
+              {{ 'isyAngularWidgetsDemo.labels.sachverhalte' | translate }}
+            </th>
+            <th scope="col">
+              {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-sachverhalt>
+          <tr>
+            <td>{{ sachverhalt }}</td>
+            <td>
+              {{ 'isyAngularWidgetsDemo.labels.solved' | translate }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <demo-dialog-sachverhalte-bearbeiten
+        [(visible)]="isDialogVisible"
+        [person]="person"
+      ></demo-dialog-sachverhalte-bearbeiten>
+    </p-tabpanel>
+  </p-tabpanels>
+</p-tabs>
 <p-toast></p-toast>

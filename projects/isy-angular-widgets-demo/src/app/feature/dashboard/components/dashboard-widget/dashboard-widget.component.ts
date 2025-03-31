@@ -6,20 +6,21 @@ import {MenuTranslationService} from '../../../../shared/services/menu-translati
 @Component({
   selector: 'demo-dashboard-widget',
   templateUrl: './dashboard-widget.component.html',
-  styleUrls: ['./dashboard-widget.component.scss']
+  styleUrls: ['./dashboard-widget.component.scss'],
+  standalone: false
 })
 export class DashboardWidgetComponent implements OnInit {
   @Input() menuItems: MenuItem[] = [];
 
   @Input() backgroundColor!: string;
 
-  private selectedLanguage: string = 'de';
+  private readonly selectedLanguage: string = 'de';
 
   items: MenuItem[] = [];
 
   constructor(
     public translate: TranslateService,
-    private menuTranslationService: MenuTranslationService
+    private readonly menuTranslationService: MenuTranslationService
   ) {}
 
   ngOnInit(): void {

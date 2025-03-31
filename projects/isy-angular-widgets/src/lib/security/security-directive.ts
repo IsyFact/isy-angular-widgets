@@ -9,7 +9,7 @@ import {SecurityService} from './security-service';
  */
 @Directive({
   selector: '[isyPermitted]',
-  standalone: false
+  standalone: true
 })
 export class SecurityDirective {
   /**
@@ -19,9 +19,9 @@ export class SecurityDirective {
    * @internal
    */
   constructor(
-    private template: TemplateRef<unknown>,
-    private viewContainer: ViewContainerRef,
-    private securityService: SecurityService
+    private readonly template: TemplateRef<unknown>,
+    private readonly viewContainer: ViewContainerRef,
+    private readonly securityService: SecurityService
   ) {}
 
   /**

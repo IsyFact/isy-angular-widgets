@@ -6,7 +6,7 @@ import {PanelModule} from 'primeng/panel';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {InputTextModule} from 'primeng/inputtext';
-import {TabViewModule} from 'primeng/tabview';
+import {TabsModule} from 'primeng/tabs';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {DialogModule} from 'primeng/dialog';
@@ -15,11 +15,11 @@ import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import {ToastModule} from 'primeng/toast';
 import {CheckboxModule} from 'primeng/checkbox';
-import {IncompleteDateModule} from '@isy-angular-widgets/incomplete-date/incomplete-date.module';
+import {IncompleteDateComponent} from '@isy-angular-widgets/incomplete-date/incomplete-date.component';
 import {InputMaskModule} from 'primeng/inputmask';
 import {ObjektAnzeigenRoutingModule} from './objekt-anzeigen-routing.module';
-import {Textarea} from 'primeng/inputtextarea';
-import {SecurityModule} from '@isy-angular-widgets/security/security.module';
+import {TextareaModule} from 'primeng/textarea';
+import {SecurityDirective} from '@isy-angular-widgets/security/security-directive';
 import {FileUploadModule} from 'primeng/fileupload';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
@@ -40,7 +40,7 @@ import {ToggleSwitchModule} from 'primeng/toggleswitch';
     FormsModule,
     TranslateModule.forChild(),
     InputTextModule,
-    TabViewModule,
+    TabsModule,
     InputSwitchModule,
     InputNumberModule,
     DialogModule,
@@ -49,12 +49,12 @@ import {ToggleSwitchModule} from 'primeng/toggleswitch';
     RippleModule,
     ToastModule,
     CheckboxModule,
-    IncompleteDateModule,
+    IncompleteDateComponent,
     InputMaskModule,
     DatePickerModule,
     ReactiveFormsModule,
-    Textarea,
-    SecurityModule,
+    TextareaModule,
+    SecurityDirective,
     FileUploadModule,
     FormWrapperComponent,
     FormControlPipe,

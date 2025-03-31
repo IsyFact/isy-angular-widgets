@@ -10,7 +10,7 @@ import {PrimengMessagesComponent} from './components/primeng-messages/primeng-me
 import {PrimengMiscComponent} from './components/primeng-misc/primeng-misc.component';
 import {PrimengChartComponent} from './components/primeng-chart/primeng-chart.component';
 
-import {TabViewModule} from 'primeng/tabview';
+import {TabsModule} from 'primeng/tabs';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {InputGroupModule} from 'primeng/inputgroup';
@@ -19,7 +19,6 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputOtpModule} from 'primeng/inputotp';
 import {InputTextModule} from 'primeng/inputtext';
-import {Textarea} from 'primeng/inputtextarea';
 import {KnobModule} from 'primeng/knob';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {PasswordModule} from 'primeng/password';
@@ -69,9 +68,8 @@ import {MenubarModule} from 'primeng/menubar';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {StepsModule} from 'primeng/steps';
-import {TabMenuModule} from 'primeng/tabmenu';
 import {TieredMenuModule} from 'primeng/tieredmenu';
-import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 import {AvatarModule} from 'primeng/avatar';
 import {BadgeModule} from 'primeng/badge';
 import {BlockUIModule} from 'primeng/blockui';
@@ -89,7 +87,8 @@ import {DatePickerModule} from 'primeng/datepicker';
 import {SelectModule} from 'primeng/select';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
 import {PopoverModule} from 'primeng/popover';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
+import {TextareaModule} from 'primeng/textarea';
 
 @NgModule({
   declarations: [
@@ -105,7 +104,7 @@ import { FormsModule } from '@angular/forms';
     PrimengChartComponent
   ],
   imports: [
-    TabViewModule,
+    TabsModule,
     CheckboxModule,
     ColorPickerModule,
     InputGroupModule,
@@ -114,7 +113,7 @@ import { FormsModule } from '@angular/forms';
     InputNumberModule,
     InputOtpModule,
     InputTextModule,
-    Textarea,
+    TextareaModule,
     KnobModule,
     KeyFilterModule,
     PasswordModule,
@@ -163,9 +162,9 @@ import { FormsModule } from '@angular/forms';
     MegaMenuModule,
     PanelMenuModule,
     StepsModule,
-    TabMenuModule,
+    TabsModule,
     TieredMenuModule,
-    MessagesModule,
+    MessageModule,
     AvatarModule,
     BadgeModule,
     BlockUIModule,
@@ -185,7 +184,7 @@ import { FormsModule } from '@angular/forms';
     ToggleSwitchModule,
     PopoverModule,
     DrawerModule,
-    FormsModule 
+    FormsModule
   ]
 })
 export class PrimengWidgetsModule {}

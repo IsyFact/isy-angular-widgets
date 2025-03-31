@@ -94,7 +94,7 @@ export class InputCharComponent implements OnChanges {
   allCharacters: Zeichenobjekt[] = [];
 
   constructor(
-    private charService: CharacterService,
+    private readonly charService: CharacterService,
     public configService: WidgetsConfigService
   ) {}
 

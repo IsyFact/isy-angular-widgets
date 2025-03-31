@@ -5,7 +5,7 @@ import {Directive, Input, TemplateRef} from '@angular/core';
  */
 @Directive({
   selector: '[isyWizardDirective]',
-  standalone: false
+  standalone: true
 })
 export class WizardDirective {
   @Input() isyWizardDirective: string = '';

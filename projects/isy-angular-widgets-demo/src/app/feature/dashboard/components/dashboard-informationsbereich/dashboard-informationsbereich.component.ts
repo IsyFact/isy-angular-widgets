@@ -6,7 +6,8 @@ import {informationsbereichMenu} from './informationsbereich-menu';
 
 @Component({
   selector: 'demo-dashboard-informationsbereich',
-  templateUrl: './dashboard-informationsbereich.component.html'
+  templateUrl: './dashboard-informationsbereich.component.html',
+  standalone: false
 })
 export class DashboardInformationsbereichComponent implements OnInit {
   private readonly selectedLanguage: string = 'de';
@@ -15,7 +16,7 @@ export class DashboardInformationsbereichComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
-    private menuTranslationService: MenuTranslationService
+    private readonly menuTranslationService: MenuTranslationService
   ) {}
 
   ngOnInit(): void {

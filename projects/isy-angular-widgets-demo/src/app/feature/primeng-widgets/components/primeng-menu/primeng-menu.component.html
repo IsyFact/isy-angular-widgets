@@ -17,7 +17,16 @@
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>TabMenu</h3>
-      <p-tabMenu [model]="tabMenuOption"></p-tabMenu>
+      <p-tabs>
+        <p-tablist>
+          @for (tab of tabMenuOption; track tab.route) {
+            <p-tab [value]="tab.route" routerLink="tab.route">
+              <i [class]="tab.icon"></i>
+              <span>{{ tab.label }}</span>
+            </p-tab>
+          }
+        </p-tablist>
+      </p-tabs>
     </div>
   </div>
   <p-divider></p-divider>

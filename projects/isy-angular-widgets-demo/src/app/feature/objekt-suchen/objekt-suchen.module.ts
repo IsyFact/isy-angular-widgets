@@ -9,7 +9,8 @@ import {PanelModule} from 'primeng/panel';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {InputTextModule} from 'primeng/inputtext';
-import {WizardModule} from '@isy-angular-widgets/wizard/wizard.module';
+import {WizardComponent} from '@isy-angular-widgets/wizard/components/wizard/wizard.component';
+import {WizardDirective} from '@isy-angular-widgets/wizard/directives/wizard.directive';
 import {TableModule} from 'primeng/table';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
@@ -32,7 +33,8 @@ import {ButtonModule} from 'primeng/button';
     TranslateModule.forChild(),
     InputTextModule,
     ReactiveFormsModule,
-    WizardModule,
+    WizardComponent,
+    WizardDirective,
     TableModule,
     MultiSelectModule,
     InputCharDirective,

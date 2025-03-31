@@ -1,3 +1,7 @@
+# 18.3.0 - 
+## Breaking Changes
+- IFS-4562: Upgrade Angular- und PrimeNG-Bibliothek auf Version 19 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
+
 # 18.2.1 - 12.03.2025
 ## Fixes
 - IFS-4568: Der Build-Fehler in 18.2.0 aufgrund einer fehlenden Moduldatei wurde behoben

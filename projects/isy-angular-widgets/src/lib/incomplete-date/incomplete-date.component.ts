@@ -13,6 +13,7 @@ import {
 import {
   AbstractControl,
   ControlValueAccessor,
+  FormsModule,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -20,7 +21,8 @@ import {
 } from '@angular/forms';
 import {IncompleteDateService} from './incomplete-date.service';
 import {Validation} from '../validation/validation';
-import {InputMask} from 'primeng/inputmask';
+import {InputMask, InputMaskModule} from 'primeng/inputmask';
+import {InputTextModule} from 'primeng/inputtext';
 
 /**
  * This component is used to input complete and incomplete dates.
@@ -50,7 +52,8 @@ import {InputMask} from 'primeng/inputmask';
       multi: true
     }
   ],
-  standalone: false
+  imports: [FormsModule, InputTextModule, InputMaskModule],
+  standalone: true
 })
 export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit, OnDestroy {
   /**

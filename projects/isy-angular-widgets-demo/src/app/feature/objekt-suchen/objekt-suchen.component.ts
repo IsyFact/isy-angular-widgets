@@ -12,7 +12,7 @@ import {
 } from './forms-data';
 import {getEmptyPerson, resetPerson} from './person-data';
 import {TranslateService} from '@ngx-translate/core';
-import {ToastMessageOptions , MessageService} from 'primeng/api';
+import {ToastMessageOptions, MessageService} from 'primeng/api';
 import {CountryMap} from './model/country';
 import {DateService} from './services/date.service';
 import {TOAST_SEVERITY} from '../../shared/model/toast';

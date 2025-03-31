@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HauptfensterModule} from '@isy-angular-widgets/hauptfenster/hauptfenster.module';
+import {HauptfensterComponent} from '@isy-angular-widgets/hauptfenster/hauptfenster.component';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {SecurityService} from '@isy-angular-widgets/security/security-service';
@@ -21,8 +21,7 @@ import {MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitentoolbar.component';
 import {SelectModule} from 'primeng/select';
-import {providePrimeNG} from 'primeng/config';
-import Lara from '@primeng/themes/lara';
+import {provideIsyFactTheme} from '@isy-angular-widgets/core/providers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,18 +33,13 @@ import Lara from '@primeng/themes/lara';
     MenuTranslationService,
     MessageService,
     provideHttpClient(),
-
-    providePrimeNG({
-      theme: {
-        preset: Lara
-      }
-    })
+    provideIsyFactTheme()
   ],
   bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    HauptfensterModule,
+    HauptfensterComponent,
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,

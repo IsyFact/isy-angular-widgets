@@ -9,7 +9,7 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 })
 export class PrimengOverlayComponent {
   constructor(
-    private readonly confirmationService: ConfirmationService,
+    readonly confirmationService: ConfirmationService,
     public messageService: MessageService
   ) {}
 

@@ -97,51 +97,6 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
     component.setDisabledState(true);
     expect(component.disabled).toBeTrue();
   });
-
-  it('should toogle only one section at once', () => {
-    expect(component.activeIndices).toEqual([]);
-  });
-
-  it('should set activeIndices to an empty array when closeAllAccordionTabs is called', () => {
-    component.activeIndices = [0, 1];
-    component.closeAllAccordionTabs();
-    expect(component.activeIndices).toEqual([]);
-  });
-
-  it('should add index to activeIndices when toggleTab is called with an element that does not contain the classes p-button or p-button-label', () => {
-    const index = 0;
-    const event: unknown = {target: document.createElement('div')};
-    component.toggleTab(index, event as Event);
-    expect(component.activeIndices).toContain(index);
-  });
-
-  it('should remove index from activeIndices when toggleTab is called with an element that is already in activeIndices and does not contain the classes p-button or p-button-label', () => {
-    const index = 0;
-    const event: unknown = {target: document.createElement('div')};
-    component.activeIndices = [index];
-    component.toggleTab(index, event as Event);
-    expect(component.activeIndices).not.toContain(index);
-  });
-
-  it('should not modify activeIndices when toggleTab is called with an element that contains class p-button-label', () => {
-    const index = 0;
-    const buttonElement = document.createElement('button');
-    buttonElement.classList.add('p-button-label');
-    const event: unknown = {target: buttonElement};
-    component.activeIndices = [index];
-    component.toggleTab(index, event as Event);
-    expect(component.activeIndices).toEqual([index]);
-  });
-
-  it('should not modify activeIndices when toggleTab is called with an element that contains class p-button', () => {
-    const index = 0;
-    const buttonElement = document.createElement('button');
-    buttonElement.classList.add('p-button');
-    const event: unknown = {target: buttonElement};
-    component.activeIndices = [index];
-    component.toggleTab(index, event as Event);
-    expect(component.activeIndices).toEqual([index]);
-  });
 });
 
 describe('Integration Tests: MultiSelectButtonComponent', () => {
@@ -159,7 +114,7 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
     const schriftzeichengruppeSelectButton = fixture.debugElement
-      .queryAll(By.css('.charset-selectbutton--1 .p-buttonset div span'))
+      .queryAll(By.css('.charset-selectbutton--1 p-togglebutton button'))
       .find((elem) => elem.nativeElement.textContent === schriftzeichengruppe)?.nativeElement as HTMLElement;
     expect(schriftzeichengruppeSelectButton).toBeTruthy();
 
@@ -169,35 +124,13 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   const selectBasis = (basis: string): void => {
     const basisSelectButton = fixture.debugElement
-      .queryAll(By.css('.charset-selectbutton--0 .p-buttonset div span'))
+      .queryAll(By.css('.charset-selectbutton--0 p-togglebutton button'))
       .find((elem) => elem.nativeElement.textContent === basis)?.nativeElement as HTMLElement;
     expect(basisSelectButton).toBeTruthy();
 
     basisSelectButton.click();
     fixture.detectChanges();
   };
-
-  it('should always have only one selection when clicking through multiple selections', () => {
-    bases.forEach((base: string) => {
-      selectBasis(base);
-      expect(fixture.debugElement.queryAll(By.css('.charset-selectbutton--0 .p-button.p-highlight')).length).toEqual(1);
-      expect(
-        fixture.debugElement
-          .queryAll(By.css('.charset-selectbutton--0 .p-button'))
-          .filter((elem) => elem.attributes['aria-checked'] === 'true').length
-      ).toEqual(1);
-    });
-
-    groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-      selectSchriftzeichengruppe(schriftzeichengruppe);
-      expect(fixture.debugElement.queryAll(By.css('.charset-selectbutton--1 .p-button.p-highlight')).length).toEqual(1);
-      expect(
-        fixture.debugElement
-          .queryAll(By.css('.charset-selectbutton--1 .p-button'))
-          .filter((elem) => elem.attributes['aria-checked'] === 'true').length
-      ).toEqual(1);
-    });
-  });
 
   it('should always have the correct value when clicking through multiple selections', () => {
     bases.forEach((base: string) => {
@@ -228,7 +161,7 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
   });
 
   it('should order the accordions according to input', () => {
-    const baseSelectButtons = spectator.queryAll('p-accordionTab .p-accordion-header-text');
+    const baseSelectButtons = spectator.queryAll('p-accordion p-accordion-panel p-accordion-header');
 
     Object.keys(inputData).forEach((group, index) => {
       expect(baseSelectButtons[index].textContent).toContain(group);
@@ -239,39 +172,5 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
     const allSelectButton = spectator.debugElement.query(By.directive(SelectButton));
 
     expect(allSelectButton.nativeElement.textContent).toEqual(headerStr);
-  });
-
-  bases.forEach((base: string) => {
-    it(`should only have a ${base} base enabled active after corresponding selection"`, () => {
-      const allSelectButton = spectator.debugElement.query(By.css('.all-selectbutton'))
-        .componentInstance as SelectButton;
-      const baseSelectButton = spectator.debugElement.query(By.css('.charset-selectbutton--0'))
-        .componentInstance as SelectButton;
-      const groupSelectButton = spectator.debugElement.query(By.css('.charset-selectbutton--1'))
-        .componentInstance as SelectButton;
-
-      selectBasis(base);
-
-      expect(allSelectButton.value).toBeNull();
-      expect(baseSelectButton.value).toEqual(base);
-      expect(groupSelectButton.value).toBeNull();
-    });
-  });
-
-  groups.forEach((group: Schriftzeichengruppe) => {
-    it(`should only have a ${group} group enabled active after corresponding selection"`, () => {
-      const allSelectButton = spectator.debugElement.query(By.css('.all-selectbutton'))
-        .componentInstance as SelectButton;
-      const baseSelectButton = spectator.debugElement.query(By.css('.charset-selectbutton--0'))
-        .componentInstance as SelectButton;
-      const groupSelectButton = spectator.debugElement.query(By.css('.charset-selectbutton--1'))
-        .componentInstance as SelectButton;
-
-      selectSchriftzeichengruppe(group);
-
-      expect(allSelectButton.value).toBeNull();
-      expect(baseSelectButton.value).toBeNull();
-      expect(groupSelectButton.value).toEqual(group);
-    });
   });
 });

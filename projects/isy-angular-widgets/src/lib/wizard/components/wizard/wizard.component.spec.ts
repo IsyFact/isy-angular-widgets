@@ -3,8 +3,7 @@ import {WizardComponent} from './wizard.component';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {Component, QueryList, SimpleChange, ViewChild} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {WizardModule} from '../../wizard.module';
-import {IncompleteDateModule} from '../../../incomplete-date/incomplete-date.module';
+import {IncompleteDateComponent} from '../../../incomplete-date/incomplete-date.component';
 import {MenuItem} from 'primeng/api';
 import {MockComponents} from 'ng-mocks';
 import {Dialog} from 'primeng/dialog';
@@ -17,10 +16,10 @@ const stepperItems: MenuItem[] = [
     label: 'Auswahl 1'
   },
   {
-    label: 'Auswahl 1'
+    label: 'Auswahl 2'
   },
   {
-    label: 'Auswahl 1'
+    label: 'Auswahl 3'
   }
 ];
 const stepsNumber: number = stepperItems.length;
@@ -48,7 +47,9 @@ const closeButtonDeclaration = '#close-button';
     <isy-incomplete-date *isyWizardDirective="'${childrenLabels[0]}'"></isy-incomplete-date>
     <isy-incomplete-date *isyWizardDirective="'${childrenLabels[1]}'"></isy-incomplete-date>
     <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
-  </isy-wizard>`
+  </isy-wizard>`,
+  imports: [WizardComponent, IncompleteDateComponent, WizardDirective],
+  standalone: true
 })
 class TestComponent {
   @ViewChild('wizard') wizard!: WizardComponent;
@@ -90,7 +91,6 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let spectator: Spectator<TestComponent>;
   const createComponent = createComponentFactory({
     component: TestComponent,
-    imports: [WizardModule, IncompleteDateModule],
     providers: [provideRouter([])]
   });
 
@@ -524,7 +524,6 @@ describe('Accessibility Test: WizardComponent', () => {
   const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
   const createComponent = createComponentFactory({
     component: TestComponent,
-    imports: [WizardModule, IncompleteDateModule],
     mocks: [WidgetsConfigService],
     providers: [provideRouter([])]
   });
@@ -539,7 +538,7 @@ describe('Accessibility Test: WizardComponent', () => {
   });
 
   it('the dialog close icon should have an aria-label attribute with "Close"', () => {
-    const element = spectator.query('.p-dialog-header-icons .p-dialog-header-close') as HTMLElement;
+    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
     expect(element.getAttribute('aria-label')).toBe('Close');
   });
 });

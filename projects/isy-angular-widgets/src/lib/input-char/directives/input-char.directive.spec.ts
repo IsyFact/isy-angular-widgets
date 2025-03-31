@@ -12,7 +12,9 @@ import {ComponentFixture} from '@angular/core/testing';
     pInputText
     isyInputChar
     (change)="valueGet($event, charPicker.value)"
-  />`
+  />`,
+  standalone: true,
+  imports: [InputCharDirective]
 })
 class TestComponent {
   datentyp: Datentyp = Datentyp.DATENTYP_A;
@@ -37,15 +39,14 @@ describe('Integration Tests: InputCharDirective', () => {
   let inputCharButton: HTMLButtonElement;
   let input: HTMLInputElement;
   const createComponent = createComponentFactory({
-    component: TestComponent,
-    imports: [InputCharDirective]
+    component: TestComponent
   });
 
   beforeEach(() => {
     spectator = createComponent();
     fixture = spectator.fixture;
     directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
-    directive = directiveElement[0].injector.get(InputCharDirective);
+    directive = directiveElement[0]?.injector.get(InputCharDirective);
     input = spectator.query('#char-picker') as HTMLInputElement;
     inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
   });

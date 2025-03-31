@@ -121,8 +121,8 @@
       ></p-treeSelect>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-      <h3>InputTextarea</h3>
-      <textarea pInputTextarea class="w-full" aria-label="Textarea"></textarea>
+      <h3>Textarea</h3>
+      <textarea pTextarea class="w-full" aria-label="Textarea"></textarea>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputOpt</h3>
@@ -144,10 +144,10 @@
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>RadioButton</h3>
       <div class="flex flex-column gap-2">
-        <p-radioButton label="Cheese" name="pizza" value="Cheese" [(ngModel)]="ingredient"></p-radioButton>
-        <p-radioButton label="Mushroom" name="pizza" value="Mushroom" [(ngModel)]="ingredient"></p-radioButton>
-        <p-radioButton label="Pepper" name="pizza" value="Pepper" [(ngModel)]="ingredient"></p-radioButton>
-        <p-radioButton label="Onion" name="pizza" value="Onion" [(ngModel)]="ingredient"></p-radioButton>
+        <p-radiobutton label="Cheese" name="pizza" value="Cheese" [(ngModel)]="ingredient"></p-radiobutton>
+        <p-radiobutton label="Mushroom" name="pizza" value="Mushroom" [(ngModel)]="ingredient"></p-radiobutton>
+        <p-radiobutton label="Pepper" name="pizza" value="Pepper" [(ngModel)]="ingredient"></p-radiobutton>
+        <p-radiobutton label="Onion" name="pizza" value="Onion" [(ngModel)]="ingredient"></p-radiobutton>
       </div>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
@@ -197,7 +197,13 @@
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Chips</h3>
       <div class="p-fluid">
-        <p-autoComplete  multiple=true typeahead=false inputId="chips" [maxlength]="3" placeholder="Maximum 3 chips"></p-autoComplete>
+        <p-autoComplete
+          multiple="true"
+          typeahead="false"
+          inputId="chips"
+          [maxlength]="3"
+          placeholder="Maximum 3 chips"
+        ></p-autoComplete>
       </div>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">

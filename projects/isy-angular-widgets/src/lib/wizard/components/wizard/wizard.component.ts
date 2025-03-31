@@ -13,6 +13,10 @@ import {
 import {MenuItem} from 'primeng/api';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {CommonModule} from '@angular/common';
+import {StepsModule} from 'primeng/steps';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
 
 /**
  * The width of the wizard of not otherwise specified by the user.
@@ -33,7 +37,8 @@ const defaultHeight = 30;
 @Component({
   selector: 'isy-wizard',
   templateUrl: './wizard.component.html',
-  standalone: false
+  imports: [CommonModule, StepsModule, DialogModule, ButtonModule],
+  standalone: true
 })
 export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   /**

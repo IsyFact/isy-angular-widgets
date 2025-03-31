@@ -4,10 +4,19 @@
   <div class="grid">
     <div class="col-12 xl:col-6 flex-column gap-2">
       <h3>Accordion</h3>
-      <p-accordion>
-        <p-accordionTab header="Header 1"> Content 1 </p-accordionTab>
-        <p-accordionTab header="Header 2"> Content 2 </p-accordionTab>
-        <p-accordionTab header="Header 3"> Content 3 </p-accordionTab>
+      <p-accordion value="0" iconPos="start">
+        <p-accordion-panel value="0">
+          <p-accordion-header>Header 1</p-accordion-header>
+          <p-accordion-content>Content 1</p-accordion-content>
+        </p-accordion-panel>
+        <p-accordion-panel value="1">
+          <p-accordion-header>Header 2</p-accordion-header>
+          <p-accordion-content>Content 2</p-accordion-content>
+        </p-accordion-panel>
+        <p-accordion-panel value="3">
+          <p-accordion-header>Header 3</p-accordion-header>
+          <p-accordion-content>Content 3</p-accordion-content>
+        </p-accordion-panel>
       </p-accordion>
     </div>
     <div class="col-12 xl:col-6 flex-column gap-2">
@@ -15,12 +24,19 @@
       <p-panel header="Panel Header" [toggleable]="true"> Content </p-panel>
     </div>
     <div class="col-12 flex-column gap-2">
-      <h3>TabView</h3>
-      <p-tabView>
-        <p-tabPanel header="Header 1"> Content 1 </p-tabPanel>
-        <p-tabPanel header="Header 2"> Content 2 </p-tabPanel>
-        <p-tabPanel header="Header 3"> Content 3 </p-tabPanel>
-      </p-tabView>
+      <h3>Tabs</h3>
+      <p-tabs value="0">
+        <p-tablist>
+          <p-tab value="0">Header 1</p-tab>
+          <p-tab value="1">Header 2</p-tab>
+          <p-tab value="2">Header 3</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+          <p-tabpanel value="0"> Content 1 </p-tabpanel>
+          <p-tabpanel value="1"> Content 2 </p-tabpanel>
+          <p-tabpanel value="2"> Content 3 </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
     </div>
   </div>
   <p-divider></p-divider>
