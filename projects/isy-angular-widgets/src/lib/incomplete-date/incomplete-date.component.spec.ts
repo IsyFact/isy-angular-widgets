@@ -12,7 +12,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     key: '.',
     code: '190'
   });
-  const errorKey = 'UNSPECIFIEDDATE';
+  const errorKey = 'INVALIDUNSPECIFIEDDATE';
   let spectator: Spectator<IncompleteDateComponent>;
   const createComponent = createComponentFactory({
     component: IncompleteDateComponent,
@@ -216,7 +216,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(errors).toBeNull();
   });
 
-  it('should return UNSPECIFIEDDATE if the day is invalid', () => {
+  it('should return INVALIDUNSPECIFIEDDATE if the day is invalid', () => {
     const control: AbstractControl = new FormControl('50.11.2023');
 
     const errors = component.validate(control);
@@ -227,7 +227,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(errors[errorKey]).toBeDefined();
   });
 
-  it('should return UNSPECIFIEDDATE if the month is invalid', () => {
+  it('should return INVALIDUNSPECIFIEDDATE if the month is invalid', () => {
     const control: AbstractControl = new FormControl('11.50.2023');
 
     const errors = component.validate(control);

@@ -20,7 +20,7 @@
       <div>
         <p-button
           id="create-button"
-          class="mr-1"
+          styleClass="mr-1"
           icon="pi pi-plus"
           [label]="'isyAngularWidgetsDemo.actions.createObject' | translate"
           (onClick)="emitCreateAction()"
@@ -37,7 +37,7 @@
         </p-button>
       </div>
       <div class="pt-3">
-        <p-multiSelect
+        <p-multiselect
           display="chip"
           [options]="initialColumns"
           [(ngModel)]="selectedColumns"
@@ -74,7 +74,7 @@
                 [showAddButton]="false"
               >
                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                  <p-multiSelect
+                  <p-multiselect
                     [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
                     placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
                     [ngModel]="value"
@@ -86,7 +86,7 @@
                         <span class="p-ml-1">{{ option.label }}</span>
                       </div>
                     </ng-template>
-                  </p-multiSelect>
+                  </p-multiselect>
                 </ng-template>
               </p-columnFilter>
             } @else if (col.currency) {

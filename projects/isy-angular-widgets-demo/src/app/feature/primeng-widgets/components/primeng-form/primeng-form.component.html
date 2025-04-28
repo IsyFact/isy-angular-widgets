@@ -7,12 +7,12 @@
       <input id="inputText" type="text" pInputText class="w-full" />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-      <h3>InputMask</h3>
+      <h3>Inputmask</h3>
       <p-inputMask inputId="inputMask" mask="(999) 999-9999" placeholder="(999) 999-9999" styleClass="w-full" />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>AutoComplete</h3>
-      <p-autoComplete
+      <p-autocomplete
         inputId="autoComplete"
         optionLabel="name"
         [suggestions]="filteredCountries"
@@ -20,23 +20,23 @@
         placeholder="Enter a country"
         styleClass="w-full"
         inputStyleClass="w-full"
-      ></p-autoComplete>
+      ></p-autocomplete>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>IconField</h3>
-      <p-iconField iconPosition="left">
+      <p-iconfield iconPosition="left">
         <p-inputIcon styleClass="pi pi-search"></p-inputIcon>
         <input type="text" pInputText placeholder="Search" class="w-full" />
-      </p-iconField>
+      </p-iconfield>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputGroup</h3>
-      <p-inputGroup>
+      <p-inputgroup>
         <p-inputGroupAddon>
           <i class="pi pi-user"></i>
         </p-inputGroupAddon>
         <input id="inputGroup" pInputText placeholder="User" class="w-full" />
-      </p-inputGroup>
+      </p-inputgroup>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>KeyFilter (hex)</h3>
@@ -65,7 +65,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputNumber</h3>
-      <p-inputNumber
+      <p-inputnumber
         inputId="inputNumber"
         class="w-full"
         styleClass="w-full"
@@ -73,11 +73,11 @@
         [showButtons]="true"
         mode="currency"
         currency="EUR"
-      ></p-inputNumber>
+      ></p-inputnumber>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>CascadeSelect</h3>
-      <p-cascadeSelect
+      <p-cascadeselect
         id="cascadeSelect"
         [options]="cities"
         optionLabel="name"
@@ -85,7 +85,7 @@
         [optionGroupChildren]="$any(['states', 'cities'])"
         placeholder="Select a City"
         styleClass="w-full"
-      ></p-cascadeSelect>
+      ></p-cascadeselect>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Dropdown</h3>
@@ -102,23 +102,23 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>MultiSelect</h3>
-      <p-multiSelect
+      <p-multiselect
         id="multiSelect"
         [options]="countries"
         optionLabel="name"
         placeholder="Select Countries"
         appendTo="body"
         styleClass="w-full"
-      ></p-multiSelect>
+      ></p-multiselect>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>TreeSelect</h3>
-      <p-treeSelect
+      <p-treeselect
         inputId="treeSelect"
         [options]="files"
         placeholder="Select Item"
         containerStyleClass="w-full"
-      ></p-treeSelect>
+      ></p-treeselect>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Textarea</h3>
@@ -126,7 +126,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputOpt</h3>
-      <p-inputOtp [length]="6"></p-inputOtp>
+      <p-inputotp [length]="6"></p-inputotp>
     </div>
   </div>
   <p-divider></p-divider>
@@ -173,17 +173,17 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>ToggleButton</h3>
-      <p-toggleButton
+      <p-togglebutton
         inputId="toggleButton"
         [onIcon]="'pi pi-lock'"
         offIcon="pi pi-lock-open"
         onLabel="Locked"
         offLabel="Unlocked"
-      ></p-toggleButton>
+      ></p-togglebutton>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>SelectButton</h3>
-      <p-selectButton [options]="stateOptions"></p-selectButton>
+      <p-selectbutton [options]="stateOptions"></p-selectbutton>
     </div>
   </div>
   <p-divider></p-divider>
@@ -191,19 +191,19 @@
   <div class="grid mb-3">
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Colorpicker</h3>
-      <p-colorPicker inputId="colorpicker" [(ngModel)]="color"></p-colorPicker>
+      <p-colorpicker inputId="colorpicker" [(ngModel)]="color"></p-colorpicker>
       <span class="ml-3">{{ color }}</span>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Chips</h3>
       <div class="p-fluid">
-        <p-autoComplete
+        <p-autocomplete
           multiple="true"
           typeahead="false"
           inputId="chips"
           [maxlength]="3"
           placeholder="Maximum 3 chips"
-        ></p-autoComplete>
+        ></p-autocomplete>
       </div>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">

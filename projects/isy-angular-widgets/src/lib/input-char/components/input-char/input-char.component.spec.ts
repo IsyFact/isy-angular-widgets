@@ -6,6 +6,7 @@ import {MockComponents, MockModule} from 'ng-mocks';
 import {DialogModule} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
+import {ButtonModule} from 'primeng/button';
 
 let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
@@ -15,7 +16,7 @@ describe('Unit Tests: InputCharComponent', () => {
   const dialogDefaultHeight = '460px';
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    imports: [MockModule(DialogModule), MockComponents(InputCharDialogComponent)]
+    imports: [MockModule(DialogModule), MockComponents(InputCharDialogComponent), MockModule(ButtonModule)]
   });
 
   describe('with default datentyp', () => {
@@ -168,7 +169,7 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton button');
+        const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 

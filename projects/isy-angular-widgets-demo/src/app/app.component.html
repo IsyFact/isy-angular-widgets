@@ -6,6 +6,7 @@ like in the following example. The side bar regions can be disabled with corresp
   [showLinksnavigation]="true"
   [showInformationsbereich]="true"
   [items]="items"
+  [links]="skipLinks"
   [userInfo]="userInfo"
   linksNavigationTitle="{{ 'isyAngularWidgetsDemo.labels.leftSidebarTitle' | translate }}"
 >
@@ -83,7 +84,7 @@ like in the following example. The side bar regions can be disabled with corresp
 
   <!-- The Linksnavigation is the left side bar. You could build some kind of menu here. -->
   <div Linksnavigation>
-    <p-panelMenu [model]="sidebarItems" [multiple]="true"></p-panelMenu>
+    <p-panelmenu [model]="sidebarItems" [multiple]="true"></p-panelmenu>
     <router-outlet name="linksnavigation"></router-outlet>
   </div>
 

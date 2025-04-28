@@ -3,8 +3,8 @@
 ## Migration von Angular v18 auf v19 und PrimeNG v17 auf v19
 
 ### 1. Aktualisierte Frameworks & Tools
-- Angular: v18 → **v19.2.4**
-- PrimeNG: v17 → **v19.0.10**
+- Angular: v18 → **v19.2.8**
+- PrimeNG: v17 → **v19.1.0**
 - Alle Core-Pakete & CLI aktualisiert
 - Migrationshinweise von [update.angular.io](https://update.angular.io) & [PrimeNG Migration Guide](https://primeng.org/guides/migration) angewendet
 
@@ -14,11 +14,11 @@
 
 #### Paketkonfiguration (`index.ts`)
 ```ts
-addPackageToPackageJson(tree, '@angular/common', '19.2.4');
-addPackageToPackageJson(tree, '@angular/core', '19.2.4');
-addPackageToPackageJson(tree, 'primeng', '19.0.10');
+addPackageToPackageJson(tree, '@angular/common', '19.2.9');
+addPackageToPackageJson(tree, '@angular/core', '19.2.9');
+addPackageToPackageJson(tree, 'primeng', '19.1.0');
 addPackageToPackageJson(tree, 'moment', '^2.30.1');
-addPackageToPackageJson(tree, '@primeng/themes', '19.0.10');
+addPackageToPackageJson(tree, '@primeng/themes', '19.1.0');
 ```
 
 #### Angepasste Komponenten, Services & Direktiven
@@ -108,15 +108,15 @@ addPackageToPackageJson(tree, '@primeng/themes', '19.0.10');
 
 **Ersetzte/veraltete Komponenten:**
 
-| Alt             | Neu                                                  |
-|------------------|-------------------------------------------------------|
-| `Chips`          | `AutoComplete` (multiple, ohne Typeahead)            |
-| `TabMenu`        | `Tabs` (ohne Panels)                                 |
-| `Steps`          | `Stepper` (ohne Panels)                              |
-| `InlineMessage`  | `Message`-Komponente                                 |
-| `TabView`        | `Tabs`-Komponenten                              |
-| `Accordion`      | `AccordionPanel` + `Header` + `Content`              |
-| `Messages`       | `Message`-Komponente                                 |
+| Alt              | Neu                                        |
+|------------------|--------------------------------------------|
+| `Chips`          | `AutoComplete` (multiple, ohne Typeahead)  |
+| `TabMenu`        | `Tabs` (ohne Panels)                       |
+| `Steps`          | `Stepper` (ohne Panels)                    |
+| `InlineMessage`  | `Message`-Komponente                       |
+| `TabView`        | `Tabs`-Komponenten                         |
+| `Accordion`      | `AccordionPanel` + `Header` + `Content`    |
+| `Messages`       | `Message`-Komponente                       |
 
 ---
 
@@ -145,46 +145,46 @@ addPackageToPackageJson(tree, '@primeng/themes', '19.0.10');
 ```json
 {
     "dependencies": {
-        "@angular/animations": "19.2.4",
-        "@angular/cdk": "19.2.4",
-        "@angular/common": "19.2.4",
-        "@angular/compiler": "19.2.4",
-        "@angular/core": "19.2.4",
-        "@angular/forms": "19.2.4",
-        "@angular/platform-browser": "19.2.4",
-        "@angular/platform-browser-dynamic": "19.2.4",
-        "@angular/router": "19.2.4",
+        "@angular/animations": "^19.2.8",
+        "@angular/cdk": "^19.2.3",
+        "@angular/common": "^19.2.8",
+        "@angular/compiler": "^19.2.8",
+        "@angular/core": "^19.2.8",
+        "@angular/forms": "^19.2.8",
+        "@angular/platform-browser": "^19.2.8",
+        "@angular/platform-browser-dynamic": "^19.2.8",
+        "@angular/router": "^19.2.4",
         "@ngx-translate/core": "^16.0.4",
         "@ngx-translate/http-loader": "^16.0.1",
-        "@primeng/themes": "19.0.10",
-        "chart.js": "^4.4.8",
+        "@primeng/themes": "^19.1.0",
+        "chart.js": "^4.4.9",
         "flag-icons": "^7.3.2",
-        "primeng": "19.0.10",
+        "primeng": "19.1.0",
         "quill": "^2.0.3",
         "rxjs": "7.8.2",
         "tslib": "^2.8.1",
         "zone.js": "0.15.0"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "^19.2.4",
+        "@angular-devkit/build-angular": "^19.2.9",
         "@angular-eslint/builder": "19.3.0",
         "@angular-eslint/eslint-plugin": "19.3.0",
-        "@angular-eslint/eslint-plugin-template": "19.3.0",
+        "@angular-eslint/eslint-plugin-template": "^19.3.0",
         "@angular-eslint/schematics": "19.3.0",
         "@angular-eslint/template-parser": "19.3.0",
-        "@angular/cli": "19.2.4",
-        "@angular/compiler-cli": "19.2.4",
+        "@angular/cli": "~19.2.9",
+        "@angular/compiler-cli": "19.2.8",
         "@compodoc/compodoc": "^1.1.26",
         "@ngneat/spectator": "^19.4.1",
         "@types/jasmine": "~5.1.7",
-        "@types/node": "^22.13.14",
-        "@typescript-eslint/eslint-plugin": "^8.28.0",
-        "@typescript-eslint/parser": "^8.28.0",
-        "eslint": "^9.23.0",
-        "eslint-plugin-jsdoc": "^50.6.9",
+        "@types/node": "^22.15.2",
+        "@typescript-eslint/eslint-plugin": "^8.31.0",
+        "@typescript-eslint/parser": "^8.31.0",
+        "eslint": "^9.25.1",
+        "eslint-plugin-jsdoc": "^50.6.11",
         "jasmine-core": "~5.6.0",
         "ng-mocks": "^14.13.4",
-        "ng-packagr": "19.2.0",
+        "ng-packagr": "^19.2.2",
         "prettier": "^3.5.3",
         "typescript": "5.8.2"
     }
@@ -195,11 +195,11 @@ addPackageToPackageJson(tree, '@primeng/themes', '19.0.10');
 ```json
 {
   "peerDependencies": {
-    "@angular/common": "19.2.4",
-    "@angular/core": "19.2.4",
+    "@angular/common": "^19.2.8",
+    "@angular/core": "^19.2.8",
     "primeflex": "^4.0.0",
-    "primeng": "19.0.10",
-    "@primeng/themes": "19.0.10"
+    "primeng": "^19.1.0",
+    "@primeng/themes": "^19.1.0"
   },
   "dependencies": {
     "tslib": "^2.8.1"
@@ -208,13 +208,24 @@ addPackageToPackageJson(tree, '@primeng/themes', '19.0.10');
 ```
 ---
 
-### 7. Codequalität geprüft
+### 7. **GitHub Issues**
+    Folgende GitHub Issues wurden behoben:
+    - P-Multiselect loses focus by using keyboard #249
+    - Style of readonly Inputs #247
+    - Charpicker loses Focus #241
+    - Provide a skip link in isy-hauptfenster #239
+    - Allow Form Field Wrapper label id to be specified #238
+    - multi-select-button.component.scss overrides global styles of p-accordion #237
+
+---
+
+### 8. Codequalität geprüft
 - **ESLint:** `npm run lint` → keine Fehler
 - **Prettier:** `npm run prettier:check` → bestanden
 
 ---
 
-### 8. Tests durchgeführt
+### 9. Tests durchgeführt
 - **Unit- & Integrationstests:** `npm run test` → alle Tests bestanden
 - **Manuelle Tests:** 
   - UI geprüft
@@ -243,18 +254,19 @@ addPackageToPackageJson(tree, '@primeng/themes', '19.0.10');
 
 - **Ersetzte Komponenten (nicht mehr verfügbar):**
 
-  | Alt               | Neu                  |
-  |--------------------|----------------------|
-  | `Calendar`         | `DatePicker`         |
-  | `Dropdown`         | `Select`             |
-  | `InputSwitch`      | `ToggleSwitch`       |
-  | `OverlayPanel`     | `Popover`            |
-  | `Sidebar`          | `Drawer`             |
-  | `Chips`            | `AutoComplete`       |
-  | `TabMenu`          | `Tabs`               |
-  | `Steps`            | `Stepper`            |
-  | `Messages`, `InlineMessage` | `Message` |
-  | `TabView`          | `Tabs`-Komponente |
+  | Alt                | Neu                                     |
+  |--------------------|-----------------------------------------|
+  | `Calendar`         | `DatePicker`                            |
+  | `Dropdown`         | `Select`                                |
+  | `InputSwitch`      | `ToggleSwitch`                          |
+  | `OverlayPanel`     | `Popover`                               |
+  | `Sidebar`          | `Drawer`                                |
+  | `Chips`            | `AutoComplete`                          |
+  | `TabMenu`          | `Tabs`                                  |
+  | `Steps`            | `Stepper`                               |
+  | `Messages`         | `Message`                               |
+  | `InlineMessage`    | `Message`                               |
+  | `TabView`          | `Tabs`-Komponente                       |
   | `Accordion`        | `AccordionPanel` + `Header` + `Content` |
 
 - **API-Änderungen an bestehenden Komponenten:**
@@ -270,12 +282,17 @@ addPackageToPackageJson(tree, '@primeng/themes', '19.0.10');
   - `PrimeNGConfig` wird nicht mehr direkt konfiguriert  
     → ersetzt durch `providePrimeNG()` via `provideIsyFactTheme()`
 
+- **Neues Theming:**
+  Das FluentUI-Theme wurde durch das neue PrimeNG-Theming mit dem Standard-Theme Nora ersetzt und entsprechend angepasst.
+  Durch Aufruf von `provideIsyFactTheme({ theme: Anderes Theme })` kann ein anderes Standard-Theme optional übergeben werden.
+
 ---
 
 ## Zusammenfassung
 
 - Angular v19 & PrimeNG v19 erfolgreich migriert  
-- Veraltete Komponenten & Module ersetzt  
+- Veraltete Komponenten & Module ersetzt
+- Neues Theming-System integriert
 - Abhängigkeiten aktualisiert  
 - Tests & manuelle Checks bestanden  
 - Codequalität mit ESLint & Prettier sichergestellt

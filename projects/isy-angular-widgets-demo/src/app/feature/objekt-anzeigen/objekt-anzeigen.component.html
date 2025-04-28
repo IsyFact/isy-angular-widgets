@@ -29,6 +29,7 @@
                 type="text"
                 placeholder="{{ 'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16} }}"
                 pInputText
+                [readonly]="true"
               />
             </isy-form-wrapper>
           </div>
@@ -80,16 +81,21 @@
             </isy-form-wrapper>
           </div>
           <div class="col-12 md:col-6 xl:col-4">
+            <!-- Die Eigenschaften labelId und ariaLabelledBy in der Form-Wrapper-Komponente ermöglichen die Zuordnung des Labels zum Eingabefeld,
+            insbesondere wenn das Setzen einer inneren ID, wie z.B. bei PrimeNG p-select, nicht möglich ist. -->
             <isy-form-wrapper
               label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+              labelId="label-gender"
               fieldId="gender"
               [control]="personalInfoForm.controls.gender | formControl"
             >
               <p-select
                 inputId="gender"
                 formControlName="gender"
+                ariaLabelledBy="label-gender"
                 [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
                 [filter]="true"
+                [readonly]="true"
                 [options]="[
                   'isyAngularWidgetsDemo.labels.optionMale' | translate,
                   'isyAngularWidgetsDemo.labels.optionFemale' | translate,
@@ -108,7 +114,7 @@
               label="{{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}"
               fieldId="birth-date"
               [control]="personalInfoForm.controls.birthDate | formControl"
-              [validationMessages]="{PAST: 'isyAngularWidgetsDemo.messages.dateInPastError' | translate}"
+              [validationMessages]="{INVALIDPASTDATE: 'isyAngularWidgetsDemo.messages.dateInPastError' | translate}"
             >
               <p-datepicker
                 inputId="birth-date"
@@ -118,6 +124,7 @@
                 [showIcon]="true"
                 styleClass="w-full"
                 appendTo="body"
+                [readonlyInput]="true"
               >
               </p-datepicker>
             </isy-form-wrapper>
@@ -137,7 +144,7 @@
               fieldId="phone-number"
               [control]="personalInfoForm.controls.phoneNumber | formControl"
             >
-              <p-inputMask
+              <p-inputmask
                 inputId="phone-number"
                 formControlName="phoneNumber"
                 type="text"
@@ -151,7 +158,7 @@
               label="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
               fieldId="date-of-entry"
               [control]="personalInfoForm.controls.dateOfEntry | formControl"
-              [validationMessages]="{UNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
+              [validationMessages]="{INVALIDUNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
             >
               <isy-incomplete-date
                 inputId="date-of-entry"
@@ -169,7 +176,7 @@
               fieldId="date-of-departure"
               [control]="personalInfoForm.controls.dateOfDeparture | formControl"
             >
-              <p-inputMask
+              <p-inputmask
                 inputId="date-of-departure"
                 formControlName="dateOfDeparture"
                 styleClass="w-full"
@@ -185,7 +192,7 @@
               fieldId="identity-card-expiration-date"
               [control]="personalInfoForm.controls.identityCardExpirationDate | formControl"
             >
-              <p-inputMask
+              <p-inputmask
                 inputId="identity-card-expiration-date"
                 formControlName="identityCardExpirationDate"
                 mask="9999-99-99"
@@ -218,7 +225,7 @@
               fieldId="credit-card-number"
               [control]="personalInfoForm.controls.creditCardNumber | formControl"
             >
-              <p-inputMask
+              <p-inputmask
                 inputId="credit-card-number"
                 formControlName="creditCardNumber"
                 styleClass="w-full"
@@ -234,10 +241,10 @@
               fieldId="credit-card-expiration-date"
               [control]="personalInfoForm.controls.creditCardExpirationDate | formControl"
               [validationMessages]="{
-                CREDITCARDEXPIRATIONDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate
+                INVALIDCREDITCARDEXPIRATIONDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate
               }"
             >
-              <p-inputMask
+              <p-inputmask
                 inputId="credit-card-expiration-date"
                 formControlName="creditCardExpirationDate"
                 mask="99/99"
@@ -248,7 +255,7 @@
             </isy-form-wrapper>
           </div>
           <div class="col-12 md:col-6 xl:col-4 align-content-end">
-            <p-fileUpload
+            <p-fileupload
               id="identity-document"
               formControlName="identityDocument"
               ngDefaultControl
@@ -262,7 +269,7 @@
               chooseLabel="{{ 'isyAngularWidgetsDemo.labels.identityDocument' | translate }}"
               chooseStyleClass="p-button-outlined"
             >
-            </p-fileUpload>
+            </p-fileupload>
           </div>
         </div>
 
@@ -371,17 +378,14 @@
             </div>
           </p-fieldset>
         }
-        <button
-          pButton
+        <p-button
           label="{{ 'isyAngularWidgetsDemo.actions.addResidence' | translate }}"
           icon="pi pi-plus"
           iconPos="left"
-          type="button"
-          pRipple
           [disabled]="personalInfoForm.disabled"
-          (click)="addNewAddress()"
+          (onClick)="addNewAddress()"
           [outlined]="true"
-        ></button>
+        ></p-button>
 
         <p-divider></p-divider>
 
@@ -408,7 +412,7 @@
                   fieldId="security-level"
                   [control]="personalInfoForm.controls.securityLevel | formControl"
                 >
-                  <p-inputNumber
+                  <p-inputnumber
                     inputId="security-level"
                     formControlName="securityLevel"
                     [showButtons]="true"
@@ -420,7 +424,7 @@
                     incrementButtonClass="p-button-outlined"
                     decrementButtonClass="p-button-outlined"
                   >
-                  </p-inputNumber>
+                  </p-inputnumber>
                 </isy-form-wrapper>
               </div>
               <div class="col-12 xl:col-8">
@@ -451,17 +455,14 @@
 
       <div class="justify-content-center flex mt-3">
         <div id="div-save" class="p-buttonset">
-          <button
-            pButton
+          <p-button
             id="button-save"
-            type="button"
-            pRipple
             icon="pi pi-save"
             iconPos="left"
             [disabled]="!personalInfoForm.valid"
             [label]="'isyAngularWidgetsDemo.actions.save' | translate"
-            (click)="savePersonalien()"
-          ></button>
+            (onClick)="savePersonalien()"
+          ></p-button>
         </div>
       </div>
     </p-tabpanel>

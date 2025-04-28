@@ -162,8 +162,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * If `transferISO8601` is true, it calls `Validation.validUnspecifiedISODate` to validate the control.
    * Otherwise, it calls `Validation.validUnspecifiedDate` to validate the control.
    * The Validation checks that the date is a valid unspecified date or valid date in German format DD.MM.YYYY resp. ISO 8601 YYYY-MM-DD.
-   * If the date is invalid and not unspecified, a `UNSPECIFIEDDATE` resp. `UNSPECIFIEDISODATE` error is thrown.
-   * If the year is '0000' and `allowZeroFormat` is false, a `UNSPECIFIEDDATE` resp. `UNSPECIFIEDISODATE` error is thrown.
+   * If the date is invalid and not unspecified, a `INVALIDUNSPECIFIEDISODATE` resp. `INVALIDUNSPECIFIEDISODATE` error is thrown.
+   * If the year is '0000' and `allowZeroFormat` is false, a `INVALIDUNSPECIFIEDISODATE` resp. `INVALIDUNSPECIFIEDISODATE` error is thrown.
    * E.g. unspecified dates: 00.MM.YYYY, 00.00.YYYY, 00.00.0000, xx.MM.YYYY, xx.xx.YYYY, xx.xx.xxxx,
    * YYYY-MM-00, YYYY-00-00, 0000-00-00, YYYY-MM-xx, YYYY-xx-xx, xxxx-xx-xx
    * For valid or valid unspecified dates, no error is thrown.

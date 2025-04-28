@@ -88,12 +88,12 @@ import {PanelModule} from 'primeng/panel';
   standalone: true,
   imports: [HauptfensterComponent, PanelModule, MenuModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: './app.component.scss'
 })
 export class AppComponent {}
 ```
 
-Abschließend ist es erforderlich, in `app.config.ts` die Methode `provideIsyFactTheme` zu importieren und bereitzustellen, um Animationen zu aktivieren:
+Abschließend ist es erforderlich, in `app.config.ts` die Methode `provideAnimations` und `provideIsyFactTheme` zu importieren und bereitzustellen, um Animationen zu aktivieren:
 
 ```typescript
 // Other imports ...
@@ -103,9 +103,32 @@ import {routes} from './app.routes';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideIsyFactTheme()]
+  providers: [provideRouter(routes), provideAnimations(), provideIsyFactTheme()]
 };
 ```
+
+## Theme-Konfiguration
+
+Die Bibliothek verwendet standardmäßig das PrimeNG-Theme `Nora` über `providePrimeNG()`.
+
+Beim Aufruf von `provideIsyFactTheme()` kann ein Theme optional übergeben werden:
+
+### Beispiel: Theme-Konfiguration in `app.config.ts`
+
+```ts
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
+import Material from '@primeng/themes/material';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideIsyFactTheme({ theme: Material }),
+    provideRouter([...])
+  ]
+};
+```
+Wird kein Theme angegeben, nutzt die Bibliothek standardmäßig Nora.
 
 ## I18N
 
@@ -214,26 +237,3 @@ export class AppComponent implements OnInit, OnDestroy {
 }
 ```
 Die `translate`-Methode kann z.B. auch fr einen Language-Picker verwenden werden, damit def Benutzer einer Seite die Sprache selber wählen kann.
-
-## Theme-Konfiguration
-
-Die Bibliothek verwendet standardmäßig das PrimeNG-Theme `Nora` über `providePrimeNG()`.
-
-Beim Aufruf von `provideIsyFactTheme()` kann ein Theme optional übergeben werden:
-
-### Beispiel: Theme-Konfiguration in `app.config.ts`
-
-```ts
-import {ApplicationConfig} from '@angular/core';
-import {provideRouter} from '@angular/router';
-import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
-import Material from '@primeng/themes/Material';
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideIsyFactTheme({ theme: Material }),
-    provideRouter([...])
-  ]
-};
-```
-Wird kein Theme angegeben, nutzt die Bibliothek standardmäßig Nora.

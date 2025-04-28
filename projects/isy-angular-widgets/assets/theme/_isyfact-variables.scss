@@ -1,73 +1,41 @@
-/*
- To make precise adjustments to the Isyfact design, certain variables in the PrimeNG Bootstrap Light Theme are overwritten.
- This avoids direct modifications to the original theme variables, ensuring the integrity and maintainability of the standard theme.
- This approach allows for specific customizations while preserving the updatability of the standard theme.
-*/
+// Variables adjusted to meet the IsyFact design requirements
 
-// Variables adjusted to meet the Isyfact design requirements
+// IsyFact Colors
+$isyfactLightGrey: #f2f2f2 !default;
+$isyfactGrey: #dddddd !default;
+$isyfactMediumGrey: #83878c !default;
+$isyfactCharcoal: #404040 !default;
+$isyfactDarkGrey: #212529 !default;
+$isyfactPrimaryColor: #0055b9 !default;
+$isyfactPrimaryActive: $isyfactPrimaryColor !default;
+$isyfactPrimaryDisabledColor: #7897ae !default;
+$isyfactSecondaryColor: #d45c00 !default;
 
-// Variables in theme file _variables.scss
+$isyfactAlertColor: #a4252c !default;
+$isyfactSuccessColor: #498205 !default;
+$isyfactWarningColor: #d47d00 !default;
+$isyfactInfoColor: #008edb !default;
+$isyfactHelpColor: #8378de !default;
 
-//theme
+// theme
 $themePrimary: #0055b9 !default;
 $themeDark: #003a85 !default;
-$themeDarker: #003a85 !default;
-$themeDarkAlt: #003a85 !default;
 
-//global
+// global
 $fontFamily: BundesSans, 'Liberation Sans', sans-serif;
 $disabledOpacity: 0.8 !default;
 
-// Variables in theme file _variables.scss adjusted to meet the accessible target size of at least 44x44 pixels for interactive elements
-
-//action icons
-$actionIconWidth: 2.75rem !default;
-$actionIconHeight: 2.75rem !default;
-
-//input field (e.g. inputtext, spinner, inputmask)
-$inputPadding: 0.8125rem 0.75rem !default;
-
-//input groups
-$inputGroupAddOnMinWidth: 2.75rem !default;
-
-//button
-$buttonPadding: 0.8125rem 0.75rem !default;
-$buttonIconOnlyWidth: 2.875rem !default;
-$buttonIconOnlyPadding: 0.8125rem 0 !default;
-
-//tabview
-$tabviewHeaderPadding: 0.875rem 1rem !default;
-
-//menu (e.g. menu, menubar, tieredmenu)
-$menuitemPadding: 0.875rem 1.25rem !default;
-$submenuHeaderPadding: 0.8125rem 0.5rem !default;
-
-//chexbox
-$checkboxWidth: 24px;
-$checkboxHeight: 24px;
-
-//input lists (e.g. dropdown, autocomplete, multiselect, orderlist)
-$inputListItemPadding: 0.75rem 0.85rem !default;
-$inputListHeaderPadding: 0.75rem 0.85rem !default;
-
-//toast
-$toastPadding: 1rem !default;
-
-//panel
-$panelHeaderPadding: 0.8125rem !default;
-$accordionHeaderPadding: 0.875rem !default;
-
-//accordion
-$accordionSpacing: 0px !default;
-
-// Variables in theme file _variables.scss adjusted to meet color requirements of the IsyFact design
-
-//html label font-weight
+// html label font-weight
 $isyfactLabelFontWeight: bold !default;
 
-//input
-$inputPlaceholderTextColor: #83878c !default;
+// input
+$isyfactInputPlaceholderTextColor: #83878c !default;
 
-//progress spinner
-$isyfactProgressSpinnerStroke: $themePrimary !default;
+// progress spinner
+$isyfactProgressSpinnerStroke: $isyfactPrimaryColor !default;
 $isyfactProgressSpinnerAnimation: p-progress-spinner-dash 1.5s ease-in-out infinite !default;
+
+// Hauptfenster
+$isyfactSurfaceGround: #faf9f8;
+$isyfactSurfaceSection: #fff;
+$isyfactHauptfensterBackground: #336794 !default;

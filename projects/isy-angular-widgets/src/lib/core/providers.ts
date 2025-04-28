@@ -1,25 +1,25 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {EnvironmentProviders, makeEnvironmentProviders} from '@angular/core';
-import {provideAnimations} from '@angular/platform-browser/animations';
 import {providePrimeNG} from 'primeng/config';
-import {defaultTheme} from './theme';
-
-export interface IsyFactThemeConfig {
-  theme?: string; // Theme-Objekt (e.g. Material)
-}
+import {Preset} from '@primeng/themes/types';
+import Nora from '@primeng/themes/nora';
 
 /**
- * Provides the IsyFact theme configuration and necessary environment providers.
- * @param config - An optional configuration object for the IsyFact theme.
- * Defaults to an empty object if not provided.
- * - `theme`: Specifies the theme preset to use. If not provided, the `defaultTheme` is used.
- * @returns An `EnvironmentProviders` instance that includes animations and PrimeNG theme configuration.
+ * Provides the IsyFact theme for PrimeNG components.
+ * @param themePreset The theme preset to use. Default is Nora.
+ * @returns An EnvironmentProviders object with the theme configuration.
  */
-export function provideIsyFactTheme(config: IsyFactThemeConfig = {}): EnvironmentProviders {
+export function provideIsyFactTheme(themePreset: Preset<any> = Nora): EnvironmentProviders {
   return makeEnvironmentProviders([
-    provideAnimations(),
     providePrimeNG({
       theme: {
-        preset: config.theme ?? defaultTheme
+        preset: themePreset,
+        options: {
+          cssLayer: {
+            name: 'primeng',
+            order: 'primeng, isyfact-theme'
+          }
+        }
       }
     })
   ]);

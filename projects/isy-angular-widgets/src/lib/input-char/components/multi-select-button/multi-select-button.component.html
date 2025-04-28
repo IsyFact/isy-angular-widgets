@@ -1,25 +1,25 @@
-<p-selectButton
+<p-selectbutton
   styleClass="all-selectbutton"
   (onChange)="triggerUpdate(undefined)"
   [(ngModel)]="allOptionsModel"
   [options]="[{label: allButtonOptionsLabel}]"
   optionLabel="label"
 >
-</p-selectButton>
+</p-selectbutton>
 
-<p-accordion [(value)]="activeIndex" iconPos="start">
+<p-accordion [(value)]="activeIndex">
   @for (item of dataToDisplay | keyvalue; let i = $index; track item.key) {
     <p-accordion-panel [value]="item.key">
       <p-accordion-header>{{ item.key }}</p-accordion-header>
       <p-accordion-content>
-        <p-selectButton
+        <p-selectbutton
           [disabled]="disabled"
           [options]="item.value"
           [(ngModel)]="models[item.key]"
           (onChange)="triggerUpdate(item.key)"
           class="charset-selectbutton charset-selectbutton--{{ i }}"
         >
-        </p-selectButton>
+        </p-selectbutton>
       </p-accordion-content>
     </p-accordion-panel>
   }

@@ -1,4 +1,5 @@
 <div class="isy-hauptfenster">
+  <isy-skip-links [links]="links"></isy-skip-links>
   <header class="grid grid-nogutter">
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       @if (logoAnbieterAwl) {
@@ -74,30 +75,24 @@
                 <span class="font-bold">{{ linksNavigationTitle }}</span>
               </div>
               <div class="flex justify-content-end col-3">
-                <button
-                  class="p-button-text"
-                  type="button"
-                  pRipple
-                  pButton
+                <p-button
+                  styleClass="p-button-text"
                   icon="pi pi-chevron-left"
                   [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
-                  (click)="collapsedLinksnavigation = true"
-                ></button>
+                  (onClick)="collapsedLinksnavigation = true"
+                ></p-button>
               </div>
             </div>
           }
           <ng-content select="[Linksnavigation]"></ng-content>
         </div>
         <div [hidden]="!collapsedLinksnavigation">
-          <button
-            class="p-button-text"
-            type="button"
-            pRipple
-            pButton
+          <p-button
+            styleClass="p-button-text"
             icon="pi pi-chevron-right"
             [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
-            (click)="collapsedLinksnavigation = false"
-          ></button>
+            (onClick)="collapsedLinksnavigation = false"
+          ></p-button>
         </div>
       </aside>
     }
@@ -115,29 +110,23 @@
         <div [hidden]="collapsedInformationsbereich" id="open-informationsbereich">
           @if (allowSidebarCollapse) {
             <div class="flex justify-content-start">
-              <button
-                class="p-button-text"
-                type="button"
-                pRipple
-                pButton
+              <p-button
+                styleClass="p-button-text"
                 icon="pi pi-chevron-right"
                 [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')"
-                (click)="collapsedInformationsbereich = true"
-              ></button>
+                (onClick)="collapsedInformationsbereich = true"
+              ></p-button>
             </div>
           }
           <ng-content select="[Informationsbereich]"></ng-content>
         </div>
         <div [hidden]="!collapsedInformationsbereich">
-          <button
-            pButton
-            class="p-button-text"
-            type="button"
-            pRipple
+          <p-button
+            styleClass="p-button-text"
             icon="pi pi-chevron-left"
             [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandInformationsbereich')"
-            (click)="collapsedInformationsbereich = false"
-          ></button>
+            (onClick)="collapsedInformationsbereich = false"
+          ></p-button>
         </div>
       </aside>
     }

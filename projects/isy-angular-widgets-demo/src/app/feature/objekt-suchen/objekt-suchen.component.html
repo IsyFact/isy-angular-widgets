@@ -130,7 +130,7 @@
   <div class="flex justify-content-end p-2">
     <p-button
       id="search-button"
-      class="mr-1"
+      styleClass="mr-1"
       [label]="'isyAngularWidgetsDemo.actions.search' | translate"
       [iconPos]="'left'"
       [icon]="'pi pi-search'"
@@ -286,14 +286,14 @@
       </div>
       <div class="flex justify-content-end flex-wrap card-container pt-2">
         <p-button
-          class="flex align-items-center justify-content-center mr-1"
+          styleClass="flex align-items-center justify-content-center mr-1"
           [label]="'isyAngularWidgetsDemo.actions.save' | translate"
           (onClick)="saveChanges()"
           [disabled]="!editForm.valid || !allowSave"
         >
         </p-button>
         <p-button
-          class="flex align-items-center justify-content-center mr-1"
+          styleClass="flex align-items-center justify-content-center mr-1"
           [label]="'isyAngularWidgetsDemo.actions.close' | translate"
           (onClick)="displayEditDialog()"
         >

@@ -35,7 +35,9 @@
         "expandInformationsbereich": "Informationsbereich einblenden",
         "leftNavigation": "linksnavigation",
         "informationArea": "informationsbereich",
-        "accountName": "Kontoname"
+        "flag": "Flagge {{lang}}",
+        "accountName": "Kontoname",
+        "skipLinksAriaLabel": "Schnellnavigation"
       }
     },
     "p-calendar": {
@@ -250,6 +252,13 @@
         "de": "Deutsch",
         "en": "Englisch"
       }
+    },
+    "skipLinks": {
+      "skipToMainContent": "Zum Hauptinhalt springen",
+      "skipToNavigation": "Zur Navigation springen",
+      "skipToSiteToolbar": "Zum Seitentoolbar springen",
+      "skipToLinksNavigation": "Zur Linksnavigation springen",
+      "skipToInformationArea": "Zur Informationsbereich springen"
     }
   },
   "primeng": {

@@ -7,13 +7,13 @@
 </div>
 
 <div class="split right-panel-side">
-  <p-selectButton
+  <p-selectbutton
     [options]="displayedCharacters"
     [optionLabel]="'zeichen'"
     [(ngModel)]="selectedZeichenObjekt"
     class="flex-grow-1 overflow-y-scroll character-selectbutton"
   >
-  </p-selectButton>
+  </p-selectbutton>
   <div class="lower-right-panel">
     @if (selectedZeichenObjekt) {
       <isy-input-char-preview [zeichenObjekt]="selectedZeichenObjekt" class="flex-grow-1"></isy-input-char-preview>

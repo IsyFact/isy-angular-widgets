@@ -80,6 +80,7 @@
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.min.css",
               "node_modules/flag-icons/css/flag-icons.min.css",
+              "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss",
               "projects/isy-angular-widgets/assets/theme/isyfact-liberation-fonts.css",
               "node_modules/quill/dist/quill.snow.css"
             ],

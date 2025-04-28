@@ -31,7 +31,9 @@
         "expandInformationsbereich": "Expand right side bar",
         "leftNavigation": "leftnavigation",
         "informationArea": "informationarea",
-        "flag": "Flag {{lang}}"
+        "flag": "Flag {{lang}}",
+        "accountName": "Account name",
+        "skipLinksAriaLabel": "Quick navigation"
       }
     }
   },

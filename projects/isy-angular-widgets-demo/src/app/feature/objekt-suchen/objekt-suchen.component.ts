@@ -346,7 +346,8 @@ export class ObjektSuchenComponent {
     const message: ToastMessageOptions = {
       severity: TOAST_SEVERITY.SUCCESS,
       detail: this.translate.instant('toastMessages.successfullySavedFakeData') as string,
-      sticky: true
+      sticky: true,
+      styleClass: 'h-full'
     };
     this.messageService.add(message);
   }

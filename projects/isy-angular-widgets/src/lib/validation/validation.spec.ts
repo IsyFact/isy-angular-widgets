@@ -27,7 +27,7 @@ describe('Unit Test: Validation', () => {
   }
 
   describe('unspecifiedDate when input is valid', () => {
-    const errorKey = 'UNSPECIFIEDDATE';
+    const errorKey = 'INVALIDUNSPECIFIEDDATE';
     let control: AbstractControl;
 
     beforeEach(() => {
@@ -61,7 +61,7 @@ describe('Unit Test: Validation', () => {
   });
 
   describe('unspecifiedDate when input is invalid', () => {
-    const errorKey = 'UNSPECIFIEDDATE';
+    const errorKey = 'INVALIDUNSPECIFIEDDATE';
     let control: AbstractControl;
 
     beforeEach(() => {
@@ -90,7 +90,7 @@ describe('Unit Test: Validation', () => {
   });
 
   describe('validUnspecifiedISODate when input is valid', () => {
-    const errorKey = 'UNSPECIFIEDDATE';
+    const errorKey = 'INVALIDUNSPECIFIEDISODATE';
     let control: AbstractControl;
 
     beforeEach(() => {
@@ -125,7 +125,7 @@ describe('Unit Test: Validation', () => {
 
   describe('validUnspecifiedISODate when input is invalid', () => {
     let control: AbstractControl;
-    const errorKey = 'UNSPECIFIEDISODATE';
+    const errorKey = 'INVALIDUNSPECIFIEDISODATE';
 
     beforeEach(() => {
       control = new FormControl('');
@@ -165,8 +165,8 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return FUTURE if date is in the past', () => {
-      const errorKey = 'FUTURE';
+    it('should return INVALIDFUTUREDATE if date is in the past', () => {
+      const errorKey = 'INVALIDFUTUREDATE';
       const control: AbstractControl = new FormControl(moment().startOf('day').subtract(1, 'day'));
       const errors = Validation.isInFuture(control);
       errorHaveToBeDefined(errors, errorKey);
@@ -186,8 +186,8 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return PAST if date is in the future', () => {
-      const errorKey = 'PAST';
+    it('should return INVALIDPASTDATE if date is in the future', () => {
+      const errorKey = 'INVALIDPASTDATE';
       const control: AbstractControl = new FormControl(moment().startOf('day').add(1, 'day'));
       const errors = Validation.isInPast(control);
       errorHaveToBeDefined(errors, errorKey);
@@ -238,8 +238,8 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return CREDITCARDEXPIRATIONDATE if the date is in the past', () => {
-      const errorKey = 'CREDITCARDEXPIRATIONDATE';
+    it('should return INVALIDCREDITCARDEXPIRATIONDATE if the date is in the past', () => {
+      const errorKey = 'INVALIDCREDITCARDEXPIRATIONDATE';
       const control: AbstractControl = new FormControl(moment().subtract(1, 'year').format('MM/YY'));
       const errors = Validation.validCreditCardExpirationDate(control);
       errorHaveToBeDefined(errors, errorKey);
@@ -252,8 +252,8 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return CREDITCARDEXPIRATIONDATE if the date is not a valid credit card expiration date', () => {
-      const errorKey = 'CREDITCARDEXPIRATIONDATE';
+    it('should return INVALIDCREDITCARDEXPIRATIONDATE if the date is not a valid credit card expiration date', () => {
+      const errorKey = 'INVALIDCREDITCARDEXPIRATIONDATE';
       const control: AbstractControl = new FormControl('13/99');
       const errors = Validation.validCreditCardExpirationDate(control);
       errorHaveToBeDefined(errors, errorKey);
@@ -273,10 +273,10 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return validation error with key "DATE", if input is not a valid iso-date', () => {
+    it('should return validation error with key "INVALIDISODATE", if input is not a valid iso-date', () => {
       const invalidIsoDateControl: AbstractControl = new FormControl('12.12.206');
       const errors = Validation.isoDate(invalidIsoDateControl);
-      errorHaveToBeDefined(errors, undefined, 'DATE');
+      errorHaveToBeDefined(errors, undefined, 'INVALIDISODATE');
     });
   });
 
@@ -287,10 +287,10 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return validation error with key "TIME", if input is not a valid iso-time', () => {
+    it('should return validation error with key "INVALIDISOTIME", if input is not a valid iso-time', () => {
       const invalidIsoTimeControl: AbstractControl = new FormControl('45:12:12');
       const errors = Validation.isoTime(invalidIsoTimeControl);
-      errorHaveToBeDefined(errors, undefined, 'TIME');
+      errorHaveToBeDefined(errors, undefined, 'INVALIDISOTIME');
     });
   });
 
@@ -301,15 +301,15 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return validation error with key "DATETIME", if input is not a valid iso-datetime', () => {
+    it('should return validation error with key "INVALIDISODATETIME", if input is not a valid iso-datetime', () => {
       const invalidIsoDateTimeControl: AbstractControl = new FormControl('1997-01-01T9:28:00');
       const errors = Validation.isoDateTime(invalidIsoDateTimeControl);
-      errorHaveToBeDefined(errors, undefined, 'DATETIME');
+      errorHaveToBeDefined(errors, undefined, 'INVALIDISODATETIME');
     });
   });
 
   describe('creditCardNumber', () => {
-    const errorKey = 'CREDITCARD';
+    const errorKey = 'INVALIDCREDITCARDNUMBER';
 
     it('should return null if the number is valid', () => {
       const control: AbstractControl = new FormControl('4485-8456-9196-5929');
@@ -323,25 +323,25 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return CREDITCARD if the value is invalid', () => {
+    it('should return INVALIDCREDITCARDNUMBER if the value is invalid', () => {
       const control: AbstractControl = new FormControl('4485-8456-9196-5928');
       const errors = Validation.validCreditCardNumber(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
-    it('should return CREDITCARD if the value is not only numbers', () => {
+    it('should return INVALIDCREDITCARDNUMBER if the value is not only numbers', () => {
       const control: AbstractControl = new FormControl('448s-8456-91g6-5929');
       const errors = Validation.validCreditCardNumber(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
-    it('should return CREDITCARD if the value is too short', () => {
+    it('should return INVALIDCREDITCARDNUMBER if the value is too short', () => {
       const control: AbstractControl = new FormControl('4485-8456-9');
       const errors = Validation.validCreditCardNumber(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
-    it('should return CREDITCARD if the value is too long', () => {
+    it('should return INVALIDCREDITCARDNUMBER if the value is too long', () => {
       const control: AbstractControl = new FormControl('4485-8456-9196-59291');
       const errors = Validation.validCreditCardNumber(control);
       errorHaveToBeDefined(errors, errorKey);

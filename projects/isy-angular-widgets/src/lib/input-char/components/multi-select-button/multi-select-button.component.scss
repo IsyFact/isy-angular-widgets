@@ -5,59 +5,24 @@
   // Common styles of all select buttons
   p-selectbutton .p-ripple.p-element.p-button {
     background-color: transparent;
-    color: var(--text-color);
+    color: var(--p-text-color);
     cursor: pointer;
 
     &:hover {
-      background-color: var(--highlight-bg);
+      background-color: var(--p-highlight-bg);
     }
 
     &.p-highlight {
-      background-color: var(--primary-color);
-      color: var(--primary-color-text);
+      background-color: var(--p-primary-color);
+      color: var(--p-primary-color-text);
     }
 
     &.p-highlight:hover {
-      background-color: var(--highlight-bg);
-      color: var(--text-color);
+      background-color: var(--p-highlight-bg);
+      color: var(--p-text-color);
     }
   }
 
-  // Styles specific for left side (incl. select buttons)
-  .p-accordion {
-    .p-accordion-header .p-accordion-header-link:focus {
-      box-shadow: none !important;
-    }
-
-    p-accordiontab {
-      // Fix specific for a buggy PrimeNG 14 behaviour where sometimes, content is shown although accordion is collapsed.
-      :not(.p-accordion-tab-active) .p-toggleable-content:not(.ng-animating) {
-        height: 0;
-      }
-
-      .p-accordion-content {
-        border: 0;
-        padding: 0;
-      }
-    }
-
-    // Styles specific for left side select buttons
-    p-selectbutton .p-ripple.p-element.p-button {
-      border: none;
-    }
-
-    // Styles specific for the Grundzeichen select button
-    .charset-selectbutton .p-ripple.p-element.p-button {
-      min-width: 50px;
-      min-height: 44px;
-    }
-
-    .charset-selectbutton .p-selectbutton {
-      padding: 3px 2px;
-    }
-  }
-
-  // Styles specific for the "Select All" button
   .all-selectbutton {
     width: 100%;
     font-weight: 600;
@@ -65,20 +30,26 @@
     height: 50px;
     border: none;
     box-shadow: none !important;
+    display: flex;
+    justify-content: flex-start;
 
-    &:not(.p-highlight) {
-      background-color: var(--surface-ground);
+    &:not(.p-togglebutton-checked) {
+      background-color: var(--isyfact-surface-ground);
+      color: var(--p-text-color);
     }
 
     span {
-      padding: 0.813rem;
+      padding: 0.25rem;
+      justify-content: flex-start;
     }
   }
 
-  // Using InputChar inside a primeNG panel container with toggleable option causes a display issue in the InputChar dialog
-  // Base and group character are displayed at the same time and overlap each other
-  // The issue is fixed by overwriting the CSS style below
-  .p-panel-toggleable.p-panel-expanded p-accordion .p-toggleable-content:not(.ng-animating) {
-    overflow: hidden;
+  isy-input-char-dialog {
+    display: flex;
+  }
+
+  isy-multi-select-button {
+    display: flex;
+    flex-direction: column;
   }
 }

@@ -5,10 +5,10 @@
     <div class="col-12 xl:col-6 flex-column gap-2">
       <h3>Chip</h3>
       <div class="flex justify-content-start gap-2">
-        <p-autoComplete label="Apple" multiple="true" typeahead="false"></p-autoComplete>
-        <p-autoComplete label="Google" multiple="true" typeahead="false"></p-autoComplete>
-        <p-autoComplete label="Microsoft" multiple="true" typeahead="false"></p-autoComplete>
-        <p-autoComplete label="Facebook" multiple="true" typeahead="false"></p-autoComplete>
+        <p-autocomplete label="Apple" multiple="true" typeahead="false"></p-autocomplete>
+        <p-autocomplete label="Google" multiple="true" typeahead="false"></p-autocomplete>
+        <p-autocomplete label="Microsoft" multiple="true" typeahead="false"></p-autocomplete>
+        <p-autocomplete label="Facebook" multiple="true" typeahead="false"></p-autocomplete>
       </div>
     </div>
     <div class="col-12 xl:col-6 flex-column gap-2">
@@ -52,15 +52,15 @@
   <div class="grid">
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>ProgressSpinner</h3>
-      <p-progressSpinner></p-progressSpinner>
+      <p-progressspinner></p-progressspinner>
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>ProgressBar</h3>
-      <p-progressBar [value]="50"></p-progressBar>
+      <p-progressbar [value]="50"></p-progressbar>
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>MeterGroup</h3>
-      <p-meterGroup [value]="storageStatus"></p-meterGroup>
+      <p-metergroup [value]="storageStatus"></p-metergroup>
     </div>
   </div>
   <p-divider></p-divider>
@@ -146,9 +146,9 @@
         <p-button label="Block" (onClick)="blockContent()" />
         <p-button label="Unblock" (onClick)="unblockContent()" />
       </div>
-      <p-blockUI [target]="blockableContent" [blocked]="blockedContent">
+      <p-blockui [target]="blockableContent" [blocked]="blockedContent">
         <i class="pi pi-lock" style="font-size: 3rem"></i>
-      </p-blockUI>
+      </p-blockui>
       <p-panel #blockableContent header="Header">
         <p>Content</p>
       </p-panel>

@@ -1,5 +1,5 @@
 .isy-hauptfenster {
-  border-top: var(--isy-hauptfenster-background) solid 10px;
+  border-top: 10px solid var(--isyfact-hauptfenster-background);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,18 +27,18 @@
 }
 
 .isy-hauptfenster-linksnavigation {
-  border-right: 1px solid var(--surface-border);
-  background-color: var(--surface-ground);
+  background-color: var(--isyfact-surface-ground);
 }
 
 .isy-hauptfenster-informationsbereich {
-  border-right: 1px solid var(--surface-border);
-  background-color: var(--surface-ground);
+  background-color: var(--isyfact-surface-ground);
 }
 
-:host ::ng-deep .p-megamenu {
-  .p-menuitem-text {
-    color: var(--surface-900);
+:host ::ng-deep {
+  .p-megamenu {
+    .p-menuitem-text {
+      color: var(--p-surface-900);
+    }
   }
 }
 

@@ -15,6 +15,7 @@ import {DOCUMENT} from '@angular/common';
 import {PageTitleService} from './shared/services/page-title.service';
 import {NavigationEnd, Router, RouterEvent, Event} from '@angular/router';
 import {PrimeNG} from 'primeng/config';
+import {SkipTarget} from '@isy-angular-widgets/skip-links/model/model';
 
 @Component({
   selector: 'demo-root',
@@ -132,6 +133,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translate.onLangChange.subscribe(async () => {
       this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
       this.items = await this.menuTranslationService.translateMegaMenuItems(applicationMenu);
+      this.setupSkipLinks();
     });
   }
 
@@ -151,5 +153,42 @@ export class AppComponent implements OnInit, OnDestroy {
   selectPermission(role: string): void {
     this.userInfo.roles = [role];
     this.securityService.setRoles(this.userInfo);
+  }
+
+  skipLinks: SkipTarget[] = [];
+
+  /**
+   * Sets up the skip links for the application to enhance accessibility.
+   * The skip links allow users to quickly navigate to specific sections of the page,
+   * such as the main content, navigation, site toolbar, links navigation, and information area.
+   *
+   * Each skip link is defined with a label, which is translated using the `translate` service,
+   * and a target, which specifies the destination element on the page.
+   *
+   * The skip links are stored in the `skipLinks` property.
+   */
+  private setupSkipLinks(): void {
+    this.skipLinks = [
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToMainContent') as string,
+        target: 'main'
+      },
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToNavigation') as string,
+        target: 'nav'
+      },
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToSiteToolbar') as string,
+        target: 'isy-seiten-toolbar'
+      },
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToLinksNavigation') as string,
+        target: '.isy-hauptfenster-linksnavigation'
+      },
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToInformationArea') as string,
+        target: '.isy-hauptfenster-informationsbereich'
+      }
+    ];
   }
 }

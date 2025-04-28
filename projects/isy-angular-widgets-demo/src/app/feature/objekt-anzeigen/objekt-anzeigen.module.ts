@@ -29,6 +29,8 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {DatePickerModule} from 'primeng/datepicker';
 import {SelectModule} from 'primeng/select';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
+import {InputGroup} from 'primeng/inputgroup';
+import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 
 @NgModule({
   declarations: [ObjektAnzeigenComponent, DialogSachverhalteBearbeitenComponent],
@@ -62,7 +64,9 @@ import {ToggleSwitchModule} from 'primeng/toggleswitch';
     InputCharDirective,
     FieldsetModule,
     SelectModule,
-    ToggleSwitchModule
+    ToggleSwitchModule,
+    InputGroup,
+    InputGroupAddonModule
   ]
 })
 export class ObjektAnzeigenModule {}
