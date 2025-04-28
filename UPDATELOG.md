@@ -286,6 +286,19 @@ addPackageToPackageJson(tree, '@primeng/themes', '19.1.0');
   Das FluentUI-Theme wurde durch das neue PrimeNG-Theming mit dem Standard-Theme Nora ersetzt und entsprechend angepasst.
   Durch Aufruf von `provideIsyFactTheme({ theme: Anderes Theme })` kann ein anderes Standard-Theme optional übergeben werden.
 
+#### isy-angular-widgets v19
+
+- **Validation error objects are renamed:**
+  - isInFuture: FUTURE → INVALIDFUTUREDATE
+  - isInPast: PAST -> INVALIDPASTDATE
+  - validUnspecifiedDate: UNSPECIFIEDDATE → INVALIDUNSPECIFIEDDATE
+  - validUnspecifiedISODate: UNSPECIFIEDISODATE → INVALIDUNSPECIFIEDISODATE
+  - validCreditCardExpirationDate: CREDITCARDEXPIRATIONDATE → INVALIDCREDITCARDEXPIRATIONDATE
+  - validCreditCardNumber: CREDITCARD → INVALIDCREDITCARDNUMBER
+  - isoDate: DATE → INVALIDISODATE
+  - isoTime: TIME → INVALIDISOTIME
+  - isoDateTime : DATETIME → INVALIDISODATETIME
+
 ---
 
 ## Zusammenfassung
