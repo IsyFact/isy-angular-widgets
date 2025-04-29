@@ -100,6 +100,7 @@ Abschließend ist es erforderlich, in `app.config.ts` die Methode `provideAnimat
 import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
+import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 
 export const appConfig: ApplicationConfig = {
