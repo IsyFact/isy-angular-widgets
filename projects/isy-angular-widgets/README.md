@@ -119,6 +119,7 @@ Beim Aufruf von `provideIsyFactTheme()` kann ein Theme optional übergeben werde
 ```ts
 import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
+import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 import Material from '@primeng/themes/material';
 
@@ -199,7 +200,7 @@ import {Subscription} from 'rxjs';
   standalone: true,
   imports: [HauptfensterModule, PanelModule, MenuModule, TranslateModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy {
   primeNgSub?: Subscription;
