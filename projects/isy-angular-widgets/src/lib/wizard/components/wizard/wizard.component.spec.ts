@@ -541,4 +541,29 @@ describe('Accessibility Test: WizardComponent', () => {
     const element = spectator.query('.p-dialog-close-button') as HTMLElement;
     expect(element.getAttribute('aria-label')).toBe('Close');
   });
+
+  it('should update the index and emit the indexChange event on active index change', () => {
+    const newIndex = 1;
+    const emitSpy = spyOn(wizard.indexChange, 'emit');
+    wizard.items = stepperItems;
+
+    wizard.onActiveIndexChange(newIndex);
+
+    expect(wizard.index).toEqual(newIndex);
+    expect(emitSpy).toHaveBeenCalledWith(newIndex);
+  });
+
+  it('should display a toast message indicating the step change', () => {
+    const newIndex = 1;
+    const toastSpy = spyOn(wizard.messageService, 'add');
+    wizard.items = stepperItems;
+
+    wizard.onActiveIndexChange(newIndex);
+
+    expect(toastSpy).toHaveBeenCalledWith({
+      severity: 'info',
+      summary: mockConfigService.getTranslation('wizard.toast.stepChanged'),
+      detail: stepperItems[newIndex].label
+    });
+  });
 });

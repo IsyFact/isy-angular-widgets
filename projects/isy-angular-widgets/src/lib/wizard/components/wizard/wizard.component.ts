@@ -10,13 +10,14 @@ import {
   QueryList,
   SimpleChanges
 } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import {MenuItem, MessageService} from 'primeng/api';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CommonModule} from '@angular/common';
 import {StepsModule} from 'primeng/steps';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 
 /**
  * The width of the wizard of not otherwise specified by the user.
@@ -37,7 +38,8 @@ const defaultHeight = 30;
 @Component({
   selector: 'isy-wizard',
   templateUrl: './wizard.component.html',
-  imports: [CommonModule, StepsModule, DialogModule, ButtonModule],
+  imports: [CommonModule, StepsModule, DialogModule, ButtonModule, ToastModule],
+  providers: [MessageService],
   standalone: true
 })
 export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
@@ -45,12 +47,6 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * Stores the content that will be projected inside the template
    */
   @ContentChildren(WizardDirective) content?: QueryList<WizardDirective>;
-
-  /**
-   * @deprecated The Output should not be used. Use the Output indexChange
-   * Emits the currently displayed page
-   */
-  @Output() stepperIndexChange = new EventEmitter<number>();
 
   /**
    * Emits the currently displayed page
@@ -150,20 +146,22 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
     '412px': '95vw'
   };
 
+  @Input() allowFreeNavigation = false;
+
   /**
    * Stores the items of the wizard
    */
   items: MenuItem[] = [];
 
-  constructor(public configService: WidgetsConfigService) {}
+  constructor(
+    public configService: WidgetsConfigService,
+    readonly messageService: MessageService
+  ) {}
 
   /**
    * Fired on initialization
    */
   ngOnInit(): void {
-    this.indexChange.subscribe(() => {
-      this.stepperIndexChange.emit(this.index);
-    });
     this.indexChange.emit(this.index);
   }
 
@@ -234,5 +232,23 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    */
   save(): void {
     this.savingChange.emit(true);
+  }
+
+  /**
+   * Handles the change of the active index in the wizard component.
+   * Updates the current index, emits the index change event, and displays
+   * a toast message indicating the step change.
+   * @param event - The new active index of the wizard.
+   */
+  onActiveIndexChange(event: number): void {
+    this.index = event;
+    this.indexChange.emit(this.index);
+
+    // Show a toast message indicating the step change
+    this.messageService.add({
+      severity: 'info',
+      summary: this.configService.getTranslation('wizard.toast.stepChanged'),
+      detail: this.items[this.index].label
+    });
   }
 }
