@@ -219,7 +219,6 @@ describe('Accessibility Test: InputCharComponent', () => {
       nativeElement: {focus: focusSpy}
     } as unknown as ElementRef<HTMLButtonElement>;
 
-    // Simuliere kein fokussiertes Element
     spyOnProperty(document, 'activeElement', 'get').and.returnValue(document.body);
 
     spectator.component.onDialogClose();
@@ -236,7 +235,6 @@ describe('Accessibility Test: InputCharComponent', () => {
       nativeElement: {focus: focusSpy}
     } as unknown as ElementRef<HTMLButtonElement>;
 
-    // Simuliere ein anderes fokussiertes Element
     const mockInput = document.createElement('input');
     spyOnProperty(document, 'activeElement', 'get').and.returnValue(mockInput);
 

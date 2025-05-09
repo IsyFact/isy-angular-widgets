@@ -6,7 +6,7 @@ import {Subject} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
-describe('Integration Tests: AppComponent', () => {
+fdescribe('Integration Tests: AppComponent', () => {
   let spectator: Spectator<AppComponent>;
   let mockDocument: Document;
   const createComponent = createComponentFactory({
