@@ -259,9 +259,9 @@
     "skipLinks": {
       "skipToMainContent": "Zum Hauptinhalt springen",
       "skipToNavigation": "Zur Navigation springen",
-      "skipToSiteToolbar": "Zum Seitentoolbar springen",
+      "skipToSiteToolbar": "Zur Seitentoolbar springen",
       "skipToLinksNavigation": "Zur Linksnavigation springen",
-      "skipToInformationArea": "Zur Informationsbereich springen"
+      "skipToInformationArea": "Zum Informationsbereich springen"
     }
   },
   "primeng": {

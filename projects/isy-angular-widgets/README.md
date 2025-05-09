@@ -74,7 +74,7 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
-Im nächsten Schritt werden die notwendigen Module und Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
+Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
 
 ```typescript
 // Other imports ...
@@ -93,7 +93,7 @@ import {PanelModule} from 'primeng/panel';
 export class AppComponent {}
 ```
 
-Abschließend ist es erforderlich, in `app.config.ts` die Methode `provideAnimations` und `provideIsyFactTheme` zu importieren und bereitzustellen, um Animationen zu aktivieren:
+Abschließend ist es erforderlich, in `app.config.ts` die Methoden `provideAnimations` und `provideIsyFactTheme` zu importieren und bereitzustellen, um Animationen zu aktivieren:
 
 ```typescript
 // Other imports ...
@@ -130,7 +130,7 @@ export const appConfig: ApplicationConfig = {
   ]
 };
 ```
-Wird kein Theme angegeben, nutzt die Bibliothek standardmäßig Nora.
+Wird kein Theme angegeben, nutzt die Bibliothek standardmäßig `Nora`.
 
 ## I18N
 

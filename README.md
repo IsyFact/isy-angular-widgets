@@ -78,7 +78,7 @@ Die Erstellung und Anpassung von Themes mit diesem neuen System ist kostenfrei m
 
 Für eine visuelle und benutzerfreundlichere Gestaltung von Themes bietet PrimeNG ab Version 19 einen neuen Theme-Designer an, der jedoch kostenpflichtig ist. 
 
-Mit Version 19 der `isy-angular-widgets-Bibliothek` wurde das ursprünglich verwendete FluentUI-Theme durch das neue PrimeNG-Theming-System ersetzt.
+Mit Version 19 der `isy-angular-widgets`-Bibliothek wurde das ursprünglich verwendete FluentUI-Theme durch das neue PrimeNG-Theming-System ersetzt.
 Als Standard-Theme wurde `Nora` ausgewählt und an das bestehende Look-and-Feel der Widgets-Bibliothek sowie der Anwendung angepasst.
 
 ## Erstellen von Releases

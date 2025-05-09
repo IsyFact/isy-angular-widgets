@@ -79,7 +79,7 @@ addPackageToPackageJson(tree, '@primeng/themes', '^19.1.2');
 ### 5. Technische Anpassungen
 
 #### Angular v19
-- TranslateModule.forChild() für Lazy-Loaded Modules
+- `TranslateModule.forChild()` für Lazy-Loaded Modules
 - Konstante Werte mit readonly
 - Migration auf standalone: true/false für Komponenten
 
@@ -200,13 +200,13 @@ addPackageToPackageJson(tree, '@primeng/themes', '^19.1.2');
 
 #### Angular v19
 - Module entfernt (→ Umstellung auf standalone)
-- Lazy-Loaded Translations benötigen TranslateModule.forChild()
-- readonly für konstante Variablen empfohlen
+- Lazy-Loaded Translations benötigen `TranslateModule.forChild()`
+- `readonly` für konstante Variablen empfohlen
 
 #### PrimeNG v19
 - Diverse Komponenten ersetzt (siehe oben)
 - API-Änderungen: Properties & Komponentenverhalten angepasst
-- Konfiguration über provideIsyFactTheme() statt PrimeNGConfig
+- Konfiguration über `provideIsyFactTheme()` statt `PrimeNGConfig`
 
 #### isy-angular-widgets v19
 - **Validierungsfehler-Objekte umbenannt** (vorher als TODO markiert):
