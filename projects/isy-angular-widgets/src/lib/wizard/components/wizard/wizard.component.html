@@ -1,3 +1,4 @@
+<p-toast [baseZIndex]="2000"></p-toast>
 <p-dialog
   [header]="headerTitle"
   [closeAriaLabel]="configService.getTranslation('wizard.aria.close')"
@@ -12,7 +13,13 @@
   }"
   (visibleChange)="isVisibleChange.emit($event)"
 >
-  <p-steps [model]="items" [(activeIndex)]="index"> </p-steps>
+  <p-steps
+    [model]="items"
+    [(activeIndex)]="index"
+    [readonly]="!allowFreeNavigation"
+    (activeIndexChange)="allowFreeNavigation ? onActiveIndexChange($event) : null"
+  >
+  </p-steps>
 
   <ng-container [ngTemplateOutlet]="this.content?.get(index)?.templateRef ?? null"></ng-container>
 

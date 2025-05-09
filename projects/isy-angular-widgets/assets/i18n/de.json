@@ -7,6 +7,9 @@
       "close": "Schließen",
       "aria": {
         "close": "Schließen"
+      },
+      "toast": {
+        "stepChanged": "Schritt geändert"
       }
     },
     "inputChar": {
@@ -31,7 +34,9 @@
         "expandInformationsbereich": "Informationsbereich einblenden",
         "leftNavigation": "linksnavigation",
         "informationArea": "informationsbereich",
-        "flag": "Flagge {{lang}}"
+        "flag": "Flagge {{lang}}",
+        "accountName": "Kontoname",
+        "skipLinksAriaLabel": "Schnellnavigation"
       }
     }
   },

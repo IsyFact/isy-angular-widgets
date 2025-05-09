@@ -3,7 +3,8 @@ import {Person} from '../../../../shared/model/person';
 
 @Component({
   selector: 'demo-dialog-sachverhalte-bearbeiten',
-  templateUrl: './dialog-sachverhalte-bearbeiten.component.html'
+  templateUrl: './dialog-sachverhalte-bearbeiten.component.html',
+  standalone: false
 })
 export class DialogSachverhalteBearbeitenComponent implements OnChanges {
   @Input() person: Person | undefined;

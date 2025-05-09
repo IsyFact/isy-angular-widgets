@@ -4,10 +4,19 @@
   <div class="grid">
     <div class="col-12 xl:col-6 flex-column gap-2">
       <h3>Accordion</h3>
-      <p-accordion>
-        <p-accordionTab header="Header 1"> Content 1 </p-accordionTab>
-        <p-accordionTab header="Header 2"> Content 2 </p-accordionTab>
-        <p-accordionTab header="Header 3"> Content 3 </p-accordionTab>
+      <p-accordion value="0" iconPos="start">
+        <p-accordion-panel value="0">
+          <p-accordion-header>Header 1</p-accordion-header>
+          <p-accordion-content>Content 1</p-accordion-content>
+        </p-accordion-panel>
+        <p-accordion-panel value="1">
+          <p-accordion-header>Header 2</p-accordion-header>
+          <p-accordion-content>Content 2</p-accordion-content>
+        </p-accordion-panel>
+        <p-accordion-panel value="3">
+          <p-accordion-header>Header 3</p-accordion-header>
+          <p-accordion-content>Content 3</p-accordion-content>
+        </p-accordion-panel>
       </p-accordion>
     </div>
     <div class="col-12 xl:col-6 flex-column gap-2">
@@ -15,12 +24,19 @@
       <p-panel header="Panel Header" [toggleable]="true"> Content </p-panel>
     </div>
     <div class="col-12 flex-column gap-2">
-      <h3>TabView</h3>
-      <p-tabView>
-        <p-tabPanel header="Header 1"> Content 1 </p-tabPanel>
-        <p-tabPanel header="Header 2"> Content 2 </p-tabPanel>
-        <p-tabPanel header="Header 3"> Content 3 </p-tabPanel>
-      </p-tabView>
+      <h3>Tabs</h3>
+      <p-tabs value="0">
+        <p-tablist>
+          <p-tab value="0">Header 1</p-tab>
+          <p-tab value="1">Header 2</p-tab>
+          <p-tab value="2">Header 3</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+          <p-tabpanel value="0"> Content 1 </p-tabpanel>
+          <p-tabpanel value="1"> Content 2 </p-tabpanel>
+          <p-tabpanel value="2"> Content 3 </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
     </div>
   </div>
   <p-divider></p-divider>
@@ -36,7 +52,7 @@
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>ScrollPanel</h3>
-      <p-scrollPanel [style]="{height: '150px'}">
+      <p-scrollpanel [style]="{height: '150px'}">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -58,7 +74,7 @@
           facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
           impedit quo minus.
         </p>
-      </p-scrollPanel>
+      </p-scrollpanel>
     </div>
   </div>
   <p-divider></p-divider>
@@ -99,14 +115,14 @@
           </span>
         </div>
         <div class="p-toolbar-group-end">
-          <p-splitButton label="Save" icon="pi pi-check" [model]="option"></p-splitButton>
+          <p-splitbutton label="Save" icon="pi pi-check" [model]="option"></p-splitbutton>
         </div>
       </p-toolbar>
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>Stepper</h3>
       <p-stepper>
-        <p-stepperPanel header="Header I">
+        <p-stepper header="Header I">
           <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
             <div class="flex flex-column h-12rem">
               <div
@@ -119,8 +135,8 @@
               <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
           </ng-template>
-        </p-stepperPanel>
-        <p-stepperPanel header="Header II">
+        </p-stepper>
+        <p-stepper header="Header II">
           <ng-template
             pTemplate="content"
             let-prevCallback="prevCallback"
@@ -139,8 +155,8 @@
               <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />
             </div>
           </ng-template>
-        </p-stepperPanel>
-        <p-stepperPanel header="Header III">
+        </p-stepper>
+        <p-stepper header="Header III">
           <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
             <div class="flex flex-column h-12rem">
               <div
@@ -153,7 +169,7 @@
               <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
             </div>
           </ng-template>
-        </p-stepperPanel>
+        </p-stepper>
       </p-stepper>
     </div>
   </div>

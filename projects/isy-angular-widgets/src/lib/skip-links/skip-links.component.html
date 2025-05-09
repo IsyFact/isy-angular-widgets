@@ -1,0 +1,7 @@
+<nav class="skip-links" [attr.aria-label]="configService.getTranslation('hauptfenster.aria.skipLinksAriaLabel')">
+  @for (link of links; track link.target) {
+    <a [href]="link.target" (click)="focusTarget($event, link.target)" class="skip-link">
+      {{ link.label }}
+    </a>
+  }
+</nav>

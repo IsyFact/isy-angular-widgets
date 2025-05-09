@@ -1,13 +1,13 @@
-:host ::ng-deep .ifta {
+.ifta {
   position: relative;
 }
 
-:host ::ng-deep .ifta input,
-:host ::ng-deep .ifta textarea {
+.ifta input,
+.ifta textarea {
   padding-top: 30px;
 }
 
-:host ::ng-deep .ifta label {
+.ifta label {
   position: absolute;
   top: 10px;
   left: 13px;
@@ -16,10 +16,14 @@
   font-size: 1rem;
 }
 
-:host ::ng-deep .label--filled {
-  color: var(--blue-500);
+.label--filled {
+  color: var(--p-primary-50);
 }
 
-:host ::ng-deep .ifta .p-button.p-button-icon-only {
+.ifta .p-button.p-button-icon-only {
   padding: 1.18rem 0;
+}
+
+.flex-container:has(isy-input-char) {
+  display: inline-flex;
 }

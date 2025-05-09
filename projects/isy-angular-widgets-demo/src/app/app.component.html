@@ -6,12 +6,13 @@ like in the following example. The side bar regions can be disabled with corresp
   [showLinksnavigation]="true"
   [showInformationsbereich]="true"
   [items]="items"
+  [links]="skipLinks"
   [userInfo]="userInfo"
   linksNavigationTitle="{{ 'isyAngularWidgetsDemo.labels.leftSidebarTitle' | translate }}"
 >
   <div Hauptnavigation-Tools>
     <!-- The Hauptnavigation-Tools are a region within the Menu and could for example be used for a language selector. -->
-    <p-dropdown
+    <p-select
       id="language-selector"
       class="ml-2"
       [options]="translate.getLangs()"
@@ -33,8 +34,8 @@ like in the following example. The side bar regions can be disabled with corresp
           <div>{{ 'isyAngularWidgetsDemo.settings.languages.' + language | translate }}</div>
         </div>
       </ng-template>
-    </p-dropdown>
-    <p-dropdown
+    </p-select>
+    <p-select
       id="permissions-dropdown"
       class="ml-2"
       optionLabel="role"
@@ -53,7 +54,7 @@ like in the following example. The side bar regions can be disabled with corresp
           <span>{{ userInfo.roles[0] }}</span>
         </ng-template>
       }
-    </p-dropdown>
+    </p-select>
   </div>
 
   <!-- The Seitentoolbar is at the top of the page and can be used for navigation or other tools. -->
@@ -83,7 +84,7 @@ like in the following example. The side bar regions can be disabled with corresp
 
   <!-- The Linksnavigation is the left side bar. You could build some kind of menu here. -->
   <div Linksnavigation>
-    <p-panelMenu [model]="sidebarItems" [multiple]="true"></p-panelMenu>
+    <p-panelmenu [model]="sidebarItems" [multiple]="true"></p-panelmenu>
     <router-outlet name="linksnavigation"></router-outlet>
   </div>
 

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HauptfensterModule} from '@isy-angular-widgets/hauptfenster/hauptfenster.module';
+import {HauptfensterComponent} from '@isy-angular-widgets/hauptfenster/hauptfenster.component';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {SecurityService} from '@isy-angular-widgets/security/security-service';
@@ -13,7 +13,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {FormsModule} from '@angular/forms';
 import {HttpClient, provideHttpClient} from '@angular/common/http';
-import {DropdownModule} from 'primeng/dropdown';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
@@ -21,6 +20,8 @@ import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitentoolbar.component';
+import {SelectModule} from 'primeng/select';
+import {provideIsyFactTheme} from '@isy-angular-widgets/core/providers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,19 +32,20 @@ import {SeitentoolbarComponent} from '@isy-angular-widgets/seitentoolbar/seitent
     SecurityService,
     MenuTranslationService,
     MessageService,
-    provideHttpClient()
+    provideHttpClient(),
+    provideIsyFactTheme()
   ],
   bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
-    HauptfensterModule,
+    HauptfensterComponent,
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
     PanelMenuModule,
     FormsModule,
-    DropdownModule,
+    SelectModule,
     ToastModule,
     ButtonModule,
     TranslateModule.forRoot({

@@ -1,4 +1,5 @@
 <button
+  #openDialogButton
   [attr.aria-label]="configService.getTranslation('inputChar.aria.togglePicker')"
   class="input-char-button"
   type="button"
@@ -20,6 +21,7 @@
   [dismissableMask]="dismissableMask"
   [closeOnEscape]="closeOnEscape"
   [modal]="modal"
+  (onHide)="onDialogClose()"
   [style]="{
     width: width,
     height: height

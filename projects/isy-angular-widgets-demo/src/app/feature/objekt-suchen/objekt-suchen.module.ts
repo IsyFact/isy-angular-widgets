@@ -4,20 +4,22 @@ import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
 import {ResultListComponent} from './components/result-list/result-list.component';
 import {DateService} from './services/date.service';
-import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
 import {PanelModule} from 'primeng/panel';
-import {DropdownModule} from 'primeng/dropdown';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {InputTextModule} from 'primeng/inputtext';
-import {WizardModule} from '@isy-angular-widgets/wizard/wizard.module';
+import {WizardComponent} from '@isy-angular-widgets/wizard/components/wizard/wizard.component';
+import {WizardDirective} from '@isy-angular-widgets/wizard/directives/wizard.directive';
 import {TableModule} from 'primeng/table';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ObjektSuchenRoutingModule} from './objekt-suchen-routing.module';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
+import {DatePickerModule} from 'primeng/datepicker';
+import {SelectModule} from 'primeng/select';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [ObjektSuchenComponent, PersoenlicheInformationenComponent, ResultListComponent],
@@ -25,20 +27,22 @@ import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
   imports: [
     CommonModule,
     ObjektSuchenRoutingModule,
-    CalendarModule,
     DialogModule,
     PanelModule,
-    DropdownModule,
     FormsModule,
-    TranslateModule,
+    TranslateModule.forChild(),
     InputTextModule,
     ReactiveFormsModule,
-    WizardModule,
+    WizardComponent,
+    WizardDirective,
     TableModule,
     MultiSelectModule,
     InputCharDirective,
     FormWrapperComponent,
-    FormControlPipe
+    FormControlPipe,
+    DatePickerModule,
+    SelectModule,
+    ButtonModule
   ]
 })
 export class ObjektSuchenModule {}

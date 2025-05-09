@@ -1,36 +1,113 @@
-@import './isyfact-variables.scss';
+@use './isyfact-variables.scss' as vars;
 @import './isyfact-liberation-fonts.css';
-@import './fluent/fluent-light/theme.scss';
 
-:root {
-  font-family: $fontFamily;
-  --font-family: $fontFamily;
-  --isy-hauptfenster-background: #336794;
-}
+/*
+ To make precise adjustments to the IsyFact design, certain variables in the PrimeNG Theme are overwritten.
+ This avoids direct modifications to the original theme variables, ensuring the integrity and maintainability of the standard theme.
+ This approach allows for specific customizations while preserving the updatability of the standard theme.
+*/
 
-body {
-  margin: 0;
-  font-family: $fontFamily;
-}
+@layer isyfact-theme {
+  :root {
+    //global
+    font-family: #{vars.$fontFamily};
+    --p-font-family: #{vars.$fontFamily};
+    --p-primary-color: #{vars.$isyfactPrimaryColor};
+    --p-primary-hover-color: #{vars.$themeDark};
+    --p-primary-active-color: #{vars.$isyfactPrimaryColor};
+    --p-highlight-background: #{vars.$isyfactPrimaryColor};
+    --p-highlight-focus-background: #{vars.$isyfactPrimaryColor};
+    --p-disabled-opacity: #{vars.$disabledOpacity};
 
-label {
-  font-weight: $isyfactLabelFontWeight;
-}
+    // input
+    --p-form-field-placeholder-color: #{vars.$isyfactInputPlaceholderTextColor};
 
-.p-inputgroup .p-inputtext,
-.p-fluid .p-inputgroup .p-inputtext,
-.p-inputgroup .p-inputwrapper,
-.p-inputgroup .p-inputwrapper > .p-component {
-  // Workaround: Added because input group child element has default width 1% instead of 100%
-  width: 100%;
-}
+    // Styling for readonly input fields
+    // PrimeNG does not apply this styling by default
+    input[readonly],
+    p-select[ng-reflect-readonly],
+    p-select[readonly] {
+      border-color: #{vars.$isyfactGrey};
+    }
 
-:disabled {
-  cursor: not-allowed;
-}
+    // dropdown
+    --p-select-dropdown-width: 2.75rem;
 
-// Set the color of the progress spinner to the primary color
-.p-progress-spinner-circle {
-  stroke: $isyfactProgressSpinnerStroke;
-  animation: $isyfactProgressSpinnerAnimation;
+    // list
+    --p-list-option-padding: 0.8125rem 0.75rem;
+
+    // button
+    --p-form-field-padding-x: 0.75rem;
+    --p-form-field-padding-y: 0.75rem;
+    --p-button-padding-y: 0.8125rem;
+    --p-button-icon-only-width: 2.75rem;
+    --p-button-text-secondary-hover-background: var(--p-surface-200);
+
+    // checkbox
+    --p-checkbox-width: 24px;
+    --p-checkbox-height: 24px;
+
+    // links navigation
+    --p-navigation-item-padding: 0.875rem;
+
+    // panel
+    --p-panelmenu-submenu-indent: 0;
+    --p-panel-header-background: #faf9f8;
+    --p-panelmenu-panel-last-border-width: 1px;
+
+    // Active state styling for panel menu item links
+    // PrimeNG does not apply this styling by default
+    .p-panelmenu-item-link-active,
+    .p-megamenu-item-link-active {
+      background-color: var(--p-highlight-background);
+      color: #fff;
+    }
+
+    // datatable
+    --p-datatable-body-cell-padding: 0.75rem 0.75rem;
+    --p-datatable-row-selected-background: var(--p-content-hover-background);
+    --p-datatable-row-selected-color: var(--p-datatable-row-hover-color) --p-accordion-content-padding: 0.75rem 0.85rem;
+
+    // multiselect
+    --p-multiselect-option-selected-focus-background: var(--p-select-option-focus-background);
+    --p-multiselect-option-selected-focus-color: inherit;
+    --p-multiselect-option-selected-background: #fff;
+    --p-multiselect-option-selected-color: inherit;
+
+    // workaround: PrimeNG definePreset does not work properly (https://github.com/primefaces/primeng/issues/17833)
+    --p-emerald-50: var(--p-gray-50);
+    --p-emerald-100: var(--p-gray-100);
+    --p-emerald-200: var(--p-gray-200);
+    --p-emerald-300: var(--p-gray-300);
+    --p-emerald-400: var(--p-gray-400);
+    --p-emerald-500: var(--p-gray-500);
+    --p-emerald-600: var(--p-gray-600);
+    --p-emerald-700: var(--p-gray-700);
+    --p-emerald-800: var(--p-gray-800);
+    --p-emerald-900: var(--p-gray-900);
+    --p-emerald-950: var(--p-gray-950);
+
+    // isyfact
+    --isyfact-surface-ground: #{vars.$isyfactSurfaceGround};
+    --isyfact-surface-section: #{vars.$isyfactSurfaceSection};
+    --isyfact-hauptfenster-background: #{vars.$isyfactHauptfensterBackground};
+  }
+
+  body {
+    margin: 0;
+  }
+
+  label {
+    font-weight: #{vars.$isyfactLabelFontWeight};
+  }
+
+  :disabled {
+    cursor: not-allowed;
+  }
+
+  // Set the color of the progress spinner to the primary color
+  .p-progressspinner-circle {
+    stroke: #{vars.$isyfactProgressSpinnerStroke};
+    animation: #{vars.$isyfactProgressSpinnerAnimation};
+  }
 }

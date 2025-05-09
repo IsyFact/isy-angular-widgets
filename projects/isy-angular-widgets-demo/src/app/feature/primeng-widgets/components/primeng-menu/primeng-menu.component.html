@@ -17,7 +17,16 @@
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>TabMenu</h3>
-      <p-tabMenu [model]="tabMenuOption"></p-tabMenu>
+      <p-tabs>
+        <p-tablist>
+          @for (tab of tabMenuOption; track tab.route) {
+            <p-tab [value]="tab.route" routerLink="tab.route">
+              <i [class]="tab.icon"></i>
+              <span>{{ tab.label }}</span>
+            </p-tab>
+          }
+        </p-tablist>
+      </p-tabs>
     </div>
   </div>
   <p-divider></p-divider>
@@ -29,15 +38,15 @@
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>MegaMenu</h3>
-      <p-megaMenu id="megaMenu" [model]="megaMenuOptions"></p-megaMenu>
+      <p-megamenu id="megaMenu" [model]="megaMenuOptions"></p-megamenu>
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>PanelMenu</h3>
-      <p-panelMenu id="panelMenu" [model]="fileContainerOptions"></p-panelMenu>
+      <p-panelmenu id="panelMenu" [model]="fileContainerOptions"></p-panelmenu>
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>TieredMenu</h3>
-      <p-tieredMenu id="tieredMenu" [model]="fileContainerOptions"></p-tieredMenu>
+      <p-tieredmenu id="tieredMenu" [model]="fileContainerOptions"></p-tieredmenu>
     </div>
   </div>
   <p-divider></p-divider>

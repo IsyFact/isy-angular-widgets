@@ -5,10 +5,10 @@
     <div class="col-12 xl:col-6 flex-column gap-2">
       <h3>Chip</h3>
       <div class="flex justify-content-start gap-2">
-        <p-chip label="Apple" icon="pi pi-apple"></p-chip>
-        <p-chip label="Google" icon="pi pi-google"></p-chip>
-        <p-chip label="Microsoft" icon="pi pi-microsoft" [removable]="true"></p-chip>
-        <p-chip label="Facebook" icon="pi pi-facebook" [removable]="true"></p-chip>
+        <p-autocomplete label="Apple" multiple="true" typeahead="false"></p-autocomplete>
+        <p-autocomplete label="Google" multiple="true" typeahead="false"></p-autocomplete>
+        <p-autocomplete label="Microsoft" multiple="true" typeahead="false"></p-autocomplete>
+        <p-autocomplete label="Facebook" multiple="true" typeahead="false"></p-autocomplete>
       </div>
     </div>
     <div class="col-12 xl:col-6 flex-column gap-2">
@@ -17,23 +17,23 @@
         <p-tag value="Primary"></p-tag>
         <p-tag severity="success" value="Success"></p-tag>
         <p-tag severity="info" value="Info"></p-tag>
-        <p-tag severity="warning" value="Warning"></p-tag>
+        <p-tag severity="warn" value="Warning"></p-tag>
         <p-tag severity="danger" value="Danger"></p-tag>
       </div>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Avatar</h3>
       <div class="flex justify-content-start gap-2">
-        <p-avatar icon="pi pi-user" size="xlarge"></p-avatar>
-        <p-avatar icon="pi pi-user" size="large"></p-avatar>
+        <p-avatar icon="pi pi-user" badgeSize="xlarge"></p-avatar>
+        <p-avatar icon="pi pi-user" badgeSize="large"></p-avatar>
         <p-avatar icon="pi pi-user"></p-avatar>
       </div>
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Avatar with Badge</h3>
       <div class="flex justify-content-start gap-5 pt-3">
-        <p-avatar icon="pi pi-user" size="xlarge" pBadge value="4"></p-avatar>
-        <p-avatar icon="pi pi-user" size="large" pBadge value="3"></p-avatar>
+        <p-avatar icon="pi pi-user" badgeSize="xlarge" pBadge value="4"></p-avatar>
+        <p-avatar icon="pi pi-user" badgeSize="large" pBadge value="3"></p-avatar>
         <p-avatar icon="pi pi-user" pBadge value="2"></p-avatar>
       </div>
     </div>
@@ -42,7 +42,7 @@
       <div class="flex justify-content-start gap-2">
         <p-badge [value]="2" severity="success" badgeSize="large"></p-badge>
         <p-badge [value]="4" severity="info" badgeSize="large"></p-badge>
-        <p-badge [value]="6" severity="warning" badgeSize="large"></p-badge>
+        <p-badge [value]="6" severity="warn" badgeSize="large"></p-badge>
         <p-badge [value]="8" severity="danger" badgeSize="large"></p-badge>
       </div>
     </div>
@@ -52,15 +52,15 @@
   <div class="grid">
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>ProgressSpinner</h3>
-      <p-progressSpinner></p-progressSpinner>
+      <p-progressspinner></p-progressspinner>
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>ProgressBar</h3>
-      <p-progressBar [value]="50"></p-progressBar>
+      <p-progressbar [value]="50"></p-progressbar>
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>MeterGroup</h3>
-      <p-meterGroup [value]="storageStatus"></p-meterGroup>
+      <p-metergroup [value]="storageStatus"></p-metergroup>
     </div>
   </div>
   <p-divider></p-divider>
@@ -146,9 +146,9 @@
         <p-button label="Block" (onClick)="blockContent()" />
         <p-button label="Unblock" (onClick)="unblockContent()" />
       </div>
-      <p-blockUI [target]="blockableContent" [blocked]="blockedContent">
+      <p-blockui [target]="blockableContent" [blocked]="blockedContent">
         <i class="pi pi-lock" style="font-size: 3rem"></i>
-      </p-blockUI>
+      </p-blockui>
       <p-panel #blockableContent header="Header">
         <p>Content</p>
       </p-panel>

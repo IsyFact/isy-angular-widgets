@@ -11,39 +11,38 @@ import {AllowedSigns} from './model/din-91379';
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
- * TODO: Breaking changes - Review and update the naming of error message keys. For example, change UNSPECIFIEDDATE to INVALIDUNSPECIFIEDDATE
  */
 export class Validation {
   /**
    * If the specified value is a valid date, it will be checked if the date is in the future.
-   * If the date corresponds to today's date or is in the past, a "FUTURE" error is thrown.
+   * If the date corresponds to today's date or is in the past, a "INVALIDFUTUREDATE" error is thrown.
    * For invalid dates, no error is thrown.
    * @param c The control element the validator is appended to
-   * @returns The object {FUTURE: true} if the validation fails; null otherwise
+   * @returns The object {INVALIDFUTUREDATE: true} if the validation fails; null otherwise
    */
   static isInFuture(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
     const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
     if (dateValue.isValid() && dateValue.isSameOrBefore(today)) {
-      return {FUTURE: true};
+      return {INVALIDFUTUREDATE: true};
     }
     return null;
   }
 
   /**
    * If the given value is a valid date, it will be checked if the date is in the past.
-   * If the date is today's date or is in the future, a "PAST" error is thrown.
+   * If the date is today's date or is in the future, a "INVALIDPASTDATE" error is thrown.
    * For invalid dates, no error is thrown.
    * @param c The control element the validator is appended to
-   * @returns The object {PAST: true} if the validation fails; null otherwise
+   * @returns The object {INVALIDPASTDATE: true} if the validation fails; null otherwise
    */
   static isInPast(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('day');
     // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
     const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
     if (dateValue.isValid() && dateValue.isSameOrAfter(today)) {
-      return {PAST: true};
+      return {INVALIDPASTDATE: true};
     }
     return null;
   }
@@ -55,7 +54,7 @@ export class Validation {
    * For valid or valid unspecified dates, no error is thrown.
    * @param c The control element the validator is appended to
    * @param allowZeroFormat If true, the zero date format should allowed
-   * @returns The object {UNSPECIFIEDDATE: true} if the validation fails; null otherwise
+   * @returns The object {INVALIDUNSPECIFIEDDATE: true} if the validation fails; null otherwise
    */
   static validUnspecifiedDate(c: AbstractControl, allowZeroFormat?: boolean): ValidationErrors | null {
     const input = (c.value as string) ?? null;
@@ -68,7 +67,7 @@ export class Validation {
       const [day, month, year] = input.split('.');
       const isoFormattedStr = `${year}-${month}-${day}`;
 
-      if (year === '0000' && !allowZeroFormat) return {UNSPECIFIEDDATE: true};
+      if (year === '0000' && !allowZeroFormat) return {INVALIDUNSPECIFIEDDATE: true};
 
       if (!(input.includes('x') || day === '00' || month === '00')) {
         const date = new Date(isoFormattedStr);
@@ -78,7 +77,7 @@ export class Validation {
       }
     }
 
-    if (!(INPUT_UNSPECIFIED_REGEX.test(input) || isDateValid)) return {UNSPECIFIEDDATE: true};
+    if (!(INPUT_UNSPECIFIED_REGEX.test(input) || isDateValid)) return {INVALIDUNSPECIFIEDDATE: true};
 
     return null;
   }
@@ -90,7 +89,7 @@ export class Validation {
    * For valid or valid unspecified dates, no error is thrown.
    * @param c The control element the validator is appended to
    * @param allowZeroFormat If true, the zero date format should allowed
-   * @returns The object {UNSPECIFIEDISODATE: true} if the validation fails; null otherwise
+   * @returns The object {INVALIDUNSPECIFIEDISODATE: true} if the validation fails; null otherwise
    */
   static validUnspecifiedISODate(c: AbstractControl, allowZeroFormat = false): ValidationErrors | null {
     const input = (c.value as string) ?? null;
@@ -103,7 +102,7 @@ export class Validation {
       const [year, month, day] = input.split('-');
       const isoFormattedStr = `${year}-${month}-${day}`;
 
-      if (year === '0000' && !allowZeroFormat) return {UNSPECIFIEDDATE: true};
+      if (year === '0000' && !allowZeroFormat) return {INVALIDUNSPECIFIEDISODATE: true};
 
       if (!(input.includes('x') || day === '00' || month === '00')) {
         const date = new Date(isoFormattedStr);
@@ -113,7 +112,7 @@ export class Validation {
       }
     }
 
-    if (!(INPUT_UNSPECIFIED_REGEX_ISO_DATE.test(input) || isDateValid)) return {UNSPECIFIEDISODATE: true};
+    if (!(INPUT_UNSPECIFIED_REGEX_ISO_DATE.test(input) || isDateValid)) return {INVALIDUNSPECIFIEDISODATE: true};
 
     return null;
   }
@@ -142,17 +141,17 @@ export class Validation {
 
   /**
    * Checks if the date is a valid credit card expiration date. The date must be in the future.
-   * If the date is not a valid credit card expiration date, a "CREDITCARDEXPIRATIONDATE" error is thrown.
+   * If the date is not a valid credit card expiration date, a "INVALIDCREDITCARDEXPIRATIONDATE" error is thrown.
    * For valid credit card expiration dates, no error is thrown.
    * @param c The control element the validator is appended to
-   * @returns The object {CREDITCARDEXPIRATIONDATE: true} if the validation fails; null otherwise
+   * @returns The object {INVALIDCREDITCARDEXPIRATIONDATE: true} if the validation fails; null otherwise
    */
   static validCreditCardExpirationDate(c: AbstractControl<MomentInput>): ValidationErrors | null {
     const today = moment().startOf('month');
     if (c.value !== '') {
       const dateValue = moment(c.value, ['MM/YY'], true);
       if (!dateValue.isValid() || dateValue.isBefore(today)) {
-        return {CREDITCARDEXPIRATIONDATE: true};
+        return {INVALIDCREDITCARDEXPIRATIONDATE: true};
       }
     }
     return null;
@@ -164,7 +163,7 @@ export class Validation {
    * @returns The object {DATE: true} if the validation fails; null otherwise
    */
   static isoDate(c: AbstractControl): ValidationErrors | null {
-    const isoDateValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DD', true, 'DATE');
+    const isoDateValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DD', true, 'INVALIDISODATE');
     return isoDateValidatorFn(c);
   }
 
@@ -174,7 +173,7 @@ export class Validation {
    * @returns The object {TIME: true} if the validation fails; null otherwise
    */
   static isoTime(c: AbstractControl): ValidationErrors | null {
-    const isoTimeValidatorFn: ValidatorFn = Validation.dateFormat('HH:mm:ss', true, 'TIME');
+    const isoTimeValidatorFn: ValidatorFn = Validation.dateFormat('HH:mm:ss', true, 'INVALIDISOTIME');
     return isoTimeValidatorFn(c);
   }
 
@@ -184,7 +183,11 @@ export class Validation {
    * @returns The object {DATETIME: true} if the validation fails; null otherwise
    */
   static isoDateTime(c: AbstractControl): ValidationErrors | null {
-    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat('YYYY-MM-DDTHH:mm:ss[Z]', true, 'DATETIME');
+    const isoDateTimeValidatorFn: ValidatorFn = Validation.dateFormat(
+      'YYYY-MM-DDTHH:mm:ss[Z]',
+      true,
+      'INVALIDISODATETIME'
+    );
     return isoDateTimeValidatorFn(c);
   }
 
@@ -194,7 +197,7 @@ export class Validation {
    * - If the input is shorter than 12 characters or longer than 19 characters, an error is returned
    * - Luhn algorithm is applied to the input, if the result is NOT modulo 10, an error is returned.
    * @param c The control element the validator is appended to
-   * @returns The object {CREDITCARD: true} if the validation fails; null otherwise
+   * @returns The object {INVALIDCREDITCARDNUMBER: true} if the validation fails; null otherwise
    */
   static validCreditCardNumber(c: AbstractControl): ValidationErrors | null {
     const minLength = 12,
@@ -207,11 +210,11 @@ export class Validation {
 
     // If the input contains characters other than Numbers
     if (/[^0-9-\s]+/.test(value)) {
-      return {CREDITCARD: true};
+      return {INVALIDCREDITCARDNUMBER: true};
     }
 
     if (value.length > maxLength || value.length < minLength) {
-      return {CREDITCARD: true};
+      return {INVALIDCREDITCARDNUMBER: true};
     }
 
     // Execution of the Luhn algorithm (specific fixed numbers required)
@@ -237,7 +240,7 @@ export class Validation {
     }
 
     if (nCheck % radix !== 0) {
-      return {CREDITCARD: true};
+      return {INVALIDCREDITCARDNUMBER: true};
     }
 
     return null;

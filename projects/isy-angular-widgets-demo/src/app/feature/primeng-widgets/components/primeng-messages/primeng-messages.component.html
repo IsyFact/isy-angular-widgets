@@ -3,7 +3,9 @@
   <div class="grid">
     <div class="col-12 md:col-6 flex-column gap-2">
       <h2>Messages</h2>
-      <p-messages id="messages" [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+      @for (message of messages; track message.key) {
+        <p-message [severity]="message.severity" [text]="message.detail" [closable]="false"></p-message>
+      }
     </div>
     <div class="col-12 md:col-6 flex-column gap-2">
       <h2>Toast</h2>

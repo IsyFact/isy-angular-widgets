@@ -10,32 +10,26 @@ import {PrimengMessagesComponent} from './components/primeng-messages/primeng-me
 import {PrimengMiscComponent} from './components/primeng-misc/primeng-misc.component';
 import {PrimengChartComponent} from './components/primeng-chart/primeng-chart.component';
 
-import {TabViewModule} from 'primeng/tabview';
-import {CalendarModule} from 'primeng/calendar';
+import {TabsModule} from 'primeng/tabs';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputMaskModule} from 'primeng/inputmask';
-import {InputSwitchModule} from 'primeng/inputswitch';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputOtpModule} from 'primeng/inputotp';
 import {InputTextModule} from 'primeng/inputtext';
-import {InputTextareaModule} from 'primeng/inputtextarea';
 import {KnobModule} from 'primeng/knob';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {PasswordModule} from 'primeng/password';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {RatingModule} from 'primeng/rating';
 import {SliderModule} from 'primeng/slider';
-import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-import {ChipsModule} from 'primeng/chips';
 import {IconFieldModule} from 'primeng/iconfield';
 import {InputIconModule} from 'primeng/inputicon';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CascadeSelectModule} from 'primeng/cascadeselect';
-import {DropdownModule} from 'primeng/dropdown';
 import {ListboxModule} from 'primeng/listbox';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {SelectButtonModule} from 'primeng/selectbutton';
@@ -64,10 +58,9 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {DialogModule} from 'primeng/dialog';
-import {OverlayPanelModule} from 'primeng/overlaypanel';
-import {SidebarModule} from 'primeng/sidebar';
 import {TooltipModule} from 'primeng/tooltip';
 import {FileUploadModule} from 'primeng/fileupload';
+import {DrawerModule} from 'primeng/drawer';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {MenuModule} from 'primeng/menu';
@@ -75,13 +68,11 @@ import {MenubarModule} from 'primeng/menubar';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {StepsModule} from 'primeng/steps';
-import {TabMenuModule} from 'primeng/tabmenu';
 import {TieredMenuModule} from 'primeng/tieredmenu';
-import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 import {AvatarModule} from 'primeng/avatar';
 import {BadgeModule} from 'primeng/badge';
 import {BlockUIModule} from 'primeng/blockui';
-import {ChipModule} from 'primeng/chip';
 import {InplaceModule} from 'primeng/inplace';
 import {MeterGroupModule} from 'primeng/metergroup';
 import {ScrollTopModule} from 'primeng/scrolltop';
@@ -92,6 +83,12 @@ import {TagModule} from 'primeng/tag';
 import {TerminalModule} from 'primeng/terminal';
 import {EditorModule} from 'primeng/editor';
 import {ChartModule} from 'primeng/chart';
+import {DatePickerModule} from 'primeng/datepicker';
+import {SelectModule} from 'primeng/select';
+import {ToggleSwitchModule} from 'primeng/toggleswitch';
+import {PopoverModule} from 'primeng/popover';
+import {FormsModule} from '@angular/forms';
+import {TextareaModule} from 'primeng/textarea';
 
 @NgModule({
   declarations: [
@@ -107,32 +104,27 @@ import {ChartModule} from 'primeng/chart';
     PrimengChartComponent
   ],
   imports: [
-    TabViewModule,
-    CalendarModule,
+    TabsModule,
     CheckboxModule,
     ColorPickerModule,
     InputGroupModule,
     InputGroupAddonModule,
     InputMaskModule,
-    InputSwitchModule,
     InputNumberModule,
     InputOtpModule,
     InputTextModule,
-    InputTextareaModule,
+    TextareaModule,
     KnobModule,
     KeyFilterModule,
     PasswordModule,
     RadioButtonModule,
     RatingModule,
     SliderModule,
-    TriStateCheckboxModule,
     ToggleButtonModule,
-    ChipsModule,
     IconFieldModule,
     InputIconModule,
     AutoCompleteModule,
     CascadeSelectModule,
-    DropdownModule,
     ListboxModule,
     MultiSelectModule,
     SelectButtonModule,
@@ -161,8 +153,6 @@ import {ChartModule} from 'primeng/chart';
     ConfirmDialogModule,
     ConfirmPopupModule,
     DialogModule,
-    OverlayPanelModule,
-    SidebarModule,
     TooltipModule,
     FileUploadModule,
     BreadcrumbModule,
@@ -172,13 +162,12 @@ import {ChartModule} from 'primeng/chart';
     MegaMenuModule,
     PanelMenuModule,
     StepsModule,
-    TabMenuModule,
+    TabsModule,
     TieredMenuModule,
-    MessagesModule,
+    MessageModule,
     AvatarModule,
     BadgeModule,
     BlockUIModule,
-    ChipModule,
     InplaceModule,
     MeterGroupModule,
     ScrollTopModule,
@@ -189,7 +178,13 @@ import {ChartModule} from 'primeng/chart';
     TerminalModule,
     NgOptimizedImage,
     EditorModule,
-    ChartModule
+    ChartModule,
+    DatePickerModule,
+    SelectModule,
+    ToggleSwitchModule,
+    PopoverModule,
+    DrawerModule,
+    FormsModule
   ]
 })
 export class PrimengWidgetsModule {}

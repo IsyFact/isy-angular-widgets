@@ -5,7 +5,7 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {Subscription, filter} from 'rxjs';
-import {MegaMenuItem, MenuItem, PrimeNGConfig, Translation} from 'primeng/api';
+import {MegaMenuItem, MenuItem, Translation} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {WidgetsTranslation} from '@isy-angular-widgets/i18n/widgets-translation';
@@ -14,11 +14,14 @@ import {permissions} from './app.permission';
 import {DOCUMENT} from '@angular/common';
 import {PageTitleService} from './shared/services/page-title.service';
 import {NavigationEnd, Router, RouterEvent, Event} from '@angular/router';
+import {PrimeNG} from 'primeng/config';
+import {SkipTarget} from '@isy-angular-widgets/skip-links/model/model';
 
 @Component({
   selector: 'demo-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
   items: MegaMenuItem[] = [];
@@ -32,16 +35,16 @@ export class AppComponent implements OnInit, OnDestroy {
   focusHasBeenSet?: boolean;
 
   constructor(
-    private securityService: SecurityService,
-    private userInfoPublicService: UserInfoPublicService,
+    private readonly securityService: SecurityService,
+    private readonly userInfoPublicService: UserInfoPublicService,
     public translate: TranslateService,
-    private primeNGConfig: PrimeNGConfig,
-    private widgetsConfigService: WidgetsConfigService,
-    private menuTranslationService: MenuTranslationService,
+    private readonly primeng: PrimeNG,
+    private readonly widgetsConfigService: WidgetsConfigService,
+    private readonly menuTranslationService: MenuTranslationService,
     public pageTitleService: PageTitleService,
     public router: Router,
-    private cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private document: Document
+    private readonly cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private readonly document: Document
   ) {
     // Add translation
     translate.addLangs(['de', 'en']);
@@ -49,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set PrimeNG translation
     this.primeNGI18nSubscription = this.translate.stream('primeng').subscribe((data: Translation) => {
-      this.primeNGConfig.setTranslation(data);
+      this.primeng.setTranslation(data);
     });
 
     // Set Isy Angular Widgets translation
@@ -130,6 +133,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translate.onLangChange.subscribe(async () => {
       this.sidebarItems = await this.menuTranslationService.translateMenuItems(navigationMenu);
       this.items = await this.menuTranslationService.translateMegaMenuItems(applicationMenu);
+      this.setupSkipLinks();
     });
   }
 
@@ -149,5 +153,32 @@ export class AppComponent implements OnInit, OnDestroy {
   selectPermission(role: string): void {
     this.userInfo.roles = [role];
     this.securityService.setRoles(this.userInfo);
+  }
+
+  skipLinks: SkipTarget[] = [];
+
+  /**
+   * Sets up the skip links for the application to enhance accessibility.
+   * The skip links allow users to quickly navigate to specific sections of the page,
+   * such as the main content, navigation, site toolbar, links navigation, and information area.
+   *
+   * Each skip link is defined with a label, which is translated using the `translate` service,
+   * and a target, which specifies the destination element on the page.
+   *
+   * The skip links are stored in the `skipLinks` property.
+   */
+  private setupSkipLinks(): void {
+    const links: {key: string; target: string}[] = [
+      {key: 'skipToMainContent', target: 'main'},
+      {key: 'skipToNavigation', target: 'nav'},
+      {key: 'skipToSiteToolbar', target: 'isy-seiten-toolbar'},
+      {key: 'skipToLinksNavigation', target: '.isy-hauptfenster-linksnavigation'},
+      {key: 'skipToInformationArea', target: '.isy-hauptfenster-informationsbereich'}
+    ];
+
+    this.skipLinks = links.map((link) => ({
+      label: this.translate.instant(`isyAngularWidgetsDemo.skipLinks.${link.key}`) as string,
+      target: link.target
+    }));
   }
 }

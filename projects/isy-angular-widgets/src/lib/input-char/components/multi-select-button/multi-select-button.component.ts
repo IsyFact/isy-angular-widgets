@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '
 import {CommonModule} from '@angular/common'; // Import CommonModule for common directives
 import {ControlValueAccessor, FormsModule} from '@angular/forms'; // Import FormsModule if you're using template-driven forms
 import {InputCharData} from '../../model/model';
-import {AccordionModule} from 'primeng/accordion';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {AccordionModule} from 'primeng/accordion';
 
 @Component({
   selector: 'isy-multi-select-button',
@@ -41,6 +41,8 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
 
   allOptionsModel: {label: string} | undefined = this.allOptions[0];
 
+  activeIndex: string | number | string[] | number[] = '';
+
   /**
    * Lifecycle hook that is called when any data-bound property of the component changes.
    * @param changes - An object containing the changed properties and their current and previous values.
@@ -51,38 +53,6 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
     }
   }
 
-  activeIndices: number[] = [];
-
-  /**
-   * Close all accordion tabs
-   */
-  closeAllAccordionTabs(): void {
-    this.activeIndices = [];
-  }
-
-  /**
-   * Prevents accordion tab to close when clicking a base or group within the accordion.
-   * To ensure that the accordion remains open when buttons within it are clicked, utilize the activeIndex property.
-   * This function prevents the accordion from closing upon button clicks inside it.
-   * @param index - The index of the tab.
-   * @param event - The click event.
-   */
-  toggleTab(index: number, event: Event): void {
-    if (
-      event.target instanceof HTMLElement &&
-      !event.target.classList.contains('p-button-label') &&
-      !event.target.classList.contains('p-button')
-    ) {
-      const position = this.activeIndices.indexOf(index);
-      const positionClose = -1;
-      if (position === positionClose) {
-        this.activeIndices = [...this.activeIndices, index];
-      } else {
-        this.activeIndices = [...this.activeIndices.slice(0, position), ...this.activeIndices.slice(position + 1)];
-      }
-    }
-  }
-
   /**
    * Triggers an update of the selected group and emits the updated value.
    * @param group - The selected group.
@@ -90,6 +60,7 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
   triggerUpdate(group: string | undefined): void {
     this.writeValue(group ? {group: group, value: this.models[group]} : undefined);
     this.valueChange.emit(this.value);
+    this.activeIndex = group ? this.activeIndex : [];
   }
 
   /**

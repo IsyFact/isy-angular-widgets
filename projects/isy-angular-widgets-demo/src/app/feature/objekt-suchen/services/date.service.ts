@@ -4,9 +4,9 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class DateService {
-  private LOCALE = 'en-GB';
-  private SEPARATOR = '/';
-  private DOT = '.';
+  private readonly LOCALE = 'en-GB';
+  private readonly SEPARATOR = '/';
+  private readonly DOT = '.';
 
   convertToGermanDateFormat(date: string): string {
     return new Date(date).toLocaleDateString(this.LOCALE).split(this.SEPARATOR).join(this.DOT);

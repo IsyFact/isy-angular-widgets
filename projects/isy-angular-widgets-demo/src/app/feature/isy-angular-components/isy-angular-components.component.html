@@ -56,7 +56,7 @@
           label="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
           fieldId="date-of-entry"
           [control]="personalInfoForm.controls.dateOfEntry | formControl"
-          [validationMessages]="{UNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
+          [validationMessages]="{INVALIDUNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
         >
           <isy-incomplete-date
             inputId="date-of-entry"

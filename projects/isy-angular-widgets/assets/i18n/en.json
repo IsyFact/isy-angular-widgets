@@ -7,6 +7,9 @@
       "close": "Close",
       "aria": {
         "close": "Close"
+      },
+      "toast": {
+        "stepChanged": "Step changed"
       }
     },
     "inputChar": {
@@ -31,7 +34,9 @@
         "expandInformationsbereich": "Expand right side bar",
         "leftNavigation": "leftnavigation",
         "informationArea": "informationarea",
-        "flag": "Flag {{lang}}"
+        "flag": "Flag {{lang}}",
+        "accountName": "Account name",
+        "skipLinksAriaLabel": "Quick navigation"
       }
     }
   },

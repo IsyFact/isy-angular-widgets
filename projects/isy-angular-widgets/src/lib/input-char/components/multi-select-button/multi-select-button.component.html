@@ -1,30 +1,26 @@
-<p-selectButton
-  class="all-selectbutton"
+<p-selectbutton
+  styleClass="all-selectbutton"
   (onChange)="triggerUpdate(undefined)"
-  (click)="closeAllAccordionTabs()"
   [(ngModel)]="allOptionsModel"
   [options]="[{label: allButtonOptionsLabel}]"
   optionLabel="label"
-  (keydown)="closeAllAccordionTabs()"
 >
-</p-selectButton>
+</p-selectbutton>
 
-<p-accordion [activeIndex]="activeIndices">
-  @for (item of dataToDisplay | keyvalue; track item.key) {
-    <p-accordionTab
-      [header]="item.key"
-      [disabled]="disabled"
-      (click)="toggleTab($index, $event)"
-      (keydown)="toggleTab($index, $event)"
-    >
-      <p-selectButton
-        [disabled]="disabled"
-        [options]="item.value"
-        [(ngModel)]="models[item.key]"
-        (onChange)="triggerUpdate(item.key)"
-        class="charset-selectbutton charset-selectbutton--{{ $index }}"
-      >
-      </p-selectButton>
-    </p-accordionTab>
+<p-accordion [(value)]="activeIndex">
+  @for (item of dataToDisplay | keyvalue; let i = $index; track item.key) {
+    <p-accordion-panel [value]="item.key">
+      <p-accordion-header>{{ item.key }}</p-accordion-header>
+      <p-accordion-content>
+        <p-selectbutton
+          [disabled]="disabled"
+          [options]="item.value"
+          [(ngModel)]="models[item.key]"
+          (onChange)="triggerUpdate(item.key)"
+          class="charset-selectbutton charset-selectbutton--{{ i }}"
+        >
+        </p-selectbutton>
+      </p-accordion-content>
+    </p-accordion-panel>
   }
 </p-accordion>

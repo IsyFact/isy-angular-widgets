@@ -35,7 +35,6 @@ function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext,
   const styles = [
     'node_modules/primeicons/primeicons.css',
     'node_modules/primeflex/primeflex.min.css',
-    'node_modules/primeng/resources/primeng.min.css',
     'node_modules/@isyfact/isy-angular-widgets/assets/theme/isyfact-theme.scss'
   ];
   const projects = workspace?.projects || [];
@@ -140,12 +139,13 @@ export function ngAdd(): Rule {
 
     // Add necessary dependencies to new CLI project.
 
-    addPackageToPackageJson(tree, '@angular/common', '^18.1.4');
-    addPackageToPackageJson(tree, '@angular/core', '^18.1.4');
+    addPackageToPackageJson(tree, '@angular/common', '^19.2.9');
+    addPackageToPackageJson(tree, '@angular/core', '^19.2.9');
     addPackageToPackageJson(tree, 'primeicons', '^7.0.0');
-    addPackageToPackageJson(tree, 'primeng', '^17.18.8');
-    addPackageToPackageJson(tree, 'primeflex', '^3.3.1');
+    addPackageToPackageJson(tree, 'primeng', '^19.1.2');
+    addPackageToPackageJson(tree, 'primeflex', '^4.0.0');
     addPackageToPackageJson(tree, 'moment', '^2.30.1');
+    addPackageToPackageJson(tree, '@primeng/themes', '^19.1.2');
 
     // Install isy-angular-widgets
     context.addTask(new NodePackageInstallTask());

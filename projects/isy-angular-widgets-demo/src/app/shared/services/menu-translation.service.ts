@@ -25,7 +25,7 @@ import {TranslateService} from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class MenuTranslationService {
-  constructor(private translate: TranslateService) {}
+  constructor(private readonly translate: TranslateService) {}
 
   /**
    * Translates all `label` and `title` fields of  {@link MenuItem} and all submenu items.

@@ -1,4 +1,5 @@
 import {InputCharComponent} from './input-char.component';
+import {ElementRef} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
@@ -6,6 +7,7 @@ import {MockComponents, MockModule} from 'ng-mocks';
 import {DialogModule} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
+import {ButtonModule} from 'primeng/button';
 
 let component: InputCharComponent;
 let spectator: Spectator<InputCharComponent>;
@@ -15,7 +17,7 @@ describe('Unit Tests: InputCharComponent', () => {
   const dialogDefaultHeight = '460px';
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    imports: [MockModule(DialogModule), MockComponents(InputCharDialogComponent)]
+    imports: [MockModule(DialogModule), MockComponents(InputCharDialogComponent), MockModule(ButtonModule)]
   });
 
   describe('with default datentyp', () => {
@@ -168,13 +170,13 @@ describe('Integration Test: InputCharComponent', () => {
 
       const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.queryAll('.charset-selectbutton--1 div span');
+        const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
       const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = spectator.queryAll('.right-panel-side div span');
+        const groupButtons = spectator.queryAll('.right-panel-side p-selectbutton p-togglebutton');
         expect(groupButtons.length).toEqual(expectedCharacters);
       });
     });
@@ -204,7 +206,41 @@ describe('Accessibility Test: InputCharComponent', () => {
   });
 
   it('the dialog close icon should have an aria-label attribute with "Close picker"', () => {
-    const element = spectator.query('.p-dialog-header-icons .p-dialog-header-close') as HTMLElement;
+    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
     expect(element.getAttribute('aria-label')).toBe('Close picker');
+  });
+
+  it('should focus the button if no element is focused when dialog closes', () => {
+    spectator.component.visible = true;
+
+    const focusSpy = jasmine.createSpy('focus');
+
+    spectator.component.openDialogButton = {
+      nativeElement: {focus: focusSpy}
+    } as unknown as ElementRef<HTMLButtonElement>;
+
+    spyOnProperty(document, 'activeElement', 'get').and.returnValue(document.body);
+
+    spectator.component.onDialogClose();
+
+    expect(spectator.component.visible).toBeFalse();
+    expect(focusSpy).toHaveBeenCalled();
+  });
+
+  it('should not focus the button if another element is already focused', () => {
+    spectator.component.visible = true;
+
+    const focusSpy = jasmine.createSpy('focus');
+    spectator.component.openDialogButton = {
+      nativeElement: {focus: focusSpy}
+    } as unknown as ElementRef<HTMLButtonElement>;
+
+    const mockInput = document.createElement('input');
+    spyOnProperty(document, 'activeElement', 'get').and.returnValue(mockInput);
+
+    spectator.component.onDialogClose();
+
+    expect(spectator.component.visible).toBeFalse();
+    expect(focusSpy).not.toHaveBeenCalled();
   });
 });

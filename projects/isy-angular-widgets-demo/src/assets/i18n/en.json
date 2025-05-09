@@ -7,6 +7,9 @@
       "close": "Close",
       "aria": {
         "close": "Close"
+      },
+      "toast": {
+        "stepChanged": "Step changed"
       }
     },
     "inputChar": {
@@ -35,7 +38,9 @@
         "expandInformationsbereich": "Expand right side bar",
         "leftNavigation": "leftnavigation",
         "informationArea": "informationarea",
-        "accountName": "Account name"
+        "accountName": "Account name",
+        "flag": "Flag {{lang}}",
+        "skipLinksAriaLabel": "Quick navigation"
       }
     },
     "p-calendar": {
@@ -250,6 +255,13 @@
         "de": "German",
         "en": "English"
       }
+    },
+    "skipLinks": {
+      "skipToMainContent": "Skip to main content",
+      "skipToNavigation": "Skip to navigation",
+      "skipToSiteToolbar": "Skip to site toolbar",
+      "skipToLinksNavigation": "Skip to links navigation",
+      "skipToInformationArea": "Skip to information area"
     }
   },
   "primeng": {

@@ -8,7 +8,8 @@ import {StorageStatus} from '../../model/product';
 @Component({
   selector: 'demo-primeng-misc',
   templateUrl: './primeng-misc.component.html',
-  providers: [TerminalService]
+  providers: [TerminalService],
+  standalone: false
 })
 export class PrimengMiscComponent implements OnDestroy {
   blockedContent: boolean = false;

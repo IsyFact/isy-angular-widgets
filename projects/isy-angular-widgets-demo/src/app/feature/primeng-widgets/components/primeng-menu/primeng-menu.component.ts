@@ -7,7 +7,8 @@ import {personalData} from '../../data/organization';
 
 @Component({
   selector: 'demo-primeng-menu',
-  templateUrl: './primeng-menu.component.html'
+  templateUrl: './primeng-menu.component.html',
+  standalone: false
 })
 export class PrimengMenuComponent {
   electronics: MenuItem[] = electronicData;

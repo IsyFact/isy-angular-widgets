@@ -12,7 +12,7 @@ import {
 } from './forms-data';
 import {getEmptyPerson, resetPerson} from './person-data';
 import {TranslateService} from '@ngx-translate/core';
-import {Message, MessageService} from 'primeng/api';
+import {ToastMessageOptions, MessageService} from 'primeng/api';
 import {CountryMap} from './model/country';
 import {DateService} from './services/date.service';
 import {TOAST_SEVERITY} from '../../shared/model/toast';
@@ -22,7 +22,8 @@ const defaultWidth = 60;
 @Component({
   selector: 'demo-personen-suchen',
   templateUrl: './objekt-suchen.component.html',
-  styleUrls: ['./objekt-suchen.component.scss']
+  styleUrls: ['./objekt-suchen.component.scss'],
+  standalone: false
 })
 export class ObjektSuchenComponent {
   /**
@@ -132,8 +133,8 @@ export class ObjektSuchenComponent {
 
   constructor(
     public personService: PersonenService,
-    private messageService: MessageService,
-    private dateService: DateService,
+    private readonly messageService: MessageService,
+    private readonly dateService: DateService,
     public translate: TranslateService
   ) {
     this.onLanguageChange();
@@ -342,10 +343,11 @@ export class ObjektSuchenComponent {
    * Is adding a notification to the notification service to display a toast popup
    */
   addSuccessNotification(): void {
-    const message: Message = {
+    const message: ToastMessageOptions = {
       severity: TOAST_SEVERITY.SUCCESS,
       detail: this.translate.instant('toastMessages.successfullySavedFakeData') as string,
-      sticky: true
+      sticky: true,
+      styleClass: 'h-full'
     };
     this.messageService.add(message);
   }

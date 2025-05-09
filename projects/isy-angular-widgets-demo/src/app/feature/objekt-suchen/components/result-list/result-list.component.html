@@ -20,7 +20,7 @@
       <div>
         <p-button
           id="create-button"
-          class="mr-1"
+          styleClass="mr-1"
           icon="pi pi-plus"
           [label]="'isyAngularWidgetsDemo.actions.createObject' | translate"
           (onClick)="emitCreateAction()"
@@ -37,7 +37,7 @@
         </p-button>
       </div>
       <div class="pt-3">
-        <p-multiSelect
+        <p-multiselect
           display="chip"
           [options]="initialColumns"
           [(ngModel)]="selectedColumns"
@@ -74,7 +74,7 @@
                 [showAddButton]="false"
               >
                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                  <p-multiSelect
+                  <p-multiselect
                     [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
                     placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
                     [ngModel]="value"
@@ -86,7 +86,7 @@
                         <span class="p-ml-1">{{ option.label }}</span>
                       </div>
                     </ng-template>
-                  </p-multiSelect>
+                  </p-multiselect>
                 </ng-template>
               </p-columnFilter>
             } @else if (col.currency) {
@@ -106,7 +106,7 @@
           {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
           <p-columnFilter field="personalien.state" matchMode="equals" display="menu">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-              <p-dropdown
+              <p-select
                 [ariaLabel]="'isyAngularWidgetsDemo.labels.state' | translate"
                 [ngModel]="value"
                 [options]="state"
@@ -116,7 +116,7 @@
                 <ng-template let-option pTemplate="item">
                   <span>{{ option.label }}</span>
                 </ng-template>
-              </p-dropdown>
+              </p-select>
             </ng-template>
           </p-columnFilter>
           <p-sortIcon field="personalien.state"></p-sortIcon>

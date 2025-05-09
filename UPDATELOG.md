@@ -1,3 +1,242 @@
+# Update Log - 06.05.2025
+
+## Migration auf Angular v19 & PrimeNG v19
+
+### 1. Aktualisierte Frameworks & Tools
+- Angular: v18 → **v19.2.9**
+- PrimeNG: v17 → **v19.1.2**
+- Core-Pakete & CLI aktualisiert
+- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/guides/migration) umgesetzt
+
+---
+
+### 2. Änderungen in **_isy-angular-widgets_** (Bibliothek)
+
+#### Paketkonfiguration (`index.ts`)
+```ts
+addPackageToPackageJson(tree, '@angular/common', '^19.2.9');
+addPackageToPackageJson(tree, '@angular/core', '^19.2.9');
+addPackageToPackageJson(tree, 'primeng', '^19.1.2');
+addPackageToPackageJson(tree, '@primeng/themes', '^19.1.2');
+```
+
+#### Überarbeitete Dateien (Auswahl)
+- Komponenten: `form-wrapper`, `hauptfenster`, `input-char`, `incomplete-date`, `multi-select-button`, `wizard`, `interactive-elements`
+- Direktiven & Services: `input-char.directive`, `security-directive`, `security-guard`, `widgets-config.service`
+- Tests: Alle zugehörigen .spec.ts-Dateien aktualisiert
+- Übersetzungen: `de.json`, `en.json`
+- **Gelöschte Module** (durch Umstieg auf Standalone): `hauptfenster.module.ts`, `wizard.module.ts`, `incomplete-date.module.ts`, `security.module.ts`
+
+#### Neue Komponenten & Funktionen
+- Neues IsyFact-Theme via `provideIsyFactTheme()`
+- Alte Themes (`theme.css`, `FluentUI`) entfernt
+- Neue Design-Variablen für das IsyFact-Styling
+- `form-wrapper`: Unterstützung für Label-ID
+- `skip-links`-Komponente zur barrierefreien Navigation
+- `isy-wizard`: Neue Eigenschaft `allowFreeNavigation` für freie Schritt-Navigation
+- Aktiver Zustand in der Links-Navigation farblich hervorgehoben
+- Styling des `isy-input-char`-Dialogs überarbeitet
+- Styling von schreibgeschützten Eingabefeldern angepasst  
+
+---
+
+### 3. Änderungen in **_isy-angular-widgets-demo_** (Demo-App)
+
+#### Überarbeitete Dateien (Auswahl)
+- Komponenten: `dashboard-*`, `isy-angular-components`, `objekt-*`, `primeng-*`
+- Services: `date.service.ts`, `menu-translation.service.ts`, `page-title.service.ts`
+- Übersetzungen: `de.json`, `en.json`
+- Modulstruktur & Imports angepasst
+
+---
+
+### 4. PrimeNG-Komponenten ersetzt/aktualisiert
+
+**Umbenannte Komponenten**
+
+| Alt             | Neu               |
+|-----------------|-------------------|
+| `Calendar`      | `DatePicker`      |
+| `Dropdown`      | `Select`          |
+| `InputSwitch`   | `ToggleSwitch`    |
+| `OverlayPanel`  | `Popover`         |
+| `Sidebar`       | `Drawer`          |
+
+**Ersetzte/veraltete Komponenten:**
+
+| Alt              | Neu                                        |
+|------------------|--------------------------------------------|
+| `Chips`          | `AutoComplete` (multiple, ohne Typeahead)  |
+| `TabMenu`        | `Tabs` (ohne Panels)                       |
+| `Steps`          | `Stepper` (ohne Panels)                    |
+| `InlineMessage`  | `Message`-Komponente                       |
+| `TabView`        | `Tabs`-Komponenten                         |
+| `Accordion`      | `AccordionPanel` + `Header` + `Content`    |
+| `Messages`       | `Message`-Komponente                       |
+
+---
+
+### 5. Technische Anpassungen
+
+#### Angular v19
+- `TranslateModule.forChild()` für Lazy-Loaded Modules
+- Konstante Werte mit readonly
+- Migration auf standalone: true/false für Komponenten
+
+#### PrimeNG v19
+- Konfiguration jetzt via `providePrimeNG()` über `provideIsyFactTheme`
+- `TriStateCheckbox` durch `p-checkbox` mit `indeterminate` ersetzt
+- Checkbox-Label via `<label>` statt label-Property
+- Chips `p-chips` ersetzt durch AutoComplete `p-autoComplete` (`multiple`, `typeahead=false`)
+- `pInputTextarea` → `pTextarea`
+- `severity="warning"` → `severity="warn"`
+- `size` → `badgeSize`
+- `Message` → `ToastMessageOptions` (wegen Namenskonflikt)
+
+---
+
+### 6. Aktualisierte Abhängigkeiten
+
+#### Demo-App (`package.json`)
+```json
+{
+    "dependencies": {
+        "@angular/animations": "^19.2.9",
+        "@angular/cdk": "^19.2.14",
+        "@angular/common": "^19.2.9",
+        "@angular/compiler": "^19.2.9",
+        "@angular/core": "^19.2.9",
+        "@angular/forms": "^19.2.9",
+        "@angular/platform-browser": "^19.2.9",
+        "@angular/platform-browser-dynamic": "^19.2.9",
+        "@angular/router": "^19.2.9",
+        "@ngx-translate/core": "^16.0.4",
+        "@ngx-translate/http-loader": "^16.0.1",
+        "@primeng/themes": "^19.1.2",
+        "chart.js": "^4.4.9",
+        "flag-icons": "^7.3.2",
+        "primeflex": "^4.0.0",
+        "primeng": "^19.1.2",
+        "quill": "^2.0.3",
+        "rxjs": "^7.8.2",
+        "tslib": "^2.8.1",
+        "zone.js": "~0.15.0"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^19.2.10",
+        "@angular-eslint/builder": "19.3.0",
+        "@angular-eslint/eslint-plugin": "19.3.0",
+        "@angular-eslint/eslint-plugin-template": "^19.3.0",
+        "@angular-eslint/schematics": "19.3.0",
+        "@angular-eslint/template-parser": "19.3.0",
+        "@angular/cli": "~19.2.10",
+        "@angular/compiler-cli": "^19.2.9",
+        "@compodoc/compodoc": "^1.1.26",
+        "@isyfact/eslint-plugin": "3.0.1",
+        "@ngneat/spectator": "^19.5.0",
+        "@stylistic/eslint-plugin-ts": "^3.1.0",
+        "@types/jasmine": "~5.1.8",
+        "@types/node": "^18.19.96",
+        "@typescript-eslint/eslint-plugin": "^8.32.0",
+        "@typescript-eslint/parser": "^8.32.0",
+        "eslint": "^9.26.0",
+        "eslint-plugin-jsdoc": "^50.6.11",
+        "jasmine-core": "~5.7.1",
+        "ng-mocks": "^14.13.4",
+        "ng-packagr": "^19.2.2",
+        "prettier": "^3.5.3",
+        "typescript": "~5.8.3"
+    }
+}
+```
+
+#### Bibliothek (`package.json`)
+```json
+{
+  "peerDependencies": {
+    "@angular/common": "^19.2.9",
+    "@angular/core": "^19.2.9",
+    "primeflex": "^4.0.0",
+    "primeng": "^19.1.2",
+    "@primeng/themes": "^19.1.2"
+  },
+  "dependencies": {
+    "tslib": "^2.8.1"
+  }
+}
+```
+---
+
+### 7. **Behandelte GitHub-Issues**
+
+| ID    | Titel                                                                     |
+|-------|---------------------------------------------------------------------------|
+| #254  | Missing option in p-steps for jumping between steps                       |
+| #249  | P-Multiselect loses focus by using keyboard                               |
+| #247  | Style of readonly Inputs                                                  |
+| #241  | Charpicker loses Focus                                                    |
+| #239  | Provide a skip link in isy-hauptfenster                                   |
+| #238  | Allow Form Field Wrapper label id to be specified                         |
+| #237  | multi-select-button.component.scss overrides global styles of p-accordion |
+
+---
+
+### 8. Codequalität geprüft
+- **ESLint:** `npm run lint` → keine Fehler
+- **Prettier:** `npm run prettier:check` → bestanden
+
+---
+
+### 9. Tests durchgeführt
+- **Unit- & Integrationstests:** `npm run test` → alle Tests bestanden
+- **Manuelle Tests:** 
+  - UI geprüft
+  - Hauptfunktionalitäten erfolgreich validiert
+  - Keine kritischen Fehler festgestellt
+
+---
+
+### **Breaking Changes**
+
+#### Angular v19
+- Module entfernt (→ Umstellung auf standalone)
+- Lazy-Loaded Translations benötigen `TranslateModule.forChild()`
+- `readonly` für konstante Variablen empfohlen
+
+#### PrimeNG v19
+- Diverse Komponenten ersetzt (siehe oben)
+- API-Änderungen: Properties & Komponentenverhalten angepasst
+- Konfiguration über `provideIsyFactTheme()` statt `PrimeNGConfig`
+
+#### isy-angular-widgets v19
+- **Validierungsfehler-Objekte umbenannt** (vorher als TODO markiert):
+
+| Alt                       | Neu                             |
+|---------------------------|---------------------------------|
+| FUTURE                    | INVALIDFUTUREDATE               |
+| PAST                      | INVALIDPASTDATE                 |
+| UNSPECIFIEDDATE           | INVALIDUNSPECIFIEDDATE          |
+| UNSPECIFIEDISODATE        | INVALIDUNSPECIFIEDISODATE       |
+| CREDITCARDEXPIRATIONDATE  | INVALIDCREDITCARDEXPIRATIONDATE |
+| CREDITCARD                | INVALIDCREDITCARDNUMBER         |
+| DATE                      | INVALIDISODATE                  |
+| TIME                      | INVALIDISOTIME                  |
+| DATETIME                  | INVALIDISODATETIME              |
+
+- **@deprecated:**
+  - Der Output `stepperIndexChange` wurde in `indexChange` umbenannt und in der Demo-Anwendung angepasst.
+
+---
+
+## Zusammenfassung
+- Migration auf Angular 19 & PrimeNG 19 erfolgreich durchgeführt
+- Veraltete Komponenten ersetzt, neue Features integriert
+- Theming modernisiert & Standalone-Ansatz umgesetzt
+- Abhängigkeiten, Tests & Qualitätssicherung auf aktuellem Stand
+- Alle Breaking Changes dokumentiert
+
+---
+
 # Update Log - 03.09.2024
 
 ## Update von Angular v17 auf v18

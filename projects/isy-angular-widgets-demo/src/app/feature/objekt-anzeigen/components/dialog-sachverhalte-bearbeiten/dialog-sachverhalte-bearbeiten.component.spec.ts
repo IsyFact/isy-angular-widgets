@@ -5,13 +5,24 @@ import {PersonenService} from '../../../../shared/services/personen.service';
 import {DialogModule} from 'primeng/dialog';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
+import {ButtonModule} from 'primeng/button';
+import {InputGroup} from 'primeng/inputgroup';
+import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 
 describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   let component: DialogSachverhalteBearbeitenComponent;
   let spectator: Spectator<DialogSachverhalteBearbeitenComponent>;
   const createComponent = createComponentFactory({
     component: DialogSachverhalteBearbeitenComponent,
-    imports: [TableModule, DialogModule, TranslateModule.forRoot(), FormsModule]
+    imports: [
+      TableModule,
+      DialogModule,
+      TranslateModule.forRoot(),
+      FormsModule,
+      ButtonModule,
+      InputGroup,
+      InputGroupAddonModule
+    ]
   });
 
   beforeEach(() => {
@@ -67,7 +78,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
     component.visible = true;
     setupPerson();
 
-    (spectator.query('#ok-button') as HTMLButtonElement).click();
+    (spectator.query('.ok-button') as HTMLButtonElement).click();
     spectator.fixture.detectChanges();
 
     expect(component.person!.sachverhalte).toEqual(component.newSachverhalteListe);
@@ -100,7 +111,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   it('the dialog header close icon should have an aria-label attribute', () => {
     component.visible = true;
     setupPerson();
-    const element = spectator.query('.p-dialog-header button.p-dialog-header-close') as HTMLElement;
+    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
     expect(element.hasAttribute('aria-label')).toBeTrue();
   });
 

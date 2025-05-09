@@ -4,11 +4,12 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 @Component({
   selector: 'demo-primeng-overlay',
   templateUrl: './primeng-overlay.component.html',
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService],
+  standalone: false
 })
 export class PrimengOverlayComponent {
   constructor(
-    private confirmationService: ConfirmationService,
+    readonly confirmationService: ConfirmationService,
     public messageService: MessageService
   ) {}
 

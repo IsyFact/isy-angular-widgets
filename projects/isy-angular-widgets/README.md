@@ -74,26 +74,26 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
-Im nächsten Schritt werden die notwendigen Module `HauptfensterModule`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
+Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
 
 ```typescript
 // Other imports ...
 import {Component} from '@angular/core';
-import {HauptfensterModule} from '@isyfact/isy-angular-widgets';
+import {HauptfensterComponent} from '@isyfact/isy-angular-widgets';
 import {MenuModule} from 'primeng/menu';
 import {PanelModule} from 'primeng/panel';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HauptfensterModule, PanelModule, MenuModule],
+  imports: [HauptfensterComponent, PanelModule, MenuModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: './app.component.scss'
 })
 export class AppComponent {}
 ```
 
-Abschließend ist es erforderlich, in `app.config.ts` die Methode `provideAnimations` zu importieren und bereitzustellen, um Animationen zu aktivieren:
+Abschließend ist es erforderlich, in `app.config.ts` die Methoden `provideAnimations` und `provideIsyFactTheme` zu importieren und bereitzustellen, um Animationen zu aktivieren:
 
 ```typescript
 // Other imports ...
@@ -101,11 +101,36 @@ import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 import {provideAnimations} from '@angular/platform-browser/animations';
+import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations()]
+  providers: [provideRouter(routes), provideAnimations(), provideIsyFactTheme()]
 };
 ```
+
+## Theme-Konfiguration
+
+Die Bibliothek verwendet standardmäßig das PrimeNG-Theme `Nora` über `providePrimeNG()`.
+
+Beim Aufruf von `provideIsyFactTheme()` kann ein Theme optional übergeben werden:
+
+### Beispiel: Theme-Konfiguration in `app.config.ts`
+
+```ts
+import {ApplicationConfig} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
+import Material from '@primeng/themes/material';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideIsyFactTheme({ theme: Material }),
+    provideRouter([...])
+  ]
+};
+```
+Wird kein Theme angegeben, nutzt die Bibliothek standardmäßig `Nora`.
 
 ## I18N
 
@@ -134,7 +159,7 @@ Dazu müssen zunächst folgende Importe bereitgestellt werden, z.B. in `appConfi
 import {ApplicationConfig, importProvidersFrom} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
-import {provideAnimations} from '@angular/platform-browser/animations';
+import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 import {HttpClient, provideHttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
@@ -142,7 +167,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideAnimations(),
+    provideIsyFactTheme(),
     provideHttpClient(),
     importProvidersFrom(
       TranslateModule.forRoot({
@@ -175,7 +200,7 @@ import {Subscription} from 'rxjs';
   standalone: true,
   imports: [HauptfensterModule, PanelModule, MenuModule, TranslateModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy {
   primeNgSub?: Subscription;

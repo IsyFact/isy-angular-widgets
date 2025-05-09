@@ -1,15 +1,15 @@
 <!-- Interactive PrimeNG elements used in the demo app, tested for a minimum size of 44x44 pixels -->
 
-<p-button id="button-icon" icon="pi pi-print" class="mr-1" ariaLabel="Print"></p-button>
+<p-button id="button-icon" icon="pi pi-print" styleClass="mr-1" ariaLabel="Print"></p-button>
 
-<p-dropdown
+<p-select
   id="permissions-dropdown"
   [options]="[
     {role: 'Admin', permission: 'admin'},
     {role: 'User', permission: 'user'}
   ]"
 >
-</p-dropdown>
+</p-select>
 
 <isy-hauptfenster
   [collapsedLinksnavigation]="false"
@@ -18,21 +18,23 @@
   [applicationGroupColor]="'#458648'"
   [linksNavigationWidth]="'200px'"
 >
-  <p-menu
+  <p-panelmenu
     Linksnavigation
     [model]="[
       {label: 'Menu entry 1', icon: 'pi pi-check'},
       {label: 'Menu entry 2', icon: 'pi pi-check'},
       {label: 'Menu entry 3', icon: 'pi pi-check'}
     ]"
-  ></p-menu>
+  ></p-panelmenu>
   <p-panel header="Content">
-    <p-tabView id="tab-view"> <p-tabPanel [header]="'Tabview header item'"></p-tabPanel></p-tabView
-  ></p-panel>
+    <p-tabs id="tab-view"
+      ><p-tablist><p-tab>Tabview header item</p-tab></p-tablist></p-tabs
+    >
+  </p-panel>
 </isy-hauptfenster>
 
 <input type="text" pInputText isyInputChar />
 
-<p-inputSwitch></p-inputSwitch>
+<p-toggleswitch></p-toggleswitch>
 
-<p-fileUpload chooseIcon="pi pi-upload"></p-fileUpload>
+<p-fileupload chooseIcon="pi pi-upload"></p-fileupload>

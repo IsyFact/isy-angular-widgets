@@ -1,12 +1,16 @@
 $dot-thickness: 2px;
 $serif-font: BundesSerif, 'Liberation Serif', serif;
-$letter-size: 5em;
+$letter-size: 3em;
 $letters-preview-width: 30%;
 
 :host {
   display: flex;
   align-items: center;
-  height: $letter-size;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 #serif-letter {
@@ -14,14 +18,13 @@ $letters-preview-width: 30%;
 }
 
 #sans-letter {
-  font-family: var(--font-family);
+  font-family: var(--p-font-family);
 }
 
 #letters-preview {
-  border-bottom: $dot-thickness var(--text-color) dotted;
-  border-top: $dot-thickness var(--text-color) dotted;
+  border-bottom: $dot-thickness var(--p-text-color) dotted;
+  border-top: $dot-thickness var(--p-text-color) dotted;
   width: $letters-preview-width;
-  float: left;
 
   .letter {
     font-size: $letter-size;
@@ -30,13 +33,11 @@ $letters-preview-width: 30%;
 }
 
 #letter-information-preview {
-  position: relative;
   padding-left: 10px;
   width: calc(100% - $letters-preview-width);
-  height: calc($letter-size + 1em);
 
-  #codepoint {
-    position: absolute;
-    bottom: 0;
+  @media screen and (max-width: 700px) {
+    padding: 10px 10px 0 0;
+    width: 100%;
   }
 }

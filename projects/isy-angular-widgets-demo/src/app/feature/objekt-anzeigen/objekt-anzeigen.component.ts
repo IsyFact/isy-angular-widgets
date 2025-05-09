@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {AfterContentChecked, ChangeDetectorRef, Component, Input} from '@angular/core';
 import {Address} from '../../shared/model/person';
 import {TranslateService} from '@ngx-translate/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -15,9 +15,10 @@ import {markFormAsDirty} from '../../shared/validation/form-helper';
 @Component({
   selector: 'demo-objekt-anzeigen',
   templateUrl: './objekt-anzeigen.component.html',
-  styleUrls: ['./objekt-anzeigen.component.scss']
+  styleUrls: ['./objekt-anzeigen.component.scss'],
+  standalone: false
 })
-export class ObjektAnzeigenComponent {
+export class ObjektAnzeigenComponent implements AfterContentChecked {
   readonly intelligenceNotesMaxLength = 255;
 
   showSecretFields = false;
@@ -35,7 +36,8 @@ export class ObjektAnzeigenComponent {
   constructor(
     public translate: TranslateService,
     private readonly fb: FormBuilder,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private readonly changeDetector: ChangeDetectorRef
   ) {
     const personalien = this.person.personalien;
     const addresses = personalien.addresses;
@@ -73,6 +75,10 @@ export class ObjektAnzeigenComponent {
     this.adressFormArray = this.getAddresses();
     // Exports the form control names of the addresses form array
     this.addressFormControlNames = Object.keys(this.getAddresses().controls[0].value as string[]);
+  }
+
+  ngAfterContentChecked(): void {
+    this.changeDetector.detectChanges();
   }
 
   uploadFile(event: FileUploadHandlerEvent): void {

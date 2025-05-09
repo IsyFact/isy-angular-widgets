@@ -1,33 +1,31 @@
 import {Component, Input} from '@angular/core';
 import {ButtonModule} from 'primeng/button';
-import {DropdownModule} from 'primeng/dropdown';
-import {HauptfensterModule} from '../../../hauptfenster/hauptfenster.module';
-import {MenuModule} from 'primeng/menu';
+import {SelectModule} from 'primeng/select';
+import {HauptfensterComponent} from '../../../hauptfenster/hauptfenster.component';
 import {PanelModule} from 'primeng/panel';
-import {TabViewModule} from 'primeng/tabview';
+import {TabsModule} from 'primeng/tabs';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputCharDirective} from '../../../input-char/directives/input-char.directive';
 import {FileUploadModule} from 'primeng/fileupload';
-import {HttpClientModule} from '@angular/common/http';
-import {InputSwitchModule} from 'primeng/inputswitch';
+import {ToggleSwitchModule} from 'primeng/toggleswitch';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 @Component({
   selector: 'isy-test-component',
-  standalone: true,
   imports: [
     ButtonModule,
-    DropdownModule,
-    HauptfensterModule,
-    MenuModule,
+    SelectModule,
+    HauptfensterComponent,
     PanelModule,
-    TabViewModule,
+    TabsModule,
     InputTextModule,
     InputCharDirective,
     FileUploadModule,
-    HttpClientModule,
-    InputSwitchModule
+    ToggleSwitchModule,
+    PanelMenuModule
   ],
-  templateUrl: './interactive-elements.component.html'
+  templateUrl: './interactive-elements.component.html',
+  standalone: true
 })
 export class TestComponentComponent {
   @Input() allowSidebarCollapse: boolean = true;

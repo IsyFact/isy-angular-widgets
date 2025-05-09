@@ -12,7 +12,9 @@ import {ComponentFixture} from '@angular/core/testing';
     pInputText
     isyInputChar
     (change)="valueGet($event, charPicker.value)"
-  />`
+  />`,
+  standalone: true,
+  imports: [InputCharDirective]
 })
 class TestComponent {
   datentyp: Datentyp = Datentyp.DATENTYP_A;
@@ -37,15 +39,14 @@ describe('Integration Tests: InputCharDirective', () => {
   let inputCharButton: HTMLButtonElement;
   let input: HTMLInputElement;
   const createComponent = createComponentFactory({
-    component: TestComponent,
-    imports: [InputCharDirective]
+    component: TestComponent
   });
 
   beforeEach(() => {
     spectator = createComponent();
     fixture = spectator.fixture;
     directiveElement = fixture.debugElement.queryAll(By.directive(InputCharDirective));
-    directive = directiveElement[0].injector.get(InputCharDirective);
+    directive = directiveElement[0]?.injector.get(InputCharDirective);
     input = spectator.query('#char-picker') as HTMLInputElement;
     inputCharButton = spectator.query('.input-char-button') as HTMLButtonElement;
   });
@@ -143,5 +144,39 @@ describe('Integration Tests: InputCharDirective', () => {
     input.value = 'test';
     input.dispatchEvent(new MouseEvent('mouseup'));
     expect(directive.selectionPosition).toEqual(input.value.length);
+  });
+
+  it('should initialize the componentRef and set its inputs correctly', () => {
+    directive.ngOnInit();
+
+    expect(directive.componentRef).toBeTruthy();
+    expect(directive.componentRef.instance.datentyp).toBe(directive.datentyp);
+    expect(directive.componentRef.instance.outlinedInputCharButton).toBe(directive.outlinedInputCharButton);
+  });
+
+  it('should call setupInputChar during initialization', () => {
+    const setupInputCharSpy = spyOn(directive, 'setupInputChar');
+    directive.ngOnInit();
+    expect(setupInputCharSpy).toHaveBeenCalled();
+  });
+
+  it('should subscribe to insertCharacter and update input value correctly', () => {
+    const zeichen = 'ç̆';
+    directive.ngOnInit();
+
+    directive.componentRef.instance.insertCharacter.emit(zeichen);
+
+    expect(directive.htmlInputElement.value).toBe(zeichen);
+    expect(directive.selectionPosition).toBe(zeichen.length);
+  });
+
+  it('should dispatch an input event when a character is inserted', () => {
+    const zeichen = 'ç̆';
+    const inputEventSpy = spyOn(directive.htmlInputElement, 'dispatchEvent');
+    directive.ngOnInit();
+
+    directive.componentRef.instance.insertCharacter.emit(zeichen);
+
+    expect(inputEventSpy).toHaveBeenCalledWith(new Event('input'));
   });
 });

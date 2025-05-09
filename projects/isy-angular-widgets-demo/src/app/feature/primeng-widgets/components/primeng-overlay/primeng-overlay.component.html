@@ -5,10 +5,10 @@
     <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
       <h3>Sidebar</h3>
       <p-button (onClick)="showSidebar()" label="Left Sidebar"></p-button>
-      <p-sidebar [(visible)]="visibleSidebar" position="left">
+      <p-drawer [(visible)]="visibleSidebar" position="left">
         <h1>Sidebar Header</h1>
         Content
-      </p-sidebar>
+      </p-drawer>
     </div>
     <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
       <h3>Dialog</h3>
@@ -24,13 +24,13 @@
       <h3>ConfirmDialog</h3>
       <p-button (onClick)="confirmDialog($event)" label="Save"></p-button>
       <p-toast position="bottom-right"></p-toast>
-      <p-confirmDialog key="confirmDialog"></p-confirmDialog>
+      <p-confirmdialog key="confirmDialog"></p-confirmdialog>
     </div>
     <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
       <h3>ConfirmPopup</h3>
       <p-button (onClick)="confirmPopup($event)" label="Save"></p-button>
       <p-toast position="bottom-right"></p-toast>
-      <p-confirmPopup key="confirmPopup"></p-confirmPopup>
+      <p-confirmpopup key="confirmPopup"></p-confirmpopup>
     </div>
   </div>
   <p-divider></p-divider>
@@ -51,9 +51,9 @@
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>OverlayPanel</h3>
       <p-button (onClick)="overlayPanel.toggle($event)" label="OverlayPanel"></p-button>
-      <p-overlayPanel #overlayPanel>
+      <p-popover #overlayPanel>
         <div class="flex flex-column gap-2">Content</div>
-      </p-overlayPanel>
+      </p-popover>
     </div>
   </div>
 </div>

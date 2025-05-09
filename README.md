@@ -72,17 +72,14 @@ $ npm run e2e
 ```
 
 ### PrimeNG-Designer
-Da der PrimeNG Theme-Designer als Open-Source zur Verfügung steht, wird die aktuelle PrimeNG Designer-Webseite kein Update mehr erhalten. 
-Der Theme-Designer ist nur noch bis zur Version 15.4.1 verfügbar.
-Momentan wird an einer erweiterten Version des Theme-Designers, dem Advanced-Theme-Editor, gearbeitet. 
-Nach der Roadmap von PrimeNG (https://primeng.org/roadmap) ist die Veröffentlichung für Q4 2023 geplant.
-Bis dahin wird auf der Designer-Website auf das PrimeNG Sass-Theme verwiesen, um auf die aktuelle Theming-API für weitere Anpassungsoptionen zuzugreifen.
 
-Das Theme _FluentUI_ wurde als Basis-Theme verwendet und als SCSS in das _IsyFact-Theme_ integriert, was eine Live-Bearbeitung der Variablen ermöglicht.
-Um präzise Anpassungen am IsyFact-Design vorzunehmen, werden bestimmte Variablen des Basis-Themes überschrieben.
-Dies vermeidet direkte Änderungen an den ursprünglichen Theme-Variablen und gewährleistet die Integrität und Wartbarkeit des Basis-Themes.
-Dieser Ansatz ermöglicht spezifische Anpassungen, während die Aktualisierbarkeit des Basis-Themes erhalten bleibt.
-Anpassungen der Properties-Variablen erfolgt in der Datei `isy-angular-widgets/assets/theme/_isyfact-theme.scss`.
+Ab PrimeNG Version 18 wurde ein neues Theming-System eingeführt. 
+Die Erstellung und Anpassung von Themes mit diesem neuen System ist kostenfrei möglich. PrimeNG stellt hierzu eine umfangreiche [Dokumentationen](https://primeng.org/theming) sowie Beispiele bereit, die den Einstieg erleichtern.
+
+Für eine visuelle und benutzerfreundlichere Gestaltung von Themes bietet PrimeNG ab Version 19 einen neuen Theme-Designer an, der jedoch kostenpflichtig ist. 
+
+Mit Version 19 der `isy-angular-widgets`-Bibliothek wurde das ursprünglich verwendete FluentUI-Theme durch das neue PrimeNG-Theming-System ersetzt.
+Als Standard-Theme wurde `Nora` ausgewählt und an das bestehende Look-and-Feel der Widgets-Bibliothek sowie der Anwendung angepasst.
 
 ## Erstellen von Releases
 

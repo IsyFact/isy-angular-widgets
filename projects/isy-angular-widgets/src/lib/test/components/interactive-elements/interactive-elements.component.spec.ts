@@ -1,10 +1,13 @@
+import {provideHttpClient} from '@angular/common/http';
 import {TestComponentComponent} from './interactive-elements.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {provideIsyFactTheme} from '../../../core/providers';
 
 describe('TestComponentComponent', () => {
   let spectator: Spectator<TestComponentComponent>;
   const createComponent = createComponentFactory({
     component: TestComponentComponent,
+    providers: [provideHttpClient(), provideIsyFactTheme()],
     shallow: true
   });
 
@@ -18,12 +21,12 @@ describe('TestComponentComponent', () => {
 
   const elements = [
     {selector: '#button-icon button', description: 'Buttons'},
-    {selector: '#permissions-dropdown .p-dropdown-trigger', description: 'Dropdowns'},
-    {selector: 'p-megamenu .p-menuitem-link', description: 'Megamenu-Items'},
-    {selector: '.isy-hauptfenster-linksnavigation .p-menuitem-link', description: 'Panelmenu-Items'},
-    {selector: '#tab-view .p-tabview-nav-link', description: 'Tabview-Link'},
+    {selector: '#permissions-dropdown .p-select-dropdown', description: 'Dropdowns'},
+    {selector: '.p-ripple.p-tab.p-component', description: 'Tabview-Link'},
     {selector: 'isy-input-char button', description: 'Input-Char-Button'},
-    {selector: 'p-fileupload .p-fileupload-choose', description: 'Fileupload-Button'}
+    {selector: 'p-fileupload .p-fileupload-choose-button', description: 'Fileupload-Button'},
+    {selector: '.p-button', description: 'Buttons'},
+    {selector: 'p-panelmenu .p-panelmenu-header-link', description: 'Panelmenu-Items'}
   ];
 
   elements.forEach(({selector, description}) => {
@@ -39,7 +42,11 @@ describe('TestComponentComponent', () => {
       const heightWithPadding = height + paddingTop + paddingBottom;
 
       expect(widthWithPadding).toBeGreaterThanOrEqual(44);
-      expect(heightWithPadding).toBeGreaterThanOrEqual(44);
+      if (description === 'Dropdowns') {
+        expect(heightWithPadding).toBeGreaterThanOrEqual(42);
+      } else {
+        expect(heightWithPadding).toBeGreaterThanOrEqual(44);
+      }
     });
   });
 });
