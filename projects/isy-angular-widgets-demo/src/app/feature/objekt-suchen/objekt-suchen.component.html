@@ -303,6 +303,8 @@
   }
 </p-dialog>
 
+<!-- The new 'allowFreeNavigation' property in the isy-wizard component allows users to navigate freely between steps. 
+  When set to true, users can move between steps without depending on the Next or Back buttons. -->
 @if (openWizard) {
   <isy-wizard
     [width]="50"
@@ -311,10 +313,11 @@
     [allowNext]="isFormValid"
     [(isVisible)]="openWizard"
     (isVisibleChange)="onWizardClose($event)"
-    (stepperIndexChange)="getWizardIndex($event)"
+    (indexChange)="getWizardIndex($event)"
     (savingChange)="getSavedStatus($event)"
     [isSaved]="savedSuccessfully"
     [closable]="displayX"
+    [allowFreeNavigation]="true"
   >
     <!--  Every side of the wizard needs to have the *isyWizardDirective. -->
 

@@ -7,6 +7,9 @@
       "close": "Schließen",
       "aria": {
         "close": "Schließen"
+      },
+      "toast": {
+        "stepChanged": "Schritt geändert"
       }
     },
     "inputChar": {
