@@ -145,4 +145,38 @@ describe('Integration Tests: InputCharDirective', () => {
     input.dispatchEvent(new MouseEvent('mouseup'));
     expect(directive.selectionPosition).toEqual(input.value.length);
   });
+
+  it('should initialize the componentRef and set its inputs correctly', () => {
+    directive.ngOnInit();
+
+    expect(directive.componentRef).toBeTruthy();
+    expect(directive.componentRef.instance.datentyp).toBe(directive.datentyp);
+    expect(directive.componentRef.instance.outlinedInputCharButton).toBe(directive.outlinedInputCharButton);
+  });
+
+  it('should call setupInputChar during initialization', () => {
+    const setupInputCharSpy = spyOn(directive, 'setupInputChar');
+    directive.ngOnInit();
+    expect(setupInputCharSpy).toHaveBeenCalled();
+  });
+
+  it('should subscribe to insertCharacter and update input value correctly', () => {
+    const zeichen = 'ç̆';
+    directive.ngOnInit();
+
+    directive.componentRef.instance.insertCharacter.emit(zeichen);
+
+    expect(directive.htmlInputElement.value).toBe(zeichen);
+    expect(directive.selectionPosition).toBe(zeichen.length);
+  });
+
+  it('should dispatch an input event when a character is inserted', () => {
+    const zeichen = 'ç̆';
+    const inputEventSpy = spyOn(directive.htmlInputElement, 'dispatchEvent');
+    directive.ngOnInit();
+
+    directive.componentRef.instance.insertCharacter.emit(zeichen);
+
+    expect(inputEventSpy).toHaveBeenCalledWith(new Event('input'));
+  });
 });

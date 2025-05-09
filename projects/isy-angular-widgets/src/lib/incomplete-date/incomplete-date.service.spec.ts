@@ -38,12 +38,19 @@ describe('Unit Tests: IncompleteDateService', () => {
       });
     });
 
-    it('Should transform 00.01.0000 to 00.00.0000 if zero date format is allowed ', () => {
+    it('Should transform 00.01.0000 to 00.00.0000 if zero date format is allowed', () => {
       expect(service.transformValue('00.01.0000', false, true)).toBe('00.00.0000');
     });
 
-    it('Should not transform 00.01.0000 to 00.00.0000 if zero date format is not allowed ', () => {
+    it('Should not transform 00.01.0000 to 00.00.0000 if zero date format is not allowed', () => {
       expect(service.transformValue('00.01.0000', false, false)).toBe('00.01.0000');
+    });
+
+    it('should transform 00.00.0000 to 00.00.0000 if zero date format is allowed', () => {
+      const result = (
+        service as unknown as {getIncompleteDate: (date: string, allowZeroFormat?: boolean) => string}
+      ).getIncompleteDate('00.00.0000', true);
+      expect(result).toBe('00.00.0000');
     });
   });
 

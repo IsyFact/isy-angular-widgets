@@ -1,4 +1,5 @@
 import {InputCharComponent} from './input-char.component';
+import {ElementRef} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
@@ -207,5 +208,41 @@ describe('Accessibility Test: InputCharComponent', () => {
   it('the dialog close icon should have an aria-label attribute with "Close picker"', () => {
     const element = spectator.query('.p-dialog-close-button') as HTMLElement;
     expect(element.getAttribute('aria-label')).toBe('Close picker');
+  });
+
+  it('should focus the button if no element is focused when dialog closes', () => {
+    spectator.component.visible = true;
+
+    const focusSpy = jasmine.createSpy('focus');
+
+    spectator.component.openDialogButton = {
+      nativeElement: {focus: focusSpy}
+    } as unknown as ElementRef<HTMLButtonElement>;
+
+    // Simuliere kein fokussiertes Element
+    spyOnProperty(document, 'activeElement', 'get').and.returnValue(document.body);
+
+    spectator.component.onDialogClose();
+
+    expect(spectator.component.visible).toBeFalse();
+    expect(focusSpy).toHaveBeenCalled();
+  });
+
+  it('should not focus the button if another element is already focused', () => {
+    spectator.component.visible = true;
+
+    const focusSpy = jasmine.createSpy('focus');
+    spectator.component.openDialogButton = {
+      nativeElement: {focus: focusSpy}
+    } as unknown as ElementRef<HTMLButtonElement>;
+
+    // Simuliere ein anderes fokussiertes Element
+    const mockInput = document.createElement('input');
+    spyOnProperty(document, 'activeElement', 'get').and.returnValue(mockInput);
+
+    spectator.component.onDialogClose();
+
+    expect(spectator.component.visible).toBeFalse();
+    expect(focusSpy).not.toHaveBeenCalled();
   });
 });
