@@ -168,27 +168,17 @@ export class AppComponent implements OnInit, OnDestroy {
    * The skip links are stored in the `skipLinks` property.
    */
   private setupSkipLinks(): void {
-    this.skipLinks = [
-      {
-        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToMainContent') as string,
-        target: 'main'
-      },
-      {
-        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToNavigation') as string,
-        target: 'nav'
-      },
-      {
-        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToSiteToolbar') as string,
-        target: 'isy-seiten-toolbar'
-      },
-      {
-        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToLinksNavigation') as string,
-        target: '.isy-hauptfenster-linksnavigation'
-      },
-      {
-        label: this.translate.instant('isyAngularWidgetsDemo.skipLinks.skipToInformationArea') as string,
-        target: '.isy-hauptfenster-informationsbereich'
-      }
+    const links: {key: string; target: string}[] = [
+      {key: 'skipToMainContent', target: 'main'},
+      {key: 'skipToNavigation', target: 'nav'},
+      {key: 'skipToSiteToolbar', target: 'isy-seiten-toolbar'},
+      {key: 'skipToLinksNavigation', target: '.isy-hauptfenster-linksnavigation'},
+      {key: 'skipToInformationArea', target: '.isy-hauptfenster-informationsbereich'}
     ];
+
+    this.skipLinks = links.map((link) => ({
+      label: this.translate.instant(`isyAngularWidgetsDemo.skipLinks.${link.key}`) as string,
+      target: link.target
+    }));
   }
 }

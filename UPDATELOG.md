@@ -34,6 +34,9 @@ addPackageToPackageJson(tree, '@primeng/themes', '^19.1.2');
 - `form-wrapper`: Unterstützung für Label-ID
 - `skip-links`-Komponente zur barrierefreien Navigation
 - `isy-wizard`: Neue Eigenschaft `allowFreeNavigation` für freie Schritt-Navigation
+- Aktiver Zustand in der Links-Navigation farblich hervorgehoben
+- Styling des `isy-input-char`-Dialogs überarbeitet
+- Styling von schreibgeschützten Eingabefeldern angepasst  
 
 ---
 

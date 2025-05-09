@@ -9,19 +9,7 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
  * ```html
  * <isy-skip-links
   ariaLabel="{{ 'isyAngularWidgetsDemo.skipLinks.ariaLabel' | translate }}"
-  [links]="[
-    {label: 'isyAngularWidgetsDemo.skipLinks.skipToMainContent' | translate, target: 'main'},
-    {label: 'isyAngularWidgetsDemo.skipLinks.skipToNavigation' | translate, target: 'nav'},
-    {label: 'isyAngularWidgetsDemo.skipLinks.skipToSiteToolbar' | translate, target: 'isy-seiten-toolbar'},
-    {
-      label: 'isyAngularWidgetsDemo.skipLinks.skipToLinksNavigation' | translate,
-      target: '.isy-hauptfenster-linksnavigation'
-    },
-    {
-      label: 'isyAngularWidgetsDemo.skipLinks.skipToInformationArea' | translate,
-      target: '.isy-hauptfenster-informationsbereich'
-    }
-  ]"
+  [links]="skipLinks"
 ></isy-skip-links>
  * ```
  */
