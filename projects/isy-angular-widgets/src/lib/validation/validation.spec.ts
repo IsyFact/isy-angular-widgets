@@ -323,28 +323,19 @@ describe('Unit Test: Validation', () => {
       expect(errors).toBeNull();
     });
 
-    it('should return INVALIDCREDITCARDNUMBER if the value is invalid', () => {
-      const control: AbstractControl = new FormControl('4485-8456-9196-5928');
-      const errors = Validation.validCreditCardNumber(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
+    const invalidCreditCardNumbers = [
+      {value: '4485-8456-9196-5928', description: 'invalid checksum'},
+      {value: '448s-8456-91g6-5929', description: 'contains non-numeric characters'},
+      {value: '4485-8456-9', description: 'too short'},
+      {value: '4485-8456-9196-59291', description: 'too long'}
+    ];
 
-    it('should return INVALIDCREDITCARDNUMBER if the value is not only numbers', () => {
-      const control: AbstractControl = new FormControl('448s-8456-91g6-5929');
-      const errors = Validation.validCreditCardNumber(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
-
-    it('should return INVALIDCREDITCARDNUMBER if the value is too short', () => {
-      const control: AbstractControl = new FormControl('4485-8456-9');
-      const errors = Validation.validCreditCardNumber(control);
-      errorHaveToBeDefined(errors, errorKey);
-    });
-
-    it('should return INVALIDCREDITCARDNUMBER if the value is too long', () => {
-      const control: AbstractControl = new FormControl('4485-8456-9196-59291');
-      const errors = Validation.validCreditCardNumber(control);
-      errorHaveToBeDefined(errors, errorKey);
+    invalidCreditCardNumbers.forEach(({value, description}) => {
+      it(`should return INVALIDCREDITCARDNUMBER if the value is ${description}`, () => {
+        const control: AbstractControl = new FormControl(value);
+        const errors = Validation.validCreditCardNumber(control);
+        errorHaveToBeDefined(errors, errorKey);
+      });
     });
   });
 

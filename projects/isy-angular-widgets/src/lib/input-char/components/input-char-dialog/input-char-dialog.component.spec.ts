@@ -180,24 +180,22 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     spectator.detectChanges();
   });
 
-  const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    const schriftzeichengruppeSelectButton = fixture.debugElement
-      .queryAll(By.css('.charset-selectbutton--1 p-togglebutton'))
-      .find((elem) => elem.nativeElement.textContent === schriftzeichengruppe)?.nativeElement as HTMLElement;
-    expect(schriftzeichengruppeSelectButton).toBeTruthy();
+  const selectOption = (selector: string, value: string): void => {
+    const optionButton = fixture.debugElement
+      .queryAll(By.css(selector))
+      .find((elem) => elem.nativeElement.textContent === value)?.nativeElement as HTMLElement;
+    expect(optionButton).toBeTruthy();
 
-    schriftzeichengruppeSelectButton.click();
+    optionButton.click();
     fixture.detectChanges();
   };
 
-  const selectBasis = (basis: string): void => {
-    const basisSelectButton = fixture.debugElement
-      .queryAll(By.css('.charset-selectbutton--0 p-togglebutton'))
-      .find((elem) => elem.nativeElement.textContent === basis)?.nativeElement as HTMLElement;
-    expect(basisSelectButton).toBeTruthy();
+  const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
+    selectOption('.charset-selectbutton--1 p-togglebutton', schriftzeichengruppe);
+  };
 
-    basisSelectButton.click();
-    fixture.detectChanges();
+  const selectBasis = (basis: string): void => {
+    selectOption('.charset-selectbutton--0 p-togglebutton', basis);
   };
 
   it(`should show ${bases.length} available bases`, () => {
