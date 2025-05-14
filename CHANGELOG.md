@@ -1,4 +1,4 @@
-# 19.0.1 -
+# 19.0.1 - 14.05.2025
 ## Fixes
 - IFS-4629: Dark Mode des Standard-Themes wurde deaktiviert
 
