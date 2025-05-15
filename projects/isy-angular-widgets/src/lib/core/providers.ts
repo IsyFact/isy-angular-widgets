@@ -15,6 +15,7 @@ export function provideIsyFactTheme(themePreset: Preset<any> = Nora): Environmen
       theme: {
         preset: themePreset,
         options: {
+          darkModeSelector: false,
           cssLayer: {
             name: 'primeng',
             order: 'primeng, isyfact-theme'
