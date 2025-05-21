@@ -5,7 +5,6 @@ import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
 import {permissions} from '../../app.permission';
 import {DebugElement} from '@angular/core';
-import {ObjektAnzeigenModule} from './objekt-anzeigen.module';
 import {MessageService} from 'primeng/api';
 import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
@@ -24,7 +23,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   const createComponent = createComponentFactory({
     component: ObjektAnzeigenComponent,
     imports: [
-      ObjektAnzeigenModule,
+      ObjektAnzeigenComponent,
       TranslateTestingModule.withTranslations('de', {
         'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
       })

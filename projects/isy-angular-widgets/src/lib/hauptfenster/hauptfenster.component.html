@@ -80,7 +80,7 @@
                   icon="pi pi-chevron-left"
                   [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
                   (onClick)="collapsedLinksnavigation = true"
-                ></p-button>
+                />
               </div>
             </div>
           }
@@ -92,7 +92,7 @@
             icon="pi pi-chevron-right"
             [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
             (onClick)="collapsedLinksnavigation = false"
-          ></p-button>
+          />
         </div>
       </aside>
     }
@@ -115,7 +115,7 @@
                 icon="pi pi-chevron-right"
                 [attr.aria-label]="configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')"
                 (onClick)="collapsedInformationsbereich = true"
-              ></p-button>
+              />
             </div>
           }
           <ng-content select="[Informationsbereich]"></ng-content>
@@ -126,7 +126,7 @@
             icon="pi pi-chevron-left"
             [attr.aria-label]="configService.getTranslation('hauptfenster.aria.expandInformationsbereich')"
             (onClick)="collapsedInformationsbereich = false"
-          ></p-button>
+          />
         </div>
       </aside>
     }

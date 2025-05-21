@@ -5,23 +5,42 @@ import {UserInfoPublicService} from './core/user/userInfoPublicService';
 import {applicationMenu} from './application-menu';
 import {navigationMenu} from './navigation-menu';
 import {Subscription, filter} from 'rxjs';
-import {MegaMenuItem, MenuItem, Translation} from 'primeng/api';
-import {TranslateService} from '@ngx-translate/core';
+import {MegaMenuItem, MenuItem, MessageService, Translation} from 'primeng/api';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from './shared/services/menu-translation.service';
 import {WidgetsTranslation} from '@isy-angular-widgets/i18n/widgets-translation';
 import {WidgetsConfigService} from '@isy-angular-widgets/i18n/widgets-config.service';
 import {permissions} from './app.permission';
-import {DOCUMENT} from '@angular/common';
+import {CommonModule, DOCUMENT} from '@angular/common';
 import {PageTitleService} from './shared/services/page-title.service';
-import {NavigationEnd, Router, RouterEvent, Event} from '@angular/router';
+import {NavigationEnd, Router, RouterEvent, Event, RouterModule} from '@angular/router';
 import {PrimeNG} from 'primeng/config';
 import {SkipTarget} from '@isy-angular-widgets/skip-links/model/model';
+import {FormsModule} from '@angular/forms';
+import {SelectModule} from 'primeng/select';
+import {ToastModule} from 'primeng/toast';
+import {ButtonModule} from 'primeng/button';
+import {HauptfensterComponent, SeitentoolbarComponent} from '@isy-angular-widgets/public-api';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 @Component({
+  standalone: true,
   selector: 'demo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: false
+  imports: [
+    RouterModule,
+    FormsModule,
+    SelectModule,
+    ToastModule,
+    ButtonModule,
+    TranslateModule,
+    HauptfensterComponent,
+    SeitentoolbarComponent,
+    CommonModule,
+    PanelMenuModule
+  ],
+  providers: [MessageService]
 })
 export class AppComponent implements OnInit, OnDestroy {
   items: MegaMenuItem[] = [];
@@ -33,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isyAngularWidgetsI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
   focusHasBeenSet?: boolean;
+  showDashboardOutlets = false;
 
   constructor(
     private readonly securityService: SecurityService,
@@ -71,9 +91,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.pageTitleService.setupPageTitle();
 
     // Reset focusHasBeenSet flag on navigation end
-    this.router.events.pipe(filter((event: Event | RouterEvent) => event instanceof NavigationEnd)).subscribe(() => {
-      this.focusHasBeenSet = false;
-    });
+    this.router.events
+      .pipe(filter((event: Event | RouterEvent) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.focusHasBeenSet = false;
+        this.showDashboardOutlets = event.urlAfterRedirects.startsWith('/dashboard');
+      });
 
     // Subscribe to requestFocusChange event
     this.pageTitleService.requestFocusChange.subscribe((id) => {

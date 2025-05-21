@@ -1,6 +1,5 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {PrimengOverlayComponent} from './primeng-overlay.component';
-import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 
 describe('Unit Tests: PrimengOverlayComponent', () => {
   let component: PrimengOverlayComponent;
@@ -9,8 +8,7 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   let messageSpy: jasmine.Spy;
 
   const createComponent = createComponentFactory({
-    component: PrimengOverlayComponent,
-    imports: [PrimengWidgetsModule]
+    component: PrimengOverlayComponent
   });
 
   beforeEach(() => {

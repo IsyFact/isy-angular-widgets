@@ -8,12 +8,12 @@ import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 
 @Component({
+  standalone: true,
   selector: 'isy-input-char',
   templateUrl: './input-char.component.html',
   styleUrls: ['./input-char.component.scss'],
-  standalone: true,
-  providers: [CharacterService],
-  imports: [InputCharDialogComponent, DialogModule, ButtonModule]
+  imports: [InputCharDialogComponent, DialogModule, ButtonModule],
+  providers: [CharacterService]
 })
 export class InputCharComponent implements OnChanges {
   /**

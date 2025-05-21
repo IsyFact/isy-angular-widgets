@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {UserInfo, UserInfoService} from '@isy-angular-widgets/api/userinfo';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserInfoPublicService implements UserInfoService {
   getUserInfo(): UserInfo {
     return {

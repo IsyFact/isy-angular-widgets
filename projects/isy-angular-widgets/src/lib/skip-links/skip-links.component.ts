@@ -14,8 +14,8 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
  * ```
  */
 @Component({
-  selector: 'isy-skip-links',
   standalone: true,
+  selector: 'isy-skip-links',
   templateUrl: './skip-links.component.html',
   styleUrls: ['./skip-links.component.scss']
 })

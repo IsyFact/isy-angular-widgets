@@ -6,6 +6,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
 
 @Component({
+  standalone: true,
   template: `<input
     #charPicker
     id="char-picker"
@@ -13,7 +14,6 @@ import {ComponentFixture} from '@angular/core/testing';
     isyInputChar
     (change)="valueGet($event, charPicker.value)"
   />`,
-  standalone: true,
   imports: [InputCharDirective]
 })
 class TestComponent {

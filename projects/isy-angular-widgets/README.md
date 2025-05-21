@@ -19,6 +19,8 @@ Praktische sowie querschnittliche Beispiele für die Umsetzung von Patterns des 
 - Wizard-Widget
 - Special-Char-Picker Widgets
 - Spezifische Validator-Methoden für Input-Felder
+- Form-Wrapper
+- Skip-Links-Komponente für barrierefreies Springen zu Hauptinhalten
 - Behördenspezifische Widgets und Widgets aus PrimeNG in deutscher und englischer Sprache
 
 ## Getting Started

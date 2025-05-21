@@ -22,11 +22,11 @@ import {SkipLinksComponent} from '../skip-links/skip-links.component';
  * Content without template references is used as main content.
  */
 @Component({
+  standalone: true,
   selector: 'isy-hauptfenster',
   templateUrl: './hauptfenster.component.html',
   styleUrls: ['./hauptfenster.component.scss'],
-  imports: [ButtonModule, CommonModule, MegaMenuModule, SkipLinksComponent],
-  standalone: true
+  imports: [ButtonModule, CommonModule, MegaMenuModule, SkipLinksComponent]
 })
 export class HauptfensterComponent {
   /**

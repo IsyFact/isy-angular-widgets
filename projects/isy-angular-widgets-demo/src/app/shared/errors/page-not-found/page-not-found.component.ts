@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'demo-page-not-found',
   templateUrl: './page-not-found.component.html',
-  standalone: false
+  imports: [RouterModule]
 })
 export class PageNotFoundComponent {}

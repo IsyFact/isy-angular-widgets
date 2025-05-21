@@ -8,6 +8,7 @@ import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
 @Component({
+  standalone: true,
   template: `
     <isy-hauptfenster [title]="title" [userInfo]="userInfo">
       <div Titelzeile>
@@ -15,8 +16,7 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
       </div>
     </isy-hauptfenster>
   `,
-  imports: [HauptfensterComponent, ButtonModule],
-  standalone: true
+  imports: [HauptfensterComponent, ButtonModule]
 })
 class HauptFensterWrapperComponent {
   title?: string;
