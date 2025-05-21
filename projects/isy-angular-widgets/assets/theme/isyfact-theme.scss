@@ -74,6 +74,9 @@
     --p-multiselect-option-selected-background: #fff;
     --p-multiselect-option-selected-color: inherit;
 
+    // accordion
+    --p-accordion-content-padding: 0 1.125rem 1.125rem 1.125rem;
+
     // workaround: PrimeNG definePreset does not work properly (https://github.com/primefaces/primeng/issues/17833)
     --p-emerald-50: var(--p-gray-50);
     --p-emerald-100: var(--p-gray-100);

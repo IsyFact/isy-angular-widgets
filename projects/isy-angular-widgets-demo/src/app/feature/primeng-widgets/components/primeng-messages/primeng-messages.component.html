@@ -4,13 +4,13 @@
     <div class="col-12 md:col-6 flex-column gap-2">
       <h2>Messages</h2>
       @for (message of messages; track message.key) {
-        <p-message [severity]="message.severity" [text]="message.detail" [closable]="false"></p-message>
+        <p-message [severity]="message.severity" [text]="message.detail" [closable]="false" />
       }
     </div>
     <div class="col-12 md:col-6 flex-column gap-2">
       <h2>Toast</h2>
       <p-button (onClick)="showToastMessage()" label="Show" />
-      <p-toast key="toast" position="bottom-right"></p-toast>
+      <p-toast key="toast" position="bottom-right" />
     </div>
   </div>
 </div>

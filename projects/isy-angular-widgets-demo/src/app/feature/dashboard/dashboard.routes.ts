@@ -3,7 +3,7 @@ import {DashboardInformationsbereichComponent} from './components/dashboard-info
 import {DashboardLinksnavigationComponent} from './components/dashboard-linksnavigation/dashboard-linksnavigation.component';
 import {DashboardComponent} from './dashboard.component';
 
-export const routes: Routes = [
+export const dashboardRoutes: Routes = [
   {
     path: '',
     component: DashboardComponent,

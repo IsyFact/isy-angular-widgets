@@ -36,6 +36,7 @@ const saveButtonDeclaration = '#save-button';
 const closeButtonDeclaration = '#close-button';
 
 @Component({
+  standalone: true,
   template: ` <isy-wizard
     #wizard
     [width]="${width}"
@@ -48,8 +49,7 @@ const closeButtonDeclaration = '#close-button';
     <isy-incomplete-date *isyWizardDirective="'${childrenLabels[1]}'"></isy-incomplete-date>
     <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
   </isy-wizard>`,
-  imports: [WizardComponent, IncompleteDateComponent, WizardDirective],
-  standalone: true
+  imports: [WizardComponent, IncompleteDateComponent, WizardDirective]
 })
 class TestComponent {
   @ViewChild('wizard') wizard!: WizardComponent;

@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-
 import {ChartData} from '../../../dashboard/model/model';
 import {
   barChartData,
@@ -16,11 +15,14 @@ import {
   radarChartOptions
 } from '../../data/chart';
 import {ChartOption} from '../../model/chart';
+import {ChartModule} from 'primeng/chart';
+import {DividerModule} from 'primeng/divider';
 
 @Component({
+  standalone: true,
   selector: 'demo-primeng-chart',
   templateUrl: './primeng-chart.component.html',
-  standalone: false
+  imports: [ChartModule, DividerModule]
 })
 export class PrimengChartComponent {
   barChartData: ChartData = barChartData;

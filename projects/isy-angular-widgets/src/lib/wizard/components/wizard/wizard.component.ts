@@ -36,11 +36,11 @@ const defaultHeight = 30;
  * Each side needs to have the @link{WizardDirective}.
  */
 @Component({
+  standalone: true,
   selector: 'isy-wizard',
   templateUrl: './wizard.component.html',
   imports: [CommonModule, StepsModule, DialogModule, ButtonModule, ToastModule],
-  providers: [MessageService],
-  standalone: true
+  providers: [MessageService]
 })
 export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   /**

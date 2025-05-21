@@ -1,6 +1,6 @@
 <!-- Interactive PrimeNG elements used in the demo app, tested for a minimum size of 44x44 pixels -->
 
-<p-button id="button-icon" icon="pi pi-print" styleClass="mr-1" ariaLabel="Print"></p-button>
+<p-button id="button-icon" icon="pi pi-print" styleClass="mr-1" ariaLabel="Print" />
 
 <p-select
   id="permissions-dropdown"
@@ -8,8 +8,7 @@
     {role: 'Admin', permission: 'admin'},
     {role: 'User', permission: 'user'}
   ]"
->
-</p-select>
+/>
 
 <isy-hauptfenster
   [collapsedLinksnavigation]="false"
@@ -25,16 +24,16 @@
       {label: 'Menu entry 2', icon: 'pi pi-check'},
       {label: 'Menu entry 3', icon: 'pi pi-check'}
     ]"
-  ></p-panelmenu>
+  />
   <p-panel header="Content">
-    <p-tabs id="tab-view"
-      ><p-tablist><p-tab>Tabview header item</p-tab></p-tablist></p-tabs
-    >
+    <p-tabs id="tab-view">
+      <p-tablist><p-tab>Tabview header item</p-tab></p-tablist>
+    </p-tabs>
   </p-panel>
 </isy-hauptfenster>
 
 <input type="text" pInputText isyInputChar />
 
-<p-toggleswitch></p-toggleswitch>
+<p-toggleswitch />
 
-<p-fileupload chooseIcon="pi pi-upload"></p-fileupload>
+<p-fileupload chooseIcon="pi pi-upload" />

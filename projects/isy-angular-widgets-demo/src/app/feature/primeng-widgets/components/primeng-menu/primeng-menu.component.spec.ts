@@ -1,9 +1,7 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ActivatedRoute} from '@angular/router';
 import {of} from 'rxjs';
-
 import {PrimengMenuComponent} from './primeng-menu.component';
-import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 import {electronicData, megaMenuProductData} from '../../data/product';
 import {contextMenuData, fileContainerData, menuBarData, optionData, tabMenuData} from '../../data/file-option';
 import {personalData} from '../../data/organization';
@@ -13,7 +11,6 @@ describe('Unit Tests: PrimengMenuComponent', () => {
   let spectator: Spectator<PrimengMenuComponent>;
   const createComponent = createComponentFactory({
     component: PrimengMenuComponent,
-    imports: [PrimengWidgetsModule],
     providers: [
       {
         provide: ActivatedRoute,

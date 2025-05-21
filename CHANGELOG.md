@@ -1,5 +1,8 @@
-# 19.0.0 - 09.05.2025
+# 19.1.0 -
+## Demo-Anwendung
+- IFS-4657: Die Anwendung wurde vollständig auf Standalone-Komponenten umgestellt
 
+# 19.0.0 - 09.05.2025
 ## Breaking Changes
 - IFS-4629: Das FluentUI-Theme wurde durch das neue PrimeNG-Theming mit dem Standard-Theme Nora ersetzt und entsprechend angepasst.
 - IFS-4562: Upgrade Angular- und PrimeNG-Bibliothek auf Version 19 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)

@@ -4,8 +4,7 @@
   [(ngModel)]="allOptionsModel"
   [options]="[{label: allButtonOptionsLabel}]"
   optionLabel="label"
->
-</p-selectbutton>
+/>
 
 <p-accordion [(value)]="activeIndex">
   @for (item of dataToDisplay | keyvalue; let i = $index; track item.key) {
@@ -18,8 +17,7 @@
           [(ngModel)]="models[item.key]"
           (onChange)="triggerUpdate(item.key)"
           class="charset-selectbutton charset-selectbutton--{{ i }}"
-        >
-        </p-selectbutton>
+        />
       </p-accordion-content>
     </p-accordion-panel>
   }
