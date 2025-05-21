@@ -2,6 +2,10 @@
 ## Demo-Anwendung
 - IFS-4657: Die Anwendung wurde vollständig auf Standalone-Komponenten umgestellt
 
+# 19.0.1 - 15.05.2025
+## Fixes
+- IFS-4629: Dark Mode des Standard-Themes wurde deaktiviert
+
 # 19.0.0 - 09.05.2025
 ## Breaking Changes
 - IFS-4629: Das FluentUI-Theme wurde durch das neue PrimeNG-Theming mit dem Standard-Theme Nora ersetzt und entsprechend angepasst.
