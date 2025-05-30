@@ -2,7 +2,7 @@ import {HttpLoaderFactory} from './app.config';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-fdescribe('HttpLoaderFactory', () => {
+describe('HttpLoaderFactory', () => {
   it('should create a TranslateHttpLoader with correct path and extension', () => {
     const mockHttpClient = {} as HttpClient;
     const loader = HttpLoaderFactory(mockHttpClient);
