@@ -1,34 +1,34 @@
-import {ActivatedRouteSnapshot, Routes} from '@angular/router';
-import {AuthGuard} from '@isy-angular-widgets/security/security-guard';
-import {inject} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Routes} from '@angular/router';
 import {PageNotFoundComponent} from './shared/errors/page-not-found/page-not-found.component';
-import {dashboardRoutes} from './feature/dashboard/dashboard.routes';
-import {objektAnzeigenRoutes} from './feature/objekt-anzeigen/objekt-anzeigen.routes';
-import {primengWidgetsRoutes} from './feature/primeng-widgets/primeng-widgets.routes';
-
-/**
- * Determines if a given route can be accessed
- * @param route Contains the information about a route associated with a component loaded in an outlet at a particular moment in time.
- * @returns An observable that eventually outputs a boolean whether the given route can be accessed
- */
-function canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-  return inject(AuthGuard).canActivate(route);
-}
+import {canActivateAuth} from './guards/auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'dashboard',
-    children: dashboardRoutes
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
-  ...objektAnzeigenRoutes,
+  {
+    path: 'dashboard',
+    loadChildren: async () => (await import('./feature/dashboard/dashboard.routes')).dashboardRoutes
+  },
+  {
+    path: 'objekt-anzeigen',
+    loadChildren: async () => (await import('./feature/objekt-anzeigen/objekt-anzeigen.routes')).objektAnzeigenRoutes,
+    canActivate: [canActivateAuth]
+  },
+  {
+    path: 'primeng-widgets',
+    loadChildren: async () => (await import('./feature/primeng-widgets/primeng-widgets.routes')).primengWidgetsRoutes,
+    canActivate: [canActivateAuth]
+  },
   {
     path: 'objekt-suchen',
     data: {
       title: 'isyAngularWidgetsDemo.websiteTitles.searchObject'
     },
     loadComponent: async () => (await import('./feature/objekt-suchen/objekt-suchen.component')).ObjektSuchenComponent,
-    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
+    canActivate: [canActivateAuth]
   },
   {
     path: 'isy-angular-components',
@@ -37,13 +37,7 @@ export const routes: Routes = [
     },
     loadComponent: async () =>
       (await import('./feature/isy-angular-components/isy-angular-components.component')).IsyAngularComponentsComponent,
-    canActivate: [(route: ActivatedRouteSnapshot): Observable<boolean> => canActivate(route)]
-  },
-  ...primengWidgetsRoutes,
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
+    canActivate: [canActivateAuth]
   },
   {
     path: '**',

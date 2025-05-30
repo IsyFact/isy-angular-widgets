@@ -6,7 +6,6 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
 
 @Component({
-  standalone: true,
   template: `<input
     #charPicker
     id="char-picker"

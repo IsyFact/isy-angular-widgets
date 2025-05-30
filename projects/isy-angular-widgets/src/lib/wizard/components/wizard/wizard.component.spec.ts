@@ -36,7 +36,6 @@ const saveButtonDeclaration = '#save-button';
 const closeButtonDeclaration = '#close-button';
 
 @Component({
-  standalone: true,
   template: ` <isy-wizard
     #wizard
     [width]="${width}"

@@ -4,8 +4,9 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
     "resolveJsonModule": true,
-    "types": ["jasmine"]
+    "types": ["jasmine", "node"]
   },
   "files": ["src/test.ts"],
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+  "include": ["src/**/*.spec.ts"],
+  "exclude": ["src/main.ts"]
 }

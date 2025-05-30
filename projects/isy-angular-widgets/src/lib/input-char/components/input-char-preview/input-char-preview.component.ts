@@ -6,7 +6,6 @@ import {Zeichenobjekt} from '../../model/model';
  * @internal
  */
 @Component({
-  standalone: true,
   selector: 'isy-input-char-preview',
   templateUrl: './input-char-preview.component.html',
   styleUrls: ['./input-char-preview.component.scss']

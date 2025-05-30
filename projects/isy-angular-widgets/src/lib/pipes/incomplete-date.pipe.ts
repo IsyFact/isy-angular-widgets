@@ -9,7 +9,6 @@ import {DATE_FORMAT_ERROR} from './data/errors';
  * An error is thrown if the input does not match YYYY-MM-DD or DD.MM.YYYY.
  */
 @Pipe({
-  standalone: true,
   name: 'incompleteDatePipe'
 })
 export class IncompleteDatePipe implements PipeTransform {

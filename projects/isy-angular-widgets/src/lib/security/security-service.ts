@@ -12,8 +12,8 @@ import {PermissionMaps} from './permission-maps';
 })
 export class SecurityService {
   private roles?: string[];
-  private routeMap: Map<string, string[]> = new Map();
-  private elementMap: Map<string, string[]> = new Map();
+  private routeMap = new Map<string, string[]>();
+  private elementMap = new Map<string, string[]>();
 
   /**
    * Sets the user the service will use
@@ -38,16 +38,11 @@ export class SecurityService {
    * @returns A boolean that contains whether permission for the given element is present
    */
   checkElementPermission(element: string): boolean {
-    if (!this.roles) {
-      return false;
-    }
+    if (!this.roles) return false;
+
     const elementValue = this.elementMap.get(element);
-    for (const role of this.roles) {
-      if (elementValue?.includes(role)) {
-        return true;
-      }
-    }
-    return false;
+
+    return elementValue?.some((role) => this.roles!.includes(role)) ?? false;
   }
 
   /**
@@ -56,18 +51,13 @@ export class SecurityService {
    * @returns An observable that eventually outputs a boolean whether the given route can be accessed
    */
   checkRoutePermission(route: ActivatedRouteSnapshot): Observable<boolean> {
-    if (!this.roles) {
-      return of(false);
-    }
+    if (!this.roles) return of(false);
 
     const spacer = route.url[0].path;
     const routeValue = this.routeMap.get(spacer);
-    for (const role of this.roles) {
-      if (routeValue?.includes(role)) {
-        return of(true);
-      }
-    }
-    return of(false);
+    const hasAccess = routeValue?.some((role) => this.roles!.includes(role)) ?? false;
+
+    return of(hasAccess);
   }
 
   /**
@@ -76,18 +66,10 @@ export class SecurityService {
    * @returns An observable that eventually outputs a boolean whether the given route can be loaded
    */
   checkLoadRoutePermission(route: Route): Observable<boolean> {
-    if (!this.roles) {
-      return of(false);
-    }
-    if (!route.path) {
-      return of(false);
-    }
+    if (!this.roles || !route.path) return of(false);
+
     const routeValue = this.routeMap.get(route.path);
-    for (const role of this.roles) {
-      if (routeValue?.includes(role)) {
-        return of(true);
-      }
-    }
-    return of(false);
+
+    return of(routeValue?.some((role) => this.roles!.includes(role)) ?? false);
   }
 }

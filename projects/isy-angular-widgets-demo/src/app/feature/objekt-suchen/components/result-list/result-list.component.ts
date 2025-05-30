@@ -14,8 +14,8 @@ import {CommonModule} from '@angular/common';
 import {SelectModule} from 'primeng/select';
 
 @Component({
-  selector: 'demo-result-list',
   standalone: true,
+  selector: 'demo-result-list',
   templateUrl: './result-list.component.html',
   imports: [
     CommonModule,
