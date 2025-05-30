@@ -19,15 +19,22 @@ describe('primengWidgetsRoutes', () => {
       {path: 'primeng-panel', title: 'isyAngularWidgetsDemo.websiteTitles.primengPanel'}
     ];
 
-    expectedRoutes.forEach(({path, title}, index) => {
-      expect(primengWidgetsRoutes[index].path).toBe(path);
-      expect(primengWidgetsRoutes[index].data?.title).toBe(title);
+    expectedRoutes.forEach(({path, title}, i) => {
+      expect(primengWidgetsRoutes[i].path).toBe(path);
+      expect(primengWidgetsRoutes[i].data?.title).toBe(title);
     });
   });
 
   it('should define loadComponent as a function for each route', () => {
-    primengWidgetsRoutes.forEach((route) => {
+    primengWidgetsRoutes.forEach(route => {
       expect(typeof route.loadComponent).toBe('function');
     });
+  });
+
+  it('should successfully load all components via loadComponent', async () => {
+    for (const route of primengWidgetsRoutes) {
+      const component = await route.loadComponent?.();
+      expect(component).toBeDefined();
+    }
   });
 });

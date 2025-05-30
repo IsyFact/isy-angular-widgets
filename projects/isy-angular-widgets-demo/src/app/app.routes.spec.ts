@@ -21,7 +21,7 @@ describe('App Routing Configuration', () => {
 
     const module = await route!.loadChildren!();
     expect(module).toBeDefined();
-    expect(Array.isArray(module)).toBeTrue(); // Annahme: dashboardRoutes ist ein Routes[]
+    expect(Array.isArray(module)).toBeTrue();
   });
 
   it('should lazy load objektAnzeigenRoutes and be protected by canActivateAuth', async () => {
