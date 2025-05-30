@@ -153,5 +153,28 @@ describe('Integration Test: SecurityService', () => {
       const isRoutePermittedObservable = service.checkLoadRoutePermission(route);
       expectRouteToBePermitted(isRoutePermittedObservable, false);
     });
+
+    it('should return false when routeValue exists but none of the user roles match', () => {
+      const userInfoData: UserInfo = {
+        userId: '1',
+        roles: ['viewer'],
+        displayName: 'Viewer'
+      };
+
+      const permissionsData: PermissionMaps = {
+        elements: {},
+        routes: {
+          dashboard: ['admin', 'user']
+        }
+      };
+
+      setupRolesAndPermissions(service, userInfoData, permissionsData);
+
+      const testRoute: Route = {path: 'dashboard'};
+
+      service.checkLoadRoutePermission(testRoute).subscribe((hasAccess) => {
+        expect(hasAccess).toBeFalse();
+      });
+    });
   });
 });

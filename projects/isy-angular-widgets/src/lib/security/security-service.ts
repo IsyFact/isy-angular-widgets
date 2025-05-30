@@ -66,10 +66,17 @@ export class SecurityService {
    * @returns An observable that eventually outputs a boolean whether the given route can be loaded
    */
   checkLoadRoutePermission(route: Route): Observable<boolean> {
-    if (!this.roles || !route.path) return of(false);
+    if (!this.roles || !route.path) {
+      return of(false);
+    }
 
     const routeValue = this.routeMap.get(route.path);
+    let hasPermission = false;
 
-    return of(routeValue?.some((role) => this.roles!.includes(role)) ?? false);
+    if (routeValue) {
+      hasPermission = routeValue.some((role) => this.roles!.includes(role));
+    }
+
+    return of(hasPermission);
   }
 }
