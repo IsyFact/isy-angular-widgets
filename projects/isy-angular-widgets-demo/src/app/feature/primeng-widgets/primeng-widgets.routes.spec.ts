@@ -26,7 +26,7 @@ describe('primengWidgetsRoutes', () => {
   });
 
   it('should define loadComponent as a function for each route', () => {
-    primengWidgetsRoutes.forEach(route => {
+    primengWidgetsRoutes.forEach((route) => {
       expect(typeof route.loadComponent).toBe('function');
     });
   });
