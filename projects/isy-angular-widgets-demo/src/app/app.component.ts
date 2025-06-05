@@ -91,12 +91,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.pageTitleService.setupPageTitle();
 
     // Reset focusHasBeenSet flag on navigation end
-    this.router.events
-      .pipe(filter((event: Event | RouterEvent) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.focusHasBeenSet = false;
-        this.showDashboardOutlets = event.urlAfterRedirects.startsWith('/dashboard');
-      });
+    this.router.events.pipe(filter((event: Event | RouterEvent) => event instanceof NavigationEnd)).subscribe(() => {
+      this.focusHasBeenSet = false;
+    });
 
     // Subscribe to requestFocusChange event
     this.pageTitleService.requestFocusChange.subscribe((id) => {
