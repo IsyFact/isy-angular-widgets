@@ -1,0 +1,3 @@
+* xref:konzept.adoc[]
+* https://isyfact.github.io/isy-angular-widgets/documentation/[Nutzungsvorgaben icon:external-link[]^]
+* https://isyfact.github.io/isy-angular-widgets/[Referenzimplementierung icon:external-link[]^]

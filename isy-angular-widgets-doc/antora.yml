@@ -1,6 +1,0 @@
-name: isy-angular-widgets-doc
-title: isy-angular-widgets
-prerelease: false
-start_page: ROOT:konzept/konzept.adoc
-nav:
-  - modules/ROOT/nav.adoc

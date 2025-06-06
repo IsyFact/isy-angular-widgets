@@ -1,10 +1,9 @@
 = Konzept Angular
-
-include::glossary:licence:partial$licence.adoc[]
+:navtitle: Konzept
 
 *Angular Bibliothek / IT-System*
 
-[cols="5,2,3",options="header"]
+[cols="5m,2,3",options="header"]
 |====
 |Name |Art |Version
 
@@ -13,24 +12,21 @@ include::glossary:licence:partial$licence.adoc[]
 |{page-component-display-version}
 |====
 
-[[einleitung]]
-== Einleitung
+Der Baustein Angular setzt die Anforderungen und Vorgaben der IsyFact, die im xref:isy-bedienkonzept-doc::bedienkonzept.adoc[Bedienkonzept] definiert sind, als https://isyfact.github.io/isy-angular-widgets/documentation/[Komponenten-Bibliothek icon:external-link[]^] um.
+Die dazugehörige https://isyfact.github.io/isy-angular-widgets/[Referenzimplementierung icon:external-link[]^] stellt die Komponenten exemplarisch dar.
+Der Baustein Angular stellt so eine einheitliche Umsetzung der GUIs in der gesamten Anwendungslandschaft sicher.
 
-In diesem Konzept werden die Anforderungen und Vorgaben der IsyFact, die im xref:isy-bedienkonzept-doc:ROOT:bedienkonzept.adoc[Bedienkonzept und Styleguide] definiert sind, als Komponenten-Bibliothek umgesetzt oder in der dazugehörigen Demo-Anwendung exemplarisch dargestellt, um eine einheitliche Umsetzung der User Interfaces in der gesamten Anwendungslandschaft zu gewährleisten.
-
-Dieses Dokument beschreibt alle Aspekte, die bei der Frontend-Entwicklung einer Anwendung zu berücksichtigen sind, um die definierten Anforderungen zu erfüllen.
-
-[[aufbau-und-zweck-des-dokuments]]
-== Aufbau und Zweck des Dokuments
-
-Der Zweck dieses Dokuments ist es, die Verwendung der Bibliothek _isy-angular-widgets_ zu beschreiben.
+Dieses Konzept beschreibt alle Aspekte, die über das Bedienkonzept hinaus bei der Entwicklung eines Frontends zu berücksichtigen sind, um die definierten Anforderungen zu erfüllen.
 
 [[grundlagen]]
 == Grundlagen
+include::documentation-guide::partial$content-new.adoc[]
 
 [[anforderungen]]
 == Anforderungen
+include::documentation-guide::partial$content-new.adoc[]
 
+////
 [[definitionen]]
 === Definitionen
 
@@ -39,33 +35,6 @@ Der Zweck dieses Dokuments ist es, die Verwendung der Bibliothek _isy-angular-wi
 
 [[definition2]]
 ==== Definition2
-
-Beispiel-Tabelle
-
-.Abkürzungen für Zeiteinheiten
-[id="table-AbkZeitEin",reftext="{table-caption} {counter:tables}"]
-[cols="4,6",options="header"]
-|====
-|Abkürzung |Zeiteinheit
-
-|ms
-|Millisekunde
-
-|s
-|Sekunde
-
-|min
-|Minute
-
-|h
-|Stunde
-
-|d
-|Tag
-
-|a
-|Jahr
-|====
 
 [[darstellung]]
 === Darstellung
@@ -81,10 +50,13 @@ Beispiel-Tabelle
 
 [[persistierung]]
 === Persistierung
+////
 
 [[vorgaben]]
 == Vorgaben
+include::documentation-guide::partial$content-new.adoc[]
 
+////
 Die folgenden architektonischen und technischen Vorgaben beziehen sich auf die Umsetzung der in Kapitel <<anforderungen>> genannten Anforderungen in der zu diesem Baustein gehörenden Bibliothek.
 
 [[bedeutung-der-standardbibliothek]]
@@ -110,3 +82,5 @@ Die folgenden architektonischen und technischen Vorgaben beziehen sich auf die U
 
 [[versionierung]]
 === Versionierung
+////
+
