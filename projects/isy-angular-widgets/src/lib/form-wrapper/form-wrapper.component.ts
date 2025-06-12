@@ -32,11 +32,11 @@ import {IftaLabelModule} from 'primeng/iftalabel';
  * ```
  */
 @Component({
-  selector: 'isy-form-wrapper',
   standalone: true,
-  imports: [ReactiveFormsModule, IftaLabelModule],
+  selector: 'isy-form-wrapper',
   templateUrl: './form-wrapper.component.html',
-  styleUrls: ['./form-wrapper.component.scss']
+  styleUrls: ['./form-wrapper.component.scss'],
+  imports: [ReactiveFormsModule, IftaLabelModule]
 })
 export class FormWrapperComponent implements OnInit {
   @Input() label!: string;

@@ -6,7 +6,6 @@ import {getEmptyPerson} from './person-data';
 import {DateService} from './services/date.service';
 import {Observable} from 'rxjs';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {ObjektSuchenModule} from './objekt-suchen.module';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {required} from '../../shared/validation/validator';
 import {provideRouter} from '@angular/router';
@@ -23,7 +22,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   let spectator: Spectator<ObjektSuchenComponent>;
   const createComponent = createComponentFactory({
     component: ObjektSuchenComponent,
-    imports: [ObjektSuchenModule, TranslateModule.forRoot()],
+    imports: [TranslateModule.forRoot()],
     providers: [TranslateService, MessageService, provideRouter([])]
   });
 

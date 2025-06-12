@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {Person, Personalien, PersonId} from '../../shared/model/person';
-import {AbstractControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {markFormAsDirty, markFormControlAsDirty, resetForm} from '../../shared/validation/form-helper';
 import {
   initGeburtsInformationenForm,
@@ -11,19 +11,51 @@ import {
   initPersoenlicheInformationenForm
 } from './forms-data';
 import {getEmptyPerson, resetPerson} from './person-data';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {ToastMessageOptions, MessageService} from 'primeng/api';
 import {CountryMap} from './model/country';
 import {DateService} from './services/date.service';
 import {TOAST_SEVERITY} from '../../shared/model/toast';
+import {PanelModule} from 'primeng/panel';
+import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
+import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
+import {InputTextModule} from 'primeng/inputtext';
+import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
+import {DatePickerModule} from 'primeng/datepicker';
+import {SelectModule} from 'primeng/select';
+import {ButtonModule} from 'primeng/button';
+import {ResultListComponent} from './components/result-list/result-list.component';
+import {CommonModule} from '@angular/common';
+import {DialogModule} from 'primeng/dialog';
+import {WizardComponent} from '@isy-angular-widgets/wizard/components/wizard/wizard.component';
+import {WizardDirective} from '@isy-angular-widgets/wizard/directives/wizard.directive';
+import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
 
 const defaultWidth = 60;
 
 @Component({
+  standalone: true,
   selector: 'demo-personen-suchen',
   templateUrl: './objekt-suchen.component.html',
-  styleUrls: ['./objekt-suchen.component.scss'],
-  standalone: false
+  imports: [
+    PanelModule,
+    CommonModule,
+    InputTextModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    ButtonModule,
+    DialogModule,
+    SelectModule,
+    DatePickerModule,
+    FormWrapperComponent,
+    ResultListComponent,
+    WizardComponent,
+    PersoenlicheInformationenComponent,
+    FormControlPipe,
+    InputCharDirective,
+    WizardDirective
+  ]
 })
 export class ObjektSuchenComponent {
   /**

@@ -1,22 +1,67 @@
 import {AfterContentChecked, ChangeDetectorRef, Component, Input} from '@angular/core';
 import {Address} from '../../shared/model/person';
-import {TranslateService} from '@ngx-translate/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {PersonalInformation} from './model/forms';
 import {Validation} from '@isy-angular-widgets/validation/validation';
-import {FileUploadHandlerEvent} from 'primeng/fileupload';
+import {FileUploadHandlerEvent, FileUploadModule} from 'primeng/fileupload';
 import {initializedPerson} from './data';
 import {markFormAsDirty} from '../../shared/validation/form-helper';
+import {TabsModule} from 'primeng/tabs';
+import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
+import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
+import {InputCharDirective} from '@isy-angular-widgets/input-char/public-api';
+import {SelectModule} from 'primeng/select';
+import {DatePickerModule} from 'primeng/datepicker';
+import {IncompleteDateComponent} from '@isy-angular-widgets/incomplete-date/incomplete-date.component';
+import {InputMaskModule} from 'primeng/inputmask';
+import {DividerModule} from 'primeng/divider';
+import {FieldsetModule} from 'primeng/fieldset';
+import {ButtonModule} from 'primeng/button';
+import {ToggleSwitchModule} from 'primeng/toggleswitch';
+import {CheckboxModule} from 'primeng/checkbox';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {TableModule} from 'primeng/table';
+import {DialogSachverhalteBearbeitenComponent} from './components/dialog-sachverhalte-bearbeiten/dialog-sachverhalte-bearbeiten.component';
+import {ToastModule} from 'primeng/toast';
+import {InputTextModule} from 'primeng/inputtext';
+import {TextareaModule} from 'primeng/textarea';
+import {CommonModule} from '@angular/common';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
  */
 @Component({
+  standalone: true,
   selector: 'demo-objekt-anzeigen',
   templateUrl: './objekt-anzeigen.component.html',
   styleUrls: ['./objekt-anzeigen.component.scss'],
-  standalone: false
+  imports: [
+    CommonModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    TabsModule,
+    FormWrapperComponent,
+    TranslateModule,
+    FormControlPipe,
+    InputCharDirective,
+    SelectModule,
+    DatePickerModule,
+    IncompleteDateComponent,
+    InputMaskModule,
+    FileUploadModule,
+    DividerModule,
+    FieldsetModule,
+    ButtonModule,
+    ToggleSwitchModule,
+    CheckboxModule,
+    InputNumberModule,
+    TableModule,
+    DialogSachverhalteBearbeitenComponent,
+    ToastModule,
+    TextareaModule
+  ]
 })
 export class ObjektAnzeigenComponent implements AfterContentChecked {
   readonly intelligenceNotesMaxLength = 255;

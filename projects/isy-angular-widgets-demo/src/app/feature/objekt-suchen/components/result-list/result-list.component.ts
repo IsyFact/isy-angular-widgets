@@ -2,13 +2,32 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {Person, Personalien} from '../../../../shared/model/person';
 import {ResultColumn, ResultFilter} from '../../model/result-column';
 import {resultColumn, state, gender} from '../../data/result-column';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {Subscription} from 'rxjs';
+import {PanelModule} from 'primeng/panel';
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {InputTextModule} from 'primeng/inputtext';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {SelectModule} from 'primeng/select';
 
 @Component({
+  standalone: true,
   selector: 'demo-result-list',
   templateUrl: './result-list.component.html',
-  standalone: false
+  imports: [
+    CommonModule,
+    SelectModule,
+    FormsModule,
+    PanelModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    TranslateModule,
+    MultiSelectModule
+  ]
 })
 export class ResultListComponent implements OnInit, OnDestroy {
   @Input() personen: Person[] = [];

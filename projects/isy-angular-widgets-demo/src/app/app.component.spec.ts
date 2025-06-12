@@ -1,6 +1,5 @@
-import {NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, provideRouter, Router} from '@angular/router';
 import {AppComponent} from './app.component';
-import {AppModule} from './app.module';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {Subject} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
@@ -11,13 +10,14 @@ describe('Integration Tests: AppComponent', () => {
   let mockDocument: Document;
   const createComponent = createComponentFactory({
     component: AppComponent,
-    imports: [AppModule, TranslateModule.forRoot()],
+    imports: [TranslateModule.forRoot()],
     providers: [
       {
         provide: DOCUMENT,
         useValue: document
       },
-      TranslateService
+      TranslateService,
+      provideRouter([])
     ]
   });
 

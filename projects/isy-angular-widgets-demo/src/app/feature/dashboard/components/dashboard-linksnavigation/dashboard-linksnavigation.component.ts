@@ -3,11 +3,13 @@ import {MenuItem} from 'primeng/api';
 import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
 import {linksnavigationMenu} from './linksnavigation-menu';
 import {TranslateService} from '@ngx-translate/core';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 @Component({
+  standalone: true,
   selector: 'demo-dashboard-linksnavigation',
   templateUrl: './dashboard-linksnavigation.component.html',
-  standalone: false
+  imports: [PanelMenuModule]
 })
 export class DashboardLinksnavigationComponent implements OnInit {
   private readonly selectedLanguage: string = 'de';

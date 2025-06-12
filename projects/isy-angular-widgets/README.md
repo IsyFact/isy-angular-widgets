@@ -19,6 +19,8 @@ Praktische sowie querschnittliche Beispiele für die Umsetzung von Patterns des 
 - Wizard-Widget
 - Special-Char-Picker Widgets
 - Spezifische Validator-Methoden für Input-Felder
+- Form-Wrapper
+- Skip-Links-Komponente für barrierefreies Springen zu Hauptinhalten
 - Behördenspezifische Widgets und Widgets aus PrimeNG in deutscher und englischer Sprache
 
 ## Getting Started
@@ -84,16 +86,16 @@ import {MenuModule} from 'primeng/menu';
 import {PanelModule} from 'primeng/panel';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [HauptfensterComponent, PanelModule, MenuModule],
+  selector: 'app-root'
   templateUrl: './app.component.html',
-  styleUrls: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  imports: [HauptfensterComponent, PanelModule, MenuModule]
 })
 export class AppComponent {}
 ```
 
-Abschließend ist es erforderlich, in `app.config.ts` die Methoden `provideAnimations` und `provideIsyFactTheme` zu importieren und bereitzustellen, um Animationen zu aktivieren:
+Abschließend ist es erforderlich, in `app.config.ts` die Methoden `provideAnimations` und `provideIsyFactTheme` zu importieren und bereitzustellen:
 
 ```typescript
 // Other imports ...
@@ -152,34 +154,37 @@ npm install @ngx-translate/core @ngx-translate/http-loader --save
 
 Im nächsten Schritt können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
 Dazu müssen zunächst folgende Importe bereitgestellt werden, z.B. in `appConfig`: 
-`provideHttpClient`, `importProvidersFrom`, `TranslateModule`, `HttpClient`, `TranslateHttpLoader`, `TranslateLoader`
+`provideHttpClient`, `HttpClient`, `provideTranslateService`, `TranslateLoader`, `TranslateHttpLoader`
 
 ```typescript
 // Other imports ...
-import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
+import {provideAnimations } from '@angular/platform-browser/animations';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
-import {HttpClient, provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, HttpClient} from '@angular/common/http';
+import {provideTranslateService, TranslateLoader } from '@ngx-translate/core'
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimations(),
     provideIsyFactTheme(),
     provideHttpClient(),
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: function HttpLoaderFactory(http: HttpClient) {
-            return new TranslateHttpLoader(http);
-          },
-          deps: [HttpClient]
-        }
-      })
-    )
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ]
 };
 ```
@@ -188,28 +193,28 @@ Anschließend lassen sich die Übersetzungen für PrimeNG und `isy-angular-widge
 
 ```typescript
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HauptfensterModule, WidgetsConfigService} from '@isyfact/isy-angular-widgets';
+import {HauptfensterComponent, WidgetsConfigService} from '@isyfact/isy-angular-widgets';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {PrimeNGConfig} from 'primeng/api';
+import {PrimeNG} from 'primeng/api';
 import {MenuModule} from 'primeng/menu';
 import {PanelModule} from 'primeng/panel';
 import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [HauptfensterModule, PanelModule, MenuModule, TranslateModule],
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  imports: [HauptfensterComponent, PanelModule, MenuModule, TranslateModule]
 })
 export class AppComponent implements OnInit, OnDestroy {
   primeNgSub?: Subscription;
   widgetSub?: Subscription;
 
   constructor(
-    private primeNgConfig: PrimeNGConfig,
-    private widgetConfig: WidgetsConfigService,
-    private translateService: TranslateService
+    private readonly primeng: PrimeNG,
+    private readonly widgetConfig: WidgetsConfigService,
+    private readonly translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -222,7 +227,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translateService.use(lang);
     this.primeNgSub = this.translateService
       .get('primeng')
-      .subscribe((res) => this.primeNgConfig.setTranslation(res));
+      .subscribe((res) => this.primeng.setTranslation(res));
     this.widgetSub = this.translateService
       .get('isyAngularWidgets')
       .subscribe((res) => this.widgetConfig.setTranslation(res));
@@ -238,4 +243,4 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 }
 ```
-Die `translate`-Methode kann z.B. auch fr einen Language-Picker verwenden werden, damit def Benutzer einer Seite die Sprache selber wählen kann.
+Die `translate`-Methode kann z.B. auch für einen Language-Picker verwenden werden, damit der Benutzer einer Seite die Sprache selber wählen kann.

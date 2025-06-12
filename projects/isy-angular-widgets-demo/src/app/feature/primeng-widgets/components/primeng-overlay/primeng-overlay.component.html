@@ -4,7 +4,7 @@
   <div class="grid">
     <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
       <h3>Sidebar</h3>
-      <p-button (onClick)="showSidebar()" label="Left Sidebar"></p-button>
+      <p-button (onClick)="showSidebar()" label="Left Sidebar" />
       <p-drawer [(visible)]="visibleSidebar" position="left">
         <h1>Sidebar Header</h1>
         Content
@@ -16,24 +16,24 @@
       <p-dialog header="Dialog Header" [modal]="true" [(visible)]="visibleDialog" [style]="{width: '25rem'}">
         <div class="flex flex-column gap-2">Content</div>
         <div class="flex justify-content-end">
-          <p-button label="Ok" (onClick)="closeDialog()"></p-button>
+          <p-button label="Ok" (onClick)="closeDialog()" />
         </div>
       </p-dialog>
     </div>
     <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
       <h3>ConfirmDialog</h3>
-      <p-button (onClick)="confirmDialog($event)" label="Save"></p-button>
-      <p-toast position="bottom-right"></p-toast>
-      <p-confirmdialog key="confirmDialog"></p-confirmdialog>
+      <p-button (onClick)="confirmDialog($event)" label="Save" />
+      <p-toast position="bottom-right" />
+      <p-confirmdialog key="confirmDialog" />
     </div>
     <div class="col-12 md:col-6 xl:col-3 flex-column gap-2">
       <h3>ConfirmPopup</h3>
-      <p-button (onClick)="confirmPopup($event)" label="Save"></p-button>
-      <p-toast position="bottom-right"></p-toast>
-      <p-confirmpopup key="confirmPopup"></p-confirmpopup>
+      <p-button (onClick)="confirmPopup($event)" label="Save" />
+      <p-toast position="bottom-right" />
+      <p-confirmpopup key="confirmPopup" />
     </div>
   </div>
-  <p-divider></p-divider>
+  <p-divider />
   <h2>Extra-Info Widgets</h2>
   <div class="grid mb-3">
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
@@ -50,7 +50,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>OverlayPanel</h3>
-      <p-button (onClick)="overlayPanel.toggle($event)" label="OverlayPanel"></p-button>
+      <p-button (onClick)="overlayPanel.toggle($event)" label="OverlayPanel" />
       <p-popover #overlayPanel>
         <div class="flex flex-column gap-2">Content</div>
       </p-popover>

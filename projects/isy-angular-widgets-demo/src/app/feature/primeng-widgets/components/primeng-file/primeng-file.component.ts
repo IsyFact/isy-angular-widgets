@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
-import {UploadEvent} from 'primeng/fileupload';
+import {FileUploadModule, UploadEvent} from 'primeng/fileupload';
 import {MessageService} from 'primeng/api';
 
 @Component({
+  standalone: true,
   selector: 'demo-primeng-file',
   templateUrl: './primeng-file.component.html',
-  standalone: false
+  imports: [FileUploadModule]
 })
 export class PrimengFileComponent {
   constructor(public messageService: MessageService) {}

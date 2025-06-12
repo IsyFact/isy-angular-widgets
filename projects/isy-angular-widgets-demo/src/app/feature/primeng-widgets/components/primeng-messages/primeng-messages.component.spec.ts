@@ -1,8 +1,6 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MessageService} from 'primeng/api';
-
 import {PrimengMessagesComponent} from './primeng-messages.component';
-import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 import {messageData} from '../../data/file-option';
 
 describe('Unit Tests: PrimengMessagesComponent', () => {
@@ -10,7 +8,6 @@ describe('Unit Tests: PrimengMessagesComponent', () => {
   let spectator: Spectator<PrimengMessagesComponent>;
   const createComponent = createComponentFactory({
     component: PrimengMessagesComponent,
-    imports: [PrimengWidgetsModule],
     providers: [MessageService]
   });
 

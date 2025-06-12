@@ -38,6 +38,7 @@ import {InputTextModule} from 'primeng/inputtext';
  * When autocompleting e.g. 10.10.50, 10.10.1950 will be the output instead of 10.10.2050.
  */
 @Component({
+  standalone: true,
   selector: 'isy-incomplete-date',
   templateUrl: './incomplete-date.component.html',
   providers: [
@@ -52,8 +53,7 @@ import {InputTextModule} from 'primeng/inputtext';
       multi: true
     }
   ],
-  imports: [FormsModule, InputTextModule, InputMaskModule],
-  standalone: true
+  imports: [FormsModule, InputTextModule, InputMaskModule]
 })
 export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit, OnDestroy {
   /**

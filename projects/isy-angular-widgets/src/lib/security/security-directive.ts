@@ -8,8 +8,7 @@ import {SecurityService} from './security-service';
  * Usage: <div *isyPermitted="'permissionId'"></div>
  */
 @Directive({
-  selector: '[isyPermitted]',
-  standalone: true
+  selector: '[isyPermitted]'
 })
 export class SecurityDirective {
   /**

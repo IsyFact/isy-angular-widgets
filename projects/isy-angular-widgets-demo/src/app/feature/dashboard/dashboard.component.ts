@@ -1,18 +1,19 @@
 import {AfterContentInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
-
 import {barChartData, lineChartData, lineStyleChartData, stackedChartData} from './data/chart-data';
 import {widgetBackgroundColors} from './data/menu-colors';
 import {widgetMenuItems} from './data/menus';
 import {initData} from './data/chart-init';
-
 import {TranslateService} from '@ngx-translate/core';
 import {ChartComponent} from './components/chart/chart.component';
+import {CardModule} from 'primeng/card';
+import {DashboardWidgetComponent} from './components/dashboard-widget/dashboard-widget.component';
 
 @Component({
+  standalone: true,
   selector: 'demo-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  standalone: false
+  imports: [CardModule, ChartComponent, DashboardWidgetComponent]
 })
 export class DashboardComponent implements OnInit, AfterContentInit {
   @ViewChildren('chart') allCharts!: QueryList<ChartComponent>;

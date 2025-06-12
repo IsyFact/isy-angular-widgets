@@ -2,12 +2,15 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
+import {PanelMenuModule} from 'primeng/panelmenu';
+import {CommonModule} from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'demo-dashboard-widget',
   templateUrl: './dashboard-widget.component.html',
   styleUrls: ['./dashboard-widget.component.scss'],
-  standalone: false
+  imports: [CommonModule, PanelMenuModule]
 })
 export class DashboardWidgetComponent implements OnInit {
   @Input() menuItems: MenuItem[] = [];

@@ -15,8 +15,7 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
       </div>
     </isy-hauptfenster>
   `,
-  imports: [HauptfensterComponent, ButtonModule],
-  standalone: true
+  imports: [HauptfensterComponent, ButtonModule]
 })
 class HauptFensterWrapperComponent {
   title?: string;

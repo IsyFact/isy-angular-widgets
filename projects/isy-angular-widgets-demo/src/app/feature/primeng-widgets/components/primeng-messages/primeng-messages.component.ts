@@ -2,11 +2,15 @@ import {Component} from '@angular/core';
 import {ToastMessageOptions, MessageService} from 'primeng/api';
 
 import {messageData} from '../../data/file-option';
+import {MessageModule} from 'primeng/message';
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 
 @Component({
+  standalone: true,
   selector: 'demo-primeng-messages',
   templateUrl: './primeng-messages.component.html',
-  standalone: false
+  imports: [MessageModule, ButtonModule, ToastModule]
 })
 export class PrimengMessagesComponent {
   constructor(public messageService: MessageService) {}

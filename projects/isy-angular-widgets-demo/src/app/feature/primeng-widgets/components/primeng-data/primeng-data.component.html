@@ -4,7 +4,7 @@
   <div class="grid">
     <div class="col-12 flex-column gap-2">
       <h3>OrganizationChart</h3>
-      <p-organizationChart [value]="organization"></p-organizationChart>
+      <p-organizationChart [value]="organization" />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Timeline</h3>
@@ -25,10 +25,10 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Tree</h3>
-      <p-tree [value]="files" class="w-full"></p-tree>
+      <p-tree [value]="files" class="w-full" />
     </div>
   </div>
-  <p-divider></p-divider>
+  <p-divider />
   <h2>Tables</h2>
   <div class="grid mb-3">
     <div class="col-12 flex-column gap-2">
@@ -39,7 +39,7 @@
         [rowsPerPageOptions]="[5, 10, 20]"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="{first} - {last} of {totalRecords}"
-      ></p-paginator>
+      />
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>Table with striped rows, paginator, filter, sort and single row selection mode</h3>
@@ -56,23 +56,23 @@
           <tr>
             <th pSortableColumn="code" scope="col">
               Code
-              <p-columnFilter field="code" type="text" display="menu"></p-columnFilter>
-              <p-sortIcon field="code"></p-sortIcon>
+              <p-columnFilter field="code" type="text" display="menu" />
+              <p-sortIcon field="code" />
             </th>
             <th pSortableColumn="name" scope="col">
               Name
-              <p-columnFilter field="name" type="text" display="menu"></p-columnFilter>
-              <p-sortIcon field="name"></p-sortIcon>
+              <p-columnFilter field="name" type="text" display="menu" />
+              <p-sortIcon field="name" />
             </th>
             <th pSortableColumn="category" scope="col">
               Category
-              <p-columnFilter field="category" type="text" display="menu"></p-columnFilter>
-              <p-sortIcon field="category"></p-sortIcon>
+              <p-columnFilter field="category" type="text" display="menu" />
+              <p-sortIcon field="category" />
             </th>
             <th pSortableColumn="price" scope="col">
               Price
               <p-columnFilter field="price" type="numeric" currency="EUR" display="menu" />
-              <p-sortIcon field="price"></p-sortIcon>
+              <p-sortIcon field="price" />
             </th>
           </tr>
         </ng-template>
@@ -99,22 +99,22 @@
           <tr>
             <th ttSortableColumn="name" scope="col">
               Name
-              <p-treeTableSortIcon field="name"></p-treeTableSortIcon>
+              <p-treeTableSortIcon field="name" />
             </th>
             <th ttSortableColumn="size" scope="col">
               Size
-              <p-treeTableSortIcon field="size"></p-treeTableSortIcon>
+              <p-treeTableSortIcon field="size" />
             </th>
             <th ttSortableColumn="type" scope="col">
               Type
-              <p-treeTableSortIcon field="type"></p-treeTableSortIcon>
+              <p-treeTableSortIcon field="type" />
             </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-itSolution let-subSolution="rowData">
           <tr [ttRow]="itSolution" [ttSelectableRow]="itSolution">
             <td>
-              <p-treeTableToggler [rowNode]="itSolution"></p-treeTableToggler>
+              <p-treeTableToggler [rowNode]="itSolution" />
               {{ subSolution.name }}
             </td>
             <td>{{ subSolution.size }}</td>

@@ -1,7 +1,6 @@
 import {DashboardComponent} from './dashboard.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {DashboardModule} from './dashboard.module';
 
 describe('Integration Tests: DashboardComponent', () => {
   const GERMAN_LANGUAGE = 'de';
@@ -12,7 +11,7 @@ describe('Integration Tests: DashboardComponent', () => {
   let spectator: Spectator<DashboardComponent>;
   const createComponent = createComponentFactory({
     component: DashboardComponent,
-    imports: [DashboardModule, TranslateModule.forRoot()],
+    imports: [DashboardComponent, TranslateModule.forRoot()],
     providers: [TranslateService]
   });
 

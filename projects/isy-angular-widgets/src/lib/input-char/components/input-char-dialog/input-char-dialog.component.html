@@ -12,8 +12,7 @@
     [optionLabel]="'zeichen'"
     [(ngModel)]="selectedZeichenObjekt"
     class="flex-grow-1 overflow-y-scroll character-selectbutton"
-  >
-  </p-selectbutton>
+  />
   <div class="lower-right-panel">
     @if (selectedZeichenObjekt) {
       <isy-input-char-preview [zeichenObjekt]="selectedZeichenObjekt" class="flex-grow-1"></isy-input-char-preview>

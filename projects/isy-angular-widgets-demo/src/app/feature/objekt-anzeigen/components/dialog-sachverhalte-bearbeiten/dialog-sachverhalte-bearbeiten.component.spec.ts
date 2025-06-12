@@ -1,28 +1,14 @@
 import {DialogSachverhalteBearbeitenComponent} from './dialog-sachverhalte-bearbeiten.component';
-import {TableModule} from 'primeng/table';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {PersonenService} from '../../../../shared/services/personen.service';
-import {DialogModule} from 'primeng/dialog';
 import {TranslateModule} from '@ngx-translate/core';
-import {FormsModule} from '@angular/forms';
-import {ButtonModule} from 'primeng/button';
-import {InputGroup} from 'primeng/inputgroup';
-import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 
 describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   let component: DialogSachverhalteBearbeitenComponent;
   let spectator: Spectator<DialogSachverhalteBearbeitenComponent>;
   const createComponent = createComponentFactory({
     component: DialogSachverhalteBearbeitenComponent,
-    imports: [
-      TableModule,
-      DialogModule,
-      TranslateModule.forRoot(),
-      FormsModule,
-      ButtonModule,
-      InputGroup,
-      InputGroupAddonModule
-    ]
+    imports: [TranslateModule.forRoot()]
   });
 
   beforeEach(() => {

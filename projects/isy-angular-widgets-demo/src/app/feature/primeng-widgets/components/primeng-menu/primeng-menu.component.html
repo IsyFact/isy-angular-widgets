@@ -4,7 +4,7 @@
   <div class="grid">
     <div class="col-12 flex-column gap-2">
       <h3>Breadcrumb</h3>
-      <p-breadcrumb [home]="{icon: 'pi pi-home'}" [model]="electronics"></p-breadcrumb>
+      <p-breadcrumb [home]="{icon: 'pi pi-home'}" [model]="electronics" />
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>Steps</h3>
@@ -13,7 +13,7 @@
         [readonly]="false"
         [activeIndex]="activeIndex"
         (activeIndexChange)="onActiveIndexChange($event)"
-      ></p-steps>
+      />
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>TabMenu</h3>
@@ -29,37 +29,41 @@
       </p-tabs>
     </div>
   </div>
-  <p-divider></p-divider>
+  <p-divider />
   <h2>Navigation Menu</h2>
   <div class="grid">
     <div class="col-12 flex-column gap-2">
       <h3>MenuBar</h3>
-      <p-menubar id="menuBar" [model]="menuBarOption"></p-menubar>
+      <p-menubar id="menuBar" [model]="menuBarOption" />
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>MegaMenu</h3>
-      <p-megamenu id="megaMenu" [model]="megaMenuOptions"></p-megamenu>
+      <p-megamenu id="megaMenu" [model]="megaMenuOptions" />
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>PanelMenu</h3>
-      <p-panelmenu id="panelMenu" [model]="fileContainerOptions"></p-panelmenu>
+      <div class="col-3 flex-column gap-2">
+        <p-panelmenu id="panelMenu" [model]="fileContainerOptions" />
+      </div>
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>TieredMenu</h3>
-      <p-tieredmenu id="tieredMenu" [model]="fileContainerOptions"></p-tieredmenu>
+      <div class="col-3 flex-column gap-2">
+        <p-tieredmenu id="tieredMenu" [model]="fileContainerOptions" />
+      </div>
     </div>
   </div>
-  <p-divider></p-divider>
+  <p-divider />
   <h2>Other Menus</h2>
   <div class="grid mb-3">
     <div class="col-12 md:col-6 flex-column gap-2">
       <h3>ContextMenu</h3>
-      <img #logo ngSrc="assets/default-application-logo.jpg" alt="Logo" aria-haspopup="true" height="150" width="335" />
-      <p-contextMenu id="contextMenu" [target]="logo" [model]="contextMenuOption"></p-contextMenu>
+      <img #logo src="assets/default-application-logo.jpg" alt="Logo" aria-haspopup="true" height="150" width="335" />
+      <p-contextMenu id="contextMenu" [target]="logo" [model]="contextMenuOption" />
     </div>
     <div class="col-12 md:col-6 flex-column gap-2">
       <h3>Menu</h3>
-      <p-menu id="menu" [model]="option" styleClass="w-full"></p-menu>
+      <p-menu id="menu" [model]="option" styleClass="w-full" />
     </div>
   </div>
 </div>
