@@ -11,8 +11,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 
 @Component({
-  selector: 'demo-isy-angular-components',
   standalone: true,
+  selector: 'demo-isy-angular-components',
   templateUrl: './isy-angular-components.component.html',
   imports: [
     FormWrapperComponent,

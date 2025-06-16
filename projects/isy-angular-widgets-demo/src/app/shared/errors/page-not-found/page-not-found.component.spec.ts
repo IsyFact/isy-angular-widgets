@@ -1,10 +1,14 @@
 import {PageNotFoundComponent} from './page-not-found.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {provideRouter} from '@angular/router';
 
 describe('Unit Tests: PageNotFoundComponent', () => {
   const startPage = 'Startseite';
   let spectator: Spectator<PageNotFoundComponent>;
-  const createComponent = createComponentFactory(PageNotFoundComponent);
+  const createComponent = createComponentFactory({
+    component: PageNotFoundComponent,
+    providers: [provideRouter([])]
+  });
 
   beforeEach(() => (spectator = createComponent()));
 

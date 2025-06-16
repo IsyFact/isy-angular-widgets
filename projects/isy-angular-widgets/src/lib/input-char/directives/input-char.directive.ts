@@ -15,8 +15,7 @@ import {Datentyp} from '../model/datentyp';
  * A directive to add to an <input> field to attach a special character picker.
  */
 @Directive({
-  selector: '[isyInputChar]',
-  standalone: true
+  selector: '[isyInputChar]'
 })
 export class InputCharDirective implements OnInit, OnDestroy {
   /**

@@ -8,6 +8,7 @@ import {addPackageToPackageJson} from './package-config';
 interface MyBuild {
   options: {
     styles: string[];
+    assets?: (string | {input: string})[];
   };
 }
 
@@ -77,6 +78,53 @@ function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext,
 }
 
 /**
+ * Adds the specified assets path (`src/assets`) to the assets array of the first application project
+ * found in the provided Angular workspace configuration. If the assets array does not exist, it is initialized.
+ * If the assets path is already present, no changes are made.
+ * @param workspace - The Angular workspace configuration object.
+ * @param context - The schematic context used for logging and reporting.
+ * @param tree - The virtual file system tree representing the project files.
+ * @returns The updated virtual file system tree.
+ */
+function applyAssetsToWorkspace(workspace: Workspace, context: SchematicContext, tree: Tree): Tree {
+  const assetsPath = 'src/assets';
+  const projects = workspace?.projects || [];
+
+  let projectName: string | undefined;
+  for (const key in projects) {
+    if (projects[key].projectType === 'application') {
+      projectName = key;
+      break;
+    }
+  }
+
+  if (!projectName) {
+    context.logger.warn('⚠ Skipping: No application project found.');
+    return tree;
+  }
+
+  const project = projects[projectName];
+  const buildOptions = project.architect.build.options;
+
+  if (Array.isArray(buildOptions.assets)) {
+    const hasAssets = buildOptions.assets.some((entry) =>
+      typeof entry === 'string' ? entry === assetsPath : entry.input === assetsPath
+    );
+    if (!hasAssets) {
+      buildOptions.assets.push(assetsPath);
+      context.logger.info(`√ Added '${assetsPath}' to assets array.`);
+    }
+  } else {
+    buildOptions.assets = [assetsPath];
+    context.logger.info(`√ Initialized assets array with '${assetsPath}'.`);
+  }
+
+  const space = 2;
+  tree.overwrite('/angular.json', JSON.stringify(workspace, null, space));
+  return tree;
+}
+
+/**
  * Loads the angular workspace store in angular.json.
  * @param tree List with angular.json properties
  * @returns Workspace Part structure of angular.json file
@@ -139,18 +187,20 @@ export function ngAdd(): Rule {
 
     // Add necessary dependencies to new CLI project.
 
-    addPackageToPackageJson(tree, '@angular/common', '^19.2.9');
-    addPackageToPackageJson(tree, '@angular/core', '^19.2.9');
+    addPackageToPackageJson(tree, '@angular/common', '^19.2.11');
+    addPackageToPackageJson(tree, '@angular/core', '^19.2.11');
     addPackageToPackageJson(tree, 'primeicons', '^7.0.0');
-    addPackageToPackageJson(tree, 'primeng', '^19.1.2');
+    addPackageToPackageJson(tree, 'primeng', '^19.1.3');
     addPackageToPackageJson(tree, 'primeflex', '^4.0.0');
     addPackageToPackageJson(tree, 'moment', '^2.30.1');
-    addPackageToPackageJson(tree, '@primeng/themes', '^19.1.2');
+    addPackageToPackageJson(tree, '@primeng/themes', '^19.1.3');
 
     // Install isy-angular-widgets
     context.addTask(new NodePackageInstallTask());
 
     const workspace = loadWorkspace(tree);
-    return applyStylesToWorkspace(workspace, context, tree);
+
+    applyStylesToWorkspace(workspace, context, tree);
+    return applyAssetsToWorkspace(workspace, context, tree);
   };
 }

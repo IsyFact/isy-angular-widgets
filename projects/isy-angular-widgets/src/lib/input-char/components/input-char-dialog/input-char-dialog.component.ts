@@ -14,10 +14,10 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
  * @internal
  */
 @Component({
+  standalone: true,
   selector: 'isy-input-char-dialog',
   templateUrl: './input-char-dialog.component.html',
   styleUrls: ['./input-char-dialog.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     ButtonModule,

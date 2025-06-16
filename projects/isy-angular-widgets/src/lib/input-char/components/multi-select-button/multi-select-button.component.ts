@@ -6,10 +6,10 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
 
 @Component({
+  standalone: true,
   selector: 'isy-multi-select-button',
   templateUrl: './multi-select-button.component.html',
   styleUrls: ['./multi-select-button.component.scss'],
-  standalone: true,
   imports: [CommonModule, FormsModule, AccordionModule, SelectButtonModule]
 })
 export class MultiSelectButtonComponent implements OnChanges, ControlValueAccessor {

@@ -27,6 +27,8 @@
     height: height
   }"
 >
-  <isy-input-char-dialog [charList]="allCharacters" (insertCharacter)="insertCharacter.emit($event)">
-  </isy-input-char-dialog>
+  <isy-input-char-dialog
+    [charList]="allCharacters"
+    (insertCharacter)="insertCharacter.emit($event)"
+  ></isy-input-char-dialog>
 </p-dialog>

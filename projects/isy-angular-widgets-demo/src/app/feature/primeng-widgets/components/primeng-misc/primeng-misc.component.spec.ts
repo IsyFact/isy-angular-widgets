@@ -1,15 +1,12 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-
 import {PrimengMiscComponent} from './primeng-misc.component';
-import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 import {storageData} from '../../data/product';
 
 describe('Unit Tests: PrimengMiscComponent', () => {
   let component: PrimengMiscComponent;
   let spectator: Spectator<PrimengMiscComponent>;
   const createComponent = createComponentFactory({
-    component: PrimengMiscComponent,
-    imports: [PrimengWidgetsModule]
+    component: PrimengMiscComponent
   });
 
   beforeEach(() => {

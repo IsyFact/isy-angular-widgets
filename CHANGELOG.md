@@ -1,3 +1,7 @@
+# 19.1.0 -
+## Demo-Anwendung
+- IFS-4657: Die Anwendung wurde vollständig auf Standalone-Komponenten umgestellt
+
 # 19.0.1 - 15.05.2025
 ## Fixes
 - IFS-4629: Dark Mode des Standard-Themes wurde deaktiviert

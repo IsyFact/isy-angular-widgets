@@ -2,16 +2,13 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {UploadEvent} from 'primeng/fileupload';
 import {MessageService} from 'primeng/api';
-
 import {PrimengFileComponent} from './primeng-file.component';
-import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 
 describe('Unit Tests: PrimengFileComponent', () => {
   let component: PrimengFileComponent;
   let spectator: Spectator<PrimengFileComponent>;
   const createComponent = createComponentFactory({
     component: PrimengFileComponent,
-    imports: [PrimengWidgetsModule],
     providers: [MessageService, provideHttpClient(withInterceptorsFromDi())]
   });
 

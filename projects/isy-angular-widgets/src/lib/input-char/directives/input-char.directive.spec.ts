@@ -13,7 +13,6 @@ import {ComponentFixture} from '@angular/core/testing';
     isyInputChar
     (change)="valueGet($event, charPicker.value)"
   />`,
-  standalone: true,
   imports: [InputCharDirective]
 })
 class TestComponent {

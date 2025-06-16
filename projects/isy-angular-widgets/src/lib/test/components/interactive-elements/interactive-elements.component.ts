@@ -11,6 +11,7 @@ import {ToggleSwitchModule} from 'primeng/toggleswitch';
 import {PanelMenuModule} from 'primeng/panelmenu';
 
 @Component({
+  standalone: true,
   selector: 'isy-test-component',
   imports: [
     ButtonModule,
@@ -24,8 +25,7 @@ import {PanelMenuModule} from 'primeng/panelmenu';
     ToggleSwitchModule,
     PanelMenuModule
   ],
-  templateUrl: './interactive-elements.component.html',
-  standalone: true
+  templateUrl: './interactive-elements.component.html'
 })
 export class TestComponentComponent {
   @Input() allowSidebarCollapse: boolean = true;

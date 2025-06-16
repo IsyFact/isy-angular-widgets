@@ -1,11 +1,12 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import {ChartData, ChartOptions} from '../../model/model';
-import {UIChart} from 'primeng/chart';
+import {ChartModule, UIChart} from 'primeng/chart';
 
 @Component({
+  standalone: true,
   selector: 'demo-chart',
   templateUrl: './chart.component.html',
-  standalone: false
+  imports: [ChartModule]
 })
 export class ChartComponent {
   @ViewChild('chart') chart!: UIChart;

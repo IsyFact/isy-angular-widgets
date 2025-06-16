@@ -1,11 +1,31 @@
 import {Component} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
+import {ButtonModule} from 'primeng/button';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {DialogModule} from 'primeng/dialog';
+import {DividerModule} from 'primeng/divider';
+import {DrawerModule} from 'primeng/drawer';
+import {InputTextModule} from 'primeng/inputtext';
+import {PopoverModule} from 'primeng/popover';
+import {ToastModule} from 'primeng/toast';
 
 @Component({
+  standalone: true,
   selector: 'demo-primeng-overlay',
   templateUrl: './primeng-overlay.component.html',
-  providers: [ConfirmationService, MessageService],
-  standalone: false
+  imports: [
+    ButtonModule,
+    DrawerModule,
+    DialogModule,
+    ToastModule,
+    ConfirmDialogModule,
+    ConfirmPopupModule,
+    DividerModule,
+    InputTextModule,
+    PopoverModule
+  ],
+  providers: [ConfirmationService, MessageService]
 })
 export class PrimengOverlayComponent {
   constructor(

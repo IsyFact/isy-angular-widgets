@@ -1,15 +1,12 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-
 import {PrimengFormComponent} from './primeng-form.component';
-import {PrimengWidgetsModule} from '../../primeng-widgets.module';
 import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 
 describe('Unit Tests: PrimengFormComponent', () => {
   let component: PrimengFormComponent;
   let spectator: Spectator<PrimengFormComponent>;
   const createComponent = createComponentFactory({
-    component: PrimengFormComponent,
-    imports: [PrimengWidgetsModule]
+    component: PrimengFormComponent
   });
 
   beforeEach(() => {

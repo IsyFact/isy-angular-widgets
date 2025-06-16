@@ -7,11 +7,11 @@ import {Router, RouterModule} from '@angular/router';
  * Represents a toolbar component that can be used to insert a toolbar at the top of the page.
  */
 @Component({
-  selector: 'isy-seiten-toolbar',
   standalone: true,
-  imports: [ToolbarModule, ButtonModule, RouterModule],
+  selector: 'isy-seiten-toolbar',
   templateUrl: './seitentoolbar.component.html',
-  styleUrls: ['./seitentoolbar.component.scss']
+  styleUrls: ['./seitentoolbar.component.scss'],
+  imports: [ToolbarModule, ButtonModule, RouterModule]
 })
 export class SeitentoolbarComponent {
   /**
