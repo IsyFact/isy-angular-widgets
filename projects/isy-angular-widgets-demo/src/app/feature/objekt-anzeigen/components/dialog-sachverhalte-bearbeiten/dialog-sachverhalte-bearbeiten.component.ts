@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 
 @Component({
+  standalone: true,
   selector: 'demo-dialog-sachverhalte-bearbeiten',
   templateUrl: './dialog-sachverhalte-bearbeiten.component.html',
   imports: [
