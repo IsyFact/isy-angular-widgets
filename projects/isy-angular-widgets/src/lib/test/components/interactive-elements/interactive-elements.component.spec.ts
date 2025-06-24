@@ -49,4 +49,11 @@ describe('TestComponentComponent', () => {
       }
     });
   });
+
+  it('should render error text with font-size > 18.666666666666664px (14pt)', () => {
+    const errorMessage = spectator.query('.p-error .p-message-text') as HTMLElement;
+    const fontSize = window.getComputedStyle(errorMessage).fontSize;
+    const fontSizePx = parseFloat(fontSize);
+    expect(fontSizePx).toBeGreaterThan(18.666666666666664);
+  });
 });

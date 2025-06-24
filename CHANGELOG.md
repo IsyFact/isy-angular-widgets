@@ -1,4 +1,6 @@
 # 19.1.0 -
+## Features
+- IFS-4374: Die Schriftgröße der Fehlertexte wurde zur Verbesserung der Barrierefreiheit erhöht
 ## Demo-Anwendung
 - IFS-4657: Die Anwendung wurde vollständig auf Standalone-Komponenten umgestellt
 
