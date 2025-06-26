@@ -21,6 +21,8 @@
 
     // input
     --p-form-field-placeholder-color: #{vars.$isyfactInputPlaceholderTextColor};
+    --p-form-field-invalid-placeholder-color: #{vars.$isyfactAlertColor};
+    --p-form-field-invalid-border-color: #{vars.$isyfactAlertColor};
 
     // Styling for readonly input fields
     // PrimeNG does not apply this styling by default
@@ -42,6 +44,7 @@
     --p-button-padding-y: 0.8125rem;
     --p-button-icon-only-width: 2.75rem;
     --p-button-text-secondary-hover-background: var(--p-surface-200);
+    --p-button-text-danger-color: #{vars.$isyfactAlertColor};
 
     // checkbox
     --p-checkbox-width: 24px;
@@ -89,6 +92,11 @@
     --p-emerald-800: var(--p-gray-800);
     --p-emerald-900: var(--p-gray-900);
     --p-emerald-950: var(--p-gray-950);
+
+    // message
+    --p-message-text-font-weight: 500;
+    --p-message-text-lg-font-size: 1.1667rem;
+    --p-message-error-simple-color: #{vars.$isyfactAlertColor};
 
     // isyfact
     --isyfact-surface-ground: #{vars.$isyfactSurfaceGround};

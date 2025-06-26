@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {IftaLabelModule} from 'primeng/iftalabel';
+import {MessageModule} from 'primeng/message';
 
 /**
  * A component that wraps form controls and displays validation messages.
@@ -26,9 +27,9 @@ import {IftaLabelModule} from 'primeng/iftalabel';
  *   </isy-form-wrapper>
  * </form>
  * ```
- * Ensure you have imported `ReactiveFormsModule` in your module:
+ * Ensure you have imported `ReactiveFormsModule` and `MessageModule` in your module:
  * ```typescript
- * import { ReactiveFormsModule } from '@angular/forms';
+ * import { ReactiveFormsModule, MessageModule } from '@angular/forms';
  * ```
  */
 @Component({
@@ -36,7 +37,7 @@ import {IftaLabelModule} from 'primeng/iftalabel';
   selector: 'isy-form-wrapper',
   templateUrl: './form-wrapper.component.html',
   styleUrls: ['./form-wrapper.component.scss'],
-  imports: [ReactiveFormsModule, IftaLabelModule]
+  imports: [ReactiveFormsModule, IftaLabelModule, MessageModule]
 })
 export class FormWrapperComponent implements OnInit {
   @Input() label!: string;

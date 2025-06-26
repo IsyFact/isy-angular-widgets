@@ -9,6 +9,7 @@ import {InputCharDirective} from '../../../input-char/directives/input-char.dire
 import {FileUploadModule} from 'primeng/fileupload';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
 import {PanelMenuModule} from 'primeng/panelmenu';
+import {MessageModule} from 'primeng/message';
 
 @Component({
   standalone: true,
@@ -23,7 +24,8 @@ import {PanelMenuModule} from 'primeng/panelmenu';
     InputCharDirective,
     FileUploadModule,
     ToggleSwitchModule,
-    PanelMenuModule
+    PanelMenuModule,
+    MessageModule
   ],
   templateUrl: './interactive-elements.component.html'
 })
