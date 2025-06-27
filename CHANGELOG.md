@@ -1,4 +1,4 @@
-# 19.1.0 -
+# 19.1.0 - 27.06.2025
 ## Features
 - IFS-4374: Die Schriftgröße der Fehlertexte wurde zur Verbesserung der Barrierefreiheit erhöht
 ## Demo-Anwendung
