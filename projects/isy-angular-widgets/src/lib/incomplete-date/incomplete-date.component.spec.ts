@@ -60,12 +60,11 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   }
 
   /**
-   * Simulates typing a sequence of keys into an input field with a date mask.
-   * This function sets the initial value of the input to a date mask (`'__.__.____'`),
-   * focuses the input, and then iterates over the provided sequence of keys.
-   * For each key, it creates a `KeyboardEvent`, calculates the correct cursor position,
-   * and updates the input value accordingly, skipping over dot separators in the mask.
-   * @param sequence - An array of string keys to simulate typing into the input field.
+   * Simulate pressing the keys in sequence
+   * Dispatching a keydown event in a unit test simulates only the event itself and does not automatically trigger the default behavior
+   * that a real keydown event would cause in a browser (like changing an input value).
+   * Thus the value of the input element is set manually before dispatching the keydown event in the setupEvent (onKeydown) function.
+   * @param sequence the input sequence
    */
   function typeSequence(sequence: string[]): void {
     // The input mask has to be initially set since dispatching the keydown event alone does not alter the input value.

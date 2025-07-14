@@ -110,7 +110,12 @@ export class FormWrapperComponent implements OnInit {
    * @returns A boolean value indicating whether the error message should be shown.
    */
   shouldShowError(): boolean {
-    return this.errorMessage !== null && this.control.invalid && (this.control.touched || this.control.dirty);
+    return (
+      this.errorMessage !== null &&
+      this.errorMessage !== '' &&
+      this.control.invalid &&
+      (this.control.touched || this.control.dirty)
+    );
   }
 
   /**

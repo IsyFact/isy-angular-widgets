@@ -38,6 +38,19 @@ const CURSOR_SHIFT = {
   Large: 3
 };
 
+/**
+ * This component is used to input complete and incomplete dates.
+ * To enter an unknown day or month,  `0` or `x` can be used.
+ *
+ * The format DD.MM.YYYY is supported by the widget
+ *
+ * == Century switch / Birthdays in the past
+ *
+ * If only past dates are allowed (e.g. for already born persons),
+ * the property `dateInPastConstraint` can be set to `true`via binding.
+ *
+ * When autocompleting e.g. 10.10.50, 10.10.1950 will be the output instead of 10.10.2050.
+ */
 @Component({
   standalone: true,
   selector: 'isy-incomplete-date',
