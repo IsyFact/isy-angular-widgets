@@ -68,30 +68,27 @@ describe('Integration Tests: IncompleteDateComponent', () => {
    * @param sequence - An array of string keys to simulate typing into the input field.
    */
   function typeSequence(sequence: string[]): void {
-    const mask = '__.__.____';
-    component.writeValue(mask);
-    input.value = mask;
+    // The input mask has to be initially set since dispatching the keydown event alone does not alter the input value.
+    const initialDateStr = (input.value = '__.__.____');
     input.focus();
 
-    let cursorPosition = 0;
-
+    /*
+    The input values are manually set for each key. On each execution of the setupEvent function,
+    a sequential key is selected and linked to a corresponding result. This result is then synchronized with the input mask,
+    updating the input for the next iteration.
+    */
     sequence.forEach((key) => {
-      const keyEvent = new KeyboardEvent('keydown', {key});
+      const keyEvent = new KeyboardEvent('keydown', {key: key});
+      input.selectionStart =
+        input.selectionStart === 2 || input.selectionStart === 5 ? input.selectionStart + 1 : input.selectionStart;
 
-      while (
-        cursorPosition === (CursorPosition.DotAfterDay as number) ||
-        cursorPosition === (CursorPosition.DotAfterMonth as number)
-      ) {
-        cursorPosition++;
-      }
+      if (key === '.') input.value = input.value.substring(0, input.selectionStart!);
+      else input.value = input.value.substring(0, input.selectionStart!) + key;
 
-      const inserted = key === '.' ? '.' : key;
-      const newCursorPosition = cursorPosition === 4 ? cursorPosition - 1 : cursorPosition;
-      const left = input.value.substring(0, newCursorPosition);
-      const newValue = left + inserted;
-      const nextCursor = cursorPosition + 1;
-      setupEvent(keyEvent, newValue, nextCursor);
-      cursorPosition = nextCursor;
+      const cursorPosition = input.selectionStart;
+      input.value += initialDateStr.substring(cursorPosition!);
+      setupEvent(keyEvent, input.value, cursorPosition!);
+      spectator.detectChanges();
     });
   }
 
@@ -114,7 +111,14 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(validators).not.toBeUndefined();
   });
 
-  const testCases0 = [{sequence: ['0', '1', '.', '0', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'}];
+  const testCases0 = [
+    {sequence: ['0', '1', '.', '0', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
+    {sequence: ['1', '.', '0', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
+    {sequence: ['1', '.', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
+    {sequence: ['0', '1', '0', '1', '2', '0', '2', '4'], expected: '01.01.2024'},
+    {sequence: ['x', '.', 'x', '.'], expected: 'xx.xx.____'},
+    {sequence: ['.'], expected: 'xx.__.____'}
+  ];
 
   testCases0.forEach(({sequence, expected}) => {
     it(`should autocomplete ${JSON.stringify(sequence)} to ${expected}`, () => {
