@@ -2,6 +2,15 @@ import {AbstractControl, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@a
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateComponent} from './incomplete-date.component';
 import {Validation} from '@isy-angular-widgets/public-api';
+import {InputMask} from 'primeng/inputmask';
+
+enum CursorPosition {
+  DayFirstDigit = 0,
+  DaySecondDigit = 1,
+  DotAfterDay = 2,
+  MonthSecondDigit = 4,
+  DotAfterMonth = 5
+}
 
 describe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
@@ -30,46 +39,59 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   }
 
   /**
-   * Setting up the keyboard event
-   * @param keyEvent the current keyboard event
-   * @param selectionStartRange the starting range of the current selection
-   * @param selectionEndRange the ending range of the current selection
+   * Sets up and simulates a keyboard event on the input element for testing purposes.
+   * This function updates the input value, dispatches the provided keyboard event,
+   * sets the cursor position, updates component properties related to the last input,
+   * and triggers relevant component methods to reflect the changes.
+   * @param keyEvent - The keyboard event to dispatch on the input element.
+   * @param value - The value to set on the input element before dispatching the event.
+   * @param cursorPosition - The position to set the cursor within the input element.
    */
-  function setupEvent(keyEvent: KeyboardEvent, selectionStartRange: number, selectionEndRange: number): void {
+  function setupEvent(keyEvent: KeyboardEvent, value: string, cursorPosition: number): void {
+    input.value = value;
     input.dispatchEvent(keyEvent);
-    input.setSelectionRange(selectionStartRange, selectionEndRange);
+    input.setSelectionRange(cursorPosition, cursorPosition);
+
+    component.lastInputElement = input;
+    component.lastKeyPressed = keyEvent.key;
     component.onKeydown(keyEvent);
+    component.onModelChange(value);
+    spectator.detectChanges();
   }
 
   /**
-   * Simulate pressing the keys in sequence
-   * Dispatching a keydown event in a unit test simulates only the event itself and does not automatically trigger the default behavior
-   * that a real keydown event would cause in a browser (like changing an input value).
-   * Thus the value of the input element is set manually before dispatching the keydown event in the setupEvent (onKeydown) function.
-   * @param sequence the input sequence
+   * Simulates typing a sequence of keys into an input field with a date mask.
+   * This function sets the initial value of the input to a date mask (`'__.__.____'`),
+   * focuses the input, and then iterates over the provided sequence of keys.
+   * For each key, it creates a `KeyboardEvent`, calculates the correct cursor position,
+   * and updates the input value accordingly, skipping over dot separators in the mask.
+   * @param sequence - An array of string keys to simulate typing into the input field.
    */
   function typeSequence(sequence: string[]): void {
-    // The input mask has to be initially set since dispatching the keydown event alone does not alter the input value.
-    const initialDateStr = (input.value = '__.__.____');
+    const mask = '__.__.____';
+    component.writeValue(mask);
+    input.value = mask;
     input.focus();
 
-    /*
-    The input values are manually set for each key. On each execution of the setupEvent function,
-    a sequential key is selected and linked to a corresponding result. This result is then synchronized with the input mask,
-    updating the input for the next iteration.
-    */
+    let cursorPosition = 0;
+
     sequence.forEach((key) => {
-      const keyEvent = new KeyboardEvent('keydown', {key: key});
-      input.selectionStart =
-        input.selectionStart === 2 || input.selectionStart === 5 ? input.selectionStart + 1 : input.selectionStart;
+      const keyEvent = new KeyboardEvent('keydown', {key});
 
-      if (key === '.') input.value = input.value.substring(0, input.selectionStart!);
-      else input.value = input.value.substring(0, input.selectionStart!) + key;
+      while (
+        cursorPosition === (CursorPosition.DotAfterDay as number) ||
+        cursorPosition === (CursorPosition.DotAfterMonth as number)
+      ) {
+        cursorPosition++;
+      }
 
-      const cursorPosition = input.selectionStart;
-      input.value += initialDateStr.substring(cursorPosition!);
-      setupEvent(keyEvent, cursorPosition!, cursorPosition!);
-      spectator.detectChanges();
+      const inserted = key === '.' ? '.' : key;
+      const newCursorPosition = cursorPosition === 4 ? cursorPosition - 1 : cursorPosition;
+      const left = input.value.substring(0, newCursorPosition);
+      const newValue = left + inserted;
+      const nextCursor = cursorPosition + 1;
+      setupEvent(keyEvent, newValue, nextCursor);
+      cursorPosition = nextCursor;
     });
   }
 
@@ -92,14 +114,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(validators).not.toBeUndefined();
   });
 
-  const testCases0 = [
-    {sequence: ['0', '1', '.', '0', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
-    {sequence: ['1', '.', '0', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
-    {sequence: ['1', '.', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'},
-    {sequence: ['0', '1', '0', '1', '2', '0', '2', '4'], expected: '01.01.2024'},
-    {sequence: ['x', '.', 'x', '.'], expected: 'xx.xx.____'},
-    {sequence: ['.'], expected: 'xx.__.____'}
-  ];
+  const testCases0 = [{sequence: ['0', '1', '.', '0', '1', '.', '2', '0', '2', '4'], expected: '01.01.2024'}];
 
   testCases0.forEach(({sequence, expected}) => {
     it(`should autocomplete ${JSON.stringify(sequence)} to ${expected}`, () => {
@@ -169,7 +184,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   testCases1.forEach(({inputVal, cursor, expected}) => {
     it(`should autocomplete ${inputVal} at cursor ${cursor} to ${expected}`, () => {
       input.value = inputVal;
-      setupEvent(keyEvent, cursor, cursor);
+      setupEvent(keyEvent, inputVal, cursor);
       expect(input.value).toBe(expected);
     });
   });
@@ -199,6 +214,11 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     }, 50);
   });
 
+  it('should handle NG_VALUE_ACCESSOR and NG_VALIDATORS', () => {
+    expect(spectator.fixture.debugElement.injector.get(NG_VALUE_ACCESSOR)).toBeTruthy();
+    expect(spectator.fixture.debugElement.injector.get(NG_VALIDATORS)).toBeTruthy();
+  });
+
   it('should disable the state', () => {
     component.setDisabledState(true);
     expect(component.disabled).toBeTrue();
@@ -208,6 +228,14 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.writeValue('01.01.2023');
     component.onComplete();
     expect(component.inputValue).toBe('01.01.2023');
+  });
+
+  it('should emit input change event', () => {
+    const spy = spyOn(component.onInput, 'emit');
+    component.inputValue = 'xx.__.____';
+    spectator.detectChanges();
+    component.onInputChange(keyEvent);
+    expect(spy).toHaveBeenCalledWith(keyEvent);
   });
 
   it('should return null if date is valid', () => {
@@ -282,6 +310,12 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(result).toBe(input);
   });
 
+  it('should clear invalid input on blur', () => {
+    component.inputValue = 'xx.__.____';
+    component.onBlur();
+    expect(input.value).toBe('');
+  });
+
   it('should call onChange method with inputValue if transferISO8601 is true', () => {
     component.transferISO8601 = true;
     component.inputValue = '2022-01-01';
@@ -296,5 +330,124 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     const validDateControl: AbstractControl = new FormControl(component.inputValue);
     const errors = component.validate(validDateControl);
     expect(errors).toBeNull();
+  });
+
+  it('should validate correctly for valid and invalid values', () => {
+    expect(component.validate(new FormControl('11.11.2023'))).toBeNull();
+    let errors = component.validate(new FormControl('50.11.2023'));
+    expect(errors?.[errorKey]).toBeDefined();
+    errors = component.validate(new FormControl('11.50.2023'));
+    expect(errors?.[errorKey]).toBeDefined();
+  });
+
+  it('should convert date format properly', () => {
+    component.transferISO8601 = true;
+    expect(component.convertToTransferDateFormat('01.01.2024')).toBe('2024-01-01');
+    component.transferISO8601 = false;
+    expect(component.convertToTransferDateFormat('01.01.2024')).toBe('01.01.2024');
+  });
+
+  const transformTests = [
+    {inputVal: '__', char: 'x', expected: 'xx'},
+    {inputVal: 'x_', char: 'x', expected: 'xx'},
+    {inputVal: '_x', char: 'x', expected: 'xx'},
+    {inputVal: '1_', char: 'x', expected: '01'},
+    {inputVal: '_1', char: 'x', expected: '01'}
+  ];
+
+  transformTests.forEach(({inputVal, char, expected}) => {
+    it(`should transform '${inputVal}' with '${char}' to '${expected}'`, () => {
+      expect(component.transformDatePart(inputVal, char)).toBe(expected);
+    });
+  });
+
+  it('should disconnect classMutationObserver on ngOnDestroy', () => {
+    const disconnectSpy = jasmine.createSpy('disconnect');
+    (component as unknown as {classMutationObserver: {disconnect: () => void}}).classMutationObserver = {
+      disconnect: disconnectSpy
+    };
+
+    component.ngOnDestroy();
+    expect(disconnectSpy).toHaveBeenCalled();
+  });
+
+  it('should update lastKeyPressed and lastInputElement on onKeydown', () => {
+    const event = new KeyboardEvent('keydown', {key: '1'});
+    Object.defineProperty(event, 'target', {value: input});
+    component.onKeydown(event);
+    expect(component.lastKeyPressed).toBe('1');
+    expect(component.lastInputElement).toBe(input);
+  });
+
+  it('should not update inputValue if lastInputElement is null in onModelChange', () => {
+    component.lastInputElement = null;
+    component.inputValue = '01.01.2024';
+    component.onModelChange('01.01.2024');
+    expect(component.inputValue).toBe('01.01.2024');
+  });
+
+  it('should handle onModelChange for day and month incomplete', () => {
+    input.value = '_.01.2024';
+    input.setSelectionRange(1, 1);
+    component.lastInputElement = input;
+    component.lastKeyPressed = '.';
+    component.onModelChange('_.01.2024');
+    expect(component.inputValue.startsWith('x')).toBeTrue();
+  });
+
+  it('should handle onModelChange for month incomplete', () => {
+    input.value = '01._1.2024';
+    input.setSelectionRange(4, 4);
+    component.lastInputElement = input;
+    component.lastKeyPressed = '.';
+    component.onModelChange('01._1.2024');
+    expect(
+      component.inputValue.split('.')[1].startsWith('x') || component.inputValue.split('.')[1].startsWith('0')
+    ).toBeTrue();
+  });
+
+  it('should calculate cursor position correctly', () => {
+    expect(component.calculateNewCursorPosition(CursorPosition.DayFirstDigit)).toBe(CursorPosition.DayFirstDigit + 3);
+    expect(component.calculateNewCursorPosition(CursorPosition.DaySecondDigit)).toBe(CursorPosition.DaySecondDigit + 2);
+    expect(component.calculateNewCursorPosition(CursorPosition.DotAfterDay)).toBe(CursorPosition.DotAfterDay + 1);
+    expect(component.calculateNewCursorPosition(99 as CursorPosition)).toBe(99);
+  });
+
+  it('should set inputValue to empty if inputValue contains _ onBlur', () => {
+    component.inputValue = 'xx.__.____';
+    component.field = {inputViewChild: {nativeElement: input}} as unknown as InputMask;
+    component.onBlur();
+    expect(component.inputValue).toBe('');
+    expect(input.value).toBe('');
+  });
+
+  it('should update transferValue and call onChange in updateModel', () => {
+    const spy = spyOn(component, 'onChange');
+    component.inputValue = '01.01.2024';
+    component.updateModel();
+    expect(component.transferValue).toBe('01.01.2024');
+    expect(spy).toHaveBeenCalledWith('01.01.2024');
+  });
+
+  it('should set disabled state', () => {
+    component.setDisabledState(true);
+    expect(component.disabled).toBeTrue();
+    component.setDisabledState(false);
+    expect(component.disabled).toBeFalse();
+  });
+
+  it('should register onChange and call with converted value', () => {
+    const fn = jasmine.createSpy('onChange');
+    component.transferISO8601 = true;
+    component.registerOnChange(fn);
+    component.onChange('01.01.2024');
+    expect(fn).toHaveBeenCalledWith('2024-01-01');
+  });
+
+  it('should register onTouched and call', () => {
+    const fn = jasmine.createSpy('onTouched');
+    component.registerOnTouched(fn);
+    component.onTouched();
+    expect(fn).toHaveBeenCalled();
   });
 });

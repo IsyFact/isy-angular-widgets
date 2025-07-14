@@ -24,19 +24,20 @@ import {Validation} from '../validation/validation';
 import {InputMask, InputMaskModule} from 'primeng/inputmask';
 import {InputTextModule} from 'primeng/inputtext';
 
-/**
- * This component is used to input complete and incomplete dates.
- * To enter an unknown day or month,  `0` or `x` can be used.
- *
- * The format DD.MM.YYYY is supported by the widget
- *
- * == Century switch / Birthdays in the past
- *
- * If only past dates are allowed (e.g. for already born persons),
- * the property `dateInPastConstraint` can be set to `true`via binding.
- *
- * When autocompleting e.g. 10.10.50, 10.10.1950 will be the output instead of 10.10.2050.
- */
+enum CursorPosition {
+  DayFirstDigit = 0,
+  DaySecondDigit = 1,
+  DotAfterDay = 2,
+  MonthSecondDigit = 4,
+  DotAfterMonth = 5
+}
+
+const CURSOR_SHIFT = {
+  Small: 1,
+  Medium: 2,
+  Large: 3
+};
+
 @Component({
   standalone: true,
   selector: 'isy-incomplete-date',
@@ -109,9 +110,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @ViewChild(InputMask) field?: InputMask;
 
-  @ViewChild('p-inputMask') inputMask!: ElementRef;
+  @ViewChild('p-inputmask') inputMask!: ElementRef;
 
   classMutationObserver?: MutationObserver;
+  lastKeyPressed: string = '';
+  lastInputElement: HTMLInputElement | null = null;
 
   /**
    * Default constructor
@@ -133,7 +136,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
         if (mutation.attributeName === 'class') {
           const isInvalid = element.className.includes('ng-invalid');
           element.querySelector('p-inputmask')?.classList.remove(isInvalid ? 'ng-valid' : 'ng-invalid');
-          if (isInvalid) element.querySelector('p-inputmask')?.classList.add('ng-invalid');
+          if (isInvalid) element.querySelector('p-inputmask')?.classList.add('ng-invalid', 'ng-dirty');
         }
       });
     });
@@ -154,8 +157,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   ngOnInit(): void {
     // Enable syntax <isy-incomplete-date readonly /> (isReadOnly has value "" which is true as boolean)
-    this.readonly = this.readonly || '' === (this.readonly as unknown);
-    this.disabled = this.disabled || '' === (this.disabled as unknown);
+    this.readonly = this.readonly || this.readonly === ('' as unknown);
+    this.disabled = this.disabled || this.disabled === ('' as unknown);
   }
 
   /**
@@ -171,8 +174,9 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * @returns A `ValidationErrors` object if the control is invalid, otherwise null.
    */
   validate(c: AbstractControl): ValidationErrors | null {
-    if (this.transferISO8601) return Validation.validUnspecifiedISODate(c, this.allowZeroFormat);
-    return Validation.validUnspecifiedDate(c, this.allowZeroFormat);
+    return this.transferISO8601
+      ? Validation.validUnspecifiedISODate(c, this.allowZeroFormat)
+      : Validation.validUnspecifiedDate(c, this.allowZeroFormat);
   }
 
   /**
@@ -184,75 +188,78 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   }
 
   /**
-   * Autocompletes the day and month input based on the cursor position and key pressed.
-   * If the dot key ('.') is pressed without a preceding number, it inserts "xx" to represent an uncertain day or month.
-   * If the dot key is pressed after a single digit, it autocompletes to a two-digit format (e.g., '1.' becomes '01').
-   * If the dot key is pressed when the cursor is at position 3 and the day is fully entered (i.e., two digits), the completion is ignored.
-   * Otherwise, it autocompletes the day.
-   * @param event KeyboardEvent
+   * Handles the keydown event for the input element.
+   * Stores the last key pressed and the input element that triggered the event.
+   * @param event - The keyboard event triggered by the user.
    */
   onKeydown(event: Event): void {
-    const dayPartEndPos = 3;
-    const monthPartEndPos = 6;
-    const input = event.target as HTMLInputElement;
-    const cursorPosition = input.selectionStart!;
+    this.lastKeyPressed = (event as KeyboardEvent).key;
+    this.lastInputElement = event.target as HTMLInputElement;
+  }
 
-    if (!(event instanceof KeyboardEvent) || event.key !== '.' || cursorPosition >= monthPartEndPos) return;
+  /**
+   * Handles changes to the date input model, updating the input value and cursor position as needed.
+   * This method processes the input value when the user interacts with the date field, specifically
+   * when editing the day or month parts. It replaces incomplete day or month values with a specified
+   * character if necessary, updates the input field, and recalculates the cursor position to ensure
+   * a smooth user experience.
+   * @param value - The current value of the date input in the format "DD.MM.YYYY".
+   */
+  onModelChange(value: string): void {
+    const input = this.lastInputElement;
 
-    const [day, month, year] = input.value.split('.');
-    let partDay = `${day}`;
-    let partMonth = `${month}`;
-    const partDayReplaced = partDay.replace(/_/g, '');
-    const partMonthReplaced = partMonth.replace(/_/g, '');
-    const dateUnspecifiedChar = 'x';
+    if (!input) return;
 
-    if (partDayReplaced.length <= 1) partDay = this.transformDatePart(partDay, dateUnspecifiedChar);
+    const cursorPos = input.selectionStart ?? 0;
+    const [day = '', month = '', year = ''] = value.split('.');
+    let partDay = day;
+    let partMonth = month;
+    const dayClean = day.replace(/_/g, '');
+    const monthClean = month.replace(/_/g, '');
+    const unspecifiedChar = 'x';
 
-    if (cursorPosition >= dayPartEndPos && cursorPosition < monthPartEndPos && partMonthReplaced.length <= 1) {
-      partDay = partDayReplaced.length === 0 ? dateUnspecifiedChar.repeat(partDay.length) : partDay;
-      if (cursorPosition > dayPartEndPos) partMonth = this.transformDatePart(partMonth, dateUnspecifiedChar);
+    this.inputValue = value;
+
+    const isInDayOrMonthRange = this.lastKeyPressed === '.' && cursorPos <= (CursorPosition.DotAfterMonth as number);
+
+    if (isInDayOrMonthRange) {
+      if (dayClean.length <= 1) partDay = this.transformDatePart(day, unspecifiedChar);
+
+      if (
+        cursorPos >= (CursorPosition.DotAfterDay as number) + 1 &&
+        cursorPos <= (CursorPosition.DotAfterMonth as number) &&
+        monthClean.length <= 1
+      ) {
+        if (cursorPos > (CursorPosition.DotAfterDay as number) + 1)
+          partMonth = this.transformDatePart(month, unspecifiedChar);
+      }
+
+      const result = [partDay, partMonth, year].join('.');
+      input.value = this.inputValue = result;
+
+      const newCursor = this.calculateNewCursorPosition(cursorPos);
+      input.setSelectionRange(newCursor, newCursor);
     }
-
-    const dateStr = [partDay, partMonth, year].join('.');
-    input.value = this.inputValue = dateStr;
-
-    const newCursorPosition = this.calculateNewCursorPosition(cursorPosition);
-    input.setSelectionRange(newCursorPosition, newCursorPosition);
-
-    if (newCursorPosition !== dayPartEndPos && partDay !== day) this.onChange(this.inputValue);
   }
 
   /**
    * Calculates the new cursor position
-   * @param cursorPosition as a number
-   * @returns newCursorPosition as a number
+   * @param position as a number
+   * @returns position as a number
    */
-  private calculateNewCursorPosition(cursorPosition: number): number {
-    let newCursorPosition = cursorPosition;
-    const cursorPositionAtFirstDayLetter = 0;
-    const cursorPositionAtSecondDayLetter = 1;
-    const cursorPositionAtDotAfterDayLetter = 2;
-    const cursorPositionAtSecondMonthLetter = 4;
-    const cursorPositionAtDotAfterMonthLetter = 5;
-    const onePosition = 1;
-    const twoPositions = 2;
-    const threePositions = 3;
-
-    switch (newCursorPosition) {
-      case cursorPositionAtFirstDayLetter:
-        newCursorPosition += threePositions;
-        break;
-      case cursorPositionAtSecondDayLetter:
-      case cursorPositionAtSecondMonthLetter:
-        newCursorPosition += twoPositions;
-        break;
-      case cursorPositionAtDotAfterDayLetter:
-      case cursorPositionAtDotAfterMonthLetter:
-        newCursorPosition += onePosition;
-        break;
+  calculateNewCursorPosition(position: CursorPosition): number {
+    switch (position) {
+      case CursorPosition.DayFirstDigit:
+        return position + CURSOR_SHIFT.Large;
+      case CursorPosition.DaySecondDigit:
+      case CursorPosition.MonthSecondDigit:
+        return position + CURSOR_SHIFT.Medium;
+      case CursorPosition.DotAfterDay:
+      case CursorPosition.DotAfterMonth:
+        return position + CURSOR_SHIFT.Small;
+      default:
+        return position;
     }
-
-    return newCursorPosition;
   }
 
   /**
@@ -278,7 +285,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
       this.dateInPastConstraint,
       this.allowZeroFormat
     );
-    this.onChange(this.inputValue);
+    this.updateModel();
   }
 
   /**
@@ -292,16 +299,30 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
         this.allowZeroFormat
       );
     }
-    const input = this.field?.inputViewChild!.nativeElement as HTMLInputElement;
-    input.value = this.inputValue;
 
-    if (this.inputValue.includes('_')) input.value = this.inputValue = '';
+    const inputEl = this.field?.inputViewChild!.nativeElement as HTMLInputElement;
+    if (inputEl) {
+      inputEl.value = this.inputValue;
+      if (this.inputValue.includes('_')) {
+        inputEl.value = this.inputValue = '';
+      }
+    }
+
     this.onTouched();
-    this.onChange(this.inputValue);
+    this.updateModel();
   }
 
   onInputChange(event: Event): void {
     this.onInput.emit(event);
+  }
+
+  /**
+   * Updates the internal model by converting the current input value to the transfer date format
+   * and propagates the change to registered listeners.
+   */
+  updateModel(): void {
+    this.transferValue = this.convertToTransferDateFormat(this.inputValue);
+    this.onChange(this.transferValue);
   }
 
   /**
