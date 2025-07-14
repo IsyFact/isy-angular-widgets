@@ -127,4 +127,20 @@ describe('FormWrapperComponent', () => {
     const labelClass = spectatorRequired.component.labelOptionClass;
     expect(labelClass).toEqual(' static-label');
   });
+
+  it('should show error if errorMessage exists, control is invalid and touched', () => {
+    const control = spectatorRequired.component.control;
+    control.markAsTouched();
+    control.setValue('');
+    spectatorRequired.detectChanges();
+    expect(spectatorRequired.component.shouldShowError()).toBeTrue();
+  });
+
+  it('should show error if errorMessage exists, control is invalid and dirty', () => {
+    const control = spectatorRequired.component.control;
+    control.markAsDirty();
+    control.setValue('');
+    spectatorRequired.detectChanges();
+    expect(spectatorRequired.component.shouldShowError()).toBeTrue();
+  });
 });

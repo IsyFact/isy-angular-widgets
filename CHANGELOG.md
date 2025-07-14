@@ -1,3 +1,7 @@
+# 19.1.1 -
+## Fixes
+- IFS-4314: Validierungsfehler des Eingabefeldes `isy-incomplete-date` für ungewisse Datumswerte bei programmatischer Befüllung behoben
+
 # 19.1.0 - 27.06.2025
 ## Features
 - IFS-4374: Die Schriftgröße der Fehlertexte wurde zur Verbesserung der Barrierefreiheit erhöht
