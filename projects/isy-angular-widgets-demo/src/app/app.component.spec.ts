@@ -1,8 +1,8 @@
+import {DOCUMENT} from '@angular/core';
 import {NavigationEnd, provideRouter, Router} from '@angular/router';
 import {AppComponent} from './app.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {Subject} from 'rxjs';
-import {DOCUMENT} from '@angular/common';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('Integration Tests: AppComponent', () => {

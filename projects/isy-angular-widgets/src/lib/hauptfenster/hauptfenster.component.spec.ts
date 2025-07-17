@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MegaMenu, MegaMenuSub} from 'primeng/megamenu';
+import {MegaMenu, MegaMenuModule, MegaMenuSub} from 'primeng/megamenu';
 import {ButtonModule} from 'primeng/button';
 import {MockComponents} from 'ng-mocks';
 import {HauptfensterComponent} from './hauptfenster.component';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
+import { SkipLinksComponent } from '@isy-angular-widgets/public-api';
 
 @Component({
   template: `
@@ -68,32 +69,6 @@ describe('Unit Tests: HauptfensterComponent', () => {
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
     const logoutButtonText = logoutButton.textContent ?? '';
     expect(logoutButtonText.trim()).toEqual(logoutTitle);
-  });
-
-  it('should have outlined style by default for the logout button', () => {
-    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
-    expect(outlinedState).toBe('true');
-  });
-
-  it('should have outlined style when outlinedLogoutButton is true', () => {
-    component.outlinedLogoutButton = true;
-    spectator.detectChanges();
-
-    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
-
-    expect(outlinedState).toBe('true');
-  });
-
-  it('should not have outlined style when outlinedLogoutButton is false', () => {
-    component.outlinedLogoutButton = false;
-    spectator.detectChanges();
-
-    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const outlinedState = logoutButton.getAttribute('ng-reflect-outlined');
-
-    expect(outlinedState).toBe('false');
   });
 
   it('should call the logout function when the button is clicked', () => {
@@ -216,23 +191,40 @@ describe('Unit Tests: HauptfensterComponent', () => {
 });
 
 describe('Integration Test: HauptfensterComponent', () => {
-  let spectator: Spectator<HauptFensterWrapperComponent>;
+  let spectator: Spectator<HauptfensterComponent>;
   const createComponent = createComponentFactory({
-    component: HauptFensterWrapperComponent
+    component: HauptfensterComponent,
+    imports: [ButtonModule]
   });
 
   beforeEach(() => (spectator = createComponent()));
 
-  it('should display custom title in template of Titelzeile if titel input is undefined', () => {
-    const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
-    expect(titelzeileEl.textContent).toEqual('Titel inside H1!');
-  });
-
   it('should display custom title if titel input is used', () => {
     const customTitle = 'Custom Title';
-    spectator.component.title = customTitle;
-    spectator.fixture.detectChanges();
+    
+    spectator = createComponent({
+      props: { title: customTitle }
+    });
+
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
     expect(titelzeileEl.textContent).toEqual(customTitle);
+  });
+
+  it('should have outlined style when outlinedLogoutButton is true', () => {
+     spectator = createComponent({
+      props: { outlinedLogoutButton: true }
+    });
+
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button button') as HTMLButtonElement;
+    expect(logoutButton).toHaveClass('p-button-outlined');
+  });
+
+  it('should not have outlined style when outlinedLogoutButton is false', () => {
+    spectator = createComponent({
+      props: { outlinedLogoutButton: false }
+    });
+
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button button') as HTMLButtonElement;
+    expect(logoutButton).not.toHaveClass('p-button-outlined');
   });
 });

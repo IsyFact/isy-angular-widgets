@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, Inject, OnDestroy, OnInit, DOCUMENT} from '@angular/core';
 import {UserInfo} from '@isy-angular-widgets/api/userinfo';
 import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
@@ -11,7 +11,6 @@ import {MenuTranslationService} from './shared/services/menu-translation.service
 import {WidgetsTranslation} from '@isy-angular-widgets/i18n/widgets-translation';
 import {WidgetsConfigService} from '@isy-angular-widgets/i18n/widgets-config.service';
 import {permissions} from './app.permission';
-import {CommonModule, DOCUMENT} from '@angular/common';
 import {PageTitleService} from './shared/services/page-title.service';
 import {NavigationEnd, Router, RouterEvent, Event, RouterModule} from '@angular/router';
 import {PrimeNG} from 'primeng/config';
@@ -37,7 +36,6 @@ import {PanelMenuModule} from 'primeng/panelmenu';
     TranslateModule,
     HauptfensterComponent,
     SeitentoolbarComponent,
-    CommonModule,
     PanelMenuModule
   ],
   providers: [MessageService]

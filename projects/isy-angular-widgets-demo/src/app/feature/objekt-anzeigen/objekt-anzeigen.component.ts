@@ -27,7 +27,6 @@ import {DialogSachverhalteBearbeitenComponent} from './components/dialog-sachver
 import {ToastModule} from 'primeng/toast';
 import {InputTextModule} from 'primeng/inputtext';
 import {TextareaModule} from 'primeng/textarea';
-import {CommonModule} from '@angular/common';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -38,7 +37,6 @@ import {CommonModule} from '@angular/common';
   templateUrl: './objekt-anzeigen.component.html',
   styleUrls: ['./objekt-anzeigen.component.scss'],
   imports: [
-    CommonModule,
     InputTextModule,
     ReactiveFormsModule,
     TabsModule,

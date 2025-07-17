@@ -2,7 +2,6 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, On
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
-import {CommonModule} from '@angular/common'; // For common directives like *ngIf, *ngFor, etc.
 import {ButtonModule} from 'primeng/button';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
@@ -19,7 +18,6 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
   templateUrl: './input-char-dialog.component.html',
   styleUrls: ['./input-char-dialog.component.scss'],
   imports: [
-    CommonModule,
     ButtonModule,
     SelectButtonModule,
     AccordionModule,
