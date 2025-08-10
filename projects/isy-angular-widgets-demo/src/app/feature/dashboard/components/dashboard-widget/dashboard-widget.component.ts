@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
@@ -21,10 +21,9 @@ export class DashboardWidgetComponent implements OnInit {
 
   items: MenuItem[] = [];
 
-  constructor(
-    public translate: TranslateService,
-    private readonly menuTranslationService: MenuTranslationService
-  ) {}
+  translate = inject(TranslateService);
+
+  private readonly menuTranslationService = inject(MenuTranslationService);
 
   ngOnInit(): void {
     this.loadMenuItems(this.menuItems);

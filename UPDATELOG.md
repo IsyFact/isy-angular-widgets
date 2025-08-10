@@ -1,3 +1,130 @@
+# Update Log - 08.08.2025
+
+## Migration auf Angular v20 & PrimeNG v20
+
+### 1. Aktualisierte Frameworks & Tools
+- Angular: v19 → **v20.1.1**
+- PrimeNG: v19 → **v20.0.0**
+- Core-Pakete & CLI aktualisiert
+- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/migration/v20) umgesetzt
+
+---
+
+### 2. Änderungen in **_isy-angular-widgets_** (Bibliothek)
+
+#### Paketkonfiguration (`index.ts`)
+```ts
+addPackageToPackageJson(tree, '@angular/common', '^20.1.6');
+addPackageToPackageJson(tree, '@angular/core', '^20.1.6');
+addPackageToPackageJson(tree, 'primeng', '^20.0.1');
+addPackageToPackageJson(tree, '@primeuix/themes', '^1.2.3');
+```
+
+#### Überarbeitete Dateien (Auswahl)
+
+#### Neue Komponenten & Funktionen
+
+### 3. Änderungen in **_isy-angular-widgets-demo_** (Demo-App)
+
+#### Überarbeitete Dateien (Auswahl)
+
+### 4. PrimeNG-Komponenten ersetzt/aktualisiert
+
+### 5. Technische Anpassungen
+
+### 6. Aktualisierte Abhängigkeiten
+
+#### Demo-App (`package.json`)
+```json
+{
+    "dependencies": {
+        "@angular/animations": "^20.1.6",
+        "@angular/cdk": "^20.1.5",
+        "@angular/common": "^20.1.6",
+        "@angular/compiler": "^20.1.6",
+        "@angular/core": "^20.1.6",
+        "@angular/forms": "^20.1.6",
+        "@angular/platform-browser": "^20.1.6",
+        "@angular/platform-browser-dynamic": "^20.1.6",
+        "@angular/router": "^20.1.6",
+        "@ngx-translate/core": "^17.0.0",
+        "@ngx-translate/http-loader": "^17.0.0",
+        "@primeuix/themes": "^1.2.3",
+        "chart.js": "^4.5.0",
+        "flag-icons": "^7.5.0",
+        "primeflex": "^4.0.0",
+        "primeng": "^20.0.1",
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^20.1.5",
+        "@angular-eslint/builder": "20.1.1",
+        "@angular-eslint/eslint-plugin": "20.1.1",
+        "@angular-eslint/eslint-plugin-template": "^20.1.1",
+        "@angular-eslint/schematics": "20.1.1",
+        "@angular-eslint/template-parser": "20.1.1",
+        "@angular/cli": "~20.1.5",
+        "@angular/compiler-cli": "^20.1.6",
+        "@isyfact/eslint-plugin": "4.0.0",
+        "@ngneat/spectator": "^21.0.1",
+        "@stylistic/eslint-plugin": "^5.2.3",
+        "@types/jasmine": "~5.1.8",
+        "@types/node": "^24.2.1",
+        "@typescript-eslint/eslint-plugin": "^8.39.0",
+        "@typescript-eslint/parser": "^8.39.0",
+        "eslint": "^9.33.0",
+        "eslint-plugin-editorconfig": "^4.0.3",
+        "eslint-plugin-jsdoc": "^52.0.4",
+        "jasmine-core": "~5.9.0",
+        "karma": "^6.4.4",
+        "ng-mocks": "^14.13.5",
+        "ng-packagr": "^20.1.0",
+        "prettier": "^3.6.2",
+    }
+}
+```
+
+#### Bibliothek (`package.json`)
+```json
+{
+  "peerDependencies": {
+    "@angular/common": "^20.1.6",
+    "@angular/core": "^20.1.6",
+    "primeng": "^20.0.1",
+    "@primeuix/themes": "^1.2.3"
+  },
+}
+```
+
+### 8. Codequalität geprüft
+- **ESLint:** `npm run lint` → keine Fehler
+- **Prettier:** `npm run prettier:check` → bestanden
+
+---
+
+### 9. Tests durchgeführt
+- **Unit- & Integrationstests:** `npm run test` → alle Tests bestanden
+- **Manuelle Tests:** 
+  - UI geprüft
+  - Hauptfunktionalitäten erfolgreich validiert
+  - Keine kritischen Fehler festgestellt
+
+---
+
+### **Breaking Changes**
+
+#### Angular v20
+
+#### PrimeNG v20
+
+## Zusammenfassung
+- Migration auf Angular 20 & PrimeNG 20 erfolgreich durchgeführt
+- Veraltete Komponenten ersetzt, neue Features integriert
+- Theming modernisiert & Standalone-Ansatz umgesetzt
+- Abhängigkeiten, Tests & Qualitätssicherung auf aktuellem Stand
+- Alle Breaking Changes dokumentiert
+
+---
+
 # Update Log - 09.05.2025
 
 ## Migration auf Angular v19 & PrimeNG v19
@@ -6,7 +133,7 @@
 - Angular: v18 → **v19.2.9**
 - PrimeNG: v17 → **v19.1.2**
 - Core-Pakete & CLI aktualisiert
-- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/guides/migration) umgesetzt
+- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/migration/v19) umgesetzt
 
 ---
 

@@ -41,7 +41,7 @@ describe('Integration Tests: AppComponent', () => {
   });
 
   it('should display the user name', () => {
-    expect(spectator.component.userInfo?.displayName).toEqual('Max Mustermann');
+    expect(spectator.component.userInfo?.displayName).toEqual('Nutzer');
   });
 
   it('the hauptfenster component should not be null', () => {

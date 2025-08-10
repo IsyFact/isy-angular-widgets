@@ -616,7 +616,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should toggle isCollapsed to true when clicked', () => {
-    const panelButton = spectator.query('button.p-panel-toggler') as HTMLButtonElement;
+    const panelButton = spectator.query('button.p-panel-toggle-button') as HTMLButtonElement;
     panelButton.click();
     spectator.fixture.detectChanges();
     expect(spectator.component.isCollapsed).toBeTrue();

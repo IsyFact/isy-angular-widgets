@@ -76,7 +76,7 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
-Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
+Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` bzw. `app.ts` importiert:
 
 ```typescript
 // Other imports ...
@@ -123,7 +123,7 @@ import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
-import Material from '@primeng/themes/material';
+import Material from '@primeuix/themes/material';
 
 export const appConfig: ApplicationConfig = {
   providers: [

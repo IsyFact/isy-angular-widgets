@@ -161,7 +161,7 @@ describe('Integration Test: InputCharComponent', () => {
 
       it('should have outlined style when outlinedInputCharButton is true', () => {
         spectator = createComponent({
-          props: { outlinedInputCharButton: true }
+          props: {outlinedInputCharButton: true}
         });
 
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
@@ -170,7 +170,7 @@ describe('Integration Test: InputCharComponent', () => {
 
       it('should not have outlined style when outlinedInputCharButton is false', () => {
         spectator = createComponent({
-          props: { outlinedInputCharButton: false }
+          props: {outlinedInputCharButton: false}
         });
 
         const button = spectator.query('.input-char-button') as HTMLButtonElement;

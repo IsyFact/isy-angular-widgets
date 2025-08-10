@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output
+} from '@angular/core';
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
@@ -78,11 +88,14 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
    */
   private mutationObserver?: MutationObserver;
 
-  constructor(
-    public configService: WidgetsConfigService,
-    private readonly charService: CharacterService,
-    private readonly elementRef: ElementRef
-  ) {}
+  /**
+   * A service used to translate labels within the widgets library.
+   */
+  configService = inject(WidgetsConfigService);
+
+  private readonly charService = inject(CharacterService);
+
+  private readonly elementRef = inject(ElementRef);
 
   ngAfterViewInit(): void {
     // Observe changes in the DOM using MutationObserver

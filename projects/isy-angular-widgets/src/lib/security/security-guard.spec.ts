@@ -2,6 +2,7 @@ import {SecurityService} from './security-service';
 import {ActivatedRouteSnapshot, UrlSegment} from '@angular/router';
 import {AuthGuard} from './security-guard';
 import {createServiceFactory, createSpyObject, SpectatorService} from '@ngneat/spectator';
+import { firstValueFrom, of } from 'rxjs';
 
 /**
  * builds an activated route snapshot
@@ -36,7 +37,7 @@ describe('SecurityGuard: Integration Tests', () => {
 
   describe('SecurityGuard - with setting up roles and permissions', () => {
     const securityServiceSpy = createSpyObject(SecurityService);
-    securityServiceSpy.checkRoutePermission.andReturn(true);
+    securityServiceSpy.checkRoutePermission.and.returnValue(of(true));
 
     const createdService = createServiceFactory({
       service: AuthGuard,
@@ -49,9 +50,9 @@ describe('SecurityGuard: Integration Tests', () => {
       expect(spectator.service).toBeTruthy();
     });
 
-    it('should activate - with roles set up', () => {
-      const canActivateObservable = spectator.service.canActivate(snapshot);
-      expect(canActivateObservable).toBeTrue();
+    it('should activate - with roles set up', async () => {
+      const result = await firstValueFrom(spectator.service.canActivate(snapshot));
+      expect(result).toBeTrue();
     });
   });
 });

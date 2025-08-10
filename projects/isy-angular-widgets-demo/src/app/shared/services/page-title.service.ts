@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, NavigationEnd, Router, Event, RouterEvent} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
@@ -14,12 +14,12 @@ export class PageTitleService {
   liveRegion?: HTMLElement;
   requestFocusChange: Subject<string> = new Subject<string>();
 
-  constructor(
-    private readonly router: Router,
-    private readonly titleService: Title,
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly translate: TranslateService
-  ) {
+  private readonly router = inject(Router);
+  private readonly titleService = inject(Title);
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly translate = inject(TranslateService);
+
+  constructor() {
     this.createLiveRegion();
   }
 

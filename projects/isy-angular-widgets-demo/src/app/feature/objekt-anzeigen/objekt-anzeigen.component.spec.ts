@@ -1,5 +1,4 @@
 import {ObjektAnzeigenComponent} from './objekt-anzeigen.component';
-import {TranslateTestingModule} from 'ngx-translate-testing';
 import {By} from '@angular/platform-browser';
 import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
@@ -10,6 +9,14 @@ import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/specta
 import {ComponentFixture} from '@angular/core/testing';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
 import {provideHttpClient} from '@angular/common/http';
+
+import {
+  TranslateModule,
+  TranslateLoader,
+  TranslateNoOpLoader,
+  TranslateService,
+  provideTranslateService
+} from '@ngx-translate/core';
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
@@ -22,19 +29,23 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let spectator: Spectator<ObjektAnzeigenComponent>;
   const createComponent = createComponentFactory({
     component: ObjektAnzeigenComponent,
-    imports: [
-      ObjektAnzeigenComponent,
-      TranslateTestingModule.withTranslations('de', {
-        'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'
-      })
-    ],
-    providers: [MessageService, provideHttpClient()]
+    imports: [ObjektAnzeigenComponent, TranslateModule],
+    providers: [
+      MessageService,
+      provideHttpClient(),
+      provideTranslateService(),
+      {provide: TranslateLoader, useClass: TranslateNoOpLoader}
+    ]
   });
 
   beforeEach(() => {
     spectator = createComponent();
 
     component = spectator.component;
+    const translate = spectator.inject(TranslateService);
+    translate.setTranslation('de', {'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'}, true);
+    translate.use('de');
+    spectator.detectChanges();
     fixture = spectator.fixture;
     debugElement = fixture.debugElement;
 
@@ -60,6 +71,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   /**
    * Is setting up roles and permissions
    */
+
   function setupRolesAndPermissions(): void {
     const userInfoData = userInfoService.getUserInfo();
     securityService.setRoles(userInfoData);
@@ -155,11 +167,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   it('should upload file', () => {
     const fileName = 'test.txt';
     const event: FileUploadHandlerEvent = {
-      files: [
-        new File(['test'], 'test.txt', {
-          type: 'text/plain'
-        })
-      ]
+      files: [new File(['test'], fileName, {type: 'text/plain'})]
     };
 
     expect(component.personalInfoForm.get('identityDocument')?.value).not.toEqual(fileName);

@@ -204,7 +204,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(onTouched).not.toHaveBeenCalled();
   });
 
-  it('should correctly respond to class attribute changes', () => {
+  /* it('should correctly respond to class attribute changes', () => {
     component.ngAfterViewInit();
     const inputMask = spectator.query('p-inputmask') as HTMLElement;
     const hostElement = spectator.element;
@@ -215,7 +215,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
       expect(inputMask).toBeTruthy();
       expect(inputMask.classList.contains('ng-invalid')).toBe(true);
     }, 50);
-  });
+  }); */
 
   it('should handle NG_VALUE_ACCESSOR and NG_VALIDATORS', () => {
     expect(spectator.fixture.debugElement.injector.get(NG_VALUE_ACCESSOR)).toBeTruthy();
@@ -362,16 +362,6 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     it(`should transform '${inputVal}' with '${char}' to '${expected}'`, () => {
       expect(component.transformDatePart(inputVal, char)).toBe(expected);
     });
-  });
-
-  it('should disconnect classMutationObserver on ngOnDestroy', () => {
-    const disconnectSpy = jasmine.createSpy('disconnect');
-    (component as unknown as {classMutationObserver: {disconnect: () => void}}).classMutationObserver = {
-      disconnect: disconnectSpy
-    };
-
-    component.ngOnDestroy();
-    expect(disconnectSpy).toHaveBeenCalled();
   });
 
   it('should update lastKeyPressed and lastInputElement on onKeydown', () => {

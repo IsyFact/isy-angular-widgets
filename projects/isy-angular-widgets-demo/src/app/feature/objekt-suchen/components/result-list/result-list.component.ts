@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Person, Personalien} from '../../../../shared/model/person';
 import {ResultColumn, ResultFilter} from '../../model/result-column';
 import {resultColumn, state, gender} from '../../data/result-column';
@@ -56,7 +56,9 @@ export class ResultListComponent implements OnInit, OnDestroy {
   state: ResultFilter[] = [...state];
   gender: ResultFilter[] = [...gender];
 
-  constructor(private readonly translate: TranslateService) {
+  private readonly translate = inject(TranslateService);
+
+  constructor() {
     this.langChangeSubscription = new Subscription();
   }
 

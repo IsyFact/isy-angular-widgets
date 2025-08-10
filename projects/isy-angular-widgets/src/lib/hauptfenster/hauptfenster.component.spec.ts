@@ -6,22 +6,6 @@ import {MockComponents} from 'ng-mocks';
 import {HauptfensterComponent} from './hauptfenster.component';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
-import { SkipLinksComponent } from '@isy-angular-widgets/public-api';
-
-@Component({
-  template: `
-    <isy-hauptfenster [title]="title" [userInfo]="userInfo">
-      <div Titelzeile>
-        <h1 class="custom-title">Titel inside H1!</h1>
-      </div>
-    </isy-hauptfenster>
-  `,
-  imports: [HauptfensterComponent, ButtonModule]
-})
-class HauptFensterWrapperComponent {
-  title?: string;
-  userInfo?: UserInfo;
-}
 
 describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
@@ -201,9 +185,9 @@ describe('Integration Test: HauptfensterComponent', () => {
 
   it('should display custom title if titel input is used', () => {
     const customTitle = 'Custom Title';
-    
+
     spectator = createComponent({
-      props: { title: customTitle }
+      props: {title: customTitle}
     });
 
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
@@ -211,8 +195,8 @@ describe('Integration Test: HauptfensterComponent', () => {
   });
 
   it('should have outlined style when outlinedLogoutButton is true', () => {
-     spectator = createComponent({
-      props: { outlinedLogoutButton: true }
+    spectator = createComponent({
+      props: {outlinedLogoutButton: true}
     });
 
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button button') as HTMLButtonElement;
@@ -221,7 +205,7 @@ describe('Integration Test: HauptfensterComponent', () => {
 
   it('should not have outlined style when outlinedLogoutButton is false', () => {
     spectator = createComponent({
-      props: { outlinedLogoutButton: false }
+      props: {outlinedLogoutButton: false}
     });
 
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button button') as HTMLButtonElement;

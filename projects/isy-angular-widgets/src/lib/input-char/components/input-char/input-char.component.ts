@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, inject, Input, OnChanges, Output, ViewChild} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {Zeichenobjekt} from '../../model/model';
@@ -95,10 +95,12 @@ export class InputCharComponent implements OnChanges {
    */
   allCharacters: Zeichenobjekt[] = [];
 
-  constructor(
-    private readonly charService: CharacterService,
-    public configService: WidgetsConfigService
-  ) {}
+  private readonly charService = inject(CharacterService);
+
+  /**
+   * A service used to translate labels within the widgets library.
+   */
+  configService = inject(WidgetsConfigService);
 
   ngOnChanges(): void {
     this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);

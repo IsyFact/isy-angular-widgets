@@ -1,4 +1,4 @@
-import {AfterContentChecked, ChangeDetectorRef, Component, Input} from '@angular/core';
+import {AfterContentChecked, ChangeDetectorRef, Component, inject, Input} from '@angular/core';
 import {Address} from '../../shared/model/person';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -76,12 +76,12 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
 
   @Input() person = initializedPerson;
 
-  constructor(
-    public translate: TranslateService,
-    private readonly fb: FormBuilder,
-    private readonly messageService: MessageService,
-    private readonly changeDetector: ChangeDetectorRef
-  ) {
+  translate = inject(TranslateService);
+  private readonly fb = inject(FormBuilder);
+  private readonly messageService = inject(MessageService);
+  private readonly changeDetector = inject(ChangeDetectorRef);
+
+  constructor() {
     const personalien = this.person.personalien;
     const addresses = personalien.addresses;
     const addressGroup = addresses ? this.createNewAddressFormGroup(addresses[0]) : this.createNewAddressFormGroup();

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {MegaMenuItem} from 'primeng/api';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
@@ -114,5 +114,8 @@ export class HauptfensterComponent {
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
-  constructor(public configService: WidgetsConfigService) {}
+  /**
+   * A service used to translate labels within the widgets library.
+   */
+  configService = inject(WidgetsConfigService);
 }
