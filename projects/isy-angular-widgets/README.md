@@ -76,7 +76,7 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
-Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` bzw. `app.ts` importiert:
+Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
 
 ```typescript
 // Other imports ...
@@ -154,22 +154,18 @@ npm install @ngx-translate/core @ngx-translate/http-loader --save
 
 Im nächsten Schritt können die Übersetzungen von `@ngx-translate` in PrimeNG und `isy-angular-widgets` eingebunden werden.
 Dazu müssen zunächst folgende Importe bereitgestellt werden, z.B. in `appConfig`: 
-`provideHttpClient`, `HttpClient`, `provideTranslateService`, `TranslateLoader`, `TranslateHttpLoader`
+`provideHttpClient`, `provideTranslateService`, `provideTranslateLoader`, `provideTranslateHttpLoader`, `TranslateHttpLoader`
 
 ```typescript
 // Other imports ...
 import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
-import {provideAnimations } from '@angular/platform-browser/animations';
+import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
-import {provideHttpClient, HttpClient} from '@angular/common/http';
-import {provideTranslateService, TranslateLoader } from '@ngx-translate/core'
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import {provideHttpClient} from '@angular/common/http';
+import {provideTranslateHttpLoader, TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {provideTranslateLoader, provideTranslateService} from '@ngx-translate/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -178,12 +174,11 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideIsyFactTheme(),
     provideHttpClient(),
-    provideTranslateService({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+    provideTranslateService(),
+    provideTranslateLoader(TranslateHttpLoader),
+    provideTranslateHttpLoader({
+      prefix: './assets/i18n/',
+      suffix: '.json'
     })
   ]
 };
@@ -195,7 +190,7 @@ Anschließend lassen sich die Übersetzungen für PrimeNG und `isy-angular-widge
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HauptfensterComponent, WidgetsConfigService} from '@isyfact/isy-angular-widgets';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {PrimeNG} from 'primeng/api';
+import {PrimeNG} from 'primeng/config';
 import {MenuModule} from 'primeng/menu';
 import {PanelModule} from 'primeng/panel';
 import {Subscription} from 'rxjs';
@@ -211,14 +206,14 @@ export class AppComponent implements OnInit, OnDestroy {
   primeNgSub?: Subscription;
   widgetSub?: Subscription;
 
-  constructor(
-    private readonly primeng: PrimeNG,
-    private readonly widgetConfig: WidgetsConfigService,
-    private readonly translateService: TranslateService
-  ) {}
+  private readonly primeng = inject(PrimeNG);
+  private readonly widgetsConfigService = inject(WidgetsConfigService);
+  readonly translateService = inject(TranslateService);
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.translateService.setDefaultLang('en');
+    this.translateService.setFallbackLang('en');
 
     this.translate('de');
   }
@@ -230,7 +225,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((res) => this.primeng.setTranslation(res));
     this.widgetSub = this.translateService
       .get('isyAngularWidgets')
-      .subscribe((res) => this.widgetConfig.setTranslation(res));
+      .subscribe((res) => this.widgetsConfigService.setTranslation(res));
   }
 
   ngOnDestroy(): void {

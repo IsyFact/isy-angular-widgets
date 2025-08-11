@@ -3,7 +3,7 @@ import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
 import {addPackageToPackageJson} from './package-config';
 
 // Node Buffer (isyTranslation) is not supported in Browser context but schematics is executed with node and not with browser
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-call */
 
 interface MyBuild {
   options: {

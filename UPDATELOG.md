@@ -10,7 +10,36 @@
 
 ---
 
-### 2. Änderungen in **_isy-angular-widgets_** (Bibliothek)
+### 2. **Breaking Changes**
+
+#### Umstellung auf Flat Config-Format (ESLint)
+- Das isy-eslint-plugin nutzt nun das Flat Config-Format, was eine Umstellung der Projektkonfiguration auf eslint.config.js erfordert
+- Die Nutzung von .eslintrc.js oder .eslintrc.json ist nicht mehr möglich
+- Die Konfiguration muss auf eslint.config.js umgestellt werden und ist im [Migration Guide](https://eslint.style/guide/migration) nachzulesen
+
+#### Umstellung auf inject()
+- Einführung von inject() statt der traditionellen DI im Konstruktor in Angular
+- Anpassungen an bestehenden Komponenten oder Services sind möglicherweise erforderlich
+- Falls die Umstellung auf [inject()](https://angular.dev/reference/migrations/inject-function) nicht gewünscht ist, kann dies durch die Regel @angular-eslint/no-inject-in-constructor: 'off' in der ESLint-Konfiguration deaktiviert werden 
+
+####  Ersetzung von @primeng/themes durch @primeuix/themes
+- Das Ersetzen von @primeng/themes durch @primeuix/themes erfordert Anpassungen an Imports, Styles und Konfigurationen
+- Paketname, API, Struktur und Build-Konfiguration ändern sich. Möglicherweise müssen auch andere Abhängigkeiten aktualisiert werden
+- Imports und Konfigurationen auf das neue Paket anpassen
+
+#### Upgrade von ngx-translate von v16 auf v17
+- Das Upgrade auf Version 17 könnte API-Änderungen oder neue Konfigurationen beinhalten
+- Es könnten Anpassungen erforderlich sein
+- Details und spezifische Breaking Changes sind im [Migration Guide](https://ngx-translate.org/getting-started/migration-guide/) nachzulesen
+
+#### Upgrade von Spectator von v19.6.2 auf v21.0.1
+- Das Upgrade könnte API-Änderungen oder neue Funktionen beinhalten
+- Möglicherweise sind Anpassungen erforderlich
+- Weitere Details und spezifische Breaking Changes sind im [Changelog](https://github.com/ngneat/spectator/blob/master/CHANGELOG.md) nachzulesen
+
+---
+
+### 3. Änderungen in **_isy-angular-widgets_** (Bibliothek)
 
 #### Paketkonfiguration (`index.ts`)
 ```ts
@@ -20,19 +49,9 @@ addPackageToPackageJson(tree, 'primeng', '^20.0.1');
 addPackageToPackageJson(tree, '@primeuix/themes', '^1.2.3');
 ```
 
-#### Überarbeitete Dateien (Auswahl)
+---
 
-#### Neue Komponenten & Funktionen
-
-### 3. Änderungen in **_isy-angular-widgets-demo_** (Demo-App)
-
-#### Überarbeitete Dateien (Auswahl)
-
-### 4. PrimeNG-Komponenten ersetzt/aktualisiert
-
-### 5. Technische Anpassungen
-
-### 6. Aktualisierte Abhängigkeiten
+### 4. Aktualisierte Abhängigkeiten
 
 #### Demo-App (`package.json`)
 ```json
@@ -95,13 +114,22 @@ addPackageToPackageJson(tree, '@primeuix/themes', '^1.2.3');
 }
 ```
 
-### 8. Codequalität geprüft
+---
+
+### 5. CI/CD
+- GitHub Actions Workflow aktualisiert:
+  - `actions/checkout@v4` und `actions/setup-node@v4`
+  - Node.js Version auf `20.x` angehoben
+
+---
+
+### 6. Codequalität geprüft
 - **ESLint:** `npm run lint` → keine Fehler
 - **Prettier:** `npm run prettier:check` → bestanden
 
 ---
 
-### 9. Tests durchgeführt
+### 7. Tests durchgeführt
 - **Unit- & Integrationstests:** `npm run test` → alle Tests bestanden
 - **Manuelle Tests:** 
   - UI geprüft
@@ -110,18 +138,21 @@ addPackageToPackageJson(tree, '@primeuix/themes', '^1.2.3');
 
 ---
 
-### **Breaking Changes**
-
-#### Angular v20
-
-#### PrimeNG v20
-
 ## Zusammenfassung
-- Migration auf Angular 20 & PrimeNG 20 erfolgreich durchgeführt
-- Veraltete Komponenten ersetzt, neue Features integriert
-- Theming modernisiert & Standalone-Ansatz umgesetzt
-- Abhängigkeiten, Tests & Qualitätssicherung auf aktuellem Stand
-- Alle Breaking Changes dokumentiert
+
+### Breaking Changes:
+- Flat Config-Format: Umstellung auf eslint.config.js, .eslintrc.js und .eslintrc.json nicht mehr unterstützt.
+- inject(): Umstellung auf inject() in Angular, kann mit @angular-eslint/no-inject-in-constructor: 'off' deaktiviert werden.
+- @primeng/themes → @primeuix/themes: Anpassungen an Imports, Styles und Konfiguration erforderlich.
+- ngx-translate Update: API-Änderungen in Version 17, Migration Guide prüfen.
+- Spectator Update: API-Änderungen in Version 21, Changelog prüfen.
+
+### Weitere Änderungen:
+- Migration auf Angular 20 & PrimeNG 20: Erfolgreich durchgeführt.
+- Veraltete Komponenten ersetzt, neue Features integriert.
+- GitHub Actions Workflow aktualisiert
+- Abhängigkeiten, Tests & Qualitätssicherung auf aktuellem Stand: Alle aktualisiert.
+- Alle Breaking Changes dokumentiert: Vollständige Dokumentation für Migration.
 
 ---
 

@@ -2,7 +2,7 @@ import {SecurityService} from './security-service';
 import {ActivatedRouteSnapshot, UrlSegment} from '@angular/router';
 import {AuthGuard} from './security-guard';
 import {createServiceFactory, createSpyObject, SpectatorService} from '@ngneat/spectator';
-import { firstValueFrom, of } from 'rxjs';
+import {firstValueFrom, of} from 'rxjs';
 
 /**
  * builds an activated route snapshot

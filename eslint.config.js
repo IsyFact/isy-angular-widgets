@@ -6,13 +6,13 @@ const angularTemplateParser = require('@angular-eslint/template-parser');
 const {configs} = require('@isyfact/eslint-plugin');
 
 module.exports = (async () => {
-  // recommended ist bei dir eine async factory → daher await
+  // 'recommended' is an async factory → hence, we need to await it
   const recommendedCfg = await configs.recommended();
 
   return [
     {ignores: ['**/node_modules/*', 'node_modules/']},
 
-    // isyfact-Configs nur auf TS-Dateien anwenden
+    // Apply isyfact configurations only to TS files
     ...recommendedCfg,
 
     // Library: TS
@@ -83,7 +83,9 @@ module.exports = (async () => {
       },
       plugins: {'@angular-eslint': angular},
       rules: {
-        ...angular.configs.recommended.rules
+        ...angular.configs.recommended.rules,
+        '@angular-eslint/directive-selector': ['error', {type: 'attribute', prefix: 'demo', style: 'camelCase'}],
+        '@angular-eslint/component-selector': ['error', {type: 'element', prefix: 'demo', style: 'kebab-case'}]
       }
     },
 
@@ -98,7 +100,7 @@ module.exports = (async () => {
       }
     },
 
-    // Tests global aus isyfact
+    // Global tests from isyfact
     ...configs.test
   ];
 })();
