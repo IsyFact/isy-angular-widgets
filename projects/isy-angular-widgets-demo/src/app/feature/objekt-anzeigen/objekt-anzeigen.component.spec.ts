@@ -71,7 +71,6 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   /**
    * Is setting up roles and permissions
    */
-
   function setupRolesAndPermissions(): void {
     const userInfoData = userInfoService.getUserInfo();
     securityService.setRoles(userInfoData);

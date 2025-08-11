@@ -2,6 +2,8 @@ const tsParser = require('@typescript-eslint/parser');
 const angular = require('@angular-eslint/eslint-plugin');
 const angularTemplate = require('@angular-eslint/eslint-plugin-template');
 const angularTemplateParser = require('@angular-eslint/template-parser');
+const jsdoc = require('eslint-plugin-jsdoc');
+const editorconfig = require('eslint-plugin-editorconfig');
 
 const {configs} = require('@isyfact/eslint-plugin');
 
@@ -29,9 +31,15 @@ module.exports = (async () => {
           sourceType: 'module'
         }
       },
-      plugins: {'@angular-eslint': angular},
+      plugins: {
+        '@angular-eslint': angular,
+        jsdoc,
+        editorconfig,
+      },
       rules: {
         ...angular.configs.recommended.rules,
+        ...jsdoc.configs['recommended-typescript'].rules,
+        ...editorconfig.configs.all?.rules,
         '@angular-eslint/directive-selector': ['error', {type: 'attribute', prefix: 'isy', style: 'camelCase'}],
         '@angular-eslint/component-selector': ['error', {type: 'element', prefix: 'isy', style: 'kebab-case'}]
       }
@@ -81,9 +89,15 @@ module.exports = (async () => {
           sourceType: 'module'
         }
       },
-      plugins: {'@angular-eslint': angular},
+      plugins: {
+        '@angular-eslint': angular,
+        jsdoc,
+        editorconfig,
+      },
       rules: {
         ...angular.configs.recommended.rules,
+        ...jsdoc.configs['recommended-typescript'].rules,
+        ...editorconfig.configs.all?.rules,
         '@angular-eslint/directive-selector': ['error', {type: 'attribute', prefix: 'demo', style: 'camelCase'}],
         '@angular-eslint/component-selector': ['error', {type: 'element', prefix: 'demo', style: 'kebab-case'}]
       }
