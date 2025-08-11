@@ -34,7 +34,7 @@ module.exports = (async () => {
       plugins: {
         '@angular-eslint': angular,
         jsdoc,
-        editorconfig,
+        editorconfig
       },
       rules: {
         ...angular.configs.recommended.rules,
@@ -92,7 +92,7 @@ module.exports = (async () => {
       plugins: {
         '@angular-eslint': angular,
         jsdoc,
-        editorconfig,
+        editorconfig
       },
       rules: {
         ...angular.configs.recommended.rules,
