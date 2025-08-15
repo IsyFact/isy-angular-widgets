@@ -48,6 +48,9 @@ jobs:
           -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
           -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
           -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
+          -Dsonar.javascript.lcov.reportPaths=coverage/isy-angular-widgets/lcov.info
+          -Dsonar.typescript.lcov.reportPaths=coverage/isy-angular-widgets/lcov.info
+          -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.config.{js,cjs,mjs,ts},**/*.module.ts,**/test.ts,**/eslint.config.{js,cjs,mjs,ts},projects/isy-angular-widgets/schematics/ng-add/index.ts
           -Dsonar.coverage.exclusions=eslint.config.js,projects/isy-angular-widgets/schematics/ng-add/index.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
