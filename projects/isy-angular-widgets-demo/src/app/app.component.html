@@ -15,7 +15,7 @@ like in the following example. The side bar regions can be disabled with corresp
     <p-select
       id="language-selector"
       class="ml-2"
-      [options]="translate.getLangs()"
+      [options]="langs"
       [(ngModel)]="selectedLanguage"
       (onChange)="changeLanguage($event.value)"
       [ariaLabel]="'isyAngularWidgetsDemo.settings.languages.label' | translate"
@@ -42,18 +42,10 @@ like in the following example. The side bar regions can be disabled with corresp
       dataKey="role"
       optionValue="permission"
       [ariaLabel]="'isyAngularWidgetsDemo.settings.role' | translate"
-      [options]="[
-        {role: 'Admin', permission: 'admin'},
-        {role: 'User', permission: 'user'}
-      ]"
+      [(ngModel)]="selectedPermission"
+      [options]="roleOptions"
       (onChange)="selectPermission($event.value)"
     >
-      @if (userInfo.roles) {
-        <!--  Workaround since PrimeNG 16.7.x is not able to display optionValue -->
-        <ng-template pTemplate="selectedItem">
-          <span>{{ userInfo.roles[0] }}</span>
-        </ng-template>
-      }
     </p-select>
   </div>
 

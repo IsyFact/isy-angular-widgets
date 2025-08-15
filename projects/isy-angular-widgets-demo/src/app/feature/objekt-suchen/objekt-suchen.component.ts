@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {Person, Personalien, PersonId} from '../../shared/model/person';
@@ -163,12 +163,12 @@ export class ObjektSuchenComponent {
    */
   isCollapsed: boolean = false;
 
-  constructor(
-    public personService: PersonenService,
-    private readonly messageService: MessageService,
-    private readonly dateService: DateService,
-    public translate: TranslateService
-  ) {
+  personService = inject(PersonenService);
+  private readonly messageService = inject(MessageService);
+  private readonly dateService = inject(DateService);
+  translate = inject(TranslateService);
+
+  constructor() {
     this.onLanguageChange();
 
     this.personen$ = of([]);

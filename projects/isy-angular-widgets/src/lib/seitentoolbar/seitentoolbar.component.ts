@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {Router, RouterModule} from '@angular/router';
@@ -34,7 +34,7 @@ export class SeitentoolbarComponent {
    */
   @Input() sidebarHomeRoute?: string = '/';
 
-  constructor(private readonly router: Router) {}
+  private readonly router = inject(Router);
 
   /**
    * Method to navigate to the homeRoute.

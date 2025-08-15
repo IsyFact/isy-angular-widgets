@@ -1,11 +1,11 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
   EventEmitter,
   forwardRef,
+  inject,
+  Injector,
   Input,
-  OnDestroy,
   OnInit,
   Output,
   ViewChild
@@ -16,6 +16,7 @@ import {
   FormsModule,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  NgControl,
   ValidationErrors,
   Validator
 } from '@angular/forms';
@@ -69,7 +70,7 @@ const CURSOR_SHIFT = {
   ],
   imports: [FormsModule, InputTextModule, InputMaskModule]
 })
-export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit, OnDestroy {
+export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit {
   /**
    * A disabled date picker can't be opened.
    */
@@ -123,46 +124,26 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @ViewChild(InputMask) field?: InputMask;
 
-  @ViewChild('p-inputmask') inputMask!: ElementRef;
-
-  classMutationObserver?: MutationObserver;
   lastKeyPressed: string = '';
   lastInputElement: HTMLInputElement | null = null;
 
   /**
-   * Default constructor
-   * @param incompleteDateService The service that contains date transformation logic
-   * @param element The ElementRef representing the host element
+   * The service that contains date transformation logic
    */
-  constructor(
-    private readonly incompleteDateService: IncompleteDateService,
-    private readonly element: ElementRef
-  ) {}
+  private readonly incompleteDateService = inject(IncompleteDateService);
 
-  ngAfterViewInit(): void {
-    const element = this.element.nativeElement as HTMLElement;
+  private readonly injector = inject(Injector);
 
-    // Observe changes in the DOM using MutationObserver
-    this.classMutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        // Check if the 'class' attribute has changed
-        if (mutation.attributeName === 'class') {
-          const isInvalid = element.className.includes('ng-invalid');
-          element.querySelector('p-inputmask')?.classList.remove(isInvalid ? 'ng-valid' : 'ng-invalid');
-          if (isInvalid) element.querySelector('p-inputmask')?.classList.add('ng-invalid', 'ng-dirty');
-        }
-      });
-    });
-
-    // Start observing the target element for attribute changes
-    this.classMutationObserver.observe(element, {attributes: true});
-
-    if (this.transferISO8601) this.onChange(this.inputValue);
+  private get ngControl(): NgControl | null {
+    return this.injector.get(NgControl, null, {self: true});
   }
 
-  ngOnDestroy(): void {
-    // Disconnect the MutationObserver to avoid memory leaks
-    this.classMutationObserver?.disconnect();
+  get isInvalid(): boolean {
+    return !!this.ngControl?.invalid && (!!this.ngControl?.touched || !!this.ngControl?.dirty);
+  }
+
+  ngAfterViewInit(): void {
+    if (this.transferISO8601) this.onChange(this.inputValue);
   }
 
   /**

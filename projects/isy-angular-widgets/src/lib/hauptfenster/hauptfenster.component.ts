@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {MegaMenuItem} from 'primeng/api';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
 import {ButtonModule} from 'primeng/button';
-import {CommonModule} from '@angular/common';
 import {MegaMenuModule} from 'primeng/megamenu';
 import {SkipTarget} from './model/model';
 import {SkipLinksComponent} from '../skip-links/skip-links.component';
@@ -26,7 +25,7 @@ import {SkipLinksComponent} from '../skip-links/skip-links.component';
   selector: 'isy-hauptfenster',
   templateUrl: './hauptfenster.component.html',
   styleUrls: ['./hauptfenster.component.scss'],
-  imports: [ButtonModule, CommonModule, MegaMenuModule, SkipLinksComponent]
+  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent]
 })
 export class HauptfensterComponent {
   /**
@@ -115,5 +114,8 @@ export class HauptfensterComponent {
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
-  constructor(public configService: WidgetsConfigService) {}
+  /**
+   * A service used to translate labels within the widgets library.
+   */
+  configService = inject(WidgetsConfigService);
 }

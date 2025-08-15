@@ -3,12 +3,19 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from '@angular
 import {markFormAsDirty} from '../../../../shared/validation/form-helper';
 import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
-import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {MockModule} from 'ng-mocks';
 import {required} from '../../../../shared/validation/validator';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
+
+import {
+  TranslateModule,
+  TranslateLoader,
+  TranslateNoOpLoader,
+  TranslateService,
+  provideTranslateService
+} from '@ngx-translate/core';
 
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
@@ -19,16 +26,13 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   let spectator: Spectator<PersoenlicheInformationenComponent>;
   const createComponent = createComponentFactory({
     component: PersoenlicheInformationenComponent,
-    imports: [
-      TranslateTestingModule.withTranslations('de', {
-        'isyAngularWidgetsDemo.labels.vorname': 'Vorname',
-        'isyAngularWidgetsDemo.labels.nachname': 'Nachname',
-        'isyAngularWidgetsDemo.labels.gender': 'Geschlecht'
-      }),
-      MockModule(ReactiveFormsModule)
-    ],
+    imports: [TranslateModule, MockModule(ReactiveFormsModule)],
     declarations: [FormWrapperComponent, FormControlPipe],
-    providers: [{provide: FormBuilder, useValue: formBuilder}]
+    providers: [
+      {provide: FormBuilder, useValue: formBuilder},
+      provideTranslateService(),
+      {provide: TranslateLoader, useClass: TranslateNoOpLoader}
+    ]
   });
 
   beforeEach(() => {
@@ -41,6 +45,19 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
         })
       }
     });
+
+    const translate = spectator.inject(TranslateService);
+    translate.setTranslation(
+      'de',
+      {
+        'isyAngularWidgetsDemo.labels.vorname': 'Vorname',
+        'isyAngularWidgetsDemo.labels.nachname': 'Nachname',
+        'isyAngularWidgetsDemo.labels.gender': 'Geschlecht'
+      },
+      true
+    );
+    translate.use('de');
+
     component = spectator.component;
     component.form = initPersoenlicheInformationenForm(person);
     markFormAsDirty(component.form);

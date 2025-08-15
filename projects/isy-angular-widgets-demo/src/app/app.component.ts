@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, DOCUMENT, inject} from '@angular/core';
 import {UserInfo} from '@isy-angular-widgets/api/userinfo';
 import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
@@ -11,7 +11,6 @@ import {MenuTranslationService} from './shared/services/menu-translation.service
 import {WidgetsTranslation} from '@isy-angular-widgets/i18n/widgets-translation';
 import {WidgetsConfigService} from '@isy-angular-widgets/i18n/widgets-config.service';
 import {permissions} from './app.permission';
-import {CommonModule, DOCUMENT} from '@angular/common';
 import {PageTitleService} from './shared/services/page-title.service';
 import {NavigationEnd, Router, RouterEvent, Event, RouterModule} from '@angular/router';
 import {PrimeNG} from 'primeng/config';
@@ -37,7 +36,6 @@ import {PanelMenuModule} from 'primeng/panelmenu';
     TranslateModule,
     HauptfensterComponent,
     SeitentoolbarComponent,
-    CommonModule,
     PanelMenuModule
   ],
   providers: [MessageService]
@@ -45,29 +43,27 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 export class AppComponent implements OnInit, OnDestroy {
   items: MegaMenuItem[] = [];
   sidebarItems: MenuItem[] = [];
-  userInfo: UserInfo = {
-    displayName: 'Max Mustermann'
-  };
+  userInfo: UserInfo = {};
   primeNGI18nSubscription: Subscription;
   isyAngularWidgetsI18nSubscription: Subscription;
   selectedLanguage: string = 'de';
   focusHasBeenSet?: boolean;
-  showDashboardOutlets = false;
+  showDashboardOutlets = true;
 
-  constructor(
-    private readonly securityService: SecurityService,
-    private readonly userInfoPublicService: UserInfoPublicService,
-    public translate: TranslateService,
-    private readonly primeng: PrimeNG,
-    private readonly widgetsConfigService: WidgetsConfigService,
-    private readonly menuTranslationService: MenuTranslationService,
-    public pageTitleService: PageTitleService,
-    public router: Router,
-    private readonly cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private readonly document: Document
-  ) {
+  private readonly securityService = inject(SecurityService);
+  private readonly userInfoPublicService = inject(UserInfoPublicService);
+  readonly translate = inject(TranslateService);
+  private readonly primeng = inject(PrimeNG);
+  private readonly widgetsConfigService = inject(WidgetsConfigService);
+  private readonly menuTranslationService = inject(MenuTranslationService);
+  readonly pageTitleService = inject(PageTitleService);
+  readonly router = inject(Router);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly document = inject(DOCUMENT);
+
+  constructor() {
     // Add translation
-    translate.addLangs(['de', 'en']);
+    this.translate.addLangs(['de', 'en']);
     this.translate.use(this.selectedLanguage);
 
     // Set PrimeNG translation
@@ -142,8 +138,22 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  get langs(): string[] {
+    return [...this.translate.getLangs()];
+  }
+
+  selectedPermission: string = '';
+
+  roleOptions: {role: string; permission: string}[] = [
+    {role: 'Admin', permission: 'admin'},
+    {role: 'User', permission: 'user'}
+  ];
+
   ngOnInit(): void {
-    this.securityService.setRoles(this.userInfoPublicService.getUserInfo());
+    this.userInfo = this.userInfoPublicService.getUserInfo();
+    this.securityService.setRoles(this.userInfo);
+
+    this.selectedPermission = this.userInfo.roles && this.userInfo.roles.length > 0 ? this.userInfo.roles[0] : '';
 
     // Permission to role mapping could also be loaded from server or a file
     this.securityService.setPermissions(permissions);

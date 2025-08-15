@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterContentInit, Component, inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {barChartData, lineChartData, lineStyleChartData, stackedChartData} from './data/chart-data';
 import {widgetBackgroundColors} from './data/menu-colors';
 import {widgetMenuItems} from './data/menus';
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit, AfterContentInit {
 
   chartData = [barChartData, lineChartData, lineStyleChartData, stackedChartData];
 
-  constructor(public translate: TranslateService) {}
+  translate = inject(TranslateService);
 
   ngAfterContentInit(): void {
     this.getChartLabels();

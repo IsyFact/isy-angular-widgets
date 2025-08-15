@@ -23,13 +23,7 @@ const stepperItems: MenuItem[] = [
   }
 ];
 const stepsNumber: number = stepperItems.length;
-
-const width = 50;
-const height = 30;
-const headerTitle = 'Wizard Title';
-const childrenLabels = ['Auswahl 1', 'Auswahl 2', 'Auswahl 3'];
 const startIndex = 0;
-
 const backButtonDeclaration = '#back-button';
 const nextButtonDeclaration = '#next-button';
 const saveButtonDeclaration = '#save-button';
@@ -38,20 +32,25 @@ const closeButtonDeclaration = '#close-button';
 @Component({
   template: ` <isy-wizard
     #wizard
-    [width]="${width}"
-    [height]="${height}"
-    [headerTitle]="'${headerTitle}'"
+    [width]="width"
+    [height]="height"
+    [headerTitle]="headerTitle"
     [isVisible]="true"
     [allowNext]="false"
   >
-    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[0]}'"></isy-incomplete-date>
-    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[1]}'"></isy-incomplete-date>
-    <isy-incomplete-date *isyWizardDirective="'${childrenLabels[childrenLabels.length - 1]}'"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="childrenLabels[0]"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="childrenLabels[1]"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="childrenLabels[childrenLabels.length - 1]"></isy-incomplete-date>
   </isy-wizard>`,
   imports: [WizardComponent, IncompleteDateComponent, WizardDirective]
 })
 class TestComponent {
   @ViewChild('wizard') wizard!: WizardComponent;
+
+  width = 50;
+  height = 30;
+  headerTitle = 'Wizard Title';
+  childrenLabels = ['Auswahl 1', 'Auswahl 2', 'Auswahl 3'];
 }
 
 let wizard: WizardComponent;
@@ -272,8 +271,8 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
   it('should have expected width and height', () => {
     expect(wizard).toBeTruthy();
-    expect(wizard.width).toEqual(width);
-    expect(wizard.height).toEqual(height);
+    expect(wizard.width).toEqual(spectator.component.width);
+    expect(wizard.height).toEqual(spectator.component.height);
   });
 
   it('should have available ContentChildren', () => {
@@ -281,7 +280,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have the correct number of content children', () => {
-    expect(contentChildren.length).toEqual(childrenLabels.length);
+    expect(contentChildren.length).toEqual(spectator.component.childrenLabels.length);
   });
 
   it('should not be saved on init', () => {
@@ -295,7 +294,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have the correct number of available steps', () => {
-    expect(wizard.items.length).toEqual(childrenLabels.length);
+    expect(wizard.items.length).toEqual(spectator.component.childrenLabels.length);
   });
 
   it('should be closable by default', () => {

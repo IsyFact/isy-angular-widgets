@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {SkipTarget} from './model/model';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
@@ -22,7 +22,10 @@ export class SkipLinksComponent {
   @Input() links: SkipTarget[] = [];
   @Input() ariaLabel?: string;
 
-  constructor(public configService: WidgetsConfigService) {}
+  /**
+   * A service used to translate labels within the widgets library.
+   */
+  configService = inject(WidgetsConfigService);
 
   focusTarget(event: Event, target: string): void {
     event.preventDefault();

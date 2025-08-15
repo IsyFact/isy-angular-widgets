@@ -1,4 +1,4 @@
-import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
+import {Directive, inject, Input, TemplateRef, ViewContainerRef} from '@angular/core';
 import {SecurityService} from './security-service';
 
 /**
@@ -12,16 +12,19 @@ import {SecurityService} from './security-service';
 })
 export class SecurityDirective {
   /**
-   * @param template Represents an embedded template that can be used to instantiate embedded views.
-   * @param viewContainer Represents a container where one or more views can be attached to a component.
-   * @param securityService A service that can be configured with permission configuration and return permissions for certain elements.
-   * @internal
+   * Represents an embedded template that can be used to instantiate embedded views.
    */
-  constructor(
-    private readonly template: TemplateRef<unknown>,
-    private readonly viewContainer: ViewContainerRef,
-    private readonly securityService: SecurityService
-  ) {}
+  private readonly template = inject<TemplateRef<unknown>>(TemplateRef);
+
+  /**
+   * Represents a container where one or more views can be attached to a component.
+   */
+  private readonly viewContainer = inject(ViewContainerRef);
+
+  /**
+   * A service that can be configured with permission configuration and return permissions for certain elements.
+   */
+  private readonly securityService = inject(SecurityService);
 
   /**
    * Shows the element if the corresponding permission is present

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {EnvironmentProviders, makeEnvironmentProviders} from '@angular/core';
 import {providePrimeNG} from 'primeng/config';
-import {Preset} from '@primeng/themes/types';
-import Nora from '@primeng/themes/nora';
+import {Preset} from '@primeuix/themes/types';
+import Nora from '@primeuix/themes/nora';
 
 /**
  * Provides the IsyFact theme for PrimeNG components.

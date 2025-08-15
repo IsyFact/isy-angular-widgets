@@ -1,8 +1,8 @@
+import {DOCUMENT} from '@angular/core';
 import {NavigationEnd, provideRouter, Router} from '@angular/router';
 import {AppComponent} from './app.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {Subject} from 'rxjs';
-import {DOCUMENT} from '@angular/common';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('Integration Tests: AppComponent', () => {
@@ -41,7 +41,7 @@ describe('Integration Tests: AppComponent', () => {
   });
 
   it('should display the user name', () => {
-    expect(spectator.component.userInfo?.displayName).toEqual('Max Mustermann');
+    expect(spectator.component.userInfo?.displayName).toEqual('Nutzer');
   });
 
   it('the hauptfenster component should not be null', () => {

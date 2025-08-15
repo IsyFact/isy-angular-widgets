@@ -3,6 +3,7 @@ import {
   Component,
   ContentChildren,
   EventEmitter,
+  inject,
   Input,
   OnChanges,
   OnInit,
@@ -153,10 +154,12 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    */
   items: MenuItem[] = [];
 
-  constructor(
-    public configService: WidgetsConfigService,
-    readonly messageService: MessageService
-  ) {}
+  /**
+   * A service used to translate labels within the widgets library.
+   */
+  configService = inject(WidgetsConfigService);
+
+  readonly messageService = inject(MessageService);
 
   /**
    * Fired on initialization

@@ -1,4 +1,7 @@
-# 19.1.1 -
+# 20.0.0 - 08.08.2025
+## Features
+- IFS-4761: Upgrade der Angularversion von 19 auf 20 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
+- IFS-4813: Upgrade der PrimeNG-Bibliothek auf Version 20 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
 ## Fixes
 - IFS-4314: Validierungsfehler des Eingabefeldes `isy-incomplete-date` für ungewisse Datumswerte bei programmatischer Befüllung behoben
 

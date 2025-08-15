@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {TerminalModule, TerminalService} from 'primeng/terminal';
 import {storageData} from '../../data/product';
@@ -46,7 +46,9 @@ export class PrimengMiscComponent implements OnDestroy {
   storageStatus: StorageStatus[] = storageData;
   subscription: Subscription;
 
-  constructor(public terminalService: TerminalService) {
+  terminalService = inject(TerminalService);
+
+  constructor() {
     this.subscription = this.terminalService.commandHandler.subscribe((command) => {
       const response = command === 'date' ? new Date().toDateString() : 'Unknown command: ' + command;
       this.terminalService.sendResponse(response);

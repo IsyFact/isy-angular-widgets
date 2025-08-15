@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {SecurityService} from './security-service';
@@ -16,10 +16,9 @@ import {SecurityService} from './security-service';
 @Injectable({providedIn: 'root'})
 export class AuthGuard {
   /**
-   * @param securityService A service that can be configured with permission configuration and return permissions for certain elements.
-   * @internal
+   * A service that can be configured with permission configuration and return permissions for certain elements.
    */
-  constructor(private readonly securityService: SecurityService) {}
+  private readonly securityService = inject(SecurityService);
 
   /**
    * Determines if a given route can be accessed

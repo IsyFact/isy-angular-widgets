@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {TranslateModule} from '@ngx-translate/core';
@@ -31,7 +31,9 @@ export class IsyAngularComponentsComponent {
   person = initializedPerson;
   personalien = this.person.personalien;
 
-  constructor(private readonly fb: FormBuilder) {
+  private readonly fb = inject(FormBuilder);
+
+  constructor() {
     this.personalInfoForm = this.fb.group({
       firstName: [this.personalien.vorname, Validators.required],
       lastName: [this.personalien.nachname, Validators.required],

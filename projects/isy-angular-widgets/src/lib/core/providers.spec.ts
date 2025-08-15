@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {provideIsyFactTheme} from './providers';
-import Nora from '@primeng/themes/nora';
+import Nora from '@primeuix/themes/nora';
 
 describe('provideIsyFactTheme', () => {
   /**

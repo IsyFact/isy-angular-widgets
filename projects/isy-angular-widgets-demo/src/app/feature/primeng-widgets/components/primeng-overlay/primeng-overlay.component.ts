@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -28,10 +28,8 @@ import {ToastModule} from 'primeng/toast';
   providers: [ConfirmationService, MessageService]
 })
 export class PrimengOverlayComponent {
-  constructor(
-    readonly confirmationService: ConfirmationService,
-    public messageService: MessageService
-  ) {}
+  readonly confirmationService = inject(ConfirmationService);
+  messageService = inject(MessageService);
 
   visibleDialog: boolean = false;
   visibleSidebar: boolean = false;

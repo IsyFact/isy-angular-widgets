@@ -27,7 +27,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
       - name: Validate latest changelog entry
         run: |
@@ -70,7 +70,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
       - name: Generate SBOM
         run: npx @cyclonedx/cyclonedx-npm --output-file isy-angular-widgets-sbom.json
@@ -87,7 +87,7 @@ jobs:
       - name: Checkout
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           registry-url: https://registry.npmjs.org/
       - name: Download Build
         uses: actions/download-artifact@v4

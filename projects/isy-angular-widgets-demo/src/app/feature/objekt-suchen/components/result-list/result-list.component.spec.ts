@@ -1,5 +1,4 @@
 import {ResultListComponent} from './result-list.component';
-import {TranslateTestingModule} from 'ngx-translate-testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
@@ -10,23 +9,28 @@ import {Person} from '../../../../shared/model/person';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {gender, state} from '../../data/result-column';
 
+import {
+  TranslateModule,
+  TranslateLoader,
+  TranslateNoOpLoader,
+  TranslateService,
+  provideTranslateService
+} from '@ngx-translate/core';
+
 describe('Integration Tests: ResultListComponent', () => {
   let person: Person;
   let spectator: Spectator<ResultListComponent>;
   const createComponent = createComponentFactory({
     component: ResultListComponent,
-    imports: [
-      TranslateTestingModule.withTranslations({}),
-      FormsModule,
-      PanelModule,
-      TableModule,
-      ButtonModule,
-      MultiSelectModule
-    ]
+    imports: [TranslateModule, FormsModule, PanelModule, TableModule, ButtonModule, MultiSelectModule],
+    providers: [provideTranslateService(), {provide: TranslateLoader, useClass: TranslateNoOpLoader}]
   });
 
   beforeEach(() => {
     spectator = createComponent();
+    const translate = spectator.inject(TranslateService);
+    translate.setTranslation('de', {}, true);
+    translate.use('de');
     const personenService = new PersonenService();
     person = personenService.generatePerson();
   });
@@ -37,8 +41,7 @@ describe('Integration Tests: ResultListComponent', () => {
    * @param create Create action or not
    */
   function addClickEventListener(button: HTMLButtonElement, create: boolean): void {
-    // Needed because events don't be triggered inside ng-template block for example onClick event handler
-    button.addEventListener('click', function () {
+    button.addEventListener('click', () => {
       if (create) {
         spectator.component.emitCreateAction();
       } else {
@@ -93,7 +96,7 @@ describe('Integration Tests: ResultListComponent', () => {
   });
 
   it('should toggle isCollapsed to true when clicked', () => {
-    const panelButton = spectator.query('.isy-demo-app-result-panel button.p-panel-toggler') as HTMLButtonElement;
+    const panelButton = spectator.query('.isy-demo-app-result-panel button.p-panel-toggle-button') as HTMLButtonElement;
     panelButton.click();
     spectator.fixture.detectChanges();
     expect(spectator.component.isCollapsed).toBeTrue();

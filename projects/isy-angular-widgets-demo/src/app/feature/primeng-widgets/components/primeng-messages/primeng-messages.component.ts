@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ToastMessageOptions, MessageService} from 'primeng/api';
 
 import {messageData} from '../../data/file-option';
@@ -13,7 +13,7 @@ import {ToastModule} from 'primeng/toast';
   imports: [MessageModule, ButtonModule, ToastModule]
 })
 export class PrimengMessagesComponent {
-  constructor(public messageService: MessageService) {}
+  messageService = inject(MessageService);
 
   messages: ToastMessageOptions[] = messageData;
 
