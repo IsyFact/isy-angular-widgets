@@ -50,7 +50,7 @@ jobs:
           -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
           -Dsonar.test.inclusions='**/*.spec.ts'
           -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
-          -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.config.{js,cjs,mjs,ts},**/*.module.ts,**/test.ts,**/*.eslint.config.{js,cjs,mjs,ts},projects/isy-angular-widgets/schematics/ng-add/index.ts
+          -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/eslint.config.js,projects/isy-angular-widgets/schematics/ng-add/index.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
