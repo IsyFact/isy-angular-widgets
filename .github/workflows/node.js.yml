@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18.x ]
+        node-version: [ 20.x ]
 
     steps:
       - name: Checkout
@@ -42,13 +42,15 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      - name: Perform SonarCloud scan
+      - name: Perform SonarCloud Scan
         run: >
-          npx sonarqube-scanner@3
+          npx sonarqube-scanner@3 -X
           -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
           -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
           -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
-          -Dsonar.coverage.exclusions=eslint.config.js,projects/isy-angular-widgets/schematics/ng-add/index.ts
+          -Dsonar.test.inclusions='**/*.spec.ts'
+          -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+          -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/eslint.config.js,projects/isy-angular-widgets/schematics/ng-add/index.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -77,7 +79,7 @@ jobs:
     needs: [build_and_test]
     strategy:
       matrix:
-        node-version: [ 18.x ]
+        node-version: [ 20.x ]
 
     steps:
       - name: Checkout

@@ -22,7 +22,7 @@ describe('TestComponentComponent', () => {
   const elements = [
     {selector: '#button-icon button', description: 'Buttons'},
     {selector: '#permissions-dropdown .p-select-dropdown', description: 'Dropdowns'},
-    {selector: '.p-ripple.p-tab.p-component', description: 'Tabview-Link'},
+    {selector: '.p-ripple.p-tab', description: 'Tabview-Link'},
     {selector: 'isy-input-char button', description: 'Input-Char-Button'},
     {selector: 'p-fileupload .p-fileupload-choose-button', description: 'Fileupload-Button'},
     {selector: '.p-button', description: 'Buttons'},

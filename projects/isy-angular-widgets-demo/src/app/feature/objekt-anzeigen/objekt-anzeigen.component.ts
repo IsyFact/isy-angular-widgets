@@ -1,4 +1,4 @@
-import {AfterContentChecked, ChangeDetectorRef, Component, Input} from '@angular/core';
+import {AfterContentChecked, ChangeDetectorRef, Component, inject, Input} from '@angular/core';
 import {Address} from '../../shared/model/person';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -27,7 +27,6 @@ import {DialogSachverhalteBearbeitenComponent} from './components/dialog-sachver
 import {ToastModule} from 'primeng/toast';
 import {InputTextModule} from 'primeng/inputtext';
 import {TextareaModule} from 'primeng/textarea';
-import {CommonModule} from '@angular/common';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -38,7 +37,6 @@ import {CommonModule} from '@angular/common';
   templateUrl: './objekt-anzeigen.component.html',
   styleUrls: ['./objekt-anzeigen.component.scss'],
   imports: [
-    CommonModule,
     InputTextModule,
     ReactiveFormsModule,
     TabsModule,
@@ -78,12 +76,12 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
 
   @Input() person = initializedPerson;
 
-  constructor(
-    public translate: TranslateService,
-    private readonly fb: FormBuilder,
-    private readonly messageService: MessageService,
-    private readonly changeDetector: ChangeDetectorRef
-  ) {
+  translate = inject(TranslateService);
+  private readonly fb = inject(FormBuilder);
+  private readonly messageService = inject(MessageService);
+  private readonly changeDetector = inject(ChangeDetectorRef);
+
+  constructor() {
     const personalien = this.person.personalien;
     const addresses = personalien.addresses;
     const addressGroup = addresses ? this.createNewAddressFormGroup(addresses[0]) : this.createNewAddressFormGroup();

@@ -1,4 +1,4 @@
-import {Directive, Input, TemplateRef} from '@angular/core';
+import {Directive, inject, Input, TemplateRef} from '@angular/core';
 
 /**
  * To be used for each site of an isy-wizard.
@@ -9,5 +9,5 @@ import {Directive, Input, TemplateRef} from '@angular/core';
 export class WizardDirective {
   @Input() isyWizardDirective: string = '';
 
-  constructor(public templateRef: TemplateRef<unknown>) {}
+  templateRef = inject<TemplateRef<unknown>>(TemplateRef);
 }

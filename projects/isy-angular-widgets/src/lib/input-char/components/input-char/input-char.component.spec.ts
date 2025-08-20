@@ -103,32 +103,6 @@ describe('Unit Tests: InputCharComponent', () => {
         expect(button.disabled).toBeFalsy();
       });
 
-      it('should not have outlined style by default for the input char button', () => {
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        const outlinedState = button.getAttribute('ng-reflect-outlined');
-        expect(outlinedState).toBe('false');
-      });
-
-      it('should have outlined style when outlinedInputCharButton is true', () => {
-        component.outlinedInputCharButton = true;
-        spectator.fixture.detectChanges();
-
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        const outlinedState = button.getAttribute('ng-reflect-outlined');
-
-        expect(outlinedState).toBe('true');
-      });
-
-      it('should not have outlined style when outlinedInputCharButton is false', () => {
-        component.outlinedInputCharButton = false;
-        spectator.fixture.detectChanges();
-
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        const outlinedState = button.getAttribute('ng-reflect-outlined');
-
-        expect(outlinedState).toBe('false');
-      });
-
       it('should display after clicking the button', () => {
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
@@ -147,7 +121,7 @@ describe('Integration Test: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    imports: [DialogModule, InputCharDialogComponent],
+    imports: [DialogModule, InputCharDialogComponent, ButtonModule],
     providers: [WidgetsConfigService, CharacterService]
   });
 
@@ -178,6 +152,29 @@ describe('Integration Test: InputCharComponent', () => {
       it(`should show ${expectedCharacters} characters after opening`, () => {
         const groupButtons = spectator.queryAll('.right-panel-side p-selectbutton p-togglebutton');
         expect(groupButtons.length).toEqual(expectedCharacters);
+      });
+
+      it('should not have outlined style by default for the input char button', () => {
+        const button = spectator.query('.input-char-button.p-button-outlined') as HTMLButtonElement;
+        expect(button).toBeFalsy();
+      });
+
+      it('should have outlined style when outlinedInputCharButton is true', () => {
+        spectator = createComponent({
+          props: {outlinedInputCharButton: true}
+        });
+
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
+        expect(button).toHaveClass('p-button-outlined');
+      });
+
+      it('should not have outlined style when outlinedInputCharButton is false', () => {
+        spectator = createComponent({
+          props: {outlinedInputCharButton: false}
+        });
+
+        const button = spectator.query('.input-char-button') as HTMLButtonElement;
+        expect(button).not.toHaveClass('p-button-outlined');
       });
     });
   });

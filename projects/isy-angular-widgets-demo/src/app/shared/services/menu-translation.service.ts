@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 import {firstValueFrom} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
@@ -25,7 +25,7 @@ import {TranslateService} from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class MenuTranslationService {
-  constructor(private readonly translate: TranslateService) {}
+  private readonly translate = inject(TranslateService);
 
   /**
    * Translates all `label` and `title` fields of  {@link MenuItem} and all submenu items.

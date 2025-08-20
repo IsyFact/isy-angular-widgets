@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FileUploadModule, UploadEvent} from 'primeng/fileupload';
 import {MessageService} from 'primeng/api';
 
@@ -9,7 +9,7 @@ import {MessageService} from 'primeng/api';
   imports: [FileUploadModule]
 })
 export class PrimengFileComponent {
-  constructor(public messageService: MessageService) {}
+  messageService = inject(MessageService);
 
   onUpload(event: UploadEvent): void {
     this.messageService.add({

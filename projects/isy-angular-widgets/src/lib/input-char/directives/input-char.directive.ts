@@ -3,6 +3,7 @@ import {
   Directive,
   ElementRef,
   HostListener,
+  inject,
   Input,
   OnDestroy,
   OnInit,
@@ -57,10 +58,11 @@ export class InputCharDirective implements OnInit, OnDestroy {
 
   private attributeMutationObserver?: MutationObserver;
 
-  constructor(
-    private readonly viewContainerRef: ViewContainerRef,
-    private readonly element: ElementRef
-  ) {
+  private readonly viewContainerRef = inject(ViewContainerRef);
+
+  private readonly element = inject(ElementRef);
+
+  constructor() {
     this.htmlInputElement = this.element.nativeElement as HTMLInputElement;
     this.htmlInputElement.style.width = 'calc(100% - 2.875rem)';
   }

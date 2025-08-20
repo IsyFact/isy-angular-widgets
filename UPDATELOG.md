@@ -1,3 +1,161 @@
+# Update Log - 08.08.2025
+
+## Migration auf Angular v20 & PrimeNG v20
+
+### 1. Aktualisierte Frameworks & Tools
+- Angular: v19 → **v20.1.1**
+- PrimeNG: v19 → **v20.0.0**
+- Core-Pakete & CLI aktualisiert
+- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/migration/v20) umgesetzt
+
+---
+
+### 2. **Breaking Changes**
+
+#### Umstellung auf Flat Config-Format (ESLint)
+- Das isy-eslint-plugin nutzt nun das Flat Config-Format, was eine Umstellung der Projektkonfiguration auf eslint.config.js erfordert
+- Die Nutzung von .eslintrc.js oder .eslintrc.json ist nicht mehr möglich
+- Die Konfiguration muss auf eslint.config.js umgestellt werden und ist im [Migration Guide](https://eslint.style/guide/migration) nachzulesen
+
+#### Umstellung auf inject()
+- Einführung von inject() statt der traditionellen DI im Konstruktor in Angular
+- Anpassungen an bestehenden Komponenten oder Services sind möglicherweise erforderlich
+- Falls die Umstellung auf [inject()](https://angular.dev/reference/migrations/inject-function) nicht gewünscht ist, kann dies durch die Regel @angular-eslint/no-inject-in-constructor: 'off' in der ESLint-Konfiguration deaktiviert werden 
+
+####  Ersetzung von @primeng/themes durch @primeuix/themes
+- Das Ersetzen von @primeng/themes durch @primeuix/themes erfordert Anpassungen an Imports, Styles und Konfigurationen
+- Paketname, API, Struktur und Build-Konfiguration ändern sich. Möglicherweise müssen auch andere Abhängigkeiten aktualisiert werden
+- Imports und Konfigurationen auf das neue Paket anpassen
+
+#### Upgrade von ngx-translate von v16 auf v17
+- Das Upgrade auf Version 17 könnte API-Änderungen oder neue Konfigurationen beinhalten
+- Es könnten Anpassungen erforderlich sein
+- Details und spezifische Breaking Changes sind im [Migration Guide](https://ngx-translate.org/getting-started/migration-guide/) nachzulesen
+
+#### Upgrade von Spectator von v19.6.2 auf v21.0.1
+- Das Upgrade könnte API-Änderungen oder neue Funktionen beinhalten
+- Möglicherweise sind Anpassungen erforderlich
+- Weitere Details und spezifische Breaking Changes sind im [Changelog](https://github.com/ngneat/spectator/blob/master/CHANGELOG.md) nachzulesen
+
+---
+
+### 3. Änderungen in **_isy-angular-widgets_** (Bibliothek)
+
+#### Paketkonfiguration (`index.ts`)
+```ts
+addPackageToPackageJson(tree, '@angular/common', '^20.1.6');
+addPackageToPackageJson(tree, '@angular/core', '^20.1.6');
+addPackageToPackageJson(tree, 'primeng', '^20.0.1');
+addPackageToPackageJson(tree, '@primeuix/themes', '^1.2.3');
+```
+
+---
+
+### 4. Aktualisierte Abhängigkeiten
+
+#### Demo-App (`package.json`)
+```json
+{
+    "dependencies": {
+        "@angular/animations": "^20.1.6",
+        "@angular/cdk": "^20.1.5",
+        "@angular/common": "^20.1.6",
+        "@angular/compiler": "^20.1.6",
+        "@angular/core": "^20.1.6",
+        "@angular/forms": "^20.1.6",
+        "@angular/platform-browser": "^20.1.6",
+        "@angular/platform-browser-dynamic": "^20.1.6",
+        "@angular/router": "^20.1.6",
+        "@ngx-translate/core": "^17.0.0",
+        "@ngx-translate/http-loader": "^17.0.0",
+        "@primeuix/themes": "^1.2.3",
+        "chart.js": "^4.5.0",
+        "flag-icons": "^7.5.0",
+        "primeflex": "^4.0.0",
+        "primeng": "^20.0.1",
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^20.1.5",
+        "@angular-eslint/builder": "20.1.1",
+        "@angular-eslint/eslint-plugin": "20.1.1",
+        "@angular-eslint/eslint-plugin-template": "^20.1.1",
+        "@angular-eslint/schematics": "20.1.1",
+        "@angular-eslint/template-parser": "20.1.1",
+        "@angular/cli": "~20.1.5",
+        "@angular/compiler-cli": "^20.1.6",
+        "@isyfact/eslint-plugin": "4.0.0",
+        "@ngneat/spectator": "^21.0.1",
+        "@stylistic/eslint-plugin": "^5.2.3",
+        "@types/jasmine": "~5.1.8",
+        "@types/node": "^24.2.1",
+        "@typescript-eslint/eslint-plugin": "^8.39.0",
+        "@typescript-eslint/parser": "^8.39.0",
+        "eslint": "^9.33.0",
+        "eslint-plugin-editorconfig": "^4.0.3",
+        "eslint-plugin-jsdoc": "^52.0.4",
+        "jasmine-core": "~5.9.0",
+        "karma": "^6.4.4",
+        "ng-mocks": "^14.13.5",
+        "ng-packagr": "^20.1.0",
+        "prettier": "^3.6.2",
+    }
+}
+```
+
+#### Bibliothek (`package.json`)
+```json
+{
+  "peerDependencies": {
+    "@angular/common": "^20.1.6",
+    "@angular/core": "^20.1.6",
+    "primeng": "^20.0.1",
+    "@primeuix/themes": "^1.2.3"
+  },
+}
+```
+
+---
+
+### 5. CI/CD
+- GitHub Actions Workflow aktualisiert:
+  - `actions/checkout@v4` und `actions/setup-node@v4`
+  - Node.js Version auf `20.x` angehoben
+
+---
+
+### 6. Codequalität geprüft
+- **ESLint:** `npm run lint` → keine Fehler
+- **Prettier:** `npm run prettier:check` → bestanden
+
+---
+
+### 7. Tests durchgeführt
+- **Unit- & Integrationstests:** `npm run test` → alle Tests bestanden
+- **Manuelle Tests:** 
+  - UI geprüft
+  - Hauptfunktionalitäten erfolgreich validiert
+  - Keine kritischen Fehler festgestellt
+
+---
+
+## Zusammenfassung
+
+### Breaking Changes:
+- Flat Config-Format: Umstellung auf eslint.config.js, .eslintrc.js und .eslintrc.json nicht mehr unterstützt.
+- inject(): Umstellung auf inject() in Angular, kann mit @angular-eslint/no-inject-in-constructor: 'off' deaktiviert werden.
+- @primeng/themes → @primeuix/themes: Anpassungen an Imports, Styles und Konfiguration erforderlich.
+- ngx-translate Update: API-Änderungen in Version 17, Migration Guide prüfen.
+- Spectator Update: API-Änderungen in Version 21, Changelog prüfen.
+
+### Weitere Änderungen:
+- Migration auf Angular 20 & PrimeNG 20: Erfolgreich durchgeführt.
+- Veraltete Komponenten ersetzt, neue Features integriert.
+- GitHub Actions Workflow aktualisiert
+- Abhängigkeiten, Tests & Qualitätssicherung auf aktuellem Stand: Alle aktualisiert.
+- Alle Breaking Changes dokumentiert: Vollständige Dokumentation für Migration.
+
+---
+
 # Update Log - 09.05.2025
 
 ## Migration auf Angular v19 & PrimeNG v19
@@ -6,7 +164,7 @@
 - Angular: v18 → **v19.2.9**
 - PrimeNG: v17 → **v19.1.2**
 - Core-Pakete & CLI aktualisiert
-- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/guides/migration) umgesetzt
+- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/migration/v19) umgesetzt
 
 ---
 

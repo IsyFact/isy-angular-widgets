@@ -107,10 +107,10 @@
     <div class="col-12 xl:col-6 flex-column gap-2">
       <h3>Splitter</h3>
       <p-splitter [style]="{height: '75px'}" styleClass="mb-8">
-        <ng-template #panel>
+        <ng-template #panelLeftSide>
           <div class="flex align-items-center justify-content-center h-full">Left Side</div>
         </ng-template>
-        <ng-template #panel>
+        <ng-template #panelRightSide>
           <div class="flex align-items-center justify-content-center h-full">Right Side</div>
         </ng-template>
       </p-splitter>
@@ -154,7 +154,7 @@
         </p-step-list>
         <p-step-panels>
           <p-step-panel [value]="1">
-            <ng-template #content let-activateCallback="activateCallback">
+            <ng-template #content1 let-activateCallback="activateCallback">
               <div class="flex flex-column h-12rem">
                 <div
                   class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
@@ -168,7 +168,7 @@
             </ng-template>
           </p-step-panel>
           <p-step-panel [value]="2">
-            <ng-template #content let-activateCallback="activateCallback">
+            <ng-template #content2 let-activateCallback="activateCallback">
               <div class="flex flex-column h-12rem">
                 <div
                   class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
@@ -183,7 +183,7 @@
             </ng-template>
           </p-step-panel>
           <p-step-panel [value]="3">
-            <ng-template #content let-activateCallback="activateCallback">
+            <ng-template #content3 let-activateCallback="activateCallback">
               <div class="flex flex-column h-12rem">
                 <div
                   class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
