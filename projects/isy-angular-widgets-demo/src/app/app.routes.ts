@@ -31,6 +31,15 @@ export const routes: Routes = [
     canActivate: [canActivateAuth]
   },
   {
+    path: 'modalarme-patterns',
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.modalarmePatterns'
+    },
+    loadComponent: async () =>
+      (await import('./feature/modalarme-patterns/modalarme-patterns.component')).ModalarmePatternsComponent,
+    canActivate: [canActivateAuth]
+  },
+  {
     path: 'isy-angular-components',
     data: {
       title: 'isyAngularWidgetsDemo.websiteTitles.isyAngularComponents'

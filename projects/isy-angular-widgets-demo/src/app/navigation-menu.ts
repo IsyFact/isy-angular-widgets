@@ -14,6 +14,12 @@ export const navigationMenu = [
         title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.displayObject',
         routerLink: 'objekt-anzeigen/42',
         styleClass: 'skip-link'
+      },
+      {
+        label: 'Modalarme Patterns',
+        title: 'zur Modalarme Patterns Seite wechseln',
+        routerLink: 'modalarme-patterns',
+        styleClass: 'skip-link'
       }
     ]
   },

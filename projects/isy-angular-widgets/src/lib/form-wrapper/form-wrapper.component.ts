@@ -43,6 +43,7 @@ export class FormWrapperComponent implements OnInit {
   @Input() label!: string;
   @Input() labelId?: string;
   @Input() fieldId!: string;
+  @Input() describedbyId!: string;
   @Input() control!: FormControl;
   @Input() validationMessages?: {[key: string]: string} = {};
   @Input() ifta: boolean = false;

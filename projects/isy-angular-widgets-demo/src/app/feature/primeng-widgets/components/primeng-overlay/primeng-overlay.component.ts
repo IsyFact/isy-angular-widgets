@@ -9,6 +9,7 @@ import {DrawerModule} from 'primeng/drawer';
 import {InputTextModule} from 'primeng/inputtext';
 import {PopoverModule} from 'primeng/popover';
 import {ToastModule} from 'primeng/toast';
+import {Tooltip} from 'primeng/tooltip';
 
 @Component({
   standalone: true,
@@ -23,7 +24,8 @@ import {ToastModule} from 'primeng/toast';
     ConfirmPopupModule,
     DividerModule,
     InputTextModule,
-    PopoverModule
+    PopoverModule,
+    Tooltip
   ],
   providers: [ConfirmationService, MessageService]
 })

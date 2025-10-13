@@ -1,0 +1,426 @@
+<div class="mx-3">
+  <h1>Modalarme Patterns (PrimeNG 20+)</h1>
+  <div class="grid">
+    <div class="col-12 flex-column">
+      <!-- Objekt anlegen – Stepper -->
+      <section class="section" aria-labelledby="h-stepper">
+        <div class="col-12 xl:col-6 flex-column">
+          <h3>2.4.1 Objekt anlegen → Seiteninterner Stepper (statt Wizard im Modal)</h3>
+          <p>
+            <strong>Begründung:</strong> Mehrschrittprozesse werden direkt auf der Seite dargestellt, ohne den Kontext
+            zu verlassen.<br />
+            Dadurch werden Fokusverluste vermieden, die Orientierung bleibt erhalten und Anforderungen an
+            Fokusführung<br />
+            sowie lineare Navigation werden erfüllt. Die Inline-Validierung und globale Alert-Zonen ermöglichen
+            unmittelbares,<br />
+            nicht blockierendes Feedback.
+          </p>
+          <p><strong>Anwendungshinweise:</strong></p>
+          <ul>
+            <li>Einsatz bei komplexen, schrittweisen Prozessen mit logischen Abhängigkeiten.</li>
+            <li>Fokuswechsel beim Schrittwechsel auf Überschrift oder erstes fehlerhaftes Feld.</li>
+            <li>„Weiter“ nur bei gültigem Schritt, „Zurück“ ohne Datenverlust.</li>
+            <li>Klare, beschriftete Aktionen; verlässliche Tastaturreihenfolge.</li>
+          </ul>
+          <p>
+            <strong>Vorteile:</strong> Keine Blockierung des Hauptfensters, bessere Übersicht, technisch einfacher als
+            mehrstufige Modals.
+          </p>
+
+          @if (globalError) {
+            <div role="alert" aria-live="assertive" class="alert">{{ globalError }}</div>
+          }
+
+          <p-stepper [value]="stepValue" [linear]="true">
+            <p-step-list aria-label="Anlage-Schritte">
+              <p-step [value]="1">ID Eintrag</p-step>
+              <p-step [value]="2">Persönliche Informationen</p-step>
+              <p-step [value]="3">Bestätigen</p-step>
+            </p-step-list>
+
+            <p-step-panels>
+              <!-- Panel 1 -->
+              <p-step-panel [value]="1">
+                <ng-template #content let-activateCallback="activateCallback">
+                  <form [formGroup]="baseFg">
+                    <div class="col-12">
+                      <isy-form-wrapper
+                        label="{{ 'isyAngularWidgetsDemo.labels.id' | translate }}"
+                        fieldId="id"
+                        [control]="baseFg.controls.id | formControl"
+                        [validationMessages]="
+                          baseFg.controls.id.errors?.required
+                            ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
+                            : {}
+                        "
+                      >
+                        <input
+                          id="id"
+                          class="w-full"
+                          pInputText
+                          formControlName="id"
+                          [attr.aria-invalid]="invalid('base', 'id')"
+                        />
+                      </isy-form-wrapper>
+                      <div class="flex pt-6 flex-wrap card-container actions">
+                        <p-button
+                          type="button"
+                          label="Weiter"
+                          (onClick)="goNext(2, baseFg, activateCallback)"
+                        ></p-button>
+                      </div>
+                    </div>
+                  </form>
+                </ng-template>
+              </p-step-panel>
+
+              <!-- Panel 2 -->
+              <p-step-panel [value]="2">
+                <ng-template #content let-activateCallback="activateCallback">
+                  <form [formGroup]="detailsFg">
+                    <div class="col-12">
+                      <isy-form-wrapper
+                        label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+                        fieldId="firstname"
+                        [control]="detailsFg.controls.firstname | formControl"
+                      >
+                        <input id="firstname" class="w-full" pInputText formControlName="firstname" />
+                      </isy-form-wrapper>
+                    </div>
+                    <div class="col-12">
+                      <isy-form-wrapper
+                        label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+                        fieldId="lastname"
+                        [control]="detailsFg.controls.lastname | formControl"
+                      >
+                        <input id="lastname" class="w-full" pInputText formControlName="lastname" />
+                      </isy-form-wrapper>
+                    </div>
+                    <div class="col-12">
+                      <isy-form-wrapper
+                        label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+                        labelId="label-gender"
+                        fieldId="gender"
+                        [control]="detailsFg.controls.gender | formControl"
+                      >
+                        <p-select
+                          inputId="gender"
+                          formControlName="gender"
+                          ariaLabelledBy="label-gender"
+                          [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
+                          [filter]="true"
+                          [options]="[
+                            'isyAngularWidgetsDemo.labels.optionMale' | translate,
+                            'isyAngularWidgetsDemo.labels.optionFemale' | translate,
+                            'isyAngularWidgetsDemo.labels.optionDivers' | translate
+                          ]"
+                          class="w-full"
+                          appendTo="body"
+                        ></p-select>
+                      </isy-form-wrapper>
+                    </div>
+                    <div class="flex pt-6 flex-wrap">
+                      <p-button
+                        class="mr-1"
+                        [outlined]="true"
+                        type="button"
+                        label="Zurück"
+                        (onClick)="goBack(1, activateCallback)"
+                      ></p-button>
+                      <p-button
+                        type="button"
+                        label="Weiter"
+                        (onClick)="goNext(3, detailsFg, activateCallback)"
+                      ></p-button>
+                    </div>
+                  </form>
+                </ng-template>
+              </p-step-panel>
+
+              <!-- Panel 3 -->
+              <p-step-panel [value]="3">
+                <ng-template #content let-activateCallback="activateCallback">
+                  <p>Bitte prüfen und speichern.</p>
+                  <div class="flex pt-6 flex-wrap card-container actions">
+                    <p-button
+                      type="button"
+                      label="Zurück"
+                      class="mr-1"
+                      [outlined]="true"
+                      (onClick)="goBack(2, activateCallback)"
+                    ></p-button>
+                    <p-button type="button" label="Speichern" (onClick)="saveStepper()"></p-button>
+                  </div>
+                </ng-template>
+              </p-step-panel>
+            </p-step-panels>
+          </p-stepper>
+        </div>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 flex-column">
+      <!-- Bearbeiten – Drawer -->
+      <section class="section" aria-labelledby="h-drawer">
+        <h3>2.4.2 Objekt bearbeiten → Drawer (seitlicher Bereich) (statt Modal-Form)</h3>
+        <p>
+          <strong>Begründung:</strong> Bearbeitungen erfolgen im Kontext der Seite; die Ausgangsansicht bleibt
+          sichtbar.<br />
+          Fokusführung und Tastatursteuerung sind kontrollierbar (ESC schließt, Fokus kehrt zum Trigger zurück).<br />
+          Dies reduziert Unterbrechungen und steigert die Bearbeitungseffizienz.
+        </p>
+        <p><strong>Anwendungshinweise:</strong></p>
+        <ul>
+          <li>Geeignet für kurze bis mittlere Bearbeitungen.</li>
+          <li>Breite des Drawers ca. 30–40&nbsp;% (mind. 360&nbsp;px), mobil ggf. Vollbild.</li>
+          <li>Eindeutige „Speichern“/„Abbrechen“-Aktionen, klarer Fokusrahmen.</li>
+          <li>Hintergrund darf nicht fokussierbar bleiben (Fokus-Containment).</li>
+        </ul>
+        <p><strong>Vorteile:</strong> Kontext bleibt sichtbar, responsive nutzbar, einfaches Fokus-Handling.</p>
+
+        <div class="flex pt-6 flex-wrap">
+          <p-button #drawerTrigger label="Bearbeiten" (onClick)="openDrawer()"></p-button>
+        </div>
+
+        <p-drawer
+          [(visible)]="drawerVisible"
+          position="right"
+          [blockScroll]="true"
+          (onShow)="onDrawerShow()"
+          (onHide)="onDrawerHide()"
+          modal="false"
+          aria-label="Bearbeitung Seitenpanel"
+        >
+          <h3 id="edit-title" tabindex="-1">Objekt bearbeiten</h3>
+
+          <form [formGroup]="formEdit" (ngSubmit)="saveEdit()">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+              fieldId="geburtsname"
+              [control]="formEdit.controls.geburtsname | formControl"
+            >
+              <input id="geburtsname" class="w-full" pInputText formControlName="geburtsname" />
+            </isy-form-wrapper>
+
+            <div class="flex pt-6 flex-wrap">
+              <p-button
+                type="button"
+                label="Abbrechen"
+                class="mr-1"
+                [outlined]="true"
+                (onClick)="closeDrawer()"
+              ></p-button>
+              <p-button type="submit" label="Speichern" [disabled]="formEdit.invalid"></p-button>
+            </div>
+          </form>
+        </p-drawer>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 flex-column">
+      <!-- Bestätigen/Löschen – Inline-Leiste -->
+      <section class="section" aria-labelledby="h-confirm-bar">
+        <h3>2.4.3 Bestätigung / Löschen → Inline-Bestätigungsleiste oder Popover (statt Meldungsdialog)</h3>
+        <p>
+          <strong>Begründung:</strong> Bestätigungen erfolgen direkt im Arbeitskontext.<br />
+          Inline- oder Popover-Bestätigungen vermeiden modale Blockaden und Kontextwechsel.<br />
+          Eine Undo-Funktion erlaubt das Rückgängigmachen von Aktionen und erhöht so Fehlertoleranz und Sicherheit.
+        </p>
+        <p><strong>Anwendungshinweise:</strong></p>
+        <ul>
+          <li>Einsatz bei reversiblen Aktionen (z. B. Löschen, Deaktivieren).</li>
+          <li>Klare Beschriftung der Aktionen („Löschen“ / „Nicht löschen“).</li>
+          <li>Optional Undo-Toast mit Ablaufzeit (5–10&nbsp;Sekunden).</li>
+          <li>Nur ein Popover gleichzeitig sichtbar.</li>
+        </ul>
+        <p>
+          <strong>Vorteile:</strong> Keine Unterbrechung des Arbeitsflusses, schnellere Bedienung, barrierefreie
+          Entscheidungssteuerung.
+        </p>
+
+        <div class="flex pt-6 flex-wrap">
+          <p-button label="Löschen" class="p-button-danger" (onClick)="askDeleteBar()"></p-button>
+        </div>
+        @if (showConfirmBar) {
+          <div class="confirm-bar mt-3" role="region" aria-label="Löschen bestätigen">
+            <span>Möchten Sie dieses Objekt wirklich löschen?</span>
+            <div class="flex pt-6 flex-wrap">
+              <p-button label="Löschen" class="p-button-danger mr-1" (onClick)="confirmDeleteBar()"></p-button>
+              <p-button label="Abbrechen" [outlined]="true" (onClick)="cancelDeleteBar()"></p-button>
+            </div>
+          </div>
+        }
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 xl:col-6 flex-column">
+      <!-- Bestätigen/Löschen – Popover -->
+      <section class="section" aria-labelledby="h-confirm-popover">
+        <h3>2.4.3 Bestätigung / Löschen → Inline-Bestätigungsleiste oder Popover (statt Meldungsdialog)</h3>
+        <p>
+          <strong>Begründung:</strong> Bestätigungen erfolgen direkt im Arbeitskontext.<br />
+          Inline- oder Popover-Bestätigungen vermeiden modale Blockaden und Kontextwechsel.<br />
+          Eine Undo-Funktion erlaubt das Rückgängigmachen von Aktionen und erhöht so Fehlertoleranz und Sicherheit.
+        </p>
+        <p><strong>Anwendungshinweise:</strong></p>
+        <ul>
+          <li>Einsatz bei reversiblen Aktionen (z. B. Löschen, Deaktivieren).</li>
+          <li>Klare Beschriftung der Aktionen („Löschen“ / „Nicht löschen“).</li>
+          <li>Optional Undo-Toast mit Ablaufzeit (5–10&nbsp;Sekunden).</li>
+          <li>Nur ein Popover gleichzeitig sichtbar.</li>
+        </ul>
+        <p>
+          <strong>Vorteile:</strong> Keine Unterbrechung des Arbeitsflusses, schnellere Bedienung, barrierefreie
+          Entscheidungssteuerung.
+        </p>
+
+        <p-button
+          #confirmTrigger
+          label="Löschen (Popover)"
+          class="p-button-danger"
+          (onClick)="confirmPopover.toggle($event)"
+        ></p-button>
+
+        <p-popover
+          #confirmPopover
+          [dismissable]="true"
+          aria-modal="false"
+          (onShow)="onConfirmPopoverShow()"
+          (onHide)="onConfirmPopoverHide()"
+        >
+          <div class="overlay-confirm">
+            <p>Möchten Sie löschen?</p>
+            <div class="flex pt-6 flex-wrap">
+              <p-button label="Löschen" class="p-button-danger mr-1" (onClick)="confirmDeletePopover()"></p-button>
+              <p-button label="Abbrechen" [outlined]="true" (onClick)="confirmPopover.hide()"></p-button>
+            </div>
+          </div>
+        </p-popover>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 xl:col-6 flex-column">
+      <!-- Hilfe – neues Accordion API + Popover -->
+      <section class="section" aria-labelledby="h-help">
+        <h3>2.4.4 Kontext-Info / Hilfe → Expander oder Popover (statt Info-Dialog)</h3>
+        <p>
+          <strong>Begründung:</strong> Zusatzinformationen erscheinen direkt im Nutzungskontext.<br />
+          Das reduziert kognitive Sprünge und erhöht die Zugänglichkeit. Expander eignen sich für strukturierte
+          Inhalte,<br />
+          Popover für kurze Hinweise. Beide sind vollständig tastaturbedienbar und mit ARIA-Attributen zugänglich.
+        </p>
+        <p><strong>Anwendungshinweise:</strong></p>
+        <ul>
+          <li>Kurze Hinweise → Popover, längere Informationen → Expander.</li>
+          <li>ESC oder Klick außerhalb schließt Popover.</li>
+          <li>Trigger mit <code>aria-expanded</code> / <code>aria-controls</code>.</li>
+          <li>Fokus nach Schließen zurück zum Auslöser.</li>
+        </ul>
+        <p>
+          <strong>Vorteile:</strong> Information ohne Workflow-Unterbrechung, einfache Integration, konsistentes
+          Verhalten.
+        </p>
+
+        <p-accordion [value]="'0'">
+          <p-accordion-panel value="0">
+            <p-accordion-header>Hilfe zu diesem Bereich</p-accordion-header>
+            <p-accordion-content>
+              <p>Kurze Erklärung, weiterführende Links …</p>
+            </p-accordion-content>
+          </p-accordion-panel>
+        </p-accordion>
+
+        <div class="flex pt-6 flex-wrap action">
+          <p-button
+            #helpBtn
+            icon="pi pi-info-circle"
+            class="p-button-text"
+            aria-label="Hilfe"
+            [attr.aria-haspopup]="'dialog'"
+            [attr.aria-expanded]="isHelpOpen"
+            [attr.aria-controls]="'help-popover'"
+            (onClick)="helpOverlay.toggle($event)"
+          ></p-button>
+        </div>
+        <span>Kontext-Hilfe (Popover)</span>
+        <p-popover #helpOverlay [dismissable]="true" (onShow)="focusHelpPanel()" (onHide)="focusHelpTrigger()">
+          <div
+            id="help-popover"
+            role="dialog"
+            aria-modal="false"
+            aria-labelledby="help-title"
+            aria-describedby="help-desc"
+            tabindex="-1"
+            #helpPanelRoot
+          >
+            <h3 id="help-title">Hilfe</h3>
+            <p id="help-desc">Kurzer erklärender Text …</p>
+            <a href="#" class="p-button-link">Zur Dokumentation</a>
+          </div>
+        </p-popover>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 xl:col-6 flex-column gap-2">
+      <!-- Fehlerhandling – Toast + feldnahe Fehler -->
+      <section class="section" aria-labelledby="h-errors">
+        <h3>2.4.5 Fehlermeldung → Toast + feldnahe Fehlermarkierung (statt blockierender Dialog)</h3>
+        <p>
+          <strong>Begründung:</strong> Fehler werden global (Toast) und lokal (am Feld) angezeigt.<br />
+          Der Nutzer erhält sofort Rückmeldung und kann direkt korrigieren, ohne dass der Prozess unterbrochen wird.<br />
+          Screenreader werden über Live-Regionen informiert; Felder sind mit <code>aria-invalid="true"</code> und
+          <code>aria-describedby</code> eindeutig markiert.
+        </p>
+        <p><strong>Anwendungshinweise:</strong></p>
+        <ul>
+          <li>Globaler Fehler: <code>role="alert</code> oder <code>aria-live="assertive"</code>.</li>
+          <li>Lokaler Fehler: eindeutige, beschreibende Fehlermeldung.</li>
+          <li>Fokus bei Fehlersubmit auf erstes fehlerhaftes Feld.</li>
+          <li>Auto-Dismiss für Toasts nach 4–6&nbsp;Sekunden, manuell schließbar.</li>
+        </ul>
+        <p>
+          <strong>Vorteile:</strong> Kein Unterbrechen des Eingabeprozesses, verständliches Feedback, bessere
+          Barrierefreiheit.
+        </p>
+
+        <form [formGroup]="formErrors" (ngSubmit)="submitErrors()">
+          <div class="col-12 md:col-6 xl:col-4">
+            <isy-form-wrapper
+              label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
+              fieldId="geburtsname"
+              describedbyId="geburtsname-err"
+              [control]="formErrors.controls.geburtsname | formControl"
+              [validationMessages]="
+                formErrors.controls.geburtsname.errors?.required
+                  ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
+                  : {}
+              "
+            >
+              <input
+                id="geburtsname"
+                type="text"
+                pInputText
+                formControlName="geburtsname"
+                [attr.aria-invalid]="isInvalid('geburtsname')"
+                aria-describedby="geburtsname-err"
+              />
+            </isy-form-wrapper>
+          </div>
+          <div class="flex pt-6 flex-wrap">
+            <p-button type="submit" label="Speichern"></p-button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
