@@ -29,6 +29,7 @@
     "prettier:check": "prettier . --check",
     "prettier:fix": "prettier . --write"
   },
+  "prettier": "@isyfact/prettier-plugin",
   "private": true,
   "dependencies": {
     "@angular/animations": "^20.1.6",
@@ -64,8 +65,8 @@
     "@angular/compiler-cli": "^20.1.6",
     "@compodoc/compodoc": "^1.1.26",
     "@isyfact/eslint-plugin": "4.0.0",
+    "@isyfact/prettier-plugin": "1.0.0",
     "@ngneat/spectator": "^21.0.1",
-    "@stylistic/eslint-plugin": "^5.2.3",
     "@types/jasmine": "~5.1.8",
     "@types/node": "^24.2.1",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
