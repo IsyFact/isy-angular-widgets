@@ -1,6 +1,5 @@
 import {Validation} from './validation';
 import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import moment from 'moment';
 
 /**
  * Unit-Test der IsyValidators Klasse.
@@ -24,6 +23,30 @@ describe('Unit Test: Validation', () => {
     if (errorProp) {
       expect(errors[errorProp]).toBeDefined();
     }
+  }
+
+  function startOfDay(date: Date): Date {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  function addDays(date: Date, days: number): Date {
+    const d = new Date(date);
+    d.setDate(d.getDate() + days);
+    return d;
+  }
+
+  function addYears(date: Date, years: number): Date {
+    const d = new Date(date);
+    d.setFullYear(d.getFullYear() + years);
+    return d;
+  }
+
+  function formatMMYY(date: Date): string {
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yy = String(date.getFullYear() % 100).padStart(2, '0');
+    return `${mm}/${yy}`;
   }
 
   describe('unspecifiedDate when input is valid', () => {
@@ -160,14 +183,14 @@ describe('Unit Test: Validation', () => {
     });
 
     it('should return null if date is in the future', () => {
-      const control: AbstractControl = new FormControl(moment().startOf('day').add(1, 'day'));
+      const control: AbstractControl = new FormControl(addDays(startOfDay(new Date()), 1));
       const errors = Validation.isInFuture(control);
       expect(errors).toBeNull();
     });
 
     it('should return INVALIDFUTUREDATE if date is in the past', () => {
       const errorKey = 'INVALIDFUTUREDATE';
-      const control: AbstractControl = new FormControl(moment().startOf('day').subtract(1, 'day'));
+      const control: AbstractControl = new FormControl(addDays(startOfDay(new Date()), -1));
       const errors = Validation.isInFuture(control);
       errorHaveToBeDefined(errors, errorKey);
     });
@@ -181,14 +204,14 @@ describe('Unit Test: Validation', () => {
     });
 
     it('should return null if date is in the past', () => {
-      const control: AbstractControl = new FormControl(moment().startOf('day').subtract(1, 'day'));
+      const control: AbstractControl = new FormControl(addDays(startOfDay(new Date()), -1));
       const errors = Validation.isInPast(control);
       expect(errors).toBeNull();
     });
 
     it('should return INVALIDPASTDATE if date is in the future', () => {
       const errorKey = 'INVALIDPASTDATE';
-      const control: AbstractControl = new FormControl(moment().startOf('day').add(1, 'day'));
+      const control: AbstractControl = new FormControl(addDays(startOfDay(new Date()), 1));
       const errors = Validation.isInPast(control);
       errorHaveToBeDefined(errors, errorKey);
     });
@@ -233,20 +256,20 @@ describe('Unit Test: Validation', () => {
 
   describe('validCreditCardExpirationDate', () => {
     it('should return null if the date is in the future', () => {
-      const control: AbstractControl = new FormControl(moment().add(1, 'year').format('MM/YY'));
+      const control: AbstractControl = new FormControl(formatMMYY(addYears(new Date(), 1)));
       const errors = Validation.validCreditCardExpirationDate(control);
       expect(errors).toBeNull();
     });
 
     it('should return INVALIDCREDITCARDEXPIRATIONDATE if the date is in the past', () => {
       const errorKey = 'INVALIDCREDITCARDEXPIRATIONDATE';
-      const control: AbstractControl = new FormControl(moment().subtract(1, 'year').format('MM/YY'));
+      const control: AbstractControl = new FormControl(formatMMYY(addYears(new Date(), -1)));
       const errors = Validation.validCreditCardExpirationDate(control);
       errorHaveToBeDefined(errors, errorKey);
     });
 
     it('should return null if the date is a valid credit card expiration date', () => {
-      const actualDate = moment().format('MM/YY');
+      const actualDate = formatMMYY(new Date());
       const control: AbstractControl = new FormControl(actualDate);
       const errors = Validation.validCreditCardExpirationDate(control);
       expect(errors).toBeNull();
