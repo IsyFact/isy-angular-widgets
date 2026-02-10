@@ -8,12 +8,46 @@ import {
 import {din91379Characters} from './data/din-91379-characters';
 import {AllowedSigns} from './model/din-91379';
 
+const DateValidationLimits = {
+  MinMonth: 1,
+  MaxMonth: 12,
+  MinDay: 1,
+  MaxDay: 31,
+  MaxHour: 23,
+  MaxMinute: 59,
+  MaxSecond: 59,
+  CreditCardYearBase: 2000,
+  CreditCardYear2Max: 99,
+  YearDigits: 4
+} as const;
+
+interface ToDateCapable {
+  toDate: () => Date;
+}
+
 /**
  * List of user-defined validators. Can be extended with additional static validators
  */
 export class Validation {
   /**
+   * Checks whether the given value looks like a moment-like object that can be converted to a native `Date`.
+   * A value is considered “moment-like” if it is a non-null object and exposes a callable `toDate()` function.
+   * This is used for backward compatibility with Moment.js (and similar libraries) without importing Moment types.
+   *
+   * @param value The value to inspect (e.g. `Date`, string, number, or an object).
+   * @returns `true` if `value` is an object with a `toDate()` function; otherwise `false`.
+   */
+ private static hasToDate(value: unknown): value is ToDateCapable {
+   if (typeof value !== 'object' || value === null) return false;
+
+   const maybe = value as { toDate?: unknown };
+   return typeof maybe.toDate === 'function';
+ }
+
+  /**
    * Returns a new Date at the start of the day (00:00:00.000) in local time.
+   * @param date Date to normalize.
+   * @returns New Date set to start of day in local time.
    */
   private static startOfDay(date: Date): Date {
     const d = new Date(date);
@@ -23,42 +57,56 @@ export class Validation {
 
   /**
    * Returns a new Date at the start of the month (day 1, 00:00:00.000) in local time.
+   * @param date Date to normalize.
+   * @returns New Date set to first day of month in local time.
    */
   private static startOfMonth(date: Date): Date {
-    return new Date(date.getFullYear(), date.getMonth(), 1);
+    return new Date(date.getFullYear(), date.getMonth(), DateValidationLimits.MinDay);
   }
 
   /**
    * Validates a (year, month, day) triple and returns a local Date at 00:00 if valid.
+   * @param year Full year (e.g. 2026).
+   * @param month Month in range 1-12.
+   * @param day Day in range 1-31.
+   * @returns Local Date at 00:00:00.000 or null if invalid.
    */
   private static toLocalDate(year: number, month: number, day: number): Date | null {
-    if (month < 1 || month > 12 || day < 1 || day > 31) return null;
-    const d = new Date(year, month - 1, day);
-    if (d.getFullYear() !== year || d.getMonth() !== month - 1 || d.getDate() !== day) return null;
+    if (
+      month < DateValidationLimits.MinMonth ||
+      month > DateValidationLimits.MaxMonth ||
+      day < DateValidationLimits.MinDay ||
+      day > DateValidationLimits.MaxDay
+    ) {
+      return null;
+    }
+    const d = new Date(year, month - DateValidationLimits.MinDay, day);
+    if (d.getFullYear() !== year || d.getMonth() !== month - DateValidationLimits.MinDay || d.getDate() !== day) {
+      return null;
+    }
+
     d.setHours(0, 0, 0, 0);
     return d;
   }
-
   /**
    * Parses a date value for validators that previously accepted MomentInput.
    * Supports Date, ISO date-time strings, and common date-only formats used in this library.
    * Returns null if the input cannot be parsed to a valid Date.
+   * @param value Value to parse.
+   * @returns Parsed Date or null if invalid/unparseable.
    */
   private static parseDateValue(value: unknown): Date | null {
     if (value == null || value === '') return null;
 
-    // Date instance
     if (value instanceof Date) {
       return isNaN(value.getTime()) ? null : value;
     }
 
-    // Backward-compatibility: moment-like objects that expose toDate()
-    if (typeof value === 'object' && value !== null && typeof (value as any).toDate === 'function') {
-      const d = (value as any).toDate();
-      if (d instanceof Date && !isNaN(d.getTime())) return d;
+    if (Validation.hasToDate(value)) {
+      const d = value.toDate();
+      return d instanceof Date && !isNaN(d.getTime()) ? d : null;
     }
 
-    // Timestamp
     if (typeof value === 'number') {
       const d = new Date(value);
       return isNaN(d.getTime()) ? null : d;
@@ -68,49 +116,42 @@ export class Validation {
     const input = value.trim();
     if (!input) return null;
 
-    // ISO 8601 date-time with timezone (e.g. 1997-01-01T09:28:00Z / +01:00)
-    const isoDateTimeRegex =
-      /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
+    const isoDateTimeRegex = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
     if (isoDateTimeRegex.test(input)) {
       const d = new Date(input);
       return isNaN(d.getTime()) ? null : d;
     }
 
     // ISO date-only: YYYY-MM-DD
-    let m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input);
-    if (m) {
-      const year = Number(m[1]);
-      const month = Number(m[2]);
-      const day = Number(m[3]);
-      return Validation.toLocalDate(year, month, day);
+    let match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input);
+    if (match) {
+      const [, yearStr, monthStr, dayStr] = match;
+      return Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr));
     }
 
     // German: DD.MM.YYYY
-    m = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(input);
-    if (m) {
-      const day = Number(m[1]);
-      const month = Number(m[2]);
-      const year = Number(m[3]);
-      return Validation.toLocalDate(year, month, day);
+    match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(input);
+    if (match) {
+      const [, dayStr, monthStr, yearStr] = match;
+      return Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr));
     }
 
-    // Hyphenated: DD-MM-YYYY OR MM-DD-YYYY (try both, like moment with multiple formats)
-    m = /^(\d{2})-(\d{2})-(\d{4})$/.exec(input);
-    if (m) {
-      const a = Number(m[1]);
-      const b = Number(m[2]);
-      const year = Number(m[3]);
+    match = /^(\d{2})-(\d{2})-(\d{4})$/.exec(input);
+    if (match) {
+      const [, dayOrMonthStr, monthOrDayStr, yearStr] = match;
+      const dayOrMonth = Number(dayOrMonthStr);
+      const monthOrDay = Number(monthOrDayStr);
+      const year = Number(yearStr);
 
       // Try DD-MM-YYYY first
-      const asDdMm = Validation.toLocalDate(year, b, a);
+      const asDdMm = Validation.toLocalDate(year, monthOrDay, dayOrMonth);
       if (asDdMm) return asDdMm;
 
-      // Fallback to MM-DD-YYYY - could potentially cause the date to be parsed differently as expected. Not sure if this is a great idea. (Example: MM-DD-YYYY for 01-02-2000 would be interpreted above, as 1. February 2000 and not 2. January 2000)
-      const asMmDd = Validation.toLocalDate(year, a, b);
-      if (asMmDd) return asMmDd;
+      // Fallback to MM-DD-YYYY
+      return Validation.toLocalDate(year, dayOrMonth, monthOrDay);
     }
 
-    // As a last resort, try native parsing for other ISO-like strings
+    // Last resort: native parsing
     const d = new Date(input);
     return isNaN(d.getTime()) ? null : d;
   }
@@ -118,83 +159,112 @@ export class Validation {
   /**
    * Validates an input string against a limited set of moment-like format tokens used by this library.
    * This replaces moment(input, format, strict).isValid().
+   * @param input Input value.
+   * @param format Expected format token (subset).
+   * @param strict Whether parsing must match the format exactly.
+   * @returns true if valid for the given format; false otherwise.
    */
   private static isValidByFormat(input: string, format: string, strict: boolean): boolean {
     const value = (input ?? '').toString().trim();
     if (!value) return false;
 
-    // Special-case: DD.MM.YYYY with non-strict parsing should allow partial input like "1.1." or "1.1.1"
+    // DD.MM.YYYY (non-strict partials)
     if (format === 'DD.MM.YYYY' && !strict) {
-      const m = /^(\d{1,2})\.(\d{1,2})\.(\d{0,4})$/.exec(value);
-      if (!m) return false;
-      const day = Number(m[1]);
-      const month = Number(m[2]);
-      const yearStr = m[3] ?? '';
-      const year = yearStr.length ? Number(yearStr.padStart(4, '0')) : new Date().getFullYear();
+      const match = /^(\d{1,2})\.(\d{1,2})\.(\d{0,4})$/.exec(value);
+      if (!match) return false;
+
+      const [, dayStr, monthStr, yearRaw = ''] = match;
+      const day = Number(dayStr);
+      const month = Number(monthStr);
+      const year = yearRaw.length
+        ? Number(yearRaw.padStart(DateValidationLimits.YearDigits, '0'))
+        : new Date().getFullYear();
+
       return Validation.toLocalDate(year, month, day) !== null;
     }
 
     // YYYY-MM-DD
     if (format === 'YYYY-MM-DD') {
-      const m = (strict ? /^(\d{4})-(\d{2})-(\d{2})$/ : /^(\d{4})-(\d{1,2})-(\d{1,2})$/).exec(value);
-      if (!m) return false;
-      const year = Number(m[1]);
-      const month = Number(m[2]);
-      const day = Number(m[3]);
-      return Validation.toLocalDate(year, month, day) !== null;
+      const match = (strict ? /^(\d{4})-(\d{2})-(\d{2})$/ : /^(\d{4})-(\d{1,2})-(\d{1,2})$/).exec(value);
+      if (!match) return false;
+
+      const [, yearStr, monthStr, dayStr] = match;
+      return Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr)) !== null;
     }
 
     // DD.MM.YYYY (strict)
     if (format === 'DD.MM.YYYY') {
-      const m = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(value);
-      if (!m) return false;
-      const day = Number(m[1]);
-      const month = Number(m[2]);
-      const year = Number(m[3]);
-      return Validation.toLocalDate(year, month, day) !== null;
+      const match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(value);
+      if (!match) return false;
+
+      const [, dayStr, monthStr, yearStr] = match;
+      return Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr)) !== null;
     }
 
     // HH:mm:ss
     if (format === 'HH:mm:ss') {
-      const m = (strict ? /^(\d{2}):(\d{2}):(\d{2})$/ : /^(\d{1,2}):(\d{1,2}):(\d{1,2})$/).exec(value);
-      if (!m) return false;
-      const hh = Number(m[1]);
-      const mm = Number(m[2]);
-      const ss = Number(m[3]);
-      return hh >= 0 && hh <= 23 && mm >= 0 && mm <= 59 && ss >= 0 && ss <= 59;
+      const match = (strict ? /^(\d{2}):(\d{2}):(\d{2})$/ : /^(\d{1,2}):(\d{1,2}):(\d{1,2})$/).exec(value);
+      if (!match) return false;
+
+      const [, hhStr, mmStr, ssStr] = match;
+      const hh = Number(hhStr);
+      const mm = Number(mmStr);
+      const ss = Number(ssStr);
+
+      return (
+        hh >= 0 &&
+        hh <= DateValidationLimits.MaxHour &&
+        mm >= 0 &&
+        mm <= DateValidationLimits.MaxMinute &&
+        ss >= 0 &&
+        ss <= DateValidationLimits.MaxSecond
+      );
     }
 
-    // YYYY-MM-DDTHH:mm:ss[Z] (literal Z at the end)
+    // YYYY-MM-DDTHH:mm:ss[Z]
     if (format === 'YYYY-MM-DDTHH:mm:ss[Z]') {
-      const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/.exec(value);
-      if (!m) return false;
-      const year = Number(m[1]);
-      const month = Number(m[2]);
-      const day = Number(m[3]);
-      const hh = Number(m[4]);
-      const mm = Number(m[5]);
-      const ss = Number(m[6]);
-      if (Validation.toLocalDate(year, month, day) === null) return false;
-      return hh >= 0 && hh <= 23 && mm >= 0 && mm <= 59 && ss >= 0 && ss <= 59;
+      const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/.exec(value);
+      if (!match) return false;
+
+      const [, yearStr, monthStr, dayStr, hhStr, mmStr, ssStr] = match;
+      if (Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr)) === null) return false;
+
+      const hh = Number(hhStr);
+      const mm = Number(mmStr);
+      const ss = Number(ssStr);
+
+      return (
+        hh >= 0 &&
+        hh <= DateValidationLimits.MaxHour &&
+        mm >= 0 &&
+        mm <= DateValidationLimits.MaxMinute &&
+        ss >= 0 &&
+        ss <= DateValidationLimits.MaxSecond
+      );
     }
 
-    // MM/YY (credit card expiration)
+    // MM/YY
     if (format === 'MM/YY') {
-      const m = /^(\d{2})\/(\d{2})$/.exec(value);
-      if (!m) return false;
-      const month = Number(m[1]);
-      const year2 = Number(m[2]);
-      return month >= 1 && month <= 12 && year2 >= 0 && year2 <= 99;
+      const match = /^(\d{2})\/(\d{2})$/.exec(value);
+      if (!match) return false;
+
+      const [, monthStr, year2Str] = match;
+      const month = Number(monthStr);
+      const year2 = Number(year2Str);
+
+      return (
+        month >= DateValidationLimits.MinMonth &&
+        month <= DateValidationLimits.MaxMonth &&
+        year2 >= 0 &&
+        year2 <= DateValidationLimits.CreditCardYear2Max
+      );
     }
 
-    // Fallback: for unknown formats, do not guess in strict mode.
     if (strict) return false;
 
-    // Non-strict fallback: accept anything that can be parsed by native Date.
     const d = new Date(value);
     return !isNaN(d.getTime());
   }
-
 
   /**
    * If the specified value is a valid date, it will be checked if the date is in the future.
@@ -203,14 +273,13 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {INVALIDFUTUREDATE: true} if the validation fails; null otherwise
    */
-  static isInFuture(c: AbstractControl<any>): ValidationErrors | null {
+  static isInFuture(c: AbstractControl): ValidationErrors | null {
     const today = Validation.startOfDay(new Date());
     const dateValue = Validation.parseDateValue(c.value);
 
     if (dateValue && dateValue.getTime() <= today.getTime()) {
       return {INVALIDFUTUREDATE: true};
     }
-
     return null;
   }
 
@@ -221,7 +290,7 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {INVALIDPASTDATE: true} if the validation fails; null otherwise
    */
-  static isInPast(c: AbstractControl<any>): ValidationErrors | null {
+  static isInPast(c: AbstractControl): ValidationErrors | null {
     const today = Validation.startOfDay(new Date());
     const dateValue = Validation.parseDateValue(c.value);
 
@@ -309,18 +378,17 @@ export class Validation {
    * @returns A validator function with the given configuration
    */
   static dateFormat(dateFormat: string, strict: boolean, messageKey: string): ValidatorFn {
-    return (c: AbstractControl<any>): ValidationErrors | null => {
+    return (c: AbstractControl): ValidationErrors | null => {
       const input = c.value ?? null;
-      if (!input) {
-        return null;
-      }
+      if (!input) return null;
 
       // If a Date (or moment-like) is provided, treat it as a valid date value.
       if (input instanceof Date) {
         return isNaN(input.getTime()) ? {[messageKey]: {format: dateFormat}} : null;
       }
-      if (typeof input === 'object' && input !== null && typeof (input as any).toDate === 'function') {
-        const d = (input as any).toDate();
+
+      if (Validation.hasToDate(input)) {
+        const d = input.toDate();
         if (d instanceof Date) {
           return isNaN(d.getTime()) ? {[messageKey]: {format: dateFormat}} : null;
         }
@@ -332,7 +400,6 @@ export class Validation {
       if (!dateFormat || !isValid) {
         return {[messageKey]: {format: dateFormat}};
       }
-
       return null;
     };
   }
@@ -344,13 +411,11 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {INVALIDCREDITCARDEXPIRATIONDATE: true} if the validation fails; null otherwise
    */
-  static validCreditCardExpirationDate(c: AbstractControl<any>): ValidationErrors | null {
+  static validCreditCardExpirationDate(c: AbstractControl): ValidationErrors | null {
     const today = Validation.startOfMonth(new Date());
     const input = (c.value as string) ?? '';
 
-    if (input === '') {
-      return null;
-    }
+    if (input === '') return null;
 
     // Strictly validate "MM/YY"
     if (!Validation.isValidByFormat(input, 'MM/YY', true)) {
@@ -363,13 +428,13 @@ export class Validation {
       return {INVALIDCREDITCARDEXPIRATIONDATE: true};
     }
 
-    const month = Number(match[1]);
-    const year2 = Number(match[2]);
-
+    const [, monthStr, year2Str] = match;
+    const month = Number(monthStr);
+    const year2 = Number(year2Str);
     // Moment's "YY" parsing maps to a 4-digit year; we follow the common 2000-2099 mapping.
-    const year = 2000 + year2;
+    const year = DateValidationLimits.CreditCardYearBase + year2;
 
-    const expDate = new Date(year, month - 1, 1);
+    const expDate = new Date(year, month - DateValidationLimits.MinDay, DateValidationLimits.MinDay);
     expDate.setHours(0, 0, 0, 0);
 
     if (isNaN(expDate.getTime()) || expDate.getTime() < today.getTime()) {
