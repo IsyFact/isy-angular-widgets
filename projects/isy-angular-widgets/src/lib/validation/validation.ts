@@ -33,16 +33,15 @@ export class Validation {
    * Checks whether the given value looks like a moment-like object that can be converted to a native `Date`.
    * A value is considered “moment-like” if it is a non-null object and exposes a callable `toDate()` function.
    * This is used for backward compatibility with Moment.js (and similar libraries) without importing Moment types.
-   *
    * @param value The value to inspect (e.g. `Date`, string, number, or an object).
    * @returns `true` if `value` is an object with a `toDate()` function; otherwise `false`.
    */
- private static hasToDate(value: unknown): value is ToDateCapable {
-   if (typeof value !== 'object' || value === null) return false;
+  private static hasToDate(value: unknown): value is ToDateCapable {
+    if (typeof value !== 'object' || value === null) return false;
 
-   const maybe = value as { toDate?: unknown };
-   return typeof maybe.toDate === 'function';
- }
+    const maybe = value as {toDate?: unknown};
+    return typeof maybe.toDate === 'function';
+  }
 
   /**
    * Returns a new Date at the start of the day (00:00:00.000) in local time.
@@ -379,6 +378,7 @@ export class Validation {
    */
   static dateFormat(dateFormat: string, strict: boolean, messageKey: string): ValidatorFn {
     return (c: AbstractControl): ValidationErrors | null => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const input = c.value ?? null;
       if (!input) return null;
 

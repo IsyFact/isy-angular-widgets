@@ -25,24 +25,46 @@ describe('Unit Test: Validation', () => {
     }
   }
 
+  /**
+   * Returns a copy of the date normalized to local start of day.
+   * @param date Source date.
+   * @returns Date at 00:00:00.000 local time.
+   */
   function startOfDay(date: Date): Date {
     const d = new Date(date);
     d.setHours(0, 0, 0, 0);
     return d;
   }
 
+  /**
+   * Adds a number of days to a date and returns a new Date instance.
+   * @param date Source date.
+   * @param days Number of days to add.
+   * @returns Shifted date.
+   */
   function addDays(date: Date, days: number): Date {
     const d = new Date(date);
     d.setDate(d.getDate() + days);
     return d;
   }
 
+  /**
+   * Adds a number of years to a date and returns a new Date instance.
+   * @param date Source date.
+   * @param years Number of years to add.
+   * @returns Shifted date.
+   */
   function addYears(date: Date, years: number): Date {
     const d = new Date(date);
     d.setFullYear(d.getFullYear() + years);
     return d;
   }
 
+  /**
+   * Formats a date as credit-card expiration string in MM/YY.
+   * @param date Source date.
+   * @returns Formatted month/year.
+   */
   function formatMMYY(date: Date): string {
     const mm = String(date.getMonth() + 1).padStart(2, '0');
     const yy = String(date.getFullYear() % 100).padStart(2, '0');
