@@ -34,7 +34,7 @@ const defaultHeight = 30;
 
 /**
  * A wizard that guides the user step by step through series of forms.
- * Each side needs to have the @link{WizardDirective}.
+ * Each side needs to have the {@link WizardDirective}.
  */
 @Component({
   standalone: true,

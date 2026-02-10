@@ -3,6 +3,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateComponent} from './incomplete-date.component';
 import {Validation} from '@isy-angular-widgets/public-api';
 import {InputMask} from 'primeng/inputmask';
+import {IncompleteDateService} from './incomplete-date.service';
 
 enum CursorPosition {
   DayFirstDigit = 0,
@@ -14,18 +15,24 @@ enum CursorPosition {
 
 describe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
+  let spectator: Spectator<IncompleteDateComponent>;
   let onChange: (value: string) => void = () => {};
   let onTouched: unknown = () => {};
   let input: HTMLInputElement;
-  const keyEvent = new KeyboardEvent('keydown', {
-    key: '.',
-    code: '190'
-  });
   const errorKey = 'INVALIDUNSPECIFIEDDATE';
-  let spectator: Spectator<IncompleteDateComponent>;
+
   const createComponent = createComponentFactory({
     component: IncompleteDateComponent,
-    imports: [IncompleteDateComponent]
+    imports: [IncompleteDateComponent],
+    detectChanges: false,
+    providers: [
+      {
+        provide: IncompleteDateService,
+        useValue: {
+          transformValue: (v: string): string => v
+        }
+      }
+    ]
   });
 
   /**
@@ -39,35 +46,27 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   }
 
   /**
-   * Sets up and simulates a keyboard event on the input element for testing purposes.
-   * This function updates the input value, dispatches the provided keyboard event,
-   * sets the cursor position, updates component properties related to the last input,
-   * and triggers relevant component methods to reflect the changes.
-   * @param keyEvent - The keyboard event to dispatch on the input element.
-   * @param value - The value to set on the input element before dispatching the event.
-   * @param cursorPosition - The position to set the cursor within the input element.
+   * Do NOT patch KeyboardEvent.target (causes "Cannot redefine property: target")
+   * For component logic, only lastKeyPressed + lastInputElement are needed.
+   * @param key The last key that was pressed (used by the component logic to decide whether to autocomplete).
+   * @param value The current input value to apply before triggering the model change logic.
+   * @param cursorPosition The cursor position to set on the input before triggering the model change logic.
    */
-  function setupEvent(keyEvent: KeyboardEvent, value: string, cursorPosition: number): void {
+  function setupEvent(key: string, value: string, cursorPosition: number): void {
     input.value = value;
-    input.dispatchEvent(keyEvent);
     input.setSelectionRange(cursorPosition, cursorPosition);
 
     component.lastInputElement = input;
-    component.lastKeyPressed = keyEvent.key;
-    component.onKeydown(keyEvent);
+    component.lastKeyPressed = key;
     component.onModelChange(value);
-    spectator.detectChanges();
   }
 
   /**
-   * Simulate pressing the keys in sequence
-   * Dispatching a keydown event in a unit test simulates only the event itself and does not automatically trigger the default behavior
-   * that a real keydown event would cause in a browser (like changing an input value).
-   * Thus the value of the input element is set manually before dispatching the keydown event in the setupEvent (onKeydown) function.
-   * @param sequence the input sequence
+   * Types a sequence of keys into the InputMask-backed input and triggers the component's model-change logic
+   * after each key press to emulate user typing behavior (including cursor advancement over dot separators).
+   * @param sequence Keys to type in order (e.g. digits or '.').
    */
   function typeSequence(sequence: string[]): void {
-    // The input mask has to be initially set since dispatching the keydown event alone does not alter the input value.
     const initialDateStr = (input.value = '__.__.____');
     input.focus();
 
@@ -77,36 +76,36 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     updating the input for the next iteration.
     */
     sequence.forEach((key) => {
-      const keyEvent = new KeyboardEvent('keydown', {key: key});
       input.selectionStart =
         input.selectionStart === 2 || input.selectionStart === 5 ? input.selectionStart + 1 : input.selectionStart;
 
       if (key === '.') input.value = input.value.substring(0, input.selectionStart!);
       else input.value = input.value.substring(0, input.selectionStart!) + key;
 
-      const cursorPosition = input.selectionStart;
-      input.value += initialDateStr.substring(cursorPosition!);
-      setupEvent(keyEvent, input.value, cursorPosition!);
-      spectator.detectChanges();
+      const cursorPosition = input.selectionStart!;
+      input.value += initialDateStr.substring(cursorPosition);
+
+      setupEvent(key, input.value, cursorPosition);
     });
   }
 
   beforeEach(() => {
     spectator = createComponent();
     component = spectator.component;
+    spectator.detectChanges();
     init();
-    input = spectator.query('p-inputmask .p-inputmask') as HTMLInputElement;
+    input = spectator.query('p-inputmask input') as HTMLInputElement;
+    expect(input).toBeTruthy();
+    component.field = {inputViewChild: {nativeElement: input}} as unknown as InputMask;
   });
 
   it('NG_VALUE_ACCESSOR should be covered', () => {
     const valueAccessor = spectator.fixture.debugElement.injector.get(NG_VALUE_ACCESSOR);
-    spectator.fixture.detectChanges();
     expect(valueAccessor).not.toBeUndefined();
   });
 
   it('NG_VALIDATORS should be covered', () => {
     const validators = spectator.fixture.debugElement.injector.get(NG_VALIDATORS);
-    spectator.fixture.detectChanges();
     expect(validators).not.toBeUndefined();
   });
 
@@ -136,6 +135,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should emit an event on input change', () => {
     const onInputSpy = spyOn(component.onInput, 'emit');
+    const keyEvent = new Event('input');
 
     component.inputValue = 'xx.__.____';
     spectator.fixture.detectChanges();
@@ -187,7 +187,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   testCases1.forEach(({inputVal, cursor, expected}) => {
     it(`should autocomplete ${inputVal} at cursor ${cursor} to ${expected}`, () => {
       input.value = inputVal;
-      setupEvent(keyEvent, inputVal, cursor);
+      setupEvent('.', inputVal, cursor);
       expect(input.value).toBe(expected);
     });
   });
@@ -203,19 +203,6 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(onChange).not.toHaveBeenCalled();
     expect(onTouched).not.toHaveBeenCalled();
   });
-
-  /* it('should correctly respond to class attribute changes', () => {
-    component.ngAfterViewInit();
-    const inputMask = spectator.query('p-inputmask') as HTMLElement;
-    const hostElement = spectator.element;
-    expect(inputMask.classList.contains('ng-invalid')).toBe(false);
-    hostElement.classList.add('ng-invalid');
-    // fakesyn and tick do not work
-    setTimeout(() => {
-      expect(inputMask).toBeTruthy();
-      expect(inputMask.classList.contains('ng-invalid')).toBe(true);
-    }, 50);
-  }); */
 
   it('should handle NG_VALUE_ACCESSOR and NG_VALIDATORS', () => {
     expect(spectator.fixture.debugElement.injector.get(NG_VALUE_ACCESSOR)).toBeTruthy();
@@ -234,11 +221,10 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('should emit input change event', () => {
+    const evt = new Event('input');
     const spy = spyOn(component.onInput, 'emit');
-    component.inputValue = 'xx.__.____';
-    spectator.detectChanges();
-    component.onInputChange(keyEvent);
-    expect(spy).toHaveBeenCalledWith(keyEvent);
+    component.onInputChange(evt);
+    expect(spy).toHaveBeenCalledWith(evt);
   });
 
   it('should return null if date is valid', () => {
@@ -249,24 +235,14 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should return INVALIDUNSPECIFIEDDATE if the day is invalid', () => {
     const control: AbstractControl = new FormControl('50.11.2023');
-
     const errors = component.validate(control);
-    if (!errors) {
-      throw new Error('errors is not defined');
-    }
-
-    expect(errors[errorKey]).toBeDefined();
+    expect(errors?.[errorKey]).toBeDefined();
   });
 
   it('should return INVALIDUNSPECIFIEDDATE if the month is invalid', () => {
     const control: AbstractControl = new FormControl('11.50.2023');
-
     const errors = component.validate(control);
-    if (!errors) {
-      throw new Error('errors is not defined');
-    }
-
-    expect(errors[errorKey]).toBeDefined();
+    expect(errors?.[errorKey]).toBeDefined();
   });
 
   const testCases2 = [
@@ -301,16 +277,12 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should convert date format to transfer format', () => {
     component.transferISO8601 = true;
-    const input = '01.01.2024';
-    const expectedOutput = '2024-01-01';
-    const result = component.convertToTransferDateFormat(input);
-    expect(result).toBe(expectedOutput);
+    expect(component.convertToTransferDateFormat('01.01.2024')).toBe('2024-01-01');
   });
 
   it('should return the same value if transferISO8601 is false', () => {
-    const input = '01.01.2024';
-    const result = component.convertToTransferDateFormat(input);
-    expect(result).toBe(input);
+    component.transferISO8601 = false;
+    expect(component.convertToTransferDateFormat('01.01.2024')).toBe('01.01.2024');
   });
 
   it('should clear invalid input on blur', () => {
@@ -365,9 +337,8 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('should update lastKeyPressed and lastInputElement on onKeydown', () => {
-    const event = new KeyboardEvent('keydown', {key: '1'});
-    Object.defineProperty(event, 'target', {value: input});
-    component.onKeydown(event);
+    const evt = {key: '1', target: input} as unknown as KeyboardEvent;
+    component.onKeydown(evt as unknown as Event);
     expect(component.lastKeyPressed).toBe('1');
     expect(component.lastInputElement).toBe(input);
   });
@@ -408,7 +379,6 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should set inputValue to empty if inputValue contains _ onBlur', () => {
     component.inputValue = 'xx.__.____';
-    component.field = {inputViewChild: {nativeElement: input}} as unknown as InputMask;
     component.onBlur();
     expect(component.inputValue).toBe('');
     expect(input.value).toBe('');

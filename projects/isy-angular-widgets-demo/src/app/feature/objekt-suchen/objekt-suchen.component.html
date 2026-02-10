@@ -10,7 +10,7 @@
   <div class="grid mt-3">
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.id' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.id' | translate"
         fieldId="id"
         [control]="idForm.get('id')! | formControl"
       >
@@ -19,7 +19,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
         fieldId="first-name"
         [control]="persoenlicheInformationenForm.get('vorname')! | formControl"
       >
@@ -35,7 +35,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"
         fieldId="last-name"
         [control]="persoenlicheInformationenForm.get('nachname')! | formControl"
       >
@@ -51,7 +51,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.geburtsname' | translate"
         fieldId="birth-name"
         [control]="geburtsInformationenForm.get('geburtsname')! | formControl"
       >
@@ -60,7 +60,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.geburtsdatum' | translate"
         fieldId="birth-date"
         [control]="geburtsInformationenForm.get('geburtsdatum')! | formControl"
       >
@@ -68,9 +68,10 @@
           inputId="birth-date"
           dateFormat="dd.mm.yy"
           [(ngModel)]="person.personalien.geburtsdatum"
-          [iconDisplay]="'input'"
+          iconDisplay="input"
           [showIcon]="true"
-          styleClass="w-full"
+          inputStyleClass="w-full"
+          class="w-full"
           appendTo="body"
         >
         </p-datepicker>
@@ -78,7 +79,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.geburtsort' | translate"
         fieldId="birth-place"
         [control]="geburtsInformationenForm.get('geburtsort')! | formControl"
       >
@@ -87,7 +88,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.gender' | translate"
         fieldId="gender"
         [control]="persoenlicheInformationenForm.get('gender')! | formControl"
       >
@@ -96,7 +97,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
         fieldId="nationality"
         [control]="geburtsInformationenForm.get('staatsangehoerigkeit')! | formControl"
       >
@@ -107,7 +108,7 @@
           [options]="laender"
           [(ngModel)]="person.personalien.staatsangehoerigkeit"
           [showClear]="person.personalien.staatsangehoerigkeit === '' ? false : true"
-          styleClass="w-full"
+          class="w-full"
           appendTo="body"
         >
           @if (person.personalien.staatsangehoerigkeit) {
@@ -132,14 +133,14 @@
       id="search-button"
       styleClass="mr-1"
       [label]="'isyAngularWidgetsDemo.actions.search' | translate"
-      [iconPos]="'left'"
-      [icon]="'pi pi-search'"
+      iconPos="left"
+      icon="pi pi-search"
       (onClick)="findPerson()"
     >
     </p-button>
     <p-button
       [label]="'isyAngularWidgetsDemo.actions.clearSeebach' | translate"
-      [iconPos]="'left'"
+      iconPos="left"
       [disabled]="!enableClearSearch()"
       (onClick)="clearSearch()"
       [outlined]="true"
@@ -173,47 +174,47 @@
       <div class="grid mt-3">
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.id' | translate }}"
+            [label]="'isyAngularWidgetsDemo.labels.id' | translate"
             fieldId="edit-id"
             [control]="editForm.get('editID')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <input id="edit-id" class="w-full" type="text" pInputText [formControlName]="'editID'" />
+            <input id="edit-id" class="w-full" type="text" pInputText formControlName="editID" />
           </isy-form-wrapper>
         </div>
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+            [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
             fieldId="edit-vorname"
             [control]="editForm.get('editVorname')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <input id="edit-vorname" class="w-full" type="text" pInputText [formControlName]="'editVorname'" />
+            <input id="edit-vorname" class="w-full" type="text" pInputText formControlName="editVorname" />
           </isy-form-wrapper>
         </div>
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+            [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"
             fieldId="edit-nachname"
             [control]="editForm.get('editNachname')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <input id="edit-nachname" class="w-full" type="text" pInputText [formControlName]="'editNachname'" />
+            <input id="edit-nachname" class="w-full" type="text" pInputText formControlName="editNachname" />
           </isy-form-wrapper>
         </div>
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
+            [label]="'isyAngularWidgetsDemo.labels.geburtsname' | translate"
             fieldId="edit-geburtsname"
             [control]="editForm.get('editGeburtsname')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <input id="edit-geburtsname" class="w-full" type="text" pInputText [formControlName]="'editGeburtsname'" />
+            <input id="edit-geburtsname" class="w-full" type="text" pInputText formControlName="editGeburtsname" />
           </isy-form-wrapper>
         </div>
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}"
+            [label]="'isyAngularWidgetsDemo.labels.geburtsdatum' | translate"
             fieldId="edit-geburtsdatum"
             [control]="editForm.get('editGeburtsdatum')! | formControl"
             [validationMessages]="{required: ''}"
@@ -221,10 +222,10 @@
             <p-datepicker
               inputId="edit-geburtsdatum"
               dateFormat="dd.mm.yy"
-              [formControlName]="'editGeburtsdatum'"
-              [iconDisplay]="'input'"
+              formControlName="editGeburtsdatum"
+              iconDisplay="input"
               [showIcon]="true"
-              styleClass="w-full"
+              class="w-full"
               appendTo="body"
             >
             </p-datepicker>
@@ -232,27 +233,27 @@
         </div>
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}"
+            [label]="'isyAngularWidgetsDemo.labels.geburtsort' | translate"
             fieldId="edit-geburtsort"
             [control]="editForm.get('editGeburtsort')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <input id="edit-geburtsort" class="w-full" type="text" pInputText [formControlName]="'editGeburtsort'" />
+            <input id="edit-geburtsort" class="w-full" type="text" pInputText formControlName="editGeburtsort" />
           </isy-form-wrapper>
         </div>
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+            [label]="'isyAngularWidgetsDemo.labels.gender' | translate"
             fieldId="edit-gender"
             [control]="editForm.get('editGender')! | formControl"
             [validationMessages]="{required: ''}"
           >
-            <input id="edit-gender" class="w-full" type="text" pInputText [formControlName]="'editGender'" />
+            <input id="edit-gender" class="w-full" type="text" pInputText formControlName="editGender" />
           </isy-form-wrapper>
         </div>
         <div class="col-12 xl:col-6">
           <isy-form-wrapper
-            label="{{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}"
+            [label]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
             fieldId="edit-nationality"
             [control]="editForm.get('editStaatsangehoerigkeit')! | formControl"
             [validationMessages]="{required: ''}"
@@ -263,9 +264,9 @@
               [ariaLabel]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
               [options]="laender"
               [showClear]="editForm.controls.editStaatsangehoerigkeit.value === '' ? false : true"
-              [formControlName]="'editStaatsangehoerigkeit'"
+              formControlName="editStaatsangehoerigkeit"
               [editable]="true"
-              styleClass="w-full"
+              class="w-full"
               appendTo="body"
             >
               <ng-template pTemplate="selectedItem">
@@ -328,7 +329,7 @@
         <div class="grid mt-5">
           <div class="col-12">
             <isy-form-wrapper
-              label="{{ 'isyAngularWidgetsDemo.labels.id' | translate }}"
+              [label]="'isyAngularWidgetsDemo.labels.id' | translate"
               fieldId="person-id"
               [control]="idForm.get('id')! | formControl"
               [validationMessages]="{required: ''}"
@@ -338,7 +339,7 @@
                 type="text"
                 class="w-full"
                 pInputText
-                [formControlName]="'id'"
+                formControlName="id"
                 (focus)="onFormControlFocus(idForm.controls.id)"
               />
             </isy-form-wrapper>
@@ -360,7 +361,7 @@
         <div class="grid mt-5">
           <div class="col-12">
             <isy-form-wrapper
-              label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
+              [label]="'isyAngularWidgetsDemo.labels.geburtsname' | translate"
               fieldId="geburtsname"
               [control]="geburtsInformationenForm.get('geburtsname')! | formControl"
               [validationMessages]="{required: ''}"
@@ -370,14 +371,14 @@
                 class="w-full"
                 type="text"
                 pInputText
-                [formControlName]="'geburtsname'"
+                formControlName="geburtsname"
                 (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsname)"
               />
             </isy-form-wrapper>
           </div>
           <div class="col-12">
             <isy-form-wrapper
-              label="{{ 'isyAngularWidgetsDemo.labels.geburtsort' | translate }}"
+              [label]="'isyAngularWidgetsDemo.labels.geburtsort' | translate"
               fieldId="geburtsort"
               [control]="geburtsInformationenForm.get('geburtsort')! | formControl"
               [validationMessages]="{required: ''}"
@@ -387,14 +388,14 @@
                 class="w-full"
                 type="text"
                 pInputText
-                [formControlName]="'geburtsort'"
+                formControlName="geburtsort"
                 (focus)="onFormControlFocus(geburtsInformationenForm.controls.geburtsort)"
               />
             </isy-form-wrapper>
           </div>
           <div class="col-12">
             <isy-form-wrapper
-              label="{{ 'isyAngularWidgetsDemo.labels.geburtsdatum' | translate }}"
+              [label]="'isyAngularWidgetsDemo.labels.geburtsdatum' | translate"
               fieldId="geburtdatum"
               [control]="geburtsInformationenForm.get('geburtsdatum')! | formControl"
               [validationMessages]="{required: ''}"
@@ -402,11 +403,11 @@
               <p-datepicker
                 inputId="geburtdatum"
                 dateFormat="dd.mm.yy"
-                [formControlName]="'geburtsdatum'"
-                [iconDisplay]="'input'"
+                formControlName="geburtsdatum"
+                iconDisplay="input"
                 [showIcon]="true"
                 appendTo="body"
-                styleClass="w-full"
+                class="w-full"
                 (focusout)="onFormControlFocus(geburtsInformationenForm.controls.geburtsdatum)"
               >
               </p-datepicker>
@@ -414,7 +415,7 @@
           </div>
           <div class="col-12">
             <isy-form-wrapper
-              label="{{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}"
+              [label]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
               fieldId="staatangehoerigkeit"
               [control]="geburtsInformationenForm.get('staatsangehoerigkeit')! | formControl"
               [validationMessages]="{required: ''}"
@@ -427,9 +428,9 @@
                 optionValue="name"
                 optionLabel="name"
                 [options]="countryMap"
-                [formControlName]="'staatsangehoerigkeit'"
+                formControlName="staatsangehoerigkeit"
                 appendTo="body"
-                styleClass="w-full"
+                class="w-full"
                 (focusout)="onFormControlFocus(geburtsInformationenForm.controls.staatsangehoerigkeit)"
               >
                 <ng-template let-land pTemplate="item">

@@ -2,14 +2,17 @@
 
 import 'zone.js';
 import 'zone.js/testing';
-import {getTestBed} from '@angular/core/testing';
-import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angular/platform-browser-dynamic/testing';
-import {ɵSharedStylesHost} from '@angular/platform-browser';
+import {NgModule, provideZoneChangeDetection} from '@angular/core';
+import {getTestBed} from '@angular/core/testing';;
+import {BrowserTestingModule, platformBrowserTesting} from '@angular/platform-browser/testing';
+
+// Angular 21 + Karma/Zone: stabilizes change detection / async behavior in tests
+@NgModule({
+  providers: [provideZoneChangeDetection()]
+})
+class AppTestingModule {}
 
 // Initialize the Angular testing environment.
-getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting(), {
+getTestBed().initTestEnvironment([BrowserTestingModule, AppTestingModule], platformBrowserTesting(), {
   teardown: {destroyAfterEach: true}
 });
-
-// Is Fixing the component style (very slow performance) overload after each test
-afterEach(() => getTestBed().inject(ɵSharedStylesHost).ngOnDestroy());

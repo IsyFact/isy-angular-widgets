@@ -1,3 +1,156 @@
+# Update Log - 08.02.2026
+
+## Migration auf Angular v21 & PrimeNG v21
+
+### 1. Aktualisierte Frameworks & Tools
+- Angular: v20 → **v21.1.2**
+- PrimeNG: v20 → **v21.1.1**
+- Core-Pakete & CLI aktualisiert
+- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/migration/v21) umgesetzt
+
+---
+
+### 2. **Breaking Changes**
+
+#### Unit-Tests (Mocks): `ng-mocks` ist unter Angular 21 nicht mehr kompatibel. Tests wurden von `ng-mocks`/`MockComponents(...)` auf eigene Standalone-Stubs und `overrideComponent(...)` umgestellt. Test-Setups können brechen, wenn bisheriges `ng-mocks`-Verhalten oder dessen Provider-Handling vorausgesetzt wurde.
+
+#### Unit-Tests (Test-Plattform): Modernisierung des Test-Setups: Wechsel von `BrowserDynamicTestingModule` / `platformBrowserDynamicTesting()` auf `BrowserTestingModule` / `platformBrowserTesting()` als Ersatz für deprecated „dynamic testing“-APIs. Anpassungen sind nötig, wenn das Setup implizit auf JIT oder `@angular/compiler` angewiesen war.
+
+#### Unit-Tests (Change Detection / Timing): Zur Stabilisierung unter Angular 21 (Karma/Zone) wurde `provideZoneChangeDetection()` im Test-Modul ergänzt. Dadurch können sich Scheduling und Timing ändern und einzelne asynchrone Tests beeinflusst werden.
+
+#### PrimeNG Animationen: PrimeNG v21 verwendet CSS-basierte Animationen aufgrund der Deprecation des Angular-Animations-Pakets. `showTransitionOptions` und `hideTransitionOptions` sind deprecated und haben keine Wirkung mehr (Properties existieren weiterhin, werden jedoch ignoriert).
+
+#### form-wrapper: Bei mehreren gleichzeitigen Validator-Errors kann sich die angezeigte Fehlermeldung ändern, da nun die Reihenfolge der `validationMessages`-Keys priorisiert wird (statt der zuvor implizit genutzten Reihenfolge aus `control.errors`).
+Zusätzlich ist `validationMessages` nun typseitig verpflichtend (`Record<string, string>`). Streng typisierte Tests oder Mocks können brechen, wenn zuvor `undefined` verwendet wurde.
+
+---
+
+### 3. Deprecations
+
+#### ngx-translate: Deprecated `TranslateService.currentLang` ersetzt – Nutzung von `getCurrentLang()` statt direktem Property-Zugriff.
+#### Angular Tests: Deprecated `BrowserDynamicTestingModule` / `platformBrowserDynamicTesting()` durch `BrowserTestingModule` und `platformBrowserTesting()` ersetzt.
+
+---
+
+### 4. Fixes
+
+#### form-wrapper: Klassenname-Fehler im Template behoben.
+#### Styling: Eingabefelder wieder korrekt auf volle Breite (`w-full`) gestylt, indem die Klasse vom Wrapper (`styleClass`) auf das Input-Element (`inputStyleClass`) verschoben wurde.
+#### PrimeNG: `severity`-Binding typensicher gemacht – nur gültige Severity-Werte werden übergeben, sonst `undefined`.
+
+---
+
+### 5. Refactoring
+
+#### PrimeNG: Attribut-Notation vereinheitlicht (z. B. `ariaLabel`).
+#### form-wrapper: Fehlertextgröße reduziert.
+#### Template: Template-Bindings von String-Interpolation (`attr="{{ … }}"`) auf Property Binding (`[attr]="…"` inkl. Pipes) umgestellt.
+#### Template: Statische Bindings vereinfacht: unnötige Property Bindings mit konstanten Strings (`[...]= '...'`) durch direkte Attribute ersetzt.
+
+---
+
+### 6. Änderungen in **_isy-angular-widgets_** (Bibliothek)
+
+#### Paketkonfiguration (`index.ts`)
+```ts
+addPackageToPackageJson(tree, '@angular/common', '^21.1.2');
+addPackageToPackageJson(tree, '@angular/core', '^21.1.2');
+addPackageToPackageJson(tree, 'primeng', '^21.1.1');
+addPackageToPackageJson(tree, '@primeuix/themes', '^2.0.3');
+```
+
+---
+
+### 7. Aktualisierte Abhängigkeiten
+
+#### Demo-App (`package.json`)
+```json
+{
+    "dependencies": {
+        "@angular/animations": "^21.1.2",
+		"@angular/cdk": "^21.1.2",
+		"@angular/common": "^21.1.2",
+		"@angular/compiler": "^21.1.2",
+		"@angular/core": "^21.1.2",
+		"@angular/forms": "^21.1.2",
+		"@angular/platform-browser": "^21.1.2",
+		"@angular/platform-browser-dynamic": "^21.1.2",
+		"@angular/router": "^21.1.2",
+		"@primeuix/themes": "^2.0.3",
+		"chart.js": "^4.5.1",
+		"primeng": "^21.1.1",
+		"zone.js": "~0.16.0"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^21.1.2",
+		"@angular-eslint/builder": "21.2.0",
+		"@angular-eslint/eslint-plugin": "21.2.0",
+		"@angular-eslint/eslint-plugin-template": "^21.2.0",
+		"@angular-eslint/schematics": "21.2.0",
+		"@angular-eslint/template-parser": "21.2.0",
+		"@angular/cli": "~21.1.2",
+		"@angular/compiler-cli": "^21.1.2",
+		"@compodoc/compodoc": "^1.2.1",
+		"@ngneat/spectator": "^22.1.0",
+		"@types/jasmine": "~6.0.0",
+		"@types/node": "^25.1.0",
+		"@typescript-eslint/eslint-plugin": "^8.54.0",
+		"@typescript-eslint/parser": "^8.54.0",
+		"eslint": "^9.39.2",
+		"eslint-plugin-jsdoc": "^62.5.0",
+		"jasmine-core": "~6.0.1",
+		"karma-jasmine-html-reporter": "~2.2.0",
+		"ng-packagr": "^21.1.0",
+		"prettier": "^3.8.1",
+		"typescript": "~5.9.3"
+    }
+}
+```
+
+#### Bibliothek (`package.json`)
+```json
+{
+  "peerDependencies": {
+    "@angular/common": "^21.1.2",
+    "@angular/core": "^21.1.2",
+    "primeng": "^21.1.1",
+    "@primeuix/themes": "^2.0.3"
+  },
+}
+```
+
+---
+
+### 8. Codequalität geprüft
+- **ESLint:** `npm run lint` → keine Fehler
+- **Prettier:** `npm run prettier:check` → bestanden
+
+---
+
+### 9. Tests durchgeführt
+- **Unit- & Integrationstests:** `npm run test` → alle Tests bestanden
+- **Manuelle Tests:** 
+  - UI geprüft
+  - Hauptfunktionalitäten erfolgreich validiert
+  - Keine kritischen Fehler festgestellt
+
+---
+
+## Zusammenfassung
+
+### Breaking Changes:
+- Tests: `ng-mocks` raus (Angular 21) → Stubs/`overrideComponent()`. Test-Platform modernisiert + provideZoneChangeDetection() → ggf. Timing/async Tests anpassen.
+- PrimeNG: Animationen jetzt CSS-basiert; show/hideTransitionOptions ohne Wirkung.
+- form-wrapper: Fehlermeldungs-Priorität bei mehreren Errors kann sich ändern; `validationMessages` ist nicht mehr optional.
+
+### Weitere Änderungen:
+- Migration auf Angular 21 & PrimeNG 21: Erfolgreich durchgeführt.
+- Veraltete Komponenten ersetzt, neue Features integriert.
+- Abhängigkeiten, Tests & Qualitätssicherung auf aktuellem Stand: Alle aktualisiert.
+- Alle Breaking Changes dokumentiert: Vollständige Dokumentation für Migration.
+
+---
+
 # Update Log - 08.08.2025
 
 ## Migration auf Angular v20 & PrimeNG v20

@@ -2,7 +2,6 @@ import {InputCharDialogComponent} from './input-char-dialog.component';
 import {By} from '@angular/platform-browser';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {MockComponent, MockModule} from 'ng-mocks';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
 import {createComponentFactory, Spectator, SpyObject} from '@ngneat/spectator';
@@ -11,6 +10,28 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
 import {ComponentFixture} from '@angular/core/testing';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {CharacterService} from '../../services/character.service';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+
+@Component({
+  selector: 'isy-input-char-preview',
+  template: '',
+  standalone: true
+})
+class MockInputCharPreviewComponent {
+  @Input() zeichenObjekt: Zeichenobjekt | null = null;
+}
+
+@Component({
+  selector: 'isy-multi-select-button',
+  template: '',
+  standalone: true
+})
+class MockMultiSelectButtonComponent {
+  @Input() dataToDisplay: unknown;
+  @Input() allButtonOptionsLabel = '';
+  @Output() valueChange = new EventEmitter<{group: string; value: string} | undefined>();
+}
 
 let spectator: Spectator<InputCharDialogComponent>;
 let mockWidgetsConfigService: SpyObject<WidgetsConfigService>;
@@ -23,26 +44,32 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
-    imports: [
-      MockModule(AccordionModule),
-      MockModule(SelectButtonModule),
-      MockModule(FormsModule),
-      MockComponent(InputCharPreviewComponent),
-      MockComponent(MultiSelectButtonComponent)
-    ],
-    mocks: [WidgetsConfigService]
+    imports: [AccordionModule, SelectButtonModule, FormsModule],
+    providers: [CharacterService],
+    mocks: [WidgetsConfigService],
+    detectChanges: false,
+
+    overrideComponents: [
+      [
+        InputCharDialogComponent,
+        {
+          remove: {imports: [InputCharPreviewComponent, MultiSelectButtonComponent]},
+          add: {imports: [MockInputCharPreviewComponent, MockMultiSelectButtonComponent]}
+        }
+      ]
+    ]
   });
+
+  const render = (): void => fixture.detectChanges(false);
 
   beforeEach(() => {
     spectator = createComponent();
     component = spectator.component;
+    fixture = spectator.fixture;
     mockWidgetsConfigService = spectator.inject(WidgetsConfigService);
     mockWidgetsConfigService.getTranslation.and.callFake((key: string) => key);
-    fixture = spectator.fixture;
     spectator.setInput('charList', sonderzeichenListe);
-    spectator.detectChanges();
-    component.ngOnChanges();
-    spectator.detectChanges();
+    render();
   });
 
   it('should create', () => {
@@ -61,15 +88,14 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     expect(resetDisplayedCharactersSpy).toHaveBeenCalled();
   });
 
-  it('should create a MutationObserver and call initSelectButtonsData on attribute changes', (done) => {
-    spyOn(component, 'initSelectButtonsData');
-    component.ngAfterViewInit();
-    const targetElement = spectator.element;
-    targetElement.setAttribute('ng-reflect-all-button-options-label', 'test');
-    setTimeout(() => {
-      expect(component.initSelectButtonsData).toHaveBeenCalled();
-      done();
-    }, 100);
+  it('should rebuild leftViewData when charList changes', () => {
+    const spy = spyOn(component, 'initSelectButtonsData').and.callThrough();
+
+    spectator.setInput('charList', [...sonderzeichenListe]);
+    render();
+
+    expect(spy).toHaveBeenCalled();
+    expect(component.leftViewData).toBeTruthy();
   });
 
   sonderzeichenListe.forEach((zeichen: Zeichenobjekt) => {
@@ -97,33 +123,21 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   bases.forEach((grundzeichen: string) => {
     it(`should show only characters with a selected base ${grundzeichen}`, () => {
       const headerBaseChars = mockWidgetsConfigService.getTranslation('inputChar.headerBaseChars') ?? '';
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
 
       component.onSelection({group: headerBaseChars, value: grundzeichen});
-      spectator.detectChanges();
 
-      const options = charactersSelectButton.options;
-      expect(options).toBeTruthy();
-
-      for (const char of options) {
+      expect(component.displayedCharacters.length).toBeGreaterThan(0);
+      for (const char of component.displayedCharacters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
       }
     });
 
     it(`should show all characters with a selected base ${grundzeichen}`, () => {
       const headerBaseChars = mockWidgetsConfigService.getTranslation('inputChar.headerBaseChars') ?? '';
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
 
       component.onSelection({group: headerBaseChars, value: grundzeichen});
-      spectator.detectChanges();
 
-      expect(charactersSelectButton.options.length).toEqual(
+      expect(component.displayedCharacters.length).toEqual(
         sonderzeichenListe.filter((char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen)
           .length
       );
@@ -131,35 +145,23 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-    it('should show only characters with a selected schriftzeichengruppe', () => {
+    it(`should show only characters with a selected schriftzeichengruppe ${schriftzeichengruppe}`, () => {
       const headerGroups = mockWidgetsConfigService.getTranslation('inputChar.headerGroups') ?? '';
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
 
-      component.onSelection({group: headerGroups, value: schriftzeichengruppe});
-      spectator.detectChanges();
+      component.onSelection({group: headerGroups, value: String(schriftzeichengruppe)});
 
-      const options = charactersSelectButton.options;
-      expect(options).toBeTruthy();
-
-      for (const character of options) {
+      expect(component.displayedCharacters.length).toBeGreaterThan(0);
+      for (const character of component.displayedCharacters) {
         expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
       }
     });
 
-    it('should show all characters with a selected schriftzeichengruppe', () => {
+    it(`should show all characters with a selected schriftzeichengruppe ${schriftzeichengruppe}`, () => {
       const headerGroups = mockWidgetsConfigService.getTranslation('inputChar.headerGroups') ?? '';
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
 
-      component.onSelection({group: headerGroups, value: schriftzeichengruppe});
-      spectator.detectChanges();
+      component.onSelection({group: headerGroups, value: String(schriftzeichengruppe)});
 
-      expect(charactersSelectButton.options.length).toEqual(
+      expect(component.displayedCharacters.length).toEqual(
         sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
       );
     });
@@ -170,7 +172,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
     imports: [AccordionModule, SelectButtonModule, FormsModule, InputCharPreviewComponent, MultiSelectButtonComponent],
-    providers: [WidgetsConfigService]
+    providers: [WidgetsConfigService, CharacterService]
   });
 
   beforeEach(() => {
@@ -183,7 +185,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   const selectOption = (selector: string, value: string): void => {
     const optionButton = fixture.debugElement
       .queryAll(By.css(selector))
-      .find((elem) => elem.nativeElement.textContent === value)?.nativeElement as HTMLElement;
+      .find((elem) => (elem.nativeElement.textContent ?? '').trim() === value)?.nativeElement as HTMLElement;
     expect(optionButton).toBeTruthy();
 
     optionButton.click();
@@ -191,7 +193,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   };
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    selectOption('.charset-selectbutton--1 p-togglebutton', schriftzeichengruppe);
+    selectOption('.charset-selectbutton--1 p-togglebutton', String(schriftzeichengruppe));
   };
 
   const selectBasis = (basis: string): void => {
@@ -210,29 +212,24 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
   bases.forEach((base: string) => {
     it(`should show only characters with a selected base ${base}`, () => {
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
-
       selectBasis(base);
 
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('.right-panel-side p-selectbutton')
+      ).componentInstance;
       const options = charactersSelectButton.options;
-      expect(options).toBeTruthy();
 
+      expect(options).toBeTruthy();
       for (const char of options) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(base);
       }
     });
 
     it(`should show all characters with a selected base ${base}`, () => {
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
-
       selectBasis(base);
-
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('.right-panel-side p-selectbutton')
+      ).componentInstance;
       expect(charactersSelectButton.options.length).toEqual(
         sonderzeichenListe.filter((char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === base).length
       );
@@ -240,30 +237,26 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   });
 
   groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-    it('should show only characters with a selected schriftzeichengruppe', () => {
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
-
+    it(`should show only characters with a selected schriftzeichengruppe ${schriftzeichengruppe}`, () => {
       selectSchriftzeichengruppe(schriftzeichengruppe);
 
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('.right-panel-side p-selectbutton')
+      ).componentInstance;
       const options = charactersSelectButton.options;
-      expect(options).toBeTruthy();
 
+      expect(options).toBeTruthy();
       for (const character of options) {
         expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
       }
     });
 
-    it('should show all characters with a selected schriftzeichengruppe', () => {
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectButton')
-      ).componentInstance;
-      expect(charactersSelectButton).toBeTruthy();
-
+    it(`should show all characters with a selected schriftzeichengruppe ${schriftzeichengruppe}`, () => {
       selectSchriftzeichengruppe(schriftzeichengruppe);
 
+      const charactersSelectButton = fixture.debugElement.query(
+        By.css('.right-panel-side p-selectbutton')
+      ).componentInstance;
       expect(charactersSelectButton.options.length).toEqual(
         sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
       );

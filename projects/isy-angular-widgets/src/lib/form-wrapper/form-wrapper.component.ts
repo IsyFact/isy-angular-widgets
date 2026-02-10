@@ -44,8 +44,8 @@ export class FormWrapperComponent implements OnInit {
   @Input() labelId?: string;
   @Input() fieldId!: string;
   @Input() control!: FormControl;
-  @Input() validationMessages?: {[key: string]: string} = {};
-  @Input() ifta: boolean = false;
+  @Input() validationMessages: Record<string, string> = {};
+  @Input() ifta = false;
 
   /**
    * Validates the control input on component initialization.
@@ -63,21 +63,15 @@ export class FormWrapperComponent implements OnInit {
    * @returns string | null The error message or null if no errors.
    */
   get errorMessage(): string | null {
-    if (this.control.errors && this.validationMessages) {
-      const errors = this.control.errors;
-      for (const errorName in errors) {
-        if (errors.hasOwnProperty(errorName)) {
-          return this.validationMessages[errorName];
-        }
-      }
-    }
-    return null;
+    const errors = this.control?.errors;
+    if (!errors) return null;
+
+    const preferredOrder = Object.keys(this.validationMessages ?? {});
+    const key = preferredOrder.find((k) => errors[k] != null) ?? Object.keys(errors)[0];
+
+    return key ? (this.validationMessages?.[key] ?? null) : null;
   }
 
-  /**
-   * Returns the CSS class for the label based on the current state.
-   * @returns The CSS class for the label.
-   */
   get labelOptionClass(): string {
     return this.ifta ? ' ifta' : ' static-label';
   }
@@ -89,7 +83,7 @@ export class FormWrapperComponent implements OnInit {
    * @returns The CSS class for the label.
    */
   get labelFilledClass(): string {
-    return this.control.value && this.ifta ? ' label--filled' : '';
+    return this.control?.value && this.ifta ? ' label--filled' : '';
   }
 
   /**
@@ -110,12 +104,7 @@ export class FormWrapperComponent implements OnInit {
    * @returns A boolean value indicating whether the error message should be shown.
    */
   shouldShowError(): boolean {
-    return (
-      this.errorMessage !== null &&
-      this.errorMessage !== '' &&
-      this.control.invalid &&
-      (this.control.touched || this.control.dirty)
-    );
+    return !!this.errorMessage && this.control.invalid && (this.control.touched || this.control.dirty);
   }
 
   /**

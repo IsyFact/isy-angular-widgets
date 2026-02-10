@@ -2,8 +2,8 @@ import {DOCUMENT} from '@angular/core';
 import {NavigationEnd, provideRouter, Router} from '@angular/router';
 import {AppComponent} from './app.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {Subject} from 'rxjs';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {of, Subject} from 'rxjs';
+import {InterpolatableTranslationObject, TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('Integration Tests: AppComponent', () => {
   let spectator: Spectator<AppComponent>;
@@ -57,10 +57,12 @@ describe('Integration Tests: AppComponent', () => {
 
   it('should setting up language', () => {
     const language = 'en';
-    expect(spectator.component.translate.currentLang).not.toEqual(language);
-    spectator.component.changeLanguage('en');
+    const translate = spectator.inject(TranslateService);
+    const fakeTranslations: InterpolatableTranslationObject = {};
+    spyOn(translate, 'use').and.returnValue(of(fakeTranslations));
+    spectator.component.changeLanguage(language);
     spectator.fixture.detectChanges();
-    expect(spectator.component.translate.currentLang).toEqual(language);
+    expect(translate.use).toHaveBeenCalledWith(language);
   });
 
   it('should return the english language', () => {

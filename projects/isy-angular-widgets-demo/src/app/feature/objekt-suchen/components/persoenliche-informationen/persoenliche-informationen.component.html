@@ -2,7 +2,7 @@
   <div class="grid mt-5">
     <div class="col-12">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"
         fieldId="nachname-dialog"
         [control]="form.get('nachname')! | formControl"
         [validationMessages]="{required: ''}"
@@ -12,23 +12,23 @@
           type="text"
           class="w-full"
           pInputText
-          [formControlName]="'nachname'"
+          formControlName="nachname"
           (focus)="onFormControlFocus(form.controls.nachname)"
         />
       </isy-form-wrapper>
     </div>
     <div class="col-12">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
         fieldId="vorname-dialog"
         [control]="form.get('vorname')! | formControl"
       >
-        <input id="vorname-dialog" type="text" class="w-full" pInputText [formControlName]="'vorname'" />
+        <input id="vorname-dialog" type="text" class="w-full" pInputText formControlName="vorname" />
       </isy-form-wrapper>
     </div>
     <div class="col-12">
       <isy-form-wrapper
-        label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+        [label]="'isyAngularWidgetsDemo.labels.gender' | translate"
         fieldId="gender-dialog"
         [control]="form.get('gender')! | formControl"
         [validationMessages]="{required: ''}"
@@ -38,7 +38,7 @@
           type="text"
           class="w-full"
           pInputText
-          [formControlName]="'gender'"
+          formControlName="gender"
           (focus)="onFormControlFocus(form.controls.gender)"
         />
       </isy-form-wrapper>

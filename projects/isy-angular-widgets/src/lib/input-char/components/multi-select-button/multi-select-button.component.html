@@ -16,7 +16,8 @@
           [options]="item.value"
           [(ngModel)]="models[item.key]"
           (onChange)="triggerUpdate(item.key)"
-          class="charset-selectbutton charset-selectbutton--{{ i }}"
+          class="charset-selectbutton"
+          [ngClass]="'charset-selectbutton--' + i"
         />
       </p-accordion-content>
     </p-accordion-panel>

@@ -4,7 +4,20 @@
     <div class="col-12 md:col-6 flex-column gap-2">
       <h2>Messages</h2>
       @for (message of messages; track message.key) {
-        <p-message [severity]="message.severity" [text]="message.detail" [closable]="false" />
+        <p-message
+          [severity]="
+            message.severity === 'success' ||
+            message.severity === 'info' ||
+            message.severity === 'warn' ||
+            message.severity === 'secondary' ||
+            message.severity === 'contrast' ||
+            message.severity === 'error'
+              ? message.severity
+              : undefined
+          "
+          [closable]="false"
+          >{{ message.detail }}</p-message
+        >
       }
     </div>
     <div class="col-12 md:col-6 flex-column gap-2">

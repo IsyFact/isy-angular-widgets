@@ -3,8 +3,8 @@
     <div class="p-toolbar-left">
       <p-button
         [link]="true"
-        label="{{ sidebarHomeButtonLabel }}"
-        ariaLabel="{{ sidebarHomeButtonAriaLabel }}"
+        [label]="sidebarHomeButtonLabel"
+        [ariaLabel]="sidebarHomeButtonAriaLabel"
         icon="pi pi-arrow-circle-left"
         (onClick)="navigateHome()"
       />

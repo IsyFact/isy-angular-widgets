@@ -2,14 +2,14 @@
   <isy-multi-select-button
     (valueChange)="onSelection($event)"
     [dataToDisplay]="leftViewData"
-    allButtonOptionsLabel="{{ configService.getTranslation('inputChar.headerAllCharacters') }}"
+    [allButtonOptionsLabel]="configService.getTranslation('inputChar.headerAllCharacters') ?? ''"
   ></isy-multi-select-button>
 </div>
 
 <div class="split right-panel-side">
   <p-selectbutton
     [options]="displayedCharacters"
-    [optionLabel]="'zeichen'"
+    optionLabel="zeichen"
     [(ngModel)]="selectedZeichenObjekt"
     class="flex-grow-1 overflow-y-scroll character-selectbutton"
   />

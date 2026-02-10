@@ -1,37 +1,67 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MegaMenu, MegaMenuModule, MegaMenuSub} from 'primeng/megamenu';
 import {ButtonModule} from 'primeng/button';
-import {MockComponents} from 'ng-mocks';
+import {MegaMenuItem} from 'primeng/api';
 import {HauptfensterComponent} from './hauptfenster.component';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
+import {SkipTarget} from './model/model';
+
+@Component({selector: 'p-megaMenu', standalone: true, template: ''})
+class MegaMenuStubComponent {
+  @Input() model: MegaMenuItem[] = [];
+}
+
+@Component({selector: 'p-megaMenuSub', standalone: true, template: ''})
+class MegaMenuSubStubComponent {}
+
+@Component({selector: 'isy-skip-links', standalone: true, template: ''})
+class SkipLinksStubComponent {
+  @Input() links: SkipTarget[] = [];
+}
 
 describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
   let component: HauptfensterComponent;
   let mockConfigService: jasmine.SpyObj<WidgetsConfigService>;
+
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
-    declarations: [MockComponents(MegaMenu, MegaMenuSub)],
+    detectChanges: false,
     mocks: [WidgetsConfigService],
-    imports: [ButtonModule]
+    overrideComponents: [
+      [
+        HauptfensterComponent,
+        {
+          set: {
+            imports: [
+              CommonModule,
+              ButtonModule,
+              MegaMenuStubComponent,
+              MegaMenuSubStubComponent,
+              SkipLinksStubComponent
+            ]
+          }
+        }
+      ]
+    ]
   });
 
-  const userInfo: UserInfo = {
-    displayName: 'Max Mustermann'
-  };
+  const userInfo: UserInfo = {displayName: 'Max Mustermann'};
 
   beforeEach(() => {
     spectator = createComponent({props: {userInfo}});
     component = spectator.component;
+
     mockConfigService = spectator.inject(WidgetsConfigService);
     mockConfigService.getTranslation.and.callFake((key: string) => {
       const translations: {[key: string]: string} = {
         'hauptfenster.logout': 'Abmelden'
       };
-      return translations[key];
+      return translations[key] ?? key;
     });
+
     spectator.detectChanges();
   });
 
@@ -41,18 +71,16 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
   it('should display the title input in Titelzeile', () => {
     const customTitle = 'Custom Title';
-    component.title = customTitle;
-    spectator.fixture.detectChanges();
-    const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
+    spectator.setInput('title', customTitle);
+    spectator.detectChanges();
 
+    const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
     expect(titelzeileEl.textContent).toEqual(customTitle);
   });
 
   it('should show "Abmelden" as the title of the logout button', () => {
-    const logoutTitle = 'Abmelden';
-    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLButtonElement;
-    const logoutButtonText = logoutButton.textContent ?? '';
-    expect(logoutButtonText.trim()).toEqual(logoutTitle);
+    const logoutButton = spectator.query('#isy-hauptfenster-logout-button') as HTMLElement;
+    expect((logoutButton.textContent ?? '').trim()).toEqual('Abmelden');
   });
 
   it('should call the logout function when the button is clicked', () => {
@@ -64,113 +92,107 @@ describe('Unit Tests: HauptfensterComponent', () => {
   });
 
   it('should have a hidden linksnavigation by default', () => {
-    const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
+    const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation');
     expect(linksnavigation).toBeFalsy();
   });
 
   it('should have a hidden informationsbereich by default', () => {
-    const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
+    const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich');
     expect(informationsbereich).toBeFalsy();
   });
 
   it('should use the provided Linksnavigation width', () => {
     const customLinksnavigationWidth = '10%';
-    component.linksNavigationWidth = customLinksnavigationWidth;
-    component.showLinksnavigation = true;
-    spectator.fixture.detectChanges();
+    spectator.setInput('linksNavigationWidth', customLinksnavigationWidth);
+    spectator.setInput('showLinksnavigation', true);
+    spectator.detectChanges();
+
     const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
     expect(linksnavigation.style.width).toEqual(customLinksnavigationWidth);
   });
 
   it('should use the provided Informationsbereich width', () => {
     const customInformationsbereichWidth = '10%';
-    component.informationsbereichWidth = customInformationsbereichWidth;
-    component.showInformationsbereich = true;
-    spectator.fixture.detectChanges();
+    spectator.setInput('informationsbereichWidth', customInformationsbereichWidth);
+    spectator.setInput('showInformationsbereich', true);
+    spectator.detectChanges();
+
     const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     expect(informationsbereich.style.width).toEqual(customInformationsbereichWidth);
   });
 
   it('should not change its Linksnavigation width when collapsed', () => {
-    component.showLinksnavigation = true;
-    spectator.fixture.detectChanges();
+    spectator.setInput('showLinksnavigation', true);
+    spectator.detectChanges();
+
     const linksnavigation = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
     (linksnavigation.querySelector('.p-button-text') as HTMLElement).click();
-    spectator.fixture.detectChanges();
+    spectator.detectChanges();
+
     const width = linksnavigation.style.width;
 
-    component.linksNavigationWidth = '20%';
-    spectator.fixture.detectChanges();
-
+    spectator.setInput('linksNavigationWidth', '20%');
+    spectator.detectChanges();
     expect(linksnavigation.style.width).toEqual(width);
 
-    component.linksNavigationWidth = '10%';
-    spectator.fixture.detectChanges();
-
+    spectator.setInput('linksNavigationWidth', '10%');
+    spectator.detectChanges();
     expect(linksnavigation.style.width).toEqual(width);
   });
 
   it('should not change its Informationsbereich width when collapsed', () => {
-    component.showInformationsbereich = true;
-    spectator.fixture.detectChanges();
+    spectator.setInput('showInformationsbereich', true);
+    spectator.detectChanges();
+
     const informationsbereich = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
     (informationsbereich.querySelector('.p-button-text') as HTMLElement).click();
-    spectator.fixture.detectChanges();
+    spectator.detectChanges();
+
     const width = informationsbereich.style.width;
 
-    component.linksNavigationWidth = '20%';
-    spectator.fixture.detectChanges();
-
+    spectator.setInput('informationsbereichWidth', '20%');
+    spectator.detectChanges();
     expect(informationsbereich.style.width).toEqual(width);
 
-    component.linksNavigationWidth = '10%';
-    spectator.fixture.detectChanges();
-
+    spectator.setInput('informationsbereichWidth', '10%');
+    spectator.detectChanges();
     expect(informationsbereich.style.width).toEqual(width);
   });
 
   it('should display the linksNavigationTitle when Linksnavigation is shown', () => {
-    component.showLinksnavigation = true;
-    const customLinksNavigationTitle = 'Custom Title';
-    component.linksNavigationTitle = customLinksNavigationTitle;
-
-    spectator.fixture.detectChanges();
+    spectator.setInput('showLinksnavigation', true);
+    spectator.setInput('linksNavigationTitle', 'Custom Title');
+    spectator.detectChanges();
 
     const labelElement = spectator.query('span.font-bold') as HTMLElement;
-
     expect(labelElement).toBeTruthy();
-    expect(labelElement.textContent).toContain(customLinksNavigationTitle);
+    expect(labelElement.textContent).toContain('Custom Title');
   });
 
   it('banner landmark/tag should be available', () => {
-    const div = spectator.query('header') as HTMLElement;
-    expect(div).not.toBeNull();
+    expect(spectator.query('header')).not.toBeNull();
   });
 
   it('main landmark/tag should be available', () => {
-    const div = spectator.query('main') as HTMLElement;
-    expect(div).not.toBeNull();
+    expect(spectator.query('main')).not.toBeNull();
   });
 
   it('nav landmark/tag should be available', () => {
-    const div = spectator.query('nav') as HTMLElement;
-    expect(div).not.toBeNull();
+    expect(spectator.query('nav')).not.toBeNull();
   });
 
   it('aside (linksnavigation) landmark/tag should be available', () => {
-    component.showLinksnavigation = true;
+    spectator.setInput('showLinksnavigation', true);
     spectator.detectChanges();
 
-    const div = spectator.query('.isy-hauptfenster-linksnavigation') as HTMLElement;
-    expect(div).not.toBeNull();
+    expect(spectator.query('.isy-hauptfenster-linksnavigation')).not.toBeNull();
   });
 
   it('aside (informationsbereich) landmark/tag should be available', () => {
-    component.showInformationsbereich = true;
+    spectator.setInput('showInformationsbereich', true);
     spectator.detectChanges();
 
-    const div = spectator.query('.isy-hauptfenster-informationsbereich') as HTMLElement;
-    expect(div).not.toBeNull();
+    expect(spectator.query('.isy-hauptfenster-informationsbereich')).not.toBeNull();
   });
 });
 

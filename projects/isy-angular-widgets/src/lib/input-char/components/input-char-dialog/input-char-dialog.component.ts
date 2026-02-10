@@ -97,29 +97,44 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
 
   private readonly elementRef = inject(ElementRef);
 
-  ngAfterViewInit(): void {
-    // Observe changes in the DOM using MutationObserver
-    this.mutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.target.textContent) {
-          this.initSelectButtonsData();
-        }
-      });
-    });
+  private rebuildTimer?: ReturnType<typeof setTimeout>;
+  private readonly rebuildDelayMs = 100;
 
-    // Start observing the target element for attribute changes
-    this.mutationObserver.observe(this.elementRef.nativeElement as HTMLElement, {
-      characterData: true,
-      subtree: true
-    });
-  }
+ngAfterViewInit(): void {
+  this.mutationObserver = new MutationObserver((mutations) => {
+    const relevant = mutations.some(m =>
+      m.type === 'characterData' ||
+      (m.type === 'childList' && (m.addedNodes.length > 0 || m.removedNodes.length > 0))
+    );
+    if (!relevant) return;
 
-  ngOnDestroy(): void {
-    // Disconnect the MutationObserver to avoid memory leaks
-    if (this.mutationObserver) {
-      this.mutationObserver.disconnect();
+    if (this.rebuildTimer) {
+      clearTimeout(this.rebuildTimer);
     }
+
+    this.rebuildTimer = setTimeout(() => {
+      this.initSelectButtonsData();
+      this.rebuildTimer = undefined;
+    }, this.rebuildDelayMs);
+  });
+
+  this.mutationObserver.observe(this.elementRef.nativeElement as HTMLElement, {
+    subtree: true,
+    characterData: true,
+    childList: true
+  });
+}
+
+ngOnDestroy(): void {
+  if (this.mutationObserver) {
+    this.mutationObserver.disconnect();
+    this.mutationObserver = undefined;
   }
+  if (this.rebuildTimer) {
+    clearTimeout(this.rebuildTimer);
+    this.rebuildTimer = undefined;
+  }
+}
 
   /**
    * Fire on input changes

@@ -1,3 +1,7 @@
+# 21.0.0 -
+## Features
+- IFS-5039: Upgrade der Angularversion und PrimeNG-Bibliothek von 20 auf 21 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
+
 # 20.0.0 - 08.08.2025
 ## Features
 - IFS-4761: Upgrade der Angularversion von 19 auf 20 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
