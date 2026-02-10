@@ -109,6 +109,8 @@ export class IncompleteDateService {
    * @returns True or false as a boolean
    */
   private dateIsUnspecified(dateStr: string): boolean {
-    return !(new RegExp(UNSPECIFIED_DATE_REGEX).exec(dateStr) === null && new RegExp(this.DATE_CHAR).exec(dateStr) === null);
+    return !(
+      new RegExp(UNSPECIFIED_DATE_REGEX).exec(dateStr) === null && new RegExp(this.DATE_CHAR).exec(dateStr) === null
+    );
   }
 }

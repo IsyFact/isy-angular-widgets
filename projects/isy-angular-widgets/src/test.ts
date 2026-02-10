@@ -3,7 +3,7 @@
 import 'zone.js';
 import 'zone.js/testing';
 import {NgModule, provideZoneChangeDetection} from '@angular/core';
-import {getTestBed} from '@angular/core/testing';;
+import {getTestBed} from '@angular/core/testing';
 import {BrowserTestingModule, platformBrowserTesting} from '@angular/platform-browser/testing';
 
 // Angular 21 + Karma/Zone: stabilizes change detection / async behavior in tests

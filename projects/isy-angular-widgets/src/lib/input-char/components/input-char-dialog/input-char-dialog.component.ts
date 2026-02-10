@@ -100,41 +100,42 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
   private rebuildTimer?: ReturnType<typeof setTimeout>;
   private readonly rebuildDelayMs = 100;
 
-ngAfterViewInit(): void {
-  this.mutationObserver = new MutationObserver((mutations) => {
-    const relevant = mutations.some(m =>
-      m.type === 'characterData' ||
-      (m.type === 'childList' && (m.addedNodes.length > 0 || m.removedNodes.length > 0))
-    );
-    if (!relevant) return;
+  ngAfterViewInit(): void {
+    this.mutationObserver = new MutationObserver((mutations) => {
+      const relevant = mutations.some(
+        (m) =>
+          m.type === 'characterData' ||
+          (m.type === 'childList' && (m.addedNodes.length > 0 || m.removedNodes.length > 0))
+      );
+      if (!relevant) return;
 
+      if (this.rebuildTimer) {
+        clearTimeout(this.rebuildTimer);
+      }
+
+      this.rebuildTimer = setTimeout(() => {
+        this.initSelectButtonsData();
+        this.rebuildTimer = undefined;
+      }, this.rebuildDelayMs);
+    });
+
+    this.mutationObserver.observe(this.elementRef.nativeElement as HTMLElement, {
+      subtree: true,
+      characterData: true,
+      childList: true
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect();
+      this.mutationObserver = undefined;
+    }
     if (this.rebuildTimer) {
       clearTimeout(this.rebuildTimer);
-    }
-
-    this.rebuildTimer = setTimeout(() => {
-      this.initSelectButtonsData();
       this.rebuildTimer = undefined;
-    }, this.rebuildDelayMs);
-  });
-
-  this.mutationObserver.observe(this.elementRef.nativeElement as HTMLElement, {
-    subtree: true,
-    characterData: true,
-    childList: true
-  });
-}
-
-ngOnDestroy(): void {
-  if (this.mutationObserver) {
-    this.mutationObserver.disconnect();
-    this.mutationObserver = undefined;
+    }
   }
-  if (this.rebuildTimer) {
-    clearTimeout(this.rebuildTimer);
-    this.rebuildTimer = undefined;
-  }
-}
 
   /**
    * Fire on input changes
