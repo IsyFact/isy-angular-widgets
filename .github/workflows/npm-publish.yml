@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
       - name: Validate latest changelog entry
         run: |
           FIRST_CHANGELOG_LINE=$(head -n 1 CHANGELOG.md)
@@ -45,7 +45,7 @@ jobs:
           npm run prettier:check
           npm run lint
       - name: Run tests
-        run: npm test
+        run: npm test -- --watch=false
       - name: Build artifact
         run: npm run build
       - name: Upload Build
@@ -71,7 +71,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
       - name: Generate SBOM
         run: npx @cyclonedx/cyclonedx-npm --output-file isy-angular-widgets-sbom.json
       - name: Upload SBOM

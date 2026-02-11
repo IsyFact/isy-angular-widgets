@@ -2,6 +2,8 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
+  const isCI = !!process.env.CI;
+  
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -25,7 +27,7 @@ module.exports = function (config) {
       Headless: {
         base: 'ChromeHeadless',
         // Need to disable sandbox in container environments.
-        flags: ['--no-sandbox', '--disable-setuid-sandbox']
+        flags: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--remote-debugging-port=9222']
       }
     },
     jasmineHtmlReporter: {
@@ -40,9 +42,13 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
     browsers: ['ChromeHeadless'],
-    singleRun: false,
-    restartOnFileChange: true
+    singleRun: isCI,
+    autoWatch: !isCI,
+    restartOnFileChange: !isCI,
+    browserDisconnectTolerance: 3,
+    browserDisconnectTimeout: 10000,
+    browserNoActivityTimeout: 120000,
+    captureTimeout: 120000,
   });
 };
