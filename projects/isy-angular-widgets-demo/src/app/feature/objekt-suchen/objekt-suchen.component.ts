@@ -332,9 +332,9 @@ export class ObjektSuchenComponent {
     const delay = 3000;
     setTimeout(() => {
       this.personen$ =
-        this.person.id === ''
-          ? this.personService.findPersonenByParameters(this.person)
-          : this.personService.findPersonById(this.person.id);
+        this.person.id !== ''
+          ? this.personService.findPersonById(this.person.id)
+          : this.personService.findPersonenByParameters(this.person);
       this.tbLoadingStatus = false;
     }, delay);
   }
