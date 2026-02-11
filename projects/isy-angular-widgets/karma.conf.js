@@ -26,7 +26,13 @@ module.exports = function (config) {
     customLaunchers: {
       Headless: {
         base: 'ChromeHeadless',
-        flags: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--remote-debugging-port=9222']
+        flags: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--remote-debugging-port=9222'
+        ]
       }
     },
     jasmineHtmlReporter: {
@@ -48,6 +54,6 @@ module.exports = function (config) {
     browserDisconnectTolerance: 3,
     browserDisconnectTimeout: 10000,
     browserNoActivityTimeout: 120000,
-    captureTimeout: 120000,
+    captureTimeout: 120000
   });
 };

@@ -3,7 +3,7 @@
 
 module.exports = function (config) {
   const isCI = !!process.env.CI;
-  
+
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -27,7 +27,13 @@ module.exports = function (config) {
       Headless: {
         base: 'ChromeHeadless',
         // Need to disable sandbox in container environments.
-        flags: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu', '--remote-debugging-port=9222']
+        flags: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--remote-debugging-port=9222'
+        ]
       }
     },
     jasmineHtmlReporter: {
@@ -49,6 +55,6 @@ module.exports = function (config) {
     browserDisconnectTolerance: 3,
     browserDisconnectTimeout: 10000,
     browserNoActivityTimeout: 120000,
-    captureTimeout: 120000,
+    captureTimeout: 120000
   });
 };
