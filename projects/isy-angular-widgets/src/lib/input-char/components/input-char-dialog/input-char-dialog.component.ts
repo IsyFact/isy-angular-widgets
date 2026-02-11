@@ -85,8 +85,9 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
 
   /**
    * The MutationObserver used to observe changes in the DOM.
+   * @internal
    */
-  private mutationObserver?: MutationObserver;
+  mutationObserver?: MutationObserver;
 
   /**
    * A service used to translate labels within the widgets library.

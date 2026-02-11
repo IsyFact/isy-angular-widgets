@@ -172,6 +172,91 @@ describe('Unit Tests: InputCharDialogComponent', () => {
       }
     }
   });
+
+  it('should create and setup MutationObserver in ngAfterViewInit', () => {
+    expect(component.mutationObserver).toBeTruthy();
+  });
+
+  it('should observe DOM changes on the component element', () => {
+    const observeSpy = jasmine.createSpy('observe');
+    const disconnectSpy = jasmine.createSpy('disconnect');
+    const MockMutationObserver = function (this: Record<string, unknown>, _cb: MutationCallback): void {
+      this.observe = observeSpy;
+      this.disconnect = disconnectSpy;
+    };
+
+    spyOn(globalThis, 'MutationObserver' as keyof typeof globalThis).and.callFake(
+      MockMutationObserver as unknown as typeof MutationObserver
+    );
+
+    component.ngAfterViewInit();
+
+    expect(observeSpy).toHaveBeenCalledWith(
+      fixture.nativeElement,
+      jasmine.objectContaining({
+        subtree: true,
+        characterData: true,
+        childList: true
+      })
+    );
+  });
+
+  it('should call initSelectButtonsData when relevant mutations occur', (done) => {
+    const initSelectButtonsDataSpy = spyOn(component, 'initSelectButtonsData');
+    const testElement = document.createElement('div');
+    fixture.nativeElement.appendChild(testElement);
+
+    setTimeout(() => {
+      expect(initSelectButtonsDataSpy).toHaveBeenCalled();
+      done();
+    }, 150);
+  });
+
+  it('should ignore irrelevant mutations', (done) => {
+    const initSelectButtonsDataSpy = spyOn(component, 'initSelectButtonsData');
+
+    if (component.mutationObserver) {
+      component.mutationObserver.disconnect();
+      component.mutationObserver = new MutationObserver((mutations) => {
+        const relevant = mutations.some(
+          (m) =>
+            m.type === 'characterData' ||
+            (m.type === 'childList' && (m.addedNodes.length > 0 || m.removedNodes.length > 0))
+        );
+        if (!relevant) return;
+      });
+
+      component.mutationObserver.observe(fixture.nativeElement, {
+        subtree: true,
+        characterData: true,
+        childList: true
+      });
+    }
+
+    setTimeout(() => {
+      expect(initSelectButtonsDataSpy).not.toHaveBeenCalled();
+      done();
+    }, 150);
+  });
+
+  it('should clear rebuild timer on ngOnDestroy', () => {
+    const clearTimeoutSpy = spyOn(globalThis, 'clearTimeout');
+
+    const testComponent = component as unknown as {rebuildTimer?: ReturnType<typeof setTimeout>};
+    testComponent.rebuildTimer = setTimeout(() => {}, 999999);
+
+    component.ngOnDestroy();
+
+    expect(clearTimeoutSpy).toHaveBeenCalled();
+    expect(testComponent.rebuildTimer).toBeUndefined();
+  });
+
+  it('should disconnect MutationObserver on ngOnDestroy', () => {
+    const disconnectSpy = spyOn(component.mutationObserver!, 'disconnect');
+    component.ngOnDestroy();
+    expect(disconnectSpy).toHaveBeenCalled();
+    expect(component.mutationObserver).toBeUndefined();
+  });
 });
 
 describe('Integration Tests: InputCharDialogComponent', () => {
