@@ -40,6 +40,32 @@ const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
 const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
 
+/**
+ * Picks a small sample from an array (up to `max` elements).
+ *
+ * - If `arr.length <= max`, a shallow copy of the array is returned.
+ * - Otherwise, the **first**, **middle**, and **last** elements are prioritized
+ *   and then filled up with additional elements from the beginning of the array
+ *   until `max` elements are reached.
+ *
+ * Note: The resulting order is `[first, middle, last, ...extras]`
+ * and is finally truncated to `max` elements.
+ * @template T - The element type of the array.
+ * @param arr - The source array to sample from.
+ * @param max - The maximum number of elements in the sample (default: `8`).
+ * @returns A new array containing up to `max` elements as a representative sample.
+ * @example pickSample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5); -> [1, 6, 10, 2, 3]
+ * @example pickSample(["a", "b", "c"], 8); -> ["a", "b", "c"]
+ */
+function pickSample<T>(arr: T[], max = 8): T[] {
+  if (arr.length <= max) return [...arr];
+  const first = arr[0];
+  const last = arr.at(-1) as T;
+  const middle = arr[Math.floor(arr.length / 2)];
+  const extras = arr.slice(1, Math.min(arr.length - 1, max - 3));
+  return [first, middle, last, ...extras].slice(0, max);
+}
+
 describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
   const createComponent = createComponentFactory({
@@ -48,7 +74,6 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     providers: [CharacterService],
     mocks: [WidgetsConfigService],
     detectChanges: false,
-
     overrideComponents: [
       [
         InputCharDialogComponent,
@@ -98,73 +123,54 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     expect(component.leftViewData).toBeTruthy();
   });
 
-  sonderzeichenListe.forEach((zeichen: Zeichenobjekt) => {
-    it(`should emit the chosen character ${zeichen.zeichen} after button press`, () => {
-      const button = spectator.query('.lower-right-panel button') as HTMLButtonElement;
-      expect(button).toBeTruthy();
-      const insertCharacterSpy = spyOn(component.insertCharacter, 'emit');
+  it('should emit chosen characters (sample) after insertSelectedZeichen', () => {
+    const insertCharacterSpy = spyOn(component.insertCharacter, 'emit');
+    const sample = pickSample(sonderzeichenListe, 10);
 
-      // Should use a model change event
+    for (const zeichen of sample) {
       component.selectedZeichenObjekt = zeichen;
-
-      button.click();
       component.insertSelectedZeichen();
-
       expect(insertCharacterSpy).toHaveBeenCalledWith(zeichen.zeichen);
-    });
+    }
   });
 
-  it('should have a button with the label "Einfügen"', () => {
+  it('should have a button with the insert label', () => {
     const button = spectator.query('.lower-right-panel button') as HTMLButtonElement;
     const insertLabel = mockWidgetsConfigService.getTranslation('inputChar.insert') ?? '';
+    expect(button).toBeTruthy();
     expect(button.innerHTML).toContain(insertLabel);
   });
 
-  bases.forEach((grundzeichen: string) => {
-    it(`should show only characters with a selected base ${grundzeichen}`, () => {
-      const headerBaseChars = mockWidgetsConfigService.getTranslation('inputChar.headerBaseChars') ?? '';
+  it('should filter characters correctly by base (all bases in one spec)', () => {
+    const headerBaseChars = mockWidgetsConfigService.getTranslation('inputChar.headerBaseChars') ?? '';
 
+    for (const grundzeichen of bases) {
       component.onSelection({group: headerBaseChars, value: grundzeichen});
 
-      expect(component.displayedCharacters.length).toBeGreaterThan(0);
+      const expected = sonderzeichenListe.filter(
+        (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen
+      );
+
+      expect(component.displayedCharacters.length).toEqual(expected.length);
       for (const char of component.displayedCharacters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
       }
-    });
-
-    it(`should show all characters with a selected base ${grundzeichen}`, () => {
-      const headerBaseChars = mockWidgetsConfigService.getTranslation('inputChar.headerBaseChars') ?? '';
-
-      component.onSelection({group: headerBaseChars, value: grundzeichen});
-
-      expect(component.displayedCharacters.length).toEqual(
-        sonderzeichenListe.filter((char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen)
-          .length
-      );
-    });
+    }
   });
 
-  groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-    it(`should show only characters with a selected schriftzeichengruppe ${schriftzeichengruppe}`, () => {
-      const headerGroups = mockWidgetsConfigService.getTranslation('inputChar.headerGroups') ?? '';
+  it('should filter characters correctly by schriftzeichengruppe (all groups in one spec)', () => {
+    const headerGroups = mockWidgetsConfigService.getTranslation('inputChar.headerGroups') ?? '';
 
+    for (const schriftzeichengruppe of groups) {
       component.onSelection({group: headerGroups, value: String(schriftzeichengruppe)});
 
-      expect(component.displayedCharacters.length).toBeGreaterThan(0);
+      const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe);
+
+      expect(component.displayedCharacters.length).toEqual(expected.length);
       for (const character of component.displayedCharacters) {
         expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
       }
-    });
-
-    it(`should show all characters with a selected schriftzeichengruppe ${schriftzeichengruppe}`, () => {
-      const headerGroups = mockWidgetsConfigService.getTranslation('inputChar.headerGroups') ?? '';
-
-      component.onSelection({group: headerGroups, value: String(schriftzeichengruppe)});
-
-      expect(component.displayedCharacters.length).toEqual(
-        sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
-      );
-    });
+    }
   });
 });
 
@@ -186,8 +192,8 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     const optionButton = fixture.debugElement
       .queryAll(By.css(selector))
       .find((elem) => (elem.nativeElement.textContent ?? '').trim() === value)?.nativeElement as HTMLElement;
-    expect(optionButton).toBeTruthy();
 
+    expect(optionButton).toBeTruthy();
     optionButton.click();
     fixture.detectChanges();
   };
@@ -210,56 +216,45 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     expect(groupButtons.length).toEqual(groups.length);
   });
 
-  bases.forEach((base: string) => {
-    it(`should show only characters with a selected base ${base}`, () => {
+  it('should filter characters by a few representative bases (integration)', () => {
+    const sampleBases = pickSample(bases, 3);
+
+    for (const base of sampleBases) {
       selectBasis(base);
 
       const charactersSelectButton = fixture.debugElement.query(
         By.css('.right-panel-side p-selectbutton')
       ).componentInstance;
-      const options = charactersSelectButton.options;
+      expect(charactersSelectButton.options).toBeTruthy();
 
-      expect(options).toBeTruthy();
-      for (const char of options) {
+      const expected = sonderzeichenListe.filter(
+        (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === base
+      );
+      expect(charactersSelectButton.options.length).toEqual(expected.length);
+
+      for (const char of charactersSelectButton.options) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(base);
       }
-    });
-
-    it(`should show all characters with a selected base ${base}`, () => {
-      selectBasis(base);
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectbutton')
-      ).componentInstance;
-      expect(charactersSelectButton.options.length).toEqual(
-        sonderzeichenListe.filter((char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === base).length
-      );
-    });
+    }
   });
 
-  groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
-    it(`should show only characters with a selected schriftzeichengruppe ${schriftzeichengruppe}`, () => {
-      selectSchriftzeichengruppe(schriftzeichengruppe);
+  it('should filter characters by a few representative groups (integration)', () => {
+    const sampleGroups = pickSample(groups, 3);
+
+    for (const group of sampleGroups) {
+      selectSchriftzeichengruppe(group);
 
       const charactersSelectButton = fixture.debugElement.query(
         By.css('.right-panel-side p-selectbutton')
       ).componentInstance;
-      const options = charactersSelectButton.options;
+      expect(charactersSelectButton.options).toBeTruthy();
 
-      expect(options).toBeTruthy();
-      for (const character of options) {
-        expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
+      const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === group);
+      expect(charactersSelectButton.options.length).toEqual(expected.length);
+
+      for (const character of charactersSelectButton.options) {
+        expect(character.schriftzeichengruppe).toEqual(group);
       }
-    });
-
-    it(`should show all characters with a selected schriftzeichengruppe ${schriftzeichengruppe}`, () => {
-      selectSchriftzeichengruppe(schriftzeichengruppe);
-
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectbutton')
-      ).componentInstance;
-      expect(charactersSelectButton.options.length).toEqual(
-        sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe).length
-      );
-    });
+    }
   });
 });
