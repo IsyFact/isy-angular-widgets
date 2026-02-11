@@ -72,6 +72,10 @@ export class FormWrapperComponent implements OnInit {
     return key ? (this.validationMessages?.[key] ?? null) : null;
   }
 
+  /**
+   * Returns the CSS class for the label based on the current state.
+   * @returns The CSS class for the label.
+   */
   get labelOptionClass(): string {
     return this.ifta ? ' ifta' : ' static-label';
   }
