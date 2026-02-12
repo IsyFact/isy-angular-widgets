@@ -1,6 +1,11 @@
 import {Validation} from './validation';
 import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
+interface ToDateCapable {
+  toDate: () => Date;
+}
+
+
 /**
  * Unit-Test der IsyValidators Klasse.
  */
@@ -509,8 +514,11 @@ describe('Unit Test: Validation', () => {
       const allowedCharacters = Validation.getAllowedCharactersByType('unknown' as 'A' | 'B' | 'C' | 'D' | 'E');
       expect(allowedCharacters).toEqual({allowed: {}, diacritic: {}});
     });
+
     /**
      * Formats a date as ISO date-only string in local time: YYYY-MM-DD
+     * @param date Source date.
+     * @returns ISO date-only string (local).
      */
     function formatYYYYMMDDLocal(date: Date): string {
       const yyyy = String(date.getFullYear()).padStart(4, '0');
@@ -521,6 +529,8 @@ describe('Unit Test: Validation', () => {
 
     /**
      * Formats a date as German date string in local time: DD.MM.YYYY
+     * @param date Source date.
+     * @returns German date string (local).
      */
     function formatDDMMYYYYLocal(date: Date): string {
       const dd = String(date.getDate()).padStart(2, '0');
@@ -531,6 +541,8 @@ describe('Unit Test: Validation', () => {
 
     /**
      * Formats a date as hyphen date string in local time: DD-MM-YYYY
+     * @param date Source date.
+     * @returns Hyphen date string (local).
      */
     function formatDDMMYYYYHyphenLocal(date: Date): string {
       const dd = String(date.getDate()).padStart(2, '0');
@@ -541,12 +553,15 @@ describe('Unit Test: Validation', () => {
 
     /**
      * Creates a "moment-like" object exposing toDate() (for backward compatibility paths).
+     * @param date Source date.
+     * @returns Object exposing toDate().
      */
-    function momentLike(date: Date) {
+    function momentLike(date: Date): ToDateCapable {
       return {
-        toDate: () => new Date(date)
+        toDate: (): Date => new Date(date)
       };
     }
+
 
     describe('internal helpers (private) - parseDateValue', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -583,7 +598,7 @@ describe('Unit Test: Validation', () => {
       });
 
       it('should return null for moment-like object with invalid toDate()', () => {
-        const bad = {toDate: () => new Date('invalid')};
+        const bad: ToDateCapable = {toDate: (): Date => new Date('invalid')};
         expect(parseDateValue(bad)).toBeNull();
       });
 
