@@ -5,7 +5,6 @@ interface ToDateCapable {
   toDate: () => Date;
 }
 
-
 /**
  * Unit-Test der IsyValidators Klasse.
  */
@@ -561,7 +560,6 @@ describe('Unit Test: Validation', () => {
         toDate: (): Date => new Date(date)
       };
     }
-
 
     describe('internal helpers (private) - parseDateValue', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
