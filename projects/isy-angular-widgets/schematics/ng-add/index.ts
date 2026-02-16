@@ -128,7 +128,7 @@ function applyAssetsToWorkspace(workspace: Workspace, context: SchematicContext,
  * Loads the angular workspace store in angular.json.
  * @param tree List with angular.json properties
  * @returns Workspace Part structure of angular.json file
- * @throws SchematicsException if workspace is not available
+ * @throws {SchematicsException} if workspace is not available
  */
 function loadWorkspace(tree: Tree): Workspace {
   const workspaceConfig = tree.read('/angular.json');
@@ -145,7 +145,7 @@ function loadWorkspace(tree: Tree): Workspace {
  * @param context A rule factory, which is normally the way schematics are implemented. Returned by the tooling after loading a schematic description.
  * @param tree Tree with translation files
  * @param language the current language
- * @throws SchematicsException if translation file does not exist or is empty
+ * @throws {SchematicsException} if translation file does not exist or is empty
  */
 export function addTranslationFile(context: SchematicContext, tree: Tree, language: string): void {
   const isyTranslation = tree.read('./node_modules/@isyfact/isy-angular-widgets/assets/i18n/' + language);
@@ -155,10 +155,7 @@ export function addTranslationFile(context: SchematicContext, tree: Tree, langua
     throw new SchematicsException('❌ Could not find isy-angular-widgets translation file.');
   }
 
-  if (!tree.exists(translationFilePath)) {
-    tree.create(translationFilePath, isyTranslation.toString('utf-8'));
-    context.logger.info('√ Add language files (de, en) for isy-angular-widgets.');
-  } else {
+  if (tree.exists(translationFilePath)) {
     const translation = tree.read(translationFilePath);
 
     if (!translation) throw new SchematicsException(`❌ Could not read directory ${translationFilePath}.`);
@@ -173,6 +170,9 @@ export function addTranslationFile(context: SchematicContext, tree: Tree, langua
 
     const space = 2;
     tree.overwrite(translationFilePath, JSON.stringify(translationJson, null, space));
+  } else {
+    tree.create(translationFilePath, isyTranslation.toString('utf-8'));
+    context.logger.info('√ Add language files (de, en) for isy-angular-widgets.');
   }
 }
 
@@ -187,11 +187,11 @@ export function ngAdd(): Rule {
 
     // Add necessary dependencies to new CLI project.
 
-    addPackageToPackageJson(tree, '@angular/common', '^20.1.6');
-    addPackageToPackageJson(tree, '@angular/core', '^20.1.6');
+    addPackageToPackageJson(tree, '@angular/common', '^21.1.2');
+    addPackageToPackageJson(tree, '@angular/core', '^21.1.2');
     addPackageToPackageJson(tree, 'primeicons', '^7.0.0');
-    addPackageToPackageJson(tree, 'primeng', '^20.0.1');
-    addPackageToPackageJson(tree, '@primeuix/themes', '^1.2.3');
+    addPackageToPackageJson(tree, 'primeng', '^21.1.1');
+    addPackageToPackageJson(tree, '@primeuix/themes', '^2.0.3');
     addPackageToPackageJson(tree, 'primeflex', '^4.0.0');
     addPackageToPackageJson(tree, 'moment', '^2.30.1');
 

@@ -10,6 +10,95 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {required} from '../../shared/validation/validator';
 import {provideRouter} from '@angular/router';
 
+/**
+ * Checks the reset of a person
+ * @param person the person who must be checked
+ */
+function expectPersonToBeReseted(person: Person): void {
+  const emptyPerson = getEmptyPerson();
+  expect(person).toEqual(emptyPerson);
+}
+
+/**
+ * Checks the reset of a form
+ * @param form the form who must be checked
+ */
+function expectFormControlsToBeReseted(form: FormGroup): void {
+  Object.keys(form.controls).forEach((key) => {
+    expect(form.controls[key].value).toBeNull();
+  });
+}
+
+/**
+ * Checks if a form is dirty
+ * @param form the form who must be checked
+ * @param isDirty the current dirty state
+ */
+function expectFormControlsToBeDirty(form: FormGroup, isDirty: boolean): void {
+  Object.keys(form.controls).forEach((key) => {
+    expect(form.controls[key].dirty).toEqual(isDirty);
+  });
+}
+
+/**
+ * Checks the validity of a form
+ * @param form the form who must be checked
+ */
+function expectFormIsValid(form: FormGroup): void {
+  expect(form.valid).toBeTrue();
+}
+
+/**
+ * Checks if the values of a form are empty
+ * @param form the form who must be checked
+ * @param checkEmpty is checking if equals or not
+ */
+function expectFormValuesAreEmpty(form: FormGroup, checkEmpty: boolean): void {
+  Object.keys(form.controls).forEach((key) => {
+    if (checkEmpty) {
+      expect(form.get(key)?.value).toEqual('');
+    } else {
+      expect(form.get(key)?.value).not.toEqual('');
+    }
+  });
+}
+
+/**
+ * Check if an array is empty
+ * @param array an array of persons
+ * @param checkEmpty is checking if equals or not
+ */
+function expectArrayIsEmpty(array: Observable<Person[]>, checkEmpty: boolean): void {
+  array.subscribe((personen) => {
+    if (checkEmpty) {
+      expect(personen).toEqual([]);
+      expect(personen.length).toEqual(0);
+    }
+
+    if (!checkEmpty) {
+      expect(personen).not.toEqual([]);
+      expect(personen.length).toBeGreaterThan(0);
+    }
+  });
+}
+
+/**
+ * @returns an initialized person
+ * Get an initialized person
+ */
+function getInitPerson(): Person {
+  const person = getEmptyPerson();
+  person.id = '0';
+  person.personalien.vorname = 'vorname';
+  person.personalien.nachname = 'nachname';
+  person.personalien.geburtsname = 'geburtsname';
+  person.personalien.gender = 'geschlecht';
+  person.personalien.geburtsort = 'geburtsort';
+  person.personalien.geburtsdatum = '01.01.2023';
+  person.personalien.staatsangehoerigkeit = 'Deutschland';
+  return person;
+}
+
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
   const DOT = '.';
@@ -35,59 +124,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   afterEach(() => spectator.fixture.destroy());
 
   /**
-   * Checks the reset of a person
-   * @param person the person who must be checked
-   */
-  function expectPersonToBeReseted(person: Person): void {
-    const emptyPerson = getEmptyPerson();
-    expect(person).toEqual(emptyPerson);
-  }
-
-  /**
-   * Checks the reset of a form
-   * @param form the form who must be checked
-   */
-  function expectFormControlsToBeReseted(form: FormGroup): void {
-    Object.keys(form.controls).forEach((key) => {
-      expect(form.controls[key].value).toBeNull();
-    });
-  }
-
-  /**
-   * Checks if a form is dirty
-   * @param form the form who must be checked
-   * @param isDirty the current dirty state
-   */
-  function expectFormControlsToBeDirty(form: FormGroup, isDirty: boolean): void {
-    Object.keys(form.controls).forEach((key) => {
-      expect(form.controls[key].dirty).toEqual(isDirty);
-    });
-  }
-
-  /**
-   * Checks the validity of a form
-   * @param form the form who must be checked
-   */
-  function expectFormIsValid(form: FormGroup): void {
-    expect(form.valid).toBeTrue();
-  }
-
-  /**
-   * Checks if the values of a form are empty
-   * @param form the form who must be checked
-   * @param checkEmpty is checking if equals or not
-   */
-  function expectFormValuesAreEmpty(form: FormGroup, checkEmpty: boolean): void {
-    Object.keys(form.controls).forEach((key) => {
-      if (checkEmpty) {
-        expect(form.get(key)?.value).toEqual('');
-      } else {
-        expect(form.get(key)?.value).not.toEqual('');
-      }
-    });
-  }
-
-  /**
    * Checks if a person is empty
    * @param person the person who must be checked
    */
@@ -100,42 +136,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(person.personalien.geburtsort).toEqual(emptyEntry);
     expect(person.personalien.geburtsdatum).toEqual(emptyEntry);
     expect(person.personalien.staatsangehoerigkeit).toEqual(emptyEntry);
-  }
-
-  /**
-   * Check if an array is empty
-   * @param array an array of persons
-   * @param checkEmpty is checking if equals or not
-   */
-  function expectArrayIsEmpty(array: Observable<Person[]>, checkEmpty: boolean): void {
-    array.subscribe((personen) => {
-      if (checkEmpty) {
-        expect(personen).toEqual([]);
-        expect(personen.length).toEqual(0);
-      }
-
-      if (!checkEmpty) {
-        expect(personen).not.toEqual([]);
-        expect(personen.length).toBeGreaterThan(0);
-      }
-    });
-  }
-
-  /**
-   * @returns an initialized person
-   * Get an initialized person
-   */
-  function getInitPerson(): Person {
-    const person = getEmptyPerson();
-    person.id = '0';
-    person.personalien.vorname = 'vorname';
-    person.personalien.nachname = 'nachname';
-    person.personalien.geburtsname = 'geburtsname';
-    person.personalien.gender = 'geschlecht';
-    person.personalien.geburtsort = 'geburtsort';
-    person.personalien.geburtsdatum = '01.01.2023';
-    person.personalien.staatsangehoerigkeit = 'Deutschland';
-    return person;
   }
 
   /**
@@ -627,7 +627,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     multiselectTrigger.click();
     spectator.fixture.detectChanges();
 
-    const multiselectItems = spectator.queryAll('p-multiselect-item span');
+    const multiselectItems = spectator.queryAll('.p-multiselect-option span');
 
     expect(multiselectItems.length).toBeGreaterThan(0);
 

@@ -32,7 +32,7 @@
             pRipple
             pButton
             [outlined]="true"
-            [class]="'flex align-items-center justify-content-center mr-2'"
+            class="flex align-items-center justify-content-center mr-2"
             (click)="previous()"
           >
             {{ labelBackButton }}
@@ -44,7 +44,7 @@
             type="button"
             pRipple
             pButton
-            [class]="'flex align-items-center justify-content-center mr-4'"
+            class="flex align-items-center justify-content-center mr-4"
             [disabled]="index === items.length - 1 || !allowNext"
             (click)="next()"
           >
@@ -59,7 +59,7 @@
           type="button"
           pRipple
           pButton
-          [class]="'flex align-items-center justify-content-center ml-4'"
+          class="flex align-items-center justify-content-center ml-4"
           [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
           (click)="save()"
         >
@@ -73,7 +73,7 @@
         pRipple
         pButton
         [outlined]="true"
-        [class]="'flex align-items-center justify-content-center'"
+        class="flex align-items-center justify-content-center"
         [disabled]="isSaved && !closable"
         (click)="closeDialog()"
       >

@@ -6,7 +6,7 @@
   iconPos="start"
 >
   <ng-template pTemplate="headericons">
-    <i class="{{ isCollapsed ? 'pi pi-chevron-right' : 'pi pi-chevron-down' }}"></i>
+    <i [class]="isCollapsed ? 'pi pi-chevron-right' : 'pi pi-chevron-down'"></i>
   </ng-template>
   <p-table
     [value]="personen"
@@ -61,12 +61,12 @@
         </th>
 
         @for (col of columns; track col.field) {
-          <th scope="col" pSortableColumn="personalien.{{ col.field }}" class="white-space-nowrap">
+          <th scope="col" [pSortableColumn]="'personalien.' + col.field" class="white-space-nowrap">
             {{ col.header | translate }}
             @if (col.field === 'gender') {
               <p-columnFilter
                 [type]="col.type"
-                field="personalien.{{ col.field }}"
+                [field]="'personalien.' + col.field"
                 matchMode="in"
                 display="menu"
                 [showMatchModes]="false"
@@ -76,7 +76,7 @@
                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                   <p-multiselect
                     [ariaLabel]="'isyAngularWidgetsDemo.labels.gender' | translate"
-                    placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate }}"
+                    [placeholder]="'isyAngularWidgetsDemo.resultList.selectOneOrMore' | translate"
                     [ngModel]="value"
                     [options]="gender"
                     (onChange)="filter($event.value)"
@@ -92,12 +92,12 @@
             } @else if (col.currency) {
               <p-columnFilter
                 [type]="col.type"
-                field="personalien.{{ col.field }}"
+                [field]="'personalien.' + col.field"
                 display="menu"
                 [currency]="col.currency.currencyCode"
               ></p-columnFilter>
             } @else {
-              <p-columnFilter [type]="col.type" field="personalien.{{ col.field }}" display="menu"></p-columnFilter>
+              <p-columnFilter [type]="col.type" [field]="'personalien.' + col.field" display="menu"></p-columnFilter>
             }
             <p-sortIcon field="personalien.{{ col.field }}"></p-sortIcon>
           </th>
@@ -111,7 +111,7 @@
                 [ngModel]="value"
                 [options]="state"
                 (onChange)="filter($event.value)"
-                placeholder="{{ 'isyAngularWidgetsDemo.resultList.selectOneState' | translate }}"
+                [placeholder]="'isyAngularWidgetsDemo.resultList.selectOneState' | translate"
               >
                 <ng-template let-option pTemplate="item">
                   <span>{{ option.label }}</span>
@@ -142,26 +142,26 @@
         <td>{{ person.personalien.state | translate }}</td>
         <td>
           <p-button
-            [icon]="'pi pi-pencil'"
-            [styleClass]="'p-button-rounded p-button-outlined mr-1'"
+            icon="pi pi-pencil"
+            styleClass="p-button-rounded p-button-outlined mr-1"
             (onClick)="emitEditAction(person)"
-            ariaLabel="{{ 'isyAngularWidgetsDemo.aria.edit' | translate }}"
+            [ariaLabel]="'isyAngularWidgetsDemo.aria.edit' | translate"
           >
           </p-button>
           <p-button
-            [icon]="'pi pi-download'"
+            icon="pi pi-download"
             severity="help"
-            [styleClass]="'p-button-rounded p-button-outlined mr-1'"
+            styleClass="p-button-rounded p-button-outlined mr-1"
             [disabled]="true"
-            ariaLabel="{{ 'isyAngularWidgetsDemo.aria.download' | translate }}"
+            [ariaLabel]="'isyAngularWidgetsDemo.aria.download' | translate"
           >
           </p-button>
           <p-button
-            [icon]="'pi pi-trash'"
+            icon="pi pi-trash"
             severity="danger"
-            [styleClass]="'p-button-rounded p-button-outlined'"
+            styleClass="p-button-rounded p-button-outlined"
             [disabled]="true"
-            ariaLabel="{{ 'isyAngularWidgetsDemo.aria.delete' | translate }}"
+            [ariaLabel]="'isyAngularWidgetsDemo.aria.delete' | translate"
           >
           </p-button>
         </td>

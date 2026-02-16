@@ -10,7 +10,8 @@
     "types": [],
     "lib": ["dom", "es2022"],
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "stripInternal": true
   },
   "exclude": ["src/test.ts", "**/*.spec.ts"]
 }

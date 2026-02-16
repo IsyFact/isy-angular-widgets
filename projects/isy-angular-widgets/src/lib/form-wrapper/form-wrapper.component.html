@@ -1,9 +1,9 @@
-<div [class]="'flex flex-column gap-2' + labelOptionClass">
-  <label [attr.id]="labelId ? labelId : undefined" [class]="'label' + labelFilledClass" [for]="fieldId">{{
+<div [class]="'flex flex-column gap-2 ' + labelOptionClass">
+  <label [attr.id]="labelId ? labelId : undefined" [class]="'label ' + labelFilledClass" [for]="fieldId">{{
     getLabel()
   }}</label>
   <div class="flex-container"><ng-content></ng-content></div>
   @if (shouldShowError()) {
-    <p-message styleClass="p-error" severity="error" variant="simple" size="large">{{ errorMessage }}</p-message>
+    <p-message styleClass="p-error" severity="error" variant="simple">{{ errorMessage }}</p-message>
   }
 </div>

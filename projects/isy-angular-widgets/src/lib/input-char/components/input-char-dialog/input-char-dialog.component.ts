@@ -85,8 +85,9 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
 
   /**
    * The MutationObserver used to observe changes in the DOM.
+   * @internal
    */
-  private mutationObserver?: MutationObserver;
+  mutationObserver?: MutationObserver;
 
   /**
    * A service used to translate labels within the widgets library.
@@ -97,27 +98,43 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
 
   private readonly elementRef = inject(ElementRef);
 
+  private rebuildTimer?: ReturnType<typeof setTimeout>;
+  private readonly rebuildDelayMs = 100;
+
   ngAfterViewInit(): void {
-    // Observe changes in the DOM using MutationObserver
     this.mutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.target.textContent) {
-          this.initSelectButtonsData();
-        }
-      });
+      const relevant = mutations.some(
+        (m) =>
+          m.type === 'characterData' ||
+          (m.type === 'childList' && (m.addedNodes.length > 0 || m.removedNodes.length > 0))
+      );
+      if (!relevant) return;
+
+      if (this.rebuildTimer) {
+        clearTimeout(this.rebuildTimer);
+      }
+
+      this.rebuildTimer = setTimeout(() => {
+        this.initSelectButtonsData();
+        this.rebuildTimer = undefined;
+      }, this.rebuildDelayMs);
     });
 
-    // Start observing the target element for attribute changes
     this.mutationObserver.observe(this.elementRef.nativeElement as HTMLElement, {
+      subtree: true,
       characterData: true,
-      subtree: true
+      childList: true
     });
   }
 
   ngOnDestroy(): void {
-    // Disconnect the MutationObserver to avoid memory leaks
     if (this.mutationObserver) {
       this.mutationObserver.disconnect();
+      this.mutationObserver = undefined;
+    }
+    if (this.rebuildTimer) {
+      clearTimeout(this.rebuildTimer);
+      this.rebuildTimer = undefined;
     }
   }
 

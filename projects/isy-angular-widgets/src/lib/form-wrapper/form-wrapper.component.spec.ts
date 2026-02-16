@@ -143,4 +143,54 @@ describe('FormWrapperComponent', () => {
     spectatorRequired.detectChanges();
     expect(spectatorRequired.component.shouldShowError()).toBeTrue();
   });
+
+  it('should return the correct error message when multiple validators fail', () => {
+    const control = new FormControl('', [Validators.required, Validators.minLength(5)]);
+    spectatorRequired.setInput('control', control);
+    spectatorRequired.setInput('validationMessages', {
+      required: 'Field is required',
+      minlength: 'Minimum length is 5'
+    });
+    spectatorRequired.detectChanges();
+    expect(spectatorRequired.component.errorMessage).toEqual('Field is required');
+  });
+
+  it('should return null when control has no errors', () => {
+    const control = new FormControl('valid value', Validators.required);
+    spectatorRequired.setInput('control', control);
+    spectatorRequired.detectChanges();
+    expect(spectatorRequired.component.errorMessage).toBeNull();
+  });
+
+  it('should return null when control errors exist but no validation messages are defined', () => {
+    const control = new FormControl('', Validators.required);
+    spectatorRequired.setInput('control', control);
+    spectatorRequired.setInput('validationMessages', {});
+    spectatorRequired.detectChanges();
+    expect(spectatorRequired.component.errorMessage).toBeNull();
+  });
+
+  it('should prioritize validation messages in the order they are defined', () => {
+    const control = new FormControl('abc', [Validators.minLength(5), Validators.pattern(/^\d+$/)]);
+
+    spectatorRequired.setInput('control', control);
+    spectatorRequired.setInput('validationMessages', {
+      pattern: 'Only digits allowed',
+      minlength: 'Minimum length is 5'
+    });
+
+    spectatorRequired.detectChanges();
+
+    expect(spectatorRequired.component.errorMessage).toEqual('Only digits allowed');
+  });
+
+  it('should return first error message when validation message is not defined for that error', () => {
+    const control = new FormControl('', [Validators.required, Validators.minLength(5)]);
+    spectatorRequired.setInput('control', control);
+    spectatorRequired.setInput('validationMessages', {
+      required: 'Field is required'
+    });
+    spectatorRequired.detectChanges();
+    expect(spectatorRequired.component.errorMessage).toEqual('Field is required');
+  });
 });

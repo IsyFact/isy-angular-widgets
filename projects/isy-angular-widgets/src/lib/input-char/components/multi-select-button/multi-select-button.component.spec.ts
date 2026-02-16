@@ -1,6 +1,5 @@
 import {MultiSelectButtonComponent} from './multi-select-button.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockModule} from 'ng-mocks';
 import {AccordionModule} from 'primeng/accordion';
 import {SelectButton, SelectButtonModule} from 'primeng/selectbutton';
 import {FormsModule} from '@angular/forms';
@@ -27,39 +26,32 @@ const props = {
 describe('Unit Tests: MultiSelectButtonComponent', () => {
   const createComponent = createComponentFactory({
     component: MultiSelectButtonComponent,
-    imports: [AccordionModule, MockModule(SelectButtonModule), MockModule(FormsModule)]
+    imports: [AccordionModule, SelectButtonModule, FormsModule],
+    detectChanges: false
   });
 
   beforeEach(() => {
-    spectator = createComponent({props: props});
+    spectator = createComponent({props});
     component = spectator.component;
     fixture = spectator.fixture;
-    spectator.detectChanges();
+    fixture.detectChanges(false);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have undefined value after all button click', () => {
-    const allSelectButton = spectator.debugElement.query(By.directive(SelectButton)).componentInstance as SelectButton;
-    component.value = {group: 'Base', value: 'A'};
-
-    allSelectButton.onChange.emit();
-
+  it('all button should be selected on init', () => {
     expect(component.value).toBeUndefined();
+    expect(component.allOptions[0].label).toBe(headerStr);
   });
 
-  it('all button should be selected on init ', () => {
-    expect(component.value).toBeUndefined();
-  });
+  // Helper: in unit tests, only call render() when the DOM needs to be updated.
+  const render = (): void => fixture.detectChanges(false);
 
-  const selectGroup = (group: string, basis: string): void => {
-    const mockGroup = group;
-    const mockValue = basis;
-    component.models = {[mockGroup]: mockValue};
-
-    component.triggerUpdate(mockGroup);
+  const selectGroup = (group: string, value: string): void => {
+    component.models = {...component.models, [group]: value};
+    component.triggerUpdate(group);
   };
 
   it('should always have the correct value when clicking through multiple selections', () => {
@@ -97,6 +89,15 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
     component.setDisabledState(true);
     expect(component.disabled).toBeTrue();
   });
+
+  it('should have undefined value after all button click', () => {
+    const allSelectButton = spectator.debugElement.query(By.directive(SelectButton)).componentInstance as SelectButton;
+    component.value = {group: 'Base', value: 'A'};
+    render();
+    allSelectButton.onChange.emit();
+    render();
+    expect(component.value).toBeUndefined();
+  });
 });
 
 describe('Integration Tests: MultiSelectButtonComponent', () => {
@@ -106,7 +107,7 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createComponent({props: props});
+    spectator = createComponent({props});
     component = spectator.component;
     fixture = spectator.fixture;
     spectator.detectChanges();
@@ -115,15 +116,15 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
   const selectOption = (groupClass: string, value: string): void => {
     const selectButton = fixture.debugElement
       .queryAll(By.css(`${groupClass} p-togglebutton`))
-      .find((elem) => elem.nativeElement.textContent === value)?.nativeElement as HTMLElement;
-    expect(selectButton).toBeTruthy();
+      .find((elem) => (elem.nativeElement.textContent ?? '').trim() === value)?.nativeElement as HTMLElement;
 
+    expect(selectButton).toBeTruthy();
     selectButton.click();
     fixture.detectChanges();
   };
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    selectOption('.charset-selectbutton--1', schriftzeichengruppe);
+    selectOption('.charset-selectbutton--1', String(schriftzeichengruppe));
   };
 
   const selectBasis = (basis: string): void => {
@@ -168,7 +169,6 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
 
   it('should show the correct text on select all button', () => {
     const allSelectButton = spectator.debugElement.query(By.directive(SelectButton));
-
-    expect(allSelectButton.nativeElement.textContent).toEqual(headerStr);
+    expect((allSelectButton.nativeElement.textContent ?? '').trim()).toEqual(headerStr);
   });
 });

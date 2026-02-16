@@ -1,32 +1,71 @@
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
 import {InputCharComponent} from './input-char.component';
-import {ElementRef} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockComponents, MockModule} from 'ng-mocks';
-import {DialogModule} from 'primeng/dialog';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
-import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
-import {ButtonModule} from 'primeng/button';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {Zeichenobjekt} from '../../model/model';
 
-let component: InputCharComponent;
-let spectator: Spectator<InputCharComponent>;
+@Component({
+  standalone: true,
+  selector: 'isy-input-char-dialog',
+  template: ''
+})
+class InputCharDialogStubComponent {
+  @Input() visible = false;
+  @Output() visibleChange = new EventEmitter<boolean>();
+  @Input() charList: Zeichenobjekt[] = [];
+  @Output() insertCharacter = new EventEmitter<string>();
+  @Input() datentyp?: Datentyp;
+  @Input() width?: string;
+  @Input() height?: string;
+  @Input() header?: string;
+  @Input() closable?: boolean;
+  @Input() draggable?: boolean;
+  @Input() resizable?: boolean;
+  @Input() dismissableMask?: boolean;
+  @Input() closeOnEscape?: boolean;
+  @Input() modal?: boolean;
+}
 
 describe('Unit Tests: InputCharComponent', () => {
+  let spectator: Spectator<InputCharComponent>;
+  let component: InputCharComponent;
   const dialogDefaultWidth = '740px';
   const dialogDefaultHeight = '460px';
+  const charServiceSpy = jasmine.createSpyObj<CharacterService>('CharacterService', ['getCharactersByDataType']);
+  charServiceSpy.getCharactersByDataType.and.returnValue([]);
+  const configServiceSpy = jasmine.createSpyObj<WidgetsConfigService>('WidgetsConfigService', ['getTranslation']);
+  configServiceSpy.getTranslation.and.callFake((k: string) => k);
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    imports: [MockModule(DialogModule), MockComponents(InputCharDialogComponent), MockModule(ButtonModule)]
+    detectChanges: false,
+
+    overrideComponents: [
+      [
+        InputCharComponent,
+        {
+          set: {
+            imports: [DialogModule, ButtonModule, InputCharDialogStubComponent],
+            providers: [{provide: CharacterService, useValue: charServiceSpy}]
+          }
+        }
+      ]
+    ],
+
+    providers: [{provide: WidgetsConfigService, useValue: configServiceSpy}]
   });
+
+  const render = (): void => spectator.fixture.detectChanges(false);
 
   describe('with default datentyp', () => {
     beforeEach(() => {
       spectator = createComponent();
       component = spectator.component;
-
-      component.ngOnChanges();
-      spectator.fixture.detectChanges();
+      render();
     });
 
     it('should create', () => {
@@ -43,14 +82,12 @@ describe('Unit Tests: InputCharComponent', () => {
     });
   });
 
-  Object.keys(Datentyp).forEach((datentyp) => {
+  Object.values(Datentyp).forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
-        spectator = createComponent({props: {datentyp: datentyp as Datentyp}});
+        spectator = createComponent({props: {datentyp}});
         component = spectator.component;
-
-        spectator.fixture.componentRef.setInput('datentyp', datentyp);
-        spectator.fixture.detectChanges();
+        render();
       });
 
       it('should create', () => {
@@ -69,46 +106,30 @@ describe('Unit Tests: InputCharComponent', () => {
         expect(component.visible).toBeFalse();
       });
 
-      it('should display the input char button', () => {
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        component.isInputDisabled = true;
-        spectator.fixture.detectChanges();
-        expect(button.disabled).toBeTruthy();
-      });
+      it('should have the input char button disabled when isInputDisabled is true', () => {
+        spectator.setInput('isInputDisabled', true);
+        render();
 
-      it('should not display the input char button', () => {
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        component.isInputDisabled = false;
-        spectator.fixture.detectChanges();
-        expect(button.disabled).toBeFalsy();
-      });
-
-      it('should have the input char button disabled when isInputDisabled property is true', () => {
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
-
-        component.isInputDisabled = true;
-        spectator.fixture.detectChanges();
-
-        expect(button.disabled).toBeTruthy();
+        expect(button.disabled).toBeTrue();
       });
 
-      it('should have the input char button not disabled when isInputDisabled property is false', () => {
+      it('should have the input char button enabled when isInputDisabled is false', () => {
+        spectator.setInput('isInputDisabled', false);
+        render();
+
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
-
-        component.isInputDisabled = false;
-        spectator.fixture.detectChanges();
-
-        expect(button.disabled).toBeFalsy();
+        expect(button.disabled).toBeFalse();
       });
 
       it('should display after clicking the button', () => {
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
         expect(button).toBeTruthy();
 
-        button.click();
-        spectator.fixture.detectChanges();
+        spectator.click(button);
+        render();
 
         expect(component.visible).toBeTrue();
       });
@@ -183,23 +204,31 @@ describe('Integration Test: InputCharComponent', () => {
 describe('Accessibility Test: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
   const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
+
   const createComponent = createComponentFactory({
     component: InputCharComponent,
-    providers: [CharacterService],
-    mocks: [WidgetsConfigService]
+    detectChanges: false,
+    overrideComponents: [
+      [
+        InputCharComponent,
+        {
+          set: {
+            imports: [DialogModule, ButtonModule, InputCharDialogStubComponent]
+          }
+        }
+      ]
+    ],
+    providers: [{provide: WidgetsConfigService, useValue: mockConfigService}]
   });
+
+  const render = (): void => spectator.fixture.detectChanges(false);
 
   beforeEach(() => {
     mockConfigService.getTranslation.and.returnValue('Close picker');
-    spectator = createComponent({
-      props: {
-        datentyp: Datentyp.DATENTYP_C as Datentyp
-      },
-      providers: [{provide: WidgetsConfigService, useValue: mockConfigService}]
-    });
-    spectator.detectChanges();
-    spectator.component.ngOnChanges();
+    spectator = createComponent({props: {datentyp: Datentyp.DATENTYP_C}});
+    render();
     spectator.click('.input-char-button');
+    render();
   });
 
   it('the dialog close icon should have an aria-label attribute with "Close picker"', () => {
@@ -211,7 +240,6 @@ describe('Accessibility Test: InputCharComponent', () => {
     spectator.component.visible = true;
 
     const focusSpy = jasmine.createSpy('focus');
-
     spectator.component.openDialogButton = {
       nativeElement: {focus: focusSpy}
     } as unknown as ElementRef<HTMLButtonElement>;

@@ -18,14 +18,14 @@
         [suggestions]="filteredCountries"
         (completeMethod)="filterCountry($event)"
         placeholder="Enter a country"
-        styleClass="w-full"
+        class="w-full"
         inputStyleClass="w-full"
       />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>IconField</h3>
       <p-iconfield iconPosition="left">
-        <p-inputIcon styleClass="pi pi-search" />
+        <p-inputIcon class="pi pi-search" />
         <input type="text" pInputText placeholder="Search" class="w-full" />
       </p-iconfield>
     </div>
@@ -44,22 +44,16 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Password</h3>
-      <p-password
-        inputId="password"
-        [(ngModel)]="password"
-        toggleMask="true"
-        styleClass="w-full"
-        inputStyleClass="w-full"
-      />
+      <p-password inputId="password" [(ngModel)]="password" toggleMask="true" class="w-full" inputStyleClass="w-full" />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Calendar</h3>
       <p-datepicker
         inputId="calender"
-        [iconDisplay]="'input'"
+        iconDisplay="input"
         [showIcon]="true"
         appendTo="body"
-        styleClass="w-full"
+        class="w-full"
         ariaLabel="Calender-Picker"
       />
     </div>
@@ -68,7 +62,6 @@
       <p-inputnumber
         inputId="inputNumber"
         class="w-full"
-        styleClass="w-full"
         ariaLabel="Input Number"
         [showButtons]="true"
         mode="currency"
@@ -84,7 +77,7 @@
         optionGroupLabel="name"
         [optionGroupChildren]="$any(['states', 'cities'])"
         placeholder="Select a City"
-        styleClass="w-full"
+        class="w-full"
       />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
@@ -96,7 +89,7 @@
         [filter]="true"
         filterBy="name"
         placeholder="Select a Country"
-        styleClass="w-full"
+        class="w-full"
         appendTo="body"
       />
     </div>
@@ -108,12 +101,19 @@
         optionLabel="name"
         placeholder="Select Countries"
         appendTo="body"
-        styleClass="w-full"
+        class="w-full"
       />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>TreeSelect</h3>
-      <p-treeselect inputId="treeSelect" [options]="files" placeholder="Select Item" containerStyleClass="w-full" />
+      <p-treeselect
+        [filter]="true"
+        [filterInputAutoFocus]="false"
+        inputId="treeSelect"
+        [options]="files"
+        placeholder="Select Item"
+        class="w-full"
+      />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Textarea</h3>
@@ -160,7 +160,7 @@
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Slider</h3>
       <input type="text" pInputText [(ngModel)]="slider" class="w-full mb-3" />
-      <p-slider [(ngModel)]="slider" styleClass="w-full" />
+      <p-slider [(ngModel)]="slider" class="w-full" />
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>InputSwitch</h3>
@@ -203,7 +203,7 @@
     </div>
     <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
       <h3>Listbox</h3>
-      <p-listbox id="listbox" [options]="countries" optionLabel="name" styleClass="w-full" />
+      <p-listbox id="listbox" [options]="countries" optionLabel="name" class="w-full" />
     </div>
     <div class="col-12 flex-column gap-2">
       <h3>Editor</h3>

@@ -1,50 +1,40 @@
 import {PersoenlicheInformationenComponent} from './persoenliche-informationen.component';
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {markFormAsDirty} from '../../../../shared/validation/form-helper';
 import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {MockModule} from 'ng-mocks';
 import {required} from '../../../../shared/validation/validator';
-import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
-import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 
 import {
-  TranslateModule,
-  TranslateLoader,
   TranslateNoOpLoader,
   TranslateService,
+  provideTranslateLoader,
   provideTranslateService
 } from '@ngx-translate/core';
+import {firstValueFrom} from 'rxjs';
 
 describe('Integration Tests: PersoenlicheInformationenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
   const person = getEmptyPerson();
-  const formBuilder: FormBuilder = new FormBuilder();
 
   let component: PersoenlicheInformationenComponent;
   let spectator: Spectator<PersoenlicheInformationenComponent>;
   const createComponent = createComponentFactory({
     component: PersoenlicheInformationenComponent,
-    imports: [TranslateModule, MockModule(ReactiveFormsModule)],
-    declarations: [FormWrapperComponent, FormControlPipe],
+    imports: [ReactiveFormsModule],
     providers: [
-      {provide: FormBuilder, useValue: formBuilder},
-      provideTranslateService(),
-      {provide: TranslateLoader, useClass: TranslateNoOpLoader}
+      provideTranslateService({
+        loader: provideTranslateLoader(TranslateNoOpLoader)
+      })
     ]
   });
 
-  beforeEach(() => {
-    spectator = createComponent({
-      props: {
-        form: new FormGroup({
-          vorname: new FormControl('', required),
-          nachname: new FormControl('', required),
-          gender: new FormControl('', required)
-        })
-      }
-    });
+  beforeEach(async () => {
+    const form = initPersoenlicheInformationenForm(person);
+    markFormAsDirty(form);
+
+    spectator = createComponent({props: {form}});
 
     const translate = spectator.inject(TranslateService);
     translate.setTranslation(
@@ -56,12 +46,11 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       },
       true
     );
-    translate.use('de');
+
+    await firstValueFrom(translate.use('de'));
 
     component = spectator.component;
-    component.form = initPersoenlicheInformationenForm(person);
-    markFormAsDirty(component.form);
-    spectator.fixture.detectChanges();
+    spectator.detectChanges();
   });
 
   it('should create', () => {
@@ -193,26 +182,25 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   it('should evaluate the HTML label text of the input fields', () => {
     const vornameLabel = spectator.query('[for="vorname-dialog"]') as HTMLElement;
-    expect(vornameLabel.textContent!.trim()).toEqual('Vorname');
+    expect(vornameLabel.textContent?.trim()).toEqual('Vorname');
 
     const nachnameLabel = spectator.query('[for="nachname-dialog"]') as HTMLElement;
-    expect(nachnameLabel.textContent!.trim()).toEqual('Nachname *');
+    expect(nachnameLabel.textContent?.trim()).toEqual('Nachname *');
 
     const genderLabel = spectator.query('[for="gender-dialog"]') as HTMLElement;
-    expect(genderLabel.textContent!.trim()).toEqual('Geschlecht *');
+    expect(genderLabel.textContent?.trim()).toEqual('Geschlecht *');
   });
 
   it('form control should be dirty after focus', () => {
     const nachnameSpy = spyOn(component, 'onFormControlFocus');
     component.form.get('nachname')!.setValue('nachname');
-    spectator.fixture.detectChanges();
+    spectator.detectChanges();
 
     const input = spectator.query('#nachname-dialog') as HTMLInputElement;
     input.focus();
 
     spectator.detectChanges();
     expect(component.form.controls.nachname.dirty).toBeTrue();
-
     expect(nachnameSpy).toHaveBeenCalledWith(component.form.controls.nachname);
   });
 
@@ -220,6 +208,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     component.form = new FormGroup({
       nachname: new FormControl('', required)
     });
+
     expect(component.form.controls.nachname.dirty).toBeFalse();
     component.onFormControlFocus(component.form.controls.nachname);
     expect(component.form.controls.nachname.dirty).toBeTrue();

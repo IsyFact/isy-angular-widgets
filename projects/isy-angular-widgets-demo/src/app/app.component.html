@@ -8,7 +8,7 @@ like in the following example. The side bar regions can be disabled with corresp
   [items]="items"
   [links]="skipLinks"
   [userInfo]="userInfo"
-  linksNavigationTitle="{{ 'isyAngularWidgetsDemo.labels.leftSidebarTitle' | translate }}"
+  [linksNavigationTitle]="'isyAngularWidgetsDemo.labels.leftSidebarTitle' | translate"
 >
   <div Hauptnavigation-Tools>
     <!-- The Hauptnavigation-Tools are a region within the Menu and could for example be used for a language selector. -->
@@ -53,8 +53,8 @@ like in the following example. The side bar regions can be disabled with corresp
   <isy-seiten-toolbar
     class="skip-link"
     [showSidebar]="true"
-    sidebarHomeButtonLabel="{{ 'isyAngularWidgetsDemo.actions.backToOverview' | translate }}"
-    sidebarHomeButtonAriaLabel="{{ 'isyAngularWidgetsDemo.actions.skipNavigationLink.backToOverview' | translate }}"
+    [sidebarHomeButtonLabel]="'isyAngularWidgetsDemo.actions.backToOverview' | translate"
+    [sidebarHomeButtonAriaLabel]="'isyAngularWidgetsDemo.actions.skipNavigationLink.backToOverview' | translate"
     sidebarHomeRoute="/dashboard"
     Seitentoolbar
   >
@@ -63,12 +63,12 @@ like in the following example. The side bar regions can be disabled with corresp
       <p-button
         icon="pi pi-print"
         class="mr-1"
-        ariaLabel="{{ 'isyAngularWidgetsDemo.aria.print' | translate }}"
+        [ariaLabel]="'isyAngularWidgetsDemo.aria.print' | translate"
         [outlined]="true"
       />
       <p-button
         icon="pi pi-info-circle"
-        ariaLabel="{{ 'isyAngularWidgetsDemo.aria.info' | translate }}"
+        [ariaLabel]="'isyAngularWidgetsDemo.aria.info' | translate"
         [outlined]="true"
       />
     </div>

@@ -45,17 +45,16 @@ describe('Integration Tests: DashboardComponent', () => {
   });
 
   describe('with translations functionality', () => {
-    it('should have the german language as default language', () => {
-      expect(component.translate.langs.length).toEqual(1);
-      expect(component.translate.langs[0]).toEqual(GERMAN_LANGUAGE);
-      expect(component.translate.currentLang).toEqual(GERMAN_LANGUAGE);
+    it('should request german as initial language', () => {
+      const useSpy = spyOn(component.translate, 'use').and.callThrough();
+      component.ngOnInit?.();
+      expect(useSpy).toHaveBeenCalledWith(GERMAN_LANGUAGE);
     });
 
     it('should change the current language', () => {
-      expect(component.translate.langs.length).toEqual(1);
+      const useSpy = spyOn(component.translate, 'use').and.callThrough();
       component.changeLanguage(ENGLISH_LANGUAGE);
-      expect(component.translate.langs.length).toEqual(2);
-      expect(component.translate.currentLang).toEqual(ENGLISH_LANGUAGE);
+      expect(useSpy).toHaveBeenCalledWith(ENGLISH_LANGUAGE);
     });
   });
 });

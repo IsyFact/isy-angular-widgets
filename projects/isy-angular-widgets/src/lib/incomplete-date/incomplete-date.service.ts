@@ -46,7 +46,7 @@ export class IncompleteDateService {
     const maxPartYearLength = 4;
     const coEfficient = 10;
     let partYear = year;
-    const partYearNoUnderscore = `${year}`.replace(/_/g, '');
+    const partYearNoUnderscore = `${year}`.replaceAll('_', '');
 
     if (partYearNoUnderscore.length < maxPartYearLength && !partYearNoUnderscore.includes(this.DATE_CHAR)) {
       if (partYearNoUnderscore.length !== 0) {
@@ -90,7 +90,7 @@ export class IncompleteDateService {
     const dateStr = Object.values(dateObject).join('.');
 
     if (
-      RegExp(INCOMPLETE_DATE_REGEX).exec(dateStr) !== null ||
+      new RegExp(INCOMPLETE_DATE_REGEX).exec(dateStr) !== null ||
       dateObject.month.includes(this.DATE_CHAR) ||
       dateObject.year.includes(this.DATE_CHAR)
     )
@@ -109,6 +109,8 @@ export class IncompleteDateService {
    * @returns True or false as a boolean
    */
   private dateIsUnspecified(dateStr: string): boolean {
-    return !(RegExp(UNSPECIFIED_DATE_REGEX).exec(dateStr) === null && RegExp(this.DATE_CHAR).exec(dateStr) === null);
+    return !(
+      new RegExp(UNSPECIFIED_DATE_REGEX).exec(dateStr) === null && new RegExp(this.DATE_CHAR).exec(dateStr) === null
+    );
   }
 }
