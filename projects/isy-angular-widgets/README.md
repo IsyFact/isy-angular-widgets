@@ -7,6 +7,19 @@ Die Bibliothek stellt zudem ein IsyFact-Theme bereit, welches sich nach den Rich
 
 Praktische sowie querschnittliche Beispiele für die Umsetzung von Patterns des Styleguide sind in der Beispielanwendung [`isy-angular-widget-demo`](https://github.com/IsyFact/isy-angular-widgets/tree/main/projects/isy-angular-widgets-demo) zu finden.
 
+## Hinweise zur Datumsvalidierung (ohne `moment.js`)
+
+Für Datumsvalidierungen wird kein `moment.js` mehr verwendet – stattdessen basiert alles auf nativer `Date`-Logik.
+
+Die Validatoren akzeptieren je nach Typ u. a.:
+- JavaScript `Date`-Objekte
+- ISO-Strings, z. B. `YYYY-MM-DD`, `YYYY-MM-DDTHH:mm:ssZ` bzw. mit Offset bei `isInFuture`/`isInPast`
+- Bibliotheksformate wie `DD.MM.YYYY` sowie `DD-MM-YYYY` (nur bei `isInFuture`/`isInPast`)
+- numerische Timestamps (`number`, z. B. `Date.now()`) - nur bei `isInFuture`/`isInPast`
+- Moment-ähnliche Objekte mit `toDate()` (Backward-Compatibility für bestehende Consumer)
+
+Wichtig: `isoDateTime` bleibt strikt und akzeptiert weiterhin ausschließlich das Format `YYYY-MM-DDTHH:mm:ssZ` mit literalem `Z` am Ende (UTC). DateTimes mit Offset wie `+01:00` bleiben dafür ungültig.
+
 ## Features
 
 - Hauptfenster-Widget mit Seitenleisten, UserInfo und Navigation

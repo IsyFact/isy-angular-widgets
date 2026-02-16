@@ -1,5 +1,4 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import moment, {MomentInput} from 'moment';
 import {
   INPUT_MASK_REGEX,
   INPUT_MASK_REGEX_ISO_DATE,
@@ -9,10 +8,263 @@ import {
 import {din91379Characters} from './data/din-91379-characters';
 import {AllowedSigns} from './model/din-91379';
 
+const DateValidationLimits = {
+  MinMonth: 1,
+  MaxMonth: 12,
+  MinDay: 1,
+  MaxDay: 31,
+  MaxHour: 23,
+  MaxMinute: 59,
+  MaxSecond: 59,
+  CreditCardYearBase: 2000,
+  CreditCardYear2Max: 99,
+  YearDigits: 4
+} as const;
+
+interface ToDateCapable {
+  toDate: () => Date;
+}
+
 /**
  * List of user-defined validators. Can be extended with additional static validators
  */
 export class Validation {
+  /**
+   * Checks whether the given value looks like a moment-like object that can be converted to a native `Date`.
+   * A value is considered “moment-like” if it is a non-null object and exposes a callable `toDate()` function.
+   * This is used for backward compatibility with Moment.js (and similar libraries) without importing Moment types.
+   * @param value The value to inspect (e.g. `Date`, string, number, or an object).
+   * @returns `true` if `value` is an object with a `toDate()` function; otherwise `false`.
+   */
+  private static hasToDate(value: unknown): value is ToDateCapable {
+    if (typeof value !== 'object' || value === null) return false;
+
+    const maybe = value as {toDate?: unknown};
+    return typeof maybe.toDate === 'function';
+  }
+
+  /**
+   * Returns a new Date at the start of the day (00:00:00.000) in local time.
+   * @param date Date to normalize.
+   * @returns New Date set to start of day in local time.
+   */
+  private static startOfDay(date: Date): Date {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  /**
+   * Returns a new Date at the start of the month (day 1, 00:00:00.000) in local time.
+   * @param date Date to normalize.
+   * @returns New Date set to first day of month in local time.
+   */
+  private static startOfMonth(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), DateValidationLimits.MinDay);
+  }
+
+  /**
+   * Validates a (year, month, day) triple and returns a local Date at 00:00 if valid.
+   * @param year Full year (e.g. 2026).
+   * @param month Month in range 1-12.
+   * @param day Day in range 1-31.
+   * @returns Local Date at 00:00:00.000 or null if invalid.
+   */
+  private static toLocalDate(year: number, month: number, day: number): Date | null {
+    if (
+      month < DateValidationLimits.MinMonth ||
+      month > DateValidationLimits.MaxMonth ||
+      day < DateValidationLimits.MinDay ||
+      day > DateValidationLimits.MaxDay
+    ) {
+      return null;
+    }
+    const d = new Date(year, month - DateValidationLimits.MinDay, day);
+    if (d.getFullYear() !== year || d.getMonth() !== month - DateValidationLimits.MinDay || d.getDate() !== day) {
+      return null;
+    }
+
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+  /**
+   * Parses a date value for validators that previously accepted MomentInput.
+   * Supports Date, ISO date-time strings, and common date-only formats used in this library.
+   * Returns null if the input cannot be parsed to a valid Date.
+   * @param value Value to parse.
+   * @returns Parsed Date or null if invalid/unparseable.
+   */
+  private static parseDateValue(value: unknown): Date | null {
+    if (value == null || value === '') return null;
+
+    if (value instanceof Date) {
+      return isNaN(value.getTime()) ? null : value;
+    }
+
+    if (Validation.hasToDate(value)) {
+      const d = value.toDate();
+      return d instanceof Date && !isNaN(d.getTime()) ? d : null;
+    }
+
+    if (typeof value === 'number') {
+      const d = new Date(value);
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    if (typeof value !== 'string') return null;
+    const input = value.trim();
+    if (!input) return null;
+
+    const isoDateTimeRegex = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
+    if (isoDateTimeRegex.test(input)) {
+      const d = new Date(input);
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    // ISO date-only: YYYY-MM-DD
+    let match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input);
+    if (match) {
+      const [, yearStr, monthStr, dayStr] = match;
+      return Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr));
+    }
+
+    // German: DD.MM.YYYY
+    match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(input);
+    if (match) {
+      const [, dayStr, monthStr, yearStr] = match;
+      return Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr));
+    }
+
+    match = /^(\d{2})-(\d{2})-(\d{4})$/.exec(input);
+    if (match) {
+      const [, dayOrMonthStr, monthOrDayStr, yearStr] = match;
+      const dayOrMonth = Number(dayOrMonthStr);
+      const monthOrDay = Number(monthOrDayStr);
+      const year = Number(yearStr);
+
+      // Try DD-MM-YYYY first
+      const asDdMm = Validation.toLocalDate(year, monthOrDay, dayOrMonth);
+      if (asDdMm) return asDdMm;
+
+      // Fallback to MM-DD-YYYY
+      return Validation.toLocalDate(year, dayOrMonth, monthOrDay);
+    }
+
+    // Last resort: native parsing
+    const d = new Date(input);
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  /**
+   * Validates an input string against a limited set of moment-like format tokens used by this library.
+   * This replaces moment(input, format, strict).isValid().
+   * @param input Input value.
+   * @param format Expected format token (subset).
+   * @param strict Whether parsing must match the format exactly.
+   * @returns true if valid for the given format; false otherwise.
+   */
+  private static isValidByFormat(input: string, format: string, strict: boolean): boolean {
+    const value = (input ?? '').toString().trim();
+    if (!value) return false;
+
+    // DD.MM.YYYY (non-strict partials)
+    if (format === 'DD.MM.YYYY' && !strict) {
+      const match = /^(\d{1,2})\.(\d{1,2})\.(\d{0,4})$/.exec(value);
+      if (!match) return false;
+
+      const [, dayStr, monthStr, yearRaw = ''] = match;
+      const day = Number(dayStr);
+      const month = Number(monthStr);
+      const year = yearRaw.length
+        ? Number(yearRaw.padStart(DateValidationLimits.YearDigits, '0'))
+        : new Date().getFullYear();
+
+      return Validation.toLocalDate(year, month, day) !== null;
+    }
+
+    // YYYY-MM-DD
+    if (format === 'YYYY-MM-DD') {
+      const match = (strict ? /^(\d{4})-(\d{2})-(\d{2})$/ : /^(\d{4})-(\d{1,2})-(\d{1,2})$/).exec(value);
+      if (!match) return false;
+
+      const [, yearStr, monthStr, dayStr] = match;
+      return Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr)) !== null;
+    }
+
+    // DD.MM.YYYY (strict)
+    if (format === 'DD.MM.YYYY') {
+      const match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(value);
+      if (!match) return false;
+
+      const [, dayStr, monthStr, yearStr] = match;
+      return Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr)) !== null;
+    }
+
+    // HH:mm:ss
+    if (format === 'HH:mm:ss') {
+      const match = (strict ? /^(\d{2}):(\d{2}):(\d{2})$/ : /^(\d{1,2}):(\d{1,2}):(\d{1,2})$/).exec(value);
+      if (!match) return false;
+
+      const [, hhStr, mmStr, ssStr] = match;
+      const hh = Number(hhStr);
+      const mm = Number(mmStr);
+      const ss = Number(ssStr);
+
+      return (
+        hh >= 0 &&
+        hh <= DateValidationLimits.MaxHour &&
+        mm >= 0 &&
+        mm <= DateValidationLimits.MaxMinute &&
+        ss >= 0 &&
+        ss <= DateValidationLimits.MaxSecond
+      );
+    }
+
+    // YYYY-MM-DDTHH:mm:ss[Z]
+    if (format === 'YYYY-MM-DDTHH:mm:ss[Z]') {
+      const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/.exec(value);
+      if (!match) return false;
+
+      const [, yearStr, monthStr, dayStr, hhStr, mmStr, ssStr] = match;
+      if (Validation.toLocalDate(Number(yearStr), Number(monthStr), Number(dayStr)) === null) return false;
+
+      const hh = Number(hhStr);
+      const mm = Number(mmStr);
+      const ss = Number(ssStr);
+
+      return (
+        hh >= 0 &&
+        hh <= DateValidationLimits.MaxHour &&
+        mm >= 0 &&
+        mm <= DateValidationLimits.MaxMinute &&
+        ss >= 0 &&
+        ss <= DateValidationLimits.MaxSecond
+      );
+    }
+
+    // MM/YY
+    if (format === 'MM/YY') {
+      const match = /^(\d{2})\/(\d{2})$/.exec(value);
+      if (!match) return false;
+
+      const [, monthStr, year2Str] = match;
+      const month = Number(monthStr);
+      const year2 = Number(year2Str);
+
+      return (
+        month >= DateValidationLimits.MinMonth &&
+        month <= DateValidationLimits.MaxMonth &&
+        year2 >= 0 &&
+        year2 <= DateValidationLimits.CreditCardYear2Max
+      );
+    }
+
+    if (strict) return false;
+
+    const d = new Date(value);
+    return !isNaN(d.getTime());
+  }
+
   /**
    * If the specified value is a valid date, it will be checked if the date is in the future.
    * If the date corresponds to today's date or is in the past, a "INVALIDFUTUREDATE" error is thrown.
@@ -20,11 +272,11 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {INVALIDFUTUREDATE: true} if the validation fails; null otherwise
    */
-  static isInFuture(c: AbstractControl<MomentInput>): ValidationErrors | null {
-    const today = moment().startOf('day');
-    // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
-    if (dateValue.isValid() && dateValue.isSameOrBefore(today)) {
+  static isInFuture(c: AbstractControl): ValidationErrors | null {
+    const today = Validation.startOfDay(new Date());
+    const dateValue = Validation.parseDateValue(c.value);
+
+    if (dateValue && dateValue.getTime() <= today.getTime()) {
       return {INVALIDFUTUREDATE: true};
     }
     return null;
@@ -37,11 +289,11 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {INVALIDPASTDATE: true} if the validation fails; null otherwise
    */
-  static isInPast(c: AbstractControl<MomentInput>): ValidationErrors | null {
-    const today = moment().startOf('day');
-    // It is not possible to check against a union type. Problem will disappear with moment.js replacement.
-    const dateValue = moment(c.value, [moment.ISO_8601, 'DD.MM.YYYY', 'DD-MM-YYYY', 'YYYY-MM-DD', 'MM-DD-YYYY'], true);
-    if (dateValue.isValid() && dateValue.isSameOrAfter(today)) {
+  static isInPast(c: AbstractControl): ValidationErrors | null {
+    const today = Validation.startOfDay(new Date());
+    const dateValue = Validation.parseDateValue(c.value);
+
+    if (dateValue && dateValue.getTime() >= today.getTime()) {
       return {INVALIDPASTDATE: true};
     }
     return null;
@@ -125,16 +377,29 @@ export class Validation {
    * @returns A validator function with the given configuration
    */
   static dateFormat(dateFormat: string, strict: boolean, messageKey: string): ValidatorFn {
-    return (c: AbstractControl<MomentInput>): ValidationErrors | null => {
-      const input = c.value;
-      if (!input) {
-        return null;
-      }
-      const parsedDate = moment(input, dateFormat, strict);
-      if (!dateFormat || !parsedDate?.isValid()) {
-        return {[messageKey]: {format: dateFormat}};
+    return (c: AbstractControl): ValidationErrors | null => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const input = c.value ?? null;
+      if (!input) return null;
+
+      // If a Date (or moment-like) is provided, treat it as a valid date value.
+      if (input instanceof Date) {
+        return isNaN(input.getTime()) ? {[messageKey]: {format: dateFormat}} : null;
       }
 
+      if (Validation.hasToDate(input)) {
+        const d = input.toDate();
+        if (d instanceof Date) {
+          return isNaN(d.getTime()) ? {[messageKey]: {format: dateFormat}} : null;
+        }
+      }
+
+      const inputStr = typeof input === 'string' ? input : String(input);
+      const isValid = Validation.isValidByFormat(inputStr, dateFormat, strict);
+
+      if (!dateFormat || !isValid) {
+        return {[messageKey]: {format: dateFormat}};
+      }
       return null;
     };
   }
@@ -146,13 +411,34 @@ export class Validation {
    * @param c The control element the validator is appended to
    * @returns The object {INVALIDCREDITCARDEXPIRATIONDATE: true} if the validation fails; null otherwise
    */
-  static validCreditCardExpirationDate(c: AbstractControl<MomentInput>): ValidationErrors | null {
-    const today = moment().startOf('month');
-    if (c.value !== '') {
-      const dateValue = moment(c.value, ['MM/YY'], true);
-      if (!dateValue.isValid() || dateValue.isBefore(today)) {
-        return {INVALIDCREDITCARDEXPIRATIONDATE: true};
-      }
+  static validCreditCardExpirationDate(c: AbstractControl): ValidationErrors | null {
+    const today = Validation.startOfMonth(new Date());
+    const input = (c.value as string) ?? '';
+
+    if (input === '') return null;
+
+    // Strictly validate "MM/YY"
+    if (!Validation.isValidByFormat(input, 'MM/YY', true)) {
+      return {INVALIDCREDITCARDEXPIRATIONDATE: true};
+    }
+
+    // Extract date values
+    const match = /^(\d{2})\/(\d{2})$/.exec(input);
+    if (!match) {
+      return {INVALIDCREDITCARDEXPIRATIONDATE: true};
+    }
+
+    const [, monthStr, year2Str] = match;
+    const month = Number(monthStr);
+    const year2 = Number(year2Str);
+    // Moment's "YY" parsing maps to a 4-digit year; we follow the common 2000-2099 mapping.
+    const year = DateValidationLimits.CreditCardYearBase + year2;
+
+    const expDate = new Date(year, month - DateValidationLimits.MinDay, DateValidationLimits.MinDay);
+    expDate.setHours(0, 0, 0, 0);
+
+    if (isNaN(expDate.getTime()) || expDate.getTime() < today.getTime()) {
+      return {INVALIDCREDITCARDEXPIRATIONDATE: true};
     }
     return null;
   }

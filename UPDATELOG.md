@@ -23,6 +23,31 @@
 #### form-wrapper: Bei mehreren gleichzeitigen Validator-Errors kann sich die angezeigte Fehlermeldung ändern, da nun die Reihenfolge der `validationMessages`-Keys priorisiert wird (statt der zuvor implizit genutzten Reihenfolge aus `control.errors`).
 Zusätzlich ist `validationMessages` nun typseitig verpflichtend (`Record<string, string>`). Streng typisierte Tests oder Mocks können brechen, wenn zuvor `undefined` verwendet wurde.
 
+#### Entfernung von Moment.js (Validierung & Tests)
+
+##### 1. Änderung
+- Moment.js wird in der Bibliothek nicht mehr verwendet.
+- Unit-Tests verwenden kein Moment.js mehr.
+
+##### 2. Auswirkungen / Migration
+- **Moment.js ist keine (Peer-)Abhängigkeit mehr.**
+- Consumer können weiterhin Moment-Objekte verwenden, sofern `toDate()` verfügbar ist (Backward Compatibility).
+  - Empfehlung: Übergabe von `Date` oder ISO-Strings.
+
+##### 3. Unterstützte Eingabeformate (Validierung)
+- `isInFuture` / `isInPast` akzeptieren:
+  - `Date`
+  - ISO-Date-Only (`YYYY-MM-DD`)
+  - ISO-DateTime mit `Z` oder Offset (z. B. `2099-12-31T00:00:00+01:00`)
+  - `DD.MM.YYYY`
+  - `DD-MM-YYYY` (primär interpretiert als `DD-MM-YYYY`, fallback optional als `MM-DD-YYYY`)
+  - `number` (Timestamp)
+  - Moment-ähnliche Objekte mit `toDate()`
+
+- `dateFormat(...)` unterstützt die in der Bibliothek verwendeten Formate (u. a. `YYYY-MM-DD`, `DD.MM.YYYY`, `HH:mm:ss`, `YYYY-MM-DDTHH:mm:ss[Z]`, `MM/YY`) und akzeptiert zusätzlich `Date` sowie Moment-ähnliche Objekte via `toDate()`.
+
+**Wichtig:** `isoDateTime` bleibt strikt und akzeptiert nur `YYYY-MM-DDTHH:mm:ssZ` mit literalem `Z` am Ende (UTC). Offsets wie `+01:00` sind ungültig.
+
 ---
 
 ### 3. Deprecations
