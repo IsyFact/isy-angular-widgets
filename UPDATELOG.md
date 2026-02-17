@@ -14,10 +14,6 @@
 
 #### Unit-Tests (Mocks): `ng-mocks` ist unter Angular 21 nicht mehr kompatibel. Tests wurden von `ng-mocks`/`MockComponents(...)` auf eigene Standalone-Stubs und `overrideComponent(...)` umgestellt. Test-Setups können brechen, wenn bisheriges `ng-mocks`-Verhalten oder dessen Provider-Handling vorausgesetzt wurde.
 
-#### Unit-Tests (Test-Plattform): Modernisierung des Test-Setups: Wechsel von `BrowserDynamicTestingModule` / `platformBrowserDynamicTesting()` auf `BrowserTestingModule` / `platformBrowserTesting()` als Ersatz für deprecated „dynamic testing“-APIs. Anpassungen sind nötig, wenn das Setup implizit auf JIT oder `@angular/compiler` angewiesen war.
-
-#### Unit-Tests (Change Detection / Timing): Zur Stabilisierung unter Angular 21 (Karma/Zone) wurde `provideZoneChangeDetection()` im Test-Modul ergänzt. Dadurch können sich Scheduling und Timing ändern und einzelne asynchrone Tests beeinflusst werden.
-
 #### PrimeNG Animationen: PrimeNG v21 verwendet CSS-basierte Animationen aufgrund der Deprecation des Angular-Animations-Pakets. `showTransitionOptions` und `hideTransitionOptions` sind deprecated und haben keine Wirkung mehr (Properties existieren weiterhin, werden jedoch ignoriert).
 
 #### form-wrapper: Bei mehreren gleichzeitigen Validator-Errors kann sich die angezeigte Fehlermeldung ändern, da nun die Reihenfolge der `validationMessages`-Keys priorisiert wird (statt der zuvor implizit genutzten Reihenfolge aus `control.errors`).
@@ -62,6 +58,8 @@ Zusätzlich ist `validationMessages` nun typseitig verpflichtend (`Record<string
 #### form-wrapper: Klassenname-Fehler im Template behoben.
 #### Styling: Eingabefelder wieder korrekt auf volle Breite (`w-full`) gestylt, indem die Klasse vom Wrapper (`styleClass`) auf das Input-Element (`inputStyleClass`) verschoben wurde.
 #### PrimeNG: `severity`-Binding typensicher gemacht – nur gültige Severity-Werte werden übergeben, sonst `undefined`.
+#### Unit-Tests (Change Detection / Timing): Zur Stabilisierung unter Angular 21 (Karma/Zone) wurde `provideZoneChangeDetection()` im Test-Modul ergänzt. Dadurch können sich Scheduling und Timing ändern und einzelne asynchrone Tests beeinflusst werden.
+#### Unit-Tests (Test-Plattform): Modernisierung des Test-Setups: Wechsel von `BrowserDynamicTestingModule` / `platformBrowserDynamicTesting()` auf `BrowserTestingModule` / `platformBrowserTesting()` als Ersatz für deprecated „dynamic testing“-APIs. Anpassungen sind nötig, wenn das Setup implizit auf JIT oder `@angular/compiler` angewiesen war.
 
 ---
 
