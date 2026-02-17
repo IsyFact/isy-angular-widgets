@@ -265,6 +265,6 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
    * @returns translated text
    */
   getTranslation(path: string): string {
-    return this.configService.getTranslation(path) as string;
+    return this.configService.getTranslation(path);
   }
 }

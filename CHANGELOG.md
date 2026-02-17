@@ -1,7 +1,6 @@
-# 21.0.0 -
-## Features
+# 21.0.0 - 16.02.2026
+## Breaking Changes
 - IFS-5039: Upgrade der Angularversion und PrimeNG-Bibliothek von 20 auf 21 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
-## Release Notes
 - IFS-5174: `moment.js` wurde aus der Bibliothek und den Unit-Tests entfernt. Die Datumsvalidierung basiert jetzt auf nativer `Date`-Logik (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
 ## Fixes
 - IFS-5174: Datumsvalidierung ohne Moment: `isInFuture`, `isInPast`, `dateFormat`, `validCreditCardExpirationDate` sowie ISO-Validatoren funktionieren ohne Moment-Abhängigkeit

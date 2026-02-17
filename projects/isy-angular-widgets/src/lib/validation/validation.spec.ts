@@ -6,75 +6,122 @@ interface ToDateCapable {
 }
 
 /**
+ * Expects that error have to be defined
+ * @param errors Current errors list
+ * @param errorKey Key for error finding
+ * @param errorProp Property for error finding
+ */
+function errorHaveToBeDefined(errors: ValidationErrors | null, errorKey?: string, errorProp?: string): void {
+  if (!errors) {
+    throw new Error('errors is not defined');
+  }
+
+  if (errorKey) {
+    expect(errors[errorKey]).toBeDefined();
+  }
+
+  if (errorProp) {
+    expect(errors[errorProp]).toBeDefined();
+  }
+}
+
+/**
+ * Returns a copy of the date normalized to local start of day.
+ * @param date Source date.
+ * @returns Date at 00:00:00.000 local time.
+ */
+function startOfDay(date: Date): Date {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+/**
+ * Adds a number of days to a date and returns a new Date instance.
+ * @param date Source date.
+ * @param days Number of days to add.
+ * @returns Shifted date.
+ */
+function addDays(date: Date, days: number): Date {
+  const d = new Date(date);
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+/**
+ * Adds a number of years to a date and returns a new Date instance.
+ * @param date Source date.
+ * @param years Number of years to add.
+ * @returns Shifted date.
+ */
+function addYears(date: Date, years: number): Date {
+  const d = new Date(date);
+  d.setFullYear(d.getFullYear() + years);
+  return d;
+}
+
+/**
+ * Formats a date as credit-card expiration string in MM/YY.
+ * @param date Source date.
+ * @returns Formatted month/year.
+ */
+function formatMMYY(date: Date): string {
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const yy = String(date.getFullYear() % 100).padStart(2, '0');
+  return `${mm}/${yy}`;
+}
+
+/**
+ * Formats a date as ISO date-only string in local time: YYYY-MM-DD
+ * @param date Source date.
+ * @returns ISO date-only string (local).
+ */
+function formatYYYYMMDDLocal(date: Date): string {
+  const yyyy = String(date.getFullYear()).padStart(4, '0');
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+/**
+ * Formats a date as German date string in local time: DD.MM.YYYY
+ * @param date Source date.
+ * @returns German date string (local).
+ */
+function formatDDMMYYYYLocal(date: Date): string {
+  const dd = String(date.getDate()).padStart(2, '0');
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const yyyy = String(date.getFullYear()).padStart(4, '0');
+  return `${dd}.${mm}.${yyyy}`;
+}
+
+/**
+ * Formats a date as hyphen date string in local time: DD-MM-YYYY
+ * @param date Source date.
+ * @returns Hyphen date string (local).
+ */
+function formatDDMMYYYYHyphenLocal(date: Date): string {
+  const dd = String(date.getDate()).padStart(2, '0');
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const yyyy = String(date.getFullYear()).padStart(4, '0');
+  return `${dd}-${mm}-${yyyy}`;
+}
+
+/**
+ * Creates a "moment-like" object exposing toDate() (for backward compatibility paths).
+ * @param date Source date.
+ * @returns Object exposing toDate().
+ */
+function momentLike(date: Date): ToDateCapable {
+  return {
+    toDate: (): Date => new Date(date)
+  };
+}
+
+/**
  * Unit-Test der IsyValidators Klasse.
  */
 describe('Unit Test: Validation', () => {
-  /**
-   * Expects that error have to be defined
-   * @param errors Current errors list
-   * @param errorKey Key for error finding
-   * @param errorProp Property for error finding
-   */
-  function errorHaveToBeDefined(errors: ValidationErrors | null, errorKey?: string, errorProp?: string): void {
-    if (!errors) {
-      throw new Error('errors is not defined');
-    }
-
-    if (errorKey) {
-      expect(errors[errorKey]).toBeDefined();
-    }
-
-    if (errorProp) {
-      expect(errors[errorProp]).toBeDefined();
-    }
-  }
-
-  /**
-   * Returns a copy of the date normalized to local start of day.
-   * @param date Source date.
-   * @returns Date at 00:00:00.000 local time.
-   */
-  function startOfDay(date: Date): Date {
-    const d = new Date(date);
-    d.setHours(0, 0, 0, 0);
-    return d;
-  }
-
-  /**
-   * Adds a number of days to a date and returns a new Date instance.
-   * @param date Source date.
-   * @param days Number of days to add.
-   * @returns Shifted date.
-   */
-  function addDays(date: Date, days: number): Date {
-    const d = new Date(date);
-    d.setDate(d.getDate() + days);
-    return d;
-  }
-
-  /**
-   * Adds a number of years to a date and returns a new Date instance.
-   * @param date Source date.
-   * @param years Number of years to add.
-   * @returns Shifted date.
-   */
-  function addYears(date: Date, years: number): Date {
-    const d = new Date(date);
-    d.setFullYear(d.getFullYear() + years);
-    return d;
-  }
-
-  /**
-   * Formats a date as credit-card expiration string in MM/YY.
-   * @param date Source date.
-   * @returns Formatted month/year.
-   */
-  function formatMMYY(date: Date): string {
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const yy = String(date.getFullYear() % 100).padStart(2, '0');
-    return `${mm}/${yy}`;
-  }
-
   describe('unspecifiedDate when input is valid', () => {
     const errorKey = 'INVALIDUNSPECIFIEDDATE';
     let control: AbstractControl;
@@ -513,53 +560,6 @@ describe('Unit Test: Validation', () => {
       const allowedCharacters = Validation.getAllowedCharactersByType('unknown' as 'A' | 'B' | 'C' | 'D' | 'E');
       expect(allowedCharacters).toEqual({allowed: {}, diacritic: {}});
     });
-
-    /**
-     * Formats a date as ISO date-only string in local time: YYYY-MM-DD
-     * @param date Source date.
-     * @returns ISO date-only string (local).
-     */
-    function formatYYYYMMDDLocal(date: Date): string {
-      const yyyy = String(date.getFullYear()).padStart(4, '0');
-      const mm = String(date.getMonth() + 1).padStart(2, '0');
-      const dd = String(date.getDate()).padStart(2, '0');
-      return `${yyyy}-${mm}-${dd}`;
-    }
-
-    /**
-     * Formats a date as German date string in local time: DD.MM.YYYY
-     * @param date Source date.
-     * @returns German date string (local).
-     */
-    function formatDDMMYYYYLocal(date: Date): string {
-      const dd = String(date.getDate()).padStart(2, '0');
-      const mm = String(date.getMonth() + 1).padStart(2, '0');
-      const yyyy = String(date.getFullYear()).padStart(4, '0');
-      return `${dd}.${mm}.${yyyy}`;
-    }
-
-    /**
-     * Formats a date as hyphen date string in local time: DD-MM-YYYY
-     * @param date Source date.
-     * @returns Hyphen date string (local).
-     */
-    function formatDDMMYYYYHyphenLocal(date: Date): string {
-      const dd = String(date.getDate()).padStart(2, '0');
-      const mm = String(date.getMonth() + 1).padStart(2, '0');
-      const yyyy = String(date.getFullYear()).padStart(4, '0');
-      return `${dd}-${mm}-${yyyy}`;
-    }
-
-    /**
-     * Creates a "moment-like" object exposing toDate() (for backward compatibility paths).
-     * @param date Source date.
-     * @returns Object exposing toDate().
-     */
-    function momentLike(date: Date): ToDateCapable {
-      return {
-        toDate: (): Date => new Date(date)
-      };
-    }
 
     describe('internal helpers (private) - parseDateValue', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
