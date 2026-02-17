@@ -98,17 +98,17 @@ export class Validation {
     if (value == null || value === '') return null;
 
     if (value instanceof Date) {
-      return isNaN(value.getTime()) ? null : value;
+      return Number.isNaN(value.getTime()) ? null : value;
     }
 
     if (Validation.hasToDate(value)) {
       const d = value.toDate();
-      return d instanceof Date && !isNaN(d.getTime()) ? d : null;
+      return d instanceof Date && !Number.isNaN(d.getTime()) ? d : null;
     }
 
     if (typeof value === 'number') {
       const d = new Date(value);
-      return isNaN(d.getTime()) ? null : d;
+      return Number.isNaN(d.getTime()) ? null : d;
     }
 
     if (typeof value !== 'string') return null;
@@ -118,7 +118,7 @@ export class Validation {
     const isoDateTimeRegex = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
     if (isoDateTimeRegex.test(input)) {
       const d = new Date(input);
-      return isNaN(d.getTime()) ? null : d;
+      return Number.isNaN(d.getTime()) ? null : d;
     }
 
     // ISO date-only: YYYY-MM-DD
@@ -152,7 +152,7 @@ export class Validation {
 
     // Last resort: native parsing
     const d = new Date(input);
-    return isNaN(d.getTime()) ? null : d;
+    return Number.isNaN(d.getTime()) ? null : d;
   }
 
   /**
@@ -262,7 +262,7 @@ export class Validation {
     if (strict) return false;
 
     const d = new Date(value);
-    return !isNaN(d.getTime());
+    return !Number.isNaN(d.getTime());
   }
 
   /**
@@ -325,7 +325,7 @@ export class Validation {
         const date = new Date(isoFormattedStr);
         const timestamp = date.getTime();
 
-        if (!isNaN(timestamp)) isDateValid = date.toISOString().startsWith(isoFormattedStr);
+        if (!Number.isNaN(timestamp)) isDateValid = date.toISOString().startsWith(isoFormattedStr);
       }
     }
 
@@ -360,7 +360,7 @@ export class Validation {
         const date = new Date(isoFormattedStr);
         const timestamp = date.getTime();
 
-        if (!isNaN(timestamp)) isDateValid = date.toISOString().startsWith(isoFormattedStr);
+        if (!Number.isNaN(timestamp)) isDateValid = date.toISOString().startsWith(isoFormattedStr);
       }
     }
 
@@ -384,13 +384,13 @@ export class Validation {
 
       // If a Date (or moment-like) is provided, treat it as a valid date value.
       if (input instanceof Date) {
-        return isNaN(input.getTime()) ? {[messageKey]: {format: dateFormat}} : null;
+        return Number.isNaN(input.getTime()) ? {[messageKey]: {format: dateFormat}} : null;
       }
 
       if (Validation.hasToDate(input)) {
         const d = input.toDate();
         if (d instanceof Date) {
-          return isNaN(d.getTime()) ? {[messageKey]: {format: dateFormat}} : null;
+          return Number.isNaN(d.getTime()) ? {[messageKey]: {format: dateFormat}} : null;
         }
       }
 
@@ -437,7 +437,7 @@ export class Validation {
     const expDate = new Date(year, month - DateValidationLimits.MinDay, DateValidationLimits.MinDay);
     expDate.setHours(0, 0, 0, 0);
 
-    if (isNaN(expDate.getTime()) || expDate.getTime() < today.getTime()) {
+    if (Number.isNaN(expDate.getTime()) || expDate.getTime() < today.getTime()) {
       return {INVALIDCREDITCARDEXPIRATIONDATE: true};
     }
     return null;
@@ -509,11 +509,11 @@ export class Validation {
     let nCheck = 0;
     let bEven = false;
 
-    value = value.replace(/\D/g, '');
+    value = value.replaceAll(/\D/g, '');
 
     for (let n = value.length - 1; n >= 0; n--) {
       const cDigit = value.charAt(n);
-      let nDigit = parseInt(cDigit, radix);
+      let nDigit = Number.parseInt(cDigit, radix);
 
       if (bEven) {
         if ((nDigit *= digitsMultiplier) > radix - 1) {
@@ -819,11 +819,13 @@ export class Validation {
       return '0000';
     }
 
-    const code = input.charCodeAt(index);
+    const code = input.codePointAt(index);
     const hexBase = 16;
     const hexStringLength = 4;
 
-    return isNaN(code) ? '0000' : code.toString(hexBase).toUpperCase().padStart(hexStringLength, '0');
+    return code === undefined || Number.isNaN(code)
+      ? '0000'
+      : code.toString(hexBase).toUpperCase().padStart(hexStringLength, '0');
   }
 
   /**

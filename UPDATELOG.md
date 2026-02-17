@@ -1,9 +1,9 @@
-# Update Log - 08.02.2026
+# Update Log - 16.02.2026
 
 ## Migration auf Angular v21 & PrimeNG v21
 
 ### 1. Aktualisierte Frameworks & Tools
-- Angular: v20 → **v21.1.2**
+- Angular: v20 → **v21.1.4**
 - PrimeNG: v20 → **v21.1.1**
 - Core-Pakete & CLI aktualisiert
 - Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/migration/v21) umgesetzt
@@ -13,10 +13,6 @@
 ### 2. **Breaking Changes**
 
 #### Unit-Tests (Mocks): `ng-mocks` ist unter Angular 21 nicht mehr kompatibel. Tests wurden von `ng-mocks`/`MockComponents(...)` auf eigene Standalone-Stubs und `overrideComponent(...)` umgestellt. Test-Setups können brechen, wenn bisheriges `ng-mocks`-Verhalten oder dessen Provider-Handling vorausgesetzt wurde.
-
-#### Unit-Tests (Test-Plattform): Modernisierung des Test-Setups: Wechsel von `BrowserDynamicTestingModule` / `platformBrowserDynamicTesting()` auf `BrowserTestingModule` / `platformBrowserTesting()` als Ersatz für deprecated „dynamic testing“-APIs. Anpassungen sind nötig, wenn das Setup implizit auf JIT oder `@angular/compiler` angewiesen war.
-
-#### Unit-Tests (Change Detection / Timing): Zur Stabilisierung unter Angular 21 (Karma/Zone) wurde `provideZoneChangeDetection()` im Test-Modul ergänzt. Dadurch können sich Scheduling und Timing ändern und einzelne asynchrone Tests beeinflusst werden.
 
 #### PrimeNG Animationen: PrimeNG v21 verwendet CSS-basierte Animationen aufgrund der Deprecation des Angular-Animations-Pakets. `showTransitionOptions` und `hideTransitionOptions` sind deprecated und haben keine Wirkung mehr (Properties existieren weiterhin, werden jedoch ignoriert).
 
@@ -62,6 +58,8 @@ Zusätzlich ist `validationMessages` nun typseitig verpflichtend (`Record<string
 #### form-wrapper: Klassenname-Fehler im Template behoben.
 #### Styling: Eingabefelder wieder korrekt auf volle Breite (`w-full`) gestylt, indem die Klasse vom Wrapper (`styleClass`) auf das Input-Element (`inputStyleClass`) verschoben wurde.
 #### PrimeNG: `severity`-Binding typensicher gemacht – nur gültige Severity-Werte werden übergeben, sonst `undefined`.
+#### Unit-Tests (Change Detection / Timing): Zur Stabilisierung unter Angular 21 (Karma/Zone) wurde `provideZoneChangeDetection()` im Test-Modul ergänzt. Dadurch können sich Scheduling und Timing ändern und einzelne asynchrone Tests beeinflusst werden.
+#### Unit-Tests (Test-Plattform): Modernisierung des Test-Setups: Wechsel von `BrowserDynamicTestingModule` / `platformBrowserDynamicTesting()` auf `BrowserTestingModule` / `platformBrowserTesting()` als Ersatz für deprecated „dynamic testing“-APIs. Anpassungen sind nötig, wenn das Setup implizit auf JIT oder `@angular/compiler` angewiesen war.
 
 ---
 
@@ -78,8 +76,8 @@ Zusätzlich ist `validationMessages` nun typseitig verpflichtend (`Record<string
 
 #### Paketkonfiguration (`index.ts`)
 ```ts
-addPackageToPackageJson(tree, '@angular/common', '^21.1.2');
-addPackageToPackageJson(tree, '@angular/core', '^21.1.2');
+addPackageToPackageJson(tree, '@angular/common', '^21.1.4');
+addPackageToPackageJson(tree, '@angular/core', '^21.1.4');
 addPackageToPackageJson(tree, 'primeng', '^21.1.1');
 addPackageToPackageJson(tree, '@primeuix/themes', '^2.0.3');
 ```
@@ -92,37 +90,37 @@ addPackageToPackageJson(tree, '@primeuix/themes', '^2.0.3');
 ```json
 {
     "dependencies": {
-        "@angular/animations": "^21.1.2",
-		"@angular/cdk": "^21.1.2",
-		"@angular/common": "^21.1.2",
-		"@angular/compiler": "^21.1.2",
-		"@angular/core": "^21.1.2",
-		"@angular/forms": "^21.1.2",
-		"@angular/platform-browser": "^21.1.2",
-		"@angular/platform-browser-dynamic": "^21.1.2",
-		"@angular/router": "^21.1.2",
+    "@angular/animations": "^21.1.4",
+		"@angular/cdk": "^21.1.4",
+		"@angular/common": "^21.1.4",
+		"@angular/compiler": "^21.1.4",
+		"@angular/core": "^21.1.4",
+		"@angular/forms": "^21.1.4",
+		"@angular/platform-browser": "^21.1.4",
+		"@angular/platform-browser-dynamic": "^21.1.4",
+		"@angular/router": "^21.1.4",
 		"@primeuix/themes": "^2.0.3",
 		"chart.js": "^4.5.1",
 		"primeng": "^21.1.1",
 		"zone.js": "~0.16.0"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "^21.1.2",
+    "@angular-devkit/build-angular": "^21.1.4",
 		"@angular-eslint/builder": "21.2.0",
 		"@angular-eslint/eslint-plugin": "21.2.0",
 		"@angular-eslint/eslint-plugin-template": "^21.2.0",
 		"@angular-eslint/schematics": "21.2.0",
 		"@angular-eslint/template-parser": "21.2.0",
-		"@angular/cli": "~21.1.2",
-		"@angular/compiler-cli": "^21.1.2",
+		"@angular/cli": "~21.1.4",
+		"@angular/compiler-cli": "^21.1.4",
 		"@compodoc/compodoc": "^1.2.1",
 		"@ngneat/spectator": "^22.1.0",
 		"@types/jasmine": "~6.0.0",
-		"@types/node": "^25.1.0",
-		"@typescript-eslint/eslint-plugin": "^8.54.0",
-		"@typescript-eslint/parser": "^8.54.0",
+		"@types/node": "^25.2.3",
+		"@typescript-eslint/eslint-plugin": "^88.55.0",
+		"@typescript-eslint/parser": "^8.56.0",
 		"eslint": "^9.39.2",
-		"eslint-plugin-jsdoc": "^62.5.0",
+		"eslint-plugin-jsdoc": "^62.5.5",
 		"jasmine-core": "~6.0.1",
 		"karma-jasmine-html-reporter": "~2.2.0",
 		"ng-packagr": "^21.1.0",
@@ -136,8 +134,8 @@ addPackageToPackageJson(tree, '@primeuix/themes', '^2.0.3');
 ```json
 {
   "peerDependencies": {
-    "@angular/common": "^21.1.2",
-    "@angular/core": "^21.1.2",
+    "@angular/common": "^21.1.4",
+    "@angular/core": "^21.1.4",
     "primeng": "^21.1.1",
     "@primeuix/themes": "^2.0.3"
   },

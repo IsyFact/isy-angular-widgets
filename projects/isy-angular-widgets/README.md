@@ -68,10 +68,10 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
     {label: 'Menüeintrag 2'},
     {label: 'Menüeintrag 3'}
   ]"
-  [applicationGroupColor]="'#458648'"
-  [linksNavigationWidth]="'200px'"
-  [logoAwl]="'{image-src}'"
-  [logoAnbieterAwl]="'{image-src}'"
+  applicationGroupColor="#458648"
+  linksNavigationWidth="200px"
+  logoAwl="{image-src}"
+  logoAnbieterAwl="{image-src}"
 >
   <p-menu Linksnavigation
     [model]="[
@@ -108,18 +108,17 @@ import {PanelModule} from 'primeng/panel';
 export class AppComponent {}
 ```
 
-Abschließend ist es erforderlich, in `app.config.ts` die Methoden `provideAnimations` und `provideIsyFactTheme` zu importieren und bereitzustellen:
+Abschließend ist es erforderlich, in `app.config.ts` die Methode `provideIsyFactTheme` zu importieren und bereitzustellen:
 
 ```typescript
 // Other imports ...
 import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
-import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), provideIsyFactTheme()]
+  providers: [provideRouter(routes), provideIsyFactTheme()]
 };
 ```
 
@@ -134,7 +133,6 @@ Beim Aufruf von `provideIsyFactTheme()` kann ein Theme optional übergeben werde
 ```ts
 import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
-import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 import Material from '@primeuix/themes/material';
 
@@ -174,7 +172,6 @@ Dazu müssen zunächst folgende Importe bereitgestellt werden, z.B. in `appConfi
 import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
-import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 import {provideHttpClient} from '@angular/common/http';
 import {provideTranslateHttpLoader, TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -184,7 +181,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideAnimations(),
     provideIsyFactTheme(),
     provideHttpClient(),
     provideTranslateService(),
@@ -200,7 +196,7 @@ export const appConfig: ApplicationConfig = {
 Anschließend lassen sich die Übersetzungen für PrimeNG und `isy-angular-widgets` in der Datei `app.component.ts` bereitstellen. Dazu muss das erforderliche `TranslateModule` beispielsweise in der `app.component.ts` zur Verfügung gestellt werden.
 
 ```typescript
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ChangeDetectorRef, OnDestroy, inject} from '@angular/core';
 import {HauptfensterComponent, WidgetsConfigService} from '@isyfact/isy-angular-widgets';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {PrimeNG} from 'primeng/config';
@@ -215,39 +211,38 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./app.component.scss'],
   imports: [HauptfensterComponent, PanelModule, MenuModule, TranslateModule]
 })
-export class AppComponent implements OnInit, OnDestroy {
-  primeNgSub?: Subscription;
-  widgetSub?: Subscription;
+export class AppComponent implements OnDestroy {
+  private readonly primeNgSub?: Subscription;
+  private readonly widgetSub?: Subscription;
+  private readonly langSub?: Subscription;
 
   private readonly primeng = inject(PrimeNG);
   private readonly widgetsConfigService = inject(WidgetsConfigService);
-  readonly translateService = inject(TranslateService);
+  private readonly translate = inject(TranslateService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.translateService.setFallbackLang('en');
-
-    this.translate('de');
+  constructor() {
+    this.translate.addLangs(['de', 'en']);
+    this.translate.setFallbackLang('en');
+    this.translate.use('de');
   }
 
-  translate(lang: string) {
-    this.translateService.use(lang);
-    this.primeNgSub = this.translateService
-      .get('primeng')
-      .subscribe((res) => this.primeng.setTranslation(res));
-    this.widgetSub = this.translateService
-      .get('isyAngularWidgets')
-      .subscribe((res) => this.widgetsConfigService.setTranslation(res));
-  }
+  this.primeNgSub = this.translate.stream('primeng').subscribe((res) => {
+    this.primeng.setTranslation(res);
+  });
+
+  this.widgetSub = this.translate.stream('isyAngularWidgets').subscribe((res) => {
+    this.widgetsConfigService.setTranslation(res);
+  });
+
+  this.langSub = this.translate.onLangChange.subscribe(() => {
+    this.cdr.detectChanges();
+  });
 
   ngOnDestroy(): void {
-    if (this.primeNgSub) {
-      this.primeNgSub.unsubscribe();
-    }
-    if (this.widgetSub) {
-      this.widgetSub.unsubscribe();
-    }
+    this.primeNgSub?.unsubscribe();
+    this.widgetSub?.unsubscribe();
+    this.langSub?.unsubscribe();
   }
 }
 ```

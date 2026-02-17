@@ -30,10 +30,12 @@ export class WidgetsConfigService {
 
   private readonly translationSource = new Subject<unknown>();
 
-  getTranslation(path: string): string | undefined {
+  getTranslation(path: string): string {
     // Needs to be refactored in the future
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-    return path.split('.').reduce((o, k) => (o ? (o as any)[k] : undefined), this.translation) as string;
+    const value = path.split('.').reduce((o, k) => (o ? (o as any)[k] : undefined), this.translation) as unknown;
+
+    return typeof value === 'string' ? value : '';
   }
 
   setTranslation(value: WidgetsTranslation): void {
