@@ -23,6 +23,7 @@
     --p-form-field-placeholder-color: #{vars.$isyfactInputPlaceholderTextColor};
     --p-form-field-invalid-placeholder-color: #{vars.$isyfactAlertColor};
     --p-form-field-invalid-border-color: #{vars.$isyfactAlertColor};
+    --p-form-field-hover-border-color: #{vars.$isyfactPrimaryColor};
 
     // Styling for readonly input fields
     // PrimeNG does not apply this styling by default
@@ -52,6 +53,27 @@
 
     // links navigation
     --p-navigation-item-padding: 0.875rem;
+
+    /**
+     * Hover state styling for active and interactive menu items
+     * 
+     * Applies a dark blue background color (#003a85) to various menu components
+     * when they are hovered, including:
+     * - Panel menu items and headers (non-disabled state)
+     * - Active panel menu item links
+     * - Active mega menu item links
+     * - Mega menu items (non-disabled state)
+     * 
+     * This provides visual feedback to users indicating interactive menu elements
+     * that are currently being hovered over.
+     */
+    .p-panelmenu-item:not(.p-disabled) > .p-panelmenu-item-content:hover,
+    .p-panelmenu-header:not(.p-disabled) .p-panelmenu-header-content:hover,
+    .p-panelmenu-item-link-active:hover,
+    .p-megamenu-item-link-active:hover,
+    .p-megamenu-item:not(.p-disabled) > .p-megamenu-item-content:hover {
+      background:  #4C8CEB;
+    }
 
     // panel
     --p-panelmenu-submenu-indent: 0;
