@@ -12,15 +12,9 @@
 
 ### 2. **Breaking Changes**
 
-#### Unit-Tests (Mocks): `ng-mocks` ist unter Angular 21 nicht mehr kompatibel. Tests wurden von `ng-mocks`/`MockComponents(...)` auf eigene Standalone-Stubs und `overrideComponent(...)` umgestellt. Test-Setups können brechen, wenn bisheriges `ng-mocks`-Verhalten oder dessen Provider-Handling vorausgesetzt wurde.
-
-#### PrimeNG Animationen: PrimeNG v21 verwendet CSS-basierte Animationen aufgrund der Deprecation des Angular-Animations-Pakets. `showTransitionOptions` und `hideTransitionOptions` sind deprecated und haben keine Wirkung mehr (Properties existieren weiterhin, werden jedoch ignoriert).
-
-#### form-wrapper: Bei mehreren gleichzeitigen Validator-Errors kann sich die angezeigte Fehlermeldung ändern, da nun die Reihenfolge der `validationMessages`-Keys priorisiert wird (statt der zuvor implizit genutzten Reihenfolge aus `control.errors`).
-Zusätzlich ist `validationMessages` nun typseitig verpflichtend (`Record<string, string>`). Streng typisierte Tests oder Mocks können brechen, wenn zuvor `undefined` verwendet wurde.
+#### PrimeNG Animationen: PrimeNG v21 verwendet CSS-basierte Animationen aufgrund der Deprecation des Angular-Animations-Pakets. `showTransitionOptions` und `hideTransitionOptions` sind deprecated und haben keine Wirkung mehr (Properties existieren weiterhin, werden jedoch ignoriert). Migration: `provideAnimations()` muss aus der `app.config.ts` entfernt werden.
 
 #### Entfernung von Moment.js (Validierung & Tests)
-
 ##### 1. Änderung
 - Moment.js wird in der Bibliothek nicht mehr verwendet.
 - Unit-Tests verwenden kein Moment.js mehr.
@@ -56,19 +50,28 @@ Zusätzlich ist `validationMessages` nun typseitig verpflichtend (`Record<string
 ### 4. Fixes
 
 #### form-wrapper: Klassenname-Fehler im Template behoben.
-#### Styling: Eingabefelder wieder korrekt auf volle Breite (`w-full`) gestylt, indem die Klasse vom Wrapper (`styleClass`) auf das Input-Element (`inputStyleClass`) verschoben wurde.
-#### PrimeNG: `severity`-Binding typensicher gemacht – nur gültige Severity-Werte werden übergeben, sonst `undefined`.
-#### Unit-Tests (Change Detection / Timing): Zur Stabilisierung unter Angular 21 (Karma/Zone) wurde `provideZoneChangeDetection()` im Test-Modul ergänzt. Dadurch können sich Scheduling und Timing ändern und einzelne asynchrone Tests beeinflusst werden.
-#### Unit-Tests (Test-Plattform): Modernisierung des Test-Setups: Wechsel von `BrowserDynamicTestingModule` / `platformBrowserDynamicTesting()` auf `BrowserTestingModule` / `platformBrowserTesting()` als Ersatz für deprecated „dynamic testing“-APIs. Anpassungen sind nötig, wenn das Setup implizit auf JIT oder `@angular/compiler` angewiesen war.
+#### Styling: Eingabefelder wieder korrekt auf volle Breite (`w-full`) gestylt.
+#### PrimeNG: `severity`-Binding typensicher gemacht – es werden nur gültige Severity-Werte übergeben, sonst `undefined`.
 
 ---
 
-### 5. Refactoring
+### 5. Interne Anpassungen
 
-#### PrimeNG: Attribut-Notation vereinheitlicht (z. B. `ariaLabel`).
-#### form-wrapper: Fehlertextgröße reduziert.
-#### Template: Template-Bindings von String-Interpolation (`attr="{{ … }}"`) auf Property Binding (`[attr]="…"` inkl. Pipes) umgestellt.
-#### Template: Statische Bindings vereinfacht: unnötige Property Bindings mit konstanten Strings (`[...]= '...'`) durch direkte Attribute ersetzt.
+#### Unit-Tests: 
+##### ng-mocks ist unter Angular 21 nicht mehr kompatibel.
+##### Tests wurden von ng-mocks / MockComponents(...) auf eigene Standalone-Stubs und overrideComponent(...) umgestellt.
+##### provideZoneChangeDetection() im Test-Modul ergänzt (stabileres Verhalten unter Angular 21).
+##### Modernisierung des Test-Setups: Wechsel von „dynamic testing“-APIs auf BrowserTestingModule / platformBrowserTesting().
+
+#### PrimeNG: Attribut-Notation vereinheitlicht (z. B. ariaLabel).
+
+#### form-wrapper:
+##### Reihenfolge der validationMessages-Keys priorisiert (statt der zuvor impliziten Reihenfolge aus control.errors).
+##### Fehlertextgröße reduziert.
+
+#### Template:
+##### Template-Bindings von String-Interpolation (attr="{{ … }}") auf Property Binding ([attr]="…" inkl. Pipes) umgestellt.
+##### Unnötige Property Bindings mit konstanten Strings ([...]= '...') durch direkte Attribute ersetzt.
 
 ---
 
