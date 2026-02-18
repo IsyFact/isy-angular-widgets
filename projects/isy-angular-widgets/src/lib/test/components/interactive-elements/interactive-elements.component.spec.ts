@@ -34,10 +34,10 @@ describe('TestComponentComponent', () => {
       const element = spectator.query(selector) as HTMLElement;
       const {width, height} = element.getBoundingClientRect();
       const computedStyle = getComputedStyle(element);
-      const paddingTop = parseFloat(computedStyle.paddingTop);
-      const paddingRight = parseFloat(computedStyle.paddingRight);
-      const paddingBottom = parseFloat(computedStyle.paddingBottom);
-      const paddingLeft = parseFloat(computedStyle.paddingLeft);
+      const paddingTop = Number.parseFloat(computedStyle.paddingTop);
+      const paddingRight = Number.parseFloat(computedStyle.paddingRight);
+      const paddingBottom = Number.parseFloat(computedStyle.paddingBottom);
+      const paddingLeft = Number.parseFloat(computedStyle.paddingLeft);
       const widthWithPadding = width + paddingLeft + paddingRight;
       const heightWithPadding = height + paddingTop + paddingBottom;
 
@@ -52,8 +52,8 @@ describe('TestComponentComponent', () => {
 
   it('should render error text with font-size > 18.666666666666664px (14pt)', () => {
     const errorMessage = spectator.query('.p-error .p-message-text') as HTMLElement;
-    const fontSize = window.getComputedStyle(errorMessage).fontSize;
-    const fontSizePx = parseFloat(fontSize);
+    const fontSize = globalThis.getComputedStyle(errorMessage).fontSize;
+    const fontSizePx = Number.parseFloat(fontSize);
     expect(fontSizePx).toBeGreaterThan(18.666666666666664);
   });
 });
