@@ -8,6 +8,10 @@
   * PrimeNG: Eingabefelder wieder korrekt auf volle Breite (w-full) gestylt
   * PrimeNG: Das `severity`-Binding wurde typensicher umgesetzt, sodass nur gültige Severity-Werte übergeben werden und andernfalls `undefined` gesetzt wird
 - IFS-5174: Datumsvalidierung ohne Moment: `isInFuture`, `isInPast`, `dateFormat`, `validCreditCardExpirationDate` sowie ISO-Validatoren funktionieren ohne Moment-Abhängigkeit
+- IFS-4983:
+  * Die Hoehe eines Eingabefeldes mit Sonderzeichen Picker entspricht nun der Standardhoehe
+  * Lint errors in Component Tests behoben
+- IFS-5174: Datumsvalidierung ohne Moment: `isInFuture`, `isInPast`, `dateFormat`, `validCreditCardExpirationDate` sowie ISO-Validatoren funktionieren ohne Moment-Abhängigkeit
 ## Enhancements
 - IFS-5039: Im `form-wrapper` erfolgt die Priorisierung von Fehlermeldungen nun über die Reihenfolge der validationMessages-Keys, zudem wurde die Fehlertextgröße reduziert
 
