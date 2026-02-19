@@ -3,6 +3,7 @@
 - IFS-5039: Upgrade der Angularversion und PrimeNG-Bibliothek von 20 auf 21 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
 - IFS-5174: `moment.js` wurde aus der Bibliothek und den Unit-Tests entfernt. Die Datumsvalidierung basiert jetzt auf nativer `Date`-Logik (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
 ## Fixes
+- IFS-4948: Der Hover-Status von Navigationselementen wurde farblich vom Active-Status abgegrenzt
 - IFS-5039:
   * Im form-wrapper wurde ein Klassenname-Fehler im Template behoben
   * PrimeNG: Eingabefelder wieder korrekt auf volle Breite (w-full) gestylt
@@ -11,7 +12,6 @@
 - IFS-4983:
   * Die Hoehe eines Eingabefeldes mit Sonderzeichen Picker entspricht nun der Standardhoehe
   * Lint errors in Component Tests behoben
-- IFS-5174: Datumsvalidierung ohne Moment: `isInFuture`, `isInPast`, `dateFormat`, `validCreditCardExpirationDate` sowie ISO-Validatoren funktionieren ohne Moment-Abhängigkeit
 ## Enhancements
 - IFS-5039: Im `form-wrapper` erfolgt die Priorisierung von Fehlermeldungen nun über die Reihenfolge der validationMessages-Keys, zudem wurde die Fehlertextgröße reduziert
 

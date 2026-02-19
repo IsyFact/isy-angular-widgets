@@ -23,6 +23,7 @@
     --p-form-field-placeholder-color: #{vars.$isyfactInputPlaceholderTextColor};
     --p-form-field-invalid-placeholder-color: #{vars.$isyfactAlertColor};
     --p-form-field-invalid-border-color: #{vars.$isyfactAlertColor};
+    --p-form-field-hover-border-color: #{vars.$isyfactPrimaryColor};
 
     // Styling for readonly input fields
     // PrimeNG does not apply this styling by default
@@ -52,6 +53,7 @@
 
     // links navigation
     --p-navigation-item-padding: 0.875rem;
+    --p-navigation-item-focus-background: #4c8ceb;
 
     // panel
     --p-panelmenu-submenu-indent: 0;
