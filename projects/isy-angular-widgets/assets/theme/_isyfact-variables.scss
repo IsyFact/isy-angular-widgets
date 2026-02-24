@@ -8,7 +8,7 @@ $isyfactCharcoal: #404040 !default;
 $isyfactDarkGrey: #212529 !default;
 $isyfactPrimaryColor: #0055b9 !default;
 $isyfactPrimaryActive: $isyfactPrimaryColor !default;
-$isyfactPrimaryDisabledColor: #7897ae !default;
+$isyfactPrimaryDisabledColor: #767676 !default;
 $isyfactSecondaryColor: #d45c00 !default;
 
 $isyfactAlertColor: #a4252c !default;
@@ -23,7 +23,7 @@ $themeDark: #003a85 !default;
 
 // global
 $fontFamily: BundesSans, 'Liberation Sans', sans-serif;
-$disabledOpacity: 0.8 !default;
+$disabledOpacity: 1 !default;
 
 // html label font-weight
 $isyfactLabelFontWeight: bold !default;
@@ -39,3 +39,11 @@ $isyfactProgressSpinnerAnimation: p-progress-spinner-dash 1.5s ease-in-out infin
 $isyfactSurfaceGround: #faf9f8;
 $isyfactSurfaceSection: #fff;
 $isyfactHauptfensterBackground: #336794 !default;
+
+// links
+$isyfactNavigationItemFocusBackground: #4c8ceb !default;
+
+// buttons
+$isyfactDisabledBackground: $isyfactPrimaryDisabledColor !default;
+$isyfactDisabledTextColor: #fff !default;
+$isyfactDisabledBorderColor: $isyfactPrimaryDisabledColor !default;

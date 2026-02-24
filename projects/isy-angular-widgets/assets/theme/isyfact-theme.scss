@@ -47,13 +47,19 @@
     --p-button-text-secondary-hover-background: var(--p-surface-200);
     --p-button-text-danger-color: #{vars.$isyfactAlertColor};
 
+    .p-button:disabled {
+      color: #{vars.$isyfactDisabledTextColor};
+      background-color: #{vars.$isyfactDisabledBackground};
+      border-color: #{vars.$isyfactDisabledBorderColor};
+    }
+
     // checkbox
     --p-checkbox-width: 24px;
     --p-checkbox-height: 24px;
 
     // links navigation
     --p-navigation-item-padding: 0.875rem;
-    --p-navigation-item-focus-background: #4c8ceb;
+    --p-navigation-item-focus-background: #{vars.$isyfactNavigationItemFocusBackground};
 
     // panel
     --p-panelmenu-submenu-indent: 0;
