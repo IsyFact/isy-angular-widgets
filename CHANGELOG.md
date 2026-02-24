@@ -1,3 +1,7 @@
+# 22.0.0 -
+## Fixes
+- IFS-4947: Farbe für Disabled-Buttons wurde angepasst
+
 # 21.0.0 - 16.02.2026
 ## Breaking Changes
 - IFS-5039: Upgrade der Angularversion und PrimeNG-Bibliothek von 20 auf 21 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
