@@ -1,9 +1,9 @@
-<div class="isy-hauptfenster">
+<div class="isy-hauptfenster flex flex-column min-h-screen">
   <isy-skip-links [links]="links"></isy-skip-links>
   <header class="grid grid-nogutter">
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       @if (logoAnbieterAwl) {
-        <a href="">
+        <a href="/">
           <img
             [alt]="configService.getTranslation('hauptfenster.altLogoAnbieterAwl')"
             class="isy-hauptfenster-logo-anbieter-awl"
@@ -15,7 +15,7 @@
       }
     </div>
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
-      <div class="flex flex-row-reverse">
+      <div class="flex justify-content-end">
         @if (logoAwl) {
           <img
             [alt]="configService.getTranslation('hauptfenster.altLogoAwl')"
@@ -26,7 +26,13 @@
           <ng-content select="[LogoAwl]"></ng-content>
         }
       </div>
-      <div class="flex flex-row-reverse">
+      <div class="flex justify-content-end gap-2">
+        @if (userInfo) {
+          <div class="flex align-items-center gap-1">
+            <em class="pi pi-user"></em>
+            {{ userInfo.displayName }}
+          </div>
+        }
         <p-button
           id="isy-hauptfenster-logout-button"
           (onClick)="logoutEvent.emit(userInfo)"
@@ -34,23 +40,18 @@
         >
           {{ configService.getTranslation('hauptfenster.logout') }}
         </p-button>
-        @if (userInfo) {
-          <div class="flex align-items-center justify-content-center mr-2">
-            <em class="pi pi-user mr-1"></em>
-            {{ userInfo.displayName }}
-          </div>
-        }
       </div>
     </div>
   </header>
 
-  <nav>
-    <p-megaMenu [model]="items" class="flex dont-print">
+  <nav [attr.aria-label]="configService.getTranslation('hauptfenster.aria.mainNavigation')">
+    <p-megaMenu [model]="items" class="dont-print">
       <ng-template pTemplate="end">
         <ng-content select="[Hauptnavigation-Tools]"></ng-content>
       </ng-template>
     </p-megaMenu>
   </nav>
+
   <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
     @if (title) {
       <div>{{ title }}</div>
@@ -59,74 +60,83 @@
     }
   </div>
 
-  <ng-content select="[Seitentoolbar]" class="dont-print"></ng-content>
+  <ng-content select="[Seitentoolbar]"></ng-content>
 
-  <div class="grid grid-nogutter flex-grow-1">
+  <div class="flex flex-grow-1 gap-3">
     @if (showLinksnavigation) {
       <aside
-        [attr.aria-label]="configService.getTranslation('hauptfenster.aria.leftNavigation')"
+        [attr.aria-label]="
+          collapsedLinksnavigation
+            ? configService.getTranslation('hauptfenster.aria.leftNavigationCollapsed')
+            : configService.getTranslation('hauptfenster.aria.leftNavigation')
+        "
         class="isy-hauptfenster-linksnavigation dont-print"
         [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
       >
-        <div [hidden]="collapsedLinksnavigation" id="open-links-navigation">
-          @if (allowSidebarCollapse) {
-            <div class="align-items-center grid grid-nogutter">
-              <div class="pl-3 col-9">
-                <span class="font-bold">{{ linksNavigationTitle }}</span>
-              </div>
-              <div class="flex justify-content-end col-3">
-                <p-button
-                  styleClass="p-button-text"
-                  icon="pi pi-chevron-left"
-                  [ariaLabel]="configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')"
-                  (onClick)="collapsedLinksnavigation = true"
-                />
-              </div>
+        <div class="grid grid-nogutter align-items-center">
+          @if (!collapsedLinksnavigation && allowSidebarCollapse) {
+            <div class="col-9 pl-3">
+              <span class="font-bold">{{ linksNavigationTitle }}</span>
             </div>
           }
-          <ng-content select="[Linksnavigation]"></ng-content>
+
+          @if (allowSidebarCollapse) {
+            <div class="flex justify-content-end" [ngClass]="collapsedLinksnavigation ? 'col-12' : 'col-3'">
+              <p-button
+                styleClass="p-button-text"
+                [icon]="collapsedLinksnavigation ? 'pi pi-chevron-right' : 'pi pi-chevron-left'"
+                [ariaLabel]="
+                  collapsedLinksnavigation
+                    ? configService.getTranslation('hauptfenster.aria.expandLinksnavigation')
+                    : configService.getTranslation('hauptfenster.aria.collapseLinksnavigation')
+                "
+                [attr.aria-controls]="'open-links-navigation'"
+                [attr.aria-expanded]="!collapsedLinksnavigation"
+                (onClick)="collapsedLinksnavigation = !collapsedLinksnavigation"
+              />
+            </div>
+          }
         </div>
-        <div [hidden]="!collapsedLinksnavigation">
-          <p-button
-            styleClass="p-button-text"
-            icon="pi pi-chevron-right"
-            [ariaLabel]="configService.getTranslation('hauptfenster.aria.expandLinksnavigation')"
-            (onClick)="collapsedLinksnavigation = false"
-          />
+
+        <div [hidden]="collapsedLinksnavigation" id="open-links-navigation">
+          <ng-content select="[Linksnavigation]"></ng-content>
         </div>
       </aside>
     }
 
-    <main class="col overflow-auto">
+    <main class="flex-1 min-w-0 mt-3">
       <ng-content></ng-content>
     </main>
 
     @if (showInformationsbereich) {
       <aside
-        [attr.aria-label]="configService.getTranslation('hauptfenster.aria.informationArea')"
+        [attr.aria-label]="
+          collapsedInformationsbereich
+            ? configService.getTranslation('hauptfenster.aria.informationAreaCollapsed')
+            : configService.getTranslation('hauptfenster.aria.informationArea')
+        "
         class="isy-hauptfenster-informationsbereich dont-print"
         [style.width]="collapsedInformationsbereich ? null : informationsbereichWidth"
       >
+        @if (allowSidebarCollapse) {
+          <div class="flex justify-content-start">
+            <p-button
+              styleClass="p-button-text"
+              [icon]="collapsedInformationsbereich ? 'pi pi-chevron-left' : 'pi pi-chevron-right'"
+              [ariaLabel]="
+                collapsedInformationsbereich
+                  ? configService.getTranslation('hauptfenster.aria.expandInformationsbereich')
+                  : configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')
+              "
+              [attr.aria-controls]="'open-informationsbereich'"
+              [attr.aria-expanded]="!collapsedInformationsbereich"
+              (onClick)="collapsedInformationsbereich = !collapsedInformationsbereich"
+            />
+          </div>
+        }
+
         <div [hidden]="collapsedInformationsbereich" id="open-informationsbereich">
-          @if (allowSidebarCollapse) {
-            <div class="flex justify-content-start">
-              <p-button
-                styleClass="p-button-text"
-                icon="pi pi-chevron-right"
-                [ariaLabel]="configService.getTranslation('hauptfenster.aria.collapseInformationsbereich')"
-                (onClick)="collapsedInformationsbereich = true"
-              />
-            </div>
-          }
           <ng-content select="[Informationsbereich]"></ng-content>
-        </div>
-        <div [hidden]="!collapsedInformationsbereich">
-          <p-button
-            styleClass="p-button-text"
-            icon="pi pi-chevron-left"
-            [ariaLabel]="configService.getTranslation('hauptfenster.aria.expandInformationsbereich')"
-            (onClick)="collapsedInformationsbereich = false"
-          />
         </div>
       </aside>
     }

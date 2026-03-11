@@ -18,6 +18,14 @@
     --p-highlight-background: #{vars.$isyfactPrimaryColor};
     --p-highlight-focus-background: #{vars.$isyfactPrimaryColor};
     --p-disabled-opacity: #{vars.$disabledOpacity};
+    --p-dark-grey: #{vars.$isyfactDarkGrey};
+    --p-charcoal: #{vars.$isyfactCharcoal};
+
+    --p-border-radius-xs: 0;
+    --p-border-radius-sm: 0;
+    --p-border-radius-md: 0;
+    --p-border-radius-lg: 0;
+    --p-border-radius-xl: 0;
 
     // input
     --p-form-field-placeholder-color: #{vars.$isyfactInputPlaceholderTextColor};
@@ -110,6 +118,13 @@
     --isyfact-surface-ground: #{vars.$isyfactSurfaceGround};
     --isyfact-surface-section: #{vars.$isyfactSurfaceSection};
     --isyfact-hauptfenster-background: #{vars.$isyfactHauptfensterBackground};
+
+    --isyfact-iftalabel-input-padding-top: 30px;
+    --isyfact-ifta-icon-button-padding-y: 1rem;
+    --isyfact-space-xs: 0.25rem;
+    --isyfact-space-sm: 0.5rem;
+    --isyfact-space-md: 1rem;
+    --isyfact-button-padding-block: 0.75rem;
   }
 
   body {

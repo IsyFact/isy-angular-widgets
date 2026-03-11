@@ -36,11 +36,14 @@
         "expandLinksnavigation": "Linksnavigation einblenden",
         "collapseInformationsbereich": "Informationsbereich ausblenden",
         "expandInformationsbereich": "Informationsbereich einblenden",
-        "leftNavigation": "linksnavigation",
-        "informationArea": "informationsbereich",
+        "leftNavigation": "Linksnavigation",
+        "leftNavigationCollapsed": "Linksnavigation eingeklappt",
+        "informationArea": "Informationsbereich",
+        "informationAreaCollapsed": "Informationsbereich eingeklappt",
         "flag": "Flagge {{lang}}",
         "accountName": "Kontoname",
-        "skipLinksAriaLabel": "Schnellnavigation"
+        "skipLinksAriaLabel": "Schnellnavigation",
+        "mainNavigation": "Hauptnavigation"
       }
     },
     "p-calendar": {
@@ -119,7 +122,8 @@
       "edit": "Bearbeiten",
       "download": "Herunterladen",
       "delete": "Löschen",
-      "close": "Schließen"
+      "close": "Schließen",
+      "add": "Hinzufügen"
     },
     "labels": {
       "id": "ID",

@@ -31,8 +31,9 @@
               styleClass="sachverhalte-button"
               severity="danger"
               icon="pi pi-trash"
-              rounded="true"
-              outlined="true"
+              [rounded]="true"
+              [outlined]="true"
+              [ariaLabel]="'isyAngularWidgetsDemo.aria.delete' | translate"
               (onClick)="deleteSachverhalt(sachverhalt)"
             ></p-button>
           </td>
@@ -47,11 +48,17 @@
         [(ngModel)]="newSachverhalt"
       />
       <p-inputgroup-addon>
-        <p-button outlined="true" icon="pi pi-plus" (onClick)="createSachverhalt(newSachverhalt)"></p-button
-      ></p-inputgroup-addon>
+        <p-button
+          [outlined]="true"
+          icon="pi pi-plus"
+          [ariaLabel]="'isyAngularWidgetsDemo.aria.add' | translate"
+          (onClick)="createSachverhalt(newSachverhalt)"
+        >
+        </p-button>
+      </p-inputgroup-addon>
     </p-inputgroup>
     <ng-template pTemplate="footer">
-      <p-button outlined="true" (onClick)="closeDialog()">
+      <p-button [outlined]="true" (onClick)="closeDialog()">
         {{ 'isyAngularWidgetsDemo.actions.cancel' | translate }}
       </p-button>
       <p-button styleClass="ok-button" id="ok-button" (onClick)="saveSachverhalte()">

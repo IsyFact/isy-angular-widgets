@@ -1,3 +1,4 @@
+import {NgClass} from '@angular/common';
 import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {MegaMenuItem} from 'primeng/api';
 import {UserInfo} from '../api/userinfo';
@@ -25,7 +26,7 @@ import {SkipLinksComponent} from '../skip-links/skip-links.component';
   selector: 'isy-hauptfenster',
   templateUrl: './hauptfenster.component.html',
   styleUrls: ['./hauptfenster.component.scss'],
-  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent]
+  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent, NgClass]
 })
 export class HauptfensterComponent {
   /**

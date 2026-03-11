@@ -17,6 +17,7 @@ import {ScrollTopModule} from 'primeng/scrolltop';
 import {ButtonModule} from 'primeng/button';
 import {BlockUIModule} from 'primeng/blockui';
 import {PanelModule} from 'primeng/panel';
+import {OverlayBadgeModule} from 'primeng/overlaybadge';
 
 @Component({
   standalone: true,
@@ -37,7 +38,8 @@ import {PanelModule} from 'primeng/panel';
     ButtonModule,
     BlockUIModule,
     PanelModule,
-    TerminalModule
+    TerminalModule,
+    OverlayBadgeModule
   ],
   providers: [TerminalService]
 })
