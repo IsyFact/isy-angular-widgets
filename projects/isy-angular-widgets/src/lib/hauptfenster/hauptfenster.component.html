@@ -105,7 +105,9 @@
     }
 
     <main class="flex-1 min-w-0 mt-3">
-      <ng-content></ng-content>
+      <div class="overflow-auto">
+        <ng-content></ng-content>
+      </div>
     </main>
 
     @if (showInformationsbereich) {
