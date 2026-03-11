@@ -9,12 +9,14 @@ import {initializedPerson} from '../objekt-anzeigen/data';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'demo-isy-angular-components',
   templateUrl: './isy-angular-components.component.html',
   imports: [
+    JsonPipe,
     FormWrapperComponent,
     TranslateModule,
     FormControlPipe,
