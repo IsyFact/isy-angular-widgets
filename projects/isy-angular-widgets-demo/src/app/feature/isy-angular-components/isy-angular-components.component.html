@@ -61,9 +61,12 @@
             formControlName="dateOfEntry"
             [dateInPastConstraint]="true"
             [allowZeroFormat]="true"
-            [inputLabel]="'isyAngularWidgetsDemo.labels.einreisedatum' | translate"
+            inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
+            [transferISO8601]="true"
           >
           </isy-incomplete-date>
+          <p>errors: {{ personalInfoForm.controls.dateOfEntry.errors | json }}</p>
+          <p>value: {{ personalInfoForm.controls.dateOfEntry.value }}</p>
         </isy-form-wrapper>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
