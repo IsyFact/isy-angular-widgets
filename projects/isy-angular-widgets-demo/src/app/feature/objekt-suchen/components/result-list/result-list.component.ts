@@ -17,6 +17,7 @@ import {SelectModule} from 'primeng/select';
   standalone: true,
   selector: 'demo-result-list',
   templateUrl: './result-list.component.html',
+  styleUrls: ['./result-list.component.scss'],
   imports: [
     CommonModule,
     SelectModule,
