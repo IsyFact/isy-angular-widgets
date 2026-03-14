@@ -280,7 +280,7 @@
         <h3>
           {{ 'isyAngularWidgetsDemo.labels.residences' | translate }}
         </h3>
-        @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
+        @for (addresses of adressFormArray?.controls; track $index; let i = $index) {
           <p-fieldset
             [legend]="'isyAngularWidgetsDemo.labels.residence' | translate: {numChars: i + 1}"
             class="mb-3 flex"
@@ -293,8 +293,7 @@
               [rounded]="true"
               severity="danger"
               [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
-              (click)="removeAddress(i)"
-              onKeyDown=""
+              (onClick)="removeAddress(i)"
               [ariaLabel]="'isyAngularWidgetsDemo.labels.deleteButton' | translate"
             >
             </p-button>

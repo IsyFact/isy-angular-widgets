@@ -32,11 +32,14 @@
         "expandLinksnavigation": "Linksnavigation einblenden",
         "collapseInformationsbereich": "Informationsbereich ausblenden",
         "expandInformationsbereich": "Informationsbereich einblenden",
-        "leftNavigation": "linksnavigation",
-        "informationArea": "informationsbereich",
+        "leftNavigation": "Linksnavigation",
+        "leftNavigationCollapsed": "Linksnavigation eingeklappt",
+        "informationArea": "Informationsbereich",
+        "informationAreaCollapsed": "Informationsbereich eingeklappt",
         "flag": "Flagge {{lang}}",
         "accountName": "Kontoname",
-        "skipLinksAriaLabel": "Schnellnavigation"
+        "skipLinksAriaLabel": "Schnellnavigation",
+        "mainNavigation": "Hauptnavigation"
       }
     }
   },

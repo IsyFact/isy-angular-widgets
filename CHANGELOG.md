@@ -1,4 +1,6 @@
 # 22.0.0 -
+## Features
+- IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 ## Fixes
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
 
