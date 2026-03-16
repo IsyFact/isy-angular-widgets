@@ -49,43 +49,46 @@
         </isy-form-wrapper>
       </div>
       <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h2>IncompleteDate</h2>
+        <div class="flex align-items-center justify-content-between gap-3 flex-wrap">
+          <h2 class="m-0">IncompleteDate</h2>
+
+          <div class="flex align-items-center gap-2">
+            <p-checkbox
+              inputId="transfer-iso8601"
+              name="transferIso8601"
+              [(ngModel)]="transferDateAsIso8601"
+              [binary]="true"
+              [ngModelOptions]="{standalone: true}"
+              (onChange)="onTransferIso8601Change(incompleteDateComponent)"
+            />
+            <label for="transfer-iso8601">Wert als ISO 8601 übertragen</label>
+          </div>
+        </div>
+
         <isy-form-wrapper
           [label]="'isyAngularWidgetsDemo.labels.einreisedatum' | translate"
           fieldId="date-of-entry"
           [control]="personalInfoForm.controls.dateOfEntry | formControl"
-          [validationMessages]="{INVALIDUNSPECIFIEDDATE: 'isyAngularWidgetsDemo.messages.dateError' | translate}"
+          [validationMessages]="{
+            INVALIDUNSPECIFIEDDATE: 'Das eingegebene Datum ist kein valides ungewisses Datum.',
+            INVALIDUNSPECIFIEDISODATE: 'Das eingegebene Datum ist kein valides ungewisses Datum.'
+          }"
         >
           <isy-incomplete-date
+            #incompleteDateComponent
             inputId="date-of-entry"
             formControlName="dateOfEntry"
             [dateInPastConstraint]="true"
             [allowZeroFormat]="true"
             inputLabel="{{ 'isyAngularWidgetsDemo.labels.einreisedatum' | translate }}"
-            [transferISO8601]="true"
+            [transferISO8601]="transferDateAsIso8601"
           >
           </isy-incomplete-date>
-          <p>errors: {{ personalInfoForm.controls.dateOfEntry.errors | json }}</p>
-          <p>value: {{ personalInfoForm.controls.dateOfEntry.value }}</p>
-        </isy-form-wrapper>
-      </div>
-      <div class="col-12 md:col-6 xl:col-4 flex-column gap-2">
-        <h2>InputChar</h2>
-        <isy-form-wrapper
-          [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"
-          fieldId="last-name"
-          [control]="personalInfoForm.controls.lastName | formControl"
-          [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
-        >
-          <input
-            id="last-name"
-            formControlName="lastName"
-            type="text"
-            pInputText
-            isyInputChar
-            maxlength="16"
-            [placeholder]="'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16}"
-          />
+
+          <small class="block mt-2 text-color-secondary">
+            Technische Repräsentation des Datums:
+            {{ personalInfoForm.controls.dateOfEntry.value || '—' }}
+          </small>
         </isy-form-wrapper>
       </div>
     </div>
