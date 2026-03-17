@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormsModule} from '@angular/forms';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
@@ -9,12 +9,14 @@ import {initializedPerson} from '../objekt-anzeigen/data';
 import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/input-char.directive';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @Component({
   standalone: true,
   selector: 'demo-isy-angular-components',
   templateUrl: './isy-angular-components.component.html',
   imports: [
+    FormsModule,
     FormWrapperComponent,
     TranslateModule,
     FormControlPipe,
@@ -23,13 +25,16 @@ import {ButtonModule} from 'primeng/button';
     InputCharDirective,
     InputTextModule,
     SeitentoolbarComponent,
-    ButtonModule
+    ButtonModule,
+    CheckboxModule
   ]
 })
 export class IsyAngularComponentsComponent {
   personalInfoForm: FormGroup;
   person = initializedPerson;
   personalien = this.person.personalien;
+
+  transferDateAsIso8601 = true;
 
   private readonly fb = inject(FormBuilder);
 
@@ -38,6 +43,13 @@ export class IsyAngularComponentsComponent {
       firstName: [this.personalien.vorname, Validators.required],
       lastName: [this.personalien.nachname, Validators.required],
       dateOfEntry: [this.personalien.einreisedatum]
+    });
+  }
+
+  onTransferIso8601Change(incompleteDateComponent: IncompleteDateComponent): void {
+    setTimeout(() => {
+      incompleteDateComponent.updateModel();
+      this.personalInfoForm.controls.dateOfEntry.updateValueAndValidity();
     });
   }
 }

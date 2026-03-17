@@ -413,4 +413,31 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.onTouched();
     expect(fn).toHaveBeenCalled();
   });
+
+  it('should return the ISO value unchanged if transferISO8601 is true and value is already ISO formatted', () => {
+    component.transferISO8601 = true;
+
+    expect(component.convertToTransferDateFormat('2024-01-31')).toBe('2024-01-31');
+  });
+
+  it('should keep an already ISO formatted value unchanged in updateModel when transferISO8601 is true', () => {
+    component.transferISO8601 = true;
+    component.inputValue = '2024-01-31';
+    const spy = spyOn(component, 'onChange');
+
+    component.updateModel();
+
+    expect(component.transferValue).toBe('2024-01-31');
+    expect(spy).toHaveBeenCalledWith('2024-01-31');
+  });
+
+  it('should forward an already ISO formatted value unchanged after registerOnChange when transferISO8601 is true', () => {
+    component.transferISO8601 = true;
+    const fn = jasmine.createSpy('onChange');
+
+    component.registerOnChange(fn);
+    component.onChange('2024-01-31');
+
+    expect(fn).toHaveBeenCalledWith('2024-01-31');
+  });
 });
