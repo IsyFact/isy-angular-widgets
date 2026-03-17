@@ -47,7 +47,9 @@ export class IsyAngularComponentsComponent {
   }
 
   onTransferIso8601Change(incompleteDateComponent: IncompleteDateComponent): void {
-    incompleteDateComponent.updateModel();
-    this.personalInfoForm.controls.dateOfEntry.updateValueAndValidity();
+    setTimeout(() => {
+      incompleteDateComponent.updateModel();
+      this.personalInfoForm.controls.dateOfEntry.updateValueAndValidity();
+    });
   }
 }
