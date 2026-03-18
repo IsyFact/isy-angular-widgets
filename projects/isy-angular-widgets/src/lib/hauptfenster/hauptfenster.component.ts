@@ -1,5 +1,15 @@
 import {NgClass} from '@angular/common';
-import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Injector,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {MegaMenuItem} from 'primeng/api';
 import {UserInfo} from '../api/userinfo';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
@@ -119,4 +129,53 @@ export class HauptfensterComponent {
    * A service used to translate labels within the widgets library.
    */
   configService = inject(WidgetsConfigService);
+
+  @ViewChild('linksNavigationHeader')
+  private readonly linksNavigationHeader?: ElementRef<HTMLElement>;
+
+  @ViewChild('openLinksNavigation')
+  private readonly openLinksNavigation?: ElementRef<HTMLElement>;
+
+  @ViewChild('informationsbereichHeader')
+  private readonly informationsbereichHeader?: ElementRef<HTMLElement>;
+
+  @ViewChild('openInformationsbereich')
+  private readonly openInformationsbereich?: ElementRef<HTMLElement>;
+
+  private readonly injector = inject(Injector);
+
+  collapseSidebar(): void {
+    this.collapsedLinksnavigation = true;
+    this.focusFirstAfterRender(this.linksNavigationHeader);
+  }
+
+  expandSidebar(): void {
+    this.collapsedLinksnavigation = false;
+    this.focusFirstAfterRender(this.openLinksNavigation);
+  }
+
+  collapseInformationsbereich(): void {
+    this.collapsedInformationsbereich = true;
+    this.focusFirstAfterRender(this.informationsbereichHeader);
+  }
+
+  expandInformationsbereich(): void {
+    this.collapsedInformationsbereich = false;
+    this.focusFirstAfterRender(this.openInformationsbereich);
+  }
+
+  private focusFirstAfterRender(container?: ElementRef<HTMLElement>): void {
+    afterNextRender(
+      {
+        write: () => {
+          const element = container?.nativeElement.querySelector<HTMLElement>(
+            'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+
+          element?.focus();
+        }
+      },
+      {injector: this.injector}
+    );
+  }
 }

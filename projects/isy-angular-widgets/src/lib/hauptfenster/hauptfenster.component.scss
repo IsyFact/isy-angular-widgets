@@ -30,6 +30,11 @@
   background-color: var(--isyfact-surface-ground);
 }
 
+.sidebar-nav-header,
+.sidebar-info-header {
+  padding-top: var(--isyfact-space-xs);
+}
+
 .isy-hauptfenster-informationsbereich {
   background-color: var(--isyfact-surface-ground);
 }

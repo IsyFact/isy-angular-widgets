@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {afterNextRender, Component, inject, Injector} from '@angular/core';
 import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {Person, Personalien, PersonId} from '../../shared/model/person';
@@ -206,11 +206,27 @@ export class ObjektSuchenComponent {
     });
   }
 
-  /**
-   * Is used for openning/closing the Wizard for adding a new person
-   */
-  openAddNewObjectDialog(): void {
+  private readonly injector = inject(Injector);
+  private lastTrigger?: HTMLElement;
+
+  openAddNewObjectDialog(trigger: HTMLElement): void {
+    this.lastTrigger = trigger;
     this.displayWizard();
+  }
+
+  restoreFocus(): void {
+    const target = this.lastTrigger;
+
+    if (!target?.isConnected) {
+      return;
+    }
+
+    afterNextRender(
+      {
+        write: () => target.focus()
+      },
+      {injector: this.injector}
+    );
   }
 
   /**
@@ -393,20 +409,27 @@ export class ObjektSuchenComponent {
       resetPerson(this.person);
       this.resetAddPersonForms();
       this.messageService.clear();
+      this.restoreFocus();
     }
   }
 
   /**
-   * Is called for editing an existing person
-   * @param person The current person
+   * Is called for editing an existing person.
+   * @param data The data object containing the person and the trigger element.
+   * @param data.person The current person to be edited.
+   * @param data.trigger The HTML element that triggered the edit action.
    */
-  editSelectedPerson(person: Person): void {
-    this.selectedPerson = person;
-    this.editForm = initObjektBearbeitenForm(person);
+  editSelectedPerson(data: {person: Person; trigger: HTMLElement}): void {
+    this.selectedPerson = data.person;
+    this.lastTrigger = data.trigger;
+
+    this.editForm = initObjektBearbeitenForm(data.person);
+
     this.editForm.valueChanges.subscribe(() => {
-      this.allowSave = this.hasPersonChanges(person);
+      this.allowSave = this.hasPersonChanges(data.person);
     });
-    this.displayEditDialog();
+
+    this.openEditForm = true;
   }
 
   /**

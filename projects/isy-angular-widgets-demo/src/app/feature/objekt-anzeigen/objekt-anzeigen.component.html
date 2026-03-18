@@ -474,8 +474,8 @@
             icon="pi pi-pencil"
             iconPos="left"
             [label]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
-            (click)="isDialogVisible = true"
-            (keydown)="isDialogVisible = true"
+            #editBtn
+            (onClick)="openDialog($event)"
           >
           </p-button>
         </ng-template>
@@ -500,6 +500,7 @@
       </p-table>
       <demo-dialog-sachverhalte-bearbeiten
         [(visible)]="isDialogVisible"
+        (visibleChange)="onDialogVisibleChange($event)"
         [person]="person"
       ></demo-dialog-sachverhalte-bearbeiten>
     </p-tabpanel>

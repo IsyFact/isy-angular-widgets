@@ -1,4 +1,15 @@
-import {Component, ElementRef, EventEmitter, inject, Input, OnChanges, Output, ViewChild} from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Injector,
+  Input,
+  OnChanges,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {Zeichenobjekt} from '../../model/model';
@@ -97,6 +108,8 @@ export class InputCharComponent implements OnChanges {
 
   private readonly charService = inject(CharacterService);
 
+  private readonly lastTrigger?: HTMLElement;
+
   /**
    * A service used to translate labels within the widgets library.
    */
@@ -106,18 +119,19 @@ export class InputCharComponent implements OnChanges {
     this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);
   }
 
-  /**
-   * Toggles the character picker
-   */
+  private readonly injector = inject(Injector);
+
   toggleCharPicker(): void {
     this.visible = !this.visible;
   }
 
   onDialogClose(): void {
-    this.visible = false;
+    const button = this.openDialogButton?.nativeElement;
 
-    if (!document.activeElement || document.activeElement === document.body) {
-      this.openDialogButton.nativeElement.focus();
+    if (!button || !button.isConnected || button.disabled) {
+      return;
     }
+
+    afterNextRender({write: () => button.focus()}, {injector: this.injector});
   }
 }

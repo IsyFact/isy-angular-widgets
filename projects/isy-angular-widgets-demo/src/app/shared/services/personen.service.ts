@@ -122,7 +122,7 @@ export class PersonenService {
     'isyAngularWidgetsDemo.labels.proposal'
   ];
 
-  bilanz: {min: number; max: number} = {min: 60000, max: 100000};
+  bilanz: {min: number; max: number} = {min: 600, max: 100000};
 
   findPersonById(id: string): Observable<Person[]> {
     return of<Person[]>([
@@ -236,7 +236,7 @@ export class PersonenService {
   }
 
   rng(): number {
-    const crypto = window.crypto;
+    const crypto = globalThis.crypto;
     return crypto.getRandomValues(new Uint32Array(1))[0] % this.maxEntries;
   }
 
