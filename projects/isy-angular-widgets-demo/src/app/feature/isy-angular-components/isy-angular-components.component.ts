@@ -11,7 +11,6 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputGroupModule} from 'primeng/inputgroup';
-import {InputGroupAddon} from 'primeng/inputgroupaddon';
 
 @Component({
   standalone: true,
@@ -29,8 +28,7 @@ import {InputGroupAddon} from 'primeng/inputgroupaddon';
     SeitentoolbarComponent,
     ButtonModule,
     CheckboxModule,
-    InputGroupModule,
-    InputGroupAddon
+    InputGroupModule
   ]
 })
 export class IsyAngularComponentsComponent {
