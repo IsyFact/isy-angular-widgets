@@ -24,6 +24,7 @@ import {IncompleteDateService} from './incomplete-date.service';
 import {Validation} from '../validation/validation';
 import {InputMask, InputMaskModule} from 'primeng/inputmask';
 import {InputTextModule} from 'primeng/inputtext';
+import {INPUT_MASK_REGEX_ISO_DATE} from '@isy-angular-widgets/validation/data/date-formats';
 
 enum CursorPosition {
   DayFirstDigit = 0,
@@ -358,6 +359,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   convertToTransferDateFormat(value: string): string {
     if (!this.transferISO8601) return value;
+    if (this.transferISO8601 && INPUT_MASK_REGEX_ISO_DATE.test(value)) return value;
 
     const [day, month, year] = value.split('.');
     return `${year}-${month}-${day}`;
