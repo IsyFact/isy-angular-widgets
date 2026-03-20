@@ -4,12 +4,11 @@ import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
 import {permissions} from '../../app.permission';
 import {DebugElement} from '@angular/core';
+import {ComponentFixture, fakeAsync, tick} from '@angular/core/testing';
 import {MessageService} from 'primeng/api';
-import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
-import {ComponentFixture} from '@angular/core/testing';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
 import {provideHttpClient} from '@angular/common/http';
-
 import {
   TranslateModule,
   TranslateLoader,
@@ -17,6 +16,10 @@ import {
   TranslateService,
   provideTranslateService
 } from '@ngx-translate/core';
+
+interface ObjektAnzeigenComponentTestAccess {
+  lastTrigger?: HTMLElement;
+}
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
@@ -37,6 +40,9 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
       {provide: TranslateLoader, useClass: TranslateNoOpLoader}
     ]
   });
+
+  const getComponentAccess = (): ObjektAnzeigenComponentTestAccess =>
+    component as unknown as ObjektAnzeigenComponentTestAccess;
 
   beforeEach(() => {
     spectator = createComponent();
@@ -156,11 +162,19 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   it('should display notification message if personalien have been saved', () => {
-    const msg = createSpyObject(MessageService);
-    msg.add({});
+    const messageService = spectator.inject(MessageService);
+    const addSpy = spyOn(messageService, 'add');
+
     component.savePersonalien();
     fixture.detectChanges();
-    expect(msg.add).toHaveBeenCalled();
+
+    expect(addSpy).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        severity: 'success',
+        summary: jasmine.any(String),
+        detail: jasmine.any(String)
+      })
+    );
   });
 
   it('should upload file', () => {
@@ -262,15 +276,57 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   it('should open the Sachverhalt dialog when the edit Sachverhalt button is clicked', () => {
-    const tab = spectator.query('p-tab[value="1"]') as HTMLElement;
-    tab.click();
-    fixture.detectChanges();
+    const button = spectator.query('#panel-sachverhalte p-button') as HTMLElement;
 
-    const button = spectator.query('[icon="pi pi-pencil"]') as HTMLButtonElement;
-    expect(button).toBeTruthy();
+    spectator.component.openDialog({
+      currentTarget: button
+    } as unknown as Event);
 
-    spectator.click(button);
-    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
-    expect(dialog).toBeTruthy();
+    spectator.detectChanges();
+
+    expect(spectator.component.isDialogVisible).toBeTrue();
+  });
+
+  it('should restore focus to the last trigger when the Sachverhalt dialog is closed', async () => {
+    const trigger = document.createElement('button');
+    document.body.appendChild(trigger);
+
+    const focusSpy = spyOn(trigger, 'focus');
+    spyOnProperty(trigger, 'isConnected', 'get').and.returnValue(true);
+
+    component.openDialog({
+      currentTarget: trigger
+    } as unknown as Event);
+
+    spectator.detectChanges();
+    expect(component.isDialogVisible).toBeTrue();
+
+    component.onDialogVisibleChange(false);
+    spectator.detectChanges();
+
+    await fixture.whenStable();
+    spectator.detectChanges();
+
+    expect(component.isDialogVisible).toBeFalse();
+    expect(focusSpy).toHaveBeenCalled();
+
+    trigger.remove();
+  });
+
+  it('should not restore focus when the last trigger is not connected', async () => {
+    const trigger = document.createElement('button');
+    const focusSpy = spyOn(trigger, 'focus');
+    spyOnProperty(trigger, 'isConnected', 'get').and.returnValue(false);
+
+    const componentAccess = getComponentAccess();
+    componentAccess.lastTrigger = trigger;
+
+    component.onDialogVisibleChange(false);
+    spectator.detectChanges();
+
+    await fixture.whenStable();
+    spectator.detectChanges();
+
+    expect(focusSpy).not.toHaveBeenCalled();
   });
 });

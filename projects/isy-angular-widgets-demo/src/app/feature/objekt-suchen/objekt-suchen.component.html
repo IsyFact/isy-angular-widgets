@@ -153,7 +153,7 @@
     [personen]="personen"
     [selectedObject]="selectedPerson"
     (edit)="editSelectedPerson($event)"
-    (create)="openAddNewObjectDialog()"
+    (create)="openAddNewObjectDialog($event)"
     [loading]="tbLoadingStatus"
   >
   </demo-result-list>
@@ -163,6 +163,7 @@
   [header]="'isyAngularWidgetsDemo.editObjectDialog.header' | translate"
   [closeAriaLabel]="'isyAngularWidgetsDemo.aria.close' | translate"
   [(visible)]="openEditForm"
+  (onHide)="restoreFocus()"
   [modal]="modal"
   [style.width.vw]="width"
 >

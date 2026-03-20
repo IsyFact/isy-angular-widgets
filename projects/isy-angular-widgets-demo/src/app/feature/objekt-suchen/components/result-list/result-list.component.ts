@@ -38,8 +38,8 @@ export class ResultListComponent implements OnInit, OnDestroy {
   /**
    * An event emitter that informs about the creation of a new data record
    */
-  @Output() edit = new EventEmitter<Person>();
-  @Output() create = new EventEmitter<void>();
+  @Output() edit = new EventEmitter<{person: Person; trigger: HTMLElement}>();
+  @Output() create = new EventEmitter<HTMLElement>();
   @Output() objectSelected = new EventEmitter<Person>();
   @Output() addObjectPressed = new EventEmitter<void>();
 
@@ -115,11 +115,15 @@ export class ResultListComponent implements OnInit, OnDestroy {
     this.langChangeSubscription.unsubscribe();
   }
 
-  emitEditAction(person?: Person): void {
-    this.edit.emit(person);
+  emitEditAction(person?: Person, event?: Event): void {
+    if (person && event?.currentTarget instanceof HTMLElement) {
+      this.edit.emit({person, trigger: event.currentTarget});
+    }
   }
 
-  emitCreateAction(): void {
-    this.create.emit();
+  emitCreateAction(event?: Event): void {
+    if (event?.currentTarget instanceof HTMLElement) {
+      this.create.emit(event.currentTarget);
+    }
   }
 }

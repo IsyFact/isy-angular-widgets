@@ -22,16 +22,17 @@
           id="create-button"
           icon="pi pi-plus"
           [label]="'isyAngularWidgetsDemo.actions.createObject' | translate"
-          (onClick)="emitCreateAction()"
+          (onClick)="emitCreateAction($event)"
         >
         </p-button>
+
         <p-button
           id="edit-button"
           icon="pi pi-pencil"
           [label]="'isyAngularWidgetsDemo.actions.editObject' | translate"
           [disabled]="!selectedObject"
-          (onClick)="emitEditAction(selectedObject)"
           [outlined]="true"
+          (onClick)="emitEditAction(selectedObject, $event)"
         >
         </p-button>
       </div>
@@ -130,7 +131,7 @@
         <td>{{ person.personalien.nachname }}</td>
         <td>{{ person.personalien.vorname }}</td>
         @for (col of columns; track col.field) {
-          <td>
+          <td [class.text-right]="col.currency">
             @if (col.currency) {
               {{ person.personalien[col.field] | currency: col.currency.currencyCode : col.currency.display }}
             } @else {
