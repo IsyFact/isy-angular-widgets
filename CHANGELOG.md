@@ -1,9 +1,10 @@
-# 22.0.0 -
+# 21.1.0 -
 ## Features
 - IFS-4928: Tab-Reihenfolge in Dialogen, Fokusverhalten bei Overlays und numerische Ausrichtung in Tabellen wurden verbessert
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 ## Fixes
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
+- IFS-4999: Die Property `transferISO8601` in der Komponente IsyIncompleteDate konvertiert den Wert nun in die korrekte ISO-8601-Repräsentation.
 
 # 21.0.0 - 16.02.2026
 ## Breaking Changes
