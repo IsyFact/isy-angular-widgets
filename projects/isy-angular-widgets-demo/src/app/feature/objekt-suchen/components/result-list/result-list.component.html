@@ -11,16 +11,15 @@
   <p-table
     [value]="personen"
     [columns]="selectedColumns"
-    [globalFilterFields]="['name', 'state', 'gender']"
+    [globalFilterFields]="['personalien.nachname', 'personalien.vorname', 'personalien.gender', 'personalien.state']"
     selectionMode="single"
     [(selection)]="selectedObject"
     [loading]="loading"
   >
     <ng-template pTemplate="caption">
-      <div>
+      <div class="flex justify-content-start gap-2">
         <p-button
           id="create-button"
-          styleClass="mr-1"
           icon="pi pi-plus"
           [label]="'isyAngularWidgetsDemo.actions.createObject' | translate"
           (onClick)="emitCreateAction()"
@@ -83,7 +82,7 @@
                   >
                     <ng-template let-option pTemplate="item">
                       <div class="p-multiselect-representative-option">
-                        <span class="p-ml-1">{{ option.label }}</span>
+                        <span class="ml-1">{{ option.label }}</span>
                       </div>
                     </ng-template>
                   </p-multiselect>
@@ -99,7 +98,7 @@
             } @else {
               <p-columnFilter [type]="col.type" [field]="'personalien.' + col.field" display="menu"></p-columnFilter>
             }
-            <p-sortIcon field="personalien.{{ col.field }}"></p-sortIcon>
+            <p-sortIcon [field]="'personalien.' + col.field"></p-sortIcon>
           </th>
         }
         <th scope="col" pSortableColumn="personalien.state" class="white-space-nowrap">
@@ -126,8 +125,8 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-person let-columns="columns">
-      <tr [pSelectableRow]="rowData">
+    <ng-template pTemplate="body" let-person let-columns="columns">
+      <tr [pSelectableRow]="person">
         <td>{{ person.personalien.nachname }}</td>
         <td>{{ person.personalien.vorname }}</td>
         @for (col of columns; track col.field) {
@@ -141,35 +140,37 @@
         }
         <td>{{ person.personalien.state | translate }}</td>
         <td>
-          <p-button
-            icon="pi pi-pencil"
-            styleClass="p-button-rounded p-button-outlined mr-1"
-            (onClick)="emitEditAction(person)"
-            [ariaLabel]="'isyAngularWidgetsDemo.aria.edit' | translate"
-          >
-          </p-button>
-          <p-button
-            icon="pi pi-download"
-            severity="help"
-            styleClass="p-button-rounded p-button-outlined mr-1"
-            [disabled]="true"
-            [ariaLabel]="'isyAngularWidgetsDemo.aria.download' | translate"
-          >
-          </p-button>
-          <p-button
-            icon="pi pi-trash"
-            severity="danger"
-            styleClass="p-button-rounded p-button-outlined"
-            [disabled]="true"
-            [ariaLabel]="'isyAngularWidgetsDemo.aria.delete' | translate"
-          >
-          </p-button>
+          <div class="flex gap-2">
+            <p-button
+              icon="pi pi-pencil"
+              styleClass="p-button-rounded p-button-outlined"
+              (onClick)="emitEditAction(person)"
+              [ariaLabel]="'isyAngularWidgetsDemo.aria.edit' | translate"
+            >
+            </p-button>
+            <p-button
+              icon="pi pi-download"
+              severity="help"
+              styleClass="p-button-rounded p-button-outlined"
+              [disabled]="true"
+              [ariaLabel]="'isyAngularWidgetsDemo.aria.download' | translate"
+            >
+            </p-button>
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              styleClass="p-button-rounded p-button-outlined"
+              [disabled]="true"
+              [ariaLabel]="'isyAngularWidgetsDemo.aria.delete' | translate"
+            >
+            </p-button>
+          </div>
         </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="7">
+        <td [attr.colspan]="selectedColumns.length + 4">
           {{ 'isyAngularWidgetsDemo.resultList.emptyText' | translate }}
         </td>
       </tr>

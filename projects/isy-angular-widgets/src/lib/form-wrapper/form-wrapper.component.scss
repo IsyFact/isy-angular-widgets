@@ -4,24 +4,24 @@
 
 .ifta input,
 .ifta textarea {
-  padding-top: 30px;
+  padding-top: var(--isyfact-iftalabel-input-padding-top);
 }
 
 .ifta label {
   position: absolute;
-  top: 10px;
+  top: 2px;
   left: 13px;
   pointer-events: none;
   transition: all 0.2s ease-out;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 
 .label--filled {
-  color: var(--p-primary-50);
+  color: var(--p-charcoal);
 }
 
 .ifta .p-button.p-button-icon-only {
-  padding: 1.18rem 0;
+  padding: var(--isyfact-ifta-icon-button-padding-y) 0;
 }
 
 .flex-container:has(isy-input-char) {

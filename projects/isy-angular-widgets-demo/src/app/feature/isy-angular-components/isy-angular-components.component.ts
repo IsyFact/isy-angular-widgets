@@ -10,6 +10,7 @@ import {InputCharDirective} from '@isy-angular-widgets/input-char/directives/inp
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
+import {InputGroupModule} from 'primeng/inputgroup';
 
 @Component({
   standalone: true,
@@ -26,7 +27,8 @@ import {CheckboxModule} from 'primeng/checkbox';
     InputTextModule,
     SeitentoolbarComponent,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    InputGroupModule
   ]
 })
 export class IsyAngularComponentsComponent {
@@ -45,7 +47,7 @@ export class IsyAngularComponentsComponent {
       dateOfEntry: [this.personalien.einreisedatum]
     });
   }
-
+  checked = false;
   onTransferIso8601Change(incompleteDateComponent: IncompleteDateComponent): void {
     setTimeout(() => {
       incompleteDateComponent.updateModel();

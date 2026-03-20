@@ -1,27 +1,16 @@
-<div class="card overflow-auto">
-  <div class="grid w-full pt-2 pl-3">
-    @for (item of widgetMenuItems; track item; let i = $index) {
-      <ng-container>
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <demo-dashboard-widget [menuItems]="widgetMenuItems[i]" [backgroundColor]="widgetBackgroundColors[i]">
-          </demo-dashboard-widget>
-        </div>
-      </ng-container>
-    }
-    @for (item of chartInitData; track item; let i = $index) {
-      <ng-container>
-        <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
-          <p-card>
-            <demo-chart
-              #chart
-              [type]="chartInitData[i].type"
-              [data]="chartInitData[i].data!"
-              [options]="chartInitData[i].options"
-            >
-            </demo-chart>
-          </p-card>
-        </div>
-      </ng-container>
-    }
-  </div>
+<div class="grid justify-content-center">
+  @for (item of widgetMenuItems; track $index) {
+    <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+      <demo-dashboard-widget [menuItems]="item" [backgroundColor]="widgetBackgroundColors[$index]">
+      </demo-dashboard-widget>
+    </div>
+  }
+
+  @for (item of chartInitData; track $index) {
+    <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+      <p-card>
+        <demo-chart #chart [type]="item.type" [data]="item.data!" [options]="item.options"> </demo-chart>
+      </p-card>
+    </div>
+  }
 </div>
