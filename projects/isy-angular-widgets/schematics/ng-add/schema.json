@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "id": "NgAdd",
+  "title": "Add IsyFact Angular Widgets",
+  "description": "Options for the ng-add schematic",
+  "type": "object",
+  "properties": {
+    "addEslint": {
+      "description": "Whether to add @isyfact/eslint-plugin configuration to the project.",
+      "type": "boolean",
+      "default": true,
+      "x-prompt": "Would you like to add IsyFact ESLint rules to your project?"
+    }
+  }
+}

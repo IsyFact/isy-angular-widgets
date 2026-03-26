@@ -10,6 +10,7 @@ import {Tree} from '@angular-devkit/schematics';
 
 interface PackageJson {
   dependencies: Record<string, string>;
+  devDependencies: Record<string, string>;
 }
 
 const FILE_NAME = 'package.json';
@@ -51,6 +52,37 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
     if (!json.dependencies[pkg]) {
       json.dependencies[pkg] = version;
       json.dependencies = sortObjectByKeys(json.dependencies);
+    }
+
+    host.overwrite(FILE_NAME, JSON.stringify(json, null, spacesNum));
+  }
+
+  return host;
+}
+
+/**
+ * Adds a package to the devDependencies in the package.json in the given host tree.
+ * @param host Tree with packages and their versions
+ * @param pkg The package who gets added to package.json devDependencies
+ * @param version The version of the package
+ * @returns The new package.json as Tree
+ */
+export function addDevPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
+  const spacesNum = 2;
+  if (host.exists(FILE_NAME)) {
+    // Node Buffer is not supported in Browser context but schematics is executed with node and not with browser
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+    const sourceText = host.read(FILE_NAME)!.toString('utf-8') as string;
+
+    const json = JSON.parse(sourceText) as PackageJson;
+
+    if (!json.devDependencies) {
+      json.devDependencies = {};
+    }
+
+    if (!json.devDependencies[pkg]) {
+      json.devDependencies[pkg] = version;
+      json.devDependencies = sortObjectByKeys(json.devDependencies);
     }
 
     host.overwrite(FILE_NAME, JSON.stringify(json, null, spacesNum));

@@ -1,5 +1,29 @@
 # 21.1.0 -
 ## Features
+- IFS-2966:  Anpassungen: 
+    - schematics/collection.json
+    "schema": "./ng-add/schema.json" zur ng-add Schematic-Definition hinzugefügt.
+
+    schematics/ng-add/package-config.ts
+    - devDependencies zum PackageJson Interface hinzugefügt
+    - Neue Funktion addDevPackageToPackageJson für ESLint-Pakete als devDependency
+
+    schematics/ng-add/index.ts
+    - Interfaces erweitert (ArchitectOptions, ProjectInfo mit root, sourceRoot, prefix)
+    - Neue Funktion isMonorepo() – erkennt Monorepo wenn alle Projekte einen nicht-leeren root haben
+    - Neue Funktion getTsConfigPaths() – liest tsConfig-Pfade aus architect.build und architect.test
+    - Neue Funktion generateProjectConfigBlock() – generiert pro Projekt einen ESLint-Konfigurationsblock
+    - Neue Funktion generateEslintConfigContent() – generiert die vollständige eslint.config.js für einfaches Projekt und Monorepo (gleiche Logik, unterschiedliche
+      sourceRoot-Pfade)
+    - Neue Funktion setupEslint() – installiert devDeps, erstellt eslint.config.js (wenn nicht vorhanden), gibt Warnung wenn bereits vorhanden
+    - ngAdd() akzeptiert jetzt Schema-Parameter und ruft setupEslint() auf wenn options.addEslint === true
+
+    eslint.config.js enthält:
+    - ignores für karma.conf.js und node_modules
+    - configs.recommended() (IsyFact TypeScript-Regeln)
+    - Pro Projekt: TS-Block, HTML-Block, Inline-Template-Block mit Angular-ESLint-Regeln und korrektem prefix
+    - configs.test für Unit-Test-Ausnahmen (deaktiviert u.a. no-magic-numbers, unbound-method)
+
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 ## Fixes
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
