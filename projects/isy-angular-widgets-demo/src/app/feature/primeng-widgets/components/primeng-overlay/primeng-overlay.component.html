@@ -3,16 +3,23 @@
 <div class="grid">
   <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
     <h3>Sidebar</h3>
-    <p-button (onClick)="showSidebar()" label="Left Sidebar" />
-    <p-drawer [(visible)]="visibleSidebar" position="left">
+    <p-button (onClick)="showSidebar($event)" label="Left Sidebar" />
+    <p-drawer [(visible)]="visibleSidebar" position="left" (onHide)="onSidebarHide()">
       <h1>Sidebar Header</h1>
       Content
     </p-drawer>
   </div>
+
   <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
     <h3>Dialog</h3>
-    <p-button (onClick)="showDialog()" label="Dialog" />
-    <p-dialog header="Dialog Header" [modal]="true" [(visible)]="visibleDialog" [style]="{width: '25rem'}">
+    <p-button (onClick)="showDialog($event)" label="Dialog" />
+    <p-dialog
+      header="Dialog Header"
+      [modal]="true"
+      [(visible)]="visibleDialog"
+      [style]="{width: '25rem'}"
+      (onHide)="onDialogHide()"
+    >
       <div class="flex flex-column gap-2">Content</div>
       <div class="flex justify-content-end">
         <p-button label="Ok" (onClick)="closeDialog()" />
@@ -23,8 +30,9 @@
     <h3>ConfirmDialog</h3>
     <p-button (onClick)="confirmDialog($event)" label="Save" />
     <p-toast position="bottom-right" />
-    <p-confirmdialog key="confirmDialog" />
+    <p-confirmdialog key="confirmDialog" (onHide)="onConfirmDialogHide()" />
   </div>
+
   <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
     <h3>ConfirmPopup</h3>
     <p-button (onClick)="confirmPopup($event)" label="Save" />
@@ -32,7 +40,9 @@
     <p-confirmpopup key="confirmPopup" />
   </div>
 </div>
+
 <p-divider />
+
 <h2>Extra-Info Widgets</h2>
 <div class="grid mb-3">
   <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">

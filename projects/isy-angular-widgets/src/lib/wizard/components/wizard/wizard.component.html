@@ -13,12 +13,15 @@
   }"
   (visibleChange)="isVisibleChange.emit($event)"
 >
-  <p-steps
-    [model]="items"
-    [(activeIndex)]="index"
-    [readonly]="!allowFreeNavigation"
-    (activeIndexChange)="allowFreeNavigation ? onActiveIndexChange($event) : null"
-  />
+  <p-stepper [value]="index + 1" [linear]="!allowFreeNavigation" (valueChange)="onStepperValueChange($event)">
+    <p-step-list>
+      @for (item of items; track $index; let i = $index) {
+        <p-step [value]="i + 1" [disabled]="item.disabled ?? false">
+          {{ item.label }}
+        </p-step>
+      }
+    </p-step-list>
+  </p-stepper>
 
   <ng-container [ngTemplateOutlet]="this.content?.get(index)?.templateRef ?? null"></ng-container>
 

@@ -1,4 +1,12 @@
-import {AfterContentChecked, ChangeDetectorRef, Component, inject, Input} from '@angular/core';
+import {
+  AfterContentChecked,
+  afterNextRender,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  Injector,
+  Input
+} from '@angular/core';
 import {Address} from '../../shared/model/person';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -72,7 +80,41 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
 
   adressFormArray?: FormArray;
 
+  private lastTrigger?: HTMLElement;
+  private readonly injector = inject(Injector);
+
   isDialogVisible = false;
+
+  openDialog(event: Event): void {
+    if (event.currentTarget instanceof HTMLElement) {
+      this.lastTrigger = event.currentTarget;
+    }
+
+    this.isDialogVisible = true;
+  }
+
+  onDialogVisibleChange(visible: boolean): void {
+    this.isDialogVisible = visible;
+
+    if (!visible) {
+      this.restoreFocus();
+    }
+  }
+
+  private restoreFocus(): void {
+    const target = this.lastTrigger;
+
+    if (!target?.isConnected) {
+      return;
+    }
+
+    afterNextRender(
+      {
+        write: () => target.focus()
+      },
+      {injector: this.injector}
+    );
+  }
 
   @Input() person = initializedPerson;
 

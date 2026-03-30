@@ -19,7 +19,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateComponent} from '../../../incomplete-date/incomplete-date.component';
 import {MenuItem} from 'primeng/api';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
-import {StepsModule} from 'primeng/steps';
+import {StepperModule} from 'primeng/stepper';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
@@ -58,21 +58,37 @@ class ToastStubComponent {
 }
 
 @Component({
-  selector: 'p-steps',
+  selector: 'p-stepper',
   standalone: true,
-  template: `<div class="p-steps"></div>`
+  template: `<div class="p-stepper"><ng-content></ng-content></div>`
 })
-class StepsStubComponent {
-  @Input() model?: MenuItem[];
-  @Input() readonly?: boolean;
-  @Input() activeIndex?: number;
-  @Output() activeIndexChange = new EventEmitter<number>();
+class StepperStubComponent {
+  @Input() value?: number;
+  @Input() linear = false;
+  @Output() valueChange = new EventEmitter<number | undefined>();
+}
+
+@Component({
+  selector: 'p-step-list',
+  standalone: true,
+  template: `<div class="p-step-list"><ng-content></ng-content></div>`
+})
+class StepListStubComponent {}
+
+@Component({
+  selector: 'p-step',
+  standalone: true,
+  template: `<div class="p-step"><ng-content></ng-content></div>`
+})
+class StepStubComponent {
+  @Input() value?: number;
+  @Input() disabled = false;
 }
 
 @Component({
   selector: 'p-dialog',
   standalone: true,
-  imports: [CommonModule, PTemplateStubDirective],
+  imports: [CommonModule, PTemplateStubDirective, StepperModule],
   template: `
     <div class="p-dialog">
       <button class="p-dialog-close-button" type="button" [attr.aria-label]="closeAriaLabel">×</button>
@@ -148,13 +164,15 @@ const widgetsConfigServiceStub: Pick<WidgetsConfigService, 'getTranslation'> = {
 
 const wizardOverride: MetadataOverride<Component> = {
   remove: {
-    imports: [StepsModule, DialogModule, ButtonModule, ToastModule]
+    imports: [StepperModule, DialogModule, ButtonModule, ToastModule]
   },
   add: {
     imports: [
       CommonModule,
       DialogStubComponent,
-      StepsStubComponent,
+      StepperStubComponent,
+      StepListStubComponent,
+      StepStubComponent,
       ToastStubComponent,
       PTemplateStubDirective,
       PButtonStubDirective,
@@ -181,6 +199,44 @@ describe('Unit Tests: WizardComponent', () => {
 
   it('should not have an available next step on init by default', () => {
     expectNextStepIsAllowed(false);
+  });
+
+  it('should map stepper value to zero-based index', () => {
+    wizard.items = stepperItems;
+    wizard.allowFreeNavigation = true;
+
+    const emitSpy = spyOn(wizard.indexChange, 'emit');
+    const toastSpy = spyOn(wizard.messageService, 'add');
+
+    wizard.onStepperValueChange(2);
+
+    expect(wizard.index).toBe(1);
+    expect(emitSpy).toHaveBeenCalledWith(1);
+    expect(toastSpy).toHaveBeenCalled();
+  });
+
+  it('should ignore undefined stepper value', () => {
+    wizard.items = stepperItems;
+    wizard.allowFreeNavigation = true;
+
+    const emitSpy = spyOn(wizard.indexChange, 'emit');
+
+    wizard.onStepperValueChange(undefined);
+
+    expect(wizard.index).toBe(0);
+    expect(emitSpy).not.toHaveBeenCalled();
+  });
+
+  it('should ignore out-of-range stepper value', () => {
+    wizard.items = stepperItems;
+    wizard.allowFreeNavigation = true;
+
+    const emitSpy = spyOn(wizard.indexChange, 'emit');
+
+    wizard.onStepperValueChange(99);
+
+    expect(wizard.index).toBe(0);
+    expect(emitSpy).not.toHaveBeenCalled();
   });
 });
 
@@ -655,7 +711,7 @@ describe('Accessibility Test: WizardComponent', () => {
     expect(element.getAttribute('aria-label')).toBe('Close');
   });
 
-  it('should update the index and emit the indexChange event on active index change', () => {
+  it('should update the index and emit the indexChange event on step change', () => {
     const newIndex = 1;
     const emitSpy = spyOn(wizard.indexChange, 'emit');
     wizard.items = stepperItems;
