@@ -1,6 +1,6 @@
 import {Rule, SchematicContext, SchematicsException, Tree} from '@angular-devkit/schematics';
 import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
-import {addDevPackageToPackageJson, addPackageToPackageJson} from './package-config';
+import {addDevPackageToPackageJson, addPackageToPackageJson, addScriptToPackageJson} from './package-config';
 import {Schema} from './schema';
 
 // Node Buffer (isyTranslation) is not supported in Browser context but schematics is executed with node and not with browser
@@ -206,24 +206,6 @@ function isMonorepo(workspace: Workspace): boolean {
 }
 
 /**
- * Collects the tsConfig file paths for a given project from its architect configuration.
- * @param project The project info from the angular workspace
- * @returns Array of tsConfig paths relative to the workspace root
- */
-function getTsConfigPaths(project: ProjectInfo): string[] {
-  const paths: string[] = [];
-
-  const buildTsConfig =
-    project.architect?.build?.options?.tsConfig ?? project.architect?.build?.configurations?.development?.tsConfig;
-  if (buildTsConfig) paths.push(buildTsConfig);
-
-  const testTsConfig = project.architect?.test?.options?.tsConfig;
-  if (testTsConfig) paths.push(testTsConfig);
-
-  return paths;
-}
-
-/**
  * Generates a TypeScript/HTML config block for a single project to be embedded in eslint.config.js.
  * @param name Project name
  * @param project Project info
@@ -232,17 +214,24 @@ function getTsConfigPaths(project: ProjectInfo): string[] {
 function generateProjectConfigBlock(name: string, project: ProjectInfo): string {
   const sourceRoot = project.sourceRoot || `src`;
   const prefix = project.prefix || 'app';
-  const tsConfigs = getTsConfigPaths(project);
-  const tsConfigStr = tsConfigs.map((c) => `'${c}'`).join(', ');
+
+  const buildTsConfig =
+    project.architect?.build?.options?.tsConfig ?? project.architect?.build?.configurations?.development?.tsConfig;
+
+  const testTsConfig = project.architect?.test?.options?.tsConfig;
+
+  const buildProjectList = buildTsConfig ? `'${buildTsConfig}'` : '';
+  const testProjectList = testTsConfig ? `'${testTsConfig}'` : '';
 
   return `
     // ${name}: TS
     {
       files: ['${sourceRoot}/**/*.ts'],
+      ignores: ['${sourceRoot}/**/*.spec.ts'],
       languageOptions: {
         parser: tsParser,
         parserOptions: {
-          project: [${tsConfigStr}],
+          project: [${buildProjectList}],
           tsconfigRootDir: __dirname,
           sourceType: 'module'
         }
@@ -253,6 +242,19 @@ function generateProjectConfigBlock(name: string, project: ProjectInfo): string 
         '@angular-eslint/directive-selector': ['error', {type: 'attribute', prefix: '${prefix}', style: 'camelCase'}],
         '@angular-eslint/component-selector': ['error', {type: 'element', prefix: '${prefix}', style: 'kebab-case'}]
       }
+    },
+    // ${name}: Spec TS
+    {
+      files: ['${sourceRoot}/**/*.spec.ts'],
+      languageOptions: {
+        parser: tsParser,
+        parserOptions: {
+          project: [${testProjectList}],
+          tsconfigRootDir: __dirname,
+          sourceType: 'module'
+        }
+      },
+      rules: {}
     },
     // ${name}: HTML
     {
@@ -326,14 +328,13 @@ function setupEslint(workspace: Workspace, context: SchematicContext, tree: Tree
 
   context.logger.info('√ Added @isyfact/eslint-plugin and related ESLint packages to devDependencies.');
 
+  addScriptToPackageJson(tree, 'lint', 'eslint .');
+  context.logger.info('√ Added npm script "lint".');
+
   const eslintConfigPath = '/eslint.config.js';
 
   if (tree.exists(eslintConfigPath)) {
-    context.logger.warn(
-      '⚠ eslint.config.js already exists. Please manually add the @isyfact/eslint-plugin configuration.\n' +
-        '  See https://github.com/IsyFact/isy-angular-widgets for details.'
-    );
-    return tree;
+    return patchExistingEslintConfig(workspace, context, tree, eslintConfigPath);
   }
 
   const monorepo = isMonorepo(workspace);
@@ -378,4 +379,99 @@ export function ngAdd(options: Schema): Rule {
     applyStylesToWorkspace(workspace, context, tree);
     return applyAssetsToWorkspace(workspace, context, tree);
   };
+}
+function patchExistingEslintConfig(
+  workspace: Workspace,
+  context: SchematicContext,
+  tree: Tree,
+  eslintConfigPath: string
+): Tree {
+  const fileBuffer = tree.read(eslintConfigPath);
+
+  if (!fileBuffer) {
+    throw new SchematicsException(`❌ Could not read ${eslintConfigPath}.`);
+  }
+
+  let content = fileBuffer.toString('utf-8');
+
+  // Bereits konfiguriert? Dann nichts tun.
+  if (content.includes("@isyfact/eslint-plugin")) {
+    context.logger.info('√ Existing eslint.config.js already contains IsyFact ESLint configuration.');
+    return tree;
+  }
+
+  // 1) requires ergänzen
+  const requiredSnippets = [
+    "const tsParser = require('@typescript-eslint/parser');",
+    "const angular = require('@angular-eslint/eslint-plugin');",
+    "const angularTemplate = require('@angular-eslint/eslint-plugin-template');",
+    "const angularTemplateParser = require('@angular-eslint/template-parser');",
+    "const {configs} = require('@isyfact/eslint-plugin');"
+  ];
+
+  for (const snippet of requiredSnippets) {
+    if (!content.includes(snippet)) {
+      content = `${snippet}\n${content}`;
+    }
+  }
+
+  const projectEntries = Object.entries(workspace.projects);
+  const projectBlocks = projectEntries.map(([name, project]) => generateProjectConfigBlock(name, project)).join(',\n');
+
+  const isyBlock = `
+  const recommendedCfg = await configs.recommended();
+
+  return [
+    {ignores: ['**/node_modules/*', 'node_modules/', 'karma.conf.js']},
+    ...recommendedCfg,
+${projectBlocks},
+    ...configs.test,
+`;
+
+  // 2) async-flat-config patchen
+  if (content.includes('return [')) {
+    if (!content.includes('recommendedCfg')) {
+      content = content.replace(/return\s*\[/, isyBlock);
+    }
+
+    // ignores nur ergänzen, wenn noch nicht vorhanden
+    if (!content.includes('karma.conf.js')) {
+      content = content.replace(/return\s*\[/, `return [\n    {ignores: ['**/node_modules/*', 'node_modules/', 'karma.conf.js']},`);
+    }
+
+    tree.overwrite(eslintConfigPath, content);
+    context.logger.info('√ Patched existing eslint.config.js with IsyFact ESLint configuration.');
+    return tree;
+  }
+
+  // 3) sync-flat-config patchen: module.exports = [ ... ]
+  if (content.includes('module.exports = [')) {
+    const replacement = `module.exports = (async () => {
+  const recommendedCfg = await configs.recommended();
+
+  return [
+    {ignores: ['**/node_modules/*', 'node_modules/', 'karma.conf.js']},
+    ...recommendedCfg,
+${projectBlocks},
+    ...configs.test,`;
+
+    content = content.replace(/module\.exports\s*=\s*\[/, replacement);
+
+    // Nur falls die Datei wirklich als Array endet
+    if (content.trim().endsWith('];')) {
+      content = content.replace(/];\s*$/, `
+  ];
+})();
+`);
+    }
+
+    tree.overwrite(eslintConfigPath, content);
+    context.logger.info('√ Converted and patched existing eslint.config.js with IsyFact ESLint configuration.');
+    return tree;
+  }
+
+  context.logger.warn(
+    '⚠ Existing eslint.config.js uses an unsupported format. Please manually add the @isyfact/eslint-plugin configuration.'
+  );
+  return tree;
 }

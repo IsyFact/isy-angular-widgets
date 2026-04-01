@@ -108,3 +108,21 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
 
   return packageJson.dependencies[name] ? packageJson.dependencies[name] : null;
 }
+export function addScriptToPackageJson(host: Tree, scriptName: string, script: string): Tree {
+  const file = 'package.json';
+
+  if (!host.exists(file)) return host;
+
+  const json = JSON.parse(host.read(file)!.toString('utf-8'));
+
+  if (!json.scripts) {
+    json.scripts = {};
+  }
+
+  if (!json.scripts[scriptName]) {
+    json.scripts[scriptName] = script;
+  }
+
+  host.overwrite(file, JSON.stringify(json, null, 2));
+  return host;
+}
