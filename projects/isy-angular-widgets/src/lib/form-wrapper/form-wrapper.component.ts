@@ -96,7 +96,7 @@ export class FormWrapperComponent implements OnInit {
    * @returns The label for the form wrapper component.
    */
   getLabel(): string {
-    return this.isRequired() ? `${this.label} *` : this.label;
+    return this.label;
   }
 
   /**

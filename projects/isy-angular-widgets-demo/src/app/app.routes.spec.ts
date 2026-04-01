@@ -4,7 +4,7 @@ import {canActivateAuth} from './guards/auth.guard';
 
 describe('App Routing Configuration', () => {
   it('should define 7 routes', () => {
-    expect(routes.length).toBe(7);
+    expect(routes.length).toBe(8);
   });
 
   it('should have a redirect from empty path to dashboard', () => {

@@ -5,6 +5,8 @@
 ## Fixes
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
 - IFS-4999: Die Property `transferISO8601` in der Komponente IsyIncompleteDate konvertiert den Wert nun in die korrekte ISO-8601-Repräsentation.
+## Demo-Anwendung
+- IFS-4931: Modalarme Muster wurden hinzugefügt
 
 # 21.0.0 - 16.02.2026
 ## Breaking Changes

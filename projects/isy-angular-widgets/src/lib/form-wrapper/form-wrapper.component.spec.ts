@@ -51,9 +51,11 @@ describe('FormWrapperComponent', () => {
     const control = spectatorRequired.component.control;
     control.markAsTouched();
     control.setValue('');
+    control.updateValueAndValidity();
     spectatorRequired.detectChanges();
-    const errorMessage = spectatorRequired.query('.p-error');
-    expect(errorMessage).toHaveText('Field is required');
+
+    const errorContainer = spectatorRequired.query('#requiredField-error');
+    expect(errorContainer).toHaveText('Field is required');
   });
 
   it('should return null when there are no validation errors', () => {
@@ -86,16 +88,19 @@ describe('FormWrapperComponent', () => {
   });
 
   it('label should include an asterisk (*) if the field is required, even if the validation message is set dynamically', () => {
-    const actual = `${defaultRequiredProps.label} *`;
     const label = spectatorRequired.query('label[for="requiredField"]') as HTMLElement;
 
     spectatorRequired.component.validationMessages = {required: 'true'};
     spectatorRequired.detectChanges();
-    expect(label.innerHTML).toEqual(actual);
+
+    expect(label.textContent).toContain('Required Label');
+    expect(label.querySelector('span[aria-hidden="true"]')?.textContent?.trim()).toBe('*');
 
     spectatorRequired.component.validationMessages = {};
     spectatorRequired.detectChanges();
-    expect(label.innerHTML).toEqual(actual);
+
+    expect(label.textContent).toContain('Required Label');
+    expect(label.querySelector('span[aria-hidden="true"]')?.textContent?.trim()).toBe('*');
   });
 
   it('should set the ifta input correctly', () => {
