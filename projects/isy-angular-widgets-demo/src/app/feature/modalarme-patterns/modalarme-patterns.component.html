@@ -318,7 +318,6 @@
       <section class="section" aria-labelledby="h-errors">
         <h3 id="h-errors">Fehlermeldung - Toast + feldnahe Fehlermarkierung</h3>
 
-        <!-- BUG FIX: #errorsFormEl hinzugefügt, damit @ViewChild greift -->
         <form #errorsFormEl [formGroup]="formErrors" (ngSubmit)="submitErrors()">
           <div class="col-12 md:col-6">
             <isy-form-wrapper
