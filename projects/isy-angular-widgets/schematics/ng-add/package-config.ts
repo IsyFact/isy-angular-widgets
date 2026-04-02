@@ -11,6 +11,7 @@ import {Tree} from '@angular-devkit/schematics';
 interface PackageJson {
   dependencies: Record<string, string>;
   devDependencies: Record<string, string>;
+  scripts?: Record<string, string>;
 }
 
 const FILE_NAME = 'package.json';
