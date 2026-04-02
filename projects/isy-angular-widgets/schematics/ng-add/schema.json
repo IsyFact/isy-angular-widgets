@@ -10,6 +10,12 @@
       "type": "boolean",
       "default": true,
       "x-prompt": "Would you like to add IsyFact ESLint rules to your project?"
+    },
+    "addPrettier": {
+      "description": "Whether to add @isyfact/prettier-plugin configuration to the project.",
+      "type": "boolean",
+      "default": true,
+      "x-prompt": "Would you like to add IsyFact Prettier rules to your project?"
     }
   }
 }
