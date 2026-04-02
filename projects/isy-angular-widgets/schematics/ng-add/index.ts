@@ -388,7 +388,7 @@ module.exports = (async () => {
   const recommendedCfg = await configs.recommended();
 
   return [
-    {ignores: ['**/node_modules/**', 'node_modules/', 'karma.conf.js', 'karma.config.js']},
+    {ignores: ['**/node_modules/**', 'node_modules/', 'karma.conf.js', 'karma.config.js',  '**/*.server.ts', '**/server.ts']},
 
     ...recommendedCfg,
 ${projectBlocks},
@@ -498,7 +498,7 @@ function extendExistingEslintConfig(workspace: Workspace, context: SchematicCont
     return tree;
   }
 
-  tree.overwrite(ESLINT_CONFIG_PATH, generateWrappedEslintConfigContent(workspace));
+  tree.overwrite(ESLINT_CONFIG_PATH, generateWrappedEslintConfigContent(workspace, tree));
   context.logger.info('√ Extended existing eslint.config.js with IsyFact ESLint configuration.');
 
   return tree;
