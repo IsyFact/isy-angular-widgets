@@ -525,12 +525,10 @@ function generateWrappedEslintConfigContent(workspace: Workspace, tree: Tree): s
       return [
         ...normalizedBaseConfig,
 
-        {ignores: ['**/node_modules/**', 'node_modules/', 'karma.conf.js', 'karma.config.js']},
+        {ignores: ['**/node_modules/**', 'node_modules/', 'karma.conf.js', 'karma.config.js', '**/*.server.ts', '**/server.ts']},
 
         ...recommendedCfg,
     ${projectBlocks},
-
-        ...configs.test
       ];
     })();
 `;
