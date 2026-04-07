@@ -6,7 +6,8 @@
 
     schematics/ng-add/package-config.ts
     - devDependencies zum PackageJson Interface hinzugefügt
-    - Neue Funktion addDevPackageToPackageJson für ESLint-Pakete als devDependency
+    - Neue Funktion addDevPackageToPackageJson für ESLint- und Prettier-Pakete als devDependency
+    - Neue Funktion addScriptToPackageJson für npm-Scripts (lint, format)
 
     schematics/ng-add/index.ts
     - Interfaces erweitert (ArchitectOptions, ProjectInfo mit root, sourceRoot, prefix)
@@ -17,12 +18,20 @@
       sourceRoot-Pfade)
     - Neue Funktion setupEslint() – installiert devDeps, erstellt eslint.config.js (wenn nicht vorhanden), gibt Warnung wenn bereits vorhanden
     - ngAdd() akzeptiert jetzt Schema-Parameter und ruft setupEslint() auf wenn options.addEslint === true
+    - Neue Funktion extendExistingEslintConfig() – sichert vorhandene eslint.config.js als eslint.config.base.js und erzeugt einen Wrapper
+    - Neue Funktion setupPrettier() – installiert @isyfact/prettier-plugin und prettier als devDependencies, erstellt .prettierrc.js und .prettierignore und fügt format-Script hinzu
+    - ngAdd() ruft setupPrettier() auf wenn options.addPrettier === true
 
     eslint.config.js enthält:
-    - ignores für karma.conf.js und node_modules
+    - ignores für karma.conf.js, karma.config.js, node_modules und *.server.ts
     - configs.recommended() (IsyFact TypeScript-Regeln)
-    - Pro Projekt: TS-Block, HTML-Block, Inline-Template-Block mit Angular-ESLint-Regeln und korrektem prefix
-    - configs.test für Unit-Test-Ausnahmen (deaktiviert u.a. no-magic-numbers, unbound-method)
+    - Pro Projekt: TS-Block, Spec-Block (Test-spezifische Regelausnahmen), HTML-Block und Inline-Template-Block mit Angular-ESLint-Regeln und korrektem prefix
+
+    .prettierrc.js enthält:
+    - Verweis auf @isyfact/prettier-plugin (tabWidth: 2, singleQuote: true, printWidth: 120, endOfLine: lf u.a.)
+
+    schematics/ng-add/schema.json + schema.d.ts
+    - Neues optionales Flag addPrettier (default: true) mit CLI-Prompt
 
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 ## Fixes
