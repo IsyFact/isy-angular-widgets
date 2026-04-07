@@ -33,6 +33,7 @@
     schematics/ng-add/schema.json + schema.d.ts
     - Neues optionales Flag addPrettier (default: true) mit CLI-Prompt
 
+- IFS-4928: Tab-Reihenfolge in Dialogen, Fokusverhalten bei Overlays und numerische Ausrichtung in Tabellen wurden verbessert
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 ## Fixes
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
