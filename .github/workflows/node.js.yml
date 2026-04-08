@@ -37,10 +37,14 @@ jobs:
         run:
           npm run build:widgets_lib
           npm run pack:widgets_lib
-      - name: Check code formatting and linting
+      - name: Check code formatting
         run: |
           npm run prettier:check
           npm run lint
+      - name: Lint library
+        run: ng lint isy-angular-widgets
+      - name: Lint demo
+        run: ng lint isy-angular-widgets-demo
       - name: Run tests
         run: npm test
       - name: Cache SonarCloud
