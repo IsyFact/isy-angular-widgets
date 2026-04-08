@@ -1,10 +1,11 @@
 import {ObjektSuchenComponent} from './objekt-suchen.component';
 import {FormControl, FormGroup} from '@angular/forms';
+import {fakeAsync, tick} from '@angular/core/testing';
 import {MessageService} from 'primeng/api';
 import {Person} from '../../shared/model/person';
 import {getEmptyPerson} from './person-data';
 import {DateService} from './services/date.service';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {required} from '../../shared/validation/validator';
@@ -99,6 +100,10 @@ function getInitPerson(): Person {
   return person;
 }
 
+interface ObjektSuchenComponentTestAccess {
+  lastTrigger?: HTMLElement;
+}
+
 describe('Integration Tests: PersonenSuchenComponent', () => {
   const germanCharsStr = 'öäüÖÄÜß';
   const DOT = '.';
@@ -114,6 +119,9 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     imports: [TranslateModule.forRoot()],
     providers: [TranslateService, MessageService, provideRouter([])]
   });
+
+  const getComponentAccess = (): ObjektSuchenComponentTestAccess =>
+    component as unknown as ObjektSuchenComponentTestAccess;
 
   beforeEach(() => {
     spectator = createComponent();
@@ -166,7 +174,10 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    * @param person the person where used for initializing the form
    */
   function setupEditForm(person: Person): void {
-    component.editSelectedPerson(person);
+    component.editSelectedPerson({
+      person,
+      trigger: document.createElement('button')
+    });
     spectator.fixture.detectChanges();
 
     const editForm = component.editForm;
@@ -225,6 +236,23 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expectFormControlsToBeReseted(component.geburtsInformationenForm);
     expectFormControlsToBeDirty(component.geburtsInformationenForm, false);
   });
+
+  it('should restore focus to the last trigger when the wizard closes', fakeAsync(() => {
+    const trigger = document.createElement('button');
+    document.body.appendChild(trigger);
+
+    const focusSpy = spyOn(trigger, 'focus');
+    const componentAccess = getComponentAccess();
+    componentAccess.lastTrigger = trigger;
+
+    component.onWizardClose(false);
+    spectator.detectChanges();
+    tick();
+
+    expect(focusSpy).toHaveBeenCalled();
+
+    trigger.remove();
+  }));
 
   it('should check the incoming save status - false (never arrives)', () => {
     component.getSavedStatus(false);
@@ -443,13 +471,13 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
   it('should check the opening of the wizard while adding a new person - embedded call', () => {
     expect(component.openWizard).toBeFalse();
-    component.openAddNewObjectDialog();
+    component.openAddNewObjectDialog(document.createElement('button'));
     expect(component.openWizard).toBeTrue();
   });
 
   it('should check the opening of the dialog for editing a person', () => {
     expect(component.openWizard).toBeFalse();
-    component.openAddNewObjectDialog();
+    component.openAddNewObjectDialog(document.createElement('button'));
     expect(component.openWizard).toBeTrue();
   });
 
@@ -491,13 +519,16 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
   it('should check the edit of a person', () => {
     expect(component.openWizard).toBeFalse();
-    component.openAddNewObjectDialog();
+    component.openAddNewObjectDialog(document.createElement('button'));
     expect(component.openWizard).toBeTrue();
 
     const person = getInitPerson();
     expect(component.editForm).toBeUndefined();
 
-    component.editSelectedPerson(person);
+    component.editSelectedPerson({
+      person,
+      trigger: document.createElement('button')
+    });
 
     expect(component.selectedPerson).toEqual(person);
     expect(component.editForm).not.toBeUndefined();
@@ -510,7 +541,10 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     });
 
     setupEditForm(person);
-    component.editSelectedPerson(person);
+    component.editSelectedPerson({
+      person,
+      trigger: document.createElement('button')
+    });
 
     expect(component.selectedPerson!.personalien.vorname).toEqual(person.personalien.vorname);
     expect(component.editForm).not.toBeUndefined();
@@ -519,7 +553,6 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(component.selectedPerson!.personalien.vorname).not.toEqual(component.editForm.controls.editVorname.value);
     component.saveChanges();
     expect(component.selectedPerson!.personalien.vorname).toEqual(component.editForm.controls.editVorname.value);
-
     expect(component.openEditForm).toBeFalse();
     expect(component.allowSave).toBeFalse();
   });
@@ -531,7 +564,10 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     });
 
     setupEditForm(person);
-    component.editSelectedPerson(person);
+    component.editSelectedPerson({
+      person,
+      trigger: document.createElement('button')
+    });
 
     expect(component.allowSave).toBeFalse();
     const storedValue = component.editForm.controls.editVorname.value;
@@ -541,7 +577,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(component.allowSave).toBeFalse();
   });
 
-  it('should check if save button is active', () => {
+  it('should check if clear search button is active', () => {
     let enableClearSearch = component.enableClearSearch();
     expect(enableClearSearch).toBeFalse();
     addNewEntryToPersonenList();
@@ -549,16 +585,65 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(enableClearSearch).toBeTrue();
   });
 
-  it('should find person', () => {
-    const findPersonSpy = spyOn(spectator.component, 'findPerson');
+  it('should set loading to true immediately and false after delayed person search by id', fakeAsync(() => {
+    const result = [getInitPerson()];
+    const findPersonByIdSpy = spyOn(component.personService, 'findPersonById').and.returnValue(of(result));
+
+    component.person.id = '123';
+
+    component.findPerson();
+
+    expect(component.tbLoadingStatus).toBeTrue();
+
+    tick(2999);
+    expect(component.tbLoadingStatus).toBeTrue();
+    expect(findPersonByIdSpy).not.toHaveBeenCalled();
+
+    tick(1);
+    expect(findPersonByIdSpy).toHaveBeenCalledWith('123');
     expect(component.tbLoadingStatus).toBeFalse();
 
-    const searchButton = spectator.query('#search-button') as HTMLButtonElement;
-    searchButton.addEventListener('click', function () {
-      spectator.component.findPerson();
+    let actualResult: Person[] | undefined;
+    component.personen$.subscribe((personen) => {
+      actualResult = personen;
     });
-    searchButton.click();
-    spectator.fixture.detectChanges();
+
+    expect(actualResult).toEqual(result);
+  }));
+
+  it('should search by parameters when no id is set', fakeAsync(() => {
+    const result = [getInitPerson()];
+    const findPersonenByParametersSpy = spyOn(component.personService, 'findPersonenByParameters').and.returnValue(
+      of(result)
+    );
+
+    component.person.id = '';
+
+    component.findPerson();
+
+    expect(component.tbLoadingStatus).toBeTrue();
+
+    tick(2999);
+    expect(component.tbLoadingStatus).toBeTrue();
+    expect(findPersonenByParametersSpy).not.toHaveBeenCalled();
+
+    tick(1);
+    expect(findPersonenByParametersSpy).toHaveBeenCalledWith(component.person);
+    expect(component.tbLoadingStatus).toBeFalse();
+
+    let actualResult: Person[] | undefined;
+    component.personen$.subscribe((personen) => {
+      actualResult = personen;
+    });
+
+    expect(actualResult).toEqual(result);
+  }));
+
+  it('should call findPerson when the search button is clicked', () => {
+    const findPersonSpy = spyOn(component, 'findPerson');
+
+    const searchButton = spectator.query('#search-button button') as HTMLButtonElement;
+    spectator.click(searchButton);
 
     expect(findPersonSpy).toHaveBeenCalled();
     expect(component.tbLoadingStatus).toBeFalse();

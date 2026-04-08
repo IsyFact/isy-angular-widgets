@@ -6,7 +6,7 @@
     [closable]="true"
     (onHide)="closeDialog()"
   >
-    <p-table [value]="newSachverhalteListe" responsiveLayout="scroll">
+    <p-table [value]="newSachverhalteListe">
       <ng-template pTemplate="header">
         <tr>
           <th scope="col">
@@ -47,15 +47,12 @@
         [placeholder]="'isyAngularWidgetsDemo.labels.newEntryPlaceholder' | translate"
         [(ngModel)]="newSachverhalt"
       />
-      <p-inputgroup-addon>
-        <p-button
-          [outlined]="true"
-          icon="pi pi-plus"
-          [ariaLabel]="'isyAngularWidgetsDemo.aria.add' | translate"
-          (onClick)="createSachverhalt(newSachverhalt)"
-        >
-        </p-button>
-      </p-inputgroup-addon>
+      <p-button
+        outlined="true"
+        icon="pi pi-plus"
+        [ariaLabel]="'isyAngularWidgetsDemo.aria.add' | translate"
+        (onClick)="createSachverhalt(newSachverhalt)"
+      ></p-button>
     </p-inputgroup>
     <ng-template pTemplate="footer">
       <p-button [outlined]="true" (onClick)="closeDialog()">

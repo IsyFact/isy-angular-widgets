@@ -8,6 +8,7 @@ import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {Zeichenobjekt} from '../../model/model';
+import {fakeAsync, tick} from '@angular/core/testing';
 
 @Component({
   standalone: true,
@@ -236,36 +237,37 @@ describe('Accessibility Test: InputCharComponent', () => {
     expect(element.getAttribute('aria-label')).toBe('Close picker');
   });
 
-  it('should focus the button if no element is focused when dialog closes', () => {
-    spectator.component.visible = true;
+  it('should focus the open dialog button when dialog closes', fakeAsync(() => {
+    const button = document.createElement('button');
+    const focusSpy = spyOn(button, 'focus');
+    spyOnProperty(button, 'isConnected', 'get').and.returnValue(true);
 
-    const focusSpy = jasmine.createSpy('focus');
     spectator.component.openDialogButton = {
-      nativeElement: {focus: focusSpy}
-    } as unknown as ElementRef<HTMLButtonElement>;
-
-    spyOnProperty(document, 'activeElement', 'get').and.returnValue(document.body);
+      nativeElement: button
+    } as ElementRef<HTMLButtonElement>;
 
     spectator.component.onDialogClose();
+    render();
+    tick();
 
-    expect(spectator.component.visible).toBeFalse();
     expect(focusSpy).toHaveBeenCalled();
-  });
+  }));
 
-  it('should not focus the button if another element is already focused', () => {
-    spectator.component.visible = true;
+  it('should not focus the open dialog button when it is disabled', fakeAsync(() => {
+    const button = document.createElement('button');
+    button.disabled = true;
 
-    const focusSpy = jasmine.createSpy('focus');
+    const focusSpy = spyOn(button, 'focus');
+    spyOnProperty(button, 'isConnected', 'get').and.returnValue(true);
+
     spectator.component.openDialogButton = {
-      nativeElement: {focus: focusSpy}
-    } as unknown as ElementRef<HTMLButtonElement>;
-
-    const mockInput = document.createElement('input');
-    spyOnProperty(document, 'activeElement', 'get').and.returnValue(mockInput);
+      nativeElement: button
+    } as ElementRef<HTMLButtonElement>;
 
     spectator.component.onDialogClose();
+    render();
+    tick();
 
-    expect(spectator.component.visible).toBeFalse();
     expect(focusSpy).not.toHaveBeenCalled();
-  });
+  }));
 });

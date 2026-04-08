@@ -70,10 +70,13 @@
             ? configService.getTranslation('hauptfenster.aria.leftNavigationCollapsed')
             : configService.getTranslation('hauptfenster.aria.leftNavigation')
         "
-        class="isy-hauptfenster-linksnavigation dont-print"
+        class="isy-hauptfenster-linksnavigation dont-print flex flex-column gap-1"
         [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
       >
-        <div class="grid grid-nogutter align-items-center">
+        <div
+          class="sidebar-nav-header grid grid-nogutter align-items-center"
+          [id]="collapsedLinksnavigation ? 'collapsed-links-navigation' : null"
+        >
           @if (!collapsedLinksnavigation && allowSidebarCollapse) {
             <div class="col-9 pl-3">
               <span class="font-bold">{{ linksNavigationTitle }}</span>
@@ -92,7 +95,7 @@
                 "
                 [attr.aria-controls]="'open-links-navigation'"
                 [attr.aria-expanded]="!collapsedLinksnavigation"
-                (onClick)="collapsedLinksnavigation = !collapsedLinksnavigation"
+                (onClick)="collapsedLinksnavigation ? expandSidebar() : collapseSidebar()"
               />
             </div>
           }
@@ -115,11 +118,14 @@
             ? configService.getTranslation('hauptfenster.aria.informationAreaCollapsed')
             : configService.getTranslation('hauptfenster.aria.informationArea')
         "
-        class="isy-hauptfenster-informationsbereich dont-print"
+        class="isy-hauptfenster-informationsbereich dont-print flex flex-column gap-1"
         [style.width]="collapsedInformationsbereich ? null : informationsbereichWidth"
       >
         @if (allowSidebarCollapse) {
-          <div class="flex justify-content-start">
+          <div
+            class="sidebar-info-header flex justify-content-start"
+            [id]="collapsedInformationsbereich ? 'collapsed-informationsbereich' : null"
+          >
             <p-button
               styleClass="p-button-text"
               [icon]="collapsedInformationsbereich ? 'pi pi-chevron-left' : 'pi pi-chevron-right'"
@@ -130,7 +136,7 @@
               "
               [attr.aria-controls]="'open-informationsbereich'"
               [attr.aria-expanded]="!collapsedInformationsbereich"
-              (onClick)="collapsedInformationsbereich = !collapsedInformationsbereich"
+              (onClick)="collapsedInformationsbereich ? expandInformationsbereich() : collapseInformationsbereich()"
             />
           </div>
         }
