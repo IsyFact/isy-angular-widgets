@@ -41,9 +41,9 @@ jobs:
         run: |
           npm run prettier:check
       - name: Lint library
-        run: ng lint isy-angular-widgets
+        run: npm run lint:lib
       - name: Lint demo
-        run: ng lint isy-angular-widgets-demo
+        run: npm run lint:demo
       - name: Run tests
         run: npm test
       - name: Cache SonarCloud
