@@ -411,7 +411,7 @@ function setupEslint(workspace: Workspace, context: SchematicContext, tree: Tree
   addDevPackageToPackageJson(tree, '@angular-eslint/eslint-plugin', '^21.0.0');
   addDevPackageToPackageJson(tree, '@angular-eslint/eslint-plugin-template', '^21.0.0');
   addDevPackageToPackageJson(tree, '@angular-eslint/template-parser', '^21.0.0');
-  addDevPackageToPackageJson(tree, '@typescript-eslint/parser', '^8.0.0');
+  addDevPackageToPackageJson(tree, 'typescript-eslint', '^8.0.0');
   addDevPackageToPackageJson(tree, 'eslint', '^9.0.0');
 
   context.logger.info('√ Added @isyfact/eslint-plugin and related ESLint packages to devDependencies.');
