@@ -41,13 +41,15 @@ function readPackageJson(host: Tree): PackageJson | null {
     return null;
   }
 
-  const packageJsonBuffer = host.read(FILE_NAME);
+  const packageJsonBuffer = host.read(FILE_NAME) as Uint8Array | null;
 
   if (!packageJsonBuffer) {
     return null;
   }
 
-  return JSON.parse(packageJsonBuffer.toString('utf-8')) as PackageJson;
+  const sourceText = new TextDecoder('utf-8').decode(packageJsonBuffer);
+
+  return JSON.parse(sourceText) as PackageJson;
 }
 
 /**
