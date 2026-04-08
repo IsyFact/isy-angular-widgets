@@ -66,38 +66,37 @@ function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext,
   const projects = workspace?.projects || {};
   let updatedProjects = 0;
 
-
   for (const key in projects) {
-      const project = projects[key];
+    const project = projects[key];
 
-      if (project.projectType !== 'application') {
-        continue;
-      }
-
-      if (!project?.architect?.build?.options) {
-        context.logger.warn(`⚠ Skipping add styles: Missing architect configuration on project ${key}.`);
-        continue;
-      }
-
-      if (project.architect.build.options.styles) {
-        const concatStyles = project.architect.build.options.styles.concat(styles);
-        project.architect.build.options.styles = [...new Set(concatStyles)];
-      } else {
-        project.architect.build.options.styles = styles;
-      }
-
-      updatedProjects++;
-      context.logger.info(`√ Added isy-angular-widgets styles to project '${key}'.`);
+    if (project.projectType !== 'application') {
+      continue;
     }
 
-    if (updatedProjects === 0) {
-      context.logger.warn('⚠ Skipping add styles: Workspace does not contain any project of type application.');
-      return tree;
+    if (!project?.architect?.build?.options) {
+      context.logger.warn(`⚠ Skipping add styles: Missing architect configuration on project ${key}.`);
+      continue;
     }
 
-    tree.overwrite('/angular.json', JSON.stringify(workspace, null, 2));
+    if (project.architect.build.options.styles) {
+      const concatStyles = project.architect.build.options.styles.concat(styles);
+      project.architect.build.options.styles = [...new Set(concatStyles)];
+    } else {
+      project.architect.build.options.styles = styles;
+    }
+
+    updatedProjects++;
+    context.logger.info(`√ Added isy-angular-widgets styles to project '${key}'.`);
+  }
+
+  if (updatedProjects === 0) {
+    context.logger.warn('⚠ Skipping add styles: Workspace does not contain any project of type application.');
     return tree;
   }
+
+  tree.overwrite('/angular.json', JSON.stringify(workspace, null, 2));
+  return tree;
+}
 
 /**
  * Adds the specified assets path (`src/assets`) to the assets array of the first application project
@@ -111,47 +110,47 @@ function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext,
 function applyAssetsToWorkspace(workspace: Workspace, context: SchematicContext, tree: Tree): Tree {
   const assetsPath = 'src/assets';
   const projects = workspace?.projects || {};
-    let updatedProjects = 0;
+  let updatedProjects = 0;
 
-    for (const key in projects) {
-      const project = projects[key];
+  for (const key in projects) {
+    const project = projects[key];
 
-      if (project.projectType !== 'application') {
-        continue;
-      }
-
-      const buildOptions = project.architect?.build?.options;
-
-      if (!buildOptions) {
-        context.logger.warn(`⚠ Skipping assets update: Missing build options on project '${key}'.`);
-        continue;
-      }
-
-      if (Array.isArray(buildOptions.assets)) {
-        const hasAssets = buildOptions.assets.some((entry) =>
-          typeof entry === 'string' ? entry === assetsPath : entry.input === assetsPath
-        );
-
-        if (!hasAssets) {
-          buildOptions.assets.push(assetsPath);
-          context.logger.info(`√ Added '${assetsPath}' to assets array of project '${key}'.`);
-        }
-      } else {
-        buildOptions.assets = [assetsPath];
-        context.logger.info(`√ Initialized assets array with '${assetsPath}' on project '${key}'.`);
-      }
-
-      updatedProjects++;
+    if (project.projectType !== 'application') {
+      continue;
     }
 
-    if (updatedProjects === 0) {
-      context.logger.warn('⚠ Skipping assets update: No application project found.');
-      return tree;
+    const buildOptions = project.architect?.build?.options;
+
+    if (!buildOptions) {
+      context.logger.warn(`⚠ Skipping assets update: Missing build options on project '${key}'.`);
+      continue;
     }
 
-    tree.overwrite('/angular.json', JSON.stringify(workspace, null, 2));
+    if (Array.isArray(buildOptions.assets)) {
+      const hasAssets = buildOptions.assets.some((entry) =>
+        typeof entry === 'string' ? entry === assetsPath : entry.input === assetsPath
+      );
+
+      if (!hasAssets) {
+        buildOptions.assets.push(assetsPath);
+        context.logger.info(`√ Added '${assetsPath}' to assets array of project '${key}'.`);
+      }
+    } else {
+      buildOptions.assets = [assetsPath];
+      context.logger.info(`√ Initialized assets array with '${assetsPath}' on project '${key}'.`);
+    }
+
+    updatedProjects++;
+  }
+
+  if (updatedProjects === 0) {
+    context.logger.warn('⚠ Skipping assets update: No application project found.');
     return tree;
-    }
+  }
+
+  tree.overwrite('/angular.json', JSON.stringify(workspace, null, 2));
+  return tree;
+}
 
 /**
  * Loads the angular workspace store in angular.json.
@@ -301,7 +300,6 @@ function generateMergedTestRulesExpression(): string {
  * @returns JavaScript source string for the config blocks
  */
 function generateProjectConfigBlock(name: string, project: ProjectInfo, tree: Tree): string {
-
   const sourceRoot = project.sourceRoot || `src`;
   const prefix = project.prefix || 'app';
 
@@ -374,9 +372,10 @@ function generateProjectConfigBlock(name: string, project: ProjectInfo, tree: Tr
  * @returns The content of the eslint.config.js file as a string
  */
 function generateEslintConfigContent(workspace: Workspace, tree: Tree): string {
-
   const projectEntries = Object.entries(workspace.projects);
-  const projectBlocks = projectEntries.map(([name, project]) => generateProjectConfigBlock(name, project, tree)).join(',\n');
+  const projectBlocks = projectEntries
+    .map(([name, project]) => generateProjectConfigBlock(name, project, tree))
+    .join(',\n');
 
   return `${GENERATED_ESLINT_MARKER}
 // @ts-check
@@ -424,7 +423,7 @@ function setupEslint(workspace: Workspace, context: SchematicContext, tree: Tree
   context.logger.info(`√ Detected workspace type: ${monorepo ? 'Monorepo' : 'Simple project'}.`);
 
   if (tree.exists(ESLINT_CONFIG_PATH)) {
-      return extendExistingEslintConfig(workspace, context, tree);
+    return extendExistingEslintConfig(workspace, context, tree);
   }
 
   const configContent = generateEslintConfigContent(workspace, tree);
@@ -517,10 +516,14 @@ function extendExistingEslintConfig(workspace: Workspace, context: SchematicCont
   if (existingContent.includes(GENERATED_ESLINT_MARKER)) {
     if (tree.exists(ESLINT_BASE_CONFIG_PATH)) {
       tree.overwrite(ESLINT_CONFIG_PATH, generateWrappedEslintConfigContent(workspace, tree));
-      context.logger.info('√ Regenerated existing generated eslint.config.js wrapper with updated IsyFact ESLint configuration.');
+      context.logger.info(
+        '√ Regenerated existing generated eslint.config.js wrapper with updated IsyFact ESLint configuration.'
+      );
     } else {
       tree.overwrite(ESLINT_CONFIG_PATH, generateEslintConfigContent(workspace, tree));
-      context.logger.info('√ Regenerated existing generated eslint.config.js with updated IsyFact ESLint configuration.');
+      context.logger.info(
+        '√ Regenerated existing generated eslint.config.js with updated IsyFact ESLint configuration.'
+      );
     }
 
     return tree;
@@ -544,7 +547,9 @@ function extendExistingEslintConfig(workspace: Workspace, context: SchematicCont
 }
 function generateWrappedEslintConfigContent(workspace: Workspace, tree: Tree): string {
   const projectEntries = Object.entries(workspace.projects);
-    const projectBlocks = projectEntries.map(([name, project]) => generateProjectConfigBlock(name, project, tree)).join(',\n');
+  const projectBlocks = projectEntries
+    .map(([name, project]) => generateProjectConfigBlock(name, project, tree))
+    .join(',\n');
 
   return `${GENERATED_ESLINT_MARKER}
     // @ts-check
