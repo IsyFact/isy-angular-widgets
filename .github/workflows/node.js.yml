@@ -40,7 +40,6 @@ jobs:
       - name: Check code formatting
         run: |
           npm run prettier:check
-          npm run lint
       - name: Lint library
         run: ng lint isy-angular-widgets
       - name: Lint demo
