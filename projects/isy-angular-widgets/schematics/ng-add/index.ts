@@ -466,7 +466,9 @@ function extendExistingEslintConfig(workspace: Workspace, context: SchematicCont
       );
     } else {
       tree.overwrite(ESLINT_CONFIG_PATH, generateEslintConfigContent(workspace, tree));
-      context.logger.info('√ Regenerated existing generated eslint.config.js with updated IsyFact ESLint configuration.');
+      context.logger.info(
+        '√ Regenerated existing generated eslint.config.js with updated IsyFact ESLint configuration.'
+      );
     }
 
     return tree;
