@@ -15,6 +15,7 @@ interface PackageJson {
 }
 
 const FILE_NAME = 'package.json';
+const JSON_SPACES = 2;
 
 /**
  * Sorts the keys of the given object.
@@ -31,6 +32,25 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
 }
 
 /**
+ * Reads and parses package.json from the host tree.
+ * @param host Tree containing package.json
+ * @returns Parsed package.json or null if the file does not exist
+ */
+function readPackageJson(host: Tree): PackageJson | null {
+  if (!host.exists(FILE_NAME)) {
+    return null;
+  }
+
+  const packageJsonBuffer = host.read(FILE_NAME);
+
+  if (!packageJsonBuffer) {
+    return null;
+  }
+
+  return JSON.parse(packageJsonBuffer.toString('utf-8')) as PackageJson;
+}
+
+/**
  * Adds a package to the package.json in the given host tree.
  * @param host Tree with packages and their versions
  * @param pkg The package who gets added to package.json
@@ -38,26 +58,20 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
  * @returns The new package.json as Tree
  */
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
-  const spacesNum = 2;
-  if (host.exists(FILE_NAME)) {
-    // Node Buffer is not supported in Browser context but schematics is executed with node and not with browser
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    const sourceText = host.read(FILE_NAME)!.toString('utf-8') as string;
+  const json = readPackageJson(host);
 
-    const json = JSON.parse(sourceText) as PackageJson;
-
-    if (!json.dependencies) {
-      json.dependencies = {};
-    }
-
-    if (!json.dependencies[pkg]) {
-      json.dependencies[pkg] = version;
-      json.dependencies = sortObjectByKeys(json.dependencies);
-    }
-
-    host.overwrite(FILE_NAME, JSON.stringify(json, null, spacesNum));
+  if (!json) {
+    return host;
   }
 
+  json.dependencies ??= {};
+
+  if (!json.dependencies[pkg]) {
+    json.dependencies[pkg] = version;
+    json.dependencies = sortObjectByKeys(json.dependencies);
+  }
+
+  host.overwrite(FILE_NAME, JSON.stringify(json, null, JSON_SPACES));
   return host;
 }
 
@@ -69,26 +83,20 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
  * @returns The new package.json as Tree
  */
 export function addDevPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
-  const spacesNum = 2;
-  if (host.exists(FILE_NAME)) {
-    // Node Buffer is not supported in Browser context but schematics is executed with node and not with browser
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    const sourceText = host.read(FILE_NAME)!.toString('utf-8') as string;
+  const json = readPackageJson(host);
 
-    const json = JSON.parse(sourceText) as PackageJson;
-
-    if (!json.devDependencies) {
-      json.devDependencies = {};
-    }
-
-    if (!json.devDependencies[pkg]) {
-      json.devDependencies[pkg] = version;
-      json.devDependencies = sortObjectByKeys(json.devDependencies);
-    }
-
-    host.overwrite(FILE_NAME, JSON.stringify(json, null, spacesNum));
+  if (!json) {
+    return host;
   }
 
+  json.devDependencies ??= {};
+
+  if (!json.devDependencies[pkg]) {
+    json.devDependencies[pkg] = version;
+    json.devDependencies = sortObjectByKeys(json.devDependencies);
+  }
+
+  host.overwrite(FILE_NAME, JSON.stringify(json, null, JSON_SPACES));
   return host;
 }
 
@@ -99,31 +107,35 @@ export function addDevPackageToPackageJson(host: Tree, pkg: string, version: str
  * @returns Null or the package version as a string
  */
 export function getPackageVersionFromPackageJson(tree: Tree, name: string): string | null {
-  if (!tree.exists(FILE_NAME)) {
+  const packageJson = readPackageJson(tree);
+
+  if (!packageJson) {
     return null;
   }
 
-  // Node Buffer is not supported in Browser context but schematics is executed with node and not with browser
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument
-  const packageJson = JSON.parse(tree.read(FILE_NAME)!.toString('utf8')) as PackageJson;
-
-  return packageJson.dependencies[name] ? packageJson.dependencies[name] : null;
+  return packageJson.dependencies[name] ?? null;
 }
+
+/**
+ * Adds a script to the scripts section of package.json if it does not already exist.
+ * @param host Tree containing package.json
+ * @param scriptName Name of the npm script
+ * @param script Script command
+ * @returns The updated host tree
+ */
 export function addScriptToPackageJson(host: Tree, scriptName: string, script: string): Tree {
-  const file = 'package.json';
+  const json = readPackageJson(host);
 
-  if (!host.exists(file)) return host;
-
-  const json = JSON.parse(host.read(file)!.toString('utf-8'));
-
-  if (!json.scripts) {
-    json.scripts = {};
+  if (!json) {
+    return host;
   }
+
+  json.scripts ??= {};
 
   if (!json.scripts[scriptName]) {
     json.scripts[scriptName] = script;
   }
 
-  host.overwrite(file, JSON.stringify(json, null, 2));
+  host.overwrite(FILE_NAME, JSON.stringify(json, null, JSON_SPACES));
   return host;
 }
