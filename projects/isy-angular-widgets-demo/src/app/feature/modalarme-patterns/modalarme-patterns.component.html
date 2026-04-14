@@ -1,8 +1,6 @@
 <div class="mx-3">
   <h1>Modalarme Patterns (PrimeNG 20+)</h1>
 
-  <p-toast></p-toast>
-
   <div class="grid">
     <div class="col-12 flex flex-column">
       <!-- Objekt anlegen – Stepper -->
@@ -10,12 +8,9 @@
         <div class="grid gap-3 col-12 xl:col-6 flex-column">
           <h3 id="h-stepper">Seiteninterner Stepper</h3>
 
-          <!-- aria-live: Screenreader liest Fehlermeldung vor -->
-          <div aria-live="assertive" aria-atomic="true">
-            @if (globalError) {
-              <p-message severity="error">{{ globalError }}</p-message>
-            }
-          </div>
+          @if (globalError) {
+            <p-message severity="error">{{ globalError }}</p-message>
+          }
 
           <p-stepper [value]="stepValue" aria-labelledby="h-stepper" [linear]="true">
             <p-step-list>
@@ -23,134 +18,105 @@
               <p-step [value]="2">Persönliche Informationen</p-step>
               <p-step [value]="3">Bestätigen</p-step>
             </p-step-list>
-
-            <p-step-panels>
-              <!-- Panel 1 -->
-              <p-step-panel [value]="1">
-                <ng-template #content let-activateCallback="activateCallback">
-                  <form [formGroup]="baseFg">
-                    <div class="step-panel-body">
-                      <div class="col-12">
-                        <isy-form-wrapper
-                          label="{{ 'isyAngularWidgetsDemo.labels.id' | translate }}"
-                          fieldId="id"
-                          [control]="baseFg.controls.id | formControl"
-                          [validationMessages]="
-                            baseFg.controls.id.errors?.required
-                              ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
-                              : {}
-                          "
-                        >
-                          <input
-                            id="id"
-                            class="w-full"
-                            pInputText
-                            formControlName="id"
-                            [required]="baseFg.controls.id.hasValidator(Validators.required)"
-                            [attr.aria-required]="baseFg.controls.id.hasValidator(Validators.required) ? 'true' : null"
-                            [attr.aria-invalid]="isStepFieldInvalid('base', 'id') ? 'true' : null"
-                            [attr.aria-describedby]="isStepFieldInvalid('base', 'id') ? 'id-error' : null"
-                          />
-                        </isy-form-wrapper>
-                      </div>
-                    </div>
-                    <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
-                      <p-button type="button" label="Weiter" (onClick)="goNext(2, baseFg, activateCallback)"></p-button>
-                    </div>
-                  </form>
-                </ng-template>
-              </p-step-panel>
-
-              <!-- Panel 2 -->
-              <p-step-panel [value]="2">
-                <ng-template #content let-activateCallback="activateCallback">
-                  <form [formGroup]="detailsFg">
-                    <div class="step-panel-body">
-                      <div class="col-12">
-                        <isy-form-wrapper
-                          label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
-                          fieldId="firstname"
-                          [control]="detailsFg.controls.firstname | formControl"
-                        >
-                          <input id="firstname" class="w-full" pInputText formControlName="firstname" />
-                        </isy-form-wrapper>
-                      </div>
-                      <div class="col-12">
-                        <isy-form-wrapper
-                          label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
-                          fieldId="lastname"
-                          [control]="detailsFg.controls.lastname | formControl"
-                        >
-                          <input id="lastname" class="w-full" pInputText formControlName="lastname" />
-                        </isy-form-wrapper>
-                      </div>
-                      <div class="col-12">
-                        <isy-form-wrapper
-                          label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
-                          labelId="label-gender"
-                          fieldId="gender"
-                          [control]="detailsFg.controls.gender | formControl"
-                        >
-                          <p-select
-                            inputId="gender"
-                            formControlName="gender"
-                            ariaLabelledBy="label-gender"
-                            [filter]="true"
-                            [ariaFilterLabel]="'isyAngularWidgetsDemo.labels.genderFilter' | translate"
-                            [attr.aria-describedby]="
-                              detailsFg.controls.gender.invalid &&
-                              (detailsFg.controls.gender.touched || detailsFg.controls.gender.dirty)
-                                ? 'gender-error'
-                                : null
-                            "
-                            [options]="[
-                              'isyAngularWidgetsDemo.labels.optionMale' | translate,
-                              'isyAngularWidgetsDemo.labels.optionFemale' | translate,
-                              'isyAngularWidgetsDemo.labels.optionDivers' | translate
-                            ]"
-                            class="w-full"
-                            appendTo="body"
-                          ></p-select>
-                        </isy-form-wrapper>
-                      </div>
-                    </div>
-                    <div class="flex pt-3 flex-wrap justify-content-end">
-                      <p-button
-                        class="mr-1"
-                        [outlined]="true"
-                        type="button"
-                        label="Zurück"
-                        (onClick)="goBack(1, activateCallback)"
-                      ></p-button>
-                      <p-button
-                        type="button"
-                        label="Weiter"
-                        (onClick)="goNext(3, detailsFg, activateCallback)"
-                      ></p-button>
-                    </div>
-                  </form>
-                </ng-template>
-              </p-step-panel>
-
-              <!-- Panel 3 -->
-              <p-step-panel [value]="3">
-                <ng-template #content let-activateCallback="activateCallback">
-                  <div class="step-panel-body"></div>
-                  <p class="text-right">Bitte prüfen und speichern.</p>
-                  <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
-                    <p-button
-                      type="button"
-                      label="Zurück"
-                      class="mr-1"
-                      [outlined]="true"
-                      (onClick)="goBack(2, activateCallback)"
-                    ></p-button>
-                    <p-button type="button" label="Speichern" (onClick)="saveStepper()"></p-button>
-                  </div>
-                </ng-template>
-              </p-step-panel>
-            </p-step-panels>
           </p-stepper>
+
+          @if (stepValue === 1) {
+            <form [formGroup]="baseFg" data-step-form="1">
+              <div class="step-panel-body">
+                <div class="col-12">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.id' | translate }}"
+                    fieldId="id"
+                    [control]="baseFg.controls.id | formControl"
+                    [validationMessages]="
+                      baseFg.controls.id.errors?.required
+                        ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
+                        : {}
+                    "
+                  >
+                    <input
+                      isyFormWrapperField
+                      class="w-full"
+                      pInputText
+                      formControlName="id"
+                      [required]="baseFg.controls.id.hasValidator(Validators.required)"
+                      [attr.aria-required]="baseFg.controls.id.hasValidator(Validators.required) ? 'true' : null"
+                    />
+                  </isy-form-wrapper>
+                </div>
+              </div>
+
+              <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
+                <p-button type="button" label="Weiter" (onClick)="goNext(2, baseFg)"></p-button>
+              </div>
+            </form>
+          }
+
+          @if (stepValue === 2) {
+            <form [formGroup]="detailsFg" data-step-form="2">
+              <div class="step-panel-body">
+                <div class="col-12">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+                    fieldId="firstname"
+                    [control]="detailsFg.controls.firstname | formControl"
+                  >
+                    <input isyFormWrapperField class="w-full" pInputText formControlName="firstname" />
+                  </isy-form-wrapper>
+                </div>
+
+                <div class="col-12">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+                    fieldId="lastname"
+                    [control]="detailsFg.controls.lastname | formControl"
+                  >
+                    <input isyFormWrapperField class="w-full" pInputText formControlName="lastname" />
+                  </isy-form-wrapper>
+                </div>
+
+                <div class="col-12">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+                    labelId="label-gender"
+                    fieldId="gender"
+                    [control]="detailsFg.controls.gender | formControl"
+                  >
+                    <p-select
+                      inputId="gender"
+                      formControlName="gender"
+                      ariaLabelledBy="label-gender"
+                      [filter]="true"
+                      [ariaFilterLabel]="'isyAngularWidgetsDemo.labels.genderFilter' | translate"
+                      [options]="[
+                        'isyAngularWidgetsDemo.labels.optionMale' | translate,
+                        'isyAngularWidgetsDemo.labels.optionFemale' | translate,
+                        'isyAngularWidgetsDemo.labels.optionDivers' | translate
+                      ]"
+                      class="w-full"
+                      appendTo="body"
+                    ></p-select>
+                  </isy-form-wrapper>
+                </div>
+              </div>
+
+              <div class="flex pt-3 flex-wrap justify-content-end">
+                <p-button class="mr-1" [outlined]="true" type="button" label="Zurück" (onClick)="goBack(1)"></p-button>
+                <p-button type="button" label="Weiter" (onClick)="goNext(3, detailsFg)"></p-button>
+              </div>
+            </form>
+          }
+
+          @if (stepValue === 3) {
+            <div class="step-panel-body">
+              <p class="text-right">Bitte prüfen und speichern.</p>
+            </div>
+
+            <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
+              <p-button type="button" label="Zurück" class="mr-1" [outlined]="true" (onClick)="goBack(2)"></p-button>
+              <p-button type="button" label="Speichern" (onClick)="saveStepper()"></p-button>
+            </div>
+          }
         </div>
       </section>
     </div>
@@ -271,18 +237,34 @@
         <div class="flex pt-3 flex-wrap action">
           <p-button
             #helpBtn
+            type="button"
             icon="pi pi-info-circle"
             class="p-button-text"
-            aria-label="Hilfe"
+            aria-label="Hilfe anzeigen"
             aria-haspopup="dialog"
-            (onClick)="helpOverlay.toggle($event)"
+            [pt]="{
+              root: {
+                'aria-expanded': helpOpen,
+                'aria-controls': helpOpen ? helpPopoverId : null
+              }
+            }"
+            (onClick)="toggleHelp($event)"
+            (keydown.escape)="closeHelp()"
           ></p-button>
         </div>
 
-        <p-popover #helpOverlay [dismissable]="true" ariaLabelledBy="help-popover-title">
-          <div>
-            <h3 id="help-popover-title">Hilfe</h3>
-            <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat</p>
+        <p-popover
+          #helpOverlay
+          [dismissable]="true"
+          [appendTo]="'body'"
+          [attr.id]="helpPopoverId"
+          ariaLabelledBy="help-popover-title"
+          (onShow)="onHelpShow()"
+          (onHide)="onHelpHide()"
+        >
+          <div class="w-20rem">
+            <h3 id="help-popover-title" class="mt-0 mb-2">Hilfe</h3>
+            <p class="m-0">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.</p>
           </div>
         </p-popover>
       </section>
@@ -321,25 +303,12 @@
         <form #errorsFormEl [formGroup]="formErrors" (ngSubmit)="submitErrors()">
           <div class="col-12 md:col-6">
             <isy-form-wrapper
-              label="{{ 'isyAngularWidgetsDemo.labels.geburtsname' | translate }}"
-              fieldId="errors-geburtsname"
-              describedbyId="errors-geburtsname-err"
+              label="Geburtsname"
+              fieldId="geburtsname-toast-example"
               [control]="formErrors.controls.geburtsname | formControl"
-              [validationMessages]="
-                formErrors.controls.geburtsname.errors?.required
-                  ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
-                  : {}
-              "
+              [validationMessages]="formErrors.controls.geburtsname.errors?.required ? {required: 'Pflichtfeld'} : {}"
             >
-              <input
-                id="errors-geburtsname"
-                type="text"
-                pInputText
-                class="w-full"
-                formControlName="geburtsname"
-                [attr.aria-invalid]="isInvalid('geburtsname') ? 'true' : null"
-                [attr.aria-describedby]="isInvalid('geburtsname') ? 'errors-geburtsname-err' : null"
-              />
+              <input isyFormWrapperField type="text" pInputText class="w-full" formControlName="geburtsname" />
             </isy-form-wrapper>
             <div class="flex pt-3 flex-wrap justify-content-end">
               <p-button type="submit" label="Personendaten speichern"></p-button>

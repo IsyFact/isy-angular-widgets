@@ -1,16 +1,19 @@
-<div [class]="'flex flex-column gap-2 ' + labelOptionClass">
-  <label [attr.id]="labelId || null" [class]="'label ' + labelFilledClass" [for]="fieldId">
+<div class="flex flex-column gap-2" [ngClass]="labelOptionClass">
+  <label [attr.id]="computedLabelId" [attr.for]="fieldId" class="label" [ngClass]="labelFilledClass">
     {{ label }}
-    @if (isRequired()) {
+
+    @if (required) {
       <span aria-hidden="true">*</span>
-      <span class="visually-hidden">Pflichtfeld</span>
+      <span class="visually-hidden">{{ requiredTranslation$ | async }}</span>
     }
   </label>
-  <div class="flex-container">
+
+  <div class="flex-container" data-form-wrapper-field-container>
     <ng-content></ng-content>
   </div>
-  @if (shouldShowError()) {
-    <div [attr.id]="fieldId + '-error'">
+
+  @if (showError) {
+    <div [attr.id]="errorId">
       <p-message severity="error" variant="simple">
         {{ errorMessage }}
       </p-message>

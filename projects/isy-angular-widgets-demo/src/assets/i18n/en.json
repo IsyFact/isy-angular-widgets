@@ -23,9 +23,13 @@
         "closePicker": "Close Special Character Picker"
       },
       "enum": {
-        "base": "GRUNDZEICHEN",
-        "groups": "SCHRIFTZEICHENGRUPPE"
+        "base": "BASE CHARACTERS",
+        "groups": "CHARACTER GROUPS"
       }
+    },
+    "formWrapper": {
+      "required": "Required field",
+      "invalid": "Invalid input"
     },
     "hauptfenster": {
       "altLogoAwl": "Logo of the application landscape",

@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {StepperModule} from 'primeng/stepper';
 import {Accordion, AccordionPanel, AccordionHeader, AccordionContent} from 'primeng/accordion';
 import {Popover} from 'primeng/popover';
@@ -46,7 +47,7 @@ function markAllTouched(group: FormGroup): void {
   }
 }
 
-enum StepperStep {
+export enum StepperStep {
   First = 1,
   Second = 2,
   Third = 3
@@ -82,6 +83,8 @@ export class ModalarmePatternsComponent {
   private readonly fb = inject(FormBuilder);
   private readonly msg = inject(MessageService);
   private readonly injector = inject(Injector);
+  private readonly liveAnnouncer = inject(LiveAnnouncer);
+  private readonly hostEl = inject<ElementRef<HTMLElement>>(ElementRef);
   protected readonly Validators = Validators;
 
   // Stepper
@@ -107,29 +110,33 @@ export class ModalarmePatternsComponent {
     return this.formStepper.get('details') as FormGroup;
   }
 
-  goNext(target: StepperStep, currentGroup: FormGroup, activate: (val: number) => void): void {
+  goNext(target: StepperStep, currentGroup: FormGroup): void {
     if (currentGroup.valid) {
       this.globalError = null;
       this.stepValue = target;
-      activate(target);
-    } else {
-      this.globalError = 'Bitte korrigieren Sie die markierten Felder.';
-      currentGroup.markAllAsTouched();
+      this.focusFirstFieldInStep(target);
+      return;
     }
+
+    currentGroup.markAllAsTouched();
+    this.announceGlobalError('Bitte korrigieren Sie die markierten Felder.');
+    this.focusFirstInvalidFieldInStep(this.stepValue);
   }
 
-  goBack(target: StepperStep, activate: (val: number) => void): void {
+  goBack(target: StepperStep): void {
     this.globalError = null;
     this.stepValue = target;
-    activate(target);
+    this.focusFirstFieldInStep(target);
   }
 
   saveStepper(): void {
     if (this.formStepper.invalid) {
       markAllTouched(this.formStepper);
-      this.globalError = 'Bitte vervollständigen Sie alle Pflichtfelder.';
+      this.announceGlobalError('Bitte vervollständigen Sie alle Pflichtfelder.');
+      this.focusFirstInvalidFieldInStep(this.stepValue);
       return;
     }
+
     this.globalError = null;
     this.msg.add({
       severity: 'success',
@@ -148,6 +155,81 @@ export class ModalarmePatternsComponent {
     const fg = group === 'base' ? this.baseFg : this.detailsFg;
     const c = fg.get(ctrl);
     return !!(c && c.invalid && (c.dirty || c.touched));
+  }
+
+  private announceGlobalError(message: string): void {
+    this.globalError = '';
+
+    afterNextRender(
+      {
+        write: () => {
+          this.globalError = message;
+          void this.liveAnnouncer.announce(message, 'assertive');
+        }
+      },
+      {injector: this.injector}
+    );
+  }
+
+  private focusFirstInvalidFieldInStep(step: StepperStep): void {
+    afterNextRender(
+      {
+        read: () => {
+          const stepForm = this.hostEl.nativeElement.querySelector<HTMLElement>(`[data-step-form="${step}"]`);
+          if (!stepForm) {
+            return;
+          }
+
+          const firstInvalid = stepForm.querySelector<HTMLElement>(
+            [
+              'input[aria-invalid="true"]',
+              'textarea[aria-invalid="true"]',
+              'select[aria-invalid="true"]',
+              '[role="combobox"][aria-invalid="true"]',
+              '.p-select.p-invalid',
+              '.p-select.p-invalid [role="combobox"]',
+              '.p-invalid input',
+              '.p-invalid'
+            ].join(', ')
+          );
+
+          if (!firstInvalid) {
+            return;
+          }
+
+          const focusTarget = firstInvalid.matches('[role="combobox"], input, textarea, select')
+            ? firstInvalid
+            : (firstInvalid.querySelector<HTMLElement>('[role="combobox"], input, textarea, select') ?? firstInvalid);
+
+          focusTarget.focus();
+        }
+      },
+      {injector: this.injector}
+    );
+  }
+
+  private focusFirstFieldInStep(step: StepperStep): void {
+    afterNextRender(
+      {
+        write: () => {
+          let targetId: string | null = null;
+
+          if (step === StepperStep.First) {
+            targetId = 'id';
+          } else if (step === StepperStep.Second) {
+            targetId = 'firstname';
+          }
+
+          if (!targetId) {
+            return;
+          }
+
+          const target = this.hostEl.nativeElement.querySelector<HTMLElement>(`#${targetId}`);
+          target?.focus();
+        }
+      },
+      {injector: this.injector}
+    );
   }
 
   // Drawer
@@ -247,6 +329,28 @@ export class ModalarmePatternsComponent {
       },
       {injector: this.injector}
     );
+  }
+
+  // Popover
+  @ViewChild('helpOverlay') helpOverlay!: Popover;
+
+  helpOpen = false;
+  helpPopoverId = 'help-popover-panel';
+
+  toggleHelp(event: Event): void {
+    this.helpOverlay.toggle(event);
+  }
+
+  closeHelp(): void {
+    this.helpOverlay.hide();
+  }
+
+  onHelpShow(): void {
+    this.helpOpen = true;
+  }
+
+  onHelpHide(): void {
+    this.helpOpen = false;
   }
 
   // Error handling form

@@ -1,9 +1,12 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {MessageService} from 'primeng/api';
-import {TranslateModule} from '@ngx-translate/core';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {ModalarmePatternsComponent} from './modalarme-patterns.component';
+import {fakeAsync, tick, flush} from '@angular/core/testing';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {TranslateModule} from '@ngx-translate/core';
+import {MessageService} from 'primeng/api';
+import {Popover} from 'primeng/popover';
+import {ModalarmePatternsComponent, StepperStep} from './modalarme-patterns.component';
 
 /**
  * Creates a minimal MouseEvent whose currentTarget is the given HTMLElement.
@@ -20,19 +23,24 @@ describe('ModalarmePatternsComponent', () => {
   let spectator: Spectator<ModalarmePatternsComponent>;
   let component: ModalarmePatternsComponent;
   let msgService: MessageService;
+  let liveAnnouncer: jasmine.SpyObj<LiveAnnouncer>;
+  const liveAnnouncerSpy = jasmine.createSpyObj<LiveAnnouncer>('LiveAnnouncer', ['announce']);
+  liveAnnouncerSpy.announce.and.returnValue(Promise.resolve());
 
   const createComponent = createComponentFactory({
     component: ModalarmePatternsComponent,
     imports: [ReactiveFormsModule, TranslateModule.forRoot()],
-    providers: [FormBuilder, MessageService],
+    providers: [FormBuilder, MessageService, {provide: LiveAnnouncer, useValue: liveAnnouncerSpy}],
     schemas: [NO_ERRORS_SCHEMA],
     declareComponent: false
   });
 
   beforeEach(() => {
+    liveAnnouncerSpy.announce.calls.reset();
     spectator = createComponent();
     component = spectator.component;
     msgService = spectator.inject(MessageService);
+    liveAnnouncer = spectator.inject(LiveAnnouncer) as jasmine.SpyObj<LiveAnnouncer>;
     spyOn(msgService, 'add');
   });
 
@@ -42,8 +50,8 @@ describe('ModalarmePatternsComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should initialise stepValue to 1', () => {
-      expect(component.stepValue).toBe(1);
+    it('should initialise stepValue to StepperStep.First', () => {
+      expect(component.stepValue).toBe(StepperStep.First);
     });
 
     it('should initialise globalError to null', () => {
@@ -57,9 +65,16 @@ describe('ModalarmePatternsComponent', () => {
     it('should initialise showConfirmBar to false', () => {
       expect(component.showConfirmBar).toBeFalse();
     });
+
+    it('should initialise helpOpen to false', () => {
+      expect(component.helpOpen).toBeFalse();
+    });
+
+    it('should initialise helpPopoverId', () => {
+      expect(component.helpPopoverId).toBe('help-popover-panel');
+    });
   });
 
-  // Form structure
   describe('Forms', () => {
     describe('formStepper', () => {
       it('should contain a "base" group with an "id" control', () => {
@@ -113,66 +128,97 @@ describe('ModalarmePatternsComponent', () => {
 
   // Stepper navigation
   describe('Stepper', () => {
-    let activateSpy: jasmine.Spy;
-
-    beforeEach(() => {
-      activateSpy = jasmine.createSpy('activateCallback');
-    });
-
     describe('goNext()', () => {
-      it('should call activateCallback when the current group is valid', () => {
+      it('should go to the target step when the current group is valid', () => {
         component.baseFg.controls.id.setValue('X-1');
 
-        component.goNext(2, component.baseFg, activateSpy);
+        component.goNext(StepperStep.Second, component.baseFg);
 
-        expect(activateSpy).toHaveBeenCalledWith(2);
+        expect(component.stepValue).toBe(StepperStep.Second);
         expect(component.globalError).toBeNull();
-      });
-
-      it('should set globalError and mark controls as touched when the group is invalid', () => {
-        component.baseFg.controls.id.setValue('');
-
-        component.goNext(2, component.baseFg, activateSpy);
-
-        expect(activateSpy).not.toHaveBeenCalled();
-        expect(component.globalError).toBe('Bitte korrigieren Sie die markierten Felder.');
-        expect(component.baseFg.controls.id.touched).toBeTrue();
       });
 
       it('should clear an existing globalError when the group becomes valid', () => {
         component.globalError = 'Old error';
         component.baseFg.controls.id.setValue('Y-2');
 
-        component.goNext(2, component.baseFg, activateSpy);
+        component.goNext(StepperStep.Second, component.baseFg);
 
+        expect(component.globalError).toBeNull();
+        expect(component.stepValue).toBe(StepperStep.Second);
+      });
+
+      it('should mark controls as touched and keep current step when the group is invalid', fakeAsync(() => {
+        component.goNext(StepperStep.Second, component.baseFg);
+
+        spectator.fixture.detectChanges();
+        flush();
+        spectator.fixture.detectChanges();
+
+        expect(component.baseFg.controls.id.touched).toBeTrue();
+        expect(component.stepValue).toBe(StepperStep.First);
+        expect(component.globalError).toBe('Bitte korrigieren Sie die markierten Felder.');
+      }));
+
+      it('should announce the global error when validation fails', fakeAsync(() => {
+        component.goNext(StepperStep.Second, component.baseFg);
+
+        spectator.fixture.detectChanges();
+        flush();
+        spectator.fixture.detectChanges();
+
+        expect(liveAnnouncer.announce).toHaveBeenCalledWith(
+          'Bitte korrigieren Sie die markierten Felder.',
+          'assertive'
+        );
+      }));
+    });
+
+    describe('goBack()', () => {
+      it('should set the target step and clear globalError', () => {
+        component.stepValue = StepperStep.Second;
+        component.globalError = 'Old error';
+
+        component.goBack(StepperStep.First);
+
+        expect(component.stepValue as StepperStep).toBe(StepperStep.First);
         expect(component.globalError).toBeNull();
       });
     });
 
-    describe('goBack()', () => {
-      it('should call activateCallback with the target step', () => {
-        component.goBack(1, activateSpy);
-
-        expect(activateSpy).toHaveBeenCalledWith(1);
-      });
-    });
-
     describe('saveStepper()', () => {
-      it('should set globalError when formStepper is invalid', () => {
-        component.baseFg.controls.id.setValue('');
-
+      it('should set globalError when formStepper is invalid', fakeAsync(() => {
         component.saveStepper();
+
+        spectator.fixture.detectChanges();
+        flush();
+        spectator.fixture.detectChanges();
 
         expect(component.globalError).toBe('Bitte vervollständigen Sie alle Pflichtfelder.');
-      });
+      }));
 
-      it('should mark all controls as touched when formStepper is invalid', () => {
+      it('should mark all controls as touched when formStepper is invalid', fakeAsync(() => {
         component.baseFg.controls.id.setValue('');
 
         component.saveStepper();
+        tick();
+        spectator.detectChanges();
 
         expect(component.baseFg.controls.id.touched).toBeTrue();
-      });
+      }));
+
+      it('should announce the global error when formStepper is invalid', fakeAsync(() => {
+        component.saveStepper();
+
+        spectator.fixture.detectChanges();
+        flush();
+        spectator.fixture.detectChanges();
+
+        expect(liveAnnouncer.announce).toHaveBeenCalledWith(
+          'Bitte vervollständigen Sie alle Pflichtfelder.',
+          'assertive'
+        );
+      }));
 
       it('should show a success toast and clear globalError when formStepper is valid', () => {
         component.baseFg.controls.id.setValue('OK-1');
@@ -188,6 +234,14 @@ describe('ModalarmePatternsComponent', () => {
             detail: 'Objekt angelegt.'
           })
         );
+      });
+
+      it('should not announce an error when formStepper is valid', () => {
+        component.baseFg.controls.id.setValue('OK-1');
+
+        component.saveStepper();
+
+        expect(liveAnnouncer.announce).not.toHaveBeenCalled();
       });
     });
   });
@@ -226,7 +280,6 @@ describe('ModalarmePatternsComponent', () => {
       const ctrl = component.detailsFg.controls.firstname;
       ctrl.markAsTouched();
 
-      // firstname has no validators - always valid
       expect(component.isStepFieldInvalid('details', 'firstname')).toBeFalse();
     });
 
@@ -246,12 +299,12 @@ describe('ModalarmePatternsComponent', () => {
         expect(component.panelOpen).toBeTrue();
       });
 
-      it('should store the trigger element for later focus restoration', () => {
-        const trigger = document.createElement('button');
+      it('should open the panel even when currentTarget is not an HTMLElement', () => {
+        const event = new MouseEvent('click');
+        Object.defineProperty(event, 'currentTarget', {value: null});
 
-        component.openPanel(mouseEventWithTarget(trigger));
+        component.openPanel(event);
 
-        // Verified indirectly: closePanel will attempt restoreFocus on the stored trigger
         expect(component.panelOpen).toBeTrue();
       });
     });
@@ -274,6 +327,15 @@ describe('ModalarmePatternsComponent', () => {
         component.saveEdit();
 
         expect(component.panelOpen).toBeTrue();
+      });
+
+      it('should mark geburtsname as touched when formEdit is invalid', () => {
+        component.panelOpen = true;
+        component.formEdit.controls.geburtsname.setValue('');
+
+        component.saveEdit();
+
+        expect(component.formEdit.controls.geburtsname.touched).toBeTrue();
       });
 
       it('should close the panel when formEdit is valid', () => {
@@ -320,6 +382,14 @@ describe('ModalarmePatternsComponent', () => {
 
         expect(component.showConfirmBar).toBeTrue();
       });
+
+      it('should keep state unchanged when already open', () => {
+        component.showConfirmBar = true;
+
+        component.askDeleteBar();
+
+        expect(component.showConfirmBar).toBeTrue();
+      });
     });
 
     describe('cancelDeleteBar()', () => {
@@ -356,7 +426,43 @@ describe('ModalarmePatternsComponent', () => {
     });
   });
 
-  // isInvalid() – error handling form
+  describe('Popover', () => {
+    it('should delegate toggleHelp to helpOverlay.toggle', () => {
+      const toggleSpy = jasmine.createSpy('toggle');
+      component.helpOverlay = {toggle: toggleSpy} as unknown as Popover;
+
+      const event = new MouseEvent('click');
+      component.toggleHelp(event);
+
+      expect(toggleSpy).toHaveBeenCalledWith(event);
+    });
+
+    it('should delegate closeHelp to helpOverlay.hide', () => {
+      const hideSpy = jasmine.createSpy('hide');
+      component.helpOverlay = {hide: hideSpy} as unknown as Popover;
+
+      component.closeHelp();
+
+      expect(hideSpy).toHaveBeenCalled();
+    });
+
+    it('should set helpOpen to true in onHelpShow', () => {
+      component.helpOpen = false;
+
+      component.onHelpShow();
+
+      expect(component.helpOpen).toBeTrue();
+    });
+
+    it('should set helpOpen to false in onHelpHide', () => {
+      component.helpOpen = true;
+
+      component.onHelpHide();
+
+      expect(component.helpOpen).toBeFalse();
+    });
+  });
+
   describe('isInvalid()', () => {
     it('should return false when the control is untouched', () => {
       expect(component.isInvalid('geburtsname')).toBeFalse();
@@ -437,11 +543,6 @@ describe('ModalarmePatternsComponent', () => {
 
   // Accessibility attributes (template integration)
   describe('Accessibility in the template', () => {
-    it('should render an aria-live="assertive" region for globalError', () => {
-      const liveRegion = spectator.query('[aria-live="assertive"]');
-      expect(liveRegion).toBeTruthy();
-    });
-
     it('should render an aria-live="polite" region for the confirm bar', () => {
       const liveRegion = spectator.query('[aria-live="polite"]');
       expect(liveRegion).toBeTruthy();

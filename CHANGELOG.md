@@ -2,6 +2,7 @@
 ## Features
 - IFS-4928: Tab-Reihenfolge in Dialogen, Fokusverhalten bei Overlays und numerische Ausrichtung in Tabellen wurden verbessert
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
+- IFS-4931: Die Komponente `form-wrapper` und der Service zur Übersetzung von Beschriftungen in der _isy-angular-widgets_ Bibliothek wurden überarbeitet
 ## Fixes
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
 - IFS-4999: Die Property `transferISO8601` in der Komponente IsyIncompleteDate konvertiert den Wert nun in die korrekte ISO-8601-Repräsentation.
