@@ -63,4 +63,21 @@ describe('FormWrapperFieldDirective integration', () => {
     expect(input).toHaveAttribute('aria-errormessage', 'email-error');
     expect(input).toHaveAttribute('aria-describedby', 'hint-id email-error');
   });
+
+  it('should not overwrite the field id when it is already set to the same value', async () => {
+    const field = spectator.query('input');
+    expect(field).toBeTruthy();
+
+    field!.id = 'fieldId';
+
+    const setAttributeSpy = spyOn(field!, 'setAttribute').and.callThrough();
+
+    spectator.setHostInput('fieldId', 'fieldId');
+    spectator.detectChanges();
+    await spectator.fixture.whenStable();
+    spectator.detectChanges();
+
+    expect(setAttributeSpy).not.toHaveBeenCalledWith('id', 'fieldId');
+    expect(field).toHaveAttribute('id', 'fieldId');
+  });
 });

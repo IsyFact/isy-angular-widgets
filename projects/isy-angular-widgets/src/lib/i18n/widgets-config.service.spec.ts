@@ -59,4 +59,37 @@ describe('Unit tests: WidgetsConfigService', () => {
       }
     });
   });
+
+  it('should return updated translations after setTranslation', () => {
+    spectator.service.setTranslation({
+      hauptfenster: {
+        logout: 'Logout'
+      },
+      wizard: {
+        back: 'Back'
+      }
+    });
+
+    expect(spectator.service.getTranslations()).toEqual({
+      wizard: {
+        back: 'Back',
+        next: 'Weiter',
+        save: 'Speichern',
+        close: 'Schließen'
+      },
+      inputChar: {
+        headerBaseChars: 'Basis',
+        headerGroups: 'Gruppen',
+        insert: 'Einfügen'
+      },
+      hauptfenster: {
+        altLogoAwl: 'Logo der Anwendungslandschaft',
+        altLogoAnbieterAwl: 'Logo des Anbieters der Anwendungslandschaft',
+        logout: 'Logout'
+      },
+      formWrapper: {
+        required: 'Pflichtfeld'
+      }
+    });
+  });
 });
