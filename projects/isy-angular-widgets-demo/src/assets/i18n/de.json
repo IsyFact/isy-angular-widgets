@@ -27,6 +27,10 @@
         "gruppen": "SCHRIFTZEICHENGRUPPE"
       }
     },
+    "formWrapper": {
+      "required": "Pflichtfeld",
+      "invalid": "Ungültige Eingabe"
+    },
     "hauptfenster": {
       "altLogoAwl": "Logo der Anwendungslandschaft",
       "altLogoAnbieterAwl": "Logo des Anbieters der Anwendungslandschaft",

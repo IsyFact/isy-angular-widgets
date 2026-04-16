@@ -162,11 +162,11 @@ export class PersonenService {
       for (let i = 0; i < this.rng(); i++) {
         persons.push(this.mergePersons(person, this.generatePerson()));
       }
-      return of<Person[]>(persons);
+      return of(persons);
     }
     for (let i = 0; i < this.maxEntries; i++) persons.push(this.generatePerson());
 
-    return of<Person[]>(persons);
+    return of(persons);
   }
 
   searchParametersAvailable(person: Person): boolean {

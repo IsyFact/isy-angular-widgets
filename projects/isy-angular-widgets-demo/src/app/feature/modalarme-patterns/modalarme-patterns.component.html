@@ -1,0 +1,321 @@
+<div class="mx-3">
+  <h1>Modalarme Patterns (PrimeNG 20+)</h1>
+
+  <div class="grid">
+    <div class="col-12 flex flex-column">
+      <!-- Objekt anlegen – Stepper -->
+      <section class="section" aria-labelledby="h-stepper">
+        <div class="grid gap-3 col-12 xl:col-6 flex-column">
+          <h3 id="h-stepper">Seiteninterner Stepper</h3>
+
+          @if (globalError) {
+            <p-message severity="error">{{ globalError }}</p-message>
+          }
+
+          <p-stepper [value]="stepValue" aria-labelledby="h-stepper" [linear]="true">
+            <p-step-list>
+              <p-step [value]="1">ID Eintrag</p-step>
+              <p-step [value]="2">Persönliche Informationen</p-step>
+              <p-step [value]="3">Bestätigen</p-step>
+            </p-step-list>
+          </p-stepper>
+
+          @if (stepValue === 1) {
+            <form [formGroup]="baseFg" data-step-form="1">
+              <div class="step-panel-body">
+                <div class="col-12">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.id' | translate }}"
+                    fieldId="id"
+                    [control]="baseFg.controls.id | formControl"
+                    [validationMessages]="
+                      baseFg.controls.id.errors?.required
+                        ? {required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}
+                        : {}
+                    "
+                  >
+                    <input
+                      isyFormWrapperField
+                      class="w-full"
+                      pInputText
+                      formControlName="id"
+                      [required]="baseFg.controls.id.hasValidator(Validators.required)"
+                      [attr.aria-required]="baseFg.controls.id.hasValidator(Validators.required) ? 'true' : null"
+                    />
+                  </isy-form-wrapper>
+                </div>
+              </div>
+
+              <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
+                <p-button type="button" label="Weiter" (onClick)="goNext(2, baseFg)"></p-button>
+              </div>
+            </form>
+          }
+
+          @if (stepValue === 2) {
+            <form [formGroup]="detailsFg" data-step-form="2">
+              <div class="step-panel-body">
+                <div class="col-12">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
+                    fieldId="firstname"
+                    [control]="detailsFg.controls.firstname | formControl"
+                  >
+                    <input isyFormWrapperField class="w-full" pInputText formControlName="firstname" />
+                  </isy-form-wrapper>
+                </div>
+
+                <div class="col-12">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+                    fieldId="lastname"
+                    [control]="detailsFg.controls.lastname | formControl"
+                  >
+                    <input isyFormWrapperField class="w-full" pInputText formControlName="lastname" />
+                  </isy-form-wrapper>
+                </div>
+
+                <div class="col-12">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
+                    labelId="label-gender"
+                    fieldId="gender"
+                    [control]="detailsFg.controls.gender | formControl"
+                  >
+                    <p-select
+                      inputId="gender"
+                      formControlName="gender"
+                      ariaLabelledBy="label-gender"
+                      [filter]="true"
+                      [ariaFilterLabel]="'isyAngularWidgetsDemo.labels.genderFilter' | translate"
+                      [options]="[
+                        'isyAngularWidgetsDemo.labels.optionMale' | translate,
+                        'isyAngularWidgetsDemo.labels.optionFemale' | translate,
+                        'isyAngularWidgetsDemo.labels.optionDivers' | translate
+                      ]"
+                      class="w-full"
+                      appendTo="body"
+                    ></p-select>
+                  </isy-form-wrapper>
+                </div>
+              </div>
+
+              <div class="flex pt-3 flex-wrap justify-content-end">
+                <p-button class="mr-1" [outlined]="true" type="button" label="Zurück" (onClick)="goBack(1)"></p-button>
+                <p-button type="button" label="Weiter" (onClick)="goNext(3, detailsFg)"></p-button>
+              </div>
+            </form>
+          }
+
+          @if (stepValue === 3) {
+            <div class="step-panel-body">
+              <p class="text-right">Bitte prüfen und speichern.</p>
+            </div>
+
+            <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
+              <p-button type="button" label="Zurück" class="mr-1" [outlined]="true" (onClick)="goBack(2)"></p-button>
+              <p-button type="button" label="Speichern" (onClick)="saveStepper()"></p-button>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 md:col-6 flex flex-column">
+      <!-- Drawer – Bearbeiten -->
+      <section class="section" aria-labelledby="h-drawer">
+        <h3 id="h-drawer">Drawer (seitlicher Bereich)</h3>
+
+        <div class="flex pt-3 flex-wrap">
+          <p-button
+            label="Bearbeiten"
+            (onClick)="openPanel($event)"
+            [attr.aria-controls]="'edit-panel'"
+            [attr.aria-expanded]="panelOpen ? 'true' : 'false'"
+          ></p-button>
+        </div>
+
+        <div class="grid gap-3 col-12 xl:col-6 flex-column">
+          @if (panelOpen) {
+            <section
+              id="edit-panel"
+              class="edit-panel fixed top-0 right-0 h-screen overflow-auto bg-white border-left-1 surface-border shadow-4"
+              aria-labelledby="edit-panel-title"
+            >
+              <div class="p-3">
+                <div class="flex align-items-start justify-content-between gap-3 mb-3">
+                  <h3 id="edit-panel-title" class="m-0" tabindex="-1" #panelTitle>Objekt bearbeiten</h3>
+
+                  <p-button
+                    type="button"
+                    icon="pi pi-times"
+                    [rounded]="true"
+                    severity="secondary"
+                    ariaLabel="Panel schließen"
+                    (onClick)="closePanel()"
+                  ></p-button>
+                </div>
+
+                <form [formGroup]="formEdit" (ngSubmit)="saveEdit()">
+                  <isy-form-wrapper
+                    label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
+                    fieldId="geburtsname"
+                    [control]="formEdit.controls.geburtsname | formControl"
+                  >
+                    <input id="geburtsname" class="w-full" pInputText formControlName="geburtsname" />
+                  </isy-form-wrapper>
+
+                  <div class="flex pt-3 flex-wrap">
+                    <p-button
+                      type="button"
+                      label="Schließen"
+                      class="mr-1"
+                      [outlined]="true"
+                      (onClick)="closePanel()"
+                    ></p-button>
+
+                    <p-button type="submit" label="Speichern" [disabled]="formEdit.invalid"></p-button>
+                  </div>
+                </form>
+              </div>
+            </section>
+          }
+        </div>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 md:col-6 flex flex-column">
+      <!-- Bestätigung / Löschen – Inline-Bar -->
+      <section class="section" aria-labelledby="h-confirm-bar">
+        <h3 id="h-confirm-bar">Bestätigung / Löschen - Inline-Bestätigungsleiste</h3>
+
+        <div class="flex pt-3 flex-wrap">
+          <p-button
+            #deleteTrigger
+            label="Löschen"
+            severity="danger"
+            [disabled]="showConfirmBar"
+            [attr.aria-expanded]="showConfirmBar"
+            aria-controls="delete-confirm-bar"
+            (onClick)="askDeleteBar()"
+          >
+          </p-button>
+        </div>
+
+        <!-- aria-live: Bestätigungsleiste wird angekündigt -->
+        <div aria-live="polite">
+          @if (showConfirmBar) {
+            <fieldset id="delete-confirm-bar" class="confirm-bar mt-3" (keydown.escape)="cancelDeleteBar()">
+              <legend>Löschen bestätigen</legend>
+
+              <p class="m-0">Möchten Sie dieses Objekt wirklich löschen?</p>
+
+              <div class="flex pt-3 flex-wrap gap-2">
+                <p-button #confirmDeleteBtn label="Endgültig löschen" severity="danger" (onClick)="confirmDeleteBar()">
+                </p-button>
+
+                <p-button label="Abbrechen" severity="secondary" [outlined]="true" (onClick)="cancelDeleteBar()">
+                </p-button>
+              </div>
+            </fieldset>
+          }
+        </div>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 md:col-6 flex flex-column">
+      <!-- Hilfe – Popover -->
+      <section class="section" aria-labelledby="h-help-popover">
+        <h3 id="h-help-popover">Kontext-Info / Hilfe - Popover</h3>
+
+        <div class="flex pt-3 flex-wrap action">
+          <p-button
+            #helpBtn
+            type="button"
+            icon="pi pi-info-circle"
+            class="p-button-text"
+            aria-label="Hilfe anzeigen"
+            aria-haspopup="dialog"
+            [pt]="{
+              root: {
+                'aria-expanded': helpOpen,
+                'aria-controls': helpOpen ? helpPopoverId : null
+              }
+            }"
+            (onClick)="toggleHelp($event)"
+            (keydown.escape)="closeHelp()"
+          ></p-button>
+        </div>
+
+        <p-popover
+          #helpOverlay
+          [dismissable]="true"
+          [appendTo]="'body'"
+          [attr.id]="helpPopoverId"
+          ariaLabelledBy="help-popover-title"
+          (onShow)="onHelpShow()"
+          (onHide)="onHelpHide()"
+        >
+          <div class="w-20rem">
+            <h3 id="help-popover-title" class="mt-0 mb-2">Hilfe</h3>
+            <p class="m-0">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.</p>
+          </div>
+        </p-popover>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 md:col-6 flex flex-column">
+      <!-- Hilfe – Accordion / Expander -->
+      <section class="section" aria-labelledby="h-help-expander">
+        <h3 id="h-help-expander">Kontext-Info / Hilfe - Expander</h3>
+        <p-accordion>
+          <p-accordion-panel value="0">
+            <p-accordion-header>Hilfe zu diesem Bereich</p-accordion-header>
+            <p-accordion-content>
+              <p>
+                At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+                sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+                eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+              </p>
+            </p-accordion-content>
+          </p-accordion-panel>
+        </p-accordion>
+      </section>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="col-12 xl:col-6 flex flex-column">
+      <!-- Fehlerhandling – Toast + feldnahe Fehler -->
+      <section class="section" aria-labelledby="h-errors">
+        <h3 id="h-errors">Fehlermeldung - Toast + feldnahe Fehlermarkierung</h3>
+
+        <form #errorsFormEl [formGroup]="formErrors" (ngSubmit)="submitErrors()">
+          <div class="col-12 md:col-6">
+            <isy-form-wrapper
+              label="Geburtsname"
+              fieldId="geburtsname-toast-example"
+              [control]="formErrors.controls.geburtsname | formControl"
+              [validationMessages]="formErrors.controls.geburtsname.errors?.required ? {required: 'Pflichtfeld'} : {}"
+            >
+              <input isyFormWrapperField type="text" pInputText class="w-full" formControlName="geburtsname" />
+            </isy-form-wrapper>
+            <div class="flex pt-3 flex-wrap justify-content-end">
+              <p-button type="submit" label="Personendaten speichern"></p-button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

@@ -247,3 +247,98 @@ export class AppComponent implements OnDestroy {
 }
 ```
 Die `translate`-Methode kann z.B. auch für einen Language-Picker verwenden werden, damit der Benutzer einer Seite die Sprache selber wählen kann.
+
+## Form-Wrapper
+
+Der `Form-Wrapper` kapselt Formularfelder mit Label, Pflichtfeldkennzeichnung, Validierungsfehlern und Unterstützung für Barrierefreiheit.
+
+Er wird mit **Reactive Forms** verwendet und unterstützt:
+
+- native Felder wie `input`, `textarea` und `select`
+- komplexe Komponenten über ein Adapter-Konzept
+- automatische Synchronisation von `id`, `aria-describedby`, `aria-invalid` und `aria-errormessage` bei nativen Feldern
+
+### Grundverwendung
+
+```html
+<form [formGroup]="myForm">
+  <isy-form-wrapper
+    label="E-Mail"
+    fieldId="email"
+    [control]="myForm.controls.email | formControl"
+    [validationMessages]="{
+      required: 'E-Mail ist erforderlich',
+      email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein'
+    }"
+  >
+    <input isyFormWrapperField type="email" pInputText formControlName="email" />
+  </isy-form-wrapper>
+</form>
+```
+
+### Erforderliche Inputs
+- `label`
+- `fieldId`
+- `control`
+
+### Optionale Inputs
+- `labelId` für eine eigene Label-ID
+- `describedbyId` für zusätzliche Beschreibungen oder Hilfetexte
+- `validationMessages` für validator-spezifische Fehlermeldungen
+
+### Native Felder
+
+Für native Felder wird empfohlen, `isyFormWrapperField` zu setzen:
+
+```html
+<isy-form-wrapper
+  label="Vorname"
+  fieldId="firstname"
+  [control]="form.controls.firstname | formControl"
+>
+  <input isyFormWrapperField pInputText formControlName="firstname" />
+</isy-form-wrapper>
+```
+
+Wenn `isyFormWrapperField` gesetzt ist, übernimmt der Wrapper automatisch:
+
+- `id`
+- `aria-describedby`
+- `aria-invalid`
+- `aria-errormessage`
+
+Ohne `isyFormWrapperField` versucht der Wrapper als Fallback ein natives `input`, `textarea` oder `select` im Inhalt zu finden.
+
+### Komplexe Komponenten
+
+Komplexe Komponenten wie z. B. `p-select` werden nicht automatisch über den nativen Fallback unterstützt.
+
+Hier gibt es zwei Möglichkeiten:
+- die Komponente verwaltet Accessibility selbst
+- es wird eine eigene Adapter-Directive bereitgestellt
+
+Beispiel mit manueller Anbindung:
+
+```html
+<isy-form-wrapper
+  label="Geschlecht"
+  labelId="label-gender"
+  fieldId="gender"
+  [control]="form.controls.gender | formControl"
+>
+  <p-select
+    inputId="gender"
+    ariaLabelledBy="label-gender"
+    formControlName="gender"
+    [options]="genderOptions"
+  ></p-select>
+</isy-form-wrapper>
+```
+
+### Typische Imports
+
+```typescript
+import {ReactiveFormsModule} from '@angular/forms';
+import {FormWrapperComponent} from '@isyfact/isy-angular-widgets';
+import {FormWrapperFieldDirective} from '@isyfact/isy-angular-widgets';
+```
