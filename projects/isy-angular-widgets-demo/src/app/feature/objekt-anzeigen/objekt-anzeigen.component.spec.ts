@@ -88,6 +88,9 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     inputFields.creditCardExpirationDate = debugElement.query(By.css('#credit-card-expiration-date'));
   });
 
+  /**
+   * Initializes roles and permissions for the tests.
+   */
   function setupRolesAndPermissions(): void {
     const userInfoData = userInfoService.getUserInfo();
     securityService.setRoles(userInfoData);
@@ -333,11 +336,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
 
   it('should show maxlength error if maximum count is exceeded in the form array', () => {
     const nationalities = component.getNationalities();
-    nationalities.push(new FormControl<string>('Französisch', {nonNullable: true}));
-    nationalities.push(new FormControl<string>('Spanisch', {nonNullable: true}));
-    nationalities.push(new FormControl<string>('Italienisch', {nonNullable: true}));
-    nationalities.push(new FormControl<string>('Polnisch', {nonNullable: true}));
-    nationalities.push(new FormControl<string>('Ungarisch', {nonNullable: true}));
+    nationalities.push(new FormControl('Französisch', {nonNullable: true}));
+    nationalities.push(new FormControl('Spanisch', {nonNullable: true}));
+    nationalities.push(new FormControl('Italienisch', {nonNullable: true}));
+    nationalities.push(new FormControl('Polnisch', {nonNullable: true}));
+    nationalities.push(new FormControl('Ungarisch', {nonNullable: true}));
     nationalities.markAsTouched();
     nationalities.updateValueAndValidity();
     fixture.detectChanges();
