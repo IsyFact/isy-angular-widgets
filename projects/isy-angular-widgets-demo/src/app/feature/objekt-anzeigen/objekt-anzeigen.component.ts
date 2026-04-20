@@ -189,21 +189,25 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
 
   savePersonalien(): void {
     this.personalInfoForm.clearValidators();
-    const formValue = this.personalInfoForm.getRawValue();
+
+    const formValue = this.personalInfoForm.getRawValue() as {
+      firstName?: string;
+      lastName?: string;
+    };
 
     this.messageService.add({
       severity: 'success',
       summary: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonSummary') as string,
       detail: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonDetail', {
-        firstName: formValue.firstName,
-        lastName: formValue.lastName
+        firstName: formValue.firstName ?? '',
+        lastName: formValue.lastName ?? ''
       }) as string
     });
   }
 
   private minArrayLength(min: number) {
     return (control: AbstractControl): ValidationErrors | null => {
-      const value = control.value;
+      const value = control.value as unknown;
       const length = Array.isArray(value) ? value.length : 0;
 
       return length < min
@@ -219,7 +223,7 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
 
   private maxArrayLength(max: number) {
     return (control: AbstractControl): ValidationErrors | null => {
-      const value = control.value;
+      const value = control.value as unknown;
       const length = Array.isArray(value) ? value.length : 0;
 
       return length > max

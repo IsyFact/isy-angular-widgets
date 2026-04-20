@@ -8,6 +8,7 @@ import {ComponentFixture} from '@angular/core/testing';
 import {MessageService} from 'primeng/api';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
+import {FormControl} from '@angular/forms';
 import {provideHttpClient} from '@angular/common/http';
 import {
   TranslateModule,
@@ -332,11 +333,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
 
   it('should show maxlength error if maximum count is exceeded in the form array', () => {
     const nationalities = component.getNationalities();
-    nationalities.push(component['fb'].nonNullable.control('Französisch'));
-    nationalities.push(component['fb'].nonNullable.control('Spanisch'));
-    nationalities.push(component['fb'].nonNullable.control('Italienisch'));
-    nationalities.push(component['fb'].nonNullable.control('Polnisch'));
-    nationalities.push(component['fb'].nonNullable.control('Ungarisch'));
+    nationalities.push(new FormControl<string>('Französisch', {nonNullable: true}));
+    nationalities.push(new FormControl<string>('Spanisch', {nonNullable: true}));
+    nationalities.push(new FormControl<string>('Italienisch', {nonNullable: true}));
+    nationalities.push(new FormControl<string>('Polnisch', {nonNullable: true}));
+    nationalities.push(new FormControl<string>('Ungarisch', {nonNullable: true}));
     nationalities.markAsTouched();
     nationalities.updateValueAndValidity();
     fixture.detectChanges();
