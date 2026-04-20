@@ -63,7 +63,10 @@
       "dateError": "Das Datum ist ungültig.",
       "dateInPastError": "Das Datum muss in der Vergangenheit liegen.",
       "changePage": "Seitenwechsel erfolgt. Neue Seite:",
-      "validateDIN91379Error": "Ungültige Zeichen gemäß DIN 91379."
+      "validateDIN91379Error": "Ungültige Zeichen gemäß DIN 91379.",
+      "nationalitiesHint": "Mindestens 1, maximal {{count}} Einträge. Aktuell: {{current}}.",
+      "nationalitiesRequired": "Mindestens eine Staatsangehörigkeit ist erforderlich.",
+      "nationalitiesMaxReached": "Es können maximal {{count}} Staatsangehörigkeiten erfasst werden."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -102,6 +105,7 @@
       "addOrEditFact": "Sachverhalt hinzufügen/bearbeiten",
       "addResidence": "Wohnsitz hinzufügen",
       "removeResidence": "Wohnsitz entfernen",
+      "addNationality": "Staatsangehörigkeit hinzufügen",
       "backToOverview": "Zurück zur Übersicht",
       "skipNavigationLink": {
         "backToOverview": "Sprunglink zur Seite Dashboard mit zurück zur Übersicht",
