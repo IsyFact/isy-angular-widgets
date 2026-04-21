@@ -1,4 +1,5 @@
 export interface Schema {
-  addEslint: boolean;
-  addPrettier: boolean;
+  project?: string;
+  addEslint?: boolean;
+  addPrettier?: boolean;
 }
