@@ -9,9 +9,16 @@ import {
 } from '@angular/core';
 import {Address} from '../../shared/model/person';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import {PersonalInformation} from './model/forms';
 import {Validation} from '@isy-angular-widgets/validation/validation';
 import {FileUploadHandlerEvent, FileUploadModule} from 'primeng/fileupload';
 import {initializedPerson} from './data';
@@ -35,6 +42,8 @@ import {DialogSachverhalteBearbeitenComponent} from './components/dialog-sachver
 import {ToastModule} from 'primeng/toast';
 import {InputTextModule} from 'primeng/inputtext';
 import {TextareaModule} from 'primeng/textarea';
+import {ChipModule} from 'primeng/chip';
+import {MessageModule} from 'primeng/message';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -66,11 +75,15 @@ import {TextareaModule} from 'primeng/textarea';
     TableModule,
     DialogSachverhalteBearbeitenComponent,
     ToastModule,
-    TextareaModule
+    TextareaModule,
+    ChipModule,
+    MessageModule
   ]
 })
 export class ObjektAnzeigenComponent implements AfterContentChecked {
   readonly intelligenceNotesMaxLength = 255;
+  readonly maxNationalities = 5;
+  readonly nationalityInputMaxLength = 64;
 
   showSecretFields = false;
 
@@ -137,7 +150,8 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
       gender: [personalien.gender],
       // Demo: Validator isInPast - If the given value is a valid date, it will be checked if the date is in the past
       birthDate: [personalien.geburtsdatum, Validation.isInPast],
-      nationality: [personalien.staatsangehoerigkeit],
+      nationalityInput: [''],
+      nationalities: this.createNationalitiesFormArray(personalien.staatsangehoerigkeit),
       phoneNumber: [personalien.telefonnummer],
       dateOfEntry: [personalien.einreisedatum],
       idRequired: [personalien.ausweispflichtig],
@@ -175,15 +189,143 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
 
   savePersonalien(): void {
     this.personalInfoForm.clearValidators();
-    const person = this.personalInfoForm.value as PersonalInformation;
+
+    const formValue = this.personalInfoForm.getRawValue() as {
+      firstName?: string;
+      lastName?: string;
+    };
+
     this.messageService.add({
       severity: 'success',
       summary: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonSummary') as string,
       detail: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonDetail', {
-        firstName: person.firstName,
-        lastName: person.lastName
+        firstName: formValue.firstName ?? '',
+        lastName: formValue.lastName ?? ''
       }) as string
     });
+  }
+
+  private minArrayLength(min: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as unknown;
+      const length = Array.isArray(value) ? value.length : 0;
+
+      return length < min
+        ? {
+            minlength: {
+              requiredLength: min,
+              actualLength: length
+            }
+          }
+        : null;
+    };
+  }
+
+  private maxArrayLength(max: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as unknown;
+      const length = Array.isArray(value) ? value.length : 0;
+
+      return length > max
+        ? {
+            maxlength: {
+              requiredLength: max,
+              actualLength: length
+            }
+          }
+        : null;
+    };
+  }
+
+  private createNationalitiesFormArray(initialNationality?: string): FormArray {
+    const initialValues = initialNationality?.trim() ? [initialNationality.trim()] : [];
+
+    return this.fb.array(
+      initialValues.map((value) => this.fb.nonNullable.control(value)),
+      [this.minArrayLength(1), this.maxArrayLength(this.maxNationalities)]
+    );
+  }
+
+  getNationalities(): FormArray {
+    return this.personalInfoForm.get('nationalities') as FormArray;
+  }
+
+  private getNationalityInputValue(): string {
+    return String(this.personalInfoForm.get('nationalityInput')?.value ?? '').trim();
+  }
+
+  addNationality(): void {
+    if (this.personalInfoForm.disabled) {
+      return;
+    }
+
+    const value = this.getNationalityInputValue();
+    const nationalities = this.getNationalities();
+
+    nationalities.markAsTouched();
+
+    if (!value || nationalities.length >= this.maxNationalities) {
+      nationalities.updateValueAndValidity();
+      return;
+    }
+
+    nationalities.push(this.fb.nonNullable.control(value));
+    nationalities.markAsDirty();
+    nationalities.markAsTouched();
+    nationalities.updateValueAndValidity();
+
+    this.personalInfoForm.get('nationalityInput')?.setValue('');
+  }
+
+  removeNationality(index: number): void {
+    const nationalities = this.getNationalities();
+
+    if (index < 0 || index >= nationalities.length || nationalities.length <= 1) {
+      return;
+    }
+
+    nationalities.removeAt(index);
+    nationalities.markAsDirty();
+    nationalities.markAsTouched();
+    nationalities.updateValueAndValidity();
+  }
+
+  disableAddNationality(): boolean {
+    return (
+      this.personalInfoForm.disabled ||
+      !this.getNationalityInputValue() ||
+      this.getNationalities().length >= this.maxNationalities
+    );
+  }
+
+  disableRemoveNationality(): boolean {
+    return this.personalInfoForm.disabled || this.getNationalities().length <= 1;
+  }
+
+  showNationalitiesError(errorKey: 'minlength' | 'maxlength'): boolean {
+    const nationalities = this.getNationalities();
+    return nationalities.hasError(errorKey) && (nationalities.touched || nationalities.dirty);
+  }
+
+  getNationalitiesDescribedBy(): string {
+    const ids = ['nationalities-help'];
+
+    if (this.showNationalitiesError('minlength')) {
+      ids.push('nationalities-error-required');
+    }
+
+    if (this.showNationalitiesError('maxlength')) {
+      ids.push('nationalities-error-max');
+    }
+
+    return ids.join(' ');
+  }
+
+  onNationalityInputKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addNationality();
+    }
   }
 
   addNewAddress(): void {

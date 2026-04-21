@@ -130,14 +130,73 @@
               </p-datepicker>
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
-            <isy-form-wrapper
-              [label]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
-              fieldId="nationality"
-              [control]="personalInfoForm.controls.nationality | formControl"
-            >
-              <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
-            </isy-form-wrapper>
+          <div class="col-12 md:col-6 xl:col-8">
+            <label for="nationality-input" class="block mb-2 font-medium">
+              {{ 'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate }}
+              <span aria-hidden="true">*</span>
+            </label>
+
+            <div class="flex flex-column gap-2">
+              <div class="flex gap-2 nationality-input-row">
+                <input
+                  id="nationality-input"
+                  formControlName="nationalityInput"
+                  class="w-full"
+                  type="text"
+                  pInputText
+                  [maxlength]="nationalityInputMaxLength"
+                  (keydown)="onNationalityInputKeydown($event)"
+                  [attr.aria-describedby]="getNationalitiesDescribedBy()"
+                  [attr.aria-invalid]="
+                    showNationalitiesError('minlength') || showNationalitiesError('maxlength') ? 'true' : null
+                  "
+                />
+
+                <p-button
+                  [label]="'isyAngularWidgetsDemo.actions.addNationality' | translate"
+                  icon="pi pi-plus"
+                  iconPos="left"
+                  [outlined]="true"
+                  [disabled]="disableAddNationality()"
+                  (onClick)="addNationality()"
+                ></p-button>
+              </div>
+
+              <small id="nationalities-help" class="text-color-secondary">
+                {{
+                  'isyAngularWidgetsDemo.messages.nationalitiesHint'
+                    | translate: {count: maxNationalities, current: getNationalities().length}
+                }}
+              </small>
+
+              @if (showNationalitiesError('minlength')) {
+                <div id="nationalities-error-required">
+                  <p-message severity="error" variant="simple">
+                    {{ 'isyAngularWidgetsDemo.messages.nationalitiesRequired' | translate }}
+                  </p-message>
+                </div>
+              }
+
+              @if (showNationalitiesError('maxlength')) {
+                <div id="nationalities-error-max">
+                  <p-message severity="error" variant="simple">
+                    {{
+                      'isyAngularWidgetsDemo.messages.nationalitiesMaxReached' | translate: {count: maxNationalities}
+                    }}
+                  </p-message>
+                </div>
+              }
+
+              <div class="flex flex-wrap gap-2 mt-2">
+                @for (nationality of getNationalities().controls; track $index; let i = $index) {
+                  <p-chip
+                    [label]="nationality.value"
+                    [removable]="!disableRemoveNationality()"
+                    (onRemove)="removeNationality(i)"
+                  ></p-chip>
+                }
+              </div>
+            </div>
           </div>
           <div class="col-12 md:col-6 xl:col-4">
             <isy-form-wrapper

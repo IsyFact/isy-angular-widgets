@@ -24,7 +24,7 @@ import {IncompleteDateService} from './incomplete-date.service';
 import {Validation} from '../validation/validation';
 import {InputMask, InputMaskModule} from 'primeng/inputmask';
 import {InputTextModule} from 'primeng/inputtext';
-import {INPUT_MASK_REGEX_ISO_DATE} from '@isy-angular-widgets/validation/data/date-formats';
+import {INPUT_MASK_REGEX_ISO_DATE} from '../validation/data/date-formats';
 
 enum CursorPosition {
   DayFirstDigit = 0,
