@@ -6,9 +6,18 @@ import {Schema} from './schema';
 // Node Buffer (isyTranslation) is not supported in Browser context but schematics is executed with node and not with browser
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-call */
 
+
+interface AssetPatternObject {
+  glob?: string;
+  input: string;
+  output?: string;
+  ignore?: string[];
+  followSymlinks?: boolean;
+}
+
 interface ArchitectOptions {
   styles?: string[];
-  assets?: (string | {input: string})[];
+  assets?: (string | AssetPatternObject)[];
   tsConfig?: string;
 }
 
@@ -100,16 +109,17 @@ function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext,
 }
 
 /**
- * Adds the specified assets path (`src/assets`) to the assets array of the first application project
- * found in the provided Angular workspace configuration. If the assets array does not exist, it is initialized.
- * If the assets path is already present, no changes are made.
+ * Adds the project-specific assets path to the assets array of each application project
+ * found in the provided Angular workspace configuration. The assets path is derived from
+ * the project's `sourceRoot` and falls back to `root/src/assets` if necessary.
+ * If the assets array does not exist, it is initialized. If the derived assets path is
+ * already present, no changes are made for that project.
  * @param workspace The Angular workspace configuration object.
  * @param context The schematic context used for logging and reporting.
  * @param tree The virtual file system tree representing the project files.
  * @returns The updated virtual file system tree.
  */
 function applyAssetsToWorkspace(workspace: Workspace, context: SchematicContext, tree: Tree): Tree {
-  const assetsPath = 'src/assets';
   const projects = workspace.projects ?? {};
   let updatedProjects = 0;
 
@@ -127,17 +137,24 @@ function applyAssetsToWorkspace(workspace: Workspace, context: SchematicContext,
       continue;
     }
 
+    const assetsPath = getAssetsPath(project);
+    const assetEntry: AssetPatternObject = {
+      glob: '**/*',
+      input: assetsPath,
+      output: 'assets'
+    };
+
     if (Array.isArray(buildOptions.assets)) {
       const hasAssets = buildOptions.assets.some((entry) =>
         typeof entry === 'string' ? entry === assetsPath : entry.input === assetsPath
       );
 
       if (!hasAssets) {
-        buildOptions.assets.push(assetsPath);
+        buildOptions.assets.push(assetEntry);
         context.logger.info(`√ Added '${assetsPath}' to assets array of project '${key}'.`);
       }
     } else {
-      buildOptions.assets = [assetsPath];
+      buildOptions.assets = [assetEntry];
       context.logger.info(`√ Initialized assets array with '${assetsPath}' on project '${key}'.`);
     }
 
@@ -229,6 +246,24 @@ function resolveExistingPath(tree: Tree, candidates: string[]): string | null {
   }
 
   return null;
+}
+
+/**
+ * Derives the assets path for a project based on its configuration.
+ * Prefers `sourceRoot` and falls back to `root/src/assets`.
+ * @param project Project info
+ * @returns The derived assets path
+ */
+function getAssetsPath(project: ProjectInfo): string {
+  if (project.sourceRoot) {
+    return `${project.sourceRoot}/assets`;
+  }
+
+  if (project.root) {
+    return `${project.root}/src/assets`;
+  }
+
+  return 'src/assets';
 }
 
 /**
