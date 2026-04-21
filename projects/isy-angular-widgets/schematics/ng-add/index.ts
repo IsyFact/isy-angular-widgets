@@ -6,7 +6,6 @@ import {Schema} from './schema';
 // Node Buffer (isyTranslation) is not supported in Browser context but schematics is executed with node and not with browser
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-call */
 
-
 interface AssetPatternObject {
   glob?: string;
   input: string;
@@ -64,7 +63,6 @@ coverage
 `;
 const JSON_SPACES = 2;
 
-
 /**
  * Returns the application projects that should be configured.
  * If `options.project` is provided, only that project is returned.
@@ -86,9 +84,7 @@ function getTargetProjects(workspace: Workspace, options: Schema): [string, Proj
   const targetProject = applicationProjects.find(([name]) => name === options.project);
 
   if (!targetProject) {
-    throw new SchematicsException(
-      `❌ Project '${options.project}' was not found or is not an application project.`
-    );
+    throw new SchematicsException(`❌ Project '${options.project}' was not found or is not an application project.`);
   }
 
   return [targetProject];
@@ -101,12 +97,7 @@ function getTargetProjects(workspace: Workspace, options: Schema): [string, Proj
  * @param tree List of styles
  * @returns Tree Tree with styles
  */
-function applyStylesToWorkspace(
-  workspace: Workspace,
-  context: SchematicContext,
-  tree: Tree,
-  options: Schema
-): Tree {
+function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext, tree: Tree, options: Schema): Tree {
   const styles = [
     'node_modules/primeicons/primeicons.css',
     'node_modules/primeflex/primeflex.min.css',
@@ -152,12 +143,7 @@ function applyStylesToWorkspace(
  * @param tree The virtual file system tree representing the project files.
  * @returns The updated virtual file system tree.
  */
-function applyAssetsToWorkspace(
-  workspace: Workspace,
-  context: SchematicContext,
-  tree: Tree,
-  options: Schema
-): Tree {
+function applyAssetsToWorkspace(workspace: Workspace, context: SchematicContext, tree: Tree, options: Schema): Tree {
   const projects = getTargetProjects(workspace, options);
   let updatedProjects = 0;
 
@@ -664,10 +650,10 @@ function setupPrettier(context: SchematicContext, tree: Tree): Tree {
     context.logger.info('√ Created .prettierrc.js with IsyFact Prettier configuration.');
   }
 
-if (!tree.exists(PRETTIER_IGNORE_PATH)) {
-  tree.create(PRETTIER_IGNORE_PATH, PRETTIER_IGNORE_CONTENT);
-  context.logger.info('√ Created .prettierignore from embedded template.');
-    }
+  if (!tree.exists(PRETTIER_IGNORE_PATH)) {
+    tree.create(PRETTIER_IGNORE_PATH, PRETTIER_IGNORE_CONTENT);
+    context.logger.info('√ Created .prettierignore from embedded template.');
+  }
   return tree;
 }
 

@@ -42,10 +42,7 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, '../../coverage/isy-angular-widgets'),
       subdir: '.',
       reporters: [{type: 'html'}, {type: 'text-summary'}, {type: 'lcov'}],
-        exclude: [
-          '**/schematics/**',
-          '**/index.ts'
-        ]
+      exclude: ['**/schematics/**', '**/index.ts']
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
