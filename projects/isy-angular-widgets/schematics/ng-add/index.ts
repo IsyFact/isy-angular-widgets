@@ -688,7 +688,7 @@ export function ngAdd(options: Schema): Rule {
     addPackageToPackageJson(tree, '@angular/common', '^21.1.4');
     addPackageToPackageJson(tree, '@angular/core', '^21.1.4');
     addPackageToPackageJson(tree, 'primeicons', '^7.0.0');
-    addPackageToPackageJson(tree, 'primeng', '^21.1.1');
+    addPackageToPackageJson(tree, 'primeng', '^21.1.3');
     addPackageToPackageJson(tree, '@primeuix/themes', '^2.0.3');
     addPackageToPackageJson(tree, 'primeflex', '^4.0.0');
 

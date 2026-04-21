@@ -21,7 +21,15 @@
       "aria": {
         "togglePicker": "Sonderzeichenpicker öffnen",
         "closePicker": "Sonderzeichenpicker schließen"
+      },
+      "enum": {
+        "basis": "GRUNDZEICHEN",
+        "gruppen": "SCHRIFTZEICHENGRUPPE"
       }
+    },
+    "formWrapper": {
+      "required": "Pflichtfeld",
+      "invalid": "Ungültige Eingabe"
     },
     "hauptfenster": {
       "altLogoAwl": "Logo der Anwendungslandschaft",

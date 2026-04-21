@@ -30,6 +30,12 @@ export const applicationMenu = [
               styleClass: 'skip-link'
             },
             {
+              label: 'Modalarme Patterns',
+              title: 'zur Modalarme Patterns Seite wechseln',
+              routerLink: 'modalarme-patterns',
+              styleClass: 'skip-link'
+            },
+            {
               label: 'isyAngularWidgetsDemo.menuItems.primengForm',
               title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengForm',
               routerLink: 'primeng-widgets/primeng-form',
