@@ -5,22 +5,22 @@
   "description": "Options for the ng-add schematic",
   "type": "object",
   "properties": {
-    "properties": {
       "project": {
         "description": "Name of the application project that should be configured.",
         "type": "string"
       },
-    "addEslint": {
-      "description": "Whether to add @isyfact/eslint-plugin configuration to the project.",
-      "type": "boolean",
-      "default": true,
-      "x-prompt": "Would you like to add IsyFact ESLint rules to your project?"
-    },
-    "addPrettier": {
-      "description": "Whether to add @isyfact/prettier-plugin configuration to the project.",
-      "type": "boolean",
-      "default": true,
-      "x-prompt": "Would you like to add IsyFact Prettier rules to your project?"
+      "addEslint": {
+        "description": "Whether to add @isyfact/eslint-plugin configuration to the project.",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to add IsyFact ESLint rules to your project?"
+      },
+      "addPrettier": {
+        "description": "Whether to add @isyfact/prettier-plugin configuration to the project.",
+        "type": "boolean",
+        "default": true,
+        "x-prompt": "Would you like to add IsyFact Prettier rules to your project?"
+      }
     }
   }
-}
+
