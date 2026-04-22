@@ -30,7 +30,6 @@ jobs:
           cache: "npm"
       - name: Bootstrap install (build local package)
         run: |
-          node -e "const fs=require('fs'),p=JSON.parse(fs.readFileSync('package.json'));delete p.dependencies['@isyfact/isy-angular-widgets'];fs.writeFileSync('package.json',JSON.stringify(p,null,2));"
           npm ci --legacy-peer-deps
           git checkout package.json
       - name: Build local package
@@ -104,7 +103,7 @@ jobs:
       - name: Bootstrap install (build local package)
         run: |
           node -e "const fs=require('fs'),p=JSON.parse(fs.readFileSync('package.json'));delete p.dependencies['@isyfact/isy-angular-widgets'];fs.writeFileSync('package.json',JSON.stringify(p,null,2));"
-          npm install --no-package-lock --legacy-peer-deps
+          npm ci
           git checkout package.json
           npm run build:widgets_lib
           npm run pack:widgets_lib
