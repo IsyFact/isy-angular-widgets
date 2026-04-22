@@ -181,9 +181,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     const observeSpy = jasmine.createSpy('observe');
     const disconnectSpy = jasmine.createSpy('disconnect');
 
-    spyOn(globalThis, 'MutationObserver').and.callFake(function (
-      _callback: MutationCallback
-    ): MutationObserver {
+    spyOn(globalThis, 'MutationObserver').and.callFake(function (_callback: MutationCallback): MutationObserver {
       return {
         observe: observeSpy,
         disconnect: disconnectSpy,
