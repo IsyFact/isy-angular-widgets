@@ -85,7 +85,8 @@
     // datatable
     --p-datatable-body-cell-padding: 0.75rem 0.75rem;
     --p-datatable-row-selected-background: var(--p-content-hover-background);
-    --p-datatable-row-selected-color: var(--p-datatable-row-hover-color) --p-accordion-content-padding: 0.75rem 0.85rem;
+    --p-datatable-row-selected-color: var(--p-datatable-row-hover-color);
+    --p-accordion-content-padding: 0.75rem 0.85rem;
 
     // multiselect
     --p-multiselect-option-selected-focus-background: var(--p-select-option-focus-background);

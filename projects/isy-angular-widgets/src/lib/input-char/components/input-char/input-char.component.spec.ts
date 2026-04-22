@@ -1,7 +1,7 @@
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {InputCharComponent} from './input-char.component';
-import {Component, ElementRef, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
@@ -244,7 +244,7 @@ describe('Accessibility Test: InputCharComponent', () => {
 
     spectator.component.openDialogButton = {
       nativeElement: button
-    } as ElementRef<HTMLButtonElement>;
+    };
 
     spectator.component.onDialogClose();
     render();
@@ -262,7 +262,7 @@ describe('Accessibility Test: InputCharComponent', () => {
 
     spectator.component.openDialogButton = {
       nativeElement: button
-    } as ElementRef<HTMLButtonElement>;
+    };
 
     spectator.component.onDialogClose();
     render();
