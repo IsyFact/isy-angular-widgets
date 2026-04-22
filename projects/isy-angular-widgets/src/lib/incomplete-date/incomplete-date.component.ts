@@ -26,30 +26,30 @@ import {InputMask, InputMaskModule} from 'primeng/inputmask';
 import {InputTextModule} from 'primeng/inputtext';
 import {INPUT_MASK_REGEX_ISO_DATE} from '../validation/data/date-formats';
 
-enum CursorPosition {
-  DayFirstDigit = 0,
-  DaySecondDigit = 1,
-  DotAfterDay = 2,
-  MonthSecondDigit = 4,
-  DotAfterMonth = 5
-}
+const CURSOR_POSITION = {
+  DayFirstDigit: 0,
+  DaySecondDigit: 1,
+  DotAfterDay: 2,
+  MonthSecondDigit: 4,
+  DotAfterMonth: 5
+} as const;
 
 const CURSOR_SHIFT = {
   Small: 1,
   Medium: 2,
   Large: 3
-};
+} as const;
 
 /**
  * This component is used to input complete and incomplete dates.
- * To enter an unknown day or month,  `0` or `x` can be used.
+ * To enter an unknown day or month, `0` or `x` can be used.
  *
  * The format DD.MM.YYYY is supported by the widget
  *
  * == Century switch / Birthdays in the past
  *
  * If only past dates are allowed (e.g. for already born persons),
- * the property `dateInPastConstraint` can be set to `true`via binding.
+ * the property `dateInPastConstraint` can be set to `true` via binding.
  *
  * When autocompleting e.g. 10.10.50, 10.10.1950 will be the output instead of 10.10.2050.
  */
@@ -102,7 +102,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   /**
    * Currently displayed date string
    */
-  inputValue: string = '';
+  inputValue = '';
 
   /**
    * Specifies whether to transfer the date value in ISO 8601 format.
@@ -125,7 +125,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @ViewChild(InputMask) field?: InputMask;
 
-  lastKeyPressed: string = '';
+  lastKeyPressed = '';
   lastInputElement: HTMLInputElement | null = null;
 
   /**
@@ -152,8 +152,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   ngOnInit(): void {
     // Enable syntax <isy-incomplete-date readonly /> (isReadOnly has value "" which is true as boolean)
-    this.readonly = this.readonly || this.readonly === ('' as unknown);
-    this.disabled = this.disabled || this.disabled === ('' as unknown);
+    this.readonly = this.readonly || this.readonly === ('' as unknown as boolean);
+    this.disabled = this.disabled || this.disabled === ('' as unknown as boolean);
   }
 
   /**
@@ -209,24 +209,23 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
     const [day = '', month = '', year = ''] = value.split('.');
     let partDay = day;
     let partMonth = month;
-    const dayClean = day.replace(/_/g, '');
-    const monthClean = month.replace(/_/g, '');
+    const dayClean = day.replaceAll('_', '');
+    const monthClean = month.replaceAll('_', '');
     const unspecifiedChar = 'x';
 
     this.inputValue = value;
 
-    const isInDayOrMonthRange = this.lastKeyPressed === '.' && cursorPos <= (CursorPosition.DotAfterMonth as number);
+    const isInDayOrMonthRange = this.lastKeyPressed === '.' && cursorPos <= CURSOR_POSITION.DotAfterMonth;
 
     if (isInDayOrMonthRange) {
       if (dayClean.length <= 1) partDay = this.transformDatePart(day, unspecifiedChar);
 
       if (
-        cursorPos >= (CursorPosition.DotAfterDay as number) + 1 &&
-        cursorPos <= (CursorPosition.DotAfterMonth as number) &&
+        cursorPos >= CURSOR_POSITION.DotAfterDay + 1 &&
+        cursorPos <= CURSOR_POSITION.DotAfterMonth &&
         monthClean.length <= 1
       ) {
-        if (cursorPos > (CursorPosition.DotAfterDay as number) + 1)
-          partMonth = this.transformDatePart(month, unspecifiedChar);
+        if (cursorPos > CURSOR_POSITION.DotAfterDay + 1) partMonth = this.transformDatePart(month, unspecifiedChar);
       }
 
       const result = [partDay, partMonth, year].join('.');
@@ -242,15 +241,15 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * @param position as a number
    * @returns position as a number
    */
-  calculateNewCursorPosition(position: CursorPosition): number {
+  calculateNewCursorPosition(position: number): number {
     switch (position) {
-      case CursorPosition.DayFirstDigit:
+      case CURSOR_POSITION.DayFirstDigit:
         return position + CURSOR_SHIFT.Large;
-      case CursorPosition.DaySecondDigit:
-      case CursorPosition.MonthSecondDigit:
+      case CURSOR_POSITION.DaySecondDigit:
+      case CURSOR_POSITION.MonthSecondDigit:
         return position + CURSOR_SHIFT.Medium;
-      case CursorPosition.DotAfterDay:
-      case CursorPosition.DotAfterMonth:
+      case CURSOR_POSITION.DotAfterDay:
+      case CURSOR_POSITION.DotAfterMonth:
         return position + CURSOR_SHIFT.Small;
       default:
         return position;
@@ -264,7 +263,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * @returns transformed part of a date
    */
   transformDatePart(partOfDate: string, char: string): string {
-    const partOfDateReplaced = partOfDate.replace(/_/g, '');
+    const partOfDateReplaced = partOfDate.replaceAll('_', '');
 
     return partOfDateReplaced === char || partOfDateReplaced.length === 0
       ? char.repeat(partOfDate.length)
@@ -295,7 +294,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
       );
     }
 
-    const inputEl = this.field?.inputViewChild!.nativeElement as HTMLInputElement;
+    const inputEl = this.field?.inputViewChild?.nativeElement as HTMLInputElement | undefined;
     if (inputEl) {
       inputEl.value = this.inputValue;
       if (this.inputValue.includes('_')) {
@@ -338,7 +337,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * @param fn The function to be called on component touch
    */
   registerOnTouched(fn: unknown): void {
-    this.onTouched = fn as () => unknown;
+    this.onTouched = fn as () => void;
   }
 
   /**
@@ -359,13 +358,13 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   convertToTransferDateFormat(value: string): string {
     if (!this.transferISO8601) return value;
-    if (this.transferISO8601 && INPUT_MASK_REGEX_ISO_DATE.test(value)) return value;
+    if (INPUT_MASK_REGEX_ISO_DATE.test(value)) return value;
 
     const [day, month, year] = value.split('.');
     return `${year}-${month}-${day}`;
   }
 
-  onChange: (value: string) => unknown = () => {};
+  onChange: (value: string) => void = () => {};
 
   onTouched: () => void = () => {};
 }

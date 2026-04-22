@@ -200,7 +200,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     const componentAccess = getComponentAccess();
     componentAccess.linksNavigationHeader = {
       nativeElement: container
-    } as ElementRef<HTMLElement>;
+    };
 
     component.collapseSidebar();
     spectator.detectChanges();
@@ -221,7 +221,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     const componentAccess = getComponentAccess();
     componentAccess.openLinksNavigation = {
       nativeElement: container
-    } as ElementRef<HTMLElement>;
+    };
 
     component.expandSidebar();
     spectator.detectChanges();
@@ -241,7 +241,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     const componentAccess = getComponentAccess();
     componentAccess.informationsbereichHeader = {
       nativeElement: container
-    } as ElementRef<HTMLElement>;
+    };
 
     component.collapseInformationsbereich();
     spectator.detectChanges();
@@ -261,7 +261,7 @@ describe('Unit Tests: HauptfensterComponent', () => {
     const componentAccess = getComponentAccess();
     componentAccess.openInformationsbereich = {
       nativeElement: container
-    } as ElementRef<HTMLElement>;
+    };
 
     component.expandInformationsbereich();
     spectator.detectChanges();

@@ -180,14 +180,16 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   it('should observe DOM changes on the component element', () => {
     const observeSpy = jasmine.createSpy('observe');
     const disconnectSpy = jasmine.createSpy('disconnect');
-    const MockMutationObserver = function (this: Record<string, unknown>, _cb: MutationCallback): void {
-      this.observe = observeSpy;
-      this.disconnect = disconnectSpy;
-    };
 
-    spyOn(globalThis, 'MutationObserver' as keyof typeof globalThis).and.callFake(
-      MockMutationObserver as unknown as typeof MutationObserver
-    );
+    spyOn(globalThis, 'MutationObserver').and.callFake(function (
+      _callback: MutationCallback
+    ): MutationObserver {
+      return {
+        observe: observeSpy,
+        disconnect: disconnectSpy,
+        takeRecords: (): MutationRecord[] => []
+      };
+    });
 
     component.ngAfterViewInit();
 
