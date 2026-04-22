@@ -95,6 +95,7 @@ function getTargetProjects(workspace: Workspace, options: Schema): [string, Proj
  * @param workspace Current angular workspace object
  * @param context A rule factory, which is normally the way schematics are implemented. Returned by the tooling after loading a schematic description
  * @param tree List of styles
+ * @param options Schema options for the schematic
  * @returns Tree Tree with styles
  */
 function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext, tree: Tree, options: Schema): Tree {
@@ -133,6 +134,24 @@ function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext,
 }
 
 /**
+ * Derives the assets path for a project based on its configuration.
+ * Prefers `sourceRoot` and falls back to `root/src/assets`.
+ * @param project Project info
+ * @returns The derived assets path
+ */
+function getAssetsPath(project: ProjectInfo): string {
+  if (project.sourceRoot) {
+    return `${project.sourceRoot}/assets`;
+  }
+
+  if (project.root) {
+    return `${project.root}/src/assets`;
+  }
+
+  return 'src/assets';
+}
+
+/**
  * Adds the project-specific assets path to the assets array of each application project
  * found in the provided Angular workspace configuration. The assets path is derived from
  * the project's `sourceRoot` and falls back to `root/src/assets` if necessary.
@@ -141,6 +160,7 @@ function applyStylesToWorkspace(workspace: Workspace, context: SchematicContext,
  * @param workspace The Angular workspace configuration object.
  * @param context The schematic context used for logging and reporting.
  * @param tree The virtual file system tree representing the project files.
+ * @param options Schema options for the schematic
  * @returns The updated virtual file system tree.
  */
 function applyAssetsToWorkspace(workspace: Workspace, context: SchematicContext, tree: Tree, options: Schema): Tree {
@@ -202,6 +222,23 @@ function loadWorkspace(tree: Tree): Workspace {
   }
 
   return JSON.parse(workspaceConfig.toString()) as Workspace;
+}
+
+/**
+ * Derives the i18n directory path for a project.
+ * @param project Project info
+ * @returns The derived i18n directory path
+ */
+function getI18nPath(project: ProjectInfo): string {
+  if (project.sourceRoot) {
+    return `${project.sourceRoot}/assets/i18n`;
+  }
+
+  if (project.root) {
+    return `${project.root}/src/assets/i18n`;
+  }
+
+  return 'src/assets/i18n';
 }
 
 /**
@@ -275,23 +312,6 @@ function addTranslationFilesToWorkspace(
 }
 
 /**
- * Derives the i18n directory path for a project.
- * @param project Project info
- * @returns The derived i18n directory path
- */
-function getI18nPath(project: ProjectInfo): string {
-  if (project.sourceRoot) {
-    return `${project.sourceRoot}/assets/i18n`;
-  }
-
-  if (project.root) {
-    return `${project.root}/src/assets/i18n`;
-  }
-
-  return 'src/assets/i18n';
-}
-
-/**
  * Normalizes a workspace-relative path to a Tree path.
  * @param path Workspace-relative path
  * @returns Normalized path starting with "/"
@@ -314,24 +334,6 @@ function resolveExistingPath(tree: Tree, candidates: string[]): string | null {
   }
 
   return null;
-}
-
-/**
- * Derives the assets path for a project based on its configuration.
- * Prefers `sourceRoot` and falls back to `root/src/assets`.
- * @param project Project info
- * @returns The derived assets path
- */
-function getAssetsPath(project: ProjectInfo): string {
-  if (project.sourceRoot) {
-    return `${project.sourceRoot}/assets`;
-  }
-
-  if (project.root) {
-    return `${project.root}/src/assets`;
-  }
-
-  return 'src/assets';
 }
 
 /**
