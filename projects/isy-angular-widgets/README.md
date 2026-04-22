@@ -50,6 +50,7 @@ Die Schematics führt folgende Schritte aus:
 - Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
 - *(Optional)* Konfiguration der ESLint-Regeln der IsyFact (`@isyfact/eslint-plugin`) inkl. Unterstützung für einfache Projekte und Monorepos
 - *(Optional)* Konfiguration der Prettier-Regeln der IsyFact (`@isyfact/prettier-plugin`)
+- *(Optional)* Konfiguration des Projekts in Monorepos für die EsLint-  und/ oder Prettier-Regeln installiert werden sollen. 
 
 Die optionalen Schritte werden während der Installation per CLI-Prompt abgefragt.
 
