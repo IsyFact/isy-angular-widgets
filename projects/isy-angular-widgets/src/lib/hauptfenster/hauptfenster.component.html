@@ -1,6 +1,6 @@
-<div class="isy-hauptfenster flex flex-column min-h-screen">
+<div class="isy-hauptfenster flex flex-col min-h-screen">
   <isy-skip-links [links]="links"></isy-skip-links>
-  <header class="grid grid-nogutter">
+  <header class="grid grid-cols-12 gap-4">
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       @if (logoAnbieterAwl) {
         <a href="/">
@@ -15,7 +15,7 @@
       }
     </div>
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
-      <div class="flex justify-content-end">
+      <div class="flex justify-end">
         @if (logoAwl) {
           <img
             [alt]="configService.getTranslation('hauptfenster.altLogoAwl')"
@@ -26,9 +26,9 @@
           <ng-content select="[LogoAwl]"></ng-content>
         }
       </div>
-      <div class="flex justify-content-end gap-2">
+      <div class="flex justify-end gap-2">
         @if (userInfo) {
-          <div class="flex align-items-center gap-1">
+          <div class="flex items-center gap-1">
             <em class="pi pi-user"></em>
             {{ userInfo.displayName }}
           </div>
@@ -62,7 +62,7 @@
 
   <ng-content select="[Seitentoolbar]"></ng-content>
 
-  <div class="flex flex-grow-1 gap-3">
+  <div class="flex grow gap-4">
     @if (showLinksnavigation) {
       <aside
         [attr.aria-label]="
@@ -70,21 +70,21 @@
             ? configService.getTranslation('hauptfenster.aria.leftNavigationCollapsed')
             : configService.getTranslation('hauptfenster.aria.leftNavigation')
         "
-        class="isy-hauptfenster-linksnavigation dont-print flex flex-column gap-1"
+        class="isy-hauptfenster-linksnavigation dont-print flex flex-col gap-1"
         [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
       >
         <div
-          class="sidebar-nav-header grid grid-nogutter align-items-center"
+          class="sidebar-nav-header grid grid-cols-12 gap-4 items-center"
           [id]="collapsedLinksnavigation ? 'collapsed-links-navigation' : null"
         >
           @if (!collapsedLinksnavigation && allowSidebarCollapse) {
-            <div class="col-9 pl-3">
+            <div class="col-span-9 pl-4">
               <span class="font-bold">{{ linksNavigationTitle }}</span>
             </div>
           }
 
           @if (allowSidebarCollapse) {
-            <div class="flex justify-content-end" [ngClass]="collapsedLinksnavigation ? 'col-12' : 'col-3'">
+            <div class="flex justify-end" [ngClass]="collapsedLinksnavigation ? 'col-12' : 'col-3'">
               <p-button
                 styleClass="p-button-text"
                 [icon]="collapsedLinksnavigation ? 'pi pi-chevron-right' : 'pi pi-chevron-left'"
@@ -107,7 +107,7 @@
       </aside>
     }
 
-    <main class="flex-1 min-w-0 mt-3">
+    <main class="flex-1 min-w-0 mt-4">
       <ng-content></ng-content>
     </main>
 
@@ -118,12 +118,12 @@
             ? configService.getTranslation('hauptfenster.aria.informationAreaCollapsed')
             : configService.getTranslation('hauptfenster.aria.informationArea')
         "
-        class="isy-hauptfenster-informationsbereich dont-print flex flex-column gap-1"
+        class="isy-hauptfenster-informationsbereich dont-print flex flex-col gap-1"
         [style.width]="collapsedInformationsbereich ? null : informationsbereichWidth"
       >
         @if (allowSidebarCollapse) {
           <div
-            class="sidebar-info-header flex justify-content-start"
+            class="sidebar-info-header flex justify-start"
             [id]="collapsedInformationsbereich ? 'collapsed-informationsbereich' : null"
           >
             <p-button

@@ -4,7 +4,7 @@ import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
 import {permissions} from '../../app.permission';
 import {DebugElement} from '@angular/core';
-import {ComponentFixture, fakeAsync, tick} from '@angular/core/testing';
+import {ComponentFixture} from '@angular/core/testing';
 import {MessageService} from 'primeng/api';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';

@@ -6,7 +6,7 @@
   [modal]="modal"
   [closable]="closable"
   [draggable]="draggable"
-  [breakpoints]="breaktpoints"
+  [breakpoints]="breakpoints"
   [style]="{
     width: width + 'vw',
     height: height + 'vw'
@@ -26,7 +26,7 @@
   <ng-container [ngTemplateOutlet]="this.content?.get(index)?.templateRef ?? null"></ng-container>
 
   <ng-template pTemplate="footer">
-    <div class="flex justify-content-end flex-wrap card-container">
+    <div class="flex justify-end flex-wrap card-container">
       @if (!isSaved) {
         @if (index !== 0) {
           <button
@@ -35,7 +35,7 @@
             pRipple
             pButton
             [outlined]="true"
-            class="flex align-items-center justify-content-center mr-2"
+            class="flex items-center justify-center mr-2"
             (click)="previous()"
           >
             {{ labelBackButton }}
@@ -47,7 +47,7 @@
             type="button"
             pRipple
             pButton
-            class="flex align-items-center justify-content-center mr-4"
+            class="flex items-center justify-center mr-6"
             [disabled]="index === items.length - 1 || !allowNext"
             (click)="next()"
           >
@@ -62,7 +62,7 @@
           type="button"
           pRipple
           pButton
-          class="flex align-items-center justify-content-center ml-4"
+          class="flex items-center justify-center ml-6"
           [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
           (click)="save()"
         >
@@ -76,7 +76,7 @@
         pRipple
         pButton
         [outlined]="true"
-        class="flex align-items-center justify-content-center"
+        class="flex items-center justify-center"
         [disabled]="isSaved && !closable"
         (click)="closeDialog()"
       >

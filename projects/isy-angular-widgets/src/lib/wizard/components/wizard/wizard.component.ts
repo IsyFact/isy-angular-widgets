@@ -139,7 +139,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   /**
    * Breakpoint for PrimeNg dialog responsiveness
    */
-  @Input() breaktpoints: {[key: string]: string} = {
+  @Input() breakpoints: {[key: string]: string} = {
     '3840px': '95vw',
     '1920px': '95vw',
     '1366px': '85vw',

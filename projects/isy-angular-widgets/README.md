@@ -36,6 +36,15 @@ Wichtig: `isoDateTime` bleibt strikt und akzeptiert weiterhin ausschließlich da
 - Skip-Links-Komponente für barrierefreies Springen zu Hauptinhalten
 - Behördenspezifische Widgets und Widgets aus PrimeNG in deutscher und englischer Sprache
 
+## Styling / Utility-Klassen
+
+`isy-angular-widgets` verwendet keine PrimeFlex-Utilities mehr.
+Für Utility-Klassen wird Tailwind CSS v4 eingesetzt.
+
+Für die Verwendung mit PrimeNG wird zusätzlich `tailwindcss-primeui` genutzt, damit PrimeNG-Design-Tokens auch als Tailwind-Utilities verwendet werden können.
+
+Bestehende komponentenspezifische Styles in `.scss`-Dateien der Bibliothek bleiben davon unberührt und können weiterhin verwendet werden.
+
 ## Getting Started
 
 Mit folgendem Befehl wird die Bibliothek `isy-angular-widgets` zu einem bestehenden Angular-Projekt hinzugefügt.
@@ -44,15 +53,26 @@ Mit folgendem Befehl wird die Bibliothek `isy-angular-widgets` zu einem bestehen
 $ ng add @isyfact/isy-angular-widgets
 ```
 
-Die Schematics führt folgende Schritte aus:
-- Hinzufügen und Installation der Bibliothek und der notwendigen Abhängigkeiten
-- Hinzufügen der Stylesheets der IsyFact
+### Voraussetzungen für Tailwind CSS 4
+
+`isy-angular-widgets` verwendet Tailwind CSS v4 anstelle von PrimeFlex.
+
+Falls Tailwind CSS im Zielprojekt noch nicht eingerichtet ist und die Konfiguration nicht durch `ng add @isyfact/isy-angular-widgets` erfolgt, werden zusätzlich folgende Pakete benötigt:
+
+```bash
+npm install tailwindcss @tailwindcss/postcss postcss tailwindcss-primeui
+```
+
+Die Schematics führen folgende Schritte aus:
+- Hinzufügen und Installation der Bibliothek sowie der benötigten Abhängigkeiten
+- Einbinden der IsyFact-Styles
+- Einbinden der Tailwind-CSS-Basis sowie der PrimeNG-Tailwind-Integration
 - Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
 
 ### Hauptfenster einbinden
 
 Nach der Installation von `isy-angular-widgets` kann das Hauptfenster-Widget eingebunden werden.
-Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Datei `app.component.html` mit folgendem Inhalt überschrieben werden:
+Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Datei `app.html` mit folgendem Inhalt überschrieben werden:
 
 ```html
 <isy-hauptfenster
@@ -89,7 +109,7 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
-Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
+Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.ts` importiert:
 
 ```typescript
 // Other imports ...
@@ -100,9 +120,9 @@ import {PanelModule} from 'primeng/panel';
 
 @Component({
   standalone: true,
-  selector: 'app-root'
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-root',
+  templateUrl: './app.html',
+  styleUrls: ['./app.scss'],
   imports: [HauptfensterComponent, PanelModule, MenuModule]
 })
 export class AppComponent {}
@@ -122,6 +142,27 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
+## Migration von PrimeFlex auf Tailwind CSS
+
+Bestehende Projekte sollten PrimeFlex-Utilities schrittweise durch Tailwind-Klassen ersetzen.
+
+Typische Beispiele:
+
+- `grid grid-nogutter` → Tailwind-Grid mit `grid`, `grid-cols-*` und `gap-0`
+- `col-12 md:col-6` → `col-span-12 md:col-span-6`
+- `p-mt-3` → `mt-3`
+- `p-d-flex` → `flex`
+- `p-jc-between` → `justify-between`
+- `p-ai-center` → `items-center`
+
+Normale komponentenspezifische `.scss`-Dateien bleiben davon unberührt. Eine Anpassung ist dort nur erforderlich, wenn PrimeFlex-Klassen direkt verwendet oder nachgebildet wurden.
+
+Die Bibliothek verwendet keine PrimeFlex-Utilities mehr und setzt stattdessen auf Tailwind CSS v4.
+
+## Browser-Hinweis
+
+Tailwind CSS v4 setzt moderne Browser voraus. Vor der Einführung in bestehenden Projekten sollte geprüft werden, ob die Browser-Anforderungen des Zielprojekts damit vereinbar sind.
+
 ## Theme-Konfiguration
 
 Die Bibliothek verwendet standardmäßig das PrimeNG-Theme `Nora` über `providePrimeNG()`.
@@ -130,7 +171,7 @@ Beim Aufruf von `provideIsyFactTheme()` kann ein Theme optional übergeben werde
 
 ### Beispiel: Theme-Konfiguration in `app.config.ts`
 
-```ts
+```typescript
 import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
@@ -150,7 +191,7 @@ Wird kein Theme angegeben, nutzt die Bibliothek standardmäßig `Nora`.
 `isy-angular-widgets` unterstützt die Übersetzungsfähigkeit in beliebigen Sprachen.
 Standardmäßig werden die Widgets auf Deutsch dargestellt.
 
-Beim Installer über `ng add @isyfact/isy-angular-widgets` werden automatisch deutsche und englische Übersetzungsdateien, sowohl für PrimeNG als auch für `isy-angular-widgets`, im `asset` Verzeichnis angelegt.
+Beim Installer über `ng add @isyfact/isy-angular-widgets` werden automatisch deutsche und englische Übersetzungsdateien sowohl für PrimeNG als auch für `isy-angular-widgets` im `assets`-Verzeichnis angelegt.
 
 ### Beispielkonfiguration mit ngx-translate
 
@@ -212,32 +253,32 @@ import {Subscription} from 'rxjs';
   imports: [HauptfensterComponent, PanelModule, MenuModule, TranslateModule]
 })
 export class AppComponent implements OnDestroy {
-  private readonly primeNgSub?: Subscription;
-  private readonly widgetSub?: Subscription;
-  private readonly langSub?: Subscription;
-
   private readonly primeng = inject(PrimeNG);
   private readonly widgetsConfigService = inject(WidgetsConfigService);
   private readonly translate = inject(TranslateService);
   private readonly cdr = inject(ChangeDetectorRef);
 
+  private primeNgSub?: Subscription;
+  private widgetSub?: Subscription;
+  private langSub?: Subscription;
+
   constructor() {
     this.translate.addLangs(['de', 'en']);
     this.translate.setFallbackLang('en');
     this.translate.use('de');
+
+    this.primeNgSub = this.translate.stream('primeng').subscribe((res) => {
+      this.primeng.setTranslation(res);
+    });
+
+    this.widgetSub = this.translate.stream('isyAngularWidgets').subscribe((res) => {
+      this.widgetsConfigService.setTranslation(res);
+    });
+
+    this.langSub = this.translate.onLangChange.subscribe(() => {
+      this.cdr.detectChanges();
+    });
   }
-
-  this.primeNgSub = this.translate.stream('primeng').subscribe((res) => {
-    this.primeng.setTranslation(res);
-  });
-
-  this.widgetSub = this.translate.stream('isyAngularWidgets').subscribe((res) => {
-    this.widgetsConfigService.setTranslation(res);
-  });
-
-  this.langSub = this.translate.onLangChange.subscribe(() => {
-    this.cdr.detectChanges();
-  });
 
   ngOnDestroy(): void {
     this.primeNgSub?.unsubscribe();
@@ -246,7 +287,7 @@ export class AppComponent implements OnDestroy {
   }
 }
 ```
-Die `translate`-Methode kann z.B. auch für einen Language-Picker verwenden werden, damit der Benutzer einer Seite die Sprache selber wählen kann.
+Die `translate`-Methode kann z. B. auch für einen Language-Picker verwendet werden, damit der Benutzer einer Seite die Sprache selber wählen kann.
 
 ## Form-Wrapper
 

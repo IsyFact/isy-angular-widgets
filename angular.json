@@ -32,6 +32,7 @@
             "tsConfig": "projects/isy-angular-widgets/tsconfig.spec.json",
             "karmaConfig": "projects/isy-angular-widgets/karma.conf.js",
             "styles": [
+              "projects/isy-angular-widgets/assets/theme/tailwind.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.min.css",
               "node_modules/flag-icons/css/flag-icons.min.css",
@@ -77,6 +78,7 @@
               "projects/isy-angular-widgets-demo/src/assets"
             ],
             "styles": [
+              "projects/isy-angular-widgets/assets/theme/tailwind.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.min.css",
               "node_modules/flag-icons/css/flag-icons.min.css",
