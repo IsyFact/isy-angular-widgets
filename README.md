@@ -31,13 +31,16 @@ Im Root-Verzeichnis des Projekts wird durch den nachstehenden Shortcut-Befehl au
 npm run build-and-pack:widgets_lib
 ```
 
-Im nächsten Schritt erfolgt die Installation dieser Bibliothek in einem neuen Angular-Projekt. Hierfür wird der Pfad zur TGZ-Datei benötigt. Im Root-Verzeichnis des neuen Angular-Projekts ist der folgende Befehl auszuführen.
+Im nächsten Schritt erfolgt die Installation dieser Bibliothek in einem neuen Angular-Projekt. 
+Hierfür wird der Pfad zur TGZ-Datei benötigt. 
+Im Root-Verzeichnis des neuen Angular-Projekts ist der folgende Befehl auszuführen.
 
 ```shell
 ng add [WIDGETS_LIB_PATH].tgz
 ```
-
-Anschließend ist die Aktivierung von Animationen notwendig. Je nach Projekttyp gibt es unterschiedliche Vorgehensweisen.
+    
+Anschließend ist die Aktivierung von Animationen notwendig. 
+Je nach Projekttyp gibt es unterschiedliche Vorgehensweisen.
 In Standalone-Projekten muss in `app.config.ts` die Methode `provideAnimations` importiert und bereitstellt werden.
 In None-Standalone-Projekten erfolgt das Aktivieren von Animationen durch das Importieren und Hinzufügen von `BrowserAnimationsModule` zum `AppModule`.
 
