@@ -8,7 +8,6 @@ import {ComponentFixture} from '@angular/core/testing';
 import {MessageService} from 'primeng/api';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
-import {FormControl} from '@angular/forms';
 import {provideHttpClient} from '@angular/common/http';
 import {
   TranslateModule,
@@ -54,7 +53,11 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
       'de',
       {
         'isyAngularWidgetsDemo.labels.optionMale': 'Männlich',
-        'isyAngularWidgetsDemo.actions.addNationality': 'Staatsangehörigkeit hinzufügen',
+        'isyAngularWidgetsDemo.labels.nationalityGerman': 'Deutsch',
+        'isyAngularWidgetsDemo.labels.nationalityFrench': 'Französisch',
+        'isyAngularWidgetsDemo.labels.nationalitySpanish': 'Spanisch',
+        'isyAngularWidgetsDemo.labels.nationalityItalian': 'Italienisch',
+        'isyAngularWidgetsDemo.labels.nationalityPolish': 'Polnisch',
         'isyAngularWidgetsDemo.messages.nationalitiesHint':
           'Mindestens 1, maximal {{count}} Einträge. Aktuell: {{current}}.',
         'isyAngularWidgetsDemo.messages.nationalitiesRequired': 'Mindestens eine Staatsangehörigkeit ist erforderlich.',
@@ -76,7 +79,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     inputFields.firstName = debugElement.query(By.css('#first-name'));
     inputFields.birthName = debugElement.query(By.css('#birth-name'));
     inputFields.birthplace = debugElement.query(By.css('#birth-place'));
-    inputFields.nationalityInput = debugElement.query(By.css('#nationality-input'));
+    inputFields.nationalities = debugElement.query(By.css('p-multiselect'));
     inputFields.gender = debugElement.query(By.css('#gender'));
     inputFields.phoneNumber = debugElement.query(By.css('#phone-number'));
     inputFields.birthDate = debugElement.query(By.css('#birth-date'));
@@ -109,9 +112,9 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(inputFields.firstName.nativeElement.value).toEqual('Max');
     expect(inputFields.birthName.nativeElement.value.trim()).toEqual('Mustermann');
     expect(inputFields.birthplace.nativeElement.value).toEqual('Köln');
-    expect(component.getNationalities().length).toBe(1);
-    expect(component.getNationalities().at(0).value).toEqual('Deutsch');
-    expect(inputFields.nationalityInput.nativeElement.value).toEqual('');
+    expect(component.personalInfoForm.get('nationalities')?.value).toEqual(['DE']);
+    expect(component.getSelectedNationalitiesCount()).toBe(1);
+    expect(inputFields.nationalities).toBeTruthy();
     expect(inputFields.gender.nativeElement.innerText).toEqual('Männlich');
     expect(inputFields.phoneNumber.nativeElement.value).toEqual('');
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
@@ -272,135 +275,71 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(remainingAddress.city).toEqual('City A');
   });
 
+  it('should render nationality multiselect', () => {
+    expect(inputFields.nationalities).toBeTruthy();
+  });
+
   it('should initialize nationalities with one required entry', () => {
-    const nationalities = component.getNationalities();
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
 
-    expect(nationalities.length).toBe(1);
-    expect(nationalities.at(0).value).toBe('Deutsch');
-    expect(component.disableRemoveNationality()).toBeTrue();
-    expect(component.showNationalitiesError('minlength')).toBeFalse();
+    expect(nationalitiesControl?.value).toEqual(['DE']);
+    expect(component.getSelectedNationalitiesCount()).toBe(1);
+    expect(component.showNationalitiesError('required')).toBeFalse();
   });
 
-  it('should add a nationality', () => {
-    component.personalInfoForm.get('nationalityInput')?.setValue('Französisch');
+  it('should update selected nationalities in the form control', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
 
-    component.addNationality();
-
-    expect(component.getNationalities().length).toBe(2);
-    expect(component.getNationalities().at(1).value).toBe('Französisch');
-    expect(component.personalInfoForm.get('nationalityInput')?.value).toBe('');
-  });
-
-  it('should add a nationality when pressing Enter in the nationality input', () => {
-    const event = new KeyboardEvent('keydown', {key: 'Enter'});
-    spyOn(event, 'preventDefault');
-
-    component.personalInfoForm.get('nationalityInput')?.setValue('Spanisch');
-
-    component.onNationalityInputKeydown(event);
-
-    expect(event.preventDefault).toHaveBeenCalled();
-    expect(component.getNationalities().length).toBe(2);
-    expect(component.getNationalities().at(1).value).toBe('Spanisch');
-  });
-
-  it('should not add an empty nationality', () => {
-    component.personalInfoForm.get('nationalityInput')?.setValue('   ');
-
-    component.addNationality();
-
-    expect(component.getNationalities().length).toBe(1);
-  });
-
-  it('should disable add nationality if input is empty', () => {
-    component.personalInfoForm.get('nationalityInput')?.setValue('');
-
-    expect(component.disableAddNationality()).toBeTrue();
-  });
-
-  it('should disable add nationality if maximum count is reached', () => {
-    component.personalInfoForm.get('nationalityInput')?.setValue('Französisch');
-    component.addNationality();
-    component.personalInfoForm.get('nationalityInput')?.setValue('Spanisch');
-    component.addNationality();
-    component.personalInfoForm.get('nationalityInput')?.setValue('Italienisch');
-    component.addNationality();
-    component.personalInfoForm.get('nationalityInput')?.setValue('Polnisch');
-    component.addNationality();
-
-    expect(component.getNationalities().length).toBe(component.maxNationalities);
-
-    component.personalInfoForm.get('nationalityInput')?.setValue('Ungarisch');
-    expect(component.disableAddNationality()).toBeTrue();
-  });
-
-  it('should show maxlength error if maximum count is exceeded in the form array', () => {
-    const nationalities = component.getNationalities();
-    nationalities.push(new FormControl('Französisch', {nonNullable: true}));
-    nationalities.push(new FormControl('Spanisch', {nonNullable: true}));
-    nationalities.push(new FormControl('Italienisch', {nonNullable: true}));
-    nationalities.push(new FormControl('Polnisch', {nonNullable: true}));
-    nationalities.push(new FormControl('Ungarisch', {nonNullable: true}));
-    nationalities.markAsTouched();
-    nationalities.updateValueAndValidity();
+    nationalitiesControl?.setValue(['DE', 'FR']);
+    nationalitiesControl?.markAsTouched();
+    nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    expect(nationalities.hasError('maxlength')).toBeTrue();
-    expect(component.showNationalitiesError('maxlength')).toBeTrue();
+    expect(nationalitiesControl?.value).toEqual(['DE', 'FR']);
+    expect(component.getSelectedNationalitiesCount()).toBe(2);
   });
 
-  it('should remove a nationality if more than one entry exists', () => {
-    component.personalInfoForm.get('nationalityInput')?.setValue('Französisch');
-    component.addNationality();
+  it('should allow up to the configured maximum number of nationalities', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
 
-    expect(component.getNationalities().length).toBe(2);
-
-    component.removeNationality(1);
-
-    expect(component.getNationalities().length).toBe(1);
-    expect(component.getNationalities().at(0).value).toBe('Deutsch');
-  });
-
-  it('should not remove the last remaining nationality', () => {
-    expect(component.getNationalities().length).toBe(1);
-
-    component.removeNationality(0);
-
-    expect(component.getNationalities().length).toBe(1);
-    expect(component.getNationalities().at(0).value).toBe('Deutsch');
-  });
-
-  it('should show required error when no nationality is available', () => {
-    const nationalities = component.getNationalities();
-    nationalities.clear();
-    nationalities.markAsTouched();
-    nationalities.updateValueAndValidity();
+    nationalitiesControl?.setValue(['DE', 'FR', 'ES', 'IT', 'PL']);
+    nationalitiesControl?.markAsTouched();
+    nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    expect(nationalities.hasError('minlength')).toBeTrue();
-    expect(component.showNationalitiesError('minlength')).toBeTrue();
+    expect(nationalitiesControl?.value).toEqual(['DE', 'FR', 'ES', 'IT', 'PL']);
+    expect(component.getSelectedNationalitiesCount()).toBe(component.maxNationalities);
+    expect(nationalitiesControl?.valid).toBeTrue();
   });
 
-  it('should build aria-describedby for nationality input based on current error state', () => {
-    const nationalities = component.getNationalities();
+  it('should show required error when no nationality is selected', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
 
-    expect(component.getNationalitiesDescribedBy()).toContain('nationalities-help');
-
-    nationalities.clear();
-    nationalities.markAsTouched();
-    nationalities.updateValueAndValidity();
+    nationalitiesControl?.setValue([]);
+    nationalitiesControl?.markAsTouched();
+    nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    expect(component.getNationalitiesDescribedBy()).toContain('nationalities-error-required');
+    expect(nationalitiesControl?.hasError('required')).toBeTrue();
+    expect(component.showNationalitiesError('required')).toBeTrue();
   });
 
-  it('should render nationality chips', () => {
-    component.personalInfoForm.get('nationalityInput')?.setValue('Französisch');
-    component.addNationality();
+  it('should show maxSelected error if maximum count is exceeded', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    nationalitiesControl?.setValue(['DE', 'FR', 'ES', 'IT', 'PL', 'XX']);
+    nationalitiesControl?.markAsTouched();
+    nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    const chips = spectator.queryAll('p-chip');
-    expect(chips.length).toBe(2);
+    expect(nationalitiesControl?.hasError('maxSelected')).toBeTrue();
+    expect(component.showNationalitiesError('maxSelected')).toBeTrue();
+  });
+
+  it('should render nationality hint with current count', () => {
+    const pageText = fixture.nativeElement.textContent;
+
+    expect(pageText).toContain('Mindestens 1, maximal 5 Einträge. Aktuell: 1.');
   });
 
   it('should open the character dialog when the isy-input-char button is clicked', () => {
