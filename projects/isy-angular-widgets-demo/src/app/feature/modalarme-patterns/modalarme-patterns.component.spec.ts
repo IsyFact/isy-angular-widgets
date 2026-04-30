@@ -40,7 +40,7 @@ describe('ModalarmePatternsComponent', () => {
     spectator = createComponent();
     component = spectator.component;
     msgService = spectator.inject(MessageService);
-    liveAnnouncer = spectator.inject(LiveAnnouncer) as jasmine.SpyObj<LiveAnnouncer>;
+    liveAnnouncer = liveAnnouncerSpy;
     spyOn(msgService, 'add');
   });
 

@@ -48,6 +48,38 @@ Die Schematics führt folgende Schritte aus:
 - Hinzufügen und Installation der Bibliothek und der notwendigen Abhängigkeiten
 - Hinzufügen der Stylesheets der IsyFact
 - Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
+- *(Optional)* Konfiguration der ESLint-Regeln der IsyFact (`@isyfact/eslint-plugin`) inkl. Unterstützung für einfache Projekte und Monorepos
+- *(Optional)* Konfiguration der Prettier-Regeln der IsyFact (`@isyfact/prettier-plugin`)
+- *(Optional)* Konfiguration des Projekts in Monorepos für die EsLint-  und/ oder Prettier-Regeln installiert werden sollen. 
+
+Die optionalen Schritte werden während der Installation per CLI-Prompt abgefragt.
+
+### ESLint
+
+Bei der Installation wird optional eine `eslint.config.js` im Projektstamm angelegt, die die IsyFact ESLint-Regeln über `@isyfact/eslint-plugin` einbindet.
+Die Konfiguration unterstützt sowohl einfache Angular-Projekte als auch Monorepos.
+Für jedes Projekt werden separate Konfigurationsblöcke für TypeScript-, Spec- und HTML-Dateien generiert.
+
+Die Linting-Prüfung kann mit folgendem Befehl ausgeführt werden:
+
+```bash
+npm run lint
+```
+
+Ist bereits eine `eslint.config.js` vorhanden, wird diese gesichert (`eslint.config.base.js`) und die IsyFact-Konfiguration als Wrapper darüber gelegt.
+
+### Prettier
+
+Bei der Installation wird optional eine `.prettierrc.js` im Projektstamm angelegt, die die IsyFact Prettier-Regeln über `@isyfact/prettier-plugin` einbindet.
+Zusätzlich wird eine `.prettierignore` mit den IsyFact-Standardausschlüssen (z. B. `dist`, `node_modules`, `*.md`) erstellt.
+
+Die Formatierung kann mit folgendem Befehl ausgeführt werden:
+
+```bash
+npm run format
+```
+
+Ist bereits eine `.prettierrc.js` vorhanden, wird sie nicht überschrieben.
 
 ### Hauptfenster einbinden
 
