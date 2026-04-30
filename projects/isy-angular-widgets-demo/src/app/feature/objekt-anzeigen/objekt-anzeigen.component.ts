@@ -9,9 +9,16 @@ import {
 } from '@angular/core';
 import {Address} from '../../shared/model/person';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import {PersonalInformation} from './model/forms';
 import {Validation} from '@isy-angular-widgets/validation/validation';
 import {FileUploadHandlerEvent, FileUploadModule} from 'primeng/fileupload';
 import {initializedPerson} from './data';
@@ -35,6 +42,7 @@ import {DialogSachverhalteBearbeitenComponent} from './components/dialog-sachver
 import {ToastModule} from 'primeng/toast';
 import {InputTextModule} from 'primeng/inputtext';
 import {TextareaModule} from 'primeng/textarea';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 /*
  * This page implements a suggestion for the Object Bearbeiten workflow.
@@ -53,6 +61,7 @@ import {TextareaModule} from 'primeng/textarea';
     FormControlPipe,
     InputCharDirective,
     SelectModule,
+    MultiSelectModule,
     DatePickerModule,
     IncompleteDateComponent,
     InputMaskModule,
@@ -71,6 +80,7 @@ import {TextareaModule} from 'primeng/textarea';
 })
 export class ObjektAnzeigenComponent implements AfterContentChecked {
   readonly intelligenceNotesMaxLength = 255;
+  readonly maxNationalities = 5;
 
   showSecretFields = false;
 
@@ -119,6 +129,38 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
   @Input() person = initializedPerson;
 
   translate = inject(TranslateService);
+  private readonly legacyNationalityMapping: Record<string, string> = {
+    Deutsch: 'DE',
+    Französisch: 'FR',
+    Spanisch: 'ES',
+    Italienisch: 'IT',
+    Polnisch: 'PL'
+  };
+
+  get nationalityOptions(): Array<{label: string; value: string}> {
+    return [
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.labels.nationalityGerman') as string,
+        value: 'DE'
+      },
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.labels.nationalityFrench') as string,
+        value: 'FR'
+      },
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.labels.nationalitySpanish') as string,
+        value: 'ES'
+      },
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.labels.nationalityItalian') as string,
+        value: 'IT'
+      },
+      {
+        label: this.translate.instant('isyAngularWidgetsDemo.labels.nationalityPolish') as string,
+        value: 'PL'
+      }
+    ];
+  }
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
   private readonly changeDetector = inject(ChangeDetectorRef);
@@ -137,7 +179,10 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
       gender: [personalien.gender],
       // Demo: Validator isInPast - If the given value is a valid date, it will be checked if the date is in the past
       birthDate: [personalien.geburtsdatum, Validation.isInPast],
-      nationality: [personalien.staatsangehoerigkeit],
+      nationalities: [
+        this.mapInitialNationalities(personalien.staatsangehoerigkeit),
+        [Validators.required, this.maxSelectedNationalitiesValidator(this.maxNationalities)]
+      ],
       phoneNumber: [personalien.telefonnummer],
       dateOfEntry: [personalien.einreisedatum],
       idRequired: [personalien.ausweispflichtig],
@@ -175,15 +220,58 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
 
   savePersonalien(): void {
     this.personalInfoForm.clearValidators();
-    const person = this.personalInfoForm.value as PersonalInformation;
+
+    const formValue = this.personalInfoForm.getRawValue() as {
+      firstName?: string;
+      lastName?: string;
+    };
+
     this.messageService.add({
       severity: 'success',
       summary: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonSummary') as string,
       detail: this.translate.instant('isyAngularWidgetsDemo.messages.savePersonDetail', {
-        firstName: person.firstName,
-        lastName: person.lastName
+        firstName: formValue.firstName ?? '',
+        lastName: formValue.lastName ?? ''
       }) as string
     });
+  }
+
+  private mapInitialNationalities(initialNationality?: string): string[] {
+    const value = initialNationality?.trim();
+
+    if (!value) {
+      return [];
+    }
+
+    return [this.legacyNationalityMapping[value] ?? value];
+  }
+
+  private maxSelectedNationalitiesValidator(max: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value as unknown;
+      const length = Array.isArray(value) ? value.length : 0;
+
+      return length > max
+        ? {
+            maxSelected: {
+              requiredLength: max,
+              actualLength: length
+            }
+          }
+        : null;
+    };
+  }
+
+  showNationalitiesError(errorKey: 'required' | 'maxSelected'): boolean {
+    const control = this.personalInfoForm.get('nationalities');
+
+    return !!(control && control.hasError(errorKey) && (control.touched || control.dirty));
+  }
+
+  getSelectedNationalitiesCount(): number {
+    const value = this.personalInfoForm.get('nationalities')?.value as unknown;
+
+    return Array.isArray(value) ? value.length : 0;
   }
 
   addNewAddress(): void {

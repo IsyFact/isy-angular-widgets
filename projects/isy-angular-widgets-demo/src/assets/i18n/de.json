@@ -63,7 +63,10 @@
       "dateError": "Das Datum ist ungültig.",
       "dateInPastError": "Das Datum muss in der Vergangenheit liegen.",
       "changePage": "Seitenwechsel erfolgt. Neue Seite:",
-      "validateDIN91379Error": "Ungültige Zeichen gemäß DIN 91379."
+      "validateDIN91379Error": "Ungültige Zeichen gemäß DIN 91379.",
+      "nationalitiesHint": "Mindestens 1, maximal {{count}} Einträge. Aktuell: {{current}}.",
+      "nationalitiesRequired": "Mindestens eine Staatsangehörigkeit ist erforderlich.",
+      "nationalitiesMaxReached": "Es können maximal {{count}} Staatsangehörigkeiten erfasst werden."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -138,6 +141,11 @@
       "gender": "Geschlecht",
       "geburtsdatum": "Geburtsdatum",
       "staatsangehoerigkeit": "Nationalität",
+      "nationalityGerman": "Deutsch",
+      "nationalityFrench": "Französisch",
+      "nationalitySpanish": "Spanisch",
+      "nationalityItalian": "Italienisch",
+      "nationalityPolish": "Polnisch",
       "chooseCountry": "Land wählen",
       "actions": "Aktionen",
       "optionMale": "Männlich",
