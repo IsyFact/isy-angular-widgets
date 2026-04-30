@@ -32,19 +32,20 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
 
 /**
  * Safely reads a file as UTF-8 string.
- * Encapsulates file reading and decoding from Tree.read().
  * @param host Tree
  * @param fileName File path
  * @returns File content as string or null
  */
 function readFileAsUtf8(host: Tree, fileName: string): string | null {
-  const fileContent: unknown = host.read(fileName);
-
-  if (!(fileContent instanceof Uint8Array)) {
+  if (!host.exists(fileName)) {
     return null;
   }
 
-  return new TextDecoder('utf-8').decode(fileContent);
+  try {
+    return host.readText(fileName);
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -54,10 +55,6 @@ function readFileAsUtf8(host: Tree, fileName: string): string | null {
  * @throws {SchematicsException} if package.json exists but contains invalid JSON
  */
 function readPackageJson(host: Tree): PackageJson | null {
-  if (!host.exists(FILE_NAME)) {
-    return null;
-  }
-
   const sourceText = readFileAsUtf8(host, FILE_NAME);
 
   if (!sourceText) {

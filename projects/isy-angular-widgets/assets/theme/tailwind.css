@@ -1,2 +1,40 @@
-@import "tailwindcss";
-@import "tailwindcss-primeui";
+@layer theme, base, primeng, components, utilities, isyfact-theme;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@plugin "tailwindcss-primeui";
+
+@source "../../src";
+@source "../../../isy-angular-widgets-demo/src";
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold mt-4 mb-4;
+  }
+
+  h2 {
+    @apply text-2xl font-bold mt-4 mb-3;
+  }
+
+  h3 {
+    @apply text-xl font-semibold mt-3 mb-2;
+  }
+
+  h4 {
+    @apply text-lg font-semibold mt-3 mb-2;
+  }
+
+  h5 {
+    @apply text-base font-semibold mt-2 mb-2;
+  }
+
+  h6 {
+    @apply text-sm font-semibold mt-2 mb-1;
+  }
+
+  p {
+    @apply mb-4;
+  }
+}

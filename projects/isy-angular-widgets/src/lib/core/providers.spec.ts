@@ -1,53 +1,76 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {provideIsyFactTheme} from './providers';
+import {provideIsyFactTheme, NoraGrayPreset} from './providers';
 import Nora from '@primeuix/themes/nora';
 
-describe('provideIsyFactTheme', () => {
+/**
+ * Extracts all providers from the input object.
+ * @param envProviders The environment providers to process
+ * @returns An array of all extracted providers
+ */
+function extractAllProviders(envProviders: any): any[] {
+  const seen = new Set();
+  const results: any[] = [];
+
   /**
-   * Extracts all providers from a given Angular environment providers object.
-   * This function recursively traverses the input object to collect all provider definitions,
-   * avoiding duplicates by using a `Set` to track already processed items.
-   * @param envProviders - The Angular environment providers object to extract providers from.
-   * @returns An array of provider definitions extracted from the input object.
+   * Recursively extracts all providers from the input object.
+   * @param input The input to process
    */
-  function extractAllProviders(envProviders: any): any[] {
-    const seen = new Set();
-    const results: any[] = [];
+  function recurse(input: any): void {
+    if (!input || seen.has(input)) return;
 
-    /**
-     * Recursively processes the given input to extract and collect objects with a `provide` property.
-     * @param input - The input to process, which can be of any type. It may be an array, an object, or other data types.
-     * The function performs the following:
-     * - Skips processing if the input is falsy or has already been processed (tracked in the `seen` set).
-     * - If the input is an array, it recursively processes each element.
-     * - If the input is an object:
-     *   - Recursively processes the `ɵproviders` property if it exists.
-     *   - Adds the object to the `results` array if it contains a `provide` property.
-     */
-    function recurse(input: any): void {
-      if (!input || seen.has(input)) return;
-      seen.add(input);
+    seen.add(input);
 
-      if (Array.isArray(input)) {
-        input.forEach(recurse);
-      } else if (typeof input === 'object') {
-        if (input.ɵproviders) recurse(input.ɵproviders);
-        if (input.provide) results.push(input);
-      }
+    if (Array.isArray(input)) {
+      input.forEach(recurse);
+    } else if (typeof input === 'object') {
+      if (input.ɵproviders) recurse(input.ɵproviders);
+      if (input.provide) results.push(input);
     }
-
-    recurse(envProviders.ɵproviders);
-    return results;
   }
 
-  it('should include a provider with the correct theme preset', () => {
+  recurse(envProviders.ɵproviders);
+  return results;
+}
+
+/**
+ * Extracts the PrimeNG configuration provider from the given environment providers.
+ * @param envProviders The environment providers to search through
+ * @returns The PrimeNG provider or undefined if not found
+ */
+function getPrimeNgProvider(envProviders: any): any {
+  const allProviders = extractAllProviders(envProviders);
+
+  return allProviders.find((provider: any) => provider?.provide?._desc === 'PRIME_NG_CONFIG');
+}
+
+describe('provideIsyFactTheme', () => {
+  it('should include a provider with the default Nora gray theme preset', () => {
     const result = provideIsyFactTheme();
-    const allProviders = extractAllProviders(result);
-    const primeNgProvider = allProviders.find(
-      (p: any) => p?.provide?._desc === 'PRIME_NG_CONFIG' && p?.useValue?.theme?.preset === Nora
-    );
+    const primeNgProvider = getPrimeNgProvider(result);
 
     expect(primeNgProvider).toBeDefined();
-    expect(primeNgProvider!.useValue.theme.preset).toEqual(Nora);
+    expect(primeNgProvider!.useValue.theme.preset).toBe(NoraGrayPreset);
+  });
+
+  it('should allow overriding the default theme preset', () => {
+    const result = provideIsyFactTheme(Nora);
+    const primeNgProvider = getPrimeNgProvider(result);
+
+    expect(primeNgProvider).toBeDefined();
+    expect(primeNgProvider!.useValue.theme.preset).toBe(Nora);
+  });
+
+  it('should configure PrimeNG theme options', () => {
+    const result = provideIsyFactTheme();
+    const primeNgProvider = getPrimeNgProvider(result);
+
+    expect(primeNgProvider).toBeDefined();
+    expect(primeNgProvider!.useValue.theme.options).toEqual({
+      darkModeSelector: false,
+      cssLayer: {
+        name: 'primeng',
+        order: 'theme, base, primeng, components, utilities, isyfact-theme'
+      }
+    });
   });
 });

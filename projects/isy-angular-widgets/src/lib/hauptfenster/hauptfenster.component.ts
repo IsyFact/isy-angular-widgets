@@ -1,4 +1,3 @@
-import {NgClass} from '@angular/common';
 import {
   afterNextRender,
   Component,
@@ -36,7 +35,7 @@ import {SkipLinksComponent} from '../skip-links/skip-links.component';
   selector: 'isy-hauptfenster',
   templateUrl: './hauptfenster.component.html',
   styleUrls: ['./hauptfenster.component.scss'],
-  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent, NgClass]
+  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent]
 })
 export class HauptfensterComponent {
   /**

@@ -1,7 +1,7 @@
 <div class="isy-hauptfenster flex flex-col min-h-screen">
   <isy-skip-links [links]="links"></isy-skip-links>
-  <header class="grid grid-cols-12 gap-4">
-    <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
+  <header class="grid grid-cols-12 gap-4 px-2 pb-2">
+    <div class="col-span-6 isy-hauptfenster-anbieterlogo-bereich dont-print">
       @if (logoAnbieterAwl) {
         <a href="/">
           <img
@@ -14,7 +14,8 @@
         <ng-content select="[LogoAnbieterAwl]"></ng-content>
       }
     </div>
-    <div class="col isy-hauptfenster-nutzerbereich dont-print">
+
+    <div class="col-span-6 flex flex-col items-end isy-hauptfenster-nutzerbereich dont-print">
       <div class="flex justify-end">
         @if (logoAwl) {
           <img
@@ -26,6 +27,7 @@
           <ng-content select="[LogoAwl]"></ng-content>
         }
       </div>
+
       <div class="flex justify-end gap-2">
         @if (userInfo) {
           <div class="flex items-center gap-1">
@@ -33,6 +35,7 @@
             {{ userInfo.displayName }}
           </div>
         }
+
         <p-button
           id="isy-hauptfenster-logout-button"
           (onClick)="logoutEvent.emit(userInfo)"
@@ -74,17 +77,17 @@
         [style.width]="collapsedLinksnavigation ? null : linksNavigationWidth"
       >
         <div
-          class="sidebar-nav-header grid grid-cols-12 gap-4 items-center"
+          class="sidebar-nav-header flex items-center gap-4"
           [id]="collapsedLinksnavigation ? 'collapsed-links-navigation' : null"
         >
           @if (!collapsedLinksnavigation && allowSidebarCollapse) {
-            <div class="col-span-9 pl-4">
+            <div class="pl-4">
               <span class="font-bold">{{ linksNavigationTitle }}</span>
             </div>
           }
 
           @if (allowSidebarCollapse) {
-            <div class="flex justify-end" [ngClass]="collapsedLinksnavigation ? 'col-12' : 'col-3'">
+            <div class="ml-auto flex justify-end">
               <p-button
                 styleClass="p-button-text"
                 [icon]="collapsedLinksnavigation ? 'pi pi-chevron-right' : 'pi pi-chevron-left'"

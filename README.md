@@ -23,12 +23,35 @@ Vor der ersten Ausführung bzw. nach dem Ergänzen neuer Pakete müssen die Abh�
 npm install
 ```
 
-Das Projekt verwendet Tailwind CSS v4 über die PostCSS-Integration. Die globale Tailwind-Einbindung erfolgt über die zentrale CSS-Datei, z. B. mit:
+Das Projekt verwendet Tailwind CSS v4 über die PostCSS-Integration.
+PrimeNG-Design-Tokens werden über `tailwindcss-primeui` als Tailwind-Utilities verfügbar gemacht.
+
+Die globale Tailwind-Einbindung erfolgt über eine zentrale CSS-Datei, z. B.:
 
 ```css
 @import "tailwindcss";
-@import "tailwindcss-primeui";
+@plugin "tailwindcss-primeui";
 ```
+
+Falls Tailwind-Klassen aus der Widgets-Bibliothek oder der Demo-Anwendung erkannt werden müssen, müssen die entsprechenden Quellpfade über `@source` eingebunden werden. Beispiel:
+
+```css
+@import "tailwindcss";
+@plugin "tailwindcss-primeui";
+
+@source "../projects/isy-angular-widgets";
+@source "../projects/isy-angular-widgets-demo";
+```
+
+Die konkreten Pfade hängen davon ab, wo die zentrale Tailwind-CSS-Datei abgelegt ist.
+
+### Hinweis zu PrimeFlex
+
+Die Widgets-Bibliothek verwendet keine PrimeFlex-Utilities mehr.
+Neue Layouts und Utility-Klassen sollen mit Tailwind CSS umgesetzt werden.
+
+Bestehende komponentenspezifische `.scss`-Dateien können weiterhin verwendet werden.
+Anpassungen sind nur erforderlich, wenn dort PrimeFlex-Klassen direkt verwendet oder nachgebildet wurden.
 
 ### Widgets-Bibliothek lokal an ein neues Projekt anbinden
 
@@ -56,28 +79,29 @@ Neben den Widgets können in der Demo-Anwendung praktische Beispiele für die Um
 Die Demo-Anwendung kann mit folgendem Befehl gestartet werden:
 
 ```shell
-$ npm run start
+npm run start
 ```
 
 ### Browser-Hinweis
 
-Tailwind CSS v4 setzt moderne Browser voraus. Vor der Entwicklung oder Migration sollte geprüft werden, ob die Browser-Anforderungen des Projekts damit vereinbar sind.
+Tailwind CSS v4 setzt moderne Browser voraus.
+Vor der Entwicklung oder Migration sollte geprüft werden, ob die Browser-Anforderungen des Projekts damit vereinbar sind.
 
-#### Prettier für Demo-Anwendung und Widgets-Bibliothek ausführen
+### Prettier für Demo-Anwendung und Widgets-Bibliothek ausführen
 
 Zur Überprüfung der Demo-Anwendung und der Widgets-Bibliothek auf Code-Formatierungsfehler mithilfe von Prettier kann folgender Befehl ausgeführt werden:
 
 ```shell
-$ npm run prettier:check
+npm run prettier:check
 ```
 
 Um Code-Formatierungsfehler innerhalb der Demo-Anwendung und der Widgets-Bibliothek mithilfe von Prettier zu beheben, kann folgender Befehl ausgeführt werden:
 
 ```shell
-$ npm run prettier:fix
+npm run prettier:fix
 ```
 
-#### E2E-Tests für Demo-Anwendung ausführen
+### E2E-Tests für Demo-Anwendung ausführen
 
 Für die Demo-Anwendung wurden exemplarisch einige E2E-Tests mit dem Framework [TestCafe](https://testcafe.io/) umgesetzt.
 Um die Tests auszuführen, muss zunächst die Demo-Anwendung gestartet werden (siehe oben).
@@ -85,7 +109,7 @@ Für die Ausführung der Tests wird der Webbrowser Chrome benötigt, alternativ 
 Die Tests werden mit folgendem Befehl gestartet.
 
 ```shell
-$ npm run e2e
+npm run e2e
 ```
 
 ### PrimeNG-Designer

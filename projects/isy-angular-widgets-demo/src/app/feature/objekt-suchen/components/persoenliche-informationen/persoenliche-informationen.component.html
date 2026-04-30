@@ -1,6 +1,6 @@
 <form [formGroup]="form">
-  <div class="grid mt-5">
-    <div class="col-12">
+  <div class="grid grid-cols-12 gap-4 mt-8">
+    <div class="col-span-12">
       <isy-form-wrapper
         [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"
         fieldId="nachname-dialog"
@@ -17,7 +17,7 @@
         />
       </isy-form-wrapper>
     </div>
-    <div class="col-12">
+    <div class="col-span-12">
       <isy-form-wrapper
         [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
         fieldId="vorname-dialog"
@@ -26,7 +26,7 @@
         <input id="vorname-dialog" type="text" class="w-full" pInputText formControlName="vorname" />
       </isy-form-wrapper>
     </div>
-    <div class="col-12">
+    <div class="col-span-12">
       <isy-form-wrapper
         [label]="'isyAngularWidgetsDemo.labels.gender' | translate"
         fieldId="gender-dialog"

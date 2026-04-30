@@ -1,13 +1,9 @@
 import {Rule, SchematicContext, SchematicsException, Tree} from '@angular-devkit/schematics';
 import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
-import {Buffer} from 'node:buffer';
 import {addDevPackageToPackageJson, addPackageToPackageJson} from './package-config';
 
 const JSON_INDENT_SPACES = 2;
 const MAX_LOGGED_TRANSLATION_CONFLICTS = 10;
-
-// Node Buffer (isyTranslation) is not supported in Browser context but schematics is executed with node and not with browser
-/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-call */
 
 interface BuildOptions {
   styles?: string[];
@@ -47,13 +43,11 @@ interface MergeConflict {
  * @returns project name and project definition, if available
  */
 function getApplicationProject(workspace: Workspace): {projectName: string; project: ProjectDefinition} | null {
-  const projects = workspace?.projects || {};
-
-  for (const key in projects) {
-    if (projects[key].projectType === 'application') {
+  for (const [projectName, project] of Object.entries(workspace.projects)) {
+    if (project.projectType === 'application') {
       return {
-        projectName: key,
-        project: projects[key]
+        projectName,
+        project
       };
     }
   }
@@ -85,6 +79,21 @@ function getSourceRoot(project: ProjectDefinition): string {
 function ensureFile(tree: Tree, filePath: string, content: string): void {
   if (!tree.exists(filePath)) {
     tree.create(filePath, content);
+  }
+}
+
+/**
+ * Reads a file from the tree as UTF-8 string.
+ * @param tree Virtual file tree
+ * @param filePath Absolute file path
+ * @returns File content as UTF-8 string
+ * @throws {SchematicsException} if the file cannot be read
+ */
+function readFileAsUtf8(tree: Tree, filePath: string): string {
+  try {
+    return tree.readText(filePath);
+  } catch {
+    throw new SchematicsException(`❌ Could not read file '${filePath}'.`);
   }
 }
 
@@ -220,15 +229,15 @@ function deepMergeWithConflicts(
 }
 
 /**
- * Parses a JSON buffer into an unknown value.
- * @param fileContent File content buffer
+ * Parses a JSON string into an unknown value.
+ * @param fileContent File content as string
  * @param filePath Path used for error reporting
  * @returns Parsed JSON value
  * @throws {SchematicsException} if JSON parsing fails
  */
-function parseJsonFile(fileContent: Buffer, filePath: string): unknown {
+function parseJsonFile(fileContent: string, filePath: string): unknown {
   try {
-    return JSON.parse(fileContent.toString('utf-8')) as unknown;
+    return JSON.parse(fileContent) as unknown;
   } catch {
     throw new SchematicsException(`❌ Could not parse JSON file '${filePath}'.`);
   }
@@ -360,14 +369,11 @@ function applyAssetsToWorkspace(workspace: Workspace, context: SchematicContext,
  * @throws {SchematicsException} if workspace is not available
  */
 function loadWorkspace(tree: Tree): Workspace {
-  const workspaceConfig = tree.read('/angular.json');
-
-  if (!workspaceConfig) {
-    throw new SchematicsException('❌ Could not find Angular workspace configuration.');
-  }
+  const workspaceFilePath = '/angular.json';
+  const workspaceConfig = readFileAsUtf8(tree, workspaceFilePath);
 
   try {
-    return JSON.parse(workspaceConfig.toString()) as Workspace;
+    return JSON.parse(workspaceConfig) as Workspace;
   } catch {
     throw new SchematicsException('❌ Could not parse Angular workspace configuration.');
   }
@@ -391,10 +397,20 @@ function createTailwindEntryFile(workspace: Workspace, context: SchematicContext
   const sourceRoot = getSourceRoot(project);
   const tailwindFilePath = `${sourceRoot}/tailwind.css`;
 
+  const normalizedSourceRoot = sourceRoot.replace(/^\/+/, '');
+  const sourceRootDepth = normalizedSourceRoot.split('/').filter(Boolean).length;
+  const nodeModulesPath = `${'../'.repeat(sourceRootDepth)}node_modules/@isyfact/isy-angular-widgets`;
+
   const tailwindFileContent = [
-    '@import "tailwindcss";',
+    '@layer theme, base, primeng, components, utilities, isyfact-theme;',
+    '',
+    '@import "tailwindcss/theme.css" layer(theme);',
+    '@import "tailwindcss/preflight.css" layer(base);',
+    '@import "tailwindcss/utilities.css" layer(utilities);',
+    '',
     '@plugin "tailwindcss-primeui";',
-    '@source "../node_modules/@isyfact/isy-angular-widgets";',
+    '',
+    `@source "${nodeModulesPath}";`,
     ''
   ].join('\n');
 
@@ -421,12 +437,7 @@ function createPostCssConfig(context: SchematicContext, tree: Tree): void {
     return;
   }
 
-  const existingContent = tree.read(postCssConfigPath);
-
-  if (!existingContent) {
-    throw new SchematicsException('❌ Could not read existing .postcssrc.json.');
-  }
-
+  const existingContent = readFileAsUtf8(tree, postCssConfigPath);
   const parsedConfig = parseJsonFile(existingContent, postCssConfigPath) as {
     plugins?: Record<string, unknown>;
   };
@@ -464,27 +475,18 @@ export function addTranslationFile(
 
   const {project} = appProjectResult;
   const sourceRoot = getSourceRoot(project);
-  const libraryTranslationPath = `./node_modules/@isyfact/isy-angular-widgets/assets/i18n/${language}`;
+  const libraryTranslationPath = `/node_modules/@isyfact/isy-angular-widgets/assets/i18n/${language}`;
   const translationFilePath = `${sourceRoot}/assets/i18n/${language}`;
 
-  const isyTranslation = tree.read(libraryTranslationPath);
-
-  if (!isyTranslation) {
-    throw new SchematicsException('❌ Could not find isy-angular-widgets translation file.');
-  }
+  const isyTranslation = readFileAsUtf8(tree, libraryTranslationPath);
 
   if (!tree.exists(translationFilePath)) {
-    tree.create(translationFilePath, isyTranslation.toString('utf-8'));
+    tree.create(translationFilePath, isyTranslation);
     context.logger.info(`√ Added language file '${language}'.`);
     return;
   }
 
-  const translation = tree.read(translationFilePath);
-
-  if (!translation) {
-    throw new SchematicsException(`❌ Could not read file ${translationFilePath}.`);
-  }
-
+  const translation = readFileAsUtf8(tree, translationFilePath);
   const translationJson = parseJsonFile(translation, translationFilePath);
   const isyTranslationJson = parseJsonFile(isyTranslation, libraryTranslationPath);
 
@@ -517,9 +519,9 @@ export function ngAdd(): Rule {
     addPackageToPackageJson(tree, 'tailwindcss-primeui', '^0.6.1');
 
     // Required build dependencies
-    addDevPackageToPackageJson(tree, 'tailwindcss', '^4.1.4');
-    addDevPackageToPackageJson(tree, '@tailwindcss/postcss', '^4.1.4');
-    addDevPackageToPackageJson(tree, 'postcss', '^8.4.49');
+    addDevPackageToPackageJson(tree, 'tailwindcss', '^4.2.4');
+    addDevPackageToPackageJson(tree, '@tailwindcss/postcss', '^4.2.4');
+    addDevPackageToPackageJson(tree, 'postcss', '^8.5.10');
 
     createTailwindEntryFile(workspace, context, tree);
     createPostCssConfig(context, tree);

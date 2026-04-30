@@ -1,13 +1,13 @@
 <h1>PrimeNG Panels</h1>
 <h2>Content Organisor</h2>
-<div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12 xl:col-span-6 flex flex-col gap-2">
     <h3>Accordion</h3>
     <p-accordion value="0">
       <p-accordion-panel value="0">
         <p-accordion-header>Header I</p-accordion-header>
         <p-accordion-content>
-          <p class="m-0 pt-3">
+          <p class="m-0 pt-4">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
             dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
             clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
@@ -19,7 +19,7 @@
       <p-accordion-panel value="1">
         <p-accordion-header>Header II</p-accordion-header>
         <p-accordion-content>
-          <p class="m-0 pt-3">
+          <p class="m-0 pt-4">
             Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
             amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
@@ -30,7 +30,7 @@
       <p-accordion-panel value="2">
         <p-accordion-header>Header III</p-accordion-header>
         <p-accordion-content>
-          <p class="m-0 pt-3">
+          <p class="m-0 pt-4">
             Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
             commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
             vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
@@ -40,11 +40,11 @@
       </p-accordion-panel>
     </p-accordion>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
+  <div class="col-span-12 xl:col-span-6 flex flex-col gap-2">
     <h3>Panel</h3>
     <p-panel header="Panel Header" [toggleable]="true"> Content </p-panel>
   </div>
-  <div class="col-12 flex flex-column gap-2">
+  <div class="col-span-12 flex flex-col gap-2">
     <h3>Tabs</h3>
     <p-tabs value="0">
       <p-tablist>
@@ -62,16 +62,16 @@
 </div>
 <p-divider />
 <h2>Content Container</h2>
-<div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12 xl:col-span-6 flex flex-col gap-2">
     <h3>Card</h3>
     <p-card header="Card Header" subheader="Card Subheader"> Content </p-card>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
+  <div class="col-span-12 xl:col-span-6 flex flex-col gap-2">
     <h3>Fieldset</h3>
     <p-fieldset legend="Fieldset Header"> Content </p-fieldset>
   </div>
-  <div class="col-12 flex flex-column gap-2">
+  <div class="col-span-12 flex flex-col gap-2">
     <h3>ScrollPanel</h3>
     <p-scrollpanel [style]="{height: '150px'}">
       <p>
@@ -97,19 +97,19 @@
 </div>
 <p-divider />
 <h2>Separator</h2>
-<div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12 xl:col-span-6 flex flex-col gap-2">
     <h3>Splitter</h3>
-    <p-splitter [style]="{height: '75px'}" class="mb-8">
+    <p-splitter [style]="{height: '75px'}" class="mb-20">
       <ng-template #panelLeftSide>
-        <div class="flex align-items-center justify-content-center h-full">Left Side</div>
+        <div class="flex items-center justify-center h-full">Left Side</div>
       </ng-template>
       <ng-template #panelRightSide>
-        <div class="flex align-items-center justify-content-center h-full">Right Side</div>
+        <div class="flex items-center justify-center h-full">Right Side</div>
       </ng-template>
     </p-splitter>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
+  <div class="col-span-12 xl:col-span-6 flex flex-col gap-2">
     <h3>Divider</h3>
     Text above divider.
     <p-divider />
@@ -118,8 +118,8 @@
 </div>
 <p-divider />
 <h2>Design Pattern</h2>
-<div class="grid">
-  <div class="col-12 flex flex-column gap-2">
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12 flex flex-col gap-2">
     <h3>Toolbar</h3>
     <p-toolbar>
       <ng-template #start>
@@ -138,7 +138,7 @@
       </ng-template>
     </p-toolbar>
   </div>
-  <div class="col-12 flex flex-column gap-2">
+  <div class="col-span-12 flex flex-col gap-2">
     <h3>Stepper</h3>
     <p-stepper [value]="1">
       <p-step-list>
@@ -149,28 +149,28 @@
       <p-step-panels>
         <p-step-panel [value]="1">
           <ng-template #content1 let-activateCallback="activateCallback">
-            <div class="flex flex-column h-12rem">
+            <div class="flex flex-col h-48">
               <div
-                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+                class="border-2 border-dashed border-surface rounded-border bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
               >
                 Content I
               </div>
             </div>
-            <div class="flex pt-6 justify-content-end">
+            <div class="flex pt-12 justify-end">
               <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
             </div>
           </ng-template>
         </p-step-panel>
         <p-step-panel [value]="2">
           <ng-template #content2 let-activateCallback="activateCallback">
-            <div class="flex flex-column h-12rem">
+            <div class="flex flex-col h-48">
               <div
-                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+                class="border-2 border-dashed border-surface rounded-border bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
               >
                 Content II
               </div>
             </div>
-            <div class="flex pt-6 justify-content-between">
+            <div class="flex pt-12 justify-between">
               <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
               <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" />
             </div>
@@ -178,14 +178,14 @@
         </p-step-panel>
         <p-step-panel [value]="3">
           <ng-template #content3 let-activateCallback="activateCallback">
-            <div class="flex flex-column h-12rem">
+            <div class="flex flex-col h-48">
               <div
-                class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
+                class="border-2 border-dashed border-surface rounded-border bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
               >
                 Content III
               </div>
             </div>
-            <div class="flex pt-6 justify-content-start">
+            <div class="flex pt-12 justify-start">
               <p-button label="Back" icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(2)" />
             </div>
           </ng-template>

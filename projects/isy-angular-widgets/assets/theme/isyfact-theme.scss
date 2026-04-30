@@ -48,9 +48,9 @@
     --p-list-option-padding: 0.8125rem 0.75rem;
 
     // button
-    --p-form-field-padding-x: 0.75rem;
-    --p-form-field-padding-y: 0.75rem;
-    --p-button-padding-y: 0.75rem;
+    --p-form-field-padding-x: 0.563rem;
+    --p-form-field-padding-y: 0.563rem;
+    --p-button-padding-y: 0.563rem;
     --p-button-icon-only-width: 2.75rem;
     --p-button-text-secondary-hover-background: var(--p-surface-200);
     --p-button-text-danger-color: #{vars.$isyfactAlertColor};
@@ -97,19 +97,6 @@
     // accordion
     --p-accordion-content-padding: 1.125rem 1.125rem;
 
-    // workaround: PrimeNG definePreset does not work properly (https://github.com/primefaces/primeng/issues/17833)
-    --p-emerald-50: var(--p-gray-50);
-    --p-emerald-100: var(--p-gray-100);
-    --p-emerald-200: var(--p-gray-200);
-    --p-emerald-300: var(--p-gray-300);
-    --p-emerald-400: var(--p-gray-400);
-    --p-emerald-500: var(--p-gray-500);
-    --p-emerald-600: var(--p-gray-600);
-    --p-emerald-700: var(--p-gray-700);
-    --p-emerald-800: var(--p-gray-800);
-    --p-emerald-900: var(--p-gray-900);
-    --p-emerald-950: var(--p-gray-950);
-
     // message
     --p-message-text-font-weight: 500;
     --p-message-text-lg-font-size: 1.1667rem;
@@ -125,7 +112,7 @@
     --isyfact-space-xs: 0.25rem;
     --isyfact-space-sm: 0.5rem;
     --isyfact-space-md: 1rem;
-    --isyfact-button-padding-block: 0.75rem;
+    --isyfact-button-padding-block: 0.563rem;
   }
 
   body {
@@ -144,10 +131,5 @@
   .p-progressspinner-circle {
     stroke: #{vars.$isyfactProgressSpinnerStroke};
     animation: #{vars.$isyfactProgressSpinnerAnimation};
-  }
-
-  // Adjust the margin of the panel menu submenu to align with the IsyFact design
-  .p-panelmenu .p-panelmenu-submenu {
-    margin: -1rem 0 0 -2.5rem;
   }
 }
