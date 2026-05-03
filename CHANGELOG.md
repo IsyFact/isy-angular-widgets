@@ -1,3 +1,7 @@
+# 21.0.1 - 03.05.2026
+## Fixes
+- IFS-5223: Der referenzierte Font-Family-Name wurde auf `BundesSans Web` korrigiert, damit die systemseitig installierte Schrift korrekt geladen wird.
+
 # 21.0.0 - 16.02.2026
 ## Breaking Changes
 - IFS-5039: Upgrade der Angularversion und PrimeNG-Bibliothek von 20 auf 21 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
