@@ -11,10 +11,11 @@ import {SchematicsException, Tree} from '@angular-devkit/schematics';
 interface PackageJson {
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
+  scripts?: Record<string, string>;
 }
 
 const FILE_NAME = 'package.json';
-const JSON_INDENT_SPACES = 2;
+const JSON_SPACES = 2;
 
 /**
  * Sorts the keys of the given object.
@@ -31,33 +32,21 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
 }
 
 /**
- * Safely reads a file as UTF-8 string.
- * @param host Tree
- * @param fileName File path
- * @returns File content as string or null
- */
-function readFileAsUtf8(host: Tree, fileName: string): string | null {
-  if (!host.exists(fileName)) {
-    return null;
-  }
-
-  try {
-    return host.readText(fileName);
-  } catch {
-    return null;
-  }
-}
-
-/**
  * Reads and parses package.json from the host tree.
  * @param host Tree containing package.json
- * @returns Parsed package.json object or null if file is missing/unreadable
- * @throws {SchematicsException} if package.json exists but contains invalid JSON
+ * @returns Parsed package.json or null if the file does not exist
+ * @throws {SchematicsException} If package.json cannot be parsed
  */
 function readPackageJson(host: Tree): PackageJson | null {
-  const sourceText = readFileAsUtf8(host, FILE_NAME);
+  if (!host.exists(FILE_NAME)) {
+    return null;
+  }
 
-  if (!sourceText) {
+  let sourceText: string;
+
+  try {
+    sourceText = host.readText(FILE_NAME);
+  } catch {
     return null;
   }
 
@@ -74,16 +63,16 @@ function readPackageJson(host: Tree): PackageJson | null {
  * @param packageJson Parsed package.json object
  */
 function writePackageJson(host: Tree, packageJson: PackageJson): void {
-  host.overwrite(FILE_NAME, JSON.stringify(packageJson, null, JSON_INDENT_SPACES));
+  host.overwrite(FILE_NAME, JSON.stringify(packageJson, null, JSON_SPACES));
 }
 
 /**
- * Adds a package to the given section in package.json.
- * @param host Tree with packages and their versions
- * @param section Target section in package.json
- * @param pkg The package name
- * @param version The version of the package
- * @returns The updated tree
+ * Adds a package to the given package.json section.
+ * @param host Tree containing package.json
+ * @param section Target package.json section
+ * @param pkg Package name
+ * @param version Package version
+ * @returns The updated host tree
  */
 function addPackageToSection(
   host: Tree,
@@ -109,29 +98,29 @@ function addPackageToSection(
 }
 
 /**
- * Adds a package to the dependencies section in package.json.
+ * Adds a package to the package.json in the given host tree.
  * @param host Tree with packages and their versions
- * @param pkg The package name
+ * @param pkg The package who gets added to package.json
  * @param version The version of the package
- * @returns The updated tree
+ * @returns The new package.json as Tree
  */
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
   return addPackageToSection(host, 'dependencies', pkg, version);
 }
 
 /**
- * Adds a package to the devDependencies section in package.json.
+ * Adds a package to the devDependencies in the package.json in the given host tree.
  * @param host Tree with packages and their versions
- * @param pkg The package name
+ * @param pkg The package who gets added to package.json devDependencies
  * @param version The version of the package
- * @returns The updated tree
+ * @returns The new package.json as Tree
  */
 export function addDevPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
   return addPackageToSection(host, 'devDependencies', pkg, version);
 }
 
 /**
- * Gets the version of the specified package by looking at package.json in the given tree.
+ * Gets the version of the specified package by looking at the package.json in the given tree.
  * Checks dependencies first, then devDependencies.
  * @param tree Tree with packages and their versions
  * @param name The name of the package
@@ -145,4 +134,28 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
   }
 
   return packageJson.dependencies?.[name] ?? packageJson.devDependencies?.[name] ?? null;
+}
+
+/**
+ * Adds a script to the scripts section of package.json if it does not already exist.
+ * @param host Tree containing package.json
+ * @param scriptName Name of the npm script
+ * @param script Script command
+ * @returns The updated host tree
+ */
+export function addScriptToPackageJson(host: Tree, scriptName: string, script: string): Tree {
+  const packageJson = readPackageJson(host);
+
+  if (!packageJson) {
+    return host;
+  }
+
+  packageJson.scripts ??= {};
+
+  if (!packageJson.scripts[scriptName]) {
+    packageJson.scripts[scriptName] = script;
+    writePackageJson(host, packageJson);
+  }
+
+  return host;
 }

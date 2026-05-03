@@ -133,10 +133,38 @@
           <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
-              fieldId="nationality"
-              [control]="personalInfoForm.controls.nationality | formControl"
+              labelId="label-nationalities"
+              fieldId="nationalities"
+              [control]="personalInfoForm.controls.nationalities | formControl"
+              [validationMessages]="{
+                required: 'isyAngularWidgetsDemo.messages.nationalitiesRequired' | translate,
+                maxSelected:
+                  'isyAngularWidgetsDemo.messages.nationalitiesMaxReached' | translate: {count: maxNationalities}
+              }"
             >
-              <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
+              <div class="flex flex-column gap-2">
+                <p-multiselect
+                  inputId="nationalities"
+                  formControlName="nationalities"
+                  ariaLabelledBy="label-nationalities"
+                  [options]="nationalityOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  display="chip"
+                  [maxSelectedLabels]="maxNationalities"
+                  [filter]="true"
+                  [selectionLimit]="maxNationalities"
+                  class="w-full"
+                  appendTo="body"
+                ></p-multiselect>
+
+                <small class="text-color-secondary">
+                  {{
+                    'isyAngularWidgetsDemo.messages.nationalitiesHint'
+                      | translate: {count: maxNationalities, current: getSelectedNationalitiesCount()}
+                  }}
+                </small>
+              </div>
             </isy-form-wrapper>
           </div>
           <div class="col-span-12 md:col-span-6 xl:col-span-4">
