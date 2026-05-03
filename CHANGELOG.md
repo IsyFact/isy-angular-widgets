@@ -1,3 +1,7 @@
+# 20.0.1 - 03.05.2026
+## Fixes
+- IFS-5223: Der referenzierte Font-Family-Name wurde auf `BundesSans Web` korrigiert, damit die systemseitig installierte Schrift korrekt geladen wird.
+
 # 20.0.0 - 08.08.2025
 ## Features
 - IFS-4761: Upgrade der Angularversion von 19 auf 20 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
