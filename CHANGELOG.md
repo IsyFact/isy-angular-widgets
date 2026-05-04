@@ -1,3 +1,7 @@
+# 19.1.1 - 03.05.2026
+## Fixes
+- IFS-5223: Der referenzierte Font-Family-Name wurde auf `BundesSans Web` korrigiert, damit die systemseitig installierte Schrift korrekt geladen wird.
+
 # 19.1.0 - 27.06.2025
 ## Features
 - IFS-4374: Die Schriftgröße der Fehlertexte wurde zur Verbesserung der Barrierefreiheit erhöht
