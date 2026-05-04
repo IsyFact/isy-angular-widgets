@@ -1,4 +1,4 @@
-<div class="flex justify-content-center w-full">
+<div class="flex justify-center w-full">
   <div class="w-full" style="max-width: 2560px">
     <!-- The Isy-Hauptfenster is the main frame of isy-angular-widgets. It provides three regions to be filled,
     like in the following example. The side bar regions can be disabled with corresponding parameters. -->
@@ -12,7 +12,7 @@
       [userInfo]="userInfo"
       [linksNavigationTitle]="'isyAngularWidgetsDemo.labels.leftSidebarTitle' | translate"
     >
-      <div Hauptnavigation-Tools class="flex align-items-center gap-2">
+      <div Hauptnavigation-Tools class="flex items-center gap-2">
         <!-- The Hauptnavigation-Tools are a region within the Menu and could for example be used for a language selector. -->
         <p-select
           id="language-selector"
@@ -23,14 +23,14 @@
         >
           <ng-template pTemplate="selectedItem">
             @if (selectedLanguage) {
-              <div class="flex align-items-center gap-2">
+              <div class="flex items-center gap-2">
                 <span [class]="'fi fi-' + getLanguageIcon(selectedLanguage)"></span>
                 <div>{{ 'isyAngularWidgetsDemo.settings.languages.' + selectedLanguage | translate }}</div>
               </div>
             }
           </ng-template>
           <ng-template let-language pTemplate="item">
-            <div class="flex align-items-center gap-2">
+            <div class="flex items-center gap-2">
               <span [class]="'fi fi-' + getLanguageIcon(language)"></span>
               <div>{{ 'isyAngularWidgetsDemo.settings.languages.' + language | translate }}</div>
             </div>
@@ -59,7 +59,7 @@
         Seitentoolbar
       >
         <div middle></div>
-        <div right class="flex align-items-center gap-2">
+        <div right class="flex items-center gap-2">
           <p-button icon="pi pi-print" [ariaLabel]="'isyAngularWidgetsDemo.aria.print' | translate" [outlined]="true" />
           <p-button
             icon="pi pi-info-circle"

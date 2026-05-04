@@ -11,11 +11,11 @@
     [options]="displayedCharacters"
     optionLabel="zeichen"
     [(ngModel)]="selectedZeichenObjekt"
-    class="flex-grow-1 overflow-y-scroll character-selectbutton"
+    class="grow overflow-y-scroll character-selectbutton"
   />
   <div class="lower-right-panel">
     @if (selectedZeichenObjekt) {
-      <isy-input-char-preview [zeichenObjekt]="selectedZeichenObjekt" class="flex-grow-1"></isy-input-char-preview>
+      <isy-input-char-preview [zeichenObjekt]="selectedZeichenObjekt" class="grow"></isy-input-char-preview>
     }
 
     <button
@@ -23,7 +23,7 @@
       pRipple
       pButton
       [disabled]="!selectedZeichenObjekt"
-      class="flex-shrink-0 font-bold"
+      class="shrink-0 font-bold"
       (click)="insertSelectedZeichen()"
     >
       {{ configService.getTranslation('inputChar.insert') }}

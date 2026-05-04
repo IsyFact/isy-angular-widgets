@@ -1,4 +1,7 @@
 # 21.1.0 -
+## Breaking Changes
+- IFS-5378: Die Demo-Anwendung wurde von PrimeFlex auf Tailwind CSS migriert
+- IFS-5327: Die Bibliothek wurde von PrimeFlex auf Tailwind CSS migriert
 ## Features
 - IFS-2966:  Anpassungen: 
     - schematics/collection.json

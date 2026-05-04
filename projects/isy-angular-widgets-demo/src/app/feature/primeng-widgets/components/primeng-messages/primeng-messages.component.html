@@ -1,6 +1,6 @@
 <h1>PrimeNG Messages</h1>
-<div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h2>Messages</h2>
     @for (message of messages; track message.key) {
       <p-message
@@ -19,7 +19,7 @@
       >
     }
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h2>Toast</h2>
     <p-button (onClick)="showToastMessage()" label="Show" />
     <p-toast key="toast" position="bottom-right" />

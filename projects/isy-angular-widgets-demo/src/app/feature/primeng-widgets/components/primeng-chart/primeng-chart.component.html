@@ -1,43 +1,43 @@
 <h1>PrimeNG Charts</h1>
 <h2>Bar Charts</h2>
-<div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h3>Vertical</h3>
     <p-chart type="bar" [data]="barChartData" [options]="verticalBarChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h3>Horizontal</h3>
     <p-chart type="bar" [data]="barChartData" [options]="horizontalBarChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h3>Stacked</h3>
     <p-chart type="bar" [data]="barChartData" [options]="stackedBarChartOptions" />
   </div>
 </div>
 <p-divider />
 <h2>Circular Charts</h2>
-<div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+<div class="grid grid-cols-12 gap-4">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h3>Pie Chart</h3>
     <p-chart type="pie" [data]="circledChartData" [options]="pieChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h3>Doughnut Chart</h3>
     <p-chart type="doughnut" [data]="circledChartData" [options]="doughnutChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h3>PolarArea Chart</h3>
     <p-chart type="polarArea" [data]="circledChartData" [options]="polarAreaChartOptions" />
   </div>
 </div>
 <p-divider />
 <h2>Other Charts</h2>
-<div class="grid mb-3">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+<div class="grid grid-cols-12 gap-4 mb-4">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h3>Line Chart</h3>
     <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
+  <div class="col-span-12 md:col-span-6 flex flex-col gap-2">
     <h3>Radar Chart</h3>
     <p-chart type="radar" [data]="radarChartData" [options]="radarChartOptions" />
   </div>

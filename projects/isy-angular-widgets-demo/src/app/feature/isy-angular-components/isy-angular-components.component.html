@@ -1,7 +1,7 @@
 <form [formGroup]="personalInfoForm">
   <h1>Isy-Angular Komponenten</h1>
-  <div class="grid">
-    <div class="col-12 flex flex-column gap-2">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 flex flex-col gap-2">
       <h2>Seitentoolbar</h2>
       <isy-seiten-toolbar
         class="skip-link"
@@ -12,7 +12,7 @@
         Seitentoolbar
       >
         <div middle></div>
-        <div right class="flex align-items-center gap-2">
+        <div right class="flex items-center gap-2">
           <p-button
             icon="pi pi-print"
             [ariaLabel]="'isyAngularWidgetsDemo.aria.print' | translate"
@@ -26,7 +26,7 @@
         </div>
       </isy-seiten-toolbar>
     </div>
-    <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 flex flex-col gap-2">
       <h2>FormWrapper</h2>
       <isy-form-wrapper
         [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
@@ -46,11 +46,11 @@
         />
       </isy-form-wrapper>
     </div>
-    <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-      <div class="flex align-items-center justify-content-between flex-wrap gap-3">
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 flex flex-col gap-2">
+      <div class="flex items-center justify-between flex-wrap gap-4">
         <h2>IncompleteDate</h2>
 
-        <div class="flex align-items-center gap-2">
+        <div class="flex items-center gap-2">
           <p-checkbox
             inputId="transfer-iso8601"
             name="transferIso8601"
@@ -82,13 +82,13 @@
         >
         </isy-incomplete-date>
 
-        <small class="block mt-2 text-color-secondary">
+        <small class="block mt-2 text-muted-color">
           Technische Repräsentation des Datums:
           {{ personalInfoForm.controls.dateOfEntry.value || '—' }}
         </small>
       </isy-form-wrapper>
     </div>
-    <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+    <div class="col-span-12 md:col-span-6 xl:col-span-4 flex flex-col gap-2">
       <h2>InputChar</h2>
       <isy-form-wrapper
         [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"

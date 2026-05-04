@@ -40,7 +40,7 @@ describe('ModalarmePatternsComponent', () => {
     spectator = createComponent();
     component = spectator.component;
     msgService = spectator.inject(MessageService);
-    liveAnnouncer = liveAnnouncerSpy;
+    liveAnnouncer = spectator.inject(LiveAnnouncer);
     spyOn(msgService, 'add');
   });
 

@@ -1,13 +1,13 @@
-<div class="grid justify-content-center">
+<div class="grid grid-cols-12 gap-4 justify-center">
   @for (item of widgetMenuItems; track $index) {
-    <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+    <div class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
       <demo-dashboard-widget [menuItems]="item" [backgroundColor]="widgetBackgroundColors[$index]">
       </demo-dashboard-widget>
     </div>
   }
 
   @for (item of chartInitData; track $index) {
-    <div class="col-12 sm:col-12 md:col-6 lg:col-4 xl:col-3">
+    <div class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
       <p-card>
         <demo-chart #chart [type]="item.type" [data]="item.data!" [options]="item.options"> </demo-chart>
       </p-card>

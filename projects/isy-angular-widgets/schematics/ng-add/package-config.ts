@@ -6,11 +6,11 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Tree} from '@angular-devkit/schematics';
+import {SchematicsException, Tree} from '@angular-devkit/schematics';
 
 interface PackageJson {
-  dependencies: Record<string, string>;
-  devDependencies: Record<string, string>;
+  dependencies?: Record<string, string>;
+  devDependencies?: Record<string, string>;
   scripts?: Record<string, string>;
 }
 
@@ -35,21 +35,66 @@ function sortObjectByKeys(obj: Record<string, string>): Record<string, string> {
  * Reads and parses package.json from the host tree.
  * @param host Tree containing package.json
  * @returns Parsed package.json or null if the file does not exist
+ * @throws {SchematicsException} If package.json cannot be parsed
  */
 function readPackageJson(host: Tree): PackageJson | null {
   if (!host.exists(FILE_NAME)) {
     return null;
   }
 
-  const packageJsonBuffer = host.read(FILE_NAME) as Uint8Array | null;
+  let sourceText: string;
 
-  if (!packageJsonBuffer) {
+  try {
+    sourceText = host.readText(FILE_NAME);
+  } catch {
     return null;
   }
 
-  const sourceText = new TextDecoder('utf-8').decode(packageJsonBuffer);
+  try {
+    return JSON.parse(sourceText) as PackageJson;
+  } catch {
+    throw new SchematicsException(`❌ Could not parse '${FILE_NAME}'.`);
+  }
+}
 
-  return JSON.parse(sourceText) as PackageJson;
+/**
+ * Writes package.json back to the host tree.
+ * @param host Tree containing package.json
+ * @param packageJson Parsed package.json object
+ */
+function writePackageJson(host: Tree, packageJson: PackageJson): void {
+  host.overwrite(FILE_NAME, JSON.stringify(packageJson, null, JSON_SPACES));
+}
+
+/**
+ * Adds a package to the given package.json section.
+ * @param host Tree containing package.json
+ * @param section Target package.json section
+ * @param pkg Package name
+ * @param version Package version
+ * @returns The updated host tree
+ */
+function addPackageToSection(
+  host: Tree,
+  section: 'dependencies' | 'devDependencies',
+  pkg: string,
+  version: string
+): Tree {
+  const packageJson = readPackageJson(host);
+
+  if (!packageJson) {
+    return host;
+  }
+
+  const targetSection = (packageJson[section] ??= {});
+
+  if (!targetSection[pkg]) {
+    targetSection[pkg] = version;
+    packageJson[section] = sortObjectByKeys(targetSection);
+    writePackageJson(host, packageJson);
+  }
+
+  return host;
 }
 
 /**
@@ -60,21 +105,7 @@ function readPackageJson(host: Tree): PackageJson | null {
  * @returns The new package.json as Tree
  */
 export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
-  const json = readPackageJson(host);
-
-  if (!json) {
-    return host;
-  }
-
-  json.dependencies ??= {};
-
-  if (!json.dependencies[pkg]) {
-    json.dependencies[pkg] = version;
-    json.dependencies = sortObjectByKeys(json.dependencies);
-  }
-
-  host.overwrite(FILE_NAME, JSON.stringify(json, null, JSON_SPACES));
-  return host;
+  return addPackageToSection(host, 'dependencies', pkg, version);
 }
 
 /**
@@ -85,25 +116,12 @@ export function addPackageToPackageJson(host: Tree, pkg: string, version: string
  * @returns The new package.json as Tree
  */
 export function addDevPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
-  const json = readPackageJson(host);
-
-  if (!json) {
-    return host;
-  }
-
-  json.devDependencies ??= {};
-
-  if (!json.devDependencies[pkg]) {
-    json.devDependencies[pkg] = version;
-    json.devDependencies = sortObjectByKeys(json.devDependencies);
-  }
-
-  host.overwrite(FILE_NAME, JSON.stringify(json, null, JSON_SPACES));
-  return host;
+  return addPackageToSection(host, 'devDependencies', pkg, version);
 }
 
 /**
  * Gets the version of the specified package by looking at the package.json in the given tree.
+ * Checks dependencies first, then devDependencies.
  * @param tree Tree with packages and their versions
  * @param name The name of the package
  * @returns Null or the package version as a string
@@ -115,7 +133,7 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
     return null;
   }
 
-  return packageJson.dependencies[name] ?? null;
+  return packageJson.dependencies?.[name] ?? packageJson.devDependencies?.[name] ?? null;
 }
 
 /**
@@ -126,18 +144,18 @@ export function getPackageVersionFromPackageJson(tree: Tree, name: string): stri
  * @returns The updated host tree
  */
 export function addScriptToPackageJson(host: Tree, scriptName: string, script: string): Tree {
-  const json = readPackageJson(host);
+  const packageJson = readPackageJson(host);
 
-  if (!json) {
+  if (!packageJson) {
     return host;
   }
 
-  json.scripts ??= {};
+  packageJson.scripts ??= {};
 
-  if (!json.scripts[scriptName]) {
-    json.scripts[scriptName] = script;
+  if (!packageJson.scripts[scriptName]) {
+    packageJson.scripts[scriptName] = script;
+    writePackageJson(host, packageJson);
   }
 
-  host.overwrite(FILE_NAME, JSON.stringify(json, null, JSON_SPACES));
   return host;
 }
