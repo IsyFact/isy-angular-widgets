@@ -74,7 +74,7 @@ export class IncompleteDateService {
     const formats = date.split('.');
     const dateKeys = ['day', 'month', 'year'];
 
-    const dateObject = dateKeys.reduce<DateObject>(
+    const dateObject = dateKeys.reduce(
       (object: DateObject, element: string, index: number) => {
         let partOfFormat = formats[index];
 

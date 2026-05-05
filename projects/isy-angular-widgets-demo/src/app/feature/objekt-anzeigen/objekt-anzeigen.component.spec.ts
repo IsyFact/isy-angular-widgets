@@ -4,12 +4,12 @@ import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from '../../core/user/userInfoPublicService';
 import {permissions} from '../../app.permission';
 import {DebugElement} from '@angular/core';
-import {MessageService} from 'primeng/api';
-import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator';
 import {ComponentFixture} from '@angular/core/testing';
+import {FormControl} from '@angular/forms';
+import {MessageService} from 'primeng/api';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
 import {provideHttpClient} from '@angular/common/http';
-
 import {
   TranslateModule,
   TranslateLoader,
@@ -17,6 +17,15 @@ import {
   TranslateService,
   provideTranslateService
 } from '@ngx-translate/core';
+
+interface ObjektAnzeigenComponentTestAccess {
+  lastTrigger?: HTMLElement;
+}
+
+interface ObjektAnzeigenComponentPrivateAccess {
+  mapInitialNationalities(initialNationality?: string): string[];
+  maxSelectedNationalitiesValidator(max: number): (control: FormControl) => Record<string, unknown> | null;
+}
 
 describe('Integration Tests: ObjektAnzeigenComponent', () => {
   let userInfoService: UserInfoPublicService;
@@ -38,13 +47,36 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     ]
   });
 
+  const getComponentAccess = (): ObjektAnzeigenComponentTestAccess =>
+    component as unknown as ObjektAnzeigenComponentTestAccess;
+
+  const getPrivateAccess = (): ObjektAnzeigenComponentPrivateAccess =>
+    component as unknown as ObjektAnzeigenComponentPrivateAccess;
+
   beforeEach(() => {
     spectator = createComponent();
 
     component = spectator.component;
     const translate = spectator.inject(TranslateService);
-    translate.setTranslation('de', {'isyAngularWidgetsDemo.labels.optionMale': 'Männlich'}, true);
+    translate.setTranslation(
+      'de',
+      {
+        'isyAngularWidgetsDemo.labels.optionMale': 'Männlich',
+        'isyAngularWidgetsDemo.labels.nationalityGerman': 'Deutsch',
+        'isyAngularWidgetsDemo.labels.nationalityFrench': 'Französisch',
+        'isyAngularWidgetsDemo.labels.nationalitySpanish': 'Spanisch',
+        'isyAngularWidgetsDemo.labels.nationalityItalian': 'Italienisch',
+        'isyAngularWidgetsDemo.labels.nationalityPolish': 'Polnisch',
+        'isyAngularWidgetsDemo.messages.nationalitiesHint':
+          'Mindestens 1, maximal {{count}} Einträge. Aktuell: {{current}}.',
+        'isyAngularWidgetsDemo.messages.nationalitiesRequired': 'Mindestens eine Staatsangehörigkeit ist erforderlich.',
+        'isyAngularWidgetsDemo.messages.nationalitiesMaxReached':
+          'Es können maximal {{count}} Staatsangehörigkeiten erfasst werden.'
+      },
+      true
+    );
     translate.use('de');
+
     spectator.detectChanges();
     fixture = spectator.fixture;
     debugElement = fixture.debugElement;
@@ -56,7 +88,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     inputFields.firstName = debugElement.query(By.css('#first-name'));
     inputFields.birthName = debugElement.query(By.css('#birth-name'));
     inputFields.birthplace = debugElement.query(By.css('#birth-place'));
-    inputFields.nationality = debugElement.query(By.css('#nationality'));
+    inputFields.nationalities = debugElement.query(By.css('p-multiselect'));
     inputFields.gender = debugElement.query(By.css('#gender'));
     inputFields.phoneNumber = debugElement.query(By.css('#phone-number'));
     inputFields.birthDate = debugElement.query(By.css('#birth-date'));
@@ -69,7 +101,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   /**
-   * Is setting up roles and permissions
+   * Initializes roles and permissions for the tests.
    */
   function setupRolesAndPermissions(): void {
     const userInfoData = userInfoService.getUserInfo();
@@ -89,7 +121,9 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(inputFields.firstName.nativeElement.value).toEqual('Max');
     expect(inputFields.birthName.nativeElement.value.trim()).toEqual('Mustermann');
     expect(inputFields.birthplace.nativeElement.value).toEqual('Köln');
-    expect(inputFields.nationality.nativeElement.value).toEqual('Deutsch');
+    expect(component.personalInfoForm.get('nationalities')?.value).toEqual(['DE']);
+    expect(component.getSelectedNationalitiesCount()).toBe(1);
+    expect(inputFields.nationalities).toBeTruthy();
     expect(inputFields.gender.nativeElement.innerText).toEqual('Männlich');
     expect(inputFields.phoneNumber.nativeElement.value).toEqual('');
     expect(inputFields.birthDate.nativeElement.value).toEqual('03.08.1980');
@@ -156,11 +190,19 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   it('should display notification message if personalien have been saved', () => {
-    const msg = createSpyObject(MessageService);
-    msg.add({});
+    const messageService = spectator.inject(MessageService);
+    const addSpy = spyOn(messageService, 'add');
+
     component.savePersonalien();
     fixture.detectChanges();
-    expect(msg.add).toHaveBeenCalled();
+
+    expect(addSpy).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        severity: 'success',
+        summary: jasmine.any(String),
+        detail: jasmine.any(String)
+      })
+    );
   });
 
   it('should upload file', () => {
@@ -242,35 +284,173 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(remainingAddress.city).toEqual('City A');
   });
 
-  it('should open the character dialog when the isy-input-char button is clicked', () => {
-    const button = spectator.query('.input-char-button') as HTMLButtonElement;
-    spectator.click(button);
-    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
-    expect(dialog).toBeTruthy();
+  it('should render nationality multiselect', () => {
+    expect(inputFields.nationalities).toBeTruthy();
   });
 
-  it('should not open the character dialog when pressing the enter button in the input field', () => {
-    const input = spectator.query('#first-name') as HTMLButtonElement;
-    spectator.dispatchKeyboardEvent(input, 'keydown', 'Enter');
-    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
-    expect(dialog).toBeFalsy();
+  it('should provide translated nationality options', () => {
+    expect(component.nationalityOptions).toEqual([
+      {label: 'Deutsch', value: 'DE'},
+      {label: 'Französisch', value: 'FR'},
+      {label: 'Spanisch', value: 'ES'},
+      {label: 'Italienisch', value: 'IT'},
+      {label: 'Polnisch', value: 'PL'}
+    ]);
   });
 
-  it('should not open the Sachverhalt dialog by default', () => {
-    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
-    expect(dialog).toBeFalsy();
+  it('should initialize nationalities with one required entry', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    expect(nationalitiesControl?.value).toEqual(['DE']);
+    expect(component.getSelectedNationalitiesCount()).toBe(1);
+    expect(component.showNationalitiesError('required')).toBeFalse();
   });
 
-  it('should open the Sachverhalt dialog when the edit Sachverhalt button is clicked', () => {
-    const tab = spectator.query('p-tab[value="1"]') as HTMLElement;
-    tab.click();
+  it('should update selected nationalities in the form control', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    nationalitiesControl?.setValue(['DE', 'FR']);
+    nationalitiesControl?.markAsTouched();
+    nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    const button = spectator.query('[icon="pi pi-pencil"]') as HTMLButtonElement;
-    expect(button).toBeTruthy();
+    expect(nationalitiesControl?.value).toEqual(['DE', 'FR']);
+    expect(component.getSelectedNationalitiesCount()).toBe(2);
+  });
 
-    spectator.click(button);
-    const dialog = spectator.query('.p-dialog-mask') as HTMLElement;
-    expect(dialog).toBeTruthy();
+  it('should allow up to the configured maximum number of nationalities', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    nationalitiesControl?.setValue(['DE', 'FR', 'ES', 'IT', 'PL']);
+    nationalitiesControl?.markAsTouched();
+    nationalitiesControl?.updateValueAndValidity();
+    fixture.detectChanges();
+
+    expect(nationalitiesControl?.value).toEqual(['DE', 'FR', 'ES', 'IT', 'PL']);
+    expect(component.getSelectedNationalitiesCount()).toBe(component.maxNationalities);
+    expect(nationalitiesControl?.valid).toBeTrue();
+  });
+
+  it('should show required error when no nationality is selected', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    nationalitiesControl?.setValue([]);
+    nationalitiesControl?.markAsTouched();
+    nationalitiesControl?.updateValueAndValidity();
+    fixture.detectChanges();
+
+    expect(nationalitiesControl?.hasError('required')).toBeTrue();
+    expect(component.showNationalitiesError('required')).toBeTrue();
+  });
+
+  it('should not show required error before the control was touched or dirtied', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    nationalitiesControl?.setValue([]);
+    nationalitiesControl?.markAsUntouched();
+    nationalitiesControl?.markAsPristine();
+    nationalitiesControl?.updateValueAndValidity();
+    fixture.detectChanges();
+
+    expect(nationalitiesControl?.hasError('required')).toBeTrue();
+    expect(component.showNationalitiesError('required')).toBeFalse();
+  });
+
+  it('should show maxSelected error if maximum count is exceeded', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    nationalitiesControl?.setValue(['DE', 'FR', 'ES', 'IT', 'PL', 'XX']);
+    nationalitiesControl?.markAsTouched();
+    nationalitiesControl?.updateValueAndValidity();
+    fixture.detectChanges();
+
+    expect(nationalitiesControl?.hasError('maxSelected')).toBeTrue();
+    expect(component.showNationalitiesError('maxSelected')).toBeTrue();
+  });
+
+  it('should not show maxSelected error before the control was touched or dirtied', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    nationalitiesControl?.setValue(['DE', 'FR', 'ES', 'IT', 'PL', 'XX']);
+    nationalitiesControl?.markAsUntouched();
+    nationalitiesControl?.markAsPristine();
+    nationalitiesControl?.updateValueAndValidity();
+    fixture.detectChanges();
+
+    expect(nationalitiesControl?.hasError('maxSelected')).toBeTrue();
+    expect(component.showNationalitiesError('maxSelected')).toBeFalse();
+  });
+
+  it('should render nationality hint with current count', () => {
+    const pageText = fixture.nativeElement.textContent;
+
+    expect(pageText).toContain('Mindestens 1, maximal 5 Einträge. Aktuell: 1.');
+  });
+
+  it('should return zero selected nationalities if control value is null', () => {
+    const nationalitiesControl = component.personalInfoForm.get('nationalities');
+
+    nationalitiesControl?.setValue(null);
+    nationalitiesControl?.updateValueAndValidity();
+
+    expect(component.getSelectedNationalitiesCount()).toBe(0);
+  });
+
+  it('should map known legacy nationality to option value', () => {
+    const privateAccess = getPrivateAccess();
+
+    expect(privateAccess.mapInitialNationalities('Deutsch')).toEqual(['DE']);
+  });
+
+  it('should keep unknown legacy nationality value during mapping', () => {
+    const privateAccess = getPrivateAccess();
+
+    expect(privateAccess.mapInitialNationalities('Unbekannt')).toEqual(['Unbekannt']);
+  });
+
+  it('should return an empty array for empty legacy nationality values', () => {
+    const privateAccess = getPrivateAccess();
+
+    expect(privateAccess.mapInitialNationalities(undefined)).toEqual([]);
+    expect(privateAccess.mapInitialNationalities('')).toEqual([]);
+    expect(privateAccess.mapInitialNationalities('   ')).toEqual([]);
+  });
+
+  it('should return null from maxSelected validator when limit is not exceeded', () => {
+    const privateAccess = getPrivateAccess();
+    const validator = privateAccess.maxSelectedNationalitiesValidator(component.maxNationalities);
+    const result = validator(new FormControl(['DE', 'FR']));
+
+    expect(result).toBeNull();
+  });
+
+  it('should return maxSelected error object from validator when limit is exceeded', () => {
+    const privateAccess = getPrivateAccess();
+    const validator = privateAccess.maxSelectedNationalitiesValidator(component.maxNationalities);
+    const result = validator(new FormControl(['DE', 'FR', 'ES', 'IT', 'PL', 'XX']));
+
+    expect(result).toEqual({
+      maxSelected: {
+        requiredLength: 5,
+        actualLength: 6
+      }
+    });
+  });
+
+  it('should not restore focus when the last trigger is not connected', async () => {
+    const trigger = document.createElement('button');
+    const focusSpy = spyOn(trigger, 'focus');
+    spyOnProperty(trigger, 'isConnected', 'get').and.returnValue(false);
+
+    const componentAccess = getComponentAccess();
+    componentAccess.lastTrigger = trigger;
+
+    component.onDialogVisibleChange(false);
+    spectator.detectChanges();
+
+    await fixture.whenStable();
+    spectator.detectChanges();
+
+    expect(focusSpy).not.toHaveBeenCalled();
   });
 });

@@ -82,7 +82,7 @@ describe('Unit Tests: PersonenService', () => {
     expect(personalien.ablaufdatumReisepass).toBe(empty);
     expect(personalien.kreditkartennummer).toBe(empty);
     expect(personalien.ablaufdatumKreditkarte).toBe(empty);
-    expect(personalien.bilanz).toBeGreaterThan(60000);
+    expect(personalien.bilanz).toBeGreaterThan(600);
     expect(personalien.bilanz).toBeLessThan(100000);
 
     expect(person.sachverhalte).toEqual([]);

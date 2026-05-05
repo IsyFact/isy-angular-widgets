@@ -3,17 +3,21 @@
 }
 
 .blue-background {
-  background-color: var(--blue-200);
+  border: 1px solid var(--p-blue-200);
+  background-color: var(--p-blue-200);
 }
 
 .pink-background {
-  background-color: var(--pink-200);
+  border: 1px solid var(--p-pink-200);
+  background-color: var(--p-pink-200);
 }
 
 .orange-background {
-  background-color: var(--orange-200);
+  border: 1px solid var(--p-orange-200);
+  background-color: var(--p-orange-200);
 }
 
 .yellow-background {
-  background-color: var(--yellow-200);
+  border: 1px solid var(--p-yellow-200);
+  background-color: var(--p-yellow-200);
 }

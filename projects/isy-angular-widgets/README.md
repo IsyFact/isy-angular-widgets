@@ -48,6 +48,38 @@ Die Schematics führt folgende Schritte aus:
 - Hinzufügen und Installation der Bibliothek und der notwendigen Abhängigkeiten
 - Hinzufügen der Stylesheets der IsyFact
 - Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
+- *(Optional)* Konfiguration der ESLint-Regeln der IsyFact (`@isyfact/eslint-plugin`) inkl. Unterstützung für einfache Projekte und Monorepos
+- *(Optional)* Konfiguration der Prettier-Regeln der IsyFact (`@isyfact/prettier-plugin`)
+- *(Optional)* Konfiguration des Projekts in Monorepos für die EsLint-  und/ oder Prettier-Regeln installiert werden sollen. 
+
+Die optionalen Schritte werden während der Installation per CLI-Prompt abgefragt.
+
+### ESLint
+
+Bei der Installation wird optional eine `eslint.config.js` im Projektstamm angelegt, die die IsyFact ESLint-Regeln über `@isyfact/eslint-plugin` einbindet.
+Die Konfiguration unterstützt sowohl einfache Angular-Projekte als auch Monorepos.
+Für jedes Projekt werden separate Konfigurationsblöcke für TypeScript-, Spec- und HTML-Dateien generiert.
+
+Die Linting-Prüfung kann mit folgendem Befehl ausgeführt werden:
+
+```bash
+npm run lint
+```
+
+Ist bereits eine `eslint.config.js` vorhanden, wird diese gesichert (`eslint.config.base.js`) und die IsyFact-Konfiguration als Wrapper darüber gelegt.
+
+### Prettier
+
+Bei der Installation wird optional eine `.prettierrc.js` im Projektstamm angelegt, die die IsyFact Prettier-Regeln über `@isyfact/prettier-plugin` einbindet.
+Zusätzlich wird eine `.prettierignore` mit den IsyFact-Standardausschlüssen (z. B. `dist`, `node_modules`, `*.md`) erstellt.
+
+Die Formatierung kann mit folgendem Befehl ausgeführt werden:
+
+```bash
+npm run format
+```
+
+Ist bereits eine `.prettierrc.js` vorhanden, wird sie nicht überschrieben.
 
 ### Hauptfenster einbinden
 
@@ -247,3 +279,98 @@ export class AppComponent implements OnDestroy {
 }
 ```
 Die `translate`-Methode kann z.B. auch für einen Language-Picker verwenden werden, damit der Benutzer einer Seite die Sprache selber wählen kann.
+
+## Form-Wrapper
+
+Der `Form-Wrapper` kapselt Formularfelder mit Label, Pflichtfeldkennzeichnung, Validierungsfehlern und Unterstützung für Barrierefreiheit.
+
+Er wird mit **Reactive Forms** verwendet und unterstützt:
+
+- native Felder wie `input`, `textarea` und `select`
+- komplexe Komponenten über ein Adapter-Konzept
+- automatische Synchronisation von `id`, `aria-describedby`, `aria-invalid` und `aria-errormessage` bei nativen Feldern
+
+### Grundverwendung
+
+```html
+<form [formGroup]="myForm">
+  <isy-form-wrapper
+    label="E-Mail"
+    fieldId="email"
+    [control]="myForm.controls.email | formControl"
+    [validationMessages]="{
+      required: 'E-Mail ist erforderlich',
+      email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein'
+    }"
+  >
+    <input isyFormWrapperField type="email" pInputText formControlName="email" />
+  </isy-form-wrapper>
+</form>
+```
+
+### Erforderliche Inputs
+- `label`
+- `fieldId`
+- `control`
+
+### Optionale Inputs
+- `labelId` für eine eigene Label-ID
+- `describedbyId` für zusätzliche Beschreibungen oder Hilfetexte
+- `validationMessages` für validator-spezifische Fehlermeldungen
+
+### Native Felder
+
+Für native Felder wird empfohlen, `isyFormWrapperField` zu setzen:
+
+```html
+<isy-form-wrapper
+  label="Vorname"
+  fieldId="firstname"
+  [control]="form.controls.firstname | formControl"
+>
+  <input isyFormWrapperField pInputText formControlName="firstname" />
+</isy-form-wrapper>
+```
+
+Wenn `isyFormWrapperField` gesetzt ist, übernimmt der Wrapper automatisch:
+
+- `id`
+- `aria-describedby`
+- `aria-invalid`
+- `aria-errormessage`
+
+Ohne `isyFormWrapperField` versucht der Wrapper als Fallback ein natives `input`, `textarea` oder `select` im Inhalt zu finden.
+
+### Komplexe Komponenten
+
+Komplexe Komponenten wie z. B. `p-select` werden nicht automatisch über den nativen Fallback unterstützt.
+
+Hier gibt es zwei Möglichkeiten:
+- die Komponente verwaltet Accessibility selbst
+- es wird eine eigene Adapter-Directive bereitgestellt
+
+Beispiel mit manueller Anbindung:
+
+```html
+<isy-form-wrapper
+  label="Geschlecht"
+  labelId="label-gender"
+  fieldId="gender"
+  [control]="form.controls.gender | formControl"
+>
+  <p-select
+    inputId="gender"
+    ariaLabelledBy="label-gender"
+    formControlName="gender"
+    [options]="genderOptions"
+  ></p-select>
+</isy-form-wrapper>
+```
+
+### Typische Imports
+
+```typescript
+import {ReactiveFormsModule} from '@angular/forms';
+import {FormWrapperComponent} from '@isyfact/isy-angular-widgets';
+import {FormWrapperFieldDirective} from '@isyfact/isy-angular-widgets';
+```

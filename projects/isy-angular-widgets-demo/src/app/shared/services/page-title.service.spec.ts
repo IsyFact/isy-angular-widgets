@@ -9,7 +9,7 @@ describe('PageTitleService', () => {
   let spectator: SpectatorService<PageTitleService>;
   let router: SpyObject<Router>;
   const mockRouter = {
-    events: new BehaviorSubject<NavigationEnd>(new NavigationEnd(1, '/dashboard', '/objekt-suchen'))
+    events: new BehaviorSubject(new NavigationEnd(1, '/dashboard', '/objekt-suchen'))
   };
   const routeData = new BehaviorSubject<{title?: string}>({title: 'Test Page'});
 

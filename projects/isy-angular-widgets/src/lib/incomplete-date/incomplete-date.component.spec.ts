@@ -5,19 +5,11 @@ import {Validation} from '@isy-angular-widgets/public-api';
 import {InputMask} from 'primeng/inputmask';
 import {IncompleteDateService} from './incomplete-date.service';
 
-enum CursorPosition {
-  DayFirstDigit = 0,
-  DaySecondDigit = 1,
-  DotAfterDay = 2,
-  MonthSecondDigit = 4,
-  DotAfterMonth = 5
-}
-
 describe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
   let spectator: Spectator<IncompleteDateComponent>;
   let onChange: (value: string) => void = () => {};
-  let onTouched: unknown = () => {};
+  let onTouched: () => void = () => {};
   let input: HTMLInputElement;
   const errorKey = 'INVALIDUNSPECIFIEDDATE';
 
@@ -338,7 +330,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should update lastKeyPressed and lastInputElement on onKeydown', () => {
     const evt = {key: '1', target: input} as unknown as KeyboardEvent;
-    component.onKeydown(evt as unknown as Event);
+    component.onKeydown(evt);
     expect(component.lastKeyPressed).toBe('1');
     expect(component.lastInputElement).toBe(input);
   });
@@ -371,10 +363,10 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('should calculate cursor position correctly', () => {
-    expect(component.calculateNewCursorPosition(CursorPosition.DayFirstDigit)).toBe(CursorPosition.DayFirstDigit + 3);
-    expect(component.calculateNewCursorPosition(CursorPosition.DaySecondDigit)).toBe(CursorPosition.DaySecondDigit + 2);
-    expect(component.calculateNewCursorPosition(CursorPosition.DotAfterDay)).toBe(CursorPosition.DotAfterDay + 1);
-    expect(component.calculateNewCursorPosition(99 as CursorPosition)).toBe(99);
+    expect(component.calculateNewCursorPosition(0)).toBe(3);
+    expect(component.calculateNewCursorPosition(1)).toBe(3);
+    expect(component.calculateNewCursorPosition(2)).toBe(3);
+    expect(component.calculateNewCursorPosition(99)).toBe(99);
   });
 
   it('should set inputValue to empty if inputValue contains _ onBlur', () => {
@@ -412,5 +404,32 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.registerOnTouched(fn);
     component.onTouched();
     expect(fn).toHaveBeenCalled();
+  });
+
+  it('should return the ISO value unchanged if transferISO8601 is true and value is already ISO formatted', () => {
+    component.transferISO8601 = true;
+
+    expect(component.convertToTransferDateFormat('2024-01-31')).toBe('2024-01-31');
+  });
+
+  it('should keep an already ISO formatted value unchanged in updateModel when transferISO8601 is true', () => {
+    component.transferISO8601 = true;
+    component.inputValue = '2024-01-31';
+    const spy = spyOn(component, 'onChange');
+
+    component.updateModel();
+
+    expect(component.transferValue).toBe('2024-01-31');
+    expect(spy).toHaveBeenCalledWith('2024-01-31');
+  });
+
+  it('should forward an already ISO formatted value unchanged after registerOnChange when transferISO8601 is true', () => {
+    component.transferISO8601 = true;
+    const fn = jasmine.createSpy('onChange');
+
+    component.registerOnChange(fn);
+    component.onChange('2024-01-31');
+
+    expect(fn).toHaveBeenCalledWith('2024-01-31');
   });
 });

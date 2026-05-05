@@ -21,7 +21,15 @@
       "aria": {
         "togglePicker": "Open Special Character Picker",
         "closePicker": "Close Special Character Picker"
+      },
+      "enum": {
+        "base": "BASE CHARACTERS",
+        "groups": "CHARACTER GROUPS"
       }
+    },
+    "formWrapper": {
+      "required": "Required field",
+      "invalid": "Invalid input"
     },
     "hauptfenster": {
       "altLogoAwl": "Logo of the application landscape",
@@ -32,11 +40,14 @@
         "expandLinksnavigation": "Expand left side bar",
         "collapseInformationsbereich": "Collapse right side bar",
         "expandInformationsbereich": "Expand right side bar",
-        "leftNavigation": "leftnavigation",
-        "informationArea": "informationarea",
+        "leftNavigation": "Left navigation",
+        "leftNavigationCollapsed": "Left navigation collapsed",
+        "informationArea": "Information area",
+        "informationAreaCollapsed": "Information area collapsed",
         "flag": "Flag {{lang}}",
         "accountName": "Account name",
-        "skipLinksAriaLabel": "Quick navigation"
+        "skipLinksAriaLabel": "Quick navigation",
+        "mainNavigation": "Main navigation"
       }
     }
   },

@@ -185,10 +185,10 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     expect(vornameLabel.textContent?.trim()).toEqual('Vorname');
 
     const nachnameLabel = spectator.query('[for="nachname-dialog"]') as HTMLElement;
-    expect(nachnameLabel.textContent?.trim()).toEqual('Nachname *');
+    expect(nachnameLabel.textContent?.trim()).toEqual('Nachname *Pflichtfeld');
 
     const genderLabel = spectator.query('[for="gender-dialog"]') as HTMLElement;
-    expect(genderLabel.textContent?.trim()).toEqual('Geschlecht *');
+    expect(genderLabel.textContent?.trim()).toEqual('Geschlecht *Pflichtfeld');
   });
 
   it('form control should be dirty after focus', () => {

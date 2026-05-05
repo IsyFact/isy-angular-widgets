@@ -8,13 +8,13 @@
 
 .left-panel-side {
   width: 35%;
-  padding: 5px;
+  padding: var(--isyfact-space-xs);
   overflow-y: scroll;
 }
 
 .right-panel-side {
   width: 65%;
-  padding: 5px;
+  padding: var(--isyfact-space-xs);
   display: flex;
   flex-direction: column;
 }
@@ -26,7 +26,7 @@
 .lower-right-panel {
   display: flex;
   width: 100%;
-  padding: 1em 0 0 0;
+  padding: var(--isyfact-space-md) 0 0 0;
   align-items: flex-end;
 }
 
@@ -37,7 +37,7 @@
   // Styles specific for right side select buttons
   .right-panel-side p-selectbutton {
     .p-ripple.p-togglebutton {
-      padding: 0.25rem;
+      padding: var(--isyfact-space-xs);
       width: 44px;
       height: 44px;
       font-size: 1.25rem;

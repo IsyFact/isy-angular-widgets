@@ -130,13 +130,41 @@
               </p-datepicker>
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-12 md:col-6 xl:col-8">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
-              fieldId="nationality"
-              [control]="personalInfoForm.controls.nationality | formControl"
+              labelId="label-nationalities"
+              fieldId="nationalities"
+              [control]="personalInfoForm.controls.nationalities | formControl"
+              [validationMessages]="{
+                required: 'isyAngularWidgetsDemo.messages.nationalitiesRequired' | translate,
+                maxSelected:
+                  'isyAngularWidgetsDemo.messages.nationalitiesMaxReached' | translate: {count: maxNationalities}
+              }"
             >
-              <input id="nationality" formControlName="nationality" class="w-full" type="text" pInputText />
+              <div class="flex flex-column gap-2">
+                <p-multiselect
+                  inputId="nationalities"
+                  formControlName="nationalities"
+                  ariaLabelledBy="label-nationalities"
+                  [options]="nationalityOptions"
+                  optionLabel="label"
+                  optionValue="value"
+                  display="chip"
+                  [maxSelectedLabels]="maxNationalities"
+                  [filter]="true"
+                  [selectionLimit]="maxNationalities"
+                  class="w-full"
+                  appendTo="body"
+                ></p-multiselect>
+
+                <small class="text-color-secondary">
+                  {{
+                    'isyAngularWidgetsDemo.messages.nationalitiesHint'
+                      | translate: {count: maxNationalities, current: getSelectedNationalitiesCount()}
+                  }}
+                </small>
+              </div>
             </isy-form-wrapper>
           </div>
           <div class="col-12 md:col-6 xl:col-4">
@@ -280,7 +308,7 @@
         <h3>
           {{ 'isyAngularWidgetsDemo.labels.residences' | translate }}
         </h3>
-        @for (addresses of adressFormArray?.controls; track addresses; let i = $index) {
+        @for (addresses of adressFormArray?.controls; track $index; let i = $index) {
           <p-fieldset
             [legend]="'isyAngularWidgetsDemo.labels.residence' | translate: {numChars: i + 1}"
             class="mb-3 flex"
@@ -293,8 +321,7 @@
               [rounded]="true"
               severity="danger"
               [disabled]="personalInfoForm.disabled || !isAnyAddressAvailable() || disableDeleteButton()"
-              (click)="removeAddress(i)"
-              onKeyDown=""
+              (onClick)="removeAddress(i)"
               [ariaLabel]="'isyAngularWidgetsDemo.labels.deleteButton' | translate"
             >
             </p-button>
@@ -475,8 +502,8 @@
             icon="pi pi-pencil"
             iconPos="left"
             [label]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
-            (click)="isDialogVisible = true"
-            (keydown)="isDialogVisible = true"
+            #editBtn
+            (onClick)="openDialog($event)"
           >
           </p-button>
         </ng-template>
@@ -501,6 +528,7 @@
       </p-table>
       <demo-dialog-sachverhalte-bearbeiten
         [(visible)]="isDialogVisible"
+        (visibleChange)="onDialogVisibleChange($event)"
         [person]="person"
       ></demo-dialog-sachverhalte-bearbeiten>
     </p-tabpanel>

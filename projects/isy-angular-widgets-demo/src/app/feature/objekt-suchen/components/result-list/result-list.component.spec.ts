@@ -41,11 +41,11 @@ describe('Integration Tests: ResultListComponent', () => {
    * @param create Create action or not
    */
   function addClickEventListener(button: HTMLButtonElement, create: boolean): void {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
       if (create) {
-        spectator.component.emitCreateAction();
+        spectator.component.emitCreateAction(event);
       } else {
-        spectator.component.emitEditAction(person);
+        spectator.component.emitEditAction(person, event);
       }
     });
   }
@@ -76,7 +76,7 @@ describe('Integration Tests: ResultListComponent', () => {
     createButton.click();
     spectator.fixture.detectChanges();
 
-    expect(createActionSpy).toHaveBeenCalled();
+    expect(createActionSpy).toHaveBeenCalledWith(jasmine.any(HTMLElement));
   });
 
   it('should emit after edit action', () => {
@@ -88,7 +88,10 @@ describe('Integration Tests: ResultListComponent', () => {
     editButton.click();
     spectator.fixture.detectChanges();
 
-    expect(editActionSpy).toHaveBeenCalledWith(person);
+    expect(editActionSpy).toHaveBeenCalledWith({
+      person,
+      trigger: jasmine.any(HTMLElement)
+    });
   });
 
   it('should have isCollapsed set to false by default', () => {

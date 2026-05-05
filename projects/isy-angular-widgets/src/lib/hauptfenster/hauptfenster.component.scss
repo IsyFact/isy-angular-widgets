@@ -18,16 +18,21 @@
 }
 
 .isy-hauptfenster-anbieterlogo-bereich {
-  margin-left: 0.5rem;
+  margin-left: var(--isyfact-space-sm);
 }
 
 .isy-hauptfenster-nutzerbereich {
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-right: var(--isyfact-space-sm);
+  margin-bottom: var(--isyfact-space-sm);
 }
 
 .isy-hauptfenster-linksnavigation {
   background-color: var(--isyfact-surface-ground);
+}
+
+.sidebar-nav-header,
+.sidebar-info-header {
+  padding-top: var(--isyfact-space-xs);
 }
 
 .isy-hauptfenster-informationsbereich {

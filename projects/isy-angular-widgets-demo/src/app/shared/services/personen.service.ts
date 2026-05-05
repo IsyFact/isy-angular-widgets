@@ -122,7 +122,7 @@ export class PersonenService {
     'isyAngularWidgetsDemo.labels.proposal'
   ];
 
-  bilanz: {min: number; max: number} = {min: 60000, max: 100000};
+  bilanz: {min: number; max: number} = {min: 600, max: 100000};
 
   findPersonById(id: string): Observable<Person[]> {
     return of<Person[]>([
@@ -162,11 +162,11 @@ export class PersonenService {
       for (let i = 0; i < this.rng(); i++) {
         persons.push(this.mergePersons(person, this.generatePerson()));
       }
-      return of<Person[]>(persons);
+      return of(persons);
     }
     for (let i = 0; i < this.maxEntries; i++) persons.push(this.generatePerson());
 
-    return of<Person[]>(persons);
+    return of(persons);
   }
 
   searchParametersAvailable(person: Person): boolean {
@@ -236,7 +236,7 @@ export class PersonenService {
   }
 
   rng(): number {
-    const crypto = window.crypto;
+    const crypto = globalThis.crypto;
     return crypto.getRandomValues(new Uint32Array(1))[0] % this.maxEntries;
   }
 

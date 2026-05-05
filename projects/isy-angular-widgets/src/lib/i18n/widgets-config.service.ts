@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {distinctUntilChanged, map} from 'rxjs/operators';
 import {WidgetsTranslation} from './widgets-translation';
-import {Subject} from 'rxjs';
 
 /**
  * A service to translate labels in widgets library.
@@ -12,7 +13,7 @@ export class WidgetsConfigService {
   private translation: WidgetsTranslation = {
     wizard: {
       back: 'Zurück',
-      next: 'weiter',
+      next: 'Weiter',
       save: 'Speichern',
       close: 'Schließen'
     },
@@ -25,21 +26,60 @@ export class WidgetsConfigService {
       altLogoAwl: 'Logo der Anwendungslandschaft',
       altLogoAnbieterAwl: 'Logo des Anbieters der Anwendungslandschaft',
       logout: 'Abmelden'
+    },
+    formWrapper: {
+      required: 'Pflichtfeld'
     }
   };
 
-  private readonly translationSource = new Subject<unknown>();
+  private readonly translationSource = new BehaviorSubject(this.translation);
+
+  readonly translation$: Observable<WidgetsTranslation> = this.translationSource.asObservable();
 
   getTranslation(path: string): string {
-    // Needs to be refactored in the future
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-    const value = path.split('.').reduce((o, k) => (o ? (o as any)[k] : undefined), this.translation) as unknown;
+    const value = path.split('.').reduce<unknown>((current, key) => {
+      if (!current || typeof current !== 'object') {
+        return undefined;
+      }
+
+      return (current as Record<string, unknown>)[key];
+    }, this.translation);
 
     return typeof value === 'string' ? value : '';
   }
 
+  getTranslation$(path: string): Observable<string> {
+    return this.translation$.pipe(
+      map(() => this.getTranslation(path)),
+      distinctUntilChanged()
+    );
+  }
+
   setTranslation(value: WidgetsTranslation): void {
-    this.translation = {...this.translation, ...value};
+    this.translation = {
+      ...this.translation,
+      wizard: {
+        ...this.translation.wizard,
+        ...value.wizard
+      },
+      inputChar: {
+        ...this.translation.inputChar,
+        ...value.inputChar
+      },
+      hauptfenster: {
+        ...this.translation.hauptfenster,
+        ...value.hauptfenster
+      },
+      formWrapper: {
+        ...this.translation.formWrapper,
+        ...value.formWrapper
+      }
+    };
+
     this.translationSource.next(this.translation);
+  }
+
+  getTranslations(): WidgetsTranslation {
+    return this.translation;
   }
 }

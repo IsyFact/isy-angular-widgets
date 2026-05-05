@@ -11,6 +11,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     component: PrimengOverlayComponent
   });
 
+  const createClickEvent = (element: HTMLElement): Event =>
+    ({
+      currentTarget: element,
+      target: element
+    }) as unknown as Event;
+
   beforeEach(() => {
     spectator = createComponent();
     component = spectator.component;
@@ -24,27 +30,77 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   });
 
   it('should show dialog', () => {
-    component.showDialog();
+    const button = document.createElement('button');
+
+    component.showDialog(createClickEvent(button));
+
     expect(component.visibleDialog).toBeTrue();
   });
 
   it('should close dialog', () => {
     component.visibleDialog = true;
+
     component.closeDialog();
+
     expect(component.visibleDialog).toBeFalse();
   });
 
   it('should show sidebar', () => {
-    component.showSidebar();
+    const button = document.createElement('button');
+
+    component.showSidebar(createClickEvent(button));
+
     expect(component.visibleSidebar).toBeTrue();
   });
 
+  it('should restore focus to dialog trigger when dialog hides', async () => {
+    const button = document.createElement('button');
+    document.body.appendChild(button);
+
+    try {
+      const focusSpy = spyOn(button, 'focus');
+
+      component.showDialog(createClickEvent(button));
+      spectator.detectChanges();
+
+      component.onDialogHide();
+      spectator.detectChanges();
+      await spectator.fixture.whenStable();
+      spectator.detectChanges();
+
+      expect(focusSpy).toHaveBeenCalled();
+    } finally {
+      button.remove();
+    }
+  });
+
+  it('should restore focus to sidebar trigger when sidebar hides', async () => {
+    const button = document.createElement('button');
+    document.body.appendChild(button);
+
+    const focusSpy = spyOn(button, 'focus');
+
+    component.showSidebar(createClickEvent(button));
+    spectator.detectChanges();
+
+    component.onSidebarHide();
+    spectator.detectChanges();
+    await spectator.fixture.whenStable();
+    spectator.detectChanges();
+
+    expect(focusSpy).toHaveBeenCalled();
+  });
+
   it('should open confirm dialog and close it on accept', () => {
-    component.confirmDialog({target: {}} as Event);
+    const button = document.createElement('button');
+
+    component.confirmDialog(createClickEvent(button));
 
     expect(confirmSpy).toHaveBeenCalled();
 
     const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    expect(confirmArgs.target).toBe(button);
+
     confirmArgs.accept();
 
     expect(messageSpy).toHaveBeenCalledWith({
@@ -55,11 +111,15 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   });
 
   it('should open confirm dialog and close it on reject', () => {
-    component.confirmDialog({target: {}} as Event);
+    const button = document.createElement('button');
+
+    component.confirmDialog(createClickEvent(button));
 
     expect(confirmSpy).toHaveBeenCalled();
 
     const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    expect(confirmArgs.target).toBe(button);
+
     confirmArgs.reject();
 
     expect(messageSpy).toHaveBeenCalledWith({
@@ -69,12 +129,33 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     });
   });
 
+  it('should restore focus to confirm dialog trigger when dialog hides', async () => {
+    const button = document.createElement('button');
+    document.body.appendChild(button);
+
+    const focusSpy = spyOn(button, 'focus');
+
+    component.confirmDialog(createClickEvent(button));
+    spectator.detectChanges();
+
+    component.onConfirmDialogHide();
+    spectator.detectChanges();
+    await spectator.fixture.whenStable();
+    spectator.detectChanges();
+
+    expect(focusSpy).toHaveBeenCalled();
+  });
+
   it('should open confirm popup and close it on accept', () => {
-    component.confirmPopup({target: {}} as Event);
+    const button = document.createElement('button');
+
+    component.confirmPopup(createClickEvent(button));
 
     expect(confirmSpy).toHaveBeenCalled();
 
     const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    expect(confirmArgs.target).toBe(button);
+
     confirmArgs.accept();
 
     expect(messageSpy).toHaveBeenCalledWith({
@@ -85,11 +166,15 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   });
 
   it('should open confirm popup and close it on reject', () => {
-    component.confirmPopup({target: {}} as Event);
+    const button = document.createElement('button');
+
+    component.confirmPopup(createClickEvent(button));
 
     expect(confirmSpy).toHaveBeenCalled();
 
     const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    expect(confirmArgs.target).toBe(button);
+
     confirmArgs.reject();
 
     expect(messageSpy).toHaveBeenCalledWith({

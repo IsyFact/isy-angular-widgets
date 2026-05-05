@@ -1,9 +1,22 @@
-<div [class]="'flex flex-column gap-2 ' + labelOptionClass">
-  <label [attr.id]="labelId ? labelId : undefined" [class]="'label ' + labelFilledClass" [for]="fieldId">{{
-    getLabel()
-  }}</label>
-  <div class="flex-container"><ng-content></ng-content></div>
-  @if (shouldShowError()) {
-    <p-message styleClass="p-error" severity="error" variant="simple">{{ errorMessage }}</p-message>
+<div class="flex flex-column gap-2" [ngClass]="labelOptionClass">
+  <label [attr.id]="computedLabelId" [attr.for]="fieldId" class="label" [ngClass]="labelFilledClass">
+    {{ label }}
+
+    @if (required) {
+      <span aria-hidden="true">*</span>
+      <span class="visually-hidden">{{ requiredTranslation$ | async }}</span>
+    }
+  </label>
+
+  <div class="flex-container" data-form-wrapper-field-container>
+    <ng-content></ng-content>
+  </div>
+
+  @if (showError) {
+    <div [attr.id]="errorId">
+      <p-message severity="error" variant="simple">
+        {{ errorMessage }}
+      </p-message>
+    </div>
   }
 </div>

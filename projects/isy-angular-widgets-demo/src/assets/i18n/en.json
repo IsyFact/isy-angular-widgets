@@ -23,9 +23,13 @@
         "closePicker": "Close Special Character Picker"
       },
       "enum": {
-        "base": "GRUNDZEICHEN",
-        "groups": "SCHRIFTZEICHENGRUPPE"
+        "base": "BASE CHARACTERS",
+        "groups": "CHARACTER GROUPS"
       }
+    },
+    "formWrapper": {
+      "required": "Required field",
+      "invalid": "Invalid input"
     },
     "hauptfenster": {
       "altLogoAwl": "Logo of the application landscape",
@@ -36,11 +40,14 @@
         "expandLinksnavigation": "Expand left side bar",
         "collapseInformationsbereich": "Collapse right side bar",
         "expandInformationsbereich": "Expand right side bar",
-        "leftNavigation": "leftnavigation",
-        "informationArea": "informationarea",
-        "accountName": "Account name",
+        "leftNavigation": "Left navigation",
+        "leftNavigationCollapsed": "Left navigation collapsed",
+        "informationArea": "Information area",
+        "informationAreaCollapsed": "Information area collapsed",
         "flag": "Flag {{lang}}",
-        "skipLinksAriaLabel": "Quick navigation"
+        "accountName": "Account name",
+        "skipLinksAriaLabel": "Quick navigation",
+        "mainNavigation": "Main navigation"
       }
     },
     "p-calendar": {
@@ -56,7 +63,10 @@
       "dateError": "The date is invalid.",
       "dateInPastError": "The date must be in the past.",
       "changePage": "Page is changed. New page:",
-      "validateDIN91379Error": "Invalid characters according to DIN 91379."
+      "validateDIN91379Error": "Invalid characters according to DIN 91379.",
+      "nationalitiesHint": "At least 1, at most {{count}} entries. Current: {{current}}.",
+      "nationalitiesRequired": "At least one nationality is required.",
+      "nationalitiesMaxReached": "A maximum of {{count}} nationalities can be entered."
     },
     "displayObject": {
       "masterDataHeader": "Master data",
@@ -119,7 +129,8 @@
       "edit": "Edit",
       "download": "Download",
       "delete": "Delete",
-      "close": "Close"
+      "close": "Close",
+      "add": "Add"
     },
     "labels": {
       "id": "ID",
@@ -130,6 +141,11 @@
       "gender": "Gender",
       "geburtsdatum": "Birth date",
       "staatsangehoerigkeit": "Nationality",
+      "nationalityGerman": "German",
+      "nationalityFrench": "French",
+      "nationalitySpanish": "Spanish",
+      "nationalityItalian": "Italian",
+      "nationalityPolish": "Polish",
       "chooseCountry": "Choose country",
       "actions": "Actions",
       "optionMale": "Male",

@@ -41,7 +41,8 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, '../../coverage/isy-angular-widgets'),
       subdir: '.',
-      reporters: [{type: 'html'}, {type: 'text-summary'}, {type: 'lcov'}]
+      reporters: [{type: 'html'}, {type: 'text-summary'}, {type: 'lcov'}],
+      exclude: ['**/schematics/**', '**/index.ts']
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,

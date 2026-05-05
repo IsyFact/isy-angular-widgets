@@ -18,4 +18,7 @@ export interface WidgetsTranslation {
     altLogoAnbieterAwl?: string;
     logout?: string;
   };
+  formWrapper?: {
+    required?: string;
+  };
 }

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, Injector, afterNextRender, inject} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -29,14 +29,24 @@ import {ToastModule} from 'primeng/toast';
 })
 export class PrimengOverlayComponent {
   readonly confirmationService = inject(ConfirmationService);
-  messageService = inject(MessageService);
+  readonly messageService = inject(MessageService);
+  private readonly injector = inject(Injector);
 
-  visibleDialog: boolean = false;
-  visibleSidebar: boolean = false;
+  visibleDialog = false;
+  visibleSidebar = false;
+
+  private lastDialogTrigger?: HTMLElement;
+  private lastSidebarTrigger?: HTMLElement;
+
+  private lastConfirmDialogTrigger?: HTMLElement;
 
   confirmDialog(event: Event): void {
+    if (event.currentTarget instanceof HTMLElement) {
+      this.lastConfirmDialogTrigger = event.currentTarget;
+    }
+
     this.confirmationService.confirm({
-      target: event.target as EventTarget,
+      target: event.currentTarget as EventTarget,
       key: 'confirmDialog',
       message: 'Are you sure that you want to proceed?',
       header: 'Confirmation',
@@ -51,6 +61,21 @@ export class PrimengOverlayComponent {
         this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
       }
     });
+  }
+
+  onConfirmDialogHide(): void {
+    const target = this.lastConfirmDialogTrigger;
+
+    if (!target?.isConnected) {
+      return;
+    }
+
+    afterNextRender(
+      {
+        write: () => target.focus()
+      },
+      {injector: this.injector}
+    );
   }
 
   confirmPopup(event: Event): void {
@@ -68,7 +93,11 @@ export class PrimengOverlayComponent {
     });
   }
 
-  showDialog(): void {
+  showDialog(event: Event): void {
+    if (event.currentTarget instanceof HTMLElement) {
+      this.lastDialogTrigger = event.currentTarget;
+    }
+
     this.visibleDialog = true;
   }
 
@@ -76,7 +105,32 @@ export class PrimengOverlayComponent {
     this.visibleDialog = false;
   }
 
-  showSidebar(): void {
+  onDialogHide(): void {
+    this.restoreFocus(this.lastDialogTrigger);
+  }
+
+  showSidebar(event: Event): void {
+    if (event.currentTarget instanceof HTMLElement) {
+      this.lastSidebarTrigger = event.currentTarget;
+    }
+
     this.visibleSidebar = true;
+  }
+
+  onSidebarHide(): void {
+    this.restoreFocus(this.lastSidebarTrigger);
+  }
+
+  private restoreFocus(target?: HTMLElement): void {
+    if (!target?.isConnected) {
+      return;
+    }
+
+    afterNextRender(
+      {
+        write: () => target.focus()
+      },
+      {injector: this.injector}
+    );
   }
 }

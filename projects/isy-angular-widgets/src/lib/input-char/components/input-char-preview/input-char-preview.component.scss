@@ -33,11 +33,11 @@ $letters-preview-width: 30%;
 }
 
 #letter-information-preview {
-  padding-left: 10px;
+  padding-left: var(--isyfact-space-sm);
   width: calc(100% - $letters-preview-width);
 
   @media screen and (max-width: 700px) {
-    padding: 10px 10px 0 0;
+    padding: var(--isyfact-space-sm) var(--isyfact-space-sm) 0 0;
     width: 100%;
   }
 }

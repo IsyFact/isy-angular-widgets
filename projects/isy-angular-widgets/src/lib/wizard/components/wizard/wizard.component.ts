@@ -15,7 +15,7 @@ import {MenuItem, MessageService} from 'primeng/api';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CommonModule} from '@angular/common';
-import {StepsModule} from 'primeng/steps';
+import {StepperModule} from 'primeng/stepper';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
@@ -40,7 +40,7 @@ const defaultHeight = 30;
   standalone: true,
   selector: 'isy-wizard',
   templateUrl: './wizard.component.html',
-  imports: [CommonModule, StepsModule, DialogModule, ButtonModule, ToastModule],
+  imports: [CommonModule, StepperModule, DialogModule, ButtonModule, ToastModule],
   providers: [MessageService]
 })
 export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
@@ -186,7 +186,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * @param changes Includes all DOM changes
    */
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.isVisible && changes.isVisible?.currentValue === false) {
+    if (changes.isVisible?.previousValue === true && changes.isVisible?.currentValue === false) {
       this.resetWizard();
     }
   }
@@ -244,14 +244,35 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * @param event - The new active index of the wizard.
    */
   onActiveIndexChange(event: number): void {
+    if (event < 0 || event >= this.items.length) {
+      return;
+    }
+
     this.index = event;
     this.indexChange.emit(this.index);
 
-    // Show a toast message indicating the step change
+    const label = this.items[event]?.label ?? '';
+
     this.messageService.add({
       severity: 'info',
       summary: this.configService.getTranslation('wizard.toast.stepChanged'),
-      detail: this.items[this.index].label
+      detail: label
     });
+  }
+
+  onStepperValueChange(stepValue: number | undefined): void {
+    if (stepValue == null) {
+      return;
+    }
+
+    const newIndex = stepValue - 1;
+
+    if (newIndex < 0 || newIndex >= this.items.length) {
+      return;
+    }
+
+    if (this.allowFreeNavigation) {
+      this.onActiveIndexChange(newIndex);
+    }
   }
 }

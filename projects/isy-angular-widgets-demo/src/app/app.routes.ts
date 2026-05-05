@@ -40,6 +40,15 @@ export const routes: Routes = [
     canActivate: [canActivateAuth]
   },
   {
+    path: 'modalarme-patterns',
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.modalarmePatterns'
+    },
+    loadComponent: async () =>
+      (await import('./feature/modalarme-patterns/modalarme-patterns.component')).ModalarmePatternsComponent,
+    canActivate: [canActivateAuth]
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }

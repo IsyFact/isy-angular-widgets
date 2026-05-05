@@ -1,83 +1,132 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  DestroyRef,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  inject
+} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {
+  FormControl,
+  PristineChangeEvent,
+  ReactiveFormsModule,
+  StatusChangeEvent,
+  TouchedChangeEvent,
+  Validators,
+  ValueChangeEvent
+} from '@angular/forms';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ReplaySubject} from 'rxjs';
+import {filter, startWith, switchMap} from 'rxjs/operators';
 import {IftaLabelModule} from 'primeng/iftalabel';
 import {MessageModule} from 'primeng/message';
+import {WidgetsConfigService} from '../i18n/widgets-config.service';
+import {FORM_WRAPPER_FIELD_ADAPTER, FormWrapperFieldAdapter} from './form-wrapper-field-adapter';
 
-/**
- * A component that wraps form controls and displays validation messages.
- * It requires the usage of reactive forms and supports standalone usage.
- * @example
- * ```html
- * <form [formGroup]="myForm">
- *   <isy-form-wrapper
- *     label="Email"
- *     fieldId="email"
- *     [control]="myForm.controls.email| formControl"
- *     [validationMessages]="{
- *       'required': 'Email is required',
- *       'email': 'Please enter a valid email address'
- *     }">
- *     <input
- *        id="email"
- *        formControlName="email"
- *        class="w-full"
- *        type="text"
- *        pInputText
- *     />
- *   </isy-form-wrapper>
- * </form>
- * ```
- * Ensure you have imported `ReactiveFormsModule` and `MessageModule` in your module:
- * ```typescript
- * import { ReactiveFormsModule, MessageModule } from '@angular/forms';
- * ```
- */
+type FormWrapperFieldElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+
 @Component({
   standalone: true,
   selector: 'isy-form-wrapper',
   templateUrl: './form-wrapper.component.html',
   styleUrls: ['./form-wrapper.component.scss'],
-  imports: [ReactiveFormsModule, IftaLabelModule, MessageModule]
+  imports: [CommonModule, ReactiveFormsModule, IftaLabelModule, MessageModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormWrapperComponent implements OnInit {
-  @Input() label!: string;
+export class FormWrapperComponent implements OnInit, OnChanges, AfterContentInit {
+  @Input({required: true}) label!: string;
   @Input() labelId?: string;
-  @Input() fieldId!: string;
-  @Input() control!: FormControl;
+  @Input({required: true}) fieldId!: string;
+  @Input() describedbyId?: string;
   @Input() validationMessages: Record<string, string> = {};
   @Input() ifta = false;
 
-  /**
-   * Validates the control input on component initialization.
-   * Throws an error if control is missing or not an instance of FormControl.
-   */
+  @ContentChild(FORM_WRAPPER_FIELD_ADAPTER, {read: FORM_WRAPPER_FIELD_ADAPTER})
+  formFieldAdapter?: FormWrapperFieldAdapter;
+
+  private readonly hostEl = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroyRef = inject(DestroyRef);
+
+  readonly configService = inject(WidgetsConfigService);
+  readonly requiredTranslation$ = this.configService.getTranslation$('formWrapper.required');
+
+  private readonly controlSource = new ReplaySubject<FormControl<unknown>>(1);
+  private _control!: FormControl<unknown>;
+
+  @Input({required: true})
+  set control(value: FormControl<unknown>) {
+    if (!(value instanceof FormControl)) {
+      throw new TypeError('control input is required and must be an instance of FormControl');
+    }
+
+    this._control = value;
+    this.controlSource.next(value);
+  }
+
+  get control(): FormControl<unknown> {
+    return this._control;
+  }
+
   ngOnInit(): void {
-    if (!this.control || !(this.control instanceof FormControl)) {
-      throw new Error('control Input is required and must be an instance of FormControl');
+    this.controlSource
+      .pipe(
+        switchMap((control) =>
+          control.events.pipe(
+            filter(
+              (event) =>
+                event instanceof ValueChangeEvent ||
+                event instanceof StatusChangeEvent ||
+                event instanceof TouchedChangeEvent ||
+                event instanceof PristineChangeEvent
+            ),
+            startWith(null)
+          )
+        ),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => this.refreshView());
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.fieldId || changes.describedbyId || changes.validationMessages || changes.ifta) {
+      queueMicrotask(() => this.refreshView());
     }
   }
 
-  /**
-   * Computes and returns the appropriate error message.
-   * Iterates over control errors and matches them with custom validation messages.
-   * @returns string | null The error message or null if no errors.
-   */
-  get errorMessage(): string | null {
-    const errors = this.control?.errors;
-    if (!errors) return null;
-
-    const preferredOrder = Object.keys(this.validationMessages ?? {});
-    const key = preferredOrder.find((k) => errors[k] != null) ?? Object.keys(errors)[0];
-
-    return key ? (this.validationMessages?.[key] ?? null) : null;
+  ngAfterContentInit(): void {
+    queueMicrotask(() => this.syncFieldAttributes());
   }
 
-  /**
-   * Returns the CSS class for the label based on the current state.
-   * @returns The CSS class for the label.
-   */
+  get computedLabelId(): string {
+    return this.labelId ?? `${this.fieldId}-label`;
+  }
+
+  get errorId(): string {
+    return `${this.fieldId}-error`;
+  }
+
+  get errorMessage(): string | null {
+    const errors = this.control.errors;
+    if (!errors) {
+      return null;
+    }
+
+    const preferredOrder = Object.keys(this.validationMessages);
+    const matchingKey = preferredOrder.find((key) => errors[key] != null) ?? Object.keys(errors)[0];
+
+    return matchingKey ? (this.validationMessages[matchingKey] ?? 'Ungültige Eingabe') : null;
+  }
+
   get labelOptionClass(): string {
-    return this.ifta ? ' ifta' : ' static-label';
+    return this.ifta ? 'ifta' : 'static-label';
   }
 
   /**
@@ -87,35 +136,91 @@ export class FormWrapperComponent implements OnInit {
    * @returns The CSS class for the label.
    */
   get labelFilledClass(): string {
-    return this.control?.value && this.ifta ? ' label--filled' : '';
+    return this.ifta && !!this.control.value ? 'label--filled' : '';
   }
 
-  /**
-   * Retrieves the label for the form wrapper component.
-   * If the label is required, it appends an asterisk (*) to the label.
-   * @returns The label for the form wrapper component.
-   */
-  getLabel(): string {
-    return this.isRequired() ? `${this.label} *` : this.label;
-  }
-
-  /**
-   * Determines whether the error message should be shown.
-   * The error message should be shown if:
-   * - The errorMessage is not null or empty
-   * - The control is invalid
-   * - The control has been touched
-   * @returns A boolean value indicating whether the error message should be shown.
-   */
-  shouldShowError(): boolean {
+  get showError(): boolean {
     return !!this.errorMessage && this.control.invalid && (this.control.touched || this.control.dirty);
   }
 
-  /**
-   * Computes and returns the information about the required state
-   * @returns the required state
-   */
-  isRequired(): boolean {
-    return this.control.hasValidator(Validators.required);
+  get required(): boolean {
+    return this.control.hasValidator(Validators.required) || this.control.hasValidator(Validators.requiredTrue);
+  }
+
+  get ariaDescribedBy(): string | null {
+    const ids: string[] = [];
+
+    if (this.describedbyId) {
+      ids.push(this.describedbyId);
+    }
+
+    if (this.showError) {
+      ids.push(this.errorId);
+    }
+
+    return ids.length > 0 ? ids.join(' ') : null;
+  }
+
+  get ariaInvalid(): 'true' | null {
+    return this.showError ? 'true' : null;
+  }
+
+  get ariaErrorMessage(): string | null {
+    return this.showError ? this.errorId : null;
+  }
+
+  private refreshView(): void {
+    this.syncFieldAttributes();
+    this.cdr.markForCheck();
+  }
+
+  private syncFieldAttributes(): void {
+    if (this.formFieldAdapter) {
+      this.formFieldAdapter.setFieldId(this.fieldId);
+      this.formFieldAdapter.setAriaDescribedBy(this.ariaDescribedBy);
+      this.formFieldAdapter.setAriaInvalid(this.ariaInvalid);
+      this.formFieldAdapter.setAriaErrorMessage(this.ariaErrorMessage);
+      return;
+    }
+
+    const field = this.resolveFallbackFieldElement();
+    if (!field) {
+      return;
+    }
+
+    if (field.id !== this.fieldId) {
+      field.id = this.fieldId;
+    }
+
+    this.setOrRemoveAttribute(field, 'aria-describedby', this.ariaDescribedBy);
+    this.setOrRemoveAttribute(field, 'aria-invalid', this.ariaInvalid);
+    this.setOrRemoveAttribute(field, 'aria-errormessage', this.ariaErrorMessage);
+  }
+
+  private setOrRemoveAttribute(element: Element, name: string, value: string | null): void {
+    if (value) {
+      element.setAttribute(name, value);
+    } else {
+      element.removeAttribute(name);
+    }
+  }
+
+  private resolveFallbackFieldElement(): FormWrapperFieldElement | null {
+    const container = this.hostEl.nativeElement.querySelector('[data-form-wrapper-field-container]');
+    if (!(container instanceof HTMLElement)) {
+      return null;
+    }
+
+    const candidate: Element | null = container.querySelector('input, textarea, select');
+
+    if (
+      candidate instanceof HTMLInputElement ||
+      candidate instanceof HTMLTextAreaElement ||
+      candidate instanceof HTMLSelectElement
+    ) {
+      return candidate;
+    }
+
+    return null;
   }
 }
