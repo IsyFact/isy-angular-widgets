@@ -154,6 +154,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
 
   it('should render three InputText variants for validation, disabled and readonly', () => {
     expect(spectator.query<HTMLInputElement>('#input-text-validation')).toBeTruthy();
+    expect(spectator.query<HTMLInputElement>('#input-text-required')).toBeTruthy();
     expect(spectator.query<HTMLInputElement>('#input-text-disabled')).toBeTruthy();
     expect(spectator.query<HTMLInputElement>('#input-text-readonly')).toBeTruthy();
   });
@@ -181,6 +182,26 @@ describe('Unit Tests: PrimengFormComponent', () => {
     spectator.detectChanges();
 
     expect(spectator.query('p-message')).toBeTruthy();
+  });
+
+  it('should render required InputText field with red asterisk', () => {
+    const requiredLabel = spectator.query('label[for="input-text-required"]');
+    const requiredInput = spectator.query<HTMLInputElement>('#input-text-required');
+
+    expect(requiredLabel?.textContent).toContain('*');
+    expect(requiredInput?.hasAttribute('required')).toBeTrue();
+    expect(requiredInput?.hasAttribute('aria-required')).toBeTrue();
+  });
+
+  it('should show required validation error when required field is touched and empty', () => {
+    const input = spectator.query<HTMLInputElement>('#input-text-required');
+
+    expect(input).toBeTruthy();
+    spectator.dispatchFakeEvent(input as HTMLInputElement, 'blur');
+    spectator.detectChanges();
+
+    const errorMessage = spectator.query('p-message');
+    expect(errorMessage).toBeTruthy();
   });
 
   it('should keep disabled and readonly InputText variants in correct state', () => {

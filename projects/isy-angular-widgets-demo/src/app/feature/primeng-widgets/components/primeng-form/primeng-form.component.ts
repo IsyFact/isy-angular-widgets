@@ -91,6 +91,7 @@ export class PrimengFormComponent implements AfterViewInit {
   password: string = '';
   ingredient: string = '';
   inputTextValue: string = '';
+  inputTextRequiredValue: string = '';
 
   stateOptions: string[] = ['Off', 'On'];
   slider: number = 0;

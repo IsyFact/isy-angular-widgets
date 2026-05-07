@@ -15,7 +15,6 @@
           [ngModelOptions]="{standalone: true}"
           [placeholder]="'isyAngularWidgetsDemo.placeholders.inputTextWithHelp' | translate"
           [invalid]="inputTextModel.invalid && inputTextModel.touched"
-          [required]="true"
           minlength="3"
           aria-describedby="input-text-help"
           #inputTextModel="ngModel"
@@ -23,13 +22,38 @@
         <small id="input-text-help">{{ 'isyAngularWidgetsDemo.messages.inputTextHelp' | translate }}</small>
         @if (inputTextModel.invalid && inputTextModel.touched) {
           <p-message severity="error" variant="simple">
-            @if (inputTextModel.errors?.['required']) {
-              {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
-            } @else if (inputTextModel.errors?.['minlength']) {
+            @if (inputTextModel.errors?.['minlength']) {
               {{
                 'isyAngularWidgetsDemo.messages.minLengthError'
                   | translate: {numChars: inputTextModel.errors?.['minlength'].requiredLength}
               }}
+            }
+          </p-message>
+        }
+      </div>
+
+      <div class="flex flex-column gap-2">
+        <label for="input-text-required">
+          {{ 'isyAngularWidgetsDemo.labels.inputTextRequired' | translate }}
+          <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="input-text-required"
+          type="text"
+          pInputText
+          class="w-full"
+          [(ngModel)]="inputTextRequiredValue"
+          [ngModelOptions]="{standalone: true}"
+          [placeholder]="'isyAngularWidgetsDemo.placeholders.inputTextRequired' | translate"
+          [invalid]="inputTextRequiredModel.invalid && inputTextRequiredModel.touched"
+          required="true"
+          aria-required="true"
+          #inputTextRequiredModel="ngModel"
+        />
+        @if (inputTextRequiredModel.invalid && inputTextRequiredModel.touched) {
+          <p-message severity="error" variant="simple">
+            @if (inputTextRequiredModel.errors?.['required']) {
+              {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
             }
           </p-message>
         }
