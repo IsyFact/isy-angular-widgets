@@ -2,8 +2,11 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {fakeAsync, tick, flush} from '@angular/core/testing';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {ViewportScroller} from '@angular/common';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {TranslateModule} from '@ngx-translate/core';
+import {Subject} from 'rxjs';
 import {MessageService} from 'primeng/api';
 import {Popover} from 'primeng/popover';
 import {ModalarmePatternsComponent, StepperStep} from './modalarme-patterns.component';
@@ -20,6 +23,8 @@ function mouseEventWithTarget(target: HTMLElement): MouseEvent {
 }
 
 describe('ModalarmePatternsComponent', () => {
+  const sectionAnchorIds = ['h-stepper', 'h-drawer', 'h-confirm-bar', 'h-help-popover', 'h-help-expander', 'h-errors'];
+
   let spectator: Spectator<ModalarmePatternsComponent>;
   let component: ModalarmePatternsComponent;
   let msgService: MessageService;
@@ -27,16 +32,28 @@ describe('ModalarmePatternsComponent', () => {
   const liveAnnouncerSpy = jasmine.createSpyObj<LiveAnnouncer>('LiveAnnouncer', ['announce']);
   liveAnnouncerSpy.announce.and.returnValue(Promise.resolve());
 
+  const fragment$ = new Subject<string | null>();
+  const viewportScrollerMock = {
+    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+  };
+
   const createComponent = createComponentFactory({
     component: ModalarmePatternsComponent,
     imports: [ReactiveFormsModule, TranslateModule.forRoot()],
-    providers: [FormBuilder, MessageService, {provide: LiveAnnouncer, useValue: liveAnnouncerSpy}],
+    providers: [
+      FormBuilder,
+      MessageService,
+      {provide: LiveAnnouncer, useValue: liveAnnouncerSpy},
+      {provide: ActivatedRoute, useValue: {fragment: fragment$.asObservable()}},
+      {provide: ViewportScroller, useValue: viewportScrollerMock}
+    ],
     schemas: [NO_ERRORS_SCHEMA],
     declareComponent: false
   });
 
   beforeEach(() => {
     liveAnnouncerSpy.announce.calls.reset();
+    viewportScrollerMock.scrollToAnchor.calls.reset();
     spectator = createComponent();
     component = spectator.component;
     msgService = spectator.inject(MessageService);
@@ -48,6 +65,37 @@ describe('ModalarmePatternsComponent', () => {
   describe('Initialisation', () => {
     it('should create the component', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should render all section headings with hover-only anchor symbols', () => {
+      sectionAnchorIds.forEach((id) => {
+        const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
+        const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
+
+        expect(heading).withContext(id).toBeTruthy();
+        expect(heading?.classList.contains('section-heading')).withContext(id).toBeTrue();
+        expect(anchor).withContext(id).toBeTruthy();
+        expect(anchor?.classList.contains('section-anchor')).withContext(id).toBeTrue();
+        expect(anchor?.textContent?.trim()).withContext(id).toBe('🔗');
+      });
+    });
+
+    it('should scroll to anchor after initialization when fragment is emitted', () => {
+      fragment$.next('h-stepper');
+      expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('h-stepper');
+    });
+
+    it('should scroll to section when anchor symbol is clicked', () => {
+      sectionAnchorIds.forEach((id) => {
+        viewportScrollerMock.scrollToAnchor.calls.reset();
+        spectator.click(`h3#${id} > a`);
+        expect(viewportScrollerMock.scrollToAnchor).withContext(id).toHaveBeenCalledWith(id);
+      });
+    });
+
+    it('should not scroll when clicking only the heading text', () => {
+      spectator.click('h3#h-stepper');
+      expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
     });
 
     it('should initialise stepValue to StepperStep.First', () => {

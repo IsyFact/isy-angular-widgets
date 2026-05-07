@@ -1,5 +1,7 @@
 import {
+  AfterViewInit,
   Component,
+  DestroyRef,
   ElementRef,
   ViewChild,
   inject,
@@ -8,6 +10,9 @@ import {
   Injector,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ViewportScroller} from '@angular/common';
 import {CommonModule} from '@angular/common';
 import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
@@ -79,7 +84,10 @@ export enum StepperStep {
   templateUrl: './modalarme-patterns.component.html',
   styleUrls: ['./modalarme-patterns.component.scss']
 })
-export class ModalarmePatternsComponent {
+export class ModalarmePatternsComponent implements AfterViewInit {
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly viewportScroller = inject(ViewportScroller);
   private readonly fb = inject(FormBuilder);
   private readonly msg = inject(MessageService);
   private readonly injector = inject(Injector);
@@ -336,6 +344,24 @@ export class ModalarmePatternsComponent {
 
   helpOpen = false;
   helpPopoverId = 'help-popover-panel';
+
+  ngAfterViewInit(): void {
+    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
+      if (fragment) {
+        this.viewportScroller.scrollToAnchor(fragment);
+      }
+    });
+  }
+
+  scrollToWidget(event: MouseEvent, anchor: string): void {
+    event.preventDefault();
+    this.viewportScroller.scrollToAnchor(anchor);
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${window.location.pathname}${window.location.search}#${anchor}`
+    );
+  }
 
   toggleHelp(event: Event): void {
     this.helpOverlay.toggle(event);

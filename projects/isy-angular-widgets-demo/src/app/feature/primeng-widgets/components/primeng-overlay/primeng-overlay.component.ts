@@ -1,4 +1,7 @@
-import {Component, Injector, afterNextRender, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, Injector, afterNextRender, inject} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ViewportScroller} from '@angular/common';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -27,7 +30,10 @@ import {ToastModule} from 'primeng/toast';
   ],
   providers: [ConfirmationService, MessageService]
 })
-export class PrimengOverlayComponent {
+export class PrimengOverlayComponent implements AfterViewInit {
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly viewportScroller = inject(ViewportScroller);
   readonly confirmationService = inject(ConfirmationService);
   readonly messageService = inject(MessageService);
   private readonly injector = inject(Injector);
@@ -37,8 +43,25 @@ export class PrimengOverlayComponent {
 
   private lastDialogTrigger?: HTMLElement;
   private lastSidebarTrigger?: HTMLElement;
-
   private lastConfirmDialogTrigger?: HTMLElement;
+
+  ngAfterViewInit(): void {
+    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
+      if (fragment) {
+        this.viewportScroller.scrollToAnchor(fragment);
+      }
+    });
+  }
+
+  scrollToWidget(event: MouseEvent, anchor: string): void {
+    event.preventDefault();
+    this.viewportScroller.scrollToAnchor(anchor);
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${window.location.pathname}${window.location.search}#${anchor}`
+    );
+  }
 
   confirmDialog(event: Event): void {
     if (event.currentTarget instanceof HTMLElement) {

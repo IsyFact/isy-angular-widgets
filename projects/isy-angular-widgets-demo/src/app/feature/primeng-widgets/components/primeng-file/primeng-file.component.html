@@ -1,7 +1,16 @@
 <h1>PrimeNG File</h1>
 <div class="grid">
-  <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-    <h2>FileUpload</h2>
+  <div class="col-12 flex flex-column gap-2">
+    <h2 id="fileupload" class="section-heading">
+      FileUpload
+      <a
+        class="section-anchor"
+        href="#fileupload"
+        (click)="scrollToWidget($event, 'fileupload')"
+        aria-label="Link zu FileUpload"
+        >🔗</a
+      >
+    </h2>
     <p-fileupload
       mode="basic"
       chooseIcon="pi pi-upload"

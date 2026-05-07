@@ -1,7 +1,16 @@
 <h1>PrimeNG Messages</h1>
 <div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h2>Messages</h2>
+  <div class="col-12 flex flex-column gap-2">
+    <h2 id="messages" class="section-heading">
+      Messages
+      <a
+        class="section-anchor"
+        href="#messages"
+        (click)="scrollToWidget($event, 'messages')"
+        aria-label="Link zu Messages"
+        >🔗</a
+      >
+    </h2>
     @for (message of messages; track message.key) {
       <p-message
         [severity]="
@@ -19,8 +28,13 @@
       >
     }
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h2>Toast</h2>
+  <div class="col-12 flex flex-column gap-2">
+    <h2 id="toast" class="section-heading">
+      Toast
+      <a class="section-anchor" href="#toast" (click)="scrollToWidget($event, 'toast')" aria-label="Link zu Toast"
+        >🔗</a
+      >
+    </h2>
     <p-button (onClick)="showToastMessage()" label="Show" />
     <p-toast key="toast" position="bottom-right" />
   </div>

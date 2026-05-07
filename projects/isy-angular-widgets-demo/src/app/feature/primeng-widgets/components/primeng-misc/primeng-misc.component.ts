@@ -1,5 +1,7 @@
-import {Component, inject, OnDestroy} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ViewportScroller} from '@angular/common';
 import {TerminalModule, TerminalService} from 'primeng/terminal';
 import {storageData} from '../../data/product';
 import {StorageStatus} from '../../model/product';
@@ -18,6 +20,7 @@ import {ButtonModule} from 'primeng/button';
 import {BlockUIModule} from 'primeng/blockui';
 import {PanelModule} from 'primeng/panel';
 import {OverlayBadgeModule} from 'primeng/overlaybadge';
+import {InputTextModule} from 'primeng/inputtext';
 
 @Component({
   standalone: true,
@@ -39,28 +42,43 @@ import {OverlayBadgeModule} from 'primeng/overlaybadge';
     BlockUIModule,
     PanelModule,
     TerminalModule,
-    OverlayBadgeModule
+    OverlayBadgeModule,
+    InputTextModule
   ],
   providers: [TerminalService]
 })
-export class PrimengMiscComponent implements OnDestroy {
+export class PrimengMiscComponent implements AfterViewInit {
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly viewportScroller = inject(ViewportScroller);
+  private readonly terminalService = inject(TerminalService);
+
   blockedContent: boolean = false;
   storageStatus: StorageStatus[] = storageData;
-  subscription: Subscription;
-
-  terminalService = inject(TerminalService);
 
   constructor() {
-    this.subscription = this.terminalService.commandHandler.subscribe((command) => {
+    this.terminalService.commandHandler.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((command) => {
       const response = command === 'date' ? new Date().toDateString() : 'Unknown command: ' + command;
       this.terminalService.sendResponse(response);
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  ngAfterViewInit(): void {
+    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
+      if (fragment) {
+        this.viewportScroller.scrollToAnchor(fragment);
+      }
+    });
+  }
+
+  scrollToWidget(event: MouseEvent, anchor: string): void {
+    event.preventDefault();
+    this.viewportScroller.scrollToAnchor(anchor);
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${window.location.pathname}${window.location.search}#${anchor}`
+    );
   }
 
   blockContent(): void {

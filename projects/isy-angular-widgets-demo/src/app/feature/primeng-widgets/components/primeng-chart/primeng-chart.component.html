@@ -1,44 +1,116 @@
 <h1>PrimeNG Charts</h1>
 <h2>Bar Charts</h2>
 <div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Vertical</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="bar-chart-vertical" class="section-heading">
+      Vertical
+      <a
+        class="section-anchor"
+        href="#bar-chart-vertical"
+        (click)="scrollToWidget($event, 'bar-chart-vertical')"
+        aria-label="Link zu Vertical"
+        >🔗</a
+      >
+    </h3>
     <p-chart type="bar" [data]="barChartData" [options]="verticalBarChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Horizontal</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="bar-chart-horizontal" class="section-heading">
+      Horizontal
+      <a
+        class="section-anchor"
+        href="#bar-chart-horizontal"
+        (click)="scrollToWidget($event, 'bar-chart-horizontal')"
+        aria-label="Link zu Horizontal"
+        >🔗</a
+      >
+    </h3>
     <p-chart type="bar" [data]="barChartData" [options]="horizontalBarChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Stacked</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="bar-chart-stacked" class="section-heading">
+      Stacked
+      <a
+        class="section-anchor"
+        href="#bar-chart-stacked"
+        (click)="scrollToWidget($event, 'bar-chart-stacked')"
+        aria-label="Link zu Stacked"
+        >🔗</a
+      >
+    </h3>
     <p-chart type="bar" [data]="barChartData" [options]="stackedBarChartOptions" />
   </div>
 </div>
 <p-divider />
 <h2>Circular Charts</h2>
 <div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Pie Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="pie-chart" class="section-heading">
+      Pie Chart
+      <a
+        class="section-anchor"
+        href="#pie-chart"
+        (click)="scrollToWidget($event, 'pie-chart')"
+        aria-label="Link zu Pie Chart"
+        >🔗</a
+      >
+    </h3>
     <p-chart type="pie" [data]="circledChartData" [options]="pieChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Doughnut Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="doughnut-chart" class="section-heading">
+      Doughnut Chart
+      <a
+        class="section-anchor"
+        href="#doughnut-chart"
+        (click)="scrollToWidget($event, 'doughnut-chart')"
+        aria-label="Link zu Doughnut Chart"
+        >🔗</a
+      >
+    </h3>
     <p-chart type="doughnut" [data]="circledChartData" [options]="doughnutChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>PolarArea Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="polararea-chart" class="section-heading">
+      PolarArea Chart
+      <a
+        class="section-anchor"
+        href="#polararea-chart"
+        (click)="scrollToWidget($event, 'polararea-chart')"
+        aria-label="Link zu PolarArea Chart"
+        >🔗</a
+      >
+    </h3>
     <p-chart type="polarArea" [data]="circledChartData" [options]="polarAreaChartOptions" />
   </div>
 </div>
 <p-divider />
 <h2>Other Charts</h2>
 <div class="grid mb-3">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Line Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="line-chart" class="section-heading">
+      Line Chart
+      <a
+        class="section-anchor"
+        href="#line-chart"
+        (click)="scrollToWidget($event, 'line-chart')"
+        aria-label="Link zu Line Chart"
+        >🔗</a
+      >
+    </h3>
     <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Radar Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="radar-chart" class="section-heading">
+      Radar Chart
+      <a
+        class="section-anchor"
+        href="#radar-chart"
+        (click)="scrollToWidget($event, 'radar-chart')"
+        aria-label="Link zu Radar Chart"
+        >🔗</a
+      >
+    </h3>
     <p-chart type="radar" [data]="radarChartData" [options]="radarChartOptions" />
   </div>
 </div>

@@ -1,8 +1,11 @@
 <h1>PrimeNG Misc</h1>
 <h2>Indicator</h2>
 <div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Chip</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="chip" class="section-heading">
+      Chip
+      <a class="section-anchor" href="#chip" (click)="scrollToWidget($event, 'chip')" aria-label="Link zu Chip">🔗</a>
+    </h3>
     <div class="flex justify-content-start gap-2">
       <p-autocomplete label="Apple" multiple="true" typeahead="false" />
       <p-autocomplete label="Google" multiple="true" typeahead="false" />
@@ -10,8 +13,11 @@
       <p-autocomplete label="Facebook" multiple="true" typeahead="false" />
     </div>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Tag</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="tag" class="section-heading">
+      Tag
+      <a class="section-anchor" href="#tag" (click)="scrollToWidget($event, 'tag')" aria-label="Link zu Tag">🔗</a>
+    </h3>
     <div class="flex justify-content-start gap-2">
       <p-tag value="Primary" />
       <p-tag severity="success" value="Success" />
@@ -20,16 +26,30 @@
       <p-tag severity="danger" value="Danger" />
     </div>
   </div>
-  <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-    <h3>Avatar</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="avatar" class="section-heading">
+      Avatar
+      <a class="section-anchor" href="#avatar" (click)="scrollToWidget($event, 'avatar')" aria-label="Link zu Avatar"
+        >🔗</a
+      >
+    </h3>
     <div class="flex justify-content-start gap-2">
       <p-avatar icon="pi pi-user" badgeSize="xlarge" />
       <p-avatar icon="pi pi-user" badgeSize="large" />
       <p-avatar icon="pi pi-user" />
     </div>
   </div>
-  <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-    <h3>Avatar with Badge</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="avatar-badge" class="section-heading">
+      Avatar with Badge
+      <a
+        class="section-anchor"
+        href="#avatar-badge"
+        (click)="scrollToWidget($event, 'avatar-badge')"
+        aria-label="Link zu Avatar with Badge"
+        >🔗</a
+      >
+    </h3>
     <div class="flex justify-content-start gap-5 pt-3">
       <p-overlay-badge value="4" class="inline-flex">
         <p-avatar icon="pi pi-user" badgeSize="xlarge" />
@@ -42,8 +62,13 @@
       </p-overlay-badge>
     </div>
   </div>
-  <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-    <h3>Badge</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="badge" class="section-heading">
+      Badge
+      <a class="section-anchor" href="#badge" (click)="scrollToWidget($event, 'badge')" aria-label="Link zu Badge"
+        >🔗</a
+      >
+    </h3>
     <div class="flex justify-content-start gap-2">
       <p-badge [value]="2" severity="success" badgeSize="large" />
       <p-badge [value]="4" severity="info" badgeSize="large" />
@@ -55,40 +80,94 @@
 <p-divider />
 <h2>Progress Indicator</h2>
 <div class="grid">
-  <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-    <h3>ProgressSpinner</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="progressspinner" class="section-heading">
+      ProgressSpinner
+      <a
+        class="section-anchor"
+        href="#progressspinner"
+        (click)="scrollToWidget($event, 'progressspinner')"
+        aria-label="Link zu ProgressSpinner"
+        >🔗</a
+      >
+    </h3>
     <p-progressspinner />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3>ProgressBar</h3>
+    <h3 id="progressbar" class="section-heading">
+      ProgressBar
+      <a
+        class="section-anchor"
+        href="#progressbar"
+        (click)="scrollToWidget($event, 'progressbar')"
+        aria-label="Link zu ProgressBar"
+        >🔗</a
+      >
+    </h3>
     <p-progressbar [value]="50" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3>MeterGroup</h3>
+    <h3 id="metergroup" class="section-heading">
+      MeterGroup
+      <a
+        class="section-anchor"
+        href="#metergroup"
+        (click)="scrollToWidget($event, 'metergroup')"
+        aria-label="Link zu MeterGroup"
+        >🔗</a
+      >
+    </h3>
     <p-metergroup [value]="storageStatus" />
   </div>
 </div>
 <p-divider />
 <h2>Skeleton</h2>
 <div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Rectangle</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="skeleton-rectangle" class="section-heading">
+      Rectangle
+      <a
+        class="section-anchor"
+        href="#skeleton-rectangle"
+        (click)="scrollToWidget($event, 'skeleton-rectangle')"
+        aria-label="Link zu Rectangle"
+        >🔗</a
+      >
+    </h3>
     <p-skeleton class="mb-2" />
     <p-skeleton width="10rem" class="mb-2" />
     <p-skeleton width="5rem" class="mb-2" />
     <p-skeleton height="2rem" class="mb-2" />
     <p-skeleton width="10rem" height="4rem" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Rounded</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="skeleton-rounded" class="section-heading">
+      Rounded
+      <a
+        class="section-anchor"
+        href="#skeleton-rounded"
+        (click)="scrollToWidget($event, 'skeleton-rounded')"
+        aria-label="Link zu Rounded"
+        >🔗</a
+      >
+    </h3>
     <p-skeleton class="mb-2" borderRadius="16px" />
     <p-skeleton width="10rem" class="mb-2" borderRadius="16px" />
     <p-skeleton width="5rem" class="mb-2" borderRadius="16px" />
     <p-skeleton height="2rem" class="mb-2" borderRadius="16px" />
     <p-skeleton width="10rem" height="4rem" borderRadius="16px" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Square</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="skeleton-square" class="section-heading">
+      Square
+      <a
+        class="section-anchor"
+        href="#skeleton-square"
+        (click)="scrollToWidget($event, 'skeleton-square')"
+        aria-label="Link zu Square"
+        >🔗</a
+      >
+    </h3>
     <div class="flex justify-content-start gap-2">
       <p-skeleton size="5rem" />
       <p-skeleton size="4rem" />
@@ -96,8 +175,17 @@
       <p-skeleton size="2rem" />
     </div>
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Circle</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="skeleton-circle" class="section-heading">
+      Circle
+      <a
+        class="section-anchor"
+        href="#skeleton-circle"
+        (click)="scrollToWidget($event, 'skeleton-circle')"
+        aria-label="Link zu Circle"
+        >🔗</a
+      >
+    </h3>
     <div class="flex justify-content-start gap-2">
       <p-skeleton shape="circle" size="5rem" />
       <p-skeleton shape="circle" size="4rem" />
@@ -110,7 +198,12 @@
 <h2>Other Misc</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <h3>Inplace</h3>
+    <h3 id="inplace" class="section-heading">
+      Inplace
+      <a class="section-anchor" href="#inplace" (click)="scrollToWidget($event, 'inplace')" aria-label="Link zu Inplace"
+        >🔗</a
+      >
+    </h3>
     <p-inplace closable="closable">
       <ng-template pTemplate="display">Click to Edit</ng-template>
       <ng-template pTemplate="content">
@@ -118,8 +211,17 @@
       </ng-template>
     </p-inplace>
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>ScrollTop</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="scrolltop" class="section-heading">
+      ScrollTop
+      <a
+        class="section-anchor"
+        href="#scrolltop"
+        (click)="scrollToWidget($event, 'scrolltop')"
+        aria-label="Link zu ScrollTop"
+        >🔗</a
+      >
+    </h3>
     <div style="height: 150px; overflow: auto">
       <p>
         Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
@@ -143,8 +245,13 @@
       <p-scrollTop target="parent" [threshold]="10" icon="pi pi-arrow-up" />
     </div>
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>BlockUI</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="blockui" class="section-heading">
+      BlockUI
+      <a class="section-anchor" href="#blockui" (click)="scrollToWidget($event, 'blockui')" aria-label="Link zu BlockUI"
+        >🔗</a
+      >
+    </h3>
     <div class="flex justify-content-start gap-2">
       <p-button label="Block" (onClick)="blockContent()" />
       <p-button label="Unblock" (onClick)="unblockContent()" />
@@ -157,7 +264,16 @@
     </p-panel>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3>Terminal</h3>
+    <h3 id="terminal" class="section-heading">
+      Terminal
+      <a
+        class="section-anchor"
+        href="#terminal"
+        (click)="scrollToWidget($event, 'terminal')"
+        aria-label="Link zu Terminal"
+        >🔗</a
+      >
+    </h3>
     <p-terminal welcomeMessage="Welcome to PrimeNG: Enter 'date' to display the current date" prompt="primeng $" />
   </div>
 </div>

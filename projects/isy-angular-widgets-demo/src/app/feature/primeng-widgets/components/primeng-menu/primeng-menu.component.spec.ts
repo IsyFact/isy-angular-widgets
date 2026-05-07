@@ -1,32 +1,42 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
+import {ViewportScroller} from '@angular/common';
+import {Subject} from 'rxjs';
 import {PrimengMenuComponent} from './primeng-menu.component';
 import {electronicData, megaMenuProductData} from '../../data/product';
 import {contextMenuData, fileContainerData, menuBarData, optionData, tabMenuData} from '../../data/file-option';
 import {personalData} from '../../data/organization';
 
 describe('Unit Tests: PrimengMenuComponent', () => {
+  const sectionAnchorIds = [
+    'breadcrumb',
+    'steps',
+    'tabmenu',
+    'menubar',
+    'megamenu',
+    'panelmenu',
+    'tieredmenu',
+    'contextmenu',
+    'menu'
+  ];
+
   let component: PrimengMenuComponent;
   let spectator: Spectator<PrimengMenuComponent>;
+  const fragment$ = new Subject<string | null>();
+  const viewportScrollerMock = {
+    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+  };
+
   const createComponent = createComponentFactory({
     component: PrimengMenuComponent,
     providers: [
-      {
-        provide: ActivatedRoute,
-        useValue: {
-          params: of({}),
-          snapshot: {
-            paramMap: {
-              get: (): null => null
-            }
-          }
-        }
-      }
+      {provide: ActivatedRoute, useValue: {fragment: fragment$.asObservable()}},
+      {provide: ViewportScroller, useValue: viewportScrollerMock}
     ]
   });
 
   beforeEach(() => {
+    viewportScrollerMock.scrollToAnchor.calls.reset();
     spectator = createComponent();
     component = spectator.component;
   });
@@ -74,5 +84,43 @@ describe('Unit Tests: PrimengMenuComponent', () => {
 
   it('should have initial activeIndex as 0', () => {
     expect(component.activeIndex).toBe(0);
+  });
+
+  it('should render all section headings with hover-only anchor symbols', () => {
+    sectionAnchorIds.forEach((id) => {
+      const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
+      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
+
+      expect(heading).toBeTruthy();
+      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(anchor).toBeTruthy();
+      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchor?.textContent?.trim()).toBe('🔗');
+    });
+  });
+
+  it('should render all widgets in full-width containers', () => {
+    sectionAnchorIds.forEach((id) => {
+      const container = spectator.query<HTMLElement>(`.col-12.flex.flex-column.gap-2 h3#${id}`);
+      expect(container).toBeTruthy();
+    });
+  });
+
+  it('should scroll to anchor after initialization when fragment is emitted', () => {
+    fragment$.next('breadcrumb');
+    expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('breadcrumb');
+  });
+
+  it('should scroll to section when anchor symbol is clicked', () => {
+    sectionAnchorIds.forEach((id) => {
+      viewportScrollerMock.scrollToAnchor.calls.reset();
+      spectator.click(`h3#${id} > a`);
+      expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith(id);
+    });
+  });
+
+  it('should not scroll when clicking only the heading text', () => {
+    spectator.click('h3#breadcrumb');
+    expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
   });
 });
