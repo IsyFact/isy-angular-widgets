@@ -1,8 +1,11 @@
 <h1>PrimeNG Panels</h1>
 <h2>Content Organisor</h2>
 <div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Accordion</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="accordion" class="section-heading">
+      Accordion
+      <a class="section-anchor" href="#accordion" (click)="scrollToWidget($event, 'accordion')" aria-label="Link zu Accordion">#</a>
+    </h3>
     <p-accordion value="0">
       <p-accordion-panel value="0">
         <p-accordion-header>Header I</p-accordion-header>
@@ -40,12 +43,18 @@
       </p-accordion-panel>
     </p-accordion>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Panel</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="panel" class="section-heading">
+      Panel
+      <a class="section-anchor" href="#panel" (click)="scrollToWidget($event, 'panel')" aria-label="Link zu Panel">#</a>
+    </h3>
     <p-panel header="Panel Header" [toggleable]="true"> Content </p-panel>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3>Tabs</h3>
+    <h3 id="tabs" class="section-heading">
+      Tabs
+      <a class="section-anchor" href="#tabs" (click)="scrollToWidget($event, 'tabs')" aria-label="Link zu Tabs">#</a>
+    </h3>
     <p-tabs value="0">
       <p-tablist>
         <p-tab value="0">Header 1</p-tab>
@@ -63,16 +72,25 @@
 <p-divider />
 <h2>Content Container</h2>
 <div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Card</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="card" class="section-heading">
+      Card
+      <a class="section-anchor" href="#card" (click)="scrollToWidget($event, 'card')" aria-label="Link zu Card">#</a>
+    </h3>
     <p-card header="Card Header" subheader="Card Subheader"> Content </p-card>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Fieldset</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="fieldset" class="section-heading">
+      Fieldset
+      <a class="section-anchor" href="#fieldset" (click)="scrollToWidget($event, 'fieldset')" aria-label="Link zu Fieldset">#</a>
+    </h3>
     <p-fieldset legend="Fieldset Header"> Content </p-fieldset>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3>ScrollPanel</h3>
+    <h3 id="scrollpanel" class="section-heading">
+      ScrollPanel
+      <a class="section-anchor" href="#scrollpanel" (click)="scrollToWidget($event, 'scrollpanel')" aria-label="Link zu ScrollPanel">#</a>
+    </h3>
     <p-scrollpanel [style]="{height: '150px'}">
       <p>
         Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
@@ -98,8 +116,11 @@
 <p-divider />
 <h2>Separator</h2>
 <div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Splitter</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="splitter" class="section-heading">
+      Splitter
+      <a class="section-anchor" href="#splitter" (click)="scrollToWidget($event, 'splitter')" aria-label="Link zu Splitter">#</a>
+    </h3>
     <p-splitter [style]="{height: '75px'}" class="mb-8">
       <ng-template #panelLeftSide>
         <div class="flex align-items-center justify-content-center h-full">Left Side</div>
@@ -109,8 +130,11 @@
       </ng-template>
     </p-splitter>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Divider</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <h3 id="divider" class="section-heading">
+      Divider
+      <a class="section-anchor" href="#divider" (click)="scrollToWidget($event, 'divider')" aria-label="Link zu Divider">#</a>
+    </h3>
     Text above divider.
     <p-divider />
     Text behind divider.
@@ -120,7 +144,10 @@
 <h2>Design Pattern</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <h3>Toolbar</h3>
+    <h3 id="toolbar" class="section-heading">
+      Toolbar
+      <a class="section-anchor" href="#toolbar" (click)="scrollToWidget($event, 'toolbar')" aria-label="Link zu Toolbar">#</a>
+    </h3>
     <p-toolbar>
       <ng-template #start>
         <p-button icon="pi pi-plus" text severity="secondary" />
@@ -139,7 +166,10 @@
     </p-toolbar>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3>Stepper</h3>
+    <h3 id="stepper" class="section-heading">
+      Stepper
+      <a class="section-anchor" href="#stepper" (click)="scrollToWidget($event, 'stepper')" aria-label="Link zu Stepper">#</a>
+    </h3>
     <p-stepper [value]="1">
       <p-step-list>
         <p-step [value]="1">Header I</p-step>
