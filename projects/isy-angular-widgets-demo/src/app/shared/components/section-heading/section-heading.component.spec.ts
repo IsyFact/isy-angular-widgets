@@ -27,7 +27,7 @@ describe('SectionHeadingComponent', () => {
     spectator = createComponent({
       props: {headingId: 'my-section', label: 'My Section', ariaLabel: 'Link zu My Section', level: 2}
     });
-    viewportScrollerSpy = spectator.inject(ViewportScroller) as jasmine.SpyObj<ViewportScroller>;
+    viewportScrollerSpy = spectator.inject(ViewportScroller);
   });
 
   describe('level 2 (default)', () => {
