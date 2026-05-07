@@ -4,6 +4,7 @@ import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
 import {PrimengFormComponent} from './primeng-form.component';
 import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('Unit Tests: PrimengFormComponent', () => {
   const widgetAnchorIds = [
@@ -46,6 +47,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
 
   const createComponent = createComponentFactory({
     component: PrimengFormComponent,
+    imports: [TranslateModule.forRoot()],
     providers: [
       {
         provide: ActivatedRoute,
@@ -148,5 +150,46 @@ describe('Unit Tests: PrimengFormComponent', () => {
     const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
     component.filterCountry(event);
     expect(component.filteredCountries.length).toBe(0);
+  });
+
+  it('should render three InputText variants for validation, disabled and readonly', () => {
+    expect(spectator.query<HTMLInputElement>('#input-text-validation')).toBeTruthy();
+    expect(spectator.query<HTMLInputElement>('#input-text-disabled')).toBeTruthy();
+    expect(spectator.query<HTMLInputElement>('#input-text-readonly')).toBeTruthy();
+  });
+
+  it('should not show InputText validation error before field is touched', () => {
+    expect(spectator.query('p-message')).toBeFalsy();
+  });
+
+  it('should show required validation error after InputText field is touched', () => {
+    const input = spectator.query<HTMLInputElement>('#input-text-validation');
+
+    expect(input).toBeTruthy();
+    spectator.dispatchFakeEvent(input as HTMLInputElement, 'blur');
+    spectator.detectChanges();
+
+    expect(spectator.query('p-message')).toBeTruthy();
+  });
+
+  it('should apply minlength validation to InputText and show error for too-short input', () => {
+    const input = spectator.query<HTMLInputElement>('#input-text-validation');
+
+    expect(input?.getAttribute('minlength')).toBe('3');
+    spectator.typeInElement('ab', input as HTMLInputElement);
+    spectator.dispatchFakeEvent(input as HTMLInputElement, 'blur');
+    spectator.detectChanges();
+
+    expect(spectator.query('p-message')).toBeTruthy();
+  });
+
+  it('should keep disabled and readonly InputText variants in correct state', () => {
+    const disabledInput = spectator.query<HTMLInputElement>('#input-text-disabled');
+    const readonlyInput = spectator.query<HTMLInputElement>('#input-text-readonly');
+
+    expect(disabledInput?.disabled).toBeTrue();
+    expect(readonlyInput?.readOnly).toBeTrue();
+    expect(disabledInput?.value.length).toBeGreaterThan(0);
+    expect(readonlyInput?.value.length).toBeGreaterThan(0);
   });
 });

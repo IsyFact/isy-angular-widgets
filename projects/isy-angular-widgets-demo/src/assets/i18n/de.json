@@ -59,6 +59,8 @@
       "savePersonSummary": "Personalien gespeichert",
       "savePersonDetail": "Die Personalie mit dem Namen {{firstName}} {{lastName}} wurde erfolgreich gespeichert.",
       "requiredMessage": "Dieses Feld ist ein Pflichtfeld.",
+      "inputTextHelp": "Pflichtfeld mit mindestens 3 Zeichen.",
+      "minLengthError": "Es müssen mindestens {{numChars}} Zeichen verwendet werden.",
       "maxLengthError": "Es dürfen maximal {{numChars}} Zeichen verwendet werden.",
       "dateError": "Das Datum ist ungültig.",
       "dateInPastError": "Das Datum muss in der Vergangenheit liegen.",
@@ -186,10 +188,16 @@
       "female": "Weiblich",
       "male": "Männlich",
       "divers": "Divers",
-      "leftSidebarTitle": "Demo-Anwendung"
+      "leftSidebarTitle": "Demo-Anwendung",
+      "inputTextWithHelp": "Eingabefeld mit Hilfetext",
+      "disabledInputText": "Deaktiviertes Eingabefeld",
+      "disabledInputTextValue": "Dieser Wert ist deaktiviert",
+      "readonlyInputText": "Schreibgeschuetztes Eingabefeld",
+      "readonlyInputTextValue": "Dieser Wert ist nur lesbar"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} Zeichen",
+      "inputTextWithHelp": "Mindestens 3 Zeichen eingeben",
       "creditCardNumber": "Nummer mit 16 Ziffern eingeben",
       "identityCardExpirationDate": "YYYY-MM-DD",
       "creditCardExpirationDate": "MM/YY",

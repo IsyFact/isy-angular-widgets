@@ -3,7 +3,62 @@
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="inputtext" [level]="3" label="InputText" ariaLabel="Link zu InputText" />
-    <input id="inputText" type="text" pInputText class="w-full" />
+    <div class="flex flex-column gap-4">
+      <div class="flex flex-column gap-2">
+        <label for="input-text-validation">{{ 'isyAngularWidgetsDemo.labels.inputTextWithHelp' | translate }}</label>
+        <input
+          id="input-text-validation"
+          type="text"
+          pInputText
+          class="w-full"
+          [(ngModel)]="inputTextValue"
+          [ngModelOptions]="{standalone: true}"
+          [placeholder]="'isyAngularWidgetsDemo.placeholders.inputTextWithHelp' | translate"
+          [invalid]="inputTextModel.invalid && inputTextModel.touched"
+          [required]="true"
+          minlength="3"
+          aria-describedby="input-text-help"
+          #inputTextModel="ngModel"
+        />
+        <small id="input-text-help">{{ 'isyAngularWidgetsDemo.messages.inputTextHelp' | translate }}</small>
+        @if (inputTextModel.invalid && inputTextModel.touched) {
+          <p-message severity="error" variant="simple">
+            @if (inputTextModel.errors?.['required']) {
+              {{ 'isyAngularWidgetsDemo.messages.requiredMessage' | translate }}
+            } @else if (inputTextModel.errors?.['minlength']) {
+              {{
+                'isyAngularWidgetsDemo.messages.minLengthError'
+                  | translate: {numChars: inputTextModel.errors?.['minlength'].requiredLength}
+              }}
+            }
+          </p-message>
+        }
+      </div>
+
+      <div class="flex flex-column gap-2">
+        <label for="input-text-disabled">{{ 'isyAngularWidgetsDemo.labels.disabledInputText' | translate }}</label>
+        <input
+          id="input-text-disabled"
+          type="text"
+          pInputText
+          class="w-full"
+          [value]="'isyAngularWidgetsDemo.labels.disabledInputTextValue' | translate"
+          [disabled]="true"
+        />
+      </div>
+
+      <div class="flex flex-column gap-2">
+        <label for="input-text-readonly">{{ 'isyAngularWidgetsDemo.labels.readonlyInputText' | translate }}</label>
+        <input
+          id="input-text-readonly"
+          type="text"
+          pInputText
+          class="w-full"
+          [value]="'isyAngularWidgetsDemo.labels.readonlyInputTextValue' | translate"
+          [readonly]="true"
+        />
+      </div>
+    </div>
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="inputmask" [level]="3" label="Inputmask" ariaLabel="Link zu Inputmask" />

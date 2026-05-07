@@ -59,6 +59,8 @@
       "savePersonSummary": "Personal data saved",
       "savePersonDetail": "The personal data with the name {{firstName}} {{lastName}} was successfully saved.",
       "requiredMessage": "This field is required.",
+      "inputTextHelp": "Required field with at least 3 characters.",
+      "minLengthError": "At least {{numChars}} characters are required.",
       "maxLengthError": "A maximum of {{numChars}} characters may be used.",
       "dateError": "The date is invalid.",
       "dateInPastError": "The date must be in the past.",
@@ -186,10 +188,16 @@
       "female": "Female",
       "male": "Male",
       "divers": "Divers",
-      "leftSidebarTitle": "Demo-App"
+      "leftSidebarTitle": "Demo-App",
+      "inputTextWithHelp": "Input field with help text",
+      "disabledInputText": "Disabled input field",
+      "disabledInputTextValue": "This value is disabled",
+      "readonlyInputText": "Readonly input field",
+      "readonlyInputTextValue": "This value is readonly"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} charaters",
+      "inputTextWithHelp": "Enter at least 3 characters",
       "creditCardNumber": "Enter number with 16 digits",
       "identityCardExpirationDate": "YYYY-MM-DD",
       "creditCardExpirationDate": "MM/YY",

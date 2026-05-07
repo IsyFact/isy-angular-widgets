@@ -36,6 +36,8 @@ import {KeyFilterModule} from 'primeng/keyfilter';
 import {SliderModule} from 'primeng/slider';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {EditorModule} from 'primeng/editor';
+import {MessageModule} from 'primeng/message';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   standalone: true,
@@ -72,6 +74,8 @@ import {EditorModule} from 'primeng/editor';
     SliderModule,
     ColorPickerModule,
     EditorModule,
+    MessageModule,
+    TranslateModule,
     SectionHeadingComponent
   ]
 })
@@ -86,6 +90,7 @@ export class PrimengFormComponent implements AfterViewInit {
   color: string = '#0055B9';
   password: string = '';
   ingredient: string = '';
+  inputTextValue: string = '';
 
   stateOptions: string[] = ['Off', 'On'];
   slider: number = 0;
