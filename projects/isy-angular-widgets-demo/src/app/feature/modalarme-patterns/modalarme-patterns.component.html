@@ -6,16 +6,12 @@
       <!-- Objekt anlegen – Stepper -->
       <section class="section" aria-labelledby="h-stepper">
         <div class="grid gap-3 col-12 xl:col-6 flex-column">
-          <h3 id="h-stepper" class="section-heading">
-            Seiteninterner Stepper
-            <a
-              class="section-anchor"
-              href="#h-stepper"
-              (click)="scrollToWidget($event, 'h-stepper')"
-              aria-label="Link zu Seiteninterner Stepper"
-              >🔗</a
-            >
-          </h3>
+          <demo-section-heading
+            headingId="h-stepper"
+            [level]="3"
+            label="Seiteninterner Stepper"
+            ariaLabel="Link zu Seiteninterner Stepper"
+          />
 
           @if (globalError) {
             <p-message severity="error">{{ globalError }}</p-message>
@@ -135,16 +131,12 @@
     <div class="col-12 flex flex-column">
       <!-- Drawer – Bearbeiten -->
       <section class="section" aria-labelledby="h-drawer">
-        <h3 id="h-drawer" class="section-heading">
-          Drawer (seitlicher Bereich)
-          <a
-            class="section-anchor"
-            href="#h-drawer"
-            (click)="scrollToWidget($event, 'h-drawer')"
-            aria-label="Link zu Drawer"
-            >🔗</a
-          >
-        </h3>
+        <demo-section-heading
+          headingId="h-drawer"
+          [level]="3"
+          label="Drawer (seitlicher Bereich)"
+          ariaLabel="Link zu Drawer"
+        />
 
         <div class="flex pt-3 flex-wrap">
           <p-button
@@ -209,16 +201,12 @@
     <div class="col-12 flex flex-column">
       <!-- Bestätigung / Löschen – Inline-Bar -->
       <section class="section" aria-labelledby="h-confirm-bar">
-        <h3 id="h-confirm-bar" class="section-heading">
-          Bestätigung / Löschen - Inline-Bestätigungsleiste
-          <a
-            class="section-anchor"
-            href="#h-confirm-bar"
-            (click)="scrollToWidget($event, 'h-confirm-bar')"
-            aria-label="Link zu Bestätigung / Löschen"
-            >🔗</a
-          >
-        </h3>
+        <demo-section-heading
+          headingId="h-confirm-bar"
+          [level]="3"
+          label="Bestätigung / Löschen - Inline-Bestätigungsleiste"
+          ariaLabel="Link zu Bestätigung / Löschen"
+        />
 
         <div class="flex pt-3 flex-wrap">
           <p-button
@@ -259,16 +247,12 @@
     <div class="col-12 flex flex-column">
       <!-- Hilfe – Popover -->
       <section class="section" aria-labelledby="h-help-popover">
-        <h3 id="h-help-popover" class="section-heading">
-          Kontext-Info / Hilfe - Popover
-          <a
-            class="section-anchor"
-            href="#h-help-popover"
-            (click)="scrollToWidget($event, 'h-help-popover')"
-            aria-label="Link zu Kontext-Info Popover"
-            >🔗</a
-          >
-        </h3>
+        <demo-section-heading
+          headingId="h-help-popover"
+          [level]="3"
+          label="Kontext-Info / Hilfe - Popover"
+          ariaLabel="Link zu Kontext-Info Popover"
+        />
 
         <div class="flex pt-3 flex-wrap action">
           <p-button
@@ -311,16 +295,12 @@
     <div class="col-12 flex flex-column">
       <!-- Hilfe – Accordion / Expander -->
       <section class="section" aria-labelledby="h-help-expander">
-        <h3 id="h-help-expander" class="section-heading">
-          Kontext-Info / Hilfe - Expander
-          <a
-            class="section-anchor"
-            href="#h-help-expander"
-            (click)="scrollToWidget($event, 'h-help-expander')"
-            aria-label="Link zu Kontext-Info Expander"
-            >🔗</a
-          >
-        </h3>
+        <demo-section-heading
+          headingId="h-help-expander"
+          [level]="3"
+          label="Kontext-Info / Hilfe - Expander"
+          ariaLabel="Link zu Kontext-Info Expander"
+        />
         <p-accordion>
           <p-accordion-panel value="0">
             <p-accordion-header>Hilfe zu diesem Bereich</p-accordion-header>
@@ -343,16 +323,12 @@
     <div class="col-12 xl:col-6 flex flex-column">
       <!-- Fehlerhandling – Toast + feldnahe Fehler -->
       <section class="section" aria-labelledby="h-errors">
-        <h3 id="h-errors" class="section-heading">
-          Fehlermeldung - Toast + feldnahe Fehlermarkierung
-          <a
-            class="section-anchor"
-            href="#h-errors"
-            (click)="scrollToWidget($event, 'h-errors')"
-            aria-label="Link zu Fehlermeldung"
-            >🔗</a
-          >
-        </h3>
+        <demo-section-heading
+          headingId="h-errors"
+          [level]="3"
+          label="Fehlermeldung - Toast + feldnahe Fehlermarkierung"
+          ariaLabel="Link zu Fehlermeldung"
+        />
 
         <form #errorsFormEl [formGroup]="formErrors" (ngSubmit)="submitErrors()">
           <div class="col-12 md:col-6">

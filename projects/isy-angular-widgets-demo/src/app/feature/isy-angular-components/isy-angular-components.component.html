@@ -2,16 +2,7 @@
   <h1>Isy-Angular Komponenten</h1>
   <div class="grid">
     <div class="col-12 flex flex-column gap-2">
-      <h2 id="seitentoolbar" class="section-heading">
-        Seitentoolbar
-        <a
-          class="section-anchor"
-          href="#seitentoolbar"
-          (click)="scrollToWidget($event, 'seitentoolbar')"
-          aria-label="Link zu Seitentoolbar"
-          >🔗</a
-        >
-      </h2>
+      <demo-section-heading headingId="seitentoolbar" label="Seitentoolbar" ariaLabel="Link zu Seitentoolbar" />
       <isy-seiten-toolbar
         class="skip-link"
         [showSidebar]="true"
@@ -36,16 +27,7 @@
       </isy-seiten-toolbar>
     </div>
     <div class="col-12 flex flex-column gap-2">
-      <h2 id="formwrapper" class="section-heading">
-        FormWrapper
-        <a
-          class="section-anchor"
-          href="#formwrapper"
-          (click)="scrollToWidget($event, 'formwrapper')"
-          aria-label="Link zu FormWrapper"
-          >🔗</a
-        >
-      </h2>
+      <demo-section-heading headingId="formwrapper" label="FormWrapper" ariaLabel="Link zu FormWrapper" />
       <isy-form-wrapper
         [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
         fieldId="first-name"
@@ -66,16 +48,7 @@
     </div>
     <div class="col-12 flex flex-column gap-2">
       <div class="flex align-items-center justify-content-between flex-wrap gap-3">
-        <h2 id="incompletedate" class="section-heading">
-          IncompleteDate
-          <a
-            class="section-anchor"
-            href="#incompletedate"
-            (click)="scrollToWidget($event, 'incompletedate')"
-            aria-label="Link zu IncompleteDate"
-            >🔗</a
-          >
-        </h2>
+        <demo-section-heading headingId="incompletedate" label="IncompleteDate" ariaLabel="Link zu IncompleteDate" />
 
         <div class="flex align-items-center gap-2">
           <p-checkbox
@@ -116,16 +89,7 @@
       </isy-form-wrapper>
     </div>
     <div class="col-12 flex flex-column gap-2">
-      <h2 id="inputchar" class="section-heading">
-        InputChar
-        <a
-          class="section-anchor"
-          href="#inputchar"
-          (click)="scrollToWidget($event, 'inputchar')"
-          aria-label="Link zu InputChar"
-          >🔗</a
-        >
-      </h2>
+      <demo-section-heading headingId="inputchar" label="InputChar" ariaLabel="Link zu InputChar" />
       <isy-form-wrapper
         [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"
         fieldId="last-name"

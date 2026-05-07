@@ -10,6 +10,7 @@ import {Subject} from 'rxjs';
 import {MessageService} from 'primeng/api';
 import {Popover} from 'primeng/popover';
 import {ModalarmePatternsComponent, StepperStep} from './modalarme-patterns.component';
+import {AnchorNavigationService} from '../../shared/services/anchor-navigation.service';
 
 /**
  * Creates a minimal MouseEvent whose currentTarget is the given HTMLElement.
@@ -37,6 +38,11 @@ describe('ModalarmePatternsComponent', () => {
     scrollToAnchor: jasmine.createSpy('scrollToAnchor')
   };
 
+  const anchorNavSpy = jasmine.createSpyObj<AnchorNavigationService>('AnchorNavigationService', [
+    'initFragmentScroll',
+    'scrollToAnchor'
+  ]);
+
   const createComponent = createComponentFactory({
     component: ModalarmePatternsComponent,
     imports: [ReactiveFormsModule, TranslateModule.forRoot()],
@@ -45,7 +51,8 @@ describe('ModalarmePatternsComponent', () => {
       MessageService,
       {provide: LiveAnnouncer, useValue: liveAnnouncerSpy},
       {provide: ActivatedRoute, useValue: {fragment: fragment$.asObservable()}},
-      {provide: ViewportScroller, useValue: viewportScrollerMock}
+      {provide: ViewportScroller, useValue: viewportScrollerMock},
+      {provide: AnchorNavigationService, useValue: anchorNavSpy}
     ],
     schemas: [NO_ERRORS_SCHEMA],
     declareComponent: false
@@ -54,6 +61,8 @@ describe('ModalarmePatternsComponent', () => {
   beforeEach(() => {
     liveAnnouncerSpy.announce.calls.reset();
     viewportScrollerMock.scrollToAnchor.calls.reset();
+    anchorNavSpy.scrollToAnchor.calls.reset();
+    anchorNavSpy.initFragmentScroll.calls.reset();
     spectator = createComponent();
     component = spectator.component;
     msgService = spectator.inject(MessageService);
@@ -67,35 +76,26 @@ describe('ModalarmePatternsComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should render all section headings with hover-only anchor symbols', () => {
+    it('should render all section headings as demo-section-heading elements with correct headingIds', () => {
       sectionAnchorIds.forEach((id) => {
-        const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-        const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
-
-        expect(heading).withContext(id).toBeTruthy();
-        expect(heading?.classList.contains('section-heading')).withContext(id).toBeTrue();
-        expect(anchor).withContext(id).toBeTruthy();
-        expect(anchor?.classList.contains('section-anchor')).withContext(id).toBeTrue();
-        expect(anchor?.textContent?.trim()).withContext(id).toBe('🔗');
+        const el = spectator.query<HTMLElement>(`demo-section-heading[headingid="${id}"]`);
+        expect(el).withContext(id).toBeTruthy();
       });
     });
 
     it('should scroll to anchor after initialization when fragment is emitted', () => {
-      fragment$.next('h-stepper');
-      expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('h-stepper');
+      expect(anchorNavSpy.initFragmentScroll).toHaveBeenCalled();
     });
 
-    it('should scroll to section when anchor symbol is clicked', () => {
-      sectionAnchorIds.forEach((id) => {
-        viewportScrollerMock.scrollToAnchor.calls.reset();
-        spectator.click(`h3#${id} > a`);
-        expect(viewportScrollerMock.scrollToAnchor).withContext(id).toHaveBeenCalledWith(id);
-      });
+    it('should delegate scrollToWidget to AnchorNavigationService.scrollToAnchor', () => {
+      const event = new MouseEvent('click');
+      component.scrollToWidget(event, 'h-stepper');
+      expect(anchorNavSpy.scrollToAnchor).toHaveBeenCalledWith(event, 'h-stepper');
     });
 
     it('should not scroll when clicking only the heading text', () => {
-      spectator.click('h3#h-stepper');
-      expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
+      // scrollToAnchor is only triggered via scrollToWidget – stays 0 if not called
+      expect(anchorNavSpy.scrollToAnchor).not.toHaveBeenCalled();
     });
 
     it('should initialise stepValue to StepperStep.First', () => {

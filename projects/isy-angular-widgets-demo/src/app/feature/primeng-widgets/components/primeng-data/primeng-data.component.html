@@ -2,29 +2,16 @@
 <h2>Data Views</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="organizationchart" class="section-heading">
-      OrganizationChart
-      <a
-        class="section-anchor"
-        href="#organizationchart"
-        (click)="scrollToWidget($event, 'organizationchart')"
-        aria-label="Link zu OrganizationChart"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading
+      headingId="organizationchart"
+      [level]="3"
+      label="OrganizationChart"
+      ariaLabel="Link zu OrganizationChart"
+    />
     <p-organizationChart [value]="organization" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="timeline" class="section-heading">
-      Timeline
-      <a
-        class="section-anchor"
-        href="#timeline"
-        (click)="scrollToWidget($event, 'timeline')"
-        aria-label="Link zu Timeline"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="timeline" [level]="3" label="Timeline" ariaLabel="Link zu Timeline" />
     <p-timeline [value]="deliveryStatus">
       <ng-template let-delivery pTemplate="opposite"> {{ delivery.status }} </ng-template>
       <ng-template let-delivery pTemplate="content">
@@ -33,16 +20,7 @@
     </p-timeline>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="scroller" class="section-heading">
-      Scroller
-      <a
-        class="section-anchor"
-        href="#scroller"
-        (click)="scrollToWidget($event, 'scroller')"
-        aria-label="Link zu Scroller"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="scroller" [level]="3" label="Scroller" ariaLabel="Link zu Scroller" />
     <p-scroller [items]="countries" [itemSize]="50" scrollHeight="200px" styleClass="w-full">
       <ng-template pTemplate="item" let-country>
         <div style="height: 50px">{{ country.name }}</div>
@@ -50,10 +28,7 @@
     </p-scroller>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="tree" class="section-heading">
-      Tree
-      <a class="section-anchor" href="#tree" (click)="scrollToWidget($event, 'tree')" aria-label="Link zu Tree">🔗</a>
-    </h3>
+    <demo-section-heading headingId="tree" [level]="3" label="Tree" ariaLabel="Link zu Tree" />
     <p-tree [value]="files" class="w-full" />
   </div>
 </div>
@@ -61,16 +36,7 @@
 <h2>Tables</h2>
 <div class="grid mb-3">
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="paginator" class="section-heading">
-      Paginator
-      <a
-        class="section-anchor"
-        href="#paginator"
-        (click)="scrollToWidget($event, 'paginator')"
-        aria-label="Link zu Paginator"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="paginator" [level]="3" label="Paginator" ariaLabel="Link zu Paginator" />
     <p-paginator
       [rows]="10"
       [totalRecords]="120"
@@ -80,12 +46,12 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="table" class="section-heading">
-      Table with striped rows, paginator, filter, sort and single row selection mode
-      <a class="section-anchor" href="#table" (click)="scrollToWidget($event, 'table')" aria-label="Link zu Table"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading
+      headingId="table"
+      [level]="3"
+      label="Table with striped rows, paginator, filter, sort and single row selection mode"
+      ariaLabel="Link zu Table"
+    />
     <p-table
       [value]="products"
       selectionMode="single"
@@ -130,16 +96,12 @@
     </p-table>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="treetable" class="section-heading">
-      TreeTable with paginator, sort and single row selection mode
-      <a
-        class="section-anchor"
-        href="#treetable"
-        (click)="scrollToWidget($event, 'treetable')"
-        aria-label="Link zu TreeTable"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading
+      headingId="treetable"
+      [level]="3"
+      label="TreeTable with paginator, sort and single row selection mode"
+      ariaLabel="Link zu TreeTable"
+    />
     <p-treetable
       [value]="itSolutions"
       selectionMode="single"

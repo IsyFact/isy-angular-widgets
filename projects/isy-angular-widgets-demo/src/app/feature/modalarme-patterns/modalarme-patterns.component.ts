@@ -10,9 +10,6 @@ import {
   Injector,
   ChangeDetectionStrategy
 } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ViewportScroller} from '@angular/common';
 import {CommonModule} from '@angular/common';
 import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
@@ -29,6 +26,8 @@ import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 import {SelectModule} from 'primeng/select';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import {AnchorNavigationService} from '../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../shared/components/section-heading/section-heading.component';
 
 /**
  * Type guard: checks whether an AbstractControl is a FormGroup.
@@ -79,15 +78,15 @@ export enum StepperStep {
     FormControlPipe,
     SelectModule,
     MessageModule,
-    ToastModule
+    ToastModule,
+    SectionHeadingComponent
   ],
   templateUrl: './modalarme-patterns.component.html',
   styleUrls: ['./modalarme-patterns.component.scss']
 })
 export class ModalarmePatternsComponent implements AfterViewInit {
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly viewportScroller = inject(ViewportScroller);
+  private readonly anchorNav = inject(AnchorNavigationService);
   private readonly fb = inject(FormBuilder);
   private readonly msg = inject(MessageService);
   private readonly injector = inject(Injector);
@@ -346,21 +345,11 @@ export class ModalarmePatternsComponent implements AfterViewInit {
   helpPopoverId = 'help-popover-panel';
 
   ngAfterViewInit(): void {
-    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
-      if (fragment) {
-        this.viewportScroller.scrollToAnchor(fragment);
-      }
-    });
+    this.anchorNav.initFragmentScroll(this.destroyRef);
   }
 
   scrollToWidget(event: MouseEvent, anchor: string): void {
-    event.preventDefault();
-    this.viewportScroller.scrollToAnchor(anchor);
-    window.history.replaceState(
-      window.history.state,
-      '',
-      `${window.location.pathname}${window.location.search}#${anchor}`
-    );
+    this.anchorNav.scrollToAnchor(event, anchor);
   }
 
   toggleHelp(event: Event): void {

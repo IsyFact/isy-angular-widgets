@@ -1,14 +1,10 @@
 <h1>PrimeNG Buttons</h1>
-<h2 id="colored-buttons" class="section-heading">
-  Colored Buttons
-  <a
-    class="section-anchor"
-    href="#colored-buttons"
-    (click)="scrollToWidget($event, 'colored-buttons')"
-    aria-label="Link zu Colored Buttons"
-    >🔗</a
-  >
-</h2>
+<demo-section-heading
+  headingId="colored-buttons"
+  [level]="2"
+  label="Colored Buttons"
+  ariaLabel="Link zu Colored Buttons"
+/>
 <div class="grid">
   <div class="col-12">
     <div class="flex flex-column gap-2">
@@ -44,16 +40,12 @@
   </div>
 </div>
 <p-divider />
-<h2 id="outlined-buttons" class="section-heading">
-  Outlined Buttons
-  <a
-    class="section-anchor"
-    href="#outlined-buttons"
-    (click)="scrollToWidget($event, 'outlined-buttons')"
-    aria-label="Link zu Outlined Buttons"
-    >🔗</a
-  >
-</h2>
+<demo-section-heading
+  headingId="outlined-buttons"
+  [level]="2"
+  label="Outlined Buttons"
+  ariaLabel="Link zu Outlined Buttons"
+/>
 <div class="grid">
   <div class="col-12">
     <div class="flex flex-column gap-2">
@@ -89,16 +81,7 @@
   </div>
 </div>
 <p-divider />
-<h2 id="icon-buttons" class="section-heading">
-  Icon Buttons
-  <a
-    class="section-anchor"
-    href="#icon-buttons"
-    (click)="scrollToWidget($event, 'icon-buttons')"
-    aria-label="Link zu Icon Buttons"
-    >🔗</a
-  >
-</h2>
+<demo-section-heading headingId="icon-buttons" [level]="2" label="Icon Buttons" ariaLabel="Link zu Icon Buttons" />
 <div class="grid">
   <div class="col-12">
     <div class="flex flex-column gap-2">
@@ -139,29 +122,11 @@
 <h2>Special Buttons</h2>
 <div class="grid mb-3">
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="splitbutton" class="section-heading">
-      SplitButton
-      <a
-        class="section-anchor"
-        href="#splitbutton"
-        (click)="scrollToWidget($event, 'splitbutton')"
-        aria-label="Link zu SplitButton"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="splitbutton" [level]="3" label="SplitButton" ariaLabel="Link zu SplitButton" />
     <p-splitbutton label="Save" icon="pi pi-save" [model]="options" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="speeddial" class="section-heading">
-      SpeedDial
-      <a
-        class="section-anchor"
-        href="#speeddial"
-        (click)="scrollToWidget($event, 'speeddial')"
-        aria-label="Link zu SpeedDial"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="speeddial" [level]="3" label="SpeedDial" ariaLabel="Link zu SpeedDial" />
     <p-speeddial id="speedDial" [model]="options" direction="right" />
   </div>
 </div>

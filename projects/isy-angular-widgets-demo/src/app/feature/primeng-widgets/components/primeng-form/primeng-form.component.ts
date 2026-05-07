@@ -1,8 +1,7 @@
 import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ViewportScroller} from '@angular/common';
 import {AutoCompleteCompleteEvent, AutoCompleteModule} from 'primeng/autocomplete';
+import {AnchorNavigationService} from '../../../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../../../shared/components/section-heading/section-heading.component';
 
 import {Country} from '../../model/country';
 import {countryCityMapping, countryData} from '../../data/country';
@@ -72,13 +71,13 @@ import {EditorModule} from 'primeng/editor';
     KeyFilterModule,
     SliderModule,
     ColorPickerModule,
-    EditorModule
+    EditorModule,
+    SectionHeadingComponent
   ]
 })
 export class PrimengFormComponent implements AfterViewInit {
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly viewportScroller = inject(ViewportScroller);
+  private readonly anchorNav = inject(AnchorNavigationService);
 
   countries: Country[] = countryData;
   filteredCountries: Country[] = [];
@@ -98,21 +97,11 @@ export class PrimengFormComponent implements AfterViewInit {
   text: string = '';
 
   ngAfterViewInit(): void {
-    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
-      if (fragment) {
-        this.viewportScroller.scrollToAnchor(fragment);
-      }
-    });
+    this.anchorNav.initFragmentScroll(this.destroyRef);
   }
 
   scrollToWidget(event: MouseEvent, anchor: string): void {
-    event.preventDefault();
-    this.viewportScroller.scrollToAnchor(anchor);
-    window.history.replaceState(
-      window.history.state,
-      '',
-      `${window.location.pathname}${window.location.search}#${anchor}`
-    );
+    this.anchorNav.scrollToAnchor(event, anchor);
   }
 
   filterCountry(event: AutoCompleteCompleteEvent): void {

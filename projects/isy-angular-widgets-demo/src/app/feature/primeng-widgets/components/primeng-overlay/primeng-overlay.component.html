@@ -2,12 +2,7 @@
 <h2>Dialogs</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="sidebar" class="section-heading">
-      Sidebar
-      <a class="section-anchor" href="#sidebar" (click)="scrollToWidget($event, 'sidebar')" aria-label="Link zu Sidebar"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="sidebar" [level]="3" label="Sidebar" ariaLabel="Link zu Sidebar" />
     <p-button (onClick)="showSidebar($event)" label="Left Sidebar" />
     <p-drawer [(visible)]="visibleSidebar" position="left" (onHide)="onSidebarHide()">
       <h1>Sidebar Header</h1>
@@ -15,12 +10,7 @@
     </p-drawer>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="dialog" class="section-heading">
-      Dialog
-      <a class="section-anchor" href="#dialog" (click)="scrollToWidget($event, 'dialog')" aria-label="Link zu Dialog"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="dialog" [level]="3" label="Dialog" ariaLabel="Link zu Dialog" />
     <p-button (onClick)="showDialog($event)" label="Dialog" />
     <p-dialog
       header="Dialog Header"
@@ -36,31 +26,18 @@
     </p-dialog>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="confirmdialog" class="section-heading">
-      ConfirmDialog
-      <a
-        class="section-anchor"
-        href="#confirmdialog"
-        (click)="scrollToWidget($event, 'confirmdialog')"
-        aria-label="Link zu ConfirmDialog"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading
+      headingId="confirmdialog"
+      [level]="3"
+      label="ConfirmDialog"
+      ariaLabel="Link zu ConfirmDialog"
+    />
     <p-button (onClick)="confirmDialog($event)" label="Save" />
     <p-toast position="bottom-right" />
     <p-confirmdialog key="confirmDialog" (onHide)="onConfirmDialogHide()" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="confirmpopup" class="section-heading">
-      ConfirmPopup
-      <a
-        class="section-anchor"
-        href="#confirmpopup"
-        (click)="scrollToWidget($event, 'confirmpopup')"
-        aria-label="Link zu ConfirmPopup"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="confirmpopup" [level]="3" label="ConfirmPopup" ariaLabel="Link zu ConfirmPopup" />
     <p-button (onClick)="confirmPopup($event)" label="Save" />
     <p-toast position="bottom-right" />
     <p-confirmpopup key="confirmPopup" />
@@ -72,12 +49,7 @@
 <h2>Extra-Info Widgets</h2>
 <div class="grid mb-3">
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="tooltip" class="section-heading">
-      Tooltip
-      <a class="section-anchor" href="#tooltip" (click)="scrollToWidget($event, 'tooltip')" aria-label="Link zu Tooltip"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="tooltip" [level]="3" label="Tooltip" ariaLabel="Link zu Tooltip" />
     <input
       id="tooltip-input"
       type="text"
@@ -89,16 +61,7 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3 id="overlaypanel" class="section-heading">
-      OverlayPanel
-      <a
-        class="section-anchor"
-        href="#overlaypanel"
-        (click)="scrollToWidget($event, 'overlaypanel')"
-        aria-label="Link zu OverlayPanel"
-        >🔗</a
-      >
-    </h3>
+    <demo-section-heading headingId="overlaypanel" [level]="3" label="OverlayPanel" ariaLabel="Link zu OverlayPanel" />
     <p-button (onClick)="overlayPanel.toggle($event)" label="OverlayPanel" />
     <p-popover #overlayPanel>
       <div class="flex flex-column gap-2">Content</div>

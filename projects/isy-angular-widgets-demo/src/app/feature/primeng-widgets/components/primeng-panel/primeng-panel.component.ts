@@ -1,7 +1,4 @@
 import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ViewportScroller} from '@angular/common';
 import {MenuItem} from 'primeng/api';
 import {optionData} from '../../data/file-option';
 import {AccordionModule} from 'primeng/accordion';
@@ -19,6 +16,8 @@ import {StepperModule} from 'primeng/stepper';
 import {InputIconModule} from 'primeng/inputicon';
 import {InputTextModule} from 'primeng/inputtext';
 import {IconFieldModule} from 'primeng/iconfield';
+import {AnchorNavigationService} from '../../../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../../../shared/components/section-heading/section-heading.component';
 
 @Component({
   standalone: true,
@@ -39,31 +38,21 @@ import {IconFieldModule} from 'primeng/iconfield';
     StepperModule,
     InputTextModule,
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    SectionHeadingComponent
   ]
 })
 export class PrimengPanelComponent implements AfterViewInit {
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly viewportScroller = inject(ViewportScroller);
+  private readonly anchorNav = inject(AnchorNavigationService);
 
   option: MenuItem[] = optionData;
 
   ngAfterViewInit(): void {
-    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
-      if (fragment) {
-        this.viewportScroller.scrollToAnchor(fragment);
-      }
-    });
+    this.anchorNav.initFragmentScroll(this.destroyRef);
   }
 
   scrollToWidget(event: MouseEvent, anchor: string): void {
-    event.preventDefault();
-    this.viewportScroller.scrollToAnchor(anchor);
-    window.history.replaceState(
-      window.history.state,
-      '',
-      `${window.location.pathname}${window.location.search}#${anchor}`
-    );
+    this.anchorNav.scrollToAnchor(event, anchor);
   }
 }

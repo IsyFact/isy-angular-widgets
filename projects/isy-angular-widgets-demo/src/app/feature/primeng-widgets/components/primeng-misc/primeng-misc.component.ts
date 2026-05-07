@@ -1,7 +1,5 @@
 import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ViewportScroller} from '@angular/common';
 import {TerminalModule, TerminalService} from 'primeng/terminal';
 import {storageData} from '../../data/product';
 import {StorageStatus} from '../../model/product';
@@ -21,6 +19,8 @@ import {BlockUIModule} from 'primeng/blockui';
 import {PanelModule} from 'primeng/panel';
 import {OverlayBadgeModule} from 'primeng/overlaybadge';
 import {InputTextModule} from 'primeng/inputtext';
+import {AnchorNavigationService} from '../../../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../../../shared/components/section-heading/section-heading.component';
 
 @Component({
   standalone: true,
@@ -43,14 +43,14 @@ import {InputTextModule} from 'primeng/inputtext';
     PanelModule,
     TerminalModule,
     OverlayBadgeModule,
-    InputTextModule
+    InputTextModule,
+    SectionHeadingComponent
   ],
   providers: [TerminalService]
 })
 export class PrimengMiscComponent implements AfterViewInit {
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly viewportScroller = inject(ViewportScroller);
+  private readonly anchorNav = inject(AnchorNavigationService);
   private readonly terminalService = inject(TerminalService);
 
   blockedContent: boolean = false;
@@ -64,21 +64,11 @@ export class PrimengMiscComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
-      if (fragment) {
-        this.viewportScroller.scrollToAnchor(fragment);
-      }
-    });
+    this.anchorNav.initFragmentScroll(this.destroyRef);
   }
 
   scrollToWidget(event: MouseEvent, anchor: string): void {
-    event.preventDefault();
-    this.viewportScroller.scrollToAnchor(anchor);
-    window.history.replaceState(
-      window.history.state,
-      '',
-      `${window.location.pathname}${window.location.search}#${anchor}`
-    );
+    this.anchorNav.scrollToAnchor(event, anchor);
   }
 
   blockContent(): void {

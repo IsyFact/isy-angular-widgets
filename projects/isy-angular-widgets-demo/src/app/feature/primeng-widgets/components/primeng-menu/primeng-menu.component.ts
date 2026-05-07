@@ -1,7 +1,4 @@
 import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {ViewportScroller} from '@angular/common';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 import {electronicData, megaMenuProductData} from '../../data/product';
 import {contextMenuData, fileContainerData, menuBarData, optionData, tabMenuData} from '../../data/file-option';
@@ -16,6 +13,8 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {MenuModule} from 'primeng/menu';
+import {AnchorNavigationService} from '../../../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../../../shared/components/section-heading/section-heading.component';
 
 @Component({
   standalone: true,
@@ -31,13 +30,13 @@ import {MenuModule} from 'primeng/menu';
     PanelMenuModule,
     TieredMenuModule,
     ContextMenuModule,
-    MenuModule
+    MenuModule,
+    SectionHeadingComponent
   ]
 })
 export class PrimengMenuComponent implements AfterViewInit {
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly viewportScroller = inject(ViewportScroller);
+  private readonly anchorNav = inject(AnchorNavigationService);
 
   electronics: MenuItem[] = electronicData;
   contextMenuOption: MenuItem[] = contextMenuData;
@@ -50,21 +49,11 @@ export class PrimengMenuComponent implements AfterViewInit {
   tabMenuOption: MenuItem[] = tabMenuData;
 
   ngAfterViewInit(): void {
-    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
-      if (fragment) {
-        this.viewportScroller.scrollToAnchor(fragment);
-      }
-    });
+    this.anchorNav.initFragmentScroll(this.destroyRef);
   }
 
   scrollToWidget(event: MouseEvent, anchor: string): void {
-    event.preventDefault();
-    this.viewportScroller.scrollToAnchor(anchor);
-    window.history.replaceState(
-      window.history.state,
-      '',
-      `${window.location.pathname}${window.location.search}#${anchor}`
-    );
+    this.anchorNav.scrollToAnchor(event, anchor);
   }
 
   onActiveIndexChange(event: number): void {
