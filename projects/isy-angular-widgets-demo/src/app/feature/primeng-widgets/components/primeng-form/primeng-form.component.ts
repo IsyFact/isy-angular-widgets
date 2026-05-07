@@ -1,4 +1,7 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ViewportScroller} from '@angular/common';
 import {AutoCompleteCompleteEvent, AutoCompleteModule} from 'primeng/autocomplete';
 
 import {Country} from '../../model/country';
@@ -39,6 +42,29 @@ import {EditorModule} from 'primeng/editor';
   standalone: true,
   selector: 'demo-primeng-form',
   templateUrl: './primeng-form.component.html',
+  styles: [
+    `
+      .section-heading {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .section-anchor {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        text-decoration: none;
+      }
+
+      .section-heading:hover .section-anchor,
+      .section-heading:focus-within .section-anchor {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    `
+  ],
   imports: [
     InputTextModule,
     InputMaskModule,
@@ -72,7 +98,11 @@ import {EditorModule} from 'primeng/editor';
     EditorModule
   ]
 })
-export class PrimengFormComponent {
+export class PrimengFormComponent implements AfterViewInit {
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly viewportScroller = inject(ViewportScroller);
+
   countries: Country[] = countryData;
   filteredCountries: Country[] = [];
   files: FileOption[] = fileOptionData;
@@ -89,6 +119,20 @@ export class PrimengFormComponent {
 
   // Variable to hold the text entered in the editor
   text: string = '';
+
+  ngAfterViewInit(): void {
+    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fragment => {
+      if (fragment) {
+        this.viewportScroller.scrollToAnchor(fragment);
+      }
+    });
+  }
+
+  scrollToWidget(event: MouseEvent, anchor: string): void {
+    event.preventDefault();
+    this.viewportScroller.scrollToAnchor(anchor);
+    window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}#${anchor}`);
+  }
 
   filterCountry(event: AutoCompleteCompleteEvent): void {
     const filtered: Country[] = [];
