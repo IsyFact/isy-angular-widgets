@@ -121,7 +121,7 @@ export class PrimengFormComponent implements AfterViewInit {
   text: string = '';
 
   ngAfterViewInit(): void {
-    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fragment => {
+    this.activatedRoute.fragment.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((fragment) => {
       if (fragment) {
         this.viewportScroller.scrollToAnchor(fragment);
       }
@@ -131,7 +131,11 @@ export class PrimengFormComponent implements AfterViewInit {
   scrollToWidget(event: MouseEvent, anchor: string): void {
     event.preventDefault();
     this.viewportScroller.scrollToAnchor(anchor);
-    window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}#${anchor}`);
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${window.location.pathname}${window.location.search}#${anchor}`
+    );
   }
 
   filterCountry(event: AutoCompleteCompleteEvent): void {

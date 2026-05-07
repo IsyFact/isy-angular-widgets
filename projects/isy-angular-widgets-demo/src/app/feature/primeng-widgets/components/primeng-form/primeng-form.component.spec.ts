@@ -7,12 +7,34 @@ import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 
 describe('Unit Tests: PrimengFormComponent', () => {
   const widgetAnchorIds = [
-    'inputtext', 'inputmask', 'autocomplete', 'iconfield', 'inputgroup',
-    'keyfilter', 'password', 'calendar', 'inputnumber', 'cascadeselect',
-    'dropdown', 'multiselect', 'treeselect', 'textarea', 'inputotp',
-    'checkbox', 'radiobutton', 'knob', 'tristatecheckbox', 'rating',
-    'slider', 'inputswitch', 'togglebutton', 'selectbutton',
-    'colorpicker', 'chips', 'listbox', 'editor'
+    'inputtext',
+    'inputmask',
+    'autocomplete',
+    'iconfield',
+    'inputgroup',
+    'keyfilter',
+    'password',
+    'calendar',
+    'inputnumber',
+    'cascadeselect',
+    'dropdown',
+    'multiselect',
+    'treeselect',
+    'textarea',
+    'inputotp',
+    'checkbox',
+    'radiobutton',
+    'knob',
+    'tristatecheckbox',
+    'rating',
+    'slider',
+    'inputswitch',
+    'togglebutton',
+    'selectbutton',
+    'colorpicker',
+    'chips',
+    'listbox',
+    'editor'
   ];
 
   let component: PrimengFormComponent;
@@ -51,7 +73,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
 
     expect(headingLinks).toHaveLength(widgetAnchorIds.length);
 
-    widgetAnchorIds.forEach(id => {
+    widgetAnchorIds.forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
       const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
 

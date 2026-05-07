@@ -54,7 +54,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
     expect(headingLinks).toHaveLength(widgetAnchorIds.length);
 
-    widgetAnchorIds.forEach(id => {
+    widgetAnchorIds.forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
       const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
 

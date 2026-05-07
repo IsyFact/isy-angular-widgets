@@ -1,24 +1,42 @@
 <h1>PrimeNG Forms</h1>
 <h2>Input Fields</h2>
 <div class="grid">
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="inputtext" class="section-heading">
       InputText
-      <a class="section-anchor" href="#inputtext" (click)="scrollToWidget($event, 'inputtext')" aria-label="Link zu InputText">#</a>
+      <a
+        class="section-anchor"
+        href="#inputtext"
+        (click)="scrollToWidget($event, 'inputtext')"
+        aria-label="Link zu InputText"
+        >#</a
+      >
     </h3>
     <input id="inputText" type="text" pInputText class="w-full" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="inputmask" class="section-heading">
       Inputmask
-      <a class="section-anchor" href="#inputmask" (click)="scrollToWidget($event, 'inputmask')" aria-label="Link zu Inputmask">#</a>
+      <a
+        class="section-anchor"
+        href="#inputmask"
+        (click)="scrollToWidget($event, 'inputmask')"
+        aria-label="Link zu Inputmask"
+        >#</a
+      >
     </h3>
     <p-inputMask inputId="inputMask" mask="(999) 999-9999" placeholder="(999) 999-9999" styleClass="w-full" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="autocomplete" class="section-heading">
       AutoComplete
-      <a class="section-anchor" href="#autocomplete" (click)="scrollToWidget($event, 'autocomplete')" aria-label="Link zu AutoComplete">#</a>
+      <a
+        class="section-anchor"
+        href="#autocomplete"
+        (click)="scrollToWidget($event, 'autocomplete')"
+        aria-label="Link zu AutoComplete"
+        >#</a
+      >
     </h3>
     <p-autocomplete
       inputId="autoComplete"
@@ -30,20 +48,32 @@
       inputStyleClass="w-full"
     />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="iconfield" class="section-heading">
       IconField
-      <a class="section-anchor" href="#iconfield" (click)="scrollToWidget($event, 'iconfield')" aria-label="Link zu IconField">#</a>
+      <a
+        class="section-anchor"
+        href="#iconfield"
+        (click)="scrollToWidget($event, 'iconfield')"
+        aria-label="Link zu IconField"
+        >#</a
+      >
     </h3>
     <p-iconfield iconPosition="left">
       <p-inputIcon class="pi pi-search" />
       <input type="text" pInputText placeholder="Search" class="w-full" />
     </p-iconfield>
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="inputgroup" class="section-heading">
       InputGroup
-      <a class="section-anchor" href="#inputgroup" (click)="scrollToWidget($event, 'inputgroup')" aria-label="Link zu InputGroup">#</a>
+      <a
+        class="section-anchor"
+        href="#inputgroup"
+        (click)="scrollToWidget($event, 'inputgroup')"
+        aria-label="Link zu InputGroup"
+        >#</a
+      >
     </h3>
     <p-inputgroup>
       <p-inputGroupAddon>
@@ -52,24 +82,42 @@
       <input id="inputGroup" pInputText placeholder="User" class="w-full" />
     </p-inputgroup>
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="keyfilter" class="section-heading">
       KeyFilter (hex)
-      <a class="section-anchor" href="#keyfilter" (click)="scrollToWidget($event, 'keyfilter')" aria-label="Link zu KeyFilter">#</a>
+      <a
+        class="section-anchor"
+        href="#keyfilter"
+        (click)="scrollToWidget($event, 'keyfilter')"
+        aria-label="Link zu KeyFilter"
+        >#</a
+      >
     </h3>
     <input id="keyFilter" pInputText pKeyFilter="hex" class="w-full" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="password" class="section-heading">
       Password
-      <a class="section-anchor" href="#password" (click)="scrollToWidget($event, 'password')" aria-label="Link zu Password">#</a>
+      <a
+        class="section-anchor"
+        href="#password"
+        (click)="scrollToWidget($event, 'password')"
+        aria-label="Link zu Password"
+        >#</a
+      >
     </h3>
     <p-password inputId="password" [(ngModel)]="password" toggleMask="true" class="w-full" inputStyleClass="w-full" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="calendar" class="section-heading">
       Calendar
-      <a class="section-anchor" href="#calendar" (click)="scrollToWidget($event, 'calendar')" aria-label="Link zu Calendar">#</a>
+      <a
+        class="section-anchor"
+        href="#calendar"
+        (click)="scrollToWidget($event, 'calendar')"
+        aria-label="Link zu Calendar"
+        >#</a
+      >
     </h3>
     <p-datepicker
       inputId="calender"
@@ -80,10 +128,16 @@
       ariaLabel="Calender-Picker"
     />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="inputnumber" class="section-heading">
       InputNumber
-      <a class="section-anchor" href="#inputnumber" (click)="scrollToWidget($event, 'inputnumber')" aria-label="Link zu InputNumber">#</a>
+      <a
+        class="section-anchor"
+        href="#inputnumber"
+        (click)="scrollToWidget($event, 'inputnumber')"
+        aria-label="Link zu InputNumber"
+        >#</a
+      >
     </h3>
     <p-inputnumber
       inputId="inputNumber"
@@ -94,10 +148,16 @@
       currency="EUR"
     />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="cascadeselect" class="section-heading">
       CascadeSelect
-      <a class="section-anchor" href="#cascadeselect" (click)="scrollToWidget($event, 'cascadeselect')" aria-label="Link zu CascadeSelect">#</a>
+      <a
+        class="section-anchor"
+        href="#cascadeselect"
+        (click)="scrollToWidget($event, 'cascadeselect')"
+        aria-label="Link zu CascadeSelect"
+        >#</a
+      >
     </h3>
     <p-cascadeselect
       id="cascadeSelect"
@@ -109,10 +169,16 @@
       class="w-full"
     />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="dropdown" class="section-heading">
       Dropdown
-      <a class="section-anchor" href="#dropdown" (click)="scrollToWidget($event, 'dropdown')" aria-label="Link zu Dropdown">#</a>
+      <a
+        class="section-anchor"
+        href="#dropdown"
+        (click)="scrollToWidget($event, 'dropdown')"
+        aria-label="Link zu Dropdown"
+        >#</a
+      >
     </h3>
     <p-select
       id="dropdown"
@@ -125,10 +191,16 @@
       appendTo="body"
     />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="multiselect" class="section-heading">
       MultiSelect
-      <a class="section-anchor" href="#multiselect" (click)="scrollToWidget($event, 'multiselect')" aria-label="Link zu MultiSelect">#</a>
+      <a
+        class="section-anchor"
+        href="#multiselect"
+        (click)="scrollToWidget($event, 'multiselect')"
+        aria-label="Link zu MultiSelect"
+        >#</a
+      >
     </h3>
     <p-multiselect
       id="multiSelect"
@@ -139,10 +211,16 @@
       class="w-full"
     />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="treeselect" class="section-heading">
       TreeSelect
-      <a class="section-anchor" href="#treeselect" (click)="scrollToWidget($event, 'treeselect')" aria-label="Link zu TreeSelect">#</a>
+      <a
+        class="section-anchor"
+        href="#treeselect"
+        (click)="scrollToWidget($event, 'treeselect')"
+        aria-label="Link zu TreeSelect"
+        >#</a
+      >
     </h3>
     <p-treeselect
       [filter]="true"
@@ -153,17 +231,29 @@
       class="w-full"
     />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="textarea" class="section-heading">
       Textarea
-      <a class="section-anchor" href="#textarea" (click)="scrollToWidget($event, 'textarea')" aria-label="Link zu Textarea">#</a>
+      <a
+        class="section-anchor"
+        href="#textarea"
+        (click)="scrollToWidget($event, 'textarea')"
+        aria-label="Link zu Textarea"
+        >#</a
+      >
     </h3>
     <textarea pTextarea class="w-full" aria-label="Textarea"></textarea>
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="inputotp" class="section-heading">
       InputOtp
-      <a class="section-anchor" href="#inputotp" (click)="scrollToWidget($event, 'inputotp')" aria-label="Link zu InputOtp">#</a>
+      <a
+        class="section-anchor"
+        href="#inputotp"
+        (click)="scrollToWidget($event, 'inputotp')"
+        aria-label="Link zu InputOtp"
+        >#</a
+      >
     </h3>
     <p-inputotp [length]="6" />
   </div>
@@ -171,10 +261,16 @@
 <p-divider />
 <h2>Status Components</h2>
 <div class="grid">
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="checkbox" class="section-heading">
       Checkbox
-      <a class="section-anchor" href="#checkbox" (click)="scrollToWidget($event, 'checkbox')" aria-label="Link zu Checkbox">#</a>
+      <a
+        class="section-anchor"
+        href="#checkbox"
+        (click)="scrollToWidget($event, 'checkbox')"
+        aria-label="Link zu Checkbox"
+        >#</a
+      >
     </h3>
     <div class="flex flex-column gap-2">
       <p-checkbox label="Cheese" name="pizza" value="Cheese" />
@@ -183,10 +279,16 @@
       <p-checkbox label="Onion" name="pizza" value="Onion" />
     </div>
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="radiobutton" class="section-heading">
       RadioButton
-      <a class="section-anchor" href="#radiobutton" (click)="scrollToWidget($event, 'radiobutton')" aria-label="Link zu RadioButton">#</a>
+      <a
+        class="section-anchor"
+        href="#radiobutton"
+        (click)="scrollToWidget($event, 'radiobutton')"
+        aria-label="Link zu RadioButton"
+        >#</a
+      >
     </h3>
     <div class="flex flex-column gap-2">
       <p-radiobutton label="Cheese" name="pizza" value="Cheese" [(ngModel)]="ingredient" />
@@ -195,46 +297,68 @@
       <p-radiobutton label="Onion" name="pizza" value="Onion" [(ngModel)]="ingredient" />
     </div>
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="knob" class="section-heading">
       Knob
       <a class="section-anchor" href="#knob" (click)="scrollToWidget($event, 'knob')" aria-label="Link zu Knob">#</a>
     </h3>
     <p-knob ariaLabel="Knob" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="tristatecheckbox" class="section-heading">
       TriStateCheckbox
-      <a class="section-anchor" href="#tristatecheckbox" (click)="scrollToWidget($event, 'tristatecheckbox')" aria-label="Link zu TriStateCheckbox">#</a>
+      <a
+        class="section-anchor"
+        href="#tristatecheckbox"
+        (click)="scrollToWidget($event, 'tristatecheckbox')"
+        aria-label="Link zu TriStateCheckbox"
+        >#</a
+      >
     </h3>
     <p-checkbox inputId="triStateCheckbox" label="TriStateCheckbox" [binary]="true" [indeterminate]="true" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="rating" class="section-heading">
       Rating
-      <a class="section-anchor" href="#rating" (click)="scrollToWidget($event, 'rating')" aria-label="Link zu Rating">#</a>
+      <a class="section-anchor" href="#rating" (click)="scrollToWidget($event, 'rating')" aria-label="Link zu Rating"
+        >#</a
+      >
     </h3>
     <p-rating />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="slider" class="section-heading">
       Slider
-      <a class="section-anchor" href="#slider" (click)="scrollToWidget($event, 'slider')" aria-label="Link zu Slider">#</a>
+      <a class="section-anchor" href="#slider" (click)="scrollToWidget($event, 'slider')" aria-label="Link zu Slider"
+        >#</a
+      >
     </h3>
     <input type="text" pInputText [(ngModel)]="slider" class="w-full mb-3" />
     <p-slider [(ngModel)]="slider" class="w-full" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="inputswitch" class="section-heading">
       InputSwitch
-      <a class="section-anchor" href="#inputswitch" (click)="scrollToWidget($event, 'inputswitch')" aria-label="Link zu InputSwitch">#</a>
+      <a
+        class="section-anchor"
+        href="#inputswitch"
+        (click)="scrollToWidget($event, 'inputswitch')"
+        aria-label="Link zu InputSwitch"
+        >#</a
+      >
     </h3>
     <p-toggleswitch inputId="inputSwitch" ariaLabel="Input Switch" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="togglebutton" class="section-heading">
       ToggleButton
-      <a class="section-anchor" href="#togglebutton" (click)="scrollToWidget($event, 'togglebutton')" aria-label="Link zu ToggleButton">#</a>
+      <a
+        class="section-anchor"
+        href="#togglebutton"
+        (click)="scrollToWidget($event, 'togglebutton')"
+        aria-label="Link zu ToggleButton"
+        >#</a
+      >
     </h3>
     <p-togglebutton
       inputId="toggleButton"
@@ -244,10 +368,16 @@
       offLabel="Unlocked"
     />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="selectbutton" class="section-heading">
       SelectButton
-      <a class="section-anchor" href="#selectbutton" (click)="scrollToWidget($event, 'selectbutton')" aria-label="Link zu SelectButton">#</a>
+      <a
+        class="section-anchor"
+        href="#selectbutton"
+        (click)="scrollToWidget($event, 'selectbutton')"
+        aria-label="Link zu SelectButton"
+        >#</a
+      >
     </h3>
     <p-selectbutton [options]="stateOptions" />
   </div>
@@ -255,15 +385,21 @@
 <p-divider />
 <h2>Special Components</h2>
 <div class="grid mb-3">
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="colorpicker" class="section-heading">
       Colorpicker
-      <a class="section-anchor" href="#colorpicker" (click)="scrollToWidget($event, 'colorpicker')" aria-label="Link zu Colorpicker">#</a>
+      <a
+        class="section-anchor"
+        href="#colorpicker"
+        (click)="scrollToWidget($event, 'colorpicker')"
+        aria-label="Link zu Colorpicker"
+        >#</a
+      >
     </h3>
     <p-colorpicker inputId="colorpicker" [(ngModel)]="color" />
     <span class="ml-3">{{ color }}</span>
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="chips" class="section-heading">
       Chips
       <a class="section-anchor" href="#chips" (click)="scrollToWidget($event, 'chips')" aria-label="Link zu Chips">#</a>
@@ -272,17 +408,21 @@
       <p-autocomplete multiple="true" typeahead="false" inputId="chips" [maxlength]="3" placeholder="Maximum 3 chips" />
     </div>
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="listbox" class="section-heading">
       Listbox
-      <a class="section-anchor" href="#listbox" (click)="scrollToWidget($event, 'listbox')" aria-label="Link zu Listbox">#</a>
+      <a class="section-anchor" href="#listbox" (click)="scrollToWidget($event, 'listbox')" aria-label="Link zu Listbox"
+        >#</a
+      >
     </h3>
     <p-listbox id="listbox" [options]="countries" optionLabel="name" class="w-full" />
   </div>
-  <div class="col-12 flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2">
     <h3 id="editor" class="section-heading">
       Editor
-      <a class="section-anchor" href="#editor" (click)="scrollToWidget($event, 'editor')" aria-label="Link zu Editor">#</a>
+      <a class="section-anchor" href="#editor" (click)="scrollToWidget($event, 'editor')" aria-label="Link zu Editor"
+        >#</a
+      >
     </h3>
     <p-editor [(ngModel)]="text" [style]="{height: '320px'}" />
   </div>
