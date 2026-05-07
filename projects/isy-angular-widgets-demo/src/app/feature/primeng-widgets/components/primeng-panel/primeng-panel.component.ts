@@ -24,29 +24,6 @@ import {IconFieldModule} from 'primeng/iconfield';
   standalone: true,
   selector: 'demo-primeng-panel',
   templateUrl: './primeng-panel.component.html',
-  styles: [
-    `
-      .section-heading {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .section-anchor {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        text-decoration: none;
-      }
-
-      .section-heading:hover .section-anchor,
-      .section-heading:focus-within .section-anchor {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-      }
-    `
-  ],
   imports: [
     AccordionModule,
     PanelModule,

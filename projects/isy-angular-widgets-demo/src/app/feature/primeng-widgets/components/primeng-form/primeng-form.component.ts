@@ -42,29 +42,6 @@ import {EditorModule} from 'primeng/editor';
   standalone: true,
   selector: 'demo-primeng-form',
   templateUrl: './primeng-form.component.html',
-  styles: [
-    `
-      .section-heading {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .section-anchor {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        text-decoration: none;
-      }
-
-      .section-heading:hover .section-anchor,
-      .section-heading:focus-within .section-anchor {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-      }
-    `
-  ],
   imports: [
     InputTextModule,
     InputMaskModule,

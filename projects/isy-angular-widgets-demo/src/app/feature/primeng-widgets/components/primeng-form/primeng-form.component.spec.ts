@@ -81,7 +81,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
       expect(heading?.classList.contains('section-heading')).toBeTrue();
       expect(anchorLink).toBeTruthy();
       expect(anchorLink?.classList.contains('section-anchor')).toBeTrue();
-      expect(anchorLink?.textContent?.trim()).toBe('#');
+      expect(anchorLink?.textContent?.trim()).toBe('🔗');
     });
   });
 
