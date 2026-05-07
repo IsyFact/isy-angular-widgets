@@ -12,6 +12,7 @@ import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-bu
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
 import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'isy-input-char-preview',
@@ -39,6 +40,14 @@ let fixture: ComponentFixture<InputCharDialogComponent>;
 const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
 const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
+let headerBaseChars$: BehaviorSubject<string>;
+let headerGroups$: BehaviorSubject<string>;
+const translations: Record<string, string> = {
+  'inputChar.headerBaseChars': 'Basis',
+  'inputChar.headerGroups': 'Gruppen',
+  'inputChar.insert': 'Einfügen',
+  'inputChar.headerAllCharacters': 'Alle'
+};
 
 /**
  * Picks a small sample from an array (up to `max` elements).
@@ -68,6 +77,7 @@ function pickSample<T>(arr: T[], max = 8): T[] {
 
 describe('Unit Tests: InputCharDialogComponent', () => {
   let component: InputCharDialogComponent;
+
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
     imports: [AccordionModule, SelectButtonModule, FormsModule],
@@ -88,11 +98,33 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   const render = (): void => fixture.detectChanges(false);
 
   beforeEach(() => {
+    translations['inputChar.headerBaseChars'] = 'Basis';
+    translations['inputChar.headerGroups'] = 'Gruppen';
+    translations['inputChar.insert'] = 'Einfügen';
+    translations['inputChar.headerAllCharacters'] = 'Alle';
+
+    headerBaseChars$ = new BehaviorSubject<string>(translations['inputChar.headerBaseChars']);
+    headerGroups$ = new BehaviorSubject<string>(translations['inputChar.headerGroups']);
+
     spectator = createComponent();
     component = spectator.component;
     fixture = spectator.fixture;
     mockWidgetsConfigService = spectator.inject(WidgetsConfigService);
-    mockWidgetsConfigService.getTranslation.and.callFake((key: string) => key);
+
+    mockWidgetsConfigService.getTranslation.and.callFake((key: string) => translations[key] ?? key);
+
+    mockWidgetsConfigService.getTranslation$.and.callFake((key: string) => {
+      if (key === 'inputChar.headerBaseChars') {
+        return headerBaseChars$.asObservable();
+      }
+
+      if (key === 'inputChar.headerGroups') {
+        return headerGroups$.asObservable();
+      }
+
+      return new BehaviorSubject<string>(translations[key] ?? key).asObservable();
+    });
+
     spectator.setInput('charList', sonderzeichenListe);
     render();
   });
@@ -121,6 +153,41 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
     expect(spy).toHaveBeenCalled();
     expect(component.leftViewData).toBeTruthy();
+  });
+
+  it('should rebuild leftViewData when translations change', () => {
+    expect(component.leftViewData.Basis).toBeTruthy();
+    expect(component.leftViewData.Gruppen).toBeTruthy();
+
+    translations['inputChar.headerBaseChars'] = 'Base characters';
+    translations['inputChar.headerGroups'] = 'Groups';
+
+    headerBaseChars$.next('Base characters');
+    headerGroups$.next('Groups');
+
+    render();
+
+    expect(component.leftViewData['Base characters']).toBeTruthy();
+    expect(component.leftViewData.Groups).toBeTruthy();
+    expect(component.leftViewData.Basis).toBeUndefined();
+    expect(component.leftViewData.Gruppen).toBeUndefined();
+  });
+
+  it('should keep the displayed characters when translations change', () => {
+    const base = bases.find((value) => value !== '*') ?? bases[0];
+
+    component.onGrundzeichenSelection(base);
+    const selectedCharacters = component.displayedCharacters;
+
+    translations['inputChar.headerBaseChars'] = 'Base characters';
+    translations['inputChar.headerGroups'] = 'Groups';
+
+    headerBaseChars$.next('Base characters');
+    headerGroups$.next('Groups');
+
+    render();
+
+    expect(component.displayedCharacters).toBe(selectedCharacters);
   });
 
   it('should emit chosen characters (sample) after insertSelectedZeichen', () => {
@@ -171,91 +238,6 @@ describe('Unit Tests: InputCharDialogComponent', () => {
         expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
       }
     }
-  });
-
-  it('should create and setup MutationObserver in ngAfterViewInit', () => {
-    expect(component.mutationObserver).toBeTruthy();
-  });
-
-  it('should observe DOM changes on the component element', () => {
-    const observeSpy = jasmine.createSpy('observe');
-    const disconnectSpy = jasmine.createSpy('disconnect');
-
-    spyOn(globalThis, 'MutationObserver').and.callFake(function (_callback: MutationCallback): MutationObserver {
-      return {
-        observe: observeSpy,
-        disconnect: disconnectSpy,
-        takeRecords: (): MutationRecord[] => []
-      };
-    });
-
-    component.ngAfterViewInit();
-
-    expect(observeSpy).toHaveBeenCalledWith(
-      fixture.nativeElement,
-      jasmine.objectContaining({
-        subtree: true,
-        characterData: true,
-        childList: true
-      })
-    );
-  });
-
-  it('should call initSelectButtonsData when relevant mutations occur', (done) => {
-    const initSelectButtonsDataSpy = spyOn(component, 'initSelectButtonsData');
-    const testElement = document.createElement('div');
-    fixture.nativeElement.appendChild(testElement);
-
-    setTimeout(() => {
-      expect(initSelectButtonsDataSpy).toHaveBeenCalled();
-      done();
-    }, 150);
-  });
-
-  it('should ignore irrelevant mutations', (done) => {
-    const initSelectButtonsDataSpy = spyOn(component, 'initSelectButtonsData');
-
-    if (component.mutationObserver) {
-      component.mutationObserver.disconnect();
-      component.mutationObserver = new MutationObserver((mutations) => {
-        const relevant = mutations.some(
-          (m) =>
-            m.type === 'characterData' ||
-            (m.type === 'childList' && (m.addedNodes.length > 0 || m.removedNodes.length > 0))
-        );
-        if (!relevant) return;
-      });
-
-      component.mutationObserver.observe(fixture.nativeElement, {
-        subtree: true,
-        characterData: true,
-        childList: true
-      });
-    }
-
-    setTimeout(() => {
-      expect(initSelectButtonsDataSpy).not.toHaveBeenCalled();
-      done();
-    }, 150);
-  });
-
-  it('should clear rebuild timer on ngOnDestroy', () => {
-    const clearTimeoutSpy = spyOn(globalThis, 'clearTimeout');
-
-    const testComponent = component as unknown as {rebuildTimer?: ReturnType<typeof setTimeout>};
-    testComponent.rebuildTimer = setTimeout(() => {}, 999999);
-
-    component.ngOnDestroy();
-
-    expect(clearTimeoutSpy).toHaveBeenCalled();
-    expect(testComponent.rebuildTimer).toBeUndefined();
-  });
-
-  it('should disconnect MutationObserver on ngOnDestroy', () => {
-    const disconnectSpy = spyOn(component.mutationObserver!, 'disconnect');
-    component.ngOnDestroy();
-    expect(disconnectSpy).toHaveBeenCalled();
-    expect(component.mutationObserver).toBeUndefined();
   });
 });
 

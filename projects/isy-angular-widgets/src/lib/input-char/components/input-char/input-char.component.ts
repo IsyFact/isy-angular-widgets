@@ -8,6 +8,7 @@ import {
   Input,
   OnChanges,
   Output,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
@@ -23,8 +24,7 @@ import {ButtonModule} from 'primeng/button';
   selector: 'isy-input-char',
   templateUrl: './input-char.component.html',
   styleUrls: ['./input-char.component.scss'],
-  imports: [InputCharDialogComponent, DialogModule, ButtonModule],
-  providers: [CharacterService]
+  imports: [InputCharDialogComponent, DialogModule, ButtonModule]
 })
 export class InputCharComponent implements OnChanges {
   /**
@@ -108,20 +108,26 @@ export class InputCharComponent implements OnChanges {
 
   private readonly charService = inject(CharacterService);
 
-  private readonly lastTrigger?: HTMLElement;
+  private readonly injector = inject(Injector);
+
+  private loadedDatentyp?: Datentyp;
 
   /**
    * A service used to translate labels within the widgets library.
    */
   configService = inject(WidgetsConfigService);
 
-  ngOnChanges(): void {
-    this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.datentyp && this.visible) {
+      this.loadCharacters();
+    }
   }
 
-  private readonly injector = inject(Injector);
-
   toggleCharPicker(): void {
+    if (!this.visible) {
+      this.loadCharacters();
+    }
+
     this.visible = !this.visible;
   }
 
@@ -133,5 +139,14 @@ export class InputCharComponent implements OnChanges {
     }
 
     afterNextRender({write: () => button.focus()}, {injector: this.injector});
+  }
+
+  private loadCharacters(): void {
+    if (this.loadedDatentyp === this.datentyp) {
+      return;
+    }
+
+    this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);
+    this.loadedDatentyp = this.datentyp;
   }
 }

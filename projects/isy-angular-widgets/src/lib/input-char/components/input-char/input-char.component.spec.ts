@@ -37,10 +37,11 @@ describe('Unit Tests: InputCharComponent', () => {
   let component: InputCharComponent;
   const dialogDefaultWidth = '740px';
   const dialogDefaultHeight = '460px';
+  const datentypValues = Object.values(Datentyp) as Datentyp[];
+
   const charServiceSpy = jasmine.createSpyObj<CharacterService>('CharacterService', ['getCharactersByDataType']);
-  charServiceSpy.getCharactersByDataType.and.returnValue([]);
   const configServiceSpy = jasmine.createSpyObj<WidgetsConfigService>('WidgetsConfigService', ['getTranslation']);
-  configServiceSpy.getTranslation.and.callFake((k: string) => k);
+
   const createComponent = createComponentFactory({
     component: InputCharComponent,
     detectChanges: false,
@@ -62,6 +63,14 @@ describe('Unit Tests: InputCharComponent', () => {
 
   const render = (): void => spectator.fixture.detectChanges(false);
 
+  beforeEach(() => {
+    charServiceSpy.getCharactersByDataType.calls.reset();
+    charServiceSpy.getCharactersByDataType.and.returnValue([]);
+
+    configServiceSpy.getTranslation.calls.reset();
+    configServiceSpy.getTranslation.and.callFake((key: string) => key);
+  });
+
   describe('with default datentyp', () => {
     beforeEach(() => {
       spectator = createComponent();
@@ -81,9 +90,56 @@ describe('Unit Tests: InputCharComponent', () => {
       expect(component.width).toEqual(dialogDefaultWidth);
       expect(component.height).toEqual(dialogDefaultHeight);
     });
+
+    it('should not load characters before opening the dialog', () => {
+      expect(charServiceSpy.getCharactersByDataType).not.toHaveBeenCalled();
+      expect(component.allCharacters).toEqual([]);
+    });
+
+    it('should load characters when opening the dialog', () => {
+      spectator.click('.input-char-button');
+      render();
+
+      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledWith(Datentyp.DATENTYP_C);
+      expect(component.visible).toBeTrue();
+    });
+
+    it('should not load characters again when reopening with the same datentyp', () => {
+      spectator.click('.input-char-button');
+      render();
+
+      spectator.click('.input-char-button');
+      render();
+
+      spectator.click('.input-char-button');
+      render();
+
+      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledTimes(1);
+    });
+
+    it('should render the input char dialog only when visible is true', () => {
+      expect(spectator.query(InputCharDialogStubComponent)).toBeFalsy();
+
+      spectator.click('.input-char-button');
+      render();
+
+      expect(spectator.query(InputCharDialogStubComponent)).toBeTruthy();
+    });
+
+    it('should load characters again when datentyp changes while dialog is visible', () => {
+      spectator.click('.input-char-button');
+      render();
+
+      spectator.setInput('datentyp', Datentyp.DATENTYP_A);
+      render();
+
+      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledWith(Datentyp.DATENTYP_C);
+      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledWith(Datentyp.DATENTYP_A);
+      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledTimes(2);
+    });
   });
 
-  Object.values(Datentyp).forEach((datentyp) => {
+  datentypValues.forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
         spectator = createComponent({props: {datentyp}});
@@ -134,6 +190,13 @@ describe('Unit Tests: InputCharComponent', () => {
 
         expect(component.visible).toBeTrue();
       });
+
+      it('should load characters for the selected datentyp after opening', () => {
+        spectator.click('.input-char-button');
+        render();
+
+        expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledWith(datentyp);
+      });
     });
   });
 });
@@ -141,36 +204,38 @@ describe('Unit Tests: InputCharComponent', () => {
 describe('Integration Test: InputCharComponent', () => {
   const service = new CharacterService();
   let spectator: Spectator<InputCharComponent>;
+  const datentypValues = Object.values(Datentyp) as Datentyp[];
   const createComponent = createComponentFactory({
     component: InputCharComponent,
     imports: [DialogModule, InputCharDialogComponent, ButtonModule],
     providers: [WidgetsConfigService, CharacterService]
   });
 
-  Object.keys(Datentyp).forEach((datentyp) => {
+  datentypValues.forEach((datentyp) => {
     describe(`with ${datentyp}`, () => {
       beforeEach(() => {
         spectator = createComponent({
           props: {
-            datentyp: datentyp as Datentyp
+            datentyp
           }
         });
+
         spectator.detectChanges();
-        spectator.component.ngOnChanges();
         spectator.click('.input-char-button');
+        spectator.detectChanges();
       });
 
       it('should create', () => {
         expect(spectator.component).toBeTruthy();
       });
 
-      const expectedGroups = service.getGroupsByDataType(datentyp as Datentyp).length;
+      const expectedGroups = service.getGroupsByDataType(datentyp).length;
       it(`should show ${expectedGroups} available groups after opening`, () => {
         const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton');
         expect(groupButtons.length).toEqual(expectedGroups);
       });
 
-      const expectedCharacters = service.getCharactersByDataType(datentyp as Datentyp).length;
+      const expectedCharacters = service.getCharactersByDataType(datentyp).length;
       it(`should show ${expectedCharacters} characters after opening`, () => {
         const groupButtons = spectator.queryAll('.right-panel-side p-selectbutton p-togglebutton');
         expect(groupButtons.length).toEqual(expectedCharacters);
@@ -225,6 +290,7 @@ describe('Accessibility Test: InputCharComponent', () => {
   const render = (): void => spectator.fixture.detectChanges(false);
 
   beforeEach(() => {
+    mockConfigService.getTranslation.calls.reset();
     mockConfigService.getTranslation.and.returnValue('Close picker');
     spectator = createComponent({props: {datentyp: Datentyp.DATENTYP_C}});
     render();

@@ -7,6 +7,7 @@ describe('Unit Tests: CharacterService', () => {
   let service: CharacterService;
   let spectator: SpectatorService<CharacterService>;
   const createdService = createServiceFactory(CharacterService);
+
   const groupCounts = new Map<Schriftzeichengruppe, number>([
     [Schriftzeichengruppe.LATEIN, 649],
     [Schriftzeichengruppe.N1, 18],
@@ -17,6 +18,7 @@ describe('Unit Tests: CharacterService', () => {
     [Schriftzeichengruppe.GRIECHISCH, 69],
     [Schriftzeichengruppe.KYRILLISCH, 62]
   ]);
+
   const baseCounts = new Map<string, number>([
     ['', 253],
     ['A', 61],
@@ -46,6 +48,7 @@ describe('Unit Tests: CharacterService', () => {
     ['Y', 21],
     ['Z', 32]
   ]);
+
   const datenTypTestDataSet = [
     {
       datentyp: Datentyp.DATENTYP_A,
@@ -142,9 +145,7 @@ describe('Unit Tests: CharacterService', () => {
 
       testData.expectedSchriftzeichengruppen.forEach((expectedSchriftzeichengruppe) => {
         it(`should contain ${expectedSchriftzeichengruppe}`, () => {
-          for (const expectedSchriftzeichengruppe of testData.expectedSchriftzeichengruppen) {
-            expect(service.getGroupsByDataType(datentyp)).toContain(expectedSchriftzeichengruppe);
-          }
+          expect(service.getGroupsByDataType(datentyp)).toContain(expectedSchriftzeichengruppe);
         });
       });
 
@@ -163,5 +164,37 @@ describe('Unit Tests: CharacterService', () => {
       const filteredResult = service.getCharacters().find((item) => item.zeichen === character);
       expect(filteredResult).toBeTruthy();
     });
+  });
+
+  it('should cache characters by data type', () => {
+    const firstResult = service.getCharactersByDataType(Datentyp.DATENTYP_C);
+    const secondResult = service.getCharactersByDataType(Datentyp.DATENTYP_C);
+
+    expect(secondResult).toBe(firstResult);
+  });
+
+  it('should return different cached character lists for different data types', () => {
+    const datentypAResult = service.getCharactersByDataType(Datentyp.DATENTYP_A);
+    const datentypCResult = service.getCharactersByDataType(Datentyp.DATENTYP_C);
+
+    expect(datentypAResult).not.toBe(datentypCResult);
+  });
+
+  it('should cache grundzeichen for the same character list', () => {
+    const characters = service.getCharactersByDataType(Datentyp.DATENTYP_C);
+
+    const firstResult = service.getGrundzeichen(characters);
+    const secondResult = service.getGrundzeichen(characters);
+
+    expect(secondResult).toBe(firstResult);
+  });
+
+  it('should cache schriftzeichengruppen for the same character list', () => {
+    const characters = service.getCharactersByDataType(Datentyp.DATENTYP_C);
+
+    const firstResult = service.getSchriftzeichenGruppen(characters);
+    const secondResult = service.getSchriftzeichenGruppen(characters);
+
+    expect(secondResult).toBe(firstResult);
   });
 });

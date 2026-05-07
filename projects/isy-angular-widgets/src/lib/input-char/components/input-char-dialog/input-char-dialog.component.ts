@@ -1,14 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Output
-} from '@angular/core';
+import {Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {combineLatest} from 'rxjs';
 import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
@@ -36,7 +28,7 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
     MultiSelectButtonComponent
   ]
 })
-export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class InputCharDialogComponent implements OnChanges, OnInit {
   /**
    * Emits a character chosen to insert by the user.
    */
@@ -84,58 +76,27 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
   allButtonHeader!: string;
 
   /**
-   * The MutationObserver used to observe changes in the DOM.
-   * @internal
-   */
-  mutationObserver?: MutationObserver;
-
-  /**
    * A service used to translate labels within the widgets library.
    */
   configService = inject(WidgetsConfigService);
 
   private readonly charService = inject(CharacterService);
 
-  private readonly elementRef = inject(ElementRef);
+  private readonly destroyRef = inject(DestroyRef);
 
-  private rebuildTimer?: ReturnType<typeof setTimeout>;
-  private readonly rebuildDelayMs = 100;
-
-  ngAfterViewInit(): void {
-    this.mutationObserver = new MutationObserver((mutations) => {
-      const relevant = mutations.some(
-        (m) =>
-          m.type === 'characterData' ||
-          (m.type === 'childList' && (m.addedNodes.length > 0 || m.removedNodes.length > 0))
-      );
-      if (!relevant) return;
-
-      if (this.rebuildTimer) {
-        clearTimeout(this.rebuildTimer);
-      }
-
-      this.rebuildTimer = setTimeout(() => {
+  /**
+   * Fire on component initialization
+   * @internal
+   */
+  ngOnInit(): void {
+    combineLatest([
+      this.configService.getTranslation$('inputChar.headerBaseChars'),
+      this.configService.getTranslation$('inputChar.headerGroups')
+    ])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
         this.initSelectButtonsData();
-        this.rebuildTimer = undefined;
-      }, this.rebuildDelayMs);
-    });
-
-    this.mutationObserver.observe(this.elementRef.nativeElement as HTMLElement, {
-      subtree: true,
-      characterData: true,
-      childList: true
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.mutationObserver) {
-      this.mutationObserver.disconnect();
-      this.mutationObserver = undefined;
-    }
-    if (this.rebuildTimer) {
-      clearTimeout(this.rebuildTimer);
-      this.rebuildTimer = undefined;
-    }
+      });
   }
 
   /**
