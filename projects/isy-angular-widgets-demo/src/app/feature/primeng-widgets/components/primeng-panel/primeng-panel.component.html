@@ -102,7 +102,7 @@
       <form class="flex flex-column gap-3" novalidate>
         <div class="flex flex-column gap-1">
           <label for="fieldset-required-input" class="font-medium">
-            Pflichtfeld
+            {{ 'isyAngularWidgetsDemo.labels.panelFieldsetRequiredLabel' | translate }}
             <span class="text-red-500" aria-hidden="true">*</span>
           </label>
           <input
@@ -116,12 +116,16 @@
             aria-describedby="fieldset-required-input-error"
           />
           @if (requiredInputModel.invalid && (requiredInputModel.dirty || requiredInputModel.touched)) {
-            <small id="fieldset-required-input-error" class="text-red-500">Pflichtfeld ist erforderlich.</small>
+            <small id="fieldset-required-input-error" class="text-red-500">{{
+              'isyAngularWidgetsDemo.messages.panelFieldsetRequiredError' | translate
+            }}</small>
           }
         </div>
 
         <div class="flex flex-column gap-1">
-          <label for="fieldset-number-input" class="font-medium">Zahlenwert</label>
+          <label for="fieldset-number-input" class="font-medium">{{
+            'isyAngularWidgetsDemo.labels.panelFieldsetNumberLabel' | translate
+          }}</label>
           <p-inputnumber
             inputId="fieldset-number-input"
             name="fieldsetNumberInput"
@@ -133,7 +137,9 @@
         </div>
 
         <div class="flex flex-column gap-1">
-          <label for="fieldset-date-input" class="font-medium">Datum</label>
+          <label for="fieldset-date-input" class="font-medium">{{
+            'isyAngularWidgetsDemo.labels.panelFieldsetDateLabel' | translate
+          }}</label>
           <p-datepicker
             inputId="fieldset-date-input"
             name="fieldsetDateInput"

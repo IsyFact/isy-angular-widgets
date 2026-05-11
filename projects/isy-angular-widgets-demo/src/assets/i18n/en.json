@@ -75,7 +75,8 @@
       "panelTabAnalyticsContent": "Key metrics and trends at a glance.",
       "panelTabSettingsContent": "Core settings shown in a compact form.",
       "panelTabGenericContent": "Generic content for tab {{index}}.",
-      "panelStepperStepContent": "Sample content for step {{index}}."
+      "panelStepperStepContent": "Sample content for step {{index}}.",
+      "panelFieldsetRequiredError": "Required field must not be empty."
     },
     "displayObject": {
       "masterDataHeader": "Master data",
@@ -225,6 +226,9 @@
       "panelTabGenericLabel": "Tab {{index}}",
       "panelStepperStepLabel": "Step {{index}}",
       "panelStepperFinalAction": "Final action",
+      "panelFieldsetRequiredLabel": "Required field",
+      "panelFieldsetNumberLabel": "Numeric value",
+      "panelFieldsetDateLabel": "Date",
       "isyInputChar": "Special character input field"
     },
     "placeholders": {

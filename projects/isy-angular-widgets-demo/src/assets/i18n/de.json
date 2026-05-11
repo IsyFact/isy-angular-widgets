@@ -75,7 +75,8 @@
       "panelTabAnalyticsContent": "Kennzahlen und Trends auf einen Blick.",
       "panelTabSettingsContent": "Zentrale Einstellungen kompakt dargestellt.",
       "panelTabGenericContent": "Generischer Inhalt für Tab {{index}}.",
-      "panelStepperStepContent": "Beispielinhalt für Schritt {{index}}."
+      "panelStepperStepContent": "Beispielinhalt für Schritt {{index}}.",
+      "panelFieldsetRequiredError": "Pflichtfeld ist erforderlich."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -225,6 +226,9 @@
       "panelTabGenericLabel": "Tab {{index}}",
       "panelStepperStepLabel": "Schritt {{index}}",
       "panelStepperFinalAction": "Abschlussaktion",
+      "panelFieldsetRequiredLabel": "Pflichtfeld",
+      "panelFieldsetNumberLabel": "Zahlenwert",
+      "panelFieldsetDateLabel": "Datum",
       "isyInputChar": "Sonderzeichenpicker"
     },
     "placeholders": {
