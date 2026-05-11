@@ -74,7 +74,8 @@
       "panelTabOverviewContent": "Short overview of the current status.",
       "panelTabAnalyticsContent": "Key metrics and trends at a glance.",
       "panelTabSettingsContent": "Core settings shown in a compact form.",
-      "panelTabGenericContent": "Generic content for tab {{index}}."
+      "panelTabGenericContent": "Generic content for tab {{index}}.",
+      "panelStepperStepContent": "Sample content for step {{index}}."
     },
     "displayObject": {
       "masterDataHeader": "Master data",
@@ -222,6 +223,8 @@
       "panelTabAnalytics": "Analytics",
       "panelTabSettings": "Settings",
       "panelTabGenericLabel": "Tab {{index}}",
+      "panelStepperStepLabel": "Step {{index}}",
+      "panelStepperFinalAction": "Final action",
       "isyInputChar": "Special character input field"
     },
     "placeholders": {

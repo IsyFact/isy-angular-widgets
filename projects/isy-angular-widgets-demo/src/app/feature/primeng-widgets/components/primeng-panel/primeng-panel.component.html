@@ -171,51 +171,52 @@
     <demo-section-heading headingId="stepper" [level]="3" label="Stepper" ariaLabel="Link zu Stepper" />
     <p-stepper [value]="1">
       <p-step-list>
-        <p-step [value]="1">Header I</p-step>
-        <p-step [value]="2">Header II</p-step>
-        <p-step [value]="3">Header II</p-step>
+        <p-step [value]="1">{{ 'isyAngularWidgetsDemo.labels.panelStepperStepLabel' | translate: { index: 1 } }}</p-step>
+        <p-step [value]="2">{{ 'isyAngularWidgetsDemo.labels.panelStepperStepLabel' | translate: { index: 2 } }}</p-step>
+        <p-step [value]="3">{{ 'isyAngularWidgetsDemo.labels.panelStepperStepLabel' | translate: { index: 3 } }}</p-step>
       </p-step-list>
       <p-step-panels>
         <p-step-panel [value]="1">
-          <ng-template #content1 let-activateCallback="activateCallback">
+          <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-column h-12rem">
               <div
                 class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
               >
-                Content I
+                {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: { index: 1 } }}
               </div>
             </div>
             <div class="flex pt-6 justify-content-end">
-              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
+              <p-button [label]="'isyAngularWidgets.wizard.next' | translate" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
             </div>
           </ng-template>
         </p-step-panel>
         <p-step-panel [value]="2">
-          <ng-template #content2 let-activateCallback="activateCallback">
+          <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-column h-12rem">
               <div
                 class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
               >
-                Content II
+                {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: { index: 2 } }}
               </div>
             </div>
-            <div class="flex pt-6 justify-content-between">
-              <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
-              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" />
+            <div class="flex pt-6 justify-content-end gap-2">
+              <p-button [label]="'isyAngularWidgets.wizard.back' | translate" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
+              <p-button [label]="'isyAngularWidgets.wizard.next' | translate" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" />
             </div>
           </ng-template>
         </p-step-panel>
         <p-step-panel [value]="3">
-          <ng-template #content3 let-activateCallback="activateCallback">
+          <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-column h-12rem">
               <div
                 class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
               >
-                Content III
+                {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: { index: 3 } }}
               </div>
             </div>
-            <div class="flex pt-6 justify-content-start">
-              <p-button label="Back" icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(2)" />
+            <div class="flex pt-6 justify-content-end gap-2">
+              <p-button [label]="'isyAngularWidgets.wizard.back' | translate" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />
+              <p-button [label]="'isyAngularWidgetsDemo.labels.panelStepperFinalAction' | translate" [disabled]="true" />
             </div>
           </ng-template>
         </p-step-panel>

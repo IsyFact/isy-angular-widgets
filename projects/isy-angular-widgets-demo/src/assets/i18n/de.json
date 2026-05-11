@@ -74,7 +74,8 @@
       "panelTabOverviewContent": "Kurzüberblick über den aktuellen Status.",
       "panelTabAnalyticsContent": "Kennzahlen und Trends auf einen Blick.",
       "panelTabSettingsContent": "Zentrale Einstellungen kompakt dargestellt.",
-      "panelTabGenericContent": "Generischer Inhalt für Tab {{index}}."
+      "panelTabGenericContent": "Generischer Inhalt für Tab {{index}}.",
+      "panelStepperStepContent": "Beispielinhalt für Schritt {{index}}."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -222,6 +223,8 @@
       "panelTabAnalytics": "Auswertung",
       "panelTabSettings": "Einstellungen",
       "panelTabGenericLabel": "Tab {{index}}",
+      "panelStepperStepLabel": "Schritt {{index}}",
+      "panelStepperFinalAction": "Abschlussaktion",
       "isyInputChar": "Sonderzeichenpicker"
     },
     "placeholders": {
