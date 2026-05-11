@@ -90,6 +90,14 @@ describe('Unit Tests: PrimengPanelComponent', () => {
     expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
   });
 
+  it('should delegate scrollToWidget to anchor navigation service', () => {
+    const event = new MouseEvent('click');
+
+    component.scrollToWidget(event, 'accordion');
+
+    expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('accordion');
+  });
+
   it('should render standard and scrollable tab examples', () => {
     const tabs = spectator.queryAll('p-tabs');
     const renderedTabButtons = spectator.queryAll('[role="tab"]');

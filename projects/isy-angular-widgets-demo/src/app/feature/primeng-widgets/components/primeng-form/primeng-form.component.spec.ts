@@ -107,6 +107,14 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
   });
 
+  it('should delegate scrollToWidget to anchor navigation service', () => {
+    const event = new MouseEvent('click');
+
+    component.scrollToWidget(event, 'inputtext');
+
+    expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('inputtext');
+  });
+
   it('should filter countries with partial match', () => {
     const query = 'Uni';
     const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
