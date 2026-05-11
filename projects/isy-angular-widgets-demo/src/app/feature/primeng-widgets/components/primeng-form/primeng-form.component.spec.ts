@@ -242,4 +242,22 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(component.inputGroupValue).toBe('');
     expect(spectator.query<HTMLInputElement>('#input-group-clearable')?.value).toBe('');
   });
+
+  it('should render checkbox examples in horizontal and vertical fieldsets with four items each', () => {
+    expect(spectator.query('.checkbox-group-horizontal')).toBeTruthy();
+    expect(spectator.query('.checkbox-group-vertical')).toBeTruthy();
+
+    const horizontalIds = [1, 2, 3, 4].map((index) => `#checkbox-horizontal-${index}`);
+    const verticalIds = [1, 2, 3, 4].map((index) => `#checkbox-vertical-${index}`);
+
+    horizontalIds.forEach((id) => {
+      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
+      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('Checkbox');
+    });
+
+    verticalIds.forEach((id) => {
+      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
+      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('Checkbox');
+    });
+  });
 });

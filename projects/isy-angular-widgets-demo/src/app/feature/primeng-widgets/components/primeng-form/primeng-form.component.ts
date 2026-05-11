@@ -39,6 +39,7 @@ import {ColorPickerModule} from 'primeng/colorpicker';
 import {EditorModule} from 'primeng/editor';
 import {MessageModule} from 'primeng/message';
 import {TranslateModule} from '@ngx-translate/core';
+import {FieldsetModule} from 'primeng/fieldset';
 
 @Component({
   standalone: true,
@@ -78,6 +79,7 @@ import {TranslateModule} from '@ngx-translate/core';
     EditorModule,
     MessageModule,
     TranslateModule,
+    FieldsetModule,
     SectionHeadingComponent
   ]
 })
@@ -98,6 +100,8 @@ export class PrimengFormComponent implements AfterViewInit {
   stateOptions: string[] = ['Off', 'On'];
   slider: number = 0;
   inputGroupValue: string = 'Max Mustermann';
+  checkboxHorizontal: boolean[] = [false, false, false, false];
+  checkboxVertical: boolean[] = [false, false, false, false];
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   cities: any[] = countryCityMapping;

@@ -199,7 +199,14 @@
       "readonlyInputText": "Readonly input field",
       "readonlyInputTextValue": "This value is readonly",
       "inputMaskPhoneNumber": "Phone number",
-      "inputGroupClearable": "Input field with clear button"
+      "inputGroupClearable": "Input field with clear button",
+      "checkboxHorizontalLegend": "Horizontal layout",
+      "checkboxVerticalLegend": "Vertical layout",
+      "checkbox1": "Checkbox 1",
+      "checkbox2": "Checkbox 2",
+      "checkbox3": "Checkbox 3",
+      "checkbox4": "Checkbox 4",
+      "isyInputChar": "Special character input field"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} charaters",
