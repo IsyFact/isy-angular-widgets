@@ -133,4 +133,3 @@ jobs:
         run: |
           echo "Demo URL: https://isyfact.github.io/isy-angular-widgets/"
           echo "Documentation URL: https://isyfact.github.io/isy-angular-widgets/documentation/"
-          
