@@ -70,7 +70,11 @@
       "nationalitiesRequired": "Mindestens eine Staatsangehörigkeit ist erforderlich.",
       "nationalitiesMaxReached": "Es können maximal {{count}} Staatsangehörigkeiten erfasst werden.",
       "inputMaskPhoneHelp": "Bitte geben Sie Ihre Telefonnummer im angezeigten Format ein.",
-      "inputGroupHelp": "Mit dem Button am Ende des Feldes kann der Inhalt direkt geleert werden."
+      "inputGroupHelp": "Mit dem Button am Ende des Feldes kann der Inhalt direkt geleert werden.",
+      "panelTabOverviewContent": "Kurzüberblick über den aktuellen Status.",
+      "panelTabAnalyticsContent": "Kennzahlen und Trends auf einen Blick.",
+      "panelTabSettingsContent": "Zentrale Einstellungen kompakt dargestellt.",
+      "panelTabGenericContent": "Generischer Inhalt für Tab {{index}}."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -212,6 +216,12 @@
       "radioButton2": "RadioButton 2",
       "radioButton3": "RadioButton 3",
       "radioButton4": "RadioButton 4",
+      "panelTabsStandardLegend": "Standard Tabpanel mit Icons",
+      "panelTabsScrollableLegend": "Tabpanel mit Überlänge",
+      "panelTabOverview": "Übersicht",
+      "panelTabAnalytics": "Auswertung",
+      "panelTabSettings": "Einstellungen",
+      "panelTabGenericLabel": "Tab {{index}}",
       "isyInputChar": "Sonderzeichenpicker"
     },
     "placeholders": {

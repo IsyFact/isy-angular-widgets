@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
 import {PrimengPanelComponent} from './primeng-panel.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('Unit Tests: PrimengPanelComponent', () => {
   const widgetAnchorIds = [
@@ -27,6 +28,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
   const createComponent = createComponentFactory({
     component: PrimengPanelComponent,
+    imports: [TranslateModule.forRoot()],
     providers: [
       {
         provide: ActivatedRoute,
@@ -86,5 +88,16 @@ describe('Unit Tests: PrimengPanelComponent', () => {
     spectator.click('h3#accordion');
 
     expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
+  });
+
+  it('should render standard and scrollable tab examples', () => {
+    const tabs = spectator.queryAll('p-tabs');
+    const renderedTabButtons = spectator.queryAll('[role="tab"]');
+
+    expect(tabs.length).toBeGreaterThanOrEqual(2);
+    expect(component.standardTabs.length).toBe(3);
+    expect(component.scrollableTabs.length).toBe(30);
+    expect(renderedTabButtons.length).toBeGreaterThanOrEqual(component.standardTabs.length + component.scrollableTabs.length);
+    expect(spectator.query('.pi.pi-home')).toBeTruthy();
   });
 });

@@ -70,7 +70,11 @@
       "nationalitiesRequired": "At least one nationality is required.",
       "nationalitiesMaxReached": "A maximum of {{count}} nationalities can be entered.",
       "inputMaskPhoneHelp": "Please enter your phone number in the displayed format.",
-      "inputGroupHelp": "Use the button at the end of the field to clear its content."
+      "inputGroupHelp": "Use the button at the end of the field to clear its content.",
+      "panelTabOverviewContent": "Short overview of the current status.",
+      "panelTabAnalyticsContent": "Key metrics and trends at a glance.",
+      "panelTabSettingsContent": "Core settings shown in a compact form.",
+      "panelTabGenericContent": "Generic content for tab {{index}}."
     },
     "displayObject": {
       "masterDataHeader": "Master data",
@@ -212,6 +216,12 @@
       "radioButton2": "RadioButton 2",
       "radioButton3": "RadioButton 3",
       "radioButton4": "RadioButton 4",
+      "panelTabsStandardLegend": "Standard tab panel with icons",
+      "panelTabsScrollableLegend": "Tab panel with overflow",
+      "panelTabOverview": "Overview",
+      "panelTabAnalytics": "Analytics",
+      "panelTabSettings": "Settings",
+      "panelTabGenericLabel": "Tab {{index}}",
       "isyInputChar": "Special character input field"
     },
     "placeholders": {

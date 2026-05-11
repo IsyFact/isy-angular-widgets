@@ -44,23 +44,52 @@
     <demo-section-heading headingId="panel" [level]="3" label="Panel" ariaLabel="Link zu Panel" />
     <p-panel header="Panel Header" [toggleable]="true"> Content </p-panel>
   </div>
-  <div class="col-12 flex flex-column gap-2">
+  <div class="col-12 flex flex-column gap-2" style="min-width: 0">
     <demo-section-heading headingId="tabs" [level]="3" label="Tabs" ariaLabel="Link zu Tabs" />
-    <p-tabs value="0">
-      <p-tablist>
-        <p-tab value="0">Header 1</p-tab>
-        <p-tab value="1">Header 2</p-tab>
-        <p-tab value="2">Header 3</p-tab>
-      </p-tablist>
-      <p-tabpanels>
-        <p-tabpanel value="0"> Content 1 </p-tabpanel>
-        <p-tabpanel value="1"> Content 2 </p-tabpanel>
-        <p-tabpanel value="2"> Content 3 </p-tabpanel>
-      </p-tabpanels>
-    </p-tabs>
+    <div class="flex flex-column gap-4 w-full" style="min-width: 0">
+      <p-card  [header]="'isyAngularWidgetsDemo.labels.panelTabsStandardLegend' | translate">
+        <p-tabs [value]="standardTabs[0].value" class="mt-3">
+          <p-tablist>
+            @for (tab of standardTabs; track tab.value) {
+              <p-tab [value]="tab.value">
+                <i [class]="tab.iconClass"></i>
+                <span>{{ tab.labelKey | translate }}</span>
+              </p-tab>
+            }
+          </p-tablist>
+          <p-tabpanels>
+            @for (tab of standardTabs; track tab.value) {
+              <p-tabpanel [value]="tab.value">
+                <p class="m-0">{{ tab.contentKey | translate }}</p>
+              </p-tabpanel>
+            }
+          </p-tabpanels>
+        </p-tabs>
+      </p-card>
+
+      <p-card  [header]="'isyAngularWidgetsDemo.labels.panelTabsScrollableLegend' | translate">
+        <p-tabs
+          [value]="scrollableTabs[0].value"
+          [scrollable]="true"
+          [showNavigators]="true"
+        >
+          <p-tablist class="mt-3">
+            @for (tab of scrollableTabs; track tab.value) {
+              <p-tab [value]="tab.value">{{ 'isyAngularWidgetsDemo.labels.panelTabGenericLabel' | translate: {index: tab.index} }}</p-tab>
+            }
+          </p-tablist>
+          <p-tabpanels>
+            @for (tab of scrollableTabs; track tab.value) {
+              <p-tabpanel [value]="tab.value">
+                <p class="m-0">{{ 'isyAngularWidgetsDemo.messages.panelTabGenericContent' | translate: {index: tab.index} }}</p>
+              </p-tabpanel>
+            }
+          </p-tabpanels>
+        </p-tabs>
+      </p-card>
+    </div>
   </div>
 </div>
-<p-divider />
 <h2>Content Container</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
