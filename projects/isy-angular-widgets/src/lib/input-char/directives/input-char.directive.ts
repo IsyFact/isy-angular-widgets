@@ -5,8 +5,10 @@ import {
   HostListener,
   inject,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   ViewContainerRef
 } from '@angular/core';
 import {InputCharComponent} from '../components/input-char/input-char.component';
@@ -18,7 +20,7 @@ import {Datentyp} from '../model/datentyp';
 @Directive({
   selector: '[isyInputChar]'
 })
-export class InputCharDirective implements OnInit, OnDestroy {
+export class InputCharDirective implements OnInit, OnDestroy, OnChanges {
   /**
    * Determines which set of characters (datatype) according to DIN 91379 to show
    */
@@ -67,10 +69,18 @@ export class InputCharDirective implements OnInit, OnDestroy {
     this.htmlInputElement.style.width = 'calc(100% - 2.875rem)';
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.outlinedInputCharButton && this.componentRef) {
+      this.componentRef.setInput('outlinedInputCharButton', changes.outlinedInputCharButton.currentValue);
+
+      this.componentRef.changeDetectorRef.detectChanges();
+    }
+  }
+
   ngOnInit(): void {
     this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
     this.componentRef.instance.datentyp = this.datentyp!;
-    this.componentRef.instance.outlinedInputCharButton = this.outlinedInputCharButton;
+    this.componentRef.setInput('outlinedInputCharButton', this.outlinedInputCharButton);
 
     this.setupInputChar();
 

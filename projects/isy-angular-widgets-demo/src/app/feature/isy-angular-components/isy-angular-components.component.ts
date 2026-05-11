@@ -43,6 +43,7 @@ export class IsyAngularComponentsComponent implements AfterViewInit {
   person = initializedPerson;
   personalien = this.person.personalien;
   transferDateAsIso8601 = true;
+  outlineInputChar = false;
   checked = false;
 
   constructor() {
@@ -60,7 +61,6 @@ export class IsyAngularComponentsComponent implements AfterViewInit {
   scrollToWidget(event: MouseEvent, anchor: string): void {
     this.anchorNav.scrollToAnchor(event, anchor);
   }
-
   onTransferIso8601Change(incompleteDateComponent: IncompleteDateComponent): void {
     setTimeout(() => {
       incompleteDateComponent.updateModel();
