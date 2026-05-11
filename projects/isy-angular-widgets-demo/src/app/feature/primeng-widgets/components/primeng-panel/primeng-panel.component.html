@@ -98,7 +98,53 @@
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="fieldset" [level]="3" label="Fieldset" ariaLabel="Link zu Fieldset" />
-    <p-fieldset legend="Fieldset Header"> Content </p-fieldset>
+    <p-fieldset legend="Fieldset Header">
+      <form class="flex flex-column gap-3" novalidate>
+        <div class="flex flex-column gap-1">
+          <label for="fieldset-required-input" class="font-medium">
+            Pflichtfeld
+            <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="fieldset-required-input"
+            type="text"
+            pInputText
+            name="fieldsetRequiredInput"
+            [(ngModel)]="fieldsetRequiredInput"
+            #requiredInputModel="ngModel"
+            required
+            aria-describedby="fieldset-required-input-error"
+          />
+          @if (requiredInputModel.invalid && (requiredInputModel.dirty || requiredInputModel.touched)) {
+            <small id="fieldset-required-input-error" class="text-red-500">Pflichtfeld ist erforderlich.</small>
+          }
+        </div>
+
+        <div class="flex flex-column gap-1">
+          <label for="fieldset-number-input" class="font-medium">Zahlenwert</label>
+          <p-inputnumber
+            inputId="fieldset-number-input"
+            name="fieldsetNumberInput"
+            [(ngModel)]="fieldsetNumberInput"
+            [useGrouping]="false"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+          />
+        </div>
+
+        <div class="flex flex-column gap-1">
+          <label for="fieldset-date-input" class="font-medium">Datum</label>
+          <p-datepicker
+            inputId="fieldset-date-input"
+            name="fieldsetDateInput"
+            [(ngModel)]="fieldsetDateInput"
+            appendTo="body"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+          />
+        </div>
+      </form>
+    </p-fieldset>
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="scrollpanel" [level]="3" label="ScrollPanel" ariaLabel="Link zu ScrollPanel" />

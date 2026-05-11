@@ -17,6 +17,9 @@ import {InputIconModule} from 'primeng/inputicon';
 import {InputTextModule} from 'primeng/inputtext';
 import {IconFieldModule} from 'primeng/iconfield';
 import {TranslateModule} from '@ngx-translate/core';
+import {FormsModule} from '@angular/forms';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {DatePickerModule} from 'primeng/datepicker';
 import {AnchorNavigationService} from '../../../../shared/services/anchor-navigation.service';
 import {SectionHeadingComponent} from '../../../../shared/components/section-heading/section-heading.component';
 
@@ -49,7 +52,10 @@ interface ScrollableTabDefinition {
     ButtonModule,
     SplitButtonModule,
     StepperModule,
+    FormsModule,
     InputTextModule,
+    InputNumberModule,
+    DatePickerModule,
     IconFieldModule,
     InputIconModule,
     TranslateModule,
@@ -61,6 +67,9 @@ export class PrimengPanelComponent implements AfterViewInit {
   private readonly anchorNav = inject(AnchorNavigationService);
 
   option: MenuItem[] = optionData;
+  fieldsetRequiredInput = '';
+  fieldsetNumberInput: number | null = null;
+  fieldsetDateInput: Date | null = null;
 
   standardTabs: StandardTabDefinition[] = [
     {
