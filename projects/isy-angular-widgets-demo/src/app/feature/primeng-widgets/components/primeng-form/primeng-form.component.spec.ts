@@ -260,4 +260,22 @@ describe('Unit Tests: PrimengFormComponent', () => {
       expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('Checkbox');
     });
   });
+
+  it('should render radio button examples in horizontal and vertical fieldsets with four items each', () => {
+    expect(spectator.query('.radio-group-horizontal')).toBeTruthy();
+    expect(spectator.query('.radio-group-vertical')).toBeTruthy();
+
+    const horizontalIds = [1, 2, 3, 4].map((index) => `#radio-horizontal-${index}`);
+    const verticalIds = [1, 2, 3, 4].map((index) => `#radio-vertical-${index}`);
+
+    horizontalIds.forEach((id) => {
+      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
+      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('RadioButton');
+    });
+
+    verticalIds.forEach((id) => {
+      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
+      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('RadioButton');
+    });
+  });
 });

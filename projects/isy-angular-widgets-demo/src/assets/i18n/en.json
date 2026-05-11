@@ -206,6 +206,12 @@
       "checkbox2": "Checkbox 2",
       "checkbox3": "Checkbox 3",
       "checkbox4": "Checkbox 4",
+      "radioButtonHorizontalLegend": "Horizontal layout",
+      "radioButtonVerticalLegend": "Vertical layout",
+      "radioButton1": "RadioButton 1",
+      "radioButton2": "RadioButton 2",
+      "radioButton3": "RadioButton 3",
+      "radioButton4": "RadioButton 4",
       "isyInputChar": "Special character input field"
     },
     "placeholders": {

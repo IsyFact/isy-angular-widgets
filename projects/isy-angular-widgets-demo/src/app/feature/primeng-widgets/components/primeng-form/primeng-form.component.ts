@@ -94,6 +94,8 @@ export class PrimengFormComponent implements AfterViewInit {
   color: string = '#0055B9';
   password: string = '';
   ingredient: string = '';
+  radioHorizontalValue: string = 'radio1';
+  radioVerticalValue: string = 'radio1';
   inputTextValue: string = '';
   inputTextRequiredValue: string = '';
 

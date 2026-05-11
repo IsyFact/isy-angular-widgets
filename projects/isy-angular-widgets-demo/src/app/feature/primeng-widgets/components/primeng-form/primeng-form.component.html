@@ -281,12 +281,95 @@
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="radiobutton" [level]="3" label="RadioButton" ariaLabel="Link zu RadioButton" />
-    <div class="flex flex-column gap-2">
-      <p-radiobutton label="Cheese" name="pizza" value="Cheese" [(ngModel)]="ingredient" />
-      <p-radiobutton label="Mushroom" name="pizza" value="Mushroom" [(ngModel)]="ingredient" />
-      <p-radiobutton label="Pepper" name="pizza" value="Pepper" [(ngModel)]="ingredient" />
-      <p-radiobutton label="Onion" name="pizza" value="Onion" [(ngModel)]="ingredient" />
-    </div>
+    <p-fieldset [legend]="'isyAngularWidgetsDemo.labels.radioButtonHorizontalLegend' | translate">
+      <div class="radio-group-horizontal flex flex-wrap gap-3">
+        <div class="flex align-items-center gap-2">
+          <p-radiobutton
+            inputId="radio-horizontal-1"
+            name="radio-horizontal-group"
+            value="radio1"
+            [(ngModel)]="radioHorizontalValue"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="radio-horizontal-1">{{ 'isyAngularWidgetsDemo.labels.radioButton1' | translate }}</label>
+        </div>
+        <div class="flex align-items-center gap-2">
+          <p-radiobutton
+            inputId="radio-horizontal-2"
+            name="radio-horizontal-group"
+            value="radio2"
+            [(ngModel)]="radioHorizontalValue"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="radio-horizontal-2">{{ 'isyAngularWidgetsDemo.labels.radioButton2' | translate }}</label>
+        </div>
+        <div class="flex align-items-center gap-2">
+          <p-radiobutton
+            inputId="radio-horizontal-3"
+            name="radio-horizontal-group"
+            value="radio3"
+            [(ngModel)]="radioHorizontalValue"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="radio-horizontal-3">{{ 'isyAngularWidgetsDemo.labels.radioButton3' | translate }}</label>
+        </div>
+        <div class="flex align-items-center gap-2">
+          <p-radiobutton
+            inputId="radio-horizontal-4"
+            name="radio-horizontal-group"
+            value="radio4"
+            [(ngModel)]="radioHorizontalValue"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="radio-horizontal-4">{{ 'isyAngularWidgetsDemo.labels.radioButton4' | translate }}</label>
+        </div>
+      </div>
+    </p-fieldset>
+
+    <p-fieldset [legend]="'isyAngularWidgetsDemo.labels.radioButtonVerticalLegend' | translate">
+      <div class="radio-group-vertical flex flex-column gap-2">
+        <div class="flex align-items-center gap-2">
+          <p-radiobutton
+            inputId="radio-vertical-1"
+            name="radio-vertical-group"
+            value="radio1"
+            [(ngModel)]="radioVerticalValue"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="radio-vertical-1">{{ 'isyAngularWidgetsDemo.labels.radioButton1' | translate }}</label>
+        </div>
+        <div class="flex align-items-center gap-2">
+          <p-radiobutton
+            inputId="radio-vertical-2"
+            name="radio-vertical-group"
+            value="radio2"
+            [(ngModel)]="radioVerticalValue"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="radio-vertical-2">{{ 'isyAngularWidgetsDemo.labels.radioButton2' | translate }}</label>
+        </div>
+        <div class="flex align-items-center gap-2">
+          <p-radiobutton
+            inputId="radio-vertical-3"
+            name="radio-vertical-group"
+            value="radio3"
+            [(ngModel)]="radioVerticalValue"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="radio-vertical-3">{{ 'isyAngularWidgetsDemo.labels.radioButton3' | translate }}</label>
+        </div>
+        <div class="flex align-items-center gap-2">
+          <p-radiobutton
+            inputId="radio-vertical-4"
+            name="radio-vertical-group"
+            value="radio4"
+            [(ngModel)]="radioVerticalValue"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="radio-vertical-4">{{ 'isyAngularWidgetsDemo.labels.radioButton4' | translate }}</label>
+        </div>
+      </div>
+    </p-fieldset>
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="knob" [level]="3" label="Knob" ariaLabel="Link zu Knob" />
