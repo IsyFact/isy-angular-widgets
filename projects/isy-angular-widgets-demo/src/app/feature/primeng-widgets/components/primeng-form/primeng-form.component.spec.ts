@@ -213,4 +213,14 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(disabledInput?.value.length).toBeGreaterThan(0);
     expect(readonlyInput?.value.length).toBeGreaterThan(0);
   });
+
+  it('should render Inputmask phone field with label, placeholder and help text', () => {
+    const label = spectator.query<HTMLLabelElement>('label[for="input-mask-phone"]');
+    const input = spectator.query<HTMLInputElement>('input#input-mask-phone');
+    const helpText = spectator.query<HTMLElement>('#input-mask-phone-help');
+
+    expect(label?.textContent).toContain('isyAngularWidgetsDemo.labels.inputMaskPhoneNumber');
+    expect(input?.getAttribute('placeholder')).toBe('isyAngularWidgetsDemo.placeholders.inputMaskPhoneNumber');
+    expect(helpText?.textContent).toContain('isyAngularWidgetsDemo.messages.inputMaskPhoneHelp');
+  });
 });

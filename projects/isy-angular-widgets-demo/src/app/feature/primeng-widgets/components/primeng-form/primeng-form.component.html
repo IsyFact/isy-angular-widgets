@@ -86,7 +86,14 @@
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="inputmask" [level]="3" label="Inputmask" ariaLabel="Link zu Inputmask" />
-    <p-inputMask inputId="inputMask" mask="(999) 999-9999" placeholder="(999) 999-9999" styleClass="w-full" />
+    <label for="input-mask-phone">{{ 'isyAngularWidgetsDemo.labels.inputMaskPhoneNumber' | translate }}</label>
+    <p-inputMask
+      inputId="input-mask-phone"
+      mask="(999) 999-9999"
+      [placeholder]="'isyAngularWidgetsDemo.placeholders.inputMaskPhoneNumber' | translate"
+      styleClass="w-full"
+    />
+    <small id="input-mask-phone-help">{{ 'isyAngularWidgetsDemo.messages.inputMaskPhoneHelp' | translate }}</small>
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="autocomplete" [level]="3" label="AutoComplete" ariaLabel="Link zu AutoComplete" />

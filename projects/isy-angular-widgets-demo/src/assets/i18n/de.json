@@ -68,7 +68,8 @@
       "validateDIN91379Error": "Ungültige Zeichen gemäß DIN 91379.",
       "nationalitiesHint": "Mindestens 1, maximal {{count}} Einträge. Aktuell: {{current}}.",
       "nationalitiesRequired": "Mindestens eine Staatsangehörigkeit ist erforderlich.",
-      "nationalitiesMaxReached": "Es können maximal {{count}} Staatsangehörigkeiten erfasst werden."
+      "nationalitiesMaxReached": "Es können maximal {{count}} Staatsangehörigkeiten erfasst werden.",
+      "inputMaskPhoneHelp": "Bitte geben Sie Ihre Telefonnummer im angezeigten Format ein."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -194,12 +195,14 @@
       "disabledInputText": "Deaktiviertes Eingabefeld",
       "disabledInputTextValue": "Dieser Wert ist deaktiviert",
       "readonlyInputText": "Schreibgeschuetztes Eingabefeld",
-      "readonlyInputTextValue": "Dieser Wert ist nur lesbar"
+      "readonlyInputTextValue": "Dieser Wert ist nur lesbar",
+      "inputMaskPhoneNumber": "Telefonnummer"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} Zeichen",
       "inputTextWithHelp": "Mindestens 3 Zeichen eingeben",
       "inputTextRequired": "Eingabe erforderlich",
+      "inputMaskPhoneNumber": "z.B. (030) 123-4567",
       "creditCardNumber": "Nummer mit 16 Ziffern eingeben",
       "identityCardExpirationDate": "YYYY-MM-DD",
       "creditCardExpirationDate": "MM/YY",
