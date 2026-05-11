@@ -12,6 +12,7 @@ import {IconFieldModule} from 'primeng/iconfield';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {InputIconModule} from 'primeng/inputicon';
+import {ButtonModule} from 'primeng/button';
 import {PasswordModule} from 'primeng/password';
 import {DatePickerModule} from 'primeng/datepicker';
 import {FormsModule} from '@angular/forms';
@@ -51,6 +52,7 @@ import {TranslateModule} from '@ngx-translate/core';
     InputGroupModule,
     InputGroupAddonModule,
     InputIconModule,
+    ButtonModule,
     PasswordModule,
     DatePickerModule,
     FormsModule,
@@ -95,6 +97,7 @@ export class PrimengFormComponent implements AfterViewInit {
 
   stateOptions: string[] = ['Off', 'On'];
   slider: number = 0;
+  inputGroupValue: string = 'Max Mustermann';
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   cities: any[] = countryCityMapping;
@@ -121,5 +124,9 @@ export class PrimengFormComponent implements AfterViewInit {
     }
 
     this.filteredCountries = filtered;
+  }
+
+  clearInputGroup(): void {
+    this.inputGroupValue = '';
   }
 }

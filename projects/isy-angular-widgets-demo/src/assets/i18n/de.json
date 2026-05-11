@@ -69,7 +69,8 @@
       "nationalitiesHint": "Mindestens 1, maximal {{count}} Einträge. Aktuell: {{current}}.",
       "nationalitiesRequired": "Mindestens eine Staatsangehörigkeit ist erforderlich.",
       "nationalitiesMaxReached": "Es können maximal {{count}} Staatsangehörigkeiten erfasst werden.",
-      "inputMaskPhoneHelp": "Bitte geben Sie Ihre Telefonnummer im angezeigten Format ein."
+      "inputMaskPhoneHelp": "Bitte geben Sie Ihre Telefonnummer im angezeigten Format ein.",
+      "inputGroupHelp": "Mit dem Button am Ende des Feldes kann der Inhalt direkt geleert werden."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -101,6 +102,7 @@
       "save": "Speichern",
       "edit": "Bearbeiten",
       "cancel": "Abbrechen",
+      "clear": "Leeren",
       "close": "Schließen",
       "clearSeebach": "Suche leeren",
       "showSecretFields": "Zeige geheime Felder",
@@ -196,13 +198,15 @@
       "disabledInputTextValue": "Dieser Wert ist deaktiviert",
       "readonlyInputText": "Schreibgeschuetztes Eingabefeld",
       "readonlyInputTextValue": "Dieser Wert ist nur lesbar",
-      "inputMaskPhoneNumber": "Telefonnummer"
+      "inputMaskPhoneNumber": "Telefonnummer",
+      "inputGroupClearable": "Eingabefeld mit Leeren-Button"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} Zeichen",
       "inputTextWithHelp": "Mindestens 3 Zeichen eingeben",
       "inputTextRequired": "Eingabe erforderlich",
       "inputMaskPhoneNumber": "z.B. (030) 123-4567",
+      "inputGroupClearable": "z.B. Max Mustermann",
       "creditCardNumber": "Nummer mit 16 Ziffern eingeben",
       "identityCardExpirationDate": "YYYY-MM-DD",
       "creditCardExpirationDate": "MM/YY",

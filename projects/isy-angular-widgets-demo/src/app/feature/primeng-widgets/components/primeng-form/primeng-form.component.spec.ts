@@ -223,4 +223,23 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(input?.getAttribute('placeholder')).toBe('isyAngularWidgetsDemo.placeholders.inputMaskPhoneNumber');
     expect(helpText?.textContent).toContain('isyAngularWidgetsDemo.messages.inputMaskPhoneHelp');
   });
+
+  it('should render prefilled InputGroup field and clear it via button', () => {
+    const label = spectator.query<HTMLLabelElement>('label[for="input-group-clearable"]');
+    const input = spectator.query<HTMLInputElement>('#input-group-clearable');
+    const helpText = spectator.query<HTMLElement>('#input-group-help');
+    const clearButton = spectator.query('p-inputgroup p-button');
+
+    expect(label?.textContent).toContain('isyAngularWidgetsDemo.labels.inputGroupClearable');
+    expect(input?.value).toBe('Max Mustermann');
+    expect(input?.getAttribute('placeholder')).toBe('isyAngularWidgetsDemo.placeholders.inputGroupClearable');
+    expect(helpText?.textContent).toContain('isyAngularWidgetsDemo.messages.inputGroupHelp');
+    expect(clearButton).toBeTruthy();
+
+    spectator.click(clearButton as HTMLElement);
+    spectator.detectChanges();
+
+    expect(component.inputGroupValue).toBe('');
+    expect(spectator.query<HTMLInputElement>('#input-group-clearable')?.value).toBe('');
+  });
 });

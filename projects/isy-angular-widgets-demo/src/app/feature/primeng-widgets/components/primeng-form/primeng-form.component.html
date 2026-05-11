@@ -96,6 +96,33 @@
     <small id="input-mask-phone-help">{{ 'isyAngularWidgetsDemo.messages.inputMaskPhoneHelp' | translate }}</small>
   </div>
   <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading headingId="inputgroup" [level]="3" label="InputGroup" ariaLabel="Link zu InputGroup" />
+    <label for="input-group-clearable">{{ 'isyAngularWidgetsDemo.labels.inputGroupClearable' | translate }}</label>
+    <p-inputgroup>
+      <input
+        id="input-group-clearable"
+        pInputText
+        class="w-full"
+        [(ngModel)]="inputGroupValue"
+        [ngModelOptions]="{standalone: true}"
+        [placeholder]="'isyAngularWidgetsDemo.placeholders.inputGroupClearable' | translate"
+        aria-describedby="input-group-help"
+      />
+      <p-inputGroupAddon>
+        <p-button
+          icon="pi pi-times"
+          severity="secondary"
+          [outlined]="true"
+          [ariaLabel]="'isyAngularWidgetsDemo.actions.clear' | translate"
+          [label]="'isyAngularWidgetsDemo.actions.clear' | translate"
+          type="button"
+          (onClick)="clearInputGroup()"
+        />
+      </p-inputGroupAddon>
+    </p-inputgroup>
+    <small id="input-group-help">{{ 'isyAngularWidgetsDemo.messages.inputGroupHelp' | translate }}</small>
+  </div>
+  <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="autocomplete" [level]="3" label="AutoComplete" ariaLabel="Link zu AutoComplete" />
     <p-autocomplete
       inputId="autoComplete"
@@ -113,15 +140,6 @@
       <p-inputIcon class="pi pi-search" />
       <input type="text" pInputText placeholder="Search" class="w-full" />
     </p-iconfield>
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="inputgroup" [level]="3" label="InputGroup" ariaLabel="Link zu InputGroup" />
-    <p-inputgroup>
-      <p-inputGroupAddon>
-        <i class="pi pi-user"></i>
-      </p-inputGroupAddon>
-      <input id="inputGroup" pInputText placeholder="User" class="w-full" />
-    </p-inputgroup>
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading headingId="keyfilter" [level]="3" label="KeyFilter (hex)" ariaLabel="Link zu KeyFilter" />

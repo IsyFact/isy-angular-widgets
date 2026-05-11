@@ -69,7 +69,8 @@
       "nationalitiesHint": "At least 1, at most {{count}} entries. Current: {{current}}.",
       "nationalitiesRequired": "At least one nationality is required.",
       "nationalitiesMaxReached": "A maximum of {{count}} nationalities can be entered.",
-      "inputMaskPhoneHelp": "Please enter your phone number in the displayed format."
+      "inputMaskPhoneHelp": "Please enter your phone number in the displayed format.",
+      "inputGroupHelp": "Use the button at the end of the field to clear its content."
     },
     "displayObject": {
       "masterDataHeader": "Master data",
@@ -101,6 +102,7 @@
       "edit": "Edit",
       "delete": "Delete",
       "cancel": "Cancel",
+      "clear": "Clear",
       "close": "Close",
       "clearSeebach": "Clear search",
       "showSecretFields": "Show secret fields",
@@ -196,13 +198,15 @@
       "disabledInputTextValue": "This value is disabled",
       "readonlyInputText": "Readonly input field",
       "readonlyInputTextValue": "This value is readonly",
-      "inputMaskPhoneNumber": "Phone number"
+      "inputMaskPhoneNumber": "Phone number",
+      "inputGroupClearable": "Input field with clear button"
     },
     "placeholders": {
       "maxLength": "max. {{maxlength}} charaters",
       "inputTextWithHelp": "Enter at least 3 characters",
       "inputTextRequired": "Entry required",
       "inputMaskPhoneNumber": "e.g. (555) 123-4567",
+      "inputGroupClearable": "e.g. John Doe",
       "creditCardNumber": "Enter number with 16 digits",
       "identityCardExpirationDate": "YYYY-MM-DD",
       "creditCardExpirationDate": "MM/YY",
