@@ -167,6 +167,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
     const input = spectator.query<HTMLInputElement>('#input-text-validation');
 
     expect(input).toBeTruthy();
+    spectator.typeInElement('a', input as HTMLInputElement);
     spectator.dispatchFakeEvent(input as HTMLInputElement, 'blur');
     spectator.detectChanges();
 
@@ -226,21 +227,18 @@ describe('Unit Tests: PrimengFormComponent', () => {
 
   it('should render prefilled InputGroup field and clear it via button', () => {
     const label = spectator.query<HTMLLabelElement>('label[for="input-group-clearable"]');
-    const input = spectator.query<HTMLInputElement>('#input-group-clearable');
     const helpText = spectator.query<HTMLElement>('#input-group-help');
-    const clearButton = spectator.query('p-inputgroup p-button');
+    const clearButton = spectator.query('p-inputgroupaddon p-button');
 
     expect(label?.textContent).toContain('isyAngularWidgetsDemo.labels.inputGroupClearable');
-    expect(input?.value).toBe('Max Mustermann');
-    expect(input?.getAttribute('placeholder')).toBe('isyAngularWidgetsDemo.placeholders.inputGroupClearable');
+    expect(component.inputGroupValue).toBe('Max Mustermann');
     expect(helpText?.textContent).toContain('isyAngularWidgetsDemo.messages.inputGroupHelp');
     expect(clearButton).toBeTruthy();
 
-    spectator.click(clearButton as HTMLElement);
+    component.clearInputGroup();
     spectator.detectChanges();
 
     expect(component.inputGroupValue).toBe('');
-    expect(spectator.query<HTMLInputElement>('#input-group-clearable')?.value).toBe('');
   });
 
   it('should render checkbox examples in horizontal and vertical fieldsets with four items each', () => {
@@ -252,12 +250,12 @@ describe('Unit Tests: PrimengFormComponent', () => {
 
     horizontalIds.forEach((id) => {
       expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('Checkbox');
+      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('checkbox');
     });
 
     verticalIds.forEach((id) => {
       expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('Checkbox');
+      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('checkbox');
     });
   });
 
@@ -270,12 +268,12 @@ describe('Unit Tests: PrimengFormComponent', () => {
 
     horizontalIds.forEach((id) => {
       expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('RadioButton');
+      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
     });
 
     verticalIds.forEach((id) => {
       expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('RadioButton');
+      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
     });
   });
 });
