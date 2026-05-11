@@ -97,7 +97,9 @@ describe('Unit Tests: PrimengPanelComponent', () => {
     expect(tabs.length).toBeGreaterThanOrEqual(2);
     expect(component.standardTabs.length).toBe(3);
     expect(component.scrollableTabs.length).toBe(30);
-    expect(renderedTabButtons.length).toBeGreaterThanOrEqual(component.standardTabs.length + component.scrollableTabs.length);
+    expect(renderedTabButtons.length).toBeGreaterThanOrEqual(
+      component.standardTabs.length + component.scrollableTabs.length
+    );
     expect(spectator.query('.pi.pi-home')).toBeTruthy();
   });
 });
