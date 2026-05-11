@@ -1,0 +1,25 @@
+@if (pickerService.state(); as state) {
+  <p-dialog
+    [header]="state.header ?? configService.getTranslation('inputChar.title')"
+    [visible]="pickerService.visible()"
+    [closable]="state.closable"
+    [closeAriaLabel]="configService.getTranslation('inputChar.aria.closePicker')"
+    [draggable]="state.draggable"
+    [resizable]="state.resizable"
+    [dismissableMask]="state.dismissableMask"
+    [closeOnEscape]="state.closeOnEscape"
+    [modal]="state.modal"
+    (onHide)="onDialogClose()"
+    [style]="{
+      width: state.width,
+      height: state.height
+    }"
+  >
+    @defer (when pickerService.visible()) {
+      <isy-input-char-dialog
+        [charList]="allCharacters()"
+        (insertCharacter)="insertCharacter($event)"
+      ></isy-input-char-dialog>
+    }
+  </p-dialog>
+}

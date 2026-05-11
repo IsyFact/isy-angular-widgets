@@ -1,32 +1,17 @@
-import {
-  afterNextRender,
-  Component,
-  ElementRef,
-  EventEmitter,
-  inject,
-  Injector,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import {Component, ElementRef, ErrorHandler, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
-import {CharacterService} from '../../services/character.service';
-import {Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
-import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
-import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
+import {InputCharPickerService} from '../../services/input-char-picker.service';
 
 @Component({
   standalone: true,
   selector: 'isy-input-char',
   templateUrl: './input-char.component.html',
   styleUrls: ['./input-char.component.scss'],
-  imports: [InputCharDialogComponent, DialogModule, ButtonModule]
+  imports: [ButtonModule]
 })
-export class InputCharComponent implements OnChanges {
+export class InputCharComponent {
   /**
    * The width of the dialog.
    */
@@ -95,58 +80,47 @@ export class InputCharComponent implements OnChanges {
   @ViewChild('openDialogButton') openDialogButton!: ElementRef<HTMLButtonElement>;
 
   /**
-   * Controls the char picker visibility
-   * @internal
-   */
-  visible: boolean = false;
-
-  /**
-   * All characters available in the selected data type.
-   * @internal
-   */
-  allCharacters: Zeichenobjekt[] = [];
-
-  private readonly charService = inject(CharacterService);
-
-  private readonly injector = inject(Injector);
-
-  private loadedDatentyp?: Datentyp;
-
-  /**
    * A service used to translate labels within the widgets library.
    */
   configService = inject(WidgetsConfigService);
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.datentyp && this.visible) {
-      this.loadCharacters();
-    }
-  }
+  private readonly pickerService = inject(InputCharPickerService);
+
+  private readonly errorHandler = inject(ErrorHandler);
 
   toggleCharPicker(): void {
-    if (!this.visible) {
-      this.loadCharacters();
-    }
-
-    this.visible = !this.visible;
-  }
-
-  onDialogClose(): void {
     const button = this.openDialogButton?.nativeElement;
 
-    if (!button || !button.isConnected || button.disabled) {
+    if (!button) {
       return;
     }
 
-    afterNextRender({write: () => button.focus()}, {injector: this.injector});
+    if (this.pickerService.isOpenFor(button)) {
+      this.pickerService.close();
+      return;
+    }
+
+    void this.openCharPicker(button);
   }
 
-  private loadCharacters(): void {
-    if (this.loadedDatentyp === this.datentyp) {
-      return;
+  private async openCharPicker(button: HTMLButtonElement): Promise<void> {
+    try {
+      await this.pickerService.open({
+        datentyp: this.datentyp,
+        triggerElement: button,
+        width: this.width,
+        height: this.height,
+        header: this.header,
+        closable: this.closable,
+        draggable: this.draggable,
+        resizable: this.resizable,
+        dismissableMask: this.dismissableMask,
+        closeOnEscape: this.closeOnEscape,
+        modal: this.modal,
+        onInsert: (zeichen) => this.insertCharacter.emit(zeichen)
+      });
+    } catch (error: unknown) {
+      this.errorHandler.handleError(error);
     }
-
-    this.allCharacters = this.charService.getCharactersByDataType(this.datentyp);
-    this.loadedDatentyp = this.datentyp;
   }
 }

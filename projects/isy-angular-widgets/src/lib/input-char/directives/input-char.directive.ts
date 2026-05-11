@@ -5,12 +5,16 @@ import {
   HostListener,
   inject,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   ViewContainerRef
 } from '@angular/core';
+import {Subscription} from 'rxjs';
 import {InputCharComponent} from '../components/input-char/input-char.component';
 import {Datentyp} from '../model/datentyp';
+import {InputCharPickerService} from '../services/input-char-picker.service';
 
 /**
  * A directive to add to an <input> field to attach a special character picker.
@@ -18,7 +22,7 @@ import {Datentyp} from '../model/datentyp';
 @Directive({
   selector: '[isyInputChar]'
 })
-export class InputCharDirective implements OnInit, OnDestroy {
+export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
   /**
    * Determines which set of characters (datatype) according to DIN 91379 to show
    */
@@ -58,9 +62,13 @@ export class InputCharDirective implements OnInit, OnDestroy {
 
   private attributeMutationObserver?: MutationObserver;
 
+  private insertCharacterSubscription?: Subscription;
+
   private readonly viewContainerRef = inject(ViewContainerRef);
 
   private readonly element = inject(ElementRef);
+
+  private readonly pickerService = inject(InputCharPickerService);
 
   constructor() {
     this.htmlInputElement = this.element.nativeElement as HTMLInputElement;
@@ -69,21 +77,37 @@ export class InputCharDirective implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
-    this.componentRef.instance.datentyp = this.datentyp!;
-    this.componentRef.instance.outlinedInputCharButton = this.outlinedInputCharButton;
+    this.componentRef.setInput('datentyp', this.datentyp);
+    this.componentRef.setInput('outlinedInputCharButton', this.outlinedInputCharButton);
 
     this.setupInputChar();
 
-    this.componentRef.instance.insertCharacter.subscribe((zeichen) => {
+    this.insertCharacterSubscription = this.componentRef.instance.insertCharacter.subscribe((zeichen) => {
       this.htmlInputElement.value = this.buildInputValue(this.htmlInputElement.value, zeichen);
       this.setNextInputPosition(zeichen.length);
       this.htmlInputElement.dispatchEvent(new Event('input'));
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.componentRef) {
+      return;
+    }
+
+    if (changes.datentyp) {
+      this.componentRef.setInput('datentyp', this.datentyp);
+    }
+
+    if (changes.outlinedInputCharButton) {
+      this.componentRef.setInput('outlinedInputCharButton', this.outlinedInputCharButton);
+    }
+  }
+
   ngOnDestroy(): void {
     // Disconnect the MutationObserver to avoid memory leaks
     this.attributeMutationObserver?.disconnect();
+    this.insertCharacterSubscription?.unsubscribe();
+    this.closeCharPicker();
   }
 
   /**
@@ -93,21 +117,19 @@ export class InputCharDirective implements OnInit, OnDestroy {
   setupInputChar(): void {
     this.updateInputDisabledState();
 
-    // Observe changes in the DOM using MutationObserver
+    // Observe changes in disabled and readonly attributes of the input element.
     this.attributeMutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         const input = mutation.target as HTMLInputElement;
 
-        if (mutation) {
-          this.handleDisabledReadonlyChange(input, mutation.attributeName);
-          this.handleDatentypChange(input, mutation.attributeName);
-        }
+        this.handleDisabledReadonlyChange(input, mutation.attributeName);
       });
     });
 
     // Start observing the target element for attribute changes
     this.attributeMutationObserver.observe(this.htmlInputElement, {
-      attributes: true
+      attributes: true,
+      attributeFilter: ['disabled', 'readonly']
     });
   }
 
@@ -122,25 +144,13 @@ export class InputCharDirective implements OnInit, OnDestroy {
   /**
    * Handles the change in disabled or readonly attribute of the input element.
    * @param input - The HTMLInputElement to handle.
-   * @param attributeName - The name of the attribute that changed (disabled or readonly).
+   * @param attributeName - The name of the attribute that changed.
    */
   handleDisabledReadonlyChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
     if (attributeName === 'disabled' || attributeName === 'readonly') {
       const isDisabledOrReadOnly = input.disabled || input.readOnly;
-      this.componentRef.instance.visible = false;
+      this.closeCharPicker();
       this.componentRef.setInput('isInputDisabled', isDisabledOrReadOnly);
-    }
-  }
-
-  /**
-   * Handles the change of the datentyp attribute for the input element.
-   * If the attributeName is 'ng-reflect-datentyp', it sets the 'datentyp' input of the component.
-   * @param input - The HTMLInputElement that triggered the change event.
-   * @param attributeName - The name of the attribute that changed.
-   */
-  handleDatentypChange(input: HTMLInputElement, attributeName: string | undefined | null): void {
-    if (attributeName === 'ng-reflect-datentyp') {
-      this.componentRef.setInput('datentyp', input.getAttribute('ng-reflect-datentyp'));
     }
   }
 
@@ -162,14 +172,25 @@ export class InputCharDirective implements OnInit, OnDestroy {
   }
 
   /**
-   * Builds the input value by inserting a character at the current selection position.
+   * Builds the input value by inserting a character at the current cursor position.
    * @param value - The original input value.
-   * @param zeichen - The character to be inserted.
-   * @returns The updated input value with the character inserted at the current selection position.
+   * @param zeichen - The character to insert.
+   * @returns The updated input value with the character inserted at the current cursor position.
    */
   buildInputValue(value: string, zeichen: string): string {
     const beforeZeichen = value.substring(0, this.selectionPosition);
     const afterZeichen = value.substring(this.selectionPosition);
     return `${beforeZeichen}${zeichen}${afterZeichen}`;
+  }
+
+  private closeCharPicker(): void {
+    const hostElement = this.componentRef.location.nativeElement as HTMLElement;
+    const button = hostElement.querySelector('button');
+
+    if (!(button instanceof HTMLElement)) {
+      return;
+    }
+
+    this.pickerService.closeFor(button);
   }
 }

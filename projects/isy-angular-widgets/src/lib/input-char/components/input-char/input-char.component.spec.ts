@@ -1,77 +1,57 @@
-import {DialogModule} from 'primeng/dialog';
-import {ButtonModule} from 'primeng/button';
+import {ElementRef, ErrorHandler} from '@angular/core';
+import {fakeAsync, flushMicrotasks} from '@angular/core/testing';
 import {InputCharComponent} from './input-char.component';
-import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
-import {CharacterService} from '../../services/character.service';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {InputCharDialogComponent} from '../input-char-dialog/input-char-dialog.component';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
-import {Zeichenobjekt} from '../../model/model';
-import {fakeAsync, tick} from '@angular/core/testing';
-
-@Component({
-  standalone: true,
-  selector: 'isy-input-char-dialog',
-  template: ''
-})
-class InputCharDialogStubComponent {
-  @Input() visible = false;
-  @Output() visibleChange = new EventEmitter<boolean>();
-  @Input() charList: Zeichenobjekt[] = [];
-  @Output() insertCharacter = new EventEmitter<string>();
-  @Input() datentyp?: Datentyp;
-  @Input() width?: string;
-  @Input() height?: string;
-  @Input() header?: string;
-  @Input() closable?: boolean;
-  @Input() draggable?: boolean;
-  @Input() resizable?: boolean;
-  @Input() dismissableMask?: boolean;
-  @Input() closeOnEscape?: boolean;
-  @Input() modal?: boolean;
-}
+import {InputCharPickerService} from '../../services/input-char-picker.service';
 
 describe('Unit Tests: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
   let component: InputCharComponent;
+
   const dialogDefaultWidth = '740px';
   const dialogDefaultHeight = '460px';
   const datentypValues = Object.values(Datentyp) as Datentyp[];
 
-  const charServiceSpy = jasmine.createSpyObj<CharacterService>('CharacterService', ['getCharactersByDataType']);
+  const pickerServiceSpy = jasmine.createSpyObj<InputCharPickerService>('InputCharPickerService', [
+    'open',
+    'close',
+    'isOpenFor'
+  ]);
+
   const configServiceSpy = jasmine.createSpyObj<WidgetsConfigService>('WidgetsConfigService', ['getTranslation']);
+
+  const errorHandlerSpy = jasmine.createSpyObj<ErrorHandler>('ErrorHandler', ['handleError']);
 
   const createComponent = createComponentFactory({
     component: InputCharComponent,
     detectChanges: false,
-
-    overrideComponents: [
-      [
-        InputCharComponent,
-        {
-          set: {
-            imports: [DialogModule, ButtonModule, InputCharDialogStubComponent],
-            providers: [{provide: CharacterService, useValue: charServiceSpy}]
-          }
-        }
-      ]
-    ],
-
-    providers: [{provide: WidgetsConfigService, useValue: configServiceSpy}]
+    providers: [
+      {provide: WidgetsConfigService, useValue: configServiceSpy},
+      {provide: InputCharPickerService, useValue: pickerServiceSpy},
+      {provide: ErrorHandler, useValue: errorHandlerSpy}
+    ]
   });
 
   const render = (): void => spectator.fixture.detectChanges(false);
 
   beforeEach(() => {
-    charServiceSpy.getCharactersByDataType.calls.reset();
-    charServiceSpy.getCharactersByDataType.and.returnValue([]);
+    pickerServiceSpy.open.calls.reset();
+    pickerServiceSpy.open.and.resolveTo();
+
+    pickerServiceSpy.close.calls.reset();
+
+    pickerServiceSpy.isOpenFor.calls.reset();
+    pickerServiceSpy.isOpenFor.and.returnValue(false);
 
     configServiceSpy.getTranslation.calls.reset();
     configServiceSpy.getTranslation.and.callFake((key: string) => key);
+
+    errorHandlerSpy.handleError.calls.reset();
   });
 
-  describe('with default datentyp', () => {
+  describe('with default inputs', () => {
     beforeEach(() => {
       spectator = createComponent();
       component = spectator.component;
@@ -91,51 +71,157 @@ describe('Unit Tests: InputCharComponent', () => {
       expect(component.height).toEqual(dialogDefaultHeight);
     });
 
-    it('should not load characters before opening the dialog', () => {
-      expect(charServiceSpy.getCharactersByDataType).not.toHaveBeenCalled();
-      expect(component.allCharacters).toEqual([]);
+    it('should have the specified default input configuration', () => {
+      expect(component.header).toEqual(undefined);
+      expect(component.closable).toBeTrue();
+      expect(component.draggable).toBeTrue();
+      expect(component.resizable).toBeFalse();
+      expect(component.dismissableMask).toBeFalse();
+      expect(component.closeOnEscape).toBeTrue();
+      expect(component.modal).toBeFalse();
+      expect(component.isInputDisabled).toBeFalse();
     });
 
-    it('should load characters when opening the dialog', () => {
-      spectator.click('.input-char-button');
-      render();
+    it('should render the input char button', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
 
-      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledWith(Datentyp.DATENTYP_C);
-      expect(component.visible).toBeTrue();
+      expect(button).toBeTruthy();
     });
 
-    it('should not load characters again when reopening with the same datentyp', () => {
-      spectator.click('.input-char-button');
-      render();
+    it('should set the translated aria-label on the input char button', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
 
-      spectator.click('.input-char-button');
-      render();
-
-      spectator.click('.input-char-button');
-      render();
-
-      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledTimes(1);
+      expect(button.getAttribute('aria-label')).toBe('inputChar.aria.togglePicker');
+      expect(configServiceSpy.getTranslation).toHaveBeenCalledWith('inputChar.aria.togglePicker');
     });
 
-    it('should render the input char dialog only when visible is true', () => {
-      expect(spectator.query(InputCharDialogStubComponent)).toBeFalsy();
-
-      spectator.click('.input-char-button');
+    it('should have the input char button disabled when isInputDisabled is true', () => {
+      spectator.setInput('isInputDisabled', true);
       render();
 
-      expect(spectator.query(InputCharDialogStubComponent)).toBeTruthy();
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      expect(button).toBeTruthy();
+      expect(button.disabled).toBeTrue();
     });
 
-    it('should load characters again when datentyp changes while dialog is visible', () => {
-      spectator.click('.input-char-button');
+    it('should have the input char button enabled when isInputDisabled is false', () => {
+      spectator.setInput('isInputDisabled', false);
       render();
 
-      spectator.setInput('datentyp', Datentyp.DATENTYP_A);
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      expect(button).toBeTruthy();
+      expect(button.disabled).toBeFalse();
+    });
+
+    it('should not have outlined style by default for the input char button', () => {
+      const button = spectator.query('.input-char-button.p-button-outlined') as HTMLButtonElement;
+
+      expect(button).toBeFalsy();
+    });
+
+    it('should not open or close the picker when the open dialog button is not available', () => {
+      component.openDialogButton = new ElementRef<HTMLButtonElement>(undefined as unknown as HTMLButtonElement);
+
+      component.toggleCharPicker();
+
+      expect(pickerServiceSpy.isOpenFor).not.toHaveBeenCalled();
+      expect(pickerServiceSpy.open).not.toHaveBeenCalled();
+      expect(pickerServiceSpy.close).not.toHaveBeenCalled();
+    });
+
+    it('should open the shared input char picker when clicking the button', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      spectator.click(button);
       render();
 
-      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledWith(Datentyp.DATENTYP_C);
-      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledWith(Datentyp.DATENTYP_A);
-      expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledTimes(2);
+      expect(pickerServiceSpy.open).toHaveBeenCalledWith(
+        jasmine.objectContaining({
+          datentyp: Datentyp.DATENTYP_C,
+          triggerElement: button,
+          width: dialogDefaultWidth,
+          height: dialogDefaultHeight,
+          header: undefined,
+          closable: true,
+          draggable: true,
+          resizable: false,
+          dismissableMask: false,
+          closeOnEscape: true,
+          modal: false
+        })
+      );
+    });
+
+    it('should close the shared input char picker when it is already open for the button', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      pickerServiceSpy.isOpenFor.and.returnValue(true);
+
+      spectator.click(button);
+      render();
+
+      expect(pickerServiceSpy.close).toHaveBeenCalled();
+      expect(pickerServiceSpy.open).not.toHaveBeenCalled();
+    });
+
+    it('should emit insertCharacter when the picker insert callback is called', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+      const emitSpy = spyOn(component.insertCharacter, 'emit');
+
+      spectator.click(button);
+      render();
+
+      const openOptions = pickerServiceSpy.open.calls.mostRecent().args[0];
+
+      openOptions.onInsert('Ä');
+
+      expect(emitSpy).toHaveBeenCalledWith('Ä');
+    });
+
+    it('should delegate picker opening errors to Angular ErrorHandler', fakeAsync(() => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+      const error = new Error('Failed to open input char picker');
+
+      pickerServiceSpy.open.and.returnValue(Promise.reject(error));
+
+      spectator.click(button);
+      flushMicrotasks();
+
+      expect(errorHandlerSpy.handleError).toHaveBeenCalledWith(error);
+    }));
+  });
+
+  describe('with outlined input char button', () => {
+    it('should have outlined style when outlinedInputCharButton is true', () => {
+      spectator = createComponent({
+        props: {
+          outlinedInputCharButton: true
+        }
+      });
+
+      render();
+
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      expect(button).toBeTruthy();
+      expect(button).toHaveClass('p-button-outlined');
+    });
+
+    it('should not have outlined style when outlinedInputCharButton is false', () => {
+      spectator = createComponent({
+        props: {
+          outlinedInputCharButton: false
+        }
+      });
+
+      render();
+
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      expect(button).toBeTruthy();
+      expect(button).not.toHaveClass('p-button-outlined');
     });
   });
 
@@ -151,189 +237,64 @@ describe('Unit Tests: InputCharComponent', () => {
         expect(component).toBeTruthy();
       });
 
-      it('should have the specified default input configuration', () => {
-        expect(component.header).toEqual(undefined);
-        expect(component.closable).toBeTrue();
-        expect(component.draggable).toBeTrue();
-        expect(component.resizable).toBeFalse();
-        expect(component.dismissableMask).toBeFalse();
-        expect(component.closeOnEscape).toBeTrue();
-        expect(component.modal).toBeFalse();
-        expect(component.isInputDisabled).toBeFalse();
-        expect(component.visible).toBeFalse();
-      });
-
-      it('should have the input char button disabled when isInputDisabled is true', () => {
-        spectator.setInput('isInputDisabled', true);
-        render();
-
+      it('should pass the selected datentyp to the shared input char picker', () => {
         const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        expect(button).toBeTruthy();
-        expect(button.disabled).toBeTrue();
-      });
-
-      it('should have the input char button enabled when isInputDisabled is false', () => {
-        spectator.setInput('isInputDisabled', false);
-        render();
-
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        expect(button).toBeTruthy();
-        expect(button.disabled).toBeFalse();
-      });
-
-      it('should display after clicking the button', () => {
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        expect(button).toBeTruthy();
 
         spectator.click(button);
         render();
 
-        expect(component.visible).toBeTrue();
-      });
-
-      it('should load characters for the selected datentyp after opening', () => {
-        spectator.click('.input-char-button');
-        render();
-
-        expect(charServiceSpy.getCharactersByDataType).toHaveBeenCalledWith(datentyp);
+        expect(pickerServiceSpy.open).toHaveBeenCalledWith(
+          jasmine.objectContaining({
+            datentyp,
+            triggerElement: button
+          })
+        );
       });
     });
   });
-});
 
-describe('Integration Test: InputCharComponent', () => {
-  const service = new CharacterService();
-  let spectator: Spectator<InputCharComponent>;
-  const datentypValues = Object.values(Datentyp) as Datentyp[];
-  const createComponent = createComponentFactory({
-    component: InputCharComponent,
-    imports: [DialogModule, InputCharDialogComponent, ButtonModule],
-    providers: [WidgetsConfigService, CharacterService]
-  });
-
-  datentypValues.forEach((datentyp) => {
-    describe(`with ${datentyp}`, () => {
-      beforeEach(() => {
-        spectator = createComponent({
-          props: {
-            datentyp
-          }
-        });
-
-        spectator.detectChanges();
-        spectator.click('.input-char-button');
-        spectator.detectChanges();
-      });
-
-      it('should create', () => {
-        expect(spectator.component).toBeTruthy();
-      });
-
-      const expectedGroups = service.getGroupsByDataType(datentyp).length;
-      it(`should show ${expectedGroups} available groups after opening`, () => {
-        const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton');
-        expect(groupButtons.length).toEqual(expectedGroups);
-      });
-
-      const expectedCharacters = service.getCharactersByDataType(datentyp).length;
-      it(`should show ${expectedCharacters} characters after opening`, () => {
-        const groupButtons = spectator.queryAll('.right-panel-side p-selectbutton p-togglebutton');
-        expect(groupButtons.length).toEqual(expectedCharacters);
-      });
-
-      it('should not have outlined style by default for the input char button', () => {
-        const button = spectator.query('.input-char-button.p-button-outlined') as HTMLButtonElement;
-        expect(button).toBeFalsy();
-      });
-
-      it('should have outlined style when outlinedInputCharButton is true', () => {
-        spectator = createComponent({
-          props: {outlinedInputCharButton: true}
-        });
-
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        expect(button).toHaveClass('p-button-outlined');
-      });
-
-      it('should not have outlined style when outlinedInputCharButton is false', () => {
-        spectator = createComponent({
-          props: {outlinedInputCharButton: false}
-        });
-
-        const button = spectator.query('.input-char-button') as HTMLButtonElement;
-        expect(button).not.toHaveClass('p-button-outlined');
-      });
-    });
-  });
-});
-
-describe('Accessibility Test: InputCharComponent', () => {
-  let spectator: Spectator<InputCharComponent>;
-  const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
-
-  const createComponent = createComponentFactory({
-    component: InputCharComponent,
-    detectChanges: false,
-    overrideComponents: [
-      [
-        InputCharComponent,
-        {
-          set: {
-            imports: [DialogModule, ButtonModule, InputCharDialogStubComponent]
-          }
+  describe('with custom dialog configuration', () => {
+    beforeEach(() => {
+      spectator = createComponent({
+        props: {
+          datentyp: Datentyp.DATENTYP_A,
+          width: '900px',
+          height: '600px',
+          header: 'Custom header',
+          closable: false,
+          draggable: false,
+          resizable: true,
+          dismissableMask: true,
+          closeOnEscape: false,
+          modal: true
         }
-      ]
-    ],
-    providers: [{provide: WidgetsConfigService, useValue: mockConfigService}]
+      });
+
+      component = spectator.component;
+      render();
+    });
+
+    it('should pass the custom configuration to the shared input char picker', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      spectator.click(button);
+      render();
+
+      expect(pickerServiceSpy.open).toHaveBeenCalledWith(
+        jasmine.objectContaining({
+          datentyp: Datentyp.DATENTYP_A,
+          triggerElement: button,
+          width: '900px',
+          height: '600px',
+          header: 'Custom header',
+          closable: false,
+          draggable: false,
+          resizable: true,
+          dismissableMask: true,
+          closeOnEscape: false,
+          modal: true
+        })
+      );
+    });
   });
-
-  const render = (): void => spectator.fixture.detectChanges(false);
-
-  beforeEach(() => {
-    mockConfigService.getTranslation.calls.reset();
-    mockConfigService.getTranslation.and.returnValue('Close picker');
-    spectator = createComponent({props: {datentyp: Datentyp.DATENTYP_C}});
-    render();
-    spectator.click('.input-char-button');
-    render();
-  });
-
-  it('the dialog close icon should have an aria-label attribute with "Close picker"', () => {
-    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
-    expect(element.getAttribute('aria-label')).toBe('Close picker');
-  });
-
-  it('should focus the open dialog button when dialog closes', fakeAsync(() => {
-    const button = document.createElement('button');
-    const focusSpy = spyOn(button, 'focus');
-    spyOnProperty(button, 'isConnected', 'get').and.returnValue(true);
-
-    spectator.component.openDialogButton = {
-      nativeElement: button
-    };
-
-    spectator.component.onDialogClose();
-    render();
-    tick();
-
-    expect(focusSpy).toHaveBeenCalled();
-  }));
-
-  it('should not focus the open dialog button when it is disabled', fakeAsync(() => {
-    const button = document.createElement('button');
-    button.disabled = true;
-
-    const focusSpy = spyOn(button, 'focus');
-    spyOnProperty(button, 'isConnected', 'get').and.returnValue(true);
-
-    spectator.component.openDialogButton = {
-      nativeElement: button
-    };
-
-    spectator.component.onDialogClose();
-    render();
-    tick();
-
-    expect(focusSpy).not.toHaveBeenCalled();
-  }));
 });

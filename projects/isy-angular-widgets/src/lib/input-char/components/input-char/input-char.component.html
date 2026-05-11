@@ -10,27 +10,3 @@
   [disabled]="isInputDisabled"
   (click)="toggleCharPicker()"
 ></button>
-
-<p-dialog
-  [header]="header ?? configService.getTranslation('inputChar.title')"
-  [(visible)]="visible"
-  [closable]="closable"
-  [closeAriaLabel]="configService.getTranslation('inputChar.aria.closePicker')"
-  [draggable]="draggable"
-  [resizable]="resizable"
-  [dismissableMask]="dismissableMask"
-  [closeOnEscape]="closeOnEscape"
-  [modal]="modal"
-  (onHide)="onDialogClose()"
-  [style]="{
-    width: width,
-    height: height
-  }"
->
-  @if (visible) {
-    <isy-input-char-dialog
-      [charList]="allCharacters"
-      (insertCharacter)="insertCharacter.emit($event)"
-    ></isy-input-char-dialog>
-  }
-</p-dialog>
