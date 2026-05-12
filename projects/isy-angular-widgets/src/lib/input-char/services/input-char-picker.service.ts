@@ -1,7 +1,6 @@
 import {
   ApplicationRef,
   ComponentRef,
-  EmbeddedViewRef,
   EnvironmentInjector,
   Injectable,
   OnDestroy,
@@ -27,6 +26,8 @@ export class InputCharPickerService implements OnDestroy {
   private readonly document = inject(DOCUMENT);
 
   private hostComponentRef?: ComponentRef<unknown>;
+
+  private hostElement?: HTMLElement;
 
   private hostCreationPromise?: Promise<void>;
 
@@ -95,7 +96,11 @@ export class InputCharPickerService implements OnDestroy {
 
     this.appRef.detachView(this.hostComponentRef.hostView);
     this.hostComponentRef.destroy();
+    this.hostElement?.remove();
+
     this.hostComponentRef = undefined;
+    this.hostElement = undefined;
+    this.hostCreationPromise = undefined;
   }
 
   private async ensureHostComponent(): Promise<void> {
@@ -115,16 +120,17 @@ export class InputCharPickerService implements OnDestroy {
     const {InputCharPickerHostComponent} =
       await import('../components/input-char-picker-host/input-char-picker-host.component');
 
+    const hostElement = this.document.createElement('isy-input-char-picker-host');
+
     const componentRef = createComponent(InputCharPickerHostComponent, {
-      environmentInjector: this.environmentInjector
+      environmentInjector: this.environmentInjector,
+      hostElement
     });
 
     this.appRef.attachView(componentRef.hostView);
-
-    const hostElement = (componentRef.hostView as EmbeddedViewRef<unknown>).rootNodes[0] as HTMLElement;
-
     this.document.body.appendChild(hostElement);
 
+    this.hostElement = hostElement;
     this.hostComponentRef = componentRef;
   }
 }

@@ -22,10 +22,6 @@ describe('Unit Tests: InputCharPickerService', () => {
 
   const configServiceSpy = jasmine.createSpyObj<WidgetsConfigService>('WidgetsConfigService', ['getTranslation']);
 
-  type InputCharPickerServiceWithPrivateMethods = InputCharPickerService & {
-    createHostComponent: () => Promise<void>;
-  };
-
   /**
    * Creates InputCharPickerOpenOptions with default values and optional overrides.
    * @param overrides Optional partial overrides for the options.
@@ -319,15 +315,32 @@ describe('Unit Tests: InputCharPickerService', () => {
     expect(onInsert).not.toHaveBeenCalled();
   });
 
-  it('should detach and destroy the host component on destroy', async () => {
+  it('should detach, destroy and remove the host component on destroy', async () => {
     const appRef = spectator.inject(ApplicationRef);
     const detachViewSpy = spyOn(appRef, 'detachView').and.callThrough();
 
     await service.open(createOpenOptions());
 
+    expect(getHostElements().length).toBe(1);
+
     service.ngOnDestroy();
 
     expect(detachViewSpy).toHaveBeenCalled();
+    expect(getHostElements().length).toBe(0);
+  });
+
+  it('should recreate the host component after destroy and opening again', async () => {
+    await service.open(createOpenOptions());
+
+    expect(getHostElements().length).toBe(1);
+
+    service.ngOnDestroy();
+
+    expect(getHostElements().length).toBe(0);
+
+    await service.open(createOpenOptions());
+
+    expect(getHostElements().length).toBe(1);
   });
 
   it('should not throw when destroyed without an existing host component', () => {
