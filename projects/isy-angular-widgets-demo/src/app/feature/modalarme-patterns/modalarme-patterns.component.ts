@@ -1,5 +1,7 @@
 import {
+  AfterViewInit,
   Component,
+  DestroyRef,
   ElementRef,
   ViewChild,
   inject,
@@ -24,6 +26,8 @@ import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 import {SelectModule} from 'primeng/select';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import {AnchorNavigationService} from '../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../shared/components/section-heading/section-heading.component';
 
 /**
  * Type guard: checks whether an AbstractControl is a FormGroup.
@@ -74,12 +78,15 @@ export enum StepperStep {
     FormControlPipe,
     SelectModule,
     MessageModule,
-    ToastModule
+    ToastModule,
+    SectionHeadingComponent
   ],
   templateUrl: './modalarme-patterns.component.html',
   styleUrls: ['./modalarme-patterns.component.scss']
 })
-export class ModalarmePatternsComponent {
+export class ModalarmePatternsComponent implements AfterViewInit {
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly anchorNav = inject(AnchorNavigationService);
   private readonly fb = inject(FormBuilder);
   private readonly msg = inject(MessageService);
   private readonly injector = inject(Injector);
@@ -336,6 +343,14 @@ export class ModalarmePatternsComponent {
 
   helpOpen = false;
   helpPopoverId = 'help-popover-panel';
+
+  ngAfterViewInit(): void {
+    this.anchorNav.initFragmentScroll(this.destroyRef);
+  }
+
+  scrollToWidget(event: MouseEvent, anchor: string): void {
+    this.anchorNav.scrollToAnchor(event, anchor);
+  }
 
   toggleHelp(event: Event): void {
     this.helpOverlay.toggle(event);

@@ -1,8 +1,8 @@
 <h1>PrimeNG Panels</h1>
 <h2>Content Organisor</h2>
 <div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Accordion</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="accordion" [level]="3" label="Accordion" ariaLabel="Link zu Accordion" />
     <p-accordion value="0">
       <p-accordion-panel value="0">
         <p-accordion-header>Header I</p-accordion-header>
@@ -40,39 +40,120 @@
       </p-accordion-panel>
     </p-accordion>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Panel</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="panel" [level]="3" label="Panel" ariaLabel="Link zu Panel" />
     <p-panel header="Panel Header" [toggleable]="true"> Content </p-panel>
   </div>
-  <div class="col-12 flex flex-column gap-2">
-    <h3>Tabs</h3>
-    <p-tabs value="0">
-      <p-tablist>
-        <p-tab value="0">Header 1</p-tab>
-        <p-tab value="1">Header 2</p-tab>
-        <p-tab value="2">Header 3</p-tab>
-      </p-tablist>
-      <p-tabpanels>
-        <p-tabpanel value="0"> Content 1 </p-tabpanel>
-        <p-tabpanel value="1"> Content 2 </p-tabpanel>
-        <p-tabpanel value="2"> Content 3 </p-tabpanel>
-      </p-tabpanels>
-    </p-tabs>
+  <div class="col-12 flex flex-column gap-2" style="min-width: 0">
+    <demo-section-heading anchorId="tabs" [level]="3" label="Tabs" ariaLabel="Link zu Tabs" />
+    <div class="flex flex-column gap-4 w-full" style="min-width: 0">
+      <p-card [header]="'isyAngularWidgetsDemo.labels.panelTabsStandardLegend' | translate">
+        <p-tabs [value]="standardTabs[0].value" class="mt-3">
+          <p-tablist>
+            @for (tab of standardTabs; track tab.value) {
+              <p-tab [value]="tab.value">
+                <i [class]="tab.iconClass"></i>
+                <span>{{ tab.labelKey | translate }}</span>
+              </p-tab>
+            }
+          </p-tablist>
+          <p-tabpanels>
+            @for (tab of standardTabs; track tab.value) {
+              <p-tabpanel [value]="tab.value">
+                <p class="m-0">{{ tab.contentKey | translate }}</p>
+              </p-tabpanel>
+            }
+          </p-tabpanels>
+        </p-tabs>
+      </p-card>
+
+      <p-card [header]="'isyAngularWidgetsDemo.labels.panelTabsScrollableLegend' | translate">
+        <p-tabs [value]="scrollableTabs[0].value" [scrollable]="true" [showNavigators]="true">
+          <p-tablist class="mt-3">
+            @for (tab of scrollableTabs; track tab.value) {
+              <p-tab [value]="tab.value">{{
+                'isyAngularWidgetsDemo.labels.panelTabGenericLabel' | translate: {index: tab.index}
+              }}</p-tab>
+            }
+          </p-tablist>
+          <p-tabpanels>
+            @for (tab of scrollableTabs; track tab.value) {
+              <p-tabpanel [value]="tab.value">
+                <p class="m-0">
+                  {{ 'isyAngularWidgetsDemo.messages.panelTabGenericContent' | translate: {index: tab.index} }}
+                </p>
+              </p-tabpanel>
+            }
+          </p-tabpanels>
+        </p-tabs>
+      </p-card>
+    </div>
   </div>
 </div>
-<p-divider />
 <h2>Content Container</h2>
 <div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Card</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="card" [level]="3" label="Card" ariaLabel="Link zu Card" />
     <p-card header="Card Header" subheader="Card Subheader"> Content </p-card>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Fieldset</h3>
-    <p-fieldset legend="Fieldset Header"> Content </p-fieldset>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="fieldset" [level]="3" label="Fieldset" ariaLabel="Link zu Fieldset" />
+    <p-fieldset legend="Fieldset Header">
+      <form class="flex flex-column gap-3" novalidate>
+        <div class="flex flex-column gap-1">
+          <label for="fieldset-required-input" class="font-medium">
+            {{ 'isyAngularWidgetsDemo.labels.panelFieldsetRequiredLabel' | translate }}
+            <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="fieldset-required-input"
+            type="text"
+            pInputText
+            name="fieldsetRequiredInput"
+            [(ngModel)]="fieldsetRequiredInput"
+            #requiredInputModel="ngModel"
+            required
+            aria-describedby="fieldset-required-input-error"
+          />
+          @if (requiredInputModel.invalid && (requiredInputModel.dirty || requiredInputModel.touched)) {
+            <small id="fieldset-required-input-error" class="text-red-500">{{
+              'isyAngularWidgetsDemo.messages.panelFieldsetRequiredError' | translate
+            }}</small>
+          }
+        </div>
+
+        <div class="flex flex-column gap-1">
+          <label for="fieldset-number-input" class="font-medium">{{
+            'isyAngularWidgetsDemo.labels.panelFieldsetNumberLabel' | translate
+          }}</label>
+          <p-inputnumber
+            inputId="fieldset-number-input"
+            name="fieldsetNumberInput"
+            [(ngModel)]="fieldsetNumberInput"
+            [useGrouping]="false"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+          />
+        </div>
+
+        <div class="flex flex-column gap-1">
+          <label for="fieldset-date-input" class="font-medium">{{
+            'isyAngularWidgetsDemo.labels.panelFieldsetDateLabel' | translate
+          }}</label>
+          <p-datepicker
+            inputId="fieldset-date-input"
+            name="fieldsetDateInput"
+            [(ngModel)]="fieldsetDateInput"
+            appendTo="body"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+          />
+        </div>
+      </form>
+    </p-fieldset>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3>ScrollPanel</h3>
+    <demo-section-heading anchorId="scrollpanel" [level]="3" label="ScrollPanel" ariaLabel="Link zu ScrollPanel" />
     <p-scrollpanel [style]="{height: '150px'}">
       <p>
         Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
@@ -98,8 +179,8 @@
 <p-divider />
 <h2>Separator</h2>
 <div class="grid">
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Splitter</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="splitter" [level]="3" label="Splitter" ariaLabel="Link zu Splitter" />
     <p-splitter [style]="{height: '75px'}" class="mb-8">
       <ng-template #panelLeftSide>
         <div class="flex align-items-center justify-content-center h-full">Left Side</div>
@@ -109,8 +190,8 @@
       </ng-template>
     </p-splitter>
   </div>
-  <div class="col-12 xl:col-6 flex flex-column gap-2">
-    <h3>Divider</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="divider" [level]="3" label="Divider" ariaLabel="Link zu Divider" />
     Text above divider.
     <p-divider />
     Text behind divider.
@@ -120,7 +201,7 @@
 <h2>Design Pattern</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <h3>Toolbar</h3>
+    <demo-section-heading anchorId="toolbar" [level]="3" label="Toolbar" ariaLabel="Link zu Toolbar" />
     <p-toolbar>
       <ng-template #start>
         <p-button icon="pi pi-plus" text severity="secondary" />
@@ -139,54 +220,78 @@
     </p-toolbar>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <h3>Stepper</h3>
+    <demo-section-heading anchorId="stepper" [level]="3" label="Stepper" ariaLabel="Link zu Stepper" />
     <p-stepper [value]="1">
       <p-step-list>
-        <p-step [value]="1">Header I</p-step>
-        <p-step [value]="2">Header II</p-step>
-        <p-step [value]="3">Header II</p-step>
+        <p-step [value]="1">{{ 'isyAngularWidgetsDemo.labels.panelStepperStepLabel' | translate: {index: 1} }}</p-step>
+        <p-step [value]="2">{{ 'isyAngularWidgetsDemo.labels.panelStepperStepLabel' | translate: {index: 2} }}</p-step>
+        <p-step [value]="3">{{ 'isyAngularWidgetsDemo.labels.panelStepperStepLabel' | translate: {index: 3} }}</p-step>
       </p-step-list>
       <p-step-panels>
         <p-step-panel [value]="1">
-          <ng-template #content1 let-activateCallback="activateCallback">
+          <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-column h-12rem">
               <div
                 class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
               >
-                Content I
+                {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: {index: 1} }}
               </div>
             </div>
             <div class="flex pt-6 justify-content-end">
-              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
+              <p-button
+                [label]="'isyAngularWidgets.wizard.next' | translate"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                (onClick)="activateCallback(2)"
+              />
             </div>
           </ng-template>
         </p-step-panel>
         <p-step-panel [value]="2">
-          <ng-template #content2 let-activateCallback="activateCallback">
+          <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-column h-12rem">
               <div
                 class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
               >
-                Content II
+                {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: {index: 2} }}
               </div>
             </div>
-            <div class="flex pt-6 justify-content-between">
-              <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
-              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" />
+            <div class="flex pt-6 justify-content-end gap-2">
+              <p-button
+                [label]="'isyAngularWidgets.wizard.back' | translate"
+                severity="secondary"
+                icon="pi pi-arrow-left"
+                (onClick)="activateCallback(1)"
+              />
+              <p-button
+                [label]="'isyAngularWidgets.wizard.next' | translate"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                (onClick)="activateCallback(3)"
+              />
             </div>
           </ng-template>
         </p-step-panel>
         <p-step-panel [value]="3">
-          <ng-template #content3 let-activateCallback="activateCallback">
+          <ng-template #content let-activateCallback="activateCallback">
             <div class="flex flex-column h-12rem">
               <div
                 class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"
               >
-                Content III
+                {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: {index: 3} }}
               </div>
             </div>
-            <div class="flex pt-6 justify-content-start">
-              <p-button label="Back" icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(2)" />
+            <div class="flex pt-6 justify-content-end gap-2">
+              <p-button
+                [label]="'isyAngularWidgets.wizard.back' | translate"
+                severity="secondary"
+                icon="pi pi-arrow-left"
+                (onClick)="activateCallback(2)"
+              />
+              <p-button
+                [label]="'isyAngularWidgetsDemo.labels.panelStepperFinalAction' | translate"
+                [disabled]="true"
+              />
             </div>
           </ng-template>
         </p-step-panel>

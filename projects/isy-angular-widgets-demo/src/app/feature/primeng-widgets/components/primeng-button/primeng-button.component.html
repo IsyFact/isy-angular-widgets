@@ -1,108 +1,132 @@
 <h1>PrimeNG Buttons</h1>
-<h2>Colored Buttons</h2>
+<demo-section-heading
+  anchorId="colored-buttons"
+  [level]="2"
+  label="Colored Buttons"
+  ariaLabel="Link zu Colored Buttons"
+/>
 <div class="grid">
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Primary Color</h3>
-    <p-button label="Primary" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Secondary Color</h3>
-    <p-button label="Secondary" severity="secondary" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Success Color</h3>
-    <p-button label="Success" severity="success" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Info Color</h3>
-    <p-button label="Info" severity="info" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Warning Color</h3>
-    <p-button label="Warning" severity="warn" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Help Color</h3>
-    <p-button label="Help" severity="help" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Danger Color</h3>
-    <p-button label="Danger" severity="danger" />
-  </div>
-</div>
-<p-divider></p-divider>
-<h2>Outlined Buttons</h2>
-<div class="grid">
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Primary Color</h3>
-    <p-button label="Primary" [outlined]="true" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Secondary Color</h3>
-    <p-button label="Secondary" [outlined]="true" severity="secondary" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Success Color</h3>
-    <p-button label="Success" [outlined]="true" severity="success" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Info Color</h3>
-    <p-button label="Info" [outlined]="true" severity="info" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Warning Color</h3>
-    <p-button label="Warning" [outlined]="true" severity="warn" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Help Color</h3>
-    <p-button label="Help" [outlined]="true" severity="help" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Danger Color</h3>
-    <p-button label="Danger" [outlined]="true" severity="danger" />
+  <div class="col-12">
+    <div class="flex flex-column gap-2">
+      <div class="grid align-items-center">
+        <span class="col-4">Primary</span>
+        <div class="col-8"><p-button label="Primary" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Secondary</span>
+        <div class="col-8"><p-button label="Secondary" severity="secondary" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Success</span>
+        <div class="col-8"><p-button label="Success" severity="success" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Info</span>
+        <div class="col-8"><p-button label="Info" severity="info" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Warning</span>
+        <div class="col-8"><p-button label="Warning" severity="warn" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Help</span>
+        <div class="col-8"><p-button label="Help" severity="help" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Danger</span>
+        <div class="col-8"><p-button label="Danger" severity="danger" /></div>
+      </div>
+    </div>
   </div>
 </div>
 <p-divider />
-<h2>Icon Buttons</h2>
+<demo-section-heading
+  anchorId="outlined-buttons"
+  [level]="2"
+  label="Outlined Buttons"
+  ariaLabel="Link zu Outlined Buttons"
+/>
 <div class="grid">
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Primary Color</h3>
-    <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" />
+  <div class="col-12">
+    <div class="flex flex-column gap-2">
+      <div class="grid align-items-center">
+        <span class="col-4">Primary</span>
+        <div class="col-8"><p-button label="Primary" [outlined]="true" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Secondary</span>
+        <div class="col-8"><p-button label="Secondary" [outlined]="true" severity="secondary" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Success</span>
+        <div class="col-8"><p-button label="Success" [outlined]="true" severity="success" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Info</span>
+        <div class="col-8"><p-button label="Info" [outlined]="true" severity="info" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Warning</span>
+        <div class="col-8"><p-button label="Warning" [outlined]="true" severity="warn" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Help</span>
+        <div class="col-8"><p-button label="Help" [outlined]="true" severity="help" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Danger</span>
+        <div class="col-8"><p-button label="Danger" [outlined]="true" severity="danger" /></div>
+      </div>
+    </div>
   </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Secondary Color</h3>
-    <p-button icon="pi pi-bookmark" [rounded]="true" severity="secondary" [outlined]="true" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Success Color</h3>
-    <p-button icon="pi pi-search" [rounded]="true" severity="success" [outlined]="true" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Info Color</h3>
-    <p-button icon="pi pi-user" [rounded]="true" severity="info" [outlined]="true" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Warning Color</h3>
-    <p-button icon="pi pi-bell" [rounded]="true" severity="warn" [outlined]="true" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Help Color</h3>
-    <p-button icon="pi pi-heart" [rounded]="true" severity="help" [outlined]="true" />
-  </div>
-  <div class="col-12 md:col-6 xl:col-3 flex flex-column gap-2">
-    <h3>Danger Color</h3>
-    <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" />
+</div>
+<p-divider />
+<demo-section-heading anchorId="icon-buttons" [level]="2" label="Icon Buttons" ariaLabel="Link zu Icon Buttons" />
+<div class="grid">
+  <div class="col-12">
+    <div class="flex flex-column gap-2">
+      <div class="grid align-items-center">
+        <span class="col-4">Primary</span>
+        <div class="col-8"><p-button icon="pi pi-check" [rounded]="true" [outlined]="true" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Secondary</span>
+        <div class="col-8">
+          <p-button icon="pi pi-bookmark" [rounded]="true" severity="secondary" [outlined]="true" />
+        </div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Success</span>
+        <div class="col-8"><p-button icon="pi pi-search" [rounded]="true" severity="success" [outlined]="true" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Info</span>
+        <div class="col-8"><p-button icon="pi pi-user" [rounded]="true" severity="info" [outlined]="true" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Warning</span>
+        <div class="col-8"><p-button icon="pi pi-bell" [rounded]="true" severity="warn" [outlined]="true" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Help</span>
+        <div class="col-8"><p-button icon="pi pi-heart" [rounded]="true" severity="help" [outlined]="true" /></div>
+      </div>
+      <div class="grid align-items-center">
+        <span class="col-4">Danger</span>
+        <div class="col-8"><p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" /></div>
+      </div>
+    </div>
   </div>
 </div>
 <p-divider />
 <h2>Special Buttons</h2>
 <div class="grid mb-3">
-  <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-    <h3>SplitButton</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="splitbutton" [level]="3" label="SplitButton" ariaLabel="Link zu SplitButton" />
     <p-splitbutton label="Save" icon="pi pi-save" [model]="options" />
   </div>
-  <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-    <h3>SpeedDial</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="speeddial" [level]="3" label="SpeedDial" ariaLabel="Link zu SpeedDial" />
     <p-speeddial id="speedDial" [model]="options" direction="right" />
   </div>
 </div>

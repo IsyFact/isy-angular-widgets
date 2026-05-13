@@ -1,44 +1,59 @@
 <h1>PrimeNG Charts</h1>
 <h2>Bar Charts</h2>
 <div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Vertical</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="bar-chart-vertical" [level]="3" label="Vertical" ariaLabel="Link zu Vertical" />
     <p-chart type="bar" [data]="barChartData" [options]="verticalBarChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Horizontal</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading
+      anchorId="bar-chart-horizontal"
+      [level]="3"
+      label="Horizontal"
+      ariaLabel="Link zu Horizontal"
+    />
     <p-chart type="bar" [data]="barChartData" [options]="horizontalBarChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Stacked</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="bar-chart-stacked" [level]="3" label="Stacked" ariaLabel="Link zu Stacked" />
     <p-chart type="bar" [data]="barChartData" [options]="stackedBarChartOptions" />
   </div>
 </div>
 <p-divider />
 <h2>Circular Charts</h2>
 <div class="grid">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Pie Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="pie-chart" [level]="3" label="Pie Chart" ariaLabel="Link zu Pie Chart" />
     <p-chart type="pie" [data]="circledChartData" [options]="pieChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Doughnut Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading
+      anchorId="doughnut-chart"
+      [level]="3"
+      label="Doughnut Chart"
+      ariaLabel="Link zu Doughnut Chart"
+    />
     <p-chart type="doughnut" [data]="circledChartData" [options]="doughnutChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>PolarArea Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading
+      anchorId="polararea-chart"
+      [level]="3"
+      label="PolarArea Chart"
+      ariaLabel="Link zu PolarArea Chart"
+    />
     <p-chart type="polarArea" [data]="circledChartData" [options]="polarAreaChartOptions" />
   </div>
 </div>
 <p-divider />
 <h2>Other Charts</h2>
 <div class="grid mb-3">
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Line Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="line-chart" [level]="3" label="Line Chart" ariaLabel="Link zu Line Chart" />
     <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions" />
   </div>
-  <div class="col-12 md:col-6 flex flex-column gap-2">
-    <h3>Radar Chart</h3>
+  <div class="col-12 flex flex-column gap-2">
+    <demo-section-heading anchorId="radar-chart" [level]="3" label="Radar Chart" ariaLabel="Link zu Radar Chart" />
     <p-chart type="radar" [data]="radarChartData" [options]="radarChartOptions" />
   </div>
 </div>

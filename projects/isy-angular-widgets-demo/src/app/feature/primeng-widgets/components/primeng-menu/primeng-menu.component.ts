@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 import {electronicData, megaMenuProductData} from '../../data/product';
 import {contextMenuData, fileContainerData, menuBarData, optionData, tabMenuData} from '../../data/file-option';
@@ -13,6 +13,8 @@ import {PanelMenuModule} from 'primeng/panelmenu';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {MenuModule} from 'primeng/menu';
+import {AnchorNavigationService} from '../../../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../../../shared/components/section-heading/section-heading.component';
 
 @Component({
   standalone: true,
@@ -28,10 +30,14 @@ import {MenuModule} from 'primeng/menu';
     PanelMenuModule,
     TieredMenuModule,
     ContextMenuModule,
-    MenuModule
+    MenuModule,
+    SectionHeadingComponent
   ]
 })
-export class PrimengMenuComponent {
+export class PrimengMenuComponent implements AfterViewInit {
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly anchorNav = inject(AnchorNavigationService);
+
   electronics: MenuItem[] = electronicData;
   contextMenuOption: MenuItem[] = contextMenuData;
   option: MenuItem[] = optionData;
@@ -41,6 +47,14 @@ export class PrimengMenuComponent {
   stepItem: MenuItem[] = personalData;
   activeIndex: number = 0;
   tabMenuOption: MenuItem[] = tabMenuData;
+
+  ngAfterViewInit(): void {
+    this.anchorNav.initFragmentScroll(this.destroyRef);
+  }
+
+  scrollToWidget(event: MouseEvent, anchor: string): void {
+    this.anchorNav.scrollToAnchor(event, anchor);
+  }
 
   onActiveIndexChange(event: number): void {
     this.activeIndex = event;

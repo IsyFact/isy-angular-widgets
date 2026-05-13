@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+/* Reusable section heading with hover-only anchor symbol for widget demo pages */
+.section-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .section-anchor {
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+    text-decoration: none;
+
+    &:focus {
+      opacity: 1;
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+
+  &:hover .section-anchor {
+    opacity: 1;
+  }
+
+  &:focus-within .section-anchor {
+    opacity: 1;
+  }
+}

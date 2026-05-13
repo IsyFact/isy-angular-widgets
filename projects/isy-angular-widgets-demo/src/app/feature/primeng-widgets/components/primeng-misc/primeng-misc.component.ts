@@ -1,5 +1,5 @@
-import {Component, inject, OnDestroy} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TerminalModule, TerminalService} from 'primeng/terminal';
 import {storageData} from '../../data/product';
 import {StorageStatus} from '../../model/product';
@@ -18,6 +18,9 @@ import {ButtonModule} from 'primeng/button';
 import {BlockUIModule} from 'primeng/blockui';
 import {PanelModule} from 'primeng/panel';
 import {OverlayBadgeModule} from 'primeng/overlaybadge';
+import {InputTextModule} from 'primeng/inputtext';
+import {AnchorNavigationService} from '../../../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../../../shared/components/section-heading/section-heading.component';
 
 @Component({
   standalone: true,
@@ -39,28 +42,33 @@ import {OverlayBadgeModule} from 'primeng/overlaybadge';
     BlockUIModule,
     PanelModule,
     TerminalModule,
-    OverlayBadgeModule
+    OverlayBadgeModule,
+    InputTextModule,
+    SectionHeadingComponent
   ],
   providers: [TerminalService]
 })
-export class PrimengMiscComponent implements OnDestroy {
+export class PrimengMiscComponent implements AfterViewInit {
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly anchorNav = inject(AnchorNavigationService);
+  private readonly terminalService = inject(TerminalService);
+
   blockedContent: boolean = false;
   storageStatus: StorageStatus[] = storageData;
-  subscription: Subscription;
-
-  terminalService = inject(TerminalService);
 
   constructor() {
-    this.subscription = this.terminalService.commandHandler.subscribe((command) => {
+    this.terminalService.commandHandler.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((command) => {
       const response = command === 'date' ? new Date().toDateString() : 'Unknown command: ' + command;
       this.terminalService.sendResponse(response);
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  ngAfterViewInit(): void {
+    this.anchorNav.initFragmentScroll(this.destroyRef);
+  }
+
+  scrollToWidget(event: MouseEvent, anchor: string): void {
+    this.anchorNav.scrollToAnchor(event, anchor);
   }
 
   blockContent(): void {

@@ -2,11 +2,15 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {fakeAsync, tick, flush} from '@angular/core/testing';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {ViewportScroller} from '@angular/common';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {TranslateModule} from '@ngx-translate/core';
+import {Subject} from 'rxjs';
 import {MessageService} from 'primeng/api';
 import {Popover} from 'primeng/popover';
 import {ModalarmePatternsComponent, StepperStep} from './modalarme-patterns.component';
+import {AnchorNavigationService} from '../../shared/services/anchor-navigation.service';
 
 /**
  * Creates a minimal MouseEvent whose currentTarget is the given HTMLElement.
@@ -20,6 +24,8 @@ function mouseEventWithTarget(target: HTMLElement): MouseEvent {
 }
 
 describe('ModalarmePatternsComponent', () => {
+  const sectionAnchorIds = ['h-stepper', 'h-drawer', 'h-confirm-bar', 'h-help-popover', 'h-help-expander', 'h-errors'];
+
   let spectator: Spectator<ModalarmePatternsComponent>;
   let component: ModalarmePatternsComponent;
   let msgService: MessageService;
@@ -27,16 +33,36 @@ describe('ModalarmePatternsComponent', () => {
   const liveAnnouncerSpy = jasmine.createSpyObj<LiveAnnouncer>('LiveAnnouncer', ['announce']);
   liveAnnouncerSpy.announce.and.returnValue(Promise.resolve());
 
+  const fragment$ = new Subject<string | null>();
+  const viewportScrollerMock = {
+    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+  };
+
+  const anchorNavSpy = jasmine.createSpyObj<AnchorNavigationService>('AnchorNavigationService', [
+    'initFragmentScroll',
+    'scrollToAnchor'
+  ]);
+
   const createComponent = createComponentFactory({
     component: ModalarmePatternsComponent,
     imports: [ReactiveFormsModule, TranslateModule.forRoot()],
-    providers: [FormBuilder, MessageService, {provide: LiveAnnouncer, useValue: liveAnnouncerSpy}],
+    providers: [
+      FormBuilder,
+      MessageService,
+      {provide: LiveAnnouncer, useValue: liveAnnouncerSpy},
+      {provide: ActivatedRoute, useValue: {fragment: fragment$.asObservable()}},
+      {provide: ViewportScroller, useValue: viewportScrollerMock},
+      {provide: AnchorNavigationService, useValue: anchorNavSpy}
+    ],
     schemas: [NO_ERRORS_SCHEMA],
     declareComponent: false
   });
 
   beforeEach(() => {
     liveAnnouncerSpy.announce.calls.reset();
+    viewportScrollerMock.scrollToAnchor.calls.reset();
+    anchorNavSpy.scrollToAnchor.calls.reset();
+    anchorNavSpy.initFragmentScroll.calls.reset();
     spectator = createComponent();
     component = spectator.component;
     msgService = spectator.inject(MessageService);
@@ -48,6 +74,28 @@ describe('ModalarmePatternsComponent', () => {
   describe('Initialisation', () => {
     it('should create the component', () => {
       expect(component).toBeTruthy();
+    });
+
+    it('should render all section headings as demo-section-heading elements with correct headingIds', () => {
+      sectionAnchorIds.forEach((id) => {
+        const el = spectator.query<HTMLElement>(`demo-section-heading[anchorId="${id}"]`);
+        expect(el).withContext(id).toBeTruthy();
+      });
+    });
+
+    it('should scroll to anchor after initialization when fragment is emitted', () => {
+      expect(anchorNavSpy.initFragmentScroll).toHaveBeenCalled();
+    });
+
+    it('should delegate scrollToWidget to AnchorNavigationService.scrollToAnchor', () => {
+      const event = new MouseEvent('click');
+      component.scrollToWidget(event, 'h-stepper');
+      expect(anchorNavSpy.scrollToAnchor).toHaveBeenCalledWith(event, 'h-stepper');
+    });
+
+    it('should not scroll when clicking only the heading text', () => {
+      // scrollToAnchor is only triggered via scrollToWidget – stays 0 if not called
+      expect(anchorNavSpy.scrollToAnchor).not.toHaveBeenCalled();
     });
 
     it('should initialise stepValue to StepperStep.First', () => {

@@ -48,6 +48,8 @@
   * Mindestens ein Eintrag ist als Pflichtfeld berücksichtigt
   * Die maximale Anzahl von Einträgen ist begrenzt
   * Einträge können wieder entfernt werden
+- IFS-2989: Die Masken für die Bedienelemente wurden umstrukturiert.
+Dadurch können sie nun gezielt über Anker im Bedienkonzept verlinkt werden und bilden die dort beschriebenen Varianten der Bedienelemente nachvollziehbar ab.
 
 # 21.0.1 - 03.05.2026
 ## Fixes

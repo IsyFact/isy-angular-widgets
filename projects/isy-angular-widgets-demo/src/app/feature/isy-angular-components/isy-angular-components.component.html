@@ -2,7 +2,7 @@
   <h1>Isy-Angular Komponenten</h1>
   <div class="grid">
     <div class="col-12 flex flex-column gap-2">
-      <h2>Seitentoolbar</h2>
+      <demo-section-heading anchorId="seitentoolbar" label="Seitentoolbar" ariaLabel="Link zu Seitentoolbar" />
       <isy-seiten-toolbar
         class="skip-link"
         [showSidebar]="true"
@@ -26,8 +26,8 @@
         </div>
       </isy-seiten-toolbar>
     </div>
-    <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-      <h2>FormWrapper</h2>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="formwrapper" label="FormWrapper" ariaLabel="Link zu FormWrapper" />
       <isy-form-wrapper
         [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
         fieldId="first-name"
@@ -46,9 +46,9 @@
         />
       </isy-form-wrapper>
     </div>
-    <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
+    <div class="col-12 flex flex-column gap-2">
       <div class="flex align-items-center justify-content-between flex-wrap gap-3">
-        <h2>IncompleteDate</h2>
+        <demo-section-heading anchorId="incompletedate" label="IncompleteDate" ariaLabel="Link zu IncompleteDate" />
 
         <div class="flex align-items-center gap-2">
           <p-checkbox
@@ -88,10 +88,22 @@
         </small>
       </isy-form-wrapper>
     </div>
-    <div class="col-12 md:col-6 xl:col-4 flex flex-column gap-2">
-      <h2>InputChar</h2>
+    <div class="col-12 flex flex-column gap-2">
+      <div class="flex align-items-center justify-content-between flex-wrap gap-3">
+        <demo-section-heading anchorId="inputchar" label="InputChar" ariaLabel="Link zu InputChar" />
+        <div class="flex align-items-center gap-2">
+          <p-checkbox
+            inputId="outline-input-char"
+            name="outline-input-char"
+            [(ngModel)]="outlineInputChar"
+            [binary]="true"
+            [ngModelOptions]="{standalone: true}"
+          />
+          <label for="outline-input-char" class="m-0">Outlined Darstellung anzeigen</label>
+        </div>
+      </div>
       <isy-form-wrapper
-        [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"
+        [label]="'isyAngularWidgetsDemo.labels.isyInputChar' | translate"
         fieldId="last-name"
         [control]="personalInfoForm.controls.lastName | formControl"
         [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
@@ -103,6 +115,7 @@
           pInputText
           isyInputChar
           maxlength="16"
+          [outlinedInputCharButton]="outlineInputChar"
           [placeholder]="'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16}"
         />
       </isy-form-wrapper>

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormsModule} from '@angular/forms';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
 import {TranslateModule} from '@ngx-translate/core';
@@ -11,6 +11,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputGroupModule} from 'primeng/inputgroup';
+import {AnchorNavigationService} from '../../shared/services/anchor-navigation.service';
+import {SectionHeadingComponent} from '../../shared/components/section-heading/section-heading.component';
 
 @Component({
   standalone: true,
@@ -28,17 +30,21 @@ import {InputGroupModule} from 'primeng/inputgroup';
     SeitentoolbarComponent,
     ButtonModule,
     CheckboxModule,
-    InputGroupModule
+    InputGroupModule,
+    SectionHeadingComponent
   ]
 })
-export class IsyAngularComponentsComponent {
+export class IsyAngularComponentsComponent implements AfterViewInit {
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly anchorNav = inject(AnchorNavigationService);
+  private readonly fb = inject(FormBuilder);
+
   personalInfoForm: FormGroup;
   person = initializedPerson;
   personalien = this.person.personalien;
-
   transferDateAsIso8601 = true;
-
-  private readonly fb = inject(FormBuilder);
+  outlineInputChar = false;
+  checked = false;
 
   constructor() {
     this.personalInfoForm = this.fb.group({
@@ -47,7 +53,14 @@ export class IsyAngularComponentsComponent {
       dateOfEntry: [this.personalien.einreisedatum]
     });
   }
-  checked = false;
+
+  ngAfterViewInit(): void {
+    this.anchorNav.initFragmentScroll(this.destroyRef);
+  }
+
+  scrollToWidget(event: MouseEvent, anchor: string): void {
+    this.anchorNav.scrollToAnchor(event, anchor);
+  }
   onTransferIso8601Change(incompleteDateComponent: IncompleteDateComponent): void {
     setTimeout(() => {
       incompleteDateComponent.updateModel();
