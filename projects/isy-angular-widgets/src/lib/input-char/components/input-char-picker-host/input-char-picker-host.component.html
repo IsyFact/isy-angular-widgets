@@ -18,6 +18,11 @@
     @defer (when pickerService.visible()) {
       <isy-input-char-dialog
         [charList]="allCharacters()"
+        [resetKey]="state.resetKey"
+        [selection]="state.selection"
+        [selectedCharacter]="state.selectedCharacter"
+        (selectionChange)="updateSelection($event)"
+        (selectedCharacterChange)="updateSelectedCharacter($event)"
         (insertCharacter)="insertCharacter($event)"
       ></isy-input-char-dialog>
     }

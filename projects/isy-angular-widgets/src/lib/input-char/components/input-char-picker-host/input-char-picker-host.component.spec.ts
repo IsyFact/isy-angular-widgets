@@ -7,8 +7,8 @@ import {InputCharPickerService} from '../../services/input-char-picker.service';
 import {CharacterService} from '../../services/character.service';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {Datentyp} from '../../model/datentyp';
-import {InputCharPickerState} from '../../model/input-char-picker.model';
-import {Zeichenobjekt} from '../../model/model';
+import type {InputCharPickerState} from '../../model/input-char-picker.model';
+import {InputCharSelection, Zeichenobjekt} from '../../model/model';
 
 @Component({
   standalone: true,
@@ -18,7 +18,76 @@ import {Zeichenobjekt} from '../../model/model';
 class InputCharDialogStubComponent {
   @Input() charList: Zeichenobjekt[] = [];
 
+  @Input() resetKey = 0;
+
+  @Input() selection: InputCharSelection | undefined;
+
+  @Input() selectedCharacter: string | undefined;
+
   @Output() insertCharacter = new EventEmitter<string>();
+
+  @Output() selectionChange = new EventEmitter<InputCharSelection | undefined>();
+
+  @Output() selectedCharacterChange = new EventEmitter<string | undefined>();
+}
+
+let visibleRectSourceElement: HTMLElement | undefined;
+
+/**
+ * Returns a DOMRectList with at least one rect.
+ * @returns A visible DOMRectList.
+ */
+function createVisibleDomRectList(): DOMRectList {
+  visibleRectSourceElement?.remove();
+
+  visibleRectSourceElement = document.createElement('div');
+  visibleRectSourceElement.style.position = 'fixed';
+  visibleRectSourceElement.style.left = '0';
+  visibleRectSourceElement.style.top = '0';
+  visibleRectSourceElement.style.width = '10px';
+  visibleRectSourceElement.style.height = '10px';
+  visibleRectSourceElement.style.visibility = 'visible';
+  visibleRectSourceElement.style.display = 'block';
+
+  document.body.appendChild(visibleRectSourceElement);
+
+  return visibleRectSourceElement.getClientRects();
+}
+
+/**
+ * Returns an empty DOMRectList.
+ * @returns An empty DOMRectList.
+ */
+function createEmptyDomRectList(): DOMRectList {
+  return document.createElement('div').getClientRects();
+}
+
+/**
+ * Removes the temporary element used to create a visible DOMRectList.
+ */
+function cleanupVisibleDomRectSourceElement(): void {
+  visibleRectSourceElement?.remove();
+  visibleRectSourceElement = undefined;
+}
+
+/**
+ * Mocks an element as connected and visible.
+ * @param element The element to mock.
+ */
+function mockElementAvailable(element: HTMLElement): void {
+  spyOnProperty(element, 'isConnected', 'get').and.returnValue(true);
+  spyOn(element, 'getClientRects').and.returnValue(createVisibleDomRectList());
+  element.style.visibility = 'visible';
+}
+
+/**
+ * Mocks an element as connected but not visible.
+ * @param element The element to mock.
+ */
+function mockElementUnavailable(element: HTMLElement): void {
+  spyOnProperty(element, 'isConnected', 'get').and.returnValue(true);
+  spyOn(element, 'getClientRects').and.returnValue(createEmptyDomRectList());
+  element.style.visibility = 'visible';
 }
 
 describe('Unit Tests: InputCharPickerHostComponent', () => {
@@ -28,12 +97,17 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
 
   const state = signal<InputCharPickerState | undefined>(undefined);
 
+  let triggerElement: HTMLElement | undefined;
+
   const pickerServiceMock = {
     visible,
     state,
     close: jasmine.createSpy('close'),
     finishClose: jasmine.createSpy('finishClose'),
-    insertCharacter: jasmine.createSpy('insertCharacter')
+    insertCharacter: jasmine.createSpy('insertCharacter'),
+    updateSelection: jasmine.createSpy('updateSelection'),
+    updateSelectedCharacter: jasmine.createSpy('updateSelectedCharacter'),
+    getTriggerElement: jasmine.createSpy('getTriggerElement').and.callFake(() => triggerElement)
   };
 
   const charServiceSpy = jasmine.createSpyObj<CharacterService>('CharacterService', ['getCharactersByDataType']);
@@ -42,13 +116,12 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
 
   /**
    * Creates a picker state with default values and applies optional overrides.
-   * @param overrides Partial state overrides
-   * @returns InputCharPickerState with defaults and overrides applied
+   * @param overrides Partial state overrides.
+   * @returns InputCharPickerState with defaults and overrides applied.
    */
   function createPickerState(overrides: Partial<InputCharPickerState> = {}): InputCharPickerState {
     return {
       datentyp: Datentyp.DATENTYP_C,
-      triggerElement: document.createElement('button'),
       width: '740px',
       height: '460px',
       header: undefined,
@@ -58,6 +131,9 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
       dismissableMask: false,
       closeOnEscape: true,
       modal: false,
+      resetKey: 1,
+      selection: undefined,
+      selectedCharacter: undefined,
       ...overrides
     };
   }
@@ -87,10 +163,15 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
   beforeEach(() => {
     visible.set(false);
     state.set(undefined);
+    triggerElement = undefined;
 
     pickerServiceMock.close.calls.reset();
     pickerServiceMock.finishClose.calls.reset();
     pickerServiceMock.insertCharacter.calls.reset();
+    pickerServiceMock.updateSelection.calls.reset();
+    pickerServiceMock.updateSelectedCharacter.calls.reset();
+    pickerServiceMock.getTriggerElement.calls.reset();
+    pickerServiceMock.getTriggerElement.and.callFake(() => triggerElement);
 
     charServiceSpy.getCharactersByDataType.calls.reset();
     charServiceSpy.getCharactersByDataType.and.returnValue([]);
@@ -100,6 +181,10 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
 
     spectator = createComponent();
     render();
+  });
+
+  afterEach(() => {
+    cleanupVisibleDomRectSourceElement();
   });
 
   it('should create', () => {
@@ -155,6 +240,26 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
     expect(pickerServiceMock.insertCharacter).toHaveBeenCalledWith('Ä');
   });
 
+  it('should delegate selection updates to the picker service', () => {
+    const selection: InputCharSelection = {group: 'baseChars', value: 'A'};
+
+    spectator.component.updateSelection(selection);
+
+    expect(pickerServiceMock.updateSelection).toHaveBeenCalledWith(selection);
+  });
+
+  it('should delegate selected character updates to the picker service', () => {
+    spectator.component.updateSelectedCharacter('Ä');
+
+    expect(pickerServiceMock.updateSelectedCharacter).toHaveBeenCalledWith('Ä');
+  });
+
+  it('should delegate cleared selected character updates to the picker service', () => {
+    spectator.component.updateSelectedCharacter(undefined);
+
+    expect(pickerServiceMock.updateSelectedCharacter).toHaveBeenCalledWith(undefined);
+  });
+
   it('should close the picker when the dialog closes', () => {
     const currentState = createPickerState();
 
@@ -171,11 +276,11 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
     const button = document.createElement('button');
     const focusSpy = spyOn(button, 'focus');
 
-    spyOnProperty(button, 'isConnected', 'get').and.returnValue(true);
+    mockElementAvailable(button);
 
-    const currentState = createPickerState({
-      triggerElement: button
-    });
+    triggerElement = button;
+
+    const currentState = createPickerState();
 
     visible.set(true);
     state.set(currentState);
@@ -195,14 +300,12 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
 
     const focusSpy = spyOn(button, 'focus');
 
-    spyOnProperty(button, 'isConnected', 'get').and.returnValue(true);
+    mockElementAvailable(button);
+
+    triggerElement = button;
 
     visible.set(true);
-    state.set(
-      createPickerState({
-        triggerElement: button
-      })
-    );
+    state.set(createPickerState());
 
     spectator.component.onDialogClose();
     render();
@@ -217,18 +320,99 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
 
     spyOnProperty(button, 'isConnected', 'get').and.returnValue(false);
 
+    triggerElement = button;
+
     visible.set(true);
-    state.set(
-      createPickerState({
-        triggerElement: button
-      })
-    );
+    state.set(createPickerState());
 
     spectator.component.onDialogClose();
     render();
     tick();
 
     expect(focusSpy).not.toHaveBeenCalled();
+  }));
+
+  it('should close the picker after a document click when the trigger element is no longer visible', fakeAsync(() => {
+    const button = document.createElement('button');
+    const currentState = createPickerState();
+
+    mockElementUnavailable(button);
+
+    triggerElement = button;
+
+    visible.set(true);
+    state.set(currentState);
+
+    spectator.component.onDocumentClick();
+    tick();
+
+    expect(pickerServiceMock.close).toHaveBeenCalled();
+    expect(pickerServiceMock.finishClose).toHaveBeenCalledWith(currentState);
+  }));
+
+  it('should close the picker after a document click when the trigger element is missing', fakeAsync(() => {
+    const currentState = createPickerState();
+
+    triggerElement = undefined;
+
+    visible.set(true);
+    state.set(currentState);
+
+    spectator.component.onDocumentClick();
+    tick();
+
+    expect(pickerServiceMock.close).toHaveBeenCalled();
+    expect(pickerServiceMock.finishClose).toHaveBeenCalledWith(currentState);
+  }));
+
+  it('should not close the picker after a document click when the trigger element is still visible', fakeAsync(() => {
+    const button = document.createElement('button');
+
+    mockElementAvailable(button);
+
+    triggerElement = button;
+
+    visible.set(true);
+    state.set(createPickerState());
+
+    spectator.component.onDocumentClick();
+    tick();
+
+    expect(pickerServiceMock.close).not.toHaveBeenCalled();
+    expect(pickerServiceMock.finishClose).not.toHaveBeenCalled();
+  }));
+
+  it('should not check the trigger element after a document click when the picker is not visible', fakeAsync(() => {
+    visible.set(false);
+    state.set(createPickerState());
+
+    spectator.component.onDocumentClick();
+    tick();
+
+    expect(pickerServiceMock.getTriggerElement).not.toHaveBeenCalled();
+    expect(pickerServiceMock.close).not.toHaveBeenCalled();
+  }));
+
+  it('should clear an existing trigger check timer before scheduling a new one', fakeAsync(() => {
+    const button = document.createElement('button');
+    const currentState = createPickerState();
+
+    mockElementUnavailable(button);
+
+    triggerElement = button;
+
+    visible.set(true);
+    state.set(currentState);
+
+    spectator.component.onDocumentClick();
+    spectator.component.onDocumentClick();
+
+    tick();
+
+    expect(pickerServiceMock.getTriggerElement).toHaveBeenCalledTimes(1);
+    expect(pickerServiceMock.close).toHaveBeenCalledTimes(1);
+    expect(pickerServiceMock.finishClose).toHaveBeenCalledTimes(1);
+    expect(pickerServiceMock.finishClose).toHaveBeenCalledWith(currentState);
   }));
 
   it('should render the dialog only when a picker state exists', () => {
@@ -241,4 +425,23 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
 
     expect(spectator.query('p-dialog')).toBeTruthy();
   });
+
+  it('should clear the pending trigger check timer on destroy', fakeAsync(() => {
+    const button = document.createElement('button');
+
+    mockElementUnavailable(button);
+
+    triggerElement = button;
+
+    visible.set(true);
+    state.set(createPickerState());
+
+    spectator.component.onDocumentClick();
+    spectator.component.ngOnDestroy();
+
+    tick();
+
+    expect(pickerServiceMock.close).not.toHaveBeenCalled();
+    expect(pickerServiceMock.finishClose).not.toHaveBeenCalled();
+  }));
 });

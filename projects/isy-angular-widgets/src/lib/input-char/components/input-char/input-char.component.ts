@@ -1,4 +1,14 @@
-import {Component, ElementRef, ErrorHandler, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ErrorHandler,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {ButtonModule} from 'primeng/button';
@@ -11,7 +21,7 @@ import {InputCharPickerService} from '../../services/input-char-picker.service';
   styleUrls: ['./input-char.component.scss'],
   imports: [ButtonModule]
 })
-export class InputCharComponent {
+export class InputCharComponent implements OnDestroy {
   /**
    * The width of the dialog.
    */
@@ -87,6 +97,16 @@ export class InputCharComponent {
   private readonly pickerService = inject(InputCharPickerService);
 
   private readonly errorHandler = inject(ErrorHandler);
+
+  ngOnDestroy(): void {
+    const button = this.openDialogButton?.nativeElement;
+
+    if (!button) {
+      return;
+    }
+
+    this.pickerService.closeFor(button);
+  }
 
   toggleCharPicker(): void {
     const button = this.openDialogButton?.nativeElement;

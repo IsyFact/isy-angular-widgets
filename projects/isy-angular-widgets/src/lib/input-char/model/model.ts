@@ -51,9 +51,33 @@ export interface Zeichenobjekt {
 /**
  * @internal
  */
-export interface InputCharData {
-  [key: string]: string[];
+export type InputCharSelectionGroup = 'baseChars' | 'groups';
+
+/**
+ * @internal
+ */
+export type InputCharSelectionValue = string | Schriftzeichengruppe;
+
+/**
+ * @internal
+ */
+export interface InputCharSelection {
+  group: InputCharSelectionGroup;
+  value: InputCharSelectionValue;
 }
+
+/**
+ * @internal
+ */
+export interface InputCharDataGroup {
+  label: string;
+  values: InputCharSelectionValue[];
+}
+
+/**
+ * @internal
+ */
+export type InputCharData = Record<InputCharSelectionGroup, InputCharDataGroup>;
 
 /**
  * @internal

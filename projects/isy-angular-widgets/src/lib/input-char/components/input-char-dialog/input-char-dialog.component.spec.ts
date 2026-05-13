@@ -1,6 +1,6 @@
 import {InputCharDialogComponent} from './input-char-dialog.component';
 import {By} from '@angular/platform-browser';
-import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
+import {InputCharSelection, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
@@ -11,7 +11,7 @@ import {ComponentFixture} from '@angular/core/testing';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -30,18 +30,27 @@ class MockInputCharPreviewComponent {
 })
 class MockMultiSelectButtonComponent {
   @Input() dataToDisplay: unknown;
+
   @Input() allButtonOptionsLabel = '';
-  @Output() valueChange = new EventEmitter<{group: string; value: string} | undefined>();
+
+  @Input() value: InputCharSelection | undefined;
+
+  @Input() resetKey = 0;
+
+  @Output() valueChange = new EventEmitter<InputCharSelection | undefined>();
 }
 
 let spectator: Spectator<InputCharDialogComponent>;
 let mockWidgetsConfigService: SpyObject<WidgetsConfigService>;
 let fixture: ComponentFixture<InputCharDialogComponent>;
+
 const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];
 const bases = [...new Set(sonderzeichenListe.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
 const groups = [...new Set(sonderzeichenListe.map((item) => item.schriftzeichengruppe))];
+
 let headerBaseChars$: BehaviorSubject<string>;
 let headerGroups$: BehaviorSubject<string>;
+
 const translations: Record<string, string> = {
   'inputChar.headerBaseChars': 'Basis',
   'inputChar.headerGroups': 'Gruppen',
@@ -68,10 +77,12 @@ const translations: Record<string, string> = {
  */
 function pickSample<T>(arr: T[], max = 8): T[] {
   if (arr.length <= max) return [...arr];
+
   const first = arr[0];
   const last = arr.at(-1) as T;
   const middle = arr[Math.floor(arr.length / 2)];
   const extras = arr.slice(1, Math.min(arr.length - 1, max - 3));
+
   return [first, middle, last, ...extras].slice(0, max);
 }
 
@@ -135,13 +146,17 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
   it('should call onAllSelection for unexpected selection values', () => {
     const onAllSelectionSpy = spyOn(component, 'onAllSelection').and.callThrough();
-    component.onSelection({group: 'unexpectedGroup', value: 'unexpectedValue'});
+
+    component.onSelection({group: 'unexpectedGroup', value: 'unexpectedValue'} as unknown as InputCharSelection);
+
     expect(onAllSelectionSpy).toHaveBeenCalled();
   });
 
   it('should call resetDisplayedCharacters when onAllSelection is called', () => {
     const resetDisplayedCharactersSpy = spyOn(component, 'resetDisplayedCharacters').and.callThrough();
+
     component.onAllSelection();
+
     expect(resetDisplayedCharactersSpy).toHaveBeenCalled();
   });
 
@@ -152,12 +167,13 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     render();
 
     expect(spy).toHaveBeenCalled();
-    expect(component.leftViewData).toBeTruthy();
+    expect(component.leftViewData.baseChars.values.length).toBeGreaterThan(0);
+    expect(component.leftViewData.groups.values.length).toBeGreaterThan(0);
   });
 
-  it('should rebuild leftViewData when translations change', () => {
-    expect(component.leftViewData.Basis).toBeTruthy();
-    expect(component.leftViewData.Gruppen).toBeTruthy();
+  it('should rebuild leftViewData labels when translations change', () => {
+    expect(component.leftViewData.baseChars.label).toBe('Basis');
+    expect(component.leftViewData.groups.label).toBe('Gruppen');
 
     translations['inputChar.headerBaseChars'] = 'Base characters';
     translations['inputChar.headerGroups'] = 'Groups';
@@ -167,10 +183,10 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
     render();
 
-    expect(component.leftViewData['Base characters']).toBeTruthy();
-    expect(component.leftViewData.Groups).toBeTruthy();
-    expect(component.leftViewData.Basis).toBeUndefined();
-    expect(component.leftViewData.Gruppen).toBeUndefined();
+    expect(component.leftViewData.baseChars.label).toBe('Base characters');
+    expect(component.leftViewData.groups.label).toBe('Groups');
+    expect(component.leftViewData.baseChars.values).toEqual(component.grundZeichenListe);
+    expect(component.leftViewData.groups.values).toEqual(component.schriftZeichenGruppen);
   });
 
   it('should keep the displayed characters when translations change', () => {
@@ -190,6 +206,77 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     expect(component.displayedCharacters).toBe(selectedCharacters);
   });
 
+  it('should emit selectionChange when a selection is made', () => {
+    const selectionChangeSpy = spyOn(component.selectionChange, 'emit');
+    const selection: InputCharSelection = {group: 'baseChars', value: 'A'};
+
+    component.onSelection(selection);
+
+    expect(selectionChangeSpy).toHaveBeenCalledWith(selection);
+    expect(component.selection).toEqual(selection);
+  });
+
+  it('should apply selection input when selection changes', () => {
+    const selection: InputCharSelection = {group: 'baseChars', value: 'A'};
+
+    spectator.setInput('selection', selection);
+    render();
+
+    expect(component.selection).toEqual(selection);
+
+    for (const char of component.displayedCharacters) {
+      expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual('A');
+    }
+  });
+
+  it('should reset selected character to first entry when selection changes', () => {
+    const selection: InputCharSelection = {group: 'baseChars', value: 'A'};
+
+    spectator.setInput('selection', selection);
+    render();
+
+    expect(component.selectedZeichenObjekt).toEqual(component.displayedCharacters[0]);
+  });
+
+  it('should emit selectedCharacterChange when selected character changes', () => {
+    const selectedCharacterChangeSpy = spyOn(component.selectedCharacterChange, 'emit');
+    const selectedZeichenObjekt = sonderzeichenListe[0];
+
+    component.onSelectedZeichenObjektChange(selectedZeichenObjekt);
+
+    expect(component.selectedZeichenObjekt).toBe(selectedZeichenObjekt);
+    expect(selectedCharacterChangeSpy).toHaveBeenCalledWith(selectedZeichenObjekt.zeichen);
+  });
+
+  it('should emit undefined when selected character is cleared', () => {
+    const selectedCharacterChangeSpy = spyOn(component.selectedCharacterChange, 'emit');
+
+    component.onSelectedZeichenObjektChange(undefined);
+
+    expect(component.selectedZeichenObjekt).toBeUndefined();
+    expect(selectedCharacterChangeSpy).toHaveBeenCalledWith(undefined);
+  });
+
+  it('should restore selected character when selectedCharacter input changes', () => {
+    const selectedZeichenObjekt = sonderzeichenListe.find((item) => item.grundzeichen === 'A');
+
+    expect(selectedZeichenObjekt).toBeTruthy();
+
+    spectator.setInput('selectedCharacter', selectedZeichenObjekt!.zeichen);
+    render();
+
+    expect(component.selectedZeichenObjekt).toEqual(selectedZeichenObjekt);
+  });
+
+  it('should keep first displayed character when selectedCharacter does not exist in displayed characters', () => {
+    const firstCharacter = component.displayedCharacters[0];
+
+    spectator.setInput('selectedCharacter', 'not-existing-character');
+    render();
+
+    expect(component.selectedZeichenObjekt).toEqual(firstCharacter);
+  });
+
   it('should emit chosen characters (sample) after insertSelectedZeichen', () => {
     const insertCharacterSpy = spyOn(component.insertCharacter, 'emit');
     const sample = pickSample(sonderzeichenListe, 10);
@@ -204,21 +291,21 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   it('should have a button with the insert label', () => {
     const button = spectator.query('.lower-right-panel button') as HTMLButtonElement;
     const insertLabel = mockWidgetsConfigService.getTranslation('inputChar.insert') ?? '';
+
     expect(button).toBeTruthy();
     expect(button.innerHTML).toContain(insertLabel);
   });
 
   it('should filter characters correctly by base (all bases in one spec)', () => {
-    const headerBaseChars = mockWidgetsConfigService.getTranslation('inputChar.headerBaseChars') ?? '';
-
     for (const grundzeichen of bases) {
-      component.onSelection({group: headerBaseChars, value: grundzeichen});
+      component.onSelection({group: 'baseChars', value: grundzeichen});
 
       const expected = sonderzeichenListe.filter(
         (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen
       );
 
       expect(component.displayedCharacters.length).toEqual(expected.length);
+
       for (const char of component.displayedCharacters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
       }
@@ -226,14 +313,13 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   it('should filter characters correctly by schriftzeichengruppe (all groups in one spec)', () => {
-    const headerGroups = mockWidgetsConfigService.getTranslation('inputChar.headerGroups') ?? '';
-
     for (const schriftzeichengruppe of groups) {
-      component.onSelection({group: headerGroups, value: String(schriftzeichengruppe)});
+      component.onSelection({group: 'groups', value: schriftzeichengruppe});
 
       const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe);
 
       expect(component.displayedCharacters.length).toEqual(expected.length);
+
       for (const character of component.displayedCharacters) {
         expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
       }
@@ -275,11 +361,13 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
   it(`should show ${bases.length} available bases`, () => {
     const baseButtons = spectator.queryAll('.charset-selectbutton--0 p-togglebutton');
+
     expect(baseButtons.length).toEqual(bases.length);
   });
 
   it(`should show ${groups.length} available groups`, () => {
     const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton');
+
     expect(groupButtons.length).toEqual(groups.length);
   });
 
@@ -292,11 +380,13 @@ describe('Integration Tests: InputCharDialogComponent', () => {
       const charactersSelectButton = fixture.debugElement.query(
         By.css('.right-panel-side p-selectbutton')
       ).componentInstance;
+
       expect(charactersSelectButton.options).toBeTruthy();
 
       const expected = sonderzeichenListe.filter(
         (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === base
       );
+
       expect(charactersSelectButton.options.length).toEqual(expected.length);
 
       for (const char of charactersSelectButton.options) {
@@ -314,9 +404,11 @@ describe('Integration Tests: InputCharDialogComponent', () => {
       const charactersSelectButton = fixture.debugElement.query(
         By.css('.right-panel-side p-selectbutton')
       ).componentInstance;
+
       expect(charactersSelectButton.options).toBeTruthy();
 
       const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === group);
+
       expect(charactersSelectButton.options.length).toEqual(expected.length);
 
       for (const character of charactersSelectButton.options) {

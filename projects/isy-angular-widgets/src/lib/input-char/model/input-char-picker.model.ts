@@ -1,8 +1,8 @@
 import {Datentyp} from './datentyp';
+import type {InputCharSelection} from './model';
 
 export interface InputCharPickerState {
   datentyp: Datentyp;
-  triggerElement: HTMLElement;
   width: string;
   height: string;
   header?: string;
@@ -12,6 +12,9 @@ export interface InputCharPickerState {
   dismissableMask: boolean;
   closeOnEscape: boolean;
   modal: boolean;
+  resetKey: number;
+  selection?: InputCharSelection;
+  selectedCharacter?: string;
 }
 
 export interface InputCharPickerOpenOptions {

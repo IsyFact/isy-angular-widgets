@@ -17,6 +17,7 @@ describe('Unit Tests: InputCharComponent', () => {
   const pickerServiceSpy = jasmine.createSpyObj<InputCharPickerService>('InputCharPickerService', [
     'open',
     'close',
+    'closeFor',
     'isOpenFor'
   ]);
 
@@ -41,6 +42,8 @@ describe('Unit Tests: InputCharComponent', () => {
     pickerServiceSpy.open.and.resolveTo();
 
     pickerServiceSpy.close.calls.reset();
+
+    pickerServiceSpy.closeFor.calls.reset();
 
     pickerServiceSpy.isOpenFor.calls.reset();
     pickerServiceSpy.isOpenFor.and.returnValue(false);
@@ -191,6 +194,22 @@ describe('Unit Tests: InputCharComponent', () => {
 
       expect(errorHandlerSpy.handleError).toHaveBeenCalledWith(error);
     }));
+
+    it('should close the picker for its button when destroyed', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      component.ngOnDestroy();
+
+      expect(pickerServiceSpy.closeFor).toHaveBeenCalledWith(button);
+    });
+
+    it('should not close the picker on destroy when the open dialog button is not available', () => {
+      component.openDialogButton = new ElementRef<HTMLButtonElement>(undefined as unknown as HTMLButtonElement);
+
+      component.ngOnDestroy();
+
+      expect(pickerServiceSpy.closeFor).not.toHaveBeenCalled();
+    });
   });
 
   describe('with outlined input char button', () => {
