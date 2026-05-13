@@ -37,8 +37,10 @@
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 - IFS-4931: Die Komponente `form-wrapper` und der Service zur Übersetzung von Beschriftungen in der _isy-angular-widgets_ Bibliothek wurden überarbeitet
 ## Fixes
+- IFS-549: Performanzproblem bei mehrfacher Einbindung der `InputCharComponent` wurde behoben
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
 - IFS-4999: Die Property `transferISO8601` in der Komponente IsyIncompleteDate konvertiert den Wert nun in die korrekte ISO-8601-Repräsentation.
+- IFS-5223: Release v21.0.1 wurde in `main` gemergt und enthält die Anpassung des Font-Family-Namens.
 ## Demo-Anwendung
 - IFS-4931: Modalarme Muster wurden hinzugefügt
 - IFS-3587: Auf der Seite _Objekt anzeigen_ wurde ein Beispielpattern zur Erfassung mehrerer einfacher Eingaben ergänzt
@@ -48,6 +50,10 @@
   * Einträge können wieder entfernt werden
 - IFS-2989: Die Masken für die Bedienelemente wurden umstrukturiert.
 Dadurch können sie nun gezielt über Anker im Bedienkonzept verlinkt werden und bilden die dort beschriebenen Varianten der Bedienelemente nachvollziehbar ab.
+
+# 21.0.1 - 03.05.2026
+## Fixes
+- IFS-5223: Der referenzierte Font-Family-Name wurde auf `BundesSans Web` korrigiert, damit die systemseitig installierte Schrift korrekt geladen wird.
 
 # 21.0.0 - 16.02.2026
 ## Breaking Changes

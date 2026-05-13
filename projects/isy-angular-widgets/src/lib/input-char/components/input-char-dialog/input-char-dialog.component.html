@@ -1,5 +1,7 @@
 <div class="split left-panel-side">
   <isy-multi-select-button
+    [value]="selection"
+    [resetKey]="resetKey"
     (valueChange)="onSelection($event)"
     [dataToDisplay]="leftViewData"
     [allButtonOptionsLabel]="configService.getTranslation('inputChar.headerAllCharacters')"
@@ -10,7 +12,8 @@
   <p-selectbutton
     [options]="displayedCharacters"
     optionLabel="zeichen"
-    [(ngModel)]="selectedZeichenObjekt"
+    [ngModel]="selectedZeichenObjekt"
+    (ngModelChange)="onSelectedZeichenObjektChange($event)"
     class="flex-grow-1 overflow-y-scroll character-selectbutton"
   />
   <div class="lower-right-panel">

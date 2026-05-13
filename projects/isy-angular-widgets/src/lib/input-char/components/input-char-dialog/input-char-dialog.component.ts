@@ -1,15 +1,17 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
+  DestroyRef,
   EventEmitter,
   inject,
   Input,
   OnChanges,
-  OnDestroy,
-  Output
+  OnInit,
+  Output,
+  SimpleChanges
 } from '@angular/core';
-import {InputCharData, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {combineLatest} from 'rxjs';
+import {InputCharData, InputCharSelection, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
 import {ButtonModule} from 'primeng/button';
@@ -36,16 +38,46 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
     MultiSelectButtonComponent
   ]
 })
-export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class InputCharDialogComponent implements OnChanges, OnInit {
   /**
    * Emits a character chosen to insert by the user.
    */
   @Output() insertCharacter = new EventEmitter<string>();
 
   /**
+   * Emits the current filter selection.
+   * @internal
+   */
+  @Output() selectionChange = new EventEmitter<InputCharSelection | undefined>();
+
+  /**
+   * Emits the currently selected character.
+   * @internal
+   */
+  @Output() selectedCharacterChange = new EventEmitter<string | undefined>();
+
+  /**
    * All characters the dialog should display.
    */
   @Input() charList: Zeichenobjekt[] = [];
+
+  /**
+   * Resets the dialog selection state when the picker context changes.
+   * @internal
+   */
+  @Input() resetKey: number = 0;
+
+  /**
+   * Current filter selection.
+   * @internal
+   */
+  @Input() selection: InputCharSelection | undefined;
+
+  /**
+   * Current selected character.
+   * @internal
+   */
+  @Input() selectedCharacter: string | undefined;
 
   /**
    * The currently displayed characters.
@@ -75,7 +107,16 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
    * Includes the displaying data for the left side of the view
    * @internal
    */
-  leftViewData: InputCharData = {};
+  leftViewData: InputCharData = {
+    baseChars: {
+      label: '',
+      values: []
+    },
+    groups: {
+      label: '',
+      values: []
+    }
+  };
 
   /**
    * Header of all select button
@@ -84,87 +125,58 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
   allButtonHeader!: string;
 
   /**
-   * The MutationObserver used to observe changes in the DOM.
-   * @internal
-   */
-  mutationObserver?: MutationObserver;
-
-  /**
    * A service used to translate labels within the widgets library.
    */
   configService = inject(WidgetsConfigService);
 
   private readonly charService = inject(CharacterService);
 
-  private readonly elementRef = inject(ElementRef);
+  private readonly destroyRef = inject(DestroyRef);
 
-  private rebuildTimer?: ReturnType<typeof setTimeout>;
-  private readonly rebuildDelayMs = 100;
-
-  ngAfterViewInit(): void {
-    this.mutationObserver = new MutationObserver((mutations) => {
-      const relevant = mutations.some(
-        (m) =>
-          m.type === 'characterData' ||
-          (m.type === 'childList' && (m.addedNodes.length > 0 || m.removedNodes.length > 0))
-      );
-      if (!relevant) return;
-
-      if (this.rebuildTimer) {
-        clearTimeout(this.rebuildTimer);
-      }
-
-      this.rebuildTimer = setTimeout(() => {
+  /**
+   * Fire on component initialization
+   * @internal
+   */
+  ngOnInit(): void {
+    combineLatest([
+      this.configService.getTranslation$('inputChar.headerBaseChars'),
+      this.configService.getTranslation$('inputChar.headerGroups')
+    ])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
         this.initSelectButtonsData();
-        this.rebuildTimer = undefined;
-      }, this.rebuildDelayMs);
-    });
-
-    this.mutationObserver.observe(this.elementRef.nativeElement as HTMLElement, {
-      subtree: true,
-      characterData: true,
-      childList: true
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.mutationObserver) {
-      this.mutationObserver.disconnect();
-      this.mutationObserver = undefined;
-    }
-    if (this.rebuildTimer) {
-      clearTimeout(this.rebuildTimer);
-      this.rebuildTimer = undefined;
-    }
+      });
   }
 
   /**
    * Fire on input changes
+   * @param changes The changes detected in the input properties
    * @internal
    */
-  ngOnChanges(): void {
-    this.setupCharPicker();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.charList || changes.resetKey || changes.selection || changes.selectedCharacter) {
+      this.setupCharPicker();
+    }
   }
 
   /**
    * Fired on user zeichen selection
    * @param selected Incoming event
    */
-  onSelection(selected: {group: string; value: string} | undefined): void {
-    switch (selected?.group) {
-      case this.getTranslation('inputChar.headerBaseChars'): {
-        this.onGrundzeichenSelection(selected.value);
-        break;
-      }
-      case this.getTranslation('inputChar.headerGroups'): {
-        this.onSchriftzeichenGruppeSelection(selected.value as Schriftzeichengruppe);
-        break;
-      }
-      default: {
-        this.onAllSelection();
-        break;
-      }
-    }
+  onSelection(selected: InputCharSelection | undefined): void {
+    this.selection = selected;
+    this.selectionChange.emit(selected);
+    this.applySelection(selected);
+  }
+
+  /**
+   * Fired when the selected character changes.
+   * @param zeichenObjekt The selected character object.
+   * @internal
+   */
+  onSelectedZeichenObjektChange(zeichenObjekt: Zeichenobjekt | undefined): void {
+    this.selectedZeichenObjekt = zeichenObjekt;
+    this.selectedCharacterChange.emit(zeichenObjekt?.zeichen);
   }
 
   /**
@@ -173,8 +185,14 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
    */
   initSelectButtonsData(): void {
     this.leftViewData = {
-      [this.getTranslation('inputChar.headerBaseChars')]: this.grundZeichenListe,
-      [this.getTranslation('inputChar.headerGroups')]: this.schriftZeichenGruppen
+      baseChars: {
+        label: this.getTranslation('inputChar.headerBaseChars'),
+        values: this.grundZeichenListe
+      },
+      groups: {
+        label: this.getTranslation('inputChar.headerGroups'),
+        values: this.schriftZeichenGruppen
+      }
     };
   }
 
@@ -216,14 +234,6 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
   }
 
   /**
-   * Is selecting the first zeichenobjekt inside the current list
-   * @internal
-   */
-  private selectFirstEntry(): void {
-    this.selectedZeichenObjekt = this.displayedCharacters[0];
-  }
-
-  /**
    * Initialize the char picker with it's Grundzeichen, Schriftzeichengruppen and initial state.
    * @internal
    */
@@ -231,24 +241,8 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
     this.grundZeichenListe = this.getAvailableGrundzeichen();
     this.schriftZeichenGruppen = this.getAvailableSchriftzeichenGruppen();
     this.initSelectButtonsData();
-    this.resetDisplayedCharacters();
-  }
-
-  /**
-   * Calculates an array of all different Schriftzeichengruppen within @{link allCharacters}.
-   * @returns An array containing all different Schriftzeichengruppen.
-   */
-  private getAvailableSchriftzeichenGruppen(): Schriftzeichengruppe[] {
-    return this.charService.getSchriftzeichenGruppen(this.charList);
-  }
-
-  /**
-   * Calculates an array of all different Grundzeichen within @{link allCharacters}.
-   * Empty Grundzeichen is transformed to "*".
-   * @returns An array containing all different Grundzeichen.
-   */
-  private getAvailableGrundzeichen(): string[] {
-    return this.charService.getGrundzeichen(this.charList);
+    this.applySelection(this.selection);
+    this.restoreSelectedCharacter(this.selectedCharacter);
   }
 
   /**
@@ -266,5 +260,61 @@ export class InputCharDialogComponent implements OnChanges, AfterViewInit, OnDes
    */
   getTranslation(path: string): string {
     return this.configService.getTranslation(path);
+  }
+
+  private applySelection(selected: InputCharSelection | undefined): void {
+    switch (selected?.group) {
+      case 'baseChars': {
+        this.onGrundzeichenSelection(selected.value);
+        break;
+      }
+      case 'groups': {
+        this.onSchriftzeichenGruppeSelection(selected.value as Schriftzeichengruppe);
+        break;
+      }
+      default: {
+        this.onAllSelection();
+        break;
+      }
+    }
+  }
+
+  private restoreSelectedCharacter(selectedCharacter: string | undefined): void {
+    if (!selectedCharacter) {
+      return;
+    }
+
+    const selectedZeichenObjekt = this.displayedCharacters.find((item) => item.zeichen === selectedCharacter);
+
+    if (!selectedZeichenObjekt) {
+      return;
+    }
+
+    this.selectedZeichenObjekt = selectedZeichenObjekt;
+  }
+
+  /**
+   * Is selecting the first zeichenobjekt inside the current list
+   * @internal
+   */
+  private selectFirstEntry(): void {
+    this.selectedZeichenObjekt = this.displayedCharacters[0];
+  }
+
+  /**
+   * Calculates an array of all different Schriftzeichengruppen within @{link allCharacters}.
+   * @returns An array containing all different Schriftzeichengruppen.
+   */
+  private getAvailableSchriftzeichenGruppen(): Schriftzeichengruppe[] {
+    return this.charService.getSchriftzeichenGruppen(this.charList);
+  }
+
+  /**
+   * Calculates an array of all different Grundzeichen within @{link allCharacters}.
+   * Empty Grundzeichen is transformed to "*".
+   * @returns An array containing all different Grundzeichen.
+   */
+  private getAvailableGrundzeichen(): string[] {
+    return this.charService.getGrundzeichen(this.charList);
   }
 }

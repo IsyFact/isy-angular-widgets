@@ -2,20 +2,22 @@
   styleClass="all-selectbutton"
   (onChange)="triggerUpdate(undefined)"
   [(ngModel)]="allOptionsModel"
-  [options]="[{label: allButtonOptionsLabel}]"
+  [options]="allOptions"
   optionLabel="label"
 />
 
 <p-accordion [(value)]="activeIndex">
-  @for (item of dataToDisplay | keyvalue; let i = $index; track item.key) {
-    <p-accordion-panel [value]="item.key">
-      <p-accordion-header>{{ item.key }}</p-accordion-header>
+  @for (group of selectionGroups; let i = $index; track group) {
+    @let item = dataToDisplay[group];
+
+    <p-accordion-panel [value]="group">
+      <p-accordion-header>{{ item.label }}</p-accordion-header>
       <p-accordion-content>
         <p-selectbutton
           [disabled]="disabled"
-          [options]="item.value"
-          [(ngModel)]="models[item.key]"
-          (onChange)="triggerUpdate(item.key)"
+          [options]="item.values"
+          [(ngModel)]="models[group]"
+          (onChange)="triggerUpdate(group)"
           class="charset-selectbutton"
           [ngClass]="'charset-selectbutton--' + i"
         />
