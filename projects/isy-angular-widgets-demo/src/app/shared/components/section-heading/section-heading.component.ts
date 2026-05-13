@@ -26,7 +26,7 @@ export type HeadingLevel = 2 | 3;
           [href]="'#' + anchorId"
           (click)="anchorNav.scrollToAnchor($event, anchorId)"
           [attr.aria-label]="ariaLabel"
-        >🔗</a
+          >🔗</a
         >
       </h2>
     } @else {
@@ -37,7 +37,7 @@ export type HeadingLevel = 2 | 3;
           [href]="'#' + anchorId"
           (click)="anchorNav.scrollToAnchor($event, anchorId)"
           [attr.aria-label]="ariaLabel"
-        >🔗</a
+          >🔗</a
         >
       </h3>
     }
