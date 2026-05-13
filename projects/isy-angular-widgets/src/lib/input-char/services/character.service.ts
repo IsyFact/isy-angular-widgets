@@ -10,11 +10,25 @@ import {Datentyp} from '../model/datentyp';
   providedIn: 'root'
 })
 export class CharacterService {
+  private readonly characters = sonderzeichenliste as Zeichenobjekt[];
+
+  private readonly charactersByDataTypeCache = new Map<Datentyp, Zeichenobjekt[]>();
+
+  private readonly grundzeichenCache = new WeakMap<Zeichenobjekt[], string[]>();
+
+  private readonly schriftzeichenGruppenCache = new WeakMap<Zeichenobjekt[], Schriftzeichengruppe[]>();
+
   getCharacters(): Zeichenobjekt[] {
-    return sonderzeichenliste as Zeichenobjekt[];
+    return this.characters;
   }
 
   getGrundzeichen(list: Zeichenobjekt[]): string[] {
+    const cached = this.grundzeichenCache.get(list);
+
+    if (cached) {
+      return cached;
+    }
+
     const res = [...new Set(list.map((item) => (item.grundzeichen === '' ? '*' : item.grundzeichen)))];
 
     // Put * to the first position if present
@@ -23,22 +37,41 @@ export class CharacterService {
       res.splice(specialPos, 1);
       res.unshift('*');
     }
+
+    this.grundzeichenCache.set(list, res);
     return res;
   }
 
   getSchriftzeichenGruppen(list: Zeichenobjekt[]): Schriftzeichengruppe[] {
+    const cached = this.schriftzeichenGruppenCache.get(list);
+
+    if (cached) {
+      return cached;
+    }
+
     const res: Schriftzeichengruppe[] = [];
     for (const char of list) {
       if (!res.includes(char.schriftzeichengruppe)) {
         res.push(char.schriftzeichengruppe);
       }
     }
+
+    this.schriftzeichenGruppenCache.set(list, res);
     return res;
   }
 
   getCharactersByDataType(datentyp: Datentyp): Zeichenobjekt[] {
+    const cached = this.charactersByDataTypeCache.get(datentyp);
+
+    if (cached) {
+      return cached;
+    }
+
     const allowedGroups = this.getGroupsByDataType(datentyp);
-    return this.getCharacters().filter((z) => allowedGroups.includes(z.schriftzeichengruppe));
+    const res = this.getCharacters().filter((z) => allowedGroups.includes(z.schriftzeichengruppe));
+
+    this.charactersByDataTypeCache.set(datentyp, res);
+    return res;
   }
 
   getGroupsByDataType(dataTyp: Datentyp): Schriftzeichengruppe[] {

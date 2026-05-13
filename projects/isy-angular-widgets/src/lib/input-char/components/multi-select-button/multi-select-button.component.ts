@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {CommonModule} from '@angular/common'; // Import CommonModule for common directives
-import {ControlValueAccessor, FormsModule} from '@angular/forms'; // Import FormsModule if you're using template-driven forms
-import {InputCharData} from '../../model/model';
+import {CommonModule} from '@angular/common';
+import {ControlValueAccessor, FormsModule} from '@angular/forms';
+import {InputCharData, InputCharSelection, InputCharSelectionGroup, InputCharSelectionValue} from '../../model/model';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
 
@@ -23,7 +23,22 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
    * The array who stores an array with every data who must be displayed.
    * @internal
    */
-  @Input() dataToDisplay: InputCharData = {};
+  @Input() dataToDisplay: InputCharData = {
+    baseChars: {
+      label: '',
+      values: []
+    },
+    groups: {
+      label: '',
+      values: []
+    }
+  };
+
+  /**
+   * Resets the visible selection state when the picker context changes.
+   * @internal
+   */
+  @Input() resetKey: number = 0;
 
   @Input() disabled = false;
 
@@ -31,11 +46,13 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
    * Current select button value
    * @internal
    */
-  @Input() value: {group: string; value: string} | undefined;
+  @Input() value: InputCharSelection | undefined;
 
-  @Output() valueChange = new EventEmitter<{group: string; value: string} | undefined>();
+  @Output() valueChange = new EventEmitter<InputCharSelection | undefined>();
 
-  models: {[key: string]: string} = {};
+  readonly selectionGroups: InputCharSelectionGroup[] = ['baseChars', 'groups'];
+
+  models: Partial<Record<InputCharSelectionGroup, InputCharSelectionValue | undefined>> = {};
 
   allOptions = [{label: this.allButtonOptionsLabel}];
 
@@ -51,29 +68,39 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
     if (changes.allButtonOptionsLabel) {
       this.allOptions[0].label = this.allButtonOptionsLabel;
     }
+
+    if (changes.dataToDisplay || changes.value || changes.resetKey) {
+      this.writeValue(this.value);
+    }
   }
 
   /**
    * Triggers an update of the selected group and emits the updated value.
    * @param group - The selected group.
    */
-  triggerUpdate(group: string | undefined): void {
-    this.writeValue(group ? {group: group, value: this.models[group]} : undefined);
+  triggerUpdate(group: InputCharSelectionGroup | undefined): void {
+    const selectedValue = group ? this.models[group] : undefined;
+
+    this.writeValue(group && selectedValue !== undefined ? {group, value: selectedValue} : undefined);
     this.valueChange.emit(this.value);
-    this.activeIndex = group ? this.activeIndex : [];
   }
 
   /**
    * Writes a new value to the multi-select button component.
    * @param obj - The new value to be set. It should be an object with `group` and `value` properties.
    */
-  writeValue(obj: {group: string; value: string} | undefined): void {
+  writeValue(obj: InputCharSelection | undefined): void {
     this.value = obj;
-    this.models = Object.keys(this.models).reduce<{[key: string]: string}>((acc, key) => {
-      acc[key] = key === obj?.group ? obj.value : '';
+
+    this.models = this.selectionGroups.reduce<
+      Partial<Record<InputCharSelectionGroup, InputCharSelectionValue | undefined>>
+    >((acc, group) => {
+      acc[group] = group === obj?.group ? obj.value : undefined;
       return acc;
     }, {});
+
     this.allOptionsModel = obj ? undefined : this.allOptions[0];
+    this.activeIndex = obj ? obj.group : [];
   }
 
   /**
