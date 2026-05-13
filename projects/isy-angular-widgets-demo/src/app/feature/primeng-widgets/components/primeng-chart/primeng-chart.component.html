@@ -2,12 +2,12 @@
 <h2>Bar Charts</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="bar-chart-vertical" [level]="3" label="Vertical" ariaLabel="Link zu Vertical" />
+    <demo-section-heading anchorId="bar-chart-vertical" [level]="3" label="Vertical" ariaLabel="Link zu Vertical" />
     <p-chart type="bar" [data]="barChartData" [options]="verticalBarChartOptions" />
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="bar-chart-horizontal"
+      anchorId="bar-chart-horizontal"
       [level]="3"
       label="Horizontal"
       ariaLabel="Link zu Horizontal"
@@ -15,7 +15,7 @@
     <p-chart type="bar" [data]="barChartData" [options]="horizontalBarChartOptions" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="bar-chart-stacked" [level]="3" label="Stacked" ariaLabel="Link zu Stacked" />
+    <demo-section-heading anchorId="bar-chart-stacked" [level]="3" label="Stacked" ariaLabel="Link zu Stacked" />
     <p-chart type="bar" [data]="barChartData" [options]="stackedBarChartOptions" />
   </div>
 </div>
@@ -23,12 +23,12 @@
 <h2>Circular Charts</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="pie-chart" [level]="3" label="Pie Chart" ariaLabel="Link zu Pie Chart" />
+    <demo-section-heading anchorId="pie-chart" [level]="3" label="Pie Chart" ariaLabel="Link zu Pie Chart" />
     <p-chart type="pie" [data]="circledChartData" [options]="pieChartOptions" />
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="doughnut-chart"
+      anchorId="doughnut-chart"
       [level]="3"
       label="Doughnut Chart"
       ariaLabel="Link zu Doughnut Chart"
@@ -37,7 +37,7 @@
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="polararea-chart"
+      anchorId="polararea-chart"
       [level]="3"
       label="PolarArea Chart"
       ariaLabel="Link zu PolarArea Chart"
@@ -49,11 +49,11 @@
 <h2>Other Charts</h2>
 <div class="grid mb-3">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="line-chart" [level]="3" label="Line Chart" ariaLabel="Link zu Line Chart" />
+    <demo-section-heading anchorId="line-chart" [level]="3" label="Line Chart" ariaLabel="Link zu Line Chart" />
     <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="radar-chart" [level]="3" label="Radar Chart" ariaLabel="Link zu Radar Chart" />
+    <demo-section-heading anchorId="radar-chart" [level]="3" label="Radar Chart" ariaLabel="Link zu Radar Chart" />
     <p-chart type="radar" [data]="radarChartData" [options]="radarChartOptions" />
   </div>
 </div>

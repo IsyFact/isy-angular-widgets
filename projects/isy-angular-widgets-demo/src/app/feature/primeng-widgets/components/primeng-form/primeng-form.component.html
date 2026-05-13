@@ -2,7 +2,7 @@
 <h2>Input Fields</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="inputtext" [level]="3" label="InputText" ariaLabel="Link zu InputText" />
+    <demo-section-heading anchorId="inputtext" [level]="3" label="InputText" ariaLabel="Link zu InputText" />
     <div class="flex flex-column gap-4">
       <div class="flex flex-column gap-2">
         <label for="input-text-validation">{{ 'isyAngularWidgetsDemo.labels.inputTextWithHelp' | translate }}</label>
@@ -85,7 +85,7 @@
     </div>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="inputmask" [level]="3" label="Inputmask" ariaLabel="Link zu Inputmask" />
+    <demo-section-heading anchorId="inputmask" [level]="3" label="Inputmask" ariaLabel="Link zu Inputmask" />
     <label for="input-mask-phone">{{ 'isyAngularWidgetsDemo.labels.inputMaskPhoneNumber' | translate }}</label>
     <p-inputMask
       inputId="input-mask-phone"
@@ -96,7 +96,7 @@
     <small id="input-mask-phone-help">{{ 'isyAngularWidgetsDemo.messages.inputMaskPhoneHelp' | translate }}</small>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="inputgroup" [level]="3" label="InputGroup" ariaLabel="Link zu InputGroup" />
+    <demo-section-heading anchorId="inputgroup" [level]="3" label="InputGroup" ariaLabel="Link zu InputGroup" />
     <label for="input-group-clearable">{{ 'isyAngularWidgetsDemo.labels.inputGroupClearable' | translate }}</label>
     <p-inputgroup>
       <input
@@ -123,7 +123,7 @@
     <small id="input-group-help">{{ 'isyAngularWidgetsDemo.messages.inputGroupHelp' | translate }}</small>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="autocomplete" [level]="3" label="AutoComplete" ariaLabel="Link zu AutoComplete" />
+    <demo-section-heading anchorId="autocomplete" [level]="3" label="AutoComplete" ariaLabel="Link zu AutoComplete" />
     <p-autocomplete
       inputId="autoComplete"
       optionLabel="name"
@@ -135,22 +135,22 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="iconfield" [level]="3" label="IconField" ariaLabel="Link zu IconField" />
+    <demo-section-heading anchorId="iconfield" [level]="3" label="IconField" ariaLabel="Link zu IconField" />
     <p-iconfield iconPosition="left">
       <p-inputIcon class="pi pi-search" />
       <input type="text" pInputText placeholder="Search" class="w-full" />
     </p-iconfield>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="keyfilter" [level]="3" label="KeyFilter (hex)" ariaLabel="Link zu KeyFilter" />
+    <demo-section-heading anchorId="keyfilter" [level]="3" label="KeyFilter (hex)" ariaLabel="Link zu KeyFilter" />
     <input id="keyFilter" pInputText pKeyFilter="hex" class="w-full" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="password" [level]="3" label="Password" ariaLabel="Link zu Password" />
+    <demo-section-heading anchorId="password" [level]="3" label="Password" ariaLabel="Link zu Password" />
     <p-password inputId="password" [(ngModel)]="password" toggleMask="true" class="w-full" inputStyleClass="w-full" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="calendar" [level]="3" label="Calendar" ariaLabel="Link zu Calendar" />
+    <demo-section-heading anchorId="calendar" [level]="3" label="Calendar" ariaLabel="Link zu Calendar" />
     <p-datepicker
       inputId="calender"
       iconDisplay="input"
@@ -161,7 +161,7 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="inputnumber" [level]="3" label="InputNumber" ariaLabel="Link zu InputNumber" />
+    <demo-section-heading anchorId="inputnumber" [level]="3" label="InputNumber" ariaLabel="Link zu InputNumber" />
     <p-inputnumber
       inputId="inputNumber"
       class="w-full"
@@ -173,7 +173,7 @@
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="cascadeselect"
+      anchorId="cascadeselect"
       [level]="3"
       label="CascadeSelect"
       ariaLabel="Link zu CascadeSelect"
@@ -189,7 +189,7 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="dropdown" [level]="3" label="Dropdown" ariaLabel="Link zu Dropdown" />
+    <demo-section-heading anchorId="dropdown" [level]="3" label="Dropdown" ariaLabel="Link zu Dropdown" />
     <p-select
       id="dropdown"
       [options]="countries"
@@ -202,7 +202,7 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="multiselect" [level]="3" label="MultiSelect" ariaLabel="Link zu MultiSelect" />
+    <demo-section-heading anchorId="multiselect" [level]="3" label="MultiSelect" ariaLabel="Link zu MultiSelect" />
     <p-multiselect
       id="multiSelect"
       [options]="countries"
@@ -213,7 +213,7 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="treeselect" [level]="3" label="TreeSelect" ariaLabel="Link zu TreeSelect" />
+    <demo-section-heading anchorId="treeselect" [level]="3" label="TreeSelect" ariaLabel="Link zu TreeSelect" />
     <p-treeselect
       [filter]="true"
       [filterInputAutoFocus]="false"
@@ -224,11 +224,11 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="textarea" [level]="3" label="Textarea" ariaLabel="Link zu Textarea" />
+    <demo-section-heading anchorId="textarea" [level]="3" label="Textarea" ariaLabel="Link zu Textarea" />
     <textarea pTextarea class="w-full" aria-label="Textarea"></textarea>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="inputotp" [level]="3" label="InputOtp" ariaLabel="Link zu InputOtp" />
+    <demo-section-heading anchorId="inputotp" [level]="3" label="InputOtp" ariaLabel="Link zu InputOtp" />
     <p-inputotp [length]="6" />
   </div>
 </div>
@@ -236,7 +236,7 @@
 <h2>Status Components</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="checkbox" [level]="3" label="Checkbox" ariaLabel="Link zu Checkbox" />
+    <demo-section-heading anchorId="checkbox" [level]="3" label="Checkbox" ariaLabel="Link zu Checkbox" />
     <p-fieldset [legend]="'isyAngularWidgetsDemo.labels.checkboxHorizontalLegend' | translate">
       <div class="checkbox-group-horizontal flex flex-wrap gap-3">
         <div class="flex align-items-center gap-2">
@@ -320,7 +320,7 @@
     </p-fieldset>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="radiobutton" [level]="3" label="RadioButton" ariaLabel="Link zu RadioButton" />
+    <demo-section-heading anchorId="radiobutton" [level]="3" label="RadioButton" ariaLabel="Link zu RadioButton" />
     <p-fieldset [legend]="'isyAngularWidgetsDemo.labels.radioButtonHorizontalLegend' | translate">
       <div class="radio-group-horizontal flex flex-wrap gap-3">
         <div class="flex align-items-center gap-2">
@@ -412,12 +412,12 @@
     </p-fieldset>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="knob" [level]="3" label="Knob" ariaLabel="Link zu Knob" />
+    <demo-section-heading anchorId="knob" [level]="3" label="Knob" ariaLabel="Link zu Knob" />
     <p-knob ariaLabel="Knob" />
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="tristatecheckbox"
+      anchorId="tristatecheckbox"
       [level]="3"
       label="TriStateCheckbox"
       ariaLabel="Link zu TriStateCheckbox"
@@ -425,20 +425,20 @@
     <p-checkbox inputId="triStateCheckbox" label="TriStateCheckbox" [binary]="true" [indeterminate]="true" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="rating" [level]="3" label="Rating" ariaLabel="Link zu Rating" />
+    <demo-section-heading anchorId="rating" [level]="3" label="Rating" ariaLabel="Link zu Rating" />
     <p-rating />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="slider" [level]="3" label="Slider" ariaLabel="Link zu Slider" />
+    <demo-section-heading anchorId="slider" [level]="3" label="Slider" ariaLabel="Link zu Slider" />
     <input type="text" pInputText [(ngModel)]="slider" class="w-full mb-3" />
     <p-slider [(ngModel)]="slider" class="w-full" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="inputswitch" [level]="3" label="InputSwitch" ariaLabel="Link zu InputSwitch" />
+    <demo-section-heading anchorId="inputswitch" [level]="3" label="InputSwitch" ariaLabel="Link zu InputSwitch" />
     <p-toggleswitch inputId="inputSwitch" ariaLabel="Input Switch" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="togglebutton" [level]="3" label="ToggleButton" ariaLabel="Link zu ToggleButton" />
+    <demo-section-heading anchorId="togglebutton" [level]="3" label="ToggleButton" ariaLabel="Link zu ToggleButton" />
     <p-togglebutton
       inputId="toggleButton"
       [onIcon]="'pi pi-lock'"
@@ -448,7 +448,7 @@
     />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="selectbutton" [level]="3" label="SelectButton" ariaLabel="Link zu SelectButton" />
+    <demo-section-heading anchorId="selectbutton" [level]="3" label="SelectButton" ariaLabel="Link zu SelectButton" />
     <p-selectbutton [options]="stateOptions" />
   </div>
 </div>
@@ -456,22 +456,22 @@
 <h2>Special Components</h2>
 <div class="grid mb-3">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="colorpicker" [level]="3" label="Colorpicker" ariaLabel="Link zu Colorpicker" />
+    <demo-section-heading anchorId="colorpicker" [level]="3" label="Colorpicker" ariaLabel="Link zu Colorpicker" />
     <p-colorpicker inputId="colorpicker" [(ngModel)]="color" />
     <span class="ml-3">{{ color }}</span>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="chips" [level]="3" label="Chips" ariaLabel="Link zu Chips" />
+    <demo-section-heading anchorId="chips" [level]="3" label="Chips" ariaLabel="Link zu Chips" />
     <div class="p-fluid">
       <p-autocomplete multiple="true" typeahead="false" inputId="chips" [maxlength]="3" placeholder="Maximum 3 chips" />
     </div>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="listbox" [level]="3" label="Listbox" ariaLabel="Link zu Listbox" />
+    <demo-section-heading anchorId="listbox" [level]="3" label="Listbox" ariaLabel="Link zu Listbox" />
     <p-listbox id="listbox" [options]="countries" optionLabel="name" class="w-full" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="editor" [level]="3" label="Editor" ariaLabel="Link zu Editor" />
+    <demo-section-heading anchorId="editor" [level]="3" label="Editor" ariaLabel="Link zu Editor" />
     <p-editor [(ngModel)]="text" [style]="{height: '320px'}" />
   </div>
 </div>

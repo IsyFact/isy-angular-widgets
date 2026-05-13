@@ -2,7 +2,7 @@
 <h2>Indicator</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="chip" [level]="3" label="Chip" ariaLabel="Link zu Chip" />
+    <demo-section-heading anchorId="chip" [level]="3" label="Chip" ariaLabel="Link zu Chip" />
     <div class="flex justify-content-start gap-2">
       <p-autocomplete label="Apple" multiple="true" typeahead="false" />
       <p-autocomplete label="Google" multiple="true" typeahead="false" />
@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="tag" [level]="3" label="Tag" ariaLabel="Link zu Tag" />
+    <demo-section-heading anchorId="tag" [level]="3" label="Tag" ariaLabel="Link zu Tag" />
     <div class="flex justify-content-start gap-2">
       <p-tag value="Primary" />
       <p-tag severity="success" value="Success" />
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="avatar" [level]="3" label="Avatar" ariaLabel="Link zu Avatar" />
+    <demo-section-heading anchorId="avatar" [level]="3" label="Avatar" ariaLabel="Link zu Avatar" />
     <div class="flex justify-content-start gap-2">
       <p-avatar icon="pi pi-user" badgeSize="xlarge" />
       <p-avatar icon="pi pi-user" badgeSize="large" />
@@ -30,7 +30,7 @@
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="avatar-badge"
+      anchorId="avatar-badge"
       [level]="3"
       label="Avatar with Badge"
       ariaLabel="Link zu Avatar with Badge"
@@ -48,7 +48,7 @@
     </div>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="badge" [level]="3" label="Badge" ariaLabel="Link zu Badge" />
+    <demo-section-heading anchorId="badge" [level]="3" label="Badge" ariaLabel="Link zu Badge" />
     <div class="flex justify-content-start gap-2">
       <p-badge [value]="2" severity="success" badgeSize="large" />
       <p-badge [value]="4" severity="info" badgeSize="large" />
@@ -62,7 +62,7 @@
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="progressspinner"
+      anchorId="progressspinner"
       [level]="3"
       label="ProgressSpinner"
       ariaLabel="Link zu ProgressSpinner"
@@ -70,11 +70,11 @@
     <p-progressspinner />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="progressbar" [level]="3" label="ProgressBar" ariaLabel="Link zu ProgressBar" />
+    <demo-section-heading anchorId="progressbar" [level]="3" label="ProgressBar" ariaLabel="Link zu ProgressBar" />
     <p-progressbar [value]="50" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="metergroup" [level]="3" label="MeterGroup" ariaLabel="Link zu MeterGroup" />
+    <demo-section-heading anchorId="metergroup" [level]="3" label="MeterGroup" ariaLabel="Link zu MeterGroup" />
     <p-metergroup [value]="storageStatus" />
   </div>
 </div>
@@ -82,7 +82,7 @@
 <h2>Skeleton</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="skeleton-rectangle" [level]="3" label="Rectangle" ariaLabel="Link zu Rectangle" />
+    <demo-section-heading anchorId="skeleton-rectangle" [level]="3" label="Rectangle" ariaLabel="Link zu Rectangle" />
     <p-skeleton class="mb-2" />
     <p-skeleton width="10rem" class="mb-2" />
     <p-skeleton width="5rem" class="mb-2" />
@@ -90,7 +90,7 @@
     <p-skeleton width="10rem" height="4rem" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="skeleton-rounded" [level]="3" label="Rounded" ariaLabel="Link zu Rounded" />
+    <demo-section-heading anchorId="skeleton-rounded" [level]="3" label="Rounded" ariaLabel="Link zu Rounded" />
     <p-skeleton class="mb-2" borderRadius="16px" />
     <p-skeleton width="10rem" class="mb-2" borderRadius="16px" />
     <p-skeleton width="5rem" class="mb-2" borderRadius="16px" />
@@ -98,7 +98,7 @@
     <p-skeleton width="10rem" height="4rem" borderRadius="16px" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="skeleton-square" [level]="3" label="Square" ariaLabel="Link zu Square" />
+    <demo-section-heading anchorId="skeleton-square" [level]="3" label="Square" ariaLabel="Link zu Square" />
     <div class="flex justify-content-start gap-2">
       <p-skeleton size="5rem" />
       <p-skeleton size="4rem" />
@@ -107,7 +107,7 @@
     </div>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="skeleton-circle" [level]="3" label="Circle" ariaLabel="Link zu Circle" />
+    <demo-section-heading anchorId="skeleton-circle" [level]="3" label="Circle" ariaLabel="Link zu Circle" />
     <div class="flex justify-content-start gap-2">
       <p-skeleton shape="circle" size="5rem" />
       <p-skeleton shape="circle" size="4rem" />
@@ -120,7 +120,7 @@
 <h2>Other Misc</h2>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="inplace" [level]="3" label="Inplace" ariaLabel="Link zu Inplace" />
+    <demo-section-heading anchorId="inplace" [level]="3" label="Inplace" ariaLabel="Link zu Inplace" />
     <p-inplace closable="closable">
       <ng-template pTemplate="display">Click to Edit</ng-template>
       <ng-template pTemplate="content">
@@ -129,7 +129,7 @@
     </p-inplace>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="scrolltop" [level]="3" label="ScrollTop" ariaLabel="Link zu ScrollTop" />
+    <demo-section-heading anchorId="scrolltop" [level]="3" label="ScrollTop" ariaLabel="Link zu ScrollTop" />
     <div style="height: 150px; overflow: auto">
       <p>
         Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
@@ -154,7 +154,7 @@
     </div>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="blockui" [level]="3" label="BlockUI" ariaLabel="Link zu BlockUI" />
+    <demo-section-heading anchorId="blockui" [level]="3" label="BlockUI" ariaLabel="Link zu BlockUI" />
     <div class="flex justify-content-start gap-2">
       <p-button label="Block" (onClick)="blockContent()" />
       <p-button label="Unblock" (onClick)="unblockContent()" />
@@ -167,7 +167,7 @@
     </p-panel>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="terminal" [level]="3" label="Terminal" ariaLabel="Link zu Terminal" />
+    <demo-section-heading anchorId="terminal" [level]="3" label="Terminal" ariaLabel="Link zu Terminal" />
     <p-terminal welcomeMessage="Welcome to PrimeNG: Enter 'date' to display the current date" prompt="primeng $" />
   </div>
 </div>

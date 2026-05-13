@@ -3,7 +3,7 @@
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="organizationchart"
+      anchorId="organizationchart"
       [level]="3"
       label="OrganizationChart"
       ariaLabel="Link zu OrganizationChart"
@@ -11,7 +11,7 @@
     <p-organizationChart [value]="organization" />
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="timeline" [level]="3" label="Timeline" ariaLabel="Link zu Timeline" />
+    <demo-section-heading anchorId="timeline" [level]="3" label="Timeline" ariaLabel="Link zu Timeline" />
     <p-timeline [value]="deliveryStatus">
       <ng-template let-delivery pTemplate="opposite"> {{ delivery.status }} </ng-template>
       <ng-template let-delivery pTemplate="content">
@@ -20,7 +20,7 @@
     </p-timeline>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="scroller" [level]="3" label="Scroller" ariaLabel="Link zu Scroller" />
+    <demo-section-heading anchorId="scroller" [level]="3" label="Scroller" ariaLabel="Link zu Scroller" />
     <p-scroller [items]="countries" [itemSize]="50" scrollHeight="200px" styleClass="w-full">
       <ng-template pTemplate="item" let-country>
         <div style="height: 50px">{{ country.name }}</div>
@@ -28,7 +28,7 @@
     </p-scroller>
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="tree" [level]="3" label="Tree" ariaLabel="Link zu Tree" />
+    <demo-section-heading anchorId="tree" [level]="3" label="Tree" ariaLabel="Link zu Tree" />
     <p-tree [value]="files" class="w-full" />
   </div>
 </div>
@@ -36,7 +36,7 @@
 <h2>Tables</h2>
 <div class="grid mb-3">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="paginator" [level]="3" label="Paginator" ariaLabel="Link zu Paginator" />
+    <demo-section-heading anchorId="paginator" [level]="3" label="Paginator" ariaLabel="Link zu Paginator" />
     <p-paginator
       [rows]="10"
       [totalRecords]="120"
@@ -47,7 +47,7 @@
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="table"
+      anchorId="table"
       [level]="3"
       label="Table with striped rows, paginator, filter, sort and single row selection mode"
       ariaLabel="Link zu Table"
@@ -97,7 +97,7 @@
   </div>
   <div class="col-12 flex flex-column gap-2">
     <demo-section-heading
-      headingId="treetable"
+      anchorId="treetable"
       [level]="3"
       label="TreeTable with paginator, sort and single row selection mode"
       ariaLabel="Link zu TreeTable"

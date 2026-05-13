@@ -19,25 +19,25 @@ export type HeadingLevel = 2 | 3;
 
   template: `
     @if (level === H2) {
-      <h2 [id]="headingId" class="section-heading">
+      <h2 [id]="anchorId" class="section-heading">
         {{ label }}
         <a
           class="section-anchor"
-          [href]="'#' + headingId"
-          (click)="anchorNav.scrollToAnchor($event, headingId)"
+          [href]="'#' + anchorId"
+          (click)="anchorNav.scrollToAnchor($event, anchorId)"
           [attr.aria-label]="ariaLabel"
-          >🔗</a
+        >🔗</a
         >
       </h2>
     } @else {
-      <h3 [id]="headingId" class="section-heading">
+      <h3 [id]="anchorId" class="section-heading">
         {{ label }}
         <a
           class="section-anchor"
-          [href]="'#' + headingId"
-          (click)="anchorNav.scrollToAnchor($event, headingId)"
+          [href]="'#' + anchorId"
+          (click)="anchorNav.scrollToAnchor($event, anchorId)"
           [attr.aria-label]="ariaLabel"
-          >🔗</a
+        >🔗</a
         >
       </h3>
     }
@@ -47,7 +47,7 @@ export class SectionHeadingComponent {
   private static readonly DEFAULT_LEVEL: HeadingLevel = 2;
 
   /** The `id` of the rendered heading element used as fragment target. */
-  @Input({required: true}) headingId!: string;
+  @Input({required: true}) anchorId!: string;
   /** The visible text of the heading. */
   @Input({required: true}) label!: string;
   /** The `aria-label` of the anchor link, e.g. `"Link zu FormWrapper"`. */

@@ -1,7 +1,7 @@
 <h1>PrimeNG Messages</h1>
 <div class="grid">
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="messages" [level]="2" label="Messages" ariaLabel="Link zu Messages" />
+    <demo-section-heading anchorId="messages" [level]="2" label="Messages" ariaLabel="Link zu Messages" />
     @for (message of messages; track message.key) {
       <p-message
         [severity]="
@@ -20,7 +20,7 @@
     }
   </div>
   <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading headingId="toast" [level]="2" label="Toast" ariaLabel="Link zu Toast" />
+    <demo-section-heading anchorId="toast" [level]="2" label="Toast" ariaLabel="Link zu Toast" />
     <p-button (onClick)="showToastMessage()" label="Show" />
     <p-toast key="toast" position="bottom-right" />
   </div>

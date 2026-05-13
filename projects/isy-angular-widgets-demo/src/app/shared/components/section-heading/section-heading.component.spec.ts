@@ -25,7 +25,7 @@ describe('SectionHeadingComponent', () => {
 
   beforeEach(() => {
     spectator = createComponent({
-      props: {headingId: 'my-section', label: 'My Section', ariaLabel: 'Link zu My Section', level: 2}
+      props: {anchorId: 'my-section', label: 'My Section', ariaLabel: 'Link zu My Section', level: 2}
     });
     viewportScrollerSpy = spectator.inject(ViewportScroller);
   });
@@ -57,7 +57,7 @@ describe('SectionHeadingComponent', () => {
   describe('level 3', () => {
     beforeEach(() => {
       spectator = createComponent({
-        props: {headingId: 'sub-section', label: 'Sub Section', ariaLabel: 'Link zu Sub Section', level: 3}
+        props: {anchorId: 'sub-section', label: 'Sub Section', ariaLabel: 'Link zu Sub Section', level: 3}
       });
     });
 
