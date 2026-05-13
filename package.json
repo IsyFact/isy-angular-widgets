@@ -10,6 +10,9 @@
   },
   "license": "Apache-2.0",
   "homepage": "http://isyfact.de",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
