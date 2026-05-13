@@ -39,6 +39,7 @@
 ## Fixes
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
 - IFS-4999: Die Property `transferISO8601` in der Komponente IsyIncompleteDate konvertiert den Wert nun in die korrekte ISO-8601-Repräsentation.
+- IFS-5223: Release v21.0.1 wurde in `main` gemergt und enthält die Anpassung des Font-Family-Namens.
 ## Demo-Anwendung
 - IFS-4931: Modalarme Muster wurden hinzugefügt
 - IFS-3587: Auf der Seite _Objekt anzeigen_ wurde ein Beispielpattern zur Erfassung mehrerer einfacher Eingaben ergänzt
@@ -46,6 +47,10 @@
   * Mindestens ein Eintrag ist als Pflichtfeld berücksichtigt
   * Die maximale Anzahl von Einträgen ist begrenzt
   * Einträge können wieder entfernt werden
+
+# 21.0.1 - 03.05.2026
+## Fixes
+- IFS-5223: Der referenzierte Font-Family-Name wurde auf `BundesSans Web` korrigiert, damit die systemseitig installierte Schrift korrekt geladen wird.
 
 # 21.0.0 - 16.02.2026
 ## Breaking Changes
