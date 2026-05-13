@@ -78,7 +78,7 @@ describe('ModalarmePatternsComponent', () => {
 
     it('should render all section headings as demo-section-heading elements with correct headingIds', () => {
       sectionAnchorIds.forEach((id) => {
-        const el = spectator.query<HTMLElement>(`demo-section-heading[headingid="${id}"]`);
+        const el = spectator.query<HTMLElement>(`demo-section-heading[anchorId="${id}"]`);
         expect(el).withContext(id).toBeTruthy();
       });
     });
