@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   Component,
+  ContentChild,
   ContentChildren,
   EventEmitter,
   inject,
@@ -13,12 +14,31 @@ import {
 } from '@angular/core';
 import {MenuItem, MessageService} from 'primeng/api';
 import {WizardDirective} from '../../directives/wizard.directive';
+import {WizardFooterDirective} from '../../directives/wizard-footer.directive';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CommonModule} from '@angular/common';
 import {StepperModule} from 'primeng/stepper';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
+
+export interface WizardFooterContext {
+  index: number;
+  stepCount: number;
+  isFirstStep: boolean;
+  isLastStep: boolean;
+  allowNext: boolean;
+  isSaved: boolean;
+  closable: boolean;
+  showBack: boolean;
+  showNext: boolean;
+  showSave: boolean;
+  canClose: boolean;
+  next: () => void;
+  previous: () => void;
+  save: () => void;
+  close: () => void;
+}
 
 /**
  * The width of the wizard of not otherwise specified by the user.
@@ -48,6 +68,11 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
    * Stores the content that will be projected inside the template
    */
   @ContentChildren(WizardDirective) content?: QueryList<WizardDirective>;
+
+  /**
+   * Stores an optional projected custom footer template.
+   */
+  @ContentChild(WizardFooterDirective) footerTemplate?: WizardFooterDirective;
 
   /**
    * Emits the currently displayed page
@@ -160,6 +185,54 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   configService = inject(WidgetsConfigService);
 
   readonly messageService = inject(MessageService);
+
+  get stepCount(): number {
+    return this.items.length;
+  }
+
+  get isFirstStep(): boolean {
+    return this.index === 0;
+  }
+
+  get isLastStep(): boolean {
+    return this.index === this.stepCount - 1;
+  }
+
+  get showBackButton(): boolean {
+    return !this.isSaved && !this.isFirstStep;
+  }
+
+  get showNextButton(): boolean {
+    return !this.isSaved && !this.isLastStep;
+  }
+
+  get showSaveButton(): boolean {
+    return this.isLastStep && !this.isSaved;
+  }
+
+  get canClose(): boolean {
+    return !this.isSaved || this.closable;
+  }
+
+  get footerContext(): WizardFooterContext {
+    return {
+      index: this.index,
+      stepCount: this.stepCount,
+      isFirstStep: this.isFirstStep,
+      isLastStep: this.isLastStep,
+      allowNext: this.allowNext,
+      isSaved: this.isSaved,
+      closable: this.closable,
+      showBack: this.showBackButton,
+      showNext: this.showNextButton,
+      showSave: this.showSaveButton,
+      canClose: this.canClose,
+      next: () => this.next(),
+      previous: () => this.previous(),
+      save: () => this.save(),
+      close: () => this.closeDialog()
+    };
+  }
 
   /**
    * Fired on initialization

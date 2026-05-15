@@ -318,6 +318,62 @@
     [closable]="displayX"
     [allowFreeNavigation]="true"
   >
+    <ng-template
+      isyWizardFooter
+      let-showBack="showBack"
+      let-showNext="showNext"
+      let-showSave="showSave"
+      let-allowNext="allowNext"
+      let-canClose="canClose"
+      let-previous="previous"
+      let-next="next"
+      let-save="save"
+      let-close="close"
+    >
+      <div class="flex align-items-center justify-content-between flex-wrap gap-3 w-full">
+        <div class="flex align-items-center">
+          <p-button
+            [label]="'isyAngularWidgetsDemo.actions.close' | translate"
+            [outlined]="true"
+            [disabled]="!canClose"
+            (onClick)="close()"
+          >
+          </p-button>
+        </div>
+
+        <div class="flex align-items-center justify-content-center flex-wrap gap-2">
+          @if (showBack) {
+            <p-button
+              [label]="'isyAngularWidgets.wizard.back' | translate"
+              [outlined]="true"
+              icon="pi pi-angle-left"
+              iconPos="left"
+              (onClick)="previous()"
+            >
+            </p-button>
+          }
+
+          @if (showNext) {
+            <p-button
+              [label]="'isyAngularWidgets.wizard.next' | translate"
+              icon="pi pi-angle-right"
+              iconPos="right"
+              [disabled]="!allowNext"
+              (onClick)="next()"
+            >
+            </p-button>
+          }
+        </div>
+
+        <div class="flex align-items-center justify-content-end">
+          @if (showSave) {
+            <p-button [label]="'isyAngularWidgets.wizard.save' | translate" [disabled]="!allowNext" (onClick)="save()">
+            </p-button>
+          }
+        </div>
+      </div>
+    </ng-template>
+
     <!--  Every side of the wizard needs to have the *isyWizardDirective. -->
 
     <!-- Step 1: ID Entry -->

@@ -1,5 +1,21 @@
 # Update Log - 16.02.2026
 
+## Migration `IFS-4984` - isy-wizard Button-Anordnung
+
+### 1. Änderung
+- Der `isy-wizard` unterstützt optional einen projektspezifischen Footer über ein projiziertes Template.
+- Der Standard-Footer des `isy-wizard` bleibt als Fallback erhalten.
+- Die Standard-Anordnung der Buttons im Wizard wurde überarbeitet, damit Aktionen konsistent platziert werden können.
+
+### 2. Auswirkungen / Migration
+- Bestehende Anwendungen ohne Custom-Footer bleiben lauffähig.
+- Anwendungen sollten die geänderte Standard-Anordnung der Wizard-Buttons fachlich und visuell prüfen.
+- Falls bisher implizit von der alten Reihenfolge oder Sichtbarkeit einzelner Aktionen ausgegangen wurde, ist eine Anpassung des eigenen Wizards oder ein projektspezifischer Footer zu prüfen.
+
+### 3. Empfehlung
+- Wenn die Standard-Anordnung ausreicht, ist keine technische Migration erforderlich.
+- Wenn eine abweichende Reihenfolge, andere Beschriftungen oder projektspezifisches Styling benötigt werden, sollte der Footer des `isy-wizard` explizit per Template definiert werden.
+
 ## Migration auf Angular v21 & PrimeNG v21
 
 ### 1. Aktualisierte Frameworks & Tools
