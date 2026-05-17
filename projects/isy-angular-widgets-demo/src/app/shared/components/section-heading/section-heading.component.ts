@@ -23,7 +23,7 @@ export type HeadingLevel = 2 | 3;
         {{ label }}
         <a
           class="section-anchor"
-          [href]="'#' + anchorId"
+          [href]="buildAnchorHref(anchorId)"
           (click)="anchorNav.scrollToAnchor($event, anchorId)"
           [attr.aria-label]="ariaLabel"
           >🔗</a
@@ -34,7 +34,7 @@ export type HeadingLevel = 2 | 3;
         {{ label }}
         <a
           class="section-anchor"
-          [href]="'#' + anchorId"
+          [href]="buildAnchorHref(anchorId)"
           (click)="anchorNav.scrollToAnchor($event, anchorId)"
           [attr.aria-label]="ariaLabel"
           >🔗</a
@@ -57,4 +57,8 @@ export class SectionHeadingComponent {
 
   protected readonly anchorNav = inject(AnchorNavigationService);
   protected readonly H2: HeadingLevel = SectionHeadingComponent.DEFAULT_LEVEL;
+
+  protected buildAnchorHref(anchor: string): string {
+    return this.anchorNav.buildAnchorHref?.(anchor) ?? `#${anchor}`;
+  }
 }

@@ -41,10 +41,10 @@ describe('SectionHeadingComponent', () => {
       expect(spectator.query('h2')?.textContent).toContain('My Section');
     });
 
-    it('should render an anchor with href="#headingId" and the given aria-label', () => {
+    it('should render an anchor with href ending in "#headingId" and the given aria-label', () => {
       const a = spectator.query<HTMLAnchorElement>('a.section-anchor');
       expect(a).toBeTruthy();
-      expect(a?.getAttribute('href')).toBe('#my-section');
+      expect(a?.getAttribute('href')).toMatch(/#my-section$/);
       expect(a?.getAttribute('aria-label')).toBe('Link zu My Section');
       expect(a?.textContent?.trim()).toBe('🔗');
     });
