@@ -22,6 +22,12 @@
 
 ## Migration auf Angular v21 & PrimeNG v21
 
+### 1. Aktualisierte Frameworks & Tools
+- Angular: v20 → **v21.1.4**
+- PrimeNG: v20 → **v21.1.1**
+- Core-Pakete & CLI aktualisiert
+- Migrationshinweise von [update.angular.io](https://update.angular.io) und [PrimeNG Migration Guide](https://primeng.org/migration/v21) umgesetzt
+
 ---
 
 ### 2. **Breaking Changes**
