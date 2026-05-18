@@ -26,62 +26,73 @@
   <ng-container [ngTemplateOutlet]="this.content?.get(index)?.templateRef ?? null"></ng-container>
 
   <ng-template pTemplate="footer">
-    <div class="flex justify-content-end flex-wrap card-container">
-      @if (!isSaved) {
-        @if (index !== 0) {
+    @if (footerTemplate) {
+      <ng-container
+        [ngTemplateOutlet]="footerTemplate.templateRef"
+        [ngTemplateOutletContext]="footerContext"
+      ></ng-container>
+    } @else {
+      <div class="flex align-items-center justify-content-between flex-wrap gap-3 card-container w-full">
+        <div class="flex align-items-center">
           <button
-            id="back-button"
+            id="close-button"
             type="button"
             pRipple
             pButton
             [outlined]="true"
-            class="flex align-items-center justify-content-center mr-2"
-            (click)="previous()"
+            class="flex align-items-center justify-content-center"
+            [disabled]="!canClose"
+            (click)="closeDialog()"
           >
-            {{ labelBackButton }}
+            {{ labelCloseButton }}
           </button>
-        }
-        @if (index !== items.length - 1) {
-          <button
-            id="next-button"
-            type="button"
-            pRipple
-            pButton
-            class="flex align-items-center justify-content-center mr-4"
-            [disabled]="index === items.length - 1 || !allowNext"
-            (click)="next()"
-          >
-            {{ labelNextButton }}
-          </button>
-        }
-      }
+        </div>
 
-      @if (index === items.length - 1 && !isSaved) {
-        <button
-          id="save-button"
-          type="button"
-          pRipple
-          pButton
-          class="flex align-items-center justify-content-center ml-4"
-          [disabled]="(index !== items.length - 1 || !allowNext) && !isSaved"
-          (click)="save()"
-        >
-          {{ labelSaveButton }}
-        </button>
-      }
+        <div class="flex align-items-center justify-content-center flex-wrap gap-2">
+          @if (showBackButton) {
+            <button
+              id="back-button"
+              type="button"
+              pRipple
+              pButton
+              [outlined]="true"
+              class="flex align-items-center justify-content-center"
+              (click)="previous()"
+            >
+              {{ labelBackButton }}
+            </button>
+          }
+          @if (showNextButton) {
+            <button
+              id="next-button"
+              type="button"
+              pRipple
+              pButton
+              class="flex align-items-center justify-content-center"
+              [disabled]="!allowNext"
+              (click)="next()"
+            >
+              {{ labelNextButton }}
+            </button>
+          }
+        </div>
 
-      <button
-        id="close-button"
-        type="button"
-        pRipple
-        pButton
-        [outlined]="true"
-        class="flex align-items-center justify-content-center"
-        [disabled]="isSaved && !closable"
-        (click)="closeDialog()"
-      >
-        {{ labelCloseButton }}
-      </button>
-    </div>
+        <div class="flex align-items-center justify-content-end">
+          @if (showSaveButton) {
+            <button
+              id="save-button"
+              type="button"
+              pRipple
+              pButton
+              class="flex align-items-center justify-content-center"
+              [disabled]="!allowNext"
+              (click)="save()"
+            >
+              {{ labelSaveButton }}
+            </button>
+          }
+        </div>
+      </div>
+    }
   </ng-template>
 </p-dialog>

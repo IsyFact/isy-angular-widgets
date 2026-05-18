@@ -28,6 +28,7 @@ import {ResultListComponent} from './components/result-list/result-list.componen
 import {CommonModule} from '@angular/common';
 import {DialogModule} from 'primeng/dialog';
 import {WizardComponent} from '@isy-angular-widgets/wizard/components/wizard/wizard.component';
+import {WizardFooterDirective} from '@isy-angular-widgets/wizard/directives/wizard-footer.directive';
 import {WizardDirective} from '@isy-angular-widgets/wizard/directives/wizard.directive';
 import {PersoenlicheInformationenComponent} from './components/persoenliche-informationen/persoenliche-informationen.component';
 
@@ -51,6 +52,7 @@ const defaultWidth = 60;
     FormWrapperComponent,
     ResultListComponent,
     WizardComponent,
+    WizardFooterDirective,
     PersoenlicheInformationenComponent,
     FormControlPipe,
     InputCharDirective,

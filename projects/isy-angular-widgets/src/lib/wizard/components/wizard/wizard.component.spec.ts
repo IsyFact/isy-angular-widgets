@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import {WizardComponent} from './wizard.component';
 import {WizardDirective} from '../../directives/wizard.directive';
+import {WizardFooterDirective} from '../../directives/wizard-footer.directive';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateComponent} from '../../../incomplete-date/incomplete-date.component';
 import {MenuItem} from 'primeng/api';
@@ -143,6 +144,48 @@ class TestComponent {
   width = 50;
   height = 30;
   headerTitle = 'Wizard Title';
+  childrenLabels = ['Auswahl 1', 'Auswahl 2', 'Auswahl 3'];
+}
+
+@Component({
+  template: ` <isy-wizard #wizard [isVisible]="true" [allowNext]="allowNext">
+    <isy-incomplete-date *isyWizardDirective="childrenLabels[0]"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="childrenLabels[1]"></isy-incomplete-date>
+    <isy-incomplete-date *isyWizardDirective="childrenLabels[2]"></isy-incomplete-date>
+
+    <ng-template
+      isyWizardFooter
+      let-index="index"
+      let-showBack="showBack"
+      let-showNext="showNext"
+      let-showSave="showSave"
+      let-allowNext="allowNext"
+      let-next="next"
+      let-previous="previous"
+      let-save="save"
+      let-close="close"
+    >
+      <div id="custom-footer">
+        <span id="custom-index">{{ index }}</span>
+        @if (showBack) {
+          <button id="custom-back-button" type="button" (click)="previous()">Back</button>
+        }
+        @if (showNext) {
+          <button id="custom-next-button" type="button" [disabled]="!allowNext" (click)="next()">Next</button>
+        }
+        @if (showSave) {
+          <button id="custom-save-button" type="button" [disabled]="!allowNext" (click)="save()">Save</button>
+        }
+        <button id="custom-close-button" type="button" (click)="close()">Close</button>
+      </div>
+    </ng-template>
+  </isy-wizard>`,
+  imports: [WizardComponent, IncompleteDateComponent, WizardDirective, WizardFooterDirective]
+})
+class TestCustomFooterComponent {
+  @ViewChild('wizard') wizard!: WizardComponent;
+
+  allowNext = false;
   childrenLabels = ['Auswahl 1', 'Auswahl 2', 'Auswahl 3'];
 }
 
@@ -330,6 +373,17 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function getNativeElementAsHTMLElement(declaration: string): HTMLElement | null {
     return spectator.query<HTMLElement>(declaration);
+  }
+
+  /**
+   * Returns the ids of all rendered footer buttons in DOM order.
+   * @returns A list of non-empty button ids.
+   */
+  function getFooterButtonIds(): string[] {
+    return spectator
+      .queryAll<HTMLButtonElement>('button')
+      .map((button) => button.id)
+      .filter((id) => !!id);
   }
 
   /**
@@ -607,6 +661,17 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(closeButton!.innerHTML).toContain(wizard.labelCloseButton);
   });
 
+  it('should render close before next on the first step', () => {
+    expect(getFooterButtonIds()).toEqual(['close-button', 'next-button']);
+  });
+
+  it('should render close, back and save on the last step in that order', () => {
+    moveToLastStep();
+    setNextStepAvailable();
+
+    expect(getFooterButtonIds()).toEqual(['close-button', 'back-button', 'save-button']);
+  });
+
   it('should have an enabled close button on any step', () => {
     for (let i = 0; i < contentChildren.length - 1; i++) {
       setNextStepAvailable();
@@ -677,6 +742,75 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
 
     expect(wizard.isVisible).toBeFalse();
     expect(visibilityChangedSpy).toHaveBeenCalledWith(false);
+  });
+});
+
+describe('Integration Tests: WizardComponent with Custom Footer', () => {
+  let spectator: Spectator<TestCustomFooterComponent>;
+  const createComponent = createComponentFactory({
+    component: TestCustomFooterComponent,
+    providers: [provideRouter([]), {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub}],
+    overrideComponents: [[WizardComponent, wizardOverride]]
+  });
+
+  /**
+   * Clicks a custom footer button and updates the fixture afterwards.
+   * @param selector CSS selector of the button to click.
+   */
+  function clickButton(selector: string): void {
+    const button = spectator.query<HTMLButtonElement>(selector);
+    expect(button).withContext(`Button not found: ${selector}`).not.toBeNull();
+    button!.click();
+    spectator.detectChanges();
+  }
+
+  beforeEach(() => {
+    spectator = createComponent();
+    wizard = spectator.component.wizard;
+    wizard.items = stepperItems;
+    spectator.detectChanges();
+  });
+
+  it('should render the custom footer instead of the default footer', () => {
+    expect(spectator.query('#custom-footer')).not.toBeNull();
+    expect(spectator.query(closeButtonDeclaration)).toBeNull();
+  });
+
+  it('should expose the current index in the footer context', () => {
+    const indexValue = spectator.query('#custom-index');
+    expect(indexValue).not.toBeNull();
+    expect(indexValue!.textContent?.trim()).toBe('0');
+  });
+
+  it('should use the projected next action from the footer context', () => {
+    const emitSpy = spyOn(wizard.indexChange, 'emit');
+    spectator.component.allowNext = true;
+    spectator.detectChanges();
+
+    clickButton('#custom-next-button');
+
+    expect(wizard.index).toBe(1);
+    expect(emitSpy).toHaveBeenCalledWith(1);
+  });
+
+  it('should use the projected save action from the footer context', () => {
+    const saveSpy = spyOn(wizard.savingChange, 'emit');
+    spectator.component.allowNext = true;
+    wizard.index = 2;
+    spectator.detectChanges();
+
+    clickButton('#custom-save-button');
+
+    expect(saveSpy).toHaveBeenCalledWith(true);
+  });
+
+  it('should use the projected close action from the footer context', () => {
+    const visibilitySpy = spyOn(wizard.isVisibleChange, 'emit');
+
+    clickButton('#custom-close-button');
+
+    expect(wizard.isVisible).toBeFalse();
+    expect(visibilitySpy).toHaveBeenCalledWith(false);
   });
 });
 

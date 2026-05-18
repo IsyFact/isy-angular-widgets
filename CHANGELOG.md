@@ -33,6 +33,7 @@
     schematics/ng-add/schema.json + schema.d.ts
     - Neues optionales Flag addPrettier (default: true) mit CLI-Prompt
 
+- IFS-4984: Der `isy-wizard` wurde um einen anpassbaren Footer erweitert. Zusätzlich wurde die Standard-Anordnung der Wizard-Buttons überarbeitet, damit Aktionen konsistent platziert und projektspezifisch per Template angepasst werden können.
 - IFS-4928: Tab-Reihenfolge in Dialogen, Fokusverhalten bei Overlays und numerische Ausrichtung in Tabellen wurden verbessert
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 - IFS-4931: Die Komponente `form-wrapper` und der Service zur Übersetzung von Beschriftungen in der _isy-angular-widgets_ Bibliothek wurden überarbeitet
