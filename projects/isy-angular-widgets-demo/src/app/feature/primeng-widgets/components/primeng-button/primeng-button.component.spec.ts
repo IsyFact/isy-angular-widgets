@@ -35,7 +35,7 @@ describe('Unit Tests: PrimengButtonComponent', () => {
   it('should render section headings with hover-only anchor symbols for colored/outlined/icon groups', () => {
     ['colored-buttons', 'outlined-buttons', 'icon-buttons'].forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h2#${id}`);
-      const anchor = spectator.query<HTMLAnchorElement>(`h2#${id} > a[href="#${id}"]`);
+      const anchor = spectator.query<HTMLAnchorElement>(`h2#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
       expect(heading?.classList.contains('section-heading')).toBeTrue();
@@ -48,7 +48,7 @@ describe('Unit Tests: PrimengButtonComponent', () => {
   it('should render section headings with hover-only anchor symbols for special buttons', () => {
     ['splitbutton', 'speeddial'].forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
+      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
       expect(heading?.classList.contains('section-heading')).toBeTrue();

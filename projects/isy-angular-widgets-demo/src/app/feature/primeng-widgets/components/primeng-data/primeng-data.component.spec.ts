@@ -35,7 +35,7 @@ describe('Unit Tests: PrimengDataComponent', () => {
   it('should render section headings with hover-only anchor symbols for data view widgets', () => {
     ['organizationchart', 'timeline', 'scroller', 'tree'].forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
+      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
       expect(heading?.classList.contains('section-heading')).toBeTrue();
@@ -48,7 +48,7 @@ describe('Unit Tests: PrimengDataComponent', () => {
   it('should render section headings with hover-only anchor symbols for table widgets', () => {
     ['paginator', 'table', 'treetable'].forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
+      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
       expect(heading?.classList.contains('section-heading')).toBeTrue();

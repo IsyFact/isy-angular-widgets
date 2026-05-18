@@ -58,7 +58,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
     widgetAnchorIds.forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
+      const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
       expect(heading?.classList.contains('section-heading')).toBeTrue();
@@ -79,7 +79,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
   });
 
   it('should scroll to a widget when anchor symbol is clicked', () => {
-    spectator.click('h3#accordion > a[href="#accordion"]');
+    spectator.click('h3#accordion > a.section-anchor');
 
     expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('accordion');
   });

@@ -47,7 +47,7 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   it('should render all section headings with hover-only anchor symbols', () => {
     sectionAnchorIds.forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
+      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
       expect(heading?.classList.contains('section-heading')).toBeTrue();

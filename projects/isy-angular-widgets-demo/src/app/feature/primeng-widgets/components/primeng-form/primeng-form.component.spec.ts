@@ -16,6 +16,10 @@ describe('Unit Tests: PrimengFormComponent', () => {
     'keyfilter',
     'password',
     'calendar',
+    'date-picker',
+    'date-time-picker',
+    'date-range',
+    'date-time-range',
     'inputnumber',
     'cascadeselect',
     'dropdown',
@@ -77,7 +81,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
 
     widgetAnchorIds.forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a[href="#${id}"]`);
+      const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
       expect(heading?.classList.contains('section-heading')).toBeTrue();
@@ -98,7 +102,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should scroll to a widget when anchor symbol is clicked', () => {
-    spectator.click('h3#inputtext > a[href="#inputtext"]');
+    spectator.click('h3#inputtext > a.section-anchor');
     expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('inputtext');
   });
 
