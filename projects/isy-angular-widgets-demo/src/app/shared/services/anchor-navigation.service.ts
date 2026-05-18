@@ -19,6 +19,16 @@ export class AnchorNavigationService {
   private readonly activatedRoute = inject(ActivatedRoute);
 
   /**
+   * Builds an absolute in-page anchor URL for the current route.
+   * This makes copied links include the full page path plus fragment.
+   * @param anchor - The id of the target element.
+   * @returns The current page URL with fragment (e.g. `/primeng-widgets/primeng-form#date-picker`).
+   */
+  buildAnchorHref(anchor: string): string {
+    return `${globalThis.location.pathname}${globalThis.location.search}#${anchor}`;
+  }
+
+  /**
    * Subscribes to the current route's fragment and scrolls to the matching
    * anchor whenever the fragment changes.  The subscription is automatically
    * cleaned up when the given `DestroyRef` fires.
@@ -46,10 +56,6 @@ export class AnchorNavigationService {
   scrollToAnchor(event: MouseEvent, anchor: string): void {
     event.preventDefault();
     this.viewportScroller.scrollToAnchor(anchor);
-    window.history.replaceState(
-      window.history.state,
-      '',
-      `${window.location.pathname}${window.location.search}#${anchor}`
-    );
+    globalThis.history.replaceState(globalThis.history.state, '', this.buildAnchorHref(anchor));
   }
 }

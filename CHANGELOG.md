@@ -42,6 +42,7 @@
 - IFS-4999: Die Property `transferISO8601` in der Komponente IsyIncompleteDate konvertiert den Wert nun in die korrekte ISO-8601-Repräsentation.
 - IFS-5223: Release v21.0.1 wurde in `main` gemergt und enthält die Anpassung des Font-Family-Namens.
 ## Demo-Anwendung
+- IFS-4541: Eingabefelder für Datum, Uhrzeit und Zeiträume wurden hinzugefügt
 - IFS-4931: Modalarme Muster wurden hinzugefügt
 - IFS-3587: Auf der Seite _Objekt anzeigen_ wurde ein Beispielpattern zur Erfassung mehrerer einfacher Eingaben ergänzt
   * Exemplarische Umsetzung für Staatsangehörigkeiten mit PrimeNG Chips

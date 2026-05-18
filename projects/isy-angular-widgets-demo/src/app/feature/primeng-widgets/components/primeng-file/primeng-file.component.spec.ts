@@ -39,7 +39,7 @@ describe('Unit Tests: PrimengFileComponent', () => {
 
   it('should render section heading with hover-only anchor symbol', () => {
     const heading = spectator.query<HTMLHeadingElement>('h2#fileupload');
-    const anchor = spectator.query<HTMLAnchorElement>('h2#fileupload > a[href="#fileupload"]');
+    const anchor = spectator.query<HTMLAnchorElement>('h2#fileupload > a.section-anchor');
 
     expect(heading).toBeTruthy();
     expect(heading?.classList.contains('section-heading')).toBeTrue();
