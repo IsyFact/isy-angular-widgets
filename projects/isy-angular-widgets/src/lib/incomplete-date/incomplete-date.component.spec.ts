@@ -1,9 +1,33 @@
-import {AbstractControl, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Component} from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateComponent} from './incomplete-date.component';
 import {Validation} from '@isy-angular-widgets/public-api';
 import {InputMask} from 'primeng/inputmask';
 import {IncompleteDateService} from './incomplete-date.service';
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, IncompleteDateComponent],
+  template: `
+    <form [formGroup]="form">
+      <isy-incomplete-date inputId="date-of-entry" formControlName="dateOfEntry" />
+    </form>
+  `
+})
+class RequiredIncompleteDateHostComponent {
+  form = new FormGroup({
+    dateOfEntry: new FormControl('', Validators.required)
+  });
+}
 
 describe('Integration Tests: IncompleteDateComponent', () => {
   let component: IncompleteDateComponent;
@@ -12,6 +36,10 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   let onTouched: () => void = () => {};
   let input: HTMLInputElement;
   const errorKey = 'INVALIDUNSPECIFIEDDATE';
+
+  const createRequiredHostComponent = createComponentFactory({
+    component: RequiredIncompleteDateHostComponent
+  });
 
   const createComponent = createComponentFactory({
     component: IncompleteDateComponent,
@@ -431,5 +459,30 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.onChange('2024-01-31');
 
     expect(fn).toHaveBeenCalledWith('2024-01-31');
+  });
+
+  it('should not mark the native input as required by default', () => {
+    expect(input.hasAttribute('required')).toBeFalse();
+    expect(input.getAttribute('aria-required')).toBe('false');
+  });
+
+  it('should mark the native input as required when required input is true', () => {
+    spectator.setInput('required', true);
+    spectator.detectChanges();
+
+    expect(input.hasAttribute('required')).toBeTrue();
+    expect(input.getAttribute('aria-required')).toBe('true');
+  });
+
+  it('should mark the native input as required when the form control has Validators.required', () => {
+    const hostSpectator = createRequiredHostComponent();
+
+    hostSpectator.detectChanges();
+
+    const requiredInput = hostSpectator.query('#date-of-entry') as HTMLInputElement;
+
+    expect(requiredInput).toBeTruthy();
+    expect(requiredInput.hasAttribute('required')).toBeTrue();
+    expect(requiredInput.getAttribute('aria-required')).toBe('true');
   });
 });
