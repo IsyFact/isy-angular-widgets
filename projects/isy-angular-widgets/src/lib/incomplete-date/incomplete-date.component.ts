@@ -8,7 +8,8 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
+  booleanAttribute
 } from '@angular/core';
 import {
   AbstractControl,
@@ -18,7 +19,8 @@ import {
   NG_VALUE_ACCESSOR,
   NgControl,
   ValidationErrors,
-  Validator
+  Validator,
+  Validators
 } from '@angular/forms';
 import {IncompleteDateService} from './incomplete-date.service';
 import {Validation} from '../validation/validation';
@@ -116,6 +118,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   @Input() allowZeroFormat = false;
 
+  /**
+   * Marks the underlying input as required for accessibility.
+   */
+  @Input({transform: booleanAttribute}) required = false;
+
   // ISO string data-side date format
   transferValue?: string;
 
@@ -141,6 +148,10 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   get isInvalid(): boolean {
     return !!this.ngControl?.invalid && (!!this.ngControl?.touched || !!this.ngControl?.dirty);
+  }
+
+  get isRequired(): boolean {
+    return this.required || !!this.ngControl?.control?.hasValidator(Validators.required);
   }
 
   ngAfterViewInit(): void {

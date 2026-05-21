@@ -135,6 +135,13 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(inputFields.creditCardExpirationDate.nativeElement.value).toEqual('');
   });
 
+  it('should mark date of entry as required for accessibility', () => {
+    const dateOfEntry = inputFields.dateOfEntry.nativeElement as HTMLInputElement;
+
+    expect(dateOfEntry.hasAttribute('required')).toBeTrue();
+    expect(dateOfEntry.getAttribute('aria-required')).toBe('true');
+  });
+
   it('should hide button group for saving changes if not in edit mode', () => {
     const saveButtonGroup = debugElement.query(By.css('#divSaveCancel'));
     expect(saveButtonGroup).toBeNull();

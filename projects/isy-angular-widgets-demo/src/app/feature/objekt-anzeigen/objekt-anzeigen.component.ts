@@ -184,7 +184,7 @@ export class ObjektAnzeigenComponent implements AfterContentChecked {
         [Validators.required, this.maxSelectedNationalitiesValidator(this.maxNationalities)]
       ],
       phoneNumber: [personalien.telefonnummer],
-      dateOfEntry: [personalien.einreisedatum],
+      dateOfEntry: [personalien.einreisedatum, Validators.required],
       idRequired: [personalien.ausweispflichtig],
       securityLevel: [personalien.sicherheitsstufe],
       intelligenceNotes: [personalien.geheimdienstnotizen, Validators.maxLength(this.intelligenceNotesMaxLength)],
