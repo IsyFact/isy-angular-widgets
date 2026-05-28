@@ -17,8 +17,7 @@ for (const vp of VIEWPORTS) {
     // Zur Demo-Seite navigieren
     await t.navigateTo(`${DEMO_URL}/isy-angular-components`);
 
-    const openButton = Selector('[data-testid="input-char-button"]').nth(0);
-    // Fallback falls kein data-testid: Selector('button[aria-label*="Sonderzeichen"]')
+    const openButton = Selector('button.input-char-button').nth(0);
     await t.click(openButton);
 
     const dialog = Selector('p-dialog .p-dialog');
