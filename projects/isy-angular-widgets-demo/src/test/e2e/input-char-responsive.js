@@ -1,17 +1,17 @@
-import { Selector } from 'testcafe';
+import {Selector} from 'testcafe';
 
 const DEMO_URL = 'http://localhost:4200';
 const VIEWPORTS = [
-  { name: 'Smartphone', width: 390, height: 873 },
-  { name: 'Tablet', width: 1536, height: 864 },
-  { name: 'FullHD', width: 1920, height: 1080 },
-  { name: '2K', width: 2560, height: 1440 }
+  {name: 'Smartphone', width: 390, height: 873},
+  {name: 'Tablet', width: 1536, height: 864},
+  {name: 'FullHD', width: 1920, height: 1080},
+  {name: '2K', width: 2560, height: 1440}
 ];
 
 fixture('InputChar Responsive').page(DEMO_URL);
 
 for (const vp of VIEWPORTS) {
-  test(`InputChar öffnet sich korrekt bei ${vp.name} (${vp.width}x${vp.height})`, async t => {
+  test(`InputChar öffnet sich korrekt bei ${vp.name} (${vp.width}x${vp.height})`, async (t) => {
     await t.resizeWindow(vp.width, vp.height);
 
     // Zur Demo-Seite navigieren
@@ -25,9 +25,7 @@ for (const vp of VIEWPORTS) {
     await t.expect(dialog.visible).ok(`Dialog nicht sichtbar bei ${vp.name}`);
 
     // Kein horizontaler Overflow
-    const hasOverflow = await t.eval(() =>
-      document.documentElement.scrollWidth > window.innerWidth
-    );
+    const hasOverflow = await t.eval(() => document.documentElement.scrollWidth > window.innerWidth);
     await t.expect(hasOverflow).notOk(`Horizontaler Overflow bei ${vp.name}`);
 
     // Insert-Button erreichbar
