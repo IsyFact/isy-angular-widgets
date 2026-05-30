@@ -40,7 +40,7 @@
 ## Fixes
 - IFS-5514: In der PrimeNG-Formular-Demo wird die sichtbare Validierungsfehlermeldung des Eingabefeldes mit Hilfetext per `aria-describedby` referenziert, damit Screenreader die Fehlermeldung beim erneuten Fokussieren vorlesen.
 - IFS-5026: `isy-incomplete-date` setzt Pflichtfelder nun korrekt mit `required` und `aria-required`
-- IFS-549: Performanzproblem bei mehrfacher Einbindung der `InputCharComponent` wurde behoben
+- IFS-5439: Performanzproblem bei mehrfacher Einbindung der `InputCharComponent` wurde behoben
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
 - IFS-4999: Die Property `transferISO8601` in der Komponente IsyIncompleteDate konvertiert den Wert nun in die korrekte ISO-8601-Repräsentation.
 - IFS-5223: Release v21.0.1 wurde in `main` gemergt und enthält die Anpassung des Font-Family-Namens.
