@@ -1,5 +1,6 @@
 # 21.1.0 -
 ## Features
+- IFS-2925: Der `InputChar`-Dialog (`isy-input-char-picker-host`) ist nun responsiv: Die Breite ist auf `95vw` begrenzt, sodass der Dialog auf schmalen Viewports (≤ 390 px) nicht überläuft. Unterhalb von 480 px werden das linke und rechte Panel vertikal gestapelt statt nebeneinander dargestellt.
 - IFS-2966:  Anpassungen: 
     - schematics/collection.json
     "schema": "./ng-add/schema.json" zur ng-add Schematic-Definition hinzugefügt.
@@ -38,7 +39,6 @@
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 - IFS-4931: Die Komponente `form-wrapper` und der Service zur Übersetzung von Beschriftungen in der _isy-angular-widgets_ Bibliothek wurden überarbeitet
 ## Fixes
-- IFS-2925: Der `InputChar`-Dialog (`isy-input-char-picker-host`) ist nun responsiv: Die Breite ist auf `95vw` begrenzt, sodass der Dialog auf schmalen Viewports (≤ 390 px) nicht überläuft. Unterhalb von 480 px werden linkes und rechtes Panel vertikal gestapelt statt nebeneinander dargestellt.
 - IFS-5026: `isy-incomplete-date` setzt Pflichtfelder nun korrekt mit `required` und `aria-required`
 - IFS-5439: Performanzproblem bei mehrfacher Einbindung der `InputCharComponent` wurde behoben
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
