@@ -12,7 +12,9 @@
     (onHide)="onDialogClose()"
     [style]="{
       width: state.width,
-      height: state.height
+      height: state.height,
+      maxWidth: '95vw',
+      maxHeight: '90vh'
     }"
   >
     @defer (when pickerService.visible()) {

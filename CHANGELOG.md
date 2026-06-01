@@ -1,5 +1,6 @@
 # 21.1.0 -
 ## Features
+- IFS-2925: Der `InputChar`-Dialog (`isy-input-char-picker-host`) ist nun responsiv: Die Breite ist auf `95vw` begrenzt, sodass der Dialog auf schmalen Viewports (≤ 390 px) nicht überläuft. Unterhalb von 480 px werden das linke und rechte Panel vertikal gestapelt statt nebeneinander dargestellt.
 - IFS-2966:  Anpassungen: 
     - schematics/collection.json
     "schema": "./ng-add/schema.json" zur ng-add Schematic-Definition hinzugefügt.
