@@ -40,7 +40,7 @@
 ## Fixes
 - IFS-2925: Der `InputChar`-Dialog (`isy-input-char-picker-host`) ist nun responsiv: Die Breite ist auf `95vw` begrenzt, sodass der Dialog auf schmalen Viewports (≤ 390 px) nicht überläuft. Unterhalb von 480 px werden linkes und rechtes Panel vertikal gestapelt statt nebeneinander dargestellt.
 - IFS-5026: `isy-incomplete-date` setzt Pflichtfelder nun korrekt mit `required` und `aria-required`
-- IFS-549: Performanzproblem bei mehrfacher Einbindung der `InputCharComponent` wurde behoben
+- IFS-5439: Performanzproblem bei mehrfacher Einbindung der `InputCharComponent` wurde behoben
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
 - IFS-4999: Die Property `transferISO8601` in der Komponente IsyIncompleteDate konvertiert den Wert nun in die korrekte ISO-8601-Repräsentation.
 - IFS-5223: Release v21.0.1 wurde in `main` gemergt und enthält die Anpassung des Font-Family-Namens.
