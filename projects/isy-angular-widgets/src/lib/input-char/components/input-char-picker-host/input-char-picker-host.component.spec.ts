@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
 import {fakeAsync, tick} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {DialogModule} from 'primeng/dialog';
 import {InputCharPickerHostComponent} from './input-char-picker-host.component';
@@ -444,4 +445,28 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
     expect(pickerServiceMock.close).not.toHaveBeenCalled();
     expect(pickerServiceMock.finishClose).not.toHaveBeenCalled();
   }));
+
+  it('should apply maxWidth and maxHeight to the dialog style to prevent viewport overflow', () => {
+    state.set(createPickerState({width: '740px', height: '460px'}));
+    visible.set(true);
+    render();
+
+    const dialogEl = spectator.fixture.debugElement.query(By.css('p-dialog'));
+    const dialogStyle = dialogEl?.componentInstance?.style;
+
+    expect(dialogStyle).toEqual(jasmine.objectContaining({maxWidth: '95vw', maxHeight: '90vh'}));
+  });
+
+  it('should keep state width and height in the dialog style alongside the viewport constraints', () => {
+    state.set(createPickerState({width: '740px', height: '460px'}));
+    visible.set(true);
+    render();
+
+    const dialogEl = spectator.fixture.debugElement.query(By.css('p-dialog'));
+    const dialogStyle = dialogEl?.componentInstance?.style;
+
+    expect(dialogStyle).toEqual(
+      jasmine.objectContaining({width: '740px', height: '460px', maxWidth: '95vw', maxHeight: '90vh'})
+    );
+  });
 });

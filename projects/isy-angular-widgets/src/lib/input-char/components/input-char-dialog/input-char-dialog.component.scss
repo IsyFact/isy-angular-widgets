@@ -1,3 +1,11 @@
+:host {
+  display: flex;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
 .split {
   height: 100%;
   max-height: 350px;
@@ -32,6 +40,22 @@
 
 // To style PrimeNG widgets within a composition, we were unable to use own classes. A SASS interface is currently
 // not available. For a quick fix, the deprecated ng-deep is used; SASS variables should be used later.
+
+@media screen and (max-width: 480px) {
+  .split {
+    max-height: none;
+    height: auto;
+  }
+
+  .left-panel-side {
+    width: 100%;
+    max-height: 200px;
+  }
+
+  .right-panel-side {
+    width: 100%;
+  }
+}
 
 ::ng-deep {
   // Styles specific for right side select buttons
