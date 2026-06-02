@@ -175,6 +175,13 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(spectator.query('p-message')).toBeFalsy();
   });
 
+  it('should describe InputText validation field with help text before an error is shown', () => {
+    const input = spectator.query<HTMLInputElement>('#input-text-validation');
+
+    expect(input).toHaveAttribute('aria-describedby', 'input-text-help');
+    expect(spectator.query('#input-text-validation-error')).toBeFalsy();
+  });
+
   it('should show required validation error after InputText field is touched', () => {
     const input = spectator.query<HTMLInputElement>('#input-text-validation');
 
@@ -184,6 +191,17 @@ describe('Unit Tests: PrimengFormComponent', () => {
     spectator.detectChanges();
 
     expect(spectator.query('p-message')).toBeTruthy();
+  });
+
+  it('should describe InputText validation field with help text and error when an error is shown', () => {
+    const input = spectator.query<HTMLInputElement>('#input-text-validation');
+
+    spectator.typeInElement('ab', input as HTMLInputElement);
+    spectator.dispatchFakeEvent(input as HTMLInputElement, 'blur');
+    spectator.detectChanges();
+
+    expect(spectator.query('#input-text-validation-error')).toBeTruthy();
+    expect(input).toHaveAttribute('aria-describedby', 'input-text-help input-text-validation-error');
   });
 
   it('should apply minlength validation to InputText and show error for too-short input', () => {

@@ -39,6 +39,7 @@
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 - IFS-4931: Die Komponente `form-wrapper` und der Service zur Übersetzung von Beschriftungen in der _isy-angular-widgets_ Bibliothek wurden überarbeitet
 ## Fixes
+- IFS-5514: In der PrimeNG-Formular-Demo wird die sichtbare Validierungsfehlermeldung des Eingabefeldes mit Hilfetext per `aria-describedby` referenziert, damit Screenreader die Fehlermeldung beim erneuten Fokussieren vorlesen.
 - IFS-5026: `isy-incomplete-date` setzt Pflichtfelder nun korrekt mit `required` und `aria-required`
 - IFS-5439: Performanzproblem bei mehrfacher Einbindung der `InputCharComponent` wurde behoben
 - IFS-4947: Farbe für Disabled-Buttons wurde angepasst
