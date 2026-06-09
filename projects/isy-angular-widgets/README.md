@@ -44,21 +44,24 @@ Mit folgendem Befehl wird die Bibliothek `isy-angular-widgets` zu einem bestehen
 $ ng add @isyfact/isy-angular-widgets
 ```
 
-Die Schematics führt folgende Schritte aus:
-- Hinzufügen und Installation der Bibliothek und der notwendigen Abhängigkeiten
-- Hinzufügen der Stylesheets der IsyFact
-- Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
-- *(Optional)* Konfiguration der ESLint-Regeln der IsyFact (`@isyfact/eslint-plugin`) inkl. Unterstützung für einfache Projekte und Monorepos
-- *(Optional)* Konfiguration der Prettier-Regeln der IsyFact (`@isyfact/prettier-plugin`)
-- *(Optional)* Konfiguration des Projekts in Monorepos für die EsLint-  und/ oder Prettier-Regeln installiert werden sollen. 
+Die Schematic führt folgende Schritte aus:
+
+* Hinzufügen und Installation der Bibliothek und der notwendigen Abhängigkeiten
+* Hinzufügen der IsyFact-Stylesheets
+* Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in deutscher und englischer Sprache
+* *(Optional)* Konfiguration der IsyFact ESLint-Regeln über `@isyfact/eslint-plugin` inklusive Unterstützung für einfache Projekte und Monorepos
+* *(Optional)* Konfiguration der IsyFact Prettier-Regeln über `@isyfact/prettier-plugin`
+* *(Optional)* Auswahl der Projekte, für die in Monorepos ESLint und/oder Prettier eingerichtet werden sollen
 
 Die optionalen Schritte werden während der Installation per CLI-Prompt abgefragt.
 
 ### ESLint
 
-Bei der Installation wird optional eine `eslint.config.js` im Projektstamm angelegt, die die IsyFact ESLint-Regeln über `@isyfact/eslint-plugin` einbindet.
-Die Konfiguration unterstützt sowohl einfache Angular-Projekte als auch Monorepos.
-Für jedes Projekt werden separate Konfigurationsblöcke für TypeScript-, Spec- und HTML-Dateien generiert.
+Bei der Installation kann optional eine `eslint.config.js` im Projektstamm angelegt werden, die die IsyFact ESLint-Regeln über `@isyfact/eslint-plugin` einbindet.
+
+Die Konfiguration unterstützt sowohl einfache Angular-Projekte als auch Monorepos. Für jedes Projekt werden passende Konfigurationsblöcke für TypeScript-, Spec- und HTML-Dateien generiert.
+
+Zusätzlich wird ein `lint`-Script in der `package.json` ergänzt.
 
 Die Linting-Prüfung kann mit folgendem Befehl ausgeführt werden:
 
@@ -66,12 +69,13 @@ Die Linting-Prüfung kann mit folgendem Befehl ausgeführt werden:
 npm run lint
 ```
 
-Ist bereits eine `eslint.config.js` vorhanden, wird diese gesichert (`eslint.config.base.js`) und die IsyFact-Konfiguration als Wrapper darüber gelegt.
+Ist bereits eine `eslint.config.js` vorhanden, wird diese als `eslint.config.base.js` gesichert und in die neue IsyFact-Konfiguration eingebunden.
 
 ### Prettier
 
-Bei der Installation wird optional eine `.prettierrc.js` im Projektstamm angelegt, die die IsyFact Prettier-Regeln über `@isyfact/prettier-plugin` einbindet.
-Zusätzlich wird eine `.prettierignore` mit den IsyFact-Standardausschlüssen (z. B. `dist`, `node_modules`, `*.md`) erstellt.
+Bei der Installation kann optional eine `.prettierrc.js` im Projektstamm angelegt werden, die die IsyFact Prettier-Regeln über `@isyfact/prettier-plugin` einbindet.
+
+Zusätzlich wird eine `.prettierignore` mit den IsyFact-Standardausschlüssen erstellt und ein `format`-Script in der `package.json` ergänzt.
 
 Die Formatierung kann mit folgendem Befehl ausgeführt werden:
 
@@ -81,10 +85,12 @@ npm run format
 
 Ist bereits eine `.prettierrc.js` vorhanden, wird sie nicht überschrieben.
 
+Das Prettier-Setup ist standardmäßig aktiviert und kann über das Schema-Flag `addPrettier` gesteuert werden.
+
 ### Hauptfenster einbinden
 
 Nach der Installation von `isy-angular-widgets` kann das Hauptfenster-Widget eingebunden werden.
-Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Datei `app.component.html` mit folgendem Inhalt überschrieben werden:
+Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Datei `app.html` mit folgendem Inhalt überschrieben werden:
 
 ```html
 <isy-hauptfenster
@@ -121,7 +127,7 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
-Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.component.ts` importiert:
+Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.ts` importiert:
 
 ```typescript
 // Other imports ...
@@ -133,11 +139,11 @@ import {PanelModule} from 'primeng/panel';
 @Component({
   standalone: true,
   selector: 'app-root'
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.html',
+  styleUrls: ['./app.scss'],
   imports: [HauptfensterComponent, PanelModule, MenuModule]
 })
-export class AppComponent {}
+export class App {}
 ```
 
 Abschließend ist es erforderlich, in `app.config.ts` die Methode `provideIsyFactTheme` zu importieren und bereitzustellen:
@@ -225,7 +231,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-Anschließend lassen sich die Übersetzungen für PrimeNG und `isy-angular-widgets` in der Datei `app.component.ts` bereitstellen. Dazu muss das erforderliche `TranslateModule` beispielsweise in der `app.component.ts` zur Verfügung gestellt werden.
+Anschließend lassen sich die Übersetzungen für PrimeNG und `isy-angular-widgets` in der Datei `app.ts` bereitstellen. Dazu muss das erforderliche `TranslateModule` beispielsweise in der `app.ts` zur Verfügung gestellt werden.
 
 ```typescript
 import {Component, ChangeDetectorRef, OnDestroy, inject} from '@angular/core';
@@ -239,11 +245,11 @@ import {Subscription} from 'rxjs';
 @Component({
   standalone: true,
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.html',
+  styleUrls: ['./app.scss'],
   imports: [HauptfensterComponent, PanelModule, MenuModule, TranslateModule]
 })
-export class AppComponent implements OnDestroy {
+export class App implements OnDestroy {
   private readonly primeNgSub?: Subscription;
   private readonly widgetSub?: Subscription;
   private readonly langSub?: Subscription;

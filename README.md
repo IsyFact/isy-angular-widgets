@@ -31,18 +31,29 @@ Im Root-Verzeichnis des Projekts wird durch den nachstehenden Shortcut-Befehl au
 npm run build-and-pack:widgets_lib
 ```
 
-Im nächsten Schritt erfolgt die Installation dieser Bibliothek in einem neuen Angular-Projekt. 
-Hierfür wird der Pfad zur TGZ-Datei benötigt. 
-Im Root-Verzeichnis des neuen Angular-Projekts ist der folgende Befehl auszuführen.
+Dadurch wird im Verzeichnis `dist/isy-angular-widgets` eine TGZ-Datei der Bibliothek erzeugt, zum Beispiel:
+
+`dist/isy-angular-widgets/isyfact-isy-angular-widgets-0.0.0.tgz`
+
+Im nächsten Schritt wird die erzeugte TGZ-Datei in einem neuen Angular-Projekt installiert.
+Hierfür wird der Pfad zur TGZ-Datei benötigt.
+Im Root-Verzeichnis des neuen Angular-Projekts ist folgender Befehl auszuführen:
 
 ```shell
-ng add [WIDGETS_LIB_PATH].tgz
+npm install "file:[WIDGETS_LIB_PATH].tgz"
 ```
-    
-Anschließend ist die Aktivierung von Animationen notwendig. 
-Je nach Projekttyp gibt es unterschiedliche Vorgehensweisen.
-In Standalone-Projekten muss in `app.config.ts` die Methode `provideAnimations` importiert und bereitstellt werden.
-In None-Standalone-Projekten erfolgt das Aktivieren von Animationen durch das Importieren und Hinzufügen von `BrowserAnimationsModule` zum `AppModule`.
+
+Nach der Installation kann die Schematic der Bibliothek ausgeführt werden:
+
+```shell
+ng generate @isyfact/isy-angular-widgets:ng-add
+```
+
+Der direkte Aufruf von `ng add` auf die lokale TGZ-Datei sollte nicht verwendet werden, da Angular CLI bei lokalen Paketdateien die Paketinformationen unter Umständen nicht korrekt auslesen kann.
+
+Eine zusätzliche Aktivierung von Angular-Animationen über `provideAnimations`, `provideAnimationsAsync` oder `BrowserAnimationsModule` ist für Angular 21 und PrimeNG 21 nicht mehr erforderlich. Angular hat die bisherigen Animation-Provider als deprecated markiert. PrimeNG 21 verwendet native CSS-Animationen.
+
+Falls ein Projekt weiterhin eigene Legacy-Animationen aus `@angular/animations` verwendet, muss dies projektbezogen geprüft und perspektivisch auf native CSS-Animationen migriert werden.
 
 ### Demo-Anwendung starten
 
