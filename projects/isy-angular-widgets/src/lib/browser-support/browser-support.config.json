@@ -1,0 +1,23 @@
+{
+  "angularMajor": 21,
+  "baselineDate": "2025-10-20",
+  "source": "Generated from Angular browser support rules for Angular 21.",
+  "browsers": {
+    "chrome": {
+      "label": "Google Chrome",
+      "minimumVersion": "146"
+    },
+    "edge": {
+      "label": "Microsoft Edge",
+      "minimumVersion": "145"
+    },
+    "firefox": {
+      "label": "Mozilla Firefox",
+      "minimumVersion": "140"
+    },
+    "safari": {
+      "label": "Apple Safari",
+      "minimumVersion": "18.0"
+    }
+  }
+}

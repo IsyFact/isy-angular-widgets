@@ -31,9 +31,15 @@ Im Root-Verzeichnis des Projekts wird durch den nachstehenden Shortcut-Befehl au
 npm run build-and-pack:widgets_lib
 ```
 
-Im nächsten Schritt erfolgt die Installation dieser Bibliothek in einem neuen Angular-Projekt. 
-Hierfür wird der Pfad zur TGZ-Datei benötigt. 
-Im Root-Verzeichnis des neuen Angular-Projekts ist der folgende Befehl auszuführen.
+Dadurch wird im Verzeichnis `dist/isy-angular-widgets` eine TGZ-Datei der Bibliothek erzeugt, zum Beispiel:
+
+```text
+dist/isy-angular-widgets/isyfact-isy-angular-widgets-0.0.0.tgz
+```
+
+Im nächsten Schritt wird die erzeugte TGZ-Datei in einem neuen Angular-Projekt installiert.
+Hierfür wird der Pfad zur TGZ-Datei benötigt.
+Im Root-Verzeichnis des neuen Angular-Projekts ist folgender Befehl auszuführen:
 
 ```shell
 ng add [WIDGETS_LIB_PATH].tgz
@@ -52,6 +58,48 @@ Die Demo-Anwendung kann mit folgendem Befehl gestartet werden.
 ```
 $ npm run start
 ```
+
+### Browser-Versionsprüfung im Hauptfenster
+
+Das Widget `HauptfensterComponent` prüft beim Laden der Anwendung automatisch, ob die vom Client verwendete Browser-Version unterstützt wird. Wird eine nicht unterstützte Browser-Version erkannt, wird im Hauptfenster eine Warnmeldung angezeigt.
+
+Die Prüfung ist standardmäßig aktiviert und muss bei der Verwendung des Hauptfensters nicht zusätzlich konfiguriert werden.
+
+```html
+<isy-hauptfenster>
+  <!-- Anwendungscode -->
+</isy-hauptfenster>
+```
+
+Falls die Prüfung in einer Anwendung deaktiviert werden soll, kann dies über das Input-Property `checkBrowserVersion` erfolgen.
+
+```html
+<isy-hauptfenster [checkBrowserVersion]="false">
+  <!-- Anwendungscode -->
+</isy-hauptfenster>
+```
+
+#### Browser-Support-Konfiguration generieren
+
+Die unterstützten Mindest-Browser-Versionen werden in der Datei `browser-support.config.json` statisch in der Widgets-Bibliothek hinterlegt.
+
+Die Datei befindet sich unter:
+
+```text
+projects/isy-angular-widgets/src/lib/browser-support/browser-support.config.json
+```
+
+Die Konfiguration wird über folgendes Skript generiert:
+
+```shell
+npm run generate-browser-support
+```
+
+Das Skript ermittelt die Browser-Versionen auf Basis der im Generator hinterlegten Browser-Support-Regeln des aktuellen Angular-Major-Releases und aktualisiert die Datei `browser-support.config.json`.
+
+Die generierte Datei ist Bestandteil der Widgets-Bibliothek und muss eingecheckt werden.
+
+Das Skript sollte insbesondere nach einem Update auf ein neues Angular-Major-Release erneut ausgeführt werden.
 
 #### Prettier für Demo-Anwendung und Widgets-Bibliothek ausführen
 Zur Überprüfung der Demo-Anwendung und der Widgets-Bibliothek auf Code-Formatierungsfehler mithilfe von Prettier, kann folgender Befehl ausgeführt werden.

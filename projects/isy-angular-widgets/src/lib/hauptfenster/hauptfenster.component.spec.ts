@@ -1,12 +1,15 @@
-import {Component, ElementRef, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {Component, ElementRef, Input} from '@angular/core';
 import {fakeAsync, tick} from '@angular/core/testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {ButtonModule} from 'primeng/button';
+import {BehaviorSubject} from 'rxjs';
 import {MegaMenuItem} from 'primeng/api';
-import {HauptfensterComponent} from './hauptfenster.component';
+import {ButtonModule} from 'primeng/button';
 import {UserInfo} from '../api/userinfo';
+import {BrowserSupportCheckResult, BrowserVersionService} from '../browser-support/browser-version.service';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
+import {WidgetsTranslation} from '../i18n/widgets-translation';
+import {HauptfensterComponent} from './hauptfenster.component';
 import {SkipTarget} from './model/model';
 
 @Component({selector: 'p-megaMenu', standalone: true, template: ''})
@@ -22,6 +25,21 @@ class SkipLinksStubComponent {
   @Input() links: SkipTarget[] = [];
 }
 
+@Component({
+  selector: 'p-message',
+  standalone: true,
+  template: `
+    <div [class]="styleClass" role="alert" aria-live="assertive">
+      <ng-content></ng-content>
+    </div>
+  `
+})
+class MessageStubComponent {
+  @Input() severity?: string;
+  @Input() icon?: string;
+  @Input() styleClass?: string;
+}
+
 interface HauptfensterComponentTestAccess {
   linksNavigationHeader?: ElementRef<HTMLElement>;
   openLinksNavigation?: ElementRef<HTMLElement>;
@@ -33,11 +51,43 @@ describe('Unit Tests: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
   let component: HauptfensterComponent;
   let mockConfigService: jasmine.SpyObj<WidgetsConfigService>;
+  let mockBrowserVersionService: jasmine.SpyObj<BrowserVersionService>;
+  let translationSource: BehaviorSubject<WidgetsTranslation>;
+
+  const supportedBrowserResult: BrowserSupportCheckResult = {
+    supported: true,
+    supportedBrowsers: [
+      {
+        label: 'Google Chrome',
+        minimumVersion: '112'
+      }
+    ]
+  };
+
+  const unsupportedBrowserResult: BrowserSupportCheckResult = {
+    supported: false,
+    detectedBrowser: {
+      name: 'chrome',
+      label: 'Google Chrome',
+      version: '1.0.0'
+    },
+    minimumVersion: '112',
+    supportedBrowsers: [
+      {
+        label: 'Google Chrome',
+        minimumVersion: '112'
+      },
+      {
+        label: 'Microsoft Edge',
+        minimumVersion: '112'
+      }
+    ]
+  };
 
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
     detectChanges: false,
-    mocks: [WidgetsConfigService],
+    mocks: [WidgetsConfigService, BrowserVersionService],
     overrideComponents: [
       [
         HauptfensterComponent,
@@ -48,7 +98,8 @@ describe('Unit Tests: HauptfensterComponent', () => {
               ButtonModule,
               MegaMenuStubComponent,
               MegaMenuSubStubComponent,
-              SkipLinksStubComponent
+              SkipLinksStubComponent,
+              MessageStubComponent
             ]
           }
         }
@@ -61,23 +112,119 @@ describe('Unit Tests: HauptfensterComponent', () => {
   const getComponentAccess = (): HauptfensterComponentTestAccess =>
     component as unknown as HauptfensterComponentTestAccess;
 
-  beforeEach(() => {
-    spectator = createComponent({props: {userInfo}});
+  const setupComponent = (
+    browserSupportResult: BrowserSupportCheckResult = supportedBrowserResult,
+    props: Partial<HauptfensterComponent> = {}
+  ): void => {
+    spectator = createComponent({
+      props: {
+        userInfo,
+        ...props
+      }
+    });
+
     component = spectator.component;
 
     mockConfigService = spectator.inject(WidgetsConfigService);
-    mockConfigService.getTranslation.and.callFake((key: string) => {
-      const translations: {[key: string]: string} = {
-        'hauptfenster.logout': 'Abmelden'
-      };
-      return translations[key] ?? key;
+    mockBrowserVersionService = spectator.inject(BrowserVersionService);
+    translationSource = new BehaviorSubject<WidgetsTranslation>({});
+
+    Object.defineProperty(mockConfigService, 'translation$', {
+      configurable: true,
+      value: translationSource.asObservable()
     });
 
+    mockConfigService.getTranslation.and.callFake(
+      (key: string, params: Record<string, string | number> = {}): string => {
+        const translations: Record<string, string> = {
+          'hauptfenster.logout': 'Abmelden',
+          'hauptfenster.browserWarning.currentBrowserFallback': 'Ihr aktuell verwendeter Browser',
+          'hauptfenster.browserWarning.message':
+            '{{browser}} wird von dieser Anwendung nicht unterstützt. Bitte verwenden Sie eine unterstützte Browser-Version: {{supportedBrowsers}}.',
+          'hauptfenster.browserWarning.supportedBrowser': '{{browser}} ab Version {{version}}'
+        };
+
+        return Object.entries(params).reduce(
+          (result, [paramKey, replacement]) => result.replaceAll(`{{${paramKey}}}`, String(replacement)),
+          translations[key] ?? key
+        );
+      }
+    );
+
+    mockBrowserVersionService.checkCurrentBrowser.and.returnValue(browserSupportResult);
+    mockBrowserVersionService.checkCurrentBrowser.calls.reset();
+
     spectator.detectChanges();
+  };
+
+  beforeEach(() => {
+    setupComponent();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should check the browser version by default', () => {
+    expect(mockBrowserVersionService.checkCurrentBrowser).toHaveBeenCalled();
+  });
+
+  it('should not check the browser version when checkBrowserVersion is disabled', () => {
+    setupComponent(supportedBrowserResult, {
+      checkBrowserVersion: false
+    });
+
+    expect(mockBrowserVersionService.checkCurrentBrowser).not.toHaveBeenCalled();
+    expect(spectator.query('.isy-hauptfenster-browser-warning')).toBeNull();
+  });
+
+  it('should not display a browser warning when the browser is supported', () => {
+    expect(spectator.query('.isy-hauptfenster-browser-warning')).toBeNull();
+  });
+
+  it('should display a browser warning when the browser is unsupported', () => {
+    setupComponent(unsupportedBrowserResult);
+
+    const warning = spectator.query('.isy-hauptfenster-browser-warning') as HTMLElement;
+
+    expect(warning).not.toBeNull();
+    expect(warning.getAttribute('role')).toEqual('alert');
+    expect(warning.getAttribute('aria-live')).toEqual('assertive');
+    expect(warning.textContent).toContain('Google Chrome 1.0.0');
+    expect(warning.textContent).toContain('wird von dieser Anwendung nicht unterstützt');
+    expect(warning.textContent).toContain('Google Chrome ab Version 112');
+    expect(warning.textContent).toContain('Microsoft Edge ab Version 112');
+  });
+
+  it('should update the browser warning when translations change', () => {
+    setupComponent(unsupportedBrowserResult);
+
+    mockConfigService.getTranslation.and.callFake(
+      (key: string, params: Record<string, string | number> = {}): string => {
+        const translations: Record<string, string> = {
+          'hauptfenster.logout': 'Logout',
+          'hauptfenster.browserWarning.currentBrowserFallback': 'Your current browser',
+          'hauptfenster.browserWarning.message':
+            '{{browser}} is not supported by this application. Please use a supported browser version: {{supportedBrowsers}}.',
+          'hauptfenster.browserWarning.supportedBrowser': '{{browser}} version {{version}} or later'
+        };
+
+        return Object.entries(params).reduce(
+          (result, [paramKey, replacement]) => result.replaceAll(`{{${paramKey}}}`, String(replacement)),
+          translations[key] ?? key
+        );
+      }
+    );
+
+    translationSource.next({});
+    spectator.detectChanges();
+
+    const warning = spectator.query('.isy-hauptfenster-browser-warning') as HTMLElement;
+
+    expect(warning.textContent).toContain('Google Chrome 1.0.0');
+    expect(warning.textContent).toContain('is not supported by this application');
+    expect(warning.textContent).toContain('Google Chrome version 112 or later');
+    expect(warning.textContent).toContain('Microsoft Edge version 112 or later');
   });
 
   it('should display the title input in Titelzeile', () => {
@@ -300,9 +447,26 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
 describe('Integration Test: HauptfensterComponent', () => {
   let spectator: Spectator<HauptfensterComponent>;
+
   const createComponent = createComponentFactory({
     component: HauptfensterComponent,
-    imports: [ButtonModule]
+    imports: [ButtonModule],
+    providers: [
+      {
+        provide: BrowserVersionService,
+        useValue: {
+          checkCurrentBrowser: (): BrowserSupportCheckResult => ({
+            supported: true,
+            supportedBrowsers: [
+              {
+                label: 'Google Chrome',
+                minimumVersion: '112'
+              }
+            ]
+          })
+        }
+      }
+    ]
   });
 
   beforeEach(() => {

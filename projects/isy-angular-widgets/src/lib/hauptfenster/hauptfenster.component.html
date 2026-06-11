@@ -1,5 +1,19 @@
 <div class="isy-hauptfenster flex flex-column min-h-screen">
   <isy-skip-links [links]="links"></isy-skip-links>
+
+  @if (unsupportedBrowserMessage) {
+    <p-message
+      severity="warn"
+      icon="pi pi-exclamation-triangle"
+      styleClass="isy-hauptfenster-browser-warning dont-print"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <span>{{ unsupportedBrowserMessage }}</span>
+    </p-message>
+  }
+
   <header class="grid grid-nogutter">
     <div class="col isy-hauptfenster-anbieterlogo-bereich dont-print">
       @if (logoAnbieterAwl) {
