@@ -29,7 +29,7 @@ class SkipLinksStubComponent {
   selector: 'p-message',
   standalone: true,
   template: `
-    <div [class]="styleClass" role="alert" aria-live="assertive">
+    <div [class]="styleClass" role="alert" aria-live="assertive" aria-atomic="true">
       <ng-content></ng-content>
     </div>
   `
@@ -72,6 +72,20 @@ describe('Unit Tests: HauptfensterComponent', () => {
       version: '1.0.0'
     },
     minimumVersion: '112',
+    supportedBrowsers: [
+      {
+        label: 'Google Chrome',
+        minimumVersion: '112'
+      },
+      {
+        label: 'Microsoft Edge',
+        minimumVersion: '112'
+      }
+    ]
+  };
+
+  const unsupportedUnknownBrowserResult: BrowserSupportCheckResult = {
+    supported: false,
     supportedBrowsers: [
       {
         label: 'Google Chrome',
@@ -190,7 +204,20 @@ describe('Unit Tests: HauptfensterComponent', () => {
     expect(warning).not.toBeNull();
     expect(warning.getAttribute('role')).toEqual('alert');
     expect(warning.getAttribute('aria-live')).toEqual('assertive');
+    expect(warning.getAttribute('aria-atomic')).toEqual('true');
     expect(warning.textContent).toContain('Google Chrome 1.0.0');
+    expect(warning.textContent).toContain('wird von dieser Anwendung nicht unterstützt');
+    expect(warning.textContent).toContain('Google Chrome ab Version 112');
+    expect(warning.textContent).toContain('Microsoft Edge ab Version 112');
+  });
+
+  it('should display the fallback browser text when the unsupported browser cannot be detected', () => {
+    setupComponent(unsupportedUnknownBrowserResult);
+
+    const warning = spectator.query('.isy-hauptfenster-browser-warning') as HTMLElement;
+
+    expect(warning).not.toBeNull();
+    expect(warning.textContent).toContain('Ihr aktuell verwendeter Browser');
     expect(warning.textContent).toContain('wird von dieser Anwendung nicht unterstützt');
     expect(warning.textContent).toContain('Google Chrome ab Version 112');
     expect(warning.textContent).toContain('Microsoft Edge ab Version 112');

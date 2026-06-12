@@ -28,6 +28,7 @@
         <ng-content select="[LogoAnbieterAwl]"></ng-content>
       }
     </div>
+
     <div class="col isy-hauptfenster-nutzerbereich dont-print">
       <div class="flex justify-content-end">
         @if (logoAwl) {
@@ -40,6 +41,7 @@
           <ng-content select="[LogoAwl]"></ng-content>
         }
       </div>
+
       <div class="flex justify-content-end gap-2">
         @if (userInfo) {
           <div class="flex align-items-center gap-1">
@@ -47,6 +49,7 @@
             {{ userInfo.displayName }}
           </div>
         }
+
         <p-button
           id="isy-hauptfenster-logout-button"
           (onClick)="logoutEvent.emit(userInfo)"

@@ -16,12 +16,12 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {MegaMenuItem} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {MegaMenuModule} from 'primeng/megamenu';
+import {MessageModule} from 'primeng/message';
 import {UserInfo} from '../api/userinfo';
 import {BrowserSupportCheckResult, BrowserVersionService} from '../browser-support/browser-version.service';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
 import {SkipLinksComponent} from '../skip-links/skip-links.component';
 import {SkipTarget} from './model/model';
-import {MessageModule} from 'primeng/message';
 
 /**
  * The Anwendungsrahmen that contains general, application independent elements as logos or navigation bars.

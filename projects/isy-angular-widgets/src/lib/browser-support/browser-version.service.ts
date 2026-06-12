@@ -118,17 +118,27 @@ export class BrowserVersionService {
       };
     }
 
-    const safariMatch = /Version\/([\d.]+).*Safari\//.exec(userAgent);
+    const safariBrowser = this.detectSafari(userAgent);
 
-    if (safariMatch && !this.isChromiumBasedBrowser(userAgent)) {
-      return {
-        name: 'safari',
-        label: CONFIG.browsers.safari.label,
-        version: safariMatch[VERSION_GROUP_INDEX]
-      };
+    if (safariBrowser) {
+      return safariBrowser;
     }
 
     return undefined;
+  }
+
+  private detectSafari(userAgent: string): DetectedBrowser | undefined {
+    const safariVersionMatch = /Version\/([\d.]+)/.exec(userAgent);
+
+    if (!safariVersionMatch || !userAgent.includes('Safari/') || this.isChromiumBasedBrowser(userAgent)) {
+      return undefined;
+    }
+
+    return {
+      name: 'safari',
+      label: CONFIG.browsers.safari.label,
+      version: safariVersionMatch[VERSION_GROUP_INDEX]
+    };
   }
 
   private isChromiumBasedBrowser(userAgent: string): boolean {
