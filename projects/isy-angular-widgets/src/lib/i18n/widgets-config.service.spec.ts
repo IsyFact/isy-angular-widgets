@@ -1,6 +1,6 @@
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 import {WidgetsConfigService} from './widgets-config.service';
 import {WidgetsTranslation} from './widgets-translation';
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
 
 describe('Unit tests: WidgetsConfigService', () => {
   let spectator: SpectatorService<WidgetsConfigService>;
@@ -85,11 +85,75 @@ describe('Unit tests: WidgetsConfigService', () => {
       hauptfenster: {
         altLogoAwl: 'Logo der Anwendungslandschaft',
         altLogoAnbieterAwl: 'Logo des Anbieters der Anwendungslandschaft',
-        logout: 'Logout'
+        logout: 'Logout',
+        browserWarning: {
+          currentBrowserFallback: 'Ihr aktuell verwendeter Browser',
+          message:
+            '{{browser}} wird von dieser Anwendung nicht unterstützt. Bitte verwenden Sie eine unterstützte Browser-Version: {{supportedBrowsers}}.',
+          supportedBrowser: '{{browser}} ab Version {{version}}'
+        }
       },
       formWrapper: {
         required: 'Pflichtfeld'
       }
     });
+  });
+
+  it('should interpolate translation params', () => {
+    const translatedText = spectator.service.getTranslation('hauptfenster.browserWarning.supportedBrowser', {
+      browser: 'Google Chrome',
+      version: '112'
+    });
+
+    expect(translatedText).toEqual('Google Chrome ab Version 112');
+  });
+
+  it('should interpolate multiple occurrences of the same translation param', () => {
+    spectator.service.setTranslation({
+      hauptfenster: {
+        browserWarning: {
+          message: '{{browser}} / {{browser}} / {{supportedBrowsers}}'
+        }
+      }
+    });
+
+    const translatedText = spectator.service.getTranslation('hauptfenster.browserWarning.message', {
+      browser: 'Google Chrome',
+      supportedBrowsers: 'Microsoft Edge'
+    });
+
+    expect(translatedText).toEqual('Google Chrome / Google Chrome / Microsoft Edge');
+  });
+
+  it('should merge nested browser warning translations without removing existing values', () => {
+    spectator.service.setTranslation({
+      hauptfenster: {
+        browserWarning: {
+          message: '{{browser}} is not supported. Supported browsers: {{supportedBrowsers}}.'
+        }
+      }
+    });
+
+    expect(
+      spectator.service.getTranslation('hauptfenster.browserWarning.message', {
+        browser: 'Google Chrome 1.0.0',
+        supportedBrowsers: 'Google Chrome version 112 or later'
+      })
+    ).toEqual('Google Chrome 1.0.0 is not supported. Supported browsers: Google Chrome version 112 or later.');
+
+    expect(spectator.service.getTranslation('hauptfenster.browserWarning.currentBrowserFallback')).toEqual(
+      'Ihr aktuell verwendeter Browser'
+    );
+
+    expect(
+      spectator.service.getTranslation('hauptfenster.browserWarning.supportedBrowser', {
+        browser: 'Google Chrome',
+        version: '112'
+      })
+    ).toEqual('Google Chrome ab Version 112');
+  });
+
+  it('should return an empty string for unknown translation paths', () => {
+    expect(spectator.service.getTranslation('hauptfenster.unknown')).toEqual('');
   });
 });

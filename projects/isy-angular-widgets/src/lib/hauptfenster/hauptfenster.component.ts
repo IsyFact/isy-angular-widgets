@@ -1,7 +1,9 @@
 import {NgClass} from '@angular/common';
 import {
+  OnInit,
   afterNextRender,
   Component,
+  DestroyRef,
   ElementRef,
   EventEmitter,
   inject,
@@ -10,13 +12,16 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {MegaMenuItem} from 'primeng/api';
-import {UserInfo} from '../api/userinfo';
-import {WidgetsConfigService} from '../i18n/widgets-config.service';
 import {ButtonModule} from 'primeng/button';
 import {MegaMenuModule} from 'primeng/megamenu';
-import {SkipTarget} from './model/model';
+import {MessageModule} from 'primeng/message';
+import {UserInfo} from '../api/userinfo';
+import {BrowserSupportCheckResult, BrowserVersionService} from '../browser-support/browser-version.service';
+import {WidgetsConfigService} from '../i18n/widgets-config.service';
 import {SkipLinksComponent} from '../skip-links/skip-links.component';
+import {SkipTarget} from './model/model';
 
 /**
  * The Anwendungsrahmen that contains general, application independent elements as logos or navigation bars.
@@ -36,9 +41,9 @@ import {SkipLinksComponent} from '../skip-links/skip-links.component';
   selector: 'isy-hauptfenster',
   templateUrl: './hauptfenster.component.html',
   styleUrls: ['./hauptfenster.component.scss'],
-  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent, NgClass]
+  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent, NgClass, MessageModule]
 })
-export class HauptfensterComponent {
+export class HauptfensterComponent implements OnInit {
   /**
    * Items to be shown in the main menu bar.
    */
@@ -123,12 +128,18 @@ export class HauptfensterComponent {
 
   @Input() links: SkipTarget[] = [];
 
+  /**
+   * Enables the automatic browser version check.
+   * The check is enabled by default.
+   */
+  @Input() checkBrowserVersion = true;
+
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 
   /**
    * A service used to translate labels within the widgets library.
    */
-  configService = inject(WidgetsConfigService);
+  protected readonly configService = inject(WidgetsConfigService);
 
   @ViewChild('linksNavigationHeader')
   private readonly linksNavigationHeader?: ElementRef<HTMLElement>;
@@ -142,7 +153,55 @@ export class HauptfensterComponent {
   @ViewChild('openInformationsbereich')
   private readonly openInformationsbereich?: ElementRef<HTMLElement>;
 
+  protected unsupportedBrowserMessage = '';
+
+  private browserSupportResult?: BrowserSupportCheckResult;
+
+  private readonly browserVersionService = inject(BrowserVersionService);
+
+  private readonly destroyRef = inject(DestroyRef);
+
   private readonly injector = inject(Injector);
+
+  ngOnInit(): void {
+    if (!this.checkBrowserVersion) {
+      return;
+    }
+
+    this.browserSupportResult = this.browserVersionService.checkCurrentBrowser();
+
+    if (this.browserSupportResult.supported) {
+      return;
+    }
+
+    this.configService.translation$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      if (this.browserSupportResult) {
+        this.unsupportedBrowserMessage = this.createUnsupportedBrowserMessage(this.browserSupportResult);
+      }
+    });
+  }
+
+  private createUnsupportedBrowserMessage(browserSupportResult: BrowserSupportCheckResult): string {
+    const detectedBrowser = browserSupportResult.detectedBrowser;
+
+    const browserText = detectedBrowser
+      ? `${detectedBrowser.label} ${detectedBrowser.version}`
+      : this.configService.getTranslation('hauptfenster.browserWarning.currentBrowserFallback');
+
+    const supportedBrowsersText = browserSupportResult.supportedBrowsers
+      .map((browser) =>
+        this.configService.getTranslation('hauptfenster.browserWarning.supportedBrowser', {
+          browser: browser.label,
+          version: browser.minimumVersion
+        })
+      )
+      .join(', ');
+
+    return this.configService.getTranslation('hauptfenster.browserWarning.message', {
+      browser: browserText,
+      supportedBrowsers: supportedBrowsersText
+    });
+  }
 
   collapseSidebar(): void {
     this.collapsedLinksnavigation = true;

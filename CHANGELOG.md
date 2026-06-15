@@ -1,6 +1,11 @@
 # 21.1.0 - 06.06.2026
 ## Features
 - IFS-5530: Version wurde auf `v21.1.0` angehoben und zugehörige Dokumentation angepasst
+- IFS-5003: Das `isy-hauptfenster` prüft beim Laden der Anwendung automatisch, ob die vom Client verwendete Browser-Version unterstützt wird, und zeigt bei nicht unterstützten Versionen eine Warnmeldung im Hauptfenster an
+  * Die Browser-Versionsprüfung ist standardmäßig aktiviert und kann über das Input-Property `checkBrowserVersion` deaktiviert werden
+  * Die unterstützten Mindest-Browser-Versionen werden aus einer statischen `browser-support.config.json` geladen
+  * Die Browser-Support-Konfiguration kann über das Skript `npm run generate-browser-support` aktualisiert werden
+  * Die Texte der Warnmeldung sind über den `WidgetsConfigService` konfigurierbar
 - IFS-2925: `InputChar`-Dialog (`isy-input-char-picker-host`) wurde responsiv angepasst
   * Die Dialogbreite ist nun auf `95vw` begrenzt, damit der Dialog auf schmalen Viewports nicht überläuft
   * Unterhalb von `480px` werden das linke und rechte Panel vertikal statt nebeneinander dargestellt
