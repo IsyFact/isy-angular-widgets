@@ -1,40 +1,23 @@
 # 21.1.0 -
 ## Features
-- IFS-2925: Der `InputChar`-Dialog (`isy-input-char-picker-host`) ist nun responsiv: Die Breite ist auf `95vw` begrenzt, sodass der Dialog auf schmalen Viewports (≤ 390 px) nicht überläuft. Unterhalb von 480 px werden das linke und rechte Panel vertikal gestapelt statt nebeneinander dargestellt.
-- IFS-2966:  Anpassungen: 
-    - schematics/collection.json
-    "schema": "./ng-add/schema.json" zur ng-add Schematic-Definition hinzugefügt.
-
-    schematics/ng-add/package-config.ts
-    - devDependencies zum PackageJson Interface hinzugefügt
-    - Neue Funktion addDevPackageToPackageJson für ESLint- und Prettier-Pakete als devDependency
-    - Neue Funktion addScriptToPackageJson für npm-Scripts (lint, format)
-
-    schematics/ng-add/index.ts
-    - Interfaces erweitert (ArchitectOptions, ProjectInfo mit root, sourceRoot, prefix)
-    - Neue Funktion isMonorepo() – erkennt Monorepo wenn alle Projekte einen nicht-leeren root haben
-    - Neue Funktion getTsConfigPaths() – liest tsConfig-Pfade aus architect.build und architect.test
-    - Neue Funktion generateProjectConfigBlock() – generiert pro Projekt einen ESLint-Konfigurationsblock
-    - Neue Funktion generateEslintConfigContent() – generiert die vollständige eslint.config.js für einfaches Projekt und Monorepo (gleiche Logik, unterschiedliche
-      sourceRoot-Pfade)
-    - Neue Funktion setupEslint() – installiert devDeps, erstellt eslint.config.js (wenn nicht vorhanden), gibt Warnung wenn bereits vorhanden
-    - ngAdd() akzeptiert jetzt Schema-Parameter und ruft setupEslint() auf wenn options.addEslint === true
-    - Neue Funktion extendExistingEslintConfig() – sichert vorhandene eslint.config.js als eslint.config.base.js und erzeugt einen Wrapper
-    - Neue Funktion setupPrettier() – installiert @isyfact/prettier-plugin und prettier als devDependencies, erstellt .prettierrc.js und .prettierignore und fügt format-Script hinzu
-    - ngAdd() ruft setupPrettier() auf wenn options.addPrettier === true
-
-    eslint.config.js enthält:
-    - ignores für karma.conf.js, karma.config.js, node_modules und *.server.ts
-    - configs.recommended() (IsyFact TypeScript-Regeln)
-    - Pro Projekt: TS-Block, Spec-Block (Test-spezifische Regelausnahmen), HTML-Block und Inline-Template-Block mit Angular-ESLint-Regeln und korrektem prefix
-
-    .prettierrc.js enthält:
-    - Verweis auf @isyfact/prettier-plugin (tabWidth: 2, singleQuote: true, printWidth: 120, endOfLine: lf u.a.)
-
-    schematics/ng-add/schema.json + schema.d.ts
-    - Neues optionales Flag addPrettier (default: true) mit CLI-Prompt
-
-- IFS-4984: Der `isy-wizard` wurde um einen anpassbaren Footer erweitert. Zusätzlich wurde die Standard-Anordnung der Wizard-Buttons überarbeitet, damit Aktionen konsistent platziert und projektspezifisch per Template angepasst werden können.
+- IFS-5003: Das `isy-hauptfenster` prüft beim Laden der Anwendung automatisch, ob die vom Client verwendete Browser-Version unterstützt wird, und zeigt bei nicht unterstützten Versionen eine Warnmeldung im Hauptfenster an
+  * Die Browser-Versionsprüfung ist standardmäßig aktiviert und kann über das Input-Property `checkBrowserVersion` deaktiviert werden
+  * Die unterstützten Mindest-Browser-Versionen werden aus einer statischen `browser-support.config.json` geladen
+  * Die Browser-Support-Konfiguration kann über das Skript `npm run generate-browser-support` aktualisiert werden
+  * Die Texte der Warnmeldung sind über den `WidgetsConfigService` konfigurierbar
+- IFS-5530: Version wurde auf `v21.1.0` angehoben und zugehörige Dokumentation angepasst
+- IFS-2925: `InputChar`-Dialog (`isy-input-char-picker-host`) wurde responsiv angepasst
+  * Die Dialogbreite ist nun auf `95vw` begrenzt, damit der Dialog auf schmalen Viewports nicht überläuft
+  * Unterhalb von `480px` werden das linke und rechte Panel vertikal statt nebeneinander dargestellt
+- IFS-2966: `ng-add` Schematic wurde um optionales ESLint- und Prettier-Setup erweitert
+  * ESLint-Konfiguration kann nun automatisch für einfache Angular-Projekte und Monorepos erzeugt werden
+  * Bestehende `eslint.config.js` wird erkannt, als `eslint.config.base.js` gesichert und in die neue Konfiguration eingebunden
+  * Projektspezifische ESLint-Konfigurationsblöcke für TypeScript-, Spec-, HTML- und Inline-Template-Dateien werden automatisch generiert
+  * TypeScript-Konfigurationspfade werden aus den Build- und Test-Targets der Angular-Projekte ermittelt
+  * Prettier-Setup mit `@isyfact/prettier-plugin`, `.prettierrc.js`, `.prettierignore` und `format`-Script ergänzt
+  * `lint`-Script wird bei aktiviertem ESLint-Setup in der `package.json` ergänzt
+  * Neues Schema-Flag `addPrettier` mit Standardwert `true` hinzugefügt
+- IFS-4984: `isy-wizard` wurde um einen anpassbaren Footer erweitert und die Standard-Anordnung der Wizard-Buttons wurde vereinheitlicht, sodass Aktionen konsistent platziert und projektspezifisch per Template angepasst werden können
 - IFS-4928: Tab-Reihenfolge in Dialogen, Fokusverhalten bei Overlays und numerische Ausrichtung in Tabellen wurden verbessert
 - IFS-4927: Der Hauptinhalt ist zentriert, Abstände werden über Container-Gaps bzw. Spacing-Tokens gesteuert und doppelte Margins zwischen Komponenten wurden entfernt.
 - IFS-4931: Die Komponente `form-wrapper` und der Service zur Übersetzung von Beschriftungen in der _isy-angular-widgets_ Bibliothek wurden überarbeitet

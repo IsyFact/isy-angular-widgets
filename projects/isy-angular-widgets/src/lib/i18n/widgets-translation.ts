@@ -17,6 +17,11 @@ export interface WidgetsTranslation {
     altLogoAwl?: string;
     altLogoAnbieterAwl?: string;
     logout?: string;
+    browserWarning?: {
+      currentBrowserFallback?: string;
+      message?: string;
+      supportedBrowser?: string;
+    };
   };
   formWrapper?: {
     required?: string;

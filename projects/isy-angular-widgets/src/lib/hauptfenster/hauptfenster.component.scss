@@ -39,6 +39,16 @@
   background-color: var(--isyfact-surface-ground);
 }
 
+:host ::ng-deep .isy-hauptfenster-browser-warning {
+  border-radius: 0;
+  justify-content: flex-start;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: var(--isyfact-space-md) var(--isyfact-space-sm);
+  z-index: 1000;
+}
+
 :host ::ng-deep {
   .p-megamenu {
     .p-menuitem-text {

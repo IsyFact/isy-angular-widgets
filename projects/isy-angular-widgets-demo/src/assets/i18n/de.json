@@ -35,6 +35,11 @@
       "altLogoAwl": "Logo der Anwendungslandschaft",
       "altLogoAnbieterAwl": "Logo des Anbieters der Anwendungslandschaft",
       "logout": "Abmelden",
+      "browserWarning": {
+        "currentBrowserFallback": "Ihr aktuell verwendeter Browser",
+        "message": "{{browser}} wird von dieser Anwendung nicht unterstützt. Bitte verwenden Sie eine unterstützte Browser-Version: {{supportedBrowsers}}.",
+        "supportedBrowser": "{{browser}} ab Version {{version}}"
+      },
       "aria": {
         "collapseLinksnavigation": "Linksnavigation ausblenden",
         "expandLinksnavigation": "Linksnavigation einblenden",

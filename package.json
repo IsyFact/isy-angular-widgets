@@ -33,7 +33,8 @@
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -d ./docs -s --disablePrivate --disableInternal",
     "compodoc:serve": "compodoc -s -d ./docs",
     "prettier:check": "prettier . --check",
-    "prettier:fix": "prettier . --write"
+    "prettier:fix": "prettier . --write",
+    "generate-browser-support": "node tools/generate-browser-support.mjs"
   },
   "prettier": "@isyfact/prettier-plugin",
   "private": true,

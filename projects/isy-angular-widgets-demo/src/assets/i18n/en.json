@@ -33,8 +33,13 @@
     },
     "hauptfenster": {
       "altLogoAwl": "Logo of the application landscape",
-      "altLogoAnbieterAwl": "Logo of the application landscape provide",
+      "altLogoAnbieterAwl": "Logo of the application landscape provider",
       "logout": "Logout",
+      "browserWarning": {
+        "currentBrowserFallback": "Your current browser",
+        "message": "{{browser}} is not supported by this application. Please use a supported browser version: {{supportedBrowsers}}.",
+        "supportedBrowser": "{{browser}} version {{version}} or later"
+      },
       "aria": {
         "collapseLinksnavigation": "Collapse left side bar",
         "expandLinksnavigation": "Expand left side bar",

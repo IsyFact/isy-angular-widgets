@@ -3,6 +3,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged, map} from 'rxjs/operators';
 import {WidgetsTranslation} from './widgets-translation';
 
+type TranslationParams = Record<string, string | number>;
+
 /**
  * A service to translate labels in widgets library.
  */
@@ -25,7 +27,13 @@ export class WidgetsConfigService {
     hauptfenster: {
       altLogoAwl: 'Logo der Anwendungslandschaft',
       altLogoAnbieterAwl: 'Logo des Anbieters der Anwendungslandschaft',
-      logout: 'Abmelden'
+      logout: 'Abmelden',
+      browserWarning: {
+        currentBrowserFallback: 'Ihr aktuell verwendeter Browser',
+        message:
+          '{{browser}} wird von dieser Anwendung nicht unterstützt. Bitte verwenden Sie eine unterstützte Browser-Version: {{supportedBrowsers}}.',
+        supportedBrowser: '{{browser}} ab Version {{version}}'
+      }
     },
     formWrapper: {
       required: 'Pflichtfeld'
@@ -36,7 +44,7 @@ export class WidgetsConfigService {
 
   readonly translation$: Observable<WidgetsTranslation> = this.translationSource.asObservable();
 
-  getTranslation(path: string): string {
+  getTranslation(path: string, params: TranslationParams = {}): string {
     const value = path.split('.').reduce<unknown>((current, key) => {
       if (!current || typeof current !== 'object') {
         return undefined;
@@ -45,12 +53,12 @@ export class WidgetsConfigService {
       return (current as Record<string, unknown>)[key];
     }, this.translation);
 
-    return typeof value === 'string' ? value : '';
+    return typeof value === 'string' ? this.interpolate(value, params) : '';
   }
 
-  getTranslation$(path: string): Observable<string> {
+  getTranslation$(path: string, params: TranslationParams = {}): Observable<string> {
     return this.translation$.pipe(
-      map(() => this.getTranslation(path)),
+      map(() => this.getTranslation(path, params)),
       distinctUntilChanged()
     );
   }
@@ -68,7 +76,11 @@ export class WidgetsConfigService {
       },
       hauptfenster: {
         ...this.translation.hauptfenster,
-        ...value.hauptfenster
+        ...value.hauptfenster,
+        browserWarning: {
+          ...this.translation.hauptfenster?.browserWarning,
+          ...value.hauptfenster?.browserWarning
+        }
       },
       formWrapper: {
         ...this.translation.formWrapper,
@@ -81,5 +93,12 @@ export class WidgetsConfigService {
 
   getTranslations(): WidgetsTranslation {
     return this.translation;
+  }
+
+  private interpolate(value: string, params: TranslationParams): string {
+    return Object.entries(params).reduce(
+      (result, [key, replacement]) => result.replaceAll(`{{${key}}}`, String(replacement)),
+      value
+    );
   }
 }
