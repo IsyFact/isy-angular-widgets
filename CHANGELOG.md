@@ -1,4 +1,4 @@
-# 21.1.0 - 06.06.2026
+# 21.1.0 - 16.06.2026
 ## Features
 - IFS-5530: Version wurde auf `v21.1.0` angehoben und zugehörige Dokumentation angepasst
 - IFS-5003: Das `isy-hauptfenster` prüft beim Laden der Anwendung automatisch, ob die vom Client verwendete Browser-Version unterstützt wird, und zeigt bei nicht unterstützten Versionen eine Warnmeldung im Hauptfenster an
