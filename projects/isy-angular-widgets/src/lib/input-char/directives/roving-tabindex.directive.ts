@@ -5,12 +5,45 @@ const NOT_FOUND = -1;
 const STEP_PREVIOUS = -1;
 const STEP_NEXT = 1;
 const NO_STEP = 0;
+const LAYOUT_DIVISOR = 2;
 
 /**
  * Orientation of the roving navigation.
  * @internal
  */
 type RovingOrientation = 'horizontal' | 'vertical' | 'both';
+
+/**
+ * Navigation style for arrow-key handling.
+ *
+ * - `linear`: arrow keys step forward/backward through the flat item list (1D).
+ * - `grid`: arrow keys navigate geometrically across a measured 2D layout, so
+ *   ArrowDown/ArrowUp move to the item visually below/above the current one.
+ * @internal
+ */
+type RovingNavigation = 'linear' | 'grid';
+
+/**
+ * A single item in the geometric layout map used by {@link RovingNavigation} `'grid'`.
+ * @internal
+ */
+interface LayoutCell {
+  /** The DOM element. */
+  element: HTMLElement;
+  /** The horizontal center of the element in viewport coordinates. */
+  centerX: number;
+}
+
+/**
+ * A visual row in the geometric layout map.
+ * @internal
+ */
+interface LayoutRow {
+  /** The top offset of the row in viewport coordinates. */
+  top: number;
+  /** The cells of the row, ordered left to right. */
+  cells: LayoutCell[];
+}
 
 /**
  * Turns its host element into a single keyboard tab stop with arrow-key navigation
@@ -25,6 +58,10 @@ type RovingOrientation = 'horizontal' | 'vertical' | 'both';
  *
  * Activation (`Enter`/`Space`) is delegated to a synthetic `click()` so it keeps working
  * even where PrimeNG's own key activation is broken in this version.
+ *
+ * When {@link navigation} is `'grid'`, arrow keys navigate geometrically (measured bounding
+ * rects), so ArrowDown/ArrowUp move to the item visually below/above the current one,
+ * and ArrowLeft/ArrowRight move within the same visual row before stepping to an adjacent row.
  * @internal
  */
 @Directive({
@@ -46,6 +83,12 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
    * Whether navigation wraps around at the ends.
    */
   readonly wrap = input<boolean>(true);
+
+  /**
+   * Navigation style: `'linear'` steps through the flat item list; `'grid'` navigates
+   * geometrically so that ArrowDown/ArrowUp move to the item visually below/above.
+   */
+  readonly navigation = input<RovingNavigation>('linear');
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
@@ -128,6 +171,12 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
       return;
     }
 
+    if (this.navigation() === 'grid') {
+      this.handleGridNavigation(event, items, current);
+
+      return;
+    }
+
     const step = this.step(event.key);
 
     if (step === NO_STEP) {
@@ -140,6 +189,145 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
     const target = items[this.targetIndex(current, step, items.length)];
     this.setActive(target);
     target.focus();
+  }
+
+  /**
+   * Handles arrow-key navigation in `'grid'` mode by measuring the visual layout and
+   * moving focus to the geometrically adjacent item.
+   *
+   * ArrowDown/ArrowUp move to the nearest item in the visual row below/above.
+   * ArrowRight/ArrowLeft move within the current visual row and step to the adjacent row
+   * at the row boundary (wrapping if {@link wrap} is `true`).
+   * @param event The keyboard event.
+   * @param items The navigable items in DOM order.
+   * @param current The index of the currently active item within `items`.
+   */
+  private handleGridNavigation(event: KeyboardEvent, items: HTMLElement[], current: number): void {
+    const key = event.key;
+    const o = this.orientation();
+    const allowH = o !== 'vertical';
+    const allowV = o !== 'horizontal';
+
+    const isHandled =
+      (allowV && (key === 'ArrowDown' || key === 'ArrowUp')) ||
+      (allowH && (key === 'ArrowRight' || key === 'ArrowLeft'));
+
+    if (!isHandled) {
+      return;
+    }
+
+    const rows = this.buildGridLayout(items);
+    const currentElement = items[current];
+
+    let rowIndex = NOT_FOUND;
+    let cellIndexInRow = NOT_FOUND;
+
+    for (let ri = 0; ri < rows.length; ri++) {
+      const ci = rows[ri].cells.findIndex((c) => c.element === currentElement);
+
+      if (ci !== NOT_FOUND) {
+        rowIndex = ri;
+        cellIndexInRow = ci;
+        break;
+      }
+    }
+
+    if (rowIndex === NOT_FOUND || cellIndexInRow === NOT_FOUND) {
+      return;
+    }
+
+    const currentCenterX = rows[rowIndex].cells[cellIndexInRow].centerX;
+    let targetElement: HTMLElement | undefined;
+
+    if (key === 'ArrowDown') {
+      const nextRow = rows[rowIndex + 1];
+      targetElement = nextRow ? this.nearestInRow(nextRow, currentCenterX)?.element : undefined;
+    } else if (key === 'ArrowUp') {
+      const prevRow = rows[rowIndex - 1];
+      targetElement = prevRow ? this.nearestInRow(prevRow, currentCenterX)?.element : undefined;
+    } else if (key === 'ArrowRight') {
+      const rowCells = rows[rowIndex].cells;
+
+      if (cellIndexInRow < rowCells.length - 1) {
+        targetElement = rowCells[cellIndexInRow + 1].element;
+      } else if (rowIndex < rows.length - 1) {
+        targetElement = rows[rowIndex + 1].cells[0]?.element;
+      } else if (this.wrap()) {
+        targetElement = rows[0]?.cells[0]?.element;
+      }
+    } else if (key === 'ArrowLeft') {
+      const rowCells = rows[rowIndex].cells;
+
+      if (cellIndexInRow > 0) {
+        targetElement = rowCells[cellIndexInRow - 1].element;
+      } else if (rowIndex > 0) {
+        const prevRow = rows[rowIndex - 1];
+        targetElement = prevRow.cells[prevRow.cells.length - 1]?.element;
+      } else if (this.wrap()) {
+        const lastRow = rows[rows.length - 1];
+        targetElement = lastRow?.cells[lastRow.cells.length - 1]?.element;
+      }
+    }
+
+    if (!targetElement) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    this.setActive(targetElement);
+    targetElement.focus();
+  }
+
+  /**
+   * Finds the cell in `row` whose horizontal center is closest to `fromX`.
+   * @param row The row to search.
+   * @param fromX The reference horizontal center.
+   * @returns The nearest cell, or `undefined` if the row is empty.
+   */
+  private nearestInRow(row: LayoutRow, fromX: number): LayoutCell | undefined {
+    if (row.cells.length === 0) {
+      return undefined;
+    }
+
+    return row.cells.reduce((best, cell) =>
+      Math.abs(cell.centerX - fromX) < Math.abs(best.centerX - fromX) ? cell : best
+    );
+  }
+
+  /**
+   * Measures the visible items and groups them into visual rows sorted top-to-bottom,
+   * left-to-right. Items with zero dimensions are skipped.
+   * @param items The navigable items to lay out.
+   * @returns The visual rows, each sorted by horizontal center.
+   */
+  private buildGridLayout(items: HTMLElement[]): LayoutRow[] {
+    const rows: LayoutRow[] = [];
+
+    for (const element of items) {
+      const rect = element.getBoundingClientRect();
+
+      if (rect.width === 0 && rect.height === 0) {
+        continue;
+      }
+
+      const centerX = rect.left + rect.width / LAYOUT_DIVISOR;
+      const top = rect.top;
+      const tolerance = (rect.height || 1) / LAYOUT_DIVISOR;
+      let row = rows.find((r) => Math.abs(top - r.top) <= tolerance);
+
+      if (!row) {
+        row = {top, cells: []};
+        rows.push(row);
+      }
+
+      row.cells.push({element, centerX});
+    }
+
+    rows.sort((a, b) => a.top - b.top);
+    rows.forEach((row) => row.cells.sort((a, b) => a.centerX - b.centerX));
+
+    return rows;
   }
 
   /**

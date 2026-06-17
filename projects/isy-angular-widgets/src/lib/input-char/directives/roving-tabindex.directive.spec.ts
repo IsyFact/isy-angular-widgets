@@ -152,3 +152,143 @@ describe('RovingTabindexDirective', () => {
     expect(tabindexOf('c')).toBe('0');
   });
 });
+
+// Grid-mode host: 3×3 layout (row0: r0c0, r0c1, r0c2 | row1: r1c0, r1c1, r1c2 | row2: r2c0)
+@Component({
+  standalone: true,
+  imports: [RovingTabindexDirective],
+  template: `
+    <div isyRovingTabindex [itemSelector]="'button'" [navigation]="'grid'" [wrap]="wrap">
+      <button id="r0c0">0,0</button>
+      <button id="r0c1">0,1</button>
+      <button id="r0c2">0,2</button>
+      <button id="r1c0">1,0</button>
+      <button id="r1c1">1,1</button>
+      <button id="r1c2">1,2</button>
+      <button id="r2c0">2,0</button>
+    </div>
+  `
+})
+class GridHostComponent {
+  wrap = true;
+}
+
+describe('RovingTabindexDirective (navigation: grid)', () => {
+  let spectator: Spectator<GridHostComponent>;
+
+  const createComponent = createComponentFactory({component: GridHostComponent, detectChanges: false});
+
+  const tabindexOf = (id: string): string | null => spectator.query(`#${id}`)?.getAttribute('tabindex') ?? null;
+
+  const btn = (id: string): HTMLButtonElement => spectator.query(`#${id}`) as HTMLButtonElement;
+
+  // Mock a 3×3 layout: cells 50×44, cell size 50 wide, 44 high.
+  // Row 0: y=0,   x=0/50/100
+  // Row 1: y=44,  x=0/50/100
+  // Row 2: y=88,  x=0
+  const CELL_W = 50;
+  const CELL_H = 44;
+
+  const mockRects: Record<string, DOMRect> = {
+    r0c0: new DOMRect(0, 0, CELL_W, CELL_H),
+    r0c1: new DOMRect(CELL_W, 0, CELL_W, CELL_H),
+    r0c2: new DOMRect(CELL_W * 2, 0, CELL_W, CELL_H),
+    r1c0: new DOMRect(0, CELL_H, CELL_W, CELL_H),
+    r1c1: new DOMRect(CELL_W, CELL_H, CELL_W, CELL_H),
+    r1c2: new DOMRect(CELL_W * 2, CELL_H, CELL_W, CELL_H),
+    r2c0: new DOMRect(0, CELL_H * 2, CELL_W, CELL_H)
+  };
+
+  const pressKey = (id: string, key: string): KeyboardEvent => {
+    const event = new KeyboardEvent('keydown', {key, bubbles: true, cancelable: true});
+    btn(id).dispatchEvent(event);
+    spectator.detectChanges();
+
+    return event;
+  };
+
+  beforeEach(async () => {
+    spectator = createComponent();
+    spectator.detectChanges();
+    await Promise.resolve();
+    spectator.detectChanges();
+
+    // Give each button its mock bounding rect.
+    spyOn(HTMLElement.prototype, 'getBoundingClientRect').and.callFake(function (this: HTMLElement) {
+      return mockRects[this.id] ?? new DOMRect(0, 0, 0, 0);
+    });
+  });
+
+  // G1: ArrowDown moves to the item visually below (same column)
+  it('should move to the item below on ArrowDown', () => {
+    btn('r0c1').focus();
+    pressKey('r0c1', 'ArrowDown');
+
+    expect(tabindexOf('r1c1')).toBe('0');
+  });
+
+  // G2: ArrowUp moves to the item visually above (same column)
+  it('should move to the item above on ArrowUp', () => {
+    btn('r1c1').focus();
+    pressKey('r1c1', 'ArrowUp');
+
+    expect(tabindexOf('r0c1')).toBe('0');
+  });
+
+  // G3: ArrowRight moves to the next item in the same row
+  it('should move right within the same row on ArrowRight', () => {
+    btn('r0c0').focus();
+    pressKey('r0c0', 'ArrowRight');
+
+    expect(tabindexOf('r0c1')).toBe('0');
+  });
+
+  // G4: ArrowLeft moves to the previous item in the same row
+  it('should move left within the same row on ArrowLeft', () => {
+    btn('r0c2').focus();
+    pressKey('r0c2', 'ArrowLeft');
+
+    expect(tabindexOf('r0c1')).toBe('0');
+  });
+
+  // G5: ArrowRight at row end steps to the first item of the next row
+  it('should step to the first item of the next row when ArrowRight reaches row end', () => {
+    btn('r0c2').focus();
+    pressKey('r0c2', 'ArrowRight');
+
+    expect(tabindexOf('r1c0')).toBe('0');
+  });
+
+  // G6: ArrowLeft at row start steps to the last item of the previous row
+  it('should step to the last item of the previous row when ArrowLeft reaches row start', () => {
+    btn('r1c0').focus();
+    pressKey('r1c0', 'ArrowLeft');
+
+    expect(tabindexOf('r0c2')).toBe('0');
+  });
+
+  // G7: ArrowDown on last row stays (no wrap vertically)
+  it('should not move when ArrowDown is pressed on the last row', () => {
+    btn('r2c0').focus();
+    pressKey('r2c0', 'ArrowDown');
+
+    expect(tabindexOf('r2c0')).toBe('0');
+  });
+
+  // G8: ArrowDown picks the nearest column in the target row
+  it('should pick the nearest column in the target row on ArrowDown', () => {
+    // r0c2 is at x=100..150; r1c2 is the closest in row1 (x=100..150)
+    btn('r0c2').focus();
+    pressKey('r0c2', 'ArrowDown');
+
+    expect(tabindexOf('r1c2')).toBe('0');
+  });
+
+  // G9: handled keys are prevented in grid mode
+  it('should prevent default for arrow keys in grid mode', () => {
+    btn('r0c0').focus();
+    const event = pressKey('r0c0', 'ArrowDown');
+
+    expect(event.defaultPrevented).toBeTrue();
+  });
+});
