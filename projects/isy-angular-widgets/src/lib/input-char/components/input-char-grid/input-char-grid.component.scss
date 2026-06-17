@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  min-height: 0;
+}
+
+.character-listbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.character-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  margin: 0 -1px -1px 0;
+  padding: var(--isyfact-space-xs);
+  font-size: 1.25rem;
+  border: 1px solid var(--p-content-border-color, #cbcbcb);
+  background: var(--p-content-background, #ffffff);
+  color: var(--p-text-color, inherit);
+  cursor: pointer;
+  user-select: none;
+}
+
+.character-option:hover:not(.disabled) {
+  background: var(--p-content-hover-background, #e9ecef);
+}
+
+.character-option.selected {
+  border-color: var(--p-primary-color, #1a73e8);
+  background: var(--p-primary-color, #1a73e8);
+  color: var(--p-primary-contrast-color, #ffffff);
+  position: relative;
+  z-index: 1;
+}
+
+.character-option.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+// Visible focus indicator, kept distinct from the selection styling.
+.character-option:focus-visible {
+  outline: 2px solid var(--p-focus-ring-color, var(--p-primary-color, #1a73e8));
+  outline-offset: -2px;
+  position: relative;
+  z-index: 2;
+}
