@@ -27,8 +27,8 @@
   flex-direction: column;
 }
 
-.right-panel-side p-selectbutton {
-  flex-wrap: wrap;
+.right-panel-side .character-grid {
+  min-height: 0;
 }
 
 .lower-right-panel {
@@ -58,19 +58,6 @@
 }
 
 ::ng-deep {
-  // Styles specific for right side select buttons
-  .right-panel-side p-selectbutton {
-    .p-ripple.p-togglebutton {
-      padding: var(--isyfact-space-xs);
-      width: 44px;
-      height: 44px;
-      font-size: 1.25rem;
-      border-width: 1px;
-      margin: 0px -1px -1px 0px;
-      border-style: solid;
-    }
-  }
-
   .left-panel-side .p-accordioncontent-content p-selectbutton {
     flex-wrap: wrap;
 

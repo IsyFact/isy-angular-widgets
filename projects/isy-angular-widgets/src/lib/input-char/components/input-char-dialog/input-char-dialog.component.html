@@ -1,4 +1,4 @@
-<div class="split left-panel-side">
+<div class="split left-panel-side" isyRovingTabindex>
   <isy-multi-select-button
     [value]="selection"
     [resetKey]="resetKey"
@@ -9,12 +9,13 @@
 </div>
 
 <div class="split right-panel-side">
-  <p-selectbutton
-    [options]="displayedCharacters"
-    optionLabel="zeichen"
-    [ngModel]="selectedZeichenObjekt"
-    (ngModelChange)="onSelectedZeichenObjektChange($event)"
-    class="flex-grow-1 overflow-y-scroll character-selectbutton"
+  <isy-input-char-grid
+    class="flex-grow-1 character-grid"
+    [characters]="displayedCharacters"
+    [selected]="selectedZeichenObjekt"
+    [ariaLabel]="configService.getTranslation('inputChar.aria.characterGrid')"
+    (selectedChange)="onSelectedZeichenObjektChange($event)"
+    (insert)="insertSelectedZeichen()"
   />
   <div class="lower-right-panel">
     @if (selectedZeichenObjekt) {

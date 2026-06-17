@@ -15,11 +15,10 @@ import {InputCharData, InputCharSelection, Schriftzeichengruppe, Zeichenobjekt} 
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
 import {ButtonModule} from 'primeng/button';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {AccordionModule} from 'primeng/accordion';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
-import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
+import {InputCharGridComponent} from '../input-char-grid/input-char-grid.component';
+import {RovingTabindexDirective} from '../../directives/roving-tabindex.directive';
 
 /**
  * @internal
@@ -31,11 +30,10 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
   styleUrls: ['./input-char-dialog.component.scss'],
   imports: [
     ButtonModule,
-    SelectButtonModule,
-    AccordionModule,
-    FormsModule,
     InputCharPreviewComponent,
-    MultiSelectButtonComponent
+    MultiSelectButtonComponent,
+    InputCharGridComponent,
+    RovingTabindexDirective
   ]
 })
 export class InputCharDialogComponent implements OnChanges, OnInit {
@@ -250,7 +248,11 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
    * @internal
    */
   insertSelectedZeichen(): void {
-    this.insertCharacter.emit(this.selectedZeichenObjekt!.zeichen);
+    if (!this.selectedZeichenObjekt) {
+      return;
+    }
+
+    this.insertCharacter.emit(this.selectedZeichenObjekt.zeichen);
   }
 
   /**
