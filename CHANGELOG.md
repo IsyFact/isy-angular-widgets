@@ -1,3 +1,13 @@
+# Unreleased
+## Features
+- IFS-3588: Die Tastatur- und Maussteuerung des Sonderzeichenpickers wurde überarbeitet (Barrierefreiheit nach WAI-ARIA-Listbox-Pattern)
+  * Das Zeichenraster ist nun eine eigene Listbox (`role="listbox"`/`role="option"`) mit Roving-Tabindex statt des PrimeNG-`p-selectButton`
+  * Navigation erfolgt positionsbasiert (gemessene Geometrie): Pfeiltasten bewegen Fokus und Auswahl gemeinsam, ohne Zeilenumbruch am Rand und unter Überspringen deaktivierter Zellen
+  * `Home`/`End` springen zur ersten/letzten Zelle, `PageUp`/`PageDown` seitenweise; `Enter` fügt das Zeichen ein, `Space` wählt nur aus
+  * Mausbedienung bleibt gleichwertig: Klick wählt aus, Einfügen erfolgt über den Einfügen-Button
+  * Das Filter-Panel ist ein einzelner Tab-Stopp; der Dialog wird modal dargestellt, damit der Fokus innerhalb des Dialogs verbleibt
+  * Neues i18n-Label `inputChar.aria.characterGrid` für die Beschriftung des Rasters
+
 # 21.1.0 - 16.06.2026
 ## Features
 - IFS-5530: Version wurde auf `v21.1.0` angehoben und zugehörige Dokumentation angepasst
