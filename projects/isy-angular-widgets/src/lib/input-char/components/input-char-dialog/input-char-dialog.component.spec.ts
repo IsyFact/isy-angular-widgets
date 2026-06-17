@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 import {ComponentFixture} from '@angular/core/testing';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
+import {InputCharGridComponent} from '../input-char-grid/input-char-grid.component';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
@@ -377,19 +378,18 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     for (const base of sampleBases) {
       selectBasis(base);
 
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectbutton')
-      ).componentInstance;
+      const grid = fixture.debugElement.query(By.css('isy-input-char-grid'))
+        .componentInstance as InputCharGridComponent;
 
-      expect(charactersSelectButton.options).toBeTruthy();
+      expect(grid.characters).toBeTruthy();
 
       const expected = sonderzeichenListe.filter(
         (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === base
       );
 
-      expect(charactersSelectButton.options.length).toEqual(expected.length);
+      expect(grid.characters.length).toEqual(expected.length);
 
-      for (const char of charactersSelectButton.options) {
+      for (const char of grid.characters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(base);
       }
     }
@@ -401,17 +401,16 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     for (const group of sampleGroups) {
       selectSchriftzeichengruppe(group);
 
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectbutton')
-      ).componentInstance;
+      const grid = fixture.debugElement.query(By.css('isy-input-char-grid'))
+        .componentInstance as InputCharGridComponent;
 
-      expect(charactersSelectButton.options).toBeTruthy();
+      expect(grid.characters).toBeTruthy();
 
       const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === group);
 
-      expect(charactersSelectButton.options.length).toEqual(expected.length);
+      expect(grid.characters.length).toEqual(expected.length);
 
-      for (const character of charactersSelectButton.options) {
+      for (const character of grid.characters) {
         expect(character.schriftzeichengruppe).toEqual(group);
       }
     }
