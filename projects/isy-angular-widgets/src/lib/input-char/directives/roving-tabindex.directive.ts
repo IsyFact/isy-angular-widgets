@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  HostListener,
-  inject,
-  input,
-  OnDestroy,
-  output
-} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, HostListener, inject, input, OnDestroy, output} from '@angular/core';
 
 const DEFAULT_ITEM_SELECTOR = 'p-togglebutton, p-accordion-header, [role="button"], [role="radio"]';
 const NOT_FOUND = -1;
@@ -412,8 +403,7 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
     const active =
       items.find((element) => element.getAttribute('tabindex') === '0') ??
       items.find(
-        (element) =>
-          element.getAttribute('aria-pressed') === 'true' || element.getAttribute('aria-checked') === 'true'
+        (element) => element.getAttribute('aria-pressed') === 'true' || element.getAttribute('aria-checked') === 'true'
       ) ??
       items[0];
 
