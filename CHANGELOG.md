@@ -1,12 +1,16 @@
 # Unreleased
 ## Features
-- IFS-3588: Die Tastatur- und Maussteuerung des Sonderzeichenpickers wurde überarbeitet (Barrierefreiheit nach WAI-ARIA-Listbox-Pattern)
+- IFS-3588: Die Tastatur- und Maussteuerung des Sonderzeichenpickers wurde überarbeitet
   * Das Zeichenraster ist nun eine eigene Listbox (`role="listbox"`/`role="option"`) mit Roving-Tabindex statt des PrimeNG-`p-selectButton`
   * Navigation erfolgt positionsbasiert (gemessene Geometrie): Pfeiltasten bewegen Fokus und Auswahl gemeinsam, ohne Zeilenumbruch am Rand und unter Überspringen deaktivierter Zellen
   * `Home`/`End` springen zur ersten/letzten Zelle, `PageUp`/`PageDown` seitenweise; `Enter` fügt das Zeichen ein, `Space` wählt nur aus
   * Mausbedienung bleibt gleichwertig: Klick wählt aus, Einfügen erfolgt über den Einfügen-Button
   * Das Filter-Panel ist ein einzelner Tab-Stopp; der Dialog wird modal dargestellt, damit der Fokus innerhalb des Dialogs verbleibt
   * Innerhalb des Filter-Panels übernimmt die `isyRovingTabindex`-Directive die Pfeiltasten-Navigation selbst (Roving-Tabindex mit eigenem Keydown-Handler in der Capture-Phase), da `p-selectButton` und das Akkordeon keine durchgängige Pfeiltasten-Steuerung bieten; `Enter`/`Space` aktivieren das fokussierte Element, deaktivierte Elemente werden übersprungen
+  * Die Pfeiltasten-Navigation im Filter-Panel folgt auch der visuellen Anordnung (`navigation="grid"`): Pfeil-hoch/ runter, bewegen den Fokus zum Element ober-/unterhalb, Pfeil-links/rechts innerhalb der Zeile
+  * Nach Auswahl eines Filterwerts (Grundzeichen/Schriftzeichengruppe) per `Enter`/`Space` springt der Fokus automatisch in das Zeichenraster; das Auf-/Zuklappen eines Accordion-Headers verschiebt den Fokus hingegen nicht
+  * `ESC` im Zeichenraster setzt den Fokus zurück auf den zuletzt aktiven Filter-Header, ohne den Dialog zu schließen
+  * `ESC` auf einem Filterwert innerhalb einer aufgeklappten Accordion-Sektion setzt den Fokus zurück auf den zugehörigen Sektions-Header (zum Wechseln der Gruppe)
   * Neues i18n-Label `inputChar.aria.characterGrid` für die Beschriftung des Rasters
 
 # 21.1.0 - 16.06.2026
