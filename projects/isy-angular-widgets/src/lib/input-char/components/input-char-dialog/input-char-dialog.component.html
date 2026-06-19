@@ -1,4 +1,12 @@
-<div class="split left-panel-side" isyRovingTabindex [navigation]="'grid'">
+<div
+  #leftPanel
+  class="split left-panel-side"
+  isyRovingTabindex
+  [navigation]="'grid'"
+  (focusin)="onFilterFocusIn($event)"
+  (itemActivate)="onFilterItemActivate($event)"
+  (escape)="onFilterEscape($event)"
+>
   <isy-multi-select-button
     [value]="selection"
     [resetKey]="resetKey"
@@ -16,6 +24,7 @@
     [ariaLabel]="configService.getTranslation('inputChar.aria.characterGrid')"
     (selectedChange)="onSelectedZeichenObjektChange($event)"
     (insert)="insertSelectedZeichen()"
+    (escape)="onGridEscape($event)"
   />
   <div class="lower-right-panel">
     @if (selectedZeichenObjekt) {

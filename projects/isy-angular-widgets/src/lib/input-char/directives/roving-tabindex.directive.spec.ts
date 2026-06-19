@@ -6,7 +6,13 @@ import {RovingTabindexDirective} from './roving-tabindex.directive';
   standalone: true,
   imports: [RovingTabindexDirective],
   template: `
-    <div isyRovingTabindex [itemSelector]="'button'" [wrap]="wrap">
+    <div
+      isyRovingTabindex
+      [itemSelector]="'button'"
+      [wrap]="wrap"
+      (itemActivate)="activated.push($event)"
+      (escape)="escaped.push($event)"
+    >
       <button id="a">A</button>
       <button id="b" [disabled]="disabledB">B</button>
       <button id="c">C</button>
@@ -16,6 +22,8 @@ import {RovingTabindexDirective} from './roving-tabindex.directive';
 class HostComponent {
   wrap = true;
   disabledB = false;
+  activated: HTMLElement[] = [];
+  escaped: KeyboardEvent[] = [];
 }
 
 describe('RovingTabindexDirective', () => {
@@ -128,6 +136,27 @@ describe('RovingTabindexDirective', () => {
     pressKey('a', ' ');
 
     expect(clickSpy).toHaveBeenCalled();
+  });
+
+  // F7: itemActivate emits the activated element on keyboard activation
+  it('should emit itemActivate with the activated element on Enter', () => {
+    pressKey('a', 'Enter');
+
+    expect(spectator.component.activated).toContain(button('a'));
+  });
+
+  it('should emit itemActivate on Space', () => {
+    pressKey('a', ' ');
+
+    expect(spectator.component.activated).toContain(button('a'));
+  });
+
+  it('should emit escape on Escape without suppressing it', () => {
+    const event = pressKey('a', 'Escape');
+
+    expect(spectator.component.escaped).toContain(event);
+    // Suppression is left to the host (so the dialog can still close when appropriate).
+    expect(event.defaultPrevented).toBeFalse();
   });
 
   // F8: handled keys are prevented and stop propagation

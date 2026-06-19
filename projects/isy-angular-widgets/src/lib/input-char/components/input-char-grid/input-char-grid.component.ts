@@ -110,6 +110,18 @@ export class InputCharGridComponent implements OnChanges, AfterViewInit, OnDestr
   @Output() insert = new EventEmitter<void>();
 
   /**
+   * Emits the originating keyboard event when `Escape` is pressed while a cell is focused.
+   *
+   * The grid intentionally does not suppress the event itself: it does not know the filter
+   * panel and therefore cannot decide whether a focus target exists. The owning dialog
+   * listens to this output and, only if it can move focus back to the filter, calls
+   * `preventDefault()`/`stopPropagation()` on the event to keep the dialog open. Because
+   * PrimeNG's `closeOnEscape` listener runs on `document` in the bubble phase, stopping
+   * propagation in this (target-phase) handler reliably prevents the dialog from closing.
+   */
+  @Output() escape = new EventEmitter<KeyboardEvent>();
+
+  /**
    * The listbox container element.
    * @internal
    */
@@ -199,6 +211,19 @@ export class InputCharGridComponent implements OnChanges, AfterViewInit, OnDestr
   }
 
   /**
+   * Moves keyboard focus to the currently active (roving) cell. Used by the dialog to
+   * jump into the grid after a filter value has been chosen in the left panel.
+   * @internal
+   */
+  focusActiveCell(): void {
+    if (this.activeIndex === INACTIVE_INDEX) {
+      return;
+    }
+
+    this.cells.get(this.activeIndex)?.nativeElement.focus();
+  }
+
+  /**
    * Handles a click on a cell: selects it without inserting (mouse parity).
    * @param index The clicked cell index.
    * @internal
@@ -251,6 +276,12 @@ export class InputCharGridComponent implements OnChanges, AfterViewInit, OnDestr
         event.preventDefault();
         event.stopPropagation();
         this.onCellClick(index);
+
+        break;
+      }
+      case 'Escape': {
+        // Suppression is decided by the owning dialog (see `escape` output).
+        this.escape.emit(event);
 
         break;
       }

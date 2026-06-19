@@ -379,6 +379,40 @@ describe('InputCharGridComponent', () => {
     });
   });
 
+  describe('focusActiveCell', () => {
+    it('should focus the active cell', () => {
+      const chars = makeChars(3);
+      setup(chars, chars[1]);
+
+      const focusSpy = spyOn(cellEls()[1], 'focus');
+
+      component.focusActiveCell();
+
+      expect(focusSpy).toHaveBeenCalled();
+    });
+
+    it('should do nothing when there is no active cell', () => {
+      setup([]);
+
+      expect(() => component.focusActiveCell()).not.toThrow();
+    });
+  });
+
+  describe('escape', () => {
+    it('should emit the keyboard event on Escape without suppressing it', () => {
+      const chars = makeChars(3);
+      setup(chars, chars[0]);
+
+      const escape = spyOn(component.escape, 'emit');
+      const event = press('Escape', 0);
+
+      expect(escape).toHaveBeenCalledWith(event);
+      // The grid leaves suppression to the dialog (FR-7.6 / FR-7.8).
+      expect(event.preventDefault).not.toHaveBeenCalled();
+      expect(event.stopPropagation).not.toHaveBeenCalled();
+    });
+  });
+
   describe('jump keys (FR-3)', () => {
     /**
      * Builds a 2-column, 4-row grid (8 cells).

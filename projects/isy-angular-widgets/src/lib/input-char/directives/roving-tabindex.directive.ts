@@ -1,4 +1,13 @@
-import {AfterViewInit, Directive, ElementRef, HostListener, inject, input, OnDestroy} from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  HostListener,
+  inject,
+  input,
+  OnDestroy,
+  output
+} from '@angular/core';
 
 const DEFAULT_ITEM_SELECTOR = 'p-togglebutton, p-accordion-header, [role="button"], [role="radio"]';
 const NOT_FOUND = -1;
@@ -90,6 +99,22 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
    */
   readonly navigation = input<RovingNavigation>('linear');
 
+  /**
+   * Emits the activated item element when it is activated via keyboard (`Enter`/`Space`).
+   * Lets the host react to a keyboard activation, e.g. moving focus elsewhere.
+   */
+  readonly itemActivate = output<HTMLElement>();
+
+  /**
+   * Emits the originating keyboard event when `Escape` is pressed within the container.
+   *
+   * Like the grid's `escape` output, suppression is left to the host: the directive does not
+   * know whether a meaningful focus target exists, so it neither calls `preventDefault()` nor
+   * stops propagation. The host listens synchronously and, only if it moves focus, suppresses
+   * the event to keep the dialog open.
+   */
+  readonly escape = output<KeyboardEvent>();
+
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   private observer?: MutationObserver;
@@ -149,6 +174,13 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
    * @param event The keyboard event.
    */
   private handleKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      // Suppression is decided by the host (see `escape` output).
+      this.escape.emit(event);
+
+      return;
+    }
+
     const items = this.items;
 
     if (items.length === 0) {
@@ -167,6 +199,7 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
       event.preventDefault();
       event.stopImmediatePropagation();
       items[current].click();
+      this.itemActivate.emit(items[current]);
 
       return;
     }
