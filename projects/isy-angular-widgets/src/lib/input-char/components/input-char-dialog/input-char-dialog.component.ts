@@ -383,7 +383,7 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
 
   /**
    * Resolves the accordion header that should receive focus when ESC is pressed in the grid
-   * (FR-7.4): the last focused header if still present, otherwise the header of the expanded
+   * the last focused header if still present, otherwise the header of the expanded
    * section, otherwise the last header in DOM order. Returns `undefined` if no focusable
    * (non-disabled) header exists.
    * @returns The target header element, or `undefined` when none is available.

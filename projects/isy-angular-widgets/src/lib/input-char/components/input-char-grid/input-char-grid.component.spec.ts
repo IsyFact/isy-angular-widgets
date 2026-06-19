@@ -109,7 +109,7 @@ describe('InputCharGridComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ARIA / roving tabindex (FR-6)', () => {
+  describe('ARIA / roving tabindex', () => {
     it('should render a listbox with options and an aria-label', () => {
       setup(makeChars(3));
 
@@ -155,7 +155,7 @@ describe('InputCharGridComponent', () => {
       expect(cellEls()[0].getAttribute('tabindex')).toBe('0');
     });
 
-    it('should reset the roving index and discard an invalid selection on filter change (FR-6.4)', () => {
+    it('should reset the roving index and discard an invalid selection on filter change', () => {
       const first = makeChars(4);
       setup(first, first[2]);
 
@@ -166,7 +166,7 @@ describe('InputCharGridComponent', () => {
       expect(component.activeIndex).toBe(0);
     });
 
-    it('should make the container non-tabbable when empty (edge case 1)', () => {
+    it('should make the container non-tabbable when empty (edge case)', () => {
       setup([]);
 
       const listbox = spectator.query('.character-listbox') as HTMLElement;
@@ -177,7 +177,7 @@ describe('InputCharGridComponent', () => {
   });
 
   describe('mouse parity (FR-5)', () => {
-    it('should select on click without inserting (T9)', () => {
+    it('should select on click without inserting', () => {
       const chars = makeChars(3);
       setup(chars);
 
@@ -192,7 +192,7 @@ describe('InputCharGridComponent', () => {
       expect(component.activeIndex).toBe(1);
     });
 
-    it('should ignore clicks on disabled cells (FR-5.3)', () => {
+    it('should ignore clicks on disabled cells', () => {
       const chars = makeChars(3);
       spectator = createComponent({props: {characters: chars, isDisabled: (c) => c === chars[1]}});
       component = spectator.component;
@@ -206,8 +206,8 @@ describe('InputCharGridComponent', () => {
     });
   });
 
-  describe('Enter / Space (FR-4)', () => {
-    it('should emit insert on Enter (T8)', () => {
+  describe('Enter / Space handeling', () => {
+    it('should emit insert on Enter', () => {
       const chars = makeChars(3);
       setup(chars, chars[0]);
 
@@ -218,7 +218,7 @@ describe('InputCharGridComponent', () => {
       expect(insert).toHaveBeenCalled();
     });
 
-    it('should only select on Space, never insert (FR-4.2)', () => {
+    it('should only select on Space, never insert', () => {
       const chars = makeChars(3);
       setup(chars);
 
@@ -233,7 +233,7 @@ describe('InputCharGridComponent', () => {
     });
   });
 
-  describe('arrow navigation (FR-2)', () => {
+  describe('arrow navigation test', () => {
     /**
      * Sets up a 3x3 grid (last row centered with a gap) and returns the characters.
      * Columns centerX: 20, 60, 100. Rows top: 0, 40, 80.
@@ -271,7 +271,7 @@ describe('InputCharGridComponent', () => {
       expect(selectedChange).toHaveBeenCalledWith(chars[4]);
     });
 
-    it('should not wrap at the row edge (FR-2.2)', () => {
+    it('should not wrap at the row edge', () => {
       const chars = setupGrid();
 
       press('ArrowRight', 2);
@@ -280,7 +280,7 @@ describe('InputCharGridComponent', () => {
       expect(component.activeIndex).toBe(4);
     });
 
-    it('should move down to the visually adjacent cell (T2)', () => {
+    it('should move down to the visually adjacent cell', () => {
       const chars = setupGrid();
 
       press('ArrowDown', 1);
@@ -288,7 +288,7 @@ describe('InputCharGridComponent', () => {
       expect(component.selected).toBe(chars[4]);
     });
 
-    it('should clamp at the last row (T3)', () => {
+    it('should clamp at the last row', () => {
       const chars = setupGrid();
 
       press('ArrowDown', 6);
@@ -297,7 +297,7 @@ describe('InputCharGridComponent', () => {
       expect(component.activeIndex).toBe(4);
     });
 
-    it('should pick the horizontally nearest cell over a gap (T4)', () => {
+    it('should pick the horizontally nearest cell over a gap', () => {
       const chars = setupGrid();
 
       // from index 4 (centerX 60) down to centered row -> nearest is index 6 (centerX 50)
@@ -306,7 +306,7 @@ describe('InputCharGridComponent', () => {
       expect(component.selected).toBe(chars[6]);
     });
 
-    it('should prevent default and stop propagation on arrow keys (FR-2.6)', () => {
+    it('should prevent default and stop propagation on arrow keys', () => {
       setupGrid();
 
       const event = press('ArrowDown', 1);
@@ -326,7 +326,7 @@ describe('InputCharGridComponent', () => {
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
 
-    it('should focus and scroll the target cell into view (FR-2.5)', () => {
+    it('should focus and scroll the target cell into view', () => {
       setupGrid();
       const target = cellEls()[5];
       const focusSpy = spyOn(target, 'focus');
@@ -338,7 +338,7 @@ describe('InputCharGridComponent', () => {
       expect(scrollSpy).toHaveBeenCalledWith({block: 'nearest', inline: 'nearest'});
     });
 
-    it('should keep focus on a single-row grid for ArrowUp/Down (edge case 4)', () => {
+    it('should keep focus on a single-row grid for ArrowUp/Down (edge case)', () => {
       const chars = makeChars(3);
       setup(chars, chars[1]);
       mockLayout({0: {x: 0, y: 0}, 1: {x: 40, y: 0}, 2: {x: 80, y: 0}});
@@ -351,8 +351,8 @@ describe('InputCharGridComponent', () => {
     });
   });
 
-  describe('disabled skipping (FR-2.4)', () => {
-    it('should skip a disabled cell in the movement direction (T5)', () => {
+  describe('disabled skipping', () => {
+    it('should skip a disabled cell in the movement direction', () => {
       const chars = makeChars(3);
       spectator = createComponent({props: {characters: chars, selected: chars[0], isDisabled: (c) => c === chars[1]}});
       component = spectator.component;
@@ -364,7 +364,7 @@ describe('InputCharGridComponent', () => {
       expect(component.selected).toBe(chars[2]);
     });
 
-    it('should stay put when the adjacent row is fully disabled (edge case 5)', () => {
+    it('should stay put when the adjacent row is fully disabled (edge case)', () => {
       const chars = makeChars(4);
       spectator = createComponent({
         props: {characters: chars, selected: chars[0], isDisabled: (c) => c === chars[2] || c === chars[3]}
@@ -413,7 +413,7 @@ describe('InputCharGridComponent', () => {
     });
   });
 
-  describe('jump keys (FR-3)', () => {
+  describe('jump keys', () => {
     /**
      * Builds a 2-column, 4-row grid (8 cells).
      * @returns The grid characters.
@@ -435,7 +435,7 @@ describe('InputCharGridComponent', () => {
       return chars;
     };
 
-    it('should jump to the first and last valid cell with Home/End (T6)', () => {
+    it('should jump to the first and last valid cell with Home/End', () => {
       const chars = setupColumns();
 
       press('End', 0);
@@ -445,7 +445,7 @@ describe('InputCharGridComponent', () => {
       expect(component.selected).toBe(chars[0]);
     });
 
-    it('should page down by one viewport page when scrollable (T7)', () => {
+    it('should page down by one viewport page when scrollable', () => {
       const chars = setupColumns();
       mockScroll(80, 160); // 2 rows visible, scrollable
 
@@ -455,7 +455,7 @@ describe('InputCharGridComponent', () => {
       expect(component.selected).toBe(chars[4]);
     });
 
-    it('should jump to the last row on PageDown when not scrollable (FR-3.2)', () => {
+    it('should jump to the last row on PageDown when not scrollable', () => {
       const chars = setupColumns();
       mockScroll(160, 160); // everything visible
 

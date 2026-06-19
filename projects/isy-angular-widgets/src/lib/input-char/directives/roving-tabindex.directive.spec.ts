@@ -51,14 +51,14 @@ describe('RovingTabindexDirective', () => {
     spectator.detectChanges();
   });
 
-  // F1: exactly one tab stop initially
+  // exactly one tab stop initially
   it('should keep only the first item tabbable initially', () => {
     expect(tabindexOf('a')).toBe('0');
     expect(tabindexOf('b')).toBe('-1');
     expect(tabindexOf('c')).toBe('-1');
   });
 
-  // F2: ArrowDown / ArrowRight move forward and focus the next item
+  // ArrowDown / ArrowRight move forward and focus the next item
   it('should move the tab stop forward on ArrowDown', () => {
     button('a').focus();
     const focusSpy = spyOn(button('b'), 'focus').and.callThrough();
@@ -76,7 +76,7 @@ describe('RovingTabindexDirective', () => {
     expect(tabindexOf('b')).toBe('0');
   });
 
-  // F3: ArrowUp / ArrowLeft move backward
+  // ArrowUp / ArrowLeft move backward
   it('should move the tab stop backward on ArrowUp', () => {
     pressKey('a', 'ArrowRight');
     pressKey('b', 'ArrowUp');
@@ -85,7 +85,7 @@ describe('RovingTabindexDirective', () => {
     expect(tabindexOf('b')).toBe('-1');
   });
 
-  // F4: wrap-around at the ends when wrap is enabled
+  // Wrap-around at the ends when wrap is enabled
   it('should wrap from the last to the first item', () => {
     pressKey('a', 'ArrowRight');
     pressKey('b', 'ArrowRight');
@@ -98,7 +98,7 @@ describe('RovingTabindexDirective', () => {
     expect(tabindexOf('c')).toBe('-1');
   });
 
-  // F5: clamp instead of wrap when wrap is disabled
+  //  clamp instead of wrap when wrap is disabled
   it('should clamp at the first item when wrap is disabled', () => {
     spectator.component.wrap = false;
     spectator.detectChanges();
@@ -108,7 +108,7 @@ describe('RovingTabindexDirective', () => {
     expect(tabindexOf('a')).toBe('0');
   });
 
-  // F6: disabled items are skipped
+  // disabled items are skipped
   it('should skip disabled items during navigation', () => {
     spectator.component.disabledB = true;
     spectator.detectChanges();
@@ -120,7 +120,7 @@ describe('RovingTabindexDirective', () => {
     expect(tabindexOf('c')).toBe('0');
   });
 
-  // F7: Enter activates the current item via click()
+  // Enter activates the current item via click()
   it('should activate the current item on Enter', () => {
     const clickSpy = spyOn(button('a'), 'click');
 
@@ -129,7 +129,7 @@ describe('RovingTabindexDirective', () => {
     expect(clickSpy).toHaveBeenCalled();
   });
 
-  // F7: Space activates the current item via click()
+  // Space activates the current item via click()
   it('should activate the current item on Space', () => {
     const clickSpy = spyOn(button('a'), 'click');
 
@@ -138,7 +138,7 @@ describe('RovingTabindexDirective', () => {
     expect(clickSpy).toHaveBeenCalled();
   });
 
-  // F7: itemActivate emits the activated element on keyboard activation
+  // itemActivate emits the activated element on keyboard activation
   it('should emit itemActivate with the activated element on Enter', () => {
     pressKey('a', 'Enter');
 
@@ -159,7 +159,7 @@ describe('RovingTabindexDirective', () => {
     expect(event.defaultPrevented).toBeFalse();
   });
 
-  // F8: handled keys are prevented and stop propagation
+  // handled keys are prevented and stop propagation
   it('should prevent default for keys it handles', () => {
     const event = pressKey('a', 'ArrowRight');
 
@@ -172,7 +172,7 @@ describe('RovingTabindexDirective', () => {
     expect(event.defaultPrevented).toBeFalse();
   });
 
-  // F9: focusin moves the single tab stop to the focused item
+  // focusin moves the single tab stop to the focused item
   it('should move the single tab stop to the focused element', () => {
     button('c').dispatchEvent(new FocusEvent('focusin', {bubbles: true}));
     spectator.detectChanges();
@@ -248,7 +248,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     });
   });
 
-  // G1: ArrowDown moves to the item visually below (same column)
+  // ArrowDown moves to the item visually below (same column)
   it('should move to the item below on ArrowDown', () => {
     btn('r0c1').focus();
     pressKey('r0c1', 'ArrowDown');
@@ -256,7 +256,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     expect(tabindexOf('r1c1')).toBe('0');
   });
 
-  // G2: ArrowUp moves to the item visually above (same column)
+  // ArrowUp moves to the item visually above (same column)
   it('should move to the item above on ArrowUp', () => {
     btn('r1c1').focus();
     pressKey('r1c1', 'ArrowUp');
@@ -264,7 +264,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     expect(tabindexOf('r0c1')).toBe('0');
   });
 
-  // G3: ArrowRight moves to the next item in the same row
+  // ArrowRight moves to the next item in the same row
   it('should move right within the same row on ArrowRight', () => {
     btn('r0c0').focus();
     pressKey('r0c0', 'ArrowRight');
@@ -272,7 +272,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     expect(tabindexOf('r0c1')).toBe('0');
   });
 
-  // G4: ArrowLeft moves to the previous item in the same row
+  // ArrowLeft moves to the previous item in the same row
   it('should move left within the same row on ArrowLeft', () => {
     btn('r0c2').focus();
     pressKey('r0c2', 'ArrowLeft');
@@ -280,7 +280,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     expect(tabindexOf('r0c1')).toBe('0');
   });
 
-  // G5: ArrowRight at row end steps to the first item of the next row
+  // ArrowRight at row end steps to the first item of the next row
   it('should step to the first item of the next row when ArrowRight reaches row end', () => {
     btn('r0c2').focus();
     pressKey('r0c2', 'ArrowRight');
@@ -288,7 +288,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     expect(tabindexOf('r1c0')).toBe('0');
   });
 
-  // G6: ArrowLeft at row start steps to the last item of the previous row
+  // ArrowLeft at row start steps to the last item of the previous row
   it('should step to the last item of the previous row when ArrowLeft reaches row start', () => {
     btn('r1c0').focus();
     pressKey('r1c0', 'ArrowLeft');
@@ -296,7 +296,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     expect(tabindexOf('r0c2')).toBe('0');
   });
 
-  // G7: ArrowDown on last row stays (no wrap vertically)
+  // ArrowDown on last row stays (no wrap vertically)
   it('should not move when ArrowDown is pressed on the last row', () => {
     btn('r2c0').focus();
     pressKey('r2c0', 'ArrowDown');
@@ -304,7 +304,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     expect(tabindexOf('r2c0')).toBe('0');
   });
 
-  // G8: ArrowDown picks the nearest column in the target row
+  // ArrowDown picks the nearest column in the target row
   it('should pick the nearest column in the target row on ArrowDown', () => {
     // r0c2 is at x=100..150; r1c2 is the closest in row1 (x=100..150)
     btn('r0c2').focus();
@@ -313,7 +313,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     expect(tabindexOf('r1c2')).toBe('0');
   });
 
-  // G9: handled keys are prevented in grid mode
+  // handled keys are prevented in grid mode
   it('should prevent default for arrow keys in grid mode', () => {
     btn('r0c0').focus();
     const event = pressKey('r0c0', 'ArrowDown');
