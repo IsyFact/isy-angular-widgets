@@ -16,7 +16,7 @@ import {
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {combineLatest} from 'rxjs';
 import {InputCharData, InputCharSelection, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
-import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
 import {CharacterService} from '../../services/character.service';
 import {ButtonModule} from 'primeng/button';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';

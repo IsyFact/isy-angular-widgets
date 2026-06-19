@@ -10,7 +10,7 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
 import {ComponentFixture} from '@angular/core/testing';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
 import {InputCharGridComponent} from '../input-char-grid/input-char-grid.component';
-import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
 import {CharacterService} from '../../services/character.service';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
