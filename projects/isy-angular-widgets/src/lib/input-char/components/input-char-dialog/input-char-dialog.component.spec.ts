@@ -416,7 +416,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     }
   });
 
-  describe('ESC focus return (FR-7)', () => {
+  describe('ESC focus return', () => {
     const filterHeaders = (): HTMLElement[] =>
       Array.from(spectator.element.querySelectorAll<HTMLElement>('p-accordion-header'));
 
