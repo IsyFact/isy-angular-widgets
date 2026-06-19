@@ -352,8 +352,9 @@ export class InputCharGridComponent implements OnChanges, AfterViewInit, OnDestr
       return undefined;
     }
 
-    const nearest = candidates.reduce((best, cell) =>
-      Math.abs(cell.centerX - fromX) < Math.abs(best.centerX - fromX) ? cell : best
+    const nearest = candidates.reduce(
+      (best, cell) => (Math.abs(cell.centerX - fromX) < Math.abs(best.centerX - fromX) ? cell : best),
+      candidates[0]
     );
 
     return nearest.index;
@@ -379,8 +380,9 @@ export class InputCharGridComponent implements OnChanges, AfterViewInit, OnDestr
       return undefined;
     }
 
-    const nearest = candidates.reduce((best, cell) =>
-      Math.abs(cell.centerX - fromX) < Math.abs(best.centerX - fromX) ? cell : best
+    const nearest = candidates.reduce(
+      (best, cell) => (Math.abs(cell.centerX - fromX) < Math.abs(best.centerX - fromX) ? cell : best),
+      candidates[0]
     );
 
     return nearest.index;

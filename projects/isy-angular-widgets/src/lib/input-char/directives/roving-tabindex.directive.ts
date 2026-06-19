@@ -314,8 +314,9 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
       return undefined;
     }
 
-    return row.cells.reduce((best, cell) =>
-      Math.abs(cell.centerX - fromX) < Math.abs(best.centerX - fromX) ? cell : best
+    return row.cells.reduce(
+      (best, cell) => (Math.abs(cell.centerX - fromX) < Math.abs(best.centerX - fromX) ? cell : best),
+      row.cells[0]
     );
   }
 
