@@ -1,3 +1,10 @@
+<!--
+  The ARIA listbox/option pattern is intentional and must not be replaced by a native
+  <select>/<option> (Sonar suggests this). A native control cannot provide the 2D grid
+  layout, the geometric arrow-key navigation, Home/End/PageUp/PageDown paging, or the
+  distinct Enter (insert) vs. Space (select) behaviour this widget requires. This is the
+  spec-conformant WAI-ARIA listbox pattern with roving tabindex.
+-->
 <div
   #listbox
   role="listbox"
@@ -6,6 +13,7 @@
   [attr.tabindex]="characters.length === 0 ? -1 : null"
 >
   @for (zeichenObjekt of characters; track zeichenObjekt; let index = $index) {
+    <!-- role="option" is required by the listbox pattern above; a native <option> is not applicable here. -->
     <div
       #cell
       role="option"

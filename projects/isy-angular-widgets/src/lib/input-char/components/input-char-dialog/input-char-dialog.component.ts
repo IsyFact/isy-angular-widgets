@@ -40,6 +40,8 @@ const FILTER_VALUE_SELECTOR = 'p-togglebutton, [role="radio"]';
  * Selector matching an accordion panel (the section that groups a header with its values).
  */
 const FILTER_PANEL_SELECTOR = 'p-accordion-panel, p-accordionpanel';
+/** Relative index of the last element for `Array.prototype.at`. */
+const LAST_INDEX = -1;
 
 /**
  * @internal
@@ -400,7 +402,7 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
     }
 
     const headers = Array.from(panel.querySelectorAll<HTMLElement>(FILTER_HEADER_SELECTOR)).filter(
-      (header) => header.getAttribute('data-p-disabled') !== 'true'
+      (header) => header.dataset.pDisabled !== 'true'
     );
 
     if (headers.length === 0) {
@@ -409,7 +411,7 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
 
     const expanded = headers.find((header) => header.getAttribute('aria-expanded') === 'true');
 
-    return expanded ?? headers[headers.length - 1];
+    return expanded ?? headers.at(LAST_INDEX);
   }
 
   private applySelection(selected: InputCharSelection | undefined): void {

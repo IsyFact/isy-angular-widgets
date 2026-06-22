@@ -6,6 +6,8 @@ const STEP_PREVIOUS = -1;
 const STEP_NEXT = 1;
 const NO_STEP = 0;
 const LAYOUT_DIVISOR = 2;
+/** Relative index of the last element for `Array.prototype.at`. */
+const LAST_INDEX = -1;
 
 /**
  * Orientation of the roving navigation.
@@ -43,6 +45,14 @@ interface LayoutRow {
   top: number;
   /** The cells of the row, ordered left to right. */
   cells: LayoutCell[];
+}
+
+/** The position of a cell within the grid layout. */
+interface GridPosition {
+  /** The index of the row in the layout. */
+  rowIndex: number;
+  /** The index of the cell within its row. */
+  cellIndex: number;
 }
 
 /**
@@ -155,9 +165,7 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
   private get items(): HTMLElement[] {
     const elements = Array.from(this.host.nativeElement.querySelectorAll<HTMLElement>(this.itemSelector()));
 
-    return elements.filter(
-      (element) => !element.hasAttribute('disabled') && element.getAttribute('data-p-disabled') !== 'true'
-    );
+    return elements.filter((element) => !element.hasAttribute('disabled') && element.dataset.pDisabled !== 'true');
   }
 
   /**
@@ -227,71 +235,18 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
    * @param current The index of the currently active item within `items`.
    */
   private handleGridNavigation(event: KeyboardEvent, items: HTMLElement[], current: number): void {
-    const key = event.key;
-    const o = this.orientation();
-    const allowH = o !== 'vertical';
-    const allowV = o !== 'horizontal';
-
-    const isHandled =
-      (allowV && (key === 'ArrowDown' || key === 'ArrowUp')) ||
-      (allowH && (key === 'ArrowRight' || key === 'ArrowLeft'));
-
-    if (!isHandled) {
+    if (!this.isGridKeyHandled(event.key)) {
       return;
     }
 
     const rows = this.buildGridLayout(items);
-    const currentElement = items[current];
+    const position = this.findCellPosition(rows, items[current]);
 
-    let rowIndex = NOT_FOUND;
-    let cellIndexInRow = NOT_FOUND;
-
-    for (let ri = 0; ri < rows.length; ri++) {
-      const ci = rows[ri].cells.findIndex((c) => c.element === currentElement);
-
-      if (ci !== NOT_FOUND) {
-        rowIndex = ri;
-        cellIndexInRow = ci;
-        break;
-      }
-    }
-
-    if (rowIndex === NOT_FOUND || cellIndexInRow === NOT_FOUND) {
+    if (!position) {
       return;
     }
 
-    const currentCenterX = rows[rowIndex].cells[cellIndexInRow].centerX;
-    let targetElement: HTMLElement | undefined;
-
-    if (key === 'ArrowDown') {
-      const nextRow = rows[rowIndex + 1];
-      targetElement = nextRow ? this.nearestInRow(nextRow, currentCenterX)?.element : undefined;
-    } else if (key === 'ArrowUp') {
-      const prevRow = rows[rowIndex - 1];
-      targetElement = prevRow ? this.nearestInRow(prevRow, currentCenterX)?.element : undefined;
-    } else if (key === 'ArrowRight') {
-      const rowCells = rows[rowIndex].cells;
-
-      if (cellIndexInRow < rowCells.length - 1) {
-        targetElement = rowCells[cellIndexInRow + 1].element;
-      } else if (rowIndex < rows.length - 1) {
-        targetElement = rows[rowIndex + 1].cells[0]?.element;
-      } else if (this.wrap()) {
-        targetElement = rows[0]?.cells[0]?.element;
-      }
-    } else if (key === 'ArrowLeft') {
-      const rowCells = rows[rowIndex].cells;
-
-      if (cellIndexInRow > 0) {
-        targetElement = rowCells[cellIndexInRow - 1].element;
-      } else if (rowIndex > 0) {
-        const prevRow = rows[rowIndex - 1];
-        targetElement = prevRow.cells[prevRow.cells.length - 1]?.element;
-      } else if (this.wrap()) {
-        const lastRow = rows[rows.length - 1];
-        targetElement = lastRow?.cells[lastRow.cells.length - 1]?.element;
-      }
-    }
+    const targetElement = this.resolveGridTarget(event.key, rows, position);
 
     if (!targetElement) {
       return;
@@ -301,6 +256,90 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
     event.stopImmediatePropagation();
     this.setActive(targetElement);
     targetElement.focus();
+  }
+
+  /**
+   * @param key The pressed key.
+   * @returns Whether the key is an arrow key handled for the configured orientation.
+   */
+  private isGridKeyHandled(key: string): boolean {
+    const orientation = this.orientation();
+    const allowHorizontal = orientation !== 'vertical';
+    const allowVertical = orientation !== 'horizontal';
+
+    return (
+      (allowVertical && (key === 'ArrowDown' || key === 'ArrowUp')) ||
+      (allowHorizontal && (key === 'ArrowRight' || key === 'ArrowLeft'))
+    );
+  }
+
+  /**
+   * Locates the given element within the grid layout.
+   * @param rows The grid layout.
+   * @param element The element to locate.
+   * @returns The cell position, or `undefined` if the element is not part of the layout.
+   */
+  private findCellPosition(rows: LayoutRow[], element: HTMLElement): GridPosition | undefined {
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+      const cellIndex = rows[rowIndex].cells.findIndex((cell) => cell.element === element);
+
+      if (cellIndex !== NOT_FOUND) {
+        return {rowIndex, cellIndex};
+      }
+    }
+
+    return undefined;
+  }
+
+  /**
+   * Resolves the element an arrow key should move focus to.
+   * @param key The pressed arrow key.
+   * @param rows The grid layout.
+   * @param position The current cell position.
+   * @returns The target element, or `undefined` if there is none.
+   */
+  private resolveGridTarget(key: string, rows: LayoutRow[], position: GridPosition): HTMLElement | undefined {
+    const currentCenterX = rows[position.rowIndex].cells[position.cellIndex].centerX;
+
+    if (key === 'ArrowDown' || key === 'ArrowUp') {
+      const step = key === 'ArrowDown' ? STEP_NEXT : STEP_PREVIOUS;
+      const targetRow = rows[position.rowIndex + step];
+
+      return targetRow ? this.nearestInRow(targetRow, currentCenterX)?.element : undefined;
+    }
+
+    return this.resolveHorizontalTarget(rows, position, key === 'ArrowRight' ? STEP_NEXT : STEP_PREVIOUS);
+  }
+
+  /**
+   * Resolves the horizontal navigation target, stepping into the adjacent row at a row
+   * boundary and wrapping around when {@link wrap} is enabled.
+   * @param rows The grid layout.
+   * @param position The current cell position.
+   * @param step `1` for ArrowRight, `-1` for ArrowLeft.
+   * @returns The target element, or `undefined` if there is none.
+   */
+  private resolveHorizontalTarget(rows: LayoutRow[], position: GridPosition, step: number): HTMLElement | undefined {
+    const cells = rows[position.rowIndex].cells;
+    const nextIndex = position.cellIndex + step;
+
+    if (nextIndex >= 0 && nextIndex < cells.length) {
+      return cells[nextIndex].element;
+    }
+
+    if (step === STEP_NEXT) {
+      if (position.rowIndex < rows.length - 1) {
+        return rows[position.rowIndex + 1].cells[0]?.element;
+      }
+
+      return this.wrap() ? rows[0]?.cells[0]?.element : undefined;
+    }
+
+    if (position.rowIndex > 0) {
+      return rows[position.rowIndex - 1].cells.at(LAST_INDEX)?.element;
+    }
+
+    return this.wrap() ? rows.at(LAST_INDEX)?.cells.at(LAST_INDEX)?.element : undefined;
   }
 
   /**
@@ -350,7 +389,9 @@ export class RovingTabindexDirective implements AfterViewInit, OnDestroy {
     }
 
     rows.sort((a, b) => a.top - b.top);
-    rows.forEach((row) => row.cells.sort((a, b) => a.centerX - b.centerX));
+    rows.forEach((row) => {
+      row.cells.sort((a, b) => a.centerX - b.centerX);
+    });
 
     return rows;
   }

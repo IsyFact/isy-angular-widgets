@@ -577,7 +577,9 @@ export class InputCharGridComponent implements OnChanges, AfterViewInit, OnDestr
     }
 
     rows.sort((a, b) => a.top - b.top);
-    rows.forEach((row) => row.cells.sort((a, b) => a.centerX - b.centerX));
+    rows.forEach((row) => {
+      row.cells.sort((a, b) => a.centerX - b.centerX);
+    });
 
     this.rows = rows;
     this.indexToPosition = new Map();
