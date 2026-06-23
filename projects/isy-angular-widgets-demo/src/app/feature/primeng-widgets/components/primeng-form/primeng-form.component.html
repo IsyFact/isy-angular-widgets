@@ -30,7 +30,7 @@
               @if (inputTextModel.errors?.['minlength']) {
                 {{
                   'isyAngularWidgetsDemo.messages.minLengthError'
-                    | translate: {numChars: inputTextModel.errors?.['minlength'].requiredLength}
+                    | translate: {numChars: inputTextModel.errors['minlength'].requiredLength}
                 }}
               }
             </p-message>

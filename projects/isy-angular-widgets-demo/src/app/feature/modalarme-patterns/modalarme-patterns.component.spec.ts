@@ -2,7 +2,7 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {ViewportScroller} from '@angular/common';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
-import {fakeAsync, flush, tick} from '@angular/core/testing';
+import {fakeAsync, tick} from '@angular/core/testing';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
