@@ -496,6 +496,22 @@ describe('Integration Test: HauptfensterComponent', () => {
     ]
   });
 
+  /**
+   * Returns the element matching the specified selector.
+   * @param selector The CSS selector of the requested element.
+   * @returns The matching HTML element.
+   * @throws {Error} If no matching element can be found.
+   */
+  const getRequiredElement = (selector: string): HTMLElement => {
+    const element = spectator.query(selector);
+
+    if (!element) {
+      throw new Error(`Element "${selector}" was not found.`);
+    }
+
+    return element as HTMLElement;
+  };
+
   beforeEach(() => {
     spectator = createComponent();
   });
@@ -504,28 +520,87 @@ describe('Integration Test: HauptfensterComponent', () => {
     const customTitle = 'Custom Title';
 
     spectator = createComponent({
-      props: {title: customTitle}
+      props: {
+        title: customTitle
+      }
     });
 
     const titelzeileEl = spectator.query('.isy-hauptfenster-titelzeile') as HTMLElement;
+
     expect((titelzeileEl.textContent ?? '').trim()).toEqual(customTitle);
   });
 
   it('should have outlined style when outlinedLogoutButton is true', () => {
     spectator = createComponent({
-      props: {outlinedLogoutButton: true}
+      props: {
+        outlinedLogoutButton: true
+      }
     });
 
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button button') as HTMLButtonElement;
+
     expect(logoutButton).toHaveClass('p-button-outlined');
   });
 
   it('should not have outlined style when outlinedLogoutButton is false', () => {
     spectator = createComponent({
-      props: {outlinedLogoutButton: false}
+      props: {
+        outlinedLogoutButton: false
+      }
     });
 
     const logoutButton = spectator.query('#isy-hauptfenster-logout-button button') as HTMLButtonElement;
+
     expect(logoutButton).not.toHaveClass('p-button-outlined');
+  });
+
+  it('should hide both side areas and keep the main content visible at 320 px when responsive is enabled', () => {
+    spectator = createComponent({
+      props: {
+        responsive: true,
+        showLinksnavigation: true,
+        showInformationsbereich: true
+      }
+    });
+
+    spectator.element.style.width = '320px';
+    spectator.detectChanges();
+
+    const hauptfenster = getRequiredElement('.isy-hauptfenster');
+    const linksnavigation = getRequiredElement('.isy-hauptfenster-linksnavigation');
+    const main = getRequiredElement('.isy-hauptfenster-inhaltsbereich > main');
+    const informationsbereich = getRequiredElement('.isy-hauptfenster-informationsbereich');
+
+    expect(getComputedStyle(spectator.element).width).toBe('320px');
+    expect(hauptfenster).toHaveClass('isy-hauptfenster--responsive');
+
+    expect(getComputedStyle(linksnavigation).display).toBe('none');
+    expect(getComputedStyle(informationsbereich).display).toBe('none');
+    expect(getComputedStyle(main).display).not.toBe('none');
+    expect(main.offsetWidth).toBeGreaterThan(0);
+  });
+
+  it('should show both side areas and the main content at desktop width when responsive is enabled', () => {
+    spectator = createComponent({
+      props: {
+        responsive: true,
+        showLinksnavigation: true,
+        showInformationsbereich: true
+      }
+    });
+
+    spectator.element.style.width = '1280px';
+    spectator.detectChanges();
+
+    const linksnavigation = getRequiredElement('.isy-hauptfenster-linksnavigation');
+    const main = getRequiredElement('.isy-hauptfenster-inhaltsbereich > main');
+    const informationsbereich = getRequiredElement('.isy-hauptfenster-informationsbereich');
+
+    expect(getComputedStyle(spectator.element).width).toBe('1280px');
+
+    expect(getComputedStyle(linksnavigation).display).not.toBe('none');
+    expect(getComputedStyle(informationsbereich).display).not.toBe('none');
+    expect(getComputedStyle(main).display).not.toBe('none');
+    expect(main.offsetWidth).toBeGreaterThan(0);
   });
 });

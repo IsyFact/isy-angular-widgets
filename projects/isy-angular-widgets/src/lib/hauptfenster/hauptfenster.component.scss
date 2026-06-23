@@ -1,3 +1,10 @@
+$responsive-breakpoint: 1024px;
+
+:host {
+  display: block;
+  container-type: inline-size;
+}
+
 .isy-hauptfenster {
   border-top: 10px solid var(--isyfact-hauptfenster-background);
   min-height: 100vh;
@@ -30,13 +37,13 @@
   background-color: var(--isyfact-surface-ground);
 }
 
+.isy-hauptfenster-informationsbereich {
+  background-color: var(--isyfact-surface-ground);
+}
+
 .sidebar-nav-header,
 .sidebar-info-header {
   padding-top: var(--isyfact-space-xs);
-}
-
-.isy-hauptfenster-informationsbereich {
-  background-color: var(--isyfact-surface-ground);
 }
 
 :host ::ng-deep .isy-hauptfenster-browser-warning {
@@ -53,6 +60,28 @@
   .p-megamenu {
     .p-menuitem-text {
       color: var(--p-surface-900);
+    }
+  }
+}
+
+@container (max-width: #{$responsive-breakpoint}) {
+  .isy-hauptfenster--responsive {
+    .isy-hauptfenster-linksnavigation,
+    .isy-hauptfenster-informationsbereich {
+      display: none !important;
+    }
+
+    .isy-hauptfenster-inhaltsbereich {
+      width: 100%;
+      min-width: 0;
+      gap: 0 !important;
+    }
+
+    .isy-hauptfenster-inhaltsbereich > main {
+      flex: 1 1 100% !important;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
     }
   }
 }

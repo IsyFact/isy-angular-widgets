@@ -10,7 +10,9 @@ import {
   Injector,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {CommonModule} from '@angular/common';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {StepperModule} from 'primeng/stepper';
@@ -26,6 +28,7 @@ import {FormControlPipe} from '@isy-angular-widgets/pipes/form-control.pipe';
 import {SelectModule} from 'primeng/select';
 import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
+import {map} from 'rxjs';
 import {AnchorNavigationService} from '../../shared/services/anchor-navigation.service';
 import {SectionHeadingComponent} from '../../shared/components/section-heading/section-heading.component';
 
@@ -85,6 +88,8 @@ export enum StepperStep {
   styleUrls: ['./modalarme-patterns.component.scss']
 })
 export class ModalarmePatternsComponent implements AfterViewInit {
+  private static readonly VERTICAL_STEPPER_MEDIA_QUERY = '(max-width: 320px)';
+
   private readonly destroyRef = inject(DestroyRef);
   private readonly anchorNav = inject(AnchorNavigationService);
   private readonly fb = inject(FormBuilder);
@@ -92,11 +97,37 @@ export class ModalarmePatternsComponent implements AfterViewInit {
   private readonly injector = inject(Injector);
   private readonly liveAnnouncer = inject(LiveAnnouncer);
   private readonly hostEl = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  private pendingStepperFocus: StepperStep | null = null;
+
   protected readonly Validators = Validators;
+  protected readonly isVerticalStepper = toSignal(
+    this.breakpointObserver
+      .observe(ModalarmePatternsComponent.VERTICAL_STEPPER_MEDIA_QUERY)
+      .pipe(map(({matches}) => matches)),
+    {
+      initialValue: this.breakpointObserver.isMatched(ModalarmePatternsComponent.VERTICAL_STEPPER_MEDIA_QUERY)
+    }
+  );
 
   // Stepper
   stepValue: StepperStep = StepperStep.First;
   globalError: string | null = null;
+
+  /**
+   * Focuses the first field as soon as the active step panel has actually
+   * created the field and PrimeNG has made it visible.
+   */
+  @ViewChild('stepperFocusTarget', {read: ElementRef})
+  set stepperFocusTarget(target: ElementRef<HTMLElement> | undefined) {
+    const pendingStep = this.pendingStepperFocus;
+
+    if (!target || pendingStep === null || pendingStep !== this.stepValue) {
+      return;
+    }
+
+    this.focusStepperTargetWhenReady(target.nativeElement, pendingStep);
+  }
 
   formStepper: FormGroup = this.fb.nonNullable.group({
     base: this.fb.group({
@@ -120,8 +151,8 @@ export class ModalarmePatternsComponent implements AfterViewInit {
   goNext(target: StepperStep, currentGroup: FormGroup): void {
     if (currentGroup.valid) {
       this.globalError = null;
+      this.pendingStepperFocus = target;
       this.stepValue = target;
-      this.focusFirstFieldInStep(target);
       return;
     }
 
@@ -132,8 +163,8 @@ export class ModalarmePatternsComponent implements AfterViewInit {
 
   goBack(target: StepperStep): void {
     this.globalError = null;
+    this.pendingStepperFocus = target;
     this.stepValue = target;
-    this.focusFirstFieldInStep(target);
   }
 
   saveStepper(): void {
@@ -165,78 +196,66 @@ export class ModalarmePatternsComponent implements AfterViewInit {
   }
 
   private announceGlobalError(message: string): void {
-    this.globalError = '';
-
-    afterNextRender(
-      {
-        write: () => {
-          this.globalError = message;
-          void this.liveAnnouncer.announce(message, 'assertive');
-        }
-      },
-      {injector: this.injector}
-    );
+    this.globalError = message;
+    void this.liveAnnouncer.announce(message, 'assertive');
   }
 
   private focusFirstInvalidFieldInStep(step: StepperStep): void {
     afterNextRender(
       {
-        read: () => {
+        write: () => {
           const stepForm = this.hostEl.nativeElement.querySelector<HTMLElement>(`[data-step-form="${step}"]`);
-          if (!stepForm) {
-            return;
-          }
 
-          const firstInvalid = stepForm.querySelector<HTMLElement>(
+          const invalidElement = stepForm?.querySelector<HTMLElement>(
             [
               'input[aria-invalid="true"]',
               'textarea[aria-invalid="true"]',
               'select[aria-invalid="true"]',
               '[role="combobox"][aria-invalid="true"]',
-              '.p-select.p-invalid',
               '.p-select.p-invalid [role="combobox"]',
               '.p-invalid input',
-              '.p-invalid'
+              '.p-invalid textarea',
+              '.p-invalid select',
+              '.p-invalid [role="combobox"]'
             ].join(', ')
           );
 
-          if (!firstInvalid) {
-            return;
-          }
-
-          const focusTarget = firstInvalid.matches('[role="combobox"], input, textarea, select')
-            ? firstInvalid
-            : (firstInvalid.querySelector<HTMLElement>('[role="combobox"], input, textarea, select') ?? firstInvalid);
-
-          focusTarget.focus();
+          invalidElement?.focus();
         }
       },
       {injector: this.injector}
     );
   }
 
-  private focusFirstFieldInStep(step: StepperStep): void {
-    afterNextRender(
-      {
-        write: () => {
-          let targetId: string | null = null;
+  /**
+   * Waits until PrimeNG has mounted and displayed the target before focusing it.
+   * @param element - Field that should receive focus
+   * @param step - Step associated with the field
+   * @param attempt - Current animation-frame attempt
+   */
+  private focusStepperTargetWhenReady(element: HTMLElement, step: StepperStep, attempt = 0): void {
+    const maxAttempts = 60;
 
-          if (step === StepperStep.First) {
-            targetId = 'id';
-          } else if (step === StepperStep.Second) {
-            targetId = 'firstname';
-          }
+    requestAnimationFrame(() => {
+      if (this.pendingStepperFocus !== step || this.stepValue !== step || !element.isConnected) {
+        return;
+      }
 
-          if (!targetId) {
-            return;
-          }
+      const isVisible = element.getClientRects().length > 0;
 
-          const target = this.hostEl.nativeElement.querySelector<HTMLElement>(`#${targetId}`);
-          target?.focus();
+      if (isVisible) {
+        element.focus();
+
+        if (element.ownerDocument.activeElement === element) {
+          this.pendingStepperFocus = null;
+          return;
         }
-      },
-      {injector: this.injector}
-    );
+      }
+
+      if (attempt < maxAttempts) {
+        this.focusStepperTargetWhenReady(element, step, attempt + 1);
+      }
+    });
   }
 
   // Drawer
