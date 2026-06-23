@@ -27,10 +27,9 @@
           <small id="input-text-help">{{ 'isyAngularWidgetsDemo.messages.inputTextHelp' | translate }}</small>
           @if (inputTextModel.invalid && inputTextModel.touched) {
             <p-message id="input-text-validation-error" severity="error" variant="simple">
-              @if (inputTextModel.errors?.['minlength']) {
+              @if (inputTextModel.errors?.['minlength']; as minLengthError) {
                 {{
-                  'isyAngularWidgetsDemo.messages.minLengthError'
-                    | translate: {numChars: inputTextModel.errors['minlength'].requiredLength}
+                  'isyAngularWidgetsDemo.messages.minLengthError' | translate: {numChars: minLengthError.requiredLength}
                 }}
               }
             </p-message>
