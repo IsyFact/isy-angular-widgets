@@ -57,6 +57,9 @@
     },
     "p-calendar": {
       "iconAriaLabel": "Open/Close Datepicker"
+    },
+    "seitentoolbar": {
+      "back": "Back to overview"
     }
   },
   "isyAngularWidgetsDemo": {

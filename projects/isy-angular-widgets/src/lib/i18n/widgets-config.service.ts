@@ -37,6 +37,9 @@ export class WidgetsConfigService {
     },
     formWrapper: {
       required: 'Pflichtfeld'
+    },
+    seitentoolbar: {
+      back: 'Zurück zur Übersicht'
     }
   };
 
@@ -85,6 +88,10 @@ export class WidgetsConfigService {
       formWrapper: {
         ...this.translation.formWrapper,
         ...value.formWrapper
+      },
+      seitentoolbar: {
+        ...this.translation.seitentoolbar,
+        ...value.seitentoolbar
       }
     };
 

@@ -94,6 +94,7 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 
 ```html
 <isy-hauptfenster
+  responsive
   [collapsedLinksnavigation]="false"
   [collapsedInformationsbereich]="true"
   [showInformationsbereich]="true"
@@ -127,6 +128,60 @@ Bei einem neu generierten Projekt kann dazu einfach der komplette Inhalt der Dat
 </isy-hauptfenster>
 ```
 
+#### Responsive Darstellung
+
+Das responsive Verhalten des Hauptfensters ist standardmäßig deaktiviert und kann über das Boolean-Attribut `responsive` aktiviert werden:
+
+```html
+<isy-hauptfenster
+  responsive
+  [showLinksnavigation]="true"
+  [showInformationsbereich]="true"
+>
+  <p-menu Linksnavigation [model]="navigationItems"></p-menu>
+
+  <main>
+    Zentraler Inhaltsbereich
+  </main>
+
+  <p Informationsbereich>
+    Zusätzliche Informationen
+  </p>
+</isy-hauptfenster>
+```
+
+Ist `responsive` gesetzt, reagiert das Hauptfenster auf seine verfügbare Breite:
+
+- Bei einer Breite von höchstens `1024 px` werden die Linksnavigation und der Informationsbereich automatisch ausgeblendet.
+- Der zentrale Inhaltsbereich bleibt sichtbar und nutzt die verfügbare Breite.
+- Wird das Hauptfenster wieder breiter als `1024 px`, werden die Seitenbereiche entsprechend ihrer Einstellungen `showLinksnavigation` und `showInformationsbereich` erneut angezeigt.
+- Die Werte von `collapsedLinksnavigation` und `collapsedInformationsbereich` werden durch das responsive Verhalten nicht verändert.
+
+Das Attribut kann auch dynamisch gesetzt werden:
+
+```html
+<isy-hauptfenster
+  [responsive]="responsiveLayoutEnabled"
+  [showLinksnavigation]="true"
+  [showInformationsbereich]="true"
+>
+  <!-- Inhalte -->
+</isy-hauptfenster>
+```
+
+Ohne das Attribut bleibt das bisherige Verhalten unverändert:
+
+```html
+<isy-hauptfenster
+  [showLinksnavigation]="true"
+  [showInformationsbereich]="true"
+>
+  <!-- Inhalte -->
+</isy-hauptfenster>
+```
+
+Da die responsive Darstellung auf der Breite der Komponente basiert, funktioniert sie auch dann, wenn das Hauptfenster innerhalb eines schmaleren Containers verwendet wird.
+
 Im nächsten Schritt werden die notwendigen Module und die Komponente `HauptfensterComponent`, `PanelModule` und `MenuModule` in der Datei `app.ts` importiert:
 
 ```typescript
@@ -159,6 +214,23 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideIsyFactTheme()]
 };
 ```
+
+### Responsive Darstellung der Seitentoolbar
+
+Das responsive Verhalten ist standardmäßig deaktiviert und kann über das Boolean-Attribut `responsive` aktiviert werden:
+
+```html
+<isy-seiten-toolbar
+  responsive
+  [showSidebar]="true"
+  sidebarHomeButtonLabel="Zurück"
+  sidebarHomeButtonAriaLabel="Zurück zur Übersicht"
+/>
+```
+
+Bei einer Bildschirmbreite von höchstens `320 px` wird das sichtbare Label des Home-/Zurück-Buttons ausgeblendet. Das Icon und das Accessible Label bleiben erhalten.
+
+Ohne `responsive` bleibt das sichtbare Label auch bei schmalen Bildschirmbreiten erhalten.
 
 ## Theme-Konfiguration
 

@@ -1,3 +1,8 @@
+# 21.2.0 -
+## Features
+- IFS-5527: Responsives Verhalten für die Seitentoolbar wurde über das Attribut `responsive` ergänzt, wobei bei Bildschirmbreiten bis `320 px` das sichtbare Label des Home-/Zurück-Buttons ausgeblendet wird
+- IFS-5526: Responsives Verhalten für das Hauptfenster wurde über das Attribut `responsive` ergänzt
+
 # 21.1.0 - 16.06.2026
 ## Features
 - IFS-5530: Version wurde auf `v21.1.0` angehoben und zugehörige Dokumentation angepasst
