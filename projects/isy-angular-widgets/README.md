@@ -215,6 +215,23 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
+### Responsive Darstellung der Seitentoolbar
+
+Das responsive Verhalten ist standardmäßig deaktiviert und kann über das Boolean-Attribut `responsive` aktiviert werden:
+
+```html
+<isy-seiten-toolbar
+  responsive
+  [showSidebar]="true"
+  sidebarHomeButtonLabel="Zurück"
+  sidebarHomeButtonAriaLabel="Zurück zur Übersicht"
+/>
+```
+
+Bei einer Bildschirmbreite von höchstens `320 px` wird das sichtbare Label des Home-/Zurück-Buttons ausgeblendet. Das Icon und das Accessible Label bleiben erhalten.
+
+Ohne `responsive` bleibt das sichtbare Label auch bei schmalen Bildschirmbreiten erhalten.
+
 ## Theme-Konfiguration
 
 Die Bibliothek verwendet standardmäßig das PrimeNG-Theme `Nora` über `providePrimeNG()`.

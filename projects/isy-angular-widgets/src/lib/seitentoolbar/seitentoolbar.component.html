@@ -1,10 +1,11 @@
 @if (showSidebar) {
-  <p-toolbar class="dont-print">
+  <p-toolbar class="dont-print" [class.isy-seiten-toolbar-responsive]="responsive">
     <div class="p-toolbar-left">
       <p-button
+        class="isy-seiten-toolbar-home-button"
         [link]="true"
         [label]="sidebarHomeButtonLabel"
-        [ariaLabel]="sidebarHomeButtonAriaLabel"
+        [ariaLabel]="effectiveSidebarHomeButtonAriaLabel"
         icon="pi pi-arrow-circle-left"
         (onClick)="navigateHome()"
       />

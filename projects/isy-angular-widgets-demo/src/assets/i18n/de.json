@@ -57,6 +57,9 @@
     },
     "p-calendar": {
       "iconAriaLabel": "Datepicker öffnen/schließen"
+    },
+    "seitentoolbar": {
+      "back": "Zurück zur Übersicht"
     }
   },
   "isyAngularWidgetsDemo": {

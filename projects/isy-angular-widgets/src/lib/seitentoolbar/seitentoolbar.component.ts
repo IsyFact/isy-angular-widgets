@@ -1,7 +1,8 @@
-import {Component, inject, Input} from '@angular/core';
-import {ToolbarModule} from 'primeng/toolbar';
-import {ButtonModule} from 'primeng/button';
+import {booleanAttribute, Component, inject, Input} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
+import {ButtonModule} from 'primeng/button';
+import {ToolbarModule} from 'primeng/toolbar';
+import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
 /**
  * Represents a toolbar component that can be used to insert a toolbar at the top of the page.
@@ -20,21 +21,43 @@ export class SeitentoolbarComponent {
   @Input() showSidebar: boolean = false;
 
   /**
+   * Determines whether responsive behavior is enabled.
+   */
+  @Input({transform: booleanAttribute}) responsive: boolean = false;
+
+  /**
    * Label for the home button.
    */
   @Input() sidebarHomeButtonLabel?: string;
 
   /**
-   * AriaLabel for the home button.
+   * Accessible label for the home button.
    */
   @Input() sidebarHomeButtonAriaLabel?: string;
 
   /**
    * Route for the home button.
    */
-  @Input() sidebarHomeRoute?: string = '/';
+  @Input() sidebarHomeRoute: string = '/';
 
   private readonly router = inject(Router);
+
+  /**
+   * A service used to translate labels within the widgets library.
+   */
+  protected readonly configService = inject(WidgetsConfigService);
+
+  /**
+   * Returns the accessible label for the home button.
+   * @returns The effective accessible label for the home button.
+   */
+  get effectiveSidebarHomeButtonAriaLabel(): string {
+    return (
+      this.sidebarHomeButtonAriaLabel ??
+      this.sidebarHomeButtonLabel ??
+      this.configService.getTranslation('seitentoolbar.back')
+    );
+  }
 
   /**
    * Method to navigate to the homeRoute.
