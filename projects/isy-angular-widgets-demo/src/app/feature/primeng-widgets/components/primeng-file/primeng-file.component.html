@@ -1,16 +1,18 @@
-<h1>PrimeNG File</h1>
-<div class="grid">
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="fileupload" [level]="2" label="FileUpload" ariaLabel="Link zu FileUpload" />
-    <p-fileupload
-      mode="basic"
-      chooseIcon="pi pi-upload"
-      chooseLabel="FileUpload"
-      name="fileUploadExample"
-      url="https://www.primefaces.org/cdn/api/upload.php"
-      accept="image/*,.pdf,.txt"
-      [maxFileSize]="1000000"
-      (onUpload)="onUpload($event)"
-    />
+<div class="flex flex-column p-3">
+  <h1>PrimeNG File</h1>
+  <div class="grid">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="fileupload" [level]="2" label="FileUpload" ariaLabel="Link zu FileUpload" />
+      <p-fileupload
+        mode="basic"
+        chooseIcon="pi pi-upload"
+        chooseLabel="FileUpload"
+        name="fileUploadExample"
+        url="https://www.primefaces.org/cdn/api/upload.php"
+        accept="image/*,.pdf,.txt"
+        [maxFileSize]="1000000"
+        (onUpload)="onUpload($event)"
+      />
+    </div>
   </div>
 </div>

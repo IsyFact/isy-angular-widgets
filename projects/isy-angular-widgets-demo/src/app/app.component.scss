@@ -16,3 +16,7 @@
 :host ::ng-deep .skip-link a:focus {
   box-shadow: var(--focus-ring);
 }
+
+:host ::ng-deep .p-toast {
+  width: auto;
+}

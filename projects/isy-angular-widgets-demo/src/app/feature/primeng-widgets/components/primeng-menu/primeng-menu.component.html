@@ -1,67 +1,69 @@
-<h1>PrimeNG Menus</h1>
-<h2>Content Splitter</h2>
-<div class="grid">
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="breadcrumb" [level]="3" label="Breadcrumb" ariaLabel="Link zu Breadcrumb" />
-    <p-breadcrumb [home]="{icon: 'pi pi-home'}" [model]="electronics" />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="steps" [level]="3" label="Steps" ariaLabel="Link zu Steps" />
-    <p-steps
-      [model]="stepItem"
-      [readonly]="false"
-      [activeIndex]="activeIndex"
-      (activeIndexChange)="onActiveIndexChange($event)"
-    />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="tabmenu" [level]="3" label="TabMenu" ariaLabel="Link zu TabMenu" />
-    <p-tabs>
-      <p-tablist>
-        @for (tab of tabMenuOption; track tab.route) {
-          <p-tab class="flex items-center gap-2" [value]="tab.route" routerLink="tab.route">
-            <i [class]="tab.icon"></i>
-            <span>{{ tab.label }}</span>
-          </p-tab>
-        }
-      </p-tablist>
-    </p-tabs>
-  </div>
-</div>
-<p-divider />
-<h2>Navigation Menu</h2>
-<div class="grid">
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="menubar" [level]="3" label="MenuBar" ariaLabel="Link zu MenuBar" />
-    <p-menubar id="menu-bar" [model]="menuBarOption" />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="megamenu" [level]="3" label="MegaMenu" ariaLabel="Link zu MegaMenu" />
-    <p-megamenu id="mega-menu" [model]="megaMenuOptions" />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="panelmenu" [level]="3" label="PanelMenu" ariaLabel="Link zu PanelMenu" />
-    <div class="col-3 flex flex-column gap-2">
-      <p-panelmenu id="panel-menu" [model]="fileContainerOptions" />
+<div class="flex flex-column p-3">
+  <h1>PrimeNG Menus</h1>
+  <h2>Content Splitter</h2>
+  <div class="grid">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="breadcrumb" [level]="3" label="Breadcrumb" ariaLabel="Link zu Breadcrumb" />
+      <p-breadcrumb [home]="{icon: 'pi pi-home'}" [model]="electronics" />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="steps" [level]="3" label="Steps" ariaLabel="Link zu Steps" />
+      <p-steps
+        [model]="stepItem"
+        [readonly]="false"
+        [activeIndex]="activeIndex"
+        (activeIndexChange)="onActiveIndexChange($event)"
+      />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="tabmenu" [level]="3" label="TabMenu" ariaLabel="Link zu TabMenu" />
+      <p-tabs>
+        <p-tablist>
+          @for (tab of tabMenuOption; track tab.route) {
+            <p-tab class="flex items-center gap-2" [value]="tab.route" routerLink="tab.route">
+              <i [class]="tab.icon"></i>
+              <span>{{ tab.label }}</span>
+            </p-tab>
+          }
+        </p-tablist>
+      </p-tabs>
     </div>
   </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="tieredmenu" [level]="3" label="TieredMenu" ariaLabel="Link zu TieredMenu" />
-    <div class="col-3 flex flex-column gap-2">
-      <p-tieredmenu id="tiered-menu" [model]="fileContainerOptions" />
+  <p-divider />
+  <h2>Navigation Menu</h2>
+  <div class="grid">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="menubar" [level]="3" label="MenuBar" ariaLabel="Link zu MenuBar" />
+      <p-menubar id="menu-bar" [model]="menuBarOption" />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="megamenu" [level]="3" label="MegaMenu" ariaLabel="Link zu MegaMenu" />
+      <p-megamenu id="mega-menu" [model]="megaMenuOptions" />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="panelmenu" [level]="3" label="PanelMenu" ariaLabel="Link zu PanelMenu" />
+      <div class="col-12 md:col-3 flex flex-column gap-2">
+        <p-panelmenu id="panel-menu" [model]="fileContainerOptions" />
+      </div>
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="tieredmenu" [level]="3" label="TieredMenu" ariaLabel="Link zu TieredMenu" />
+      <div class="col-3 flex flex-column gap-2">
+        <p-tieredmenu id="tiered-menu" [model]="fileContainerOptions" />
+      </div>
     </div>
   </div>
-</div>
-<p-divider />
-<h2>Other Menus</h2>
-<div class="grid mb-3">
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="contextmenu" [level]="3" label="ContextMenu" ariaLabel="Link zu ContextMenu" />
-    <img #logo src="assets/default-application-logo.jpg" alt="Logo" aria-haspopup="true" height="150" width="335" />
-    <p-contextMenu id="context-menu" [target]="logo" [model]="contextMenuOption" />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="menu" [level]="3" label="Menu" ariaLabel="Link zu Menu" />
-    <p-menu id="p-menu" [model]="option" styleClass="w-full" />
+  <p-divider />
+  <h2>Other Menus</h2>
+  <div class="grid mb-3">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="contextmenu" [level]="3" label="ContextMenu" ariaLabel="Link zu ContextMenu" />
+      <img #logo src="assets/default-application-logo.jpg" alt="Logo" aria-haspopup="true" height="150" width="335" />
+      <p-contextMenu id="context-menu" [target]="logo" [model]="contextMenuOption" />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="menu" [level]="3" label="Menu" ariaLabel="Link zu Menu" />
+      <p-menu id="p-menu" [model]="option" styleClass="w-full" />
+    </div>
   </div>
 </div>

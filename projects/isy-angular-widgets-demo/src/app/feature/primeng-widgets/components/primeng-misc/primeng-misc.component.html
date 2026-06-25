@@ -1,173 +1,175 @@
-<h1>PrimeNG Misc</h1>
-<h2>Indicator</h2>
-<div class="grid">
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="chip" [level]="3" label="Chip" ariaLabel="Link zu Chip" />
-    <div class="flex justify-content-start gap-2">
-      <p-autocomplete label="Apple" multiple="true" typeahead="false" />
-      <p-autocomplete label="Google" multiple="true" typeahead="false" />
-      <p-autocomplete label="Microsoft" multiple="true" typeahead="false" />
-      <p-autocomplete label="Facebook" multiple="true" typeahead="false" />
+<div class="flex flex-column p-3">
+  <h1>PrimeNG Misc</h1>
+  <h2>Indicator</h2>
+  <div class="grid">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="chip" [level]="3" label="Chip" ariaLabel="Link zu Chip" />
+      <div class="flex justify-content-start gap-2">
+        <p-autocomplete label="Apple" multiple="true" typeahead="false" />
+        <p-autocomplete label="Google" multiple="true" typeahead="false" />
+        <p-autocomplete label="Microsoft" multiple="true" typeahead="false" />
+        <p-autocomplete label="Facebook" multiple="true" typeahead="false" />
+      </div>
     </div>
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="tag" [level]="3" label="Tag" ariaLabel="Link zu Tag" />
-    <div class="flex justify-content-start gap-2">
-      <p-tag value="Primary" />
-      <p-tag severity="success" value="Success" />
-      <p-tag severity="info" value="Info" />
-      <p-tag severity="warn" value="Warning" />
-      <p-tag severity="danger" value="Danger" />
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="tag" [level]="3" label="Tag" ariaLabel="Link zu Tag" />
+      <div class="flex flex-column md:flex-row align-items-start md:align-items-center gap-2">
+        <p-tag value="Primary" />
+        <p-tag severity="success" value="Success" />
+        <p-tag severity="info" value="Info" />
+        <p-tag severity="warn" value="Warning" />
+        <p-tag severity="danger" value="Danger" />
+      </div>
     </div>
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="avatar" [level]="3" label="Avatar" ariaLabel="Link zu Avatar" />
-    <div class="flex justify-content-start gap-2">
-      <p-avatar icon="pi pi-user" badgeSize="xlarge" />
-      <p-avatar icon="pi pi-user" badgeSize="large" />
-      <p-avatar icon="pi pi-user" />
-    </div>
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading
-      anchorId="avatar-badge"
-      [level]="3"
-      label="Avatar with Badge"
-      ariaLabel="Link zu Avatar with Badge"
-    />
-    <div class="flex justify-content-start gap-5 pt-3">
-      <p-overlay-badge value="4" class="inline-flex">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="avatar" [level]="3" label="Avatar" ariaLabel="Link zu Avatar" />
+      <div class="flex justify-content-start gap-2">
         <p-avatar icon="pi pi-user" badgeSize="xlarge" />
-      </p-overlay-badge>
-      <p-overlay-badge value="3" class="inline-flex">
         <p-avatar icon="pi pi-user" badgeSize="large" />
-      </p-overlay-badge>
-      <p-overlay-badge value="2" class="inline-flex">
         <p-avatar icon="pi pi-user" />
-      </p-overlay-badge>
+      </div>
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading
+        anchorId="avatar-badge"
+        [level]="3"
+        label="Avatar with Badge"
+        ariaLabel="Link zu Avatar with Badge"
+      />
+      <div class="flex justify-content-start gap-5 pt-3">
+        <p-overlay-badge value="4" class="inline-flex">
+          <p-avatar icon="pi pi-user" badgeSize="xlarge" />
+        </p-overlay-badge>
+        <p-overlay-badge value="3" class="inline-flex">
+          <p-avatar icon="pi pi-user" badgeSize="large" />
+        </p-overlay-badge>
+        <p-overlay-badge value="2" class="inline-flex">
+          <p-avatar icon="pi pi-user" />
+        </p-overlay-badge>
+      </div>
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="badge" [level]="3" label="Badge" ariaLabel="Link zu Badge" />
+      <div class="flex justify-content-start gap-2">
+        <p-badge [value]="2" severity="success" badgeSize="large" />
+        <p-badge [value]="4" severity="info" badgeSize="large" />
+        <p-badge [value]="6" severity="warn" badgeSize="large" />
+        <p-badge [value]="8" severity="danger" badgeSize="large" />
+      </div>
     </div>
   </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="badge" [level]="3" label="Badge" ariaLabel="Link zu Badge" />
-    <div class="flex justify-content-start gap-2">
-      <p-badge [value]="2" severity="success" badgeSize="large" />
-      <p-badge [value]="4" severity="info" badgeSize="large" />
-      <p-badge [value]="6" severity="warn" badgeSize="large" />
-      <p-badge [value]="8" severity="danger" badgeSize="large" />
+  <p-divider />
+  <h2>Progress Indicator</h2>
+  <div class="grid">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading
+        anchorId="progressspinner"
+        [level]="3"
+        label="ProgressSpinner"
+        ariaLabel="Link zu ProgressSpinner"
+      />
+      <p-progressspinner />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="progressbar" [level]="3" label="ProgressBar" ariaLabel="Link zu ProgressBar" />
+      <p-progressbar [value]="50" />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="metergroup" [level]="3" label="MeterGroup" ariaLabel="Link zu MeterGroup" />
+      <p-metergroup [value]="storageStatus" />
     </div>
   </div>
-</div>
-<p-divider />
-<h2>Progress Indicator</h2>
-<div class="grid">
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading
-      anchorId="progressspinner"
-      [level]="3"
-      label="ProgressSpinner"
-      ariaLabel="Link zu ProgressSpinner"
-    />
-    <p-progressspinner />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="progressbar" [level]="3" label="ProgressBar" ariaLabel="Link zu ProgressBar" />
-    <p-progressbar [value]="50" />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="metergroup" [level]="3" label="MeterGroup" ariaLabel="Link zu MeterGroup" />
-    <p-metergroup [value]="storageStatus" />
-  </div>
-</div>
-<p-divider />
-<h2>Skeleton</h2>
-<div class="grid">
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="skeleton-rectangle" [level]="3" label="Rectangle" ariaLabel="Link zu Rectangle" />
-    <p-skeleton class="mb-2" />
-    <p-skeleton width="10rem" class="mb-2" />
-    <p-skeleton width="5rem" class="mb-2" />
-    <p-skeleton height="2rem" class="mb-2" />
-    <p-skeleton width="10rem" height="4rem" />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="skeleton-rounded" [level]="3" label="Rounded" ariaLabel="Link zu Rounded" />
-    <p-skeleton class="mb-2" borderRadius="16px" />
-    <p-skeleton width="10rem" class="mb-2" borderRadius="16px" />
-    <p-skeleton width="5rem" class="mb-2" borderRadius="16px" />
-    <p-skeleton height="2rem" class="mb-2" borderRadius="16px" />
-    <p-skeleton width="10rem" height="4rem" borderRadius="16px" />
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="skeleton-square" [level]="3" label="Square" ariaLabel="Link zu Square" />
-    <div class="flex justify-content-start gap-2">
-      <p-skeleton size="5rem" />
-      <p-skeleton size="4rem" />
-      <p-skeleton size="3rem" />
-      <p-skeleton size="2rem" />
+  <p-divider />
+  <h2>Skeleton</h2>
+  <div class="grid">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="skeleton-rectangle" [level]="3" label="Rectangle" ariaLabel="Link zu Rectangle" />
+      <p-skeleton class="mb-2" />
+      <p-skeleton width="10rem" class="mb-2" />
+      <p-skeleton width="5rem" class="mb-2" />
+      <p-skeleton height="2rem" class="mb-2" />
+      <p-skeleton width="10rem" height="4rem" />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="skeleton-rounded" [level]="3" label="Rounded" ariaLabel="Link zu Rounded" />
+      <p-skeleton class="mb-2" borderRadius="16px" />
+      <p-skeleton width="10rem" class="mb-2" borderRadius="16px" />
+      <p-skeleton width="5rem" class="mb-2" borderRadius="16px" />
+      <p-skeleton height="2rem" class="mb-2" borderRadius="16px" />
+      <p-skeleton width="10rem" height="4rem" borderRadius="16px" />
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="skeleton-square" [level]="3" label="Square" ariaLabel="Link zu Square" />
+      <div class="flex justify-content-start gap-2">
+        <p-skeleton size="5rem" />
+        <p-skeleton size="4rem" />
+        <p-skeleton size="3rem" />
+        <p-skeleton size="2rem" />
+      </div>
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="skeleton-circle" [level]="3" label="Circle" ariaLabel="Link zu Circle" />
+      <div class="flex justify-content-start gap-2">
+        <p-skeleton shape="circle" size="5rem" />
+        <p-skeleton shape="circle" size="4rem" />
+        <p-skeleton shape="circle" size="3rem" />
+        <p-skeleton shape="circle" size="2rem" />
+      </div>
     </div>
   </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="skeleton-circle" [level]="3" label="Circle" ariaLabel="Link zu Circle" />
-    <div class="flex justify-content-start gap-2">
-      <p-skeleton shape="circle" size="5rem" />
-      <p-skeleton shape="circle" size="4rem" />
-      <p-skeleton shape="circle" size="3rem" />
-      <p-skeleton shape="circle" size="2rem" />
+  <p-divider />
+  <h2>Other Misc</h2>
+  <div class="grid">
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="inplace" [level]="3" label="Inplace" ariaLabel="Link zu Inplace" />
+      <p-inplace closable="closable">
+        <ng-template pTemplate="display">Click to Edit</ng-template>
+        <ng-template pTemplate="content">
+          <input type="text" value="Inplace Inputfield" pInputText />
+        </ng-template>
+      </p-inplace>
     </div>
-  </div>
-</div>
-<p-divider />
-<h2>Other Misc</h2>
-<div class="grid">
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="inplace" [level]="3" label="Inplace" ariaLabel="Link zu Inplace" />
-    <p-inplace closable="closable">
-      <ng-template pTemplate="display">Click to Edit</ng-template>
-      <ng-template pTemplate="content">
-        <input type="text" value="Inplace Inputfield" pInputText />
-      </ng-template>
-    </p-inplace>
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="scrolltop" [level]="3" label="ScrollTop" ariaLabel="Link zu ScrollTop" />
-    <div style="height: 150px; overflow: auto">
-      <p>
-        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
-        feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
-        delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-      </p>
-      <p>
-        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-        commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
-        illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-        luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-      </p>
-      <p>
-        Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
-        possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-        ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. expedita distinctio. Nam libero tempore,
-        cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-      </p>
-      <p-scrollTop target="parent" [threshold]="10" icon="pi pi-arrow-up" />
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="scrolltop" [level]="3" label="ScrollTop" ariaLabel="Link zu ScrollTop" />
+      <div style="height: 150px; overflow: auto">
+        <p>
+          Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
+          feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+          delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+          sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        </p>
+        <p>
+          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+          commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+          vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
+          praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+        </p>
+        <p>
+          Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
+          possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+          tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+          tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. expedita distinctio. Nam libero
+          tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+        </p>
+        <p-scrollTop target="parent" [threshold]="10" icon="pi pi-arrow-up" />
+      </div>
     </div>
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="blockui" [level]="3" label="BlockUI" ariaLabel="Link zu BlockUI" />
-    <div class="flex justify-content-start gap-2">
-      <p-button label="Block" (onClick)="blockContent()" />
-      <p-button label="Unblock" (onClick)="unblockContent()" />
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="blockui" [level]="3" label="BlockUI" ariaLabel="Link zu BlockUI" />
+      <div class="flex justify-content-start gap-2">
+        <p-button label="Block" (onClick)="blockContent()" />
+        <p-button label="Unblock" (onClick)="unblockContent()" />
+      </div>
+      <p-blockui [target]="blockableContent" [blocked]="blockedContent">
+        <i class="pi pi-lock" style="font-size: 3rem"></i>
+      </p-blockui>
+      <p-panel #blockableContent header="Header">
+        <p>Content</p>
+      </p-panel>
     </div>
-    <p-blockui [target]="blockableContent" [blocked]="blockedContent">
-      <i class="pi pi-lock" style="font-size: 3rem"></i>
-    </p-blockui>
-    <p-panel #blockableContent header="Header">
-      <p>Content</p>
-    </p-panel>
-  </div>
-  <div class="col-12 flex flex-column gap-2">
-    <demo-section-heading anchorId="terminal" [level]="3" label="Terminal" ariaLabel="Link zu Terminal" />
-    <p-terminal welcomeMessage="Welcome to PrimeNG: Enter 'date' to display the current date" prompt="primeng $" />
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading anchorId="terminal" [level]="3" label="Terminal" ariaLabel="Link zu Terminal" />
+      <p-terminal welcomeMessage="Welcome to PrimeNG: Enter 'date' to display the current date" prompt="primeng $" />
+    </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
-# Unreleased
+
+# 21.2.0 -
 ## Features
+- IFS-5526: Responsives Verhalten für das Hauptfenster wurde über das Attribut `responsive` ergänzt
 - IFS-3588: Die Tastatur- und Maussteuerung des Sonderzeichenpickers wurde überarbeitet
   * Das Zeichenraster ist nun eine eigene Listbox (`role="listbox"`/`role="option"`) mit Roving-Tabindex statt des PrimeNG-`p-selectButton`
   * Navigation erfolgt positionsbasiert (gemessene Geometrie): Pfeiltasten bewegen Fokus und Auswahl gemeinsam, ohne Zeilenumbruch am Rand und unter Überspringen deaktivierter Zellen
