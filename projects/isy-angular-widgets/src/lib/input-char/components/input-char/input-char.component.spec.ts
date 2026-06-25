@@ -81,7 +81,7 @@ describe('Unit Tests: InputCharComponent', () => {
       expect(component.resizable).toBeFalse();
       expect(component.dismissableMask).toBeFalse();
       expect(component.closeOnEscape).toBeTrue();
-      expect(component.modal).toBeFalse();
+      expect(component.modal).toBeTrue();
       expect(component.isInputDisabled).toBeFalse();
     });
 
@@ -152,7 +152,7 @@ describe('Unit Tests: InputCharComponent', () => {
           resizable: false,
           dismissableMask: false,
           closeOnEscape: true,
-          modal: false
+          modal: true
         })
       );
     });
