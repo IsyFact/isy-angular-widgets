@@ -36,7 +36,6 @@
   border-color: var(--p-primary-color, #1a73e8);
   background: var(--p-primary-color, #1a73e8);
   color: var(--p-primary-contrast-color, #ffffff);
-  box-shadow: inset 0 0 0 var(--p-focus-ring-width, 2px) var(--p-primary-contrast-color, #ffffff);
   position: relative;
   z-index: 1;
 }
@@ -52,4 +51,10 @@
   outline-offset: -2px;
   position: relative;
   z-index: 2;
+}
+
+// Inner ring on the selected cell while it holds focus (keyboard or mouse).
+// Disappears when focus leaves the grid (e.g. Tab to the insert button).
+.character-option.selected:focus {
+  box-shadow: inset 0 0 0 var(--p-focus-ring-width, 2px) var(--p-primary-contrast-color, #ffffff);
 }
