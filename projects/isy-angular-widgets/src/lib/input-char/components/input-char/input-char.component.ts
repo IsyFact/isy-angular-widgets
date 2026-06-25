@@ -78,9 +78,10 @@ export class InputCharComponent implements OnDestroy {
   @Input() closeOnEscape: boolean = true;
 
   /**
-   * Determines whether the picker is displayed as a modal
+   * Determines whether the picker is displayed as a modal.
+   * Enabled by default so PrimeNG's dialog provides the focus trap (keyboard accessibility).
    */
-  @Input() modal: boolean = false;
+  @Input() modal: boolean = true;
 
   /**
    * Determines whether the input is displayed
