@@ -20,7 +20,8 @@
       "insert": "Insert",
       "aria": {
         "togglePicker": "Open Special Character Picker",
-        "closePicker": "Close Special Character Picker"
+        "closePicker": "Close Special Character Picker",
+        "characterGrid": "Special character selection"
       },
       "enum": {
         "base": "BASE CHARACTERS",

@@ -20,7 +20,8 @@
       "insert": "Einfügen",
       "aria": {
         "togglePicker": "Sonderzeichenpicker öffnen",
-        "closePicker": "Sonderzeichenpicker schließen"
+        "closePicker": "Sonderzeichenpicker schließen",
+        "characterGrid": "Sonderzeichenauswahl"
       },
       "enum": {
         "basis": "GRUNDZEICHEN",

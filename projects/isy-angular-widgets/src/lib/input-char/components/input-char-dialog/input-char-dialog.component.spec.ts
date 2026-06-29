@@ -9,7 +9,8 @@ import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 import {ComponentFixture} from '@angular/core/testing';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
-import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {InputCharGridComponent} from '../input-char-grid/input-char-grid.component';
+import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
 import {CharacterService} from '../../services/character.service';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
@@ -377,19 +378,18 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     for (const base of sampleBases) {
       selectBasis(base);
 
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectbutton')
-      ).componentInstance;
+      const grid = fixture.debugElement.query(By.css('isy-input-char-grid'))
+        .componentInstance as InputCharGridComponent;
 
-      expect(charactersSelectButton.options).toBeTruthy();
+      expect(grid.characters).toBeTruthy();
 
       const expected = sonderzeichenListe.filter(
         (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === base
       );
 
-      expect(charactersSelectButton.options.length).toEqual(expected.length);
+      expect(grid.characters.length).toEqual(expected.length);
 
-      for (const char of charactersSelectButton.options) {
+      for (const char of grid.characters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(base);
       }
     }
@@ -401,19 +401,159 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     for (const group of sampleGroups) {
       selectSchriftzeichengruppe(group);
 
-      const charactersSelectButton = fixture.debugElement.query(
-        By.css('.right-panel-side p-selectbutton')
-      ).componentInstance;
+      const grid = fixture.debugElement.query(By.css('isy-input-char-grid'))
+        .componentInstance as InputCharGridComponent;
 
-      expect(charactersSelectButton.options).toBeTruthy();
+      expect(grid.characters).toBeTruthy();
 
       const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === group);
 
-      expect(charactersSelectButton.options.length).toEqual(expected.length);
+      expect(grid.characters.length).toEqual(expected.length);
 
-      for (const character of charactersSelectButton.options) {
+      for (const character of grid.characters) {
         expect(character.schriftzeichengruppe).toEqual(group);
       }
     }
+  });
+
+  describe('ESC focus return', () => {
+    const filterHeaders = (): HTMLElement[] =>
+      Array.from(spectator.element.querySelectorAll<HTMLElement>('p-accordion-header'));
+
+    const makeEsc = (): KeyboardEvent => {
+      const event = new KeyboardEvent('keydown', {key: 'Escape', cancelable: true, bubbles: true});
+      spyOn(event, 'preventDefault').and.callThrough();
+      spyOn(event, 'stopPropagation').and.callThrough();
+
+      return event;
+    };
+
+    it('returns focus to the last focused filter header and keeps the dialog open', () => {
+      const headers = filterHeaders();
+      expect(headers.length).toBeGreaterThan(1);
+
+      const firstHeader = headers[0];
+      const lastHeader = headers[headers.length - 1];
+      const firstFocusSpy = spyOn(firstHeader, 'focus');
+      const lastFocusSpy = spyOn(lastHeader, 'focus');
+
+      // Focus had last entered the FIRST header before leaving the filter.
+      firstHeader.dispatchEvent(new FocusEvent('focusin', {bubbles: true}));
+
+      const event = makeEsc();
+      spectator.component.onGridEscape(event);
+
+      expect(firstFocusSpy).toHaveBeenCalled();
+      expect(lastFocusSpy).not.toHaveBeenCalled();
+      // E8: closeOnEscape is suppressed via preventDefault + stopPropagation.
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(event.stopPropagation).toHaveBeenCalled();
+    });
+
+    it('falls back to a filter header when the grid was entered without prior filter focus', () => {
+      const headers = filterHeaders();
+      const lastHeader = headers[headers.length - 1];
+      const focusSpy = spyOn(lastHeader, 'focus');
+
+      const event = makeEsc();
+      spectator.component.onGridEscape(event);
+
+      // No section is expanded by default -> last header in DOM order (FR-7.4 c).
+      expect(focusSpy).toHaveBeenCalled();
+      expect(event.preventDefault).toHaveBeenCalled();
+    });
+
+    it('lets the dialog close (default) when no focusable filter header exists', () => {
+      filterHeaders().forEach((header) => header.remove());
+
+      const event = makeEsc();
+      spectator.component.onGridEscape(event);
+
+      expect(event.preventDefault).not.toHaveBeenCalled();
+      expect(event.stopPropagation).not.toHaveBeenCalled();
+    });
+
+    it('suppresses the event end-to-end when the grid emits its escape output', () => {
+      const grid = fixture.debugElement.query(By.css('isy-input-char-grid'))
+        .componentInstance as InputCharGridComponent;
+
+      const event = makeEsc();
+      grid.escape.emit(event);
+
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(event.stopPropagation).toHaveBeenCalled();
+    });
+
+    const escFrom = (element: HTMLElement): KeyboardEvent => {
+      const event = makeEsc();
+      Object.defineProperty(event, 'target', {value: element});
+
+      return event;
+    };
+
+    it('returns focus from a filter value to its accordion header on ESC (left panel)', () => {
+      const value = spectator.element.querySelector('.charset-selectbutton--0 p-togglebutton') as HTMLElement;
+      expect(value).toBeTruthy();
+
+      const header = value.closest('p-accordion-panel')?.querySelector('p-accordion-header') as HTMLElement;
+      const focusSpy = spyOn(header, 'focus');
+
+      const event = escFrom(value);
+      spectator.component.onFilterEscape(event);
+
+      expect(focusSpy).toHaveBeenCalled();
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(event.stopPropagation).toHaveBeenCalled();
+    });
+
+    it('lets ESC close the dialog when focus is on an accordion header (left panel)', () => {
+      const event = escFrom(filterHeaders()[0]);
+
+      spectator.component.onFilterEscape(event);
+
+      expect(event.preventDefault).not.toHaveBeenCalled();
+      expect(event.stopPropagation).not.toHaveBeenCalled();
+    });
+
+    it('lets ESC close the dialog when focus is on a value outside any accordion section', () => {
+      // A filter value (toggle button) that is not nested inside an accordion panel.
+      const detachedValue = document.createElement('p-togglebutton');
+
+      const event = escFrom(detachedValue);
+      spectator.component.onFilterEscape(event);
+
+      expect(event.preventDefault).not.toHaveBeenCalled();
+      expect(event.stopPropagation).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('focus jump into the grid after a filter selection', () => {
+    it('moves focus into the grid when a filter value is activated via keyboard', async () => {
+      const grid = spectator.component.gridComponent!;
+      const focusSpy = spyOn(grid, 'focusActiveCell');
+      const toggle = spectator.element.querySelector('p-togglebutton') as HTMLElement;
+
+      expect(toggle).toBeTruthy();
+
+      spectator.component.onFilterItemActivate(toggle);
+      spectator.detectChanges();
+      await spectator.fixture.whenStable();
+
+      expect(focusSpy).toHaveBeenCalled();
+    });
+
+    it('does not move focus into the grid when an accordion header is toggled', async () => {
+      const grid = spectator.component.gridComponent!;
+      const focusSpy = spyOn(grid, 'focusActiveCell');
+      const header = spectator.element.querySelector('p-accordion-header') as HTMLElement;
+
+      expect(header).toBeTruthy();
+
+      spectator.component.onFilterItemActivate(header);
+      spectator.detectChanges();
+      await spectator.fixture.whenStable();
+
+      expect(focusSpy).not.toHaveBeenCalled();
+    });
   });
 });

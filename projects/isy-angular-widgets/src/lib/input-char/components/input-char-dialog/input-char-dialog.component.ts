@@ -1,25 +1,47 @@
 import {
+  afterNextRender,
   Component,
   DestroyRef,
+  ElementRef,
   EventEmitter,
   inject,
+  Injector,
   Input,
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {combineLatest} from 'rxjs';
 import {InputCharData, InputCharSelection, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
-import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
+import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
 import {CharacterService} from '../../services/character.service';
 import {ButtonModule} from 'primeng/button';
-import {SelectButtonModule} from 'primeng/selectbutton';
-import {AccordionModule} from 'primeng/accordion';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
-import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
+import {InputCharGridComponent} from '../input-char-grid/input-char-grid.component';
+import {RovingTabindexDirective} from '../../directives/roving-tabindex.directive';
+
+/**
+ * Selector matching the focusable accordion headers of the filter panel (PrimeNG renders
+ * the header host element with `role="button"` and a tabindex).
+ */
+const FILTER_HEADER_SELECTOR = 'p-accordion-header, p-accordionheader';
+
+/**
+ * Selector matching an actual filter value (a toggle/radio button) within the filter panel,
+ * as opposed to an accordion header. Activating such a value moves focus into the grid.
+ */
+const FILTER_VALUE_SELECTOR = 'p-togglebutton, [role="radio"]';
+
+/**
+ * Selector matching an accordion panel (the section that groups a header with its values).
+ */
+const FILTER_PANEL_SELECTOR = 'p-accordion-panel, p-accordionpanel';
+/** Relative index of the last element for `Array.prototype.at`. */
+const LAST_INDEX = -1;
 
 /**
  * @internal
@@ -31,11 +53,10 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
   styleUrls: ['./input-char-dialog.component.scss'],
   imports: [
     ButtonModule,
-    SelectButtonModule,
-    AccordionModule,
-    FormsModule,
     InputCharPreviewComponent,
-    MultiSelectButtonComponent
+    MultiSelectButtonComponent,
+    InputCharGridComponent,
+    RovingTabindexDirective
   ]
 })
 export class InputCharDialogComponent implements OnChanges, OnInit {
@@ -125,6 +146,18 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
   allButtonHeader!: string;
 
   /**
+   * The left filter panel container, used to resolve the focus target for the grid's ESC.
+   * @internal
+   */
+  @ViewChild('leftPanel') leftPanelRef?: ElementRef<HTMLElement>;
+
+  /**
+   * The character grid, used to move focus into it after a filter value was chosen.
+   * @internal
+   */
+  @ViewChild(InputCharGridComponent) gridComponent?: InputCharGridComponent;
+
+  /**
    * A service used to translate labels within the widgets library.
    */
   configService = inject(WidgetsConfigService);
@@ -132,6 +165,14 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
   private readonly charService = inject(CharacterService);
 
   private readonly destroyRef = inject(DestroyRef);
+
+  private readonly injector = inject(Injector);
+
+  /**
+   * The accordion header that was last focused within the filter panel. Used to return
+   * focus when ESC is pressed inside the character grid (FR-7.4, case "a").
+   */
+  private lastFilterHeader?: HTMLElement;
 
   /**
    * Fire on component initialization
@@ -177,6 +218,82 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
   onSelectedZeichenObjektChange(zeichenObjekt: Zeichenobjekt | undefined): void {
     this.selectedZeichenObjekt = zeichenObjekt;
     this.selectedCharacterChange.emit(zeichenObjekt?.zeichen);
+  }
+
+  /**
+   * Tracks the last focused accordion header within the filter panel (FR-7.4).
+   * @param event The focus event bubbling out of the filter panel.
+   * @internal
+   */
+  onFilterFocusIn(event: FocusEvent): void {
+    const header = (event.target as HTMLElement | null)?.closest<HTMLElement>(FILTER_HEADER_SELECTOR);
+
+    if (header) {
+      this.lastFilterHeader = header;
+    }
+  }
+
+  /**
+   * Moves focus into the character grid when a filter value (not an accordion header) was
+   * activated with the keyboard, so the user can immediately pick a specific character.
+   * The focus is deferred until the grid has re-rendered with the filtered characters.
+   * @param element The filter item that was activated via keyboard.
+   * @internal
+   */
+  onFilterItemActivate(element: HTMLElement): void {
+    if (!element.closest(FILTER_VALUE_SELECTOR)) {
+      return;
+    }
+
+    afterNextRender(() => this.gridComponent?.focusActiveCell(), {injector: this.injector});
+  }
+
+  /**
+   * Handles ESC pressed inside the filter panel: if focus is on a filter value within an
+   * accordion section, moves focus back up to that section's header so the user can choose
+   * a different group, keeping the dialog open. ESC on a header (or outside a section) is
+   * left untouched, so PrimeNG's `closeOnEscape` closes the dialog as before.
+   * @param event The keyboard event emitted by the filter directive.
+   * @internal
+   */
+  onFilterEscape(event: KeyboardEvent): void {
+    const value = (event.target as HTMLElement | null)?.closest(FILTER_VALUE_SELECTOR);
+
+    if (!value) {
+      return;
+    }
+
+    const header = value.closest(FILTER_PANEL_SELECTOR)?.querySelector<HTMLElement>(FILTER_HEADER_SELECTOR);
+
+    if (!header) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    header.focus();
+  }
+
+  /**
+   * Handles ESC pressed inside the character grid: moves focus back to the last active
+   * filter header and keeps the dialog open (FR-7). If no focusable filter target exists,
+   * the event is left untouched so PrimeNG's `closeOnEscape` closes the dialog (FR-7.8).
+   * @param event The keyboard event emitted by the grid.
+   * @internal
+   */
+  onGridEscape(event: KeyboardEvent): void {
+    const target = this.resolveLastFilterHeader();
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Focusing the header lets the filter's `isyRovingTabindex` directive re-apply the
+    // roving tabindex via its `focusin` handler (FR-7.3).
+    target.focus();
   }
 
   /**
@@ -250,7 +367,11 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
    * @internal
    */
   insertSelectedZeichen(): void {
-    this.insertCharacter.emit(this.selectedZeichenObjekt!.zeichen);
+    if (!this.selectedZeichenObjekt) {
+      return;
+    }
+
+    this.insertCharacter.emit(this.selectedZeichenObjekt.zeichen);
   }
 
   /**
@@ -260,6 +381,37 @@ export class InputCharDialogComponent implements OnChanges, OnInit {
    */
   getTranslation(path: string): string {
     return this.configService.getTranslation(path);
+  }
+
+  /**
+   * Resolves the accordion header that should receive focus when ESC is pressed in the grid
+   * the last focused header if still present, otherwise the header of the expanded
+   * section, otherwise the last header in DOM order. Returns `undefined` if no focusable
+   * (non-disabled) header exists.
+   * @returns The target header element, or `undefined` when none is available.
+   */
+  private resolveLastFilterHeader(): HTMLElement | undefined {
+    const panel = this.leftPanelRef?.nativeElement;
+
+    if (!panel) {
+      return undefined;
+    }
+
+    if (this.lastFilterHeader && panel.contains(this.lastFilterHeader)) {
+      return this.lastFilterHeader;
+    }
+
+    const headers = Array.from(panel.querySelectorAll<HTMLElement>(FILTER_HEADER_SELECTOR)).filter(
+      (header) => header.dataset.pDisabled !== 'true'
+    );
+
+    if (headers.length === 0) {
+      return undefined;
+    }
+
+    const expanded = headers.find((header) => header.getAttribute('aria-expanded') === 'true');
+
+    return expanded ?? headers.at(LAST_INDEX);
   }
 
   private applySelection(selected: InputCharSelection | undefined): void {
