@@ -17,15 +17,7 @@
             <p-message severity="error">{{ globalError }}</p-message>
           }
 
-          <p-stepper [value]="stepValue" aria-labelledby="h-stepper" [linear]="true">
-            <p-step-list>
-              <p-step [value]="1">ID Eintrag</p-step>
-              <p-step [value]="2">Persönliche Informationen</p-step>
-              <p-step [value]="3">Bestätigen</p-step>
-            </p-step-list>
-          </p-stepper>
-
-          @if (stepValue === 1) {
+          <ng-template #stepOneContent>
             <form [formGroup]="baseFg" data-step-form="1">
               <div class="step-panel-body">
                 <div class="col-12">
@@ -40,6 +32,8 @@
                     "
                   >
                     <input
+                      #stepperFocusTarget
+                      id="id"
                       isyFormWrapperField
                       class="w-full"
                       pInputText
@@ -55,9 +49,9 @@
                 <p-button type="button" label="Weiter" (onClick)="goNext(2, baseFg)"></p-button>
               </div>
             </form>
-          }
+          </ng-template>
 
-          @if (stepValue === 2) {
+          <ng-template #stepTwoContent>
             <form [formGroup]="detailsFg" data-step-form="2">
               <div class="step-panel-body">
                 <div class="col-12">
@@ -66,7 +60,14 @@
                     fieldId="firstname"
                     [control]="detailsFg.controls.firstname | formControl"
                   >
-                    <input isyFormWrapperField class="w-full" pInputText formControlName="firstname" />
+                    <input
+                      #stepperFocusTarget
+                      id="firstname"
+                      isyFormWrapperField
+                      class="w-full"
+                      pInputText
+                      formControlName="firstname"
+                    />
                   </isy-form-wrapper>
                 </div>
 
@@ -76,7 +77,7 @@
                     fieldId="lastname"
                     [control]="detailsFg.controls.lastname | formControl"
                   >
-                    <input isyFormWrapperField class="w-full" pInputText formControlName="lastname" />
+                    <input id="lastname" isyFormWrapperField class="w-full" pInputText formControlName="lastname" />
                   </isy-form-wrapper>
                 </div>
 
@@ -110,17 +111,90 @@
                 <p-button type="button" label="Weiter" (onClick)="goNext(3, detailsFg)"></p-button>
               </div>
             </form>
-          }
+          </ng-template>
 
-          @if (stepValue === 3) {
-            <div class="step-panel-body">
-              <p class="text-right">Bitte prüfen und speichern.</p>
-            </div>
+          <ng-template #stepThreeContent>
+            <div data-step-form="3">
+              <div class="step-panel-body">
+                <p class="text-right">Bitte prüfen und speichern.</p>
+              </div>
 
-            <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
-              <p-button type="button" label="Zurück" class="mr-1" [outlined]="true" (onClick)="goBack(2)"></p-button>
-              <p-button type="button" label="Speichern" (onClick)="saveStepper()"></p-button>
+              <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
+                <p-button type="button" label="Zurück" class="mr-1" [outlined]="true" (onClick)="goBack(2)"></p-button>
+                <p-button type="button" label="Speichern" (onClick)="saveStepper()"></p-button>
+              </div>
             </div>
+          </ng-template>
+
+          @if (isVerticalStepper()) {
+            <p-stepper [value]="stepValue" aria-labelledby="h-stepper" [linear]="true">
+              <p-step-item [value]="1">
+                <p-step>ID Eintrag</p-step>
+                <p-step-panel>
+                  <ng-template #content>
+                    @if (stepValue === 1) {
+                      <ng-container *ngTemplateOutlet="stepOneContent"></ng-container>
+                    }
+                  </ng-template>
+                </p-step-panel>
+              </p-step-item>
+
+              <p-step-item [value]="2">
+                <p-step>Persönliche Informationen</p-step>
+                <p-step-panel>
+                  <ng-template #content>
+                    @if (stepValue === 2) {
+                      <ng-container *ngTemplateOutlet="stepTwoContent"></ng-container>
+                    }
+                  </ng-template>
+                </p-step-panel>
+              </p-step-item>
+
+              <p-step-item [value]="3">
+                <p-step>Bestätigen</p-step>
+                <p-step-panel>
+                  <ng-template #content>
+                    @if (stepValue === 3) {
+                      <ng-container *ngTemplateOutlet="stepThreeContent"></ng-container>
+                    }
+                  </ng-template>
+                </p-step-panel>
+              </p-step-item>
+            </p-stepper>
+          } @else {
+            <p-stepper [value]="stepValue" aria-labelledby="h-stepper" [linear]="true">
+              <p-step-list>
+                <p-step [value]="1">ID Eintrag</p-step>
+                <p-step [value]="2">Persönliche Informationen</p-step>
+                <p-step [value]="3">Bestätigen</p-step>
+              </p-step-list>
+
+              <p-step-panels>
+                <p-step-panel [value]="1">
+                  <ng-template #content>
+                    @if (stepValue === 1) {
+                      <ng-container *ngTemplateOutlet="stepOneContent"></ng-container>
+                    }
+                  </ng-template>
+                </p-step-panel>
+
+                <p-step-panel [value]="2">
+                  <ng-template #content>
+                    @if (stepValue === 2) {
+                      <ng-container *ngTemplateOutlet="stepTwoContent"></ng-container>
+                    }
+                  </ng-template>
+                </p-step-panel>
+
+                <p-step-panel [value]="3">
+                  <ng-template #content>
+                    @if (stepValue === 3) {
+                      <ng-container *ngTemplateOutlet="stepThreeContent"></ng-container>
+                    }
+                  </ng-template>
+                </p-step-panel>
+              </p-step-panels>
+            </p-stepper>
           }
         </div>
       </section>

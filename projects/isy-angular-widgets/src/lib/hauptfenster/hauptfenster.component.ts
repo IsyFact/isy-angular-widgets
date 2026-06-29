@@ -10,7 +10,8 @@ import {
   Injector,
   Input,
   Output,
-  ViewChild
+  ViewChild,
+  booleanAttribute
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {MegaMenuItem} from 'primeng/api';
@@ -133,6 +134,14 @@ export class HauptfensterComponent implements OnInit {
    * The check is enabled by default.
    */
   @Input() checkBrowserVersion = true;
+
+  /**
+   * Enables responsive behavior for the Hauptfenster.
+   *
+   * When enabled, the Linksnavigation and Informationsbereich are hidden
+   * automatically below the defined responsive breakpoint.
+   */
+  @Input({transform: booleanAttribute}) responsive = false;
 
   @Output() logoutEvent = new EventEmitter<UserInfo>();
 

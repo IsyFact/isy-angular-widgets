@@ -1,4 +1,4 @@
-<div class="isy-hauptfenster flex flex-column min-h-screen">
+<div class="isy-hauptfenster flex flex-column min-h-screen" [class.isy-hauptfenster--responsive]="responsive">
   <isy-skip-links [links]="links"></isy-skip-links>
 
   @if (unsupportedBrowserMessage) {
@@ -79,7 +79,7 @@
 
   <ng-content select="[Seitentoolbar]"></ng-content>
 
-  <div class="flex flex-grow-1 gap-3">
+  <div class="isy-hauptfenster-inhaltsbereich flex flex-grow-1 gap-3">
     @if (showLinksnavigation) {
       <aside
         [attr.aria-label]="
