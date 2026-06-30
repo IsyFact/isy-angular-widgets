@@ -1,6 +1,6 @@
-
 # 21.2.0 -
 ## Features
+- IFS-5527: Responsives Verhalten für die Seitentoolbar wurde über das Attribut `responsive` ergänzt, wobei bei Bildschirmbreiten bis `320 px` das sichtbare Label des Home-/Zurück-Buttons ausgeblendet wird
 - IFS-5526: Responsives Verhalten für das Hauptfenster wurde über das Attribut `responsive` ergänzt
 - IFS-3588: Die Tastatur- und Maussteuerung des Sonderzeichenpickers wurde überarbeitet
   * Das Zeichenraster ist nun eine eigene Listbox (`role="listbox"`/`role="option"`) mit Roving-Tabindex statt des PrimeNG-`p-selectButton`

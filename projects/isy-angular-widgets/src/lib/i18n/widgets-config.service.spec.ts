@@ -28,6 +28,23 @@ describe('Unit tests: WidgetsConfigService', () => {
     expect(translatedText).toEqual('Logout');
   });
 
+  it('should get and update the Seitentoolbar back translation', () => {
+    const text = 'seitentoolbar.back';
+    let translatedText = spectator.service.getTranslation(text);
+
+    expect(translatedText).toEqual('Zurück zur Übersicht');
+
+    spectator.service.setTranslation({
+      seitentoolbar: {
+        back: 'Back to overview'
+      }
+    });
+
+    translatedText = spectator.service.getTranslation(text);
+
+    expect(translatedText).toEqual('Back to overview');
+  });
+
   it('should merge nested translations without removing existing values', () => {
     spectator.service.setTranslation({
       wizard: {
@@ -39,6 +56,16 @@ describe('Unit tests: WidgetsConfigService', () => {
     expect(spectator.service.getTranslation('wizard.next')).toEqual('Weiter');
     expect(spectator.service.getTranslation('wizard.save')).toEqual('Speichern');
     expect(spectator.service.getTranslation('wizard.close')).toEqual('Schließen');
+  });
+
+  it('should preserve the Seitentoolbar translation when another translation is updated', () => {
+    spectator.service.setTranslation({
+      wizard: {
+        back: 'Back'
+      }
+    });
+
+    expect(spectator.service.getTranslation('seitentoolbar.back')).toEqual('Zurück zur Übersicht');
   });
 
   it('should emit updated translation values via getTranslation$', (done) => {
@@ -95,6 +122,9 @@ describe('Unit tests: WidgetsConfigService', () => {
       },
       formWrapper: {
         required: 'Pflichtfeld'
+      },
+      seitentoolbar: {
+        back: 'Zurück zur Übersicht'
       }
     });
   });

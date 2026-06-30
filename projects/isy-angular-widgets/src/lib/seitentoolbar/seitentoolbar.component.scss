@@ -6,4 +6,24 @@
   .p-toolbar {
     background-color: var(--isyfact-surface-section);
   }
+
+  @media (max-width: 320px) {
+    .isy-seiten-toolbar-responsive {
+      .isy-seiten-toolbar-home-button {
+        .p-button {
+          border: 1px solid currentColor;
+          border-radius: var(--p-button-border-radius);
+          background: transparent;
+        }
+
+        .p-button-label {
+          display: none;
+        }
+
+        .p-button-icon {
+          margin: 0;
+        }
+      }
+    }
+  }
 }

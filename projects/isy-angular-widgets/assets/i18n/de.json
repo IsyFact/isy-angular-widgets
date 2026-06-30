@@ -55,6 +55,12 @@
         "skipLinksAriaLabel": "Schnellnavigation",
         "mainNavigation": "Hauptnavigation"
       }
+    },
+    "p-calendar": {
+      "iconAriaLabel": "Datepicker öffnen/schließen"
+    },
+    "seitentoolbar": {
+      "back": "Zurück zur Übersicht"
     }
   },
   "primeng": {
