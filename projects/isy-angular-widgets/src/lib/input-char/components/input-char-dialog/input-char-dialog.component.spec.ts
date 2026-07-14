@@ -10,14 +10,15 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
 import {ComponentFixture} from '@angular/core/testing';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
 import {InputCharGridComponent} from '../input-char-grid/input-char-grid.component';
-import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ChangeDetectionStrategy} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'isy-input-char-preview',
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true
 })
 class MockInputCharPreviewComponent {
@@ -27,6 +28,7 @@ class MockInputCharPreviewComponent {
 @Component({
   selector: 'isy-multi-select-button',
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true
 })
 class MockMultiSelectButtonComponent {

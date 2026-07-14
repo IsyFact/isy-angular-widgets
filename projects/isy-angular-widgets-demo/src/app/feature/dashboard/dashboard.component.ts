@@ -1,4 +1,12 @@
-import {AfterContentInit, Component, inject, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  inject,
+  OnInit,
+  QueryList,
+  ViewChildren,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import {barChartData, lineChartData, lineStyleChartData, stackedChartData} from './data/chart-data';
 import {widgetBackgroundColors} from './data/menu-colors';
 import {widgetMenuItems} from './data/menus';
@@ -13,6 +21,7 @@ import {DashboardWidgetComponent} from './components/dashboard-widget/dashboard-
   selector: 'demo-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CardModule, ChartComponent, DashboardWidgetComponent]
 })
 export class DashboardComponent implements OnInit, AfterContentInit {

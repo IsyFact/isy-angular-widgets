@@ -4,11 +4,11 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "rootDir": "./",
+    "esModuleInterop": true,
     "types": ["jasmine", "node"],
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
-    "allowSyntheticDefaultImports": true,
     "noPropertyAccessFromIndexSignature": false,
     "paths": {
       "isy-angular-widgets": ["./dist/isy-angular-widgets"],

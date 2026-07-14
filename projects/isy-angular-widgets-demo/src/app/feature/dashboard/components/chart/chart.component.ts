@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, Input, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {ChartData, ChartOptions} from '../../model/model';
 import {ChartModule, UIChart} from 'primeng/chart';
 
@@ -6,6 +6,7 @@ import {ChartModule, UIChart} from 'primeng/chart';
   standalone: true,
   selector: 'demo-chart',
   templateUrl: './chart.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ChartModule]
 })
 export class ChartComponent {

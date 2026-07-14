@@ -3,13 +3,13 @@ import {ViewportScroller} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
 import {AnchorNavigationService} from './anchor-navigation.service';
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 
 // ---------------------------------------------------------------------------
 // Helper: tiny host component that calls initFragmentScroll so we have a
 // proper DestroyRef in injection context.
 // ---------------------------------------------------------------------------
-@Component({standalone: true, template: ''})
+@Component({standalone: true, changeDetection: ChangeDetectionStrategy.Eager, template: ''})
 class HostComponent implements OnInit {
   readonly anchorNav = inject(AnchorNavigationService);
   readonly destroyRef = inject(DestroyRef);

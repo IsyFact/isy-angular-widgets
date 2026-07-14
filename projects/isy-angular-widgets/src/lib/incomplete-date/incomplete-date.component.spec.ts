@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -17,6 +17,7 @@ import {IncompleteDateService} from './incomplete-date.service';
 @Component({
   standalone: true,
   imports: [ReactiveFormsModule, IncompleteDateComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <form [formGroup]="form">
       <isy-incomplete-date inputId="date-of-entry" formControlName="dateOfEntry" />

@@ -1,6 +1,6 @@
 import {NgTemplateOutlet} from '@angular/common';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
@@ -43,6 +43,7 @@ interface ScrollableTabDefinition {
   standalone: true,
   selector: 'demo-primeng-panel',
   templateUrl: './primeng-panel.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     NgTemplateOutlet,
     AccordionModule,

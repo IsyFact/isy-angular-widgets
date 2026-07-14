@@ -9,7 +9,8 @@ import {
   OnInit,
   Output,
   ViewChild,
-  booleanAttribute
+  booleanAttribute,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   AbstractControl,
@@ -71,6 +72,7 @@ const CURSOR_SHIFT = {
       multi: true
     }
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormsModule, InputTextModule, InputMaskModule]
 })
 export class IncompleteDateComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit {
@@ -127,7 +129,6 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   transferValue?: string;
 
   // To align with PrimeNG API
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onInput: EventEmitter<Event> = new EventEmitter<Event>();
 
   @ViewChild(InputMask) field?: InputMask;

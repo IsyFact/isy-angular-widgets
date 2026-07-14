@@ -40,8 +40,16 @@ Wichtig: `isoDateTime` bleibt strikt und akzeptiert weiterhin ausschließlich da
 
 Mit folgendem Befehl wird die Bibliothek `isy-angular-widgets` zu einem bestehenden Angular-Projekt hinzugefügt.
 
+**Angular 21:**
+```shell
+ng add @isyfact/isy-angular-widgets
 ```
-$ ng add @isyfact/isy-angular-widgets
+
+**Angular 22** (wegen PrimeNG-21-Peer-Dependency-Konflikten muss die Bibliothek zuerst manuell installiert werden):
+```shell
+npm install @isyfact/isy-angular-widgets --legacy-peer-deps
+npx ng generate @isyfact/isy-angular-widgets:ng-add
+npm install --legacy-peer-deps
 ```
 
 Die Schematic führt folgende Schritte aus:
@@ -54,6 +62,21 @@ Die Schematic führt folgende Schritte aus:
 * *(Optional)* Auswahl der Projekte, für die in Monorepos ESLint und/oder Prettier eingerichtet werden sollen
 
 Die optionalen Schritte werden während der Installation per CLI-Prompt abgefragt.
+
+### Verwendung mit Angular 22
+
+Die Bibliothek unterstützt Angular 21 und Angular 22.
+Da PrimeNG 21 offiziell für Angular 21 entwickelt wurde, meldet `npm` bei Angular-22-Projekten einen Peer-Dependency-Konflikt.
+
+Bei `ng add` überspringt die Schematic in diesem Fall den automatischen Package-Install und gibt einen Hinweis aus.
+Anschließend muss die Installation manuell ausgeführt werden:
+
+```shell
+npm install --legacy-peer-deps
+```
+
+Die Kombination aus Angular 22 und PrimeNG 21 ist im geprüften Projektumfang lauffähig, stellt jedoch keine offiziell deklarierte Versionskombination dar.
+Einzelne PrimeNG-Komponenten sollten in der eigenen Anwendung zusätzlich getestet werden.
 
 ### ESLint
 
@@ -193,7 +216,7 @@ import {PanelModule} from 'primeng/panel';
 
 @Component({
   standalone: true,
-  selector: 'app-root'
+  selector: 'app-root',
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
   imports: [HauptfensterComponent, PanelModule, MenuModule]

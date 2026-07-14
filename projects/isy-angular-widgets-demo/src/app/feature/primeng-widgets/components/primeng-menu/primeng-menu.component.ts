@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 import {electronicData, megaMenuProductData} from '../../data/product';
 import {contextMenuData, fileContainerData, menuBarData, optionData, tabMenuData} from '../../data/file-option';
@@ -20,6 +20,7 @@ import {SectionHeadingComponent} from '../../../../shared/components/section-hea
   standalone: true,
   selector: 'demo-primeng-menu',
   templateUrl: './primeng-menu.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     BreadcrumbModule,
     StepsModule,

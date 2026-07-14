@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ChangeDetectionStrategy} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ControlValueAccessor, FormsModule} from '@angular/forms';
 import {InputCharData, InputCharSelection, InputCharSelectionGroup, InputCharSelectionValue} from '../../model/model';
@@ -10,6 +10,7 @@ import {AccordionModule} from 'primeng/accordion';
   selector: 'isy-multi-select-button',
   templateUrl: './multi-select-button.component.html',
   styleUrls: ['./multi-select-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, FormsModule, AccordionModule, SelectButtonModule]
 })
 export class MultiSelectButtonComponent implements OnChanges, ControlValueAccessor {

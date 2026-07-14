@@ -37,7 +37,6 @@ module.exports = (async () => {
         editorconfig
       },
       rules: {
-        ...angular.configs.recommended.rules,
         ...jsdoc.configs['recommended-typescript'].rules,
         ...editorconfig.configs.all?.rules,
         '@angular-eslint/directive-selector': ['error', {type: 'attribute', prefix: 'isy', style: 'camelCase'}],
@@ -51,7 +50,6 @@ module.exports = (async () => {
       languageOptions: {parser: angularTemplateParser},
       plugins: {'@angular-eslint/template': angularTemplate},
       rules: {
-        ...angularTemplate.configs.recommended.rules,
         '@typescript-eslint/only-throw-error': 'off'
       }
     },
@@ -95,7 +93,6 @@ module.exports = (async () => {
         editorconfig
       },
       rules: {
-        ...angular.configs.recommended.rules,
         ...jsdoc.configs['recommended-typescript'].rules,
         ...editorconfig.configs.all?.rules,
         '@angular-eslint/directive-selector': ['error', {type: 'attribute', prefix: 'demo', style: 'camelCase'}],
@@ -109,7 +106,6 @@ module.exports = (async () => {
       languageOptions: {parser: angularTemplateParser},
       plugins: {'@angular-eslint/template': angularTemplate},
       rules: {
-        ...angularTemplate.configs.recommended.rules,
         '@typescript-eslint/only-throw-error': 'off'
       }
     },

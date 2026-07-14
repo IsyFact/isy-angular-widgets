@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {FileUploadModule, UploadEvent} from 'primeng/fileupload';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
@@ -9,6 +9,7 @@ import {SectionHeadingComponent} from '../../../../shared/components/section-hea
   standalone: true,
   selector: 'demo-primeng-file',
   templateUrl: './primeng-file.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FileUploadModule, ToastModule, SectionHeadingComponent]
 })
 export class PrimengFileComponent implements AfterViewInit {

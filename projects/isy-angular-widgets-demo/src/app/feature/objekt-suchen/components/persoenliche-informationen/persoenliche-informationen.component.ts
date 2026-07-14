@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {AbstractControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {markFormControlAsDirty} from '../../../../shared/validation/form-helper';
 import {FormWrapperComponent} from '@isy-angular-widgets/form-wrapper/form-wrapper.component';
@@ -13,6 +13,7 @@ import {InputTextModule} from 'primeng/inputtext';
   standalone: true,
   selector: 'demo-persoenliche-informationen',
   templateUrl: './persoenliche-informationen.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormWrapperComponent, ReactiveFormsModule, FormControlPipe, TranslateModule, InputTextModule]
 })
 export class PersoenlicheInformationenComponent {

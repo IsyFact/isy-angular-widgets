@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
@@ -10,6 +10,7 @@ import {CommonModule} from '@angular/common';
   selector: 'demo-dashboard-widget',
   templateUrl: './dashboard-widget.component.html',
   styleUrls: ['./dashboard-widget.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, PanelMenuModule]
 })
 export class DashboardWidgetComponent implements OnInit {
