@@ -155,7 +155,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('should emit an event on input change', () => {
-    const onInputSpy = spyOn(component.onInput, 'emit');
+    const onInputSpy = spyOn(component.inputChange, 'emit');
     const keyEvent = new Event('input');
 
     component.inputValue = 'xx.__.____';
@@ -243,7 +243,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should emit input change event', () => {
     const evt = new Event('input');
-    const spy = spyOn(component.onInput, 'emit');
+    const spy = spyOn(component.inputChange, 'emit');
     component.onInputChange(evt);
     expect(spy).toHaveBeenCalledWith(evt);
   });

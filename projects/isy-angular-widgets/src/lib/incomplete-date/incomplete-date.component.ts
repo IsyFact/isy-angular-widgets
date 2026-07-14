@@ -129,7 +129,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   transferValue?: string;
 
   // To align with PrimeNG API
-  @Output() onInput: EventEmitter<Event> = new EventEmitter<Event>();
+  @Output() inputChange: EventEmitter<Event> = new EventEmitter<Event>();
 
   @ViewChild(InputMask) field?: InputMask;
 
@@ -319,7 +319,7 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
   }
 
   onInputChange(event: Event): void {
-    this.onInput.emit(event);
+    this.inputChange.emit(event);
   }
 
   /**
