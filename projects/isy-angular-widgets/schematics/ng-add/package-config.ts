@@ -58,6 +58,17 @@ function readPackageJson(host: Tree): PackageJson | null {
 }
 
 /**
+ * Adds a package to the dependencies in the package.json in the given host tree.
+ * @param host Tree with packages and their versions
+ * @param pkg The package who gets added to package.json dependencies
+ * @param version The version of the package
+ * @returns The new package.json as Tree
+ */
+export function addPackageToPackageJson(host: Tree, pkg: string, version: string): Tree {
+  return addPackageToSection(host, 'dependencies', pkg, version);
+}
+
+/**
  * Writes package.json back to the host tree.
  * @param host Tree containing package.json
  * @param packageJson Parsed package.json object
