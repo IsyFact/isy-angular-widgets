@@ -18,7 +18,7 @@
 
 <div class="split right-panel-side">
   <isy-input-char-grid
-    class="flex-grow-1 character-grid"
+    class="grow character-grid"
     [characters]="displayedCharacters"
     [selected]="selectedZeichenObjekt"
     [ariaLabel]="configService.getTranslation('inputChar.aria.characterGrid')"
@@ -28,7 +28,7 @@
   />
   <div class="lower-right-panel">
     @if (selectedZeichenObjekt) {
-      <isy-input-char-preview [zeichenObjekt]="selectedZeichenObjekt" class="flex-grow-1"></isy-input-char-preview>
+      <isy-input-char-preview [zeichenObjekt]="selectedZeichenObjekt" class="grow"></isy-input-char-preview>
     }
 
     <button
@@ -36,7 +36,7 @@
       pRipple
       pButton
       [disabled]="!selectedZeichenObjekt"
-      class="flex-shrink-0 font-bold"
+      class="shrink-0 font-bold"
       (click)="insertSelectedZeichen()"
     >
       {{ configService.getTranslation('inputChar.insert') }}

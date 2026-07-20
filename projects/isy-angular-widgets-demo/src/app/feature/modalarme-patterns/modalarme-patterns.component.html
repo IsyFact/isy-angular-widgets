@@ -1,11 +1,11 @@
-<div class="mx-3">
+<div class="mx-4">
   <h1>Modalarme Patterns (PrimeNG 20+)</h1>
 
-  <div class="grid">
-    <div class="col-12 flex flex-column">
+  <div class="grid gap-4">
+    <div class="col-span-12 flex flex-col">
       <!-- Objekt anlegen – Stepper -->
       <section class="section" aria-labelledby="h-stepper">
-        <div class="grid gap-3 col-12 xl:col-6 flex-column">
+        <div class="grid gap-4 gap-4 col-span-12 xl:col-span-6 flex-col">
           <demo-section-heading
             anchorId="h-stepper"
             [level]="3"
@@ -20,7 +20,7 @@
           <ng-template #stepOneContent>
             <form [formGroup]="baseFg" data-step-form="1">
               <div class="step-panel-body">
-                <div class="col-12">
+                <div class="col-span-12">
                   <isy-form-wrapper
                     label="{{ 'isyAngularWidgetsDemo.labels.id' | translate }}"
                     fieldId="id"
@@ -45,7 +45,7 @@
                 </div>
               </div>
 
-              <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
+              <div class="flex pt-4 flex-wrap justify-end card-container actions">
                 <p-button type="button" label="Weiter" (onClick)="goNext(2, baseFg)"></p-button>
               </div>
             </form>
@@ -54,7 +54,7 @@
           <ng-template #stepTwoContent>
             <form [formGroup]="detailsFg" data-step-form="2">
               <div class="step-panel-body">
-                <div class="col-12">
+                <div class="col-span-12">
                   <isy-form-wrapper
                     label="{{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}"
                     fieldId="firstname"
@@ -71,7 +71,7 @@
                   </isy-form-wrapper>
                 </div>
 
-                <div class="col-12">
+                <div class="col-span-12">
                   <isy-form-wrapper
                     label="{{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}"
                     fieldId="lastname"
@@ -81,7 +81,7 @@
                   </isy-form-wrapper>
                 </div>
 
-                <div class="col-12">
+                <div class="col-span-12">
                   <isy-form-wrapper
                     label="{{ 'isyAngularWidgetsDemo.labels.gender' | translate }}"
                     labelId="label-gender"
@@ -106,7 +106,7 @@
                 </div>
               </div>
 
-              <div class="flex pt-3 flex-wrap justify-content-end">
+              <div class="flex pt-4 flex-wrap justify-end">
                 <p-button class="mr-1" [outlined]="true" type="button" label="Zurück" (onClick)="goBack(1)"></p-button>
                 <p-button type="button" label="Weiter" (onClick)="goNext(3, detailsFg)"></p-button>
               </div>
@@ -119,7 +119,7 @@
                 <p class="text-right">Bitte prüfen und speichern.</p>
               </div>
 
-              <div class="flex pt-3 flex-wrap justify-content-end card-container actions">
+              <div class="flex pt-4 flex-wrap justify-end card-container actions">
                 <p-button type="button" label="Zurück" class="mr-1" [outlined]="true" (onClick)="goBack(2)"></p-button>
                 <p-button type="button" label="Speichern" (onClick)="saveStepper()"></p-button>
               </div>
@@ -200,9 +200,9 @@
       </section>
     </div>
 
-    <p-divider></p-divider>
+    <div class="col-span-12 w-full border-t border-surface-200"></div>
 
-    <div class="col-12 flex flex-column">
+    <div class="col-span-12 flex flex-col">
       <!-- Drawer – Bearbeiten -->
       <section class="section" aria-labelledby="h-drawer">
         <demo-section-heading
@@ -212,7 +212,7 @@
           ariaLabel="Link zu Drawer"
         />
 
-        <div class="flex pt-3 flex-wrap">
+        <div class="flex pt-4 flex-wrap">
           <p-button
             label="Bearbeiten"
             (onClick)="openPanel($event)"
@@ -221,15 +221,15 @@
           ></p-button>
         </div>
 
-        <div class="grid gap-3 col-12 xl:col-6 flex-column">
+        <div class="grid grid-cols-12 gap-4 gap-4 col-span-12 xl:col-span-6 flex-col">
           @if (panelOpen) {
             <section
               id="edit-panel"
-              class="edit-panel fixed top-0 right-0 h-screen overflow-auto bg-white border-left-1 surface-border shadow-4"
+              class="edit-panel fixed top-0 right-0 h-screen overflow-auto bg-white border-l border-surface shadow-lg"
               aria-labelledby="edit-panel-title"
             >
-              <div class="p-3">
-                <div class="flex align-items-start justify-content-between gap-3 mb-3">
+              <div class="p-4">
+                <div class="flex items-start justify-between gap-4 mb-4">
                   <h3 id="edit-panel-title" class="m-0" tabindex="-1" #panelTitle>Objekt bearbeiten</h3>
 
                   <p-button
@@ -251,7 +251,7 @@
                     <input id="geburtsname" class="w-full" pInputText formControlName="geburtsname" />
                   </isy-form-wrapper>
 
-                  <div class="flex pt-3 flex-wrap">
+                  <div class="flex pt-4 flex-wrap">
                     <p-button
                       type="button"
                       label="Schließen"
@@ -270,9 +270,9 @@
       </section>
     </div>
 
-    <p-divider></p-divider>
+    <div class="col-span-12 w-full border-t border-surface-200"></div>
 
-    <div class="col-12 flex flex-column">
+    <div class="col-span-12 flex flex-col">
       <!-- Bestätigung / Löschen – Inline-Bar -->
       <section class="section" aria-labelledby="h-confirm-bar">
         <demo-section-heading
@@ -282,7 +282,7 @@
           ariaLabel="Link zu Bestätigung / Löschen"
         />
 
-        <div class="flex pt-3 flex-wrap">
+        <div class="flex pt-4 flex-wrap">
           <p-button
             #deleteTrigger
             label="Löschen"
@@ -298,12 +298,12 @@
         <!-- aria-live: Bestätigungsleiste wird angekündigt -->
         <div aria-live="polite">
           @if (showConfirmBar) {
-            <fieldset id="delete-confirm-bar" class="confirm-bar mt-3" (keydown.escape)="cancelDeleteBar()">
+            <fieldset id="delete-confirm-bar" class="confirm-bar mt-4" (keydown.escape)="cancelDeleteBar()">
               <legend>Löschen bestätigen</legend>
 
               <p class="m-0">Möchten Sie dieses Objekt wirklich löschen?</p>
 
-              <div class="flex pt-3 flex-wrap gap-2">
+              <div class="flex pt-4 flex-wrap gap-2">
                 <p-button #confirmDeleteBtn label="Endgültig löschen" severity="danger" (onClick)="confirmDeleteBar()">
                 </p-button>
 
@@ -316,9 +316,9 @@
       </section>
     </div>
 
-    <p-divider></p-divider>
+    <div class="col-span-12 w-full border-t border-surface-200"></div>
 
-    <div class="col-12 flex flex-column">
+    <div class="col-span-12 flex flex-col">
       <!-- Hilfe – Popover -->
       <section class="section" aria-labelledby="h-help-popover">
         <demo-section-heading
@@ -328,7 +328,7 @@
           ariaLabel="Link zu Kontext-Info Popover"
         />
 
-        <div class="flex pt-3 flex-wrap action">
+        <div class="flex pt-4 flex-wrap action">
           <p-button
             #helpBtn
             type="button"
@@ -356,7 +356,7 @@
           (onShow)="onHelpShow()"
           (onHide)="onHelpHide()"
         >
-          <div class="w-20rem">
+          <div class="w-80">
             <h3 id="help-popover-title" class="mt-0 mb-2">Hilfe</h3>
             <p class="m-0">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.</p>
           </div>
@@ -364,9 +364,9 @@
       </section>
     </div>
 
-    <p-divider></p-divider>
+    <div class="col-span-12 w-full border-t border-surface-200"></div>
 
-    <div class="col-12 flex flex-column">
+    <div class="col-span-12 flex flex-col">
       <!-- Hilfe – Accordion / Expander -->
       <section class="section" aria-labelledby="h-help-expander">
         <demo-section-heading
@@ -392,9 +392,9 @@
       </section>
     </div>
 
-    <p-divider></p-divider>
+    <div class="col-span-12 w-full border-t border-surface-200"></div>
 
-    <div class="col-12 xl:col-6 flex flex-column">
+    <div class="col-span-12 xl:col-span-6 flex flex-col">
       <!-- Fehlerhandling – Toast + feldnahe Fehler -->
       <section class="section" aria-labelledby="h-errors">
         <demo-section-heading
@@ -405,7 +405,7 @@
         />
 
         <form #errorsFormEl [formGroup]="formErrors" (ngSubmit)="submitErrors()">
-          <div class="col-12 md:col-6">
+          <div class="col-span-12 md:col-span-6">
             <isy-form-wrapper
               label="Geburtsname"
               fieldId="geburtsname-toast-example"
@@ -414,7 +414,7 @@
             >
               <input isyFormWrapperField type="text" pInputText class="w-full" formControlName="geburtsname" />
             </isy-form-wrapper>
-            <div class="flex pt-3 flex-wrap justify-content-end">
+            <div class="flex pt-4 flex-wrap justify-end">
               <p-button type="submit" label="Personendaten speichern"></p-button>
             </div>
           </div>

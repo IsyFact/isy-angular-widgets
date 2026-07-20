@@ -338,7 +338,7 @@ describe('InputCharGridComponent', () => {
       expect(scrollSpy).toHaveBeenCalledWith({block: 'nearest', inline: 'nearest'});
     });
 
-    it('should keep focus on a single-row grid for ArrowUp/Down (edge case)', () => {
+    it('should keep focus on a single-row grid grid-cols-12 gap-4 for ArrowUp/Down (edge case)', () => {
       const chars = makeChars(3);
       setup(chars, chars[1]);
       mockLayout({0: {x: 0, y: 0}, 1: {x: 40, y: 0}, 2: {x: 80, y: 0}});

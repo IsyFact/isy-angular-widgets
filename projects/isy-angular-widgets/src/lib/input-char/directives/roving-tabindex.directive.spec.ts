@@ -316,7 +316,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
   });
 
   // handled keys are prevented in grid mode
-  it('should prevent default for arrow keys in grid mode', () => {
+  it('should prevent default for arrow keys in grid grid-cols-12 gap-4 mode', () => {
     btn('r0c0').focus();
     const event = pressKey('r0c0', 'ArrowDown');
 

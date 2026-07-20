@@ -6,7 +6,7 @@
   [modal]="modal"
   [closable]="closable"
   [draggable]="draggable"
-  [breakpoints]="breaktpoints"
+  [breakpoints]="breakpoints"
   [style]="{
     width: width + 'vw',
     height: height + 'vw'
@@ -32,15 +32,15 @@
         [ngTemplateOutletContext]="footerContext"
       ></ng-container>
     } @else {
-      <div class="flex align-items-center justify-content-between flex-wrap gap-3 card-container w-full">
-        <div class="flex align-items-center">
+      <div class="flex items-center justify-between flex-wrap gap-4 card-container w-full">
+        <div class="flex items-center">
           <button
             id="close-button"
             type="button"
             pRipple
             pButton
             [outlined]="true"
-            class="flex align-items-center justify-content-center"
+            class="flex items-center justify-center"
             [disabled]="!canClose"
             (click)="closeDialog()"
           >
@@ -48,7 +48,7 @@
           </button>
         </div>
 
-        <div class="flex align-items-center justify-content-center flex-wrap gap-2">
+        <div class="flex items-center justify-center flex-wrap gap-2">
           @if (showBackButton) {
             <button
               id="back-button"
@@ -56,7 +56,7 @@
               pRipple
               pButton
               [outlined]="true"
-              class="flex align-items-center justify-content-center"
+              class="flex items-center justify-center"
               (click)="previous()"
             >
               {{ labelBackButton }}
@@ -68,7 +68,7 @@
               type="button"
               pRipple
               pButton
-              class="flex align-items-center justify-content-center"
+              class="flex items-center justify-center"
               [disabled]="!allowNext"
               (click)="next()"
             >
@@ -77,14 +77,14 @@
           }
         </div>
 
-        <div class="flex align-items-center justify-content-end">
+        <div class="flex items-center justify-end">
           @if (showSaveButton) {
             <button
               id="save-button"
               type="button"
               pRipple
               pButton
-              class="flex align-items-center justify-content-center"
+              class="flex items-center justify-center"
               [disabled]="!allowNext"
               (click)="save()"
             >
