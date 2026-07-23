@@ -57,11 +57,6 @@ jobs:
         run: npm run lint:demo
       - name: Run tests
         run: npm test
-      - name: Setup Java 21 for SonarCloud
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
       - name: Cache SonarCloud
         uses: actions/cache@v4
         with:
@@ -69,17 +64,18 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Perform SonarCloud Scan
-        run: >
-          npx sonarqube-scanner@3 -X
-          -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
-          -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
-          -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
-          -Dsonar.test.inclusions='**/*.spec.ts'
-          -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
-          -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/karma.conf.js,**/eslint.config.js,**/schematics/**,**/test/**,tools/generate-browser-support.mjs
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
+            -Dsonar.test.inclusions=**/*.spec.ts
+            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+            -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/karma.conf.js,**/eslint.config.js,**/schematics/**,**/test/**,tools/generate-browser-support.mjs
       - name: Build project
         run: npm run build --if-present
 
