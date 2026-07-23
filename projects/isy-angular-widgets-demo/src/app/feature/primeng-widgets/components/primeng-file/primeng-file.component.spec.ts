@@ -49,7 +49,7 @@ describe('Unit Tests: PrimengFileComponent', () => {
   });
 
   it('should render section in full-width container', () => {
-    const container = spectator.query<HTMLElement>('.col-12.flex.flex-column.gap-2 h2#fileupload');
+    const container = spectator.query<HTMLElement>('.col-span-12.flex.flex-col.gap-2 h2#fileupload');
     expect(container).toBeTruthy();
   });
 

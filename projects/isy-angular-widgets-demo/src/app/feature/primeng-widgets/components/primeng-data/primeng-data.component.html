@@ -1,8 +1,8 @@
-<div class="flex flex-column p-3">
+<div class="flex flex-col p-4">
   <h1>PrimeNG Data</h1>
   <h2>Data Views</h2>
-  <div class="grid">
-    <div class="col-12 flex flex-column gap-2 overflow-x-auto">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 flex flex-col gap-2 overflow-x-auto">
       <demo-section-heading
         anchorId="organizationchart"
         [level]="3"
@@ -11,7 +11,7 @@
       />
       <p-organizationChart [value]="organization" />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="timeline" [level]="3" label="Timeline" ariaLabel="Link zu Timeline" />
       <p-timeline [value]="deliveryStatus">
         <ng-template let-delivery pTemplate="opposite"> {{ delivery.status }} </ng-template>
@@ -20,7 +20,7 @@
         </ng-template>
       </p-timeline>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="scroller" [level]="3" label="Scroller" ariaLabel="Link zu Scroller" />
       <p-scroller [items]="countries" [itemSize]="50" scrollHeight="200px" styleClass="w-full">
         <ng-template pTemplate="item" let-country>
@@ -28,15 +28,15 @@
         </ng-template>
       </p-scroller>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="tree" [level]="3" label="Tree" ariaLabel="Link zu Tree" />
       <p-tree [value]="files" class="w-full" />
     </div>
   </div>
   <p-divider />
   <h2>Tables</h2>
-  <div class="grid mb-3">
-    <div class="col-12 flex flex-column gap-2">
+  <div class="grid grid-cols-12 gap-4 mb-4">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="paginator" [level]="3" label="Paginator" ariaLabel="Link zu Paginator" />
       <p-paginator
         [rows]="10"
@@ -46,7 +46,7 @@
         currentPageReportTemplate="{first} - {last} of {totalRecords}"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading
         anchorId="table"
         [level]="3"
@@ -96,7 +96,7 @@
         </ng-template>
       </p-table>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading
         anchorId="treetable"
         [level]="3"

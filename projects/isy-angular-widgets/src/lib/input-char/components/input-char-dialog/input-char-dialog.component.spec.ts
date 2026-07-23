@@ -452,7 +452,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
       expect(event.stopPropagation).toHaveBeenCalled();
     });
 
-    it('falls back to a filter header when the grid was entered without prior filter focus', () => {
+    it('falls back to a filter header when the grid grid-cols-12 gap-4 was entered without prior filter focus', () => {
       const headers = filterHeaders();
       const lastHeader = headers[headers.length - 1];
       const focusSpy = spyOn(lastHeader, 'focus');
@@ -475,7 +475,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
       expect(event.stopPropagation).not.toHaveBeenCalled();
     });
 
-    it('suppresses the event end-to-end when the grid emits its escape output', () => {
+    it('suppresses the event end-to-end when the grid grid-cols-12 gap-4 emits its escape output', () => {
       const grid = fixture.debugElement.query(By.css('isy-input-char-grid'))
         .componentInstance as InputCharGridComponent;
 
@@ -529,8 +529,8 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     });
   });
 
-  describe('focus jump into the grid after a filter selection', () => {
-    it('moves focus into the grid when a filter value is activated via keyboard', async () => {
+  describe('focus jump into the grid grid-cols-12 gap-4 after a filter selection', () => {
+    it('moves focus into the grid grid-cols-12 gap-4 when a filter value is activated via keyboard', async () => {
       const grid = spectator.component.gridComponent!;
       const focusSpy = spyOn(grid, 'focusActiveCell');
       const toggle = spectator.element.querySelector('p-togglebutton') as HTMLElement;
@@ -544,7 +544,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
       expect(focusSpy).toHaveBeenCalled();
     });
 
-    it('does not move focus into the grid when an accordion header is toggled', async () => {
+    it('does not move focus into the grid grid-cols-12 gap-4 when an accordion header is toggled', async () => {
       const grid = spectator.component.gridComponent!;
       const focusSpy = spyOn(grid, 'focusActiveCell');
       const header = spectator.element.querySelector('p-accordion-header') as HTMLElement;

@@ -1,4 +1,3 @@
-import {NgClass} from '@angular/common';
 import {
   OnInit,
   afterNextRender,
@@ -44,7 +43,7 @@ import {SkipTarget} from './model/model';
   templateUrl: './hauptfenster.component.html',
   styleUrls: ['./hauptfenster.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent, NgClass, MessageModule]
+  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent, MessageModule]
 })
 export class HauptfensterComponent implements OnInit {
   /**

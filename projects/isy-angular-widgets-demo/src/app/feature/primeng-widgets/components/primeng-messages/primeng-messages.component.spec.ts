@@ -53,11 +53,11 @@ describe('Unit Tests: PrimengMessagesComponent', () => {
   });
 
   it('should render all sections in full-width containers', () => {
-    const fullWidthContainers = spectator.queryAll<HTMLElement>('.col-12.flex.flex-column.gap-2');
+    const fullWidthContainers = spectator.queryAll<HTMLElement>('.col-span-12.flex.flex-col.gap-2');
 
     expect(fullWidthContainers.length).toBeGreaterThanOrEqual(sectionAnchorIds.length);
     sectionAnchorIds.forEach((id) => {
-      const container = spectator.query<HTMLElement>(`.col-12.flex.flex-column.gap-2 h2#${id}`);
+      const container = spectator.query<HTMLElement>(`.col-span-12.flex.flex-col.gap-2 h2#${id}`);
       expect(container).toBeTruthy();
     });
   });
