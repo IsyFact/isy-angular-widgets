@@ -57,6 +57,11 @@ jobs:
         run: npm run lint:demo
       - name: Run tests
         run: npm test
+      - name: Setup Java 21 for SonarCloud
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
       - name: Cache SonarCloud
         uses: actions/cache@v4
         with:
