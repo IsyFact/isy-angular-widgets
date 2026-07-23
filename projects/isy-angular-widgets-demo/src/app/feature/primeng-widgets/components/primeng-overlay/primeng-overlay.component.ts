@@ -1,4 +1,12 @@
-import {AfterViewInit, Component, DestroyRef, Injector, afterNextRender, inject} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  Injector,
+  afterNextRender,
+  inject,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -28,6 +36,7 @@ import {SectionHeadingComponent} from '../../../../shared/components/section-hea
     PopoverModule,
     SectionHeadingComponent
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [ConfirmationService, MessageService]
 })
 export class PrimengOverlayComponent implements AfterViewInit {

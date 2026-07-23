@@ -9,7 +9,7 @@ import {FormControl} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withXhr} from '@angular/common/http';
 import {
   TranslateModule,
   TranslateLoader,
@@ -41,7 +41,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     imports: [ObjektAnzeigenComponent, TranslateModule],
     providers: [
       MessageService,
-      provideHttpClient(),
+      provideHttpClient(withXhr()),
       provideTranslateService(),
       {provide: TranslateLoader, useClass: TranslateNoOpLoader}
     ]

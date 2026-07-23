@@ -10,7 +10,8 @@ import {
   OnInit,
   Output,
   QueryList,
-  SimpleChanges
+  SimpleChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {MenuItem, MessageService} from 'primeng/api';
 import {WizardDirective} from '../../directives/wizard.directive';
@@ -61,6 +62,7 @@ const defaultHeight = 30;
   selector: 'isy-wizard',
   templateUrl: './wizard.component.html',
   imports: [CommonModule, StepperModule, DialogModule, ButtonModule, ToastModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [MessageService]
 })
 export class WizardComponent implements OnInit, AfterContentInit, OnChanges {

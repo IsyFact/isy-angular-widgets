@@ -11,12 +11,13 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {combineLatest} from 'rxjs';
 import {InputCharData, InputCharSelection, Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
-import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
 import {ButtonModule} from 'primeng/button';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
@@ -51,6 +52,7 @@ const LAST_INDEX = -1;
   selector: 'isy-input-char-dialog',
   templateUrl: './input-char-dialog.component.html',
   styleUrls: ['./input-char-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     ButtonModule,
     InputCharPreviewComponent,

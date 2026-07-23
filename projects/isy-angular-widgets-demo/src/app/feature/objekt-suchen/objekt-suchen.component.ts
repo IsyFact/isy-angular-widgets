@@ -1,4 +1,4 @@
-import {afterNextRender, Component, inject, Injector} from '@angular/core';
+import {afterNextRender, Component, inject, Injector, ChangeDetectionStrategy} from '@angular/core';
 import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {Person, Personalien, PersonId} from '../../shared/model/person';
@@ -38,6 +38,7 @@ const defaultWidth = 60;
   standalone: true,
   selector: 'demo-personen-suchen',
   templateUrl: './objekt-suchen.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     PanelModule,
     CommonModule,

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {optionData} from '../../data/file-option';
 import {ButtonModule} from 'primeng/button';
@@ -12,6 +12,7 @@ import {SectionHeadingComponent} from '../../../../shared/components/section-hea
   standalone: true,
   selector: 'demo-primeng-button',
   templateUrl: './primeng-button.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ButtonModule, DividerModule, SplitButtonModule, SpeedDialModule, SectionHeadingComponent]
 })
 export class PrimengButtonComponent implements AfterViewInit {

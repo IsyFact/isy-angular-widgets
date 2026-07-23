@@ -10,7 +10,7 @@
       "prefix": "isy",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/isy-angular-widgets/ng-package.json"
           },
@@ -25,18 +25,28 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "codeCoverage": true,
             "main": "projects/isy-angular-widgets/src/test.ts",
             "tsConfig": "projects/isy-angular-widgets/tsconfig.spec.json",
             "karmaConfig": "projects/isy-angular-widgets/karma.conf.js",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/primeicons/fonts",
+                "output": "media"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/isy-angular-widgets/assets/fonts",
+                "output": "media"
+              }
+            ],
             "styles": [
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.min.css",
-              "node_modules/flag-icons/css/flag-icons.min.css",
-              "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss",
-              "projects/isy-angular-widgets/assets/theme/isyfact-liberation-fonts.css"
+              "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss"
             ]
           }
         },
@@ -63,13 +73,14 @@
       "prefix": "demo",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "baseHref": "/isy-angular-widgets",
-            "outputPath": "dist/isy-angular-widgets-demo",
+            "baseHref": "/",
+            "outputPath": {
+              "base": "dist/isy-angular-widgets-demo"
+            },
             "index": "projects/isy-angular-widgets-demo/src/index.html",
-            "main": "projects/isy-angular-widgets-demo/src/main.ts",
-            "polyfills": "zone.js",
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/isy-angular-widgets-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -86,10 +97,12 @@
               "node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": [],
-            "allowedCommonJsDependencies": ["moment", "quill", "quill-delta"]
+            "allowedCommonJsDependencies": ["moment", "quill", "quill-delta"],
+            "browser": "projects/isy-angular-widgets-demo/src/main.ts"
           },
           "configurations": {
             "production": {
+              "baseHref": "/isy-angular-widgets/",
               "budgets": [
                 {
                   "type": "initial",
@@ -105,9 +118,8 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
+              "outputHashing": "media",
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -116,7 +128,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "isy-angular-widgets-demo:build:production"
@@ -128,13 +140,13 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "isy-angular-widgets-demo:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "codeCoverage": true,
             "main": "projects/isy-angular-widgets-demo/src/test.ts",
@@ -144,7 +156,17 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/isy-angular-widgets-demo/src/favicon.ico",
-              "projects/isy-angular-widgets-demo/src/assets"
+              "projects/isy-angular-widgets-demo/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/primeicons/fonts",
+                "output": "media"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/isy-angular-widgets/assets/fonts",
+                "output": "media"
+              }
             ],
             "styles": ["projects/isy-angular-widgets-demo/src/styles.scss"],
             "scripts": []

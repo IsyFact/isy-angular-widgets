@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, Input, ChangeDetectionStrategy} from '@angular/core';
 import {AnchorNavigationService} from '../../services/anchor-navigation.service';
 
 /** Allowed heading levels rendered by {@link SectionHeadingComponent}. */
@@ -17,6 +17,7 @@ export type HeadingLevel = 2 | 3;
   standalone: true,
   selector: 'demo-section-heading',
 
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if (level === H2) {
       <h2 [id]="anchorId" class="section-heading">

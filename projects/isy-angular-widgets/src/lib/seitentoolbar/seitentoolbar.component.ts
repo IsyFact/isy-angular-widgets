@@ -1,4 +1,4 @@
-import {booleanAttribute, Component, inject, Input} from '@angular/core';
+import {booleanAttribute, Component, inject, Input, ChangeDetectionStrategy} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -12,6 +12,7 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
   selector: 'isy-seiten-toolbar',
   templateUrl: './seitentoolbar.component.html',
   styleUrls: ['./seitentoolbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ToolbarModule, ButtonModule, RouterModule]
 })
 export class SeitentoolbarComponent {

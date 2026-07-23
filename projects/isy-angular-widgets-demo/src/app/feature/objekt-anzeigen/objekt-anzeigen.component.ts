@@ -5,7 +5,8 @@ import {
   Component,
   inject,
   Injector,
-  Input
+  Input,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {Address} from '../../shared/model/person';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
@@ -52,6 +53,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
   selector: 'demo-objekt-anzeigen',
   templateUrl: './objekt-anzeigen.component.html',
   styleUrls: ['./objekt-anzeigen.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     InputTextModule,
     ReactiveFormsModule,

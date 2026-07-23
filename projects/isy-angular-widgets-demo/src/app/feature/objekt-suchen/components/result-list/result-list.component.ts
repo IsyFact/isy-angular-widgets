@@ -1,4 +1,13 @@
-import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import {Person, Personalien} from '../../../../shared/model/person';
 import {ResultColumn, ResultFilter} from '../../model/result-column';
 import {resultColumn, state, gender} from '../../data/result-column';
@@ -18,6 +27,7 @@ import {SelectModule} from 'primeng/select';
   selector: 'demo-result-list',
   templateUrl: './result-list.component.html',
   styleUrls: ['./result-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     SelectModule,

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {Zeichenobjekt} from '../../model/model';
 
 /**
@@ -8,6 +8,7 @@ import {Zeichenobjekt} from '../../model/model';
 @Component({
   selector: 'isy-input-char-preview',
   templateUrl: './input-char-preview.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./input-char-preview.component.scss']
 })
 export class InputCharPreviewComponent {

@@ -1,6 +1,6 @@
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
-import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 import {ZipkinOpenTracingHttpInterceptor} from './zipkin-open-tracing-http-interceptor';
 import {OpenTraceHeaders} from './open-tracing-headers';
 
@@ -26,7 +26,7 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: HTTP_INTERCEPTORS, useClass: ZipkinOpenTracingHttpInterceptor, multi: true},
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting()
       ]
     });

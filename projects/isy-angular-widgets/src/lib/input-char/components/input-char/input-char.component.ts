@@ -7,7 +7,8 @@ import {
   Input,
   OnDestroy,
   Output,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {Datentyp} from '../../model/datentyp';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
@@ -19,6 +20,7 @@ import {InputCharPickerService} from '../../services/input-char-picker.service';
   selector: 'isy-input-char',
   templateUrl: './input-char.component.html',
   styleUrls: ['./input-char.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ButtonModule]
 })
 export class InputCharComponent implements OnDestroy {

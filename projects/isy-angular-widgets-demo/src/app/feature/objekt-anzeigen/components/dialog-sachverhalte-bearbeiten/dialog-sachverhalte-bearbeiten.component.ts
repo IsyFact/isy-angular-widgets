@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, ChangeDetectionStrategy} from '@angular/core';
 import {Person} from '../../../../shared/model/person';
 import {DialogModule} from 'primeng/dialog';
 import {TableModule} from 'primeng/table';
@@ -13,6 +13,7 @@ import {InputTextModule} from 'primeng/inputtext';
   standalone: true,
   selector: 'demo-dialog-sachverhalte-bearbeiten',
   templateUrl: './dialog-sachverhalte-bearbeiten.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     FormsModule,
     InputTextModule,

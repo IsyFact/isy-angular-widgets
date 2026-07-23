@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {TerminalModule, TerminalService} from 'primeng/terminal';
 import {storageData} from '../../data/product';
@@ -46,6 +46,7 @@ import {SectionHeadingComponent} from '../../../../shared/components/section-hea
     InputTextModule,
     SectionHeadingComponent
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [TerminalService]
 })
 export class PrimengMiscComponent implements AfterViewInit {

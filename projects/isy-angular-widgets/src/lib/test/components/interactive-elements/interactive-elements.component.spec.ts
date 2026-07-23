@@ -1,4 +1,4 @@
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withXhr} from '@angular/common/http';
 import {TestComponentComponent} from './interactive-elements.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {provideIsyFactTheme} from '../../../core/providers';
@@ -7,7 +7,7 @@ describe('TestComponentComponent', () => {
   let spectator: Spectator<TestComponentComponent>;
   const createComponent = createComponentFactory({
     component: TestComponentComponent,
-    providers: [provideHttpClient(), provideIsyFactTheme()],
+    providers: [provideHttpClient(withXhr()), provideIsyFactTheme()],
     shallow: true
   });
 

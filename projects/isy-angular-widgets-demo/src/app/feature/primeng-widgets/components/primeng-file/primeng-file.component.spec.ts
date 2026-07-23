@@ -1,7 +1,7 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 import {Subject} from 'rxjs';
 import {UploadEvent} from 'primeng/fileupload';
 import {MessageService} from 'primeng/api';
@@ -21,7 +21,7 @@ describe('Unit Tests: PrimengFileComponent', () => {
     component: PrimengFileComponent,
     providers: [
       MessageService,
-      provideHttpClient(withInterceptorsFromDi()),
+      provideHttpClient(withXhr(), withInterceptorsFromDi()),
       {provide: ActivatedRoute, useValue: {fragment: fragment$.asObservable()}},
       {provide: ViewportScroller, useValue: viewportScrollerMock}
     ]

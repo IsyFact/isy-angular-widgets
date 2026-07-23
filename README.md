@@ -41,8 +41,14 @@ Im nächsten Schritt wird die erzeugte TGZ-Datei in einem neuen Angular-Projekt 
 Hierfür wird der Pfad zur TGZ-Datei benötigt.
 Im Root-Verzeichnis des neuen Angular-Projekts ist folgender Befehl auszuführen:
 
+**Angular 21:**
 ```shell
 npm install "file:[WIDGETS_LIB_PATH].tgz"
+```
+
+**Angular 22** (wegen PrimeNG-21-Peer-Dependency-Konflikten):
+```shell
+npm install "file:[WIDGETS_LIB_PATH].tgz" --legacy-peer-deps
 ```
 
 Nach der Installation kann die Schematic der Bibliothek ausgeführt werden:
@@ -52,6 +58,22 @@ ng generate @isyfact/isy-angular-widgets:ng-add
 ```
 
 Der direkte Aufruf von `ng add` auf die lokale TGZ-Datei sollte nicht verwendet werden, da Angular CLI bei lokalen Paketdateien die Paketinformationen unter Umständen nicht korrekt auslesen kann.
+
+#### Hinweis bei Verwendung mit Angular 22
+
+Die Bibliothek unterstützt Angular 21 und Angular 22.
+Da PrimeNG 21 offiziell für Angular 21 entwickelt wurde, meldet `npm` bei Angular-22-Projekten einen Peer-Dependency-Konflikt.
+
+Die Schematic überspringt in diesem Fall den automatischen Package-Install und gibt stattdessen einen Hinweis aus.
+Anschließend muss die Installation manuell ausgeführt werden:
+
+```shell
+npm install --legacy-peer-deps
+```
+
+Diese Option weist `npm` an, Peer-Dependency-Konflikte zu ignorieren.
+Die Kombination aus Angular 22 und PrimeNG 21 ist im geprüften Projektumfang lauffähig, stellt jedoch keine offiziell deklarierte Versionskombination dar.
+Einzelne PrimeNG-Komponenten sollten in der eigenen Anwendung zusätzlich getestet werden.
 
 Eine zusätzliche Aktivierung von Angular-Animationen über `provideAnimations`, `provideAnimationsAsync` oder `BrowserAnimationsModule` ist für Angular 21 und PrimeNG 21 nicht mehr erforderlich. Angular hat die bisherigen Animation-Provider als deprecated markiert. PrimeNG 21 verwendet native CSS-Animationen.
 

@@ -1,98 +1,47 @@
-export const navigationMenu = [
+import {MenuItem} from 'primeng/api';
+
+const MENU_ITEMS_PREFIX = 'isyAngularWidgetsDemo.menuItems';
+const SKIP_LINK_PREFIX = 'isyAngularWidgetsDemo.actions.skipNavigationLink';
+
+const createNavigationItem = (key: string, routerLink: string): MenuItem => ({
+  label: `${MENU_ITEMS_PREFIX}.${key}`,
+  title: `${SKIP_LINK_PREFIX}.${key}`,
+  routerLink,
+  styleClass: 'skip-link'
+});
+
+const createCustomNavigationItem = (label: string, title: string, routerLink: string): MenuItem => ({
+  label,
+  title,
+  routerLink,
+  styleClass: 'skip-link'
+});
+
+export const navigationMenu: MenuItem[] = [
   {
-    label: 'isyAngularWidgetsDemo.menuItems.frequentTasks',
+    label: `${MENU_ITEMS_PREFIX}.frequentTasks`,
     expanded: true,
     items: [
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.searchObject',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.searchObject',
-        routerLink: 'objekt-suchen',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.displayObject',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.displayObject',
-        routerLink: 'objekt-anzeigen/42',
-        styleClass: 'skip-link'
-      }
+      createNavigationItem('searchObject', '/objekt-suchen'),
+      createNavigationItem('displayObject', '/objekt-anzeigen/42')
     ]
   },
   {
-    label: 'isyAngularWidgetsDemo.menuItems.uiWidgets',
+    label: `${MENU_ITEMS_PREFIX}.uiWidgets`,
     expanded: true,
     items: [
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.isyAngularComponents',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.isyAngularComponents',
-        routerLink: 'isy-angular-components',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'Modalarme Patterns',
-        title: 'zur Modalarme Patterns Seite wechseln',
-        routerLink: 'modalarme-patterns',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengForm',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengForm',
-        routerLink: 'primeng-widgets/primeng-form',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengButton',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengButton',
-        routerLink: 'primeng-widgets/primeng-button',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengData',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengData',
-        routerLink: 'primeng-widgets/primeng-data',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengPanel',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengPanel',
-        routerLink: 'primeng-widgets/primeng-panel',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengOverlay',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengOverlay',
-        routerLink: 'primeng-widgets/primeng-overlay',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengFile',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengFile',
-        routerLink: 'primeng-widgets/primeng-file',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengMenu',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengMenu',
-        routerLink: 'primeng-widgets/primeng-menu',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengChart',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengChart',
-        routerLink: 'primeng-widgets/primeng-chart',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengMessages',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengMessages',
-        routerLink: 'primeng-widgets/primeng-messages',
-        styleClass: 'skip-link'
-      },
-      {
-        label: 'isyAngularWidgetsDemo.menuItems.primengMisc',
-        title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengMisc',
-        routerLink: 'primeng-widgets/primeng-misc',
-        styleClass: 'skip-link'
-      }
+      createNavigationItem('isyAngularComponents', '/isy-angular-components'),
+      createCustomNavigationItem('Modalarme Patterns', 'zur Modalarme Patterns Seite wechseln', '/modalarme-patterns'),
+      createNavigationItem('primengForm', '/primeng-widgets/primeng-form'),
+      createNavigationItem('primengButton', '/primeng-widgets/primeng-button'),
+      createNavigationItem('primengData', '/primeng-widgets/primeng-data'),
+      createNavigationItem('primengPanel', '/primeng-widgets/primeng-panel'),
+      createNavigationItem('primengOverlay', '/primeng-widgets/primeng-overlay'),
+      createNavigationItem('primengFile', '/primeng-widgets/primeng-file'),
+      createNavigationItem('primengMenu', '/primeng-widgets/primeng-menu'),
+      createNavigationItem('primengChart', '/primeng-widgets/primeng-chart'),
+      createNavigationItem('primengMessages', '/primeng-widgets/primeng-messages'),
+      createNavigationItem('primengMisc', '/primeng-widgets/primeng-misc')
     ]
   }
 ];
