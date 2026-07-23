@@ -48,6 +48,7 @@
     "@angular/platform-browser": "^22.0.5",
     "@angular/platform-browser-dynamic": "^22.0.5",
     "@angular/router": "^22.0.5",
+    "@isyfact/isy-angular-widgets": "^21.1.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "@primeuix/themes": "^2.0.3",
@@ -91,9 +92,9 @@
     "karma-jasmine-html-reporter": "~2.2.0",
     "ng-packagr": "22.0.1",
     "postcss": "^8.5.10",
+    "prettier": "^3.8.1",
     "tailwindcss": "^4.2.4",
     "tailwindcss-primeui": "^0.6.1",
-    "prettier": "^3.8.1",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.58.1"
   }

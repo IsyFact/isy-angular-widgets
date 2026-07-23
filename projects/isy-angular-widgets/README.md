@@ -63,6 +63,13 @@ npx ng generate @isyfact/isy-angular-widgets:ng-add
 npm install --legacy-peer-deps
 ```
 
+**Angular 22** (wegen PrimeNG-21-Peer-Dependency-Konflikten muss die Bibliothek zuerst manuell installiert werden):
+```bash
+npm install @isyfact/isy-angular-widgets --legacy-peer-deps
+npx ng generate @isyfact/isy-angular-widgets:ng-add
+npm install --legacy-peer-deps
+```
+
 Die Schematics führen folgende Schritte aus:
 
 - Hinzufügen und Installation der Bibliothek sowie der benötigten Abhängigkeiten
