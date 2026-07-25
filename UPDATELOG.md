@@ -286,6 +286,30 @@
 
 ---
 
+#### 3.4 Migration von PrimeFlex auf Tailwind CSS
+
+##### 1. Änderung
+
+* Die Bibliothek verwendet keine PrimeFlex-Utilities mehr.
+* Für Utility-Klassen wird Tailwind CSS v4 eingesetzt.
+* Für die PrimeNG-Integration wird zusätzlich `tailwindcss-primeui` verwendet.
+
+##### 2. Auswirkungen / Migration
+
+* Bestehende Anwendungen, die PrimeFlex-Klassen direkt in Templates oder Styles verwenden, müssen diese auf Tailwind-Utilities umstellen.
+* Betroffen sind insbesondere Layout-, Spacing- und Flex-Utilities (z. B. `grid`, `col-*`, `p-mt-*`, `p-d-flex`, `p-jc-*`, `p-ai-*`).
+* Einordnung: Breaking Change auf Styling- und Template-Ebene, keine Entfernung zentraler öffentlicher TypeScript-APIs.
+* Komponentenspezifische `.scss`-Dateien bleiben unverändert nutzbar, sofern dort keine PrimeFlex-Klassen verwendet oder nachgebildet wurden.
+
+##### 3. Empfehlung
+
+* PrimeFlex-Klassen schrittweise durch Tailwind-Klassen ersetzen.
+* Tailwind im Zielprojekt konsistent einbinden (inklusive `@tailwindcss/postcss` und `tailwindcss-primeui`).
+* Nach der Migration betroffene Formulare, Layouts und responsive Ansichten gezielt visuell und funktional testen.
+* Für typische Klassen-Mappings und Einbindungsbeispiele den README-Abschnitt "Migration von PrimeFlex auf Tailwind CSS" verwenden.
+
+---
+
 ### 4. Demo-spezifische Änderungen
 
 Die folgenden Änderungen betreffen ausschließlich die Demo-Anwendung und sind nicht als eigene Breaking Changes der öffentlichen Library-API zu bewerten.
@@ -651,6 +675,7 @@ changeDetection: ChangeDetectionStrategy.Eager
 * CI-Images, lokale Node.js-Versionen und individuelle Build-Integrationen müssen auf Angular-22-Kompatibilität geprüft werden.
 * PrimeNG bleibt auf Version 21 und wurde nicht gemeinsam mit Angular aktualisiert.
 * Aufgrund der auf Angular 21 ausgerichteten PrimeNG-Peer-Dependencies können bei Angular-22-Consumern Installationswarnungen oder Konflikte auftreten.
+* PrimeFlex-Utilities werden nicht mehr verwendet; bestehende Utility-Klassen in Consumer-Projekten müssen auf Tailwind CSS migriert werden (Breaking Change auf Styling-/Template-Ebene).
 
 ### Kompatibilitätsbewertung
 
