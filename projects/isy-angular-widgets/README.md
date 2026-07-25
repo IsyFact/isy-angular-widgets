@@ -333,7 +333,7 @@ Typische Klassen-Migrationen:
 | `p-jc-between` | `justify-between` |
 | `p-ai-center` | `items-center` |
 
-Normale komponentenspezifische .scss-Dateien bleiben davon unberuehrt.
+Normale komponentenspezifische `.scss`-Dateien bleiben davon unberührt.
 Eine Anpassung ist dort nur erforderlich, wenn PrimeFlex-Klassen direkt verwendet oder nachgebildet wurden.
 
 Die Bibliothek verwendet keine PrimeFlex-Utilities mehr und setzt stattdessen auf Tailwind CSS v4.
