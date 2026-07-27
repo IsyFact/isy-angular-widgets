@@ -309,7 +309,20 @@ Ohne `responsive` bleibt das sichtbare Label auch bei schmalen Bildschirmbreiten
 
 Bestehende Projekte sollten PrimeFlex-Utilities schrittweise durch Tailwind-Klassen ersetzen.
 
-Typische Beispiele:
+Wichtiger Pflichtschritt:
+1. PrimeFlex komplett entfernen.
+2. PrimeFlex aus package.json entfernen, falls vorhanden.
+3. PrimeFlex aus angular.json unter styles entfernen.
+4. Abhaengigkeiten neu installieren.
+
+Beispiel:
+
+```bash
+npm uninstall primeflex
+npm install --legacy-peer-deps
+```
+
+Typische Klassen-Migrationen:
 
 | PrimeFlex | Tailwind CSS |
 |---|---|
