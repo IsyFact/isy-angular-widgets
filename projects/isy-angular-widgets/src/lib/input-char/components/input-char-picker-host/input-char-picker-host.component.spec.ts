@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, signal} from '@angular/core';
+import {Component, EventEmitter, Input, Output, signal, ChangeDetectionStrategy} from '@angular/core';
 import {fakeAsync, tick} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
@@ -14,6 +14,7 @@ import {InputCharSelection, Zeichenobjekt} from '../../model/model';
 @Component({
   standalone: true,
   selector: 'isy-input-char-dialog',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: ''
 })
 class InputCharDialogStubComponent {

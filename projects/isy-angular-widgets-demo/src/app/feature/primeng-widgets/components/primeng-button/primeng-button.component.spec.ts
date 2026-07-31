@@ -59,12 +59,12 @@ describe('Unit Tests: PrimengButtonComponent', () => {
   });
 
   it('should render the colored/outlined/icon sections as a two-column flat list', () => {
-    const rows = spectator.queryAll<HTMLElement>('.grid .col-12 .flex.flex-column.gap-2 .grid.align-items-center');
+    const rows = spectator.queryAll<HTMLElement>('.grid .col-span-12 .flex.flex-col.gap-2 .grid.items-center');
 
     expect(rows.length).toBeGreaterThan(0);
     rows.forEach((row) => {
-      expect(row.querySelector('.col-4')).toBeTruthy();
-      expect(row.querySelector('.col-8')).toBeTruthy();
+      expect(row.querySelector('.col-span-4')).toBeTruthy();
+      expect(row.querySelector('.col-span-8')).toBeTruthy();
     });
   });
 

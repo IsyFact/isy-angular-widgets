@@ -1,4 +1,13 @@
-import {ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, DOCUMENT, inject} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  DOCUMENT,
+  inject,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import {UserInfo} from '@isy-angular-widgets/api/userinfo';
 import {SecurityService} from '@isy-angular-widgets/security/security-service';
 import {UserInfoPublicService} from './core/user/userInfoPublicService';
@@ -38,6 +47,7 @@ import {PanelMenuModule} from 'primeng/panelmenu';
     SeitentoolbarComponent,
     PanelMenuModule
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [MessageService]
 })
 export class AppComponent implements OnInit, OnDestroy {

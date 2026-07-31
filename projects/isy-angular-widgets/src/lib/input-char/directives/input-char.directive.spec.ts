@@ -1,4 +1,4 @@
-import {Component, DebugElement} from '@angular/core';
+import {Component, DebugElement, ChangeDetectionStrategy} from '@angular/core';
 import {Datentyp} from '../model/datentyp';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
@@ -18,6 +18,7 @@ import {InputCharPickerService} from '../services/input-char-picker.service';
     [outlinedInputCharButton]="outlinedInputCharButton"
     (change)="valueGet($event, charPicker.value)"
   />`,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [InputCharDirective]
 })
 class TestComponent {

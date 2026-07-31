@@ -1,11 +1,11 @@
-<div class="flex flex-column p-3">
+<div class="flex flex-col p-4">
   <h1>PrimeNG Forms</h1>
   <h2>Input Fields</h2>
-  <div class="grid">
-    <div class="col-12 flex flex-column gap-2">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="inputtext" [level]="3" label="InputText" ariaLabel="Link zu InputText" />
-      <div class="flex flex-column gap-4">
-        <div class="flex flex-column gap-2">
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-2">
           <label for="input-text-validation">{{ 'isyAngularWidgetsDemo.labels.inputTextWithHelp' | translate }}</label>
           <input
             id="input-text-validation"
@@ -36,7 +36,7 @@
           }
         </div>
 
-        <div class="flex flex-column gap-2">
+        <div class="flex flex-col gap-2">
           <label for="input-text-required">
             {{ 'isyAngularWidgetsDemo.labels.inputTextRequired' | translate }}
             <span class="text-red-500">*</span>
@@ -63,7 +63,7 @@
           }
         </div>
 
-        <div class="flex flex-column gap-2">
+        <div class="flex flex-col gap-2">
           <label for="input-text-disabled">{{ 'isyAngularWidgetsDemo.labels.disabledInputText' | translate }}</label>
           <input
             id="input-text-disabled"
@@ -75,7 +75,7 @@
           />
         </div>
 
-        <div class="flex flex-column gap-2">
+        <div class="flex flex-col gap-2">
           <label for="input-text-readonly">{{ 'isyAngularWidgetsDemo.labels.readonlyInputText' | translate }}</label>
           <input
             id="input-text-readonly"
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="inputmask" [level]="3" label="Inputmask" ariaLabel="Link zu Inputmask" />
       <label for="input-mask-phone">{{ 'isyAngularWidgetsDemo.labels.inputMaskPhoneNumber' | translate }}</label>
       <p-inputMask
@@ -99,7 +99,7 @@
       />
       <small id="input-mask-phone-help">{{ 'isyAngularWidgetsDemo.messages.inputMaskPhoneHelp' | translate }}</small>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="inputgroup" [level]="3" label="InputGroup" ariaLabel="Link zu InputGroup" />
       <label for="input-group-clearable">{{ 'isyAngularWidgetsDemo.labels.inputGroupClearable' | translate }}</label>
       <p-inputgroup>
@@ -126,7 +126,7 @@
       </p-inputgroup>
       <small id="input-group-help">{{ 'isyAngularWidgetsDemo.messages.inputGroupHelp' | translate }}</small>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="autocomplete" [level]="3" label="AutoComplete" ariaLabel="Link zu AutoComplete" />
       <p-autocomplete
         inputId="autoComplete"
@@ -138,18 +138,18 @@
         inputStyleClass="w-full"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="iconfield" [level]="3" label="IconField" ariaLabel="Link zu IconField" />
       <p-iconfield iconPosition="left">
         <p-inputIcon class="pi pi-search" />
         <input type="text" pInputText placeholder="Search" class="w-full" />
       </p-iconfield>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="keyfilter" [level]="3" label="KeyFilter (hex)" ariaLabel="Link zu KeyFilter" />
       <input id="keyFilter" pInputText pKeyFilter="hex" class="w-full" />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="password" [level]="3" label="Password" ariaLabel="Link zu Password" />
       <p-password
         inputId="password-input"
@@ -159,7 +159,7 @@
         inputStyleClass="w-full"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="calendar" [level]="3" label="Calendar" ariaLabel="Link zu Calendar" />
       <p-datepicker
         inputId="calendar-input"
@@ -171,7 +171,7 @@
       />
     </div>
 
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading
         anchorId="date-picker"
         [level]="3"
@@ -190,7 +190,7 @@
       />
     </div>
 
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading
         anchorId="date-time-picker"
         [level]="3"
@@ -211,7 +211,7 @@
       />
     </div>
 
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading
         anchorId="date-range"
         [level]="3"
@@ -231,7 +231,7 @@
       />
     </div>
 
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading
         anchorId="date-time-range"
         [level]="3"
@@ -239,8 +239,8 @@
         ariaLabel="Link zu Eingabe von Zeiträumen mit Datum und Uhrzeit"
       />
 
-      <div class="flex flex-column md:flex-row gap-3">
-        <div class="flex flex-column gap-2 flex-1">
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="flex flex-col gap-2 flex-1">
           <label for="start-date-time-input">Beginn</label>
           <p-datepicker
             inputId="start-date-time-input"
@@ -254,7 +254,7 @@
           />
         </div>
 
-        <div class="flex flex-column gap-2 flex-1">
+        <div class="flex flex-col gap-2 flex-1">
           <label for="end-date-time-input">Ende</label>
           <p-datepicker
             inputId="end-date-time-input"
@@ -270,7 +270,7 @@
       </div>
     </div>
 
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="inputnumber" [level]="3" label="InputNumber" ariaLabel="Link zu InputNumber" />
       <p-inputnumber
         inputId="inputNumber"
@@ -281,7 +281,7 @@
         currency="EUR"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading
         anchorId="cascadeselect"
         [level]="3"
@@ -298,7 +298,7 @@
         class="w-full"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="dropdown" [level]="3" label="Dropdown" ariaLabel="Link zu Dropdown" />
       <p-select
         id="dropdown-input"
@@ -311,7 +311,7 @@
         appendTo="body"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="multiselect" [level]="3" label="MultiSelect" ariaLabel="Link zu MultiSelect" />
       <p-multiselect
         id="multiSelect"
@@ -322,7 +322,7 @@
         class="w-full"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="treeselect" [level]="3" label="TreeSelect" ariaLabel="Link zu TreeSelect" />
       <p-treeselect
         [filter]="true"
@@ -333,23 +333,23 @@
         class="w-full"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="textarea" [level]="3" label="Textarea" ariaLabel="Link zu Textarea" />
       <textarea pTextarea class="w-full" aria-label="Textarea"></textarea>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="inputotp" [level]="3" label="InputOtp" ariaLabel="Link zu InputOtp" />
       <p-inputotp [length]="6" />
     </div>
   </div>
   <p-divider />
   <h2>Status Components</h2>
-  <div class="grid">
-    <div class="col-12 flex flex-column gap-2">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="checkbox" [level]="3" label="Checkbox" ariaLabel="Link zu Checkbox" />
       <p-fieldset [legend]="'isyAngularWidgetsDemo.labels.checkboxHorizontalLegend' | translate">
-        <div class="checkbox-group-horizontal flex flex-wrap gap-3">
-          <div class="flex align-items-center gap-2">
+        <div class="checkbox-group-horizontal flex flex-wrap gap-4">
+          <div class="flex items-center gap-2">
             <p-checkbox
               inputId="checkbox-horizontal-1"
               [binary]="true"
@@ -358,7 +358,7 @@
             />
             <label for="checkbox-horizontal-1">{{ 'isyAngularWidgetsDemo.labels.checkbox1' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-checkbox
               inputId="checkbox-horizontal-2"
               [binary]="true"
@@ -367,7 +367,7 @@
             />
             <label for="checkbox-horizontal-2">{{ 'isyAngularWidgetsDemo.labels.checkbox2' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-checkbox
               inputId="checkbox-horizontal-3"
               [binary]="true"
@@ -376,7 +376,7 @@
             />
             <label for="checkbox-horizontal-3">{{ 'isyAngularWidgetsDemo.labels.checkbox3' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-checkbox
               inputId="checkbox-horizontal-4"
               [binary]="true"
@@ -389,8 +389,8 @@
       </p-fieldset>
 
       <p-fieldset [legend]="'isyAngularWidgetsDemo.labels.checkboxVerticalLegend' | translate">
-        <div class="checkbox-group-vertical flex flex-column gap-2">
-          <div class="flex align-items-center gap-2">
+        <div class="checkbox-group-vertical flex flex-col gap-2">
+          <div class="flex items-center gap-2">
             <p-checkbox
               inputId="checkbox-vertical-1"
               [binary]="true"
@@ -399,7 +399,7 @@
             />
             <label for="checkbox-vertical-1">{{ 'isyAngularWidgetsDemo.labels.checkbox1' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-checkbox
               inputId="checkbox-vertical-2"
               [binary]="true"
@@ -408,7 +408,7 @@
             />
             <label for="checkbox-vertical-2">{{ 'isyAngularWidgetsDemo.labels.checkbox2' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-checkbox
               inputId="checkbox-vertical-3"
               [binary]="true"
@@ -417,7 +417,7 @@
             />
             <label for="checkbox-vertical-3">{{ 'isyAngularWidgetsDemo.labels.checkbox3' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-checkbox
               inputId="checkbox-vertical-4"
               [binary]="true"
@@ -429,11 +429,11 @@
         </div>
       </p-fieldset>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="radiobutton" [level]="3" label="RadioButton" ariaLabel="Link zu RadioButton" />
       <p-fieldset [legend]="'isyAngularWidgetsDemo.labels.radioButtonHorizontalLegend' | translate">
-        <div class="radio-group-horizontal flex flex-wrap gap-3">
-          <div class="flex align-items-center gap-2">
+        <div class="radio-group-horizontal flex flex-wrap gap-4">
+          <div class="flex items-center gap-2">
             <p-radiobutton
               inputId="radio-horizontal-1"
               name="radio-horizontal-group"
@@ -443,7 +443,7 @@
             />
             <label for="radio-horizontal-1">{{ 'isyAngularWidgetsDemo.labels.radioButton1' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-radiobutton
               inputId="radio-horizontal-2"
               name="radio-horizontal-group"
@@ -453,7 +453,7 @@
             />
             <label for="radio-horizontal-2">{{ 'isyAngularWidgetsDemo.labels.radioButton2' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-radiobutton
               inputId="radio-horizontal-3"
               name="radio-horizontal-group"
@@ -463,7 +463,7 @@
             />
             <label for="radio-horizontal-3">{{ 'isyAngularWidgetsDemo.labels.radioButton3' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-radiobutton
               inputId="radio-horizontal-4"
               name="radio-horizontal-group"
@@ -477,8 +477,8 @@
       </p-fieldset>
 
       <p-fieldset [legend]="'isyAngularWidgetsDemo.labels.radioButtonVerticalLegend' | translate">
-        <div class="radio-group-vertical flex flex-column gap-2">
-          <div class="flex align-items-center gap-2">
+        <div class="radio-group-vertical flex flex-col gap-2">
+          <div class="flex items-center gap-2">
             <p-radiobutton
               inputId="radio-vertical-1"
               name="radio-vertical-group"
@@ -488,7 +488,7 @@
             />
             <label for="radio-vertical-1">{{ 'isyAngularWidgetsDemo.labels.radioButton1' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-radiobutton
               inputId="radio-vertical-2"
               name="radio-vertical-group"
@@ -498,7 +498,7 @@
             />
             <label for="radio-vertical-2">{{ 'isyAngularWidgetsDemo.labels.radioButton2' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-radiobutton
               inputId="radio-vertical-3"
               name="radio-vertical-group"
@@ -508,7 +508,7 @@
             />
             <label for="radio-vertical-3">{{ 'isyAngularWidgetsDemo.labels.radioButton3' | translate }}</label>
           </div>
-          <div class="flex align-items-center gap-2">
+          <div class="flex items-center gap-2">
             <p-radiobutton
               inputId="radio-vertical-4"
               name="radio-vertical-group"
@@ -521,11 +521,11 @@
         </div>
       </p-fieldset>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="knob" [level]="3" label="Knob" ariaLabel="Link zu Knob" />
       <p-knob ariaLabel="Knob" />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading
         anchorId="tristatecheckbox"
         [level]="3"
@@ -534,20 +534,20 @@
       />
       <p-checkbox inputId="triStateCheckbox" label="TriStateCheckbox" [binary]="true" [indeterminate]="true" />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="rating" [level]="3" label="Rating" ariaLabel="Link zu Rating" />
       <p-rating />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="slider" [level]="3" label="Slider" ariaLabel="Link zu Slider" />
-      <input type="text" pInputText [(ngModel)]="slider" class="w-full mb-3" />
+      <input type="text" pInputText [(ngModel)]="slider" class="w-full mb-4" />
       <p-slider [(ngModel)]="slider" class="w-full" />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="inputswitch" [level]="3" label="InputSwitch" ariaLabel="Link zu InputSwitch" />
       <p-toggleswitch inputId="inputSwitch" ariaLabel="Input Switch" />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="togglebutton" [level]="3" label="ToggleButton" ariaLabel="Link zu ToggleButton" />
       <p-togglebutton
         inputId="toggleButton"
@@ -557,20 +557,20 @@
         offLabel="Unlocked"
       />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="selectbutton" [level]="3" label="SelectButton" ariaLabel="Link zu SelectButton" />
       <p-selectbutton [options]="stateOptions" />
     </div>
   </div>
   <p-divider />
   <h2>Special Components</h2>
-  <div class="grid mb-3">
-    <div class="col-12 flex flex-column gap-2">
+  <div class="grid grid-cols-12 gap-4 mb-4">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="colorpicker" [level]="3" label="Colorpicker" ariaLabel="Link zu Colorpicker" />
       <p-colorpicker inputId="colorpicker-input" [(ngModel)]="color" />
       <span>{{ color }}</span>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="chips" [level]="3" label="Chips" ariaLabel="Link zu Chips" />
       <div class="p-fluid">
         <p-autocomplete
@@ -582,11 +582,11 @@
         />
       </div>
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="listbox" [level]="3" label="Listbox" ariaLabel="Link zu Listbox" />
       <p-listbox id="listbox-input" [options]="countries" optionLabel="name" class="w-full" />
     </div>
-    <div class="col-12 flex flex-column gap-2">
+    <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="editor" [level]="3" label="Editor" ariaLabel="Link zu Editor" />
       <p-editor [(ngModel)]="text" [style]="{height: '320px'}" />
     </div>

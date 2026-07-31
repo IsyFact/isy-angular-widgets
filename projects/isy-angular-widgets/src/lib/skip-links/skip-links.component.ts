@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, Input, ChangeDetectionStrategy} from '@angular/core';
 import {SkipTarget} from './model/model';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
@@ -16,6 +16,7 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
 @Component({
   selector: 'isy-skip-links',
   templateUrl: './skip-links.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./skip-links.component.scss']
 })
 export class SkipLinksComponent {

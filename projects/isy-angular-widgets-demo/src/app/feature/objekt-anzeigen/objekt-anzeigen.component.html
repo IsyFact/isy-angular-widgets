@@ -6,8 +6,8 @@
   <p-tabpanels>
     <p-tabpanel id="panel-personalien" value="0">
       <form [formGroup]="personalInfoForm">
-        <div class="grid mt-3">
-          <div class="col-12 md:col-6 xl:col-4">
+        <div class="grid grid-cols-12 gap-4 mt-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
             ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet. -->
             <isy-form-wrapper
@@ -33,7 +33,7 @@
               />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.nachname' | translate"
               fieldId="last-name"
@@ -53,7 +53,7 @@
               />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.geburtsname' | translate"
               fieldId="birth-name"
@@ -71,7 +71,7 @@
               />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.geburtsort' | translate"
               fieldId="birth-place"
@@ -80,7 +80,7 @@
               <input id="birth-place" formControlName="birthplace" class="w-full" type="text" pInputText />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <!-- Die Eigenschaften labelId und ariaLabelledBy in der Form-Wrapper-Komponente ermöglichen die Zuordnung des Labels zum Eingabefeld,
             insbesondere wenn das Setzen einer inneren ID, wie z.B. bei PrimeNG p-select, nicht möglich ist. -->
             <isy-form-wrapper
@@ -106,7 +106,7 @@
               ></p-select>
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
             ein beliebiges PrimeNG Eingabefeld und eine Validierungsnachricht beinhaltet.
             Die Formcontrol nutzt einen benutzerdefinierten Validator. -->
@@ -130,7 +130,7 @@
               </p-datepicker>
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-8">
+          <div class="col-span-12 md:col-span-6 xl:col-span-8">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.staatsangehoerigkeit' | translate"
               labelId="label-nationalities"
@@ -142,7 +142,7 @@
                   'isyAngularWidgetsDemo.messages.nationalitiesMaxReached' | translate: {count: maxNationalities}
               }"
             >
-              <div class="flex flex-column gap-2">
+              <div class="flex flex-col gap-2">
                 <p-multiselect
                   inputId="nationalities"
                   formControlName="nationalities"
@@ -158,7 +158,7 @@
                   appendTo="body"
                 ></p-multiselect>
 
-                <small class="text-color-secondary">
+                <small class="text-muted-color">
                   {{
                     'isyAngularWidgetsDemo.messages.nationalitiesHint'
                       | translate: {count: maxNationalities, current: getSelectedNationalitiesCount()}
@@ -167,7 +167,7 @@
               </div>
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.telefonnummer' | translate"
               fieldId="phone-number"
@@ -182,7 +182,7 @@
               />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.einreisedatum' | translate"
               fieldId="date-of-entry"
@@ -202,7 +202,7 @@
               </isy-incomplete-date>
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.abreisedatum' | translate"
               fieldId="date-of-departure"
@@ -218,7 +218,7 @@
               />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.ablaufdatumPersonalausweis' | translate"
               fieldId="identity-card-expiration-date"
@@ -234,7 +234,7 @@
               />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.ablaufdatumReisepass' | translate"
               fieldId="passport-expiration-date"
@@ -252,7 +252,7 @@
               ></p-datepicker>
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.kreditkartennummer' | translate"
               fieldId="credit-card-number"
@@ -268,7 +268,7 @@
               />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <isy-form-wrapper
               [label]="'isyAngularWidgetsDemo.labels.ablaufdatumKreditkarte' | translate"
               fieldId="credit-card-expiration-date"
@@ -287,7 +287,7 @@
               />
             </isy-form-wrapper>
           </div>
-          <div class="col-12 md:col-6 xl:col-4 align-content-end">
+          <div class="col-span-12 md:col-span-6 xl:col-span-4 content-end">
             <p-fileupload
               id="identity-document"
               formControlName="identityDocument"
@@ -314,7 +314,7 @@
         @for (addresses of adressFormArray?.controls; track $index; let i = $index) {
           <p-fieldset
             [legend]="'isyAngularWidgetsDemo.labels.residence' | translate: {numChars: i + 1}"
-            class="mb-3 flex"
+            class="mb-4 flex"
             styleClass="w-full"
           >
             <p-button
@@ -329,9 +329,9 @@
             >
             </p-button>
 
-            <div class="grid mt-3" formArrayName="addresses">
+            <div class="grid grid-cols-12 gap-4 mt-4" formArrayName="addresses">
               <ng-container [formGroupName]="i">
-                <div class="col-12 md:col-6 xl:col-4">
+                <div class="col-span-12 md:col-span-6 xl:col-span-4">
                   <isy-form-wrapper
                     [label]="'isyAngularWidgetsDemo.labels.address.country' | translate"
                     [fieldId]="'country' + i"
@@ -346,7 +346,7 @@
                     />
                   </isy-form-wrapper>
                 </div>
-                <div class="col-12 md:col-6 xl:col-4">
+                <div class="col-span-12 md:col-span-6 xl:col-span-4">
                   <isy-form-wrapper
                     [label]="'isyAngularWidgetsDemo.labels.address.zipCode' | translate"
                     [fieldId]="'zip' + i"
@@ -361,7 +361,7 @@
                     />
                   </isy-form-wrapper>
                 </div>
-                <div class="col-12 md:col-6 xl:col-4">
+                <div class="col-span-12 md:col-span-6 xl:col-span-4">
                   <isy-form-wrapper
                     [label]="'isyAngularWidgetsDemo.labels.address.city' | translate"
                     [fieldId]="'city' + i"
@@ -376,7 +376,7 @@
                     />
                   </isy-form-wrapper>
                 </div>
-                <div class="col-12 md:col-6 xl:col-4">
+                <div class="col-span-12 md:col-span-6 xl:col-span-4">
                   <isy-form-wrapper
                     [label]="'isyAngularWidgetsDemo.labels.address.street' | translate"
                     [fieldId]="'streetName' + i"
@@ -391,7 +391,7 @@
                     />
                   </isy-form-wrapper>
                 </div>
-                <div class="col-12 md:col-6 xl:col-4">
+                <div class="col-span-12 md:col-span-6 xl:col-span-4">
                   <isy-form-wrapper
                     [label]="'isyAngularWidgetsDemo.labels.address.number' | translate"
                     [fieldId]="'streetNumber' + i"
@@ -421,24 +421,24 @@
 
         <p-divider></p-divider>
 
-        <div class="field field-checkbox my-5">
+        <div class="field field-checkbox my-8">
           <p-toggleswitch inputId="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-toggleswitch>
-          <label for="show-secret-fields" class="m-0 ml-3">
+          <label for="show-secret-fields" class="m-0 ml-4">
             {{ 'isyAngularWidgetsDemo.actions.showSecretFields' | translate }}
           </label>
         </div>
         @if (showSecretFields) {
           <div id="div-show-secret-fields">
-            <div class="grid m-0 align-items-center">
-              <div class="col-12 md:col-6 xl:col-4">
-                <div class="flex align-items-center">
+            <div class="grid grid-cols-12 gap-4 m-0 items-center">
+              <div class="col-span-12 md:col-span-6 xl:col-span-4">
+                <div class="flex items-center">
                   <p-checkbox inputId="id-required" formControlName="idRequired" [binary]="true"></p-checkbox>
                   <label for="id-required" class="ml-2">{{
                     'isyAngularWidgetsDemo.labels.ausweispflichtig' | translate
                   }}</label>
                 </div>
               </div>
-              <div class="col-12 md:col-6 xl:col-4">
+              <div class="col-span-12 md:col-span-6 xl:col-span-4">
                 <isy-form-wrapper
                   [label]="'isyAngularWidgetsDemo.labels.sicherheitsstufe' | translate"
                   fieldId="security-level"
@@ -458,7 +458,7 @@
                   </p-inputnumber>
                 </isy-form-wrapper>
               </div>
-              <div class="col-12 xl:col-8">
+              <div class="col-span-12 xl:col-span-8">
                 <isy-form-wrapper
                   [label]="'isyAngularWidgetsDemo.labels.geheimdienstnotizen' | translate"
                   fieldId="intelligence-notes"
@@ -484,7 +484,7 @@
         }
       </form>
 
-      <div class="justify-content-center flex mt-3">
+      <div class="justify-center flex mt-4">
         <div id="div-save" class="p-buttonset">
           <p-button
             id="button-save"

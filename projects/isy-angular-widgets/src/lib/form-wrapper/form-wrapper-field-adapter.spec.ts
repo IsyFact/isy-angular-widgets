@@ -1,4 +1,4 @@
-import {Component, Directive, ElementRef, inject} from '@angular/core';
+import {Component, Directive, ElementRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FormWrapperComponent} from './form-wrapper.component';
@@ -7,6 +7,7 @@ import {FORM_WRAPPER_FIELD_ADAPTER, FormWrapperFieldAdapter} from './form-wrappe
 @Component({
   standalone: true,
   selector: 'fake-custom-field',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: ''
 })
 class FakeCustomFieldComponent {}

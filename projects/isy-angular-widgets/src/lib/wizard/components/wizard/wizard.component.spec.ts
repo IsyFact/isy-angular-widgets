@@ -11,7 +11,8 @@ import {
   SimpleChange,
   TemplateRef,
   ViewChild,
-  inject
+  inject,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {WizardComponent} from './wizard.component';
 import {WizardDirective} from '../../directives/wizard.directive';
@@ -52,6 +53,7 @@ class PRippleStubDirective {}
 @Component({
   selector: 'p-toast',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: ''
 })
 class ToastStubComponent {
@@ -61,6 +63,7 @@ class ToastStubComponent {
 @Component({
   selector: 'p-stepper',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `<div class="p-stepper"><ng-content></ng-content></div>`
 })
 class StepperStubComponent {
@@ -72,6 +75,7 @@ class StepperStubComponent {
 @Component({
   selector: 'p-step-list',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `<div class="p-step-list"><ng-content></ng-content></div>`
 })
 class StepListStubComponent {}
@@ -79,6 +83,7 @@ class StepListStubComponent {}
 @Component({
   selector: 'p-step',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `<div class="p-step"><ng-content></ng-content></div>`
 })
 class StepStubComponent {
@@ -90,6 +95,7 @@ class StepStubComponent {
   selector: 'p-dialog',
   standalone: true,
   imports: [CommonModule, PTemplateStubDirective, StepperModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="p-dialog">
       <button class="p-dialog-close-button" type="button" [attr.aria-label]="closeAriaLabel">×</button>
@@ -136,6 +142,7 @@ const closeButtonDeclaration = '#close-button';
     <isy-incomplete-date *isyWizardDirective="childrenLabels[1]"></isy-incomplete-date>
     <isy-incomplete-date *isyWizardDirective="childrenLabels[childrenLabels.length - 1]"></isy-incomplete-date>
   </isy-wizard>`,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [WizardComponent, IncompleteDateComponent, WizardDirective]
 })
 class TestComponent {
@@ -180,6 +187,7 @@ class TestComponent {
       </div>
     </ng-template>
   </isy-wizard>`,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [WizardComponent, IncompleteDateComponent, WizardDirective, WizardFooterDirective]
 })
 class TestCustomFooterComponent {

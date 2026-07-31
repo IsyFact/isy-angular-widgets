@@ -17,7 +17,7 @@
     [loading]="loading"
   >
     <ng-template pTemplate="caption">
-      <div class="flex justify-content-start gap-2">
+      <div class="flex justify-start gap-2">
         <p-button
           id="create-button"
           icon="pi pi-plus"
@@ -36,7 +36,7 @@
         >
         </p-button>
       </div>
-      <div class="pt-3">
+      <div class="pt-4">
         <p-multiselect
           display="chip"
           [options]="initialColumns"
@@ -49,19 +49,19 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th scope="col" pSortableColumn="personalien.nachname" class="white-space-nowrap">
+        <th scope="col" pSortableColumn="personalien.nachname" class="whitespace-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
           <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.nachname"></p-sortIcon>
         </th>
-        <th scope="col" pSortableColumn="personalien.vorname" class="white-space-nowrap">
+        <th scope="col" pSortableColumn="personalien.vorname" class="whitespace-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
           <p-columnFilter type="text" field="personalien.vorname" display="menu"></p-columnFilter>
           <p-sortIcon field="personalien.vorname"></p-sortIcon>
         </th>
 
         @for (col of columns; track col.field) {
-          <th scope="col" [pSortableColumn]="'personalien.' + col.field" class="white-space-nowrap">
+          <th scope="col" [pSortableColumn]="'personalien.' + col.field" class="whitespace-nowrap">
             {{ col.header | translate }}
             @if (col.field === 'gender') {
               <p-columnFilter
@@ -102,7 +102,7 @@
             <p-sortIcon [field]="'personalien.' + col.field"></p-sortIcon>
           </th>
         }
-        <th scope="col" pSortableColumn="personalien.state" class="white-space-nowrap">
+        <th scope="col" pSortableColumn="personalien.state" class="whitespace-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
           <p-columnFilter field="personalien.state" matchMode="equals" display="menu">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -121,7 +121,7 @@
           </p-columnFilter>
           <p-sortIcon field="personalien.state"></p-sortIcon>
         </th>
-        <th scope="col" class="white-space-nowrap">
+        <th scope="col" class="whitespace-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.actions' | translate }}
         </th>
       </tr>

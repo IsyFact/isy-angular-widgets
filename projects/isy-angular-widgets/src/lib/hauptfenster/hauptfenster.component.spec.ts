@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, ElementRef, Input} from '@angular/core';
+import {Component, ElementRef, Input, ChangeDetectionStrategy} from '@angular/core';
 import {fakeAsync, tick} from '@angular/core/testing';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {BehaviorSubject} from 'rxjs';
@@ -12,15 +12,15 @@ import {WidgetsTranslation} from '../i18n/widgets-translation';
 import {HauptfensterComponent} from './hauptfenster.component';
 import {SkipTarget} from './model/model';
 
-@Component({selector: 'p-megaMenu', standalone: true, template: ''})
+@Component({selector: 'p-megaMenu', standalone: true, changeDetection: ChangeDetectionStrategy.Eager, template: ''})
 class MegaMenuStubComponent {
   @Input() model: MegaMenuItem[] = [];
 }
 
-@Component({selector: 'p-megaMenuSub', standalone: true, template: ''})
+@Component({selector: 'p-megaMenuSub', standalone: true, changeDetection: ChangeDetectionStrategy.Eager, template: ''})
 class MegaMenuSubStubComponent {}
 
-@Component({selector: 'isy-skip-links', standalone: true, template: ''})
+@Component({selector: 'isy-skip-links', standalone: true, changeDetection: ChangeDetectionStrategy.Eager, template: ''})
 class SkipLinksStubComponent {
   @Input() links: SkipTarget[] = [];
 }
@@ -28,6 +28,7 @@ class SkipLinksStubComponent {
 @Component({
   selector: 'p-message',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div [class]="styleClass" role="alert" aria-live="assertive" aria-atomic="true">
       <ng-content></ng-content>

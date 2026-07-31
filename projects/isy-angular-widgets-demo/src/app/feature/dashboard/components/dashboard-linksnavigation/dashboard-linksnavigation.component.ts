@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {MenuTranslationService} from '../../../../shared/services/menu-translation.service';
 import {linksnavigationMenu} from './linksnavigation-menu';
@@ -9,6 +9,7 @@ import {PanelMenuModule} from 'primeng/panelmenu';
   standalone: true,
   selector: 'demo-dashboard-linksnavigation',
   templateUrl: './dashboard-linksnavigation.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PanelMenuModule]
 })
 export class DashboardLinksnavigationComponent implements OnInit {

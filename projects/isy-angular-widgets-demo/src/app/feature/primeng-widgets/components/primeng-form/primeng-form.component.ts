@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {AutoCompleteCompleteEvent, AutoCompleteModule} from 'primeng/autocomplete';
 import {AnchorNavigationService} from '../../../../shared/services/anchor-navigation.service';
 import {SectionHeadingComponent} from '../../../../shared/components/section-heading/section-heading.component';
@@ -45,6 +45,7 @@ import {FieldsetModule} from 'primeng/fieldset';
   standalone: true,
   selector: 'demo-primeng-form',
   templateUrl: './primeng-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     InputTextModule,
     InputMaskModule,

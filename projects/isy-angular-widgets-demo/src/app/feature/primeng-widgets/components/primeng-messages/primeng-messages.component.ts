@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {ToastMessageOptions, MessageService} from 'primeng/api';
 import {messageData} from '../../data/file-option';
 import {MessageModule} from 'primeng/message';
@@ -11,6 +11,7 @@ import {SectionHeadingComponent} from '../../../../shared/components/section-hea
   standalone: true,
   selector: 'demo-primeng-messages',
   templateUrl: './primeng-messages.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MessageModule, ButtonModule, ToastModule, SectionHeadingComponent]
 })
 export class PrimengMessagesComponent implements AfterViewInit {

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {ButtonModule} from 'primeng/button';
 import {SelectModule} from 'primeng/select';
 import {HauptfensterComponent} from '../../../hauptfenster/hauptfenster.component';
@@ -27,6 +27,7 @@ import {MessageModule} from 'primeng/message';
     PanelMenuModule,
     MessageModule
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './interactive-elements.component.html'
 })
 export class TestComponentComponent {

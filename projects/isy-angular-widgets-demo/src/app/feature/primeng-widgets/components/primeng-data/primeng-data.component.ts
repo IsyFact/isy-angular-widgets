@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {TreeNode} from 'primeng/api';
 import {organizationData} from '../../data/organization';
 import {countryData} from '../../data/country';
@@ -23,6 +23,7 @@ import {SectionHeadingComponent} from '../../../../shared/components/section-hea
   standalone: true,
   selector: 'demo-primeng-data',
   templateUrl: './primeng-data.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     OrganizationChartModule,

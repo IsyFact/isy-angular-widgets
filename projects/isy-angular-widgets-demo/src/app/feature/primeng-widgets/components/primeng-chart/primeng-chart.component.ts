@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, DestroyRef, inject} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, inject, ChangeDetectionStrategy} from '@angular/core';
 import {ChartData} from '../../../dashboard/model/model';
 import {
   barChartData,
@@ -24,6 +24,7 @@ import {SectionHeadingComponent} from '../../../../shared/components/section-hea
   standalone: true,
   selector: 'demo-primeng-chart',
   templateUrl: './primeng-chart.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ChartModule, DividerModule, SectionHeadingComponent]
 })
 export class PrimengChartComponent implements AfterViewInit {

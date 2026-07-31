@@ -53,7 +53,7 @@ describe('IsyAngularComponentsComponent', () => {
 
   it('should render all widgets in full-width containers', () => {
     sectionAnchorIds.forEach((id) => {
-      const container = spectator.query<HTMLElement>(`.col-12.flex.flex-column.gap-2 h2#${id}`);
+      const container = spectator.query<HTMLElement>(`.col-span-12.flex.flex-col.gap-2 h2#${id}`);
       expect(container).toBeTruthy();
     });
   });

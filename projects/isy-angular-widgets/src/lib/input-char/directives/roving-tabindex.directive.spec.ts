@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {RovingTabindexDirective} from './roving-tabindex.directive';
 
 @Component({
   standalone: true,
   imports: [RovingTabindexDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div
       isyRovingTabindex
@@ -186,6 +187,7 @@ describe('RovingTabindexDirective', () => {
 @Component({
   standalone: true,
   imports: [RovingTabindexDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div isyRovingTabindex [itemSelector]="'button'" [navigation]="'grid'" [wrap]="wrap">
       <button id="r0c0">0,0</button>
@@ -314,7 +316,7 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
   });
 
   // handled keys are prevented in grid mode
-  it('should prevent default for arrow keys in grid mode', () => {
+  it('should prevent default for arrow keys in grid grid-cols-12 gap-4 mode', () => {
     btn('r0c0').focus();
     const event = pressKey('r0c0', 'ArrowDown');
 

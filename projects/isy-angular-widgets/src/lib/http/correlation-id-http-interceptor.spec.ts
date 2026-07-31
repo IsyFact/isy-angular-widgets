@@ -1,6 +1,6 @@
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
-import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 import {CorrelationIdHttpInterceptor} from './correlation-id-http-interceptor';
 
 describe('Unit tests: CorrelationIdHttpInterceptor', () => {
@@ -22,7 +22,7 @@ describe('Unit tests: CorrelationIdHttpInterceptor', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: HTTP_INTERCEPTORS, useClass: CorrelationIdHttpInterceptor, multi: true},
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
         provideHttpClientTesting()
       ]
     });

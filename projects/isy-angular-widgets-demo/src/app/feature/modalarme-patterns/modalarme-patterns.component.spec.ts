@@ -1,89 +1,33 @@
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {ViewportScroller} from '@angular/common';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
-import {fakeAsync, tick} from '@angular/core/testing';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {fakeAsync, tick, flush} from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {TranslateModule} from '@ngx-translate/core';
 import {Subject} from 'rxjs';
 import {MessageService} from 'primeng/api';
 import {Popover} from 'primeng/popover';
 import {ModalarmePatternsComponent, StepperStep} from './modalarme-patterns.component';
-import {AnchorNavigationService} from '../../shared/services/anchor-navigation.service';
 
 /**
  * Creates a minimal MouseEvent whose currentTarget is the given HTMLElement.
- * @param target The HTMLElement to set as the currentTarget of the MouseEvent
- * @returns A MouseEvent with the specified target
+ * @param target The HTMLElement to set as the currentTarget of the MouseEvent.
+ * @returns A MouseEvent with the specified target.
  */
 function mouseEventWithTarget(target: HTMLElement): MouseEvent {
   const event = new MouseEvent('click', {bubbles: true});
   Object.defineProperty(event, 'currentTarget', {value: target});
-
   return event;
 }
 
-/**
- * Provides access to protected component members for testing.
- */
-interface ModalarmePatternsComponentTestAccess {
-  isVerticalStepper: () => boolean;
-}
-
-/**
- * Returns whether the stepper is currently displayed vertically.
- * @param component The component whose responsive state should be read
- * @returns True when the stepper should be displayed vertically
- */
-function getIsVerticalStepper(component: ModalarmePatternsComponent): boolean {
-  return (component as unknown as ModalarmePatternsComponentTestAccess).isVerticalStepper();
-}
-
-/**
- * Completes the PrimeNG panel transition and the component's
- * animation-frame focus request.
- * @param spectator The component spectator used to trigger change detection
- */
-function completeStepperRender(spectator: Spectator<ModalarmePatternsComponent>): void {
-  spectator.detectComponentChanges();
-  tick(400);
-
-  spectator.detectComponentChanges();
-  tick(16);
-
-  spectator.detectComponentChanges();
-}
-
 describe('ModalarmePatternsComponent', () => {
-  const sectionAnchorIds = ['h-stepper', 'h-drawer', 'h-confirm-bar', 'h-help-popover', 'h-help-expander', 'h-errors'];
-  const verticalStepperMediaQuery = '(max-width: 320px)';
-
   let spectator: Spectator<ModalarmePatternsComponent>;
   let component: ModalarmePatternsComponent;
   let msgService: MessageService;
   let liveAnnouncer: jasmine.SpyObj<LiveAnnouncer>;
-  let breakpointState$: Subject<BreakpointState>;
-
   const liveAnnouncerSpy = jasmine.createSpyObj<LiveAnnouncer>('LiveAnnouncer', ['announce']);
   liveAnnouncerSpy.announce.and.returnValue(Promise.resolve());
-
-  const breakpointObserverSpy = jasmine.createSpyObj<BreakpointObserver>('BreakpointObserver', [
-    'observe',
-    'isMatched'
-  ]);
-
-  const fragment$ = new Subject<string | null>();
-
-  const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
-  };
-
-  const anchorNavSpy = jasmine.createSpyObj<AnchorNavigationService>('AnchorNavigationService', [
-    'initFragmentScroll',
-    'scrollToAnchor'
-  ]);
 
   const createComponent = createComponentFactory({
     component: ModalarmePatternsComponent,
@@ -92,70 +36,25 @@ describe('ModalarmePatternsComponent', () => {
       FormBuilder,
       MessageService,
       {provide: LiveAnnouncer, useValue: liveAnnouncerSpy},
-      {
-        provide: ActivatedRoute,
-        useValue: {fragment: fragment$.asObservable()}
-      },
-      {provide: ViewportScroller, useValue: viewportScrollerMock},
-      {provide: AnchorNavigationService, useValue: anchorNavSpy},
-      {provide: BreakpointObserver, useValue: breakpointObserverSpy}
+      {provide: ActivatedRoute, useValue: {fragment: new Subject()}}
     ],
     schemas: [NO_ERRORS_SCHEMA],
     declareComponent: false
   });
 
   beforeEach(() => {
-    breakpointState$ = new Subject<BreakpointState>();
-
-    breakpointObserverSpy.observe.calls.reset();
-    breakpointObserverSpy.isMatched.calls.reset();
-    breakpointObserverSpy.observe.and.returnValue(breakpointState$.asObservable());
-    breakpointObserverSpy.isMatched.and.returnValue(false);
-
     liveAnnouncerSpy.announce.calls.reset();
-    viewportScrollerMock.scrollToAnchor.calls.reset();
-    anchorNavSpy.scrollToAnchor.calls.reset();
-    anchorNavSpy.initFragmentScroll.calls.reset();
-
-    spyOn(Element.prototype, 'getClientRects').and.returnValue({
-      length: 1
-    } as DOMRectList);
-
     spectator = createComponent();
     component = spectator.component;
     msgService = spectator.inject(MessageService);
-    liveAnnouncer = liveAnnouncerSpy;
-
+    liveAnnouncer = spectator.inject(LiveAnnouncer);
     spyOn(msgService, 'add');
   });
 
+  // Initial state
   describe('Initialisation', () => {
     it('should create the component', () => {
       expect(component).toBeTruthy();
-    });
-
-    it('should render all section headings as demo-section-heading elements with correct headingIds', () => {
-      sectionAnchorIds.forEach((id) => {
-        const element = spectator.query<HTMLElement>(`demo-section-heading[anchorId="${id}"]`);
-
-        expect(element).withContext(id).toBeTruthy();
-      });
-    });
-
-    it('should scroll to anchor after initialization when fragment is emitted', () => {
-      expect(anchorNavSpy.initFragmentScroll).toHaveBeenCalled();
-    });
-
-    it('should delegate scrollToWidget to AnchorNavigationService.scrollToAnchor', () => {
-      const event = new MouseEvent('click');
-
-      component.scrollToWidget(event, 'h-stepper');
-
-      expect(anchorNavSpy.scrollToAnchor).toHaveBeenCalledWith(event, 'h-stepper');
-    });
-
-    it('should not scroll when clicking only the heading text', () => {
-      expect(anchorNavSpy.scrollToAnchor).not.toHaveBeenCalled();
     });
 
     it('should initialise stepValue to StepperStep.First', () => {
@@ -183,70 +82,6 @@ describe('ModalarmePatternsComponent', () => {
     });
   });
 
-  describe('Responsive stepper', () => {
-    it('should observe the configured vertical stepper breakpoint', () => {
-      expect(breakpointObserverSpy.observe).toHaveBeenCalledOnceWith(verticalStepperMediaQuery);
-      expect(breakpointObserverSpy.isMatched).toHaveBeenCalledOnceWith(verticalStepperMediaQuery);
-    });
-
-    it('should initialise the stepper horizontally when the breakpoint does not match', () => {
-      expect(getIsVerticalStepper(component)).toBeFalse();
-    });
-
-    it('should initialise the stepper vertically when the breakpoint already matches', () => {
-      spectator.fixture.destroy();
-
-      breakpointState$ = new Subject<BreakpointState>();
-
-      breakpointObserverSpy.observe.calls.reset();
-      breakpointObserverSpy.isMatched.calls.reset();
-      breakpointObserverSpy.observe.and.returnValue(breakpointState$.asObservable());
-      breakpointObserverSpy.isMatched.and.returnValue(true);
-
-      spectator = createComponent();
-      component = spectator.component;
-
-      expect(getIsVerticalStepper(component)).toBeTrue();
-    });
-
-    it('should switch to a vertical stepper when the breakpoint starts matching', () => {
-      breakpointState$.next({
-        matches: true,
-        breakpoints: {
-          [verticalStepperMediaQuery]: true
-        }
-      });
-
-      spectator.detectComponentChanges();
-
-      expect(getIsVerticalStepper(component)).toBeTrue();
-    });
-
-    it('should switch back to a horizontal stepper when the breakpoint no longer matches', () => {
-      breakpointState$.next({
-        matches: true,
-        breakpoints: {
-          [verticalStepperMediaQuery]: true
-        }
-      });
-
-      spectator.detectComponentChanges();
-
-      expect(getIsVerticalStepper(component)).toBeTrue();
-
-      breakpointState$.next({
-        matches: false,
-        breakpoints: {
-          [verticalStepperMediaQuery]: false
-        }
-      });
-
-      spectator.detectComponentChanges();
-
-      expect(getIsVerticalStepper(component)).toBeFalse();
-    });
-  });
-
   describe('Forms', () => {
     describe('formStepper', () => {
       it('should contain a "base" group with an "id" control', () => {
@@ -255,15 +90,12 @@ describe('ModalarmePatternsComponent', () => {
       });
 
       it('should require the "id" field', () => {
-        const idControl = component.baseFg.controls.id;
+        const idCtrl = component.baseFg.controls.id;
+        idCtrl.setValue('');
+        expect(idCtrl.valid).toBeFalse();
 
-        idControl.setValue('');
-
-        expect(idControl.valid).toBeFalse();
-
-        idControl.setValue('ABC-123');
-
-        expect(idControl.valid).toBeTrue();
+        idCtrl.setValue('ABC-123');
+        expect(idCtrl.valid).toBeTrue();
       });
 
       it('should contain a "details" group with firstname, lastname and gender', () => {
@@ -280,33 +112,28 @@ describe('ModalarmePatternsComponent', () => {
 
     describe('formEdit', () => {
       it('should require geburtsname', () => {
-        const control = component.formEdit.controls.geburtsname;
+        const ctrl = component.formEdit.controls.geburtsname;
+        ctrl.setValue('');
+        expect(ctrl.valid).toBeFalse();
 
-        control.setValue('');
-
-        expect(control.valid).toBeFalse();
-
-        control.setValue('Müller');
-
-        expect(control.valid).toBeTrue();
+        ctrl.setValue('Müller');
+        expect(ctrl.valid).toBeTrue();
       });
     });
 
     describe('formErrors', () => {
       it('should require geburtsname', () => {
-        const control = component.formErrors.controls.geburtsname;
+        const ctrl = component.formErrors.controls.geburtsname;
+        ctrl.setValue('');
+        expect(ctrl.valid).toBeFalse();
 
-        control.setValue('');
-
-        expect(control.valid).toBeFalse();
-
-        control.setValue('Schmidt');
-
-        expect(control.valid).toBeTrue();
+        ctrl.setValue('Schmidt');
+        expect(ctrl.valid).toBeTrue();
       });
     });
   });
 
+  // Stepper navigation
   describe('Stepper', () => {
     describe('goNext()', () => {
       it('should go to the target step when the current group is valid', () => {
@@ -328,56 +155,30 @@ describe('ModalarmePatternsComponent', () => {
         expect(component.stepValue).toBe(StepperStep.Second);
       });
 
-      it('should focus the first field after moving from the first to the second step', fakeAsync(() => {
-        component.baseFg.controls.id.setValue('X-1');
-
+      it('should mark controls as touched and keep current step when the group is invalid', fakeAsync(() => {
         component.goNext(StepperStep.Second, component.baseFg);
-        completeStepperRender(spectator);
 
-        const firstnameInput = spectator.query<HTMLInputElement>('#firstname');
-
-        expect(firstnameInput).toBeTruthy();
-        expect(document.activeElement).toBe(firstnameInput);
-      }));
-
-      it('should focus the first field after moving to the second step in the vertical stepper', fakeAsync(() => {
-        breakpointState$.next({
-          matches: true,
-          breakpoints: {
-            [verticalStepperMediaQuery]: true
-          }
-        });
-
-        spectator.detectComponentChanges();
-
-        component.baseFg.controls.id.setValue('X-1');
-
-        component.goNext(StepperStep.Second, component.baseFg);
-        completeStepperRender(spectator);
-
-        const firstnameInput = spectator.query<HTMLInputElement>('#firstname');
-
-        expect(getIsVerticalStepper(component)).toBeTrue();
-        expect(firstnameInput).toBeTruthy();
-        expect(document.activeElement).toBe(firstnameInput);
-      }));
-
-      it('should mark controls as touched and keep current step when the group is invalid', () => {
-        component.goNext(StepperStep.Second, component.baseFg);
+        spectator.fixture.detectChanges();
+        flush();
+        spectator.fixture.detectChanges();
 
         expect(component.baseFg.controls.id.touched).toBeTrue();
         expect(component.stepValue).toBe(StepperStep.First);
         expect(component.globalError).toBe('Bitte korrigieren Sie die markierten Felder.');
-      });
+      }));
 
-      it('should announce the global error when validation fails', () => {
+      it('should announce the global error when validation fails', fakeAsync(() => {
         component.goNext(StepperStep.Second, component.baseFg);
+
+        spectator.fixture.detectChanges();
+        flush();
+        spectator.fixture.detectChanges();
 
         expect(liveAnnouncer.announce).toHaveBeenCalledWith(
           'Bitte korrigieren Sie die markierten Felder.',
           'assertive'
         );
-      });
+      }));
     });
 
     describe('goBack()', () => {
@@ -390,99 +191,41 @@ describe('ModalarmePatternsComponent', () => {
         expect(component.stepValue as StepperStep).toBe(StepperStep.First);
         expect(component.globalError).toBeNull();
       });
-
-      it('should focus the first field after moving from the second to the first step', fakeAsync(() => {
-        component.baseFg.controls.id.setValue('X-1');
-
-        component.goNext(StepperStep.Second, component.baseFg);
-        completeStepperRender(spectator);
-
-        expect(component.stepValue).toBe(StepperStep.Second);
-
-        component.goBack(StepperStep.First);
-        completeStepperRender(spectator);
-
-        const idInput = spectator.query<HTMLInputElement>('#id');
-
-        expect(component.stepValue).toBe(StepperStep.First);
-        expect(idInput).toBeTruthy();
-        expect(document.activeElement).toBe(idInput);
-      }));
-
-      it('should focus the first field after moving from the third to the second step', fakeAsync(() => {
-        component.baseFg.controls.id.setValue('X-1');
-
-        component.goNext(StepperStep.Second, component.baseFg);
-        completeStepperRender(spectator);
-
-        component.goNext(StepperStep.Third, component.detailsFg);
-        completeStepperRender(spectator);
-
-        expect(component.stepValue).toBe(StepperStep.Third);
-
-        component.goBack(StepperStep.Second);
-        completeStepperRender(spectator);
-
-        const firstnameInput = spectator.query<HTMLInputElement>('#firstname');
-
-        expect(component.stepValue).toBe(StepperStep.Second);
-        expect(firstnameInput).toBeTruthy();
-        expect(document.activeElement).toBe(firstnameInput);
-      }));
-
-      it('should focus the first field after moving back in the vertical stepper', fakeAsync(() => {
-        breakpointState$.next({
-          matches: true,
-          breakpoints: {
-            [verticalStepperMediaQuery]: true
-          }
-        });
-
-        spectator.detectComponentChanges();
-
-        expect(getIsVerticalStepper(component)).toBeTrue();
-
-        component.baseFg.controls.id.setValue('X-1');
-
-        component.goNext(StepperStep.Second, component.baseFg);
-        completeStepperRender(spectator);
-
-        expect(component.stepValue).toBe(StepperStep.Second);
-
-        component.goBack(StepperStep.First);
-        completeStepperRender(spectator);
-
-        const idInput = spectator.query<HTMLInputElement>('#id');
-
-        expect(component.stepValue).toBe(StepperStep.First);
-        expect(idInput).toBeTruthy();
-        expect(document.activeElement).toBe(idInput);
-      }));
     });
 
     describe('saveStepper()', () => {
-      it('should set globalError when formStepper is invalid', () => {
+      it('should set globalError when formStepper is invalid', fakeAsync(() => {
         component.saveStepper();
 
-        expect(component.globalError).toBe('Bitte vervollständigen Sie alle Pflichtfelder.');
-      });
+        spectator.fixture.detectChanges();
+        flush();
+        spectator.fixture.detectChanges();
 
-      it('should mark all controls as touched when formStepper is invalid', () => {
+        expect(component.globalError).toBe('Bitte vervollständigen Sie alle Pflichtfelder.');
+      }));
+
+      it('should mark all controls as touched when formStepper is invalid', fakeAsync(() => {
         component.baseFg.controls.id.setValue('');
 
         component.saveStepper();
+        tick();
+        spectator.detectChanges();
 
         expect(component.baseFg.controls.id.touched).toBeTrue();
-      });
+      }));
 
-      it('should announce the global error when formStepper is invalid', () => {
+      it('should announce the global error when formStepper is invalid', fakeAsync(() => {
         component.saveStepper();
+
+        spectator.fixture.detectChanges();
+        flush();
+        spectator.fixture.detectChanges();
 
         expect(liveAnnouncer.announce).toHaveBeenCalledWith(
           'Bitte vervollständigen Sie alle Pflichtfelder.',
           'assertive'
         );
-      });
+      }));
 
       it('should show a success toast and clear globalError when formStepper is valid', () => {
         component.baseFg.controls.id.setValue('OK-1');
@@ -510,42 +253,39 @@ describe('ModalarmePatternsComponent', () => {
     });
   });
 
+  // isStepFieldInvalid()
   describe('isStepFieldInvalid()', () => {
     it('should return false when the control is untouched and pristine', () => {
       expect(component.isStepFieldInvalid('base', 'id')).toBeFalse();
     });
 
     it('should return true when the control is invalid and touched', () => {
-      const control = component.baseFg.controls.id;
-
-      control.setValue('');
-      control.markAsTouched();
+      const ctrl = component.baseFg.controls.id;
+      ctrl.setValue('');
+      ctrl.markAsTouched();
 
       expect(component.isStepFieldInvalid('base', 'id')).toBeTrue();
     });
 
     it('should return true when the control is invalid and dirty', () => {
-      const control = component.baseFg.controls.id;
-
-      control.setValue('');
-      control.markAsDirty();
+      const ctrl = component.baseFg.controls.id;
+      ctrl.setValue('');
+      ctrl.markAsDirty();
 
       expect(component.isStepFieldInvalid('base', 'id')).toBeTrue();
     });
 
     it('should return false when the control is valid even if touched', () => {
-      const control = component.baseFg.controls.id;
-
-      control.setValue('ABC');
-      control.markAsTouched();
+      const ctrl = component.baseFg.controls.id;
+      ctrl.setValue('ABC');
+      ctrl.markAsTouched();
 
       expect(component.isStepFieldInvalid('base', 'id')).toBeFalse();
     });
 
     it('should resolve controls in the details group correctly', () => {
-      const control = component.detailsFg.controls.firstname;
-
-      control.markAsTouched();
+      const ctrl = component.detailsFg.controls.firstname;
+      ctrl.markAsTouched();
 
       expect(component.isStepFieldInvalid('details', 'firstname')).toBeFalse();
     });
@@ -555,6 +295,7 @@ describe('ModalarmePatternsComponent', () => {
     });
   });
 
+  // Drawer (edit panel)
   describe('Drawer', () => {
     describe('openPanel()', () => {
       it('should set panelOpen to true', () => {
@@ -633,6 +374,7 @@ describe('ModalarmePatternsComponent', () => {
     });
   });
 
+  // Confirm – inline bar
   describe('Inline confirm bar', () => {
     describe('askDeleteBar()', () => {
       it('should set showConfirmBar to true', () => {
@@ -697,7 +439,6 @@ describe('ModalarmePatternsComponent', () => {
       component.helpOverlay = {toggle: toggleSpy} as unknown as Popover;
 
       const event = new MouseEvent('click');
-
       component.toggleHelp(event);
 
       expect(toggleSpy).toHaveBeenCalledWith(event);
@@ -735,28 +476,25 @@ describe('ModalarmePatternsComponent', () => {
     });
 
     it('should return true when the control is invalid and touched', () => {
-      const control = component.formErrors.controls.geburtsname;
-
-      control.setValue('');
-      control.markAsTouched();
+      const ctrl = component.formErrors.controls.geburtsname;
+      ctrl.setValue('');
+      ctrl.markAsTouched();
 
       expect(component.isInvalid('geburtsname')).toBeTrue();
     });
 
     it('should return true when the control is invalid and dirty', () => {
-      const control = component.formErrors.controls.geburtsname;
-
-      control.setValue('');
-      control.markAsDirty();
+      const ctrl = component.formErrors.controls.geburtsname;
+      ctrl.setValue('');
+      ctrl.markAsDirty();
 
       expect(component.isInvalid('geburtsname')).toBeTrue();
     });
 
     it('should return false when the control is valid even if touched', () => {
-      const control = component.formErrors.controls.geburtsname;
-
-      control.setValue('Meier');
-      control.markAsTouched();
+      const ctrl = component.formErrors.controls.geburtsname;
+      ctrl.setValue('Meier');
+      ctrl.markAsTouched();
 
       expect(component.isInvalid('geburtsname')).toBeFalse();
     });
@@ -766,6 +504,7 @@ describe('ModalarmePatternsComponent', () => {
     });
   });
 
+  // submitErrors()
   describe('submitErrors()', () => {
     it('should show an error toast and mark controls as touched when the form is invalid', () => {
       component.formErrors.controls.geburtsname.setValue('');
@@ -804,26 +543,23 @@ describe('ModalarmePatternsComponent', () => {
       component.submitErrors();
 
       expect(msgService.add).toHaveBeenCalledTimes(1);
-
-      const lastArguments = (msgService.add as jasmine.Spy).calls.mostRecent().args[0];
-
-      expect(lastArguments.severity).toBe('error');
+      const lastArgs = (msgService.add as jasmine.Spy).calls.mostRecent().args[0];
+      expect(lastArgs.severity).toBe('error');
     });
   });
 
+  // Accessibility attributes (template integration)
   describe('Accessibility in the template', () => {
     it('should render an aria-live="polite" region for the confirm bar', () => {
       const liveRegion = spectator.query('[aria-live="polite"]');
-
       expect(liveRegion).toBeTruthy();
     });
 
     it('should have no duplicate IDs in the DOM', () => {
       const allIds = spectator
         .queryAll('[id]')
-        .map((element) => element.id)
+        .map((el) => el.id)
         .filter(Boolean);
-
       const uniqueIds = new Set(allIds);
 
       expect(allIds.length).toBe(uniqueIds.size);

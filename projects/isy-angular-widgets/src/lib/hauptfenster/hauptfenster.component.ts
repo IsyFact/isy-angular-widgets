@@ -1,4 +1,3 @@
-import {NgClass} from '@angular/common';
 import {
   OnInit,
   afterNextRender,
@@ -11,7 +10,8 @@ import {
   Input,
   Output,
   ViewChild,
-  booleanAttribute
+  booleanAttribute,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {MegaMenuItem} from 'primeng/api';
@@ -42,7 +42,8 @@ import {SkipTarget} from './model/model';
   selector: 'isy-hauptfenster',
   templateUrl: './hauptfenster.component.html',
   styleUrls: ['./hauptfenster.component.scss'],
-  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent, NgClass, MessageModule]
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [ButtonModule, MegaMenuModule, SkipLinksComponent, MessageModule]
 })
 export class HauptfensterComponent implements OnInit {
   /**

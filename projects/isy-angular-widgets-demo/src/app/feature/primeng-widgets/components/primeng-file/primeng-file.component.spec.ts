@@ -1,7 +1,7 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 import {Subject} from 'rxjs';
 import {UploadEvent} from 'primeng/fileupload';
 import {MessageService} from 'primeng/api';
@@ -21,7 +21,7 @@ describe('Unit Tests: PrimengFileComponent', () => {
     component: PrimengFileComponent,
     providers: [
       MessageService,
-      provideHttpClient(withInterceptorsFromDi()),
+      provideHttpClient(withXhr(), withInterceptorsFromDi()),
       {provide: ActivatedRoute, useValue: {fragment: fragment$.asObservable()}},
       {provide: ViewportScroller, useValue: viewportScrollerMock}
     ]
@@ -49,7 +49,7 @@ describe('Unit Tests: PrimengFileComponent', () => {
   });
 
   it('should render section in full-width container', () => {
-    const container = spectator.query<HTMLElement>('.col-12.flex.flex-column.gap-2 h2#fileupload');
+    const container = spectator.query<HTMLElement>('.col-span-12.flex.flex-col.gap-2 h2#fileupload');
     expect(container).toBeTruthy();
   });
 
