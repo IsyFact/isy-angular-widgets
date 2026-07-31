@@ -67,7 +67,11 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.allButtonOptionsLabel) {
-      this.allOptions[0].label = this.allButtonOptionsLabel;
+      this.allOptions = [{label: this.allButtonOptionsLabel}];
+
+      if (this.allOptionsModel) {
+        this.allOptionsModel = this.allOptions[0];
+      }
     }
 
     if (changes.dataToDisplay || changes.value || changes.resetKey) {
