@@ -38,16 +38,27 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
+      - name: Validate CHANGELOG on release branches
+        if: startsWith(github.ref, 'refs/heads/release/')
+        run: |
+          VERSION="${GITHUB_REF_NAME#release/}"
+          FIRST_CHANGELOG_LINE=$(head -n 1 CHANGELOG.md)
+          if [[ "$FIRST_CHANGELOG_LINE" =~ ^\#[[:space:]]${VERSION//./\\.}.* ]]; then
+            echo "First changelog entry describes current release version $VERSION"
+          else
+            echo "First changelog entry does not describe current release version $VERSION."
+            exit 1
+          fi
       - name: Bootstrap install (build local package)
         run: |
-          npm ci --ignore-scripts --legacy-peer-deps
+          npm ci --ignore-scripts
           git checkout package.json
       - name: Build local package
         run: |
           npm run build:widgets_lib
           npm run pack:widgets_lib
       - name: Install dependencies
-        run: npm ci --ignore-scripts --legacy-peer-deps
+        run: npm ci --ignore-scripts
       - name: Check code formatting
         run: |
           npm run prettier:check
@@ -57,6 +68,22 @@ jobs:
         run: npm run lint:demo
       - name: Run tests
         run: npm test
+      - name: Build demo application
+        run: npm run build:widgets_demo
+      - name: Build documentation (Compodoc)
+        run: npm run compodoc:build
+      - name: Generate SBOM (smoke test)
+        continue-on-error: true
+        run: |
+          if npx @cyclonedx/cyclonedx-npm --ignore-npm-errors --output-file /tmp/sbom-smoke.json 2>/tmp/sbom-smoke.err; then
+            echo "SBOM generated successfully."
+          elif test -s /tmp/sbom-smoke.json; then
+            echo "SBOM generated successfully (npm-ls diagnostics ignored)."
+          else
+            echo "SBOM generation failed. npm output:"
+            cat /tmp/sbom-smoke.err
+            exit 1
+          fi
       - name: Cache SonarCloud
         uses: actions/cache@v4
         with:
@@ -75,8 +102,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: Build project
-        run: npm run build --if-present
 
   build_and_deploy_demo_and_docs:
     if: ${{ github.event_name == 'push' }}
