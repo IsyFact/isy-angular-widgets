@@ -98,7 +98,16 @@ jobs:
           node-version: 24
           cache: "npm"
       - name: Generate SBOM
-        run: npx @cyclonedx/cyclonedx-npm --output-file isy-angular-widgets-sbom.json
+        run: |
+          if npx @cyclonedx/cyclonedx-npm --ignore-npm-errors --output-file isy-angular-widgets-sbom.json 2>/tmp/sbom.err; then
+            echo "SBOM generated successfully."
+          elif test -s isy-angular-widgets-sbom.json; then
+            echo "SBOM generated successfully (npm-ls diagnostics ignored)."
+          else
+            echo "SBOM generation failed. npm output:"
+            cat /tmp/sbom.err
+            exit 1
+          fi
       - name: Upload SBOM
         uses: actions/upload-artifact@v4
         with:
