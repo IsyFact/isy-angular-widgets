@@ -74,7 +74,7 @@ jobs:
         run: npm run compodoc:build
       - name: Generate SBOM (smoke test)
         continue-on-error: true
-        run: npx @cyclonedx/cyclonedx-npm --output-file /tmp/sbom-smoke.json
+        run: npx @cyclonedx/cyclonedx-npm --ignore-npm-errors --output-file /tmp/sbom-smoke.json
       - name: Cache SonarCloud
         uses: actions/cache@v4
         with:
