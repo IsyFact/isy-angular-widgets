@@ -572,7 +572,7 @@ export class Validation {
     const SINGLE_STEP = 1;
     const DIACRITIC_STEP = 2;
 
-    for (let i = 0; i < value.length; ) {
+    for (let i = 0; i < value.length;) {
       const {unicodeCharacter, step} = this.processCharacter(value, i, allowedCharacters, SINGLE_STEP, DIACRITIC_STEP);
       if (unicodeCharacter) {
         nonDinChars.push(unicodeCharacter);
