@@ -6,9 +6,23 @@ on:
   push:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version/tag whose documentation should be built (e.g. 22.0.0). Must correspond to an existing git tag.'
+        required: true
+        type: string
 
 jobs:
   DocsBuild:
+    # For push:tags the tag pattern already filters out pre-releases.
+    # For release:published we additionally guard against pre-releases and tag names containing '-'
+    # so that only stable releases (e.g. 22.0.0) trigger the Antora documentation build.
+    if: >-
+      github.event_name != 'release' ||
+      (github.event.release.prerelease == false && !contains(github.event.release.tag_name, '-'))
     uses: IsyFact/isy-github-actions-templates/.github/workflows/docs_build_template.yml@v2.2.1
     secrets:
       ANTORA_TRIGGER_TOKEN: ${{ secrets.ANTORA_TRIGGER_TOKEN }}
