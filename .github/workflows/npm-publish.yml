@@ -6,7 +6,8 @@ name: Node.js Package
 on:
   push:
     tags:
-      - '\d+.\d+.\d+'
+      - '[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+-*'
 
 env:
   RELEASE_VERSION: ${{ github.ref_name }}
@@ -14,6 +15,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      is_prerelease: ${{ steps.classify.outputs.is_prerelease }}
+      dist_tag: ${{ steps.classify.outputs.dist_tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,17 +33,38 @@ jobs:
         with:
           node-version: 24
           cache: "npm"
+      - name: Classify release
+        id: classify
+        run: |
+          if [[ "$RELEASE_VERSION" == *-* ]]; then
+            PRE="${RELEASE_VERSION#*-}"
+            TAG="${PRE%%.*}"
+            echo "is_prerelease=true" >> "$GITHUB_OUTPUT"
+            echo "dist_tag=${TAG:-next}" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_prerelease=false" >> "$GITHUB_OUTPUT"
+            echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
+          fi
       - name: Validate latest changelog entry
         run: |
+          BASE_VERSION="${RELEASE_VERSION%%-*}"
           FIRST_CHANGELOG_LINE=$(head -n 1 CHANGELOG.md)
-          if [[ "$FIRST_CHANGELOG_LINE" =~ ^\#[[:space:]]${RELEASE_VERSION//./\\.}.* ]]; then
-            echo "First changelog entry describes current version $RELEASE_VERSION"
+          if [[ "$FIRST_CHANGELOG_LINE" =~ ^\#[[:space:]]${BASE_VERSION//./\\.}.* ]]; then
+            echo "First changelog entry describes current version $BASE_VERSION"
           else
-            echo "First changelog entry does not describe current version $RELEASE_VERSION."
+            echo "First changelog entry does not describe current version $BASE_VERSION."
             exit 1
           fi
+      - name: Bootstrap install (build local package)
+        run: |
+          npm ci --ignore-scripts
+          git checkout package.json
+      - name: Build local package
+        run: |
+          npm run build:widgets_lib
+          npm run pack:widgets_lib
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
       - name: Check code formatting and linting
         run: |
           npm run prettier:check
@@ -73,7 +98,16 @@ jobs:
           node-version: 24
           cache: "npm"
       - name: Generate SBOM
-        run: npx @cyclonedx/cyclonedx-npm --output-file isy-angular-widgets-sbom.json
+        run: |
+          if npx @cyclonedx/cyclonedx-npm --ignore-npm-errors --output-file isy-angular-widgets-sbom.json 2>/tmp/sbom.err; then
+            echo "SBOM generated successfully."
+          elif test -s isy-angular-widgets-sbom.json; then
+            echo "SBOM generated successfully (npm-ls diagnostics ignored)."
+          else
+            echo "SBOM generation failed. npm output:"
+            cat /tmp/sbom.err
+            exit 1
+          fi
       - name: Upload SBOM
         uses: actions/upload-artifact@v4
         with:
@@ -85,6 +119,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -93,11 +129,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: Build
+          path: dist/isy-angular-widgets/
       - name: Download SBOM
         uses: actions/download-artifact@v4
         with:
           name: SBOM
       - name: Bump version in package.json
+        working-directory: dist/isy-angular-widgets
         run: |
           # jq can't replace file contents directly therefore a tmp file is needed
           tmp_file=$(mktemp)
@@ -106,6 +144,7 @@ jobs:
             && jq --arg version "$RELEASE_VERSION" '.version=$version' "$tmp_file" >package.json \
             && rm -f "$tmp_file"
       - name: Publish to npm
-        run: npm publish --access public
+        working-directory: dist/isy-angular-widgets
+        run: npm publish --access public --tag "${{ needs.build.outputs.dist_tag }}"
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
