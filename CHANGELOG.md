@@ -3,6 +3,7 @@
 -IFS-2925: Das Label des `Alle`-Buttons der `InputCharComponent` wird nun bei Sprachwechsel aktualisiert
 
 # 22.0.0 - 27.07.2026
+# 22.0.0-next.1 - 04.08.2026
 ## Breaking Changes
 - IFS-5476: Die Bibliothek und Demo-Anwendung wurden von PrimeFlex auf Tailwind CSS migriert
 - IFS-5533: Upgrade der Angularversion von 21 auf 22 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
