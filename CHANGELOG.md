@@ -1,3 +1,7 @@
+# 22.1.0-next.1 -
+## Features
+- IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
+
 # 22.0.0-next.1 - 04.08.2026
 ## Breaking Changes
 - IFS-5476: Die Bibliothek und Demo-Anwendung wurden von PrimeFlex auf Tailwind CSS migriert
