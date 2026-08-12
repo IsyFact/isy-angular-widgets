@@ -71,7 +71,7 @@
     "@angular/cli": "~21.1.4",
     "@angular/compiler-cli": "^21.1.4",
     "@compodoc/compodoc": "^1.2.1",
-    "@isyfact/eslint-plugin": "file:C:/BVA_2026/isy-eslint-plugin/isy-eslint-plugin/isyfact-eslint-plugin-5.0.0.tgz",
+    "@isyfact/eslint-plugin": "5.0.0",
     "@isyfact/prettier-plugin": "1.0.0",
     "@ngneat/spectator": "^22.1.0",
     "@types/jasmine": "~6.0.0",
