@@ -6,7 +6,8 @@
       "save": "Speichern",
       "close": "Schließen",
       "aria": {
-        "close": "Schließen"
+        "close": "Schließen",
+        "disabledStep": "Schritt deaktiviert"
       },
       "toast": {
         "stepChanged": "Schritt geändert"

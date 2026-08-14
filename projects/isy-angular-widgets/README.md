@@ -20,6 +20,57 @@ Die Validatoren akzeptieren je nach Typ u. a.:
 
 Wichtig: `isoDateTime` bleibt strikt und akzeptiert weiterhin ausschließlich das Format `YYYY-MM-DDTHH:mm:ssZ` mit literalem `Z` am Ende (UTC). DateTimes mit Offset wie `+01:00` bleiben dafür ungültig.
 
+## Wizard: Neue Optionen für deaktivierte Schritte
+
+Im `isy-wizard` wurden neue Input-Properties für deaktivierte Schritte ergänzt:
+- `autoDisableFutureSteps`
+- `disabledStepTooltip`
+- `disabledStepAriaText`
+- `stepStates`
+
+Damit können folgende Schritte automatisch deaktiviert werden, solange ein Weitergehen nicht erlaubt ist.
+Zusätzlich lassen sich Tooltip- und Screenreader-Texte für deaktivierte Schritte konfigurieren.
+
+`stepStates` wird nur benötigt, wenn einzelne Schritte unterschiedlich behandelt werden sollen.
+
+Beispiel:
+
+```html
+<isy-wizard
+  [autoDisableFutureSteps]="true"
+  [disabledStepTooltip]="'Bitte zuerst Pflichtfelder ausfüllen'"
+  [disabledStepAriaText]="'Schritt deaktiviert'"
+></isy-wizard>
+```
+
+Optionales Beispiel für `stepStates` (nur bei unterschiedlicher Behandlung einzelner Schritte):
+
+```typescript
+import {WizardStepState} from '@isyfact/isy-angular-widgets';
+
+wizardStepStates: WizardStepState[] = [
+  {},
+  {
+    disabled: true,
+    disabledTooltip: 'Bitte zuerst Pflichtfelder ausfüllen',
+    disabledScreenReaderText: 'Schritt deaktiviert. Bitte zuerst Pflichtfelder ausfüllen'
+  },
+  {
+    disabled: true,
+    disabledTooltip: 'Dieser Schritt wird später freigeschaltet'
+  }
+];
+```
+
+```html
+<isy-wizard
+  [autoDisableFutureSteps]="true"
+  [disabledStepTooltip]="'Bitte zuerst Pflichtfelder ausfüllen'"
+  [disabledStepAriaText]="'Schritt deaktiviert'"
+  [stepStates]="wizardStepStates"
+></isy-wizard>
+```
+
 ## Features
 
 - Hauptfenster-Widget mit Seitenleisten, UserInfo und Navigation

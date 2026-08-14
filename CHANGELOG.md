@@ -1,3 +1,12 @@
+# 21.3.0 -
+## Features
+- IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
+  * `autoDisableFutureSteps`
+  * `disabledStepTooltip`
+  * `disabledStepAriaText`
+  * `stepStates`
+  * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
+
 # 21.2.0 - 04.08.2026
 ## Features
 - IFS-5527: Responsives Verhalten für die Seitentoolbar wurde über das Attribut `responsive` ergänzt, wobei bei Bildschirmbreiten bis `320 px` das sichtbare Label des Home-/Zurück-Buttons ausgeblendet wird
