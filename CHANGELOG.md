@@ -1,3 +1,12 @@
+# 22.1.0-next.1 -
+## Features
+- IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
+  * `autoDisableFutureSteps`
+  * `disabledStepTooltip`
+  * `disabledStepAriaText`
+  * `stepStates`
+  * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
+
 # 22.0.0-next.1 - 04.08.2026
 ## Breaking Changes
 - IFS-5476: Die Bibliothek und Demo-Anwendung wurden von PrimeFlex auf Tailwind CSS migriert

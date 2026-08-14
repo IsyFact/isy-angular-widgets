@@ -22,6 +22,13 @@ import {StepperModule} from 'primeng/stepper';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
+import {TooltipModule} from 'primeng/tooltip';
+
+export interface WizardStepState {
+  disabled?: boolean;
+  disabledTooltip?: string;
+  disabledScreenReaderText?: string;
+}
 
 export interface WizardFooterContext {
   index: number;
@@ -61,7 +68,8 @@ const defaultHeight = 30;
   standalone: true,
   selector: 'isy-wizard',
   templateUrl: './wizard.component.html',
-  imports: [CommonModule, StepperModule, DialogModule, ButtonModule, ToastModule],
+  styleUrls: ['./wizard.component.scss'],
+  imports: [CommonModule, StepperModule, DialogModule, ButtonModule, ToastModule, TooltipModule],
   changeDetection: ChangeDetectionStrategy.Eager,
   providers: [MessageService]
 })
@@ -175,6 +183,26 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   };
 
   @Input() allowFreeNavigation = false;
+
+  /**
+   * Automatically disables all following steps while the current step is not allowed to proceed.
+   */
+  @Input() autoDisableFutureSteps = false;
+
+  /**
+   * Tooltip text used for auto-disabled steps.
+   */
+  @Input() disabledStepTooltip?: string;
+
+  /**
+   * Screenreader text used for auto-disabled steps.
+   */
+  @Input() disabledStepAriaText?: string;
+
+  /**
+   * Optional states for individual steps. Array positions correspond to step indices.
+   */
+  @Input() stepStates: WizardStepState[] = [];
 
   /**
    * Stores the items of the wizard
@@ -346,8 +374,66 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
       return;
     }
 
-    if (this.allowFreeNavigation) {
+    if (this.allowFreeNavigation && !this.isStepDisabled(newIndex)) {
       this.onActiveIndexChange(newIndex);
     }
+  }
+
+  onStepSelect(index: number, activateCallback: () => void): void {
+    if (this.isStepDisabled(index)) {
+      return;
+    }
+
+    activateCallback();
+  }
+
+  private isAutoDisabledStep(index: number): boolean {
+    return this.autoDisableFutureSteps && !this.allowNext && index > this.index;
+  }
+
+  private isExplicitlyDisabledStep(index: number): boolean {
+    return this.stepStates[index]?.disabled ?? false;
+  }
+
+  private isItemDisabledStep(index: number): boolean {
+    return this.items[index]?.disabled === true;
+  }
+
+  isStepDisabled(index: number): boolean {
+    return this.isItemDisabledStep(index) || this.isExplicitlyDisabledStep(index) || this.isAutoDisabledStep(index);
+  }
+
+  getStepTooltip(index: number): string | undefined {
+    if (!this.isStepDisabled(index)) {
+      return undefined;
+    }
+
+    if (this.isExplicitlyDisabledStep(index)) {
+      return this.stepStates[index]?.disabledTooltip;
+    }
+
+    if (this.isAutoDisabledStep(index)) {
+      return this.disabledStepTooltip;
+    }
+
+    return undefined;
+  }
+
+  getStepScreenReaderText(index: number): string {
+    if (!this.isStepDisabled(index)) {
+      return '';
+    }
+
+    const configuredText = this.isExplicitlyDisabledStep(index)
+      ? this.stepStates[index]?.disabledScreenReaderText?.trim()
+      : this.disabledStepAriaText?.trim();
+    if (configuredText) {
+      return configuredText;
+    }
+
+    const disabledStateText = this.configService.getTranslation('wizard.aria.disabledStep');
+    const tooltip = this.getStepTooltip(index)?.trim();
+
+    return tooltip ? `${disabledStateText}. ${tooltip}` : disabledStateText;
   }
 }

@@ -73,7 +73,7 @@
     "@isyfact/eslint-plugin": "4.1.0",
     "@isyfact/prettier-plugin": "1.0.0",
     "@ngneat/spectator": "^22.1.0",
-    "@tailwindcss/postcss": "^4.2.4",
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/jasmine": "~6.0.0",
     "@types/node": "^25.2.3",
     "@typescript-eslint/eslint-plugin": "^8.55.0",
