@@ -96,7 +96,9 @@
       "header": "Creating a complex object",
       "stepIdEntry": "ID Entry",
       "stepPersonalInfo": "Personal information",
-      "stepBirthInfo": "Birth information"
+      "stepBirthInfo": "Birth information",
+      "disabledStepTooltip": "Please complete the required inputs in the previous steps first.",
+      "disabledStepScreenReaderText": "Step disabled. Please complete the required inputs in the previous steps first."
     },
     "editObjectDialog": {
       "header": "Edit selected object"
