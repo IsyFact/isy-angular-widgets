@@ -25,8 +25,17 @@ import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 
 export interface WizardStepState {
+  /**
+   * Explicitly disables a single step independent of autoDisableFutureSteps.
+   */
   disabled?: boolean;
+  /**
+   * Optional tooltip for explicitly disabled steps.
+   */
   disabledTooltip?: string;
+  /**
+   * Optional screen-reader text for explicitly disabled steps.
+   */
   disabledScreenReaderText?: string;
 }
 
@@ -186,21 +195,28 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
 
   /**
    * Automatically disables all following steps while the current step is not allowed to proceed.
+   * Typical use:
+   * <isy-wizard [autoDisableFutureSteps]="true"></isy-wizard>
    */
   @Input() autoDisableFutureSteps = false;
 
   /**
    * Tooltip text used for auto-disabled steps.
+   * Example:
+   * <isy-wizard [disabledStepTooltip]="'Bitte zuerst Pflichtfelder ausfüllen'"></isy-wizard>
    */
   @Input() disabledStepTooltip?: string;
 
   /**
    * Screenreader text used for auto-disabled steps.
+   * Example:
+   * <isy-wizard [disabledStepAriaText]="'Schritt deaktiviert'"></isy-wizard>
    */
   @Input() disabledStepAriaText?: string;
 
   /**
    * Optional states for individual steps. Array positions correspond to step indices.
+   * Use this only when single steps need different disabled/tooltip/aria behavior.
    */
   @Input() stepStates: WizardStepState[] = [];
 
