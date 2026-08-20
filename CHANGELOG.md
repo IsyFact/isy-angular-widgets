@@ -1,5 +1,6 @@
 # 21.3.0 -
 ## Features
+- IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
 - IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
   * `autoDisableFutureSteps`
   * `disabledStepTooltip`
