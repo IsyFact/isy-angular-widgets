@@ -1,8 +1,14 @@
 # 21.3.0 -
 ## Features
 - IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
+- IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
+  * `autoDisableFutureSteps`
+  * `disabledStepTooltip`
+  * `disabledStepAriaText`
+  * `stepStates`
+  * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
 
-# 21.2.0 - 27.07.2026
+# 21.2.0 - 04.08.2026
 ## Features
 - IFS-5527: Responsives Verhalten für die Seitentoolbar wurde über das Attribut `responsive` ergänzt, wobei bei Bildschirmbreiten bis `320 px` das sichtbare Label des Home-/Zurück-Buttons ausgeblendet wird
 - IFS-5526: Responsives Verhalten für das Hauptfenster wurde über das Attribut `responsive` ergänzt

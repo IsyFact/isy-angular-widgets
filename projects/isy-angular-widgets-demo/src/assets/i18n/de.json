@@ -96,7 +96,9 @@
       "header": "Anlegen eines komplexen Objektes",
       "stepIdEntry": "ID Eintrag",
       "stepPersonalInfo": "Persönliche Informationen",
-      "stepBirthInfo": "Geburtsinformationen"
+      "stepBirthInfo": "Geburtsinformationen",
+      "disabledStepTooltip": "Bitte vervollständigen Sie zuerst die erforderlichen Eingaben in den vorherigen Schritten.",
+      "disabledStepScreenReaderText": "Schritt deaktiviert. Bitte vervollständigen Sie zuerst die erforderlichen Eingaben in den vorherigen Schritten."
     },
     "editObjectDialog": {
       "header": "Ausgewähltes Objekt bearbeiten"
