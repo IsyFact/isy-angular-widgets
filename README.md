@@ -67,7 +67,7 @@ Dadurch wird im Verzeichnis `dist/isy-angular-widgets` eine TGZ-Datei der Biblio
 dist/isy-angular-widgets/isyfact-isy-angular-widgets-0.0.0.tgz
 ```
 
-Im nächsten Schritt erfolgt die Installation dieser Bibliothek in einem neuen Angular-Projekt. Hierfür wird der Pfad zur TGZ-Datei benötigt. Im Root-Verzeichnis des neuen Angular-Projekts ist der folgende Befehl auszuführen:auszuführen:
+Im nächsten Schritt erfolgt die Installation dieser Bibliothek in einem neuen Angular-Projekt. Hierfür wird der Pfad zur TGZ-Datei benötigt. Im Root-Verzeichnis des neuen Angular-Projekts ist der folgende Befehl auszuführen:
 
 **Angular 21:**
 ```shell
