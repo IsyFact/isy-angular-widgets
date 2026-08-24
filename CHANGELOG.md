@@ -7,6 +7,10 @@
   * `disabledStepAriaText`
   * `stepStates`
   * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
+ 
+## Fixes
+- IFS-2925: Das Label des `Alle`-Buttons der `InputCharComponent` wird nun bei Sprachwechsel aktualisiert
+- IFS-5717: MultiSelectButtonComponent: Aktualisierung des "Alle"-Labels bei Sprachwechsel zur Laufzeit korrigiert.
 
 # 21.2.0 - 04.08.2026
 ## Features

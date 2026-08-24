@@ -123,6 +123,17 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
     expect(component.allOptionsModel).toEqual(component.allOptions[0]);
   });
 
+  it('should update the all button label at runtime when allButtonOptionsLabel changes', () => {
+    const previousAllOptions = component.allOptions;
+
+    spectator.setInput('allButtonOptionsLabel', 'Alle');
+    render();
+
+    expect(component.allOptions).not.toBe(previousAllOptions);
+    expect(component.allOptions[0].label).toBe('Alle');
+    expect(component.allOptionsModel).toEqual(component.allOptions[0]);
+  });
+
   it('should register onChange callback', () => {
     const onChangeSpy = jasmine.createSpy('onChangeSpy');
 
