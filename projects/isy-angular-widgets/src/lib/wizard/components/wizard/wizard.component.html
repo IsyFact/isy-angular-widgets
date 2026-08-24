@@ -16,8 +16,36 @@
   <p-stepper [value]="index + 1" [linear]="!allowFreeNavigation" (valueChange)="onStepperValueChange($event)">
     <p-step-list>
       @for (item of items; track $index; let i = $index) {
-        <p-step [value]="i + 1" [disabled]="item.disabled ?? false">
-          {{ item.label }}
+        <p-step [value]="i + 1">
+          <ng-template pTemplate="content" let-activateCallback="activateCallback" let-value="value">
+            <span
+              class="isy-wizard-step-trigger"
+              [pTooltip]="getStepTooltip(i)"
+              tooltipPosition="top"
+              [attr.aria-disabled]="isStepDisabled(i)"
+              [attr.aria-label]="isStepDisabled(i) ? getStepScreenReaderText(i) : null"
+              [attr.tabindex]="isStepDisabled(i) ? 0 : null"
+            >
+              <button
+                type="button"
+                class="p-step-header"
+                [disabled]="isStepDisabled(i)"
+                [attr.aria-controls]="null"
+                [attr.tabindex]="-1"
+                (click)="onStepSelect(i, activateCallback)"
+              >
+                <span class="p-step-number">{{ value }}</span>
+                <span class="p-step-title">
+                  <span class="isy-wizard-step-label" [class.is-disabled]="isStepDisabled(i)">
+                    <span>{{ item.label }}</span>
+                    @if (isStepDisabled(i)) {
+                      <span class="visually-hidden">{{ getStepScreenReaderText(i) }}</span>
+                    }
+                  </span>
+                </span>
+              </button>
+            </span>
+          </ng-template>
         </p-step>
       }
     </p-step-list>
