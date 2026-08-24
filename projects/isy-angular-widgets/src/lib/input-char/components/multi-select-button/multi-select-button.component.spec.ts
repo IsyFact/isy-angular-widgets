@@ -73,6 +73,17 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
     expect(component.activeIndex).toEqual([]);
   });
 
+  it('should update the all button label at runtime when allButtonOptionsLabel changes', () => {
+    const previousAllOptions = component.allOptions;
+
+    spectator.setInput('allButtonOptionsLabel', 'Alle');
+    render();
+
+    expect(component.allOptions).not.toBe(previousAllOptions);
+    expect(component.allOptions[0].label).toBe('Alle');
+    expect(component.allOptionsModel).toEqual(component.allOptions[0]);
+  });
+
   it('should always have the correct value when clicking through multiple selections', () => {
     spyOn(component, 'writeValue').and.callThrough();
     spyOn(component.valueChange, 'emit');
