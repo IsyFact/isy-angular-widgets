@@ -6,7 +6,8 @@
       "save": "Save",
       "close": "Close",
       "aria": {
-        "close": "Close"
+        "close": "Close",
+        "disabledStep": "Step disabled"
       },
       "toast": {
         "stepChanged": "Step changed"

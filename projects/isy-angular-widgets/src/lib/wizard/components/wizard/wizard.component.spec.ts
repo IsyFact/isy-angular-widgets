@@ -24,6 +24,7 @@ import {StepperModule} from 'primeng/stepper';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
+import {TooltipModule} from 'primeng/tooltip';
 import {provideRouter} from '@angular/router';
 
 @Directive({
@@ -48,6 +49,15 @@ class PButtonStubDirective {
   standalone: true
 })
 class PRippleStubDirective {}
+
+@Directive({
+  selector: '[pTooltip]',
+  standalone: true
+})
+class PTooltipStubDirective {
+  @Input('pTooltip') text?: string;
+  @Input() tooltipPosition?: string;
+}
 
 @Component({
   selector: 'p-toast',
@@ -79,11 +89,22 @@ class StepListStubComponent {}
 @Component({
   selector: 'p-step',
   standalone: true,
-  template: `<div class="p-step"><ng-content></ng-content></div>`
+  imports: [CommonModule, PTemplateStubDirective],
+  template: `
+    <div class="p-step">
+      <ng-container *ngIf="contentTpl; else projectedContent" [ngTemplateOutlet]="contentTpl.template"></ng-container>
+      <ng-template #projectedContent><ng-content></ng-content></ng-template>
+    </div>
+  `
 })
 class StepStubComponent {
   @Input() value?: number;
   @Input() disabled = false;
+  @ContentChildren(PTemplateStubDirective) templates?: QueryList<PTemplateStubDirective>;
+
+  get contentTpl(): PTemplateStubDirective | undefined {
+    return this.templates?.find((template) => template.name === 'content');
+  }
 }
 
 @Component({
@@ -207,7 +228,7 @@ const widgetsConfigServiceStub: Pick<WidgetsConfigService, 'getTranslation'> = {
 
 const wizardOverride: MetadataOverride<Component> = {
   remove: {
-    imports: [StepperModule, DialogModule, ButtonModule, ToastModule]
+    imports: [StepperModule, DialogModule, ButtonModule, ToastModule, TooltipModule]
   },
   add: {
     imports: [
@@ -219,7 +240,8 @@ const wizardOverride: MetadataOverride<Component> = {
       ToastStubComponent,
       PTemplateStubDirective,
       PButtonStubDirective,
-      PRippleStubDirective
+      PRippleStubDirective,
+      PTooltipStubDirective
     ]
   }
 };
@@ -280,6 +302,70 @@ describe('Unit Tests: WizardComponent', () => {
 
     expect(wizard.index).toBe(0);
     expect(emitSpy).not.toHaveBeenCalled();
+  });
+
+  it('should not navigate to a disabled step', () => {
+    wizard.items = stepperItems;
+    wizard.allowFreeNavigation = true;
+    wizard.stepStates = [{}, {disabled: true, disabledTooltip: 'Bitte zuerst Pflichtfelder ausfuellen'}];
+
+    const emitSpy = spyOn(wizard.indexChange, 'emit');
+    const toastSpy = spyOn(wizard.messageService, 'add');
+
+    wizard.onStepperValueChange(2);
+
+    expect(wizard.index).toBe(0);
+    expect(emitSpy).not.toHaveBeenCalled();
+    expect(toastSpy).not.toHaveBeenCalled();
+  });
+
+  it('should create a default screenreader text for disabled steps', () => {
+    wizard.stepStates = [{disabled: true, disabledTooltip: 'Bitte zuerst Pflichtfelder ausfuellen'}];
+
+    expect(wizard.getStepScreenReaderText(0)).toBe('wizard.aria.disabledStep. Bitte zuerst Pflichtfelder ausfuellen');
+  });
+
+  it('should not activate a disabled step through the custom step header', () => {
+    wizard.stepStates = [{disabled: true}];
+
+    const activateSpy = jasmine.createSpy('activateCallback');
+
+    wizard.onStepSelect(0, activateSpy);
+
+    expect(activateSpy).not.toHaveBeenCalled();
+  });
+
+  it('should auto-disable following steps when configured and next is not allowed', () => {
+    wizard.items = stepperItems;
+    wizard.index = 0;
+    wizard.allowNext = false;
+    wizard.autoDisableFutureSteps = true;
+
+    expect(wizard.isStepDisabled(0)).toBeFalse();
+    expect(wizard.isStepDisabled(1)).toBeTrue();
+    expect(wizard.isStepDisabled(2)).toBeTrue();
+  });
+
+  it('should return auto-disabled tooltip text when configured', () => {
+    wizard.items = stepperItems;
+    wizard.index = 0;
+    wizard.allowNext = false;
+    wizard.autoDisableFutureSteps = true;
+    wizard.disabledStepTooltip = 'Bitte vervollständigen Sie zuerst die Eingaben.';
+
+    expect(wizard.getStepTooltip(1)).toBe('Bitte vervollständigen Sie zuerst die Eingaben.');
+  });
+
+  it('should return auto-disabled screenreader text when configured', () => {
+    wizard.items = stepperItems;
+    wizard.index = 0;
+    wizard.allowNext = false;
+    wizard.autoDisableFutureSteps = true;
+    wizard.disabledStepAriaText = 'Schritt deaktiviert. Bitte vervollständigen Sie zuerst die Eingaben.';
+
+    expect(wizard.getStepScreenReaderText(1)).toBe(
+      'Schritt deaktiviert. Bitte vervollständigen Sie zuerst die Eingaben.'
+    );
   });
 });
 
@@ -472,7 +558,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it(`should have ${stepsNumber} steps`, () => {
-    expect(wizard.items.length).toEqual(stepsNumber);
+    expect(wizard.items).toHaveSize(stepsNumber);
   });
 
   it('should have the correct start index', () => {
@@ -483,6 +569,19 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     for (let i = 0; i < wizard.items.length; i++) {
       expect(wizard.items[i]).toEqual(stepperItems[i]);
     }
+  });
+
+  it('should render disabled step labels with tooltip and screenreader text', () => {
+    wizard.stepStates = [{}, {disabled: true, disabledTooltip: 'Bitte zuerst Pflichtfelder ausfuellen'}];
+
+    fixture.detectChanges();
+
+    const stepLabels = spectator.queryAll<HTMLElement>('.isy-wizard-step-label');
+    expect(stepLabels).toHaveSize(stepsNumber);
+    expect(stepLabels[1].classList.contains('is-disabled')).toBeTrue();
+
+    const srText = stepLabels[1].querySelector('.visually-hidden')?.textContent?.trim();
+    expect(srText).toBe('wizard.aria.disabledStep. Bitte zuerst Pflichtfelder ausfuellen');
   });
 
   it('should have expected width and height', () => {
@@ -496,7 +595,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have the correct number of content children', () => {
-    expect(contentChildren.length).toEqual(spectator.component.childrenLabels.length);
+    expect(contentChildren).toHaveSize(spectator.component.childrenLabels.length);
   });
 
   it('should not be saved on init', () => {
@@ -510,7 +609,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have the correct number of available steps', () => {
-    expect(wizard.items.length).toEqual(spectator.component.childrenLabels.length);
+    expect(wizard.items).toHaveSize(spectator.component.childrenLabels.length);
   });
 
   it('should be closable by default', () => {
