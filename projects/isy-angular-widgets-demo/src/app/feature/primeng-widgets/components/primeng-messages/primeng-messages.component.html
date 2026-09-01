@@ -1,4 +1,4 @@
-<div class="flex flex-col p-4">
+<div class="demo-print-page flex flex-col p-4">
   <h1>PrimeNG Messages</h1>
   <div class="grid grid-cols-12 gap-4">
     <div class="col-span-12 flex flex-col gap-2">
@@ -22,7 +22,7 @@
     </div>
     <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="toast" [level]="2" label="Toast" ariaLabel="Link zu Toast" />
-      <p-button (onClick)="showToastMessage()" label="Show" />
+      <p-button class="isy-print-hide" (onClick)="showToastMessage()" label="Show" />
       <p-toast key="toast" position="bottom-right" />
     </div>
   </div>

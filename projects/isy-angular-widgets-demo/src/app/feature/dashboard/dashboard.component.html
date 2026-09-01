@@ -1,13 +1,19 @@
-<div class="grid grid-cols-12 gap-4 justify-center">
+<div class="demo-print-page demo-dashboard grid grid-cols-12 gap-4 justify-center">
+  <h2 class="demo-dashboard__section-heading isy-print-only">
+    {{ 'isyAngularWidgetsDemo.menuItems.dashboardExampleTitle' | translate }}
+  </h2>
   @for (item of widgetMenuItems; track $index) {
-    <div class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
+    <div class="demo-dashboard__item col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
       <demo-dashboard-widget [menuItems]="item" [backgroundColor]="widgetBackgroundColors[$index]">
       </demo-dashboard-widget>
     </div>
   }
 
+  <h2 class="demo-dashboard__section-heading isy-print-only">
+    {{ 'isyAngularWidgetsDemo.menuItems.dashboardCharts' | translate }}
+  </h2>
   @for (item of chartInitData; track $index) {
-    <div class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
+    <div class="demo-dashboard__item col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
       <p-card>
         <demo-chart #chart [type]="item.type" [data]="item.data!" [options]="item.options"> </demo-chart>
       </p-card>

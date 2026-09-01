@@ -64,6 +64,13 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     });
   });
 
+  it('should print visible overlays without interaction-only triggers or actions', () => {
+    expect(spectator.query('.demo-print-page')).toBeTruthy();
+    expect(spectator.query('p-drawer.isy-print-overlay')).toBeTruthy();
+    expect(spectator.query('p-dialog.isy-print-overlay')).toBeTruthy();
+    expect(spectator.queryAll('p-button.isy-print-hide')).toHaveLength(5);
+  });
+
   it('should scroll to anchor after initialization when fragment is emitted', () => {
     fragment$.next('dialog');
     expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('dialog');

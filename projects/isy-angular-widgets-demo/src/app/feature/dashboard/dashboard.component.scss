@@ -5,3 +5,34 @@
 :host ::ng-deep .p-card-content {
   padding: 0;
 }
+
+@media print {
+  .demo-dashboard {
+    display: block !important;
+  }
+
+  .demo-dashboard__section-heading {
+    margin-block: 6mm 3mm;
+  }
+
+  .demo-dashboard__section-heading:first-child {
+    margin-block-start: 0;
+  }
+
+  .demo-dashboard__item {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-block-end: 4mm;
+    break-inside: avoid-page;
+  }
+
+  :host ::ng-deep {
+    .p-card,
+    .p-panelmenu {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+  }
+}

@@ -52,7 +52,7 @@
   :host ::ng-deep {
     .isy-hauptfenster {
       min-height: auto;
-      border-top: 0;
+      border-top: 0 !important;
     }
 
     .isy-hauptfenster-inhaltsbereich {

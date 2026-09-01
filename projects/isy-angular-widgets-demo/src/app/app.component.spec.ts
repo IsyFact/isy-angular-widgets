@@ -39,6 +39,10 @@ describe('Integration Tests: AppComponent', () => {
     expect(print).toHaveBeenCalledOnceWith();
   });
 
+  it('should exclude the application toolbar from print', () => {
+    expect(spectator.query('isy-seiten-toolbar[Seitentoolbar].isy-print-hide')).toBeTruthy();
+  });
+
   it('the info button should have an aria-label attribute', () => {
     const element = spectator.query('p-button[icon="pi pi-info-circle"] button') as HTMLElement;
     expect(element.hasAttribute('aria-label')).toBeTrue();

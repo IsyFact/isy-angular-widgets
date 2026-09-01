@@ -63,6 +63,75 @@
     max-width: 100%;
   }
 
+  :where(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :where(
+    .p-card,
+    .p-panel,
+    .p-fieldset,
+    .p-accordion,
+    .p-tabs,
+    .p-toolbar,
+    .p-menu,
+    .p-menubar,
+    .p-megamenu,
+    .p-panelmenu,
+    .p-tieredmenu,
+    .p-breadcrumb
+  ) {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  :where(.p-toolbar, .p-menu, .p-menubar, .p-megamenu, .p-panelmenu, .p-tieredmenu, .p-breadcrumb) {
+    color: #000 !important;
+    background: #fff !important;
+    border-color: #666 !important;
+    box-shadow: none !important;
+  }
+
+  :where(.p-toolbar, .p-menubar, .p-megamenu, .p-tablist-tab-list, .p-breadcrumb-list, .p-steps-list) {
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+  }
+
+  :where(.p-chart) {
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  :where(.p-chart canvas) {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  :where(.p-chart, .p-message, .p-tag, .p-badge, .p-metergroup, .p-progressbar) {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  :where(.p-scrollpanel, .p-scrollpanel-content-container, .p-scrollpanel-content) {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  :where(.p-scrollpanel-bar) {
+    display: none !important;
+  }
+
   :where(fieldset, .p-card, .p-panel) {
     color: #000;
     background: #fff;
@@ -176,6 +245,11 @@
     -webkit-print-color-adjust: exact;
   }
 
+  :where(.isy-print-form .p-slider) {
+    width: calc(100% - 4mm) !important;
+    margin-inline: 2mm !important;
+  }
+
   /* Remove interaction-only affordances while keeping the current field values visible. */
   :where(
     .isy-print-form .p-select-dropdown,
@@ -247,6 +321,8 @@
     .isy-print-current-state .p-tabpanel[hidden],
     .isy-print-current-state .p-accordioncontent[data-p-active='false'],
     .isy-print-current-state.p-panel.p-panel-collapsed .p-panel-content-container,
+    .isy-print-current-state .p-stepitem[data-p-active='false'],
+    .isy-print-current-state .p-step:not([data-p-active='true']),
     .isy-print-current-state .p-steppanel[data-p-active='false'] .p-steppanel-content-wrapper
   ) {
     display: none !important;
@@ -258,7 +334,8 @@
     .isy-print-current-state .p-tablist-active-bar,
     .isy-print-current-state .p-accordionheader-toggle-icon,
     .isy-print-current-state .p-accordionheader > [data-p-icon],
-    .isy-print-current-state .p-panel-toggle-button
+    .isy-print-current-state .p-panel-toggle-button,
+    .isy-print-current-state .p-stepper-separator
   ) {
     display: none !important;
   }
@@ -298,6 +375,7 @@
     z-index: auto !important;
     width: 100% !important;
     max-width: 100% !important;
+    height: auto !important;
     max-height: none !important;
     margin-block: 4mm !important;
     color: #000 !important;
@@ -320,6 +398,8 @@
     .p-drawer-close-button,
     .p-confirmdialog-accept-button,
     .p-confirmdialog-reject-button,
+    .p-blockui,
+    .p-scrolltop,
     .p-toast,
     .p-tooltip
   ) {

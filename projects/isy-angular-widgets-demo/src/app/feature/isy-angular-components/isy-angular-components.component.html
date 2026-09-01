@@ -1,5 +1,5 @@
-<div class="flex flex-col p-4 lg:p-0">
-  <form [formGroup]="personalInfoForm">
+<div class="demo-print-page flex flex-col p-4 lg:p-0">
+  <form class="isy-print-form" [formGroup]="personalInfoForm">
     <h1>Isy-Angular Komponenten</h1>
     <div class="grid gap-4">
       <div class="col-span-12 flex flex-col gap-2">
@@ -51,7 +51,7 @@
         <div class="flex items-center justify-between flex-wrap gap-4">
           <demo-section-heading anchorId="incompletedate" label="IncompleteDate" ariaLabel="Link zu IncompleteDate" />
 
-          <div class="flex items-center gap-2">
+          <div class="demo-print-configuration isy-print-hide flex items-center gap-2">
             <p-checkbox
               inputId="transfer-iso8601"
               name="transferIso8601"
@@ -92,7 +92,7 @@
       <div class="col-span-12 flex flex-col gap-2">
         <div class="flex items-center justify-between flex-wrap gap-4">
           <demo-section-heading anchorId="inputchar" label="InputChar" ariaLabel="Link zu InputChar" />
-          <div class="flex items-center gap-2">
+          <div class="demo-print-configuration isy-print-hide flex items-center gap-2">
             <p-checkbox
               inputId="outline-input-char"
               name="outline-input-char"

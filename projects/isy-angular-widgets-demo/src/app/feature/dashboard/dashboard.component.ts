@@ -11,7 +11,7 @@ import {barChartData, lineChartData, lineStyleChartData, stackedChartData} from 
 import {widgetBackgroundColors} from './data/menu-colors';
 import {widgetMenuItems} from './data/menus';
 import {initData} from './data/chart-init';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {ChartComponent} from './components/chart/chart.component';
 import {CardModule} from 'primeng/card';
 import {DashboardWidgetComponent} from './components/dashboard-widget/dashboard-widget.component';
@@ -22,7 +22,7 @@ import {DashboardWidgetComponent} from './components/dashboard-widget/dashboard-
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [CardModule, ChartComponent, DashboardWidgetComponent]
+  imports: [CardModule, ChartComponent, DashboardWidgetComponent, TranslateModule]
 })
 export class DashboardComponent implements OnInit, AfterContentInit {
   @ViewChildren('chart') allCharts!: QueryList<ChartComponent>;

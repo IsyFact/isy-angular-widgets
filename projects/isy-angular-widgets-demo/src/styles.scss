@@ -25,3 +25,30 @@
     opacity: 1;
   }
 }
+
+@media print {
+  .demo-print-page {
+    display: block;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .demo-print-page :where(.grid, [class*='col-span-'], .p-card, .p-panel, .p-fieldset, .p-toolbar) {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .demo-print-page :where(.grid) {
+    width: 100%;
+  }
+
+  .demo-print-overflow-visible {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
