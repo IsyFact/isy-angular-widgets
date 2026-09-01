@@ -78,6 +78,10 @@
     table-layout: auto !important;
   }
 
+  /*
+   * The A4 portrait profile is verified against the demo's seven visible business columns.
+   * Wider domain tables need downstream print overrides; row and header pagination remain browser best effort.
+   */
   :where(.isy-print-table table, table.isy-print-table) {
     font-size: 8pt;
     line-height: 1.25;
