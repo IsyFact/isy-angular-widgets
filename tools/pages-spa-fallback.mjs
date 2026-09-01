@@ -41,18 +41,18 @@ function injectIntoHead(html, snippet, source) {
   return html.replace(/<head[^>]*>/i, (head) => `${head}\n${snippet}`);
 }
 
-const restorer = `    <script>
+const restorer = String.raw`    <script>
       // Restores the deep link that the root 404.html handed over in "?p=".
       (function () {
         var match = /[?&]p=([^&]*)/.exec(location.search);
         if (!match) return;
         var rest = location.search.replace(/[?&]p=[^&]*/, '').replace(/^&/, '?');
-        var path = location.pathname.replace(/\\/$/, '') + decodeURIComponent(match[1]);
+        var path = location.pathname.replace(/\/$/, '') + decodeURIComponent(match[1]);
         history.replaceState(null, '', path + rest + location.hash);
       })();
     </script>`;
 
-const dispatcher = `    <script>
+const dispatcher = String.raw`    <script>
       // Routes deep links of the other version lines to their own application.
       (function () {
         var base = ${JSON.stringify(basePath)};
@@ -62,7 +62,7 @@ const dispatcher = `    <script>
         for (var i = 0; i < apps.length; i++) {
           var app = apps[i];
           if (rest !== app && rest.indexOf(app + '/') !== 0) continue;
-          var deep = rest.slice(app.length).replace(/^\\//, '');
+          var deep = rest.slice(app.length).replace(/^\//, '');
           // The documentation consists of real files, it needs no SPA fallback.
           if (deep.indexOf('documentation/') === 0) return;
           location.replace(

@@ -37,7 +37,7 @@ npm ci --ignore-scripts
 mv package.json.orig package.json
 npm run build:widgets_lib
 npm run pack:widgets_lib
-npm ci
+npm ci --ignore-scripts
 
 npm run compodoc:build
 

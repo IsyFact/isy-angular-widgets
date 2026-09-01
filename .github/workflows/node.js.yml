@@ -109,6 +109,7 @@ jobs:
             -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
             -Dsonar.test.inclusions=**/*.spec.ts
+            -Dsonar.exclusions=docs/**/*.html,docs/**/*.js,docs/**/*.css
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
             -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/karma.conf.js,**/eslint.config.js,**/schematics/**,**/test/**,tools/generate-browser-support.mjs,tools/pages-spa-fallback.mjs
 
