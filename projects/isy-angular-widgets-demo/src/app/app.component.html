@@ -1,8 +1,30 @@
 <div class="flex justify-center w-full">
   <div class="w-full" style="max-width: 2560px">
+    <header class="isy-print-only demo-print-header">
+      <div class="demo-print-header__layout">
+        <img
+          class="demo-print-header__logo"
+          src="assets/default-application-logo.jpg"
+          [alt]="'isyAngularWidgets.hauptfenster.altLogoAwl' | translate"
+        />
+        <div>
+          <h1>{{ pageTitle }}</h1>
+          <p>
+            {{ 'isyAngularWidgetsDemo.printHeader.date' | translate }}:
+            <time [attr.datetime]="printDate.toISOString()">{{ formattedPrintDate }}</time>
+          </p>
+          <p>
+            {{ 'isyAngularWidgetsDemo.printHeader.user' | translate }}:
+            {{ userInfo.displayName }}
+          </p>
+        </div>
+      </div>
+    </header>
+
     <!-- The Isy-Hauptfenster is the main frame of isy-angular-widgets. It provides three regions to be filled,
     like in the following example. The side bar regions can be disabled with corresponding parameters. -->
     <isy-hauptfenster
+      class="isy-print-content"
       logoAwl="assets/default-application-logo.jpg"
       logoAnbieterAwl="assets/default-vendor-logo.png"
       [showLinksnavigation]="true"
@@ -62,7 +84,12 @@
       >
         <div middle></div>
         <div right class="flex items-center gap-2">
-          <p-button icon="pi pi-print" [ariaLabel]="'isyAngularWidgetsDemo.aria.print' | translate" [outlined]="true" />
+          <p-button
+            icon="pi pi-print"
+            [ariaLabel]="'isyAngularWidgetsDemo.aria.print' | translate"
+            [outlined]="true"
+            (onClick)="print()"
+          />
           <p-button
             icon="pi pi-info-circle"
             [ariaLabel]="'isyAngularWidgetsDemo.aria.info' | translate"
@@ -89,7 +116,7 @@
 
       <router-outlet></router-outlet>
     </isy-hauptfenster>
-    <p-toast id="notification-toast" position="bottom-right">
+    <p-toast id="notification-toast" class="isy-print-hide" position="bottom-right">
       <!--  To define the (global) space where toast notifications will occur. -->
     </p-toast>
   </div>

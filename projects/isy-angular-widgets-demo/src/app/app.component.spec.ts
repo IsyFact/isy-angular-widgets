@@ -31,6 +31,14 @@ describe('Integration Tests: AppComponent', () => {
     expect(element.hasAttribute('aria-label')).toBeTrue();
   });
 
+  it('should open the browser print dialog once when the print button is activated', () => {
+    const print = spyOn(window, 'print');
+
+    spectator.click('p-button[icon="pi pi-print"] button');
+
+    expect(print).toHaveBeenCalledOnceWith();
+  });
+
   it('the info button should have an aria-label attribute', () => {
     const element = spectator.query('p-button[icon="pi pi-info-circle"] button') as HTMLElement;
     expect(element.hasAttribute('aria-label')).toBeTrue();

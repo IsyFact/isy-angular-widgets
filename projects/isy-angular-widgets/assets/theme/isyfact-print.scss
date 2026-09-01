@@ -1,0 +1,87 @@
+:where(.isy-print-only) {
+  display: none !important;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
+
+  :where(html, body) {
+    width: auto;
+    min-width: 0;
+    color: #000;
+    background: #fff;
+  }
+
+  :where(body) {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    margin-block: 0 0.5em;
+    color: #000;
+    line-height: 1.2;
+    break-after: avoid-page;
+  }
+
+  :where(p, li, dt, dd) {
+    orphans: 3;
+    widows: 3;
+  }
+
+  :where(a) {
+    color: #000;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+  }
+
+  :where(.isy-print-hide, .dont-print) {
+    display: none !important;
+  }
+
+  :where(.isy-print-only) {
+    display: revert !important;
+  }
+
+  :where(.isy-print-content) {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    background: #fff;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  :where(.isy-print-content > *) {
+    max-width: 100%;
+  }
+
+  :where(fieldset, .p-card, .p-panel) {
+    color: #000;
+    background: #fff;
+    border-color: #666;
+    box-shadow: none;
+  }
+
+  :where(.isy-print-break-before) {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  :where(.isy-print-break-after) {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  :where(.isy-print-break-inside-avoid) {
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+}

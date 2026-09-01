@@ -20,3 +20,48 @@
 :host ::ng-deep .p-toast {
   width: auto;
 }
+
+@media print {
+  .demo-print-header {
+    margin-block-end: 8mm;
+    padding-block-end: 4mm;
+    border-bottom: 1px solid #666;
+  }
+
+  .demo-print-header__layout {
+    display: flex;
+    align-items: center;
+    gap: 12mm;
+  }
+
+  .demo-print-header__logo {
+    width: auto;
+    max-width: 45mm;
+    max-height: 20mm;
+  }
+
+  .demo-print-header h1 {
+    margin: 0 0 2mm;
+    font-size: 18pt;
+  }
+
+  .demo-print-header p {
+    margin: 0;
+  }
+
+  :host ::ng-deep {
+    .isy-hauptfenster {
+      min-height: auto;
+      border-top: 0;
+    }
+
+    .isy-hauptfenster-inhaltsbereich {
+      display: block;
+    }
+
+    .isy-hauptfenster-inhaltsbereich > main {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+}

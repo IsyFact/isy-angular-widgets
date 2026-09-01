@@ -154,6 +154,10 @@
       "close": "Close",
       "add": "Add"
     },
+    "printHeader": {
+      "date": "Print date",
+      "user": "User"
+    },
     "labels": {
       "id": "ID",
       "nachname": "Last name",
