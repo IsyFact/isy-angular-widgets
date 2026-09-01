@@ -1,4 +1,4 @@
-# 22.1.0-next.1 -
+# 22.1.0-next.1 - 02.09.2026
 ## Features
 - IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
 - IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
@@ -8,6 +8,7 @@
   * `stepStates`
   * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
 ## Fixes
+- IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
 - IFS-2925: Das Label des `Alle`-Buttons der `InputCharComponent` wird nun bei Sprachwechsel aktualisiert
 - IFS-5717: MultiSelectButtonComponent: Aktualisierung des "Alle"-Labels bei Sprachwechsel zur Laufzeit korrigiert.
 
