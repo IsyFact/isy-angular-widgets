@@ -720,4 +720,10 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
       expect(item.textContent?.trim()).not.toBe('');
     }
   });
+
+  it('should exclude the search and filter panel from print', () => {
+    const searchPanel = spectator.query('p-panel.isy-print-hide');
+
+    expect(searchPanel).toBeTruthy();
+  });
 });

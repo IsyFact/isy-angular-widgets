@@ -70,6 +70,112 @@
     box-shadow: none;
   }
 
+  :where(table, .p-datatable-table, .p-treetable-table) {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    border-collapse: collapse;
+    table-layout: auto !important;
+  }
+
+  :where(.isy-print-table table, table.isy-print-table) {
+    font-size: 8pt;
+    line-height: 1.25;
+  }
+
+  :where(thead, .p-datatable-thead, .p-treetable-thead) {
+    display: table-header-group;
+    position: static !important;
+  }
+
+  :where(tbody, .p-datatable-tbody, .p-treetable-tbody) {
+    display: table-row-group;
+  }
+
+  :where(tfoot, .p-datatable-tfoot, .p-treetable-tfoot) {
+    display: table-footer-group;
+    position: static !important;
+  }
+
+  :where(tr, th, td) {
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  :where(th, td) {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    padding: 1.5mm !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+    vertical-align: top;
+  }
+
+  :where(th, .p-datatable-thead > tr > th, .p-treetable-thead > tr > th) {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  :where(.p-datatable, .p-treetable, .p-datatable-table-container, .p-treetable-table-container) {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  :where(.p-datatable-frozen-column, .p-treetable-frozen-column) {
+    position: static !important;
+    inset-inline: auto !important;
+  }
+
+  :where(
+    .p-paginator,
+    .p-datatable-column-resizer,
+    .p-treetable-column-resizer,
+    .p-datatable-filter-overlay,
+    .p-datatable-sort-icon,
+    .p-treetable-sort-icon,
+    .p-sortable-column-badge,
+    .p-panel-toggle-button
+  ) {
+    display: none !important;
+  }
+
+  :where(.isy-print-table .p-datatable-header) {
+    display: none !important;
+  }
+
+  /* Keep pagination and virtualization state intact: only records already present in the DOM are printed. */
+  :where(.isy-print-current-items, .isy-print-current-items .p-virtualscroller, .isy-print-table .p-virtualscroller) {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    contain: none !important;
+    transform: none !important;
+  }
+
+  :where(.isy-print-current-items .p-virtualscroller-content, .isy-print-table .p-virtualscroller-content) {
+    position: static !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    transform: none !important;
+  }
+
+  :where(
+    .isy-print-current-items .p-virtualscroller-spacer,
+    .isy-print-current-items .p-virtualscroller-loader,
+    .isy-print-table .p-virtualscroller-spacer,
+    .isy-print-table .p-virtualscroller-loader,
+    .isy-print-table .p-datatable-virtualscroller-spacer
+  ) {
+    display: none !important;
+  }
+
   :where(.isy-print-break-before) {
     page-break-before: always;
     break-before: page;

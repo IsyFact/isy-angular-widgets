@@ -22,7 +22,13 @@
     </div>
     <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="scroller" [level]="3" label="Scroller" ariaLabel="Link zu Scroller" />
-      <p-scroller [items]="countries" [itemSize]="50" scrollHeight="200px" styleClass="w-full">
+      <p-scroller
+        class="isy-print-current-items"
+        [items]="countries"
+        [itemSize]="50"
+        scrollHeight="200px"
+        styleClass="w-full"
+      >
         <ng-template pTemplate="item" let-country>
           <div style="height: 50px">{{ country.name }}</div>
         </ng-template>
@@ -36,7 +42,7 @@
   <p-divider />
   <h2>Tables</h2>
   <div class="grid grid-cols-12 gap-4 mb-4">
-    <div class="col-span-12 flex flex-col gap-2">
+    <div class="col-span-12 flex flex-col gap-2 isy-print-hide">
       <demo-section-heading anchorId="paginator" [level]="3" label="Paginator" ariaLabel="Link zu Paginator" />
       <p-paginator
         [rows]="10"
@@ -60,29 +66,29 @@
         [paginator]="true"
         [rows]="5"
         [rowsPerPageOptions]="[5, 10, 20]"
-        class="p-datatable-striped"
+        class="p-datatable-striped isy-print-table"
       >
         <ng-template pTemplate="header">
           <tr>
             <th pSortableColumn="code" scope="col">
               Code
-              <p-columnFilter field="code" type="text" display="menu" />
-              <p-sortIcon field="code" />
+              <p-columnFilter class="isy-print-hide" field="code" type="text" display="menu" />
+              <p-sortIcon class="isy-print-hide" field="code" />
             </th>
             <th pSortableColumn="name" scope="col">
               Name
-              <p-columnFilter field="name" type="text" display="menu" />
-              <p-sortIcon field="name" />
+              <p-columnFilter class="isy-print-hide" field="name" type="text" display="menu" />
+              <p-sortIcon class="isy-print-hide" field="name" />
             </th>
             <th pSortableColumn="category" scope="col">
               Category
-              <p-columnFilter field="category" type="text" display="menu" />
-              <p-sortIcon field="category" />
+              <p-columnFilter class="isy-print-hide" field="category" type="text" display="menu" />
+              <p-sortIcon class="isy-print-hide" field="category" />
             </th>
             <th pSortableColumn="price" scope="col">
               Price
-              <p-columnFilter field="price" type="numeric" currency="EUR" display="menu" />
-              <p-sortIcon field="price" />
+              <p-columnFilter class="isy-print-hide" field="price" type="numeric" currency="EUR" display="menu" />
+              <p-sortIcon class="isy-print-hide" field="price" />
             </th>
           </tr>
         </ng-template>
@@ -104,6 +110,7 @@
         ariaLabel="Link zu TreeTable"
       />
       <p-treetable
+        class="isy-print-table"
         [value]="itSolutions"
         selectionMode="single"
         [paginator]="true"
@@ -114,15 +121,15 @@
           <tr>
             <th ttSortableColumn="name" scope="col">
               Name
-              <p-treeTableSortIcon field="name" />
+              <p-treeTableSortIcon class="isy-print-hide" field="name" />
             </th>
             <th ttSortableColumn="size" scope="col">
               Size
-              <p-treeTableSortIcon field="size" />
+              <p-treeTableSortIcon class="isy-print-hide" field="size" />
             </th>
             <th ttSortableColumn="type" scope="col">
               Type
-              <p-treeTableSortIcon field="type" />
+              <p-treeTableSortIcon class="isy-print-hide" field="type" />
             </th>
           </tr>
         </ng-template>
