@@ -20,16 +20,19 @@
 import {existsSync, readFileSync, writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 
-const [siteDir, rawBasePath, ...subApps] = process.argv.slice(2);
+const args = process.argv.slice(2);
 
-// The base path is empty for a site published at the domain root, so it must
-// be checked for absence instead of for truthiness.
-if (!siteDir || rawBasePath === undefined) {
+// The base path is empty for a site published at the domain root, so the
+// arguments are counted instead of being checked for truthiness.
+if (args.length < 2 || args[0] === '') {
   console.error('Usage: node tools/pages-spa-fallback.mjs <site-dir> <base-path> [sub-app ...]');
   process.exit(1);
 }
 
-const basePath = `/${rawBasePath.replace(/^\/+|\/+$/g, '')}/`.replace(/^\/\/$/, '/');
+const [siteDir, rawBasePath, ...subApps] = args;
+
+const segments = rawBasePath.split('/').filter(Boolean).join('/');
+const basePath = segments === '' ? '/' : `/${segments}/`;
 
 function injectIntoHead(html, snippet, source) {
   if (!/<head[^>]*>/i.test(html)) {

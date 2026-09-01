@@ -11,7 +11,7 @@
 #
 set -euo pipefail
 
-if [ "$#" -ne 3 ]; then
+if [[ "$#" -ne 3 ]]; then
   echo "Usage: $0 <source-dir> <target-dir> <base-href>" >&2
   exit 1
 fi
@@ -47,7 +47,7 @@ npx ng build isy-angular-widgets-demo --configuration production --base-href "$B
 
 # Angular 21 emits to dist/<app>, Angular 22 to dist/<app>/browser.
 DIST_DIR="dist/isy-angular-widgets-demo"
-if [ -d "$DIST_DIR/browser" ]; then
+if [[ -d "$DIST_DIR/browser" ]]; then
   DIST_DIR="$DIST_DIR/browser"
 fi
 
@@ -57,4 +57,4 @@ rm -rf "$TARGET_ABS/documentation"
 mkdir -p "$TARGET_ABS/documentation"
 cp -R docs/. "$TARGET_ABS/documentation/"
 
-echo "Done: $(ls -1 "$TARGET_ABS" | wc -l | tr -d ' ') entries in $TARGET_ABS"
+echo "Done: $(find "$TARGET_ABS" -mindepth 1 -maxdepth 1 | wc -l | tr -d ' ') entries in $TARGET_ABS"

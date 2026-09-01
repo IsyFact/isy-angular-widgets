@@ -110,7 +110,7 @@ jobs:
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
             -Dsonar.test.inclusions=**/*.spec.ts
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
-            -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/karma.conf.js,**/eslint.config.js,**/schematics/**,**/test/**,tools/generate-browser-support.mjs
+            -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/karma.conf.js,**/eslint.config.js,**/schematics/**,**/test/**,tools/generate-browser-support.mjs,tools/pages-spa-fallback.mjs
 
   build_and_deploy_demo_and_docs:
     # Reacts to workflow_dispatch as well, so that a push on develop-21 can
@@ -171,7 +171,7 @@ jobs:
             fi
           }
           check_exists() {
-            if [ ! -f "$1" ]; then
+            if [[ ! -f "$1" ]]; then
               echo "Expected $1 to exist."
               FAILED=1
             fi
@@ -182,7 +182,7 @@ jobs:
           check_exists site/documentation/index.html
           check_exists site/v21/documentation/index.html
           # GitHub Pages only ever serves the 404.html at the root of the site.
-          if [ -f site/v21/404.html ]; then
+          if [[ -f site/v21/404.html ]]; then
             echo "site/v21/404.html is ignored by GitHub Pages and must not be created."
             FAILED=1
           fi
