@@ -1,5 +1,6 @@
 # 21.3.0 -
 ## Features
+- IFS-5735: Demo und Dokumentation dieser Versionslinie werden nun automatisch unter `/v21/` bzw. `/v21/documentation/` veröffentlicht; der Deploy erfolgt zentral vom `develop`-Branch aus einem einzigen Pages-Artefakt
 - IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
 - IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
   * `autoDisableFutureSteps`
