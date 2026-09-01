@@ -373,6 +373,7 @@
     position: static !important;
     inset: auto !important;
     z-index: auto !important;
+    grid-column: 1 / -1 !important;
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;

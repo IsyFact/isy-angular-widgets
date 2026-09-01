@@ -1,5 +1,6 @@
 # 22.1.0-next.1 -
 ## Features
+- IFS-4929: Eine separat einbindbare Print-Basis stellt öffentliche `isy-print-*`-Utilities für A4-Ausdrucke bereit; die Demo zeigt deren Verwendung für Druckkopf, Tabellen, Formulare und den aktuell sichtbaren Zustand interaktiver Inhalte
 - IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
 - IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
   * `autoDisableFutureSteps`

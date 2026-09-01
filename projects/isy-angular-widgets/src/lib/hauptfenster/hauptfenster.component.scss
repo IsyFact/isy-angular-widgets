@@ -78,6 +78,10 @@ $responsive-breakpoint: 1024px;
 }
 
 @media print {
+  .isy-hauptfenster {
+    min-height: auto;
+  }
+
   .dont-print {
     display: none;
   }
