@@ -23,26 +23,41 @@
 
 @media print {
   .demo-print-header {
+    width: 100%;
     margin-block-end: 8mm;
     padding-block-end: 4mm;
     border-bottom: 1px solid #666;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
   }
 
   .demo-print-header__layout {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 45mm) minmax(0, 1fr);
     align-items: center;
     gap: 12mm;
+    min-width: 0;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
   }
 
   .demo-print-header__logo {
+    display: block;
     width: auto;
-    max-width: 45mm;
+    max-width: 100%;
     max-height: 20mm;
+  }
+
+  .demo-print-header__content {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .demo-print-header h1 {
     margin: 0 0 2mm;
     font-size: 18pt;
+    word-break: normal;
+    hyphens: auto;
   }
 
   .demo-print-header p {

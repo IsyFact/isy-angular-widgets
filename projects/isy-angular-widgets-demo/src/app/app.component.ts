@@ -204,9 +204,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.securityService.setRoles(this.userInfo);
   }
 
-  print(): void {
+  @HostListener('window:beforeprint')
+  updatePrintDate(): void {
     this.printDate = new Date();
     this.cdr.detectChanges();
+  }
+
+  print(): void {
     this.document.defaultView?.print();
   }
 

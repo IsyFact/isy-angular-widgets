@@ -39,6 +39,25 @@ describe('Integration Tests: AppComponent', () => {
     expect(print).toHaveBeenCalledOnceWith();
   });
 
+  it('should update the displayed print date immediately before browser printing', () => {
+    const stalePrintDate = new Date('2000-01-01T00:00:00.000Z');
+    const currentPrintDate = new Date('2026-09-02T12:34:56.000Z');
+    spectator.component.printDate = stalePrintDate;
+    spectator.detectChanges();
+
+    jasmine.clock().install();
+    jasmine.clock().mockDate(currentPrintDate);
+
+    try {
+      window.dispatchEvent(new Event('beforeprint'));
+
+      const time = spectator.query('.demo-print-header time') as HTMLTimeElement;
+      expect(time.dateTime).toBe(currentPrintDate.toISOString());
+    } finally {
+      jasmine.clock().uninstall();
+    }
+  });
+
   it('should exclude the application toolbar from print', () => {
     expect(spectator.query('isy-seiten-toolbar[Seitentoolbar].isy-print-hide')).toBeTruthy();
   });
