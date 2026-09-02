@@ -89,12 +89,12 @@
             ],
             "styles": [
               "projects/isy-angular-widgets/assets/theme/tailwind.css",
-              "projects/isy-angular-widgets-demo/src/styles.scss",
               "node_modules/primeicons/primeicons.css",
               "node_modules/flag-icons/css/flag-icons.min.css",
               "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss",
               "node_modules/quill/dist/quill.snow.css",
-              "projects/isy-angular-widgets/assets/theme/isyfact-print.scss"
+              "projects/isy-angular-widgets/assets/theme/isyfact-print.scss",
+              "projects/isy-angular-widgets-demo/src/styles.scss"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": ["moment", "quill", "quill-delta"],

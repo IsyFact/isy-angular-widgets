@@ -51,7 +51,7 @@ Bestehende komponentenspezifische Styles in `.scss`-Dateien der Bibliothek bleib
 
 Die Bibliothek liefert mit `assets/theme/isyfact-print.scss` eine allgemeine Basis für browserbasierte Ausdrucke im Format A4 hochkant. Sie ist bewusst nicht Bestandteil des normalen IsyFact-Themes: Anwendungen aktivieren sie nur dann, wenn sie die Print-Regeln verwenden möchten.
 
-Das Print-Stylesheet kann in der `angular.json` nach dem IsyFact-Theme und vor den eigenen globalen Styles eingebunden werden:
+Das Print-Stylesheet kann in der `angular.json` nach den normalen Theme- und Drittanbieterstyles und vor den eigenen globalen Styles eingebunden werden:
 
 ```json
 "styles": [
@@ -81,19 +81,19 @@ Einige Regeln der Basis verwenden `!important`, um Bildschirmvorgaben von PrimeN
 
 | Klasse | Zweck und Verwendung |
 | --- | --- |
-| `isy-print-hide` | Blendet Navigation, Aktionen oder andere ausschließlich interaktive Inhalte im Druck aus. |
-| `dont-print` | Kompatibler Alias für `isy-print-hide`; kann in bestehendem Markup weiterverwendet werden. |
-| `isy-print-only` | Blendet ein Element am Bildschirm aus und zeigt es ausschließlich im Druck, zum Beispiel einen Druckkopf oder einen erklärenden Tabellenhinweis. |
-| `isy-print-content` | Bereitet einen markierten Inhaltsbereich auf die verfügbare Druckbreite vor. Andere Seitenbereiche werden dadurch nicht automatisch ausgeblendet. |
-| `isy-print-form` | Stellt ein Formular einspaltig dar, erhält die aktuell gerenderten Werte und entfernt die übliche Interaktionsdekoration unterstützter Eingabe-Widgets. Fachlich irrelevante Aktionen müssen zusätzlich mit `isy-print-hide` markiert werden. |
-| `isy-print-current-state` | Druckt bei Tabs, Accordions, Panels und Steppern ausschließlich den aktuell sichtbaren Zustand, ohne geschlossene Bereiche automatisch zu öffnen. Die Klasse wird auf dem jeweiligen PrimeNG-Container gesetzt. |
-| `isy-print-overlay` | Nimmt einen sichtbaren anwendungsspezifischen Dialog oder Overlay-Inhalt in den normalen Druckfluss auf. PrimeNG-Dialoge und -Drawer werden bereits allgemein unterstützt. |
-| `isy-print-overlay-mask` | Neutralisiert die Maske eines mit `isy-print-overlay` markierten anwendungsspezifischen Overlays. |
-| `isy-print-table` | Optimiert eine Tabelle für die verfügbare Seitenbreite, wiederholbare Tabellenköpfe und möglichst stabile Zeilenumbrüche. Aktionsspalten und anwendungsspezifische Bedienung müssen mit `isy-print-hide` markiert werden. |
-| `isy-print-current-items` | Entfernt Scroll- und Virtualisierungsbegrenzungen, ohne weitere Datensätze zu laden. Gedruckt werden ausschließlich die aktuell im DOM gerenderten Einträge. |
-| `isy-print-break-before` | Erzwingt vor dem Element nach Möglichkeit einen Seitenumbruch. |
-| `isy-print-break-after` | Erzwingt nach dem Element nach Möglichkeit einen Seitenumbruch. |
-| `isy-print-break-inside-avoid` | Vermeidet nach Möglichkeit einen Seitenumbruch innerhalb des Elements. |
+| `isy-print-hide` | Hat am Bildschirm keine Wirkung und blendet das markierte Element ausschließlich im Druck aus, zum Beispiel Navigation oder Aktionen. |
+| `dont-print` | Verhält sich im Druck identisch zu `isy-print-hide` und bleibt als kompatibler Alias für bestehendes Markup unterstützt. |
+| `isy-print-only` | Blendet das markierte Element am Bildschirm aus und zeigt es ausschließlich im Druck mit seinem elementtypischen Anzeigemodus, zum Beispiel als Druckkopf oder Tabellenhinweis. |
+| `isy-print-content` | Setzt Breiten-, Abstands-, Hintergrund- und Überlaufvorgaben des markierten Inhaltsbereichs für den Druck zurück. Geschwister oder andere Seitenbereiche werden dadurch nicht ausgeblendet. |
+| `isy-print-form` | Stellt das markierte Formular im Druck einspaltig dar, erhält die aktuell gerenderten Werte und entfernt die Interaktionsdekoration unterstützter Eingabe-Widgets. Fachlich irrelevante Aktionen müssen zusätzlich mit `isy-print-hide` markiert werden. |
+| `isy-print-current-state` | Wird auf einen PrimeNG-Container für Tabs, Accordions, Panels oder Stepper gesetzt und druckt ausschließlich dessen aktuell sichtbaren Zustand. Die Klasse öffnet oder rendert keine geschlossenen Bereiche. |
+| `isy-print-overlay` | Nimmt einen sichtbaren anwendungsspezifischen Overlay-Inhalt in den normalen Druckfluss auf. PrimeNG-Dialoge und -Drawer werden bereits ohne diese Zusatzklasse unterstützt; nicht gerenderte Overlays bleiben unsichtbar. |
+| `isy-print-overlay-mask` | Wird bei einem anwendungsspezifischen Overlay auf dessen Maskenelement gesetzt und neutralisiert die Maske im Druck. Sie ist die öffentliche Begleitklasse zu `isy-print-overlay`; PrimeNG-Dialog- und Drawer-Masken werden bereits automatisch erkannt. |
+| `isy-print-table` | Wird auf eine Tabelle oder ihren PrimeNG-Container gesetzt und optimiert sie für die verfügbare Seitenbreite, wiederholbare Tabellenköpfe und möglichst stabile Zeilenumbrüche. Aktionsspalten und anwendungsspezifische Bedienung müssen mit `isy-print-hide` markiert werden. |
+| `isy-print-current-items` | Entfernt im markierten Bereich Scroll- und Virtualisierungsbegrenzungen, ohne den Anwendungszustand zu ändern oder weitere Datensätze zu laden. Gedruckt werden ausschließlich die aktuell im DOM gerenderten Einträge. |
+| `isy-print-break-before` | Fordert im Druck vor dem markierten Element einen Seitenumbruch an; die Druckengine darf die Best-Effort-Regel bei technisch nicht erfüllbaren Umbrüchen abweichend behandeln. |
+| `isy-print-break-after` | Fordert im Druck nach dem markierten Element einen Seitenumbruch an; die Druckengine darf die Best-Effort-Regel bei technisch nicht erfüllbaren Umbrüchen abweichend behandeln. |
+| `isy-print-break-inside-avoid` | Fordert an, einen Seitenumbruch innerhalb des markierten Elements zu vermeiden; zu hohe Inhalte können von der Druckengine dennoch geteilt werden. |
 
 Die Print-Basis bildet immer den aktuellen, bereits gerenderten Anwendungszustand ab:
 
