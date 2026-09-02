@@ -312,6 +312,7 @@
     },
     "websiteTitles": {
       "dashboard": "Dashboard",
+      "pageNotFound": "Page not found",
       "searchObject": "Search object",
       "displayObject": "Display object",
       "isyAngularComponents": "Isy-Angular Components",

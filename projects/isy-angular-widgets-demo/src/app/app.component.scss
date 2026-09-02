@@ -63,20 +63,4 @@
   .demo-print-header p {
     margin: 0;
   }
-
-  :host ::ng-deep {
-    .isy-hauptfenster {
-      min-height: auto;
-      border-top: 0 !important;
-    }
-
-    .isy-hauptfenster-inhaltsbereich {
-      display: block;
-    }
-
-    .isy-hauptfenster-inhaltsbereich > main {
-      width: 100%;
-      margin-top: 0;
-    }
-  }
 }

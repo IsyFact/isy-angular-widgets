@@ -127,6 +127,29 @@ describe('Unit Tests: HauptfensterComponent', () => {
   const getComponentAccess = (): HauptfensterComponentTestAccess =>
     component as unknown as HauptfensterComponentTestAccess;
 
+  const enablePrintMediaStyles = (): (() => void) => {
+    const componentPrintRules = Array.from(document.styleSheets)
+      .flatMap((styleSheet) => {
+        try {
+          return Array.from(styleSheet.cssRules);
+        } catch {
+          return [];
+        }
+      })
+      .filter(
+        (rule): rule is CSSMediaRule =>
+          rule instanceof CSSMediaRule && rule.media.mediaText === 'print' && rule.cssText.includes('.isy-hauptfenster')
+      );
+    const printStyle = document.createElement('style');
+    printStyle.textContent = componentPrintRules
+      .flatMap((mediaRule) => Array.from(mediaRule.cssRules))
+      .map((rule) => rule.cssText)
+      .join('\n');
+    document.head.appendChild(printStyle);
+
+    return () => printStyle.remove();
+  };
+
   const setupComponent = (
     browserSupportResult: BrowserSupportCheckResult = supportedBrowserResult,
     props: Partial<HauptfensterComponent> = {}
@@ -178,6 +201,31 @@ describe('Unit Tests: HauptfensterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should fill the viewport on screen and release content into the print page flow', () => {
+    const shell = spectator.query('.isy-hauptfenster') as HTMLElement;
+    const content = spectator.query('.isy-hauptfenster-inhaltsbereich') as HTMLElement;
+    const main = spectator.query('.isy-hauptfenster-inhaltsbereich > main') as HTMLElement;
+    const screenContentBounds = content.getBoundingClientRect();
+    const screenMainBounds = main.getBoundingClientRect();
+
+    expect(shell.getBoundingClientRect().height).toBeGreaterThanOrEqual(window.innerHeight);
+    expect(screenMainBounds.top).toBeGreaterThan(screenContentBounds.top);
+
+    const restoreScreenMedia = enablePrintMediaStyles();
+
+    try {
+      const printContentBounds = content.getBoundingClientRect();
+      const printMainBounds = main.getBoundingClientRect();
+
+      expect(shell.getBoundingClientRect().height).toBeLessThan(window.innerHeight);
+      expect(printMainBounds.top).toBe(printContentBounds.top);
+      expect(printMainBounds.left).toBeGreaterThanOrEqual(printContentBounds.left);
+      expect(printMainBounds.right).toBeLessThanOrEqual(printContentBounds.right);
+    } finally {
+      restoreScreenMedia();
+    }
   });
 
   it('should check the browser version by default', () => {

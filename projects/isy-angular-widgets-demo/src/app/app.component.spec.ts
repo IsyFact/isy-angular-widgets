@@ -2,8 +2,9 @@ import {DOCUMENT} from '@angular/core';
 import {NavigationEnd, provideRouter, Router} from '@angular/router';
 import {AppComponent} from './app.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {of, Subject} from 'rxjs';
+import {firstValueFrom, of, Subject} from 'rxjs';
 import {InterpolatableTranslationObject, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {routes} from './app.routes';
 
 describe('Integration Tests: AppComponent', () => {
   let spectator: Spectator<AppComponent>;
@@ -17,7 +18,7 @@ describe('Integration Tests: AppComponent', () => {
         useValue: document
       },
       TranslateService,
-      provideRouter([])
+      provideRouter(routes)
     ]
   });
 
@@ -56,6 +57,48 @@ describe('Integration Tests: AppComponent', () => {
     } finally {
       jasmine.clock().uninstall();
     }
+  });
+
+  it('should display the translated error title for an unknown route on screen and in print', async () => {
+    const router = spectator.inject(Router);
+    const translate = spectator.inject(TranslateService);
+    mockDocument.title = 'Objekt suchen';
+    translate.setTranslation(
+      'de',
+      {
+        isyAngularWidgetsDemo: {
+          websiteTitles: {pageNotFound: 'Seite nicht gefunden'},
+          messages: {changePage: 'Seite gewechselt:'}
+        }
+      },
+      true
+    );
+    translate.setTranslation(
+      'en',
+      {
+        isyAngularWidgetsDemo: {
+          websiteTitles: {pageNotFound: 'Page not found'},
+          messages: {changePage: 'Page changed:'}
+        }
+      },
+      true
+    );
+    await firstValueFrom(translate.use('de'));
+
+    expect(await router.navigateByUrl('/unbekannte-route')).toBeTrue();
+    await spectator.fixture.whenStable();
+    spectator.detectChanges();
+
+    expect(router.url).toBe('/unbekannte-route');
+    expect(spectator.query('demo-page-not-found')).toBeTruthy();
+    expect(mockDocument.title).toBe('Seite nicht gefunden');
+    expect((spectator.query('.demo-print-header h1') as HTMLElement).innerText).toBe('Seite nicht gefunden');
+
+    await firstValueFrom(translate.use('en'));
+    spectator.detectChanges();
+
+    expect(mockDocument.title).toBe('Page not found');
+    expect((spectator.query('.demo-print-header h1') as HTMLElement).innerText).toBe('Page not found');
   });
 
   it('should exclude the application toolbar from print', () => {
