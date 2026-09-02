@@ -167,9 +167,11 @@
   (onHide)="restoreFocus()"
   [modal]="modal"
   [style.width.vw]="width"
+  styleClass="isy-print-overlay"
+  maskStyleClass="isy-print-overlay-mask"
 >
   @if (selectedPerson && editForm) {
-    <div [formGroup]="editForm">
+    <div class="isy-print-form" [formGroup]="editForm">
       <div class="grid grid-cols-12 gap-4 mt-4">
         <div class="col-span-12 xl:col-span-6">
           <isy-form-wrapper
@@ -284,7 +286,11 @@
           </isy-form-wrapper>
         </div>
       </div>
-      <div class="flex justify-end flex-wrap card-container pt-2">
+    </div>
+  }
+  <ng-template pTemplate="footer">
+    @if (selectedPerson && editForm) {
+      <div class="edit-dialog-actions isy-print-hide flex justify-end flex-wrap card-container">
         <p-button
           styleClass="flex items-center justify-center mr-1"
           [label]="'isyAngularWidgetsDemo.actions.save' | translate"
@@ -299,8 +305,8 @@
         >
         </p-button>
       </div>
-    </div>
-  }
+    }
+  </ng-template>
 </p-dialog>
 
 <!-- The new 'allowFreeNavigation' property in the isy-wizard component allows users to navigate freely between steps. 

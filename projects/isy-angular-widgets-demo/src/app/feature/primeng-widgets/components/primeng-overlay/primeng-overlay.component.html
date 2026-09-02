@@ -5,7 +5,7 @@
     <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="sidebar" [level]="3" label="Sidebar" ariaLabel="Link zu Sidebar" />
       <p-button class="isy-print-hide" (onClick)="showSidebar($event)" label="Left Sidebar" />
-      <p-drawer class="isy-print-overlay" [(visible)]="visibleSidebar" position="left" (onHide)="onSidebarHide()">
+      <p-drawer styleClass="isy-print-overlay" [(visible)]="visibleSidebar" position="left" (onHide)="onSidebarHide()">
         <h1>Sidebar Header</h1>
         Content
       </p-drawer>
@@ -14,17 +14,20 @@
       <demo-section-heading anchorId="dialog" [level]="3" label="Dialog" ariaLabel="Link zu Dialog" />
       <p-button class="isy-print-hide" (onClick)="showDialog($event)" label="Dialog" />
       <p-dialog
-        class="isy-print-overlay"
         header="Dialog Header"
         [modal]="true"
         [(visible)]="visibleDialog"
         [style]="{width: '25rem'}"
+        styleClass="isy-print-overlay"
+        maskStyleClass="isy-print-overlay-mask"
         (onHide)="onDialogHide()"
       >
         <div class="flex flex-col gap-2">Content</div>
-        <div class="isy-print-hide flex justify-end">
-          <p-button label="Ok" (onClick)="closeDialog()" />
-        </div>
+        <ng-template pTemplate="footer">
+          <div class="demo-dialog-actions isy-print-hide">
+            <p-button label="Ok" (onClick)="closeDialog()" />
+          </div>
+        </ng-template>
       </p-dialog>
     </div>
     <div class="col-span-12 flex flex-col gap-2">
