@@ -7,6 +7,11 @@ Die Bibliothek stellt zudem ein IsyFact-Theme bereit, welches sich nach den Rich
 
 Praktische sowie querschnittliche Beispiele für die Umsetzung von Patterns des Styleguide sind in der Beispielanwendung [`isy-angular-widget-demo`](https://github.com/IsyFact/isy-angular-widgets/tree/main/projects/isy-angular-widgets-demo) zu finden.
 
+## Dokumentation
+
+- [MIGRATION.md](./MIGRATION.md) – Migrationshinweise und Breaking Changes je Version
+- [CHANGELOG.md](https://github.com/IsyFact/isy-angular-widgets/blob/main/CHANGELOG.md) – vollständige Liste aller Änderungen
+
 ## Hinweise zur Datumsvalidierung (ohne `moment.js`)
 
 Die Validatoren akzeptieren je nach Typ unter anderem:
