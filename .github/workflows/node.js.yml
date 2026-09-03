@@ -109,11 +109,14 @@ jobs:
             -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
             -Dsonar.test.inclusions=**/*.spec.ts
+            -Dsonar.exclusions=docs/**/*.html,docs/**/*.js,docs/**/*.css
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
-            -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/karma.conf.js,**/eslint.config.js,**/schematics/**,**/test/**,tools/generate-browser-support.mjs
+            -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/karma.conf.js,**/eslint.config.js,**/schematics/**,**/test/**,tools/generate-browser-support.mjs,tools/pages-spa-fallback.mjs
 
   build_and_deploy_demo_and_docs:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+    # Reacts to workflow_dispatch as well, so that a push on develop-21 can
+    # trigger a redeploy of both version lines from here.
+    if: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/develop' }}
 
     # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
     permissions:
@@ -137,43 +140,65 @@ jobs:
         node-version: [24.x]
 
     steps:
-      - name: Checkout
+      - name: Checkout current line (v22)
         uses: actions/checkout@v4
+      - name: Checkout legacy line (v21)
+        uses: actions/checkout@v4
+        with:
+          ref: develop-21
+          path: src-v21
       - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v4
-      - name: Bootstrap install (build local package)
+      - name: Build current line (v22) into the site root
+        run: tools/build-pages-variant.sh . site "${{ steps.pages.outputs.base_path }}/"
+      - name: Build legacy line (v21) into /v21
+        run: tools/build-pages-variant.sh src-v21 site/v21 "${{ steps.pages.outputs.base_path }}/v21/"
+      - name: Generate SPA fallback
+        run: node tools/pages-spa-fallback.mjs site "${{ steps.pages.outputs.base_path }}" v21
+      - name: Verify site layout
         run: |
-          node -e "const fs=require('fs'),p=JSON.parse(fs.readFileSync('package.json'));delete p.dependencies['@isyfact/isy-angular-widgets'];fs.writeFileSync('package.json',JSON.stringify(p,null,2));"
-          npm ci --ignore-scripts
-          git checkout package.json
-          npm run build:widgets_lib
-          npm run pack:widgets_lib
-      - name: Install dependencies
-        run: npm ci
-      - name: Build and prepare documentation for deployment
-        run: |
-          npm run compodoc:build
-          mv docs docs_temp
-          mkdir docs
-          mv docs_temp docs/documentation
-      - name: Build and prepare demo application for deployment
-        run: |
-          npm run build:widgets_demo
-          mv dist/isy-angular-widgets-demo/browser/* docs/
-          cp docs/index.html docs/404.html
+          BASE_PATH="${{ steps.pages.outputs.base_path }}"
+          FAILED=0
+          check_base_href() {
+            if ! grep -qF "<base href=\"$2\"" "$1"; then
+              echo "Expected base href '$2' in $1, found: $(grep -o '<base[^>]*>' "$1" || echo none)"
+              FAILED=1
+            fi
+          }
+          check_exists() {
+            if [[ ! -f "$1" ]]; then
+              echo "Expected $1 to exist."
+              FAILED=1
+            fi
+          }
+          check_base_href site/index.html "$BASE_PATH/"
+          check_base_href site/v21/index.html "$BASE_PATH/v21/"
+          check_exists site/404.html
+          check_exists site/documentation/index.html
+          check_exists site/v21/documentation/index.html
+          # GitHub Pages only ever serves the 404.html at the root of the site.
+          if [[ -f site/v21/404.html ]]; then
+            echo "site/v21/404.html is ignored by GitHub Pages and must not be created."
+            FAILED=1
+          fi
+          exit $FAILED
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "docs"
+          path: "site"
       - name: Deploy demo and documentation to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Display deployment URLs
         run: |
-          echo "Demo URL: https://isyfact.github.io/isy-angular-widgets/"
-          echo "Documentation URL: https://isyfact.github.io/isy-angular-widgets/documentation/"
+          PAGE_URL="${{ steps.deployment.outputs.page_url }}"
+          echo "Demo (v22):          ${PAGE_URL}"
+          echo "Documentation (v22): ${PAGE_URL}documentation/"
+          echo "Demo (v21):          ${PAGE_URL}v21/"
+          echo "Documentation (v21): ${PAGE_URL}v21/documentation/"
