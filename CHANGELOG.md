@@ -1,5 +1,6 @@
 # 21.3.0 - 02.09.2026
 ## Features
+- IFS-5735: Demo und Dokumentation dieser Versionslinie werden nun automatisch unter `/v21/` bzw. `/v21/documentation/` veröffentlicht; der Deploy erfolgt zentral vom `develop`-Branch aus einem einzigen Pages-Artefakt
 - IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
 - IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
   * `autoDisableFutureSteps`
@@ -7,9 +8,9 @@
   * `disabledStepAriaText`
   * `stepStates`
   * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
- 
 ## Fixes
 - IFS-5739: Fehlerhafte Importreferenz auf `@isy-angular-widgets/public-api`, die zum Abbruch der Bundle-Generierung führte, wurde behoben
+- IFS-5714: Fallback-Text für ungültige Eingaben aus dem `WidgetsConfigService` kann nun von konsumierenden Anwendungen per Übersetzung überschrieben werden
 - IFS-2925: Das Label des `Alle`-Buttons der `InputCharComponent` wird nun bei Sprachwechsel aktualisiert
 - IFS-5717: MultiSelectButtonComponent: Aktualisierung des "Alle"-Labels bei Sprachwechsel zur Laufzeit korrigiert.
 

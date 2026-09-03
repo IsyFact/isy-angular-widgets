@@ -4,6 +4,7 @@ import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FormWrapperComponent} from './form-wrapper.component';
 import {FormWrapperFieldDirective} from './form-wrapper-field.directive';
 import {FORM_WRAPPER_FIELD_ADAPTER, FormWrapperFieldAdapter} from './form-wrapper-field-adapter';
+import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
 @Component({
   standalone: true,
@@ -334,6 +335,28 @@ describe('FormWrapperComponent', () => {
       });
 
       expect(spectator.component.errorMessage).toBe('Ungültige Eingabe');
+    });
+
+    it('should use translated invalid message from WidgetsConfigService', () => {
+      spectator = createComponent({
+        props: {
+          ...createRequiredProps(),
+          control: new FormControl('', Validators.required),
+          validationMessages: {}
+        }
+      });
+
+      expect(spectator.component.errorMessage).toBe('Ungültige Eingabe');
+
+      const configService = spectator.inject(WidgetsConfigService);
+      configService.setTranslation({
+        formWrapper: {
+          invalid: 'Custom invalid message'
+        }
+      });
+      spectator.detectChanges();
+
+      expect(spectator.component.errorMessage).toBe('Custom invalid message');
     });
 
     it('should return the correct error message when multiple validators fail', () => {
