@@ -75,7 +75,6 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "baseHref": "/",
             "outputPath": {
               "base": "dist/isy-angular-widgets-demo"
             },
@@ -102,7 +101,6 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/isy-angular-widgets/",
               "budgets": [
                 {
                   "type": "initial",

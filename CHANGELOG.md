@@ -1,6 +1,7 @@
 # 22.1.0-next.1 -
 ## Features
 - IFS-4929: Eine separat einbindbare Print-Basis stellt öffentliche `isy-print-*`-Utilities für A4-Ausdrucke bereit; die Demo zeigt deren Verwendung für Druckkopf, Tabellen, Formulare und den aktuell sichtbaren Zustand interaktiver Inhalte
+- IFS-5735: Demo und Dokumentation werden zusätzlich für die Legacy-Linie v21 veröffentlicht (`/v21/` bzw. `/v21/documentation/`); der Deploy erfolgt zentral vom `develop`-Branch aus einem einzigen Pages-Artefakt
 - IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
 - IFS-5695: Der `isy-wizard` wurde um neue Input-Properties für deaktivierte Schritte erweitert:
   * `autoDisableFutureSteps`
@@ -9,6 +10,7 @@
   * `stepStates`
   * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
 ## Fixes
+- IFS-5714: Fallback-Text für ungültige Eingaben aus dem `WidgetsConfigService` kann nun von konsumierenden Anwendungen per Übersetzung überschrieben werden
 - IFS-2925: Das Label des `Alle`-Buttons der `InputCharComponent` wird nun bei Sprachwechsel aktualisiert
 - IFS-5717: MultiSelectButtonComponent: Aktualisierung des "Alle"-Labels bei Sprachwechsel zur Laufzeit korrigiert.
 
