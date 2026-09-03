@@ -103,12 +103,33 @@ jobs:
             -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
             -Dsonar.test.inclusions=**/*.spec.ts
+            -Dsonar.exclusions=docs/**/*.html,docs/**/*.js,docs/**/*.css
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
             -Dsonar.coverage.exclusions=**/main.ts,**/polyfills.ts,**/environment*.ts,**/environments/**,**/*.module.ts,**/test.ts,**/karma.conf.js,**/eslint.config.js,**/schematics/**,**/test/**,tools/generate-browser-support.mjs
 
-  # Note: The GitHub Pages demo/docs deployment intentionally runs only from the
-  # main development branch (`develop`) and is defined in the workflow on that
-  # branch. The v21 support branch (`develop-21`) must not deploy to
-  # github-pages (its environment protection rules do not permit it, and the
-  # published Pages site tracks the current major, not the legacy support
-  # line). Do not re-add a build_and_deploy_demo_and_docs job here.
+  # Note: The GitHub Pages deployment covers BOTH version lines and runs
+  # centrally from the `develop` branch. That workflow checks this branch out
+  # via cross checkout and publishes it under `/v21/` as part of a single Pages
+  # artifact, so there is exactly one artifact and one deploy job.
+  #
+  # Do not add a build_and_deploy_demo_and_docs job here: the environment
+  # protection rules do not permit deploying github-pages from this branch, and
+  # a second deploy job would race against the central one.
+  #
+  # The job below does not deploy. It only asks the workflow on `develop` to
+  # run, so that changes on this branch reach the published site without any
+  # manual step.
+  trigger_pages_deploy:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop-21' }}
+    needs: [build_and_test]
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: write
+
+    steps:
+      - name: Trigger demo and documentation deployment on develop
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run node.js.yml --ref develop
