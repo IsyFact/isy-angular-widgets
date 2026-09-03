@@ -78,6 +78,24 @@ $responsive-breakpoint: 1024px;
 }
 
 @media print {
+  .isy-hauptfenster {
+    min-height: auto;
+    border-top: 0;
+  }
+
+  .isy-hauptfenster-inhaltsbereich {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .isy-hauptfenster-inhaltsbereich > main {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-top: 0;
+  }
+
   .dont-print {
     display: none;
   }

@@ -9,6 +9,7 @@
     <i [class]="isCollapsed ? 'pi pi-chevron-right' : 'pi pi-chevron-down'"></i>
   </ng-template>
   <p-table
+    class="isy-print-table"
     [value]="personen"
     [columns]="selectedColumns"
     [globalFilterFields]="['personalien.nachname', 'personalien.vorname', 'personalien.gender', 'personalien.state']"
@@ -17,7 +18,7 @@
     [loading]="loading"
   >
     <ng-template pTemplate="caption">
-      <div class="flex justify-start gap-2">
+      <div class="result-list-controls isy-print-hide flex justify-start gap-2">
         <p-button
           id="create-button"
           icon="pi pi-plus"
@@ -36,7 +37,7 @@
         >
         </p-button>
       </div>
-      <div class="pt-4">
+      <div class="result-list-controls isy-print-hide pt-4">
         <p-multiselect
           display="chip"
           [options]="initialColumns"
@@ -51,13 +52,23 @@
       <tr>
         <th scope="col" pSortableColumn="personalien.nachname" class="whitespace-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.nachname' | translate }}
-          <p-columnFilter type="text" field="personalien.nachname" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.nachname"></p-sortIcon>
+          <p-columnFilter
+            class="isy-print-hide"
+            type="text"
+            field="personalien.nachname"
+            display="menu"
+          ></p-columnFilter>
+          <p-sortIcon class="isy-print-hide" field="personalien.nachname"></p-sortIcon>
         </th>
         <th scope="col" pSortableColumn="personalien.vorname" class="whitespace-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.vorname' | translate }}
-          <p-columnFilter type="text" field="personalien.vorname" display="menu"></p-columnFilter>
-          <p-sortIcon field="personalien.vorname"></p-sortIcon>
+          <p-columnFilter
+            class="isy-print-hide"
+            type="text"
+            field="personalien.vorname"
+            display="menu"
+          ></p-columnFilter>
+          <p-sortIcon class="isy-print-hide" field="personalien.vorname"></p-sortIcon>
         </th>
 
         @for (col of columns; track col.field) {
@@ -65,6 +76,7 @@
             {{ col.header | translate }}
             @if (col.field === 'gender') {
               <p-columnFilter
+                class="isy-print-hide"
                 [type]="col.type"
                 [field]="'personalien.' + col.field"
                 matchMode="in"
@@ -91,20 +103,26 @@
               </p-columnFilter>
             } @else if (col.currency) {
               <p-columnFilter
+                class="isy-print-hide"
                 [type]="col.type"
                 [field]="'personalien.' + col.field"
                 display="menu"
                 [currency]="col.currency.currencyCode"
               ></p-columnFilter>
             } @else {
-              <p-columnFilter [type]="col.type" [field]="'personalien.' + col.field" display="menu"></p-columnFilter>
+              <p-columnFilter
+                class="isy-print-hide"
+                [type]="col.type"
+                [field]="'personalien.' + col.field"
+                display="menu"
+              ></p-columnFilter>
             }
-            <p-sortIcon [field]="'personalien.' + col.field"></p-sortIcon>
+            <p-sortIcon class="isy-print-hide" [field]="'personalien.' + col.field"></p-sortIcon>
           </th>
         }
         <th scope="col" pSortableColumn="personalien.state" class="whitespace-nowrap">
           {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
-          <p-columnFilter field="personalien.state" matchMode="equals" display="menu">
+          <p-columnFilter class="isy-print-hide" field="personalien.state" matchMode="equals" display="menu">
             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
               <p-select
                 [ariaLabel]="'isyAngularWidgetsDemo.labels.state' | translate"
@@ -119,9 +137,9 @@
               </p-select>
             </ng-template>
           </p-columnFilter>
-          <p-sortIcon field="personalien.state"></p-sortIcon>
+          <p-sortIcon class="isy-print-hide" field="personalien.state"></p-sortIcon>
         </th>
-        <th scope="col" class="whitespace-nowrap">
+        <th scope="col" class="whitespace-nowrap isy-print-hide">
           {{ 'isyAngularWidgetsDemo.labels.actions' | translate }}
         </th>
       </tr>
@@ -140,7 +158,7 @@
           </td>
         }
         <td>{{ person.personalien.state | translate }}</td>
-        <td>
+        <td class="isy-print-hide">
           <div class="flex gap-2">
             <p-button
               icon="pi pi-pencil"
@@ -171,7 +189,10 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td [attr.colspan]="selectedColumns.length + 4">
+        <td class="isy-print-hide" [attr.colspan]="selectedColumns.length + 4">
+          {{ 'isyAngularWidgetsDemo.resultList.emptyText' | translate }}
+        </td>
+        <td class="isy-print-only" [attr.colspan]="selectedColumns.length + 3">
           {{ 'isyAngularWidgetsDemo.resultList.emptyText' | translate }}
         </td>
       </tr>

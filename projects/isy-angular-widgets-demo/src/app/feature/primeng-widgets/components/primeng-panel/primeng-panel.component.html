@@ -1,10 +1,10 @@
-<div class="flex flex-col p-4">
+<div class="demo-print-page flex flex-col p-4">
   <h1>PrimeNG Panels</h1>
   <h2>Content Organisor</h2>
   <div class="grid grid-cols-12 gap-4">
     <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="accordion" [level]="3" label="Accordion" ariaLabel="Link zu Accordion" />
-      <p-accordion value="0">
+      <p-accordion value="0" class="isy-print-current-state">
         <p-accordion-panel value="0">
           <p-accordion-header>Header I</p-accordion-header>
           <p-accordion-content>
@@ -43,13 +43,13 @@
     </div>
     <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="panel" [level]="3" label="Panel" ariaLabel="Link zu Panel" />
-      <p-panel header="Panel Header" [toggleable]="true"> Content </p-panel>
+      <p-panel header="Panel Header" [toggleable]="true" class="isy-print-current-state"> Content </p-panel>
     </div>
     <div class="col-span-12 flex flex-col gap-2" style="min-width: 0">
       <demo-section-heading anchorId="tabs" [level]="3" label="Tabs" ariaLabel="Link zu Tabs" />
       <div class="flex flex-col gap-6 w-full" style="min-width: 0">
         <p-card [header]="'isyAngularWidgetsDemo.labels.panelTabsStandardLegend' | translate">
-          <p-tabs [value]="standardTabs[0].value" class="mt-4">
+          <p-tabs [value]="standardTabs[0].value" class="mt-4 isy-print-current-state">
             <p-tablist>
               @for (tab of standardTabs; track tab.value) {
                 <p-tab [value]="tab.value">
@@ -69,7 +69,12 @@
         </p-card>
 
         <p-card [header]="'isyAngularWidgetsDemo.labels.panelTabsScrollableLegend' | translate">
-          <p-tabs [value]="scrollableTabs[0].value" [scrollable]="true" [showNavigators]="true">
+          <p-tabs
+            [value]="scrollableTabs[0].value"
+            [scrollable]="true"
+            [showNavigators]="true"
+            class="isy-print-current-state"
+          >
             <p-tablist class="mt-4">
               @for (tab of scrollableTabs; track tab.value) {
                 <p-tab [value]="tab.value">{{
@@ -100,7 +105,7 @@
     <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="fieldset" [level]="3" label="Fieldset" ariaLabel="Link zu Fieldset" />
       <p-fieldset legend="Fieldset Header">
-        <form class="flex flex-col gap-4" novalidate>
+        <form class="flex flex-col gap-4 isy-print-form" novalidate>
           <div class="flex flex-col gap-1">
             <label for="fieldset-required-input" class="font-medium">
               {{ 'isyAngularWidgetsDemo.labels.panelFieldsetRequiredLabel' | translate }}
@@ -232,7 +237,7 @@
             {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: {index: 1} }}
           </div>
         </div>
-        <div class="flex pt-12 justify-end">
+        <div class="flex pt-12 justify-end isy-print-hide">
           <p-button
             [label]="'isyAngularWidgets.wizard.next' | translate"
             icon="pi pi-arrow-right"
@@ -250,7 +255,7 @@
             {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: {index: 2} }}
           </div>
         </div>
-        <div class="flex pt-12 justify-end gap-2">
+        <div class="flex pt-12 justify-end gap-2 isy-print-hide">
           <p-button
             [label]="'isyAngularWidgets.wizard.back' | translate"
             severity="secondary"
@@ -274,7 +279,7 @@
             {{ 'isyAngularWidgetsDemo.messages.panelStepperStepContent' | translate: {index: 3} }}
           </div>
         </div>
-        <div class="flex pt-12 justify-end gap-2">
+        <div class="flex pt-12 justify-end gap-2 isy-print-hide">
           <p-button
             [label]="'isyAngularWidgets.wizard.back' | translate"
             severity="secondary"
@@ -286,7 +291,7 @@
       </ng-template>
 
       @if (isVerticalStepper()) {
-        <p-stepper [(value)]="stepperValue">
+        <p-stepper [(value)]="stepperValue" class="isy-print-current-state">
           <p-step-item [value]="1">
             <p-step>
               {{ 'isyAngularWidgetsDemo.labels.panelStepperStepLabel' | translate: {index: 1} }}
@@ -321,7 +326,7 @@
           </p-step-item>
         </p-stepper>
       } @else {
-        <p-stepper [(value)]="stepperValue">
+        <p-stepper [(value)]="stepperValue" class="isy-print-current-state">
           <p-step-list>
             <p-step [value]="1">
               {{ 'isyAngularWidgetsDemo.labels.panelStepperStepLabel' | translate: {index: 1} }}

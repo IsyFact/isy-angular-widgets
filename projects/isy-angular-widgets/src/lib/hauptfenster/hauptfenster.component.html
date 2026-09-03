@@ -1,5 +1,5 @@
 <div class="isy-hauptfenster flex flex-col min-h-screen" [class.isy-hauptfenster--responsive]="responsive">
-  <isy-skip-links [links]="links"></isy-skip-links>
+  <isy-skip-links class="isy-print-hide" [links]="links"></isy-skip-links>
 
   @if (unsupportedBrowserMessage) {
     <p-message
@@ -14,7 +14,7 @@
     </p-message>
   }
 
-  <header class="grid grid-cols-12 gap-4 px-2 pb-2">
+  <header class="isy-print-hide grid grid-cols-12 gap-4 px-2 pb-2">
     <div class="col-span-6 isy-hauptfenster-anbieterlogo-bereich dont-print">
       @if (logoAnbieterAwl) {
         <a href="/">
@@ -61,7 +61,7 @@
     </div>
   </header>
 
-  <nav [attr.aria-label]="configService.getTranslation('hauptfenster.aria.mainNavigation')">
+  <nav class="isy-print-hide" [attr.aria-label]="configService.getTranslation('hauptfenster.aria.mainNavigation')">
     <p-megaMenu [model]="items" class="dont-print">
       <ng-template pTemplate="end">
         <ng-content select="[Hauptnavigation-Tools]"></ng-content>
@@ -69,7 +69,10 @@
     </p-megaMenu>
   </nav>
 
-  <div class="isy-hauptfenster-titelzeile p-2" [style]="'background-color:' + applicationGroupColor + ';'">
+  <div
+    class="isy-hauptfenster-titelzeile isy-print-hide p-2"
+    [style]="'background-color:' + applicationGroupColor + ';'"
+  >
     @if (title) {
       <div>{{ title }}</div>
     } @else {

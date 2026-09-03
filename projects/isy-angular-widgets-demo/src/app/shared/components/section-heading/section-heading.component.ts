@@ -23,7 +23,7 @@ export type HeadingLevel = 2 | 3;
       <h2 [id]="anchorId" class="section-heading">
         {{ label }}
         <a
-          class="section-anchor"
+          class="section-anchor isy-print-hide"
           [href]="buildAnchorHref(anchorId)"
           (click)="anchorNav.scrollToAnchor($event, anchorId)"
           [attr.aria-label]="ariaLabel"
@@ -34,7 +34,7 @@ export type HeadingLevel = 2 | 3;
       <h3 [id]="anchorId" class="section-heading">
         {{ label }}
         <a
-          class="section-anchor"
+          class="section-anchor isy-print-hide"
           [href]="buildAnchorHref(anchorId)"
           (click)="anchorNav.scrollToAnchor($event, anchorId)"
           [attr.aria-label]="ariaLabel"

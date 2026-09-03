@@ -86,4 +86,23 @@ describe('Unit Tests: PrimengDataComponent', () => {
     spectator.click('h3#timeline');
     expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
   });
+
+  it('should exclude data controls from print while keeping the rendered table pages', () => {
+    const paginatorSection = spectator.query('h3#paginator')?.closest<HTMLElement>('.col-span-12');
+    const printableTables = spectator.queryAll('p-table.isy-print-table, p-treetable.isy-print-table');
+    const columnControls = spectator.queryAll(
+      'p-table p-columnfilter, p-table p-sorticon, p-treetable p-treetablesorticon'
+    );
+    const visibleProductRows = spectator.queryAll('p-table tbody tr');
+    const visibleTreeTableRows = spectator.queryAll('p-treetable tbody tr');
+    const currentItemsScroller = spectator.query('p-scroller.isy-print-current-items');
+
+    expect(paginatorSection?.classList.contains('isy-print-hide')).toBeTrue();
+    expect(printableTables.length).toBe(2);
+    expect(columnControls.length).toBeGreaterThan(0);
+    expect(columnControls.every((control) => control.closest('.isy-print-hide'))).toBeTrue();
+    expect(visibleProductRows.length).toBe(5);
+    expect(visibleTreeTableRows.length).toBe(3);
+    expect(currentItemsScroller).toBeTruthy();
+  });
 });

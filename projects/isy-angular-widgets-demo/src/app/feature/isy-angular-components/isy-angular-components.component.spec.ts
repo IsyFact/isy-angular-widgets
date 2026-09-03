@@ -58,6 +58,11 @@ describe('IsyAngularComponentsComponent', () => {
     });
   });
 
+  it('should keep component values printable and exclude display configuration actions', () => {
+    expect(spectator.query('form.isy-print-form')).toBeTruthy();
+    expect(spectator.queryAll('.demo-print-configuration.isy-print-hide')).toHaveLength(2);
+  });
+
   it('should scroll to anchor after initialization when fragment is emitted', () => {
     fragment$.next('formwrapper');
     expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('formwrapper');

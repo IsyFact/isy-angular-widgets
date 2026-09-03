@@ -1,0 +1,536 @@
+:where(.isy-print-only) {
+  display: none !important;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
+
+  :where(html, body) {
+    width: auto;
+    min-width: 0;
+    color: #000;
+    background: #fff;
+  }
+
+  :where(body) {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    margin-block: 0 0.5em;
+    color: #000;
+    line-height: 1.2;
+    break-after: avoid-page;
+  }
+
+  :where(p, li, dt, dd) {
+    orphans: 3;
+    widows: 3;
+  }
+
+  :where(a) {
+    color: #000;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+  }
+
+  :where(.isy-print-hide, .dont-print) {
+    display: none !important;
+  }
+
+  :where(.isy-print-only) {
+    display: revert !important;
+  }
+
+  :where(.isy-print-content) {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    color: #000;
+    background: #fff;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  :where(.isy-print-content > *) {
+    max-width: 100%;
+  }
+
+  :where(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :where(
+    .p-card,
+    .p-panel,
+    .p-fieldset,
+    .p-accordion,
+    .p-tabs,
+    .p-toolbar,
+    .p-menu,
+    .p-menubar,
+    .p-megamenu,
+    .p-panelmenu,
+    .p-tieredmenu,
+    .p-breadcrumb
+  ) {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  :where(.p-toolbar, .p-menu, .p-menubar, .p-megamenu, .p-panelmenu, .p-tieredmenu, .p-breadcrumb) {
+    color: #000 !important;
+    background: #fff !important;
+    border-color: #666 !important;
+    box-shadow: none !important;
+  }
+
+  :where(.p-toolbar, .p-menubar, .p-megamenu, .p-tablist-tab-list, .p-breadcrumb-list, .p-steps-list) {
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+  }
+
+  :where(.p-chart) {
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  :where(.p-chart canvas) {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  :where(.p-chart, .p-message, .p-tag, .p-badge, .p-metergroup, .p-progressbar) {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  :where(.p-scrollpanel, .p-scrollpanel-content-container, .p-scrollpanel-content) {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  :where(.p-scrollpanel-bar) {
+    display: none !important;
+  }
+
+  :where(fieldset, .p-card, .p-panel) {
+    color: #000;
+    background: #fff;
+    border-color: #666;
+    box-shadow: none;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  /* Large, stateful widgets may split across pages instead of overflowing the printable area. */
+  :where(.isy-print-form, .p-tabpanel, .p-dialog, .p-dialog-content, .p-drawer, .p-drawer-content) {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  /* Print the real form controls in a predictable single-column reading order. */
+  :where(.isy-print-form) {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  :where(.isy-print-form .grid) {
+    display: block !important;
+  }
+
+  :where(.isy-print-form .grid > *) {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-block: 0 3mm;
+  }
+
+  :where(.isy-print-form label, .isy-print-overlay label) {
+    color: #000 !important;
+    font-weight: 600;
+    break-after: avoid-page;
+  }
+
+  :where(
+    .isy-print-form input:not([type='checkbox']):not([type='radio']):not([type='range']),
+    .isy-print-form textarea,
+    .isy-print-form select,
+    .isy-print-overlay input:not([type='checkbox']):not([type='radio']):not([type='range']),
+    .isy-print-overlay textarea,
+    .isy-print-overlay select,
+    .isy-print-form .p-select,
+    .isy-print-form .p-multiselect,
+    .isy-print-form .p-cascadeselect,
+    .isy-print-form .p-treeselect,
+    .isy-print-form .p-listbox
+  ) {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 1mm 0 !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    opacity: 1 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid #666 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  :where(.isy-print-form textarea, .isy-print-overlay textarea) {
+    field-sizing: content;
+    min-height: 2.8em;
+    white-space: pre-wrap;
+  }
+
+  :where(.isy-print-form input, .isy-print-form textarea, .isy-print-overlay input, .isy-print-overlay textarea) {
+    &::placeholder {
+      color: transparent !important;
+    }
+  }
+
+  /* Preserve the complete selected value or editor content when screen widgets normally clip it. */
+  :where(
+    .isy-print-form .p-select-label,
+    .isy-print-form .p-multiselect-label,
+    .isy-print-form .p-chip-label,
+    .isy-print-form .p-listbox-list,
+    .isy-print-form .p-editor-content,
+    .isy-print-overlay .p-dialog-content,
+    .isy-print-overlay .p-drawer-content
+  ) {
+    height: auto !important;
+    max-height: none !important;
+    color: #000 !important;
+    background: transparent !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: anywhere;
+  }
+
+  :where(
+    .isy-print-form .p-checkbox,
+    .isy-print-form .p-radiobutton,
+    .isy-print-form .p-toggleswitch,
+    .isy-print-form .p-togglebutton,
+    .isy-print-form .p-selectbutton,
+    .isy-print-form .p-rating,
+    .isy-print-form .p-slider,
+    .isy-print-form .p-colorpicker,
+    .isy-print-form .p-knob
+  ) {
+    color: #000 !important;
+    opacity: 1 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  :where(.isy-print-form .p-slider) {
+    width: calc(100% - 4mm) !important;
+    margin-inline: 2mm !important;
+  }
+
+  /* Remove interaction-only affordances while keeping the current field values visible. */
+  :where(
+    .isy-print-form .p-select-dropdown,
+    .isy-print-form .p-select-clear-icon,
+    .isy-print-form .p-multiselect-dropdown,
+    .isy-print-form .p-multiselect-clear-icon,
+    .isy-print-form .p-multiselect-chip-icon,
+    .isy-print-form .p-chip-remove-icon,
+    .isy-print-form .p-cascadeselect-dropdown,
+    .isy-print-form .p-treeselect-dropdown,
+    .isy-print-form .p-datepicker-dropdown,
+    .isy-print-form .p-datepicker-input-icon-container,
+    .isy-print-form .p-inputnumber-button-group,
+    .isy-print-form .p-inputnumber-button,
+    .isy-print-form .p-autocomplete-dropdown,
+    .isy-print-form .p-autocomplete-clear-icon,
+    .isy-print-form .p-password-mask-icon,
+    .isy-print-form .p-password-clear-icon,
+    .isy-print-form .p-fileupload-header,
+    .isy-print-form .p-fileupload-file-actions,
+    .isy-print-form .p-fileupload-choose-button,
+    .isy-print-form .p-fileupload-upload-button,
+    .isy-print-form .p-fileupload-cancel-button,
+    .isy-print-form .p-fileupload-file-remove-button,
+    .isy-print-form .p-editor-toolbar,
+    .isy-print-form .p-inputgroup p-button,
+    .isy-print-form .input-char-button
+  ) {
+    display: none !important;
+  }
+
+  :where(.isy-print-form .p-multiselect-chip) {
+    padding: 0 !important;
+    color: #000 !important;
+    background: transparent !important;
+    border: 0 !important;
+  }
+
+  :where(.isy-print-form .p-fileupload-content, .isy-print-form .p-editor-content) {
+    height: auto !important;
+    max-height: none !important;
+    color: #000 !important;
+    background: transparent !important;
+    border-color: #666 !important;
+    overflow: visible !important;
+  }
+
+  /* Stateful containers print only their active tab, step, accordion section, or panel. */
+  :where(
+    .isy-print-current-state .p-tablist-content,
+    .isy-print-current-state .p-tablist-tab-list,
+    .isy-print-current-state .p-tabpanels,
+    .isy-print-current-state .p-tabpanel,
+    .isy-print-current-state .p-accordioncontent,
+    .isy-print-current-state .p-panel-content-container,
+    .isy-print-current-state .p-steppanel-content
+  ) {
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    color: #000 !important;
+    background: #fff !important;
+    overflow: visible !important;
+  }
+
+  :where(
+    .isy-print-current-state .p-tab:not([data-p-active='true']),
+    .isy-print-current-state .p-tabpanel[hidden],
+    .isy-print-current-state .p-accordioncontent[data-p-active='false'],
+    .isy-print-current-state.p-panel.p-panel-collapsed .p-panel-content-container,
+    .isy-print-current-state .p-stepitem[data-p-active='false'],
+    .isy-print-current-state .p-step:not([data-p-active='true']),
+    .isy-print-current-state .p-steppanel[data-p-active='false'] .p-steppanel-content-wrapper
+  ) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  :where(
+    .isy-print-current-state .p-tablist-nav-button,
+    .isy-print-current-state .p-tablist-active-bar,
+    .isy-print-current-state .p-accordionheader-toggle-icon,
+    .isy-print-current-state .p-accordionheader > [data-p-icon],
+    .isy-print-current-state .p-panel-toggle-button,
+    .isy-print-current-state .p-stepper-separator
+  ) {
+    display: none !important;
+  }
+
+  :where(
+    .isy-print-current-state .p-tab[data-p-active='true'],
+    .isy-print-current-state .p-accordionpanel[data-p-active='true'] > .p-accordionheader,
+    .isy-print-current-state .p-panel-title,
+    .isy-print-current-state .p-step[data-p-active='true']
+  ) {
+    padding: 0 0 2mm !important;
+    color: #000 !important;
+    font-size: 12pt;
+    font-weight: 700;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid #666 !important;
+    box-shadow: none !important;
+    break-after: avoid-page;
+  }
+
+  /* Move open overlays into document flow so their current content can be paginated. */
+  :where(.p-dialog-mask, .p-drawer-mask, .isy-print-overlay-mask) {
+    position: static !important;
+    inset: auto !important;
+    z-index: auto !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    pointer-events: none !important;
+  }
+
+  :where(.p-dialog, .p-drawer, .p-popover, .p-confirmdialog, .p-confirmpopup, .isy-print-overlay) {
+    position: static !important;
+    inset: auto !important;
+    z-index: auto !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin-block: 4mm !important;
+    color: #000 !important;
+    background: #fff !important;
+    border: 1px solid #666 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+  }
+
+  :where(.p-overflow-hidden) {
+    overflow: visible !important;
+  }
+
+  :where(
+    .p-dialog-header-actions,
+    .p-dialog-footer,
+    .p-drawer-close-button,
+    .p-confirmpopup-footer,
+    .p-confirmdialog-accept-button,
+    .p-confirmdialog-reject-button,
+    .p-datepicker-panel,
+    .p-blockui,
+    .p-scrolltop,
+    .p-toast,
+    .p-tooltip
+  ) {
+    display: none !important;
+  }
+
+  :where(table, .p-datatable-table, .p-treetable-table) {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    border-collapse: collapse;
+    table-layout: auto !important;
+  }
+
+  /*
+   * The A4 portrait profile is verified against the demo's seven visible business columns.
+   * Wider domain tables need downstream print overrides; row and header pagination remain browser best effort.
+   */
+  :where(.isy-print-table table, table.isy-print-table) {
+    font-size: 8pt;
+    line-height: 1.25;
+  }
+
+  :where(thead, .p-datatable-thead, .p-treetable-thead) {
+    display: table-header-group;
+    position: static !important;
+  }
+
+  :where(tbody, .p-datatable-tbody, .p-treetable-tbody) {
+    display: table-row-group;
+  }
+
+  :where(tfoot, .p-datatable-tfoot, .p-treetable-tfoot) {
+    display: table-footer-group;
+    position: static !important;
+  }
+
+  :where(tr, th, td) {
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  :where(th, td) {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    padding: 1.5mm !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+    vertical-align: top;
+  }
+
+  :where(th, .p-datatable-thead > tr > th, .p-treetable-thead > tr > th) {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  :where(.p-datatable, .p-treetable, .p-datatable-table-container, .p-treetable-table-container) {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  :where(.p-datatable-frozen-column, .p-treetable-frozen-column) {
+    position: static !important;
+    inset-inline: auto !important;
+  }
+
+  :where(
+    .p-paginator,
+    .p-datatable-column-resizer,
+    .p-treetable-column-resizer,
+    .p-datatable-filter-overlay,
+    .p-datatable-sort-icon,
+    .p-treetable-sort-icon,
+    .p-sortable-column-badge,
+    .p-panel-toggle-button
+  ) {
+    display: none !important;
+  }
+
+  :where(.isy-print-table .p-datatable-header) {
+    display: none !important;
+  }
+
+  /* Keep pagination and virtualization state intact: only records already present in the DOM are printed. */
+  :where(.isy-print-current-items, .isy-print-current-items .p-virtualscroller, .isy-print-table .p-virtualscroller) {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    contain: none !important;
+    transform: none !important;
+  }
+
+  :where(.isy-print-current-items .p-virtualscroller-content, .isy-print-table .p-virtualscroller-content) {
+    position: static !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    transform: none !important;
+  }
+
+  :where(
+    .isy-print-current-items .p-virtualscroller-spacer,
+    .isy-print-current-items .p-virtualscroller-loader,
+    .isy-print-table .p-virtualscroller-spacer,
+    .isy-print-table .p-virtualscroller-loader,
+    .isy-print-table .p-datatable-virtualscroller-spacer
+  ) {
+    display: none !important;
+  }
+
+  :where(.isy-print-break-before) {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  :where(.isy-print-break-after) {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  :where(.isy-print-break-inside-avoid) {
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+}

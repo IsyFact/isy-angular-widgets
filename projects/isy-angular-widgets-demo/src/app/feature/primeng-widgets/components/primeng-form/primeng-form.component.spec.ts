@@ -96,6 +96,14 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(spectator.queryAll('[class*="md:col-"]')).toHaveLength(0);
   });
 
+  it('should print the currently rendered controls without read-only duplicates', () => {
+    const printableForm = spectator.query('.isy-print-form');
+
+    expect(printableForm).toBeTruthy();
+    expect(spectator.queryAll('.isy-print-form .isy-print-only')).toHaveLength(0);
+    expect(spectator.queryAll('.isy-print-form input').length).toBeGreaterThan(0);
+  });
+
   it('should scroll to the fragment anchor after initialization', () => {
     fragment$.next('inputtext');
     expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('inputtext');

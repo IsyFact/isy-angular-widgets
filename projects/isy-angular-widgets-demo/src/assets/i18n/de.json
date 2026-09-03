@@ -154,6 +154,10 @@
       "close": "Schließen",
       "add": "Hinzufügen"
     },
+    "printHeader": {
+      "date": "Druckdatum",
+      "user": "Benutzer"
+    },
     "labels": {
       "id": "ID",
       "nachname": "Nachname",
@@ -278,6 +282,7 @@
       "exampleSubMenuItem3": "Beispiel Unterpunkt 3",
       "exampleMenuItemDisabled": "Beispiel Menüpunkt (Disabled)",
       "dashboardExampleTitle": "Häufig benutzt",
+      "dashboardCharts": "Diagramme",
       "dashboardExampleText": "Funktionsname",
       "dashboardExampleMessageTitle": "Nachrichten",
       "exampleMessageText": "M. Mustermann, 10:25 Uhr, Meldung: ABCDE...",
@@ -307,9 +312,11 @@
     },
     "websiteTitles": {
       "dashboard": "Dashboard",
+      "pageNotFound": "Seite nicht gefunden",
       "searchObject": "Objekt suchen",
       "displayObject": "Objekt anzeigen",
       "isyAngularComponents": "Isy-Angular Komponenten",
+      "modalarmePatterns": "Modalarme Patterns",
       "primengForm": "PrimeNG Form",
       "primengButton": "PrimeNG Button",
       "primengData": "PrimeNG Data",

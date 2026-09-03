@@ -41,18 +41,22 @@ export class PageTitleService {
         filter((data): data is {title?: string} => !!data && typeof data === 'object'),
         switchMap((data) => {
           const keys = [data.title ?? '', 'isyAngularWidgetsDemo.messages.changePage'];
-          return this.translate.get(keys).pipe(
-            map((res: {[key: string]: string}) => ({
+          return this.translate.stream(keys).pipe(
+            map((res: {[key: string]: string}, emissionIndex) => ({
               title: res[data.title ?? ''],
-              message: res['isyAngularWidgetsDemo.messages.changePage']
+              message: res['isyAngularWidgetsDemo.messages.changePage'],
+              shouldAnnouncePageChange: emissionIndex === 0
             }))
           );
         }),
-        tap(({title, message}) => {
+        tap(({title, message, shouldAnnouncePageChange}) => {
           if (title) {
             this.titleService.setTitle(title);
-            this.announce(`${message} ${title}`);
-            this.requestFocusChange.next('inputElementId');
+
+            if (shouldAnnouncePageChange) {
+              this.announce(`${message} ${title}`);
+              this.requestFocusChange.next('inputElementId');
+            }
           }
         })
       )

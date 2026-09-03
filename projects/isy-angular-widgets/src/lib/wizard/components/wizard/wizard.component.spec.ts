@@ -132,8 +132,8 @@ class StepStubComponent {
   imports: [CommonModule, PTemplateStubDirective, StepperModule],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    <div class="p-dialog">
-      <button class="p-dialog-close-button" type="button" [attr.aria-label]="closeAriaLabel">×</button>
+    <div role="dialog">
+      <button type="button" [attr.aria-label]="closeAriaLabel">×</button>
       <ng-content></ng-content>
       <ng-container *ngIf="footerTpl" [ngTemplateOutlet]="footerTpl.template"></ng-container>
     </div>
@@ -946,7 +946,7 @@ describe('Accessibility Test: WizardComponent', () => {
   });
 
   it('the dialog close icon should have an aria-label attribute with "Close"', () => {
-    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
+    const element = spectator.query('[role="dialog"] button[aria-label]') as HTMLElement;
     expect(element.getAttribute('aria-label')).toBe('Close');
   });
 
