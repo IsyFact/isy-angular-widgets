@@ -51,9 +51,29 @@ Die Bibliothek verwendet keine PrimeFlex-Utilities mehr. Für Utility-Klassen wi
 
 **Migration:**
 
-- Tailwind im Zielprojekt einbinden (inklusive `@tailwindcss/postcss` und `tailwindcss-primeui`).
-- PrimeFlex-Klassen schrittweise durch Tailwind-Utilities ersetzen. Typische Klassen-Mappings und Einbindungsbeispiele stehen im Abschnitt "Migration von PrimeFlex auf Tailwind CSS" der [README](./README.md).
-- Betroffene Formulare, Layouts und responsive Ansichten nach der Umstellung gezielt visuell und funktional prüfen.
+1. PrimeFlex vollständig entfernen – aus der `package.json` sowie aus dem `styles`-Abschnitt der `angular.json`:
+
+   ```bash
+   npm uninstall primeflex
+   npm install --legacy-peer-deps
+   ```
+
+2. Tailwind im Zielprojekt einbinden (inklusive `@tailwindcss/postcss` und `tailwindcss-primeui`). Das Setup ist im Abschnitt [Tailwind CSS manuell einrichten](./README.md#tailwind-css-manuell-einrichten) der README beschrieben.
+
+3. PrimeFlex-Klassen schrittweise durch Tailwind-Utilities ersetzen. Typische Zuordnungen:
+
+   | PrimeFlex | Tailwind CSS |
+   |---|---|
+   | `grid grid-nogutter` | `grid grid-cols-* gap-0` |
+   | `col-12 md:col-6` | `col-span-12 md:col-span-6` |
+   | `p-mt-3` | `mt-3` |
+   | `p-d-flex` | `flex` |
+   | `p-jc-between` | `justify-between` |
+   | `p-ai-center` | `items-center` |
+
+4. Betroffene Formulare, Layouts und responsive Ansichten nach der Umstellung gezielt visuell und funktional prüfen.
+
+Komponentenspezifische `.scss`-Dateien bleiben unberührt. Eine Anpassung ist dort nur erforderlich, wenn PrimeFlex-Klassen direkt verwendet oder nachgebildet wurden.
 
 ### PrimeNG verbleibt auf Version 21
 
@@ -271,7 +291,7 @@ Angular führt `inject()` anstelle der klassischen Constructor-Injection ein.
 
 **Auswirkung:** Betrifft ausschließlich Testcode; das Upgrade kann API-Änderungen enthalten.
 
-**Migration:** Details im [Spectator Changelog](https://github.com/ngneat/spectator/blob/master/CHANGELOG.md) prüfen.
+**Migration:** Details im [Spectator Changelog](https://github.com/ngneat-archive/spectator/blob/master/CHANGELOG.md) prüfen. Das ursprüngliche Repository `ngneat/spectator` ist nicht mehr verfügbar; der Changelog liegt im Archiv der Organisation.
 
 ## Aktualisierte Abhängigkeiten
 
