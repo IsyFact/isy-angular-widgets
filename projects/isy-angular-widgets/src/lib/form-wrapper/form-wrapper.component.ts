@@ -122,7 +122,9 @@ export class FormWrapperComponent implements OnInit, OnChanges, AfterContentInit
     const preferredOrder = Object.keys(this.validationMessages);
     const matchingKey = preferredOrder.find((key) => errors[key] != null) ?? Object.keys(errors)[0];
 
-    return matchingKey ? (this.validationMessages[matchingKey] ?? 'Ungültige Eingabe') : null;
+    return matchingKey
+      ? (this.validationMessages[matchingKey] ?? this.configService.getTranslation('formWrapper.invalid'))
+      : null;
   }
 
   get labelOptionClass(): string {
