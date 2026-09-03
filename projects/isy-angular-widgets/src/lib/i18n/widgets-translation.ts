@@ -25,6 +25,7 @@ export interface WidgetsTranslation {
   };
   formWrapper?: {
     required?: string;
+    invalid?: string;
   };
   seitentoolbar?: {
     back?: string;

@@ -36,7 +36,8 @@ export class WidgetsConfigService {
       }
     },
     formWrapper: {
-      required: 'Pflichtfeld'
+      required: 'Pflichtfeld',
+      invalid: 'Ungültige Eingabe'
     },
     seitentoolbar: {
       back: 'Zurück zur Übersicht'
