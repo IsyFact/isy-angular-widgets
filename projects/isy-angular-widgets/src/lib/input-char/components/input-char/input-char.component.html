@@ -1,6 +1,6 @@
 <button
   #openDialogButton
-  [attr.aria-label]="configService.getTranslation('inputChar.aria.togglePicker')"
+  [attr.aria-label]="togglePickerAriaLabel ?? configService.getTranslation('inputChar.aria.togglePicker')"
   class="input-char-button"
   [class.p-button-outlined]="outlinedInputCharButton"
   type="button"

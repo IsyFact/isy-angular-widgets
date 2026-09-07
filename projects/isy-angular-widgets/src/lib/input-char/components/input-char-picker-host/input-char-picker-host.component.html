@@ -3,7 +3,7 @@
     [header]="state.header ?? configService.getTranslation('inputChar.title')"
     [visible]="pickerService.visible()"
     [closable]="state.closable"
-    [closeAriaLabel]="configService.getTranslation('inputChar.aria.closePicker')"
+    [closeAriaLabel]="state.closePickerAriaLabel ?? configService.getTranslation('inputChar.aria.closePicker')"
     [draggable]="state.draggable"
     [resizable]="state.resizable"
     [dismissableMask]="state.dismissableMask"
