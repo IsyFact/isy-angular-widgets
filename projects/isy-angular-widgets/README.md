@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://www.bva.bund.de/DE/Das-BVA/Aufgaben/I/Informationstechnik/IsyFact/isyfact_node.html">
-    <img src="https://raw.githubusercontent.com/IsyFact/isy-angular-widgets/main/.github/assets/logo-isyfact.jpg" alt="IsyFact" width="340">
+    <img src="../../.github/assets/logo-isyfact.jpg" alt="IsyFact" width="340">
   </a>
 </h1>
 
@@ -46,19 +46,18 @@ Praktische und querschnittliche Beispiele für die Umsetzung von Styleguide-Patt
 
 ## Features
 
-- Hauptfenster-Widget mit Seitenleisten, UserInfo und Navigation
-- Standard-IsyFact-Theme mit konfigurierbaren Farben für Hauptnavigationspunkte
-- MegaMenu im Header
-- Unterstützung für Rollen und Rechte
-- Widget für die Anzeige eines ungewissen Datums mit Eingabemaske für das deutsche Datumsformat
-- Security-Modul für die Beschränkung von Rechten auf Navigationspunkte
-- Direktive zur Einschränkung der Sichtbarkeit einzelner Widgets
-- Wizard-Widget
-- Special-Char-Picker-Widgets
-- Spezifische Validator-Methoden für Eingabefelder
-- Form-Wrapper
-- Skip-Links-Komponente für barrierefreies Springen zu Hauptinhalten
-- Behördenspezifische Widgets und Widgets aus PrimeNG in deutscher und englischer Sprache
+| Feature | Nutzen |
+|---|---|
+| **Hauptfenster** | Einheitlicher Anwendungsrahmen für portalbasierte Behörden-IT-Landschaften – Kopfbereich, Navigation, Seitenleisten und Benutzerinformationen. Fachanwendungen betten ihre Inhalte ein und fügen sich ohne Zusatzaufwand ins Portal ein. |
+| **IsyFact-Theme** | Orientiert sich an den Richtlinien zur Barrierefreiheit und am Styleguide des Bundes. Über PrimeNG-Presets anpassbar, sodass sich einzelne Portalanwendungen abheben können, ohne den gemeinsamen Rahmen zu verlassen. |
+| **Berechtigungen** | Zwei Ebenen aus einer Rechtekonfiguration: Der `AuthGuard` schützt Routen und damit ganze Navigationsbereiche, die Strukturdirektive `*isyPermitted` bindet einzelne Bedienelemente wie Buttons an ein Recht. |
+| **Ungewisses Datum** | Erfasst unvollständige Datumsangaben wie `00.00.1985` oder `xx.03.1985` in deutscher Eingabemaske – originalgetreu statt mit erfundenen Platzhaltern. |
+| **Sonderzeichen-Picker** | Findet diakritische Zeichen über das Grundzeichen: Die Suche nach `E` liefert alle 44 Varianten (`È`, `É`, `Ê`, `Ë`, `Ē`, `Ě` …). Vollständig per Tastatur bedienbar, inklusive griechischer und kyrillischer Zeichen. |
+| **Validatoren** | Prüfungen, die Angular nicht mitbringt: **DIN 91379** für Namens- und Adressfelder (Datentypen A–E), ungewisse Datumsangaben sowie ISO-Datum und -Zeit – ohne Abhängigkeit zu `moment.js`. |
+| **Form-Wrapper** | Vereinheitlicht Label, Pflichtfeldkennzeichnung und Fehlertext. Verdrahtet `aria-describedby`, `aria-invalid` und `aria-errormessage` automatisch mit dem Eingabefeld. |
+| **Skip-Links** | Sprungmarken zu den Hauptinhalten für Tastatur- und Screenreader-Nutzende, inklusive zuverlässiger Fokussteuerung auf das Sprungziel. |
+
+DIN 91379 und die ungewissen Datumsangaben zielen auf denselben Anwendungsfall: die Erfassung von Personendaten in behördlichen Vorgängen – Namen zeichengetreu, unvollständig bekannte Angaben unverfälscht.
 
 ## Installation
 
@@ -499,15 +498,7 @@ Die Datumsvalidierung der Bibliothek kommt ohne `moment.js` aus. Die Validatoren
 
 Tailwind CSS v4 setzt moderne Browser voraus. Vor der Einführung in bestehenden Projekten sollte geprüft werden, ob die Browser-Anforderungen des Zielprojekts damit vereinbar sind.
 
-Das Hauptfenster prüft beim Laden der Anwendung zusätzlich, ob die verwendete Browser-Version unterstützt wird, und zeigt andernfalls eine Warnmeldung an. Die Prüfung ist standardmäßig aktiviert und lässt sich über das Input-Property `checkBrowserVersion` deaktivieren:
-
-```html
-<isy-hauptfenster [checkBrowserVersion]="false">
-  <!-- Anwendungscode -->
-</isy-hauptfenster>
-```
-
-Die Texte der Warnmeldung sind über den `WidgetsConfigService` konfigurierbar.
+Das Hauptfenster prüft beim Laden der Anwendung zusätzlich, ob die verwendete Browser-Version unterstützt wird, und zeigt andernfalls eine Warnmeldung an. Die Texte der Warnmeldung sind über den `WidgetsConfigService` konfigurierbar.
 
 ## Migration auf eine neue Version
 
