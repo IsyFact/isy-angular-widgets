@@ -87,7 +87,7 @@ npm run start
 | Skript | Beschreibung |
 |---|---|
 | `npm run start` | Startet die Demo-Anwendung im Development-Server |
-| `npm run watch` | Baut die Bibliothek im Watch-Modus |
+| `npm run watch` | Baut ein Projekt im Watch-Modus; das Projekt ist anzugeben, z. B. `npm run watch -- isy-angular-widgets` |
 | `npm run build` | Baut Bibliothek, Demo-Anwendung und Schematics |
 | `npm run build:widgets_lib` | Baut ausschließlich die Bibliothek inklusive Schematics |
 | `npm run build:widgets_demo` | Baut ausschließlich die Demo-Anwendung |
@@ -97,8 +97,14 @@ npm run start
 | `npm run prettier:check` | Prüft die Codeformatierung |
 | `npm run prettier:fix` | Behebt Formatierungsfehler automatisch |
 | `npm run e2e` | Führt die E2E-Tests der Demo-Anwendung aus |
-| `npm run compodoc:build` | Erzeugt die API-Dokumentation (`compodoc:serve` zeigt sie lokal an) |
+| `npm run compodoc:build` | Erzeugt die API-Dokumentation nach `docs/` (`compodoc:serve` zeigt sie lokal an) |
 | `npm run generate-browser-support` | Aktualisiert die Browser-Support-Konfiguration |
+
+> **Hinweis:** `compodoc:build` legt die erzeugte API-Dokumentation im Verzeichnis `docs/` ab, in dem auch die Antora-Konzeptdokumentation liegt. Die generierten Dateien sind nicht in der `.gitignore` enthalten und sollten vor einem Commit wieder entfernt werden:
+>
+> ```shell
+> git clean -fd docs/
+> ```
 
 ## Qualitätssicherung
 
@@ -118,11 +124,15 @@ Zusätzlich führt die CI einen Compodoc-Build, eine SBOM-Erzeugung und einen So
 
 ### E2E-Tests
 
-Für die Demo-Anwendung sind exemplarisch einige E2E-Tests mit [TestCafe](https://testcafe.io/) umgesetzt. Vor der Ausführung muss die Demo-Anwendung gestartet werden. Benötigt wird der Browser Chrome; alternativ kann im `e2e`-Skript ein anderer Browser eingetragen werden.
+Für die Demo-Anwendung sind exemplarisch einige E2E-Tests mit [TestCafe](https://testcafe.io/) umgesetzt. TestCafe ist keine Abhängigkeit des Repositorys und wird beim Aufruf über `npx` nachgeladen.
+
+Vor der Ausführung muss die Demo-Anwendung unter <http://localhost:4200> laufen (`npm run start`). Das Skript startet Chrome im Headless-Modus; alternativ kann im `e2e`-Skript ein anderer Browser eingetragen werden.
 
 ```shell
 npm run e2e
 ```
+
+> **Hinweis für macOS:** TestCafe benötigt die Berechtigung zur Bildschirmaufnahme. Ohne diese bricht der Lauf mit `UnableToAccessScreenRecordingAPIError` ab. Die Berechtigung wird unter *Systemeinstellungen → Datenschutz & Sicherheit → Bildschirmaufnahme* für `TestCafe Browser Tools` erteilt.
 
 ## Bibliothek lokal in einem anderen Projekt testen
 
@@ -153,10 +163,13 @@ npm install "file:[WIDGETS_LIB_PATH].tgz" --legacy-peer-deps
 Anschließend kann die Schematic der Bibliothek ausgeführt werden:
 
 ```shell
-ng generate @isyfact/isy-angular-widgets:ng-add
+npx ng generate @isyfact/isy-angular-widgets:ng-add
+npm install --legacy-peer-deps
 ```
 
 > **Hinweis:** `ng add` sollte nicht direkt auf die lokale TGZ-Datei angewendet werden, da die Angular CLI die Paketinformationen lokaler Dateien unter Umständen nicht korrekt ausliest.
+
+Der Schematic-Lauf endet in Angular-22-Projekten mit der Meldung `The Schematic workflow failed.`; die Konfiguration ist zu diesem Zeitpunkt bereits vollständig geschrieben. Details dazu stehen in der [README der Bibliothek](projects/isy-angular-widgets/README.md#installation).
 
 Hintergründe zur Versionskombination aus Angular 22 und PrimeNG 21 stehen in der [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md).
 
@@ -202,7 +215,7 @@ Die Vorbereitung eines Releases erfolgt über einen Branch nach dem Schema `rele
 | [README der Bibliothek](projects/isy-angular-widgets/README.md) | Verwendung der Bibliothek in eigenen Anwendungen |
 | [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) | Breaking Changes und Migrationshinweise je Version |
 | [CHANGELOG.md](CHANGELOG.md) | Vollständige Liste aller Änderungen |
-| [Konzept Angular](https://isyfact.github.io/isy-angular-widgets-doc/current/konzept/konzept.html) | Konzeptdokumentation der Bibliothek |
+| [Konzept Angular](https://isyfact.github.io/angular/current/konzept.html) | Konzeptdokumentation der Bibliothek |
 
 ## Lizenz
 

@@ -14,9 +14,6 @@
 - IFS-5717: MultiSelectButtonComponent: Aktualisierung des "Alle"-Labels bei Sprachwechsel zur Laufzeit korrigiert.
 ## Dokumentation
 - IFS-5725: Die Dokumentationsstruktur des Repositories wurde überarbeitet
-  * Migrationshinweise stehen nun gebündelt in der `MIGRATION.md` der Bibliothek; die `UPDATELOG.md` wurde entfernt
-  * Eine `CONTRIBUTING.md` beschreibt Branch-Modell, Commit-Konventionen und den Pull-Request-Prozess
-  * Die Root-`README.md` richtet sich an die Weiterentwicklung des Bausteins, die Bibliotheks-README an konsumierende Anwendungen
 
 # 22.0.0-next.1 - 04.08.2026
 ## Breaking Changes

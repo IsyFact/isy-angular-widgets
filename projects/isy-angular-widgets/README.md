@@ -96,21 +96,34 @@ npx ng generate @isyfact/isy-angular-widgets:ng-add
 npm install --legacy-peer-deps
 ```
 
-Die Bibliothek verwendet weiterhin PrimeNG 21. Da PrimeNG 21 für Angular 21 entwickelt wurde, meldet `npm` einen Peer-Dependency-Konflikt. Die Schematic überspringt deshalb den automatischen Package-Install und gibt einen Hinweis aus; die Installation wird anschließend manuell mit `--legacy-peer-deps` ausgeführt.
+Die Bibliothek verwendet weiterhin PrimeNG 21. Da PrimeNG 21 für Angular 21 entwickelt wurde, meldet `npm` einen Peer-Dependency-Konflikt (`ERESOLVE`). Deshalb ist in einem Angular-22-Projekt bei jeder Installation `--legacy-peer-deps` erforderlich – auch für später hinzugefügte Pakete.
+
+> **Bekanntes Problem:** Die Schematic startet abschließend ein `npm install` ohne `--legacy-peer-deps`. Dieser Schritt schlägt in Angular-22-Projekten mit `ERESOLVE` fehl und die Angular CLI meldet `The Schematic workflow failed.`. Alle Dateien und Konfigurationen sind zu diesem Zeitpunkt bereits geschrieben, die Meldung kann daher ignoriert werden. Der abschließende Aufruf von `npm install --legacy-peer-deps` installiert die eingetragenen Abhängigkeiten und schließt die Installation ab.
 
 Die Kombination aus Angular 22 und PrimeNG 21 ist im geprüften Projektumfang lauffähig, stellt jedoch keine offiziell deklarierte Versionskombination dar. Die tatsächlich verwendeten PrimeNG-Komponenten sollten in der eigenen Anwendung zusätzlich getestet werden – Hintergründe dazu stehen in der [MIGRATION.md](./MIGRATION.md).
 
 ### Was die Schematic einrichtet
 
-- Hinzufügen und Installation der Bibliothek sowie der benötigten Abhängigkeiten
+- Eintragen der Bibliothek und der benötigten Abhängigkeiten in die `package.json`
 - Einbinden der IsyFact-Styles
-- Einbinden der Tailwind-CSS-Basis sowie der PrimeNG-Tailwind-Integration
+- Einbinden der Tailwind-CSS-Basis sowie der PrimeNG-Tailwind-Integration inklusive `.postcssrc.json`
 - Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in Deutsch und Englisch
 - *(Optional)* Konfiguration der IsyFact-ESLint-Regeln über [`@isyfact/eslint-plugin`](https://github.com/IsyFact/isy-eslint-plugin)
 - *(Optional)* Konfiguration der IsyFact-Prettier-Regeln über [`@isyfact/prettier-plugin`](https://github.com/IsyFact/isy-prettier-plugin)
-- *(Optional)* Auswahl der Projekte, für die in Monorepos ESLint und/oder Prettier eingerichtet werden
 
-Die optionalen Schritte werden während der Installation per CLI-Prompt abgefragt.
+Die beiden optionalen Schritte werden während der Installation per CLI-Prompt abgefragt. Beide sind standardmäßig aktiviert und lassen sich über die Schema-Optionen `addEslint` und `addPrettier` vorbelegen. Auf der Kommandozeile werden diese – wie bei der Angular CLI üblich – in Kebab-Case angegeben:
+
+```bash
+npx ng generate @isyfact/isy-angular-widgets:ng-add --add-eslint=false --add-prettier=false
+```
+
+In einem Monorepo richtet die Schematic Styles, Assets, Übersetzungen und die Tailwind-Einstiegsdatei für alle Anwendungsprojekte ein. Über das Flag `project` lässt sich die Einrichtung auf ein einzelnes Anwendungsprojekt begrenzen:
+
+```bash
+npx ng generate @isyfact/isy-angular-widgets:ng-add --project=meine-anwendung
+```
+
+ESLint und Prettier werden unabhängig davon immer für den gesamten Workspace konfiguriert.
 
 #### ESLint
 
@@ -126,7 +139,13 @@ npm run lint
 
 Optional wird eine `.prettierrc.js` angelegt, die die IsyFact-Prettier-Regeln aus [`isy-prettier-plugin`](https://github.com/IsyFact/isy-prettier-plugin) einbindet. Ergänzt werden zudem eine `.prettierignore` mit den IsyFact-Standardausschlüssen und ein `format`-Script in der `package.json`.
 
-Eine bereits vorhandene `.prettierrc.js` wird nicht überschrieben. Das Prettier-Setup ist standardmäßig aktiviert und lässt sich über das Schema-Flag `addPrettier` steuern.
+Eine bereits vorhandene `.prettierrc.js` wird nicht überschrieben.
+
+> **Wichtig:** Ein mit `ng new` erzeugtes Angular-22-Projekt enthält bereits eine `.prettierrc`. Diese hat bei der Konfigurationssuche von Prettier Vorrang vor der `.prettierrc.js`, sodass die IsyFact-Regeln ohne weiteres Zutun **nicht** greifen. Die von der Angular CLI erzeugte `.prettierrc` ist deshalb zu löschen. Welche Konfiguration tatsächlich verwendet wird, lässt sich so prüfen:
+>
+> ```bash
+> npx prettier --find-config-path src/app/app.ts
+> ```
 
 ```bash
 npm run format
@@ -139,7 +158,7 @@ Die Bibliothek verwendet Tailwind CSS v4 für Utility-Klassen und `tailwindcss-p
 Ist Tailwind CSS im Zielprojekt noch nicht vorhanden und erfolgt die Einrichtung nicht über die Schematic, werden folgende Pakete benötigt:
 
 ```bash
-npm install tailwindcss @tailwindcss/postcss postcss tailwindcss-primeui
+npm install tailwindcss @tailwindcss/postcss postcss tailwindcss-primeui --legacy-peer-deps
 ```
 
 Die anschließende Einbindung in das Projekt ist unter [Tailwind CSS manuell einbinden](#tailwind-css-manuell-einbinden) beschrieben.
@@ -239,7 +258,17 @@ Benötigt wird eine Tailwind-Einstiegsdatei `src/tailwind.css`. Die Reihenfolge 
 
 Der `@source`-Pfad ist relativ zur Einstiegsdatei anzugeben und sorgt dafür, dass Tailwind die in der Bibliothek verwendeten Utility-Klassen erkennt.
 
-Diese Datei muss in der `angular.json` unter `styles` eingebunden werden:
+Damit Tailwind CSS v4 die Datei beim Build verarbeitet, wird zusätzlich eine `.postcssrc.json` im Projektstamm benötigt. Ohne sie landen `@import`-, `@plugin`- und `@theme`-Anweisungen unverarbeitet im ausgelieferten CSS und es werden keine Utility-Klassen erzeugt:
+
+```json
+{
+  "plugins": {
+    "@tailwindcss/postcss": {}
+  }
+}
+```
+
+Die Einstiegsdatei muss außerdem in der `angular.json` unter `styles` eingebunden werden:
 
 ```json
 "styles": [
@@ -263,11 +292,12 @@ import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {provideIsyFactTheme} from '@isyfact/isy-angular-widgets';
 import Material from '@primeuix/themes/material';
+import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideIsyFactTheme(Material),
-    provideRouter([...])
+    provideRouter(routes)
   ]
 };
 ```
@@ -276,19 +306,19 @@ Eigene Presets können mit `definePreset()` aus `@primeuix/themes` erstellt und 
 
 ### Internationalisierung
 
-`isy-angular-widgets` unterstützt beliebige Sprachen; standardmäßig werden die Widgets auf Deutsch dargestellt. Bei der Installation über `ng add` werden deutsche und englische Übersetzungsdateien für PrimeNG und die Bibliothek im `assets`-Verzeichnis angelegt.
+`isy-angular-widgets` unterstützt beliebige Sprachen; standardmäßig werden die Widgets auf Deutsch dargestellt. Bei der Installation über die Schematic werden deutsche und englische Übersetzungsdateien für PrimeNG und die Bibliothek unter `src/assets/i18n` angelegt.
 
 Das folgende Beispiel zeigt die Anbindung mit [`@ngx-translate`](https://ngx-translate.org/); prinzipiell kann jede I18N-Bibliothek eingesetzt werden.
 
 ```bash
-npm install @ngx-translate/core @ngx-translate/http-loader --save
+npm install @ngx-translate/core @ngx-translate/http-loader --save --legacy-peer-deps
 ```
 
 Zunächst werden die Provider bereitgestellt, zum Beispiel in `app.config.ts`:
 
 ```typescript
 // Other imports ...
-import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {provideHttpClient} from '@angular/common/http';
 import {provideTranslateHttpLoader, TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -298,7 +328,6 @@ import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
     provideIsyFactTheme(),
     provideHttpClient(),
@@ -312,12 +341,14 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
+> **Hinweis:** Mit `ng new` erzeugte Angular-22-Projekte sind standardmäßig zoneless und enthalten kein `zone.js`. Ein zusätzlich eingetragenes `provideZoneChangeDetection()` führt deshalb beim Start zum Fehler `NG0908: In this configuration Angular requires Zone.js`.
+
 Anschließend werden die Übersetzungen für PrimeNG und die Bibliothek bereitgestellt, zum Beispiel in `app.ts`:
 
 ```typescript
 import {ChangeDetectorRef, Component, OnDestroy, inject} from '@angular/core';
 import {HauptfensterComponent, WidgetsConfigService} from '@isyfact/isy-angular-widgets';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {PrimeNG} from 'primeng/config';
 import {MenuModule} from 'primeng/menu';
 import {PanelModule} from 'primeng/panel';
@@ -328,7 +359,7 @@ import {Subscription} from 'rxjs';
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
-  imports: [HauptfensterComponent, PanelModule, MenuModule, TranslateModule]
+  imports: [HauptfensterComponent, PanelModule, MenuModule]
 })
 export class App implements OnDestroy {
   private readonly primeng = inject(PrimeNG);
@@ -365,6 +396,8 @@ export class App implements OnDestroy {
   }
 }
 ```
+
+Sollen Texte direkt im Template übersetzt werden, werden zusätzlich `TranslatePipe` und `TranslateDirective` in die `imports` der Komponente aufgenommen. Bis einschließlich `@ngx-translate/core` 17 stand dafür `TranslateModule` zur Verfügung; ab Version 18 ist dieses Modul entfallen.
 
 Die `translate`-Methode kann beispielsweise auch für einen Language-Picker verwendet werden, damit Benutzer die Sprache selbst wählen können.
 
