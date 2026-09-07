@@ -316,4 +316,49 @@ describe('Unit Tests: InputCharComponent', () => {
       );
     });
   });
+
+  describe('with custom aria-label properties', () => {
+    beforeEach(() => {
+      spectator = createComponent({
+        props: {
+          togglePickerAriaLabel: 'Open custom character picker',
+          pickerAriaLabel: 'Custom character picker dialog',
+          closePickerAriaLabel: 'Close custom character picker'
+        }
+      });
+      component = spectator.component;
+      render();
+    });
+
+    it('should use custom togglePickerAriaLabel when provided', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      expect(button.getAttribute('aria-label')).toBe('Open custom character picker');
+    });
+
+    it('should use custom togglePickerAriaLabel when opening picker', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      spectator.click(button);
+      render();
+
+      expect(pickerServiceSpy.open).toHaveBeenCalledWith(
+        jasmine.objectContaining({
+          togglePickerAriaLabel: 'Open custom character picker',
+          pickerAriaLabel: 'Custom character picker dialog',
+          closePickerAriaLabel: 'Close custom character picker'
+        })
+      );
+    });
+
+    it('should use default aria-label when custom properties are not provided', () => {
+      spectator = createComponent();
+      component = spectator.component;
+      render();
+
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      expect(button.getAttribute('aria-label')).toBe('inputChar.aria.togglePicker');
+    });
+  });
 });
