@@ -32,6 +32,58 @@ import {FORM_WRAPPER_FIELD_ADAPTER, FormWrapperFieldAdapter} from './form-wrappe
 
 type FormWrapperFieldElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
+/**
+ * Wraps a form field together with its label, required marker, validation message and the
+ * accessibility wiring between them. It is used with reactive forms and supports native fields
+ * such as `input`, `textarea` and `select` as well as complex components through an adapter concept.
+ *
+ * Required inputs are `label`, `fieldId` and `control`.
+ *
+ * ## Native fields
+ *
+ * Marking the field with `isyFormWrapperField` is recommended. The wrapper then maintains `id`,
+ * `aria-describedby`, `aria-invalid` and `aria-errormessage` automatically. Without the directive
+ * the wrapper falls back to searching for a native `input`, `textarea` or `select` in its content.
+ *
+ * ## Complex components
+ *
+ * Complex components such as `p-select` are not covered by the native fallback. Either the
+ * component manages accessibility itself, or a dedicated adapter directive is provided.
+ * @example
+ * A native field with validator specific messages:
+ * ```html
+ * <form [formGroup]="myForm">
+ *   <isy-form-wrapper
+ *     label="E-Mail"
+ *     fieldId="email"
+ *     [control]="myForm.controls.email | formControl"
+ *     [validationMessages]="{
+ *       required: 'E-Mail ist erforderlich',
+ *       email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein'
+ *     }"
+ *   >
+ *     <input isyFormWrapperField type="email" pInputText formControlName="email" />
+ *   </isy-form-wrapper>
+ * </form>
+ * ```
+ * @example
+ * A complex component wired up manually:
+ * ```html
+ * <isy-form-wrapper
+ *   label="Geschlecht"
+ *   labelId="label-gender"
+ *   fieldId="gender"
+ *   [control]="form.controls.gender | formControl"
+ * >
+ *   <p-select
+ *     inputId="gender"
+ *     ariaLabelledBy="label-gender"
+ *     formControlName="gender"
+ *     [options]="genderOptions"
+ *   ></p-select>
+ * </isy-form-wrapper>
+ * ```
+ */
 @Component({
   standalone: true,
   selector: 'isy-form-wrapper',
@@ -41,11 +93,21 @@ type FormWrapperFieldElement = HTMLInputElement | HTMLTextAreaElement | HTMLSele
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormWrapperComponent implements OnInit, OnChanges, AfterContentInit {
+  /** Visible label of the form field. */
   @Input({required: true}) label!: string;
+  /** Custom id for the label element. Falls back to `<fieldId>-label` when not set. */
   @Input() labelId?: string;
+  /** Id of the wrapped form field. Used to link label, field and validation message. */
   @Input({required: true}) fieldId!: string;
+  /** Id of an additional description or help text that is announced together with the field. */
   @Input() describedbyId?: string;
+  /**
+   * Validator specific error messages, keyed by the validation error name such as `required`.
+   * The first matching entry in insertion order is displayed; without a match a generic
+   * message from the {@link WidgetsConfigService} is used.
+   */
   @Input() validationMessages: Record<string, string> = {};
+  /** Renders the label as an in-field top-aligned label (PrimeNG IftaLabel) instead of a static label. */
   @Input() ifta = false;
 
   @ContentChild(FORM_WRAPPER_FIELD_ADAPTER, {read: FORM_WRAPPER_FIELD_ADAPTER})

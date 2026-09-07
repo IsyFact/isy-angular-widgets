@@ -26,7 +26,7 @@
 
 ---
 
-`isy-angular-widgets` stellt behördenspezifische Komponenten auf Basis von [PrimeNG](https://primeng.org/) bereit. Enthalten ist zudem ein IsyFact-Theme, das sich an den Richtlinien für Design und Barrierefreiheit des Bundes orientiert.
+`isy-angular-widgets` stellt behördenspezifische Komponenten auf Basis von [PrimeNG](https://primeng.org/) bereit und unterstützt damit die Umsetzung von Frontends gemäß dem [IsyFact-Bedienkonzept](https://isyfact.github.io/isy-bedienkonzept-doc/current/bedienkonzept.html). Enthalten ist zudem ein IsyFact-Theme, das sich an den Richtlinien für Design und Barrierefreiheit des Bundes orientiert.
 
 Diese Dokumentation richtet sich an Entwicklerinnen und Entwickler, die **die Bibliothek in einer eigenen Anwendung einsetzen**.
 
@@ -37,11 +37,10 @@ Praktische und querschnittliche Beispiele für die Umsetzung von Styleguide-Patt
 ## Inhalt
 
 - [Features](#features)
+- [Bereitgestellte Bausteine](#bereitgestellte-bausteine)
 - [Installation](#installation)
-- [Erste Schritte: Hauptfenster einbinden](#erste-schritte-hauptfenster-einbinden)
-- [Konfiguration](#konfiguration)
-- [Widgets im Detail](#widgets-im-detail)
-- [Browser-Unterstützung](#browser-unterstützung)
+- [Getting Started](#getting-started)
+- [Weiterführende Dokumentation](#weiterführende-dokumentation)
 - [Migration auf eine neue Version](#migration-auf-eine-neue-version)
 
 ## Features
@@ -57,19 +56,39 @@ Praktische und querschnittliche Beispiele für die Umsetzung von Styleguide-Patt
 | **Form-Wrapper** | Vereinheitlicht Label, Pflichtfeldkennzeichnung und Fehlertext. Verdrahtet `aria-describedby`, `aria-invalid` und `aria-errormessage` automatisch mit dem Eingabefeld. |
 | **Skip-Links** | Sprungmarken zu den Hauptinhalten für Tastatur- und Screenreader-Nutzende, inklusive zuverlässiger Fokussteuerung auf das Sprungziel. |
 
-DIN 91379 und die ungewissen Datumsangaben zielen auf denselben Anwendungsfall: die Erfassung von Personendaten in behördlichen Vorgängen – Namen zeichengetreu, unvollständig bekannte Angaben unverfälscht.
+## Bereitgestellte Bausteine
+
+Die folgende Übersicht listet die öffentlich bereitgestellten Komponenten, Direktiven, Services und Pipes. Der Name verlinkt jeweils auf die zugehörige API-Referenz.
+
+| Baustein | Art | Beschreibung |
+|---|---|---|
+| [`HauptfensterComponent`](https://isyfact.github.io/isy-angular-widgets/documentation/components/HauptfensterComponent.html) | Komponente | Anwendungsrahmen mit Kopfbereich, Hauptnavigation, Titelzeile, Linksnavigation und Informationsbereich. Optional mit responsivem Verhalten. |
+| [`SeitentoolbarComponent`](https://isyfact.github.io/isy-angular-widgets/documentation/components/SeitentoolbarComponent.html) | Komponente | Toolbar unterhalb der Titelzeile, etwa für Navigations- und Zurück-Buttons. |
+| [`SkipLinksComponent`](https://isyfact.github.io/isy-angular-widgets/documentation/components/SkipLinksComponent.html) | Komponente | Sprungmarken, mit denen Tastatur- und Screenreader-Nutzende wiederkehrende Bereiche überspringen. |
+| [`FormWrapperComponent`](https://isyfact.github.io/isy-angular-widgets/documentation/components/FormWrapperComponent.html) | Komponente | Kapselt ein Formularfeld mit Label, Pflichtfeldkennzeichnung, Fehlermeldung und der ARIA-Verdrahtung dazwischen. |
+| [`IncompleteDateComponent`](https://isyfact.github.io/isy-angular-widgets/documentation/components/IncompleteDateComponent.html) | Komponente | Eingabefeld für vollständige und unvollständige Datumsangaben im Format `DD.MM.YYYY`; unbekannte Teile werden als `0` oder `x` erfasst. |
+| [`InputCharComponent`](https://isyfact.github.io/isy-angular-widgets/documentation/components/InputCharComponent.html) | Komponente | Auswahldialog für Sonderzeichen, gegliedert nach Grundzeichen und Schriftzeichengruppen der DIN 91379. |
+| [`WizardComponent`](https://isyfact.github.io/isy-angular-widgets/documentation/components/WizardComponent.html) | Komponente | Dialog zur schrittweisen Führung durch mehrstufige Eingaben. |
+| [`SecurityDirective`](https://isyfact.github.io/isy-angular-widgets/documentation/directives/SecurityDirective.html) | Direktive | Blendet einzelne Bedienelemente wie Buttons abhängig von einem Recht ein oder aus. |
+| [`FormWrapperFieldDirective`](https://isyfact.github.io/isy-angular-widgets/documentation/directives/FormWrapperFieldDirective.html) | Direktive | Kennzeichnet ein natives `input`, `textarea` oder `select` innerhalb eines Form-Wrappers für die automatische ARIA-Verdrahtung. |
+| [`InputCharDirective`](https://isyfact.github.io/isy-angular-widgets/documentation/directives/InputCharDirective.html) | Direktive | Bindet den Sonderzeichen-Dialog an ein bestehendes Eingabefeld an. |
+| [`WizardDirective`](https://isyfact.github.io/isy-angular-widgets/documentation/directives/WizardDirective.html) | Direktive | Definiert einen einzelnen Schritt innerhalb eines Wizards. |
+| [`WizardFooterDirective`](https://isyfact.github.io/isy-angular-widgets/documentation/directives/WizardFooterDirective.html) | Direktive | Ersetzt den Fußbereich des Wizards durch eigene Bedienelemente. |
+| [`SecurityService`](https://isyfact.github.io/isy-angular-widgets/documentation/injectables/SecurityService.html) | Service | Hält die Rechtekonfiguration und beantwortet Berechtigungsprüfungen für Routen und Elemente. |
+| [`AuthGuard`](https://isyfact.github.io/isy-angular-widgets/documentation/injectables/AuthGuard.html) | Route-Guard | Verhindert beim Routing den Aufruf von Bereichen, für die das erforderliche Recht fehlt. |
+| [`WidgetsConfigService`](https://isyfact.github.io/isy-angular-widgets/documentation/injectables/WidgetsConfigService.html) | Service | Stellt die Übersetzungen der Widget-Beschriftungen bereit und ermöglicht einen Sprachwechsel zur Laufzeit. |
+| [`IncompleteDateService`](https://isyfact.github.io/isy-angular-widgets/documentation/injectables/IncompleteDateService.html) | Service | Wandelt unvollständige Datumsangaben in das deutsche Datumsformat um. |
+| [`UserInfoService`](https://isyfact.github.io/isy-angular-widgets/documentation/injectables/UserInfoService.html) | Abstrakter Service | Schnittstelle, über die die Anwendung die Daten der angemeldeten Person bereitstellt. Die Implementierung – etwa der Serveraufruf – erfolgt im Zielprojekt. |
+| [`Validation`](https://isyfact.github.io/isy-angular-widgets/documentation/classes/Validation.html) | Validator-Sammlung | Statische Validatoren für DIN 91379, unvollständige Datumsangaben, ISO-Datum und -Zeit sowie Kreditkartenangaben. |
+| [`provideIsyFactTheme`](https://isyfact.github.io/isy-angular-widgets/documentation/miscellaneous/functions.html#provideIsyFactTheme) | Provider-Funktion | Registriert das IsyFact-Theme inklusive CSS-Layer-Reihenfolge in der Anwendungskonfiguration. |
+| [`FormControlPipe`](https://isyfact.github.io/isy-angular-widgets/documentation/pipes/FormControlPipe.html) | Pipe | Typsichere Übergabe eines `AbstractControl` als `FormControl` im Template. |
+| [`IncompleteDatePipe`](https://isyfact.github.io/isy-angular-widgets/documentation/pipes/IncompleteDatePipe.html) | Pipe | Formatiert unvollständige Datumsangaben für die Anzeige. |
+| [`CorrelationIdHttpInterceptor`](https://isyfact.github.io/isy-angular-widgets/documentation/interceptors/CorrelationIdHttpInterceptor.html) | HTTP-Interceptor | Ergänzt ausgehende Requests um eine Korrelations-ID gemäß IsyFact-Vorgaben. |
+| [`ZipkinOpenTracingHttpInterceptor`](https://isyfact.github.io/isy-angular-widgets/documentation/injectables/ZipkinOpenTracingHttpInterceptor.html) | HTTP-Interceptor | Ergänzt Requests um Tracing-Header nach dem OpenTracing-Standard in der Zipkin-Ausprägung. |
 
 ## Installation
 
-Die Bibliothek wird über ihre Schematic zu einem bestehenden Angular-Projekt hinzugefügt.
-
-**Angular 21:**
-
-```bash
-ng add @isyfact/isy-angular-widgets
-```
-
-**Angular 22:**
+Die Bibliothek setzt **Angular 22** voraus und wird über ihre Schematic zu einem bestehenden Angular-Projekt hinzugefügt:
 
 ```bash
 npm install @isyfact/isy-angular-widgets --legacy-peer-deps
@@ -77,7 +96,7 @@ npx ng generate @isyfact/isy-angular-widgets:ng-add
 npm install --legacy-peer-deps
 ```
 
-Die Bibliothek unterstützt Angular 21 und Angular 22, verwendet aber weiterhin PrimeNG 21. Da PrimeNG 21 für Angular 21 entwickelt wurde, meldet `npm` in Angular-22-Projekten einen Peer-Dependency-Konflikt. Die Schematic überspringt in diesem Fall den automatischen Package-Install und gibt einen Hinweis aus; die Installation wird anschließend manuell mit `--legacy-peer-deps` ausgeführt.
+Die Bibliothek verwendet weiterhin PrimeNG 21. Da PrimeNG 21 für Angular 21 entwickelt wurde, meldet `npm` einen Peer-Dependency-Konflikt. Die Schematic überspringt deshalb den automatischen Package-Install und gibt einen Hinweis aus; die Installation wird anschließend manuell mit `--legacy-peer-deps` ausgeführt.
 
 Die Kombination aus Angular 22 und PrimeNG 21 ist im geprüften Projektumfang lauffähig, stellt jedoch keine offiziell deklarierte Versionskombination dar. Die tatsächlich verwendeten PrimeNG-Komponenten sollten in der eigenen Anwendung zusätzlich getestet werden – Hintergründe dazu stehen in der [MIGRATION.md](./MIGRATION.md).
 
@@ -87,15 +106,15 @@ Die Kombination aus Angular 22 und PrimeNG 21 ist im geprüften Projektumfang la
 - Einbinden der IsyFact-Styles
 - Einbinden der Tailwind-CSS-Basis sowie der PrimeNG-Tailwind-Integration
 - Hinzufügen der Übersetzungsdateien für die Bibliothek und PrimeNG in Deutsch und Englisch
-- *(Optional)* Konfiguration der IsyFact-ESLint-Regeln über `@isyfact/eslint-plugin`
-- *(Optional)* Konfiguration der IsyFact-Prettier-Regeln über `@isyfact/prettier-plugin`
+- *(Optional)* Konfiguration der IsyFact-ESLint-Regeln über [`@isyfact/eslint-plugin`](https://github.com/IsyFact/isy-eslint-plugin)
+- *(Optional)* Konfiguration der IsyFact-Prettier-Regeln über [`@isyfact/prettier-plugin`](https://github.com/IsyFact/isy-prettier-plugin)
 - *(Optional)* Auswahl der Projekte, für die in Monorepos ESLint und/oder Prettier eingerichtet werden
 
 Die optionalen Schritte werden während der Installation per CLI-Prompt abgefragt.
 
 #### ESLint
 
-Optional wird eine `eslint.config.js` im Projektstamm angelegt, die die IsyFact-ESLint-Regeln einbindet. Unterstützt werden einfache Angular-Projekte und Monorepos; für jedes Projekt entstehen passende Konfigurationsblöcke für TypeScript-, Spec- und HTML-Dateien. Zusätzlich wird ein `lint`-Script in der `package.json` ergänzt.
+Optional wird eine `eslint.config.js` im Projektstamm angelegt, die die IsyFact-ESLint-Regeln aus [`isy-eslint-plugin`](https://github.com/IsyFact/isy-eslint-plugin) einbindet. Unterstützt werden einfache Angular-Projekte und Monorepos; für jedes Projekt entstehen passende Konfigurationsblöcke für TypeScript-, Spec- und HTML-Dateien. Zusätzlich wird ein `lint`-Script in der `package.json` ergänzt.
 
 Eine bereits vorhandene `eslint.config.js` wird als `eslint.config.base.js` gesichert und in die neue Konfiguration eingebunden.
 
@@ -105,7 +124,7 @@ npm run lint
 
 #### Prettier
 
-Optional wird eine `.prettierrc.js` angelegt, die die IsyFact-Prettier-Regeln einbindet. Ergänzt werden zudem eine `.prettierignore` mit den IsyFact-Standardausschlüssen und ein `format`-Script in der `package.json`.
+Optional wird eine `.prettierrc.js` angelegt, die die IsyFact-Prettier-Regeln aus [`isy-prettier-plugin`](https://github.com/IsyFact/isy-prettier-plugin) einbindet. Ergänzt werden zudem eine `.prettierignore` mit den IsyFact-Standardausschlüssen und ein `format`-Script in der `package.json`.
 
 Eine bereits vorhandene `.prettierrc.js` wird nicht überschrieben. Das Prettier-Setup ist standardmäßig aktiviert und lässt sich über das Schema-Flag `addPrettier` steuern.
 
@@ -113,46 +132,19 @@ Eine bereits vorhandene `.prettierrc.js` wird nicht überschrieben. Das Prettier
 npm run format
 ```
 
-### Tailwind CSS manuell einrichten
+### Tailwind-CSS-Pakete manuell installieren
 
-Die Bibliothek verwendet Tailwind CSS v4 für Utility-Klassen und `tailwindcss-primeui`, damit PrimeNG-Design-Tokens als Tailwind-Utilities zur Verfügung stehen. Bei der Installation über `ng add` wird das automatisch eingerichtet.
+Die Bibliothek verwendet Tailwind CSS v4 für Utility-Klassen und `tailwindcss-primeui`, damit PrimeNG-Design-Tokens als Tailwind-Utilities zur Verfügung stehen. Über die Schematic wird das automatisch eingerichtet.
 
-Ist Tailwind CSS im Zielprojekt noch nicht eingerichtet und erfolgt die Konfiguration nicht über die Schematic, werden folgende Pakete benötigt:
+Ist Tailwind CSS im Zielprojekt noch nicht vorhanden und erfolgt die Einrichtung nicht über die Schematic, werden folgende Pakete benötigt:
 
 ```bash
 npm install tailwindcss @tailwindcss/postcss postcss tailwindcss-primeui
 ```
 
-Zusätzlich wird eine Tailwind-Einstiegsdatei `src/tailwind.css` benötigt. Die Reihenfolge der `@layer`-Deklaration ist dabei entscheidend: Sie legt fest, dass das IsyFact-Theme die Styles von PrimeNG und Tailwind überschreiben kann.
+Die anschließende Einbindung in das Projekt ist unter [Tailwind CSS manuell einbinden](#tailwind-css-manuell-einbinden) beschrieben.
 
-```css
-@layer theme, base, primeng, components, utilities, isyfact-theme;
-
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
-@import "tailwindcss/utilities.css" layer(utilities);
-
-@plugin "tailwindcss-primeui";
-
-@source "../node_modules/@isyfact/isy-angular-widgets";
-```
-
-Der `@source`-Pfad ist relativ zur Einstiegsdatei anzugeben und sorgt dafür, dass Tailwind die in der Bibliothek verwendeten Utility-Klassen erkennt.
-
-Diese Datei muss in der `angular.json` unter `styles` eingebunden werden:
-
-```json
-"styles": [
-  "src/styles.scss",
-  "src/tailwind.css",
-  "node_modules/primeicons/primeicons.css",
-  "node_modules/@isyfact/isy-angular-widgets/assets/theme/isyfact-theme.scss"
-]
-```
-
-Komponentenspezifische Styles in eigenen `.scss`-Dateien bleiben davon unberührt.
-
-## Erste Schritte: Hauptfenster einbinden
+## Getting Started
 
 Nach der Installation kann das Hauptfenster-Widget eingebunden werden. In einem neu generierten Projekt lässt sich der Inhalt der Datei `app.html` beispielhaft ersetzen:
 
@@ -225,9 +217,42 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-## Konfiguration
+Damit ist die Bibliothek einsatzbereit. Die folgenden Abschnitte sind optional.
 
-### Theme
+### Tailwind CSS manuell einbinden
+
+Nur erforderlich, wenn die Tailwind-Pakete [manuell installiert](#tailwind-css-pakete-manuell-installieren) wurden und die Einrichtung nicht über die Schematic erfolgt ist.
+
+Benötigt wird eine Tailwind-Einstiegsdatei `src/tailwind.css`. Die Reihenfolge der `@layer`-Deklaration ist dabei entscheidend: Sie legt fest, dass das IsyFact-Theme die Styles von PrimeNG und Tailwind überschreiben kann.
+
+```css
+@layer theme, base, primeng, components, utilities, isyfact-theme;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@plugin "tailwindcss-primeui";
+
+@source "../node_modules/@isyfact/isy-angular-widgets";
+```
+
+Der `@source`-Pfad ist relativ zur Einstiegsdatei anzugeben und sorgt dafür, dass Tailwind die in der Bibliothek verwendeten Utility-Klassen erkennt.
+
+Diese Datei muss in der `angular.json` unter `styles` eingebunden werden:
+
+```json
+"styles": [
+  "src/styles.scss",
+  "src/tailwind.css",
+  "node_modules/primeicons/primeicons.css",
+  "node_modules/@isyfact/isy-angular-widgets/assets/theme/isyfact-theme.scss"
+]
+```
+
+Komponentenspezifische Styles in eigenen `.scss`-Dateien bleiben davon unberührt.
+
+### Theming
 
 Die Bibliothek liefert mit `provideIsyFactTheme()` ein vorkonfiguriertes PrimeNG-Theme aus. Als Standard dient das PrimeNG-Preset **Nora** mit Grau als Primärfarbe. Der Provider setzt zugleich die CSS-Layer-Reihenfolge (`theme, base, primeng, components, utilities, isyfact-theme`) und deaktiviert den Dark Mode.
 
@@ -343,162 +368,14 @@ export class App implements OnDestroy {
 
 Die `translate`-Methode kann beispielsweise auch für einen Language-Picker verwendet werden, damit Benutzer die Sprache selbst wählen können.
 
-## Widgets im Detail
+## Weiterführende Dokumentation
 
-Eine vollständige API-Referenz aller Komponenten, Direktiven und Services steht in der [Compodoc-Dokumentation](https://isyfact.github.io/isy-angular-widgets/documentation/).
+| Ressource | Inhalt |
+|---|---|
+| [API-Referenz (Compodoc)](https://isyfact.github.io/isy-angular-widgets/documentation/) | Alle Komponenten, Direktiven und Services mit Inputs, Outputs und Beispielen |
+| [IsyFact-Bedienkonzept](https://isyfact.github.io/isy-bedienkonzept-doc/current/bedienkonzept.html) | Fachliche und gestalterische Vorgaben, die den Widgets zugrunde liegen |
+| [Demo-Anwendung](https://isyfact.github.io/isy-angular-widgets/) | Lauffähige Beispiele der Widgets und Styleguide-Patterns |
 
-### Hauptfenster: responsive Darstellung
-
-Das responsive Verhalten des Hauptfensters ist standardmäßig deaktiviert und wird über das Boolean-Attribut `responsive` aktiviert:
-
-```html
-<isy-hauptfenster
-  responsive
-  [showLinksnavigation]="true"
-  [showInformationsbereich]="true"
->
-  <p-menu Linksnavigation [model]="navigationItems"></p-menu>
-
-  <main>
-    Zentraler Inhaltsbereich
-  </main>
-
-  <p Informationsbereich>
-    Zusätzliche Informationen
-  </p>
-</isy-hauptfenster>
-```
-
-Ist `responsive` gesetzt, reagiert das Hauptfenster auf seine verfügbare Breite:
-
-- Bei einer Breite von höchstens `1024 px` werden Linksnavigation und Informationsbereich automatisch ausgeblendet.
-- Der zentrale Inhaltsbereich bleibt sichtbar und nutzt die verfügbare Breite.
-- Wird das Hauptfenster wieder breiter als `1024 px`, erscheinen die Seitenbereiche entsprechend `showLinksnavigation` und `showInformationsbereich` erneut.
-- Die Werte von `collapsedLinksnavigation` und `collapsedInformationsbereich` bleiben unverändert.
-
-Das Attribut kann auch dynamisch gesetzt werden:
-
-```html
-<isy-hauptfenster
-  [responsive]="responsiveLayoutEnabled"
-  [showLinksnavigation]="true"
-  [showInformationsbereich]="true"
->
-  <!-- Inhalte -->
-</isy-hauptfenster>
-```
-
-Ohne das Attribut bleibt das bisherige Verhalten unverändert. Da die responsive Darstellung auf der Breite der Komponente basiert, funktioniert sie auch innerhalb eines schmaleren Containers.
-
-### Seiten-Toolbar: responsive Darstellung
-
-Auch bei der Seiten-Toolbar ist das responsive Verhalten standardmäßig deaktiviert und wird über `responsive` aktiviert:
-
-```html
-<isy-seiten-toolbar
-  responsive
-  [showSidebar]="true"
-  sidebarHomeButtonLabel="Zurück"
-  sidebarHomeButtonAriaLabel="Zurück zur Übersicht"
-/>
-```
-
-Bei einer Bildschirmbreite von höchstens `320 px` wird das sichtbare Label des Home-/Zurück-Buttons ausgeblendet. Icon und Accessible Label bleiben erhalten. Ohne `responsive` bleibt das sichtbare Label auch bei schmalen Bildschirmbreiten erhalten.
-
-### Form-Wrapper
-
-Der Form-Wrapper kapselt Formularfelder mit Label, Pflichtfeldkennzeichnung, Validierungsfehlern und Unterstützung für Barrierefreiheit. Er wird mit **Reactive Forms** verwendet und unterstützt:
-
-- native Felder wie `input`, `textarea` und `select`
-- komplexe Komponenten über ein Adapter-Konzept
-- automatische Synchronisation von `id`, `aria-describedby`, `aria-invalid` und `aria-errormessage` bei nativen Feldern
-
-```html
-<form [formGroup]="myForm">
-  <isy-form-wrapper
-    label="E-Mail"
-    fieldId="email"
-    [control]="myForm.controls.email | formControl"
-    [validationMessages]="{
-      required: 'E-Mail ist erforderlich',
-      email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein'
-    }"
-  >
-    <input isyFormWrapperField type="email" pInputText formControlName="email" />
-  </isy-form-wrapper>
-</form>
-```
-
-**Erforderliche Inputs:** `label`, `fieldId`, `control`
-
-**Optionale Inputs:**
-
-- `labelId` für eine eigene Label-ID
-- `describedbyId` für zusätzliche Beschreibungen oder Hilfetexte
-- `validationMessages` für validator-spezifische Fehlermeldungen
-
-#### Native Felder
-
-Für native Felder wird empfohlen, `isyFormWrapperField` zu setzen:
-
-```html
-<isy-form-wrapper
-  label="Vorname"
-  fieldId="firstname"
-  [control]="form.controls.firstname | formControl"
->
-  <input isyFormWrapperField pInputText formControlName="firstname" />
-</isy-form-wrapper>
-```
-
-Ist `isyFormWrapperField` gesetzt, übernimmt der Wrapper automatisch `id`, `aria-describedby`, `aria-invalid` und `aria-errormessage`. Ohne die Direktive sucht der Wrapper als Fallback ein natives `input`, `textarea` oder `select` im Inhalt.
-
-#### Komplexe Komponenten
-
-Komplexe Komponenten wie `p-select` werden vom nativen Fallback nicht automatisch unterstützt. Entweder verwaltet die Komponente Accessibility selbst, oder es wird eine eigene Adapter-Directive bereitgestellt.
-
-Beispiel mit manueller Anbindung:
-
-```html
-<isy-form-wrapper
-  label="Geschlecht"
-  labelId="label-gender"
-  fieldId="gender"
-  [control]="form.controls.gender | formControl"
->
-  <p-select
-    inputId="gender"
-    ariaLabelledBy="label-gender"
-    formControlName="gender"
-    [options]="genderOptions"
-  ></p-select>
-</isy-form-wrapper>
-```
-
-#### Typische Imports
-
-```typescript
-import {ReactiveFormsModule} from '@angular/forms';
-import {FormWrapperComponent, FormWrapperFieldDirective} from '@isyfact/isy-angular-widgets';
-```
-
-### Validatoren für Datumsangaben
-
-Die Datumsvalidierung der Bibliothek kommt ohne `moment.js` aus. Die Validatoren akzeptieren je nach Typ unter anderem:
-
-- JavaScript-`Date`-Objekte
-- ISO-Strings, zum Beispiel `YYYY-MM-DD` oder `YYYY-MM-DDTHH:mm:ssZ`, bei `isInFuture` und `isInPast` auch mit Offset
-- Bibliotheksformate wie `DD.MM.YYYY` und `DD-MM-YYYY`, nur bei `isInFuture` und `isInPast`
-- numerische Timestamps, zum Beispiel `Date.now()`, nur bei `isInFuture` und `isInPast`
-- Moment-ähnliche Objekte mit `toDate()` als Backward-Compatibility für bestehende Anwendungen
-
-> **Wichtig:** `isoDateTime` bleibt strikt und akzeptiert ausschließlich `YYYY-MM-DDTHH:mm:ssZ` mit literalem `Z` am Ende. DateTimes mit Offset wie `+01:00` sind dort ungültig.
-
-## Browser-Unterstützung
-
-Tailwind CSS v4 setzt moderne Browser voraus. Vor der Einführung in bestehenden Projekten sollte geprüft werden, ob die Browser-Anforderungen des Zielprojekts damit vereinbar sind.
-
-Das Hauptfenster prüft beim Laden der Anwendung zusätzlich, ob die verwendete Browser-Version unterstützt wird, und zeigt andernfalls eine Warnmeldung an. Die Texte der Warnmeldung sind über den `WidgetsConfigService` konfigurierbar.
 
 ## Migration auf eine neue Version
 

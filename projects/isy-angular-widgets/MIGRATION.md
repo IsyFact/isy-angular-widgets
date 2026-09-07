@@ -58,7 +58,7 @@ Die Bibliothek verwendet keine PrimeFlex-Utilities mehr. Für Utility-Klassen wi
    npm install --legacy-peer-deps
    ```
 
-2. Tailwind im Zielprojekt einbinden (inklusive `@tailwindcss/postcss` und `tailwindcss-primeui`). Das Setup ist im Abschnitt [Tailwind CSS manuell einrichten](./README.md#tailwind-css-manuell-einrichten) der README beschrieben.
+2. Tailwind im Zielprojekt einbinden (inklusive `@tailwindcss/postcss` und `tailwindcss-primeui`). Das Setup ist im Abschnitt [Tailwind CSS manuell einbinden](./README.md#tailwind-css-manuell-einbinden) der README beschrieben.
 
 3. PrimeFlex-Klassen schrittweise durch Tailwind-Utilities ersetzen. Typische Zuordnungen:
 
