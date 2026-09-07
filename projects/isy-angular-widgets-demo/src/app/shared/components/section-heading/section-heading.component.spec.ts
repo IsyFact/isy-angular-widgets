@@ -49,6 +49,10 @@ describe('SectionHeadingComponent', () => {
       expect(a?.textContent?.trim()).toBe('🔗');
     });
 
+    it('should exclude the section anchor from print', () => {
+      expect(spectator.query('a.section-anchor.isy-print-hide')).toBeTruthy();
+    });
+
     it('should not render an h3', () => {
       expect(spectator.query('h3')).toBeNull();
     });

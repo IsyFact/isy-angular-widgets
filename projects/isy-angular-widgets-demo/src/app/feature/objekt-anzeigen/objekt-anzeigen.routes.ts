@@ -10,7 +10,9 @@ export const objektAnzeigenRoutes: Routes = [
   },
   {
     path: ':id',
-    data: {},
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.displayObject'
+    },
     loadComponent: async () => (await import('./objekt-anzeigen.component')).ObjektAnzeigenComponent
   }
 ];

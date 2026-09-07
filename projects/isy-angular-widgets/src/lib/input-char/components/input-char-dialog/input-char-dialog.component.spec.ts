@@ -297,6 +297,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
     expect(button).toBeTruthy();
     expect(button.innerHTML).toContain(insertLabel);
+    expect(button.classList.contains('isy-print-hide')).toBeTrue();
   });
 
   it('should filter characters correctly by base (all bases in one spec)', () => {

@@ -1,11 +1,11 @@
-<p-tabs value="0">
+<p-tabs value="0" class="demo-print-page isy-print-current-state">
   <p-tablist>
     <p-tab value="0">{{ 'isyAngularWidgetsDemo.displayObject.tabPersonalData' | translate }}</p-tab>
     <p-tab value="1">{{ 'isyAngularWidgetsDemo.displayObject.tabFacts' | translate }}</p-tab>
   </p-tablist>
   <p-tabpanels>
     <p-tabpanel id="panel-personalien" value="0">
-      <form [formGroup]="personalInfoForm">
+      <form class="isy-print-form" [formGroup]="personalInfoForm">
         <div class="grid grid-cols-12 gap-4 mt-4">
           <div class="col-span-12 md:col-span-6 xl:col-span-4">
             <!-- Form-Wrapper-Komponente, die ein Label, welches automatisch zum Eingabefeld zugeordnet wird,
@@ -318,7 +318,7 @@
             styleClass="w-full"
           >
             <p-button
-              class="address-delete-button"
+              class="address-delete-button isy-print-hide"
               icon="pi pi-trash"
               [text]="true"
               [rounded]="true"
@@ -411,6 +411,8 @@
           </p-fieldset>
         }
         <p-button
+          id="button-add-residence"
+          class="isy-print-hide"
           [label]="'isyAngularWidgetsDemo.actions.addResidence' | translate"
           icon="pi pi-plus"
           iconPos="left"
@@ -421,7 +423,7 @@
 
         <p-divider></p-divider>
 
-        <div class="field field-checkbox my-8">
+        <div id="show-secret-fields-action" class="field field-checkbox my-8 isy-print-hide">
           <p-toggleswitch inputId="show-secret-fields" (onChange)="showSecretFields = $event.checked"></p-toggleswitch>
           <label for="show-secret-fields" class="m-0 ml-4">
             {{ 'isyAngularWidgetsDemo.actions.showSecretFields' | translate }}
@@ -485,7 +487,7 @@
       </form>
 
       <div class="justify-center flex mt-4">
-        <div id="div-save" class="p-buttonset">
+        <div id="div-save" class="p-buttonset isy-print-hide">
           <p-button
             id="button-save"
             icon="pi pi-save"
@@ -499,9 +501,11 @@
     </p-tabpanel>
 
     <p-tabpanel id="panel-sachverhalte" value="1">
-      <p-table [value]="person.sachverhalte">
+      <p-table class="isy-print-table" [value]="person.sachverhalte">
         <ng-template pTemplate="caption">
           <p-button
+            id="edit-facts-button"
+            class="isy-print-hide"
             icon="pi pi-pencil"
             iconPos="left"
             [label]="'isyAngularWidgetsDemo.actions.addOrEditFact' | translate"
@@ -537,4 +541,4 @@
     </p-tabpanel>
   </p-tabpanels>
 </p-tabs>
-<p-toast></p-toast>
+<p-toast class="isy-print-hide"></p-toast>

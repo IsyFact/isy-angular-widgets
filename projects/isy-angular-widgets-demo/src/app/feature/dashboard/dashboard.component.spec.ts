@@ -33,6 +33,14 @@ describe('Integration Tests: DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should expose readable print sections without dropping dashboard content', () => {
+    expect(spectator.query('.demo-print-page.demo-dashboard')).toBeTruthy();
+    expect(spectator.queryAll('.demo-dashboard__section-heading.isy-print-only')).toHaveLength(2);
+    expect(spectator.queryAll('.demo-dashboard__item')).toHaveLength(
+      spectator.queryAll('demo-dashboard-widget').length + spectator.queryAll('p-card').length
+    );
+  });
+
   describe('with available charts', () => {
     it('should init char data correctly', () => {
       component.initCharts();

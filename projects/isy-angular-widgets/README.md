@@ -47,6 +47,66 @@ Weitere Details dazu sind im Abschnitt [Migration von PrimeFlex auf Tailwind CSS
 
 Bestehende komponentenspezifische Styles in `.scss`-Dateien der Bibliothek bleiben davon unberührt und können weiterhin verwendet werden.
 
+## Optionale Print-Basis
+
+Die Bibliothek liefert mit `assets/theme/isyfact-print.scss` eine allgemeine Basis für browserbasierte Ausdrucke im Format A4 hochkant. Sie ist bewusst nicht Bestandteil des normalen IsyFact-Themes: Anwendungen aktivieren sie nur dann, wenn sie die Print-Regeln verwenden möchten.
+
+Das Print-Stylesheet kann in der `angular.json` nach den normalen Theme- und Drittanbieterstyles und vor den eigenen globalen Styles eingebunden werden:
+
+```json
+"styles": [
+  "node_modules/@isyfact/isy-angular-widgets/assets/theme/isyfact-theme.scss",
+  "node_modules/@isyfact/isy-angular-widgets/assets/theme/isyfact-print.scss",
+  "src/styles.scss"
+]
+```
+
+Die Reihenfolge ist relevant: Nachgeladene Anwendungsstyles können die Print-Basis innerhalb eines eigenen `@media print`-Blocks projektspezifisch erweitern oder überschreiben. Das ist beispielsweise für ein abweichendes Seitenformat oder fachlich breitere Tabellen sinnvoll:
+
+```scss
+@media print {
+  @page {
+    size: A4 landscape;
+  }
+
+  .application-wide-table {
+    font-size: 7pt !important;
+  }
+}
+```
+
+Einige Regeln der Basis verwenden `!important`, um Bildschirmvorgaben von PrimeNG verlässlich aufzuheben. Projektspezifische Regeln sollten `!important` deshalb gezielt dort ebenfalls verwenden, wo eine solche Vorgabe überschrieben werden muss.
+
+### Print-Utilities
+
+| Klasse | Zweck und Verwendung |
+| --- | --- |
+| `isy-print-hide` | Hat am Bildschirm keine Wirkung und blendet das markierte Element ausschließlich im Druck aus, zum Beispiel Navigation oder Aktionen. |
+| `dont-print` | Verhält sich im Druck identisch zu `isy-print-hide` und bleibt als kompatibler Alias für bestehendes Markup unterstützt. |
+| `isy-print-only` | Blendet das markierte Element am Bildschirm aus und zeigt es ausschließlich im Druck mit seinem elementtypischen Anzeigemodus, zum Beispiel als Druckkopf oder Tabellenhinweis. |
+| `isy-print-content` | Setzt Breiten-, Abstands-, Hintergrund- und Überlaufvorgaben des markierten Inhaltsbereichs für den Druck zurück. Geschwister oder andere Seitenbereiche werden dadurch nicht ausgeblendet. |
+| `isy-print-form` | Stellt das markierte Formular im Druck einspaltig dar, erhält die aktuell gerenderten Werte und entfernt die Interaktionsdekoration unterstützter Eingabe-Widgets. Fachlich irrelevante Aktionen müssen zusätzlich mit `isy-print-hide` markiert werden. |
+| `isy-print-current-state` | Wird auf einen PrimeNG-Container für Tabs, Accordions, Panels oder Stepper gesetzt und druckt ausschließlich dessen aktuell sichtbaren Zustand. Die Klasse öffnet oder rendert keine geschlossenen Bereiche. |
+| `isy-print-overlay` | Nimmt einen sichtbaren anwendungsspezifischen Overlay-Inhalt in den normalen Druckfluss auf. PrimeNG-Dialoge und -Drawer werden bereits ohne diese Zusatzklasse unterstützt; nicht gerenderte Overlays bleiben unsichtbar. |
+| `isy-print-overlay-mask` | Wird bei einem anwendungsspezifischen Overlay auf dessen Maskenelement gesetzt und neutralisiert die Maske im Druck. Sie ist die öffentliche Begleitklasse zu `isy-print-overlay`; PrimeNG-Dialog- und Drawer-Masken werden bereits automatisch erkannt. |
+| `isy-print-table` | Wird auf eine Tabelle oder ihren PrimeNG-Container gesetzt und optimiert sie für die verfügbare Seitenbreite, wiederholbare Tabellenköpfe und möglichst stabile Zeilenumbrüche. Aktionsspalten und anwendungsspezifische Bedienung müssen mit `isy-print-hide` markiert werden. |
+| `isy-print-current-items` | Entfernt im markierten Bereich Scroll- und Virtualisierungsbegrenzungen, ohne den Anwendungszustand zu ändern oder weitere Datensätze zu laden. Gedruckt werden ausschließlich die aktuell im DOM gerenderten Einträge. |
+| `isy-print-break-before` | Fordert im Druck vor dem markierten Element einen Seitenumbruch an; die Druckengine darf die Best-Effort-Regel bei technisch nicht erfüllbaren Umbrüchen abweichend behandeln. |
+| `isy-print-break-after` | Fordert im Druck nach dem markierten Element einen Seitenumbruch an; die Druckengine darf die Best-Effort-Regel bei technisch nicht erfüllbaren Umbrüchen abweichend behandeln. |
+| `isy-print-break-inside-avoid` | Fordert an, einen Seitenumbruch innerhalb des markierten Elements zu vermeiden; zu hohe Inhalte können von der Druckengine dennoch geteilt werden. |
+
+Die Print-Basis bildet immer den aktuellen, bereits gerenderten Anwendungszustand ab:
+
+- Bei Tabs wird nur der aktive Tab gedruckt; bei Accordions, Panels und Steppern bleiben geschlossene beziehungsweise inaktive Bereiche geschlossen.
+- Nur geöffnete und gerenderte Dialoge oder Overlays können gedruckt werden. Masken und fachlich irrelevante Dialogaktionen werden entfernt, der sichtbare Inhalt wird in den Seitenfluss übernommen.
+- Paginierte und virtualisierte Tabellen drucken nur die Datensätze der aktuellen Seite beziehungsweise die bereits gerenderten Datensätze. Die Print-Basis ändert weder Pagination noch Anwendungszustand und lädt keine weiteren Daten nach.
+
+### Bekannte Grenzen
+
+Die allgemeinen Tabellenregeln sind in der Demo mit bis zu sieben sichtbaren fachlichen Spalten auf A4 hochkant geprüft. Breitere Tabellen benötigen eine fachlich reduzierte Spaltenauswahl oder anwendungsspezifische Regeln, beispielsweise A4 quer und eine kleinere Schrift. Wiederholte Tabellenköpfe sowie das Vermeiden von Umbrüchen innerhalb einer Zeile bleiben browserabhängige Best-Effort-Regeln; eine einzelne Zeile, die höher als der bedruckbare Bereich ist, kann geteilt werden.
+
+Nicht gerenderte Seiten oder virtualisierte Datensätze können durch CSS nicht in den Ausdruck aufgenommen werden. Wenn ein vollständiger Datenexport erforderlich ist, muss die Anwendung dafür einen eigenen, datenbasierten Export- oder Druckpfad bereitstellen. Semantisch notwendige Diagrammfarben werden mit den CSS-Regeln für exakte Druckfarben erhalten, können aber zusätzlich von den Druckeinstellungen des Browsers oder Druckertreibers beeinflusst werden.
+
 ## Getting Started
 
 Mit folgendem Befehl wird die Bibliothek `isy-angular-widgets` zu einem bestehenden Angular-Projekt hinzugefügt:

@@ -2,8 +2,9 @@ import {DOCUMENT} from '@angular/core';
 import {NavigationEnd, provideRouter, Router} from '@angular/router';
 import {AppComponent} from './app.component';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {of, Subject} from 'rxjs';
+import {firstValueFrom, of, Subject} from 'rxjs';
 import {InterpolatableTranslationObject, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {routes} from './app.routes';
 
 describe('Integration Tests: AppComponent', () => {
   let spectator: Spectator<AppComponent>;
@@ -17,7 +18,7 @@ describe('Integration Tests: AppComponent', () => {
         useValue: document
       },
       TranslateService,
-      provideRouter([])
+      provideRouter(routes)
     ]
   });
 
@@ -29,6 +30,79 @@ describe('Integration Tests: AppComponent', () => {
   it('the print button should have an aria-label attribute', () => {
     const element = spectator.query('p-button[icon="pi pi-print"] button') as HTMLElement;
     expect(element.hasAttribute('aria-label')).toBeTrue();
+  });
+
+  it('should open the browser print dialog once when the print button is activated', () => {
+    const print = spyOn(window, 'print');
+
+    spectator.click('p-button[icon="pi pi-print"] button');
+
+    expect(print).toHaveBeenCalledOnceWith();
+  });
+
+  it('should update the displayed print date immediately before browser printing', () => {
+    const stalePrintDate = new Date('2000-01-01T00:00:00.000Z');
+    const currentPrintDate = new Date('2026-09-02T12:34:56.000Z');
+    spectator.component.printDate = stalePrintDate;
+    spectator.detectChanges();
+
+    jasmine.clock().install();
+    jasmine.clock().mockDate(currentPrintDate);
+
+    try {
+      window.dispatchEvent(new Event('beforeprint'));
+
+      const time = spectator.query('.demo-print-header time') as HTMLTimeElement;
+      expect(time.dateTime).toBe(currentPrintDate.toISOString());
+    } finally {
+      jasmine.clock().uninstall();
+    }
+  });
+
+  it('should display the translated error title for an unknown route on screen and in print', async () => {
+    const router = spectator.inject(Router);
+    const translate = spectator.inject(TranslateService);
+    mockDocument.title = 'Objekt suchen';
+    translate.setTranslation(
+      'de',
+      {
+        isyAngularWidgetsDemo: {
+          websiteTitles: {pageNotFound: 'Seite nicht gefunden'},
+          messages: {changePage: 'Seite gewechselt:'}
+        }
+      },
+      true
+    );
+    translate.setTranslation(
+      'en',
+      {
+        isyAngularWidgetsDemo: {
+          websiteTitles: {pageNotFound: 'Page not found'},
+          messages: {changePage: 'Page changed:'}
+        }
+      },
+      true
+    );
+    await firstValueFrom(translate.use('de'));
+
+    expect(await router.navigateByUrl('/unbekannte-route')).toBeTrue();
+    await spectator.fixture.whenStable();
+    spectator.detectChanges();
+
+    expect(router.url).toBe('/unbekannte-route');
+    expect(spectator.query('demo-page-not-found')).toBeTruthy();
+    expect(mockDocument.title).toBe('Seite nicht gefunden');
+    expect((spectator.query('.demo-print-header h1') as HTMLElement).innerText).toBe('Seite nicht gefunden');
+
+    await firstValueFrom(translate.use('en'));
+    spectator.detectChanges();
+
+    expect(mockDocument.title).toBe('Page not found');
+    expect((spectator.query('.demo-print-header h1') as HTMLElement).innerText).toBe('Page not found');
+  });
+
+  it('should exclude the application toolbar from print', () => {
+    expect(spectator.query('isy-seiten-toolbar[Seitentoolbar].isy-print-hide')).toBeTruthy();
   });
 
   it('the info button should have an aria-label attribute', () => {

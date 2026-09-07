@@ -97,8 +97,30 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   it('the dialog header close icon should have an aria-label attribute', () => {
     component.visible = true;
     setupPerson();
-    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
+    const element = spectator.query('[role="dialog"] button[aria-label]') as HTMLElement;
     expect(element.hasAttribute('aria-label')).toBeTrue();
+  });
+
+  it('should keep visible dialog content and exclude dialog actions from print', () => {
+    component.visible = true;
+    setupPerson();
+    component.person!.sachverhalte = ['Sachverhalt A', 'Sachverhalt B'];
+    component.ngOnChanges();
+    spectator.detectChanges();
+
+    const printableDialog = spectator.query('[role="dialog"].isy-print-overlay');
+    const printableTable = spectator.query('p-table.isy-print-table');
+    const hiddenTableHeadings = spectator.queryAll('thead th.isy-print-hide');
+    const hiddenTableCells = spectator.queryAll('tbody td.isy-print-hide');
+    const hiddenActions = spectator.queryAll('p-button.isy-print-hide');
+
+    expect(printableDialog).toBeTruthy();
+    expect(spectator.query('.isy-print-overlay-mask')).toBeTruthy();
+    expect(printableTable).toBeTruthy();
+    expect(hiddenTableHeadings).toHaveLength(1);
+    expect(hiddenTableCells.length).toBeGreaterThan(0);
+    expect(hiddenActions.length).toBeGreaterThanOrEqual(5);
+    expect(spectator.query('p-inputgroup.isy-print-hide')).toBeTruthy();
   });
 
   it('should close the dialog when closeDialog is called', () => {
