@@ -34,6 +34,24 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
   @Input() outlinedInputCharButton: boolean = false;
 
   /**
+   * Aria label for the open picker button.
+   * Defaults to translation from WidgetsConfigService if not provided.
+   */
+  @Input() togglePickerAriaLabel?: string;
+
+  /**
+   * Aria label for the picker dialog.
+   * Defaults to translation from WidgetsConfigService if not provided.
+   */
+  @Input() pickerAriaLabel?: string;
+
+  /**
+   * Aria label for the close picker button.
+   * Defaults to translation from WidgetsConfigService if not provided.
+   */
+  @Input() closePickerAriaLabel?: string;
+
+  /**
    * Is getting fired on mouse up event
    * @param event the fired mouse event
    */
@@ -79,6 +97,9 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
     this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
     this.componentRef.setInput('datentyp', this.datentyp);
     this.componentRef.setInput('outlinedInputCharButton', this.outlinedInputCharButton);
+    this.componentRef.setInput('togglePickerAriaLabel', this.togglePickerAriaLabel);
+    this.componentRef.setInput('pickerAriaLabel', this.pickerAriaLabel);
+    this.componentRef.setInput('closePickerAriaLabel', this.closePickerAriaLabel);
 
     this.setupInputChar();
 
@@ -100,6 +121,18 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
 
     if (changes.outlinedInputCharButton) {
       this.componentRef.setInput('outlinedInputCharButton', this.outlinedInputCharButton);
+    }
+
+    if (changes.togglePickerAriaLabel) {
+      this.componentRef.setInput('togglePickerAriaLabel', this.togglePickerAriaLabel);
+    }
+
+    if (changes.pickerAriaLabel) {
+      this.componentRef.setInput('pickerAriaLabel', this.pickerAriaLabel);
+    }
+
+    if (changes.closePickerAriaLabel) {
+      this.componentRef.setInput('closePickerAriaLabel', this.closePickerAriaLabel);
     }
   }
 
