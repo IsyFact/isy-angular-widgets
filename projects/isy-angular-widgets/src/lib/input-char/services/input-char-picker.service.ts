@@ -76,7 +76,6 @@ export class InputCharPickerService implements OnDestroy {
       selection: this.getCachedSelection(options.triggerElement, options.datentyp),
       selectedCharacter: this.getCachedSelectedCharacter(options.triggerElement, options.datentyp),
       togglePickerAriaLabel: options.togglePickerAriaLabel,
-      pickerAriaLabel: options.pickerAriaLabel,
       closePickerAriaLabel: options.closePickerAriaLabel
     });
 

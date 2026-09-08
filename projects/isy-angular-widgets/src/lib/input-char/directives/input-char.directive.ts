@@ -40,12 +40,6 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
   @Input() togglePickerAriaLabel?: string;
 
   /**
-   * Aria label for the picker dialog.
-   * Defaults to translation from WidgetsConfigService if not provided.
-   */
-  @Input() pickerAriaLabel?: string;
-
-  /**
    * Aria label for the close picker button.
    * Defaults to translation from WidgetsConfigService if not provided.
    */
@@ -98,7 +92,6 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
     this.componentRef.setInput('datentyp', this.datentyp);
     this.componentRef.setInput('outlinedInputCharButton', this.outlinedInputCharButton);
     this.componentRef.setInput('togglePickerAriaLabel', this.togglePickerAriaLabel);
-    this.componentRef.setInput('pickerAriaLabel', this.pickerAriaLabel);
     this.componentRef.setInput('closePickerAriaLabel', this.closePickerAriaLabel);
 
     this.setupInputChar();
@@ -125,10 +118,6 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
 
     if (changes.togglePickerAriaLabel) {
       this.componentRef.setInput('togglePickerAriaLabel', this.togglePickerAriaLabel);
-    }
-
-    if (changes.pickerAriaLabel) {
-      this.componentRef.setInput('pickerAriaLabel', this.pickerAriaLabel);
     }
 
     if (changes.closePickerAriaLabel) {
