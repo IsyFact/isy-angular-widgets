@@ -692,8 +692,42 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   it('the dialog header close icon should have an aria-label attribute', () => {
     spectator.component.displayEditDialog();
     spectator.detectChanges();
-    const element = spectator.query('.p-dialog-close-button') as HTMLElement;
+    const element = spectator.query('[role="dialog"] button[aria-label]') as HTMLElement;
     expect(element.hasAttribute('aria-label')).toBeTrue();
+  });
+
+  it('should print the open edit dialog with current values and actions in its footer', () => {
+    const person = getInitPerson();
+    setupEditForm(person);
+    const currentFirstName = 'Aktuell geändert';
+    component.editForm.controls.editVorname.setValue(currentFirstName);
+    spectator.detectChanges();
+
+    const expectedFields = [
+      ['edit-id', person.id],
+      ['edit-vorname', currentFirstName],
+      ['edit-nachname', person.personalien.nachname],
+      ['edit-geburtsname', person.personalien.geburtsname],
+      ['edit-geburtsdatum', person.personalien.geburtsdatum],
+      ['edit-geburtsort', person.personalien.geburtsort],
+      ['edit-gender', person.personalien.gender],
+      ['edit-nationality', person.personalien.staatsangehoerigkeit]
+    ];
+
+    expect(spectator.query('[role="dialog"].isy-print-overlay')).toBeTruthy();
+    expect(spectator.query('.isy-print-overlay-mask')).toBeTruthy();
+    expect(spectator.query('.isy-print-form #edit-id')).toBeTruthy();
+    expect(spectator.query('.edit-dialog-actions.isy-print-hide')).toBeTruthy();
+    expect(spectator.queryAll('.edit-dialog-actions p-button')).toHaveLength(2);
+
+    for (const [fieldId, value] of expectedFields) {
+      expect(spectator.query(`label[for="${fieldId}"]`))
+        .withContext(`label for ${fieldId}`)
+        .toBeTruthy();
+      expect((spectator.query(`#${fieldId}`) as HTMLInputElement).value)
+        .withContext(fieldId)
+        .toBe(value);
+    }
   });
 
   it('should have isCollapsed set to false by default', () => {
@@ -719,5 +753,11 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     for (const item of multiselectItems) {
       expect(item.textContent?.trim()).not.toBe('');
     }
+  });
+
+  it('should exclude the search and filter panel from print', () => {
+    const searchPanel = spectator.query('p-panel.isy-print-hide');
+
+    expect(searchPanel).toBeTruthy();
   });
 });

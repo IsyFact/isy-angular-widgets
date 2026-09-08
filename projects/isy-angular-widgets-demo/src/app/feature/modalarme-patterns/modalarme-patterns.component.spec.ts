@@ -80,6 +80,14 @@ describe('ModalarmePatternsComponent', () => {
     it('should initialise helpPopoverId', () => {
       expect(component.helpPopoverId).toBe('help-popover-panel');
     });
+
+    it('should mark the current state and interaction-only actions for print', () => {
+      expect(spectator.query('.demo-print-page')).toBeTruthy();
+      expect(spectator.query('p-stepper.isy-print-current-state')).toBeTruthy();
+      expect(spectator.query('p-accordion.isy-print-current-state')).toBeTruthy();
+      expect(spectator.query('form[data-step-form].isy-print-form')).toBeTruthy();
+      expect(spectator.queryAll('.isy-print-hide p-button').length).toBeGreaterThan(0);
+    });
   });
 
   describe('Forms', () => {
