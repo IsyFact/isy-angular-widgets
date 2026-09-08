@@ -75,7 +75,7 @@ describe('Unit Tests: InputCharComponent', () => {
     });
 
     it('should have the specified default input configuration', () => {
-      expect(component.header).toEqual(undefined);
+      expect(component.header).toBeUndefined();
       expect(component.closable).toBeTrue();
       expect(component.draggable).toBeTrue();
       expect(component.resizable).toBeFalse();
@@ -322,7 +322,6 @@ describe('Unit Tests: InputCharComponent', () => {
       spectator = createComponent({
         props: {
           togglePickerAriaLabel: 'Open custom character picker',
-          pickerAriaLabel: 'Custom character picker dialog',
           closePickerAriaLabel: 'Close custom character picker'
         }
       });
@@ -345,7 +344,6 @@ describe('Unit Tests: InputCharComponent', () => {
       expect(pickerServiceSpy.open).toHaveBeenCalledWith(
         jasmine.objectContaining({
           togglePickerAriaLabel: 'Open custom character picker',
-          pickerAriaLabel: 'Custom character picker dialog',
           closePickerAriaLabel: 'Close custom character picker'
         })
       );

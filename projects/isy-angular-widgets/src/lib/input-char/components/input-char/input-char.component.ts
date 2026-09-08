@@ -97,12 +97,6 @@ export class InputCharComponent implements OnDestroy {
   @Input() togglePickerAriaLabel?: string;
 
   /**
-   * Aria label for the picker dialog.
-   * Defaults to translation from WidgetsConfigService if not provided.
-   */
-  @Input() pickerAriaLabel?: string;
-
-  /**
    * Aria label for the close picker button.
    * Defaults to translation from WidgetsConfigService if not provided.
    */
@@ -159,7 +153,6 @@ export class InputCharComponent implements OnDestroy {
         closeOnEscape: this.closeOnEscape,
         modal: this.modal,
         togglePickerAriaLabel: this.togglePickerAriaLabel,
-        pickerAriaLabel: this.pickerAriaLabel,
         closePickerAriaLabel: this.closePickerAriaLabel,
         onInsert: (zeichen) => this.insertCharacter.emit(zeichen)
       });

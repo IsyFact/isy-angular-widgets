@@ -16,7 +16,6 @@ export interface InputCharPickerState {
   selection?: InputCharSelection;
   selectedCharacter?: string;
   togglePickerAriaLabel?: string;
-  pickerAriaLabel?: string;
   closePickerAriaLabel?: string;
 }
 
@@ -34,6 +33,5 @@ export interface InputCharPickerOpenOptions {
   closeOnEscape?: boolean;
   modal?: boolean;
   togglePickerAriaLabel?: string;
-  pickerAriaLabel?: string;
   closePickerAriaLabel?: string;
 }
