@@ -34,6 +34,24 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
   @Input() outlinedInputCharButton: boolean = false;
 
   /**
+   * Aria label for the open picker button.
+   * Defaults to translation from WidgetsConfigService if not provided.
+   */
+  @Input() togglePickerAriaLabel?: string;
+
+  /**
+   * Aria label for the picker dialog.
+   * Defaults to translation from WidgetsConfigService if not provided.
+   */
+  @Input() pickerAriaLabel?: string;
+
+  /**
+   * Aria label for the close picker button.
+   * Defaults to translation from WidgetsConfigService if not provided.
+   */
+  @Input() closePickerAriaLabel?: string;
+
+  /**
    * Is getting fired on mouse up event
    * @param event the fired mouse event
    */
