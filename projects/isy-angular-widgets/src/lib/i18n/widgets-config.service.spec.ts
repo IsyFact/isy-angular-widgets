@@ -105,9 +105,23 @@ describe('Unit tests: WidgetsConfigService', () => {
         close: 'Schließen'
       },
       inputChar: {
+        title: 'Sonderzeichenpicker',
         headerBaseChars: 'Basis',
         headerGroups: 'Gruppen',
-        insert: 'Einfügen'
+        headerAllCharacters: 'Alle',
+        insert: 'Einfügen',
+        preview: {
+          letters: 'Zeichenvorschau',
+          information: 'Zeicheninformationen'
+        },
+        aria: {
+          togglePicker: 'Sonderzeichenpicker öffnen',
+          closePicker: 'Sonderzeichenpicker schließen',
+          characterGrid: 'Sonderzeichenauswahl',
+          filterAllCharacters: 'Alle Zeichen wählen',
+          filterBaseChars: 'Basis-Zeichen wählen',
+          filterGroups: 'Zeichengruppen wählen'
+        }
       },
       hauptfenster: {
         altLogoAwl: 'Logo der Anwendungslandschaft',

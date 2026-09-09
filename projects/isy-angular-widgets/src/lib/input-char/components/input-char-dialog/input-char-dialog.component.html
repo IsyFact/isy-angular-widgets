@@ -13,6 +13,9 @@
     (valueChange)="onSelection($event)"
     [dataToDisplay]="leftViewData"
     [allButtonOptionsLabel]="configService.getTranslation('inputChar.headerAllCharacters')"
+    [allButtonAriaLabel]="configService.getTranslation('inputChar.aria.filterAllCharacters')"
+    [baseCharsAriaLabel]="configService.getTranslation('inputChar.aria.filterBaseChars')"
+    [groupsAriaLabel]="configService.getTranslation('inputChar.aria.filterGroups')"
   ></isy-multi-select-button>
 </div>
 

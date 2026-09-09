@@ -529,6 +529,59 @@ export class App implements OnDestroy {
 ```
 Die `translate`-Methode kann zum Beispiel auch für einen Language-Picker verwendet werden, damit Benutzer die Sprache der Anwendung selbst wählen können.
 
+### Aria-Label Übersetzungen
+
+Aria-Labels für Barrierefreiheit werden automatisch durch den `WidgetsConfigService` verwaltet und aktualisieren sich bei einem Sprachwechsel.
+
+Die verfügbaren Aria-Label Schlüssel für `inputChar` sind:
+
+```json
+{
+  "isyAngularWidgets": {
+    "inputChar": {
+      "aria": {
+        "togglePicker": "Sonderzeichenpicker öffnen",
+        "closePicker": "Sonderzeichenpicker schließen",
+        "characterGrid": "Sonderzeichenauswahl",
+        "filterAllCharacters": "Alle Zeichen wählen",
+        "filterBaseChars": "Basis-Zeichen wählen",
+        "filterGroups": "Zeichengruppen wählen"
+      },
+      "preview": {
+        "letters": "Zeichenvorschau",
+        "information": "Zeicheninformationen"
+      }
+    }
+  }
+}
+```
+
+Diese Labels können in den JSON-Übersetzungsdateien (`assets/i18n/de.json` und `assets/i18n/en.json`) angepasst werden.
+Bei einem Sprachwechsel werden die Aria-Labels automatisch aktualisiert.
+
+Beispiel für Englisch:
+
+```json
+{
+  "isyAngularWidgets": {
+    "inputChar": {
+      "aria": {
+        "togglePicker": "Open Special Character Picker",
+        "closePicker": "Close Special Character Picker",
+        "characterGrid": "Special character selection",
+        "filterAllCharacters": "Select all characters",
+        "filterBaseChars": "Select base characters",
+        "filterGroups": "Select character groups"
+      },
+      "preview": {
+        "letters": "Character Preview",
+        "information": "Character Information"
+      }
+    }
+  }
+}
+```
+
 ## Form-Wrapper
 
 Der `Form-Wrapper` kapselt Formularfelder mit Label, Pflichtfeldkennzeichnung, Validierungsfehlern und Unterstützung für Barrierefreiheit.

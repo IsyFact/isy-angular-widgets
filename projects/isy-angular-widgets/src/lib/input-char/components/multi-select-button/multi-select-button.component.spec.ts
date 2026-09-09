@@ -169,6 +169,50 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
 
     expect(component.value).toBeUndefined();
   });
+
+  describe('with custom aria-label properties', () => {
+    it('should use default getAllButtonAriaLabel from configService when allButtonAriaLabel is not provided', () => {
+      const result = component.getAllButtonAriaLabel();
+
+      expect(result).toBe('Alle Zeichen wählen');
+    });
+
+    it('should use custom allButtonAriaLabel when provided', () => {
+      spectator.setInput('allButtonAriaLabel', 'Custom all characters label');
+
+      const result = component.getAllButtonAriaLabel();
+
+      expect(result).toBe('Custom all characters label');
+    });
+
+    it('should use default getBaseCharsAriaLabel from configService when baseCharsAriaLabel is not provided', () => {
+      const result = component.getBaseCharsAriaLabel();
+
+      expect(result).toBe('Basis-Zeichen wählen');
+    });
+
+    it('should use custom baseCharsAriaLabel when provided', () => {
+      spectator.setInput('baseCharsAriaLabel', 'Custom base chars label');
+
+      const result = component.getBaseCharsAriaLabel();
+
+      expect(result).toBe('Custom base chars label');
+    });
+
+    it('should use default getGroupsAriaLabel from configService when groupsAriaLabel is not provided', () => {
+      const result = component.getGroupsAriaLabel();
+
+      expect(result).toBe('Zeichengruppen wählen');
+    });
+
+    it('should use custom groupsAriaLabel when provided', () => {
+      spectator.setInput('groupsAriaLabel', 'Custom groups label');
+
+      const result = component.getGroupsAriaLabel();
+
+      expect(result).toBe('Custom groups label');
+    });
+  });
 });
 
 describe('Integration Tests: MultiSelectButtonComponent', () => {
