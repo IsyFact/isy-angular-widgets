@@ -91,6 +91,8 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
     this.componentRef = this.viewContainerRef.createComponent(InputCharComponent);
     this.componentRef.setInput('datentyp', this.datentyp);
     this.componentRef.setInput('outlinedInputCharButton', this.outlinedInputCharButton);
+    this.componentRef.setInput('togglePickerAriaLabel', this.togglePickerAriaLabel);
+    this.componentRef.setInput('closePickerAriaLabel', this.closePickerAriaLabel);
 
     this.setupInputChar();
 
@@ -112,6 +114,14 @@ export class InputCharDirective implements OnInit, OnChanges, OnDestroy {
 
     if (changes.outlinedInputCharButton) {
       this.componentRef.setInput('outlinedInputCharButton', this.outlinedInputCharButton);
+    }
+
+    if (changes.togglePickerAriaLabel) {
+      this.componentRef.setInput('togglePickerAriaLabel', this.togglePickerAriaLabel);
+    }
+
+    if (changes.closePickerAriaLabel) {
+      this.componentRef.setInput('closePickerAriaLabel', this.closePickerAriaLabel);
     }
   }
 
