@@ -9,9 +9,23 @@ export interface WidgetsTranslation {
     close?: string;
   };
   inputChar?: {
+    title?: string;
     headerBaseChars?: string;
     headerGroups?: string;
+    headerAllCharacters?: string;
     insert?: string;
+    preview?: {
+      letters?: string;
+      information?: string;
+    };
+    aria?: {
+      togglePicker?: string;
+      closePicker?: string;
+      characterGrid?: string;
+      filterAllCharacters?: string;
+      filterBaseChars?: string;
+      filterGroups?: string;
+    };
   };
   hauptfenster?: {
     altLogoAwl?: string;
@@ -25,6 +39,7 @@ export interface WidgetsTranslation {
   };
   formWrapper?: {
     required?: string;
+    invalid?: string;
   };
   seitentoolbar?: {
     back?: string;

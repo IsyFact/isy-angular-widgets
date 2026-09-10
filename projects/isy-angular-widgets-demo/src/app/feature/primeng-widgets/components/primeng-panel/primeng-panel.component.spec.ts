@@ -151,6 +151,19 @@ describe('Unit Tests: PrimengPanelComponent', () => {
     expect(spectator.query('.pi.pi-home')).toBeTruthy();
   });
 
+  it('should preserve the current state of interactive containers for print', () => {
+    const statefulContainers = spectator.queryAll(
+      'p-accordion.isy-print-current-state, p-panel.isy-print-current-state, ' +
+        'p-tabs.isy-print-current-state, p-stepper.isy-print-current-state'
+    );
+
+    expect(statefulContainers).toHaveLength(5);
+    expect(spectator.queryAll('p-tabpanel:not([hidden])')).toHaveLength(2);
+    expect(spectator.queryAll('p-tabpanel[hidden]').length).toBeGreaterThan(0);
+    expect(spectator.query('p-fieldset form.isy-print-form')).toBeTruthy();
+    expect(spectator.query('p-stepper .isy-print-hide')).toBeTruthy();
+  });
+
   describe('Responsive stepper', () => {
     it('should observe the configured vertical stepper breakpoint', () => {
       expect(breakpointObserverSpy.observe).toHaveBeenCalledOnceWith(verticalStepperMediaQuery);

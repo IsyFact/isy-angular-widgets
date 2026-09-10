@@ -20,9 +20,23 @@ export class WidgetsConfigService {
       close: 'Schließen'
     },
     inputChar: {
+      title: 'Sonderzeichenpicker',
       headerBaseChars: 'Basis',
       headerGroups: 'Gruppen',
-      insert: 'Einfügen'
+      headerAllCharacters: 'Alle',
+      insert: 'Einfügen',
+      preview: {
+        letters: 'Zeichenvorschau',
+        information: 'Zeicheninformationen'
+      },
+      aria: {
+        togglePicker: 'Sonderzeichenpicker öffnen',
+        closePicker: 'Sonderzeichenpicker schließen',
+        characterGrid: 'Sonderzeichenauswahl',
+        filterAllCharacters: 'Alle Zeichen wählen',
+        filterBaseChars: 'Basis-Zeichen wählen',
+        filterGroups: 'Zeichengruppen wählen'
+      }
     },
     hauptfenster: {
       altLogoAwl: 'Logo der Anwendungslandschaft',
@@ -36,7 +50,8 @@ export class WidgetsConfigService {
       }
     },
     formWrapper: {
-      required: 'Pflichtfeld'
+      required: 'Pflichtfeld',
+      invalid: 'Ungültige Eingabe'
     },
     seitentoolbar: {
       back: 'Zurück zur Übersicht'
@@ -75,7 +90,15 @@ export class WidgetsConfigService {
       },
       inputChar: {
         ...this.translation.inputChar,
-        ...value.inputChar
+        ...value.inputChar,
+        preview: {
+          ...this.translation.inputChar?.preview,
+          ...value.inputChar?.preview
+        },
+        aria: {
+          ...this.translation.inputChar?.aria,
+          ...value.inputChar?.aria
+        }
       },
       hauptfenster: {
         ...this.translation.hauptfenster,

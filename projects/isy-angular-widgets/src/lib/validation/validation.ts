@@ -27,6 +27,21 @@ interface ToDateCapable {
 
 /**
  * List of user-defined validators. Can be extended with additional static validators
+ *
+ * ## Accepted date input
+ *
+ * Date validation does not depend on `moment.js`. Depending on the validator the following
+ * input is accepted:
+ *
+ * - JavaScript `Date` objects
+ * - ISO strings such as `YYYY-MM-DD` or `YYYY-MM-DDTHH:mm:ssZ`, with `isInFuture` and
+ *   `isInPast` also with an offset
+ * - library formats such as `DD.MM.YYYY` and `DD-MM-YYYY`, only with `isInFuture` and `isInPast`
+ * - numeric timestamps such as `Date.now()`, only with `isInFuture` and `isInPast`
+ * - moment-like objects exposing `toDate()`, kept for backward compatibility with existing applications
+ *
+ * Note that {@link Validation.isoDateTime} stays strict: it only accepts `YYYY-MM-DDTHH:mm:ssZ`
+ * with a literal `Z` at the end, so date times with an offset such as `+01:00` are invalid there.
  */
 export class Validation {
   /**

@@ -14,6 +14,7 @@ describe('objektAnzeigenRoutes', () => {
   it('should have parameterized path for second route', () => {
     const route = objektAnzeigenRoutes[1];
     expect(route.path).toBe(':id');
+    expect(route.data?.title).toBe('isyAngularWidgetsDemo.websiteTitles.displayObject');
   });
 
   it('should load component asynchronously for "" path', async () => {

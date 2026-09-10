@@ -6,6 +6,22 @@ import {WidgetsConfigService} from '../i18n/widgets-config.service';
 
 /**
  * Represents a toolbar component that can be used to insert a toolbar at the top of the page.
+ *
+ * ## Responsive behaviour
+ *
+ * Responsive behaviour is disabled by default and enabled through the `responsive` attribute.
+ * At a screen width of `320px` or less, the visible label of the home/back button is hidden
+ * while the icon and the accessible label are kept. Without `responsive` the visible label
+ * remains in place even on narrow screens.
+ * @example
+ * ```html
+ * <isy-seiten-toolbar
+ *   responsive
+ *   [showSidebar]="true"
+ *   sidebarHomeButtonLabel="Zurück"
+ *   sidebarHomeButtonAriaLabel="Zurück zur Übersicht"
+ * />
+ * ```
  */
 @Component({
   standalone: true,

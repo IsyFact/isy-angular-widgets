@@ -4,11 +4,13 @@
   [(ngModel)]="allOptionsModel"
   [options]="allOptions"
   optionLabel="label"
+  [ariaLabel]="getAllButtonAriaLabel()"
 />
 
 <p-accordion [(value)]="activeIndex">
   @for (group of selectionGroups; let i = $index; track group) {
     @let item = dataToDisplay[group];
+    @let ariaLabel = group === 'baseChars' ? getBaseCharsAriaLabel() : getGroupsAriaLabel();
 
     <p-accordion-panel [value]="group">
       <p-accordion-header>{{ item.label }}</p-accordion-header>
@@ -19,7 +21,8 @@
           [(ngModel)]="models[group]"
           (onChange)="triggerUpdate(group)"
           class="charset-selectbutton"
-          [ngClass]="'charset-selectbutton--' + i"
+          [ngClass]="'charset-selectbutton-' + i"
+          [attr.aria-label]="ariaLabel"
         />
       </p-accordion-content>
     </p-accordion-panel>

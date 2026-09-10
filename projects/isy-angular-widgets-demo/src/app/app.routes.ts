@@ -50,6 +50,9 @@ export const routes: Routes = [
   },
   {
     path: '**',
+    data: {
+      title: 'isyAngularWidgetsDemo.websiteTitles.pageNotFound'
+    },
     component: PageNotFoundComponent
   }
 ];

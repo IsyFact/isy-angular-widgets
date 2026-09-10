@@ -114,4 +114,34 @@ describe('Integration Tests: ResultListComponent', () => {
     expect(translateFilterSpy).toHaveBeenCalledWith(gender);
     expect(translateFilterSpy).toHaveBeenCalledWith(state);
   });
+
+  it('should exclude table actions and controls from print', () => {
+    setupPersonen();
+    spectator.detectChanges();
+
+    const table = spectator.query('p-table.isy-print-table');
+    const tableControls = spectator.query('.result-list-controls.isy-print-hide');
+    const columnControls = spectator.queryAll('p-columnfilter, p-sorticon');
+    const actionHeadings = spectator.queryAll('thead th.isy-print-hide');
+    const actionCells = spectator.queryAll('tbody td.isy-print-hide');
+
+    expect(table).toBeTruthy();
+    expect(tableControls).toBeTruthy();
+    expect(columnControls.length).toBeGreaterThan(0);
+    expect(columnControls.every((control) => control.closest('.isy-print-hide'))).toBeTrue();
+    expect(actionHeadings.length).toBe(1);
+    expect(actionCells.length).toBe(1);
+  });
+
+  it('should keep fixed columns and the current optional column selection for print', () => {
+    setupPersonen();
+    spectator.component.selectedColumns = [spectator.component.initialColumns[0]];
+    spectator.detectChanges();
+
+    const printableHeadings = spectator.queryAll('thead th:not(.isy-print-hide)');
+    const printableCells = spectator.queryAll('tbody tr:first-child td:not(.isy-print-hide)');
+
+    expect(printableHeadings.length).toBe(4);
+    expect(printableCells.length).toBe(4);
+  });
 });

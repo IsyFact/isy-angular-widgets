@@ -297,6 +297,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
     expect(button).toBeTruthy();
     expect(button.innerHTML).toContain(insertLabel);
+    expect(button.classList.contains('isy-print-hide')).toBeTrue();
   });
 
   it('should filter characters correctly by base (all bases in one spec)', () => {
@@ -355,21 +356,21 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   };
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    selectOption('.charset-selectbutton--1 p-togglebutton', String(schriftzeichengruppe));
+    selectOption('.charset-selectbutton-1 p-togglebutton', String(schriftzeichengruppe));
   };
 
   const selectBasis = (basis: string): void => {
-    selectOption('.charset-selectbutton--0 p-togglebutton', basis);
+    selectOption('.charset-selectbutton-0 p-togglebutton', basis);
   };
 
   it(`should show ${bases.length} available bases`, () => {
-    const baseButtons = spectator.queryAll('.charset-selectbutton--0 p-togglebutton');
+    const baseButtons = spectator.queryAll('.charset-selectbutton-0 p-togglebutton');
 
     expect(baseButtons.length).toEqual(bases.length);
   });
 
   it(`should show ${groups.length} available groups`, () => {
-    const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton');
+    const groupButtons = spectator.queryAll('.charset-selectbutton-1 p-togglebutton');
 
     expect(groupButtons.length).toEqual(groups.length);
   });
@@ -494,7 +495,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     };
 
     it('returns focus from a filter value to its accordion header on ESC (left panel)', () => {
-      const value = spectator.element.querySelector('.charset-selectbutton--0 p-togglebutton') as HTMLElement;
+      const value = spectator.element.querySelector('.charset-selectbutton-0 p-togglebutton') as HTMLElement;
       expect(value).toBeTruthy();
 
       const header = value.closest('p-accordion-panel')?.querySelector('p-accordion-header') as HTMLElement;
