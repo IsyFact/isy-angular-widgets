@@ -14,6 +14,8 @@
 - IFS-5714: Fallback-Text für ungültige Eingaben aus dem `WidgetsConfigService` kann nun von konsumierenden Anwendungen per Übersetzung überschrieben werden
 - IFS-2925: Das Label des `Alle`-Buttons der `InputCharComponent` wird nun bei Sprachwechsel aktualisiert
 - IFS-5717: MultiSelectButtonComponent: Aktualisierung des "Alle"-Labels bei Sprachwechsel zur Laufzeit korrigiert.
+## Dokumentation
+- IFS-5725: Die Dokumentationsstruktur des Repositories wurde überarbeitet
 
 # 21.2.0 - 04.08.2026
 ## Features
@@ -79,8 +81,8 @@ Dadurch können sie nun gezielt über Anker im Bedienkonzept verlinkt werden und
 
 # 21.0.0 - 16.02.2026
 ## Breaking Changes
-- IFS-5039: Upgrade der Angularversion und PrimeNG-Bibliothek von 20 auf 21 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
-- IFS-5174: `moment.js` wurde aus der Bibliothek und den Unit-Tests entfernt. Die Datumsvalidierung basiert jetzt auf nativer `Date`-Logik (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
+- IFS-5039: Upgrade der Angularversion und PrimeNG-Bibliothek von 20 auf 21 (Detaillierte Migrationshinweise sind im [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) zu finden)
+- IFS-5174: `moment.js` wurde aus der Bibliothek und den Unit-Tests entfernt. Die Datumsvalidierung basiert jetzt auf nativer `Date`-Logik (Detaillierte Migrationshinweise sind im [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) zu finden)
 ## Fixes
 - IFS-4948: Der Hover-Status von Navigationselementen wurde farblich vom Active-Status abgegrenzt
 - IFS-5039:
@@ -96,8 +98,8 @@ Dadurch können sie nun gezielt über Anker im Bedienkonzept verlinkt werden und
 
 # 20.0.0 - 08.08.2025
 ## Features
-- IFS-4761: Upgrade der Angularversion von 19 auf 20 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
-- IFS-4813: Upgrade der PrimeNG-Bibliothek auf Version 20 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
+- IFS-4761: Upgrade der Angularversion von 19 auf 20 (Detaillierte Migrationshinweise sind im [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) zu finden)
+- IFS-4813: Upgrade der PrimeNG-Bibliothek auf Version 20 (Detaillierte Migrationshinweise sind im [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) zu finden)
 ## Fixes
 - IFS-4314: Validierungsfehler des Eingabefeldes `isy-incomplete-date` für ungewisse Datumswerte bei programmatischer Befüllung behoben
 
@@ -114,7 +116,7 @@ Dadurch können sie nun gezielt über Anker im Bedienkonzept verlinkt werden und
 # 19.0.0 - 09.05.2025
 ## Breaking Changes
 - IFS-4629: Das FluentUI-Theme wurde durch das neue PrimeNG-Theming mit dem Standard-Theme Nora ersetzt und entsprechend angepasst.
-- IFS-4562: Upgrade Angular- und PrimeNG-Bibliothek auf Version 19 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
+- IFS-4562: Upgrade Angular- und PrimeNG-Bibliothek auf Version 19 (Detaillierte Migrationshinweise sind im [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) zu finden)
 ## Dokumentation
 - IFS-4549 Verwaltung der Version zentralisiert
 
@@ -161,7 +163,7 @@ Dadurch können sie nun gezielt über Anker im Bedienkonzept verlinkt werden und
 
 # 18.0.0 - 03.09.2024
 ## Breaking Changes
-- IFS-3776: Upgrade der Angularversion von 17 auf 18 (Detaillierte Migrationshinweise sind im [UPDATELOG.md](UPDATELOG.md) zu finden)
+- IFS-3776: Upgrade der Angularversion von 17 auf 18 (Detaillierte Migrationshinweise sind im [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) zu finden)
 ## Features
 - IFS-4016: Themewechsel im Angular-Baustein - Integration des FluentUI-Themes und Entfernung des Bootstrap-Light-Themes
 - IFS-4054: Die Sekundärbuttons auf den Seiten _Objekt-Suchen_ und _Objekt-Anzeigen_ wurden als Outlined-Buttons dargestellt

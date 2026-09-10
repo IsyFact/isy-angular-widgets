@@ -1,84 +1,193 @@
-## Development Setup
+<h1 align="center">
+  <a href="https://www.bva.bund.de/DE/Das-BVA/Aufgaben/I/Informationstechnik/IsyFact/isyfact_node.html">
+    <img src=".github/assets/logo-isyfact.jpg" alt="IsyFact" width="340">
+  </a>
+</h1>
 
-### Konzeptdokumentation
+<p align="center">
+  <strong>isy-angular-widgets</strong> – Widget-Bibliothek für Angular-Anwendungen der öffentlichen Verwaltung
+</p>
 
-Eine ausführliche Dokumentation zum Konzept der _isy-angular-widgets_ Bibliothek, ist auf der Seite [Konzept Angular](https://isyfact.github.io/isy-angular-widgets-doc/current/konzept/konzept.html) beschrieben.
+<p align="center">
+  <a href="https://github.com/IsyFact/isy-angular-widgets/actions/workflows/node.js.yml">
+    <img src="https://github.com/IsyFact/isy-angular-widgets/actions/workflows/node.js.yml/badge.svg" alt="Node.js CI">
+  </a>
+  <a href="https://www.npmjs.com/package/@isyfact/isy-angular-widgets">
+    <img src="https://img.shields.io/npm/v/@isyfact/isy-angular-widgets" alt="npm-Version">
+  </a>
+</p>
 
-### Prerequisites
+<p align="center">
+  <a href="CONTRIBUTING.md">Contributing Guidelines</a>
+</p>
 
-Auf dem PC müssen die neueste [Node und Npm LTS Version](https://nodejs.org/en/download/) installiert sein.
+---
 
-Anschließend muss das Projekt aus GitHub bezogen werden.
+> **Versionslinie 21 (Angular 21)**
+> Dieser Branch pflegt die ältere unterstützte Versionslinie der Bibliothek. Die neueste Versionslinie wird im Branch `develop` entwickelt.
 
-```shell
-git clone https://github.com/IsyFact/isy-angular-widgets.git
-cd isy-angular-widget
+## Zielgruppe
+
+Diese Datei richtet sich an Entwicklerinnen und Entwickler, die **den Baustein selbst weiterentwickeln**. Sie beschreibt den Einstieg in das Repository: Aufbau, lokales Setup, Skripte und Qualitätssicherung.
+
+> **Du möchtest die Bibliothek in einer eigenen Anwendung verwenden?**
+> Dann ist die [README der Bibliothek](projects/isy-angular-widgets/README.md) der richtige Einstieg. Dort stehen Installation, Konfiguration und die Dokumentation der einzelnen Widgets.
+> Hinweise zu Breaking Changes zwischen zwei Versionen enthält die [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md).
+
+## Repository-Struktur
+
+Das Repository ist ein Angular-Workspace mit zwei Projekten:
+
+| Projekt | Pfad | Typ | Zweck |
+|---|---|---|---|
+| `isy-angular-widgets` | `projects/isy-angular-widgets` | Library | Die Widget-Bibliothek. Wird als npm-Paket [`@isyfact/isy-angular-widgets`](https://www.npmjs.com/package/@isyfact/isy-angular-widgets) veröffentlicht. |
+| `isy-angular-widgets-demo` | `projects/isy-angular-widgets-demo` | Application | Demo-Anwendung mit Beispielen für Styleguide-Patterns. Wird auf [GitHub Pages](https://isyfact.github.io/isy-angular-widgets/v21/) deployed. |
+
+Ergänzend relevant:
+
+```text
+├── .github/workflows/   CI-Pipelines (Build, Test, Pages-Deploy, npm-Publish)
+├── docs/                Antora-Konzeptdokumentation
+├── tools/               Hilfsskripte für Build und Pages-Deployment
+├── CHANGELOG.md         Änderungen je Version
+└── CONTRIBUTING.md      Branch-Modell, Commit-Konventionen, Pull Requests
 ```
 
-### Dependencies Installieren
+Die Demo-Anwendung wird für beide unterstützten Versionslinien veröffentlicht:
 
-Vor der ersten Ausführung bzw. beim Ergänzen neuer Pakete muss das Projekt mit folgendem Befehl installiert werden.
+| Inhalt | URL |
+|---|---|
+| Demo (diese Linie, v21) | <https://isyfact.github.io/isy-angular-widgets/v21/> |
+| API-Dokumentation (Compodoc, diese Linie) | <https://isyfact.github.io/isy-angular-widgets/v21/documentation/> |
+| Demo (aktuelle Linie) | <https://isyfact.github.io/isy-angular-widgets/> |
+
+Der Pages-Deploy erfolgt zentral über die Workflow-Definition auf dem `develop`-Branch, die diesen Branch mit auscheckt und unter `/v21/` veröffentlicht. Ein Push auf `develop-21` stößt diesen Deploy automatisch an.
+
+## Erste Schritte
+
+### Voraussetzungen
+
+Das Projekt setzt die in der `package.json` unter `engines` definierte Node.js-Version voraus. Die CI baut und testet mit Node.js 24.
+
+### Repository klonen und Abhängigkeiten installieren
 
 ```shell
+git clone --branch develop-21 https://github.com/IsyFact/isy-angular-widgets.git
+cd isy-angular-widgets
 npm install
 ```
 
-### Widgets-Bibliothek lokal an ein neues Projekt anbinden
+Die Abhängigkeiten müssen auch nach dem Ergänzen neuer Pakete erneut installiert werden.
 
-Im Root-Verzeichnis des Projekts wird durch den nachstehenden Shortcut-Befehl aus der `package.json` die Widgets-Bibliothek gebaut und anschließend verpackt.
+### Demo-Anwendung starten
+
+Die Demo-Anwendung ist der schnellste Weg, Änderungen an der Bibliothek sichtbar zu machen:
+
+```shell
+npm run start
+```
+
+## npm-Skripte
+
+| Skript | Beschreibung |
+|---|---|
+| `npm run start` | Startet die Demo-Anwendung im Development-Server |
+| `npm run watch` | Baut die Bibliothek im Watch-Modus mit der Development-Konfiguration |
+| `npm run build` | Baut Bibliothek, Demo-Anwendung und Schematics |
+| `npm run build:widgets_lib` | Baut ausschließlich die Bibliothek inklusive Schematics |
+| `npm run build:widgets_demo` | Baut ausschließlich die Demo-Anwendung |
+| `npm run build-and-pack:widgets_lib` | Baut die Bibliothek und erzeugt ein installierbares TGZ-Paket |
+| `npm test` | Führt die Unit- und Integrationstests aus |
+| `npm run lint` | Lintet Bibliothek und Demo-Anwendung (`lint:lib`, `lint:demo` einzeln) |
+| `npm run prettier:check` | Prüft die Codeformatierung |
+| `npm run prettier:fix` | Behebt Formatierungsfehler automatisch |
+| `npm run e2e` | Führt die E2E-Tests der Demo-Anwendung aus |
+| `npm run compodoc:build` | Erzeugt die API-Dokumentation nach `docs/` (`compodoc:serve` zeigt sie lokal an) |
+| `npm run generate-browser-support` | Aktualisiert die Browser-Support-Konfiguration |
+
+> **Hinweis:** `compodoc:build` legt die erzeugte API-Dokumentation im Verzeichnis `docs/` ab, in dem auch die Antora-Konzeptdokumentation liegt. Die generierten Dateien sind nicht in der `.gitignore` enthalten und sollten vor einem Commit wieder entfernt werden:
+>
+> ```shell
+> git clean -fd docs/
+> ```
+
+## Qualitätssicherung
+
+Die folgenden Prüfungen entsprechen den zentralen Schritten der CI-Pipeline und sollten vor jedem Pull Request lokal fehlerfrei durchlaufen:
+
+```shell
+npm run prettier:check
+npm run lint
+npm test
+npm run build:widgets_lib
+npm run build:widgets_demo
+```
+
+Zusätzlich führt die CI einen Compodoc-Build, eine SBOM-Erzeugung und einen SonarCloud-Scan aus.
+
+> Pull Requests, welche die CI-Checks nicht erfüllen, werden ungesichtet abgelehnt. Details dazu stehen in der [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### E2E-Tests
+
+Für die Demo-Anwendung sind exemplarisch einige E2E-Tests mit [TestCafe](https://testcafe.io/) umgesetzt. TestCafe ist keine Abhängigkeit des Repositorys und wird beim Aufruf über `npx` nachgeladen.
+
+Vor der Ausführung muss die Demo-Anwendung unter <http://localhost:4200> laufen (`npm run start`). Das Skript startet Chrome im Headless-Modus; alternativ kann im `e2e`-Skript ein anderer Browser eingetragen werden.
+
+```shell
+npm run e2e
+```
+
+> **Hinweis für macOS:** TestCafe benötigt die Berechtigung zur Bildschirmaufnahme. Ohne diese bricht der Lauf mit `UnableToAccessScreenRecordingAPIError` ab. Die Berechtigung wird unter *Systemeinstellungen → Datenschutz & Sicherheit → Bildschirmaufnahme* für `TestCafe Browser Tools` erteilt.
+
+## Bibliothek lokal in einem anderen Projekt testen
+
+Um einen Entwicklungsstand vor dem Release in einer echten Anwendung zu prüfen, wird die Bibliothek gebaut und als TGZ-Paket verpackt:
 
 ```shell
 npm run build-and-pack:widgets_lib
 ```
 
-Dadurch wird im Verzeichnis `dist/isy-angular-widgets` eine TGZ-Datei der Bibliothek erzeugt, zum Beispiel:
+Das Paket liegt anschließend unter `dist/isy-angular-widgets`, zum Beispiel:
 
 ```text
 dist/isy-angular-widgets/isyfact-isy-angular-widgets-0.0.0.tgz
 ```
 
-Im nächsten Schritt wird die erzeugte TGZ-Datei in einem neuen Angular-Projekt installiert.
-Hierfür wird der Pfad zur TGZ-Datei benötigt.
-Im Root-Verzeichnis des neuen Angular-Projekts ist folgender Befehl auszuführen:
+Im Zielprojekt wird das Paket über den Pfad zur TGZ-Datei installiert:
 
 ```shell
 npm install "file:[WIDGETS_LIB_PATH].tgz"
 ```
 
-Nach der Installation kann die Schematic der Bibliothek ausgeführt werden:
+Anschließend kann die Schematic der Bibliothek ausgeführt werden:
 
 ```shell
-ng generate @isyfact/isy-angular-widgets:ng-add
+npx ng generate @isyfact/isy-angular-widgets:ng-add
 ```
 
-Der direkte Aufruf von `ng add` auf die lokale TGZ-Datei sollte nicht verwendet werden, da Angular CLI bei lokalen Paketdateien die Paketinformationen unter Umständen nicht korrekt auslesen kann.
+> **Hinweis:** `ng add` sollte nicht direkt auf die lokale TGZ-Datei angewendet werden, da die Angular CLI die Paketinformationen lokaler Dateien unter Umständen nicht korrekt ausliest.
 
-Eine zusätzliche Aktivierung von Angular-Animationen über `provideAnimations`, `provideAnimationsAsync` oder `BrowserAnimationsModule` ist für Angular 21 und PrimeNG 21 nicht mehr erforderlich. Angular hat die bisherigen Animation-Provider als deprecated markiert. PrimeNG 21 verwendet native CSS-Animationen.
+Details zur Einrichtung stehen in der [README der Bibliothek](projects/isy-angular-widgets/README.md#installation).
 
-Falls ein Projekt weiterhin eigene Legacy-Animationen aus `@angular/animations` verwendet, muss dies projektbezogen geprüft und perspektivisch auf native CSS-Animationen migriert werden.
+## Wartungsaufgaben
 
-### Demo-Anwendung starten
+### Browser-Support-Konfiguration generieren
 
-Neben den Widgets können in der Demo-Anwendung praktische Beispiele für die Umsetzung von Styleguide-Patterns oder querschnittlichen Aspekten betrachtet werden.
-Die Demo-Anwendung kann mit folgendem Befehl gestartet werden. 
+Die unterstützten Mindest-Browser-Versionen sind statisch in der Bibliothek hinterlegt:
 
-```
-$ npm run start
-```
-
-### Browser-Versionsprüfung im Hauptfenster
-
-Das Widget `HauptfensterComponent` prüft beim Laden der Anwendung automatisch, ob die vom Client verwendete Browser-Version unterstützt wird. Wird eine nicht unterstützte Browser-Version erkannt, wird im Hauptfenster eine Warnmeldung angezeigt.
-
-Die Prüfung ist standardmäßig aktiviert und muss bei der Verwendung des Hauptfensters nicht zusätzlich konfiguriert werden.
-
-```html
-<isy-hauptfenster>
-  <!-- Anwendungscode -->
-</isy-hauptfenster>
+```text
+projects/isy-angular-widgets/src/lib/browser-support/browser-support.config.json
 ```
 
-Falls die Prüfung in einer Anwendung deaktiviert werden soll, kann dies über das Input-Property `checkBrowserVersion` erfolgen.
+Die Datei wird über folgendes Skript erzeugt:
+
+```shell
+npm run generate-browser-support
+```
+
+Das Skript ermittelt die Browser-Versionen anhand der Browser-Support-Regeln des aktuellen Angular-Major-Releases. Die generierte Datei ist Bestandteil der Bibliothek und muss eingecheckt werden. Nach einem Update auf ein neues Angular-Major-Release ist das Skript erneut auszuführen.
+
+Die `HauptfensterComponent` wertet diese Konfiguration beim Laden der Anwendung aus und zeigt bei einer nicht unterstützten Browser-Version eine Warnmeldung an. Die Prüfung ist standardmäßig aktiviert und lässt sich über das Input-Property `checkBrowserVersion` deaktivieren:
 
 ```html
 <isy-hauptfenster [checkBrowserVersion]="false">
@@ -86,61 +195,24 @@ Falls die Prüfung in einer Anwendung deaktiviert werden soll, kann dies über d
 </isy-hauptfenster>
 ```
 
-#### Browser-Support-Konfiguration generieren
+## Releases erstellen
 
-Die unterstützten Mindest-Browser-Versionen werden in der Datei `browser-support.config.json` statisch in der Widgets-Bibliothek hinterlegt.
+Releases werden über eine GitHub Action erzeugt, die ausgeführt wird, sobald ein Tag mit einer gültigen Versionsnummer nach SemVer erstellt wird. Die Versionsnummer wird dabei automatisch in die `package.json` der gebauten Bibliothek eingetragen.
 
-Die Datei befindet sich unter:
+Die Versionsnummer muss deshalb **nicht** manuell in der `package.json` gepflegt werden – dort steht dauerhaft `0.0.0`.
 
-```text
-projects/isy-angular-widgets/src/lib/browser-support/browser-support.config.json
-```
+Die Vorbereitung eines Releases erfolgt über einen Branch nach dem Schema `release/<planned-version>`. Details dazu stehen in der [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Die Konfiguration wird über folgendes Skript generiert:
+## Weiterführende Dokumentation
 
-```shell
-npm run generate-browser-support
-```
+| Dokument | Inhalt |
+|---|---|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Branch-Modell, Commit-Konventionen, Pull Requests |
+| [README der Bibliothek](projects/isy-angular-widgets/README.md) | Verwendung der Bibliothek in eigenen Anwendungen |
+| [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) | Breaking Changes und Migrationshinweise je Version |
+| [CHANGELOG.md](CHANGELOG.md) | Vollständige Liste aller Änderungen |
+| [Konzept Angular](https://isyfact.github.io/angular/current/konzept.html) | Konzeptdokumentation der Bibliothek |
 
-Das Skript ermittelt die Browser-Versionen auf Basis der im Generator hinterlegten Browser-Support-Regeln des aktuellen Angular-Major-Releases und aktualisiert die Datei `browser-support.config.json`.
+## Lizenz
 
-Die generierte Datei ist Bestandteil der Widgets-Bibliothek und muss eingecheckt werden.
-
-Das Skript sollte insbesondere nach einem Update auf ein neues Angular-Major-Release erneut ausgeführt werden.
-
-#### Prettier für Demo-Anwendung und Widgets-Bibliothek ausführen
-Zur Überprüfung der Demo-Anwendung und der Widgets-Bibliothek auf Code-Formatierungsfehler mithilfe von Prettier, kann folgender Befehl ausgeführt werden.
-```
-$ npm run prettier:check
-```
-Um Code-Formatierungsfehler innerhalb der Demo-Anwendung und der Widgets-Bibliothek mithilfe von Prettier zu beheben, kann folgender Befehl ausgeführt werden.
-```
-$ npm run prettier:fix
-```
-
-#### E2E-Tests für Demo-Anwendung ausführen
-
-Für die Demo-Anwendung wurden exemplarisch einige E2E-Tests mit dem Framework [TestCafe](https://testcafe.io/) umgesetzt.
-Um die Tests auszuführen, muss zunächst die Demo-Anwendung gestartet werden (siehe oben).
-Für die Ausführung der Tests wird der Webbrowser Chrome benötigt, alternativ kann das `e2e` Skript angepasst und dort ein anderer Browser eingetragen werden.
-Die Tests werden mit folgendem Befehlt gestartet.
-
-```
-$ npm run e2e
-```
-
-### PrimeNG-Designer
-
-Ab PrimeNG Version 18 wurde ein neues Theming-System eingeführt. 
-Die Erstellung und Anpassung von Themes mit diesem neuen System ist kostenfrei möglich. PrimeNG stellt hierzu eine umfangreiche [Dokumentationen](https://primeng.org/theming) sowie Beispiele bereit, die den Einstieg erleichtern.
-
-Für eine visuelle und benutzerfreundlichere Gestaltung von Themes bietet PrimeNG ab Version 19 einen neuen Theme-Designer an, der jedoch kostenpflichtig ist. 
-
-Mit Version 19 der `isy-angular-widgets`-Bibliothek wurde das ursprünglich verwendete FluentUI-Theme durch das neue PrimeNG-Theming-System ersetzt.
-Als Standard-Theme wurde `Nora` ausgewählt und an das bestehende Look-and-Feel der Widgets-Bibliothek sowie der Anwendung angepasst.
-
-## Erstellen von Releases
-
-Releases werden mithilfe einer GitHub Action erzeugt, welche immer dann ausgeführt wird, wenn ein Tag mit einer gültigen Versionsnummer nach Semver erstellt wird.
-Diese Versionsnummer wird dann automatisch in die package.json der gebauten Bibliothek ausgetauscht.
-Das bedeutet, die Versionsnummer muss nicht manuell in der package.json des Projekts gepflegt werden (Dort steht einfach 0.0.0).
+Veröffentlicht unter der [Apache-2.0-Lizenz](LICENSE).
