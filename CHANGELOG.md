@@ -1,4 +1,5 @@
-# 22.1.0-next.1 -
+
+# 22.1.0-next.1 - 10.09.2026
 ## Features
 - IFS-4929: Eine separat einbindbare Print-Basis stellt öffentliche `isy-print-*`-Utilities für A4-Ausdrucke bereit; die Demo zeigt deren Verwendung für Druckkopf, Tabellen, Formulare und den aktuell sichtbaren Zustand interaktiver Inhalte
 - IFS-5735: Demo und Dokumentation werden zusätzlich für die Legacy-Linie v21 veröffentlicht (`/v21/` bzw. `/v21/documentation/`); der Deploy erfolgt zentral vom `develop`-Branch aus einem einzigen Pages-Artefakt
