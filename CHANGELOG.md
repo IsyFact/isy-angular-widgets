@@ -1,4 +1,3 @@
-
 # 22.1.0-next.1 - 10.09.2026
 ## Features
 - IFS-4929: Eine separat einbindbare Print-Basis stellt öffentliche `isy-print-*`-Utilities für A4-Ausdrucke bereit; die Demo zeigt deren Verwendung für Druckkopf, Tabellen, Formulare und den aktuell sichtbaren Zustand interaktiver Inhalte
