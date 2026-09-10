@@ -9,6 +9,7 @@ on:
       - main
       - develop
       - develop/**
+      - develop-*
       - support/**
       - release/**
   pull_request:
@@ -16,6 +17,7 @@ on:
       - main
       - develop
       - develop/**
+      - develop-*
       - support/**
       - release/**
 
