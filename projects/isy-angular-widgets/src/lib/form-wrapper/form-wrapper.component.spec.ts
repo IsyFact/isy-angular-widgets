@@ -420,13 +420,13 @@ describe('FormWrapperComponent', () => {
       expect(spectator.component.ifta).toBeFalse();
     });
 
-    it('should return "label--filled" when control has value and ifta is true', () => {
+    it('should return "label-filled" when control has value and ifta is true', () => {
       spectator = createComponent({props: createRequiredProps()});
 
       spectator.component.control.setValue('test value');
       spectator.component.ifta = true;
 
-      expect(spectator.component.labelFilledClass).toBe('label--filled');
+      expect(spectator.component.labelFilledClass).toBe('label-filled');
     });
 
     it('should return empty string for labelFilledClass when control has no value', () => {

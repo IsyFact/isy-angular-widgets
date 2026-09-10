@@ -56,7 +56,7 @@ $responsive-breakpoint: 1024px;
 }
 
 @container (max-width: #{$responsive-breakpoint}) {
-  .isy-hauptfenster--responsive {
+  .isy-hauptfenster-responsive {
     .isy-hauptfenster-linksnavigation,
     .isy-hauptfenster-informationsbereich {
       display: none !important;

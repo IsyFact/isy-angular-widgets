@@ -10,6 +10,7 @@ Beiträge sind willkommen – von Fehlermeldungen über Verbesserungsvorschläge
 - [Branch-Modell](#branch-modell)
 - [Branch-Namenskonvention](#branch-namenskonvention)
 - [Commit-Konventionen](#commit-konventionen)
+- [CSS-Namenskonvention](#css-namenskonvention)
 - [Pull Requests](#pull-requests)
 - [Lokale Entwicklung und Qualitätssicherung](#lokale-entwicklung-und-qualitätssicherung)
 - [Dokumentation pflegen](#dokumentation-pflegen)
@@ -188,6 +189,30 @@ Bestehende Anwendungen müssen betroffene Klassen auf Tailwind CSS umstellen.
 Jeder Breaking Change muss zusätzlich in der [MIGRATION.md](projects/isy-angular-widgets/MIGRATION.md) dokumentiert werden – siehe [Dokumentation pflegen](#dokumentation-pflegen).
 
 ---
+
+## CSS-Namenskonvention
+
+Selbst vergebene CSS-Klassen werden **flach und mit einfachem Bindestrich** benannt. **BEM (`block__element--modifier`) wird nicht verwendet.**
+
+| Art | Schema | Beispiel |
+|---|---|---|
+| Baustein einer Komponente | `isy-<komponente>-<teil>` | `isy-hauptfenster-linksnavigation` |
+| Variante bzw. Modifier | `isy-<komponente>-<variante>` | `isy-hauptfenster-responsive` |
+| Zustand | `is-<zustand>` | `is-disabled` |
+
+```html
+<!-- richtig -->
+<div class="isy-hauptfenster" [class.isy-hauptfenster-responsive]="responsive"></div>
+
+<!-- falsch -->
+<div class="isy-hauptfenster" [class.isy-hauptfenster--responsive]="responsive"></div>
+```
+
+Ergänzend gilt:
+
+- Klassen im DOM einer Bibliothekskomponente werden mit `isy-` präfixiert; rein komponenteninterne Hilfsklassen dürfen ohne Präfix auskommen (`visually-hidden`).
+- PrimeNG-Klassen (`p-…`) werden nicht selbst vergeben, sondern nur zum Überschreiben verwendet.
+- Klassen der Demo-Anwendung werden mit `demo-` präfixiert.
 
 ## Pull Requests
 

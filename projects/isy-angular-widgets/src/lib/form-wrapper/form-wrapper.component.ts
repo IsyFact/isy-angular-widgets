@@ -195,12 +195,12 @@ export class FormWrapperComponent implements OnInit, OnChanges, AfterContentInit
 
   /**
    * Returns the CSS class for the label based on the value of the control.
-   * If the control value is truthy, it returns 'label--filled',
+   * If the control value is truthy, it returns 'label-filled',
    * otherwise it returns ''.
    * @returns The CSS class for the label.
    */
   get labelFilledClass(): string {
-    return this.ifta && !!this.control.value ? 'label--filled' : '';
+    return this.ifta && !!this.control.value ? 'label-filled' : '';
   }
 
   get showError(): boolean {
