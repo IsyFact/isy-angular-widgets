@@ -184,6 +184,29 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     expect(tab.index).toBe(1);
   });
 
+  it('should preserve the visible object state and exclude edit actions from print', () => {
+    const printableTabs = spectator.query('p-tabs.isy-print-current-state');
+    const printableForm = spectator.query('form.isy-print-form');
+    const visibleTabPanels = spectator.queryAll('p-tabpanel:not([hidden])');
+    const hiddenTabPanels = spectator.queryAll('p-tabpanel[hidden]');
+
+    expect(printableTabs).toBeTruthy();
+    expect(printableForm).toBeTruthy();
+    expect(visibleTabPanels).toHaveLength(1);
+    expect(hiddenTabPanels).toHaveLength(1);
+    expect(spectator.query('.address-delete-button.isy-print-hide')).toBeTruthy();
+    expect(spectator.query('#button-add-residence.isy-print-hide')).toBeTruthy();
+    expect(spectator.query('#show-secret-fields-action.isy-print-hide')).toBeTruthy();
+    expect(spectator.query('#div-save.isy-print-hide')).toBeTruthy();
+    expect(spectator.query('#edit-facts-button.isy-print-hide')).toBeTruthy();
+
+    spectator.click(spectator.queryAll('[role="tab"]')[1]);
+    spectator.detectChanges();
+
+    expect(spectator.query('.isy-print-table')).toBeTruthy();
+    expect(spectator.query('p-toast.isy-print-hide')).toBeTruthy();
+  });
+
   it('should display permitted secret fields element', () => {
     expect(component.showSecretFields).toBeFalse();
     setupRolesAndPermissions();

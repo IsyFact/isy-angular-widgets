@@ -46,5 +46,34 @@ describe('Unit Tests: InputCharPreviewComponent', () => {
       const characterDescriptionName = spectator.query('#codepoint') as HTMLElement;
       expect(characterDescriptionName.innerText).toContain(zeichenObjekt.codepoint);
     });
+
+    it(`should have aria-label for letters preview with character ${zeichenObjekt.zeichen}`, () => {
+      spectator.setInput('zeichenObjekt', zeichenObjekt);
+      spectator.detectChanges();
+
+      const lettersPreview = spectator.query('#letters-preview') as HTMLElement;
+      expect(lettersPreview.getAttribute('aria-label')).toBe(`Zeichenvorschau: ${zeichenObjekt.zeichen}`);
+    });
+
+    it(`should have aria-label for letter information preview with character ${zeichenObjekt.zeichen}`, () => {
+      spectator.setInput('zeichenObjekt', zeichenObjekt);
+      spectator.detectChanges();
+
+      const letterInfoPreview = spectator.query('#letter-information-preview') as HTMLElement;
+      expect(letterInfoPreview.getAttribute('aria-label')).toBe(
+        `Zeicheninformationen: ${zeichenObjekt.name}, Codepoint: ${zeichenObjekt.codepoint}`
+      );
+    });
+  });
+
+  it('should have default aria-labels when no character is selected', () => {
+    spectator.setInput('zeichenObjekt', undefined);
+    spectator.detectChanges();
+
+    const lettersPreview = spectator.query('#letters-preview') as HTMLElement;
+    expect(lettersPreview.getAttribute('aria-label')).toBe('Zeichenvorschau');
+
+    const letterInfoPreview = spectator.query('#letter-information-preview') as HTMLElement;
+    expect(letterInfoPreview.getAttribute('aria-label')).toBe('Zeicheninformationen');
   });
 });

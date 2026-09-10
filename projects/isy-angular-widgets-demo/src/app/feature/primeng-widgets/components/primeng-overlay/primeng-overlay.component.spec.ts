@@ -64,6 +64,23 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     });
   });
 
+  it('should not mark closed overlays as printable', () => {
+    expect(spectator.query('.isy-print-overlay')).toBeFalsy();
+    expect(spectator.query('.isy-print-overlay-mask')).toBeFalsy();
+  });
+
+  it('should mark only rendered overlays as printable and their dialog actions as hidden', () => {
+    component.visibleSidebar = true;
+    component.visibleDialog = true;
+    spectator.detectChanges();
+
+    expect(spectator.query('.demo-print-page')).toBeTruthy();
+    expect(spectator.queryAll('.isy-print-overlay')).toHaveLength(2);
+    expect(spectator.query('.isy-print-overlay-mask')).toBeTruthy();
+    expect(spectator.queryAll('p-button.isy-print-hide')).toHaveLength(5);
+    expect(spectator.query('.demo-dialog-actions.isy-print-hide')).toBeTruthy();
+  });
+
   it('should scroll to anchor after initialization when fragment is emitted', () => {
     fragment$.next('dialog');
     expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('dialog');

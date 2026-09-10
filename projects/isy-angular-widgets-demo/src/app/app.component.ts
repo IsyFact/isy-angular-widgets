@@ -59,6 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
   selectedLanguage: string = 'de';
   focusHasBeenSet?: boolean;
   showDashboardOutlets = true;
+  printDate = new Date();
 
   private readonly securityService = inject(SecurityService);
   private readonly userInfoPublicService = inject(UserInfoPublicService);
@@ -152,6 +153,14 @@ export class AppComponent implements OnInit, OnDestroy {
     return [...this.translate.getLangs()];
   }
 
+  get pageTitle(): string {
+    return this.document.title;
+  }
+
+  get formattedPrintDate(): string {
+    return new Intl.DateTimeFormat(this.selectedLanguage, {dateStyle: 'medium'}).format(this.printDate);
+  }
+
   selectedPermission: string = '';
 
   roleOptions: {role: string; permission: string}[] = [
@@ -193,6 +202,16 @@ export class AppComponent implements OnInit, OnDestroy {
   selectPermission(role: string): void {
     this.userInfo.roles = [role];
     this.securityService.setRoles(this.userInfo);
+  }
+
+  @HostListener('window:beforeprint')
+  updatePrintDate(): void {
+    this.printDate = new Date();
+    this.cdr.detectChanges();
+  }
+
+  print(): void {
+    this.document.defaultView?.print();
   }
 
   skipLinks: SkipTarget[] = [];

@@ -4,9 +4,11 @@
     [(visible)]="visible"
     [closeAriaLabel]="'isyAngularWidgetsDemo.aria.close' | translate"
     [closable]="true"
+    styleClass="isy-print-overlay"
+    maskStyleClass="isy-print-overlay-mask"
     (onHide)="closeDialog()"
   >
-    <p-table [value]="newSachverhalteListe">
+    <p-table class="isy-print-table" [value]="newSachverhalteListe">
       <ng-template pTemplate="header">
         <tr>
           <th scope="col">
@@ -15,7 +17,7 @@
           <th scope="col">
             {{ 'isyAngularWidgetsDemo.labels.state' | translate }}
           </th>
-          <th scope="col">
+          <th scope="col" class="isy-print-hide">
             {{ 'isyAngularWidgetsDemo.actions.delete' | translate }}
           </th>
         </tr>
@@ -26,8 +28,9 @@
           <td>
             {{ 'isyAngularWidgetsDemo.labels.solved' | translate }}
           </td>
-          <td>
+          <td class="isy-print-hide">
             <p-button
+              class="isy-print-hide"
               styleClass="sachverhalte-button"
               severity="danger"
               icon="pi pi-trash"
@@ -40,7 +43,7 @@
         </tr>
       </ng-template>
     </p-table>
-    <p-inputgroup>
+    <p-inputgroup class="isy-print-hide">
       <input
         pInputText
         type="text"
@@ -48,6 +51,7 @@
         [(ngModel)]="newSachverhalt"
       />
       <p-button
+        class="isy-print-hide"
         outlined="true"
         icon="pi pi-plus"
         [ariaLabel]="'isyAngularWidgetsDemo.aria.add' | translate"
@@ -55,10 +59,10 @@
       ></p-button>
     </p-inputgroup>
     <ng-template pTemplate="footer">
-      <p-button [outlined]="true" (onClick)="closeDialog()">
+      <p-button class="isy-print-hide" [outlined]="true" (onClick)="closeDialog()">
         {{ 'isyAngularWidgetsDemo.actions.cancel' | translate }}
       </p-button>
-      <p-button styleClass="ok-button" id="ok-button" (onClick)="saveSachverhalte()">
+      <p-button class="isy-print-hide" styleClass="ok-button" id="ok-button" (onClick)="saveSachverhalte()">
         {{ 'isyAngularWidgetsDemo.actions.save' | translate }}
       </p-button>
     </ng-template>

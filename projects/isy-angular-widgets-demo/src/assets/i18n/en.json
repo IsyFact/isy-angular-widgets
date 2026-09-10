@@ -18,10 +18,17 @@
       "headerBaseChars": "Base",
       "headerGroups": "Groups",
       "insert": "Insert",
+      "preview": {
+        "letters": "Character Preview",
+        "information": "Character Information"
+      },
       "aria": {
         "togglePicker": "Open Special Character Picker",
         "closePicker": "Close Special Character Picker",
-        "characterGrid": "Special character selection"
+        "characterGrid": "Special character selection",
+        "filterAllCharacters": "Select all characters",
+        "filterBaseChars": "Select base characters",
+        "filterGroups": "Select character groups"
       },
       "enum": {
         "base": "BASE CHARACTERS",
@@ -154,6 +161,10 @@
       "close": "Close",
       "add": "Add"
     },
+    "printHeader": {
+      "date": "Print date",
+      "user": "User"
+    },
     "labels": {
       "id": "ID",
       "nachname": "Last name",
@@ -278,6 +289,7 @@
       "exampleSubMenuItem3": "Example submenu item 3",
       "exampleMenuItemDisabled": "Example menu item (Disabled)",
       "dashboardExampleTitle": "Frequently used",
+      "dashboardCharts": "Charts",
       "dashboardExampleText": "Function name",
       "dashboardExampleMessageTitle": "Messages",
       "exampleMessageText": "M. Mustermann, 10:25 p.m. time, Report: ABCDE...",
@@ -307,9 +319,11 @@
     },
     "websiteTitles": {
       "dashboard": "Dashboard",
+      "pageNotFound": "Page not found",
       "searchObject": "Search object",
       "displayObject": "Display object",
       "isyAngularComponents": "Isy-Angular Components",
+      "modalarmePatterns": "Modal Interaction Patterns",
       "primengForm": "PrimeNG Form",
       "primengButton": "PrimeNG Button",
       "primengData": "PrimeNG Data",
