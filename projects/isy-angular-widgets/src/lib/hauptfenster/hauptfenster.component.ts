@@ -36,6 +36,34 @@ import {SkipTarget} from './model/model';
  * Informationsbereich - The right sidebar.
  *
  * Content without template references is used as main content.
+ *
+ * ## Responsive behaviour
+ *
+ * Responsive behaviour is disabled by default and enabled through the `responsive` attribute.
+ * Because it is based on the width of the component itself, it also works inside a narrower
+ * container. When enabled, the Hauptfenster reacts to its available width:
+ *
+ * - At a width of `1024px` or less, Linksnavigation and Informationsbereich are hidden automatically.
+ * - The central content area stays visible and uses the available width.
+ * - Above `1024px` the side areas reappear according to `showLinksnavigation` and `showInformationsbereich`.
+ * - The values of `collapsedLinksnavigation` and `collapsedInformationsbereich` remain unchanged.
+ *
+ * Without the attribute the layout keeps its static behaviour.
+ * @example
+ * ```html
+ * <isy-hauptfenster responsive [showLinksnavigation]="true" [showInformationsbereich]="true">
+ *   <p-menu Linksnavigation [model]="navigationItems"></p-menu>
+ *   <main>Zentraler Inhaltsbereich</main>
+ *   <p Informationsbereich>Zusätzliche Informationen</p>
+ * </isy-hauptfenster>
+ * ```
+ * @example
+ * The attribute can also be bound dynamically:
+ * ```html
+ * <isy-hauptfenster [responsive]="responsiveLayoutEnabled" [showLinksnavigation]="true">
+ *   <!-- Inhalte -->
+ * </isy-hauptfenster>
+ * ```
  */
 @Component({
   standalone: true,

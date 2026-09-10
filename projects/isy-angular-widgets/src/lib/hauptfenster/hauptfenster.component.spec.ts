@@ -572,7 +572,7 @@ describe('Integration Test: HauptfensterComponent', () => {
     const informationsbereich = getRequiredElement('.isy-hauptfenster-informationsbereich');
 
     expect(getComputedStyle(spectator.element).width).toBe('320px');
-    expect(hauptfenster).toHaveClass('isy-hauptfenster--responsive');
+    expect(hauptfenster).toHaveClass('isy-hauptfenster-responsive');
 
     expect(getComputedStyle(linksnavigation).display).toBe('none');
     expect(getComputedStyle(informationsbereich).display).toBe('none');

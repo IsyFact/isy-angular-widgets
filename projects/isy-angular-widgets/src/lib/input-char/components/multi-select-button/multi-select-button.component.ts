@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ControlValueAccessor, FormsModule} from '@angular/forms';
 import {InputCharData, InputCharSelection, InputCharSelectionGroup, InputCharSelectionValue} from '../../model/model';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 
 @Component({
   standalone: true,
@@ -13,11 +14,31 @@ import {AccordionModule} from 'primeng/accordion';
   imports: [CommonModule, FormsModule, AccordionModule, SelectButtonModule]
 })
 export class MultiSelectButtonComponent implements OnChanges, ControlValueAccessor {
+  private readonly configService = inject(WidgetsConfigService);
+
   /**
    * Header title of select all button
    * @internal
    */
   @Input() allButtonOptionsLabel: string = '';
+
+  /**
+   * Custom aria-label for the "select all" button (overrides translation default)
+   * @internal
+   */
+  @Input() allButtonAriaLabel?: string;
+
+  /**
+   * Custom aria-label for the base characters filter button (overrides translation default)
+   * @internal
+   */
+  @Input() baseCharsAriaLabel?: string;
+
+  /**
+   * Custom aria-label for the groups filter button (overrides translation default)
+   * @internal
+   */
+  @Input() groupsAriaLabel?: string;
 
   /**
    * The array who stores an array with every data who must be displayed.
@@ -66,7 +87,11 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.allButtonOptionsLabel) {
-      this.allOptions[0].label = this.allButtonOptionsLabel;
+      this.allOptions = [{label: this.allButtonOptionsLabel}];
+
+      if (this.allOptionsModel) {
+        this.allOptionsModel = this.allOptions[0];
+      }
     }
 
     if (changes.dataToDisplay || changes.value || changes.resetKey) {
@@ -109,6 +134,30 @@ export class MultiSelectButtonComponent implements OnChanges, ControlValueAccess
    */
   registerOnChange(fn: unknown): void {
     this.onChange = fn as () => unknown;
+  }
+
+  /**
+   * Computes the aria-label for the "select all" button with fallback to translation
+   * @returns The aria-label text
+   */
+  getAllButtonAriaLabel(): string {
+    return this.allButtonAriaLabel ?? this.configService.getTranslation('inputChar.aria.filterAllCharacters');
+  }
+
+  /**
+   * Computes the aria-label for the base characters filter button with fallback to translation
+   * @returns The aria-label text
+   */
+  getBaseCharsAriaLabel(): string {
+    return this.baseCharsAriaLabel ?? this.configService.getTranslation('inputChar.aria.filterBaseChars');
+  }
+
+  /**
+   * Computes the aria-label for the groups filter button with fallback to translation
+   * @returns The aria-label text
+   */
+  getGroupsAriaLabel(): string {
+    return this.groupsAriaLabel ?? this.configService.getTranslation('inputChar.aria.filterGroups');
   }
 
   /**

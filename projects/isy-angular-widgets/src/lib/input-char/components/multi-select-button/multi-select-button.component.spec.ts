@@ -123,6 +123,17 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
     expect(component.allOptionsModel).toEqual(component.allOptions[0]);
   });
 
+  it('should update the all button label at runtime when allButtonOptionsLabel changes', () => {
+    const previousAllOptions = component.allOptions;
+
+    spectator.setInput('allButtonOptionsLabel', 'Alle');
+    render();
+
+    expect(component.allOptions).not.toBe(previousAllOptions);
+    expect(component.allOptions[0].label).toBe('Alle');
+    expect(component.allOptionsModel).toEqual(component.allOptions[0]);
+  });
+
   it('should register onChange callback', () => {
     const onChangeSpy = jasmine.createSpy('onChangeSpy');
 
@@ -158,6 +169,50 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
 
     expect(component.value).toBeUndefined();
   });
+
+  describe('with custom aria-label properties', () => {
+    it('should use default getAllButtonAriaLabel from configService when allButtonAriaLabel is not provided', () => {
+      const result = component.getAllButtonAriaLabel();
+
+      expect(result).toBe('Alle Zeichen wählen');
+    });
+
+    it('should use custom allButtonAriaLabel when provided', () => {
+      spectator.setInput('allButtonAriaLabel', 'Custom all characters label');
+
+      const result = component.getAllButtonAriaLabel();
+
+      expect(result).toBe('Custom all characters label');
+    });
+
+    it('should use default getBaseCharsAriaLabel from configService when baseCharsAriaLabel is not provided', () => {
+      const result = component.getBaseCharsAriaLabel();
+
+      expect(result).toBe('Basis-Zeichen wählen');
+    });
+
+    it('should use custom baseCharsAriaLabel when provided', () => {
+      spectator.setInput('baseCharsAriaLabel', 'Custom base chars label');
+
+      const result = component.getBaseCharsAriaLabel();
+
+      expect(result).toBe('Custom base chars label');
+    });
+
+    it('should use default getGroupsAriaLabel from configService when groupsAriaLabel is not provided', () => {
+      const result = component.getGroupsAriaLabel();
+
+      expect(result).toBe('Zeichengruppen wählen');
+    });
+
+    it('should use custom groupsAriaLabel when provided', () => {
+      spectator.setInput('groupsAriaLabel', 'Custom groups label');
+
+      const result = component.getGroupsAriaLabel();
+
+      expect(result).toBe('Custom groups label');
+    });
+  });
 });
 
 describe('Integration Tests: MultiSelectButtonComponent', () => {
@@ -184,11 +239,11 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
   };
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    selectOption('.charset-selectbutton--1', String(schriftzeichengruppe));
+    selectOption('.charset-selectbutton-1', String(schriftzeichengruppe));
   };
 
   const selectBasis = (basis: string): void => {
-    selectOption('.charset-selectbutton--0', basis);
+    selectOption('.charset-selectbutton-0', basis);
   };
 
   it('should always have the correct value when clicking through multiple selections', () => {

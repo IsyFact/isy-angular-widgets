@@ -18,10 +18,17 @@
       "headerBaseChars": "Base",
       "headerGroups": "Groups",
       "insert": "Insert",
+      "preview": {
+        "letters": "Character Preview",
+        "information": "Character Information"
+      },
       "aria": {
         "togglePicker": "Open Special Character Picker",
         "closePicker": "Close Special Character Picker",
-        "characterGrid": "Special character selection"
+        "characterGrid": "Special character selection",
+        "filterAllCharacters": "Select all characters",
+        "filterBaseChars": "Select base characters",
+        "filterGroups": "Select character groups"
       },
       "enum": {
         "base": "BASE CHARACTERS",
@@ -96,7 +103,9 @@
       "header": "Creating a complex object",
       "stepIdEntry": "ID Entry",
       "stepPersonalInfo": "Personal information",
-      "stepBirthInfo": "Birth information"
+      "stepBirthInfo": "Birth information",
+      "disabledStepTooltip": "Please complete the required inputs in the previous steps first.",
+      "disabledStepScreenReaderText": "Step disabled. Please complete the required inputs in the previous steps first."
     },
     "editObjectDialog": {
       "header": "Edit selected object"

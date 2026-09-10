@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateComponent} from './incomplete-date.component';
-import {Validation} from '@isy-angular-widgets/public-api';
+import {Validation} from '../validation/validation';
 import {InputMask} from 'primeng/inputmask';
 import {IncompleteDateService} from './incomplete-date.service';
 

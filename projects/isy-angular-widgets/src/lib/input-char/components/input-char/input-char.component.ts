@@ -88,6 +88,18 @@ export class InputCharComponent implements OnDestroy {
    */
   @Input() isInputDisabled: boolean = false;
 
+  /**
+   * Aria label for the open picker button.
+   * Defaults to translation from WidgetsConfigService if not provided.
+   */
+  @Input() togglePickerAriaLabel?: string;
+
+  /**
+   * Aria label for the close picker button.
+   * Defaults to translation from WidgetsConfigService if not provided.
+   */
+  @Input() closePickerAriaLabel?: string;
+
   @ViewChild('openDialogButton') openDialogButton!: ElementRef<HTMLButtonElement>;
 
   /**
@@ -138,6 +150,8 @@ export class InputCharComponent implements OnDestroy {
         dismissableMask: this.dismissableMask,
         closeOnEscape: this.closeOnEscape,
         modal: this.modal,
+        togglePickerAriaLabel: this.togglePickerAriaLabel,
+        closePickerAriaLabel: this.closePickerAriaLabel,
         onInsert: (zeichen) => this.insertCharacter.emit(zeichen)
       });
     } catch (error: unknown) {

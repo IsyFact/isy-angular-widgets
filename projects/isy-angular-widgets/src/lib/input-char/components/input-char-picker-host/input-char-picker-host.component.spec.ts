@@ -469,4 +469,42 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
       jasmine.objectContaining({width: '740px', height: '460px', maxWidth: '95vw', maxHeight: '90vh'})
     );
   });
+
+  describe('aria-label handling', () => {
+    it('should use default closeAriaLabel from configService when closePickerAriaLabel is not provided', () => {
+      state.set(createPickerState());
+      visible.set(true);
+      render();
+
+      const dialogEl = spectator.fixture.debugElement.query(By.css('p-dialog'));
+      const closeAriaLabel = dialogEl?.componentInstance?.closeAriaLabel;
+
+      expect(closeAriaLabel).toBe('inputChar.aria.closePicker');
+      expect(configServiceSpy.getTranslation).toHaveBeenCalledWith('inputChar.aria.closePicker');
+    });
+
+    it('should use custom closePickerAriaLabel from state when provided', () => {
+      state.set(createPickerState({closePickerAriaLabel: 'Custom close picker label'}));
+      visible.set(true);
+      render();
+
+      const dialogEl = spectator.fixture.debugElement.query(By.css('p-dialog'));
+      const closeAriaLabel = dialogEl?.componentInstance?.closeAriaLabel;
+
+      expect(closeAriaLabel).toBe('Custom close picker label');
+    });
+
+    it('should prioritize custom closePickerAriaLabel over default translation', () => {
+      state.set(createPickerState({closePickerAriaLabel: 'Custom close picker label'}));
+      visible.set(true);
+      render();
+
+      const dialogEl = spectator.fixture.debugElement.query(By.css('p-dialog'));
+      const closeAriaLabel = dialogEl?.componentInstance?.closeAriaLabel;
+
+      // The custom label should be used, so getTranslation for the default should not be called for this specific check
+      expect(closeAriaLabel).not.toBe('inputChar.aria.closePicker');
+      expect(closeAriaLabel).toBe('Custom close picker label');
+    });
+  });
 });

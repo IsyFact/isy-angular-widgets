@@ -6,7 +6,8 @@
       "save": "Speichern",
       "close": "Schließen",
       "aria": {
-        "close": "Schließen"
+        "close": "Schließen",
+        "disabledStep": "Schritt deaktiviert"
       },
       "toast": {
         "stepChanged": "Schritt geändert"
@@ -18,10 +19,17 @@
       "headerBaseChars": "Basis",
       "headerGroups": "Gruppen",
       "insert": "Einfügen",
+      "preview": {
+        "letters": "Zeichenvorschau",
+        "information": "Zeicheninformationen"
+      },
       "aria": {
         "togglePicker": "Sonderzeichenpicker öffnen",
         "closePicker": "Sonderzeichenpicker schließen",
-        "characterGrid": "Sonderzeichenauswahl"
+        "characterGrid": "Sonderzeichenauswahl",
+        "filterAllCharacters": "Alle Zeichen wählen",
+        "filterBaseChars": "Basis-Zeichen wählen",
+        "filterGroups": "Zeichengruppen wählen"
       },
       "enum": {
         "basis": "GRUNDZEICHEN",

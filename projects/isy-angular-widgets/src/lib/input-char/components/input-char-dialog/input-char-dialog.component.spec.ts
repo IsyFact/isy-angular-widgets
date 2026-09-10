@@ -10,7 +10,7 @@ import {InputCharPreviewComponent} from '../input-char-preview/input-char-previe
 import {ComponentFixture} from '@angular/core/testing';
 import {MultiSelectButtonComponent} from '../multi-select-button/multi-select-button.component';
 import {InputCharGridComponent} from '../input-char-grid/input-char-grid.component';
-import {WidgetsConfigService} from '@isy-angular-widgets/public-api';
+import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {CharacterService} from '../../services/character.service';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
@@ -353,21 +353,21 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   };
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    selectOption('.charset-selectbutton--1 p-togglebutton', String(schriftzeichengruppe));
+    selectOption('.charset-selectbutton-1 p-togglebutton', String(schriftzeichengruppe));
   };
 
   const selectBasis = (basis: string): void => {
-    selectOption('.charset-selectbutton--0 p-togglebutton', basis);
+    selectOption('.charset-selectbutton-0 p-togglebutton', basis);
   };
 
   it(`should show ${bases.length} available bases`, () => {
-    const baseButtons = spectator.queryAll('.charset-selectbutton--0 p-togglebutton');
+    const baseButtons = spectator.queryAll('.charset-selectbutton-0 p-togglebutton');
 
     expect(baseButtons.length).toEqual(bases.length);
   });
 
   it(`should show ${groups.length} available groups`, () => {
-    const groupButtons = spectator.queryAll('.charset-selectbutton--1 p-togglebutton');
+    const groupButtons = spectator.queryAll('.charset-selectbutton-1 p-togglebutton');
 
     expect(groupButtons.length).toEqual(groups.length);
   });
@@ -492,7 +492,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
     };
 
     it('returns focus from a filter value to its accordion header on ESC (left panel)', () => {
-      const value = spectator.element.querySelector('.charset-selectbutton--0 p-togglebutton') as HTMLElement;
+      const value = spectator.element.querySelector('.charset-selectbutton-0 p-togglebutton') as HTMLElement;
       expect(value).toBeTruthy();
 
       const header = value.closest('p-accordion-panel')?.querySelector('p-accordion-header') as HTMLElement;
