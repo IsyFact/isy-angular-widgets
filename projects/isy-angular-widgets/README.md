@@ -349,6 +349,33 @@ Das `TranslateModule` stellt `TranslatePipe` und `TranslateDirective` bereit und
 
 Die `translate`-Methode kann beispielsweise auch für einen Language-Picker verwendet werden, damit Benutzer die Sprache selbst wählen können.
 
+#### ARIA-Beschriftungen
+
+Auch die ARIA-Beschriftungen der Widgets stammen aus dem Übersetzungsbaum `isyAngularWidgets` und werden bei einem Sprachwechsel automatisch aktualisiert. Anwendungen können sie in ihren eigenen Übersetzungsdateien (`assets/i18n/de.json`, `assets/i18n/en.json`) überschreiben – dieselben Schlüssel gelten für jede weitere Sprache.
+
+Für den Sonderzeichen-Picker stehen folgende Schlüssel zur Verfügung:
+
+```json
+{
+  "isyAngularWidgets": {
+    "inputChar": {
+      "aria": {
+        "togglePicker": "Sonderzeichenpicker öffnen",
+        "closePicker": "Sonderzeichenpicker schließen",
+        "characterGrid": "Sonderzeichenauswahl",
+        "filterAllCharacters": "Alle Zeichen wählen",
+        "filterBaseChars": "Basis-Zeichen wählen",
+        "filterGroups": "Zeichengruppen wählen"
+      },
+      "preview": {
+        "letters": "Zeichenvorschau",
+        "information": "Zeicheninformationen"
+      }
+    }
+  }
+}
+```
+
 ## Weiterführende Dokumentation
 
 | Ressource | Inhalt |

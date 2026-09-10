@@ -75,7 +75,7 @@ describe('Unit Tests: InputCharComponent', () => {
     });
 
     it('should have the specified default input configuration', () => {
-      expect(component.header).toEqual(undefined);
+      expect(component.header).toBeUndefined();
       expect(component.closable).toBeTrue();
       expect(component.draggable).toBeTrue();
       expect(component.resizable).toBeFalse();
@@ -314,6 +314,49 @@ describe('Unit Tests: InputCharComponent', () => {
           modal: true
         })
       );
+    });
+  });
+
+  describe('with custom aria-label properties', () => {
+    beforeEach(() => {
+      spectator = createComponent({
+        props: {
+          togglePickerAriaLabel: 'Open custom character picker',
+          closePickerAriaLabel: 'Close custom character picker'
+        }
+      });
+      component = spectator.component;
+      render();
+    });
+
+    it('should use custom togglePickerAriaLabel when provided', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      expect(button.getAttribute('aria-label')).toBe('Open custom character picker');
+    });
+
+    it('should use custom togglePickerAriaLabel when opening picker', () => {
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      spectator.click(button);
+      render();
+
+      expect(pickerServiceSpy.open).toHaveBeenCalledWith(
+        jasmine.objectContaining({
+          togglePickerAriaLabel: 'Open custom character picker',
+          closePickerAriaLabel: 'Close custom character picker'
+        })
+      );
+    });
+
+    it('should use default aria-label when custom properties are not provided', () => {
+      spectator = createComponent();
+      component = spectator.component;
+      render();
+
+      const button = spectator.query('.input-char-button') as HTMLButtonElement;
+
+      expect(button.getAttribute('aria-label')).toBe('inputChar.aria.togglePicker');
     });
   });
 });
