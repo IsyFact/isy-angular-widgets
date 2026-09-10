@@ -1,4 +1,4 @@
-# 21.3.0 -
+# 21.3.0 - 10.09.2026
 ## Features
 - IFS-5735: Demo und Dokumentation dieser Versionslinie werden nun automatisch unter `/v21/` bzw. `/v21/documentation/` veröffentlicht; der Deploy erfolgt zentral vom `develop`-Branch aus einem einzigen Pages-Artefakt
 - IFS-5736: `@isyfact/eslint-plugin`, `eslint` und `typescript-eslint` wurden auf die Version 10 angehoben`
@@ -8,7 +8,6 @@
   * `disabledStepAriaText`
   * `stepStates`
   * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
- 
 ## Fixes
 - IFS-5702: Die Screenreader-Unterstützung der InputCharComponent wurde durch vollständige, überschreibbare ARIA-Beschriftungen verbessert
 - IFS-5714: Fallback-Text für ungültige Eingaben aus dem `WidgetsConfigService` kann nun von konsumierenden Anwendungen per Übersetzung überschrieben werden
