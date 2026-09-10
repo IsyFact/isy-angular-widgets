@@ -239,11 +239,11 @@ describe('Integration Tests: MultiSelectButtonComponent', () => {
   };
 
   const selectSchriftzeichengruppe = (schriftzeichengruppe: Schriftzeichengruppe): void => {
-    selectOption('.charset-selectbutton--1', String(schriftzeichengruppe));
+    selectOption('.charset-selectbutton-1', String(schriftzeichengruppe));
   };
 
   const selectBasis = (basis: string): void => {
-    selectOption('.charset-selectbutton--0', basis);
+    selectOption('.charset-selectbutton-0', basis);
   };
 
   it('should always have the correct value when clicking through multiple selections', () => {

@@ -11,15 +11,15 @@
     display: block !important;
   }
 
-  .demo-dashboard__section-heading {
+  .demo-dashboard-section-heading {
     margin-block: 6mm 3mm;
   }
 
-  .demo-dashboard__section-heading:first-child {
+  .demo-dashboard-section-heading:first-child {
     margin-block-start: 0;
   }
 
-  .demo-dashboard__item {
+  .demo-dashboard-item {
     width: 100%;
     min-width: 0;
     max-width: 100%;

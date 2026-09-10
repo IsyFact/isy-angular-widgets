@@ -35,8 +35,8 @@ describe('Integration Tests: DashboardComponent', () => {
 
   it('should expose readable print sections without dropping dashboard content', () => {
     expect(spectator.query('.demo-print-page.demo-dashboard')).toBeTruthy();
-    expect(spectator.queryAll('.demo-dashboard__section-heading.isy-print-only')).toHaveLength(2);
-    expect(spectator.queryAll('.demo-dashboard__item')).toHaveLength(
+    expect(spectator.queryAll('.demo-dashboard-section-heading.isy-print-only')).toHaveLength(2);
+    expect(spectator.queryAll('.demo-dashboard-item')).toHaveLength(
       spectator.queryAll('demo-dashboard-widget').length + spectator.queryAll('p-card').length
     );
   });
