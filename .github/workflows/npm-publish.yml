@@ -9,8 +9,15 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
       - '[0-9]+.[0-9]+.[0-9]+-*'
 
+  # Allows a full dry run from the Actions tab: every step including the
+  # artifact handling is executed, only the publication itself is skipped.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
 env:
-  RELEASE_VERSION: ${{ github.ref_name }}
+  RELEASE_VERSION: ${{ github.event_name == 'push' && github.ref_name || '0.0.0-dryrun' }}
 
 jobs:
   build:
@@ -21,18 +28,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-npm-
-          path: |
-            **/node_modules
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: "npm"
+      - name: Setup Node environment
+        uses: ./.github/actions/setup-node-env
       - name: Classify release
         id: classify
         run: |
@@ -46,6 +43,7 @@ jobs:
             echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
           fi
       - name: Validate latest changelog entry
+        if: github.event_name == 'push'
         run: |
           BASE_VERSION="${RELEASE_VERSION%%-*}"
           FIRST_CHANGELOG_LINE=$(head -n 1 CHANGELOG.md)
@@ -55,48 +53,13 @@ jobs:
             echo "First changelog entry does not describe current version $BASE_VERSION."
             exit 1
           fi
-      - name: Bootstrap install (build local package)
-        run: |
-          npm ci --ignore-scripts
-          git checkout package.json
       - name: Build local package
-        run: |
-          npm run build:widgets_lib
-          npm run pack:widgets_lib
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-      - name: Check code formatting and linting
-        run: |
-          npm run prettier:check
-          npm run lint
-      - name: Run tests
-        run: npm test -- --watch=false
-      - name: Build artifact
-        run: npm run build
+        run: npm run build:widgets_lib
       - name: Upload Build
         uses: actions/upload-artifact@v4
         with:
           name: Build
           path: dist/isy-angular-widgets/
-
-  sbom:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-npm-
-          path: |
-            **/node_modules
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: "npm"
       - name: Generate SBOM
         run: |
           if npx @cyclonedx/cyclonedx-npm --ignore-npm-errors --output-file isy-angular-widgets-sbom.json 2>/tmp/sbom.err; then
@@ -113,9 +76,63 @@ jobs:
         with:
           name: SBOM
           path: isy-angular-widgets-sbom.json
+      # Packing and installing the tarball verifies that the published artifact
+      # can actually be consumed. It runs after the SBOM so that the library
+      # does not show up as a dependency of itself.
+      - name: Pack local package
+        run: npm run pack:widgets_lib
+      - name: Install packed library
+        run: |
+          shopt -s nullglob
+          TARBALLS=(dist/isy-angular-widgets/*.tgz)
+          if [[ ${#TARBALLS[@]} -ne 1 ]]; then
+            echo "Expected exactly one packed tarball, found ${#TARBALLS[@]}: ${TARBALLS[*]}"
+            exit 1
+          fi
+          npm install --no-save --no-package-lock --ignore-scripts "${TARBALLS[0]}"
+      - name: Verify manifests are untouched
+        run: git diff --exit-code package.json package-lock.json
+
+  quality:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Check code formatting
+            command: npm run prettier:check
+          - name: Lint library
+            command: npm run lint:lib
+          - name: Lint demo
+            command: npm run lint:demo
+          - name: Build demo application
+            command: npm run build:widgets_demo
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node environment
+        uses: ./.github/actions/setup-node-env
+      - name: ${{ matrix.name }}
+        run: ${{ matrix.command }}
+
+  test:
+    name: Test ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [isy-angular-widgets, isy-angular-widgets-demo]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node environment
+        uses: ./.github/actions/setup-node-env
+      - name: Run tests
+        run: npx ng test ${{ matrix.project }} --watch=false
 
   publish-npm:
-    needs: [build, sbom]
+    needs: [build, quality, test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -144,7 +161,11 @@ jobs:
             && jq --arg version "$RELEASE_VERSION" '.version=$version' "$tmp_file" >package.json \
             && rm -f "$tmp_file"
       - name: Publish to npm
+        if: github.event_name == 'push'
         working-directory: dist/isy-angular-widgets
         run: npm publish --access public --tag "${{ needs.build.outputs.dist_tag }}"
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - name: Report dry run
+        if: github.event_name != 'push'
+        run: echo "Dry run for a manual dispatch - skipped npm publish."
