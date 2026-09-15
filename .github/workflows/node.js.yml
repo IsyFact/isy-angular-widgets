@@ -283,7 +283,7 @@ jobs:
     # Deliberately without an environment so that the assembly can be dry run
     # from any branch; the github-pages environment only permits develop.
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/develop') }}
-    needs: [quality, test, sonar, package, demo_build, pages_v21]
+    needs: [quality, demo_build, pages_v21]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -356,7 +356,7 @@ jobs:
   pages_deploy:
     name: Deploy to GitHub Pages
     if: ${{ github.ref == 'refs/heads/develop' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy)) }}
-    needs: [pages_assemble]
+    needs: [pages_assemble, test, sonar, package]
 
     # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
     permissions:
