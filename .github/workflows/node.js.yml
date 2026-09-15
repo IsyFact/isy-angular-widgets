@@ -21,8 +21,15 @@ on:
       - support/**
       - release/**
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows you to run this workflow manually from the Actions tab. Running it
+  # from a branch other than develop performs a full dry run of the GitHub
+  # Pages build without deploying anything.
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Deploy to GitHub Pages (only effective on develop)"
+        type: boolean
+        default: true
 
 # Stale pull request runs are superseded by the newest push. Runs on branches
 # (and therefore every deployment) always run to completion.
@@ -32,6 +39,11 @@ concurrency:
 
 permissions:
   contents: read
+
+env:
+  # The GitHub Pages artifacts are only needed for deployments from develop and
+  # for manual dry runs.
+  PAGES_RUN: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/develop') }}
 
 jobs:
   changelog:
@@ -67,6 +79,7 @@ jobs:
             command: npm run lint:demo
           - name: Build documentation (Compodoc)
             command: npm run compodoc:build
+            docs: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -74,6 +87,16 @@ jobs:
         uses: ./.github/actions/setup-node-env
       - name: ${{ matrix.name }}
         run: ${{ matrix.command }}
+      - name: Package documentation
+        if: matrix.docs && env.PAGES_RUN == 'true'
+        run: tar -czf docs.tgz -C docs .
+      - name: Upload documentation
+        if: matrix.docs && env.PAGES_RUN == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: docs.tgz
+          retention-days: 1
 
   test:
     name: Test ${{ matrix.project }}
@@ -177,13 +200,31 @@ jobs:
   demo_build:
     name: Build demo application
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node environment
         uses: ./.github/actions/setup-node-env
+      - name: Setup Pages
+        id: pages
+        if: env.PAGES_RUN == 'true'
+        uses: actions/configure-pages@v4
       - name: Build demo application
-        run: npm run build:widgets_demo
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: |
+          if [[ -n "$BASE_PATH" ]]; then
+            # Collapses duplicate slashes so that a site published at the domain
+            # root ("/") does not produce a "//" base href.
+            BASE_HREF="$(printf '%s/' "$BASE_PATH" | sed 's|//*|/|g')"
+            echo "Building demo application with base href '$BASE_HREF'"
+            npx ng build isy-angular-widgets-demo --configuration production --base-href "$BASE_HREF"
+          else
+            npm run build:widgets_demo
+          fi
       - name: Verify demo build output layout
         run: |
           if [ ! -f dist/isy-angular-widgets-demo/browser/index.html ]; then
@@ -192,33 +233,23 @@ jobs:
             ls -R dist/isy-angular-widgets-demo || true
             exit 1
           fi
+      - name: Upload demo build
+        if: env.PAGES_RUN == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-dist
+          path: dist/isy-angular-widgets-demo/browser/
+          retention-days: 1
 
-  build_and_deploy_demo_and_docs:
+  pages_v21:
+    name: Build legacy line (v21)
     # Reacts to workflow_dispatch as well, so that a push on develop-21 can
     # trigger a redeploy of both version lines from here.
-    if: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/develop' }}
-
-    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/develop') }}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-      pages: write
-      id-token: write
-
-    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-    concurrency:
-      group: "pages"
-      cancel-in-progress: false
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: [quality, test, sonar, package, demo_build]
-    strategy:
-      matrix:
-        node-version: [24.x]
-
+      pages: read
     steps:
       - name: Checkout current line (v22)
         uses: actions/checkout@v4
@@ -227,18 +258,67 @@ jobs:
         with:
           ref: develop-21
           path: src-v21
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - name: Setup Node environment
+        uses: ./.github/actions/setup-node-env
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          # build-pages-variant.sh installs the dependencies of the checked out
+          # version line itself.
+          install: "false"
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-      - name: Build current line (v22) into the site root
-        run: tools/build-pages-variant.sh . site "${{ steps.pages.outputs.base_path }}/"
-      - name: Build legacy line (v21) into /v21
+      - name: Build legacy line (v21)
         run: tools/build-pages-variant.sh src-v21 site/v21 "${{ steps.pages.outputs.base_path }}/v21/"
+      - name: Package legacy line site
+        run: tar -czf pages-v21.tgz -C site/v21 .
+      - name: Upload legacy line site
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-v21
+          path: pages-v21.tgz
+          retention-days: 1
+
+  pages_assemble:
+    name: Assemble GitHub Pages site
+    # Deliberately without an environment so that the assembly can be dry run
+    # from any branch; the github-pages environment only permits develop.
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/develop') }}
+    needs: [quality, test, sonar, package, demo_build, pages_v21]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node environment
+        uses: ./.github/actions/setup-node-env
+        with:
+          install: "false"
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+      - name: Download demo build (v22)
+        uses: actions/download-artifact@v4
+        with:
+          name: demo-dist
+          path: site
+      - name: Download documentation (v22)
+        uses: actions/download-artifact@v4
+        with:
+          name: docs
+          path: artifacts
+      - name: Download legacy line site (v21)
+        uses: actions/download-artifact@v4
+        with:
+          name: pages-v21
+          path: artifacts
+      - name: Assemble site
+        run: |
+          mkdir -p site/documentation site/v21
+          tar -xzf artifacts/docs.tgz -C site/documentation
+          tar -xzf artifacts/pages-v21.tgz -C site/v21
+          rm -rf artifacts
       - name: Generate SPA fallback
         run: node tools/pages-spa-fallback.mjs site "${{ steps.pages.outputs.base_path }}" v21
       - name: Verify site layout
@@ -272,6 +352,29 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: "site"
+
+  pages_deploy:
+    name: Deploy to GitHub Pages
+    if: ${{ github.ref == 'refs/heads/develop' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy)) }}
+    needs: [pages_assemble]
+
+    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy demo and documentation to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
