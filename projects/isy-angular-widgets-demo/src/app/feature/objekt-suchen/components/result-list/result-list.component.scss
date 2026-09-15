@@ -1,3 +1,45 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
 :host ::ng-deep .isy-demo-app-result-panel .p-panel-content-wrapper {
   min-width: 0;
+}
+
+:host ::ng-deep .isy-demo-app-result-panel .p-panel-content,
+:host ::ng-deep .p-datatable,
+:host ::ng-deep .p-datatable-table-container {
+  min-width: 0;
+}
+
+:host ::ng-deep .p-datatable-table-container {
+  overflow-x: auto;
+}
+
+:host ::ng-deep .result-list-controls {
+  flex-wrap: wrap;
+}
+
+:host ::ng-deep .p-multiselect-label {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 320px) {
+  :host ::ng-deep .result-list-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  :host ::ng-deep .result-list-controls > p-button,
+  :host ::ng-deep .result-list-controls > p-multiselect,
+  :host ::ng-deep .result-list-controls .p-multiselect {
+    width: 100%;
+  }
+
+  :host ::ng-deep .result-list-controls > p-button .p-button {
+    width: 100%;
+    justify-content: center;
+  }
 }

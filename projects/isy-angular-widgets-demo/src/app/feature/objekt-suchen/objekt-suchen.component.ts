@@ -38,6 +38,7 @@ const defaultWidth = 60;
   standalone: true,
   selector: 'demo-personen-suchen',
   templateUrl: './objekt-suchen.component.html',
+  styleUrls: ['./objekt-suchen.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     PanelModule,

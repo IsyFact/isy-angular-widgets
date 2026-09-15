@@ -75,6 +75,13 @@
   }
 }
 
+@media screen and (max-width: 320px) {
+  .left-panel-side {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
 :host ::ng-deep {
   .left-panel-side .p-accordioncontent-content p-selectbutton {
     flex-wrap: wrap;
