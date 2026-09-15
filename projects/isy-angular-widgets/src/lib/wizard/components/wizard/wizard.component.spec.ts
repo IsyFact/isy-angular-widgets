@@ -27,6 +27,8 @@ import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {provideRouter} from '@angular/router';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {of} from 'rxjs';
 
 @Directive({
   selector: '[pTemplate]',
@@ -91,6 +93,16 @@ class StepperStubComponent {
 class StepListStubComponent {}
 
 @Component({
+  selector: 'p-step-item',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
+  template: `<div class="p-step-item"><ng-content></ng-content></div>`
+})
+class StepItemStubComponent {
+  @Input() value?: number;
+}
+
+@Component({
   selector: 'p-step',
   standalone: true,
   imports: [CommonModule],
@@ -129,7 +141,7 @@ class StepStubComponent {
 @Component({
   selector: 'p-dialog',
   standalone: true,
-  imports: [CommonModule, PTemplateStubDirective, StepperModule],
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div role="dialog">
@@ -248,6 +260,11 @@ const widgetsConfigServiceStub: Pick<WidgetsConfigService, 'getTranslation'> = {
   getTranslation: (key: string) => key
 };
 
+const breakpointObserverStub: Pick<BreakpointObserver, 'observe' | 'isMatched'> = {
+  observe: () => of({matches: false, breakpoints: {}}),
+  isMatched: () => false
+};
+
 const wizardOverride: MetadataOverride<Component> = {
   remove: {
     imports: [StepperModule, DialogModule, ButtonModule, ToastModule, TooltipModule]
@@ -258,6 +275,7 @@ const wizardOverride: MetadataOverride<Component> = {
       DialogStubComponent,
       StepperStubComponent,
       StepListStubComponent,
+      StepItemStubComponent,
       StepStubComponent,
       ToastStubComponent,
       PTemplateStubDirective,
@@ -272,7 +290,10 @@ describe('Unit Tests: WizardComponent', () => {
   let spectator: Spectator<WizardComponent>;
   const createComponent = createComponentFactory({
     component: WizardComponent,
-    providers: [{provide: WidgetsConfigService, useValue: widgetsConfigServiceStub}],
+    providers: [
+      {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub},
+      {provide: BreakpointObserver, useValue: breakpointObserverStub}
+    ],
     overrideComponents: [[WizardComponent, wizardOverride]]
   });
   beforeEach(() => {
@@ -458,7 +479,11 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let spectator: Spectator<TestComponent>;
   const createComponent = createComponentFactory({
     component: TestComponent,
-    providers: [provideRouter([]), {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub}],
+    providers: [
+      provideRouter([]),
+      {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub},
+      {provide: BreakpointObserver, useValue: breakpointObserverStub}
+    ],
     overrideComponents: [[WizardComponent, wizardOverride]]
   });
 
@@ -854,7 +879,11 @@ describe('Integration Tests: WizardComponent with Custom Footer', () => {
   let spectator: Spectator<TestCustomFooterComponent>;
   const createComponent = createComponentFactory({
     component: TestCustomFooterComponent,
-    providers: [provideRouter([]), {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub}],
+    providers: [
+      provideRouter([]),
+      {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub},
+      {provide: BreakpointObserver, useValue: breakpointObserverStub}
+    ],
     overrideComponents: [[WizardComponent, wizardOverride]]
   });
 
@@ -924,7 +953,7 @@ describe('Accessibility Test: WizardComponent', () => {
   const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
   const createComponent = createComponentFactory({
     component: TestComponent,
-    providers: [provideRouter([])],
+    providers: [provideRouter([]), {provide: BreakpointObserver, useValue: breakpointObserverStub}],
     overrideComponents: [[WizardComponent, wizardOverride]]
   });
 
@@ -936,7 +965,10 @@ describe('Accessibility Test: WizardComponent', () => {
     });
 
     spectator = createComponent({
-      providers: [{provide: WidgetsConfigService, useValue: mockConfigService}]
+      providers: [
+        {provide: WidgetsConfigService, useValue: mockConfigService},
+        {provide: BreakpointObserver, useValue: breakpointObserverStub}
+      ]
     });
 
     wizard = spectator.component.wizard;
