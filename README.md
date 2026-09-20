@@ -92,13 +92,18 @@ npm run start
 | `npm run build:widgets_lib` | Baut ausschließlich die Bibliothek inklusive Schematics |
 | `npm run build:widgets_demo` | Baut ausschließlich die Demo-Anwendung |
 | `npm run build-and-pack:widgets_lib` | Baut die Bibliothek und erzeugt ein installierbares TGZ-Paket |
-| `npm test` | Führt die Unit- und Integrationstests aus |
+| `npm test` | Führt den bestehenden Angular-/Karma-Testbestand aus |
+| `npm run test:vitest` | Startet Vitest für neue oder migrierte Tests im interaktiven Modus |
+| `npm run test:vitest:run` | Führt die aktuell eingerichteten Vitest-Tests einmalig ohne Watch-Modus aus |
+| `npm run test:vitest:coverage` | Führt die aktuell eingerichteten Vitest-Tests mit Coverage-Bericht aus |
 | `npm run lint` | Lintet Bibliothek und Demo-Anwendung (`lint:lib`, `lint:demo` einzeln) |
 | `npm run prettier:check` | Prüft die Codeformatierung |
 | `npm run prettier:fix` | Behebt Formatierungsfehler automatisch |
 | `npm run e2e` | Führt die E2E-Tests der Demo-Anwendung aus |
 | `npm run compodoc:build` | Erzeugt die API-Dokumentation nach `docs/` (`compodoc:serve` zeigt sie lokal an) |
 | `npm run generate-browser-support` | Aktualisiert die Browser-Support-Konfiguration |
+
+Vitest ist zusätzlich als technische Grundlage für die schrittweise Migration von Unit- und Komponententests eingerichtet. Der bestehende Karma-/Jasmine-Bestand bleibt vorerst unverändert über `npm test` ausführbar. Vitest erfasst aktuell ausschließlich dedizierte Dateien mit dem Suffix `*.vitest.spec.ts`.
 
 > **Hinweis:** `compodoc:build` legt die erzeugte API-Dokumentation im Verzeichnis `docs/` ab, in dem auch die Antora-Konzeptdokumentation liegt. Die generierten Dateien sind nicht in der `.gitignore` enthalten und sollten vor einem Commit wieder entfernt werden:
 >
@@ -114,6 +119,7 @@ Die folgenden Prüfungen entsprechen den zentralen Schritten der CI-Pipeline und
 npm run prettier:check
 npm run lint
 npm test
+npm run test:vitest:run
 npm run build:widgets_lib
 npm run build:widgets_demo
 ```
