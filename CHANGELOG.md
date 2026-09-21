@@ -1,6 +1,6 @@
 # 21.4.0 - 
 ## Features
-- IFS-5737: Disabled-States im IsyFact-Theme für PrimeNG-Komponenten wurden farblich vereinheitlicht
+- IFS-5737: Disabled-States für Buttons und Formularelemente im IsyFact-Theme wurden farblich vereinheitlicht
 ## Demo-Anwendung
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
 
