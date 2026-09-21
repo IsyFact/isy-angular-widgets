@@ -1,0 +1,21 @@
+name: Setup Node environment
+description: Sets up the pinned Node.js version with npm caching and optionally installs the dependencies.
+
+inputs:
+  install:
+    description: Whether to install the dependencies via npm ci.
+    required: false
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: "24"
+        cache: "npm"
+    - name: Install dependencies
+      if: inputs.install == 'true'
+      shell: bash
+      run: npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
