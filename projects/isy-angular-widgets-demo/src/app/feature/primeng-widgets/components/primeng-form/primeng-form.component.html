@@ -310,6 +310,14 @@
         class="w-full"
         appendTo="body"
       />
+      <p-select
+        id="dropdown-input-disabled"
+        [options]="countries"
+        optionLabel="name"
+        placeholder="Disabled Country"
+        class="w-full"
+        [disabled]="true"
+      />
     </div>
     <div class="col-12 flex flex-column gap-2">
       <demo-section-heading anchorId="multiselect" [level]="3" label="MultiSelect" ariaLabel="Link zu MultiSelect" />
@@ -336,6 +344,8 @@
     <div class="col-12 flex flex-column gap-2">
       <demo-section-heading anchorId="textarea" [level]="3" label="Textarea" ariaLabel="Link zu Textarea" />
       <textarea pTextarea class="w-full" aria-label="Textarea"></textarea>
+      <textarea pTextarea id="textarea-disabled" class="w-full" aria-label="Disabled Textarea" [disabled]="true">
+Disabled Textarea</textarea>
     </div>
     <div class="col-12 flex flex-column gap-2">
       <demo-section-heading anchorId="inputotp" [level]="3" label="InputOtp" ariaLabel="Link zu InputOtp" />
@@ -425,6 +435,31 @@
               [ngModelOptions]="{standalone: true}"
             />
             <label for="checkbox-vertical-4">{{ 'isyAngularWidgetsDemo.labels.checkbox4' | translate }}</label>
+          </div>
+        </div>
+      </p-fieldset>
+
+      <p-fieldset legend="Disabled Checkboxen">
+        <div class="checkbox-group-disabled flex flex-column gap-2">
+          <div class="flex align-items-center gap-2">
+            <p-checkbox
+              inputId="checkbox-disabled-1"
+              [binary]="true"
+              [(ngModel)]="checkboxDisabledChecked"
+              [ngModelOptions]="{standalone: true}"
+              [disabled]="true"
+            />
+            <label for="checkbox-disabled-1">Checkbox aktiviert und deaktiviert</label>
+          </div>
+          <div class="flex align-items-center gap-2">
+            <p-checkbox
+              inputId="checkbox-disabled-2"
+              [binary]="true"
+              [(ngModel)]="checkboxDisabledUnchecked"
+              [ngModelOptions]="{standalone: true}"
+              [disabled]="true"
+            />
+            <label for="checkbox-disabled-2">Checkbox deaktiviert</label>
           </div>
         </div>
       </p-fieldset>
@@ -520,6 +555,33 @@
           </div>
         </div>
       </p-fieldset>
+
+      <p-fieldset legend="Disabled Radio-Buttons">
+        <div class="radio-group-disabled flex flex-column gap-2">
+          <div class="flex align-items-center gap-2">
+            <p-radiobutton
+              inputId="radio-disabled-1"
+              name="radio-disabled-group"
+              value="radio1"
+              [(ngModel)]="radioDisabledValue"
+              [ngModelOptions]="{standalone: true}"
+              [disabled]="true"
+            />
+            <label for="radio-disabled-1">Radio deaktiviert</label>
+          </div>
+          <div class="flex align-items-center gap-2">
+            <p-radiobutton
+              inputId="radio-disabled-2"
+              name="radio-disabled-group"
+              value="radio2"
+              [(ngModel)]="radioDisabledValue"
+              [ngModelOptions]="{standalone: true}"
+              [disabled]="true"
+            />
+            <label for="radio-disabled-2">Radio aktiviert und deaktiviert</label>
+          </div>
+        </div>
+      </p-fieldset>
     </div>
     <div class="col-12 flex flex-column gap-2">
       <demo-section-heading anchorId="knob" [level]="3" label="Knob" ariaLabel="Link zu Knob" />
@@ -545,7 +607,21 @@
     </div>
     <div class="col-12 flex flex-column gap-2">
       <demo-section-heading anchorId="inputswitch" [level]="3" label="InputSwitch" ariaLabel="Link zu InputSwitch" />
-      <p-toggleswitch inputId="inputSwitch" ariaLabel="Input Switch" />
+      <div class="flex flex-column gap-3">
+        <p-toggleswitch
+          inputId="inputSwitch"
+          ariaLabel="Input Switch"
+          [(ngModel)]="toggleSwitchValue"
+          [ngModelOptions]="{standalone: true}"
+        />
+        <p-toggleswitch
+          inputId="inputSwitchDisabled"
+          ariaLabel="Disabled Input Switch"
+          [(ngModel)]="toggleSwitchDisabledValue"
+          [ngModelOptions]="{standalone: true}"
+          [disabled]="true"
+        />
+      </div>
     </div>
     <div class="col-12 flex flex-column gap-2">
       <demo-section-heading anchorId="togglebutton" [level]="3" label="ToggleButton" ariaLabel="Link zu ToggleButton" />

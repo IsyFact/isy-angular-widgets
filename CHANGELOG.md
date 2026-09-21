@@ -1,3 +1,9 @@
+# 21.4.0 - 
+## Features
+- IFS-5737: Disabled-States im IsyFact-Theme für PrimeNG-Komponenten wurden farblich vereinheitlicht
+## Demo-Anwendung
+- IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
+
 # 21.3.0 - 10.09.2026
 ## Features
 - IFS-5735: Demo und Dokumentation dieser Versionslinie werden nun automatisch unter `/v21/` bzw. `/v21/documentation/` veröffentlicht; der Deploy erfolgt zentral vom `develop`-Branch aus einem einzigen Pages-Artefakt
