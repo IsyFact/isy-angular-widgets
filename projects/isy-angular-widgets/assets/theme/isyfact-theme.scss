@@ -20,6 +20,12 @@
     --p-disabled-opacity: #{vars.$disabledOpacity};
     --p-dark-grey: #{vars.$isyfactDarkGrey};
     --p-charcoal: #{vars.$isyfactCharcoal};
+    --isyfact-disabled-button-background: #{vars.$isyfactDisabledBackground};
+    --isyfact-disabled-button-border-color: #{vars.$isyfactDisabledBorderColor};
+    --isyfact-disabled-button-text-color: #{vars.$isyfactDisabledTextColor};
+    --isyfact-disabled-field-background: #{vars.$isyfactDisabledFieldBackground};
+    --isyfact-disabled-field-border-color: #{vars.$isyfactDisabledFieldBorderColor};
+    --isyfact-disabled-field-text-color: #{vars.$isyfactDisabledFieldTextColor};
 
     --p-border-radius-xs: 0;
     --p-border-radius-sm: 0;
@@ -32,6 +38,9 @@
     --p-form-field-invalid-placeholder-color: #{vars.$isyfactAlertColor};
     --p-form-field-invalid-border-color: #{vars.$isyfactAlertColor};
     --p-form-field-hover-border-color: #{vars.$isyfactPrimaryColor};
+    --p-form-field-disabled-background: #{vars.$isyfactDisabledFieldBackground};
+    --p-form-field-disabled-border-color: #{vars.$isyfactDisabledFieldBorderColor};
+    --p-form-field-disabled-color: #{vars.$isyfactDisabledFieldTextColor};
 
     // Styling for readonly input fields
     // PrimeNG does not apply this styling by default
@@ -55,15 +64,94 @@
     --p-button-text-secondary-hover-background: var(--p-surface-200);
     --p-button-text-danger-color: #{vars.$isyfactAlertColor};
 
-    .p-button:disabled {
-      color: #{vars.$isyfactDisabledTextColor};
-      background-color: #{vars.$isyfactDisabledBackground};
-      border-color: #{vars.$isyfactDisabledBorderColor};
+    .p-button:disabled,
+    .p-button.p-disabled,
+    .p-button:disabled:hover,
+    .p-button.p-disabled:hover,
+    .p-button:disabled:active,
+    .p-button.p-disabled:active {
+      color: var(--isyfact-disabled-button-text-color);
+      background-color: var(--isyfact-disabled-button-background);
+      border-color: var(--isyfact-disabled-button-border-color);
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    .p-button.p-button-outlined:disabled,
+    .p-button.p-button-outlined.p-disabled,
+    .p-button.p-button-outlined:disabled:hover,
+    .p-button.p-button-outlined.p-disabled:hover,
+    .p-button.p-button-outlined:disabled:active,
+    .p-button.p-button-outlined.p-disabled:active {
+      color: var(--isyfact-disabled-button-background);
+      background-color: transparent;
+      border-color: var(--isyfact-disabled-button-border-color);
+    }
+
+    .p-button.p-button-text:disabled,
+    .p-button.p-button-text.p-disabled,
+    .p-button.p-button-text:disabled:hover,
+    .p-button.p-button-text.p-disabled:hover,
+    .p-button.p-button-text:disabled:active,
+    .p-button.p-button-text.p-disabled:active {
+      color: var(--isyfact-disabled-button-background);
+      background-color: transparent;
+      border-color: transparent;
+    }
+
+    .p-inputtext:disabled,
+    textarea.p-inputtextarea:disabled,
+    textarea.p-inputtextarea.p-disabled,
+    input:disabled,
+    textarea:disabled,
+    .p-select.p-disabled,
+    .p-select.p-disabled:hover,
+    .p-select.p-disabled .p-select-dropdown,
+    .p-select.p-disabled:hover .p-select-dropdown {
+      color: var(--isyfact-disabled-field-text-color);
+      background-color: var(--isyfact-disabled-field-background);
+      border-color: var(--isyfact-disabled-field-border-color);
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    .p-select.p-disabled .p-select-label,
+    .p-select.p-disabled .p-select-dropdown {
+      color: var(--isyfact-disabled-field-text-color);
+    }
+
+    textarea.p-inputtextarea:disabled,
+    textarea.p-inputtextarea.p-disabled {
+      color: var(--isyfact-disabled-field-text-color);
+      border-color: var(--isyfact-disabled-field-border-color);
+      opacity: 1;
+      box-shadow: none;
     }
 
     // checkbox
     --p-checkbox-width: 24px;
     --p-checkbox-height: 24px;
+
+    .p-radiobutton.p-disabled .p-radiobutton-box {
+      background-color: var(--isyfact-disabled-field-background);
+      border-color: var(--isyfact-disabled-field-border-color);
+      box-shadow: none;
+      opacity: 1;
+    }
+
+    .p-radiobutton.p-disabled.p-radiobutton-checked .p-radiobutton-box {
+      background-color: #ffffff;
+      border-color: var(--isyfact-disabled-button-border-color);
+    }
+
+    .p-radiobutton.p-disabled .p-radiobutton-icon {
+      background-color: var(--isyfact-disabled-button-border-color);
+    }
+
+    .p-radiobutton.p-disabled + label,
+    .p-radiobutton.p-disabled ~ label {
+      color: var(--isyfact-disabled-field-text-color);
+    }
 
     // links navigation
     --p-navigation-item-padding: 0.875rem;
