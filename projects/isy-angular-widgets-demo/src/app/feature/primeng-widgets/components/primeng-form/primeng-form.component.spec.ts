@@ -253,6 +253,11 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(readonlyInput?.value.length).toBeGreaterThan(0);
   });
 
+  it('should render disabled textarea and dropdown examples', () => {
+    expect(spectator.query<HTMLTextAreaElement>('#textarea-disabled')?.disabled).toBeTrue();
+    expect(spectator.query('#dropdown-input-disabled')).toBeTruthy();
+  });
+
   it('should render Inputmask phone field with label, placeholder and help text', () => {
     const label = spectator.query<HTMLLabelElement>('label[for="input-mask-phone"]');
     const input = spectator.query<HTMLInputElement>('input#input-mask-phone');
@@ -313,5 +318,18 @@ describe('Unit Tests: PrimengFormComponent', () => {
       expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
       expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
     });
+  });
+
+  it('should render disabled radio button examples', () => {
+    expect(spectator.query('.radio-group-disabled')).toBeTruthy();
+    expect(spectator.query<HTMLInputElement>('#radio-disabled-1')?.disabled).toBeTrue();
+    expect(spectator.query<HTMLInputElement>('#radio-disabled-2')?.disabled).toBeTrue();
+  });
+
+  it('should render a disabled toggle switch example', () => {
+    const disabledSwitch = spectator.query<HTMLInputElement>('#inputSwitchDisabled');
+
+    expect(disabledSwitch).toBeTruthy();
+    expect(disabledSwitch?.disabled).toBeTrue();
   });
 });

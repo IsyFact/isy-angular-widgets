@@ -36,6 +36,12 @@ class MockMultiSelectButtonComponent {
 
   @Input() allButtonOptionsLabel = '';
 
+  @Input() allButtonAriaLabel = '';
+
+  @Input() baseCharsAriaLabel = '';
+
+  @Input() groupsAriaLabel = '';
+
   @Input() value: InputCharSelection | undefined;
 
   @Input() resetKey = 0;
