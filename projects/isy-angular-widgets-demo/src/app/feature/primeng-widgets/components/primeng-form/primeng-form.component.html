@@ -603,13 +603,7 @@ Disabled Textarea</textarea>
     <div class="col-12 flex flex-column gap-2">
       <demo-section-heading anchorId="slider" [level]="3" label="Slider" ariaLabel="Link zu Slider" />
       <label for="slider-input" class="visually-hidden">Slider</label>
-      <input
-        id="slider-input"
-        type="text"
-        pInputText
-        [(ngModel)]="slider"
-        class="w-full mb-3"
-      />
+      <input id="slider-input" type="text" pInputText [(ngModel)]="slider" class="w-full mb-3" />
       <p-slider [(ngModel)]="slider" class="w-full" />
     </div>
     <div class="col-12 flex flex-column gap-2">
