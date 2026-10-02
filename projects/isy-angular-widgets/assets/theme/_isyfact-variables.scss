@@ -8,7 +8,7 @@ $isyfactCharcoal: #404040 !default;
 $isyfactDarkGrey: #212529 !default;
 $isyfactPrimaryColor: #0055b9 !default;
 $isyfactPrimaryActive: $isyfactPrimaryColor !default;
-$isyfactPrimaryDisabledColor: #767676 !default;
+$isyfactPrimaryDisabledColor: #7897ae !default;
 $isyfactSecondaryColor: #d45c00 !default;
 
 $isyfactAlertColor: #a4252c !default;
@@ -47,3 +47,6 @@ $isyfactNavigationItemFocusBackground: #4c8ceb !default;
 $isyfactDisabledBackground: $isyfactPrimaryDisabledColor !default;
 $isyfactDisabledTextColor: #fff !default;
 $isyfactDisabledBorderColor: $isyfactPrimaryDisabledColor !default;
+$isyfactDisabledFieldBackground: transparent !default;
+$isyfactDisabledFieldBorderColor: #ced4da !default;
+$isyfactDisabledFieldTextColor: $isyfactMediumGrey !default;
