@@ -1,4 +1,4 @@
-import {createPipeFactory, SpectatorPipe} from '@ngneat/spectator';
+import {createPipeFactory, SpectatorPipe} from '@ngneat/spectator/vitest';
 import {IncompleteDatePipe} from './incomplete-date.pipe';
 
 describe('Unit Tests: IncompleteDatePipe', () => {

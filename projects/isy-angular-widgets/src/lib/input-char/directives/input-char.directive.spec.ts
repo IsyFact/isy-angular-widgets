@@ -1,9 +1,10 @@
-import {Component, DebugElement, ChangeDetectionStrategy} from '@angular/core';
+import {Component, DebugElement, ChangeDetectionStrategy, SimpleChange} from '@angular/core';
 import {Datentyp} from '../model/datentyp';
 import {InputCharDirective} from './input-char.directive';
 import {By} from '@angular/platform-browser';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator/vitest';
 import {ComponentFixture} from '@angular/core/testing';
+import {expect, vi} from 'vitest';
 import {WidgetsConfigService} from '../../i18n/widgets-config.service';
 import {InputCharPickerService} from '../services/input-char-picker.service';
 
@@ -46,14 +47,9 @@ describe('Integration Tests: InputCharDirective', () => {
   let inputCharButton: HTMLButtonElement;
   let input: HTMLInputElement;
 
-  const configServiceSpy = jasmine.createSpyObj<WidgetsConfigService>('WidgetsConfigService', ['getTranslation']);
+  const configServiceSpy = createSpyObject(WidgetsConfigService);
 
-  const pickerServiceSpy = jasmine.createSpyObj<InputCharPickerService>('InputCharPickerService', [
-    'open',
-    'close',
-    'closeFor',
-    'isOpenFor'
-  ]);
+  const pickerServiceSpy = createSpyObject(InputCharPickerService);
 
   const createComponent = createComponentFactory({
     component: TestComponent,
@@ -64,17 +60,17 @@ describe('Integration Tests: InputCharDirective', () => {
   });
 
   beforeEach(() => {
-    configServiceSpy.getTranslation.calls.reset();
-    configServiceSpy.getTranslation.and.callFake((key: string) => key);
+    configServiceSpy.getTranslation.mockReset();
+    configServiceSpy.getTranslation.mockImplementation((key: string) => key);
 
-    pickerServiceSpy.open.calls.reset();
-    pickerServiceSpy.open.and.resolveTo();
+    pickerServiceSpy.open.mockReset();
+    pickerServiceSpy.open.mockResolvedValue(undefined);
 
-    pickerServiceSpy.close.calls.reset();
-    pickerServiceSpy.closeFor.calls.reset();
+    pickerServiceSpy.close.mockReset();
+    pickerServiceSpy.closeFor.mockReset();
 
-    pickerServiceSpy.isOpenFor.calls.reset();
-    pickerServiceSpy.isOpenFor.and.returnValue(false);
+    pickerServiceSpy.isOpenFor.mockReset();
+    pickerServiceSpy.isOpenFor.mockReturnValue(false);
 
     spectator = createComponent();
     fixture = spectator.fixture;
@@ -89,16 +85,13 @@ describe('Integration Tests: InputCharDirective', () => {
   /**
    * Expect that button is disabled
    * @param inputCharButton The current HTML button
-   * @param done Action method that should be called when the async work is complete.
    */
-  function expectInputCharButtonIsDisabled(inputCharButton: HTMLButtonElement, done: DoneFn): void {
-    setTimeout(() => {
+  async function expectInputCharButtonIsDisabled(inputCharButton: HTMLButtonElement): Promise<void> {
+    await vi.waitFor(() => {
       fixture.detectChanges();
 
-      expect(directive.componentRef.instance.isInputDisabled).toBeTrue();
-      expect(inputCharButton.disabled).toBeTrue();
-
-      done();
+      expect(directive.componentRef.instance.isInputDisabled).toBe(true);
+      expect(inputCharButton.disabled).toBe(true);
     });
   }
 
@@ -113,64 +106,70 @@ describe('Integration Tests: InputCharDirective', () => {
   it('should initialize the componentRef and set its inputs correctly', () => {
     expect(directive.componentRef).toBeTruthy();
     expect(directive.componentRef.instance.datentyp).toBe(Datentyp.DATENTYP_A);
-    expect(directive.componentRef.instance.outlinedInputCharButton).toBeFalse();
+    expect(directive.componentRef.instance.outlinedInputCharButton).toBe(false);
   });
 
-  it('should update the componentRef datentyp when the directive input changes', () => {
-    spectator.component.datentyp = Datentyp.DATENTYP_C;
-    fixture.detectChanges();
+  it('should update the componentRef datentyp when the directive input changes', async () => {
+    directive.datentyp = Datentyp.DATENTYP_C;
+    directive.ngOnChanges({
+      datentyp: new SimpleChange(Datentyp.DATENTYP_A, Datentyp.DATENTYP_C, false)
+    });
 
     expect(directive.datentyp).toBe(Datentyp.DATENTYP_C);
-    expect(directive.componentRef.instance.datentyp).toBe(Datentyp.DATENTYP_C);
-  });
 
-  it('should update the componentRef outlinedInputCharButton when the directive input changes', () => {
-    spectator.component.outlinedInputCharButton = true;
-    fixture.detectChanges();
-
-    expect(directive.outlinedInputCharButton).toBeTrue();
-    expect(directive.componentRef.instance.outlinedInputCharButton).toBeTrue();
-  });
-
-  it('should set the input char button to disabled when the input is disabled', (done) => {
-    expect(input).toBeTruthy();
-    expect(inputCharButton).toBeTruthy();
-
-    input.disabled = true;
-
-    expectInputCharButtonIsDisabled(inputCharButton, done);
-  });
-
-  it('should set the input char button to disabled when the input is readonly', (done) => {
-    expect(input).toBeTruthy();
-    expect(inputCharButton).toBeTruthy();
-
-    input.readOnly = true;
-
-    expectInputCharButtonIsDisabled(inputCharButton, done);
-  });
-
-  it('should close the shared picker when the input becomes disabled', (done) => {
-    input.disabled = true;
-
-    setTimeout(() => {
-      fixture.detectChanges();
-
-      expect(pickerServiceSpy.closeFor).toHaveBeenCalledWith(inputCharButton);
-
-      done();
+    await vi.waitFor(() => {
+      expect(directive.componentRef.instance.datentyp).toBe(Datentyp.DATENTYP_C);
     });
   });
 
-  it('should close the shared picker when the input becomes readonly', (done) => {
+  it('should update the componentRef outlinedInputCharButton when the directive input changes', async () => {
+    directive.outlinedInputCharButton = true;
+    directive.ngOnChanges({
+      outlinedInputCharButton: new SimpleChange(false, true, false)
+    });
+
+    expect(directive.outlinedInputCharButton).toBe(true);
+
+    await vi.waitFor(() => {
+      expect(directive.componentRef.instance.outlinedInputCharButton).toBe(true);
+    });
+  });
+
+  it('should set the input char button to disabled when the input is disabled', async () => {
+    expect(input).toBeTruthy();
+    expect(inputCharButton).toBeTruthy();
+
+    input.disabled = true;
+
+    await expectInputCharButtonIsDisabled(inputCharButton);
+  });
+
+  it('should set the input char button to disabled when the input is readonly', async () => {
+    expect(input).toBeTruthy();
+    expect(inputCharButton).toBeTruthy();
+
     input.readOnly = true;
 
-    setTimeout(() => {
+    await expectInputCharButtonIsDisabled(inputCharButton);
+  });
+
+  it('should close the shared picker when the input becomes disabled', async () => {
+    input.disabled = true;
+
+    await vi.waitFor(() => {
       fixture.detectChanges();
 
       expect(pickerServiceSpy.closeFor).toHaveBeenCalledWith(inputCharButton);
+    });
+  });
 
-      done();
+  it('should close the shared picker when the input becomes readonly', async () => {
+    input.readOnly = true;
+
+    await vi.waitFor(() => {
+      fixture.detectChanges();
+
+      expect(pickerServiceSpy.closeFor).toHaveBeenCalledWith(inputCharButton);
     });
   });
 
@@ -188,7 +187,7 @@ describe('Integration Tests: InputCharDirective', () => {
 
   it('should change the input value', () => {
     const newValue = 'abc';
-    const valueOnChangeSpy = spyOn(spectator.component, 'valueGet');
+    const valueOnChangeSpy = vi.spyOn(spectator.component, 'valueGet');
 
     input.value = newValue;
 
@@ -245,21 +244,22 @@ describe('Integration Tests: InputCharDirective', () => {
 
   it('should dispatch an input event when a character is inserted', () => {
     const zeichen = 'ç̆';
-    const dispatchEventSpy = spyOn(directive.htmlInputElement, 'dispatchEvent').and.callThrough();
+    const dispatchEventSpy = vi.spyOn(directive.htmlInputElement, 'dispatchEvent');
 
     directive.componentRef.instance.insertCharacter.emit(zeichen);
 
     expect(dispatchEventSpy).toHaveBeenCalled();
 
-    const dispatchedEvent = dispatchEventSpy.calls.mostRecent().args[0];
+    const dispatchedEvent = dispatchEventSpy.mock.lastCall?.[0];
 
-    expect(dispatchedEvent).toEqual(jasmine.any(Event));
-    expect(dispatchedEvent.type).toBe('input');
+    expect(dispatchedEvent).toBeDefined();
+    expect(dispatchedEvent).toEqual(expect.any(Event));
+    expect(dispatchedEvent!.type).toBe('input');
   });
 
   it('should not close the shared picker when no input char button is found', () => {
     const hostElement = directive.componentRef.location.nativeElement as HTMLElement;
-    spyOn(hostElement, 'querySelector').and.returnValue(null);
+    vi.spyOn(hostElement, 'querySelector').mockReturnValue(null);
 
     directive.handleDisabledReadonlyChange(input, 'disabled');
 

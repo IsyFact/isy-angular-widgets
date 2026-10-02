@@ -8,11 +8,12 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {IncompleteDateComponent} from './incomplete-date.component';
 import {Validation} from '../validation/validation';
 import {InputMask} from 'primeng/inputmask';
 import {IncompleteDateService} from './incomplete-date.service';
+import {vi} from 'vitest';
 
 @Component({
   standalone: true,
@@ -60,8 +61,8 @@ describe('Integration Tests: IncompleteDateComponent', () => {
    * Initialize test
    */
   function init(): void {
-    onChange = jasmine.createSpy('onChange spy');
-    onTouched = jasmine.createSpy('onTouched spy');
+    onChange = vi.fn();
+    onTouched = vi.fn();
     component.registerOnChange(onChange);
     component.registerOnTouched(onTouched);
   }
@@ -232,7 +233,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should disable the state', () => {
     component.setDisabledState(true);
-    expect(component.disabled).toBeTrue();
+    expect(component.disabled).toBe(true);
   });
 
   it('should set value by onComplete', () => {
@@ -377,7 +378,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.lastInputElement = input;
     component.lastKeyPressed = '.';
     component.onModelChange('_.01.2024');
-    expect(component.inputValue.startsWith('x')).toBeTrue();
+    expect(component.inputValue.startsWith('x')).toBe(true);
   });
 
   it('should handle onModelChange for month incomplete', () => {
@@ -388,7 +389,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     component.onModelChange('01._1.2024');
     expect(
       component.inputValue.split('.')[1].startsWith('x') || component.inputValue.split('.')[1].startsWith('0')
-    ).toBeTrue();
+    ).toBe(true);
   });
 
   it('should calculate cursor position correctly', () => {
@@ -415,13 +416,13 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should set disabled state', () => {
     component.setDisabledState(true);
-    expect(component.disabled).toBeTrue();
+    expect(component.disabled).toBe(true);
     component.setDisabledState(false);
-    expect(component.disabled).toBeFalse();
+    expect(component.disabled).toBe(false);
   });
 
   it('should register onChange and call with converted value', () => {
-    const fn = jasmine.createSpy('onChange');
+    const fn = vi.fn();
     component.transferISO8601 = true;
     component.registerOnChange(fn);
     component.onChange('01.01.2024');
@@ -429,7 +430,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('should register onTouched and call', () => {
-    const fn = jasmine.createSpy('onTouched');
+    const fn = vi.fn();
     component.registerOnTouched(fn);
     component.onTouched();
     expect(fn).toHaveBeenCalled();
@@ -454,7 +455,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
   it('should forward an already ISO formatted value unchanged after registerOnChange when transferISO8601 is true', () => {
     component.transferISO8601 = true;
-    const fn = jasmine.createSpy('onChange');
+    const fn = vi.fn();
 
     component.registerOnChange(fn);
     component.onChange('2024-01-31');
@@ -463,7 +464,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
   });
 
   it('should not mark the native input as required by default', () => {
-    expect(input.hasAttribute('required')).toBeFalse();
+    expect(input.hasAttribute('required')).toBe(false);
     expect(input.getAttribute('aria-required')).toBe('false');
   });
 
@@ -471,7 +472,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     spectator.setInput('required', true);
     spectator.detectChanges();
 
-    expect(input.hasAttribute('required')).toBeTrue();
+    expect(input.hasAttribute('required')).toBe(true);
     expect(input.getAttribute('aria-required')).toBe('true');
   });
 
@@ -483,7 +484,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     const requiredInput = hostSpectator.query('#date-of-entry') as HTMLInputElement;
 
     expect(requiredInput).toBeTruthy();
-    expect(requiredInput.hasAttribute('required')).toBeTrue();
+    expect(requiredInput.hasAttribute('required')).toBe(true);
     expect(requiredInput.getAttribute('aria-required')).toBe('true');
   });
 });

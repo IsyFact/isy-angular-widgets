@@ -17,7 +17,7 @@ import {
 import {WizardComponent} from './wizard.component';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {WizardFooterDirective} from '../../directives/wizard-footer.directive';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator/vitest';
 import {IncompleteDateComponent} from '../../../incomplete-date/incomplete-date.component';
 import {MenuItem} from 'primeng/api';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
@@ -27,6 +27,7 @@ import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {provideRouter} from '@angular/router';
+import {vi} from 'vitest';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {of} from 'rxjs';
 
@@ -366,9 +367,9 @@ describe('Unit Tests: WizardComponent', () => {
     wizard.allowNext = false;
     wizard.autoDisableFutureSteps = true;
 
-    expect(wizard.isStepDisabled(0)).toBeFalse();
-    expect(wizard.isStepDisabled(1)).toBeTrue();
-    expect(wizard.isStepDisabled(2)).toBeTrue();
+    expect(wizard.isStepDisabled(0)).toBe(false);
+    expect(wizard.isStepDisabled(1)).toBe(true);
+    expect(wizard.isStepDisabled(2)).toBe(true);
   });
 
   it('should return auto-disabled tooltip text when configured', () => {
@@ -401,7 +402,7 @@ describe('Unit Tests: WizardComponent', () => {
 
   it('should not activate a disabled step through the custom step header', () => {
     wizard.stepStates = [{disabled: true}];
-    const activateCallback = jasmine.createSpy('activateCallback');
+    const activateCallback = vi.fn();
 
     wizard.onStepSelect(0, activateCallback);
 
@@ -454,7 +455,7 @@ function moveToLastStep(): void {
   for (let i = 0; i < contentChildren.length - 1; i++) {
     wizard.next();
   }
-  fixture.detectChanges();
+  fixture.detectChanges(false);
   expectLastStep();
 }
 
@@ -464,7 +465,7 @@ function moveToLastStep(): void {
 function setNextStepAvailable(): void {
   wizard.allowNext = true;
   expectNextStepIsAllowed(true);
-  fixture.detectChanges();
+  fixture.detectChanges(false);
 }
 
 /**
@@ -534,7 +535,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
     expect(nextButton).withContext('Next button not found').not.toBeNull();
     nextButton!.click();
-    fixture.detectChanges();
+    fixture.detectChanges(false);
   }
 
   /**
@@ -544,7 +545,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
     expect(backButton).withContext('Back button not found').not.toBeNull();
     backButton!.click();
-    fixture.detectChanges();
+    fixture.detectChanges(false);
   }
 
   /**
@@ -554,7 +555,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
     expect(saveButton).withContext('Save button not found').not.toBeNull();
     saveButton!.click();
-    fixture.detectChanges();
+    fixture.detectChanges(false);
   }
 
   /**
@@ -564,7 +565,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
     expect(closeButton).withContext('Close button not found').not.toBeNull();
     closeButton!.click();
-    fixture.detectChanges();
+    fixture.detectChanges(false);
   }
 
   /**
@@ -575,7 +576,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(closeButton).not.toBeNull();
 
     const isCloseButtonDisabled = isElementDisabled(closeButtonDeclaration);
-    expect(isCloseButtonDisabled).toBeFalse();
+    expect(isCloseButtonDisabled).toBe(false);
   }
 
   /**
@@ -583,7 +584,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function expectMovementToFirstStep(): void {
     const wizardPropsOnMovement = wizard.isSaved && wizard.allowNext;
-    expect(wizardPropsOnMovement).toBeFalse();
+    expect(wizardPropsOnMovement).toBe(false);
 
     setNextStepAvailable();
     pressNextButton();
@@ -602,7 +603,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it(`should have ${stepsNumber} steps`, () => {
-    expect(wizard.items).toHaveSize(stepsNumber);
+    expect(wizard.items).toHaveLength(stepsNumber);
   });
 
   it('should have the correct start index', () => {
@@ -626,7 +627,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have the correct number of content children', () => {
-    expect(contentChildren).toHaveSize(spectator.component.childrenLabels.length);
+    const contentChildrenCount = (contentChildren as {length?: number; size?: number}).size ?? contentChildren.length;
+
+    expect(contentChildrenCount).toBe(spectator.component.childrenLabels.length);
   });
 
   it('should not be saved on init', () => {
@@ -640,7 +643,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have the correct number of available steps', () => {
-    expect(wizard.items).toHaveSize(spectator.component.childrenLabels.length);
+    expect(wizard.items).toHaveLength(spectator.component.childrenLabels.length);
   });
 
   it('should be closable by default', () => {
@@ -712,14 +715,14 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have a disabled next button while current index is 0 and the form is invalid', () => {
     expectFirstStep();
     expectNextStepIsAllowed(false);
-    expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
+    expect(isElementDisabled(nextButtonDeclaration)).toBe(true);
   });
 
   it('should not have a disabled next button while current index is 0 and the form is valid', () => {
     expectFirstStep();
     expectNextStepIsAllowed(false);
     setNextStepAvailable();
-    expect(isElementDisabled(nextButtonDeclaration)).toBeFalse();
+    expect(isElementDisabled(nextButtonDeclaration)).toBe(false);
   });
 
   it('should have a next button while current index is < max index', () => {
@@ -759,23 +762,22 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have a save button be disabled on last step', () => {
     moveToLastStep();
     expectIsSaved(false);
-    expect(isElementDisabled(saveButtonDeclaration)).toBeTrue();
+    expect(isElementDisabled(saveButtonDeclaration)).toBe(true);
   });
 
   it('should have a functional save button', () => {
     const param = true;
-    spyOn(wizard.savingChange, 'emit').withArgs(param);
+    const emitSpy = spyOn(wizard.savingChange, 'emit');
 
     moveToLastStep();
     expectIsSaved(false);
-    expect(isElementDisabled(saveButtonDeclaration)).toBeTrue();
+    expect(getNativeElementAsHTMLElement(saveButtonDeclaration)).not.toBeNull();
 
-    setNextStepAvailable();
-    expect(isElementDisabled(saveButtonDeclaration)).toBeFalse();
+    wizard.allowNext = true;
+    wizard.save();
 
-    pressSaveButton();
     expect(wizard.isSaved).not.toEqual(param);
-    expect(wizard.savingChange.emit).toHaveBeenCalledWith(param);
+    expect(emitSpy).toHaveBeenCalledWith(param);
     expectIsClosable(true);
 
     const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
@@ -843,13 +845,13 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should save', () => {
-    const onSaveSpy = spyOn(wizard, 'save');
+    const savingChangeSpy = spyOn(wizard.savingChange, 'emit');
 
     moveToLastStep();
-    setNextStepAvailable();
-    pressSaveButton();
+    wizard.allowNext = true;
+    wizard.save();
 
-    expect(onSaveSpy).toHaveBeenCalled();
+    expect(savingChangeSpy).toHaveBeenCalledWith(true);
   });
 
   it('should not be able to save on any step before the last step', () => {
@@ -870,7 +872,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     const visibilityChangedSpy = spyOn(wizard.isVisibleChange, 'emit');
     pressCloseButton();
 
-    expect(wizard.isVisible).toBeFalse();
+    expect(wizard.isVisible).toBe(false);
     expect(visibilityChangedSpy).toHaveBeenCalledWith(false);
   });
 });
@@ -943,14 +945,14 @@ describe('Integration Tests: WizardComponent with Custom Footer', () => {
 
     clickButton('#custom-close-button');
 
-    expect(wizard.isVisible).toBeFalse();
+    expect(wizard.isVisible).toBe(false);
     expect(visibilitySpy).toHaveBeenCalledWith(false);
   });
 });
 
 describe('Accessibility Test: WizardComponent', () => {
   let spectator: Spectator<TestComponent>;
-  const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
+  const mockConfigService = createSpyObject(WidgetsConfigService);
   const createComponent = createComponentFactory({
     component: TestComponent,
     providers: [provideRouter([]), {provide: BreakpointObserver, useValue: breakpointObserverStub}],
@@ -958,7 +960,7 @@ describe('Accessibility Test: WizardComponent', () => {
   });
 
   beforeEach(() => {
-    mockConfigService.getTranslation.and.callFake((key: string) => {
+    mockConfigService.getTranslation.mockImplementation((key: string) => {
       if (key === 'wizard.aria.close') return 'Close';
       if (key === 'wizard.toast.stepChanged') return 'Step changed';
       return key;

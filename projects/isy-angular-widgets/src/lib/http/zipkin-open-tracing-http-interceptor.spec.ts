@@ -3,6 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 import {ZipkinOpenTracingHttpInterceptor} from './zipkin-open-tracing-http-interceptor';
 import {OpenTraceHeaders} from './open-tracing-headers';
+import {vi} from 'vitest';
 
 describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -18,10 +19,9 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
     }
 
     // two different IDs for Trace + Span
-    spyOn(globalThis.crypto, 'randomUUID').and.returnValues(
-      '123e4567-e89b-12d3-a456-426614174000',
-      '123e4567-e89b-12d3-a456-426614174001'
-    );
+    vi.spyOn(globalThis.crypto, 'randomUUID')
+      .mockReturnValueOnce('123e4567-e89b-12d3-a456-426614174000')
+      .mockReturnValueOnce('123e4567-e89b-12d3-a456-426614174001');
 
     TestBed.configureTestingModule({
       providers: [
@@ -44,7 +44,7 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
 
     const req = httpMock.expectOne(URL);
 
-    expect(req.request.headers.has(OpenTraceHeaders.ZIPKIN_TRACE_ID)).toBeTrue();
+    expect(req.request.headers.has(OpenTraceHeaders.ZIPKIN_TRACE_ID)).toBe(true);
     expect(req.request.headers.get(OpenTraceHeaders.ZIPKIN_TRACE_ID)).toMatch(uuidRegex);
 
     req.flush('');
@@ -55,7 +55,7 @@ describe('Unit tests: ZipkinOpenTracingHttpInterceptor', () => {
 
     const req = httpMock.expectOne(URL);
 
-    expect(req.request.headers.has(OpenTraceHeaders.ZIPKIN_SPAN_ID)).toBeTrue();
+    expect(req.request.headers.has(OpenTraceHeaders.ZIPKIN_SPAN_ID)).toBe(true);
     expect(req.request.headers.get(OpenTraceHeaders.ZIPKIN_SPAN_ID)).toMatch(uuidRegex);
 
     req.flush('');
