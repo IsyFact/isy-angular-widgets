@@ -4,7 +4,7 @@ import {InputCharSelection, Schriftzeichengruppe, Zeichenobjekt} from '../../mod
 import sonderzeichenliste from '../../sonderzeichenliste.json';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {AccordionModule} from 'primeng/accordion';
-import {createComponentFactory, Spectator, SpyObject} from '@ngneat/spectator';
+import {createComponentFactory, createSpyObject, Spectator, SpyObject} from '@ngneat/spectator/vitest';
 import {FormsModule} from '@angular/forms';
 import {InputCharPreviewComponent} from '../input-char-preview/input-char-preview.component';
 import {ComponentFixture} from '@angular/core/testing';
@@ -101,8 +101,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   const createComponent = createComponentFactory({
     component: InputCharDialogComponent,
     imports: [AccordionModule, SelectButtonModule, FormsModule],
-    providers: [CharacterService],
-    mocks: [WidgetsConfigService],
+    providers: [CharacterService, {provide: WidgetsConfigService, useValue: createSpyObject(WidgetsConfigService)}],
     detectChanges: false,
     overrideComponents: [
       [
@@ -131,9 +130,9 @@ describe('Unit Tests: InputCharDialogComponent', () => {
     fixture = spectator.fixture;
     mockWidgetsConfigService = spectator.inject(WidgetsConfigService);
 
-    mockWidgetsConfigService.getTranslation.and.callFake((key: string) => translations[key] ?? key);
+    mockWidgetsConfigService.getTranslation.mockImplementation((key: string) => translations[key] ?? key);
 
-    mockWidgetsConfigService.getTranslation$.and.callFake((key: string) => {
+    mockWidgetsConfigService.getTranslation$.mockImplementation((key: string) => {
       if (key === 'inputChar.headerBaseChars') {
         return headerBaseChars$.asObservable();
       }
@@ -154,7 +153,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   it('should call onAllSelection for unexpected selection values', () => {
-    const onAllSelectionSpy = spyOn(component, 'onAllSelection').and.callThrough();
+    const onAllSelectionSpy = spyOn(component, 'onAllSelection');
 
     component.onSelection({group: 'unexpectedGroup', value: 'unexpectedValue'} as unknown as InputCharSelection);
 
@@ -162,7 +161,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   it('should call resetDisplayedCharacters when onAllSelection is called', () => {
-    const resetDisplayedCharactersSpy = spyOn(component, 'resetDisplayedCharacters').and.callThrough();
+    const resetDisplayedCharactersSpy = spyOn(component, 'resetDisplayedCharacters');
 
     component.onAllSelection();
 
@@ -170,7 +169,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
   });
 
   it('should rebuild leftViewData when charList changes', () => {
-    const spy = spyOn(component, 'initSelectButtonsData').and.callThrough();
+    const spy = spyOn(component, 'initSelectButtonsData');
 
     spectator.setInput('charList', [...sonderzeichenListe]);
     render();
@@ -303,7 +302,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
     expect(button).toBeTruthy();
     expect(button.innerHTML).toContain(insertLabel);
-    expect(button.classList.contains('isy-print-hide')).toBeTrue();
+    expect(button.classList.contains('isy-print-hide')).toBe(true);
   });
 
   it('should filter characters correctly by base (all bases in one spec)', () => {
@@ -314,7 +313,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
         (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen
       );
 
-      expect(component.displayedCharacters.length).toEqual(expected.length);
+      expect(component.displayedCharacters).toHaveLength(expected.length);
 
       for (const char of component.displayedCharacters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
@@ -328,7 +327,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
       const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe);
 
-      expect(component.displayedCharacters.length).toEqual(expected.length);
+      expect(component.displayedCharacters).toHaveLength(expected.length);
 
       for (const character of component.displayedCharacters) {
         expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
@@ -372,13 +371,13 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   it(`should show ${bases.length} available bases`, () => {
     const baseButtons = spectator.queryAll('.charset-selectbutton-0 p-togglebutton');
 
-    expect(baseButtons.length).toEqual(bases.length);
+    expect(baseButtons).toHaveLength(bases.length);
   });
 
   it(`should show ${groups.length} available groups`, () => {
     const groupButtons = spectator.queryAll('.charset-selectbutton-1 p-togglebutton');
 
-    expect(groupButtons.length).toEqual(groups.length);
+    expect(groupButtons).toHaveLength(groups.length);
   });
 
   it('should filter characters by a few representative bases (integration)', () => {
@@ -396,7 +395,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
         (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === base
       );
 
-      expect(grid.characters.length).toEqual(expected.length);
+      expect(grid.characters).toHaveLength(expected.length);
 
       for (const char of grid.characters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(base);
@@ -417,7 +416,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
       const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === group);
 
-      expect(grid.characters.length).toEqual(expected.length);
+      expect(grid.characters).toHaveLength(expected.length);
 
       for (const character of grid.characters) {
         expect(character.schriftzeichengruppe).toEqual(group);
@@ -431,8 +430,8 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
     const makeEsc = (): KeyboardEvent => {
       const event = new KeyboardEvent('keydown', {key: 'Escape', cancelable: true, bubbles: true});
-      spyOn(event, 'preventDefault').and.callThrough();
-      spyOn(event, 'stopPropagation').and.callThrough();
+      spyOn(event, 'preventDefault');
+      spyOn(event, 'stopPropagation');
 
       return event;
     };

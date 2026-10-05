@@ -2,9 +2,10 @@ import {ElementRef, ErrorHandler} from '@angular/core';
 import {fakeAsync, flushMicrotasks} from '@angular/core/testing';
 import {InputCharComponent} from './input-char.component';
 import {Datentyp} from '../../model/datentyp';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator/vitest';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
 import {InputCharPickerService} from '../../services/input-char-picker.service';
+import {expect} from 'vitest';
 
 describe('Unit Tests: InputCharComponent', () => {
   let spectator: Spectator<InputCharComponent>;
@@ -14,16 +15,11 @@ describe('Unit Tests: InputCharComponent', () => {
   const dialogDefaultHeight = '460px';
   const datentypValues = Object.values(Datentyp) as Datentyp[];
 
-  const pickerServiceSpy = jasmine.createSpyObj<InputCharPickerService>('InputCharPickerService', [
-    'open',
-    'close',
-    'closeFor',
-    'isOpenFor'
-  ]);
+  const pickerServiceSpy = createSpyObject(InputCharPickerService);
 
-  const configServiceSpy = jasmine.createSpyObj<WidgetsConfigService>('WidgetsConfigService', ['getTranslation']);
+  const configServiceSpy = createSpyObject(WidgetsConfigService);
 
-  const errorHandlerSpy = jasmine.createSpyObj<ErrorHandler>('ErrorHandler', ['handleError']);
+  const errorHandlerSpy = createSpyObject(ErrorHandler);
 
   const createComponent = createComponentFactory({
     component: InputCharComponent,
@@ -38,20 +34,20 @@ describe('Unit Tests: InputCharComponent', () => {
   const render = (): void => spectator.fixture.detectChanges(false);
 
   beforeEach(() => {
-    pickerServiceSpy.open.calls.reset();
-    pickerServiceSpy.open.and.resolveTo();
+    pickerServiceSpy.open.mockReset();
+    pickerServiceSpy.open.mockResolvedValue(undefined);
 
-    pickerServiceSpy.close.calls.reset();
+    pickerServiceSpy.close.mockReset();
 
-    pickerServiceSpy.closeFor.calls.reset();
+    pickerServiceSpy.closeFor.mockReset();
 
-    pickerServiceSpy.isOpenFor.calls.reset();
-    pickerServiceSpy.isOpenFor.and.returnValue(false);
+    pickerServiceSpy.isOpenFor.mockReset();
+    pickerServiceSpy.isOpenFor.mockReturnValue(false);
 
-    configServiceSpy.getTranslation.calls.reset();
-    configServiceSpy.getTranslation.and.callFake((key: string) => key);
+    configServiceSpy.getTranslation.mockReset();
+    configServiceSpy.getTranslation.mockImplementation((key: string) => key);
 
-    errorHandlerSpy.handleError.calls.reset();
+    errorHandlerSpy.handleError.mockReset();
   });
 
   describe('with default inputs', () => {
@@ -76,13 +72,13 @@ describe('Unit Tests: InputCharComponent', () => {
 
     it('should have the specified default input configuration', () => {
       expect(component.header).toBeUndefined();
-      expect(component.closable).toBeTrue();
-      expect(component.draggable).toBeTrue();
-      expect(component.resizable).toBeFalse();
-      expect(component.dismissableMask).toBeFalse();
-      expect(component.closeOnEscape).toBeTrue();
-      expect(component.modal).toBeTrue();
-      expect(component.isInputDisabled).toBeFalse();
+      expect(component.closable).toBe(true);
+      expect(component.draggable).toBe(true);
+      expect(component.resizable).toBe(false);
+      expect(component.dismissableMask).toBe(false);
+      expect(component.closeOnEscape).toBe(true);
+      expect(component.modal).toBe(true);
+      expect(component.isInputDisabled).toBe(false);
     });
 
     it('should render the input char button', () => {
@@ -105,7 +101,7 @@ describe('Unit Tests: InputCharComponent', () => {
       const button = spectator.query('.input-char-button') as HTMLButtonElement;
 
       expect(button).toBeTruthy();
-      expect(button.disabled).toBeTrue();
+      expect(button.disabled).toBe(true);
     });
 
     it('should have the input char button enabled when isInputDisabled is false', () => {
@@ -115,7 +111,7 @@ describe('Unit Tests: InputCharComponent', () => {
       const button = spectator.query('.input-char-button') as HTMLButtonElement;
 
       expect(button).toBeTruthy();
-      expect(button.disabled).toBeFalse();
+      expect(button.disabled).toBe(false);
     });
 
     it('should not have outlined style by default for the input char button', () => {
@@ -141,7 +137,7 @@ describe('Unit Tests: InputCharComponent', () => {
       render();
 
       expect(pickerServiceSpy.open).toHaveBeenCalledWith(
-        jasmine.objectContaining({
+        expect.objectContaining({
           datentyp: Datentyp.DATENTYP_C,
           triggerElement: button,
           width: dialogDefaultWidth,
@@ -160,7 +156,7 @@ describe('Unit Tests: InputCharComponent', () => {
     it('should close the shared input char picker when it is already open for the button', () => {
       const button = spectator.query('.input-char-button') as HTMLButtonElement;
 
-      pickerServiceSpy.isOpenFor.and.returnValue(true);
+      pickerServiceSpy.isOpenFor.mockReturnValue(true);
 
       spectator.click(button);
       render();
@@ -176,24 +172,27 @@ describe('Unit Tests: InputCharComponent', () => {
       spectator.click(button);
       render();
 
-      const openOptions = pickerServiceSpy.open.calls.mostRecent().args[0];
+      const openOptions = pickerServiceSpy.open.mock.lastCall?.[0];
 
-      openOptions.onInsert('Ä');
+      expect(openOptions).toBeDefined();
+
+      openOptions!.onInsert('Ä');
 
       expect(emitSpy).toHaveBeenCalledWith('Ä');
     });
 
-    it('should delegate picker opening errors to Angular ErrorHandler', fakeAsync(() => {
+    it('should delegate picker opening errors to Angular ErrorHandler', async () => {
       const button = spectator.query('.input-char-button') as HTMLButtonElement;
       const error = new Error('Failed to open input char picker');
 
-      pickerServiceSpy.open.and.returnValue(Promise.reject(error));
+      pickerServiceSpy.open.mockRejectedValue(error);
 
       spectator.click(button);
-      flushMicrotasks();
+      await Promise.resolve();
+      await Promise.resolve();
 
       expect(errorHandlerSpy.handleError).toHaveBeenCalledWith(error);
-    }));
+    });
 
     it('should close the picker for its button when destroyed', () => {
       const button = spectator.query('.input-char-button') as HTMLButtonElement;
@@ -263,7 +262,7 @@ describe('Unit Tests: InputCharComponent', () => {
         render();
 
         expect(pickerServiceSpy.open).toHaveBeenCalledWith(
-          jasmine.objectContaining({
+          expect.objectContaining({
             datentyp,
             triggerElement: button
           })
@@ -300,7 +299,7 @@ describe('Unit Tests: InputCharComponent', () => {
       render();
 
       expect(pickerServiceSpy.open).toHaveBeenCalledWith(
-        jasmine.objectContaining({
+        expect.objectContaining({
           datentyp: Datentyp.DATENTYP_A,
           triggerElement: button,
           width: '900px',
@@ -342,7 +341,7 @@ describe('Unit Tests: InputCharComponent', () => {
       render();
 
       expect(pickerServiceSpy.open).toHaveBeenCalledWith(
-        jasmine.objectContaining({
+        expect.objectContaining({
           togglePickerAriaLabel: 'Open custom character picker',
           closePickerAriaLabel: 'Close custom character picker'
         })

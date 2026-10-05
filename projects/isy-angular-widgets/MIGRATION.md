@@ -30,7 +30,7 @@ Build, Development-Server, Übersetzungsextraktion und Tests verwenden nun die B
 | Ziel                | Builder                          |
 |---------------------|----------------------------------|
 | Bibliothek (Build)  | `@angular/build:ng-packagr`      |
-| Bibliothek (Test)   | `@angular/build:karma`           |
+| Bibliothek (Test)   | `Vitest` (`vitest.config.ts`)    |
 | Anwendung (Build)   | `@angular/build:application`     |
 | Anwendung (Serve)   | `@angular/build:dev-server`      |
 | Anwendung (i18n)    | `@angular/build:extract-i18n`    |
@@ -136,7 +136,34 @@ Die folgenden Punkte betreffen ausschließlich die Weiterentwicklung des Reposit
 - **ESLint:** Die Flat-Config in `eslint.config.js` wurde an die exportierte Paketstruktur von Angular ESLint 22 angepasst. Veraltete Zugriffe auf `angular.configs.recommended.rules` bzw. `angularTemplate.configs.recommended.rules` führten sonst zu `Cannot read properties of undefined (reading 'recommended')`.
 - **Schematics-TSConfig:** `baseUrl` entfernt, `module` und `moduleResolution` auf `node16` gesetzt, um TS6-Deprecation-Fehler im Schematics-Build zu vermeiden.
 - **Extended Diagnostics:** `nullishCoalescingNotNullable` und `optionalChainNotNullable` wurden auf `suppress` gesetzt. Die allgemeine TypeScript-Typprüfung bleibt aktiv; die Suppressions sind nach weiteren Angular-22-Anpassungen erneut zu bewerten.
-- **Karma-Builder:** Bei Testläufen mit `@angular/build:karma` können weiterhin 404-Warnungen für Font-Dateien (`primeicons.woff2`, `LiberationSans-Regular.woff2`) im Web-Server-Log erscheinen. Ursache ist das Zusammenspiel aus CSS-`url()`-Auflösung und dem virtuellen Karma-Dateisystem. Die Tests laufen davon unbeeinflusst erfolgreich durch.
+- **Karma-Builder:** Bei Testläufen der Demo-Anwendung mit `@angular/build:karma` können weiterhin 404-Warnungen für Font-Dateien (`primeicons.woff2`, `LiberationSans-Regular.woff2`) im Web-Server-Log erscheinen. Ursache ist das Zusammenspiel aus CSS-`url()`-Auflösung und dem virtuellen Karma-Dateisystem. Die Tests laufen davon unbeeinflusst erfolgreich durch.
+
+### Vitest-Migration der Bibliothekstests
+
+- Die Unit- und Komponententests der Widget-Bibliothek laufen unter der zentralen Root-Konfiguration `vitest.config.ts`.
+- Der Sanity-Check-Test `vitest-reference.vitest.spec.ts` und die zugehörige Hilfsdatei `vitest-reference.ts` wurden nach erfolgreichem Setup gelöscht — nicht mehr benötigt.
+- Für die gezielte Ausführung der Bibliothek stehen die Skripte `npm run test:lib:vitest`, `npm run test:lib:vitest:run` und `npm run test:lib:vitest:coverage` zur Verfügung.
+- Der Coverage-Bericht wird unter `coverage/isy-angular-widgets-vitest` erzeugt.
+
+### Dokumentierte Ausnahmen in Vitest/jsdom
+
+Ein kleiner Restbestand fachlich browsernaher Tests wurde bewusst nicht in die standardmäßige Vitest-Ausführung übernommen, weil `jsdom` keine belastbare Browser-Layout-Engine bereitstellt und bestimmte Render-/Fokuspfade nicht deterministisch nachstellt. Die Bibliotheks-API bleibt davon unberührt.
+
+- `src/lib/test/components/interactive-elements/` **→ Komponente und Tests vollständig zu TestCafe migriert**
+  Grund: Assertions zu Mindestgrößen, Schriftgrößen und Click-Target-Abmessungen hängen von echtem CSS-Layout und Browser-Rendering ab; `jsdom` liefert hierfür keine verlässlichen Maße.
+  Migriert zu: `src/test/e2e/interactive-elements-accessibility.js`
+  Gelöscht: `src/lib/test/components/interactive-elements/` (Verzeichnis und Komponente) — nicht mehr benötigt nach Migration
+- `src/lib/hauptfenster/hauptfenster.component.spec.ts` **→ Print-Layout-Test zu TestCafe migriert**
+  Grund: die Assertion prüft echtes Viewport- und Media-Query-Layout, das unter `jsdom` nicht realistisch berechnet wird.
+  Migriert zu: `src/test/e2e/hauptfenster-print-layout.js`
+  Verbleibend: 29 Unit-Tests bleiben in Vitest (OK, da keine echte Browser-Rendering notwendig)
+- `src/test/e2e/input-char-picker-host-focus.js` **← Neu: Migriert von input-char-picker-host.component.spec.ts**
+  Grund: Fokusmanagement und Sichtbarkeitsprüfung (`getClientRects()`) funktionieren nicht deterministisch in jsdom.
+  Migrierte Tests:
+  - "should not restore focus when the trigger button is disabled"
+  - "should close the picker after a document click when the trigger element is no longer visible"
+- `src/lib/input-char/components/input-char-picker-host/input-char-picker-host.component.spec.ts`
+  Status: Migriert — Die 2 browsernah-Tests wurden zu TestCafe verschoben. Verbleibend: 12 Unit-Tests bleiben in Vitest (kein echtes Browser-Rendering notwendig)
 
 ## Bekannte Einschränkungen und Risiken
 

@@ -24,32 +24,6 @@
           },
           "defaultConfiguration": "production"
         },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "codeCoverage": true,
-            "main": "projects/isy-angular-widgets/src/test.ts",
-            "tsConfig": "projects/isy-angular-widgets/tsconfig.spec.json",
-            "karmaConfig": "projects/isy-angular-widgets/karma.conf.js",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "node_modules/primeicons/fonts",
-                "output": "fonts"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/isy-angular-widgets/assets/fonts",
-                "output": "fonts"
-              }
-            ],
-            "styles": [
-              "projects/isy-angular-widgets/assets/theme/tailwind.css",
-              "node_modules/primeicons/primeicons.css",
-              "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss"
-            ]
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {

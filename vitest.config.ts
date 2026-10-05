@@ -14,15 +14,17 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    include: [
-      'projects/isy-angular-widgets/src/**/*.vitest.spec.ts',
-      'projects/isy-angular-widgets-demo/src/**/*.vitest.spec.ts'
-    ],
+    include: ['projects/isy-angular-widgets/src/**/*.spec.ts'],
     exclude: ['**/node_modules/**', '**/dist/**', '**/coverage/**'],
+    server: {
+      deps: {
+        inline: ['@ngneat/spectator']
+      }
+    },
     setupFiles: ['./vitest.setup.ts'],
     coverage: {
       provider: 'v8',
-      reportsDirectory: './coverage/vitest',
+      reportsDirectory: './coverage/isy-angular-widgets-vitest',
       reporter: ['text', 'html', 'lcov']
     }
   }

@@ -1,6 +1,7 @@
 import {InputCharGridComponent} from './input-char-grid.component';
 import {Schriftzeichengruppe, Zeichenobjekt} from '../../model/model';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
+import {vi} from 'vitest';
 
 /**
  * Builds a list of synthetic characters with unique codepoints.
@@ -58,7 +59,9 @@ describe('InputCharGridComponent', () => {
         return;
       }
 
-      spyOn(element, 'getBoundingClientRect').and.returnValue(new DOMRect(rect.x, rect.y, rect.w ?? 40, rect.h ?? 40));
+      vi.spyOn(element, 'getBoundingClientRect').mockReturnValue(
+        new DOMRect(rect.x, rect.y, rect.w ?? 40, rect.h ?? 40)
+      );
     });
   };
 
@@ -83,8 +86,8 @@ describe('InputCharGridComponent', () => {
   const press = (key: string, index: number): KeyboardEvent => {
     const event = new KeyboardEvent('keydown', {key, cancelable: true});
 
-    spyOn(event, 'preventDefault').and.callThrough();
-    spyOn(event, 'stopPropagation').and.callThrough();
+    spyOn(event, 'preventDefault');
+    spyOn(event, 'stopPropagation');
 
     component.onKeydown(event, index);
     spectator.detectChanges();
@@ -117,7 +120,7 @@ describe('InputCharGridComponent', () => {
 
       expect(listbox.getAttribute('role')).toBe('listbox');
       expect(listbox.getAttribute('aria-label')).toBe('Auswahl');
-      expect(spectator.queryAll('[role="option"]').length).toBe(3);
+      expect(spectator.queryAll('[role="option"]')).toHaveLength(3);
     });
 
     it('should label each option with name and codepoint', () => {
@@ -144,7 +147,7 @@ describe('InputCharGridComponent', () => {
 
       const tabbable = cellEls().filter((cell) => cell.getAttribute('tabindex') === '0');
 
-      expect(tabbable.length).toBe(1);
+      expect(tabbable).toHaveLength(1);
       expect(tabbable[0]).toBe(cellEls()[2]);
     });
 
@@ -172,7 +175,7 @@ describe('InputCharGridComponent', () => {
       const listbox = spectator.query('.character-listbox') as HTMLElement;
 
       expect(listbox.getAttribute('tabindex')).toBe('-1');
-      expect(cellEls().length).toBe(0);
+      expect(cellEls()).toHaveLength(0);
     });
   });
 
@@ -319,7 +322,7 @@ describe('InputCharGridComponent', () => {
       setupGrid();
 
       const event = new KeyboardEvent('keydown', {key: 'Tab', cancelable: true});
-      spyOn(event, 'preventDefault').and.callThrough();
+      spyOn(event, 'preventDefault');
 
       component.onKeydown(event, 4);
 

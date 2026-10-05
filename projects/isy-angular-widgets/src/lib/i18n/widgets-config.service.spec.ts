@@ -1,6 +1,9 @@
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
+import {firstValueFrom} from 'rxjs';
+import {take, toArray} from 'rxjs/operators';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator/vitest';
 import {WidgetsConfigService} from './widgets-config.service';
 import {WidgetsTranslation} from './widgets-translation';
+import {expect} from 'vitest';
 
 describe('Unit tests: WidgetsConfigService', () => {
   let spectator: SpectatorService<WidgetsConfigService>;
@@ -68,23 +71,18 @@ describe('Unit tests: WidgetsConfigService', () => {
     expect(spectator.service.getTranslation('seitentoolbar.back')).toEqual('Zurück zur Übersicht');
   });
 
-  it('should emit updated translation values via getTranslation$', (done) => {
-    const emittedValues: string[] = [];
-
-    spectator.service.getTranslation$('hauptfenster.logout').subscribe((value) => {
-      emittedValues.push(value);
-
-      if (emittedValues.length === 2) {
-        expect(emittedValues).toEqual(['Abmelden', 'Logout']);
-        done();
-      }
-    });
+  it('should emit updated translation values via getTranslation$', async () => {
+    const valuesPromise = firstValueFrom(
+      spectator.service.getTranslation$('hauptfenster.logout').pipe(take(2), toArray())
+    );
 
     spectator.service.setTranslation({
       hauptfenster: {
         logout: 'Logout'
       }
     });
+
+    await expect(valuesPromise).resolves.toEqual(['Abmelden', 'Logout']);
   });
 
   it('should return updated translations after setTranslation', () => {

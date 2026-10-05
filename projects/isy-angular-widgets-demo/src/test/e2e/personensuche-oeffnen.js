@@ -1,12 +1,12 @@
 import {Selector} from 'testcafe';
 
-const personenSuchenUrl = 'http://localhost:4200/personen/suchen';
+const objektSuchenUrl = 'http://localhost:4200/objekt-suchen';
 
-fixture`Anwendung > Personensuche öffnen`.page`http://localhost:4200`;
-test(`Personensuche öffnen`, async (t) => {
-  await t.maximizeWindow().navigateTo(personenSuchenUrl).wait(1000);
+fixture`Anwendung > Objektsuche öffnen`.page`http://localhost:4200`;
+test(`Objektsuche öffnen`, async (t) => {
+  await t.maximizeWindow().navigateTo(objektSuchenUrl).wait(1000);
 
-  const title = Selector('h2').textContent;
+  const title = Selector('.p-panel-title').nth(0).textContent;
 
-  await t.expect(title).eql('Label Submenü');
+  await t.expect(title).contains('Objekt suchen');
 });

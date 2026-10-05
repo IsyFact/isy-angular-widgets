@@ -2,7 +2,7 @@ import {SecurityService} from './security-service';
 import {PermissionMaps} from './permission-maps';
 import {UserInfo} from '../api/userinfo';
 import {ActivatedRoute, ActivatedRouteSnapshot, Route, UrlSegment} from '@angular/router';
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator/vitest';
 import {Observable} from 'rxjs';
 
 /**
@@ -92,20 +92,20 @@ describe('Integration Test: SecurityService', () => {
   describe('Integration Test: SecurityGuard - Unavailable roles and permissions', function () {
     it('should not access HTML element without roles and permissions', () => {
       const isElementPermitted = service.checkElementPermission('personenSuche');
-      expect(isElementPermitted).toBeFalse();
+      expect(isElementPermitted).toBe(false);
     });
 
     it('should not access route without roles and permissions', () => {
       const isRoutePermittedObservable = service.checkRoutePermission(snapshot);
       isRoutePermittedObservable.subscribe((isRoutePermitted) => {
-        expect(isRoutePermitted).toBeFalse();
+        expect(isRoutePermitted).toBe(false);
       });
     });
 
     it('should not access async route without roles and permissions', () => {
       const isLoadRoutePermittedObservable = service.checkLoadRoutePermission(route);
       isLoadRoutePermittedObservable.subscribe((isLoadRoutePermitted) => {
-        expect(isLoadRoutePermitted).toBeFalse();
+        expect(isLoadRoutePermitted).toBe(false);
       });
     });
   });
@@ -115,18 +115,18 @@ describe('Integration Test: SecurityService', () => {
 
     it('should access HTML element with correctly permissions', () => {
       const isElementPermitted = service.checkElementPermission('personenSuche');
-      expect(isElementPermitted).toBeTrue();
+      expect(isElementPermitted).toBe(true);
     });
 
     it('should not access the HTML element because the element was not found inside the permitted elements', () => {
       const isElementPermitted = service.checkElementPermission('');
-      expect(isElementPermitted).toBeFalse();
+      expect(isElementPermitted).toBe(false);
     });
 
     it('should route with correctly permissions', () => {
       const isRoutePermittedObservable = service.checkRoutePermission(snapshot);
       isRoutePermittedObservable.subscribe((isRoutePermitted) => {
-        expect(isRoutePermitted).toBeTrue();
+        expect(isRoutePermitted).toBe(true);
       });
     });
 
@@ -134,7 +134,7 @@ describe('Integration Test: SecurityService', () => {
       const snapshotWithWrongRoute = buildSnapshot(false);
       const isRoutePermittedObservable = service.checkRoutePermission(snapshotWithWrongRoute);
       isRoutePermittedObservable.subscribe((isRoutePermitted) => {
-        expect(isRoutePermitted).toBeFalse();
+        expect(isRoutePermitted).toBe(false);
       });
     });
 
@@ -173,7 +173,7 @@ describe('Integration Test: SecurityService', () => {
       const testRoute: Route = {path: 'dashboard'};
 
       service.checkLoadRoutePermission(testRoute).subscribe((hasAccess) => {
-        expect(hasAccess).toBeFalse();
+        expect(hasAccess).toBe(false);
       });
     });
   });
