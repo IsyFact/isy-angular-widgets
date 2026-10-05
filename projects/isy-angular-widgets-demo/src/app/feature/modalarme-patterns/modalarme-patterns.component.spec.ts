@@ -1,9 +1,10 @@
+import type {MockInstance} from 'vitest';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {fakeAsync, tick, flush} from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator, createSpyObject, SpyObject} from '@ngneat/spectator/vitest';
 import {TranslateModule} from '@ngx-translate/core';
 import {Subject} from 'rxjs';
 import {MessageService} from 'primeng/api';
@@ -25,9 +26,9 @@ describe('ModalarmePatternsComponent', () => {
   let spectator: Spectator<ModalarmePatternsComponent>;
   let component: ModalarmePatternsComponent;
   let msgService: MessageService;
-  let liveAnnouncer: jasmine.SpyObj<LiveAnnouncer>;
-  const liveAnnouncerSpy = jasmine.createSpyObj<LiveAnnouncer>('LiveAnnouncer', ['announce']);
-  liveAnnouncerSpy.announce.and.returnValue(Promise.resolve());
+  let liveAnnouncer: SpyObject<LiveAnnouncer>;
+  const liveAnnouncerSpy = createSpyObject(LiveAnnouncer);
+  liveAnnouncerSpy.announce.mockReturnValue(Promise.resolve());
 
   const createComponent = createComponentFactory({
     component: ModalarmePatternsComponent,
@@ -43,7 +44,7 @@ describe('ModalarmePatternsComponent', () => {
   });
 
   beforeEach(() => {
-    liveAnnouncerSpy.announce.calls.reset();
+    liveAnnouncerSpy.announce.mockClear();
     spectator = createComponent();
     component = spectator.component;
     msgService = spectator.inject(MessageService);
@@ -66,15 +67,15 @@ describe('ModalarmePatternsComponent', () => {
     });
 
     it('should initialise panelOpen to false', () => {
-      expect(component.panelOpen).toBeFalse();
+      expect(component.panelOpen).toBe(false);
     });
 
     it('should initialise showConfirmBar to false', () => {
-      expect(component.showConfirmBar).toBeFalse();
+      expect(component.showConfirmBar).toBe(false);
     });
 
     it('should initialise helpOpen to false', () => {
-      expect(component.helpOpen).toBeFalse();
+      expect(component.helpOpen).toBe(false);
     });
 
     it('should initialise helpPopoverId', () => {
@@ -100,10 +101,10 @@ describe('ModalarmePatternsComponent', () => {
       it('should require the "id" field', () => {
         const idCtrl = component.baseFg.controls.id;
         idCtrl.setValue('');
-        expect(idCtrl.valid).toBeFalse();
+        expect(idCtrl.valid).toBe(false);
 
         idCtrl.setValue('ABC-123');
-        expect(idCtrl.valid).toBeTrue();
+        expect(idCtrl.valid).toBe(true);
       });
 
       it('should contain a "details" group with firstname, lastname and gender', () => {
@@ -114,7 +115,7 @@ describe('ModalarmePatternsComponent', () => {
       });
 
       it('should report the details group as valid when no validators are set', () => {
-        expect(component.detailsFg.valid).toBeTrue();
+        expect(component.detailsFg.valid).toBe(true);
       });
     });
 
@@ -122,10 +123,10 @@ describe('ModalarmePatternsComponent', () => {
       it('should require geburtsname', () => {
         const ctrl = component.formEdit.controls.geburtsname;
         ctrl.setValue('');
-        expect(ctrl.valid).toBeFalse();
+        expect(ctrl.valid).toBe(false);
 
         ctrl.setValue('Müller');
-        expect(ctrl.valid).toBeTrue();
+        expect(ctrl.valid).toBe(true);
       });
     });
 
@@ -133,10 +134,10 @@ describe('ModalarmePatternsComponent', () => {
       it('should require geburtsname', () => {
         const ctrl = component.formErrors.controls.geburtsname;
         ctrl.setValue('');
-        expect(ctrl.valid).toBeFalse();
+        expect(ctrl.valid).toBe(false);
 
         ctrl.setValue('Schmidt');
-        expect(ctrl.valid).toBeTrue();
+        expect(ctrl.valid).toBe(true);
       });
     });
   });
@@ -170,7 +171,7 @@ describe('ModalarmePatternsComponent', () => {
         flush();
         spectator.fixture.detectChanges();
 
-        expect(component.baseFg.controls.id.touched).toBeTrue();
+        expect(component.baseFg.controls.id.touched).toBe(true);
         expect(component.stepValue).toBe(StepperStep.First);
         expect(component.globalError).toBe('Bitte korrigieren Sie die markierten Felder.');
       }));
@@ -219,7 +220,7 @@ describe('ModalarmePatternsComponent', () => {
         tick();
         spectator.detectChanges();
 
-        expect(component.baseFg.controls.id.touched).toBeTrue();
+        expect(component.baseFg.controls.id.touched).toBe(true);
       }));
 
       it('should announce the global error when formStepper is invalid', fakeAsync(() => {
@@ -243,7 +244,7 @@ describe('ModalarmePatternsComponent', () => {
 
         expect(component.globalError).toBeNull();
         expect(msgService.add).toHaveBeenCalledWith(
-          jasmine.objectContaining({
+          expect.objectContaining({
             severity: 'success',
             summary: 'Gespeichert',
             detail: 'Objekt angelegt.'
@@ -264,7 +265,7 @@ describe('ModalarmePatternsComponent', () => {
   // isStepFieldInvalid()
   describe('isStepFieldInvalid()', () => {
     it('should return false when the control is untouched and pristine', () => {
-      expect(component.isStepFieldInvalid('base', 'id')).toBeFalse();
+      expect(component.isStepFieldInvalid('base', 'id')).toBe(false);
     });
 
     it('should return true when the control is invalid and touched', () => {
@@ -272,7 +273,7 @@ describe('ModalarmePatternsComponent', () => {
       ctrl.setValue('');
       ctrl.markAsTouched();
 
-      expect(component.isStepFieldInvalid('base', 'id')).toBeTrue();
+      expect(component.isStepFieldInvalid('base', 'id')).toBe(true);
     });
 
     it('should return true when the control is invalid and dirty', () => {
@@ -280,7 +281,7 @@ describe('ModalarmePatternsComponent', () => {
       ctrl.setValue('');
       ctrl.markAsDirty();
 
-      expect(component.isStepFieldInvalid('base', 'id')).toBeTrue();
+      expect(component.isStepFieldInvalid('base', 'id')).toBe(true);
     });
 
     it('should return false when the control is valid even if touched', () => {
@@ -288,18 +289,18 @@ describe('ModalarmePatternsComponent', () => {
       ctrl.setValue('ABC');
       ctrl.markAsTouched();
 
-      expect(component.isStepFieldInvalid('base', 'id')).toBeFalse();
+      expect(component.isStepFieldInvalid('base', 'id')).toBe(false);
     });
 
     it('should resolve controls in the details group correctly', () => {
       const ctrl = component.detailsFg.controls.firstname;
       ctrl.markAsTouched();
 
-      expect(component.isStepFieldInvalid('details', 'firstname')).toBeFalse();
+      expect(component.isStepFieldInvalid('details', 'firstname')).toBe(false);
     });
 
     it('should return false for a non-existent control name', () => {
-      expect(component.isStepFieldInvalid('base', 'nonexistent')).toBeFalse();
+      expect(component.isStepFieldInvalid('base', 'nonexistent')).toBe(false);
     });
   });
 
@@ -311,7 +312,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.openPanel(mouseEventWithTarget(trigger));
 
-        expect(component.panelOpen).toBeTrue();
+        expect(component.panelOpen).toBe(true);
       });
 
       it('should open the panel even when currentTarget is not an HTMLElement', () => {
@@ -320,7 +321,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.openPanel(event);
 
-        expect(component.panelOpen).toBeTrue();
+        expect(component.panelOpen).toBe(true);
       });
     });
 
@@ -330,7 +331,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.closePanel();
 
-        expect(component.panelOpen).toBeFalse();
+        expect(component.panelOpen).toBe(false);
       });
     });
 
@@ -341,7 +342,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.saveEdit();
 
-        expect(component.panelOpen).toBeTrue();
+        expect(component.panelOpen).toBe(true);
       });
 
       it('should mark geburtsname as touched when formEdit is invalid', () => {
@@ -350,7 +351,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.saveEdit();
 
-        expect(component.formEdit.controls.geburtsname.touched).toBeTrue();
+        expect(component.formEdit.controls.geburtsname.touched).toBe(true);
       });
 
       it('should close the panel when formEdit is valid', () => {
@@ -359,7 +360,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.saveEdit();
 
-        expect(component.panelOpen).toBeFalse();
+        expect(component.panelOpen).toBe(false);
       });
     });
 
@@ -369,7 +370,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.onEscapeKey();
 
-        expect(component.panelOpen).toBeFalse();
+        expect(component.panelOpen).toBe(false);
       });
 
       it('should close the panel when it is open', () => {
@@ -377,7 +378,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.onEscapeKey();
 
-        expect(component.panelOpen).toBeFalse();
+        expect(component.panelOpen).toBe(false);
       });
     });
   });
@@ -388,14 +389,14 @@ describe('ModalarmePatternsComponent', () => {
       it('should set showConfirmBar to true', () => {
         component.askDeleteBar();
 
-        expect(component.showConfirmBar).toBeTrue();
+        expect(component.showConfirmBar).toBe(true);
       });
 
       it('should be idempotent when called twice', () => {
         component.askDeleteBar();
         component.askDeleteBar();
 
-        expect(component.showConfirmBar).toBeTrue();
+        expect(component.showConfirmBar).toBe(true);
       });
 
       it('should keep state unchanged when already open', () => {
@@ -403,7 +404,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.askDeleteBar();
 
-        expect(component.showConfirmBar).toBeTrue();
+        expect(component.showConfirmBar).toBe(true);
       });
     });
 
@@ -413,7 +414,7 @@ describe('ModalarmePatternsComponent', () => {
 
         component.cancelDeleteBar();
 
-        expect(component.showConfirmBar).toBeFalse();
+        expect(component.showConfirmBar).toBe(false);
       });
     });
 
@@ -423,14 +424,14 @@ describe('ModalarmePatternsComponent', () => {
 
         component.confirmDeleteBar();
 
-        expect(component.showConfirmBar).toBeFalse();
+        expect(component.showConfirmBar).toBe(false);
       });
 
       it('should show a warning toast with the correct message', () => {
         component.confirmDeleteBar();
 
         expect(msgService.add).toHaveBeenCalledWith(
-          jasmine.objectContaining({
+          expect.objectContaining({
             severity: 'warn',
             summary: 'Gelöscht',
             detail: 'Das Objekt wurde gelöscht.',
@@ -443,7 +444,7 @@ describe('ModalarmePatternsComponent', () => {
 
   describe('Popover', () => {
     it('should delegate toggleHelp to helpOverlay.toggle', () => {
-      const toggleSpy = jasmine.createSpy('toggle');
+      const toggleSpy = vi.fn();
       component.helpOverlay = {toggle: toggleSpy} as unknown as Popover;
 
       const event = new MouseEvent('click');
@@ -453,7 +454,7 @@ describe('ModalarmePatternsComponent', () => {
     });
 
     it('should delegate closeHelp to helpOverlay.hide', () => {
-      const hideSpy = jasmine.createSpy('hide');
+      const hideSpy = vi.fn();
       component.helpOverlay = {hide: hideSpy} as unknown as Popover;
 
       component.closeHelp();
@@ -466,7 +467,7 @@ describe('ModalarmePatternsComponent', () => {
 
       component.onHelpShow();
 
-      expect(component.helpOpen).toBeTrue();
+      expect(component.helpOpen).toBe(true);
     });
 
     it('should set helpOpen to false in onHelpHide', () => {
@@ -474,13 +475,13 @@ describe('ModalarmePatternsComponent', () => {
 
       component.onHelpHide();
 
-      expect(component.helpOpen).toBeFalse();
+      expect(component.helpOpen).toBe(false);
     });
   });
 
   describe('isInvalid()', () => {
     it('should return false when the control is untouched', () => {
-      expect(component.isInvalid('geburtsname')).toBeFalse();
+      expect(component.isInvalid('geburtsname')).toBe(false);
     });
 
     it('should return true when the control is invalid and touched', () => {
@@ -488,7 +489,7 @@ describe('ModalarmePatternsComponent', () => {
       ctrl.setValue('');
       ctrl.markAsTouched();
 
-      expect(component.isInvalid('geburtsname')).toBeTrue();
+      expect(component.isInvalid('geburtsname')).toBe(true);
     });
 
     it('should return true when the control is invalid and dirty', () => {
@@ -496,7 +497,7 @@ describe('ModalarmePatternsComponent', () => {
       ctrl.setValue('');
       ctrl.markAsDirty();
 
-      expect(component.isInvalid('geburtsname')).toBeTrue();
+      expect(component.isInvalid('geburtsname')).toBe(true);
     });
 
     it('should return false when the control is valid even if touched', () => {
@@ -504,11 +505,11 @@ describe('ModalarmePatternsComponent', () => {
       ctrl.setValue('Meier');
       ctrl.markAsTouched();
 
-      expect(component.isInvalid('geburtsname')).toBeFalse();
+      expect(component.isInvalid('geburtsname')).toBe(false);
     });
 
     it('should return false for a non-existent control name', () => {
-      expect(component.isInvalid('nonexistent')).toBeFalse();
+      expect(component.isInvalid('nonexistent')).toBe(false);
     });
   });
 
@@ -519,9 +520,9 @@ describe('ModalarmePatternsComponent', () => {
 
       component.submitErrors();
 
-      expect(component.formErrors.controls.geburtsname.touched).toBeTrue();
+      expect(component.formErrors.controls.geburtsname.touched).toBe(true);
       expect(msgService.add).toHaveBeenCalledWith(
-        jasmine.objectContaining({
+        expect.objectContaining({
           severity: 'error',
           summary: 'Eingaben prüfen',
           detail: 'Bitte korrigieren Sie die markierten Felder.',
@@ -536,7 +537,7 @@ describe('ModalarmePatternsComponent', () => {
       component.submitErrors();
 
       expect(msgService.add).toHaveBeenCalledWith(
-        jasmine.objectContaining({
+        expect.objectContaining({
           severity: 'success',
           summary: 'Gespeichert',
           detail: 'Daten wurden gespeichert.',
@@ -551,7 +552,7 @@ describe('ModalarmePatternsComponent', () => {
       component.submitErrors();
 
       expect(msgService.add).toHaveBeenCalledTimes(1);
-      const lastArgs = (msgService.add as jasmine.Spy).calls.mostRecent().args[0];
+      const lastArgs = vi.mocked(msgService.add).mock.lastCall![0];
       expect(lastArgs.severity).toBe('error');
     });
   });
@@ -570,7 +571,7 @@ describe('ModalarmePatternsComponent', () => {
         .filter(Boolean);
       const uniqueIds = new Set(allIds);
 
-      expect(allIds.length).toBe(uniqueIds.size);
+      expect(allIds).toHaveLength(uniqueIds.size);
     });
   });
 });

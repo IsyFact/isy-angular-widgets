@@ -5,7 +5,7 @@
     "outDir": "./dist/out-tsc",
     "rootDir": "./",
     "esModuleInterop": true,
-    "types": ["jasmine", "node"],
+    "types": ["vitest/globals", "node"],
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,

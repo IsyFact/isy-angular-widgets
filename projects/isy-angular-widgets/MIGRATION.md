@@ -34,7 +34,7 @@ Build, Development-Server, Übersetzungsextraktion und Tests verwenden nun die B
 | Anwendung (Build)   | `@angular/build:application`     |
 | Anwendung (Serve)   | `@angular/build:dev-server`      |
 | Anwendung (i18n)    | `@angular/build:extract-i18n`    |
-| Anwendung (Test)    | `@angular/build:karma`           |
+| Anwendung (Test)    | `Vitest` (`vitest.demo.config.ts`) |
 
 **Auswirkung:** Unterstützte Optionen und das Verhalten der Builder können von den bisherigen Devkit-Buildern abweichen. Build-Artefakte, statische Ressourcen und Medien werden unter dem neuen Build-System teilweise anders verarbeitet. Integrationen, die direkt oder indirekt vom bisherigen Devkit-Builder abhängen, müssen überprüft werden.
 
@@ -136,7 +136,6 @@ Die folgenden Punkte betreffen ausschließlich die Weiterentwicklung des Reposit
 - **ESLint:** Die Flat-Config in `eslint.config.js` wurde an die exportierte Paketstruktur von Angular ESLint 22 angepasst. Veraltete Zugriffe auf `angular.configs.recommended.rules` bzw. `angularTemplate.configs.recommended.rules` führten sonst zu `Cannot read properties of undefined (reading 'recommended')`.
 - **Schematics-TSConfig:** `baseUrl` entfernt, `module` und `moduleResolution` auf `node16` gesetzt, um TS6-Deprecation-Fehler im Schematics-Build zu vermeiden.
 - **Extended Diagnostics:** `nullishCoalescingNotNullable` und `optionalChainNotNullable` wurden auf `suppress` gesetzt. Die allgemeine TypeScript-Typprüfung bleibt aktiv; die Suppressions sind nach weiteren Angular-22-Anpassungen erneut zu bewerten.
-- **Karma-Builder:** Bei Testläufen der Demo-Anwendung mit `@angular/build:karma` können weiterhin 404-Warnungen für Font-Dateien (`primeicons.woff2`, `LiberationSans-Regular.woff2`) im Web-Server-Log erscheinen. Ursache ist das Zusammenspiel aus CSS-`url()`-Auflösung und dem virtuellen Karma-Dateisystem. Die Tests laufen davon unbeeinflusst erfolgreich durch.
 
 ### Vitest-Migration der Bibliothekstests
 

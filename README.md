@@ -92,13 +92,13 @@ npm run start
 | `npm run build:widgets_lib` | Baut ausschließlich die Bibliothek inklusive Schematics |
 | `npm run build:widgets_demo` | Baut ausschließlich die Demo-Anwendung |
 | `npm run build-and-pack:widgets_lib` | Baut die Bibliothek und erzeugt ein installierbares TGZ-Paket |
-| `npm test` | Führt den verbleibenden Angular-/Karma-Testpfad der Demo-Anwendung aus |
+| `npm test` | Führt die Tests von Bibliothek und Demo-Anwendung einmalig aus |
 | `npm run test:lib:vitest` | Startet die Widget-Bibliothekstests mit Vitest im interaktiven Modus |
 | `npm run test:lib:vitest:run` | Führt die Widget-Bibliothekstests einmalig ohne Watch-Modus aus |
 | `npm run test:lib:vitest:coverage` | Führt die Widget-Bibliothekstests mit Coverage-Bericht nach `coverage/isy-angular-widgets-vitest` aus |
-| `npm run test:vitest` | Alias für `npm run test:lib:vitest` |
-| `npm run test:vitest:run` | Alias für `npm run test:lib:vitest:run` |
-| `npm run test:vitest:coverage` | Alias für `npm run test:lib:vitest:coverage` |
+| `npm run test:demo:vitest` | Startet die Tests der Demo-Anwendung mit Vitest im interaktiven Modus |
+| `npm run test:demo:vitest:run` | Führt die Tests der Demo-Anwendung einmalig ohne Watch-Modus aus |
+| `npm run test:demo:vitest:coverage` | Führt die Tests der Demo-Anwendung mit Coverage-Bericht nach `coverage/isy-angular-widgets-demo-vitest` aus |
 | `npm run lint` | Lintet Bibliothek und Demo-Anwendung (`lint:lib`, `lint:demo` einzeln) |
 | `npm run prettier:check` | Prüft die Codeformatierung |
 | `npm run prettier:fix` | Behebt Formatierungsfehler automatisch |
@@ -106,7 +106,7 @@ npm run start
 | `npm run compodoc:build` | Erzeugt die API-Dokumentation nach `docs/` (`compodoc:serve` zeigt sie lokal an) |
 | `npm run generate-browser-support` | Aktualisiert die Browser-Support-Konfiguration |
 
-Vitest ist für die Tests der Widget-Bibliothek eingerichtet. Die Root-Konfiguration erfasst ausschließlich Bibliothekstests unter `projects/isy-angular-widgets/src/**/*.spec.ts`; Tests der Demo-Anwendung sind ausdrücklich nicht Bestandteil dieser Ausführung. Die bestehenden Karma-/Jasmine-Skripte bleiben für die Demo-App bzw. Altpfade unverändert verfügbar.
+Beide Projekte werden mit Vitest getestet. Die Bibliothekstests laufen über [vitest.config.ts](vitest.config.ts) (`projects/isy-angular-widgets/src/**/*.spec.ts`), die Tests der Demo-Anwendung über [vitest.demo.config.ts](vitest.demo.config.ts) (`projects/isy-angular-widgets-demo/src/**/*.spec.ts`). Die Demo-Konfiguration ergänzt die gemeinsame Testumgebung um Stubs für Canvas und CSS-Berechnungen, die unter jsdom fehlen.
 
 > **Hinweis:** `compodoc:build` legt die erzeugte API-Dokumentation im Verzeichnis `docs/` ab, in dem auch die Antora-Konzeptdokumentation liegt. Die generierten Dateien sind nicht in der `.gitignore` enthalten und sollten vor einem Commit wieder entfernt werden:
 >
@@ -122,6 +122,7 @@ Die folgenden Prüfungen entsprechen den zentralen Schritten der CI-Pipeline und
 npm run prettier:check
 npm run lint
 npm run test:lib:vitest:run
+npm run test:demo:vitest:run
 npm run build:widgets_lib
 npm run build:widgets_demo
 ```

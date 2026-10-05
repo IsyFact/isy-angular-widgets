@@ -3,7 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {markFormAsDirty} from '../../../../shared/validation/form-helper';
 import {initPersoenlicheInformationenForm} from '../../forms-data';
 import {getEmptyPerson} from '../../person-data';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {required} from '../../../../shared/validation/validator';
 
 import {
@@ -59,7 +59,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   it('should validate the incoming form', () => {
     const form = component.form;
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
     expect(form.get('vorname')!.value).toEqual(person.personalien.vorname);
     expect(form.get('nachname')!.value).toEqual(person.personalien.nachname);
     expect(form.get('gender')!.value).toEqual(person.personalien.gender);
@@ -72,18 +72,18 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     formFields.forEach((formFieldName) => {
       const field = component.form.get(formFieldName);
       expect(field!.value).toEqual(person.personalien.nachname);
-      expect(field!.valid).toBeFalse();
-      expect(field?.dirty).toBeTrue();
+      expect(field!.valid).toBe(false);
+      expect(field?.dirty).toBe(true);
 
       field!.setValue(formFieldName);
       expect(field!.value).toEqual(formFieldName);
-      expect(field!.valid).toBeTrue();
-      expect(field?.dirty).toBeTrue();
+      expect(field!.valid).toBe(true);
+      expect(field?.dirty).toBe(true);
 
       field!.setValue(invalidValue);
       expect(field!.value).toEqual(invalidValue);
-      expect(field!.valid).toBeFalse();
-      expect(field?.dirty).toBeTrue();
+      expect(field!.valid).toBe(false);
+      expect(field?.dirty).toBe(true);
     });
   });
 
@@ -161,7 +161,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
   it('should validate the form', () => {
     const form = component.form;
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     const nachnameInput = component.form.get('nachname');
     const vornameInput = component.form.get('vorname');
@@ -169,15 +169,15 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
 
     nachnameInput!.setValue('nachname');
     expect(nachnameInput?.errors).toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     vornameInput!.setValue('vorname');
     expect(vornameInput?.errors).toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     genderInput!.setValue('gender');
     expect(genderInput?.errors).toBeNull();
-    expect(form.valid).toBeTrue();
+    expect(form.valid).toBe(true);
   });
 
   it('should evaluate the HTML label text of the input fields', () => {
@@ -200,7 +200,7 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
     input.focus();
 
     spectator.detectChanges();
-    expect(component.form.controls.nachname.dirty).toBeTrue();
+    expect(component.form.controls.nachname.dirty).toBe(true);
     expect(nachnameSpy).toHaveBeenCalledWith(component.form.controls.nachname);
   });
 
@@ -209,8 +209,8 @@ describe('Integration Tests: PersoenlicheInformationenComponent', () => {
       nachname: new FormControl('', required)
     });
 
-    expect(component.form.controls.nachname.dirty).toBeFalse();
+    expect(component.form.controls.nachname.dirty).toBe(false);
     component.onFormControlFocus(component.form.controls.nachname);
-    expect(component.form.controls.nachname.dirty).toBeTrue();
+    expect(component.form.controls.nachname.dirty).toBe(true);
   });
 });

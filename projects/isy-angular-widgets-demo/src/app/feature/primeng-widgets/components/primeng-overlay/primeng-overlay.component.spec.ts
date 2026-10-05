@@ -1,4 +1,5 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import type {MockInstance} from 'vitest';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
@@ -9,12 +10,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
 
   let component: PrimengOverlayComponent;
   let spectator: Spectator<PrimengOverlayComponent>;
-  let confirmSpy: jasmine.Spy;
-  let messageSpy: jasmine.Spy;
+  let confirmSpy: MockInstance;
+  let messageSpy: MockInstance;
 
   const fragment$ = new Subject<string | null>();
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
   const createComponent = createComponentFactory({
@@ -32,12 +33,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     }) as unknown as Event;
 
   beforeEach(() => {
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
     spectator = createComponent();
     component = spectator.component;
 
-    confirmSpy = spyOn(component.confirmationService, 'confirm').and.callThrough();
-    messageSpy = spyOn(component.messageService, 'add').and.callThrough();
+    confirmSpy = spyOn(component.confirmationService, 'confirm');
+    messageSpy = spyOn(component.messageService, 'add');
   });
 
   it('should create', () => {
@@ -50,9 +51,9 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
       const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchor?.classList.contains('section-anchor')).toBe(true);
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -72,7 +73,7 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   it('should mark only rendered overlays as printable and their dialog actions as hidden', () => {
     component.visibleSidebar = true;
     component.visibleDialog = true;
-    spectator.detectChanges();
+    spectator.detectComponentChanges();
 
     expect(spectator.query('.demo-print-page')).toBeTruthy();
     expect(spectator.queryAll('.isy-print-overlay')).toHaveLength(2);
@@ -88,7 +89,7 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
 
   it('should scroll to section when anchor symbol is clicked', () => {
     sectionAnchorIds.forEach((id) => {
-      viewportScrollerMock.scrollToAnchor.calls.reset();
+      viewportScrollerMock.scrollToAnchor.mockClear();
       spectator.click(`h3#${id} > a`);
       expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith(id);
     });
@@ -102,19 +103,19 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
   it('should show dialog', () => {
     const button = document.createElement('button');
     component.showDialog(createClickEvent(button));
-    expect(component.visibleDialog).toBeTrue();
+    expect(component.visibleDialog).toBe(true);
   });
 
   it('should close dialog', () => {
     component.visibleDialog = true;
     component.closeDialog();
-    expect(component.visibleDialog).toBeFalse();
+    expect(component.visibleDialog).toBe(false);
   });
 
   it('should show sidebar', () => {
     const button = document.createElement('button');
     component.showSidebar(createClickEvent(button));
-    expect(component.visibleSidebar).toBeTrue();
+    expect(component.visibleSidebar).toBe(true);
   });
 
   it('should restore focus to dialog trigger when dialog hides', async () => {
@@ -125,12 +126,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
       const focusSpy = spyOn(button, 'focus');
 
       component.showDialog(createClickEvent(button));
-      spectator.detectChanges();
+      spectator.detectComponentChanges();
 
       component.onDialogHide();
-      spectator.detectChanges();
+      spectator.detectComponentChanges();
       await spectator.fixture.whenStable();
-      spectator.detectChanges();
+      spectator.detectComponentChanges();
 
       expect(focusSpy).toHaveBeenCalled();
     } finally {
@@ -145,12 +146,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     const focusSpy = spyOn(button, 'focus');
 
     component.showSidebar(createClickEvent(button));
-    spectator.detectChanges();
+    spectator.detectComponentChanges();
 
     component.onSidebarHide();
-    spectator.detectChanges();
+    spectator.detectComponentChanges();
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.detectComponentChanges();
 
     expect(focusSpy).toHaveBeenCalled();
   });
@@ -161,7 +162,7 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     component.confirmDialog(createClickEvent(button));
     expect(confirmSpy).toHaveBeenCalled();
 
-    const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    const confirmArgs = confirmSpy.mock.lastCall![0];
     expect(confirmArgs.target).toBe(button);
 
     confirmArgs.accept();
@@ -174,7 +175,7 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     component.confirmDialog(createClickEvent(button));
     expect(confirmSpy).toHaveBeenCalled();
 
-    const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    const confirmArgs = confirmSpy.mock.lastCall![0];
     confirmArgs.reject();
 
     expect(messageSpy).toHaveBeenCalledWith({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
@@ -187,12 +188,12 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     const focusSpy = spyOn(button, 'focus');
 
     component.confirmDialog(createClickEvent(button));
-    spectator.detectChanges();
+    spectator.detectComponentChanges();
 
     component.onConfirmDialogHide();
-    spectator.detectChanges();
+    spectator.detectComponentChanges();
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.detectComponentChanges();
 
     expect(focusSpy).toHaveBeenCalled();
   });
@@ -203,7 +204,7 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     component.confirmPopup(createClickEvent(button));
     expect(confirmSpy).toHaveBeenCalled();
 
-    const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    const confirmArgs = confirmSpy.mock.lastCall![0];
     confirmArgs.accept();
 
     expect(messageSpy).toHaveBeenCalledWith({severity: 'info', summary: 'Confirmed', detail: 'You have accepted'});
@@ -215,7 +216,7 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     component.confirmPopup(createClickEvent(button));
     expect(confirmSpy).toHaveBeenCalled();
 
-    const confirmArgs = confirmSpy.calls.mostRecent().args[0];
+    const confirmArgs = confirmSpy.mock.lastCall![0];
     confirmArgs.reject();
 
     expect(messageSpy).toHaveBeenCalledWith({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});

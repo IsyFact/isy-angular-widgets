@@ -1,4 +1,4 @@
-import {createServiceFactory, SpectatorService, mockProvider, SpyObject} from '@ngneat/spectator';
+import {createServiceFactory, SpectatorService, mockProvider, SpyObject} from '@ngneat/spectator/vitest';
 import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {TranslateService} from '@ngx-translate/core';
