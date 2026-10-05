@@ -1,4 +1,4 @@
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator/vitest';
 import {MenuTranslationService} from './menu-translation.service';
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 

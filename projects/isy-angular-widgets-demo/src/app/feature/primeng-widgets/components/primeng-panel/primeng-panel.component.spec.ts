@@ -2,7 +2,7 @@ import {ViewportScroller} from '@angular/common';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator, createSpyObject} from '@ngneat/spectator/vitest';
 import {TranslateModule} from '@ngx-translate/core';
 import {Subject} from 'rxjs';
 import {PrimengPanelComponent} from './primeng-panel.component';
@@ -45,13 +45,10 @@ describe('Unit Tests: PrimengPanelComponent', () => {
   const fragment$ = new Subject<string | null>();
 
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
-  const breakpointObserverSpy = jasmine.createSpyObj<BreakpointObserver>('BreakpointObserver', [
-    'observe',
-    'isMatched'
-  ]);
+  const breakpointObserverSpy = createSpyObject(BreakpointObserver);
 
   const createComponent = createComponentFactory({
     component: PrimengPanelComponent,
@@ -76,12 +73,12 @@ describe('Unit Tests: PrimengPanelComponent', () => {
   beforeEach(() => {
     breakpointState$ = new Subject<BreakpointState>();
 
-    breakpointObserverSpy.observe.calls.reset();
-    breakpointObserverSpy.isMatched.calls.reset();
-    breakpointObserverSpy.observe.and.returnValue(breakpointState$.asObservable());
-    breakpointObserverSpy.isMatched.and.returnValue(false);
+    breakpointObserverSpy.observe.mockClear();
+    breakpointObserverSpy.isMatched.mockClear();
+    breakpointObserverSpy.observe.mockReturnValue(breakpointState$.asObservable());
+    breakpointObserverSpy.isMatched.mockReturnValue(false);
 
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
 
     spectator = createComponent();
     component = spectator.component;
@@ -101,9 +98,9 @@ describe('Unit Tests: PrimengPanelComponent', () => {
       const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchorLink).toBeTruthy();
-      expect(anchorLink?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchorLink?.classList.contains('section-anchor')).toBe(true);
       expect(anchorLink?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -166,27 +163,27 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
   describe('Responsive stepper', () => {
     it('should observe the configured vertical stepper breakpoint', () => {
-      expect(breakpointObserverSpy.observe).toHaveBeenCalledOnceWith(verticalStepperMediaQuery);
-      expect(breakpointObserverSpy.isMatched).toHaveBeenCalledOnceWith(verticalStepperMediaQuery);
+      expect(breakpointObserverSpy.observe).toHaveBeenCalledExactlyOnceWith(verticalStepperMediaQuery);
+      expect(breakpointObserverSpy.isMatched).toHaveBeenCalledExactlyOnceWith(verticalStepperMediaQuery);
     });
 
     it('should initialise the stepper horizontally when the breakpoint does not match', () => {
-      expect(getIsVerticalStepper(component)).toBeFalse();
+      expect(getIsVerticalStepper(component)).toBe(false);
     });
 
     it('should initialise the stepper vertically when the breakpoint already matches', () => {
       spectator.fixture.destroy();
 
       breakpointState$ = new Subject<BreakpointState>();
-      breakpointObserverSpy.observe.calls.reset();
-      breakpointObserverSpy.isMatched.calls.reset();
-      breakpointObserverSpy.observe.and.returnValue(breakpointState$.asObservable());
-      breakpointObserverSpy.isMatched.and.returnValue(true);
+      breakpointObserverSpy.observe.mockClear();
+      breakpointObserverSpy.isMatched.mockClear();
+      breakpointObserverSpy.observe.mockReturnValue(breakpointState$.asObservable());
+      breakpointObserverSpy.isMatched.mockReturnValue(true);
 
       spectator = createComponent();
       component = spectator.component;
 
-      expect(getIsVerticalStepper(component)).toBeTrue();
+      expect(getIsVerticalStepper(component)).toBe(true);
     });
 
     it('should switch to a vertical stepper when the breakpoint starts matching', () => {
@@ -199,7 +196,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeTrue();
+      expect(getIsVerticalStepper(component)).toBe(true);
     });
 
     it('should switch back to a horizontal stepper when the breakpoint no longer matches', () => {
@@ -212,7 +209,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeTrue();
+      expect(getIsVerticalStepper(component)).toBe(true);
 
       breakpointState$.next({
         matches: false,
@@ -223,7 +220,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeFalse();
+      expect(getIsVerticalStepper(component)).toBe(false);
     });
   });
 
@@ -254,7 +251,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeTrue();
+      expect(getIsVerticalStepper(component)).toBe(true);
       expect(component.stepperValue).toBe(2);
     });
 
@@ -279,7 +276,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeFalse();
+      expect(getIsVerticalStepper(component)).toBe(false);
       expect(component.stepperValue).toBe(3);
     });
   });

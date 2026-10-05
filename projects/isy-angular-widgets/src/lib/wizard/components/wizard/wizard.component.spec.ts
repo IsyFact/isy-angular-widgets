@@ -524,7 +524,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function isElementDisabled(declaration: string): boolean {
     const el = spectator.query<HTMLButtonElement>(declaration);
-    expect(el).withContext(`Element not found: ${declaration}`).not.toBeNull();
+    expect(el, `Element not found: ${declaration}`).not.toBeNull();
     return el!.disabled;
   }
 
@@ -533,7 +533,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function pressNextButton(): void {
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
-    expect(nextButton).withContext('Next button not found').not.toBeNull();
+    expect(nextButton, 'Next button not found').not.toBeNull();
     nextButton!.click();
     fixture.detectChanges(false);
   }
@@ -543,7 +543,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function pressBackButton(): void {
     const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
-    expect(backButton).withContext('Back button not found').not.toBeNull();
+    expect(backButton, 'Back button not found').not.toBeNull();
     backButton!.click();
     fixture.detectChanges(false);
   }
@@ -553,7 +553,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function pressSaveButton(): void {
     const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
-    expect(saveButton).withContext('Save button not found').not.toBeNull();
+    expect(saveButton, 'Save button not found').not.toBeNull();
     saveButton!.click();
     fixture.detectChanges(false);
   }
@@ -563,7 +563,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function pressCloseButton(): void {
     const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
-    expect(closeButton).withContext('Close button not found').not.toBeNull();
+    expect(closeButton, 'Close button not found').not.toBeNull();
     closeButton!.click();
     fixture.detectChanges(false);
   }
@@ -895,7 +895,7 @@ describe('Integration Tests: WizardComponent with Custom Footer', () => {
    */
   function clickButton(selector: string): void {
     const button = spectator.query<HTMLButtonElement>(selector);
-    expect(button).withContext(`Button not found: ${selector}`).not.toBeNull();
+    expect(button, `Button not found: ${selector}`).not.toBeNull();
     button!.click();
     spectator.detectChanges();
   }

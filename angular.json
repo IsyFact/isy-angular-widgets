@@ -117,33 +117,6 @@
             "buildTarget": "isy-angular-widgets-demo:build"
           }
         },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "codeCoverage": true,
-            "main": "projects/isy-angular-widgets-demo/src/test.ts",
-            "polyfills": ["zone.js", "zone.js/testing"],
-            "tsConfig": "projects/isy-angular-widgets-demo/tsconfig.spec.json",
-            "karmaConfig": "projects/isy-angular-widgets-demo/karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/isy-angular-widgets-demo/src/favicon.ico",
-              "projects/isy-angular-widgets-demo/src/assets",
-              {
-                "glob": "**/*",
-                "input": "node_modules/primeicons/fonts",
-                "output": "fonts"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/isy-angular-widgets/assets/fonts",
-                "output": "fonts"
-              }
-            ],
-            "styles": ["projects/isy-angular-widgets-demo/src/styles.scss"],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {

@@ -4,10 +4,11 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
     "resolveJsonModule": true,
-    "types": ["jasmine", "node"]
+    "skipLibCheck": true,
+    "types": ["vitest/globals", "node"]
   },
-  "files": ["src/test.ts"],
-  "include": ["src/**/*.spec.ts"],
+  "files": ["../../vitest-globals.d.ts"],
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"],
   "exclude": ["src/main.ts"],
   "angularCompilerOptions": {
     "extendedDiagnostics": {

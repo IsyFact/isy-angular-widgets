@@ -7,7 +7,7 @@ import {DebugElement} from '@angular/core';
 import {ComponentFixture} from '@angular/core/testing';
 import {FormControl} from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {FileUploadHandlerEvent} from 'primeng/fileupload';
 import {provideHttpClient, withXhr} from '@angular/common/http';
 import {
@@ -138,7 +138,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   it('should mark date of entry as required for accessibility', () => {
     const dateOfEntry = inputFields.dateOfEntry.nativeElement as HTMLInputElement;
 
-    expect(dateOfEntry.hasAttribute('required')).toBeTrue();
+    expect(dateOfEntry.hasAttribute('required')).toBe(true);
     expect(dateOfEntry.getAttribute('aria-required')).toBe('true');
   });
 
@@ -155,7 +155,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   it('should set secret fields visible', () => {
     setupRolesAndPermissions();
     component.showSecretFields = securityService.checkElementPermission('secretFieldsInputSwitch');
-    expect(component.showSecretFields).toBeTrue();
+    expect(component.showSecretFields).toBe(true);
     fixture.detectChanges();
     const secretFieldsContainer = debugElement.query(By.css('#div-show-secret-fields'));
     expect(secretFieldsContainer).toBeTruthy();
@@ -208,13 +208,13 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   });
 
   it('should display permitted secret fields element', () => {
-    expect(component.showSecretFields).toBeFalse();
+    expect(component.showSecretFields).toBe(false);
     setupRolesAndPermissions();
-    expect(component.showSecretFields).toBeTrue();
+    expect(component.showSecretFields).toBe(true);
   });
 
   it('should not display non permitted element', () => {
-    expect(component.showSecretFields).toBeFalse();
+    expect(component.showSecretFields).toBe(false);
     const secretFields = fixture.nativeElement.querySelector('show-secret-fields');
     expect(secretFields).toBeNull();
   });
@@ -227,10 +227,10 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     fixture.detectChanges();
 
     expect(addSpy).toHaveBeenCalledWith(
-      jasmine.objectContaining({
+      expect.objectContaining({
         severity: 'success',
-        summary: jasmine.any(String),
-        detail: jasmine.any(String)
+        summary: expect.any(String),
+        detail: expect.any(String)
       })
     );
   });
@@ -274,14 +274,14 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     const addresses = component.getAddresses();
     addresses.clear();
     addresses.push(component.createNewAddressFormGroup());
-    expect(component.disableDeleteButton()).toBeTrue();
+    expect(component.disableDeleteButton()).toBe(true);
   });
 
   it('should return false if there are multiple addresses', () => {
     const addresses = component.getAddresses();
     addresses.push(component.createNewAddressFormGroup());
     expect(component.getAddresses().length).toBeGreaterThan(1);
-    expect(component.disableDeleteButton()).toBeFalse();
+    expect(component.disableDeleteButton()).toBe(false);
   });
 
   it('should remove the address at the given index from the FormArray', () => {
@@ -333,7 +333,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
 
     expect(nationalitiesControl?.value).toEqual(['DE']);
     expect(component.getSelectedNationalitiesCount()).toBe(1);
-    expect(component.showNationalitiesError('required')).toBeFalse();
+    expect(component.showNationalitiesError('required')).toBe(false);
   });
 
   it('should update selected nationalities in the form control', () => {
@@ -358,7 +358,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
 
     expect(nationalitiesControl?.value).toEqual(['DE', 'FR', 'ES', 'IT', 'PL']);
     expect(component.getSelectedNationalitiesCount()).toBe(component.maxNationalities);
-    expect(nationalitiesControl?.valid).toBeTrue();
+    expect(nationalitiesControl?.valid).toBe(true);
   });
 
   it('should show required error when no nationality is selected', () => {
@@ -369,8 +369,8 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    expect(nationalitiesControl?.hasError('required')).toBeTrue();
-    expect(component.showNationalitiesError('required')).toBeTrue();
+    expect(nationalitiesControl?.hasError('required')).toBe(true);
+    expect(component.showNationalitiesError('required')).toBe(true);
   });
 
   it('should not show required error before the control was touched or dirtied', () => {
@@ -382,8 +382,8 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    expect(nationalitiesControl?.hasError('required')).toBeTrue();
-    expect(component.showNationalitiesError('required')).toBeFalse();
+    expect(nationalitiesControl?.hasError('required')).toBe(true);
+    expect(component.showNationalitiesError('required')).toBe(false);
   });
 
   it('should show maxSelected error if maximum count is exceeded', () => {
@@ -394,8 +394,8 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    expect(nationalitiesControl?.hasError('maxSelected')).toBeTrue();
-    expect(component.showNationalitiesError('maxSelected')).toBeTrue();
+    expect(nationalitiesControl?.hasError('maxSelected')).toBe(true);
+    expect(component.showNationalitiesError('maxSelected')).toBe(true);
   });
 
   it('should not show maxSelected error before the control was touched or dirtied', () => {
@@ -407,8 +407,8 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
     nationalitiesControl?.updateValueAndValidity();
     fixture.detectChanges();
 
-    expect(nationalitiesControl?.hasError('maxSelected')).toBeTrue();
-    expect(component.showNationalitiesError('maxSelected')).toBeFalse();
+    expect(nationalitiesControl?.hasError('maxSelected')).toBe(true);
+    expect(component.showNationalitiesError('maxSelected')).toBe(false);
   });
 
   it('should render nationality hint with current count', () => {
@@ -470,7 +470,7 @@ describe('Integration Tests: ObjektAnzeigenComponent', () => {
   it('should not restore focus when the last trigger is not connected', async () => {
     const trigger = document.createElement('button');
     const focusSpy = spyOn(trigger, 'focus');
-    spyOnProperty(trigger, 'isConnected', 'get').and.returnValue(false);
+    spyOnProperty(trigger, 'isConnected', 'get').mockReturnValue(false);
 
     const componentAccess = getComponentAccess();
     componentAccess.lastTrigger = trigger;
