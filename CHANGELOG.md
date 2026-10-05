@@ -4,9 +4,11 @@
   - Ausführung über `npm run test:lib:vitest`, `npm run test:lib:vitest:run` und `npm run test:lib:vitest:coverage`
   - Browsernahe Grenzfälle, die unter jsdom nicht zuverlässig prüfbar sind, wurden nach TestCafe verschoben (`projects/isy-angular-widgets/src/test/e2e/`) und werden von `npm run e2e` mit ausgeführt
   - Der Karma-/Jasmine-Testpfad bleibt nur noch für die Demo-Anwendung (`npm test`) bestehen
-- IFS-5386: Vitest wurde als zusätzliche technische Testbasis vorbereitet; die bestehenden Karma-/Jasmine-Tests bleiben vorerst bestehen und werden schrittweise migriert.
+- IFS-5737: IFS-5737: Disabled-States für Buttons und Formularelemente im IsyFact-Theme wurden farblich vereinheitlicht
+- IFS-5386: Vitest wurde als zusätzliche technische Testbasis vorbereitet; die bestehenden Karma-/Jasmine-Tests bleiben vorerst bestehen und werden schrittweise migriert
 - IFS-4930: Die Widgets`isy-wizard` und `isy-input-char` wurden für die Darstellung mit einer Mindestbreite von 320px optimiert.
 ## Demo-Anwendung
+- IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
 - IFS-4930: Die Seiten _Objekt anzeigen_ und _Objekt bearbeiten_ der Demo-Anwendung wurden für eine Viewport-Breite von 320 px optimiert
 
 # 22.1.0-next.1 - 10.09.2026

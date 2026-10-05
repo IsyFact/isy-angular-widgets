@@ -11,31 +11,52 @@
       <div class="flex flex-col gap-2">
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Primary</span>
-          <div class="col-span-8"><p-button label="Primary" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Primary" />
+            <p-button label="Primary" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Secondary</span>
-          <div class="col-span-8"><p-button label="Secondary" severity="secondary" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Secondary" severity="secondary" />
+            <p-button label="Secondary" severity="secondary" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Success</span>
-          <div class="col-span-8"><p-button label="Success" severity="success" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Success" severity="success" />
+            <p-button label="Success" severity="success" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Info</span>
-          <div class="col-span-8"><p-button label="Info" severity="info" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Info" severity="info" />
+            <p-button label="Info" severity="info" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Warning</span>
-          <div class="col-span-8"><p-button label="Warning" severity="warn" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Warning" severity="warn" />
+            <p-button label="Warning" severity="warn" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Help</span>
-          <div class="col-span-8"><p-button label="Help" severity="help" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Help" severity="help" />
+            <p-button label="Help" severity="help" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Danger</span>
-          <div class="col-span-8"><p-button label="Danger" severity="danger" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Danger" severity="danger" />
+            <p-button label="Danger" severity="danger" [disabled]="true" />
+          </div>
         </div>
       </div>
     </div>
@@ -52,31 +73,81 @@
       <div class="flex flex-col gap-2">
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Primary</span>
-          <div class="col-span-8"><p-button label="Primary" [outlined]="true" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Primary" [outlined]="true" />
+            <p-button label="Primary" [outlined]="true" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Secondary</span>
-          <div class="col-span-8"><p-button label="Secondary" [outlined]="true" severity="secondary" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Secondary" [outlined]="true" severity="secondary" />
+            <p-button label="Secondary" [outlined]="true" severity="secondary" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Success</span>
-          <div class="col-span-8"><p-button label="Success" [outlined]="true" severity="success" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Success" [outlined]="true" severity="success" />
+            <p-button label="Success" [outlined]="true" severity="success" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Info</span>
-          <div class="col-span-8"><p-button label="Info" [outlined]="true" severity="info" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Info" [outlined]="true" severity="info" />
+            <p-button label="Info" [outlined]="true" severity="info" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Warning</span>
-          <div class="col-span-8"><p-button label="Warning" [outlined]="true" severity="warn" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Warning" [outlined]="true" severity="warn" />
+            <p-button label="Warning" [outlined]="true" severity="warn" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Help</span>
-          <div class="col-span-8"><p-button label="Help" [outlined]="true" severity="help" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Help" [outlined]="true" severity="help" />
+            <p-button label="Help" [outlined]="true" severity="help" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Danger</span>
-          <div class="col-span-8"><p-button label="Danger" [outlined]="true" severity="danger" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Danger" [outlined]="true" severity="danger" />
+            <p-button label="Danger" [outlined]="true" severity="danger" [disabled]="true" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-divider />
+  <demo-section-heading anchorId="text-buttons" [level]="2" label="Text Buttons" ariaLabel="Link zu Text Buttons" />
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12">
+      <div class="flex flex-col gap-2">
+        <div class="grid grid-cols-12 gap-4 items-center">
+          <span class="col-span-4">Primary</span>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Primary" [text]="true" />
+            <p-button label="Primary" [text]="true" [disabled]="true" />
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-4 items-center">
+          <span class="col-span-4">Secondary</span>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Secondary" [text]="true" severity="secondary" />
+            <p-button label="Secondary" [text]="true" severity="secondary" [disabled]="true" />
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-4 items-center">
+          <span class="col-span-4">Danger</span>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button label="Danger" [text]="true" severity="danger" />
+            <p-button label="Danger" [text]="true" severity="danger" [disabled]="true" />
+          </div>
         </div>
       </div>
     </div>
@@ -88,42 +159,51 @@
       <div class="flex flex-col gap-2">
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Primary</span>
-          <div class="col-span-8"><p-button icon="pi pi-check" [rounded]="true" [outlined]="true" /></div>
+          <div class="col-span-8 flex gap-3 flex-wrap">
+            <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" />
+            <p-button icon="pi pi-check" [rounded]="true" [outlined]="true" [disabled]="true" />
+          </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Secondary</span>
-          <div class="col-span-8">
+          <div class="col-span-8 flex gap-3 flex-wrap">
             <p-button icon="pi pi-bookmark" [rounded]="true" severity="secondary" [outlined]="true" />
+            <p-button icon="pi pi-bookmark" [rounded]="true" severity="secondary" [outlined]="true" [disabled]="true" />
           </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Success</span>
-          <div class="col-span-8">
+          <div class="col-span-8 flex gap-3 flex-wrap">
             <p-button icon="pi pi-search" [rounded]="true" severity="success" [outlined]="true" />
+            <p-button icon="pi pi-search" [rounded]="true" severity="success" [outlined]="true" [disabled]="true" />
           </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Info</span>
-          <div class="col-span-8">
+          <div class="col-span-8 flex gap-3 flex-wrap">
             <p-button icon="pi pi-user" [rounded]="true" severity="info" [outlined]="true" />
+            <p-button icon="pi pi-user" [rounded]="true" severity="info" [outlined]="true" [disabled]="true" />
           </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Warning</span>
-          <div class="col-span-8">
+          <div class="col-span-8 flex gap-3 flex-wrap">
             <p-button icon="pi pi-bell" [rounded]="true" severity="warn" [outlined]="true" />
+            <p-button icon="pi pi-bell" [rounded]="true" severity="warn" [outlined]="true" [disabled]="true" />
           </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Help</span>
-          <div class="col-span-8">
+          <div class="col-span-8 flex gap-3 flex-wrap">
             <p-button icon="pi pi-heart" [rounded]="true" severity="help" [outlined]="true" />
+            <p-button icon="pi pi-heart" [rounded]="true" severity="help" [outlined]="true" [disabled]="true" />
           </div>
         </div>
         <div class="grid grid-cols-12 gap-4 items-center">
           <span class="col-span-4">Danger</span>
-          <div class="col-span-8">
+          <div class="col-span-8 flex gap-3 flex-wrap">
             <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" />
+            <p-button icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" [disabled]="true" />
           </div>
         </div>
       </div>

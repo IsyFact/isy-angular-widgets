@@ -5,7 +5,14 @@ import {Subject} from 'rxjs';
 import {PrimengButtonComponent} from './primeng-button.component';
 
 describe('Unit Tests: PrimengButtonComponent', () => {
-  const sectionAnchorIds = ['colored-buttons', 'outlined-buttons', 'icon-buttons', 'splitbutton', 'speeddial'];
+  const sectionAnchorIds = [
+    'colored-buttons',
+    'outlined-buttons',
+    'text-buttons',
+    'icon-buttons',
+    'splitbutton',
+    'speeddial'
+  ];
 
   let component: PrimengButtonComponent;
   let spectator: Spectator<PrimengButtonComponent>;
@@ -32,8 +39,8 @@ describe('Unit Tests: PrimengButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render section headings with hover-only anchor symbols for colored/outlined/icon groups', () => {
-    ['colored-buttons', 'outlined-buttons', 'icon-buttons'].forEach((id) => {
+  it('should render section headings with hover-only anchor symbols for colored/outlined/text/icon groups', () => {
+    ['colored-buttons', 'outlined-buttons', 'text-buttons', 'icon-buttons'].forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h2#${id}`);
       const anchor = spectator.query<HTMLAnchorElement>(`h2#${id} > a.section-anchor`);
 
@@ -66,6 +73,10 @@ describe('Unit Tests: PrimengButtonComponent', () => {
       expect(row.querySelector('.col-span-4')).toBeTruthy();
       expect(row.querySelector('.col-span-8')).toBeTruthy();
     });
+  });
+
+  it('should render disabled examples for the button variants', () => {
+    expect(spectator.queryAll<HTMLButtonElement>('button:disabled').length).toBeGreaterThan(0);
   });
 
   it('should scroll to anchor after initialization when fragment is emitted', () => {
