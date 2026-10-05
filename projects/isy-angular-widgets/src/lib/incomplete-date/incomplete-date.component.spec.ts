@@ -485,4 +485,28 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(requiredInput.hasAttribute('required')).toBeTrue();
     expect(requiredInput.getAttribute('aria-required')).toBe('true');
   });
+
+  it('should reset the inner ngModel dirty/touched state when the control is cleared via writeValue', () => {
+    const hostSpectator = createRequiredHostComponent();
+    hostSpectator.detectChanges();
+
+    const hostComponent = hostSpectator.component;
+    const incompleteDate = hostSpectator.query('isy-incomplete-date').componentInstance as IncompleteDateComponent;
+    const innerControl = incompleteDate['modelDirective'].control;
+
+    innerControl.setValue('15.05.2024');
+    innerControl.markAsDirty();
+    innerControl.markAsTouched();
+    hostSpectator.detectChanges();
+
+    expect(innerControl.dirty).toBeTrue();
+    expect(innerControl.touched).toBeTrue();
+
+    hostComponent.form.controls.dateOfEntry.reset();
+    hostSpectator.detectChanges();
+
+    expect(innerControl.dirty).toBeFalse();
+    expect(innerControl.touched).toBeFalse();
+    expect(innerControl.value).toBe('');
+  });
 });

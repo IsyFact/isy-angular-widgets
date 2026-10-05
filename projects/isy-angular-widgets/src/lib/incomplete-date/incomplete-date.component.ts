@@ -18,6 +18,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgControl,
+  NgModel,
   ValidationErrors,
   Validator,
   Validators
@@ -132,6 +133,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @ViewChild(InputMask) field?: InputMask;
 
+  @ViewChild(NgModel) private readonly modelDirective?: NgModel;
+
   lastKeyPressed = '';
   lastInputElement: HTMLInputElement | null = null;
 
@@ -191,6 +194,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   writeValue(value: string): void {
     this.inputValue = value;
+
+    if (value === '' && this.modelDirective?.control) {
+      this.modelDirective.control.markAsPristine();
+      this.modelDirective.control.markAsUntouched();
+    }
   }
 
   /**
