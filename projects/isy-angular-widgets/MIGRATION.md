@@ -136,6 +136,7 @@ Die folgenden Punkte betreffen ausschließlich die Weiterentwicklung des Reposit
 - **ESLint:** Die Flat-Config in `eslint.config.js` wurde an die exportierte Paketstruktur von Angular ESLint 22 angepasst. Veraltete Zugriffe auf `angular.configs.recommended.rules` bzw. `angularTemplate.configs.recommended.rules` führten sonst zu `Cannot read properties of undefined (reading 'recommended')`.
 - **Schematics-TSConfig:** `baseUrl` entfernt, `module` und `moduleResolution` auf `node16` gesetzt, um TS6-Deprecation-Fehler im Schematics-Build zu vermeiden.
 - **Extended Diagnostics:** `nullishCoalescingNotNullable` und `optionalChainNotNullable` wurden auf `suppress` gesetzt. Die allgemeine TypeScript-Typprüfung bleibt aktiv; die Suppressions sind nach weiteren Angular-22-Anpassungen erneut zu bewerten.
+
 ### Vitest-Migration der Bibliothekstests
 
 - Die Unit- und Komponententests der Widget-Bibliothek laufen unter der zentralen Root-Konfiguration `vitest.config.ts`.
