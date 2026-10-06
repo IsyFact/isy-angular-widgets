@@ -1,5 +1,6 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {SkipLinksComponent} from './skip-links.component';
+import {expect} from 'vitest';
 
 describe('SkipLinksComponent', () => {
   let spectator: Spectator<SkipLinksComponent>;
@@ -81,7 +82,7 @@ describe('SkipLinksComponent', () => {
 
   it('should handle empty links input gracefully', () => {
     spectator.component.links = [];
-    expect(spectator.component.links.length).toBe(0);
+    expect(spectator.component.links).toHaveLength(0);
   });
 
   it('should handle undefined ariaLabel input gracefully', () => {

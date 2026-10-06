@@ -1,6 +1,6 @@
 import {DashboardLinksnavigationComponent} from './dashboard-linksnavigation.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {PanelMenu} from 'primeng/panelmenu';
 
 describe('Integration Tests: DashboardLinksnavigationComponent', () => {

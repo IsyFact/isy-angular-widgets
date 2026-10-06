@@ -1,5 +1,5 @@
 import {MultiSelectButtonComponent} from './multi-select-button.component';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {AccordionModule} from 'primeng/accordion';
 import {SelectButton, SelectButtonModule} from 'primeng/selectbutton';
 import {FormsModule} from '@angular/forms';
@@ -13,6 +13,7 @@ import {
 } from '../../model/model';
 import {By} from '@angular/platform-browser';
 import {ComponentFixture} from '@angular/core/testing';
+import {vi} from 'vitest';
 
 let spectator: Spectator<MultiSelectButtonComponent>;
 let component: MultiSelectButtonComponent;
@@ -85,7 +86,7 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
   });
 
   it('should always have the correct value when clicking through multiple selections', () => {
-    spyOn(component, 'writeValue').and.callThrough();
+    const writeValueSpy = spyOn(component, 'writeValue');
     spyOn(component.valueChange, 'emit');
 
     bases.forEach((base: string) => {
@@ -93,6 +94,7 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
 
       expect(component.value).toEqual({group: 'baseChars', value: base});
       expect(component.valueChange.emit).toHaveBeenCalledWith({group: 'baseChars', value: base});
+      expect(writeValueSpy).toHaveBeenCalled();
     });
 
     groups.forEach((schriftzeichengruppe: Schriftzeichengruppe) => {
@@ -100,6 +102,7 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
 
       expect(component.value).toEqual({group: 'groups', value: schriftzeichengruppe});
       expect(component.valueChange.emit).toHaveBeenCalledWith({group: 'groups', value: schriftzeichengruppe});
+      expect(writeValueSpy).toHaveBeenCalled();
     });
   });
 
@@ -135,7 +138,7 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
   });
 
   it('should register onChange callback', () => {
-    const onChangeSpy = jasmine.createSpy('onChangeSpy');
+    const onChangeSpy = vi.fn();
 
     component.registerOnChange(onChangeSpy);
     component.onChange('A');
@@ -144,7 +147,7 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
   });
 
   it('should register onTouched callback', () => {
-    const onTouchedSpy = jasmine.createSpy('onTouchedSpy');
+    const onTouchedSpy = vi.fn();
 
     component.registerOnTouched(onTouchedSpy);
     component.onTouched();
@@ -155,7 +158,7 @@ describe('Unit Tests: MultiSelectButtonComponent', () => {
   it('should disable the component when setDisabledState is called with true', () => {
     component.setDisabledState(true);
 
-    expect(component.disabled).toBeTrue();
+    expect(component.disabled).toBe(true);
   });
 
   it('should have undefined value after all button click', () => {

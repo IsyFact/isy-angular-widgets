@@ -21,7 +21,7 @@ describe('App Routing Configuration', () => {
 
     const module = await route!.loadChildren!();
     expect(module).toBeDefined();
-    expect(Array.isArray(module)).toBeTrue();
+    expect(Array.isArray(module)).toBe(true);
   });
 
   it('should lazy load objektAnzeigenRoutes and be protected by canActivateAuth', async () => {
@@ -32,7 +32,7 @@ describe('App Routing Configuration', () => {
 
     const module = await route!.loadChildren!();
     expect(module).toBeDefined();
-    expect(Array.isArray(module)).toBeTrue();
+    expect(Array.isArray(module)).toBe(true);
   });
 
   it('should lazy load primengWidgetsRoutes and be protected by canActivateAuth', async () => {
@@ -43,7 +43,7 @@ describe('App Routing Configuration', () => {
 
     const module = await route!.loadChildren!();
     expect(module).toBeDefined();
-    expect(Array.isArray(module)).toBeTrue();
+    expect(Array.isArray(module)).toBe(true);
   });
 
   it('should load ObjektSuchenComponent with title and auth guard', async () => {

@@ -1,4 +1,4 @@
-import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator/vitest';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FormWrapperComponent} from './form-wrapper.component';
 import {FormWrapperFieldDirective} from './form-wrapper-field.directive';
@@ -70,12 +70,12 @@ describe('FormWrapperFieldDirective integration', () => {
 
     field!.id = 'fieldId';
 
-    const setAttributeSpy = spyOn(field!, 'setAttribute').and.callThrough();
+    const setAttributeSpy = spyOn(field!, 'setAttribute');
 
-    spectator.setHostInput('fieldId', 'fieldId');
-    spectator.detectChanges();
+    (spectator.hostComponent as {fieldId: string}).fieldId = 'fieldId';
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     expect(setAttributeSpy).not.toHaveBeenCalledWith('id', 'fieldId');
     expect(field).toHaveAttribute('id', 'fieldId');

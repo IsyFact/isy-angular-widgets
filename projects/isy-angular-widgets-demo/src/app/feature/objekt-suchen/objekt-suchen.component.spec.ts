@@ -6,8 +6,8 @@ import {Person} from '../../shared/model/person';
 import {getEmptyPerson} from './person-data';
 import {DateService} from './services/date.service';
 import {Observable, of} from 'rxjs';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {required} from '../../shared/validation/validator';
 import {provideRouter} from '@angular/router';
 
@@ -46,7 +46,7 @@ function expectFormControlsToBeDirty(form: FormGroup, isDirty: boolean): void {
  * @param form the form who must be checked
  */
 function expectFormIsValid(form: FormGroup): void {
-  expect(form.valid).toBeTrue();
+  expect(form.valid).toBe(true);
 }
 
 /**
@@ -116,8 +116,14 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   let spectator: Spectator<ObjektSuchenComponent>;
   const createComponent = createComponentFactory({
     component: ObjektSuchenComponent,
-    imports: [TranslateModule.forRoot()],
-    providers: [TranslateService, MessageService, provideRouter([])]
+    // The component maps the country list during construction, so the key has to resolve to an array.
+    imports: [
+      TranslateModule.forRoot({
+        fallbackLang: 'de',
+        loader: {provide: TranslateLoader, useValue: {getTranslation: () => of({primeng: {countries: []}})}}
+      })
+    ],
+    providers: [MessageService, provideRouter([])]
   });
 
   const getComponentAccess = (): ObjektSuchenComponentTestAccess =>
@@ -151,7 +157,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
    */
   function setupFormValues(): void {
     component.displayWizard();
-    expect(component.openWizard).toBeTrue();
+    expect(component.openWizard).toBe(true);
 
     component.initReactiveForms();
 
@@ -218,8 +224,8 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should check the status booleans on init', () => {
-    expect(component.openWizard).toBeFalse();
-    expect(component.isFormValid).toBeFalse();
+    expect(component.openWizard).toBe(false);
+    expect(component.isFormValid).toBe(false);
   });
 
   it('should check the actions after closing the wizard', () => {
@@ -256,7 +262,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
   it('should check the incoming save status - false (never arrives)', () => {
     component.getSavedStatus(false);
-    expect(component.openWizard).toBeFalse();
+    expect(component.openWizard).toBe(false);
   });
 
   it('should check the incoming save status - true (client clicks on wizard save button)', () => {
@@ -264,7 +270,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     setupEditForm(person);
 
     component.getSavedStatus(true);
-    expect(component.openWizard).toBeFalse();
+    expect(component.openWizard).toBe(false);
   });
 
   it('should check the functionality on arriving wizard index (on init => index = 0)', () => {
@@ -296,7 +302,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(geburtsdatum?.errors).not.toBeNull();
     expectFormValuesAreEmpty(birthForm, true);
 
-    expect(component.isFormValid).toBeFalse();
+    expect(component.isFormValid).toBe(false);
   });
 
   it('should check the functionality on arriving wizard index (index = 1)', () => {
@@ -309,7 +315,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expectFormValuesAreEmpty(currentForm, false);
 
     spectator.fixture.detectChanges();
-    expect(component.isFormValid).toBeFalse();
+    expect(component.isFormValid).toBe(false);
   });
 
   it('should check the functionality on arriving wizard index (index = 2)', () => {
@@ -322,7 +328,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     expectFormIsValid(currentForm);
     expectFormValuesAreEmpty(currentForm, false);
-    expect(component.isFormValid).toBeFalse();
+    expect(component.isFormValid).toBe(false);
   });
 
   it('should check the functionality on arriving wizard index (index = 3)', () => {
@@ -336,7 +342,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     expectFormIsValid(currentForm);
     expectFormValuesAreEmpty(currentForm, false);
-    expect(component.isFormValid).toBeTrue();
+    expect(component.isFormValid).toBe(true);
   });
 
   it('should check the id form validation on init', () => {
@@ -345,31 +351,31 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     id!.setValue('id');
     expect(id!.errors).toBeNull();
-    expect(form.valid).toBeTrue();
+    expect(form.valid).toBe(true);
 
     id!.setValue(1);
     expect(id!.errors).toBeNull();
-    expect(form.valid).toBeTrue();
+    expect(form.valid).toBe(true);
 
     id!.setValue('');
     expect(id!.errors).not.toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     id!.setValue(' ');
     expect(id!.errors).not.toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     id!.setValue('id');
     expect(id!.errors).toBeNull();
-    expect(form.valid).toBeTrue();
+    expect(form.valid).toBe(true);
 
     id!.setValue(germanCharsStr);
     expect(id!.errors).toBeNull();
-    expect(form.valid).toBeTrue();
+    expect(form.valid).toBe(true);
 
     id!.setValue(`${germanCharsStr}abcde12345`);
     expect(id!.errors).toBeNull();
-    expect(form.valid).toBeTrue();
+    expect(form.valid).toBe(true);
   });
 
   it('should check for the id form the values change event', () => {
@@ -378,7 +384,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     id!.setValue(validValue);
     expect(component.neuePerson.id).toEqual(validValue);
-    expect(component.idForm.valid).toBeTrue();
+    expect(component.idForm.valid).toBe(true);
     expect(id?.errors).toBeNull();
   });
 
@@ -388,55 +394,55 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     const geburtsort = component.geburtsInformationenForm.get('geburtsort');
     const staatsangehoerigkeit = component.geburtsInformationenForm.get('staatsangehoerigkeit');
     const geburtsdatum = component.geburtsInformationenForm.get('geburtsdatum');
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     expect(geburtsname!.errors).not.toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     expect(geburtsort!.errors).not.toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     expect(staatsangehoerigkeit!.errors).not.toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     expect(geburtsdatum!.errors).not.toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     geburtsname?.setValue('geburtsname');
     expect(geburtsname!.errors).toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     geburtsname!.setValue(germanCharsStr);
     expect(geburtsname!.errors).toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     geburtsort?.setValue('geburtsort');
     expect(geburtsort!.errors).toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     geburtsort!.setValue(germanCharsStr);
     expect(geburtsort!.errors).toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     staatsangehoerigkeit?.setValue('staatsangehoerigkeit');
     expect(staatsangehoerigkeit!.errors).toBeNull();
-    expect(form.valid).toBeFalse();
+    expect(form.valid).toBe(false);
 
     geburtsdatum?.setValue('11-10-2000');
     expect(geburtsdatum!.errors).toBeNull();
-    expect(form.valid).toBeTrue();
+    expect(form.valid).toBe(true);
   });
 
   it('should check the incoming open wizard event', () => {
-    expect(component.openWizard).toBeFalse();
+    expect(component.openWizard).toBe(false);
 
     component.displayWizard();
-    expect(component.openWizard).toBeTrue();
+    expect(component.openWizard).toBe(true);
 
-    expect(component.openWizard).toBeTrue();
+    expect(component.openWizard).toBe(true);
 
     component.displayWizard();
-    expect(component.openWizard).toBeFalse();
+    expect(component.openWizard).toBe(false);
   });
 
   it('should check the reactive forms init', () => {
@@ -464,21 +470,21 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should check the opening of the wizard while adding a new person', () => {
-    expect(component.openWizard).toBeFalse();
+    expect(component.openWizard).toBe(false);
     component.displayWizard();
-    expect(component.openWizard).toBeTrue();
+    expect(component.openWizard).toBe(true);
   });
 
   it('should check the opening of the wizard while adding a new person - embedded call', () => {
-    expect(component.openWizard).toBeFalse();
+    expect(component.openWizard).toBe(false);
     component.openAddNewObjectDialog(document.createElement('button'));
-    expect(component.openWizard).toBeTrue();
+    expect(component.openWizard).toBe(true);
   });
 
   it('should check the opening of the dialog for editing a person', () => {
-    expect(component.openWizard).toBeFalse();
+    expect(component.openWizard).toBe(false);
     component.openAddNewObjectDialog(document.createElement('button'));
-    expect(component.openWizard).toBeTrue();
+    expect(component.openWizard).toBe(true);
   });
 
   it('should check the cleared search functionality', () => {
@@ -491,7 +497,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
   it('should check the addition of a new person', () => {
     setupFormValues();
-    expect(component.openWizard).toBeTrue();
+    expect(component.openWizard).toBe(true);
 
     const person = getInitPerson();
     setupEditForm(person);
@@ -518,9 +524,9 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should check the edit of a person', () => {
-    expect(component.openWizard).toBeFalse();
+    expect(component.openWizard).toBe(false);
     component.openAddNewObjectDialog(document.createElement('button'));
-    expect(component.openWizard).toBeTrue();
+    expect(component.openWizard).toBe(true);
 
     const person = getInitPerson();
     expect(component.editForm).toBeUndefined();
@@ -553,8 +559,8 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(component.selectedPerson!.personalien.vorname).not.toEqual(component.editForm.controls.editVorname.value);
     component.saveChanges();
     expect(component.selectedPerson!.personalien.vorname).toEqual(component.editForm.controls.editVorname.value);
-    expect(component.openEditForm).toBeFalse();
-    expect(component.allowSave).toBeFalse();
+    expect(component.openEditForm).toBe(false);
+    expect(component.allowSave).toBe(false);
   });
 
   it('should check if save button is active', () => {
@@ -569,39 +575,39 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
       trigger: document.createElement('button')
     });
 
-    expect(component.allowSave).toBeFalse();
+    expect(component.allowSave).toBe(false);
     const storedValue = component.editForm.controls.editVorname.value;
     component.editForm.controls.editVorname.setValue('edit');
-    expect(component.allowSave).toBeTrue();
+    expect(component.allowSave).toBe(true);
     component.editForm.controls.editVorname.setValue(storedValue);
-    expect(component.allowSave).toBeFalse();
+    expect(component.allowSave).toBe(false);
   });
 
   it('should check if clear search button is active', () => {
     let enableClearSearch = component.enableClearSearch();
-    expect(enableClearSearch).toBeFalse();
+    expect(enableClearSearch).toBe(false);
     addNewEntryToPersonenList();
     enableClearSearch = component.enableClearSearch();
-    expect(enableClearSearch).toBeTrue();
+    expect(enableClearSearch).toBe(true);
   });
 
   it('should set loading to true immediately and false after delayed person search by id', fakeAsync(() => {
     const result = [getInitPerson()];
-    const findPersonByIdSpy = spyOn(component.personService, 'findPersonById').and.returnValue(of(result));
+    const findPersonByIdSpy = spyOn(component.personService, 'findPersonById').mockReturnValue(of(result));
 
     component.person.id = '123';
 
     component.findPerson();
 
-    expect(component.tbLoadingStatus).toBeTrue();
+    expect(component.tbLoadingStatus).toBe(true);
 
     tick(2999);
-    expect(component.tbLoadingStatus).toBeTrue();
+    expect(component.tbLoadingStatus).toBe(true);
     expect(findPersonByIdSpy).not.toHaveBeenCalled();
 
     tick(1);
     expect(findPersonByIdSpy).toHaveBeenCalledWith('123');
-    expect(component.tbLoadingStatus).toBeFalse();
+    expect(component.tbLoadingStatus).toBe(false);
 
     let actualResult: Person[] | undefined;
     component.personen$.subscribe((personen) => {
@@ -613,7 +619,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
   it('should search by parameters when no id is set', fakeAsync(() => {
     const result = [getInitPerson()];
-    const findPersonenByParametersSpy = spyOn(component.personService, 'findPersonenByParameters').and.returnValue(
+    const findPersonenByParametersSpy = spyOn(component.personService, 'findPersonenByParameters').mockReturnValue(
       of(result)
     );
 
@@ -621,15 +627,15 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
 
     component.findPerson();
 
-    expect(component.tbLoadingStatus).toBeTrue();
+    expect(component.tbLoadingStatus).toBe(true);
 
     tick(2999);
-    expect(component.tbLoadingStatus).toBeTrue();
+    expect(component.tbLoadingStatus).toBe(true);
     expect(findPersonenByParametersSpy).not.toHaveBeenCalled();
 
     tick(1);
     expect(findPersonenByParametersSpy).toHaveBeenCalledWith(component.person);
-    expect(component.tbLoadingStatus).toBeFalse();
+    expect(component.tbLoadingStatus).toBe(false);
 
     let actualResult: Person[] | undefined;
     component.personen$.subscribe((personen) => {
@@ -640,13 +646,13 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   }));
 
   it('should call findPerson when the search button is clicked', () => {
-    const findPersonSpy = spyOn(component, 'findPerson');
+    const findPersonSpy = spyOn(component, 'findPerson').mockImplementation(() => undefined);
 
     const searchButton = spectator.query('#search-button button') as HTMLButtonElement;
     spectator.click(searchButton);
 
     expect(findPersonSpy).toHaveBeenCalled();
-    expect(component.tbLoadingStatus).toBeFalse();
+    expect(component.tbLoadingStatus).toBe(false);
   });
 
   it('form control should be dirty after focus', () => {
@@ -667,9 +673,9 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should mark form as dirty on focus', () => {
-    expect(component.idForm.controls.id.dirty).toBeFalse();
+    expect(component.idForm.controls.id.dirty).toBe(false);
     component.onFormControlFocus(component.idForm.controls.id);
-    expect(component.idForm.controls.id.dirty).toBeTrue();
+    expect(component.idForm.controls.id.dirty).toBe(true);
   });
 
   it('should setup countries again after language change', () => {
@@ -693,7 +699,7 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     spectator.component.displayEditDialog();
     spectator.detectChanges();
     const element = spectator.query('[role="dialog"] button[aria-label]') as HTMLElement;
-    expect(element.hasAttribute('aria-label')).toBeTrue();
+    expect(element.hasAttribute('aria-label')).toBe(true);
   });
 
   it('should print the open edit dialog with current values and actions in its footer', () => {
@@ -721,24 +727,20 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
     expect(spectator.queryAll('.edit-dialog-actions p-button')).toHaveLength(2);
 
     for (const [fieldId, value] of expectedFields) {
-      expect(spectator.query(`label[for="${fieldId}"]`))
-        .withContext(`label for ${fieldId}`)
-        .toBeTruthy();
-      expect((spectator.query(`#${fieldId}`) as HTMLInputElement).value)
-        .withContext(fieldId)
-        .toBe(value);
+      expect(spectator.query(`label[for="${fieldId}"]`), `label for ${fieldId}`).toBeTruthy();
+      expect((spectator.query(`#${fieldId}`) as HTMLInputElement).value, fieldId).toBe(value);
     }
   });
 
   it('should have isCollapsed set to false by default', () => {
-    expect(spectator.component.isCollapsed).toBeFalse();
+    expect(spectator.component.isCollapsed).toBe(false);
   });
 
   it('should toggle isCollapsed to true when clicked', () => {
     const panelButton = spectator.query('button.p-panel-toggle-button') as HTMLButtonElement;
     panelButton.click();
     spectator.fixture.detectChanges();
-    expect(spectator.component.isCollapsed).toBeTrue();
+    expect(spectator.component.isCollapsed).toBe(true);
   });
 
   it('should have table column multiselect checkbox label', () => {

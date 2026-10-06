@@ -1,9 +1,10 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {provideRouter, Router} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {ToolbarModule} from 'primeng/toolbar';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
 import {SeitentoolbarComponent} from './seitentoolbar.component';
+import {expect, vi} from 'vitest';
 
 describe('SeitentoolbarComponent', () => {
   let spectator: Spectator<SeitentoolbarComponent>;
@@ -153,14 +154,14 @@ describe('SeitentoolbarComponent', () => {
     spectator.fixture.componentRef.setInput('responsive', '');
     spectator.detectChanges();
 
-    expect(component.responsive).toBeTrue();
+    expect(component.responsive).toBe(true);
   });
 
   it('should transform the string value false to false', () => {
     spectator.fixture.componentRef.setInput('responsive', 'false');
     spectator.detectChanges();
 
-    expect(component.responsive).toBeFalse();
+    expect(component.responsive).toBe(false);
   });
 
   it('should add the responsive CSS class when responsive is true', () => {
@@ -171,7 +172,7 @@ describe('SeitentoolbarComponent', () => {
 
     const toolbarElement = getRequiredElement<HTMLElement>('p-toolbar');
 
-    expect(toolbarElement.classList.contains('isy-seiten-toolbar-responsive')).toBeTrue();
+    expect(toolbarElement.classList.contains('isy-seiten-toolbar-responsive')).toBe(true);
   });
 
   it('should not add the responsive CSS class when responsive is false', () => {
@@ -182,7 +183,7 @@ describe('SeitentoolbarComponent', () => {
 
     const toolbarElement = getRequiredElement<HTMLElement>('p-toolbar');
 
-    expect(toolbarElement.classList.contains('isy-seiten-toolbar-responsive')).toBeFalse();
+    expect(toolbarElement.classList.contains('isy-seiten-toolbar-responsive')).toBe(false);
   });
 
   it('should render the home button with an icon', () => {
@@ -190,8 +191,8 @@ describe('SeitentoolbarComponent', () => {
 
     const iconElement = getRequiredElement<HTMLElement>('.p-button-icon');
 
-    expect(iconElement.classList.contains('pi')).toBeTrue();
-    expect(iconElement.classList.contains('pi-arrow-circle-left')).toBeTrue();
+    expect(iconElement.classList.contains('pi')).toBe(true);
+    expect(iconElement.classList.contains('pi-arrow-circle-left')).toBe(true);
   });
 
   it('should keep an accessible label when responsive is enabled', () => {
@@ -208,7 +209,7 @@ describe('SeitentoolbarComponent', () => {
   });
 
   it('should navigate home when navigateHome is called', async () => {
-    const navigateSpy = spyOn(mockRouter, 'navigate').and.returnValue(Promise.resolve(true));
+    const navigateSpy = vi.spyOn(mockRouter, 'navigate').mockResolvedValue(true);
 
     await component.navigateHome();
 
@@ -219,7 +220,7 @@ describe('SeitentoolbarComponent', () => {
     const testRoute = '/custom-home';
     spectator.setInput('sidebarHomeRoute', testRoute);
 
-    const navigateSpy = spyOn(mockRouter, 'navigate').and.returnValue(Promise.resolve(true));
+    const navigateSpy = vi.spyOn(mockRouter, 'navigate').mockResolvedValue(true);
 
     await component.navigateHome();
 
@@ -229,7 +230,7 @@ describe('SeitentoolbarComponent', () => {
   it('should navigate to the configured route when the home button is clicked', async () => {
     const testRoute = '/custom-home';
 
-    const navigateSpy = spyOn(mockRouter, 'navigate').and.returnValue(Promise.resolve(true));
+    const navigateSpy = vi.spyOn(mockRouter, 'navigate').mockResolvedValue(true);
 
     spectator.setInput({
       showSidebar: true,

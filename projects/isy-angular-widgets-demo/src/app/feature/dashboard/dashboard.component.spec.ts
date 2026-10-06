@@ -1,6 +1,6 @@
 import {DashboardComponent} from './dashboard.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 
 describe('Integration Tests: DashboardComponent', () => {
   const GERMAN_LANGUAGE = 'de';
@@ -54,13 +54,13 @@ describe('Integration Tests: DashboardComponent', () => {
 
   describe('with translations functionality', () => {
     it('should request german as initial language', () => {
-      const useSpy = spyOn(component.translate, 'use').and.callThrough();
+      const useSpy = spyOn(component.translate, 'use');
       component.ngOnInit?.();
       expect(useSpy).toHaveBeenCalledWith(GERMAN_LANGUAGE);
     });
 
     it('should change the current language', () => {
-      const useSpy = spyOn(component.translate, 'use').and.callThrough();
+      const useSpy = spyOn(component.translate, 'use');
       component.changeLanguage(ENGLISH_LANGUAGE);
       expect(useSpy).toHaveBeenCalledWith(ENGLISH_LANGUAGE);
     });

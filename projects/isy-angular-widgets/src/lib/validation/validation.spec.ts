@@ -1,5 +1,6 @@
 import {Validation} from './validation';
 import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {expect} from 'vitest';
 
 interface ToDateCapable {
   toDate: () => Date;
@@ -578,7 +579,7 @@ describe('Unit Test: Validation', () => {
         const d = new Date();
         const parsed = parseDateValue(d);
         expect(parsed).not.toBeNull();
-        expect(parsed instanceof Date).toBeTrue();
+        expect(parsed).toBeInstanceOf(Date);
       });
 
       it('should return null for Invalid Date instance', () => {
@@ -659,44 +660,44 @@ describe('Unit Test: Validation', () => {
       ) => boolean;
 
       it('should validate YYYY-MM-DD in strict and non-strict mode', () => {
-        expect(isValidByFormat('2026-02-03', 'YYYY-MM-DD', true)).toBeTrue();
-        expect(isValidByFormat('2026-2-3', 'YYYY-MM-DD', false)).toBeTrue();
-        expect(isValidByFormat('2026-13-01', 'YYYY-MM-DD', true)).toBeFalse();
-        expect(isValidByFormat('2026-02-30', 'YYYY-MM-DD', true)).toBeFalse();
+        expect(isValidByFormat('2026-02-03', 'YYYY-MM-DD', true)).toBe(true);
+        expect(isValidByFormat('2026-2-3', 'YYYY-MM-DD', false)).toBe(true);
+        expect(isValidByFormat('2026-13-01', 'YYYY-MM-DD', true)).toBe(false);
+        expect(isValidByFormat('2026-02-30', 'YYYY-MM-DD', true)).toBe(false);
       });
 
       it('should validate DD.MM.YYYY strict and non-strict partials', () => {
-        expect(isValidByFormat('03.02.2026', 'DD.MM.YYYY', true)).toBeTrue();
-        expect(isValidByFormat('3.2.', 'DD.MM.YYYY', false)).toBeTrue();
-        expect(isValidByFormat('31.04.2026', 'DD.MM.YYYY', true)).toBeFalse(); // April has 30 days
+        expect(isValidByFormat('03.02.2026', 'DD.MM.YYYY', true)).toBe(true);
+        expect(isValidByFormat('3.2.', 'DD.MM.YYYY', false)).toBe(true);
+        expect(isValidByFormat('31.04.2026', 'DD.MM.YYYY', true)).toBe(false); // April has 30 days
       });
 
       it('should validate HH:mm:ss strict and non-strict', () => {
-        expect(isValidByFormat('12:30:50', 'HH:mm:ss', true)).toBeTrue();
-        expect(isValidByFormat('1:2:3', 'HH:mm:ss', false)).toBeTrue();
-        expect(isValidByFormat('24:00:00', 'HH:mm:ss', true)).toBeFalse();
-        expect(isValidByFormat('23:60:00', 'HH:mm:ss', true)).toBeFalse();
+        expect(isValidByFormat('12:30:50', 'HH:mm:ss', true)).toBe(true);
+        expect(isValidByFormat('1:2:3', 'HH:mm:ss', false)).toBe(true);
+        expect(isValidByFormat('24:00:00', 'HH:mm:ss', true)).toBe(false);
+        expect(isValidByFormat('23:60:00', 'HH:mm:ss', true)).toBe(false);
       });
 
       it('should validate YYYY-MM-DDTHH:mm:ss[Z] (literal Z only)', () => {
-        expect(isValidByFormat('1997-01-01T09:28:00Z', 'YYYY-MM-DDTHH:mm:ss[Z]', true)).toBeTrue();
-        expect(isValidByFormat('1997-01-01T09:28:00+01:00', 'YYYY-MM-DDTHH:mm:ss[Z]', true)).toBeFalse();
-        expect(isValidByFormat('1997-01-01T09:28:61Z', 'YYYY-MM-DDTHH:mm:ss[Z]', true)).toBeFalse();
+        expect(isValidByFormat('1997-01-01T09:28:00Z', 'YYYY-MM-DDTHH:mm:ss[Z]', true)).toBe(true);
+        expect(isValidByFormat('1997-01-01T09:28:00+01:00', 'YYYY-MM-DDTHH:mm:ss[Z]', true)).toBe(false);
+        expect(isValidByFormat('1997-01-01T09:28:61Z', 'YYYY-MM-DDTHH:mm:ss[Z]', true)).toBe(false);
       });
 
       it('should validate MM/YY', () => {
-        expect(isValidByFormat('01/26', 'MM/YY', true)).toBeTrue();
-        expect(isValidByFormat('13/26', 'MM/YY', true)).toBeFalse();
-        expect(isValidByFormat('1/26', 'MM/YY', true)).toBeFalse(); // strict requires 2 digits
+        expect(isValidByFormat('01/26', 'MM/YY', true)).toBe(true);
+        expect(isValidByFormat('13/26', 'MM/YY', true)).toBe(false);
+        expect(isValidByFormat('1/26', 'MM/YY', true)).toBe(false); // strict requires 2 digits
       });
 
       it('should not guess unknown formats in strict mode', () => {
-        expect(isValidByFormat('2026-02-03', 'SOME_UNKNOWN_FORMAT', true)).toBeFalse();
+        expect(isValidByFormat('2026-02-03', 'SOME_UNKNOWN_FORMAT', true)).toBe(false);
       });
 
       it('should use native Date parsing for unknown formats in non-strict mode', () => {
         // ISO date-time is reliably parseable
-        expect(isValidByFormat('2030-01-01T00:00:00Z', 'SOME_UNKNOWN_FORMAT', false)).toBeTrue();
+        expect(isValidByFormat('2030-01-01T00:00:00Z', 'SOME_UNKNOWN_FORMAT', false)).toBe(true);
       });
     });
 
