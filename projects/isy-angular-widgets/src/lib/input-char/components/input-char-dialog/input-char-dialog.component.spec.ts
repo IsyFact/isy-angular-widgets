@@ -308,7 +308,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
         (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === grundzeichen
       );
 
-      expect(component.displayedCharacters.length).toEqual(expected.length);
+      expect(component.displayedCharacters).toHaveSize(expected.length);
 
       for (const char of component.displayedCharacters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(grundzeichen);
@@ -322,7 +322,7 @@ describe('Unit Tests: InputCharDialogComponent', () => {
 
       const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === schriftzeichengruppe);
 
-      expect(component.displayedCharacters.length).toEqual(expected.length);
+      expect(component.displayedCharacters).toHaveSize(expected.length);
 
       for (const character of component.displayedCharacters) {
         expect(character.schriftzeichengruppe).toEqual(schriftzeichengruppe);
@@ -366,13 +366,13 @@ describe('Integration Tests: InputCharDialogComponent', () => {
   it(`should show ${bases.length} available bases`, () => {
     const baseButtons = spectator.queryAll('.charset-selectbutton-0 p-togglebutton');
 
-    expect(baseButtons.length).toEqual(bases.length);
+    expect(baseButtons).toHaveSize(bases.length);
   });
 
   it(`should show ${groups.length} available groups`, () => {
     const groupButtons = spectator.queryAll('.charset-selectbutton-1 p-togglebutton');
 
-    expect(groupButtons.length).toEqual(groups.length);
+    expect(groupButtons).toHaveSize(groups.length);
   });
 
   it('should filter characters by a few representative bases (integration)', () => {
@@ -390,7 +390,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
         (char) => (char.grundzeichen === '' ? '*' : char.grundzeichen) === base
       );
 
-      expect(grid.characters.length).toEqual(expected.length);
+      expect(grid.characters).toHaveSize(expected.length);
 
       for (const char of grid.characters) {
         expect(char.grundzeichen === '' ? '*' : char.grundzeichen).toEqual(base);
@@ -411,7 +411,7 @@ describe('Integration Tests: InputCharDialogComponent', () => {
 
       const expected = sonderzeichenListe.filter((char) => char.schriftzeichengruppe === group);
 
-      expect(grid.characters.length).toEqual(expected.length);
+      expect(grid.characters).toHaveSize(expected.length);
 
       for (const character of grid.characters) {
         expect(character.schriftzeichengruppe).toEqual(group);

@@ -4,6 +4,8 @@
 - IFS-4930: Die Widgets`isy-wizard` und `isy-input-char` wurden für die Darstellung mit einer Mindestbreite von 320px optimiert.
 ## Demo-Anwendung
 - IFS-4930: Die Seiten _Objekt anzeigen_ und _Objekt bearbeiten_ der Demo-Anwendung wurden für eine Viewport-Breite von 320 px optimiert
+## Fixes
+- IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert
 
 # 22.1.0-next.1 - 10.09.2026
 ## Features
