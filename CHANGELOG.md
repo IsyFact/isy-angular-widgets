@@ -3,6 +3,8 @@
 - IFS-5737: Disabled-States für Buttons und Formularelemente im IsyFact-Theme wurden farblich vereinheitlicht
 ## Demo-Anwendung
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
+## Fixes
+- IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert
 
 # 21.3.0 - 10.09.2026
 ## Features
@@ -15,7 +17,6 @@
   * `stepStates`
   * Deaktivierte Schritte werden visuell markiert, können per Klick nicht aktiviert werden und unterstützen Tooltip- sowie Screenreader-Texte
 ## Fixes
-- IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert
 - IFS-5702: Die Screenreader-Unterstützung der InputCharComponent wurde durch vollständige, überschreibbare ARIA-Beschriftungen verbessert
 - IFS-5714: Fallback-Text für ungültige Eingaben aus dem `WidgetsConfigService` kann nun von konsumierenden Anwendungen per Übersetzung überschrieben werden
 - IFS-2925: Das Label des `Alle`-Buttons der `InputCharComponent` wird nun bei Sprachwechsel aktualisiert
