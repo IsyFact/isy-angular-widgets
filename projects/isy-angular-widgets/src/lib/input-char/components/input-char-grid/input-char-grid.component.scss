@@ -41,6 +41,10 @@
   z-index: 1;
 }
 
+.character-option.selected:hover:not(.disabled) {
+  background: var(--p-primary-hover-color, var(--p-primary-color, #1a73e8));
+}
+
 .character-option.disabled {
   cursor: default;
   opacity: 0.5;
