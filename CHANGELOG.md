@@ -11,6 +11,8 @@
 - IFS-5387: Die Tests der Demo-Anwendung wurden auf Vitest migriert (`npm run test:demo:vitest*`); die bisherige Testkonfiguration und ihre Abhängigkeiten wurden entfernt
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
 - IFS-4930: Die Seiten _Objekt anzeigen_ und _Objekt bearbeiten_ der Demo-Anwendung wurden für eine Viewport-Breite von 320 px optimiert
+## Fixes
+- IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert
 
 # 22.1.0-next.1 - 10.09.2026
 ## Features

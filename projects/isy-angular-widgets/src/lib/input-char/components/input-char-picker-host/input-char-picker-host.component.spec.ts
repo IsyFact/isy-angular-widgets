@@ -433,6 +433,17 @@ describe('Unit Tests: InputCharPickerHostComponent', () => {
     );
   });
 
+  it('should assign a dedicated styleClass to the dialog for responsive padding overrides', () => {
+    state.set(createPickerState());
+    visible.set(true);
+    render();
+
+    const dialogEl = spectator.fixture.debugElement.query(By.css('p-dialog'));
+    const dialogStyleClass = dialogEl?.componentInstance?.styleClass;
+
+    expect(dialogStyleClass).toBe('input-char-picker-dialog');
+  });
+
   describe('aria-label handling', () => {
     it('should use default closeAriaLabel from configService when closePickerAriaLabel is not provided', () => {
       state.set(createPickerState());
