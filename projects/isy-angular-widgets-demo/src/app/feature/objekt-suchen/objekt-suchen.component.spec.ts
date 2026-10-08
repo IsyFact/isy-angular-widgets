@@ -686,11 +686,9 @@ describe('Integration Tests: PersonenSuchenComponent', () => {
   });
 
   it('should find persons', () => {
-    const searchButtonSpy = spyOn(component, 'findPerson');
+    const searchButtonSpy = spyOn(component, 'findPerson').mockImplementation(() => undefined);
 
-    const searchButton = spectator.query('#search-button') as HTMLButtonElement;
-    searchButton.addEventListener('onClick', component.findPerson);
-    searchButton.dispatchEvent(new MouseEvent('onClick'));
+    spectator.click('#search-button button');
 
     expect(searchButtonSpy).toHaveBeenCalled();
   });
