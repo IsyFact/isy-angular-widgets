@@ -286,20 +286,23 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should render checkbox examples in horizontal and vertical fieldsets with four items each', () => {
-    expect(spectator.query('.checkbox-group-horizontal')).toBeTruthy();
-    expect(spectator.query('.checkbox-group-vertical')).toBeTruthy();
+    const checkboxGroups = [
+      {container: spectator.query<HTMLElement>('.checkbox-group-horizontal'), idPrefix: 'checkbox-horizontal'},
+      {container: spectator.query<HTMLElement>('.checkbox-group-vertical'), idPrefix: 'checkbox-vertical'}
+    ];
 
-    const horizontalIds = [1, 2, 3, 4].map((index) => `#checkbox-horizontal-${index}`);
-    const verticalIds = [1, 2, 3, 4].map((index) => `#checkbox-vertical-${index}`);
+    checkboxGroups.forEach(({container, idPrefix}) => {
+      expect(container).toBeTruthy();
 
-    horizontalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('checkbox');
-    });
+      const inputs = container?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
 
-    verticalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('checkbox');
+      expect(inputs).toHaveLength(4);
+      inputs?.forEach((input, index) => {
+        const id = `${idPrefix}-${index + 1}`;
+
+        expect(input.id).toBe(id);
+        expect(container?.querySelector<HTMLLabelElement>(`label[for="${id}"]`)?.textContent).toContain('checkbox');
+      });
     });
   });
 
