@@ -75,30 +75,22 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should expose a linkable heading per widget', async () => {
-    await vi.waitFor(
-      () => {
-        spectator.detectChanges();
-        expect(spectator.queryAll<HTMLAnchorElement>('h3 > a')).toHaveLength(widgetAnchorIds.length);
-      },
-      {timeout: 10000}
-    );
+  it('should expose a linkable heading per widget', () => {
+    const headings = spectator.queryAll<HTMLHeadingElement>('h3.section-heading');
 
-    const headingLinks = spectator.queryAll<HTMLAnchorElement>('h3 > a');
+    expect(headings).toHaveLength(widgetAnchorIds.length);
 
-    expect(headingLinks).toHaveLength(widgetAnchorIds.length);
+    const headingsById = new Map(headings.map((heading) => [heading.id, heading]));
 
     widgetAnchorIds.forEach((id) => {
-      const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
+      const heading = headingsById.get(id);
+      const anchorLink = heading?.querySelector<HTMLAnchorElement>('a.section-anchor');
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchorLink).toBeTruthy();
-      expect(anchorLink?.classList.contains('section-anchor')).toBe(true);
       expect(anchorLink?.textContent?.trim()).toBe('🔗');
     });
-  });
+  }, 15000);
 
   it('should render widgets in a single-column layout', () => {
     expect(spectator.queryAll('[class*="xl:col-"]')).toHaveLength(0);
@@ -263,7 +255,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should render disabled textarea and dropdown examples', () => {
-    expect(spectator.query<HTMLTextAreaElement>('#textarea-disabled')?.disabled).toBeTrue();
+    expect(spectator.query<HTMLTextAreaElement>('#textarea-disabled')?.disabled).toBe(true);
     expect(spectator.query('#dropdown-input-disabled')).toBeTruthy();
   });
 
@@ -294,51 +286,57 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should render checkbox examples in horizontal and vertical fieldsets with four items each', () => {
-    expect(spectator.query('.checkbox-group-horizontal')).toBeTruthy();
-    expect(spectator.query('.checkbox-group-vertical')).toBeTruthy();
+    const checkboxGroups = [
+      {container: spectator.query<HTMLElement>('.checkbox-group-horizontal'), idPrefix: 'checkbox-horizontal'},
+      {container: spectator.query<HTMLElement>('.checkbox-group-vertical'), idPrefix: 'checkbox-vertical'}
+    ];
 
-    const horizontalIds = [1, 2, 3, 4].map((index) => `#checkbox-horizontal-${index}`);
-    const verticalIds = [1, 2, 3, 4].map((index) => `#checkbox-vertical-${index}`);
+    checkboxGroups.forEach(({container, idPrefix}) => {
+      expect(container).toBeTruthy();
 
-    horizontalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('checkbox');
-    });
+      const inputs = container?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
 
-    verticalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('checkbox');
+      expect(inputs).toHaveLength(4);
+      inputs?.forEach((input, index) => {
+        const id = `${idPrefix}-${index + 1}`;
+
+        expect(input.id).toBe(id);
+        expect(container?.querySelector<HTMLLabelElement>(`label[for="${id}"]`)?.textContent).toContain('checkbox');
+      });
     });
   });
 
   it('should render radio button examples in horizontal and vertical fieldsets with four items each', () => {
-    expect(spectator.query('.radio-group-horizontal')).toBeTruthy();
-    expect(spectator.query('.radio-group-vertical')).toBeTruthy();
+    const radioGroups = [
+      {container: spectator.query<HTMLElement>('.radio-group-horizontal'), idPrefix: 'radio-horizontal'},
+      {container: spectator.query<HTMLElement>('.radio-group-vertical'), idPrefix: 'radio-vertical'}
+    ];
 
-    const horizontalIds = [1, 2, 3, 4].map((index) => `#radio-horizontal-${index}`);
-    const verticalIds = [1, 2, 3, 4].map((index) => `#radio-vertical-${index}`);
+    radioGroups.forEach(({container, idPrefix}) => {
+      expect(container).toBeTruthy();
 
-    horizontalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
-    });
+      const inputs = container?.querySelectorAll<HTMLInputElement>('input[type="radio"]');
 
-    verticalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
+      expect(inputs).toHaveLength(4);
+      inputs?.forEach((input, index) => {
+        const id = `${idPrefix}-${index + 1}`;
+
+        expect(input.id).toBe(id);
+        expect(container?.querySelector<HTMLLabelElement>(`label[for="${id}"]`)?.textContent).toContain('radioButton');
+      });
     });
   });
 
   it('should render disabled radio button examples', () => {
     expect(spectator.query('.radio-group-disabled')).toBeTruthy();
-    expect(spectator.query<HTMLInputElement>('#radio-disabled-1')?.disabled).toBeTrue();
-    expect(spectator.query<HTMLInputElement>('#radio-disabled-2')?.disabled).toBeTrue();
+    expect(spectator.query<HTMLInputElement>('#radio-disabled-1')?.disabled).toBe(true);
+    expect(spectator.query<HTMLInputElement>('#radio-disabled-2')?.disabled).toBe(true);
   });
 
   it('should render a disabled toggle switch example', () => {
     const disabledSwitch = spectator.query<HTMLInputElement>('#inputSwitchDisabled');
 
     expect(disabledSwitch).toBeTruthy();
-    expect(disabledSwitch?.disabled).toBeTrue();
+    expect(disabledSwitch?.disabled).toBe(true);
   });
 });

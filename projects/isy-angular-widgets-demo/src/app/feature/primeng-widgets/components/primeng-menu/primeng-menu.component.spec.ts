@@ -87,14 +87,15 @@ describe('Unit Tests: PrimengMenuComponent', () => {
   });
 
   it('should render all section headings with hover-only anchor symbols', () => {
-    sectionAnchorIds.forEach((id) => {
-      const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
+    const headings = spectator.queryAll<HTMLHeadingElement>('h3.section-heading');
 
-      expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBe(true);
+    expect(headings).toHaveLength(sectionAnchorIds.length);
+
+    headings.forEach((heading, index) => {
+      const anchor = heading.querySelector<HTMLAnchorElement>('a.section-anchor');
+
+      expect(heading.id).toBe(sectionAnchorIds[index]);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBe(true);
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
