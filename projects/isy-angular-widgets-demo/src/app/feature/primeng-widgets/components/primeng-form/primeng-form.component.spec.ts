@@ -75,15 +75,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should expose a linkable heading per widget', async () => {
-    await vi.waitFor(
-      () => {
-        spectator.detectChanges();
-        expect(spectator.queryAll<HTMLAnchorElement>('h3 > a')).toHaveLength(widgetAnchorIds.length);
-      },
-      {timeout: 10000}
-    );
-
+  it('should expose a linkable heading per widget', () => {
     const headingLinks = spectator.queryAll<HTMLAnchorElement>('h3 > a');
 
     expect(headingLinks).toHaveLength(widgetAnchorIds.length);
