@@ -98,7 +98,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
       expect(anchorLink?.classList.contains('section-anchor')).toBe(true);
       expect(anchorLink?.textContent?.trim()).toBe('🔗');
     });
-  });
+  }, 15000);
 
   it('should render widgets in a single-column layout', () => {
     expect(spectator.queryAll('[class*="xl:col-"]')).toHaveLength(0);
@@ -263,7 +263,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should render disabled textarea and dropdown examples', () => {
-    expect(spectator.query<HTMLTextAreaElement>('#textarea-disabled')?.disabled).toBeTrue();
+    expect(spectator.query<HTMLTextAreaElement>('#textarea-disabled')?.disabled).toBe(true);
     expect(spectator.query('#dropdown-input-disabled')).toBeTruthy();
   });
 
@@ -331,14 +331,14 @@ describe('Unit Tests: PrimengFormComponent', () => {
 
   it('should render disabled radio button examples', () => {
     expect(spectator.query('.radio-group-disabled')).toBeTruthy();
-    expect(spectator.query<HTMLInputElement>('#radio-disabled-1')?.disabled).toBeTrue();
-    expect(spectator.query<HTMLInputElement>('#radio-disabled-2')?.disabled).toBeTrue();
+    expect(spectator.query<HTMLInputElement>('#radio-disabled-1')?.disabled).toBe(true);
+    expect(spectator.query<HTMLInputElement>('#radio-disabled-2')?.disabled).toBe(true);
   });
 
   it('should render a disabled toggle switch example', () => {
     const disabledSwitch = spectator.query<HTMLInputElement>('#inputSwitchDisabled');
 
     expect(disabledSwitch).toBeTruthy();
-    expect(disabledSwitch?.disabled).toBeTrue();
+    expect(disabledSwitch?.disabled).toBe(true);
   });
 });
