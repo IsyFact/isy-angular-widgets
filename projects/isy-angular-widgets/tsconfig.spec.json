@@ -4,10 +4,7 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
     "resolveJsonModule": true,
-<<<<<<< HEAD
     "skipLibCheck": true,
-=======
->>>>>>> develop
     "types": ["vitest/globals", "node"]
   },
   "files": ["../../vitest-globals.d.ts"],
