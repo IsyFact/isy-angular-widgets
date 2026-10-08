@@ -76,18 +76,18 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should expose a linkable heading per widget', () => {
-    const headingLinks = spectator.queryAll<HTMLAnchorElement>('h3 > a');
+    const headings = spectator.queryAll<HTMLHeadingElement>('h3.section-heading');
 
-    expect(headingLinks).toHaveLength(widgetAnchorIds.length);
+    expect(headings).toHaveLength(widgetAnchorIds.length);
+
+    const headingsById = new Map(headings.map((heading) => [heading.id, heading]));
 
     widgetAnchorIds.forEach((id) => {
-      const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
+      const heading = headingsById.get(id);
+      const anchorLink = heading?.querySelector<HTMLAnchorElement>('a.section-anchor');
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchorLink).toBeTruthy();
-      expect(anchorLink?.classList.contains('section-anchor')).toBe(true);
       expect(anchorLink?.textContent?.trim()).toBe('🔗');
     });
   }, 15000);
@@ -304,20 +304,23 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should render radio button examples in horizontal and vertical fieldsets with four items each', () => {
-    expect(spectator.query('.radio-group-horizontal')).toBeTruthy();
-    expect(spectator.query('.radio-group-vertical')).toBeTruthy();
+    const radioGroups = [
+      {container: spectator.query<HTMLElement>('.radio-group-horizontal'), idPrefix: 'radio-horizontal'},
+      {container: spectator.query<HTMLElement>('.radio-group-vertical'), idPrefix: 'radio-vertical'}
+    ];
 
-    const horizontalIds = [1, 2, 3, 4].map((index) => `#radio-horizontal-${index}`);
-    const verticalIds = [1, 2, 3, 4].map((index) => `#radio-vertical-${index}`);
+    radioGroups.forEach(({container, idPrefix}) => {
+      expect(container).toBeTruthy();
 
-    horizontalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
-    });
+      const inputs = container?.querySelectorAll<HTMLInputElement>('input[type="radio"]');
 
-    verticalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
+      expect(inputs).toHaveLength(4);
+      inputs?.forEach((input, index) => {
+        const id = `${idPrefix}-${index + 1}`;
+
+        expect(input.id).toBe(id);
+        expect(container?.querySelector<HTMLLabelElement>(`label[for="${id}"]`)?.textContent).toContain('radioButton');
+      });
     });
   });
 

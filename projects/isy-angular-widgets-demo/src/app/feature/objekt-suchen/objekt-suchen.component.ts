@@ -1,4 +1,4 @@
-import {afterNextRender, Component, inject, Injector, ChangeDetectionStrategy} from '@angular/core';
+import {afterNextRender, Component, inject, Injector, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
 import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {Person, Personalien, PersonId} from '../../shared/model/person';
@@ -61,7 +61,7 @@ const defaultWidth = 60;
     WizardDirective
   ]
 })
-export class ObjektSuchenComponent {
+export class ObjektSuchenComponent implements OnDestroy {
   /**
    * The boolean that decides whether to open the wizard
    */
@@ -212,6 +212,11 @@ export class ObjektSuchenComponent {
 
   private readonly injector = inject(Injector);
   private lastTrigger?: HTMLElement;
+  private findPersonTimeout?: ReturnType<typeof setTimeout>;
+
+  ngOnDestroy(): void {
+    clearTimeout(this.findPersonTimeout);
+  }
 
   openAddNewObjectDialog(trigger: HTMLElement): void {
     this.lastTrigger = trigger;
@@ -350,12 +355,13 @@ export class ObjektSuchenComponent {
   findPerson(): void {
     this.tbLoadingStatus = true;
     const delay = 3000;
-    setTimeout(() => {
+    this.findPersonTimeout = setTimeout(() => {
       this.personen$ =
         this.person.id !== ''
           ? this.personService.findPersonById(this.person.id)
           : this.personService.findPersonenByParameters(this.person);
       this.tbLoadingStatus = false;
+      this.findPersonTimeout = undefined;
     }, delay);
   }
 
