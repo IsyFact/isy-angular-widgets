@@ -32,9 +32,10 @@ describe('primengWidgetsRoutes', () => {
   });
 
   it('should successfully load all components via loadComponent', async () => {
-    for (const route of primengWidgetsRoutes) {
-      const component = await route.loadComponent?.();
+    const components = await Promise.all(primengWidgetsRoutes.map(async (route) => route.loadComponent?.()));
+
+    components.forEach((component) => {
       expect(component).toBeDefined();
-    }
-  });
+    });
+  }, 15000);
 });

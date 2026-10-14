@@ -1,5 +1,6 @@
 # 22.2.0-next.1 -
 ## Features
+- IFS-5390: Die CI-Workflows führen die Tests der Bibliothek und Demo-Anwendung mit Vitest aus
 - IFS-5388: Die Tests der Bibliothek wurden vollständig auf Vitest migriert
   - Ausführung über `npm run test:lib:vitest`, `npm run test:lib:vitest:run` und `npm run test:lib:vitest:coverage`
   - Browsernahe Grenzfälle, die unter jsdom nicht zuverlässig prüfbar sind, wurden nach TestCafe verschoben (`projects/isy-angular-widgets/src/test/e2e/`) und werden von `npm run e2e` mit ausgeführt

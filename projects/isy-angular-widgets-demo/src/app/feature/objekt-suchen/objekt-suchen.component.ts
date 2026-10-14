@@ -1,4 +1,13 @@
-import {afterNextRender, Component, inject, Injector, ChangeDetectionStrategy} from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  DestroyRef,
+  inject,
+  Injector,
+  ChangeDetectionStrategy,
+  OnDestroy
+} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {PersonenService} from '../../shared/services/personen.service';
 import {Observable, of} from 'rxjs';
 import {Person, Personalien, PersonId} from '../../shared/model/person';
@@ -61,7 +70,7 @@ const defaultWidth = 60;
     WizardDirective
   ]
 })
-export class ObjektSuchenComponent {
+export class ObjektSuchenComponent implements OnDestroy {
   /**
    * The boolean that decides whether to open the wizard
    */
@@ -195,7 +204,7 @@ export class ObjektSuchenComponent {
    * Is called on language change
    */
   onLanguageChange(): void {
-    this.translate.onLangChange.subscribe(() => {
+    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.setupCountries();
     });
   }
@@ -204,14 +213,23 @@ export class ObjektSuchenComponent {
    * Getting the country information
    */
   setupCountries(): void {
-    this.translate.get('primeng.countries').subscribe((countriesMap: CountryMap[]) => {
-      this.laender = countriesMap.map((item) => item.name);
-      this.countryMap = [...countriesMap];
-    });
+    this.translate
+      .get('primeng.countries')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((countriesMap: CountryMap[]) => {
+        this.laender = countriesMap.map((item) => item.name);
+        this.countryMap = [...countriesMap];
+      });
   }
 
+  private readonly destroyRef = inject(DestroyRef);
   private readonly injector = inject(Injector);
   private lastTrigger?: HTMLElement;
+  private findPersonTimeout?: ReturnType<typeof setTimeout>;
+
+  ngOnDestroy(): void {
+    clearTimeout(this.findPersonTimeout);
+  }
 
   openAddNewObjectDialog(trigger: HTMLElement): void {
     this.lastTrigger = trigger;
@@ -241,7 +259,7 @@ export class ObjektSuchenComponent {
   }
 
   /**
-   * Decides whether the dialog for editing an existing person is opening/closing
+   * Decides whether the dialog for editing a person is opening/closing
    */
   displayEditDialog(): void {
     this.openEditForm = !this.openEditForm;
@@ -262,7 +280,7 @@ export class ObjektSuchenComponent {
    * Triggers the subscribe method for the reactive id form.
    */
   subscribeToIdForm(): void {
-    this.idForm.valueChanges.subscribe((personId: PersonId) => {
+    this.idForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((personId: PersonId) => {
       this.isFormValid = this.idForm.valid;
       if (this.idForm.valid) {
         this.neuePerson.id = personId.id;
@@ -274,29 +292,33 @@ export class ObjektSuchenComponent {
    * Triggers the subscribe method for the reactive persoenlicheInformationen form.
    */
   subscribeToPersoenlicheInformationenForm(): void {
-    this.persoenlicheInformationenForm.valueChanges.subscribe((personalien: Personalien) => {
-      this.isFormValid = this.persoenlicheInformationenForm.valid;
-      if (this.persoenlicheInformationenForm.valid) {
-        this.neuePerson.personalien.vorname = personalien.vorname;
-        this.neuePerson.personalien.nachname = personalien.nachname;
-        this.neuePerson.personalien.gender = personalien.gender;
-      }
-    });
+    this.persoenlicheInformationenForm.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((personalien: Personalien) => {
+        this.isFormValid = this.persoenlicheInformationenForm.valid;
+        if (this.persoenlicheInformationenForm.valid) {
+          this.neuePerson.personalien.vorname = personalien.vorname;
+          this.neuePerson.personalien.nachname = personalien.nachname;
+          this.neuePerson.personalien.gender = personalien.gender;
+        }
+      });
   }
 
   /**
    * Triggers the subscribe method for the reactive geburtsInformationen form.
    */
   subscribeToGeburtsInformationenForm(): void {
-    this.geburtsInformationenForm.valueChanges.subscribe((personalien: Personalien) => {
-      this.isFormValid = this.geburtsInformationenForm.valid;
-      if (this.geburtsInformationenForm.valid) {
-        this.neuePerson.personalien.geburtsname = personalien.geburtsname;
-        this.neuePerson.personalien.geburtsort = personalien.geburtsort;
-        this.neuePerson.personalien.staatsangehoerigkeit = personalien.staatsangehoerigkeit;
-        this.neuePerson.personalien.geburtsdatum = personalien.geburtsdatum;
-      }
-    });
+    this.geburtsInformationenForm.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((personalien: Personalien) => {
+        this.isFormValid = this.geburtsInformationenForm.valid;
+        if (this.geburtsInformationenForm.valid) {
+          this.neuePerson.personalien.geburtsname = personalien.geburtsname;
+          this.neuePerson.personalien.geburtsort = personalien.geburtsort;
+          this.neuePerson.personalien.staatsangehoerigkeit = personalien.staatsangehoerigkeit;
+          this.neuePerson.personalien.geburtsdatum = personalien.geburtsdatum;
+        }
+      });
   }
 
   /**
@@ -350,12 +372,13 @@ export class ObjektSuchenComponent {
   findPerson(): void {
     this.tbLoadingStatus = true;
     const delay = 3000;
-    setTimeout(() => {
+    this.findPersonTimeout = setTimeout(() => {
       this.personen$ =
         this.person.id !== ''
           ? this.personService.findPersonById(this.person.id)
           : this.personService.findPersonenByParameters(this.person);
       this.tbLoadingStatus = false;
+      this.findPersonTimeout = undefined;
     }, delay);
   }
 
@@ -429,7 +452,7 @@ export class ObjektSuchenComponent {
 
     this.editForm = initObjektBearbeitenForm(data.person);
 
-    this.editForm.valueChanges.subscribe(() => {
+    this.editForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.allowSave = this.hasPersonChanges(data.person);
     });
 

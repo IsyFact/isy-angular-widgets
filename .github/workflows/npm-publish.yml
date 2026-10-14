@@ -122,14 +122,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [isy-angular-widgets, isy-angular-widgets-demo]
+        include:
+          - project: isy-angular-widgets
+            command: npm run test:lib:vitest:run
+          - project: isy-angular-widgets-demo
+            command: npm run test:demo:vitest:run
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node environment
         uses: ./.github/actions/setup-node-env
       - name: Run tests
-        run: npx ng test ${{ matrix.project }} --watch=false
+        run: ${{ matrix.command }}
 
   publish-npm:
     needs: [build, quality, test]
