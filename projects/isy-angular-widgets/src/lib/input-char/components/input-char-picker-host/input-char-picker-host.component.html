@@ -2,6 +2,7 @@
   <p-dialog
     [header]="state.header ?? configService.getTranslation('inputChar.title')"
     [visible]="pickerService.visible()"
+    styleClass="input-char-picker-dialog"
     [closable]="state.closable"
     [closeAriaLabel]="state.closePickerAriaLabel ?? configService.getTranslation('inputChar.aria.closePicker')"
     [draggable]="state.draggable"

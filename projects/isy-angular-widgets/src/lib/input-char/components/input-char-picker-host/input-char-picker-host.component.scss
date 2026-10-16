@@ -1,0 +1,7 @@
+:host ::ng-deep {
+  @media screen and (max-width: 320px) {
+    .input-char-picker-dialog .p-dialog-content {
+      padding: 1rem;
+    }
+  }
+}
