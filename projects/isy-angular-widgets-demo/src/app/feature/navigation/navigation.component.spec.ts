@@ -1,9 +1,11 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {MenuItemCommandEvent} from 'primeng/api';
 import {NavigationComponent} from './navigation.component';
 
 describe('NavigationComponent', () => {
   let spectator: Spectator<NavigationComponent>;
   const createComponent = createComponentFactory({component: NavigationComponent});
+  const commandEvent: MenuItemCommandEvent = {};
 
   beforeEach(() => {
     spectator = createComponent();
@@ -24,6 +26,16 @@ describe('NavigationComponent', () => {
       expect(componentGroup?.label).toBe('Komponenten');
       expect(componentGroup?.items?.map((item) => item.label)).toHaveLength(3);
     });
+  });
+
+  it('should handle commands for simple main and sub navigation', () => {
+    spectator.component.applicationMainItems[1].command?.(commandEvent);
+    expect(spectator.component.selectedMainIndex).toBe(1);
+    expect(spectator.component.selectedSubIndex).toBe(0);
+
+    spectator.component.applicationMainItems[1].items?.[0]?.[0]?.items?.[2]?.command?.(commandEvent);
+    expect(spectator.component.selectedMainIndex).toBe(1);
+    expect(spectator.component.selectedSubIndex).toBe(2);
   });
 
   it('should update functions when a subitem is selected', () => {
@@ -49,6 +61,27 @@ describe('NavigationComponent', () => {
 
     expect(spectator.component.mainItems[1].items?.[0]?.[0]?.items?.[2]?.label).toBe('Anwendung 2.3');
     expect(spectator.component.linkNavigationItems[0].items?.[0]?.label).toBe('Use Case 2.3.1.1');
+  });
+
+  it('should handle commands for grouped navigation and link navigation', () => {
+    spectator.component.mainItems[2].command?.(commandEvent);
+    expect(spectator.component.selectedMainIndex).toBe(2);
+    expect(spectator.component.selectedSubIndex).toBe(0);
+    expect(spectator.component.selectedUseCase).toBe('3.1.1.1');
+
+    spectator.component.mainItems[1].items?.[0]?.[0]?.items?.[2]?.command?.(commandEvent);
+    expect(spectator.component.selectedMainIndex).toBe(1);
+    expect(spectator.component.selectedSubIndex).toBe(2);
+    expect(spectator.component.selectedUseCase).toBe('2.3.1.1');
+
+    spectator.component.linkNavigationItems[1].items?.[2]?.command?.(commandEvent);
+    expect(spectator.component.selectedUseCase).toBe('2.3.2.3');
+  });
+
+  it('should handle a function navigation command', () => {
+    spectator.component.applicationLinkNavigationItems[2].command?.(commandEvent);
+
+    expect(spectator.component.selectedFunctionIndex).toBe(2);
   });
 
   it('should mark the selected use case active', () => {

@@ -4,7 +4,7 @@ import {canActivateAuth} from './guards/auth.guard';
 
 describe('App Routing Configuration', () => {
   it('should define 9 routes', () => {
-    expect(routes.length).toBe(9);
+    expect(routes).toHaveSize(9);
   });
 
   it('should have a redirect from empty path to dashboard', () => {
@@ -35,11 +35,16 @@ describe('App Routing Configuration', () => {
     expect(Array.isArray(module)).toBeTrue();
   });
 
-  it('should lazy load the navigation component and be protected by canActivateAuth', () => {
+  it('should lazy load the navigation component and be protected by canActivateAuth', async () => {
     const route = routes.find((entry) => entry.path === 'navigation');
 
-    expect(route?.loadComponent).toBeDefined();
-    expect(route?.canActivate).toContain(canActivateAuth);
+    expect(route).toBeDefined();
+    expect(route!.data?.title).toBe('Navigationsmuster');
+    expect(route!.canActivate).toContain(canActivateAuth);
+    expect(typeof route!.loadComponent).toBe('function');
+
+    const component = await route!.loadComponent!();
+    expect(component).toBeDefined();
   });
 
   it('should lazy load primengWidgetsRoutes and be protected by canActivateAuth', async () => {
