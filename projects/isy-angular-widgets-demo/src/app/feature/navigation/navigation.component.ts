@@ -7,7 +7,6 @@ const FUNCTION_NUMBERS = ['1', '2', '3'];
 
 interface NavigationEntry {
   label: string;
-  description?: string;
 }
 
 @Component({
@@ -37,7 +36,7 @@ export class NavigationComponent {
   selectedMainIndex = 0;
   selectedSubIndex = 0;
   selectedFunctionIndex = 0;
-  selectedUseCase = '1.1.1.1';
+  selectedUseCase = ['1', '1', '1', '1'].join('.');
   private readonly changeDetector = inject(ChangeDetectorRef);
 
   constructor() {
