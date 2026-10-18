@@ -2,6 +2,7 @@
 ## Features
 - IFS-5737: Disabled-States für Buttons und Formularelemente im IsyFact-Theme wurden farblich vereinheitlicht
 ## Demo-Anwendung
+- IFS-5750: Die Demo-Anwendung zeigt Haupt-, Sub- und Linksnavigation in einfachen und komplexen Anwendungsbeispielen
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
 ## Fixes
 - IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert

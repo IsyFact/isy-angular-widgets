@@ -1,0 +1,83 @@
+<main class="demo-print-page navigation-page flex flex-column gap-4 p-4 lg:p-0">
+  <h1>Haupt-, Sub- und Linksnavigation</h1>
+
+  <h2>Einfache Anwendung mit Hauptnavigation, Subnavigation und Linksnavigation</h2>
+  <isy-hauptfenster
+    class="navigation-preview"
+    [items]="applicationMainItems"
+    [userInfo]="userInfo"
+    [showLinksnavigation]="true"
+    [applicationGroupColor]="applicationGroupColor"
+    [allowSidebarCollapse]="true"
+    [checkBrowserVersion]="false"
+    [linksNavigationTitle]="applicationSubItems[selectedMainIndex][selectedSubIndex].label"
+  >
+    <div LogoAnbieterAwl>
+      <img
+        class="navigation-logo navigation-vendor-logo isy-hauptfenster-logo-anbieter-awl"
+        src="assets/default-vendor-logo.png"
+        alt="Anbieterlogo"
+      />
+    </div>
+    <div LogoAwl>
+      <img
+        class="navigation-logo navigation-application-logo isy-hauptfenster-logo-awl"
+        src="assets/default-application-logo.jpg"
+        alt="Anwendungslogo"
+      />
+    </div>
+    <div Linksnavigation class="navigation-sidebar">
+      <p-panelmenu [model]="applicationLinkNavigationItems" [multiple]="true" />
+    </div>
+
+    <div class="preview-content">
+      <p class="preview-kicker">Aktiver Hauptnavigationspunkt</p>
+      <h2>{{ applicationMainItems[selectedMainIndex].label }}</h2>
+      <p class="preview-subnavigation">
+        Subnavigation: {{ applicationSubItems[selectedMainIndex][selectedSubIndex].label }}
+      </p>
+      <p class="preview-function">Aktive Funktion: {{ selectedFunctionLabel }}</p>
+      <div class="preview-placeholder" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+  </isy-hauptfenster>
+
+  <h2>Komplexe Anwendung mit Hauptnavigation, Subnavigation und Linksnavigation</h2>
+  <isy-hauptfenster
+    class="navigation-preview"
+    [items]="mainItems"
+    [userInfo]="userInfo"
+    [showLinksnavigation]="true"
+    [applicationGroupColor]="applicationGroupColor"
+    [allowSidebarCollapse]="true"
+    [checkBrowserVersion]="false"
+    [linksNavigationTitle]="'Anwendung ' + (selectedMainIndex + 1) + '.' + (selectedSubIndex + 1)"
+  >
+    <div LogoAnbieterAwl>
+      <img
+        class="navigation-logo navigation-vendor-logo isy-hauptfenster-logo-anbieter-awl"
+        src="assets/default-vendor-logo.png"
+        alt="Anbieterlogo"
+      />
+    </div>
+    <div LogoAwl>
+      <img
+        class="navigation-logo navigation-application-logo isy-hauptfenster-logo-awl"
+        src="assets/default-application-logo.jpg"
+        alt="Anwendungslogo"
+      />
+    </div>
+    <div Linksnavigation class="navigation-sidebar">
+      <p-panelmenu [model]="linkNavigationItems" [multiple]="true" />
+    </div>
+
+    <div class="preview-content">
+      <p class="preview-kicker">Aktiver Hauptnavigationspunkt</p>
+      <h2>{{ mainItems[selectedMainIndex].label }}</h2>
+      <p class="preview-subnavigation">
+        Subnavigation: {{ applicationGroupSubItems[selectedMainIndex][selectedSubIndex].label }}
+      </p>
+      <p class="preview-function">Aktiver Use Case: {{ selectedUseCaseLabel }}</p>
+      <div class="preview-placeholder" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+  </isy-hauptfenster>
+</main>

@@ -3,8 +3,8 @@ import {PageNotFoundComponent} from './shared/errors/page-not-found/page-not-fou
 import {canActivateAuth} from './guards/auth.guard';
 
 describe('App Routing Configuration', () => {
-  it('should define 8 routes', () => {
-    expect(routes.length).toBe(8);
+  it('should define 9 routes', () => {
+    expect(routes.length).toBe(9);
   });
 
   it('should have a redirect from empty path to dashboard', () => {
@@ -33,6 +33,13 @@ describe('App Routing Configuration', () => {
     const module = await route!.loadChildren!();
     expect(module).toBeDefined();
     expect(Array.isArray(module)).toBeTrue();
+  });
+
+  it('should lazy load the navigation component and be protected by canActivateAuth', () => {
+    const route = routes.find((entry) => entry.path === 'navigation');
+
+    expect(route?.loadComponent).toBeDefined();
+    expect(route?.canActivate).toContain(canActivateAuth);
   });
 
   it('should lazy load primengWidgetsRoutes and be protected by canActivateAuth', async () => {

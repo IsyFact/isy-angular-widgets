@@ -13,6 +13,14 @@ export const routes: Routes = [
     loadChildren: async () => (await import('./feature/dashboard/dashboard.routes')).dashboardRoutes
   },
   {
+    path: 'navigation',
+    data: {
+      title: 'Navigationsmuster'
+    },
+    loadComponent: async () => (await import('./feature/navigation/navigation.component')).NavigationComponent,
+    canActivate: [canActivateAuth]
+  },
+  {
     path: 'objekt-anzeigen',
     loadChildren: async () => (await import('./feature/objekt-anzeigen/objekt-anzeigen.routes')).objektAnzeigenRoutes,
     canActivate: [canActivateAuth]
