@@ -1,10 +1,15 @@
 import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
+import {ActivatedRoute} from '@angular/router';
 import {MenuItemCommandEvent} from 'primeng/api';
+import {Subject} from 'rxjs';
 import {NavigationComponent} from './navigation.component';
 
 describe('NavigationComponent', () => {
   let spectator: Spectator<NavigationComponent>;
-  const createComponent = createComponentFactory({component: NavigationComponent});
+  const createComponent = createComponentFactory({
+    component: NavigationComponent,
+    providers: [{provide: ActivatedRoute, useValue: {fragment: new Subject()}}]
+  });
   const commandEvent: MenuItemCommandEvent = {};
 
   beforeEach(() => {
