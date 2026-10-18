@@ -10,12 +10,12 @@
 
 :host ::ng-deep .navigation-preview .p-megamenu .p-menuitem-link-active,
 :host ::ng-deep .navigation-sidebar .p-menuitem-link-active {
-  background: #0055b9 !important;
-  color: #ffffff !important;
+  background: #0055b9;
+  color: #ffffff;
 }
 
 :host ::ng-deep .navigation-sidebar .p-panelmenu-item-active {
-  background: #0055b9 !important;
+  background: #0055b9;
 }
 
 .preview-subnavigation,
