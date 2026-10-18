@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject} from '@an
 import {MegaMenuItem, MenuItem} from 'primeng/api';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {HauptfensterComponent} from '@isy-angular-widgets/hauptfenster/hauptfenster.component';
+import {SectionHeadingComponent} from '../../shared/components/section-heading/section-heading.component';
 
 const FUNCTION_NUMBERS = ['1', '2', '3'];
 
@@ -15,7 +16,7 @@ interface NavigationEntry {
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [HauptfensterComponent, PanelMenuModule]
+  imports: [HauptfensterComponent, PanelMenuModule, SectionHeadingComponent]
 })
 export class NavigationComponent {
   readonly userInfo = {displayName: 'Demo Nutzer'};

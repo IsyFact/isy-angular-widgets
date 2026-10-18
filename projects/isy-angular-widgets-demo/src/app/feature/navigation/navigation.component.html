@@ -1,7 +1,12 @@
-<main class="demo-print-page navigation-page flex flex-col gap-4 p-4 lg:p-0">
+<div class="demo-print-page navigation-page flex flex-col gap-4 p-4 lg:p-0">
   <h1>Haupt-, Sub- und Linksnavigation</h1>
 
-  <h2>Einfache Anwendung mit Hauptnavigation, Subnavigation und Linksnavigation</h2>
+  <demo-section-heading
+    anchorId="simple-navigation"
+    [level]="2"
+    label="Einfache Anwendung mit Hauptnavigation, Subnavigation und Linksnavigation"
+    ariaLabel="Link zur einfachen Navigation"
+  />
   <isy-hauptfenster
     class="navigation-preview"
     [items]="applicationMainItems"
@@ -41,7 +46,12 @@
     </div>
   </isy-hauptfenster>
 
-  <h2>Komplexe Anwendung mit Hauptnavigation, Subnavigation und Linksnavigation</h2>
+  <demo-section-heading
+    anchorId="complex-navigation"
+    [level]="2"
+    label="Komplexe Anwendung mit Hauptnavigation, Subnavigation und Linksnavigation"
+    ariaLabel="Link zur komplexen Navigation"
+  />
   <isy-hauptfenster
     class="navigation-preview"
     [items]="mainItems"
@@ -80,4 +90,4 @@
       <div class="preview-placeholder" aria-hidden="true"><span></span><span></span><span></span></div>
     </div>
   </isy-hauptfenster>
-</main>
+</div>
