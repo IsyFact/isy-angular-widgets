@@ -10,6 +10,13 @@ const createNavigationItem = (key: string, routerLink: string): MenuItem => ({
   styleClass: 'skip-link'
 });
 
+const createCustomNavigationItem = (label: string, title: string, routerLink: string): MenuItem => ({
+  label,
+  title,
+  routerLink,
+  styleClass: 'skip-link'
+});
+
 const createExampleItem = (key: string): MenuItem => ({
   label: `${MENU_ITEMS_PREFIX}.${key}`,
   styleClass: 'skip-link'
@@ -37,6 +44,7 @@ export const applicationMenu = [
           label: `${MENU_ITEMS_PREFIX}.uiWidgets`,
           items: [
             createNavigationItem('isyAngularComponents', '/isy-angular-components'),
+            createCustomNavigationItem('Navigationsmuster', 'zur Navigationsmuster-Seite wechseln', '/navigation'),
             {
               label: 'Modalarme Patterns',
               title: 'zur Modalarme Patterns Seite wechseln',

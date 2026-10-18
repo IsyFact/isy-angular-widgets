@@ -3,8 +3,8 @@ import {PageNotFoundComponent} from './shared/errors/page-not-found/page-not-fou
 import {canActivateAuth} from './guards/auth.guard';
 
 describe('App Routing Configuration', () => {
-  it('should define 8 routes', () => {
-    expect(routes.length).toBe(8);
+  it('should define 9 routes', () => {
+    expect(routes.length).toBe(9);
   });
 
   it('should have a redirect from empty path to dashboard', () => {
@@ -61,6 +61,17 @@ describe('App Routing Configuration', () => {
     const route = routes.find((r) => r.path === 'isy-angular-components');
     expect(route).toBeDefined();
     expect(route!.data?.title).toBe('isyAngularWidgetsDemo.websiteTitles.isyAngularComponents');
+    expect(route!.canActivate).toContain(canActivateAuth);
+    expect(typeof route!.loadComponent).toBe('function');
+
+    const component = await route!.loadComponent!();
+    expect(component).toBeDefined();
+  });
+
+  it('should load NavigationComponent with title and auth guard', async () => {
+    const route = routes.find((r) => r.path === 'navigation');
+    expect(route).toBeDefined();
+    expect(route!.data?.title).toBe('Haupt-, Sub- und Linksnavigation');
     expect(route!.canActivate).toContain(canActivateAuth);
     expect(typeof route!.loadComponent).toBe('function');
 
