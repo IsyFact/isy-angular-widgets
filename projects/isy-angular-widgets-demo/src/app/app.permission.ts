@@ -8,7 +8,8 @@ export const permissions: PermissionMaps = {
     'objekt-suchen': ['admin', 'user'],
     'modalarme-patterns': ['admin', 'user'],
     'primeng-widgets': ['admin', 'user'],
-    'isy-angular-components': ['admin', 'user']
+    'isy-angular-components': ['admin', 'user'],
+    navigation: ['admin', 'user']
   },
   elements: {
     personenSuche: ['admin'],

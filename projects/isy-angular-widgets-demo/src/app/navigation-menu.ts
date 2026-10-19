@@ -31,6 +31,7 @@ export const navigationMenu: MenuItem[] = [
     expanded: true,
     items: [
       createNavigationItem('isyAngularComponents', '/isy-angular-components'),
+      createCustomNavigationItem('Navigationsmuster', 'zur Navigationsmuster-Seite wechseln', '/navigation'),
       createCustomNavigationItem('Modalarme Patterns', 'zur Modalarme Patterns Seite wechseln', '/modalarme-patterns'),
       createNavigationItem('primengForm', '/primeng-widgets/primeng-form'),
       createNavigationItem('primengButton', '/primeng-widgets/primeng-button'),
