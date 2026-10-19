@@ -36,6 +36,12 @@ export const applicationMenu = [
               styleClass: 'skip-link'
             },
             {
+              label: 'Navigationsmuster',
+              title: 'zur Navigationsmuster-Seite wechseln',
+              routerLink: 'navigation',
+              styleClass: 'skip-link'
+            },
+            {
               label: 'isyAngularWidgetsDemo.menuItems.primengForm',
               title: 'isyAngularWidgetsDemo.actions.skipNavigationLink.primengForm',
               routerLink: 'primeng-widgets/primeng-form',
