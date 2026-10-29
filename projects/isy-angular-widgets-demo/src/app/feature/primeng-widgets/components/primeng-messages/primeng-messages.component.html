@@ -22,7 +22,12 @@
     </div>
     <div class="col-span-12 flex flex-col gap-2">
       <demo-section-heading anchorId="toast" [level]="2" label="Toast" ariaLabel="Link zu Toast" />
-      <p-button class="isy-print-hide" (onClick)="showToastMessage()" label="Show" />
+      <div class="isy-print-hide flex flex-wrap gap-2">
+        <p-button (onClick)="showToastMessage('info')" label="Info" />
+        <p-button (onClick)="showToastMessage('success')" label="Success" />
+        <p-button (onClick)="showToastMessage('warn')" label="Warning" />
+        <p-button (onClick)="showToastMessage('error')" label="Error" />
+      </div>
       <p-toast key="toast" position="bottom-right" />
     </div>
   </div>
