@@ -14,6 +14,7 @@
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
 - IFS-4930: Die Seiten _Objekt anzeigen_ und _Objekt bearbeiten_ der Demo-Anwendung wurden für eine Viewport-Breite von 320 px optimiert
 ## Fixes
+- IFS-4836: Toast- und Inline-Meldungen verwenden helle Abstufungen der Button-Farbpaletten mit kontrastreicher dunkler Schrift sowie angepassten Schließen- und Fokusfarben
 - IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert
 
 # 22.1.0-next.1 - 10.09.2026

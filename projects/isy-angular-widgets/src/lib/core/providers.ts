@@ -5,6 +5,45 @@ import {Preset} from '@primeuix/themes/types';
 import {definePreset} from '@primeuix/themes';
 import Nora from '@primeuix/themes/nora';
 
+const messageColors = {
+  info: {
+    background: '{sky.100}',
+    borderColor: '{sky.200}',
+    color: '{sky.900}',
+    closeButton: {
+      hoverBackground: '{sky.200}',
+      focusRing: {color: '{sky.900}', shadow: 'none'}
+    }
+  },
+  success: {
+    background: '{green.100}',
+    borderColor: '{green.200}',
+    color: '{green.900}',
+    closeButton: {
+      hoverBackground: '{green.200}',
+      focusRing: {color: '{green.900}', shadow: 'none'}
+    }
+  },
+  warn: {
+    background: '{orange.100}',
+    borderColor: '{orange.200}',
+    color: '{orange.900}',
+    closeButton: {
+      hoverBackground: '{orange.200}',
+      focusRing: {color: '{orange.900}', shadow: 'none'}
+    }
+  },
+  error: {
+    background: '{red.100}',
+    borderColor: '{red.200}',
+    color: '{red.900}',
+    closeButton: {
+      hoverBackground: '{red.200}',
+      focusRing: {color: '{red.900}', shadow: 'none'}
+    }
+  }
+};
+
 export const NoraGrayPreset = definePreset(Nora, {
   semantic: {
     primary: {
@@ -19,6 +58,23 @@ export const NoraGrayPreset = definePreset(Nora, {
       800: '{gray.800}',
       900: '{gray.900}',
       950: '{gray.950}'
+    }
+  },
+  components: {
+    message: {
+      colorScheme: {
+        light: messageColors
+      }
+    },
+    toast: {
+      colorScheme: {
+        light: {
+          info: {...messageColors.info, detailColor: messageColors.info.color},
+          success: {...messageColors.success, detailColor: messageColors.success.color},
+          warn: {...messageColors.warn, detailColor: messageColors.warn.color},
+          error: {...messageColors.error, detailColor: messageColors.error.color}
+        }
+      }
     }
   }
 });
