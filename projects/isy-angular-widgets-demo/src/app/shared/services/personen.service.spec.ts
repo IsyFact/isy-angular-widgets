@@ -1,6 +1,7 @@
 import {createServiceFactory, SpectatorService} from '@ngneat/spectator/vitest';
 import {PersonenService} from './personen.service';
 import {Person} from '../model/person';
+import {getEmptyPerson} from '../../feature/objekt-suchen/person-data';
 
 describe('Unit Tests: PersonenService', () => {
   const maxEntries = 30;
@@ -157,5 +158,14 @@ describe('Unit Tests: PersonenService', () => {
   it('should be smaller or equal than max entries', () => {
     const rng = spectator.service.rng();
     expect(rng).toBeLessThanOrEqual(maxEntries);
+  });
+
+  it('should preserve generated search results when no search criteria were supplied', () => {
+    const generated = structuredClone(mockedPerson);
+
+    const result = service.mergePersons(getEmptyPerson(), generated);
+
+    expect(result).toEqual(mockedPerson);
+    expect(result).toBe(generated);
   });
 });
