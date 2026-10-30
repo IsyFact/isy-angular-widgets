@@ -106,6 +106,38 @@ describe('Unit Tests: PrimengOverlayComponent', () => {
     expect(component.visibleDialog).toBe(true);
   });
 
+  it('should open overlays safely when the triggering element is unavailable', () => {
+    const event = new Event('click');
+
+    component.showDialog(event);
+    component.showSidebar(event);
+    component.confirmDialog(event);
+
+    expect(component.visibleDialog).toBe(true);
+    expect(component.visibleSidebar).toBe(true);
+    expect(confirmSpy).toHaveBeenCalled();
+    expect(() => {
+      component.onDialogHide();
+      component.onSidebarHide();
+      component.onConfirmDialogHide();
+    }).not.toThrow();
+  });
+
+  it('should not restore focus to a trigger removed while its dialog was open', () => {
+    const button = document.createElement('button');
+    document.body.appendChild(button);
+    const focus = vi.spyOn(button, 'focus');
+    component.showDialog(createClickEvent(button));
+    component.confirmDialog(createClickEvent(button));
+    button.remove();
+
+    component.onDialogHide();
+    component.onConfirmDialogHide();
+    spectator.detectChanges();
+
+    expect(focus).not.toHaveBeenCalled();
+  });
+
   it('should close dialog', () => {
     component.visibleDialog = true;
     component.closeDialog();
