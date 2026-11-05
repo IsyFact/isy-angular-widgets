@@ -1,5 +1,5 @@
 import type {MockInstance} from 'vitest';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {ElementRef, NO_ERRORS_SCHEMA} from '@angular/core';
 import {fakeAsync, tick, flush} from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
@@ -259,6 +259,102 @@ describe('ModalarmePatternsComponent', () => {
 
         expect(liveAnnouncer.announce).not.toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('stepper focus after navigation', () => {
+    let frames: FrameRequestCallback[];
+    let input: HTMLInputElement;
+    let visible: boolean;
+
+    beforeEach(() => {
+      frames = [];
+      visible = true;
+      vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation((callback) => {
+        frames.push(callback);
+        return frames.length;
+      });
+      input = document.createElement('input');
+      document.body.appendChild(input);
+      // jsdom has no layout; simulate when PrimeNG reveals the destination field.
+      Object.defineProperty(input, 'getClientRects', {value: () => ({length: visible ? 1 : 0})});
+      component.baseFg.controls.id.setValue('ID-1');
+    });
+
+    afterEach(() => {
+      input.remove();
+      vi.restoreAllMocks();
+    });
+
+    it('should leave focus unchanged when no navigation is pending', () => {
+      component.stepperFocusTarget = new ElementRef(input);
+
+      expect(frames).toHaveLength(0);
+      expect(document.activeElement).not.toBe(input);
+    });
+
+    it('should focus the destination field once it is connected and visible', () => {
+      component.goNext(StepperStep.Second, component.baseFg);
+      component.stepperFocusTarget = new ElementRef(input);
+      frames.shift()!(0);
+
+      expect(document.activeElement).toBe(input);
+      component.stepperFocusTarget = new ElementRef(input);
+      expect(frames).toHaveLength(0);
+    });
+
+    it('should wait for the destination field to become visible', () => {
+      visible = false;
+      component.goNext(StepperStep.Second, component.baseFg);
+      component.stepperFocusTarget = new ElementRef(input);
+      frames.shift()!(0);
+
+      expect(document.activeElement).not.toBe(input);
+      expect(frames).toHaveLength(1);
+      visible = true;
+      frames.shift()!(1);
+      expect(document.activeElement).toBe(input);
+    });
+
+    it('should discard a queued focus request after navigating back', () => {
+      component.goNext(StepperStep.Second, component.baseFg);
+      component.stepperFocusTarget = new ElementRef(input);
+      component.goBack(StepperStep.First);
+      frames.shift()!(0);
+
+      expect(document.activeElement).not.toBe(input);
+      expect(frames).toHaveLength(0);
+    });
+
+    it('should leave focus unchanged if the active step changes before the frame runs', () => {
+      component.goNext(StepperStep.Second, component.baseFg);
+      component.stepperFocusTarget = new ElementRef(input);
+      component.stepValue = StepperStep.Third;
+      frames.shift()!(0);
+
+      expect(document.activeElement).not.toBe(input);
+      expect(frames).toHaveLength(0);
+    });
+
+    it('should discard focus requests for a removed destination field', () => {
+      component.goNext(StepperStep.Second, component.baseFg);
+      component.stepperFocusTarget = new ElementRef(input);
+      input.remove();
+      frames.shift()!(0);
+
+      expect(document.activeElement).not.toBe(input);
+      expect(frames).toHaveLength(0);
+    });
+
+    it('should stop retrying when the destination cannot receive focus', () => {
+      const focus = vi.spyOn(input, 'focus').mockImplementation(() => {});
+      component.goNext(StepperStep.Second, component.baseFg);
+      component.stepperFocusTarget = new ElementRef(input);
+      for (let frame = 0; frame < 100 && frames.length; frame++) frames.shift()!(frame);
+
+      expect(focus.mock.calls.length).toBeGreaterThan(1);
+      expect(document.activeElement).not.toBe(input);
+      expect(frames).toHaveLength(0);
     });
   });
 
