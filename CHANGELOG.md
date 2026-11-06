@@ -5,6 +5,7 @@
 - IFS-5750: Die Demo-Anwendung zeigt Haupt-, Sub- und Linksnavigation in einfachen und komplexen Anwendungsbeispielen
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
 ## Fixes
+- IFS-4836: Toast- und Inline-Meldungen verwenden helle Abstufungen der Button-Farbpaletten mit kontrastreicher dunkler Schrift sowie angepassten Schließen- und Fokusfarben
 - IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert
 
 # 21.3.0 - 10.09.2026
