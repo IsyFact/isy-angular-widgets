@@ -1,0 +1,906 @@
+{
+  "issue": "IFS-4982",
+  "baseCommit": "40b6ba88c9d01d3c915adfcb74cd82556a7db74a",
+  "sourceHashes": {
+    "projects/isy-angular-widgets/assets/theme/isyfact-theme.scss": "54bc03ca5cffb1b984f7149f1d4ddef1a2a9cb47bb88cf2234e95e89afa518ec",
+    "projects/isy-angular-widgets/assets/theme/_isyfact-variables.scss": "ac67862a013af007e4ba8962d06f9e3cb82df010cd4fb904a53f31ff09604a40",
+    "projects/isy-angular-widgets/src/lib/core/providers.ts": "9aee9628e5985b455b3a1977f8aad124d2e6fe0f597147454c8705e79f14ce23"
+  },
+  "chrome": "Chrome/156.0.8078.79",
+  "pages": [
+    {
+      "name": "objekt-suchen",
+      "fetchTime": "2026-11-05T15:18:31.708Z",
+      "lighthouseVersion": "13.6.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "environment": {
+        "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "benchmarkIndex": 2609,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "configSettings": {
+        "output": "json",
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "desktop",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": true
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": ["file_systems", "shader_cache", "service_workers", "cache_storage"],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": true,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": ["color-contrast"],
+        "onlyCategories": null,
+        "skipAudits": null
+      },
+      "runWarnings": [],
+      "audit": {
+        "id": "color-contrast",
+        "title": "Background and foreground colors have a sufficient contrast ratio",
+        "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.14/color-contrast).",
+        "score": 1,
+        "scoreDisplayMode": "binary",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "subItemsHeading": {
+                "key": "relatedNode",
+                "valueType": "node"
+              },
+              "label": "Failing Elements"
+            }
+          ],
+          "items": []
+        }
+      },
+      "rendered": [
+        {
+          "header": "Nachname",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Nachname",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Vorname",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Vorname",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Geschlecht",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Geschlecht",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Nationalität",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Nationalität",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Geburtsdatum",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Geburtsdatum",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Bilanz",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Bilanz",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Status",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Status",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "primeng-data",
+      "fetchTime": "2026-11-05T15:18:37.573Z",
+      "lighthouseVersion": "13.6.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "environment": {
+        "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "benchmarkIndex": 2781,
+        "credits": {
+          "axe-core": "4.14.0"
+        }
+      },
+      "configSettings": {
+        "output": "json",
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "desktop",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": true
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": ["file_systems", "shader_cache", "service_workers", "cache_storage"],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "node",
+        "usePassiveGathering": true,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": ["color-contrast"],
+        "onlyCategories": null,
+        "skipAudits": null
+      },
+      "runWarnings": [],
+      "audit": {
+        "id": "color-contrast",
+        "title": "Background and foreground colors have a sufficient contrast ratio",
+        "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.14/color-contrast).",
+        "score": 1,
+        "scoreDisplayMode": "binary",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "subItemsHeading": {
+                "key": "relatedNode",
+                "valueType": "node"
+              },
+              "label": "Failing Elements"
+            }
+          ],
+          "items": []
+        }
+      },
+      "rendered": [
+        {
+          "header": "Code",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Code",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Name",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Name",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Category",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Category",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Price",
+          "order": "ascending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        },
+        {
+          "header": "Price",
+          "order": "descending",
+          "background": "rgb(226, 232, 240)",
+          "expectedBackground": "rgb(226, 232, 240)",
+          "secondaryTextFilter": true,
+          "foregrounds": [
+            {
+              "kind": "text",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "sort",
+              "token": "--p-primary-color",
+              "color": "rgb(0, 85, 185)",
+              "expectedColor": "rgb(0, 85, 185)",
+              "minimum": 4.5,
+              "ratio": 5.678299088091684
+            },
+            {
+              "kind": "filter",
+              "token": "--p-button-text-secondary-color",
+              "color": "rgb(71, 85, 105)",
+              "expectedColor": "rgb(71, 85, 105)",
+              "minimum": 3,
+              "ratio": 6.146802322753884
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

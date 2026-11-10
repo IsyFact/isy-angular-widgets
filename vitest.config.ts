@@ -24,8 +24,10 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts'],
     coverage: {
       provider: 'v8',
+      include: ['projects/isy-angular-widgets/src/lib/**/*.ts'],
       reportsDirectory: './coverage/isy-angular-widgets-vitest',
-      reporter: ['text', 'html', 'lcov']
+      reporter: ['text', 'html', 'lcov', 'json-summary'],
+      thresholds: {lines: 85, statements: 85, functions: 85, branches: 85}
     }
   }
 });

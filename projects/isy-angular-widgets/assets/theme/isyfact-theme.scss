@@ -172,6 +172,8 @@
 
     // datatable
     --p-datatable-body-cell-padding: 0.75rem 0.75rem;
+    --p-datatable-header-cell-selected-background: var(--p-content-hover-background);
+    --p-datatable-header-cell-selected-color: var(--p-primary-color);
     --p-datatable-row-selected-background: var(--p-content-hover-background);
     --p-datatable-row-selected-color: var(--p-datatable-row-hover-color);
 
