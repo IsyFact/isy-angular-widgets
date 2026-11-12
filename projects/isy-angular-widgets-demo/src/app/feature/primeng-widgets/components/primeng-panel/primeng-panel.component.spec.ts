@@ -1,6 +1,7 @@
 import {ViewportScroller} from '@angular/common';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {fakeAsync, tick} from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {TranslateModule} from '@ngx-translate/core';
@@ -269,6 +270,151 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       expect(getIsVerticalStepper(component)).toBeFalse();
       expect(component.stepperValue).toBe(3);
+    });
+  });
+
+  describe('Field group toolbar', () => {
+    /**
+     * Builds a click event whose `currentTarget` points to the given element.
+     * @param currentTarget The element to report as the event's current target
+     * @returns A `MouseEvent` with `currentTarget` overridden
+     */
+    function createClickEvent(currentTarget: HTMLElement): Event {
+      const event = new MouseEvent('click');
+      Object.defineProperty(event, 'currentTarget', {value: currentTarget});
+      return event;
+    }
+
+    it('should define the "Meldeadresse" and "Postanschrift" groups with Edit, Print, Delete in order', () => {
+      expect(component.addressGroups).toHaveSize(2);
+
+      const [registeredAddress, postalAddress] = component.addressGroups;
+
+      expect(registeredAddress.id).toBe('meldeadresse');
+      expect(registeredAddress.actions.map((action) => action.key)).toEqual(['edit', 'print', 'delete']);
+      expect(registeredAddress.actions.every((action) => !action.disabled)).toBeTrue();
+
+      expect(postalAddress.id).toBe('postanschrift');
+      expect(postalAddress.actions.map((action) => action.key)).toEqual(['edit', 'print', 'delete']);
+      expect(postalAddress.actions.find((action) => action.key === 'edit')?.disabled).toBeFalse();
+      expect(postalAddress.actions.find((action) => action.key === 'print')?.disabled).toBeTrue();
+      expect(postalAddress.actions.find((action) => action.key === 'delete')?.disabled).toBeTrue();
+    });
+
+    it('should define the overflow menu with Export, History and a disabled Archive entry', () => {
+      expect(component.addressesOverflowItems).toHaveSize(3);
+      expect(component.addressesOverflowItems[0].label).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarExport');
+      expect(component.addressesOverflowItems[1].label).toBe(
+        'isyAngularWidgetsDemo.labels.panelFieldsetToolbarHistory'
+      );
+      expect(component.addressesOverflowItems[2].label).toBe(
+        'isyAngularWidgetsDemo.labels.panelFieldsetToolbarArchive'
+      );
+      expect(component.addressesOverflowItems[2].disabled).toBeTrue();
+    });
+
+    it('should record the executed action and group, and restore focus to the triggering button', fakeAsync(() => {
+      const button = document.createElement('button');
+      spyOn(button, 'focus');
+
+      component.runFieldGroupAction(
+        createClickEvent(button),
+        'isyAngularWidgetsDemo.labels.panelFieldsetToolbarEdit',
+        'isyAngularWidgetsDemo.labels.panelFieldsetToolbarRegisteredAddress'
+      );
+
+      expect(component.lastToolbarActionKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarEdit');
+      expect(component.lastToolbarGroupKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarRegisteredAddress');
+      expect(button.focus).not.toHaveBeenCalled();
+
+      tick();
+
+      expect(button.focus).toHaveBeenCalled();
+    }));
+
+    it('should not throw when restoring focus without a triggering element', fakeAsync(() => {
+      const event = new MouseEvent('click');
+
+      expect(() => component.runFieldGroupAction(event, 'action', 'group')).not.toThrow();
+
+      tick();
+    }));
+
+    it('should toggle the highlight state and record the highlight action on the "Adressen" group', fakeAsync(() => {
+      const button = document.createElement('button');
+      spyOn(button, 'focus');
+
+      expect(component.addressesHighlighted).toBeFalse();
+
+      component.toggleAddressesHighlight(createClickEvent(button));
+
+      expect(component.addressesHighlighted).toBeTrue();
+      expect(component.lastToolbarActionKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarHighlight');
+      expect(component.lastToolbarGroupKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarAddresses');
+
+      tick();
+
+      expect(button.focus).toHaveBeenCalled();
+
+      component.toggleAddressesHighlight(createClickEvent(button));
+
+      expect(component.addressesHighlighted).toBeFalse();
+
+      tick();
+    }));
+
+    it('should run an overflow menu command and restore focus to the overflow trigger button', fakeAsync(() => {
+      const overflowButton = spectator.query<HTMLButtonElement>(
+        '[aria-haspopup="menu"][aria-controls="addresses-overflow-menu"]'
+      );
+
+      expect(overflowButton).toBeTruthy();
+      spyOn(overflowButton as HTMLButtonElement, 'focus');
+
+      component.addressesOverflowItems[0].command?.({originalEvent: new MouseEvent('click'), item: {}});
+
+      expect(component.lastToolbarActionKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarExport');
+      expect(component.lastToolbarGroupKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarAddresses');
+
+      tick();
+
+      expect(overflowButton?.focus).toHaveBeenCalled();
+    }));
+
+    it('should mark the "Adressen" and "Meldeadresse" labels as semantic headings', fakeAsync(() => {
+      spectator.detectChanges();
+      tick();
+      spectator.detectChanges();
+
+      const labels = spectator.queryAll('.p-fieldset-legend-label');
+      const addressesLabel = labels.find((label) =>
+        label.textContent?.trim().includes('panelFieldsetToolbarAddresses')
+      );
+      const registeredAddressLabel = labels.find((label) =>
+        label.textContent?.trim().includes('panelFieldsetToolbarRegisteredAddress')
+      );
+
+      expect(addressesLabel?.getAttribute('role')).toBe('heading');
+      expect(addressesLabel?.getAttribute('aria-level')).toBe('4');
+      expect(registeredAddressLabel?.getAttribute('role')).toBe('heading');
+      expect(registeredAddressLabel?.getAttribute('aria-level')).toBe('5');
+    }));
+
+    it('should expose role="toolbar" with an aria-label for the main group and both sub groups', () => {
+      spectator.detectChanges();
+
+      const toolbars = spectator.queryAll('div[role="toolbar"]');
+
+      expect(toolbars).toHaveSize(3);
+      toolbars.forEach((toolbar) => {
+        expect(toolbar.hasAttribute('aria-label')).toBeTrue();
+      });
+    });
+
+    it('should render the disabled sub group actions as disabled instead of hiding them', () => {
+      const postalAddressActions = component.addressGroups.find((group) => group.id === 'postanschrift')?.actions;
+
+      expect(postalAddressActions?.filter((action) => action.disabled)).toHaveSize(2);
     });
   });
 });
