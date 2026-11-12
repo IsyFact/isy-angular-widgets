@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {provideIsyFactTheme} from './providers';
+import {IsyFactPreset, provideIsyFactTheme} from './providers';
 import Nora from '@primeuix/themes/nora';
 
 describe('provideIsyFactTheme', () => {
@@ -44,10 +44,18 @@ describe('provideIsyFactTheme', () => {
     const result = provideIsyFactTheme();
     const allProviders = extractAllProviders(result);
     const primeNgProvider = allProviders.find(
-      (p: any) => p?.provide?._desc === 'PRIME_NG_CONFIG' && p?.useValue?.theme?.preset === Nora
+      (p: any) => p?.provide?._desc === 'PRIME_NG_CONFIG' && p?.useValue?.theme?.preset === IsyFactPreset
     );
 
     expect(primeNgProvider).toBeDefined();
-    expect(primeNgProvider!.useValue.theme.preset).toEqual(Nora);
+    expect(primeNgProvider!.useValue.theme.preset).toBe(IsyFactPreset);
+  });
+
+  it('should allow overriding the default theme preset', () => {
+    const allProviders = extractAllProviders(provideIsyFactTheme(Nora));
+    const primeNgProvider = allProviders.find((p: any) => p?.provide?._desc === 'PRIME_NG_CONFIG');
+
+    expect(primeNgProvider).toBeDefined();
+    expect(primeNgProvider!.useValue.theme.preset).toBe(Nora);
   });
 });
