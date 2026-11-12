@@ -170,15 +170,15 @@ export class PrimengPanelComponent implements AfterViewInit {
           disabled: false
         },
         {
-          key: 'delete',
-          icon: 'pi pi-trash',
-          labelKey: 'isyAngularWidgetsDemo.labels.panelFieldsetToolbarDelete',
-          disabled: false
-        },
-        {
           key: 'print',
           icon: 'pi pi-print',
           labelKey: 'isyAngularWidgetsDemo.labels.panelFieldsetToolbarPrint',
+          disabled: false
+        },
+        {
+          key: 'delete',
+          icon: 'pi pi-trash',
+          labelKey: 'isyAngularWidgetsDemo.labels.panelFieldsetToolbarDelete',
           disabled: false
         }
       ]
@@ -195,15 +195,15 @@ export class PrimengPanelComponent implements AfterViewInit {
           disabled: false
         },
         {
-          key: 'delete',
-          icon: 'pi pi-trash',
-          labelKey: 'isyAngularWidgetsDemo.labels.panelFieldsetToolbarDelete',
-          disabled: true
-        },
-        {
           key: 'print',
           icon: 'pi pi-print',
           labelKey: 'isyAngularWidgetsDemo.labels.panelFieldsetToolbarPrint',
+          disabled: true
+        },
+        {
+          key: 'delete',
+          icon: 'pi pi-trash',
+          labelKey: 'isyAngularWidgetsDemo.labels.panelFieldsetToolbarDelete',
           disabled: true
         }
       ]
