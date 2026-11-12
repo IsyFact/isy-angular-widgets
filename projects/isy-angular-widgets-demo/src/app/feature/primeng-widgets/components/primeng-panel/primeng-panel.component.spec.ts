@@ -30,6 +30,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
     'tabs',
     'card',
     'fieldset',
+    'fieldset-toolbar',
     'scrollpanel',
     'splitter',
     'divider',
