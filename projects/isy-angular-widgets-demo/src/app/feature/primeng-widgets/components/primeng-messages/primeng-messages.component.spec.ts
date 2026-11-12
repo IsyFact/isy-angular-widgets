@@ -81,13 +81,20 @@ describe('Unit Tests: PrimengMessagesComponent', () => {
     expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
   });
 
-  it('should add a success toast message on showToastMessage call', () => {
+  it.each([
+    ['info', 'Info'],
+    ['success', 'Success'],
+    ['warn', 'Warning'],
+    ['error', 'Error']
+  ] as const)('should add a %s toast message when its button is clicked', (severity, summary) => {
     const spy = spyOn(component.messageService, 'add');
-    component.showToastMessage();
+    const button = spectator.queryAll<HTMLButtonElement>('button').find((item) => item.textContent?.trim() === summary);
+    expect(button).toBeTruthy();
+    spectator.click(button);
     expect(spy).toHaveBeenCalledWith({
       key: 'toast',
-      severity: 'success',
-      summary: 'Success',
+      severity,
+      summary,
       detail: 'Message Content',
       sticky: true
     });
