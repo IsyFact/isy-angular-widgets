@@ -2,6 +2,7 @@
 ## Features
 - IFS-5737: Disabled-States für Buttons und Formularelemente im IsyFact-Theme wurden farblich vereinheitlicht
 ## Demo-Anwendung
+- IFS-5751: Die Demo-Anwendung zeigt unter `primeng-widgets/primeng-panel#fieldset-toolbar` ein Beispiel für Eingabefeldgruppen mit Toolbar
 - IFS-5750: Die Demo-Anwendung zeigt Haupt-, Sub- und Linksnavigation in einfachen und komplexen Anwendungsbeispielen
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
 ## Fixes

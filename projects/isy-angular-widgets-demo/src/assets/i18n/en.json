@@ -92,7 +92,8 @@
       "panelTabSettingsContent": "Core settings shown in a compact form.",
       "panelTabGenericContent": "Generic content for tab {{index}}.",
       "panelStepperStepContent": "Sample content for step {{index}}.",
-      "panelFieldsetRequiredError": "Required field must not be empty."
+      "panelFieldsetRequiredError": "Required field must not be empty.",
+      "panelFieldsetToolbarActionExecuted": "Action {{action}} executed for {{group}}."
     },
     "displayObject": {
       "masterDataHeader": "Master data",
@@ -247,6 +248,28 @@
       "panelFieldsetRequiredLabel": "Required field",
       "panelFieldsetNumberLabel": "Numeric value",
       "panelFieldsetDateLabel": "Date",
+      "panelFieldsetToolbarHeading": "Field groups with toolbar",
+      "panelFieldsetToolbarHeadingLink": "Link to field groups with toolbar",
+      "panelFieldsetToolbarAddresses": "Addresses",
+      "panelFieldsetToolbarAddressesToolbar": "Actions for addresses",
+      "panelFieldsetToolbarRegisteredAddress": "Registered address",
+      "panelFieldsetToolbarRegisteredAddressToolbar": "Actions for registered address",
+      "panelFieldsetToolbarPostalAddress": "Postal address",
+      "panelFieldsetToolbarPostalAddressToolbar": "Actions for postal address",
+      "panelFieldsetToolbarEdit": "Edit",
+      "panelFieldsetToolbarDelete": "Delete",
+      "panelFieldsetToolbarPrint": "Print",
+      "panelFieldsetToolbarAdd": "Add address",
+      "panelFieldsetToolbarRefresh": "Refresh",
+      "panelFieldsetToolbarHighlight": "Highlight addresses",
+      "panelFieldsetToolbarRelease": "Release",
+      "panelFieldsetToolbarMoreActions": "More actions",
+      "panelFieldsetToolbarExport": "Export",
+      "panelFieldsetToolbarHistory": "Show history",
+      "panelFieldsetToolbarArchive": "Archive",
+      "panelFieldsetToolbarStreet": "Street and house number",
+      "panelFieldsetToolbarZip": "Postal code",
+      "panelFieldsetToolbarCity": "City",
       "isyInputChar": "Special character input field"
     },
     "placeholders": {

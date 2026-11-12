@@ -30,6 +30,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
     'tabs',
     'card',
     'fieldset',
+    'fieldset-toolbar',
     'scrollpanel',
     'splitter',
     'divider',
@@ -143,8 +144,8 @@ describe('Unit Tests: PrimengPanelComponent', () => {
     const renderedTabButtons = spectator.queryAll('[role="tab"]');
 
     expect(tabs.length).toBeGreaterThanOrEqual(2);
-    expect(component.standardTabs.length).toBe(3);
-    expect(component.scrollableTabs.length).toBe(30);
+    expect(component.standardTabs).toHaveSize(3);
+    expect(component.scrollableTabs).toHaveSize(30);
     expect(renderedTabButtons.length).toBeGreaterThanOrEqual(
       component.standardTabs.length + component.scrollableTabs.length
     );
