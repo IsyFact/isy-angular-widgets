@@ -92,7 +92,8 @@
       "panelTabSettingsContent": "Zentrale Einstellungen kompakt dargestellt.",
       "panelTabGenericContent": "Generischer Inhalt für Tab {{index}}.",
       "panelStepperStepContent": "Beispielinhalt für Schritt {{index}}.",
-      "panelFieldsetRequiredError": "Pflichtfeld ist erforderlich."
+      "panelFieldsetRequiredError": "Pflichtfeld ist erforderlich.",
+      "panelFieldsetToolbarActionExecuted": "Aktion {{action}} für {{group}} ausgeführt."
     },
     "displayObject": {
       "masterDataHeader": "Stammdaten",
@@ -251,6 +252,28 @@
       "panelFieldsetRequiredLabel": "Pflichtfeld",
       "panelFieldsetNumberLabel": "Zahlenwert",
       "panelFieldsetDateLabel": "Datum",
+      "panelFieldsetToolbarHeading": "Eingabefeldgruppen mit Toolbar",
+      "panelFieldsetToolbarHeadingLink": "Link zu Eingabefeldgruppen mit Toolbar",
+      "panelFieldsetToolbarAddresses": "Adressen",
+      "panelFieldsetToolbarAddressesToolbar": "Aktionen für Adressen",
+      "panelFieldsetToolbarRegisteredAddress": "Meldeadresse",
+      "panelFieldsetToolbarRegisteredAddressToolbar": "Aktionen für Meldeadresse",
+      "panelFieldsetToolbarPostalAddress": "Postanschrift",
+      "panelFieldsetToolbarPostalAddressToolbar": "Aktionen für Postanschrift",
+      "panelFieldsetToolbarEdit": "Bearbeiten",
+      "panelFieldsetToolbarDelete": "Löschen",
+      "panelFieldsetToolbarPrint": "Drucken",
+      "panelFieldsetToolbarAdd": "Adresse hinzufügen",
+      "panelFieldsetToolbarRefresh": "Aktualisieren",
+      "panelFieldsetToolbarHighlight": "Adressen hervorheben",
+      "panelFieldsetToolbarRelease": "Freigeben",
+      "panelFieldsetToolbarMoreActions": "Weitere Aktionen",
+      "panelFieldsetToolbarExport": "Exportieren",
+      "panelFieldsetToolbarHistory": "Historie anzeigen",
+      "panelFieldsetToolbarArchive": "Archivieren",
+      "panelFieldsetToolbarStreet": "Straße und Hausnummer",
+      "panelFieldsetToolbarZip": "Postleitzahl",
+      "panelFieldsetToolbarCity": "Ort",
       "isyInputChar": "Sonderzeichenpicker"
     },
     "placeholders": {
