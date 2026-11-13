@@ -195,8 +195,11 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    */
   writeValue(value: string | null): void {
     this.inputValue = value ?? '';
-    this.inputModel?.control.markAsPristine();
-    this.inputModel?.control.markAsUntouched();
+
+    if (this.inputValue === '') {
+      this.inputModel?.control.markAsPristine();
+      this.inputModel?.control.markAsUntouched();
+    }
   }
 
   /**
