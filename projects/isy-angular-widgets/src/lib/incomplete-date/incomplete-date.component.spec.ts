@@ -495,6 +495,7 @@ describe('Integration Tests: IncompleteDateComponent', () => {
 
     const inputModel = hostSpectator.fixture.debugElement.query(By.directive(NgModel)).injector.get(NgModel);
     const inputMask = hostSpectator.query('p-inputmask') as HTMLElement;
+    const nativeInput = hostSpectator.query('#date-of-entry') as HTMLInputElement;
 
     hostSpectator.component.form.controls.dateOfEntry.setValue('15.05.2024');
     inputModel.control.markAsDirty();
@@ -512,7 +513,25 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(hostSpectator.component.form.controls.dateOfEntry.untouched).toBeTrue();
     expect(inputModel.pristine).toBeTrue();
     expect(inputModel.untouched).toBeTrue();
+    expect(nativeInput.value).toBe('');
     expect(inputMask.classList.contains('ng-dirty')).toBeFalse();
     expect(inputMask.classList.contains('p-invalid')).toBeFalse();
+  });
+
+  it('should preserve the internal input model state when a non-empty value is written programmatically', () => {
+    const hostSpectator = createRequiredHostComponent();
+
+    hostSpectator.detectChanges();
+
+    const inputModel = hostSpectator.fixture.debugElement.query(By.directive(NgModel)).injector.get(NgModel);
+
+    inputModel.control.markAsDirty();
+    inputModel.control.markAsTouched();
+
+    hostSpectator.component.form.controls.dateOfEntry.setValue('20.06.2025');
+    hostSpectator.detectChanges();
+
+    expect(inputModel.dirty).toBeTrue();
+    expect(inputModel.touched).toBeTrue();
   });
 });
