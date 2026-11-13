@@ -6,6 +6,7 @@
 - IFS-5750: Die Demo-Anwendung zeigt Haupt-, Sub- und Linksnavigation in einfachen und komplexen Anwendungsbeispielen
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
 ## Fixes
+- IFS-5860: `isy-incomplete-date` wird nach `form.reset()` vollständig auf `pristine` und `untouched` zurückgesetzt und nicht mehr fälschlich als invalid markiert
 - IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert
 
 # 21.3.0 - 10.09.2026
