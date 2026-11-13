@@ -19,6 +19,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   NgControl,
+  NgModel,
   ValidationErrors,
   Validator,
   Validators
@@ -133,6 +134,8 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
 
   @ViewChild(InputMask) field?: InputMask;
 
+  @ViewChild(NgModel) private inputModel?: NgModel;
+
   lastKeyPressed = '';
   lastInputElement: HTMLInputElement | null = null;
 
@@ -190,8 +193,10 @@ export class IncompleteDateComponent implements ControlValueAccessor, Validator,
    * Called by the Forms module to write a value into a form control
    * @param value The new value
    */
-  writeValue(value: string): void {
-    this.inputValue = value;
+  writeValue(value: string | null): void {
+    this.inputValue = value ?? '';
+    this.inputModel?.control.markAsPristine();
+    this.inputModel?.control.markAsUntouched();
   }
 
   /**
