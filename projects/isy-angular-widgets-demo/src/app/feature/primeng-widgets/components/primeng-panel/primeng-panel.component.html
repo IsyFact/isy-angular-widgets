@@ -102,7 +102,7 @@
       <p-fieldset legend="Fieldset Header">
         <form class="flex flex-column gap-3" novalidate>
           <div class="flex flex-column gap-1">
-            <label for="fieldset-required-input" class="font-medium">
+            <label for="fieldset-required-input">
               {{ 'isyAngularWidgetsDemo.labels.panelFieldsetRequiredLabel' | translate }}
               <span class="text-red-500" aria-hidden="true">*</span>
             </label>
@@ -124,7 +124,7 @@
           </div>
 
           <div class="flex flex-column gap-1">
-            <label for="fieldset-number-input" class="font-medium">{{
+            <label for="fieldset-number-input">{{
               'isyAngularWidgetsDemo.labels.panelFieldsetNumberLabel' | translate
             }}</label>
             <p-inputnumber
@@ -138,7 +138,7 @@
           </div>
 
           <div class="flex flex-column gap-1">
-            <label for="fieldset-date-input" class="font-medium">{{
+            <label for="fieldset-date-input">{{
               'isyAngularWidgetsDemo.labels.panelFieldsetDateLabel' | translate
             }}</label>
             <p-datepicker
@@ -151,6 +151,168 @@
             />
           </div>
         </form>
+      </p-fieldset>
+    </div>
+    <div class="col-12 flex flex-column gap-2">
+      <demo-section-heading
+        anchorId="fieldset-toolbar"
+        [level]="3"
+        [label]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarHeading' | translate"
+        [ariaLabel]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarHeadingLink' | translate"
+      />
+      <p-fieldset
+        [legend]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarAddresses' | translate"
+        [pt]="{
+          legend: {class: 'flex flex-wrap align-items-center justify-content-between gap-2 w-full'},
+          legendLabel: {role: 'heading', 'aria-level': 4}
+        }"
+      >
+        <!-- Custom header template keeps the legend's normal look, placing the toolbar to the right of the label -->
+        <ng-template #header>
+          <div
+            role="toolbar"
+            class="flex flex-wrap align-items-center gap-2"
+            [attr.aria-label]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarAddressesToolbar' | translate"
+          >
+            <p-button
+              type="button"
+              icon="pi pi-plus"
+              severity="secondary"
+              [text]="true"
+              [pTooltip]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarAdd' | translate"
+              [ariaLabel]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarAdd' | translate"
+              (onClick)="
+                runFieldGroupAction(
+                  $event,
+                  'isyAngularWidgetsDemo.labels.panelFieldsetToolbarAdd',
+                  'isyAngularWidgetsDemo.labels.panelFieldsetToolbarAddresses'
+                )
+              "
+            />
+            <p-button
+              type="button"
+              icon="pi pi-refresh"
+              severity="secondary"
+              [text]="true"
+              [pTooltip]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarRefresh' | translate"
+              [ariaLabel]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarRefresh' | translate"
+              (onClick)="
+                runFieldGroupAction(
+                  $event,
+                  'isyAngularWidgetsDemo.labels.panelFieldsetToolbarRefresh',
+                  'isyAngularWidgetsDemo.labels.panelFieldsetToolbarAddresses'
+                )
+              "
+            />
+            <p-button
+              type="button"
+              icon="pi pi-star"
+              severity="secondary"
+              [text]="true"
+              [pTooltip]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarHighlight' | translate"
+              [ariaLabel]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarHighlight' | translate"
+              [pt]="{root: {'aria-pressed': addressesHighlighted}}"
+              (onClick)="toggleAddressesHighlight($event)"
+            />
+            <p-button
+              type="button"
+              icon="pi pi-lock"
+              severity="secondary"
+              [text]="true"
+              [disabled]="true"
+              [pTooltip]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarRelease' | translate"
+              [ariaLabel]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarRelease' | translate"
+            />
+            <p-button
+              #addressesOverflowButton
+              type="button"
+              icon="pi pi-ellipsis-v"
+              severity="secondary"
+              [text]="true"
+              [pTooltip]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarMoreActions' | translate"
+              [ariaLabel]="'isyAngularWidgetsDemo.labels.panelFieldsetToolbarMoreActions' | translate"
+              [pt]="{root: {'aria-haspopup': 'menu', 'aria-controls': 'addresses-overflow-menu'}}"
+              (onClick)="addressesOverflowMenu.toggle($event)"
+            />
+            <p-menu
+              #addressesOverflowMenu
+              id="addresses-overflow-menu"
+              [popup]="true"
+              [model]="addressesOverflowItems"
+              appendTo="body"
+            >
+              <ng-template #item let-item>
+                <span class="p-menu-item-link">
+                  <span [class]="item.icon + ' p-menu-item-icon'"></span>
+                  <span class="p-menu-item-label">{{ item.label | translate }}</span>
+                </span>
+              </ng-template>
+            </p-menu>
+          </div>
+        </ng-template>
+
+        @for (group of addressGroups; track group.id) {
+          <p-fieldset
+            class="block mb-3"
+            [legend]="group.legendKey | translate"
+            [styleClass]="addressesHighlighted ? 'border-primary' : ''"
+            [pt]="{
+              legend: {class: 'flex flex-wrap align-items-center justify-content-between gap-2 w-full'},
+              legendLabel: {role: 'heading', 'aria-level': 5}
+            }"
+          >
+            <ng-template #header>
+              <div
+                role="toolbar"
+                class="flex flex-wrap align-items-center gap-2"
+                [attr.aria-label]="group.toolbarLabelKey | translate"
+              >
+                @for (action of group.actions; track action.key) {
+                  <p-button
+                    type="button"
+                    [icon]="action.icon"
+                    severity="secondary"
+                    [text]="true"
+                    [disabled]="action.disabled"
+                    [pTooltip]="action.labelKey | translate"
+                    [ariaLabel]="action.labelKey | translate"
+                    (onClick)="runFieldGroupAction($event, action.labelKey, group.legendKey)"
+                  />
+                }
+              </div>
+            </ng-template>
+
+            <div class="grid">
+              <div class="col-12 md:col-8 flex flex-column gap-1">
+                <label [for]="group.id + '-street'">{{
+                  'isyAngularWidgetsDemo.labels.panelFieldsetToolbarStreet' | translate
+                }}</label>
+                <input [id]="group.id + '-street'" type="text" pInputText class="w-full" />
+              </div>
+              <div class="col-12 md:col-4 flex flex-column gap-1">
+                <label [for]="group.id + '-zip'">{{
+                  'isyAngularWidgetsDemo.labels.panelFieldsetToolbarZip' | translate
+                }}</label>
+                <input [id]="group.id + '-zip'" type="text" pInputText class="w-full" />
+              </div>
+              <div class="col-12 flex flex-column gap-1">
+                <label [for]="group.id + '-city'">{{
+                  'isyAngularWidgetsDemo.labels.panelFieldsetToolbarCity' | translate
+                }}</label>
+                <input [id]="group.id + '-city'" type="text" pInputText class="w-full" />
+              </div>
+            </div>
+          </p-fieldset>
+        }
+
+        <output class="visually-hidden" aria-live="polite">
+          @if (lastToolbarActionKey && lastToolbarGroupKey) {
+            {{
+              'isyAngularWidgetsDemo.messages.panelFieldsetToolbarActionExecuted'
+                | translate: {action: lastToolbarActionKey | translate, group: lastToolbarGroupKey | translate}
+            }}
+          }
+        </output>
       </p-fieldset>
     </div>
     <div class="col-12 flex flex-column gap-2">
