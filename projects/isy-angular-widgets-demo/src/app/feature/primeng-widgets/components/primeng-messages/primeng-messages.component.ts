@@ -29,11 +29,11 @@ export class PrimengMessagesComponent implements AfterViewInit {
     this.anchorNav.scrollToAnchor(event, anchor);
   }
 
-  showToastMessage(): void {
+  showToastMessage(severity: 'info' | 'success' | 'warn' | 'error'): void {
     this.messageService.add({
       key: 'toast',
-      severity: 'success',
-      summary: 'Success',
+      severity,
+      summary: severity === 'warn' ? 'Warning' : severity.charAt(0).toUpperCase() + severity.slice(1),
       detail: 'Message Content',
       sticky: true
     });
