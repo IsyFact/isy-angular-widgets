@@ -22,8 +22,12 @@
 }
 
 .isy-wizard-step-label.is-disabled {
-  color: var(--p-text-muted-color, #6b7280);
+  color: var(--isyfact-disabled-button-background);
   cursor: not-allowed;
+}
+
+.p-step-title.is-disabled {
+  color: var(--isyfact-disabled-button-background);
 }
 
 .visually-hidden {

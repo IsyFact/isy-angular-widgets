@@ -269,6 +269,40 @@
     pointer-events: auto;
   }
 
+  .p-stepper .p-step.p-disabled .p-step-number,
+  .p-stepper .p-step-header:disabled .p-step-number {
+    color: var(--isyfact-disabled-button-background);
+    background-color: transparent;
+    border-color: var(--isyfact-disabled-button-border-color);
+  }
+
+  .p-stepper .p-step.p-disabled .p-step-title,
+  .p-stepper .p-step-header:disabled .p-step-title {
+    color: var(--isyfact-disabled-button-background);
+  }
+
+  .p-steps .p-steps-item.p-disabled .p-steps-item-link,
+  .p-steps .p-steps-item-link[aria-disabled='true'] {
+    color: var(--isyfact-disabled-button-background);
+  }
+
+  .p-steps .p-steps-item:not(.p-steps-item-active) .p-steps-item-link {
+    color: var(--p-button-text-secondary-color);
+  }
+
+  .p-steps .p-steps-item:not(.p-steps-item-active) .p-steps-item-number {
+    border-color: var(--p-button-text-secondary-color);
+  }
+
+  .p-stepper .p-step:not(.p-step-active) .p-step-header:not(:disabled) .p-step-number,
+  .p-stepper .p-step:not(.p-step-active) .p-step-header:not(:disabled) .p-step-title {
+    color: var(--p-button-text-secondary-color);
+  }
+
+  .p-stepper .p-step:not(.p-step-active) .p-step-header:not(:disabled) .p-step-number {
+    border-color: var(--p-button-text-secondary-color);
+  }
+
   // Set the color of the progress spinner to the primary color
   .p-progressspinner-circle {
     stroke: #{vars.$isyfactProgressSpinnerStroke};

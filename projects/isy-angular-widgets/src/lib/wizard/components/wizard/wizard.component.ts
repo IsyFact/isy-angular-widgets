@@ -207,7 +207,8 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() allowFreeNavigation = false;
 
   /**
-   * Automatically disables all following steps while the current step is not allowed to proceed.
+   * Automatically disables following steps while the current step is not allowed to proceed,
+   * and prevents skipping steps even when it is allowed.
    * Typical use:
    * <isy-wizard [autoDisableFutureSteps]="true"></isy-wizard>
    */
@@ -417,7 +418,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   private isAutoDisabledStep(index: number): boolean {
-    return this.autoDisableFutureSteps && !this.allowNext && index > this.index;
+    return this.autoDisableFutureSteps && index > this.index && (!this.allowNext || index > this.index + 1);
   }
 
   private isExplicitlyDisabledStep(index: number): boolean {

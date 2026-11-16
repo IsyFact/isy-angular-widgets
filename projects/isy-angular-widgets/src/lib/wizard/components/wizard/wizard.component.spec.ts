@@ -372,6 +372,40 @@ describe('Unit Tests: WizardComponent', () => {
     expect(wizard.isStepDisabled(2)).toBe(true);
   });
 
+  it('should only enable the next step when auto-disable is configured and the current step is valid', () => {
+    wizard.items = stepperItems;
+    wizard.allowFreeNavigation = true;
+    wizard.autoDisableFutureSteps = true;
+    wizard.allowNext = true;
+
+    expect(wizard.isStepDisabled(1)).toBe(false);
+    expect(wizard.isStepDisabled(2)).toBe(true);
+
+    const activateCallback = vi.fn();
+    wizard.onStepSelect(2, activateCallback);
+    wizard.onStepperValueChange(3);
+    expect(activateCallback).not.toHaveBeenCalled();
+    expect(wizard.index).toBe(0);
+
+    wizard.onStepperValueChange(2);
+    wizard.allowNext = false;
+    expect(wizard.index).toBe(1);
+    expect(wizard.isStepDisabled(0)).toBe(false);
+    expect(wizard.isStepDisabled(2)).toBe(true);
+
+    wizard.allowNext = true;
+    expect(wizard.isStepDisabled(2)).toBe(false);
+  });
+
+  it('should still allow skipping steps when automatic disabling is not configured', () => {
+    wizard.items = stepperItems;
+    wizard.allowFreeNavigation = true;
+
+    wizard.onStepperValueChange(3);
+
+    expect(wizard.index).toBe(2);
+  });
+
   it('should return auto-disabled tooltip text when configured', () => {
     wizard.items = stepperItems;
     wizard.index = 0;
@@ -614,6 +648,22 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     for (let i = 0; i < wizard.items.length; i++) {
       expect(wizard.items[i]).toEqual(stepperItems[i]);
     }
+  });
+
+  it('should render disabled step labels with tooltip and screenreader text', () => {
+    wizard.stepStates = [{}, {disabled: true, disabledTooltip: 'Bitte zuerst Pflichtfelder ausfuellen'}];
+
+    fixture.detectChanges();
+
+    const stepLabels = spectator.queryAll<HTMLElement>('.isy-wizard-step-label');
+    expect(stepLabels).toHaveLength(stepsNumber);
+    expect(stepLabels[1].classList.contains('is-disabled')).toBe(true);
+
+    const stepTitles = spectator.queryAll<HTMLElement>('.p-step-title');
+    expect(stepTitles[1].classList.contains('is-disabled')).toBe(true);
+
+    const srText = stepLabels[1].querySelector('.visually-hidden')?.textContent?.trim();
+    expect(srText).toBe('wizard.aria.disabledStep. Bitte zuerst Pflichtfelder ausfuellen');
   });
 
   it('should have expected width and height', () => {
