@@ -89,7 +89,7 @@ class StepListStubComponent {}
 @Component({
   selector: 'p-step',
   standalone: true,
-  imports: [CommonModule, PTemplateStubDirective],
+  imports: [CommonModule],
   template: `
     <div class="p-step">
       <ng-container *ngIf="contentTpl; else projectedContent" [ngTemplateOutlet]="contentTpl.template"></ng-container>
@@ -110,7 +110,7 @@ class StepStubComponent {
 @Component({
   selector: 'p-dialog',
   standalone: true,
-  imports: [CommonModule, PTemplateStubDirective, StepperModule],
+  imports: [CommonModule, StepperModule],
   template: `
     <div class="p-dialog">
       <button class="p-dialog-close-button" type="button" [attr.aria-label]="closeAriaLabel">×</button>
