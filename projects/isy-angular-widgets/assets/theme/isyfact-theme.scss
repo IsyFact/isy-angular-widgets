@@ -148,6 +148,8 @@
       background-color: var(--isyfact-disabled-button-border-color);
     }
 
+    .p-checkbox.p-disabled + label,
+    .p-checkbox.p-disabled ~ label,
     .p-radiobutton.p-disabled + label,
     .p-radiobutton.p-disabled ~ label {
       color: var(--isyfact-disabled-field-text-color);
@@ -225,6 +227,54 @@
 
   :disabled {
     cursor: not-allowed;
+  }
+
+  button:not(:disabled),
+  a[href],
+  [role='button']:not([aria-disabled='true']),
+  [role='option']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+
+  .p-select:not(.p-disabled),
+  .p-select:not(.p-disabled) .p-select-dropdown {
+    cursor: pointer;
+  }
+
+  .p-select.p-disabled,
+  .p-select.p-disabled *,
+  .p-select [disabled],
+  .p-select [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+
+  .p-select.p-disabled {
+    pointer-events: auto;
+  }
+
+  .p-checkbox.p-disabled,
+  .p-radiobutton.p-disabled,
+  .p-toggleswitch.p-disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+  }
+
+  .p-toggleswitch.p-disabled .p-toggleswitch-slider {
+    border-color: var(--isyfact-disabled-field-border-color);
+  }
+
+  .p-megamenu .p-megamenu-item.p-disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+  }
+
+  .p-megamenu .p-megamenu-item.p-disabled .p-megamenu-item-label {
+    color: var(--isyfact-disabled-field-text-color);
+  }
+
+  .p-stepper .p-step.p-disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
   }
 
   // Set the color of the progress spinner to the primary color
