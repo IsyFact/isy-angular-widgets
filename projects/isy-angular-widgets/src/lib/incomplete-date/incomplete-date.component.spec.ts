@@ -5,9 +5,11 @@ import {
   FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
+  NgModel,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import {By} from '@angular/platform-browser';
 import {createComponentFactory, Spectator} from '@ngneat/spectator';
 import {IncompleteDateComponent} from './incomplete-date.component';
 import {Validation} from '../validation/validation';
@@ -484,5 +486,52 @@ describe('Integration Tests: IncompleteDateComponent', () => {
     expect(requiredInput).toBeTruthy();
     expect(requiredInput.hasAttribute('required')).toBeTrue();
     expect(requiredInput.getAttribute('aria-required')).toBe('true');
+  });
+
+  it('should reset the internal input model to pristine and untouched when the reactive form is reset', () => {
+    const hostSpectator = createRequiredHostComponent();
+
+    hostSpectator.detectChanges();
+
+    const inputModel = hostSpectator.fixture.debugElement.query(By.directive(NgModel)).injector.get(NgModel);
+    const inputMask = hostSpectator.query('p-inputmask') as HTMLElement;
+    const nativeInput = hostSpectator.query('#date-of-entry') as HTMLInputElement;
+
+    hostSpectator.component.form.controls.dateOfEntry.setValue('15.05.2024');
+    inputModel.control.markAsDirty();
+    inputModel.control.markAsTouched();
+    hostSpectator.detectChanges();
+
+    expect(inputModel.dirty).toBeTrue();
+    expect(inputModel.touched).toBeTrue();
+    expect(inputMask.classList.contains('ng-dirty')).toBeTrue();
+
+    hostSpectator.component.form.reset();
+    hostSpectator.detectChanges();
+
+    expect(hostSpectator.component.form.controls.dateOfEntry.pristine).toBeTrue();
+    expect(hostSpectator.component.form.controls.dateOfEntry.untouched).toBeTrue();
+    expect(inputModel.pristine).toBeTrue();
+    expect(inputModel.untouched).toBeTrue();
+    expect(nativeInput.value).toBe('');
+    expect(inputMask.classList.contains('ng-dirty')).toBeFalse();
+    expect(inputMask.classList.contains('p-invalid')).toBeFalse();
+  });
+
+  it('should preserve the internal input model state when a non-empty value is written programmatically', () => {
+    const hostSpectator = createRequiredHostComponent();
+
+    hostSpectator.detectChanges();
+
+    const inputModel = hostSpectator.fixture.debugElement.query(By.directive(NgModel)).injector.get(NgModel);
+
+    inputModel.control.markAsDirty();
+    inputModel.control.markAsTouched();
+
+    hostSpectator.component.form.controls.dateOfEntry.setValue('20.06.2025');
+    hostSpectator.detectChanges();
+
+    expect(inputModel.dirty).toBeTrue();
+    expect(inputModel.touched).toBeTrue();
   });
 });
