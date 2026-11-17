@@ -13,7 +13,12 @@
   }"
   (visibleChange)="isVisibleChange.emit($event)"
 >
-  <p-stepper [value]="index + 1" [linear]="!allowFreeNavigation" (valueChange)="onStepperValueChange($event)">
+  <p-stepper
+    class="isy-wizard-stepper"
+    [value]="index + 1"
+    [linear]="!allowFreeNavigation"
+    (valueChange)="onStepperValueChange($event)"
+  >
     <p-step-list>
       @for (item of items; track $index; let i = $index) {
         <p-step [value]="i + 1">
@@ -35,7 +40,7 @@
                 (click)="onStepSelect(i, activateCallback)"
               >
                 <span class="p-step-number">{{ value }}</span>
-                <span class="p-step-title">
+                <span class="p-step-title" [class.is-disabled]="isStepDisabled(i)">
                   <span class="isy-wizard-step-label" [class.is-disabled]="isStepDisabled(i)">
                     <span>{{ item.label }}</span>
                     @if (isStepDisabled(i)) {
