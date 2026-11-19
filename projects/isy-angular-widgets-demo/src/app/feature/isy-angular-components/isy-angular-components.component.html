@@ -28,13 +28,47 @@
         </isy-seiten-toolbar>
       </div>
       <div class="col-12 flex flex-column gap-2">
-        <demo-section-heading anchorId="formwrapper" label="FormWrapper" ariaLabel="Link zu FormWrapper" />
+        <div class="flex align-items-center justify-content-between flex-wrap gap-3">
+          <demo-section-heading anchorId="formwrapper" label="FormWrapper" ariaLabel="Link zu FormWrapper" />
+          <div class="flex align-items-center gap-2">
+            <p-checkbox
+              inputId="ifta-form-wrapper"
+              name="iftaFormWrapper"
+              [(ngModel)]="iftaFormWrapper"
+              [binary]="true"
+              [ngModelOptions]="{standalone: true}"
+            />
+            <label for="ifta-form-wrapper" class="m-0">{{
+              'isyAngularWidgetsDemo.labels.showIftaPresentation' | translate
+            }}</label>
+          </div>
+        </div>
         <isy-form-wrapper
           [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
           fieldId="first-name"
+          [ifta]="iftaFormWrapper"
           [control]="personalInfoForm.controls.firstName | formControl"
           [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
         >
+          <span isyFormWrapperLabel class="text-color-secondary"
+            >{{ 'isyAngularWidgetsDemo.labels.minimumTwoCharacters' | translate }}
+          </span>
+          <p-button
+            isyFormWrapperLabel
+            type="button"
+            styleClass="w-1rem h-1rem p-0"
+            icon="pi pi-info-circle"
+            [ariaLabel]="
+              ('isyAngularWidgetsDemo.aria.info' | translate) +
+              ': ' +
+              ('isyAngularWidgetsDemo.labels.vorname' | translate)
+            "
+            [text]="true"
+            [rounded]="true"
+            [pTooltip]="'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16}"
+            tooltipEvent="both"
+            tooltipPosition="right"
+          />
           <input
             id="first-name"
             formControlName="firstName"

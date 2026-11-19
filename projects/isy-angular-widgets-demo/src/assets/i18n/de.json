@@ -163,6 +163,8 @@
       "add": "Hinzufügen"
     },
     "labels": {
+      "showIftaPresentation": "Ifta-Darstellung anzeigen",
+      "minimumTwoCharacters": "(Mindestens 2 Zeichen)",
       "id": "ID",
       "nachname": "Nachname",
       "vorname": "Vorname",

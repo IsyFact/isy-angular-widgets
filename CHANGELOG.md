@@ -1,7 +1,9 @@
 # 21.4.0 - 
 ## Features
+- IFS-5895: Der dokumentierte FormWrapper-Slot `isyFormWrapperLabel` ermöglicht Zusatzinhalt neben der Beschriftung in Standard- und Ifta-Darstellung
 - IFS-5737: Disabled-States für Buttons und Formularelemente im IsyFact-Theme wurden farblich vereinheitlicht
 ## Demo-Anwendung
+- IFS-5895: Das FormWrapper-Beispiel zeigt Zusatztext und ein Info-Symbol mit Tooltip neben der Beschriftung
 - IFS-5751: Die Demo-Anwendung zeigt unter `primeng-widgets/primeng-panel#fieldset-toolbar` ein Beispiel für Eingabefeldgruppen mit Toolbar
 - IFS-5750: Die Demo-Anwendung zeigt Haupt-, Sub- und Linksnavigation in einfachen und komplexen Anwendungsbeispielen
 - IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
