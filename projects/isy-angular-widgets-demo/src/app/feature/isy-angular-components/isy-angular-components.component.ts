@@ -11,6 +11,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputGroupModule} from 'primeng/inputgroup';
+import {TooltipModule} from 'primeng/tooltip';
 import {AnchorNavigationService} from '../../shared/services/anchor-navigation.service';
 import {SectionHeadingComponent} from '../../shared/components/section-heading/section-heading.component';
 
@@ -32,6 +33,7 @@ import {SectionHeadingComponent} from '../../shared/components/section-heading/s
     ButtonModule,
     CheckboxModule,
     InputGroupModule,
+    TooltipModule,
     SectionHeadingComponent
   ]
 })
@@ -45,6 +47,7 @@ export class IsyAngularComponentsComponent implements AfterViewInit {
   personalien = this.person.personalien;
   transferDateAsIso8601 = true;
   outlineInputChar = false;
+  iftaFormWrapper = false;
   checked = false;
 
   constructor() {
