@@ -1,12 +1,15 @@
 <div class="flex flex-column gap-2" [ngClass]="labelOptionClass">
-  <label [attr.id]="computedLabelId" [attr.for]="fieldId" class="label" [ngClass]="labelFilledClass">
-    {{ label }}
+  <div class="label-region">
+    <label [attr.id]="computedLabelId" [attr.for]="fieldId" class="label" [ngClass]="labelFilledClass">
+      {{ label }}
 
-    @if (required) {
-      <span aria-hidden="true">*</span>
-      <span class="visually-hidden">{{ requiredTranslation$ | async }}</span>
-    }
-  </label>
+      @if (required) {
+        <span aria-hidden="true">*</span>
+        <span class="visually-hidden">{{ requiredTranslation$ | async }}</span>
+      }
+    </label>
+    <span class="label-content"><ng-content select="[isyFormWrapperLabel]"></ng-content></span>
+  </div>
 
   <div class="flex-container" data-form-wrapper-field-container>
     <ng-content></ng-content>

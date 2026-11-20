@@ -40,6 +40,7 @@ Praktische und querschnittliche Beispiele für die Umsetzung von Styleguide-Patt
 
 - [Features](#features)
 - [Bereitgestellte Bausteine](#bereitgestellte-bausteine)
+- [Zusatzinhalt im FormWrapper-Label](#zusatzinhalt-im-formwrapper-label)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Weiterführende Dokumentation](#weiterführende-dokumentation)
@@ -87,6 +88,35 @@ Die folgende Übersicht listet die öffentlich bereitgestellten Komponenten, Dir
 | [`IncompleteDatePipe`](https://isyfact.github.io/isy-angular-widgets/v21/documentation/pipes/IncompleteDatePipe.html) | Pipe | Formatiert unvollständige Datumsangaben für die Anzeige. |
 | [`CorrelationIdHttpInterceptor`](https://isyfact.github.io/isy-angular-widgets/v21/documentation/interceptors/CorrelationIdHttpInterceptor.html) | HTTP-Interceptor | Ergänzt ausgehende Requests um eine Korrelations-ID gemäß IsyFact-Vorgaben. |
 | [`ZipkinOpenTracingHttpInterceptor`](https://isyfact.github.io/isy-angular-widgets/v21/documentation/injectables/ZipkinOpenTracingHttpInterceptor.html) | HTTP-Interceptor | Ergänzt Requests um Tracing-Header nach dem OpenTracing-Standard in der Zipkin-Ausprägung. |
+
+## Zusatzinhalt im FormWrapper-Label
+
+Elemente mit dem Attribut `isyFormWrapperLabel` werden neben der Beschriftung dargestellt.
+Der Slot ist ein Projektionsselektor und benötigt keinen zusätzlichen Direktiven-Import.
+Der erforderliche String-Input `label` bleibt unverändert; Inhalt ohne Slot-Attribut wird weiterhin im Feld-Container dargestellt.
+
+```html
+<isy-form-wrapper label="E-Mail" fieldId="email" [control]="emailControl">
+  <button
+    isyFormWrapperLabel
+    type="button"
+    aria-label="Hinweis zur E-Mail-Adresse"
+    pTooltip="Bitte verwenden Sie Ihre dienstliche E-Mail-Adresse."
+    tooltipEvent="both"
+  >
+    <span class="pi pi-info-circle" aria-hidden="true"></span>
+  </button>
+  <input isyFormWrapperField pInputText [formControl]="emailControl" />
+</isy-form-wrapper>
+```
+
+Das Beispiel verwendet zusätzlich `ReactiveFormsModule`, `TooltipModule` und `InputTextModule` sowie PrimeIcons.
+Der Slot funktioniert auch mit `[ifta]="true"`; für diese Darstellung sollten Zusatzelemente kompakt bleiben.
+Größere Zusatzinhalte gehören in die Standarddarstellung.
+Interaktive Elemente liegen bewusst außerhalb des nativen `label`, damit sie dessen zugänglichen Namen nicht verändern.
+Icon-Buttons benötigen einen eigenen zugänglichen Namen und innerhalb eines Formulars `type="button"`.
+`tooltipEvent="both"` macht den Tooltip auch bei Tastaturfokus verfügbar.
+Label-ID, `for`-Zuordnung, Pflichtfeldkennzeichnung und Validierungsanzeige bleiben erhalten.
 
 ## Installation
 
