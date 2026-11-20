@@ -39,6 +39,17 @@ type FormWrapperFieldElement = HTMLInputElement | HTMLTextAreaElement | HTMLSele
  *
  * Required inputs are `label`, `fieldId` and `control`.
  *
+ * ## Label content slot
+ *
+ * Add the `isyFormWrapperLabel` attribute to projected elements to render them beside the
+ * string label, in both static and Ifta mode. This is a content projection selector, not a
+ * directive, so no additional import is needed. Unmarked content stays in the field container.
+ * The slot supplements rather than replaces the required `label` input. It is rendered outside
+ * the native `label` element so interactive content does not change the field's accessible name.
+ * Give icon-only buttons their own accessible name and use `type="button"` inside forms.
+ * Tooltips should also be available on keyboard focus. Keep Ifta additions compact enough to
+ * fit above the field value; use the static variant for larger supplementary content.
+ *
  * ## Native fields
  *
  * Marking the field with `isyFormWrapperField` is recommended. The wrapper then maintains `id`,
@@ -83,6 +94,23 @@ type FormWrapperFieldElement = HTMLInputElement | HTMLTextAreaElement | HTMLSele
  *   ></p-select>
  * </isy-form-wrapper>
  * ```
+ * @example
+ * Supplementary label content (also works with `[ifta]="true"`):
+ * ```html
+ * <isy-form-wrapper label="Email" fieldId="email" [control]="emailControl">
+ *   <button
+ *     isyFormWrapperLabel
+ *     type="button"
+ *     aria-label="Help for email"
+ *     pTooltip="Use your work email address"
+ *     tooltipEvent="both"
+ *   >
+ *     <span class="pi pi-info-circle" aria-hidden="true"></span>
+ *   </button>
+ *   <input isyFormWrapperField pInputText [formControl]="emailControl" />
+ * </isy-form-wrapper>
+ * ```
+ * The tooltip and input styling in this example require PrimeNG's TooltipModule and InputTextModule.
  */
 @Component({
   standalone: true,

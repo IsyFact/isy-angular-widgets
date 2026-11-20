@@ -1,5 +1,6 @@
 # 22.2.0-next.1 -
 ## Features
+- IFS-5895: Der dokumentierte FormWrapper-Slot `isyFormWrapperLabel` ermöglicht Zusatzinhalt neben der Beschriftung in Standard- und Ifta-Darstellung
 - IFS-5390: Die CI-Workflows führen die Tests der Bibliothek und Demo-Anwendung mit Vitest aus
 - IFS-5388: Die Tests der Bibliothek wurden vollständig auf Vitest migriert
   - Ausführung über `npm run test:lib:vitest`, `npm run test:lib:vitest:run` und `npm run test:lib:vitest:coverage`
@@ -9,6 +10,7 @@
 - IFS-5386: Vitest wurde als zusätzliche technische Testbasis vorbereitet; die bestehenden Karma-/Jasmine-Tests bleiben vorerst bestehen und werden schrittweise migriert
 - IFS-4930: Die Widgets`isy-wizard` und `isy-input-char` wurden für die Darstellung mit einer Mindestbreite von 320px optimiert.
 ## Demo-Anwendung
+- IFS-5895: Das FormWrapper-Beispiel zeigt Zusatztext und ein Info-Symbol mit Tooltip neben der Beschriftung
 - IFS-5751: Die Demo-Anwendung zeigt unter `primeng-widgets/primeng-panel#fieldset-toolbar` ein Beispiel für Eingabefeldgruppen mit Toolbar
 - IFS-5750: Die Demo-Anwendung zeigt Haupt-, Sub- und Linksnavigation in einfachen und komplexen Anwendungsbeispielen
 - IFS-5387: Die Tests der Demo-Anwendung wurden auf Vitest migriert (`npm run test:demo:vitest*`); die bisherige Testkonfiguration und ihre Abhängigkeiten wurden entfernt

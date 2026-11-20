@@ -167,6 +167,8 @@
       "user": "User"
     },
     "labels": {
+      "showIftaPresentation": "Show Ifta layout",
+      "minimumTwoCharacters": "(At least 2 characters)",
       "id": "ID",
       "nachname": "Last name",
       "vorname": "First name",

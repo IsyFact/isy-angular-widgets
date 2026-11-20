@@ -86,6 +86,66 @@ describe('FormWrapperComponent', () => {
     validationMessages: {}
   });
 
+  describe('label content projection', () => {
+    const createHost = createHostFactory({
+      component: FormWrapperComponent,
+      imports: [ReactiveFormsModule, FormWrapperFieldDirective]
+    });
+
+    for (const ifta of [false, true]) {
+      it(`should preserve accessible labeling and validation with label content (ifta=${ifta})`, async () => {
+        const control = new FormControl('', Validators.required);
+        const host = createHost(
+          `<isy-form-wrapper label="Email" labelId="email-label" fieldId="email"
+            [control]="control" [ifta]="ifta" [validationMessages]="{required: 'Email is required'}">
+            <span isyFormWrapperLabel>Additional information</span>
+            <button isyFormWrapperLabel type="button" aria-label="Help for email">Help</button>
+            <input isyFormWrapperField [formControl]="control" />
+          </isy-form-wrapper>`,
+          {hostProps: {control, ifta}}
+        );
+        await host.fixture.whenStable();
+        host.detectChanges();
+
+        const label = host.query<HTMLLabelElement>('label')!;
+        const additionalText = host.query<HTMLElement>('.label-content span')!;
+        const button = host.query<HTMLButtonElement>('button')!;
+        const field = host.query<HTMLInputElement>('input')!;
+        expect(host.query('.label-region button')).toBe(button);
+        expect(host.query('[data-form-wrapper-field-container] button')).toBeNull();
+        expect(host.query('[data-form-wrapper-field-container] input')).toBe(field);
+        expect(label.id).toBe('email-label');
+        expect(label.htmlFor).toBe(field.id);
+        expect(field.labels?.item(0)).toBe(label);
+        expect(label.textContent).toContain('Email');
+        expect(label.textContent).not.toContain('Help');
+        if (ifta) {
+          expect(getComputedStyle(additionalText).fontSize).toBe(getComputedStyle(label).fontSize);
+        }
+        expect(label.querySelector('[aria-hidden="true"]')?.textContent).toBe('*');
+        expect(label.querySelector('.visually-hidden')?.textContent).toBe('Pflichtfeld');
+        expect(button.tabIndex).toBe(0);
+        expect(getComputedStyle(button).pointerEvents).not.toBe('none');
+        const valueTop = field.getBoundingClientRect().top + parseFloat(getComputedStyle(field).paddingTop);
+        expect(valueTop).toBeGreaterThanOrEqual(button.getBoundingClientRect().bottom);
+        button.focus();
+        expect(document.activeElement).toBe(button);
+
+        control.markAsTouched();
+        host.detectChanges();
+        expect(host.query('#email-error')).toHaveText('Email is required');
+        expect(field).toHaveAttribute('aria-describedby', 'email-error');
+        expect(field).toHaveAttribute('aria-invalid', 'true');
+        expect(field).toHaveAttribute('aria-errormessage', 'email-error');
+
+        control.setValue('test@example.org');
+        host.detectChanges();
+        expect(host.query('#email-error')).toBeNull();
+        expect(field.hasAttribute('aria-invalid')).toBe(false);
+      });
+    }
+  });
+
   describe('basic component behavior', () => {
     it('should create required component', () => {
       spectator = createComponent({props: createRequiredProps()});
