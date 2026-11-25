@@ -1,4 +1,4 @@
-# 22.2.0-next.1 -
+# 22.2.0-next.1 - (25.11.2026)
 ## Features
 - IFS-5895: Der dokumentierte FormWrapper-Slot `isyFormWrapperLabel` ermöglicht Zusatzinhalt neben der Beschriftung in Standard- und Ifta-Darstellung
 - IFS-5390: Die CI-Workflows führen die Tests der Bibliothek und Demo-Anwendung mit Vitest aus
