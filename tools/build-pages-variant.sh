@@ -29,15 +29,8 @@ echo "Building '$SOURCE_DIR' into '$TARGET_ABS' with base href '$BASE_HREF'"
 
 cd "$SOURCE_DIR"
 
-# The demo consumes the widgets library as a packed tarball, so the library has
-# to be built before the full dependency tree can be installed.
-cp package.json package.json.orig
-node -e "const fs=require('fs'),p=JSON.parse(fs.readFileSync('package.json'));if(p.dependencies)delete p.dependencies['@isyfact/isy-angular-widgets'];fs.writeFileSync('package.json',JSON.stringify(p,null,2));"
-npm ci --ignore-scripts
-mv package.json.orig package.json
+npm ci --ignore-scripts --prefer-offline --no-audit --no-fund
 npm run build:widgets_lib
-npm run pack:widgets_lib
-npm ci --ignore-scripts
 
 npm run compodoc:build
 

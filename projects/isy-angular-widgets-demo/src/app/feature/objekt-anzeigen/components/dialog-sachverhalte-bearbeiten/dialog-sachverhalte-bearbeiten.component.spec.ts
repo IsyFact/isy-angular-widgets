@@ -1,5 +1,5 @@
 import {DialogSachverhalteBearbeitenComponent} from './dialog-sachverhalte-bearbeiten.component';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {PersonenService} from '../../../../shared/services/personen.service';
 import {TranslateModule} from '@ngx-translate/core';
 
@@ -22,7 +22,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   function setupPerson(): void {
     const personService = new PersonenService();
     component.person = personService.generatePerson();
-    spectator.fixture.detectChanges();
+    spectator.detectComponentChanges();
   }
 
   it('should create', () => {
@@ -30,31 +30,31 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   });
 
   it('ngOnChanges method should have been called', () => {
-    const ngOnChangeSpy = spyOn(component, 'ngOnChanges').and.callThrough();
+    const ngOnChangeSpy = spyOn(component, 'ngOnChanges');
     component.ngOnChanges();
     expect(ngOnChangeSpy).toHaveBeenCalled();
   });
 
   it('saveSachverhalte method should have been called', () => {
-    const saveSachverhalteSpy = spyOn(component, 'saveSachverhalte').and.callThrough();
+    const saveSachverhalteSpy = spyOn(component, 'saveSachverhalte');
     component.saveSachverhalte();
     expect(saveSachverhalteSpy).toHaveBeenCalled();
   });
 
   it('createSachverhalt method should have been called', () => {
-    const spy = spyOn(component, 'createSachverhalt').and.callThrough();
+    const spy = spyOn(component, 'createSachverhalt');
     component.createSachverhalt('createSachverhalt');
     expect(spy).toHaveBeenCalled();
   });
 
   it('deleteSachverhalt method should have been called', () => {
-    const spy = spyOn(component, 'deleteSachverhalt').and.callThrough();
+    const spy = spyOn(component, 'deleteSachverhalt');
     component.deleteSachverhalt('deleteSachverhalt');
     expect(spy).toHaveBeenCalled();
   });
 
   it('closeDialog method should have been called', () => {
-    const spy = spyOn(component, 'closeDialog').and.callThrough();
+    const spy = spyOn(component, 'closeDialog');
     component.closeDialog();
     expect(spy).toHaveBeenCalled();
   });
@@ -68,7 +68,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
     spectator.fixture.detectChanges();
 
     expect(component.person!.sachverhalte).toEqual(component.newSachverhalteListe);
-    expect(component.visible).toBeFalse();
+    expect(component.visible).toBe(false);
     expect(visibilityChangeSpy).toHaveBeenCalledWith(component.visible);
   });
 
@@ -76,7 +76,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
     component.visible = true;
     component.saveSachverhalte();
     spectator.fixture.detectChanges();
-    expect(component.visible).toBeTrue();
+    expect(component.visible).toBe(true);
   });
 
   it('should delete sachverhalt', () => {
@@ -98,7 +98,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
     component.visible = true;
     setupPerson();
     const element = spectator.query('[role="dialog"] button[aria-label]') as HTMLElement;
-    expect(element.hasAttribute('aria-label')).toBeTrue();
+    expect(element.hasAttribute('aria-label')).toBe(true);
   });
 
   it('should keep visible dialog content and exclude dialog actions from print', () => {
@@ -126,7 +126,7 @@ describe('Integration Tests: DialogSachverhalteBearbeitenComponent', () => {
   it('should close the dialog when closeDialog is called', () => {
     component.visible = true;
     component.closeDialog();
-    expect(component.visible).toBeFalse();
+    expect(component.visible).toBe(false);
   });
 
   it('should emit visibleChange event with true when dialog is opened', () => {

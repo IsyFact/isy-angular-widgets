@@ -1,3 +1,4 @@
+import {createSpyObject, SpyObject} from '@ngneat/spectator/vitest';
 import {TestBed} from '@angular/core/testing';
 import {ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {of, from, isObservable, Observable} from 'rxjs';
@@ -17,12 +18,12 @@ function toObservable<T>(value: T | Promise<T> | Observable<T>): Observable<T> {
 }
 
 describe('canActivateAuth (functional guard)', () => {
-  let mockAuthGuard: jasmine.SpyObj<AuthGuard>;
-  let mockRouter: jasmine.SpyObj<Router>;
+  let mockAuthGuard: SpyObject<AuthGuard>;
+  let mockRouter: SpyObject<Router>;
 
   beforeEach(() => {
-    mockAuthGuard = jasmine.createSpyObj<AuthGuard>('AuthGuard', ['canActivate']);
-    mockRouter = jasmine.createSpyObj<Router>('Router', ['navigate']);
+    mockAuthGuard = createSpyObject(AuthGuard);
+    mockRouter = createSpyObject(Router);
 
     TestBed.configureTestingModule({
       providers: [
@@ -36,12 +37,12 @@ describe('canActivateAuth (functional guard)', () => {
     const route = {} as ActivatedRouteSnapshot;
     const state = {} as RouterStateSnapshot;
 
-    mockAuthGuard.canActivate.and.returnValue(of(true));
+    mockAuthGuard.canActivate.mockReturnValue(of(true));
 
     const result = await TestBed.runInInjectionContext(async () => canActivateAuth(route, state));
 
     toObservable(result).subscribe((res) => {
-      expect(res).toBeTrue();
+      expect(res).toBe(true);
       expect(mockAuthGuard.canActivate).toHaveBeenCalledWith(route);
     });
   });
@@ -50,12 +51,12 @@ describe('canActivateAuth (functional guard)', () => {
     const route = {} as ActivatedRouteSnapshot;
     const state = {} as RouterStateSnapshot;
 
-    mockAuthGuard.canActivate.and.returnValue(of(false));
+    mockAuthGuard.canActivate.mockReturnValue(of(false));
 
     const result = await TestBed.runInInjectionContext(async () => canActivateAuth(route, state));
 
     toObservable(result).subscribe((res) => {
-      expect(res).toBeFalse();
+      expect(res).toBe(false);
       expect(mockAuthGuard.canActivate).toHaveBeenCalledWith(route);
     });
   });

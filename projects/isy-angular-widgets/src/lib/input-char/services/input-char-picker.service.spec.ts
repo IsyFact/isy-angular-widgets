@@ -1,11 +1,12 @@
 import {ApplicationRef} from '@angular/core';
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
+import {createServiceFactory, createSpyObject, SpectatorService} from '@ngneat/spectator/vitest';
 import {InputCharPickerService} from './input-char-picker.service';
 import {Datentyp} from '../model/datentyp';
 import type {InputCharPickerOpenOptions} from '../model/input-char-picker.model';
 import {CharacterService} from './character.service';
 import {WidgetsConfigService} from '../../i18n/widgets-config.service';
 import {InputCharSelection} from '../model/model';
+import {expect, vi} from 'vitest';
 
 /**
  * Retrieves all host elements for the input char picker component.
@@ -23,9 +24,9 @@ describe('Unit Tests: InputCharPickerService', () => {
   let spectator: SpectatorService<InputCharPickerService>;
   let service: InputCharPickerService;
 
-  const charServiceSpy = jasmine.createSpyObj<CharacterService>('CharacterService', ['getCharactersByDataType']);
+  const charServiceSpy = createSpyObject(CharacterService);
 
-  const configServiceSpy = jasmine.createSpyObj<WidgetsConfigService>('WidgetsConfigService', ['getTranslation']);
+  const configServiceSpy = createSpyObject(WidgetsConfigService);
 
   /**
    * Creates InputCharPickerOpenOptions with default values and optional overrides.
@@ -36,7 +37,7 @@ describe('Unit Tests: InputCharPickerService', () => {
     return {
       datentyp: Datentyp.DATENTYP_C,
       triggerElement: document.createElement('button'),
-      onInsert: jasmine.createSpy('onInsert'),
+      onInsert: vi.fn(),
       ...overrides
     };
   }
@@ -50,11 +51,11 @@ describe('Unit Tests: InputCharPickerService', () => {
   });
 
   beforeEach(() => {
-    charServiceSpy.getCharactersByDataType.calls.reset();
-    charServiceSpy.getCharactersByDataType.and.returnValue([]);
+    charServiceSpy.getCharactersByDataType.mockReset();
+    charServiceSpy.getCharactersByDataType.mockReturnValue([]);
 
-    configServiceSpy.getTranslation.calls.reset();
-    configServiceSpy.getTranslation.and.callFake((key: string) => key);
+    configServiceSpy.getTranslation.mockReset();
+    configServiceSpy.getTranslation.mockImplementation((key: string) => key);
 
     spectator = createService();
     service = spectator.service;
@@ -71,13 +72,13 @@ describe('Unit Tests: InputCharPickerService', () => {
   });
 
   it('should be closed by default', () => {
-    expect(service.visible()).toBeFalse();
+    expect(service.visible()).toBe(false);
     expect(service.state()).toBeUndefined();
   });
 
   it('should open the picker with default dialog configuration', async () => {
     const triggerElement = document.createElement('button');
-    const onInsert = jasmine.createSpy('onInsert');
+    const onInsert = vi.fn();
 
     await service.open(
       createOpenOptions({
@@ -87,9 +88,9 @@ describe('Unit Tests: InputCharPickerService', () => {
       })
     );
 
-    expect(service.visible()).toBeTrue();
+    expect(service.visible()).toBe(true);
     expect(service.state()).toEqual(
-      jasmine.objectContaining({
+      expect.objectContaining({
         datentyp: Datentyp.DATENTYP_C,
         width: '740px',
         height: '460px',
@@ -126,9 +127,9 @@ describe('Unit Tests: InputCharPickerService', () => {
       })
     );
 
-    expect(service.visible()).toBeTrue();
+    expect(service.visible()).toBe(true);
     expect(service.state()).toEqual(
-      jasmine.objectContaining({
+      expect.objectContaining({
         datentyp: Datentyp.DATENTYP_A,
         width: '900px',
         height: '600px',
@@ -147,18 +148,18 @@ describe('Unit Tests: InputCharPickerService', () => {
   });
 
   it('should create the picker host component when opening the picker', async () => {
-    expect(getHostElements().length).toBe(0);
+    expect(getHostElements()).toHaveLength(0);
 
     await service.open(createOpenOptions());
 
-    expect(getHostElements().length).toBe(1);
+    expect(getHostElements()).toHaveLength(1);
   });
 
   it('should create the picker host component only once', async () => {
     await service.open(createOpenOptions());
     await service.open(createOpenOptions());
 
-    expect(getHostElements().length).toBe(1);
+    expect(getHostElements()).toHaveLength(1);
   });
 
   it('should reset host creation promise and retry after host creation failed', async () => {
@@ -167,7 +168,7 @@ describe('Unit Tests: InputCharPickerService', () => {
 
     let shouldFail = true;
 
-    const createHostComponentSpy = spyOn(privateService, 'createHostComponent').and.callFake(async () => {
+    const createHostComponentSpy = vi.spyOn(privateService, 'createHostComponent').mockImplementation(async () => {
       if (shouldFail) {
         shouldFail = false;
         await Promise.reject(error);
@@ -176,27 +177,27 @@ describe('Unit Tests: InputCharPickerService', () => {
       await Promise.resolve();
     });
 
-    await expectAsync(service.open(createOpenOptions())).toBeRejectedWith(error);
+    await expect(service.open(createOpenOptions())).rejects.toBe(error);
 
     expect(createHostComponentSpy).toHaveBeenCalledTimes(1);
-    expect(service.visible()).toBeFalse();
+    expect(service.visible()).toBe(false);
     expect(service.state()).toBeUndefined();
 
     await service.open(createOpenOptions());
 
     expect(createHostComponentSpy).toHaveBeenCalledTimes(2);
-    expect(service.visible()).toBeTrue();
+    expect(service.visible()).toBe(true);
     expect(service.state()).toBeTruthy();
   });
 
   it('should close the picker', async () => {
     await service.open(createOpenOptions());
 
-    expect(service.visible()).toBeTrue();
+    expect(service.visible()).toBe(true);
 
     service.close();
 
-    expect(service.visible()).toBeFalse();
+    expect(service.visible()).toBe(false);
   });
 
   it('should return true when the picker is open for the given trigger element', async () => {
@@ -208,7 +209,7 @@ describe('Unit Tests: InputCharPickerService', () => {
       })
     );
 
-    expect(service.isOpenFor(triggerElement)).toBeTrue();
+    expect(service.isOpenFor(triggerElement)).toBe(true);
   });
 
   it('should return false when the picker is not open for the given trigger element', async () => {
@@ -221,7 +222,7 @@ describe('Unit Tests: InputCharPickerService', () => {
       })
     );
 
-    expect(service.isOpenFor(otherTriggerElement)).toBeFalse();
+    expect(service.isOpenFor(otherTriggerElement)).toBe(false);
   });
 
   it('should return false when the picker is closed', async () => {
@@ -235,7 +236,7 @@ describe('Unit Tests: InputCharPickerService', () => {
 
     service.close();
 
-    expect(service.isOpenFor(triggerElement)).toBeFalse();
+    expect(service.isOpenFor(triggerElement)).toBe(false);
   });
 
   it('should return the active trigger element while the picker is active', async () => {
@@ -278,7 +279,7 @@ describe('Unit Tests: InputCharPickerService', () => {
 
     service.closeFor(triggerElement);
 
-    expect(service.visible()).toBeFalse();
+    expect(service.visible()).toBe(false);
   });
 
   it('should not close the picker for a different trigger element', async () => {
@@ -293,11 +294,11 @@ describe('Unit Tests: InputCharPickerService', () => {
 
     service.closeFor(otherTriggerElement);
 
-    expect(service.visible()).toBeTrue();
+    expect(service.visible()).toBe(true);
   });
 
   it('should call the insert callback when inserting a character', async () => {
-    const onInsert = jasmine.createSpy('onInsert');
+    const onInsert = vi.fn();
 
     await service.open(
       createOpenOptions({
@@ -315,7 +316,7 @@ describe('Unit Tests: InputCharPickerService', () => {
 
     service.insertCharacter('Ä');
 
-    expect(service.visible()).toBeFalse();
+    expect(service.visible()).toBe(false);
   });
 
   it('should not clear state when finishClose is called while picker is visible', async () => {
@@ -326,7 +327,7 @@ describe('Unit Tests: InputCharPickerService', () => {
     service.finishClose(currentState);
 
     expect(service.state()).toBe(currentState);
-    expect(service.visible()).toBeTrue();
+    expect(service.visible()).toBe(true);
   });
 
   it('should keep state when finishClose is called after closing with the current state', async () => {
@@ -338,7 +339,7 @@ describe('Unit Tests: InputCharPickerService', () => {
     service.finishClose(currentState);
 
     expect(service.state()).toBe(currentState);
-    expect(service.visible()).toBeFalse();
+    expect(service.visible()).toBe(false);
   });
 
   it('should not clear state when finishClose is called with an outdated state', async () => {
@@ -368,7 +369,7 @@ describe('Unit Tests: InputCharPickerService', () => {
   });
 
   it('should clear the insert callback when finishClose is called with the current state', async () => {
-    const onInsert = jasmine.createSpy('onInsert');
+    const onInsert = vi.fn();
 
     await service.open(
       createOpenOptions({
@@ -768,30 +769,30 @@ describe('Unit Tests: InputCharPickerService', () => {
 
   it('should detach, destroy and remove the host component on destroy', async () => {
     const appRef = spectator.inject(ApplicationRef);
-    const detachViewSpy = spyOn(appRef, 'detachView').and.callThrough();
+    const detachViewSpy = vi.spyOn(appRef, 'detachView');
 
     await service.open(createOpenOptions());
 
-    expect(getHostElements().length).toBe(1);
+    expect(getHostElements()).toHaveLength(1);
 
     service.ngOnDestroy();
 
     expect(detachViewSpy).toHaveBeenCalled();
-    expect(getHostElements().length).toBe(0);
+    expect(getHostElements()).toHaveLength(0);
   });
 
   it('should recreate the host component after destroy and opening again', async () => {
     await service.open(createOpenOptions());
 
-    expect(getHostElements().length).toBe(1);
+    expect(getHostElements()).toHaveLength(1);
 
     service.ngOnDestroy();
 
-    expect(getHostElements().length).toBe(0);
+    expect(getHostElements()).toHaveLength(0);
 
     await service.open(createOpenOptions());
 
-    expect(getHostElements().length).toBe(1);
+    expect(getHostElements()).toHaveLength(1);
   });
 
   it('should not throw when destroyed without an existing host component', () => {

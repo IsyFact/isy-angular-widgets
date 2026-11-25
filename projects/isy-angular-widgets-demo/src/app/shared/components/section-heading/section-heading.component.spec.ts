@@ -1,13 +1,20 @@
 import {ViewportScroller} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {Subject} from 'rxjs';
 import {AnchorNavigationService} from '../../services/anchor-navigation.service';
 import {SectionHeadingComponent} from './section-heading.component';
 
 describe('SectionHeadingComponent', () => {
   let spectator: Spectator<SectionHeadingComponent>;
-  let viewportScrollerSpy: jasmine.SpyObj<ViewportScroller>;
+  // ViewportScroller is abstract, so the mock has to list the used members explicitly.
+  const viewportScrollerSpy = {
+    scrollToAnchor: vi.fn(),
+    scrollToPosition: vi.fn(),
+    getScrollPosition: vi.fn(() => [0, 0] as [number, number]),
+    setOffset: vi.fn(),
+    setHistoryScrollRestoration: vi.fn()
+  };
   const fragment$ = new Subject<string | null>();
 
   const createComponent = createComponentFactory({
@@ -16,7 +23,7 @@ describe('SectionHeadingComponent', () => {
       AnchorNavigationService,
       {
         provide: ViewportScroller,
-        useValue: jasmine.createSpyObj<ViewportScroller>('ViewportScroller', ['scrollToAnchor'])
+        useValue: viewportScrollerSpy
       },
       {provide: ActivatedRoute, useValue: {fragment: fragment$.asObservable()}}
     ],
@@ -24,17 +31,17 @@ describe('SectionHeadingComponent', () => {
   });
 
   beforeEach(() => {
+    viewportScrollerSpy.scrollToAnchor.mockClear();
     spectator = createComponent({
       props: {anchorId: 'my-section', label: 'My Section', ariaLabel: 'Link zu My Section', level: 2}
     });
-    viewportScrollerSpy = spectator.inject(ViewportScroller);
   });
 
   describe('level 2 (default)', () => {
     it('should render an h2 with the given id and class', () => {
       const h2 = spectator.query<HTMLHeadingElement>('h2#my-section');
       expect(h2).toBeTruthy();
-      expect(h2?.classList.contains('section-heading')).toBeTrue();
+      expect(h2?.classList.contains('section-heading')).toBe(true);
     });
 
     it('should render the label text', () => {

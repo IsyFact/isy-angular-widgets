@@ -1,7 +1,7 @@
 import {InputCharPreviewComponent} from './input-char-preview.component';
 import {Zeichenobjekt} from '../../model/model';
 import sonderzeichenliste from '../../sonderzeichenliste.json';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 
 describe('Unit Tests: InputCharPreviewComponent', () => {
   const sonderzeichenListe = sonderzeichenliste as Zeichenobjekt[];

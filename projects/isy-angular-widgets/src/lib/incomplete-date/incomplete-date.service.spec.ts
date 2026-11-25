@@ -1,5 +1,5 @@
 import {IncompleteDateService} from './incomplete-date.service';
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator/vitest';
 
 describe('Unit Tests: IncompleteDateService', () => {
   let service: IncompleteDateService;

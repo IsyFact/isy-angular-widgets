@@ -92,13 +92,21 @@ npm run start
 | `npm run build:widgets_lib` | Baut ausschließlich die Bibliothek inklusive Schematics |
 | `npm run build:widgets_demo` | Baut ausschließlich die Demo-Anwendung |
 | `npm run build-and-pack:widgets_lib` | Baut die Bibliothek und erzeugt ein installierbares TGZ-Paket |
-| `npm test` | Führt die Unit- und Integrationstests aus |
+| `npm test` | Führt die Tests von Bibliothek und Demo-Anwendung einmalig aus |
+| `npm run test:lib:vitest` | Startet die Widget-Bibliothekstests mit Vitest im interaktiven Modus |
+| `npm run test:lib:vitest:run` | Führt die Widget-Bibliothekstests einmalig ohne Watch-Modus aus |
+| `npm run test:lib:vitest:coverage` | Führt die Widget-Bibliothekstests mit Coverage-Bericht nach `coverage/isy-angular-widgets-vitest` aus |
+| `npm run test:demo:vitest` | Startet die Tests der Demo-Anwendung mit Vitest im interaktiven Modus |
+| `npm run test:demo:vitest:run` | Führt die Tests der Demo-Anwendung einmalig ohne Watch-Modus aus |
+| `npm run test:demo:vitest:coverage` | Führt die Tests der Demo-Anwendung mit Coverage-Bericht nach `coverage/isy-angular-widgets-demo-vitest` aus |
 | `npm run lint` | Lintet Bibliothek und Demo-Anwendung (`lint:lib`, `lint:demo` einzeln) |
 | `npm run prettier:check` | Prüft die Codeformatierung |
 | `npm run prettier:fix` | Behebt Formatierungsfehler automatisch |
 | `npm run e2e` | Führt die E2E-Tests der Demo-Anwendung aus |
 | `npm run compodoc:build` | Erzeugt die API-Dokumentation nach `docs/` (`compodoc:serve` zeigt sie lokal an) |
 | `npm run generate-browser-support` | Aktualisiert die Browser-Support-Konfiguration |
+
+Beide Projekte werden mit Vitest getestet. Die Bibliothekstests laufen über [vitest.config.ts](vitest.config.ts) (`projects/isy-angular-widgets/src/**/*.spec.ts`), die Tests der Demo-Anwendung über [vitest.demo.config.ts](vitest.demo.config.ts) (`projects/isy-angular-widgets-demo/src/**/*.spec.ts`). Die Demo-Konfiguration ergänzt die gemeinsame Testumgebung um Stubs für Canvas und CSS-Berechnungen, die unter jsdom fehlen.
 
 > **Hinweis:** `compodoc:build` legt die erzeugte API-Dokumentation im Verzeichnis `docs/` ab, in dem auch die Antora-Konzeptdokumentation liegt. Die generierten Dateien sind nicht in der `.gitignore` enthalten und sollten vor einem Commit wieder entfernt werden:
 >
@@ -113,7 +121,8 @@ Die folgenden Prüfungen entsprechen den zentralen Schritten der CI-Pipeline und
 ```shell
 npm run prettier:check
 npm run lint
-npm test
+npm run test:lib:vitest:run
+npm run test:demo:vitest:run
 npm run build:widgets_lib
 npm run build:widgets_demo
 ```
@@ -131,6 +140,12 @@ Vor der Ausführung muss die Demo-Anwendung unter <http://localhost:4200> laufen
 ```shell
 npm run e2e
 ```
+
+Die aktuellen TestCafe-Specs decken typische Browser-Flows der Demo-Anwendung ab, darunter responsive Hauptfenster-Ansichten und die Objektsuche-Szenarien. Zusätzlich führt `npm run e2e` die Browser-Specs der Bibliothek unter `projects/isy-angular-widgets/src/test/e2e/` aus. Alle jsdom-/Browser-Grenzfälle aus der Library wurden zu TestCafe migriert:
+
+- der Print-/Viewport-Fall des Hauptfensters (migriert zu `hauptfenster-print-layout.js`)
+- die Layout- und Größenprüfungen aus `interactive-elements.component.spec.ts` (migriert zu `interactive-elements-accessibility.js`)
+- die zwei Fokus-/Sichtbarkeitsfälle des Input-Char-Picker-Hosts (migriert zu `input-char-picker-host-focus.js`)
 
 > **Hinweis für macOS:** TestCafe benötigt die Berechtigung zur Bildschirmaufnahme. Ohne diese bricht der Lauf mit `UnableToAccessScreenRecordingAPIError` ab. Die Berechtigung wird unter *Systemeinstellungen → Datenschutz & Sicherheit → Bildschirmaufnahme* für `TestCafe Browser Tools` erteilt.
 

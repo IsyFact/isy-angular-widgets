@@ -1,3 +1,29 @@
+# 22.2.0-next.1 - (25.11.2026)
+## Features
+- IFS-5895: Der dokumentierte FormWrapper-Slot `isyFormWrapperLabel` ermöglicht Zusatzinhalt neben der Beschriftung in Standard- und Ifta-Darstellung
+- IFS-5390: Die CI-Workflows führen die Tests der Bibliothek und Demo-Anwendung mit Vitest aus
+- IFS-5388: Die Tests der Bibliothek wurden vollständig auf Vitest migriert
+  - Ausführung über `npm run test:lib:vitest`, `npm run test:lib:vitest:run` und `npm run test:lib:vitest:coverage`
+  - Browsernahe Grenzfälle, die unter jsdom nicht zuverlässig prüfbar sind, wurden nach TestCafe verschoben (`projects/isy-angular-widgets/src/test/e2e/`) und werden von `npm run e2e` mit ausgeführt
+- IFS-5386: Vitest wurde als zusätzliche technische Testbasis vorbereitet; die bestehenden Karma-/Jasmine-Tests bleiben vorerst bestehen und werden schrittweise migriert
+- IFS-5737: Disabled-States für Buttons und Formularelemente im IsyFact-Theme wurden farblich vereinheitlicht
+- IFS-5386: Vitest wurde als zusätzliche technische Testbasis vorbereitet; die bestehenden Karma-/Jasmine-Tests bleiben vorerst bestehen und werden schrittweise migriert
+- IFS-4930: Die Widgets`isy-wizard` und `isy-input-char` wurden für die Darstellung mit einer Mindestbreite von 320px optimiert.
+## Demo-Anwendung
+- IFS-5895: Das FormWrapper-Beispiel zeigt Zusatztext und ein Info-Symbol mit Tooltip neben der Beschriftung
+- IFS-5751: Die Demo-Anwendung zeigt unter `primeng-widgets/primeng-panel#fieldset-toolbar` ein Beispiel für Eingabefeldgruppen mit Toolbar
+- IFS-5750: Die Demo-Anwendung zeigt Haupt-, Sub- und Linksnavigation in einfachen und komplexen Anwendungsbeispielen
+- IFS-5387: Die Tests der Demo-Anwendung wurden auf Vitest migriert (`npm run test:demo:vitest*`); die bisherige Testkonfiguration und ihre Abhängigkeiten wurden entfernt
+- IFS-5737: Die Demo-Anwendung wurde um deaktivierte Varianten für Buttons und Formularelemente ergänzt
+- IFS-4930: Die Seiten _Objekt anzeigen_ und _Objekt bearbeiten_ der Demo-Anwendung wurden für eine Viewport-Breite von 320 px optimiert
+## Fixes
+- IFS-5894: Das IsyFact-Theme kann aus eigenen SCSS-Dateien eingebunden werden und die mitgelieferten Schriftdateien werden dabei korrekt aufgelöst
+- IFS-5860: `isy-incomplete-date` wird nach `form.reset()` vollständig auf `pristine` und `untouched` zurückgesetzt und nicht mehr fälschlich als invalid markiert
+- IFS-4836: Toast- und Inline-Meldungen verwenden helle Abstufungen der Button-Farbpaletten mit kontrastreicher dunkler Schrift sowie angepassten Schließen- und Fokusfarben
+- IFS-4982: Sortierte Tabellenspalten werden im IsyFact-Theme mit hellgrauem Hintergrund und blauem Text und Sortier-Icon kontrastreich hervorgehoben
+  - Platzhalter in Formularfeldern erhalten ausreichenden Kontrast, damit beide Tabellen-Demos den Lighthouse-Kontrastaudit bestehen
+- IFS-5832: Sonderzeichen-Dialog mit fester Höhe für den Zeichenbereich und zuverlässigem vertikalem Scrollen korrigiert
+
 # 22.1.0-next.1 - 10.09.2026
 ## Features
 - IFS-4929: Eine separat einbindbare Print-Basis stellt öffentliche `isy-print-*`-Utilities für A4-Ausdrucke bereit; die Demo zeigt deren Verwendung für Druckkopf, Tabellen, Formulare und den aktuell sichtbaren Zustand interaktiver Inhalte

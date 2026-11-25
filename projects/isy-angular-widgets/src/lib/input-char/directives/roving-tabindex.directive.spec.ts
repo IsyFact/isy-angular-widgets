@@ -1,9 +1,11 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
+import {expect, vi, it} from 'vitest';
 import {RovingTabindexDirective} from './roving-tabindex.directive';
 
 @Component({
   standalone: true,
+  selector: 'isy-host-no-wrap',
   imports: [RovingTabindexDirective],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
@@ -27,10 +29,36 @@ class HostComponent {
   escaped: KeyboardEvent[] = [];
 }
 
+@Component({
+  standalone: true,
+  imports: [RovingTabindexDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  template: `
+    <div
+      isyRovingTabindex
+      [itemSelector]="'button'"
+      [wrap]="wrap"
+      (itemActivate)="activated.push($event)"
+      (escape)="escaped.push($event)"
+    >
+      <button id="a">A</button>
+      <button id="b" [disabled]="disabledB">B</button>
+      <button id="c">C</button>
+    </div>
+  `
+})
+class HostNoWrapComponent {
+  wrap = false;
+  disabledB = false;
+  activated: HTMLElement[] = [];
+  escaped: KeyboardEvent[] = [];
+}
+
 describe('RovingTabindexDirective', () => {
   let spectator: Spectator<HostComponent>;
 
   const createComponent = createComponentFactory({component: HostComponent, detectChanges: false});
+  const createNoWrapComponent = createComponentFactory({component: HostNoWrapComponent, detectChanges: false});
 
   const tabindexOf = (id: string): string | null => spectator.query(`#${id}`)?.getAttribute('tabindex') ?? null;
 
@@ -62,7 +90,7 @@ describe('RovingTabindexDirective', () => {
   // ArrowDown / ArrowRight move forward and focus the next item
   it('should move the tab stop forward on ArrowDown', () => {
     button('a').focus();
-    const focusSpy = spyOn(button('b'), 'focus').and.callThrough();
+    const focusSpy = vi.spyOn(button('b'), 'focus');
 
     pressKey('a', 'ArrowDown');
 
@@ -100,8 +128,10 @@ describe('RovingTabindexDirective', () => {
   });
 
   //  clamp instead of wrap when wrap is disabled
-  it('should clamp at the first item when wrap is disabled', () => {
-    spectator.component.wrap = false;
+  it('should clamp at the first item when wrap is disabled', async () => {
+    spectator = createNoWrapComponent();
+    spectator.detectChanges();
+    await Promise.resolve();
     spectator.detectChanges();
 
     pressKey('a', 'ArrowUp');
@@ -110,8 +140,10 @@ describe('RovingTabindexDirective', () => {
   });
 
   // disabled items are skipped
-  it('should skip disabled items during navigation', () => {
-    spectator.component.disabledB = true;
+  it('should skip disabled items during navigation', async () => {
+    button('b').disabled = true;
+    spectator.detectChanges();
+    await Promise.resolve();
     spectator.detectChanges();
 
     pressKey('a', 'ArrowRight');
@@ -123,7 +155,7 @@ describe('RovingTabindexDirective', () => {
 
   // Enter activates the current item via click()
   it('should activate the current item on Enter', () => {
-    const clickSpy = spyOn(button('a'), 'click');
+    const clickSpy = vi.spyOn(button('a'), 'click');
 
     pressKey('a', 'Enter');
 
@@ -132,7 +164,7 @@ describe('RovingTabindexDirective', () => {
 
   // Space activates the current item via click()
   it('should activate the current item on Space', () => {
-    const clickSpy = spyOn(button('a'), 'click');
+    const clickSpy = vi.spyOn(button('a'), 'click');
 
     pressKey('a', ' ');
 
@@ -157,20 +189,20 @@ describe('RovingTabindexDirective', () => {
 
     expect(spectator.component.escaped).toContain(event);
     // Suppression is left to the host (so the dialog can still close when appropriate).
-    expect(event.defaultPrevented).toBeFalse();
+    expect(event.defaultPrevented).toBe(false);
   });
 
   // handled keys are prevented and stop propagation
   it('should prevent default for keys it handles', () => {
     const event = pressKey('a', 'ArrowRight');
 
-    expect(event.defaultPrevented).toBeTrue();
+    expect(event.defaultPrevented).toBe(true);
   });
 
   it('should not prevent default for keys it does not handle', () => {
     const event = pressKey('a', 'Tab');
 
-    expect(event.defaultPrevented).toBeFalse();
+    expect(event.defaultPrevented).toBe(false);
   });
 
   // focusin moves the single tab stop to the focused item
@@ -245,41 +277,25 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     spectator.detectChanges();
 
     // Give each button its mock bounding rect.
-    spyOn(HTMLElement.prototype, 'getBoundingClientRect').and.callFake(function (this: HTMLElement) {
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function (this: HTMLElement) {
       return mockRects[this.id] ?? new DOMRect(0, 0, 0, 0);
     });
   });
 
   // ArrowDown moves to the item visually below (same column)
-  it('should move to the item below on ArrowDown', () => {
-    btn('r0c1').focus();
-    pressKey('r0c1', 'ArrowDown');
-
-    expect(tabindexOf('r1c1')).toBe('0');
-  });
-
   // ArrowUp moves to the item visually above (same column)
-  it('should move to the item above on ArrowUp', () => {
-    btn('r1c1').focus();
-    pressKey('r1c1', 'ArrowUp');
-
-    expect(tabindexOf('r0c1')).toBe('0');
-  });
-
   // ArrowRight moves to the next item in the same row
-  it('should move right within the same row on ArrowRight', () => {
-    btn('r0c0').focus();
-    pressKey('r0c0', 'ArrowRight');
-
-    expect(tabindexOf('r0c1')).toBe('0');
-  });
-
   // ArrowLeft moves to the previous item in the same row
-  it('should move left within the same row on ArrowLeft', () => {
-    btn('r0c2').focus();
-    pressKey('r0c2', 'ArrowLeft');
+  it.each<[string, string, string, string]>([
+    ['should move to the item below on ArrowDown', 'r0c1', 'ArrowDown', 'r1c1'],
+    ['should move to the item above on ArrowUp', 'r1c1', 'ArrowUp', 'r0c1'],
+    ['should move right within the same row on ArrowRight', 'r0c0', 'ArrowRight', 'r0c1'],
+    ['should move left within the same row on ArrowLeft', 'r0c2', 'ArrowLeft', 'r0c1']
+  ])('$0', (_description, fromBtn, key, expectedBtn) => {
+    btn(fromBtn).focus();
+    pressKey(fromBtn, key);
 
-    expect(tabindexOf('r0c1')).toBe('0');
+    expect(tabindexOf(expectedBtn)).toBe('0');
   });
 
   // ArrowRight at row end steps to the first item of the next row
@@ -320,6 +336,6 @@ describe('RovingTabindexDirective (navigation: grid)', () => {
     btn('r0c0').focus();
     const event = pressKey('r0c0', 'ArrowDown');
 
-    expect(event.defaultPrevented).toBeTrue();
+    expect(event.defaultPrevented).toBe(true);
   });
 });

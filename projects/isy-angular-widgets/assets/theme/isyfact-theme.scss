@@ -1,5 +1,5 @@
 @use './isyfact-variables.scss' as vars;
-@import './isyfact-liberation-fonts.css';
+@use './isyfact-liberation-fonts.css';
 
 /*
  To make precise adjustments to the IsyFact design, certain variables in the PrimeNG Theme are overwritten.
@@ -20,6 +20,12 @@
     --p-disabled-opacity: #{vars.$disabledOpacity};
     --p-dark-grey: #{vars.$isyfactDarkGrey};
     --p-charcoal: #{vars.$isyfactCharcoal};
+    --isyfact-disabled-button-background: #{vars.$isyfactDisabledBackground};
+    --isyfact-disabled-button-border-color: #{vars.$isyfactDisabledBorderColor};
+    --isyfact-disabled-button-text-color: #{vars.$isyfactDisabledTextColor};
+    --isyfact-disabled-field-background: #{vars.$isyfactDisabledFieldBackground};
+    --isyfact-disabled-field-border-color: #{vars.$isyfactDisabledFieldBorderColor};
+    --isyfact-disabled-field-text-color: #{vars.$isyfactDisabledFieldTextColor};
 
     --p-border-radius-xs: 0;
     --p-border-radius-sm: 0;
@@ -32,6 +38,9 @@
     --p-form-field-invalid-placeholder-color: #{vars.$isyfactAlertColor};
     --p-form-field-invalid-border-color: #{vars.$isyfactAlertColor};
     --p-form-field-hover-border-color: #{vars.$isyfactPrimaryColor};
+    --p-form-field-disabled-background: #{vars.$isyfactDisabledFieldBackground};
+    --p-form-field-disabled-border-color: #{vars.$isyfactDisabledFieldBorderColor};
+    --p-form-field-disabled-color: #{vars.$isyfactDisabledFieldTextColor};
 
     // Styling for readonly input fields
     // PrimeNG does not apply this styling by default
@@ -55,15 +64,96 @@
     --p-button-text-secondary-hover-background: var(--p-surface-200);
     --p-button-text-danger-color: #{vars.$isyfactAlertColor};
 
-    .p-button:disabled {
-      color: #{vars.$isyfactDisabledTextColor};
-      background-color: #{vars.$isyfactDisabledBackground};
-      border-color: #{vars.$isyfactDisabledBorderColor};
+    .p-button:disabled,
+    .p-button.p-disabled,
+    .p-button:disabled:hover,
+    .p-button.p-disabled:hover,
+    .p-button:disabled:active,
+    .p-button.p-disabled:active {
+      color: var(--isyfact-disabled-button-text-color);
+      background-color: var(--isyfact-disabled-button-background);
+      border-color: var(--isyfact-disabled-button-border-color);
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    .p-button.p-button-outlined:disabled,
+    .p-button.p-button-outlined.p-disabled,
+    .p-button.p-button-outlined:disabled:hover,
+    .p-button.p-button-outlined.p-disabled:hover,
+    .p-button.p-button-outlined:disabled:active,
+    .p-button.p-button-outlined.p-disabled:active {
+      color: var(--isyfact-disabled-button-background);
+      background-color: transparent;
+      border-color: var(--isyfact-disabled-button-border-color);
+    }
+
+    .p-button.p-button-text:disabled,
+    .p-button.p-button-text.p-disabled,
+    .p-button.p-button-text:disabled:hover,
+    .p-button.p-button-text.p-disabled:hover,
+    .p-button.p-button-text:disabled:active,
+    .p-button.p-button-text.p-disabled:active {
+      color: var(--isyfact-disabled-button-background);
+      background-color: transparent;
+      border-color: transparent;
+    }
+
+    .p-inputtext:disabled,
+    textarea.p-inputtextarea:disabled,
+    textarea.p-inputtextarea.p-disabled,
+    input:disabled,
+    textarea:disabled,
+    .p-select.p-disabled,
+    .p-select.p-disabled:hover,
+    .p-select.p-disabled .p-select-dropdown,
+    .p-select.p-disabled:hover .p-select-dropdown {
+      color: var(--isyfact-disabled-field-text-color);
+      background-color: var(--isyfact-disabled-field-background);
+      border-color: var(--isyfact-disabled-field-border-color);
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    .p-select.p-disabled .p-select-label,
+    .p-select.p-disabled .p-select-dropdown {
+      color: var(--isyfact-disabled-field-text-color);
+    }
+
+    textarea.p-inputtextarea:disabled,
+    textarea.p-inputtextarea.p-disabled {
+      color: var(--isyfact-disabled-field-text-color);
+      border-color: var(--isyfact-disabled-field-border-color);
+      opacity: 1;
+      box-shadow: none;
     }
 
     // checkbox
     --p-checkbox-width: 24px;
     --p-checkbox-height: 24px;
+
+    .p-radiobutton.p-disabled .p-radiobutton-box {
+      background-color: var(--isyfact-disabled-field-background);
+      border-color: var(--isyfact-disabled-field-border-color);
+      box-shadow: none;
+      opacity: 1;
+    }
+
+    .p-radiobutton.p-disabled.p-radiobutton-checked .p-radiobutton-box {
+      background-color: #ffffff;
+      border-color: var(--isyfact-disabled-button-border-color);
+    }
+
+    .p-radiobutton.p-disabled .p-radiobutton-icon {
+      background-color: var(--isyfact-disabled-button-border-color);
+    }
+
+    .p-checkbox.p-disabled + label,
+    .p-checkbox.p-disabled ~ label,
+    .p-radiobutton.p-disabled + label,
+    .p-radiobutton.p-disabled ~ label {
+      color: var(--isyfact-disabled-field-text-color);
+    }
 
     // links navigation
     --p-navigation-item-padding: 0.875rem;
@@ -84,6 +174,8 @@
 
     // datatable
     --p-datatable-body-cell-padding: 0.75rem 0.75rem;
+    --p-datatable-header-cell-selected-background: var(--p-content-hover-background);
+    --p-datatable-header-cell-selected-color: var(--p-primary-color);
     --p-datatable-row-selected-background: var(--p-content-hover-background);
     --p-datatable-row-selected-color: var(--p-datatable-row-hover-color);
 
@@ -127,6 +219,88 @@
 
   :disabled {
     cursor: not-allowed;
+  }
+
+  button:not(:disabled),
+  a[href],
+  [role='button']:not([aria-disabled='true']),
+  [role='option']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+
+  .p-select:not(.p-disabled),
+  .p-select:not(.p-disabled) .p-select-dropdown {
+    cursor: pointer;
+  }
+
+  .p-select.p-disabled,
+  .p-select.p-disabled *,
+  .p-select [disabled],
+  .p-select [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+
+  .p-select.p-disabled {
+    pointer-events: auto;
+  }
+
+  .p-checkbox.p-disabled,
+  .p-radiobutton.p-disabled,
+  .p-toggleswitch.p-disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+  }
+
+  .p-toggleswitch.p-disabled .p-toggleswitch-slider {
+    border-color: var(--isyfact-disabled-field-border-color);
+  }
+
+  .p-megamenu .p-megamenu-item.p-disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+  }
+
+  .p-megamenu .p-megamenu-item.p-disabled .p-megamenu-item-label {
+    color: var(--isyfact-disabled-field-text-color);
+  }
+
+  .p-stepper .p-step.p-disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+  }
+
+  .p-stepper .p-step.p-disabled .p-step-number,
+  .p-stepper .p-step-header:disabled .p-step-number {
+    color: var(--isyfact-disabled-button-background);
+    background-color: transparent;
+    border-color: var(--isyfact-disabled-button-border-color);
+  }
+
+  .p-stepper .p-step.p-disabled .p-step-title,
+  .p-stepper .p-step-header:disabled .p-step-title {
+    color: var(--isyfact-disabled-button-background);
+  }
+
+  .p-steps .p-steps-item.p-disabled .p-steps-item-link,
+  .p-steps .p-steps-item-link[aria-disabled='true'] {
+    color: var(--isyfact-disabled-button-background);
+  }
+
+  .p-steps .p-steps-item:not(.p-steps-item-active) .p-steps-item-link {
+    color: var(--p-button-text-secondary-color);
+  }
+
+  .p-steps .p-steps-item:not(.p-steps-item-active) .p-steps-item-number {
+    border-color: var(--p-button-text-secondary-color);
+  }
+
+  .p-stepper .p-step:not(.p-step-active) .p-step-header:not(:disabled) .p-step-number,
+  .p-stepper .p-step:not(.p-step-active) .p-step-header:not(:disabled) .p-step-title {
+    color: var(--p-button-text-secondary-color);
+  }
+
+  .p-stepper .p-step:not(.p-step-active) .p-step-header:not(:disabled) .p-step-number {
+    border-color: var(--p-button-text-secondary-color);
   }
 
   // Set the color of the progress spinner to the primary color

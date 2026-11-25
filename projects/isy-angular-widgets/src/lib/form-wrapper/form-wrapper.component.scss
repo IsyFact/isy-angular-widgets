@@ -1,18 +1,36 @@
+.label-region {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label-content:empty {
+  display: none;
+}
+
 .ifta {
   position: relative;
 }
 
-.ifta input,
-.ifta textarea {
+:host ::ng-deep .ifta input,
+:host ::ng-deep .ifta textarea {
   padding-top: var(--isyfact-iftalabel-input-padding-top);
 }
 
-.ifta label {
+.ifta .label-region {
   position: absolute;
   top: 2px;
   left: 13px;
   pointer-events: none;
-  transition: all 0.2s ease-out;
+}
+
+.ifta .label-content {
+  pointer-events: auto;
+  font-size: 0.7rem;
+}
+
+.ifta label {
+  transition: color 0.2s ease-out;
   font-size: 0.7rem;
 }
 

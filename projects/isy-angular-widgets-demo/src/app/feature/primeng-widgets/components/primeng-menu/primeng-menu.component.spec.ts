@@ -1,4 +1,4 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
@@ -24,7 +24,7 @@ describe('Unit Tests: PrimengMenuComponent', () => {
   let spectator: Spectator<PrimengMenuComponent>;
   const fragment$ = new Subject<string | null>();
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
   const createComponent = createComponentFactory({
@@ -36,7 +36,7 @@ describe('Unit Tests: PrimengMenuComponent', () => {
   });
 
   beforeEach(() => {
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
     spectator = createComponent();
     component = spectator.component;
   });
@@ -87,14 +87,15 @@ describe('Unit Tests: PrimengMenuComponent', () => {
   });
 
   it('should render all section headings with hover-only anchor symbols', () => {
-    sectionAnchorIds.forEach((id) => {
-      const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
+    const headings = spectator.queryAll<HTMLHeadingElement>('h3.section-heading');
 
-      expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+    expect(headings).toHaveLength(sectionAnchorIds.length);
+
+    headings.forEach((heading, index) => {
+      const anchor = heading.querySelector<HTMLAnchorElement>('a.section-anchor');
+
+      expect(heading.id).toBe(sectionAnchorIds[index]);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -113,7 +114,7 @@ describe('Unit Tests: PrimengMenuComponent', () => {
 
   it('should scroll to section when anchor symbol is clicked', () => {
     sectionAnchorIds.forEach((id) => {
-      viewportScrollerMock.scrollToAnchor.calls.reset();
+      viewportScrollerMock.scrollToAnchor.mockClear();
       spectator.click(`h3#${id} > a`);
       expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith(id);
     });

@@ -1,4 +1,4 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
@@ -13,7 +13,7 @@ describe('Unit Tests: PrimengMessagesComponent', () => {
   let spectator: Spectator<PrimengMessagesComponent>;
   const fragment$ = new Subject<string | null>();
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
   const createComponent = createComponentFactory({
@@ -26,7 +26,7 @@ describe('Unit Tests: PrimengMessagesComponent', () => {
   });
 
   beforeEach(() => {
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
     spectator = createComponent();
     component = spectator.component;
   });
@@ -45,9 +45,9 @@ describe('Unit Tests: PrimengMessagesComponent', () => {
       const anchor = spectator.query<HTMLAnchorElement>(`h2#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchor?.classList.contains('section-anchor')).toBe(true);
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -69,7 +69,7 @@ describe('Unit Tests: PrimengMessagesComponent', () => {
 
   it('should scroll to section when anchor symbol is clicked', () => {
     sectionAnchorIds.forEach((id) => {
-      viewportScrollerMock.scrollToAnchor.calls.reset();
+      viewportScrollerMock.scrollToAnchor.mockClear();
 
       spectator.click(`h2#${id} > a`);
       expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith(id);
@@ -81,13 +81,20 @@ describe('Unit Tests: PrimengMessagesComponent', () => {
     expect(viewportScrollerMock.scrollToAnchor).not.toHaveBeenCalled();
   });
 
-  it('should add a success toast message on showToastMessage call', () => {
+  it.each([
+    ['info', 'Info'],
+    ['success', 'Success'],
+    ['warn', 'Warning'],
+    ['error', 'Error']
+  ] as const)('should add a %s toast message when its button is clicked', (severity, summary) => {
     const spy = spyOn(component.messageService, 'add');
-    component.showToastMessage();
+    const button = spectator.queryAll<HTMLButtonElement>('button').find((item) => item.textContent?.trim() === summary);
+    expect(button).toBeTruthy();
+    spectator.click(button);
     expect(spy).toHaveBeenCalledWith({
       key: 'toast',
-      severity: 'success',
-      summary: 'Success',
+      severity,
+      summary,
       detail: 'Message Content',
       sticky: true
     });

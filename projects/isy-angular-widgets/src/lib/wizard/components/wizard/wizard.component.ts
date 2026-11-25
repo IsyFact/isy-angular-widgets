@@ -13,6 +13,8 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {MenuItem, MessageService} from 'primeng/api';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {WizardFooterDirective} from '../../directives/wizard-footer.directive';
@@ -23,6 +25,7 @@ import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
+import {map} from 'rxjs';
 
 export interface WizardStepState {
   /**
@@ -68,6 +71,7 @@ const defaultWidth = 50;
  * @internal
  */
 const defaultHeight = 30;
+const VERTICAL_STEPPER_MEDIA_QUERY = '(max-width: 320px)';
 
 /**
  * A wizard that guides the user step by step through series of forms.
@@ -83,6 +87,15 @@ const defaultHeight = 30;
   providers: [MessageService]
 })
 export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
+  private readonly breakpointObserver = inject(BreakpointObserver);
+
+  protected readonly isVerticalStepper = toSignal(
+    this.breakpointObserver.observe(VERTICAL_STEPPER_MEDIA_QUERY).pipe(map(({matches}) => matches)),
+    {
+      initialValue: this.breakpointObserver.isMatched(VERTICAL_STEPPER_MEDIA_QUERY)
+    }
+  );
+
   /**
    * Stores the content that will be projected inside the template
    */
@@ -194,7 +207,8 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() allowFreeNavigation = false;
 
   /**
-   * Automatically disables all following steps while the current step is not allowed to proceed.
+   * Automatically disables following steps while the current step is not allowed to proceed,
+   * and prevents skipping steps even when it is allowed.
    * Typical use:
    * <isy-wizard [autoDisableFutureSteps]="true"></isy-wizard>
    */
@@ -404,7 +418,7 @@ export class WizardComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   private isAutoDisabledStep(index: number): boolean {
-    return this.autoDisableFutureSteps && !this.allowNext && index > this.index;
+    return this.autoDisableFutureSteps && index > this.index && (!this.allowNext || index > this.index + 1);
   }
 
   private isExplicitlyDisabledStep(index: number): boolean {

@@ -1,17 +1,24 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
 import {PrimengButtonComponent} from './primeng-button.component';
 
 describe('Unit Tests: PrimengButtonComponent', () => {
-  const sectionAnchorIds = ['colored-buttons', 'outlined-buttons', 'icon-buttons', 'splitbutton', 'speeddial'];
+  const sectionAnchorIds = [
+    'colored-buttons',
+    'outlined-buttons',
+    'text-buttons',
+    'icon-buttons',
+    'splitbutton',
+    'speeddial'
+  ];
 
   let component: PrimengButtonComponent;
   let spectator: Spectator<PrimengButtonComponent>;
   const fragment$ = new Subject<string | null>();
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
   const createComponent = createComponentFactory({
@@ -23,7 +30,7 @@ describe('Unit Tests: PrimengButtonComponent', () => {
   });
 
   beforeEach(() => {
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
     spectator = createComponent();
     component = spectator.component;
   });
@@ -32,15 +39,15 @@ describe('Unit Tests: PrimengButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render section headings with hover-only anchor symbols for colored/outlined/icon groups', () => {
-    ['colored-buttons', 'outlined-buttons', 'icon-buttons'].forEach((id) => {
+  it('should render section headings with hover-only anchor symbols for colored/outlined/text/icon groups', () => {
+    ['colored-buttons', 'outlined-buttons', 'text-buttons', 'icon-buttons'].forEach((id) => {
       const heading = spectator.query<HTMLHeadingElement>(`h2#${id}`);
       const anchor = spectator.query<HTMLAnchorElement>(`h2#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchor?.classList.contains('section-anchor')).toBe(true);
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -51,9 +58,9 @@ describe('Unit Tests: PrimengButtonComponent', () => {
       const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchor?.classList.contains('section-anchor')).toBe(true);
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -68,6 +75,10 @@ describe('Unit Tests: PrimengButtonComponent', () => {
     });
   });
 
+  it('should render disabled examples for the button variants', () => {
+    expect(spectator.queryAll<HTMLButtonElement>('button:disabled').length).toBeGreaterThan(0);
+  });
+
   it('should scroll to anchor after initialization when fragment is emitted', () => {
     fragment$.next('colored-buttons');
     expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith('colored-buttons');
@@ -75,7 +86,7 @@ describe('Unit Tests: PrimengButtonComponent', () => {
 
   it('should scroll to section when anchor symbol is clicked', () => {
     sectionAnchorIds.forEach((id) => {
-      viewportScrollerMock.scrollToAnchor.calls.reset();
+      viewportScrollerMock.scrollToAnchor.mockClear();
       const selector = id === 'splitbutton' || id === 'speeddial' ? `h3#${id} > a` : `h2#${id} > a`;
 
       spectator.click(selector);

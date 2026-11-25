@@ -1,5 +1,5 @@
 import {ResultListComponent} from './result-list.component';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
 import {PersonenService} from '../../../../shared/services/personen.service';
@@ -76,7 +76,7 @@ describe('Integration Tests: ResultListComponent', () => {
     createButton.click();
     spectator.fixture.detectChanges();
 
-    expect(createActionSpy).toHaveBeenCalledWith(jasmine.any(HTMLElement));
+    expect(createActionSpy).toHaveBeenCalledWith(expect.any(HTMLElement));
   });
 
   it('should emit after edit action', () => {
@@ -90,24 +90,24 @@ describe('Integration Tests: ResultListComponent', () => {
 
     expect(editActionSpy).toHaveBeenCalledWith({
       person,
-      trigger: jasmine.any(HTMLElement)
+      trigger: expect.any(HTMLElement)
     });
   });
 
   it('should have isCollapsed set to false by default', () => {
-    expect(spectator.component.isCollapsed).toBeFalse();
+    expect(spectator.component.isCollapsed).toBe(false);
   });
 
   it('should toggle isCollapsed to true when clicked', () => {
     const panelButton = spectator.query('.isy-demo-app-result-panel button.p-panel-toggle-button') as HTMLButtonElement;
     panelButton.click();
     spectator.fixture.detectChanges();
-    expect(spectator.component.isCollapsed).toBeTrue();
+    expect(spectator.component.isCollapsed).toBe(true);
   });
 
   it('should translate the data for the result list', () => {
-    const translateColumnsSpy = spyOn(spectator.component, 'translateColumns').and.callThrough();
-    const translateFilterSpy = spyOn(spectator.component, 'translateFilter').and.callThrough();
+    const translateColumnsSpy = spyOn(spectator.component, 'translateColumns');
+    const translateFilterSpy = spyOn(spectator.component, 'translateFilter');
     spectator.component.translateData();
     expect(translateColumnsSpy).toHaveBeenCalledWith(spectator.component.untranslatedinitialColumns);
     expect(translateColumnsSpy).toHaveBeenCalledWith(spectator.component.selectedColumns);
@@ -128,7 +128,7 @@ describe('Integration Tests: ResultListComponent', () => {
     expect(table).toBeTruthy();
     expect(tableControls).toBeTruthy();
     expect(columnControls.length).toBeGreaterThan(0);
-    expect(columnControls.every((control) => control.closest('.isy-print-hide'))).toBeTrue();
+    expect(columnControls.every((control) => control.closest('.isy-print-hide'))).toBe(true);
     expect(actionHeadings.length).toBe(1);
     expect(actionCells.length).toBe(1);
   });

@@ -1,8 +1,28 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+:host ::ng-deep p-tabs,
+:host ::ng-deep .p-tabpanels,
+:host ::ng-deep .p-tabpanel,
+:host ::ng-deep .grid,
+:host ::ng-deep [class*='col-span-'],
+:host ::ng-deep isy-form-wrapper,
+:host ::ng-deep .p-fieldset-content {
+  min-width: 0;
+}
+
 :host ::ng-deep .p-fileupload .p-fileupload-buttonbar {
   width: 100%;
   background: transparent;
   padding: 0;
   border: 0;
+}
+
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button {
+  width: 100%;
+  justify-content: center;
 }
 
 :host ::ng-deep .p-fileupload .p-fileupload-content {
@@ -12,10 +32,18 @@
 
 :host ::ng-deep .p-fileupload-files {
   border-color: black;
+  overflow-wrap: anywhere;
 }
 
 :host ::ng-deep div[data-pc-name='inputgroupaddon'] {
   width: 100%;
+}
+
+:host ::ng-deep .p-multiselect-label,
+:host ::ng-deep .p-multiselect-label-container {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 :host ::ng-deep p-fieldset {
@@ -26,4 +54,20 @@
   position: absolute;
   top: 2rem;
   right: 1rem;
+}
+
+@media (max-width: 320px) {
+  :host ::ng-deep .p-tablist-tab-list {
+    flex-wrap: wrap;
+  }
+
+  :host ::ng-deep .p-tab {
+    flex: 1 1 100%;
+  }
+
+  :host ::ng-deep .address-delete-button {
+    position: static;
+    margin-left: auto;
+    margin-bottom: 0.5rem;
+  }
 }

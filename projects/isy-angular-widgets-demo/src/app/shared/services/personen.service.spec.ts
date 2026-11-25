@@ -1,6 +1,7 @@
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator/vitest';
 import {PersonenService} from './personen.service';
 import {Person} from '../model/person';
+import {getEmptyPerson} from '../../feature/objekt-suchen/person-data';
 
 describe('Unit Tests: PersonenService', () => {
   const maxEntries = 30;
@@ -50,28 +51,28 @@ describe('Unit Tests: PersonenService', () => {
     const personalien = person.personalien;
 
     const isVornameIncluded = service.vorname.includes(personalien.vorname);
-    expect(isVornameIncluded).toBeTrue();
+    expect(isVornameIncluded).toBe(true);
 
     const isNachnameIncluded = service.nachname.includes(personalien.nachname);
-    expect(isNachnameIncluded).toBeTrue();
+    expect(isNachnameIncluded).toBe(true);
 
     const isGeburtsnameIncluded = service.nachname.includes(personalien.geburtsname);
-    expect(isGeburtsnameIncluded).toBeTrue();
+    expect(isGeburtsnameIncluded).toBe(true);
 
     const isGeburtsortIncluded = service.staaten.includes(personalien.geburtsort);
-    expect(isGeburtsortIncluded).toBeTrue();
+    expect(isGeburtsortIncluded).toBe(true);
 
     const isStaatsangehoerigkeitIncluded = service.staaten.includes(personalien.staatsangehoerigkeit);
-    expect(isStaatsangehoerigkeitIncluded).toBeTrue();
+    expect(isStaatsangehoerigkeitIncluded).toBe(true);
 
-    expect(personalien.ausweispflichtig).toBeTrue();
+    expect(personalien.ausweispflichtig).toBe(true);
     expect(personalien.sicherheitsstufe).toEqual(0);
 
     const isGenderIncluded = service.gender.includes(personalien.gender);
-    expect(isGenderIncluded).toBeTrue();
+    expect(isGenderIncluded).toBe(true);
 
     const isStateIncluded = service.state.includes(personalien.state);
-    expect(isStateIncluded).toBeTrue();
+    expect(isStateIncluded).toBe(true);
 
     expect(personalien.geburtsdatum).toEqual('01.01.1337');
     expect(personalien.einreisedatum).toEqual('xx.xx.xxxx');
@@ -100,7 +101,7 @@ describe('Unit Tests: PersonenService', () => {
     personalien.geburtsname = '';
 
     const available = service.searchParametersAvailable(person);
-    expect(available).toBeFalse();
+    expect(available).toBe(false);
   });
 
   it('should find person by id', () => {
@@ -138,7 +139,7 @@ describe('Unit Tests: PersonenService', () => {
   it('parameters should be available ', () => {
     const person = service.generatePerson();
     const paramsAvailable = service.searchParametersAvailable(person);
-    expect(paramsAvailable).toBeTrue();
+    expect(paramsAvailable).toBe(true);
   });
 
   it('should merge the mocked person values into the new generated person', () => {
@@ -157,5 +158,14 @@ describe('Unit Tests: PersonenService', () => {
   it('should be smaller or equal than max entries', () => {
     const rng = spectator.service.rng();
     expect(rng).toBeLessThanOrEqual(maxEntries);
+  });
+
+  it('should preserve generated search results when no search criteria were supplied', () => {
+    const generated = structuredClone(mockedPerson);
+
+    const result = service.mergePersons(getEmptyPerson(), generated);
+
+    expect(result).toEqual(mockedPerson);
+    expect(result).toBe(generated);
   });
 });

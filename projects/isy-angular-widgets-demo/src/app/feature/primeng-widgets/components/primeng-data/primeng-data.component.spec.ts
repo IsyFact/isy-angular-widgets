@@ -1,4 +1,4 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
@@ -11,7 +11,7 @@ describe('Unit Tests: PrimengDataComponent', () => {
   let spectator: Spectator<PrimengDataComponent>;
   const fragment$ = new Subject<string | null>();
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
   const createComponent = createComponentFactory({
@@ -23,7 +23,7 @@ describe('Unit Tests: PrimengDataComponent', () => {
   });
 
   beforeEach(() => {
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
     spectator = createComponent();
     component = spectator.component;
   });
@@ -38,9 +38,9 @@ describe('Unit Tests: PrimengDataComponent', () => {
       const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchor?.classList.contains('section-anchor')).toBe(true);
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -51,9 +51,9 @@ describe('Unit Tests: PrimengDataComponent', () => {
       const anchor = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchor?.classList.contains('section-anchor')).toBe(true);
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -75,7 +75,7 @@ describe('Unit Tests: PrimengDataComponent', () => {
 
   it('should scroll to section when anchor symbol is clicked', () => {
     sectionAnchorIds.forEach((id) => {
-      viewportScrollerMock.scrollToAnchor.calls.reset();
+      viewportScrollerMock.scrollToAnchor.mockClear();
 
       spectator.click(`h3#${id} > a`);
       expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith(id);
@@ -97,10 +97,10 @@ describe('Unit Tests: PrimengDataComponent', () => {
     const visibleTreeTableRows = spectator.queryAll('p-treetable tbody tr');
     const currentItemsScroller = spectator.query('p-scroller.isy-print-current-items');
 
-    expect(paginatorSection?.classList.contains('isy-print-hide')).toBeTrue();
+    expect(paginatorSection?.classList.contains('isy-print-hide')).toBe(true);
     expect(printableTables.length).toBe(2);
     expect(columnControls.length).toBeGreaterThan(0);
-    expect(columnControls.every((control) => control.closest('.isy-print-hide'))).toBeTrue();
+    expect(columnControls.every((control) => control.closest('.isy-print-hide'))).toBe(true);
     expect(visibleProductRows.length).toBe(5);
     expect(visibleTreeTableRows.length).toBe(3);
     expect(currentItemsScroller).toBeTruthy();

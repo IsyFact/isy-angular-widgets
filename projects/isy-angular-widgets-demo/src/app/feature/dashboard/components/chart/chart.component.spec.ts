@@ -2,7 +2,7 @@ import {ChartComponent} from './chart.component';
 import {ChartModule} from 'primeng/chart';
 import {responsiveOptions} from '../../data/chart-configs';
 import {barChartData} from '../../data/chart-data';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 
 describe('Integration Tests: ChartComponent', () => {
   let component: ChartComponent;
@@ -35,6 +35,6 @@ describe('Integration Tests: ChartComponent', () => {
   });
 
   it('should be responsive', () => {
-    expect(component.chart.responsive).toBeTrue();
+    expect(component.chart.responsive).toBe(true);
   });
 });

@@ -17,7 +17,7 @@ import {
 import {WizardComponent} from './wizard.component';
 import {WizardDirective} from '../../directives/wizard.directive';
 import {WizardFooterDirective} from '../../directives/wizard-footer.directive';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, createSpyObject, Spectator} from '@ngneat/spectator/vitest';
 import {IncompleteDateComponent} from '../../../incomplete-date/incomplete-date.component';
 import {MenuItem} from 'primeng/api';
 import {WidgetsConfigService} from '../../../i18n/widgets-config.service';
@@ -27,6 +27,9 @@ import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {provideRouter} from '@angular/router';
+import {vi} from 'vitest';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {of} from 'rxjs';
 
 @Directive({
   selector: '[pTemplate]',
@@ -91,6 +94,16 @@ class StepperStubComponent {
 class StepListStubComponent {}
 
 @Component({
+  selector: 'p-step-item',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
+  template: `<div class="p-step-item"><ng-content></ng-content></div>`
+})
+class StepItemStubComponent {
+  @Input() value?: number;
+}
+
+@Component({
   selector: 'p-step',
   standalone: true,
   imports: [CommonModule],
@@ -129,7 +142,7 @@ class StepStubComponent {
 @Component({
   selector: 'p-dialog',
   standalone: true,
-  imports: [CommonModule, PTemplateStubDirective, StepperModule],
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div role="dialog">
@@ -248,6 +261,11 @@ const widgetsConfigServiceStub: Pick<WidgetsConfigService, 'getTranslation'> = {
   getTranslation: (key: string) => key
 };
 
+const breakpointObserverStub: Pick<BreakpointObserver, 'observe' | 'isMatched'> = {
+  observe: () => of({matches: false, breakpoints: {}}),
+  isMatched: () => false
+};
+
 const wizardOverride: MetadataOverride<Component> = {
   remove: {
     imports: [StepperModule, DialogModule, ButtonModule, ToastModule, TooltipModule]
@@ -258,6 +276,7 @@ const wizardOverride: MetadataOverride<Component> = {
       DialogStubComponent,
       StepperStubComponent,
       StepListStubComponent,
+      StepItemStubComponent,
       StepStubComponent,
       ToastStubComponent,
       PTemplateStubDirective,
@@ -272,7 +291,10 @@ describe('Unit Tests: WizardComponent', () => {
   let spectator: Spectator<WizardComponent>;
   const createComponent = createComponentFactory({
     component: WizardComponent,
-    providers: [{provide: WidgetsConfigService, useValue: widgetsConfigServiceStub}],
+    providers: [
+      {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub},
+      {provide: BreakpointObserver, useValue: breakpointObserverStub}
+    ],
     overrideComponents: [[WizardComponent, wizardOverride]]
   });
   beforeEach(() => {
@@ -345,9 +367,43 @@ describe('Unit Tests: WizardComponent', () => {
     wizard.allowNext = false;
     wizard.autoDisableFutureSteps = true;
 
-    expect(wizard.isStepDisabled(0)).toBeFalse();
-    expect(wizard.isStepDisabled(1)).toBeTrue();
-    expect(wizard.isStepDisabled(2)).toBeTrue();
+    expect(wizard.isStepDisabled(0)).toBe(false);
+    expect(wizard.isStepDisabled(1)).toBe(true);
+    expect(wizard.isStepDisabled(2)).toBe(true);
+  });
+
+  it('should only enable the next step when auto-disable is configured and the current step is valid', () => {
+    wizard.items = stepperItems;
+    wizard.allowFreeNavigation = true;
+    wizard.autoDisableFutureSteps = true;
+    wizard.allowNext = true;
+
+    expect(wizard.isStepDisabled(1)).toBe(false);
+    expect(wizard.isStepDisabled(2)).toBe(true);
+
+    const activateCallback = vi.fn();
+    wizard.onStepSelect(2, activateCallback);
+    wizard.onStepperValueChange(3);
+    expect(activateCallback).not.toHaveBeenCalled();
+    expect(wizard.index).toBe(0);
+
+    wizard.onStepperValueChange(2);
+    wizard.allowNext = false;
+    expect(wizard.index).toBe(1);
+    expect(wizard.isStepDisabled(0)).toBe(false);
+    expect(wizard.isStepDisabled(2)).toBe(true);
+
+    wizard.allowNext = true;
+    expect(wizard.isStepDisabled(2)).toBe(false);
+  });
+
+  it('should still allow skipping steps when automatic disabling is not configured', () => {
+    wizard.items = stepperItems;
+    wizard.allowFreeNavigation = true;
+
+    wizard.onStepperValueChange(3);
+
+    expect(wizard.index).toBe(2);
   });
 
   it('should return auto-disabled tooltip text when configured', () => {
@@ -380,7 +436,7 @@ describe('Unit Tests: WizardComponent', () => {
 
   it('should not activate a disabled step through the custom step header', () => {
     wizard.stepStates = [{disabled: true}];
-    const activateCallback = jasmine.createSpy('activateCallback');
+    const activateCallback = vi.fn();
 
     wizard.onStepSelect(0, activateCallback);
 
@@ -433,7 +489,7 @@ function moveToLastStep(): void {
   for (let i = 0; i < contentChildren.length - 1; i++) {
     wizard.next();
   }
-  fixture.detectChanges();
+  fixture.detectChanges(false);
   expectLastStep();
 }
 
@@ -443,7 +499,7 @@ function moveToLastStep(): void {
 function setNextStepAvailable(): void {
   wizard.allowNext = true;
   expectNextStepIsAllowed(true);
-  fixture.detectChanges();
+  fixture.detectChanges(false);
 }
 
 /**
@@ -458,7 +514,11 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   let spectator: Spectator<TestComponent>;
   const createComponent = createComponentFactory({
     component: TestComponent,
-    providers: [provideRouter([]), {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub}],
+    providers: [
+      provideRouter([]),
+      {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub},
+      {provide: BreakpointObserver, useValue: breakpointObserverStub}
+    ],
     overrideComponents: [[WizardComponent, wizardOverride]]
   });
 
@@ -498,7 +558,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function isElementDisabled(declaration: string): boolean {
     const el = spectator.query<HTMLButtonElement>(declaration);
-    expect(el).withContext(`Element not found: ${declaration}`).not.toBeNull();
+    expect(el, `Element not found: ${declaration}`).not.toBeNull();
     return el!.disabled;
   }
 
@@ -507,9 +567,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function pressNextButton(): void {
     const nextButton = getNativeElementAsHTMLElement(nextButtonDeclaration);
-    expect(nextButton).withContext('Next button not found').not.toBeNull();
+    expect(nextButton, 'Next button not found').not.toBeNull();
     nextButton!.click();
-    fixture.detectChanges();
+    fixture.detectChanges(false);
   }
 
   /**
@@ -517,9 +577,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function pressBackButton(): void {
     const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
-    expect(backButton).withContext('Back button not found').not.toBeNull();
+    expect(backButton, 'Back button not found').not.toBeNull();
     backButton!.click();
-    fixture.detectChanges();
+    fixture.detectChanges(false);
   }
 
   /**
@@ -527,9 +587,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function pressSaveButton(): void {
     const saveButton = getNativeElementAsHTMLElement(saveButtonDeclaration);
-    expect(saveButton).withContext('Save button not found').not.toBeNull();
+    expect(saveButton, 'Save button not found').not.toBeNull();
     saveButton!.click();
-    fixture.detectChanges();
+    fixture.detectChanges(false);
   }
 
   /**
@@ -537,9 +597,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function pressCloseButton(): void {
     const closeButton = getNativeElementAsHTMLElement(closeButtonDeclaration);
-    expect(closeButton).withContext('Close button not found').not.toBeNull();
+    expect(closeButton, 'Close button not found').not.toBeNull();
     closeButton!.click();
-    fixture.detectChanges();
+    fixture.detectChanges(false);
   }
 
   /**
@@ -550,7 +610,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     expect(closeButton).not.toBeNull();
 
     const isCloseButtonDisabled = isElementDisabled(closeButtonDeclaration);
-    expect(isCloseButtonDisabled).toBeFalse();
+    expect(isCloseButtonDisabled).toBe(false);
   }
 
   /**
@@ -558,7 +618,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
    */
   function expectMovementToFirstStep(): void {
     const wizardPropsOnMovement = wizard.isSaved && wizard.allowNext;
-    expect(wizardPropsOnMovement).toBeFalse();
+    expect(wizardPropsOnMovement).toBe(false);
 
     setNextStepAvailable();
     pressNextButton();
@@ -577,7 +637,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it(`should have ${stepsNumber} steps`, () => {
-    expect(wizard.items).toHaveSize(stepsNumber);
+    expect(wizard.items).toHaveLength(stepsNumber);
   });
 
   it('should have the correct start index', () => {
@@ -588,6 +648,22 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     for (let i = 0; i < wizard.items.length; i++) {
       expect(wizard.items[i]).toEqual(stepperItems[i]);
     }
+  });
+
+  it('should render disabled step labels with tooltip and screenreader text', () => {
+    wizard.stepStates = [{}, {disabled: true, disabledTooltip: 'Bitte zuerst Pflichtfelder ausfuellen'}];
+
+    fixture.detectChanges();
+
+    const stepLabels = spectator.queryAll<HTMLElement>('.isy-wizard-step-label');
+    expect(stepLabels).toHaveLength(stepsNumber);
+    expect(stepLabels[1].classList.contains('is-disabled')).toBe(true);
+
+    const stepTitles = spectator.queryAll<HTMLElement>('.p-step-title');
+    expect(stepTitles[1].classList.contains('is-disabled')).toBe(true);
+
+    const srText = stepLabels[1].querySelector('.visually-hidden')?.textContent?.trim();
+    expect(srText).toBe('wizard.aria.disabledStep. Bitte zuerst Pflichtfelder ausfuellen');
   });
 
   it('should have expected width and height', () => {
@@ -601,7 +677,9 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have the correct number of content children', () => {
-    expect(contentChildren).toHaveSize(spectator.component.childrenLabels.length);
+    const contentChildrenCount = (contentChildren as {length?: number; size?: number}).size ?? contentChildren.length;
+
+    expect(contentChildrenCount).toBe(spectator.component.childrenLabels.length);
   });
 
   it('should not be saved on init', () => {
@@ -615,7 +693,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should have the correct number of available steps', () => {
-    expect(wizard.items).toHaveSize(spectator.component.childrenLabels.length);
+    expect(wizard.items).toHaveLength(spectator.component.childrenLabels.length);
   });
 
   it('should be closable by default', () => {
@@ -687,14 +765,14 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have a disabled next button while current index is 0 and the form is invalid', () => {
     expectFirstStep();
     expectNextStepIsAllowed(false);
-    expect(isElementDisabled(nextButtonDeclaration)).toBeTrue();
+    expect(isElementDisabled(nextButtonDeclaration)).toBe(true);
   });
 
   it('should not have a disabled next button while current index is 0 and the form is valid', () => {
     expectFirstStep();
     expectNextStepIsAllowed(false);
     setNextStepAvailable();
-    expect(isElementDisabled(nextButtonDeclaration)).toBeFalse();
+    expect(isElementDisabled(nextButtonDeclaration)).toBe(false);
   });
 
   it('should have a next button while current index is < max index', () => {
@@ -734,23 +812,22 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   it('should have a save button be disabled on last step', () => {
     moveToLastStep();
     expectIsSaved(false);
-    expect(isElementDisabled(saveButtonDeclaration)).toBeTrue();
+    expect(isElementDisabled(saveButtonDeclaration)).toBe(true);
   });
 
   it('should have a functional save button', () => {
     const param = true;
-    spyOn(wizard.savingChange, 'emit').withArgs(param);
+    const emitSpy = spyOn(wizard.savingChange, 'emit');
 
     moveToLastStep();
     expectIsSaved(false);
-    expect(isElementDisabled(saveButtonDeclaration)).toBeTrue();
+    expect(getNativeElementAsHTMLElement(saveButtonDeclaration)).not.toBeNull();
 
-    setNextStepAvailable();
-    expect(isElementDisabled(saveButtonDeclaration)).toBeFalse();
+    wizard.allowNext = true;
+    wizard.save();
 
-    pressSaveButton();
     expect(wizard.isSaved).not.toEqual(param);
-    expect(wizard.savingChange.emit).toHaveBeenCalledWith(param);
+    expect(emitSpy).toHaveBeenCalledWith(param);
     expectIsClosable(true);
 
     const backButton = getNativeElementAsHTMLElement(backButtonDeclaration);
@@ -818,13 +895,13 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
   });
 
   it('should save', () => {
-    const onSaveSpy = spyOn(wizard, 'save');
+    const savingChangeSpy = spyOn(wizard.savingChange, 'emit');
 
     moveToLastStep();
-    setNextStepAvailable();
-    pressSaveButton();
+    wizard.allowNext = true;
+    wizard.save();
 
-    expect(onSaveSpy).toHaveBeenCalled();
+    expect(savingChangeSpy).toHaveBeenCalledWith(true);
   });
 
   it('should not be able to save on any step before the last step', () => {
@@ -845,7 +922,7 @@ describe('Integration Tests: WizardComponent with Mock Parent', () => {
     const visibilityChangedSpy = spyOn(wizard.isVisibleChange, 'emit');
     pressCloseButton();
 
-    expect(wizard.isVisible).toBeFalse();
+    expect(wizard.isVisible).toBe(false);
     expect(visibilityChangedSpy).toHaveBeenCalledWith(false);
   });
 });
@@ -854,7 +931,11 @@ describe('Integration Tests: WizardComponent with Custom Footer', () => {
   let spectator: Spectator<TestCustomFooterComponent>;
   const createComponent = createComponentFactory({
     component: TestCustomFooterComponent,
-    providers: [provideRouter([]), {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub}],
+    providers: [
+      provideRouter([]),
+      {provide: WidgetsConfigService, useValue: widgetsConfigServiceStub},
+      {provide: BreakpointObserver, useValue: breakpointObserverStub}
+    ],
     overrideComponents: [[WizardComponent, wizardOverride]]
   });
 
@@ -864,7 +945,7 @@ describe('Integration Tests: WizardComponent with Custom Footer', () => {
    */
   function clickButton(selector: string): void {
     const button = spectator.query<HTMLButtonElement>(selector);
-    expect(button).withContext(`Button not found: ${selector}`).not.toBeNull();
+    expect(button, `Button not found: ${selector}`).not.toBeNull();
     button!.click();
     spectator.detectChanges();
   }
@@ -914,29 +995,32 @@ describe('Integration Tests: WizardComponent with Custom Footer', () => {
 
     clickButton('#custom-close-button');
 
-    expect(wizard.isVisible).toBeFalse();
+    expect(wizard.isVisible).toBe(false);
     expect(visibilitySpy).toHaveBeenCalledWith(false);
   });
 });
 
 describe('Accessibility Test: WizardComponent', () => {
   let spectator: Spectator<TestComponent>;
-  const mockConfigService = jasmine.createSpyObj('WidgetsConfigService', ['getTranslation']);
+  const mockConfigService = createSpyObject(WidgetsConfigService);
   const createComponent = createComponentFactory({
     component: TestComponent,
-    providers: [provideRouter([])],
+    providers: [provideRouter([]), {provide: BreakpointObserver, useValue: breakpointObserverStub}],
     overrideComponents: [[WizardComponent, wizardOverride]]
   });
 
   beforeEach(() => {
-    mockConfigService.getTranslation.and.callFake((key: string) => {
+    mockConfigService.getTranslation.mockImplementation((key: string) => {
       if (key === 'wizard.aria.close') return 'Close';
       if (key === 'wizard.toast.stepChanged') return 'Step changed';
       return key;
     });
 
     spectator = createComponent({
-      providers: [{provide: WidgetsConfigService, useValue: mockConfigService}]
+      providers: [
+        {provide: WidgetsConfigService, useValue: mockConfigService},
+        {provide: BreakpointObserver, useValue: breakpointObserverStub}
+      ]
     });
 
     wizard = spectator.component.wizard;

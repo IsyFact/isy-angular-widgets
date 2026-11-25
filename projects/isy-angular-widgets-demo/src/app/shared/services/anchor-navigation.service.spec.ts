@@ -21,11 +21,18 @@ class HostComponent implements OnInit {
 
 describe('AnchorNavigationService', () => {
   let service: AnchorNavigationService;
-  let viewportScrollerSpy: jasmine.SpyObj<ViewportScroller>;
+  // ViewportScroller is abstract, so the mock has to list the used members explicitly.
+  const viewportScrollerSpy = {
+    scrollToAnchor: vi.fn(),
+    scrollToPosition: vi.fn(),
+    getScrollPosition: vi.fn(() => [0, 0] as [number, number]),
+    setOffset: vi.fn(),
+    setHistoryScrollRestoration: vi.fn()
+  };
   const fragment$ = new Subject<string | null>();
 
   beforeEach(() => {
-    viewportScrollerSpy = jasmine.createSpyObj<ViewportScroller>('ViewportScroller', ['scrollToAnchor']);
+    viewportScrollerSpy.scrollToAnchor.mockClear();
 
     TestBed.configureTestingModule({
       providers: [
@@ -42,7 +49,7 @@ describe('AnchorNavigationService', () => {
     it('should prevent the default browser navigation', () => {
       const event = new MouseEvent('click', {bubbles: true, cancelable: true});
       service.scrollToAnchor(event, 'some-section');
-      expect(event.defaultPrevented).toBeTrue();
+      expect(event.defaultPrevented).toBe(true);
     });
 
     it('should call ViewportScroller.scrollToAnchor with the given id', () => {

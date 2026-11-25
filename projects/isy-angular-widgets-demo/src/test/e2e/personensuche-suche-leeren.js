@@ -1,15 +1,16 @@
 import {Selector} from 'testcafe';
 
-const idInput = Selector('input#ID');
-const nameInput = Selector('input#Nachname');
-const vornameInput = Selector('input#Vorname');
-const genderInput = Selector('input#Gender');
-const geburtsnameInput = Selector('input#Geburtsname');
-const geburtsortInput = Selector('input#Geburtsort');
-const calenderInput = Selector('.p-calendar .p-inputtext');
+const idInput = Selector('input#id');
+const nameInput = Selector('input#last-name');
+const vornameInput = Selector('input#first-name');
+const genderInput = Selector('input#gender');
+const geburtsnameInput = Selector('input#birth-name');
+const geburtsortInput = Selector('input#birth-place');
+const calenderInput = Selector('input#birth-date');
+const searchButton = Selector('#search-button');
 const leerenButton = Selector('button').withText('Suche leeren');
 
-fixture`Personen suchen > Suche leeren`.page`http://localhost:4200/personen/suchen`;
+fixture`Objekt suchen > Suche leeren`.page`http://localhost:4200/objekt-suchen`;
 test('Suche leeren', async (t) => {
   await t
     .maximizeWindow()
@@ -35,7 +36,11 @@ test('Suche leeren', async (t) => {
     .eql('Berlin')
     .expect(genderInput.value)
     .eql('Weiblich')
+    // Der Leeren-Button ist erst aktiv, wenn eine Trefferliste vorhanden ist.
+    .click(searchButton)
+    .wait(4000)
     .click(leerenButton)
+    .wait(500)
 
     .expect(idInput.value)
     .eql('')

@@ -1,7 +1,8 @@
 import {CharacterService} from './character.service';
 import {Schriftzeichengruppe} from '../model/model';
 import {Datentyp} from '../model/datentyp';
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
+import {createServiceFactory, SpectatorService} from '@ngneat/spectator/vitest';
+import {expect} from 'vitest';
 
 describe('Unit Tests: CharacterService', () => {
   let service: CharacterService;
@@ -110,20 +111,20 @@ describe('Unit Tests: CharacterService', () => {
 
   const numberOfSonderZeichen = 908;
   it(`should return ${numberOfSonderZeichen} characters`, () => {
-    expect(service.getCharacters().length).toEqual(numberOfSonderZeichen);
+    expect(service.getCharacters()).toHaveLength(numberOfSonderZeichen);
   });
 
   groupCounts.forEach((expectedCount, schriftzeichengruppe) => {
     it(`should return ${expectedCount} characters with Schriftzeichengruppe ${schriftzeichengruppe}`, () => {
       expect(
-        service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe).length
-      ).toEqual(expectedCount);
+        service.getCharacters().filter((character) => character.schriftzeichengruppe === schriftzeichengruppe)
+      ).toHaveLength(expectedCount);
     });
   });
 
   baseCounts.forEach((expectedCount, base) => {
     it(`should return ${expectedCount} characters with Grundzeichen ${base}`, () => {
-      expect(service.getCharacters().filter((character) => character.grundzeichen === base).length).toEqual(
+      expect(service.getCharacters().filter((character) => character.grundzeichen === base)).toHaveLength(
         expectedCount
       );
     });
@@ -136,11 +137,11 @@ describe('Unit Tests: CharacterService', () => {
       const numberOfCharacters = testData.characters;
 
       it(`should return ${numberOfSchriftzeichenGruppen} Schriftzeichengruppen`, () => {
-        expect(service.getGroupsByDataType(datentyp).length).toEqual(numberOfSchriftzeichenGruppen);
+        expect(service.getGroupsByDataType(datentyp)).toHaveLength(numberOfSchriftzeichenGruppen);
       });
 
       it(`should return ${numberOfCharacters} characters`, () => {
-        expect(service.getCharactersByDataType(datentyp).length).toEqual(numberOfCharacters);
+        expect(service.getCharactersByDataType(datentyp)).toHaveLength(numberOfCharacters);
       });
 
       testData.expectedSchriftzeichengruppen.forEach((expectedSchriftzeichengruppe) => {

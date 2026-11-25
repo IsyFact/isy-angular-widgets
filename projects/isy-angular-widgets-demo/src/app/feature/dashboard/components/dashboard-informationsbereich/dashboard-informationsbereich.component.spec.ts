@@ -1,7 +1,7 @@
 import {DashboardInformationsbereichComponent} from './dashboard-informationsbereich.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {PanelMenu} from 'primeng/panelmenu';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 
 describe('Integration Tests: DashboardInformationsbereichComponent', () => {
   let spectator: Spectator<DashboardInformationsbereichComponent>;

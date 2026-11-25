@@ -1,3 +1,4 @@
+import {createSpyObject, SpyObject} from '@ngneat/spectator/vitest';
 import {TestBed} from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
 import {of} from 'rxjs';
@@ -9,11 +10,11 @@ import {
 } from '@ngx-translate/http-loader';
 
 describe('TranslateHttpLoader (DI config)', () => {
-  let http: jasmine.SpyObj<HttpClient>;
+  let http: SpyObject<HttpClient>;
 
   beforeEach(() => {
-    http = jasmine.createSpyObj<HttpClient>('HttpClient', ['get']);
-    http.get.and.returnValue(of({}));
+    http = createSpyObject(HttpClient);
+    http.get.mockReturnValue(of({}));
 
     TestBed.configureTestingModule({
       providers: [

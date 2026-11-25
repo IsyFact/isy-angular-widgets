@@ -1,7 +1,7 @@
 <div class="demo-print-page flex flex-col p-4 lg:p-0">
   <form class="isy-print-form" [formGroup]="personalInfoForm">
     <h1>Isy-Angular Komponenten</h1>
-    <div class="grid gap-4">
+    <div class="grid grid-cols-12 gap-4">
       <div class="col-span-12 flex flex-col gap-2">
         <demo-section-heading anchorId="seitentoolbar" label="Seitentoolbar" ariaLabel="Link zu Seitentoolbar" />
         <isy-seiten-toolbar
@@ -28,13 +28,47 @@
         </isy-seiten-toolbar>
       </div>
       <div class="col-span-12 flex flex-col gap-2">
-        <demo-section-heading anchorId="formwrapper" label="FormWrapper" ariaLabel="Link zu FormWrapper" />
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <demo-section-heading anchorId="formwrapper" label="FormWrapper" ariaLabel="Link zu FormWrapper" />
+          <div class="flex items-center gap-2">
+            <p-checkbox
+              inputId="ifta-form-wrapper"
+              name="iftaFormWrapper"
+              [(ngModel)]="iftaFormWrapper"
+              [binary]="true"
+              [ngModelOptions]="{standalone: true}"
+            />
+            <label for="ifta-form-wrapper" class="m-0">{{
+              'isyAngularWidgetsDemo.labels.showIftaPresentation' | translate
+            }}</label>
+          </div>
+        </div>
         <isy-form-wrapper
           [label]="'isyAngularWidgetsDemo.labels.vorname' | translate"
           fieldId="first-name"
+          [ifta]="iftaFormWrapper"
           [control]="personalInfoForm.controls.firstName | formControl"
           [validationMessages]="{required: 'isyAngularWidgetsDemo.messages.requiredMessage' | translate}"
         >
+          <span isyFormWrapperLabel class="text-muted-color"
+            >{{ 'isyAngularWidgetsDemo.labels.minimumTwoCharacters' | translate }}
+          </span>
+          <p-button
+            isyFormWrapperLabel
+            type="button"
+            styleClass="size-4 p-0"
+            icon="pi pi-info-circle"
+            [ariaLabel]="
+              ('isyAngularWidgetsDemo.aria.info' | translate) +
+              ': ' +
+              ('isyAngularWidgetsDemo.labels.vorname' | translate)
+            "
+            [text]="true"
+            [rounded]="true"
+            [pTooltip]="'isyAngularWidgetsDemo.placeholders.maxLength' | translate: {maxlength: 16}"
+            tooltipEvent="both"
+            tooltipPosition="right"
+          />
           <input
             id="first-name"
             formControlName="firstName"

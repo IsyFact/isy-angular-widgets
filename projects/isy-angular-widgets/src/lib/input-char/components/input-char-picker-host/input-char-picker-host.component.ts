@@ -19,6 +19,7 @@ import type {InputCharSelection} from '../../model/model';
   standalone: true,
   selector: 'isy-input-char-picker-host',
   templateUrl: './input-char-picker-host.component.html',
+  styleUrls: ['./input-char-picker-host.component.scss'],
   imports: [DialogModule, InputCharDialogComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

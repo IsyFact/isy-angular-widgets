@@ -97,8 +97,13 @@ export class PrimengFormComponent implements AfterViewInit {
   ingredient: string = '';
   radioHorizontalValue: string = 'radio1';
   radioVerticalValue: string = 'radio1';
+  radioDisabledValue: string = 'radio2';
   inputTextValue: string = '';
   inputTextRequiredValue: string = '';
+  checkboxDisabledChecked = true;
+  checkboxDisabledUnchecked = false;
+  toggleSwitchValue = false;
+  toggleSwitchDisabledValue = true;
 
   stateOptions: string[] = ['Off', 'On'];
   slider: number = 0;

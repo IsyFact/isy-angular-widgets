@@ -2,6 +2,10 @@
   display: inline-flex;
 }
 
+.isy-wizard-step-trigger[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
 .isy-wizard-step-trigger:focus-visible {
   outline: 2px solid var(--p-focus-ring-color, var(--p-primary-color, #1a73e8));
   outline-offset: 2px;
@@ -18,8 +22,12 @@
 }
 
 .isy-wizard-step-label.is-disabled {
-  color: var(--p-text-muted-color, #6b7280);
+  color: var(--isyfact-disabled-button-background);
   cursor: not-allowed;
+}
+
+.p-step-title.is-disabled {
+  color: var(--isyfact-disabled-button-background);
 }
 
 .visually-hidden {

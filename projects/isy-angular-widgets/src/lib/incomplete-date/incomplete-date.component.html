@@ -8,6 +8,7 @@
   mask="**.**.****"
   [ngModel]="inputValue"
   (ngModelChange)="onModelChange($event)"
+  [ngModelOptions]="{standalone: true}"
   characterPattern="^[x]"
   [placeholder]="placeholder"
   [inputId]="inputId!"

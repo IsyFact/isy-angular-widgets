@@ -655,7 +655,7 @@ module.exports = (async () => {
   const recommendedCfg = await configs.recommended();
 
   return [
-    {ignores: ['**/node_modules/**', 'node_modules/', 'karma.conf.js', 'karma.config.js', '**/*.server.ts', '**/server.ts']},
+    {ignores: ['**/node_modules/**', 'node_modules/', '**/*.server.ts', '**/server.ts']},
 
     ...recommendedCfg,
 ${projectBlocks},
@@ -694,7 +694,7 @@ function generateWrappedEslintConfigContent(workspace: Workspace, tree: Tree): s
       return [
         ...normalizedBaseConfig,
 
-        {ignores: ['**/node_modules/**', 'node_modules/', 'karma.conf.js', 'karma.config.js', '**/*.server.ts', '**/server.ts']},
+        {ignores: ['**/node_modules/**', 'node_modules/', '**/*.server.ts', '**/server.ts']},
 
         ...recommendedCfg,
     ${projectBlocks},

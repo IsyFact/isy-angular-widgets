@@ -40,6 +40,14 @@ export const routes: Routes = [
     canActivate: [canActivateAuth]
   },
   {
+    path: 'navigation',
+    data: {
+      title: 'Haupt-, Sub- und Linksnavigation'
+    },
+    loadComponent: async () => (await import('./feature/navigation/navigation.component')).NavigationComponent,
+    canActivate: [canActivateAuth]
+  },
+  {
     path: 'modalarme-patterns',
     data: {
       title: 'isyAngularWidgetsDemo.websiteTitles.modalarmePatterns'

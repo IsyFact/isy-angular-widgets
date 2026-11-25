@@ -1,8 +1,9 @@
 import {ViewportScroller} from '@angular/common';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {fakeAsync, tick} from '@angular/core/testing';
 import {ActivatedRoute} from '@angular/router';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator, createSpyObject} from '@ngneat/spectator/vitest';
 import {TranslateModule} from '@ngx-translate/core';
 import {Subject} from 'rxjs';
 import {PrimengPanelComponent} from './primeng-panel.component';
@@ -30,6 +31,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
     'tabs',
     'card',
     'fieldset',
+    'fieldset-toolbar',
     'scrollpanel',
     'splitter',
     'divider',
@@ -45,13 +47,10 @@ describe('Unit Tests: PrimengPanelComponent', () => {
   const fragment$ = new Subject<string | null>();
 
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
-  const breakpointObserverSpy = jasmine.createSpyObj<BreakpointObserver>('BreakpointObserver', [
-    'observe',
-    'isMatched'
-  ]);
+  const breakpointObserverSpy = createSpyObject(BreakpointObserver);
 
   const createComponent = createComponentFactory({
     component: PrimengPanelComponent,
@@ -76,12 +75,12 @@ describe('Unit Tests: PrimengPanelComponent', () => {
   beforeEach(() => {
     breakpointState$ = new Subject<BreakpointState>();
 
-    breakpointObserverSpy.observe.calls.reset();
-    breakpointObserverSpy.isMatched.calls.reset();
-    breakpointObserverSpy.observe.and.returnValue(breakpointState$.asObservable());
-    breakpointObserverSpy.isMatched.and.returnValue(false);
+    breakpointObserverSpy.observe.mockClear();
+    breakpointObserverSpy.isMatched.mockClear();
+    breakpointObserverSpy.observe.mockReturnValue(breakpointState$.asObservable());
+    breakpointObserverSpy.isMatched.mockReturnValue(false);
 
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
 
     spectator = createComponent();
     component = spectator.component;
@@ -101,9 +100,9 @@ describe('Unit Tests: PrimengPanelComponent', () => {
       const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchorLink).toBeTruthy();
-      expect(anchorLink?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchorLink?.classList.contains('section-anchor')).toBe(true);
       expect(anchorLink?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -166,27 +165,27 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
   describe('Responsive stepper', () => {
     it('should observe the configured vertical stepper breakpoint', () => {
-      expect(breakpointObserverSpy.observe).toHaveBeenCalledOnceWith(verticalStepperMediaQuery);
-      expect(breakpointObserverSpy.isMatched).toHaveBeenCalledOnceWith(verticalStepperMediaQuery);
+      expect(breakpointObserverSpy.observe).toHaveBeenCalledExactlyOnceWith(verticalStepperMediaQuery);
+      expect(breakpointObserverSpy.isMatched).toHaveBeenCalledExactlyOnceWith(verticalStepperMediaQuery);
     });
 
     it('should initialise the stepper horizontally when the breakpoint does not match', () => {
-      expect(getIsVerticalStepper(component)).toBeFalse();
+      expect(getIsVerticalStepper(component)).toBe(false);
     });
 
     it('should initialise the stepper vertically when the breakpoint already matches', () => {
       spectator.fixture.destroy();
 
       breakpointState$ = new Subject<BreakpointState>();
-      breakpointObserverSpy.observe.calls.reset();
-      breakpointObserverSpy.isMatched.calls.reset();
-      breakpointObserverSpy.observe.and.returnValue(breakpointState$.asObservable());
-      breakpointObserverSpy.isMatched.and.returnValue(true);
+      breakpointObserverSpy.observe.mockClear();
+      breakpointObserverSpy.isMatched.mockClear();
+      breakpointObserverSpy.observe.mockReturnValue(breakpointState$.asObservable());
+      breakpointObserverSpy.isMatched.mockReturnValue(true);
 
       spectator = createComponent();
       component = spectator.component;
 
-      expect(getIsVerticalStepper(component)).toBeTrue();
+      expect(getIsVerticalStepper(component)).toBe(true);
     });
 
     it('should switch to a vertical stepper when the breakpoint starts matching', () => {
@@ -199,7 +198,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeTrue();
+      expect(getIsVerticalStepper(component)).toBe(true);
     });
 
     it('should switch back to a horizontal stepper when the breakpoint no longer matches', () => {
@@ -212,7 +211,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeTrue();
+      expect(getIsVerticalStepper(component)).toBe(true);
 
       breakpointState$.next({
         matches: false,
@@ -223,7 +222,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeFalse();
+      expect(getIsVerticalStepper(component)).toBe(false);
     });
   });
 
@@ -254,7 +253,7 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeTrue();
+      expect(getIsVerticalStepper(component)).toBe(true);
       expect(component.stepperValue).toBe(2);
     });
 
@@ -279,8 +278,153 @@ describe('Unit Tests: PrimengPanelComponent', () => {
 
       spectator.detectChanges();
 
-      expect(getIsVerticalStepper(component)).toBeFalse();
+      expect(getIsVerticalStepper(component)).toBe(false);
       expect(component.stepperValue).toBe(3);
+    });
+  });
+
+  describe('Field group toolbar', () => {
+    /**
+     * Builds a click event whose `currentTarget` points to the given element.
+     * @param currentTarget The element to report as the event's current target
+     * @returns A `MouseEvent` with `currentTarget` overridden
+     */
+    function createClickEvent(currentTarget: HTMLElement): Event {
+      const event = new MouseEvent('click');
+      Object.defineProperty(event, 'currentTarget', {value: currentTarget});
+      return event;
+    }
+
+    it('should define the "Meldeadresse" and "Postanschrift" groups with Edit, Print, Delete in order', () => {
+      expect(component.addressGroups).toHaveLength(2);
+
+      const [registeredAddress, postalAddress] = component.addressGroups;
+
+      expect(registeredAddress.id).toBe('meldeadresse');
+      expect(registeredAddress.actions.map((action) => action.key)).toEqual(['edit', 'print', 'delete']);
+      expect(registeredAddress.actions.every((action) => !action.disabled)).toBe(true);
+
+      expect(postalAddress.id).toBe('postanschrift');
+      expect(postalAddress.actions.map((action) => action.key)).toEqual(['edit', 'print', 'delete']);
+      expect(postalAddress.actions.find((action) => action.key === 'edit')?.disabled).toBe(false);
+      expect(postalAddress.actions.find((action) => action.key === 'print')?.disabled).toBe(true);
+      expect(postalAddress.actions.find((action) => action.key === 'delete')?.disabled).toBe(true);
+    });
+
+    it('should define the overflow menu with Export, History and a disabled Archive entry', () => {
+      expect(component.addressesOverflowItems).toHaveLength(3);
+      expect(component.addressesOverflowItems[0].label).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarExport');
+      expect(component.addressesOverflowItems[1].label).toBe(
+        'isyAngularWidgetsDemo.labels.panelFieldsetToolbarHistory'
+      );
+      expect(component.addressesOverflowItems[2].label).toBe(
+        'isyAngularWidgetsDemo.labels.panelFieldsetToolbarArchive'
+      );
+      expect(component.addressesOverflowItems[2].disabled).toBe(true);
+    });
+
+    it('should record the executed action and group, and restore focus to the triggering button', fakeAsync(() => {
+      const button = document.createElement('button');
+      spyOn(button, 'focus');
+
+      component.runFieldGroupAction(
+        createClickEvent(button),
+        'isyAngularWidgetsDemo.labels.panelFieldsetToolbarEdit',
+        'isyAngularWidgetsDemo.labels.panelFieldsetToolbarRegisteredAddress'
+      );
+
+      expect(component.lastToolbarActionKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarEdit');
+      expect(component.lastToolbarGroupKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarRegisteredAddress');
+      expect(button.focus).not.toHaveBeenCalled();
+
+      tick();
+
+      expect(button.focus).toHaveBeenCalled();
+    }));
+
+    it('should not throw when restoring focus without a triggering element', fakeAsync(() => {
+      const event = new MouseEvent('click');
+
+      expect(() => component.runFieldGroupAction(event, 'action', 'group')).not.toThrow();
+
+      tick();
+    }));
+
+    it('should toggle the highlight state and record the highlight action on the "Adressen" group', fakeAsync(() => {
+      const button = document.createElement('button');
+      spyOn(button, 'focus');
+
+      expect(component.addressesHighlighted).toBe(false);
+
+      component.toggleAddressesHighlight(createClickEvent(button));
+
+      expect(component.addressesHighlighted).toBe(true);
+      expect(component.lastToolbarActionKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarHighlight');
+      expect(component.lastToolbarGroupKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarAddresses');
+
+      tick();
+
+      expect(button.focus).toHaveBeenCalled();
+
+      component.toggleAddressesHighlight(createClickEvent(button));
+
+      expect(component.addressesHighlighted).toBe(false);
+
+      tick();
+    }));
+
+    it('should run an overflow menu command and restore focus to the overflow trigger button', fakeAsync(() => {
+      const overflowButton = spectator.query<HTMLButtonElement>(
+        '[aria-haspopup="menu"][aria-controls="addresses-overflow-menu"]'
+      );
+
+      expect(overflowButton).toBeTruthy();
+      spyOn(overflowButton as HTMLButtonElement, 'focus');
+
+      component.addressesOverflowItems[0].command?.({originalEvent: new MouseEvent('click'), item: {}});
+
+      expect(component.lastToolbarActionKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarExport');
+      expect(component.lastToolbarGroupKey).toBe('isyAngularWidgetsDemo.labels.panelFieldsetToolbarAddresses');
+
+      tick();
+
+      expect(overflowButton?.focus).toHaveBeenCalled();
+    }));
+
+    it('should mark the "Adressen" and "Meldeadresse" labels as semantic headings', fakeAsync(() => {
+      spectator.detectChanges();
+      tick();
+      spectator.detectChanges();
+
+      const labels = spectator.queryAll('.p-fieldset-legend-label');
+      const addressesLabel = labels.find((label) =>
+        label.textContent?.trim().includes('panelFieldsetToolbarAddresses')
+      );
+      const registeredAddressLabel = labels.find((label) =>
+        label.textContent?.trim().includes('panelFieldsetToolbarRegisteredAddress')
+      );
+
+      expect(addressesLabel?.getAttribute('role')).toBe('heading');
+      expect(addressesLabel?.getAttribute('aria-level')).toBe('4');
+      expect(registeredAddressLabel?.getAttribute('role')).toBe('heading');
+      expect(registeredAddressLabel?.getAttribute('aria-level')).toBe('5');
+    }));
+
+    it('should expose role="toolbar" with an aria-label for the main group and both sub groups', () => {
+      spectator.detectChanges();
+
+      const toolbars = spectator.queryAll('div[role="toolbar"]');
+
+      expect(toolbars).toHaveLength(3);
+      toolbars.forEach((toolbar) => {
+        expect(toolbar.hasAttribute('aria-label')).toBe(true);
+      });
+    });
+
+    it('should render the disabled sub group actions as disabled instead of hiding them', () => {
+      const postalAddressActions = component.addressGroups.find((group) => group.id === 'postanschrift')?.actions;
+
+      expect(postalAddressActions?.filter((action) => action.disabled)).toHaveLength(2);
     });
   });
 });

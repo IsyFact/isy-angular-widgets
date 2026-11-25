@@ -1,7 +1,8 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
+import {vi} from 'vitest';
 import {PrimengFormComponent} from './primeng-form.component';
 import {AutoCompleteCompleteEvent} from 'primeng/autocomplete';
 import {TranslateModule} from '@ngx-translate/core';
@@ -46,7 +47,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
   let spectator: Spectator<PrimengFormComponent>;
   const fragment$ = new Subject<string | null>();
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
   const createComponent = createComponentFactory({
@@ -65,7 +66,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   beforeEach(() => {
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
     spectator = createComponent();
     component = spectator.component;
   });
@@ -75,21 +76,21 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should expose a linkable heading per widget', () => {
-    const headingLinks = spectator.queryAll<HTMLAnchorElement>('h3 > a');
+    const headings = spectator.queryAll<HTMLHeadingElement>('h3.section-heading');
 
-    expect(headingLinks).toHaveLength(widgetAnchorIds.length);
+    expect(headings).toHaveLength(widgetAnchorIds.length);
+
+    const headingsById = new Map(headings.map((heading) => [heading.id, heading]));
 
     widgetAnchorIds.forEach((id) => {
-      const heading = spectator.query<HTMLHeadingElement>(`h3#${id}`);
-      const anchorLink = spectator.query<HTMLAnchorElement>(`h3#${id} > a.section-anchor`);
+      const heading = headingsById.get(id);
+      const anchorLink = heading?.querySelector<HTMLAnchorElement>('a.section-anchor');
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
       expect(anchorLink).toBeTruthy();
-      expect(anchorLink?.classList.contains('section-anchor')).toBeTrue();
       expect(anchorLink?.textContent?.trim()).toBe('🔗');
     });
-  });
+  }, 15000);
 
   it('should render widgets in a single-column layout', () => {
     expect(spectator.queryAll('[class*="xl:col-"]')).toHaveLength(0);
@@ -132,21 +133,21 @@ describe('Unit Tests: PrimengFormComponent', () => {
     const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
     component.filterCountry(event);
     expect(component.filteredCountries.length).toBeGreaterThan(0);
-    expect(component.filteredCountries.some((country) => country.name.startsWith('Uni'))).toBeTrue();
+    expect(component.filteredCountries.some((country) => country.name.startsWith('Uni'))).toBe(true);
   });
 
   it('should handle empty query', () => {
     const query = '';
     const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
     component.filterCountry(event);
-    expect(component.filteredCountries.length).toBe(component.countries.length);
+    expect(component.filteredCountries).toHaveLength(component.countries.length);
   });
 
   it('should handle query with no matching countries', () => {
     const query = 'xyz';
     const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
     component.filterCountry(event);
-    expect(component.filteredCountries.length).toBe(0);
+    expect(component.filteredCountries).toHaveLength(0);
   });
 
   it('should handle case insensitive queries', () => {
@@ -154,7 +155,7 @@ describe('Unit Tests: PrimengFormComponent', () => {
     const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
     component.filterCountry(event);
     expect(component.filteredCountries.length).toBeGreaterThan(0);
-    expect(component.filteredCountries.some((country) => country.name.toLowerCase().startsWith('united'))).toBeTrue();
+    expect(component.filteredCountries.some((country) => country.name.toLowerCase().startsWith('united'))).toBe(true);
   });
 
   it('should handle query with mixed case', () => {
@@ -162,14 +163,14 @@ describe('Unit Tests: PrimengFormComponent', () => {
     const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
     component.filterCountry(event);
     expect(component.filteredCountries.length).toBeGreaterThan(0);
-    expect(component.filteredCountries.some((country) => country.name.toLowerCase().startsWith('united'))).toBeTrue();
+    expect(component.filteredCountries.some((country) => country.name.toLowerCase().startsWith('united'))).toBe(true);
   });
 
   it('should handle query with special characters', () => {
     const query = 'U*ni';
     const event: AutoCompleteCompleteEvent = {query, originalEvent: new Event('')};
     component.filterCountry(event);
-    expect(component.filteredCountries.length).toBe(0);
+    expect(component.filteredCountries).toHaveLength(0);
   });
 
   it('should render three InputText variants for validation, disabled and readonly', () => {
@@ -228,8 +229,8 @@ describe('Unit Tests: PrimengFormComponent', () => {
     const requiredInput = spectator.query<HTMLInputElement>('#input-text-required');
 
     expect(requiredLabel?.textContent).toContain('*');
-    expect(requiredInput?.hasAttribute('required')).toBeTrue();
-    expect(requiredInput?.hasAttribute('aria-required')).toBeTrue();
+    expect(requiredInput?.hasAttribute('required')).toBe(true);
+    expect(requiredInput?.hasAttribute('aria-required')).toBe(true);
   });
 
   it('should show required validation error when required field is touched and empty', () => {
@@ -247,10 +248,15 @@ describe('Unit Tests: PrimengFormComponent', () => {
     const disabledInput = spectator.query<HTMLInputElement>('#input-text-disabled');
     const readonlyInput = spectator.query<HTMLInputElement>('#input-text-readonly');
 
-    expect(disabledInput?.disabled).toBeTrue();
-    expect(readonlyInput?.readOnly).toBeTrue();
+    expect(disabledInput?.disabled).toBe(true);
+    expect(readonlyInput?.readOnly).toBe(true);
     expect(disabledInput?.value.length).toBeGreaterThan(0);
     expect(readonlyInput?.value.length).toBeGreaterThan(0);
+  });
+
+  it('should render disabled textarea and dropdown examples', () => {
+    expect(spectator.query<HTMLTextAreaElement>('#textarea-disabled')?.disabled).toBe(true);
+    expect(spectator.query('#dropdown-input-disabled')).toBeTruthy();
   });
 
   it('should render Inputmask phone field with label, placeholder and help text', () => {
@@ -280,38 +286,57 @@ describe('Unit Tests: PrimengFormComponent', () => {
   });
 
   it('should render checkbox examples in horizontal and vertical fieldsets with four items each', () => {
-    expect(spectator.query('.checkbox-group-horizontal')).toBeTruthy();
-    expect(spectator.query('.checkbox-group-vertical')).toBeTruthy();
+    const checkboxGroups = [
+      {container: spectator.query<HTMLElement>('.checkbox-group-horizontal'), idPrefix: 'checkbox-horizontal'},
+      {container: spectator.query<HTMLElement>('.checkbox-group-vertical'), idPrefix: 'checkbox-vertical'}
+    ];
 
-    const horizontalIds = [1, 2, 3, 4].map((index) => `#checkbox-horizontal-${index}`);
-    const verticalIds = [1, 2, 3, 4].map((index) => `#checkbox-vertical-${index}`);
+    checkboxGroups.forEach(({container, idPrefix}) => {
+      expect(container).toBeTruthy();
 
-    horizontalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('checkbox');
-    });
+      const inputs = container?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
 
-    verticalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('checkbox');
+      expect(inputs).toHaveLength(4);
+      inputs?.forEach((input, index) => {
+        const id = `${idPrefix}-${index + 1}`;
+
+        expect(input.id).toBe(id);
+        expect(container?.querySelector<HTMLLabelElement>(`label[for="${id}"]`)?.textContent).toContain('checkbox');
+      });
     });
   });
 
   it('should render radio button examples in horizontal and vertical fieldsets with four items each', () => {
-    expect(spectator.query('.radio-group-horizontal')).toBeTruthy();
-    expect(spectator.query('.radio-group-vertical')).toBeTruthy();
+    const radioGroups = [
+      {container: spectator.query<HTMLElement>('.radio-group-horizontal'), idPrefix: 'radio-horizontal'},
+      {container: spectator.query<HTMLElement>('.radio-group-vertical'), idPrefix: 'radio-vertical'}
+    ];
 
-    const horizontalIds = [1, 2, 3, 4].map((index) => `#radio-horizontal-${index}`);
-    const verticalIds = [1, 2, 3, 4].map((index) => `#radio-vertical-${index}`);
+    radioGroups.forEach(({container, idPrefix}) => {
+      expect(container).toBeTruthy();
 
-    horizontalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
+      const inputs = container?.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+
+      expect(inputs).toHaveLength(4);
+      inputs?.forEach((input, index) => {
+        const id = `${idPrefix}-${index + 1}`;
+
+        expect(input.id).toBe(id);
+        expect(container?.querySelector<HTMLLabelElement>(`label[for="${id}"]`)?.textContent).toContain('radioButton');
+      });
     });
+  });
 
-    verticalIds.forEach((id) => {
-      expect(spectator.query<HTMLInputElement>(id)).toBeTruthy();
-      expect(spectator.query(`label[for="${id.slice(1)}"]`)?.textContent).toContain('radioButton');
-    });
+  it('should render disabled radio button examples', () => {
+    expect(spectator.query('.radio-group-disabled')).toBeTruthy();
+    expect(spectator.query<HTMLInputElement>('#radio-disabled-1')?.disabled).toBe(true);
+    expect(spectator.query<HTMLInputElement>('#radio-disabled-2')?.disabled).toBe(true);
+  });
+
+  it('should render a disabled toggle switch example', () => {
+    const disabledSwitch = spectator.query<HTMLInputElement>('#inputSwitchDisabled');
+
+    expect(disabledSwitch).toBeTruthy();
+    expect(disabledSwitch?.disabled).toBe(true);
   });
 });

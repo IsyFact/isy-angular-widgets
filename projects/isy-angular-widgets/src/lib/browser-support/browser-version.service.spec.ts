@@ -1,5 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {BrowserVersionService, SupportedBrowser} from './browser-version.service';
+import {expect, it} from 'vitest';
 
 interface BrowserVersionServiceTestAccess {
   isVersionLowerThan(currentVersion: string, minimumVersion: string): boolean;
@@ -41,7 +42,7 @@ describe('Unit tests: BrowserVersionService', () => {
 
       const result = service.checkCurrentBrowser();
 
-      expect(result.supported).toBeTrue();
+      expect(result.supported).toBe(true);
       expect(result.detectedBrowser).toBeUndefined();
       expect(result.supportedBrowsers.length).toBeGreaterThan(0);
     } finally {
@@ -56,7 +57,7 @@ describe('Unit tests: BrowserVersionService', () => {
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' + 'Chrome/1.0 Safari/537.36'
     );
 
-    expect(result.supported).toBeFalse();
+    expect(result.supported).toBe(false);
     expect(result.detectedBrowser?.name).toEqual('chrome');
     expect(result.detectedBrowser?.label).toEqual('Google Chrome');
     expect(result.detectedBrowser?.version).toEqual('1.0');
@@ -70,7 +71,7 @@ describe('Unit tests: BrowserVersionService', () => {
         `Chrome/${chrome.minimumVersion}.0 Safari/537.36`
     );
 
-    expect(result.supported).toBeTrue();
+    expect(result.supported).toBe(true);
     expect(result.detectedBrowser?.name).toEqual('chrome');
     expect(result.detectedBrowser?.label).toEqual('Google Chrome');
     expect(result.minimumVersion).toEqual(chrome.minimumVersion);
@@ -83,7 +84,7 @@ describe('Unit tests: BrowserVersionService', () => {
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' + `Chrome/${chrome.minimumVersion}. Safari/537.36`
     );
 
-    expect(result.supported).toBeTrue();
+    expect(result.supported).toBe(true);
     expect(result.detectedBrowser?.name).toEqual('chrome');
     expect(result.detectedBrowser?.version).toEqual(`${chrome.minimumVersion}.`);
   });
@@ -91,7 +92,7 @@ describe('Unit tests: BrowserVersionService', () => {
   it('should treat missing current version parts as zero', () => {
     const serviceAccess = getServiceAccess();
 
-    expect(serviceAccess.isVersionLowerThan('120', '120.1')).toBeTrue();
+    expect(serviceAccess.isVersionLowerThan('120', '120.1')).toBe(true);
   });
 
   it('should detect Edge before Chrome', () => {
@@ -124,46 +125,34 @@ describe('Unit tests: BrowserVersionService', () => {
     expect(result.detectedBrowser?.version).toEqual('17.0');
   });
 
-  it('should not detect Safari when the Safari version token is missing', () => {
-    const result = service.checkUserAgent(
+  it.each<[string, string]>([
+    [
+      'should not detect Safari when the Safari version token is missing',
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Safari/605.1.15'
-    );
-
-    expect(result.supported).toBeFalse();
-    expect(result.detectedBrowser).toBeUndefined();
-  });
-
-  it('should not detect Safari when the Safari token is missing', () => {
-    const result = service.checkUserAgent(
+    ],
+    [
+      'should not detect Safari when the Safari token is missing',
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Version/17.0'
-    );
-
-    expect(result.supported).toBeFalse();
-    expect(result.detectedBrowser).toBeUndefined();
-  });
-
-  it('should not detect Safari when the user agent is Chromium based', () => {
-    const result = service.checkUserAgent(
+    ],
+    [
+      'should not detect Safari when the user agent is Chromium based',
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Version/17.0 Safari/537.36 OPR/100.0'
-    );
+    ],
+    [
+      'should not detect Opera as Chrome',
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36 OPR/100.0'
+    ]
+  ])('$1', (_description, userAgent) => {
+    const result = service.checkUserAgent(userAgent);
 
-    expect(result.supported).toBeFalse();
-    expect(result.detectedBrowser).toBeUndefined();
-  });
-
-  it('should not detect Opera as Chrome', () => {
-    const result = service.checkUserAgent(
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' + 'Chrome/120.0 Safari/537.36 OPR/100.0'
-    );
-
-    expect(result.supported).toBeFalse();
+    expect(result.supported).toBe(false);
     expect(result.detectedBrowser).toBeUndefined();
   });
 
   it('should mark unknown browsers as unsupported', () => {
     const result = service.checkUserAgent('UnknownBrowser/1.0');
 
-    expect(result.supported).toBeFalse();
+    expect(result.supported).toBe(false);
     expect(result.detectedBrowser).toBeUndefined();
   });
 
@@ -171,25 +160,13 @@ describe('Unit tests: BrowserVersionService', () => {
     const result = service.checkUserAgent('UnknownBrowser/1.0');
 
     expect(result.supportedBrowsers.length).toBeGreaterThan(0);
-    expect(result.supportedBrowsers).toContain(
-      jasmine.objectContaining({
-        label: 'Google Chrome'
-      })
-    );
-    expect(result.supportedBrowsers).toContain(
-      jasmine.objectContaining({
-        label: 'Microsoft Edge'
-      })
-    );
-    expect(result.supportedBrowsers).toContain(
-      jasmine.objectContaining({
-        label: 'Mozilla Firefox'
-      })
-    );
-    expect(result.supportedBrowsers).toContain(
-      jasmine.objectContaining({
-        label: 'Apple Safari'
-      })
+    expect(result.supportedBrowsers).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({label: 'Google Chrome'}),
+        expect.objectContaining({label: 'Microsoft Edge'}),
+        expect.objectContaining({label: 'Mozilla Firefox'}),
+        expect.objectContaining({label: 'Apple Safari'})
+      ])
     );
   });
 });

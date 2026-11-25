@@ -1,7 +1,7 @@
 import {DOCUMENT} from '@angular/core';
 import {NavigationEnd, provideRouter, Router} from '@angular/router';
 import {AppComponent} from './app.component';
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {firstValueFrom, of, Subject} from 'rxjs';
 import {InterpolatableTranslationObject, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {routes} from './app.routes';
@@ -29,7 +29,7 @@ describe('Integration Tests: AppComponent', () => {
 
   it('the print button should have an aria-label attribute', () => {
     const element = spectator.query('p-button[icon="pi pi-print"] button') as HTMLElement;
-    expect(element.hasAttribute('aria-label')).toBeTrue();
+    expect(element.hasAttribute('aria-label')).toBe(true);
   });
 
   it('should open the browser print dialog once when the print button is activated', () => {
@@ -37,7 +37,7 @@ describe('Integration Tests: AppComponent', () => {
 
     spectator.click('p-button[icon="pi pi-print"] button');
 
-    expect(print).toHaveBeenCalledOnceWith();
+    expect(print).toHaveBeenCalledExactlyOnceWith();
   });
 
   it('should update the displayed print date immediately before browser printing', () => {
@@ -46,8 +46,8 @@ describe('Integration Tests: AppComponent', () => {
     spectator.component.printDate = stalePrintDate;
     spectator.detectChanges();
 
-    jasmine.clock().install();
-    jasmine.clock().mockDate(currentPrintDate);
+    vi.useFakeTimers();
+    vi.setSystemTime(currentPrintDate);
 
     try {
       window.dispatchEvent(new Event('beforeprint'));
@@ -55,7 +55,7 @@ describe('Integration Tests: AppComponent', () => {
       const time = spectator.query('.demo-print-header time') as HTMLTimeElement;
       expect(time.dateTime).toBe(currentPrintDate.toISOString());
     } finally {
-      jasmine.clock().uninstall();
+      vi.useRealTimers();
     }
   });
 
@@ -85,7 +85,7 @@ describe('Integration Tests: AppComponent', () => {
     );
     await firstValueFrom(translate.use('de'));
 
-    expect(await router.navigateByUrl('/unbekannte-route')).toBeTrue();
+    expect(await router.navigateByUrl('/unbekannte-route')).toBe(true);
     await spectator.fixture.whenStable();
     spectator.detectChanges();
 
@@ -107,7 +107,7 @@ describe('Integration Tests: AppComponent', () => {
 
   it('the info button should have an aria-label attribute', () => {
     const element = spectator.query('p-button[icon="pi pi-info-circle"] button') as HTMLElement;
-    expect(element.hasAttribute('aria-label')).toBeTrue();
+    expect(element.hasAttribute('aria-label')).toBe(true);
   });
 
   it('should create the application', () => {
@@ -133,7 +133,7 @@ describe('Integration Tests: AppComponent', () => {
     const language = 'en';
     const translate = spectator.inject(TranslateService);
     const fakeTranslations: InterpolatableTranslationObject = {};
-    spyOn(translate, 'use').and.returnValue(of(fakeTranslations));
+    spyOn(translate, 'use').mockReturnValue(of(fakeTranslations));
     spectator.component.changeLanguage(language);
     spectator.fixture.detectChanges();
     expect(translate.use).toHaveBeenCalledWith(language);
@@ -160,17 +160,17 @@ describe('Integration Tests: AppComponent', () => {
     const inputId = 'testInput';
     const inputElement = document.createElement('input');
     inputElement.id = inputId;
-    spyOn(mockDocument, 'getElementById').and.returnValue(inputElement);
+    spyOn(mockDocument, 'getElementById').mockReturnValue(inputElement);
     spyOn(inputElement, 'focus');
     spectator.component.setFocusOnInput(inputId);
     expect(mockDocument.getElementById).toHaveBeenCalledWith(inputId);
     expect(inputElement.focus).toHaveBeenCalled();
-    expect(spectator.component.focusHasBeenSet).toBeTrue();
+    expect(spectator.component.focusHasBeenSet).toBe(true);
   });
 
   it('should not attempt to focus if element does not exist', () => {
     const invalidId = 'invalidInput';
-    spyOn(mockDocument, 'getElementById').and.returnValue(null);
+    spyOn(mockDocument, 'getElementById').mockReturnValue(null);
     spectator.component.setFocusOnInput(invalidId);
     expect(mockDocument.getElementById).toHaveBeenCalledWith(invalidId);
     expect(spectator.component.focusHasBeenSet).toBeUndefined();
@@ -181,6 +181,6 @@ describe('Integration Tests: AppComponent', () => {
     expect(spectator.component.focusHasBeenSet).toBeUndefined();
     (router.events as Subject<unknown>).next(new NavigationEnd(1, '/dashboard', '/objekt-suchen'));
     spectator.detectChanges();
-    expect(spectator.component.focusHasBeenSet).toBeFalse();
+    expect(spectator.component.focusHasBeenSet).toBe(false);
   });
 });

@@ -1,10 +1,12 @@
 import {Component, Directive, ElementRef, inject, ChangeDetectionStrategy} from '@angular/core';
-import {createComponentFactory, createHostFactory, Spectator, SpectatorHost} from '@ngneat/spectator';
+import {createComponentFactory, createHostFactory, Spectator, SpectatorHost} from '@ngneat/spectator/vitest';
+import {SimpleChange} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FormWrapperComponent} from './form-wrapper.component';
 import {FormWrapperFieldDirective} from './form-wrapper-field.directive';
 import {FORM_WRAPPER_FIELD_ADAPTER, FormWrapperFieldAdapter} from './form-wrapper-field-adapter';
 import {WidgetsConfigService} from '../i18n/widgets-config.service';
+import {it} from 'vitest';
 
 @Component({
   standalone: true,
@@ -82,6 +84,66 @@ describe('FormWrapperComponent', () => {
     fieldId: 'optionalField',
     control: new FormControl(''),
     validationMessages: {}
+  });
+
+  describe('label content projection', () => {
+    const createHost = createHostFactory({
+      component: FormWrapperComponent,
+      imports: [ReactiveFormsModule, FormWrapperFieldDirective]
+    });
+
+    for (const ifta of [false, true]) {
+      it(`should preserve accessible labeling and validation with label content (ifta=${ifta})`, async () => {
+        const control = new FormControl('', Validators.required);
+        const host = createHost(
+          `<isy-form-wrapper label="Email" labelId="email-label" fieldId="email"
+            [control]="control" [ifta]="ifta" [validationMessages]="{required: 'Email is required'}">
+            <span isyFormWrapperLabel>Additional information</span>
+            <button isyFormWrapperLabel type="button" aria-label="Help for email">Help</button>
+            <input isyFormWrapperField [formControl]="control" />
+          </isy-form-wrapper>`,
+          {hostProps: {control, ifta}}
+        );
+        await host.fixture.whenStable();
+        host.detectChanges();
+
+        const label = host.query<HTMLLabelElement>('label')!;
+        const additionalText = host.query<HTMLElement>('.label-content span')!;
+        const button = host.query<HTMLButtonElement>('button')!;
+        const field = host.query<HTMLInputElement>('input')!;
+        expect(host.query('.label-region button')).toBe(button);
+        expect(host.query('[data-form-wrapper-field-container] button')).toBeNull();
+        expect(host.query('[data-form-wrapper-field-container] input')).toBe(field);
+        expect(label.id).toBe('email-label');
+        expect(label.htmlFor).toBe(field.id);
+        expect(field.labels?.item(0)).toBe(label);
+        expect(label.textContent).toContain('Email');
+        expect(label.textContent).not.toContain('Help');
+        if (ifta) {
+          expect(getComputedStyle(additionalText).fontSize).toBe(getComputedStyle(label).fontSize);
+        }
+        expect(label.querySelector('[aria-hidden="true"]')?.textContent).toBe('*');
+        expect(label.querySelector('.visually-hidden')?.textContent).toBe('Pflichtfeld');
+        expect(button.tabIndex).toBe(0);
+        expect(getComputedStyle(button).pointerEvents).not.toBe('none');
+        const valueTop = field.getBoundingClientRect().top + parseFloat(getComputedStyle(field).paddingTop);
+        expect(valueTop).toBeGreaterThanOrEqual(button.getBoundingClientRect().bottom);
+        button.focus();
+        expect(document.activeElement).toBe(button);
+
+        control.markAsTouched();
+        host.detectChanges();
+        expect(host.query('#email-error')).toHaveText('Email is required');
+        expect(field).toHaveAttribute('aria-describedby', 'email-error');
+        expect(field).toHaveAttribute('aria-invalid', 'true');
+        expect(field).toHaveAttribute('aria-errormessage', 'email-error');
+
+        control.setValue('test@example.org');
+        host.detectChanges();
+        expect(host.query('#email-error')).toBeNull();
+        expect(field.hasAttribute('aria-invalid')).toBe(false);
+      });
+    }
   });
 
   describe('basic component behavior', () => {
@@ -230,12 +292,12 @@ describe('FormWrapperComponent', () => {
 
     it('should return true for required when Validators.required is present', () => {
       spectator = createComponent({props: createRequiredProps()});
-      expect(spectator.component.required).toBeTrue();
+      expect(spectator.component.required).toBe(true);
     });
 
     it('should return false for required when Validators.required is not present', () => {
       spectator = createComponent({props: createOptionalProps()});
-      expect(spectator.component.required).toBeFalse();
+      expect(spectator.component.required).toBe(false);
     });
 
     it('should return true for required when Validators.requiredTrue is present', () => {
@@ -246,7 +308,7 @@ describe('FormWrapperComponent', () => {
         }
       });
 
-      expect(spectator.component.required).toBeTrue();
+      expect(spectator.component.required).toBe(true);
     });
   });
 
@@ -284,7 +346,7 @@ describe('FormWrapperComponent', () => {
       control.updateValueAndValidity();
       spectator.detectChanges();
 
-      expect(spectator.component.showError).toBeTrue();
+      expect(spectator.component.showError).toBe(true);
     });
 
     it('should show error if errorMessage exists, control is invalid and dirty', () => {
@@ -295,7 +357,7 @@ describe('FormWrapperComponent', () => {
       control.updateValueAndValidity();
       spectator.detectChanges();
 
-      expect(spectator.component.showError).toBeTrue();
+      expect(spectator.component.showError).toBe(true);
     });
 
     it('should not show error when control is invalid but neither touched nor dirty', () => {
@@ -308,10 +370,10 @@ describe('FormWrapperComponent', () => {
       control.updateValueAndValidity();
       spectator.detectChanges();
 
-      expect(control.touched).toBeFalse();
-      expect(control.dirty).toBeFalse();
-      expect(control.invalid).toBeTrue();
-      expect(spectator.component.showError).toBeFalse();
+      expect(control.touched).toBe(false);
+      expect(control.dirty).toBe(false);
+      expect(control.invalid).toBe(true);
+      expect(spectator.component.showError).toBe(false);
       expect(spectator.query('#requiredField-error')).toBeNull();
     });
 
@@ -412,55 +474,36 @@ describe('FormWrapperComponent', () => {
       spectator.setInput('ifta', true);
       spectator.detectChanges();
 
-      expect(spectator.component.ifta).toBeTrue();
+      expect(spectator.component.ifta).toBe(true);
     });
 
     it('should default the ifta input to false', () => {
       spectator = createComponent({props: createRequiredProps()});
-      expect(spectator.component.ifta).toBeFalse();
+      expect(spectator.component.ifta).toBe(false);
     });
 
-    it('should return "label-filled" when control has value and ifta is true', () => {
+    it.each<[string, string, boolean, string]>([
+      ['when control has value and ifta is true', 'test value', true, 'label-filled'],
+      ['when control has no value', '', true, ''],
+      ['when ifta is false', 'test value', false, '']
+    ])('should return correct labelFilledClass $0', (_description, value, ifta, expected) => {
       spectator = createComponent({props: createRequiredProps()});
 
-      spectator.component.control.setValue('test value');
-      spectator.component.ifta = true;
+      spectator.component.control.setValue(value);
+      spectator.component.ifta = ifta;
 
-      expect(spectator.component.labelFilledClass).toBe('label-filled');
+      expect(spectator.component.labelFilledClass).toBe(expected);
     });
 
-    it('should return empty string for labelFilledClass when control has no value', () => {
+    it.each<[boolean, string]>([
+      [true, 'ifta'],
+      [false, 'static-label']
+    ])('should return correct labelOptionClass when ifta is %s', (ifta, expected) => {
       spectator = createComponent({props: createRequiredProps()});
 
-      spectator.component.control.setValue('');
-      spectator.component.ifta = true;
+      spectator.component.ifta = ifta;
 
-      expect(spectator.component.labelFilledClass).toBe('');
-    });
-
-    it('should return empty string for labelFilledClass when ifta is false', () => {
-      spectator = createComponent({props: createRequiredProps()});
-
-      spectator.component.control.setValue('test value');
-      spectator.component.ifta = false;
-
-      expect(spectator.component.labelFilledClass).toBe('');
-    });
-
-    it('should return "ifta" class when ifta is true', () => {
-      spectator = createComponent({props: createRequiredProps()});
-
-      spectator.component.ifta = true;
-
-      expect(spectator.component.labelOptionClass).toBe('ifta');
-    });
-
-    it('should return "static-label" class when ifta is false', () => {
-      spectator = createComponent({props: createRequiredProps()});
-
-      spectator.component.ifta = false;
-
-      expect(spectator.component.labelOptionClass).toBe('static-label');
+      expect(spectator.component.labelOptionClass).toBe(expected);
     });
   });
 });
@@ -525,10 +568,13 @@ describe('FormWrapperComponent A11y integration - directive path', () => {
   });
 
   it('should set aria-describedby to describedbyId when provided', async () => {
-    spectator.setHostInput('describedbyId', 'hint-id');
-    spectator.detectChanges();
+    spectator.component.describedbyId = 'hint-id';
+    spectator.component.ngOnChanges({
+      describedbyId: new SimpleChange(undefined, 'hint-id', false)
+    });
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     const input = spectator.query('input');
     expect(input).toHaveAttribute('aria-describedby', 'hint-id');
@@ -567,11 +613,14 @@ describe('FormWrapperComponent A11y integration - directive path', () => {
   });
 
   it('should include both describedbyId and errorId in aria-describedby when both exist', async () => {
-    spectator.setHostInput('describedbyId', 'hint-id');
+    spectator.component.describedbyId = 'hint-id';
+    spectator.component.ngOnChanges({
+      describedbyId: new SimpleChange(undefined, 'hint-id', false)
+    });
     control.markAsTouched();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     const input = spectator.query('input');
     expect(input).toHaveAttribute('aria-describedby', 'hint-id testField-error');
@@ -598,10 +647,13 @@ describe('FormWrapperComponent A11y integration - directive path', () => {
   });
 
   it('should keep describedbyId after error disappears', async () => {
-    spectator.setHostInput('describedbyId', 'hint-id');
-    spectator.detectChanges();
+    spectator.component.describedbyId = 'hint-id';
+    spectator.component.ngOnChanges({
+      describedbyId: new SimpleChange(undefined, 'hint-id', false)
+    });
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     control.markAsTouched();
     spectator.detectChanges();
@@ -621,18 +673,24 @@ describe('FormWrapperComponent A11y integration - directive path', () => {
   });
 
   it('should remove aria-describedby when neither describedbyId nor error exists', async () => {
-    spectator.setHostInput('describedbyId', 'hint-id');
-    spectator.detectChanges();
+    spectator.component.describedbyId = 'hint-id';
+    spectator.component.ngOnChanges({
+      describedbyId: new SimpleChange(undefined, 'hint-id', false)
+    });
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     let input = spectator.query('input');
     expect(input).toHaveAttribute('aria-describedby', 'hint-id');
 
-    spectator.setHostInput('describedbyId', undefined);
-    spectator.detectChanges();
+    spectator.component.describedbyId = undefined;
+    spectator.component.ngOnChanges({
+      describedbyId: new SimpleChange('hint-id', undefined, false)
+    });
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     input = spectator.query('input');
     expect(input).not.toHaveAttribute('aria-describedby');
@@ -713,10 +771,13 @@ describe('FormWrapperComponent A11y integration - fallback path', () => {
   });
 
   it('should set aria-describedby via fallback lookup when describedbyId is provided', async () => {
-    spectator.setHostInput('describedbyId', 'hint-id');
-    spectator.detectChanges();
+    spectator.component.describedbyId = 'hint-id';
+    spectator.component.ngOnChanges({
+      describedbyId: new SimpleChange(undefined, 'hint-id', false)
+    });
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     const input = spectator.query('input');
     expect(input).toHaveAttribute('aria-describedby', 'hint-id');
@@ -802,10 +863,10 @@ describe('FormWrapperComponent control switching', () => {
 
     expect(spectator.query('#switchField-error')).toExist();
 
-    spectator.setHostInput('control', secondControl);
-    spectator.detectChanges();
+    spectator.component.control = secondControl;
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     expect(spectator.query('#switchField-error')).toBeNull();
 
@@ -815,10 +876,10 @@ describe('FormWrapperComponent control switching', () => {
   });
 
   it('should stop reacting to the previous control after switch', async () => {
-    spectator.setHostInput('control', secondControl);
-    spectator.detectChanges();
+    spectator.component.control = secondControl;
+    spectator.fixture.detectChanges(false);
     await spectator.fixture.whenStable();
-    spectator.detectChanges();
+    spectator.fixture.detectChanges(false);
 
     firstControl.markAsTouched();
     firstControl.updateValueAndValidity();

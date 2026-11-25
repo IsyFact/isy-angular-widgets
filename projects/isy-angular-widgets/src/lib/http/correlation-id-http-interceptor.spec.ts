@@ -2,6 +2,7 @@ import {HttpTestingController, provideHttpClientTesting} from '@angular/common/h
 import {TestBed} from '@angular/core/testing';
 import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi, withXhr} from '@angular/common/http';
 import {CorrelationIdHttpInterceptor} from './correlation-id-http-interceptor';
+import {vi} from 'vitest';
 
 describe('Unit tests: CorrelationIdHttpInterceptor', () => {
   const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -17,7 +18,7 @@ describe('Unit tests: CorrelationIdHttpInterceptor', () => {
       // @ts-expect-error - minimal polyfill for test
       globalThis.crypto = {};
     }
-    spyOn(globalThis.crypto, 'randomUUID').and.returnValue('123e4567-e89b-12d3-a456-426614174000');
+    vi.spyOn(globalThis.crypto, 'randomUUID').mockReturnValue('123e4567-e89b-12d3-a456-426614174000');
 
     TestBed.configureTestingModule({
       providers: [
@@ -40,7 +41,7 @@ describe('Unit tests: CorrelationIdHttpInterceptor', () => {
 
     const req = httpMock.expectOne(URL);
 
-    expect(req.request.headers.has(X_CORRELATION_ID)).toBeTrue();
+    expect(req.request.headers.has(X_CORRELATION_ID)).toBe(true);
     expect(req.request.headers.get(X_CORRELATION_ID)).toMatch(UUID_REGEX);
 
     req.flush('');

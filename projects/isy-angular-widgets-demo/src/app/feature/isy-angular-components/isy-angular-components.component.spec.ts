@@ -1,9 +1,9 @@
-import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {createComponentFactory, Spectator} from '@ngneat/spectator/vitest';
 import {ActivatedRoute} from '@angular/router';
 import {ViewportScroller} from '@angular/common';
 import {Subject} from 'rxjs';
 import {IsyAngularComponentsComponent} from './isy-angular-components.component';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {IncompleteDateComponent} from '@isy-angular-widgets/incomplete-date/incomplete-date.component';
 import {fakeAsync, tick} from '@angular/core/testing';
 
@@ -13,7 +13,7 @@ describe('IsyAngularComponentsComponent', () => {
   let spectator: Spectator<IsyAngularComponentsComponent>;
   const fragment$ = new Subject<string | null>();
   const viewportScrollerMock = {
-    scrollToAnchor: jasmine.createSpy('scrollToAnchor')
+    scrollToAnchor: vi.fn()
   };
 
   const createComponent = createComponentFactory({
@@ -26,8 +26,23 @@ describe('IsyAngularComponentsComponent', () => {
   });
 
   beforeEach(() => {
-    viewportScrollerMock.scrollToAnchor.calls.reset();
+    viewportScrollerMock.scrollToAnchor.mockClear();
     spectator = createComponent();
+    const translate = spectator.inject(TranslateService);
+    translate.setTranslation(
+      'de',
+      {
+        isyAngularWidgetsDemo: {
+          labels: {
+            showIftaPresentation: 'Ifta-Darstellung anzeigen',
+            minimumTwoCharacters: '(Mindestens 2 Zeichen)'
+          }
+        }
+      },
+      true
+    );
+    translate.use('de').subscribe();
+    spectator.detectChanges();
   });
 
   it('should create', () => {
@@ -35,7 +50,26 @@ describe('IsyAngularComponentsComponent', () => {
   });
 
   it('should initialize transferDateAsIso8601 with true', () => {
-    expect(spectator.component.transferDateAsIso8601).toBeTrue();
+    expect(spectator.component.transferDateAsIso8601).toBe(true);
+  });
+
+  [false, true].forEach((ifta) => {
+    it(`should render the info button beside the form label (ifta=${ifta})`, () => {
+      spectator.component.iftaFormWrapper = ifta;
+      spectator.detectChanges();
+
+      const additionalText = spectator.query<HTMLElement>('.label-content span[isyFormWrapperLabel]');
+      const buttonHost = spectator.query<HTMLElement>('p-button[isyFormWrapperLabel]');
+      const button = buttonHost?.querySelector('button');
+      expect(additionalText).toHaveText('Mindestens 2 Zeichen');
+      expect(spectator.query('.label-region p-button[isyFormWrapperLabel]')).toBe(buttonHost);
+      expect(additionalText?.parentElement).toBe(buttonHost?.parentElement);
+      expect(spectator.query('[data-form-wrapper-field-container] [isyFormWrapperLabel]')).toBeNull();
+      expect(button).toHaveAttribute('type', 'button');
+      expect(button?.getAttribute('aria-label')).toBeTruthy();
+      expect(button?.querySelector('.pi-info-circle')).toBeTruthy();
+      expect(buttonHost?.closest('isy-form-wrapper')?.firstElementChild?.classList.contains('ifta')).toBe(ifta);
+    });
   });
 
   it('should render all section headings with hover-only anchor symbols', () => {
@@ -44,9 +78,9 @@ describe('IsyAngularComponentsComponent', () => {
       const anchor = spectator.query<HTMLAnchorElement>(`h2#${id} > a.section-anchor`);
 
       expect(heading).toBeTruthy();
-      expect(heading?.classList.contains('section-heading')).toBeTrue();
+      expect(heading?.classList.contains('section-heading')).toBe(true);
       expect(anchor).toBeTruthy();
-      expect(anchor?.classList.contains('section-anchor')).toBeTrue();
+      expect(anchor?.classList.contains('section-anchor')).toBe(true);
       expect(anchor?.textContent?.trim()).toBe('🔗');
     });
   });
@@ -70,7 +104,7 @@ describe('IsyAngularComponentsComponent', () => {
 
   it('should scroll to section when anchor symbol is clicked', () => {
     sectionAnchorIds.forEach((id) => {
-      viewportScrollerMock.scrollToAnchor.calls.reset();
+      viewportScrollerMock.scrollToAnchor.mockClear();
       spectator.click(`h2#${id} > a`);
       expect(viewportScrollerMock.scrollToAnchor).toHaveBeenCalledWith(id);
     });
